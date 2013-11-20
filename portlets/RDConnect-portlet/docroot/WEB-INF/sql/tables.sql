@@ -1,0 +1,22 @@
+create table rdconnect.candidate (
+	candidateId LONG not null primary key,
+	source VARCHAR(75) null,
+	name VARCHAR(255) null,
+	url VARCHAR(255) null,
+	contactperson TEXT null,
+	candidatetype VARCHAR(75) null,
+	subunitof VARCHAR(75) null,
+	country VARCHAR(75) null,
+	diseasescodes TEXT null,
+	diseasesfreetext TEXT null,
+	comment_ TEXT null,
+	address TEXT null,
+	date_ DATE null,
+	searchurl VARCHAR(255) null,
+	sourceId VARCHAR(75) null,
+	mail VARCHAR(255) null,
+	head TEXT null,
+	submittername VARCHAR(255) null,
+	submitteremail VARCHAR(255) null,
+	validated BOOLEAN
+);

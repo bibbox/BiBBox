@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.meduni.liferay.portlet.rdconnect">
+	<author>Robert Reihs</author>
+	<namespace>medunirdconnect</namespace>
+
+	<entity name="Candidate" local-service="true" remote-service="false" table="rdconnect.candidate">
+
+		<!-- PK fields -->
+		<column name="candidateId" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="source" type="String" />
+		<column name="name" type="String" />
+		<column name="url" type="String" />
+		<column name="contactperson" type="String" />
+		<column name="candidatetype" type="String" />
+		<column name="subunitof" type="String" />
+		<column name="country" type="String" />
+		<column name="diseasescodes" type="String" />
+		<column name="diseasesfreetext" type="String" />
+		<column name="comment" type="String" />
+		<column name="address" type="String" />
+		<column name="date" type="Date" />
+		<column name="searchurl" type="String" />
+		<column name="sourceId" type="String" />
+		<column name="mail" type="String" />
+		<column name="head" type="String" />
+		<column name="submittername" type="String" />
+		<column name="submitteremail" type="String" />
+        <column name="validated" type="boolean"></column>
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="country" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="CNST" return-type="Collection">
+			<finder-column name="country" comparator="LIKE" />
+			<finder-column name="name"  comparator="LIKE" />
+			<finder-column name="source"  comparator="LIKE" />
+			<finder-column name="candidatetype"  comparator="LIKE" />
+			<finder-column name="subunitof"/>
+		</finder>
+		<finder name="SubRemover" return-type="Collection">
+			<finder-column name="subunitof" />
+		</finder>
+		<finder name="Country" return-type="Collection">
+			<finder-column name="country" />
+		</finder>
+	</entity>
+</service-builder>

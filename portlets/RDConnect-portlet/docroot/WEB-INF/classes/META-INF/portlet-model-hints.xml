@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.meduni.liferay.portlet.rdconnect.model.Candidate">
+		<field name="candidateId" type="long" />
+		<field name="source" type="String" />
+		<field name="name" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="url" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="contactperson" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="candidatetype" type="String" />
+		<field name="subunitof" type="String" />
+		<field name="country" type="String" />
+		<field name="diseasescodes" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="diseasesfreetext" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="comment" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="address" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="date" type="Date" />
+		<field name="searchurl" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="sourceId" type="String" />
+		<field name="mail" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="head" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="submittername" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="submitteremail" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="validated" type="boolean" />
+	</model>
+</model-hints>

@@ -1,0 +1,39 @@
+.proposebuttonrow{
+	text-align: right;
+}
+.proposeheadline{
+	color: #385696;
+}
+hr.propose{
+	background-color: #385696;
+    color: #385696;
+    height: 1px;
+}
+.proposelayout{
+	margin-left:25px;
+}
+div.portlet-body{
+	min-width:600px;
+	max-width:1200px;
+}
+div.proposerequired{
+	width:16px;
+	display: inline;
+	background-image: url('../images/required.png');
+	background-repeat: no-repeat;
+}
+img.proposerequired{
+	float: left;
+	display: inline;
+}
+span.proposerequired{
+	float: left;
+	display: inline;
+}
+input.propose{
+	max-width: 600px;
+	width:95%;
+}
+textarea.propose{
+	width:95%;
+}

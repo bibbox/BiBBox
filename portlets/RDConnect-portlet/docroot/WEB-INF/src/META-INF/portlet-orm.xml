@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.CandidateModelImpl">
+		<attributes>
+			<id name="candidateId" />
+			<basic name="source" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="contactperson" />
+			<basic name="candidatetype" />
+			<basic name="subunitof" />
+			<basic name="country" />
+			<basic name="diseasescodes" />
+			<basic name="diseasesfreetext" />
+			<basic name="comment">
+				<column name="COMMENT_" />
+			</basic>
+			<basic name="address" />
+			<basic name="date">
+				<column name="DATE_" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="searchurl" />
+			<basic name="sourceId" />
+			<basic name="mail" />
+			<basic name="head" />
+			<basic name="submittername" />
+			<basic name="submitteremail" />
+			<basic name="validated" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl" name="Candidate">
+		<table name="rdconnect.candidate" />
+		<attributes />
+	</entity>
+</entity-mappings>

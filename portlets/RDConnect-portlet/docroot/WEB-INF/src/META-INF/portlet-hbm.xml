@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.meduni.liferay.portlet.rdconnect.model.Candidate" />
+	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl" table="rdconnect.candidate">
+		<cache usage="read-write" />
+		<id name="candidateId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactperson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="candidatetype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subunitof" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseasescodes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseasesfreetext" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="comment" type="com.liferay.portal.dao.orm.hibernate.StringType" column="comment_" />
+		<property name="address" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="date" type="org.hibernate.type.TimestampType" column="date_" />
+		<property name="searchurl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sourceId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="head" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="submittername" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="submitteremail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="validated" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+</hibernate-mapping>
