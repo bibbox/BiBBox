@@ -190,17 +190,17 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 			for (Candidate candidate : list) {
 				if (!StringUtil.wildcardMatches(candidate.getCountry(),
 							country, CharPool.UNDERLINE, CharPool.PERCENT,
-							CharPool.BACK_SLASH, true) ||
+							CharPool.BACK_SLASH, false) ||
 						!StringUtil.wildcardMatches(candidate.getName(), name,
 							CharPool.UNDERLINE, CharPool.PERCENT,
-							CharPool.BACK_SLASH, true) ||
+							CharPool.BACK_SLASH, false) ||
 						!StringUtil.wildcardMatches(candidate.getSource(),
 							source, CharPool.UNDERLINE, CharPool.PERCENT,
-							CharPool.BACK_SLASH, true) ||
+							CharPool.BACK_SLASH, false) ||
 						!StringUtil.wildcardMatches(
 							candidate.getCandidatetype(), candidatetype,
 							CharPool.UNDERLINE, CharPool.PERCENT,
-							CharPool.BACK_SLASH, true) ||
+							CharPool.BACK_SLASH, false) ||
 						!Validator.equals(subunitof, candidate.getSubunitof())) {
 					list = null;
 
@@ -313,19 +313,19 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (bindCountry) {
-					qPos.add(country);
+					qPos.add(country.toLowerCase());
 				}
 
 				if (bindName) {
-					qPos.add(name);
+					qPos.add(name.toLowerCase());
 				}
 
 				if (bindSource) {
-					qPos.add(source);
+					qPos.add(source.toLowerCase());
 				}
 
 				if (bindCandidatetype) {
-					qPos.add(candidatetype);
+					qPos.add(candidatetype.toLowerCase());
 				}
 
 				if (bindSubunitof) {
@@ -719,19 +719,19 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 		QueryPos qPos = QueryPos.getInstance(q);
 
 		if (bindCountry) {
-			qPos.add(country);
+			qPos.add(country.toLowerCase());
 		}
 
 		if (bindName) {
-			qPos.add(name);
+			qPos.add(name.toLowerCase());
 		}
 
 		if (bindSource) {
-			qPos.add(source);
+			qPos.add(source.toLowerCase());
 		}
 
 		if (bindCandidatetype) {
-			qPos.add(candidatetype);
+			qPos.add(candidatetype.toLowerCase());
 		}
 
 		if (bindSubunitof) {
@@ -886,19 +886,19 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (bindCountry) {
-					qPos.add(country);
+					qPos.add(country.toLowerCase());
 				}
 
 				if (bindName) {
-					qPos.add(name);
+					qPos.add(name.toLowerCase());
 				}
 
 				if (bindSource) {
-					qPos.add(source);
+					qPos.add(source.toLowerCase());
 				}
 
 				if (bindCandidatetype) {
-					qPos.add(candidatetype);
+					qPos.add(candidatetype.toLowerCase());
 				}
 
 				if (bindSubunitof) {
@@ -923,16 +923,16 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 	}
 
 	private static final String _FINDER_COLUMN_CNST_COUNTRY_1 = "candidate.country LIKE NULL AND ";
-	private static final String _FINDER_COLUMN_CNST_COUNTRY_2 = "candidate.country LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNST_COUNTRY_2 = "lower(candidate.country) LIKE ? AND ";
 	private static final String _FINDER_COLUMN_CNST_COUNTRY_3 = "(candidate.country IS NULL OR candidate.country LIKE '') AND ";
 	private static final String _FINDER_COLUMN_CNST_NAME_1 = "candidate.name LIKE NULL AND ";
-	private static final String _FINDER_COLUMN_CNST_NAME_2 = "candidate.name LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNST_NAME_2 = "lower(candidate.name) LIKE ? AND ";
 	private static final String _FINDER_COLUMN_CNST_NAME_3 = "(candidate.name IS NULL OR candidate.name LIKE '') AND ";
 	private static final String _FINDER_COLUMN_CNST_SOURCE_1 = "candidate.source LIKE NULL AND ";
-	private static final String _FINDER_COLUMN_CNST_SOURCE_2 = "candidate.source LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNST_SOURCE_2 = "lower(candidate.source) LIKE ? AND ";
 	private static final String _FINDER_COLUMN_CNST_SOURCE_3 = "(candidate.source IS NULL OR candidate.source LIKE '') AND ";
 	private static final String _FINDER_COLUMN_CNST_CANDIDATETYPE_1 = "candidate.candidatetype LIKE NULL AND ";
-	private static final String _FINDER_COLUMN_CNST_CANDIDATETYPE_2 = "candidate.candidatetype LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNST_CANDIDATETYPE_2 = "lower(candidate.candidatetype) LIKE ? AND ";
 	private static final String _FINDER_COLUMN_CNST_CANDIDATETYPE_3 = "(candidate.candidatetype IS NULL OR candidate.candidatetype LIKE '') AND ";
 	private static final String _FINDER_COLUMN_CNST_SUBUNITOF_1 = "candidate.subunitof IS NULL";
 	private static final String _FINDER_COLUMN_CNST_SUBUNITOF_2 = "candidate.subunitof = ?";

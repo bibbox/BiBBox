@@ -114,36 +114,32 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getFilterSource";
+		_methodName19 = "getAllCandidates";
 
 		_methodParameterTypes19 = new String[] {  };
 
-		_methodName20 = "getAllCandidates";
+		_methodName20 = "getFilterdCandidates";
 
-		_methodParameterTypes20 = new String[] {  };
-
-		_methodName21 = "getFilterdCandidates";
-
-		_methodParameterTypes21 = new String[] {
+		_methodParameterTypes20 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName22 = "getSource";
+		_methodName21 = "getSource";
+
+		_methodParameterTypes21 = new String[] {  };
+
+		_methodName22 = "getTypesOfCandidates";
 
 		_methodParameterTypes22 = new String[] {  };
 
-		_methodName23 = "getTypesOfCandidates";
+		_methodName23 = "getTypesOfCandidatesNewEntry";
 
 		_methodParameterTypes23 = new String[] {  };
 
-		_methodName24 = "getTypesOfCandidatesNewEntry";
+		_methodName24 = "getCountryNames";
 
 		_methodParameterTypes24 = new String[] {  };
-
-		_methodName25 = "getCountryNames";
-
-		_methodParameterTypes25 = new String[] {  };
 	}
 
 	@Override
@@ -697,36 +693,13 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 	}
 
 	@Override
-	public java.lang.String getFilterSource() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getAllCandidates()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -755,8 +728,8 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
 					new Object[] {
 						ClpSerializer.translateInput(name),
 						
@@ -791,6 +764,29 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 		Object returnObj = null;
 
 		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String[])ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.lang.String[] getTypesOfCandidates() {
+		Object returnObj = null;
+
+		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName22,
 					_methodParameterTypes22, new Object[] {  });
 		}
@@ -810,7 +806,7 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 	}
 
 	@Override
-	public java.lang.String[] getTypesOfCandidates() {
+	public java.lang.String[] getTypesOfCandidatesNewEntry() {
 		Object returnObj = null;
 
 		try {
@@ -833,35 +829,12 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 	}
 
 	@Override
-	public java.lang.String[] getTypesOfCandidatesNewEntry() {
+	public java.lang.String[] getCountryNames() {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName24,
 					_methodParameterTypes24, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.lang.String[])ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public java.lang.String[] getCountryNames() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName25,
-					_methodParameterTypes25, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -927,6 +900,4 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 	private String[] _methodParameterTypes23;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
-	private String _methodName25;
-	private String[] _methodParameterTypes25;
 }

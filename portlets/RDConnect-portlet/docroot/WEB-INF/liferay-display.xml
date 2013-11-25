@@ -7,5 +7,6 @@
 	</category>
 	<category name="RDConnect">
 		<portlet id="candidate-propose"></portlet>
+		<portlet id="candidate-tabel"></portlet>
 	</category>
 </display>

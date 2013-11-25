@@ -275,10 +275,6 @@ public class CandidateLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.lang.String getFilterSource() {
-		return getService().getFilterSource();
-	}
-
 	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getAllCandidates()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAllCandidates();

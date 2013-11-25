@@ -34,13 +34,13 @@
 		<order by="asc">
 			<order-column name="country" />
 		</order>
-
+		
 		<!-- Finder methods -->
 		<finder name="CNST" return-type="Collection">
-			<finder-column name="country" comparator="LIKE" />
-			<finder-column name="name"  comparator="LIKE" />
-			<finder-column name="source"  comparator="LIKE" />
-			<finder-column name="candidatetype"  comparator="LIKE" />
+			<finder-column name="country" comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="name"  comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="source"  comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="candidatetype"  comparator="LIKE" case-sensitive="false"/>
 			<finder-column name="subunitof"/>
 		</finder>
 		<finder name="SubRemover" return-type="Collection">

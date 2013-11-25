@@ -42,7 +42,6 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil} to access the candidate local service.
 	 */
-String source_ = "all";
 	
 	public Candidate addCandidate(Candidate newCandidate) throws SystemException {
 		Candidate candidate = candidatePersistence.create((int) counterLocalService.increment(Candidate.class.getName()) + 10000);
@@ -63,11 +62,12 @@ String source_ = "all";
 		candidate.setMail(newCandidate.getMail());
 		candidate.setHead(newCandidate.getHead());
 		
+		//userPersistence
+		//com.liferay.portal.service.persistence.OrganizationPersistence ld;
+		//ld.create(organizationId)
+		
+		
 		return candidatePersistence.update(candidate);
-	}
-	
-	public String getFilterSource() {
-		return source_;
 	}
 	
 	public List<Candidate> getAllCandidates() throws SystemException {
@@ -76,7 +76,6 @@ String source_ = "all";
 	}
 	
 	public List<Candidate> getFilterdCandidates(String name, String country, String type, String source) throws SystemException {
-		source_ = source;
 		if(country.equals("all")) {
 			country = "%";
 		} else {

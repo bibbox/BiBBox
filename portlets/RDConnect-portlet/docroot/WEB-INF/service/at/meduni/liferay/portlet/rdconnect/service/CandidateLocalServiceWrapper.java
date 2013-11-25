@@ -287,11 +287,6 @@ public class CandidateLocalServiceWrapper implements CandidateLocalService,
 	}
 
 	@Override
-	public java.lang.String getFilterSource() {
-		return _candidateLocalService.getFilterSource();
-	}
-
-	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getAllCandidates()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _candidateLocalService.getAllCandidates();
