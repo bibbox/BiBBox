@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="at.meduni.liferay.portlet.rdconnect.service.AQRRatingLocalService" class="at.meduni.liferay.portlet.rdconnect.service.impl.AQRRatingLocalServiceImpl" />
+	<bean id="at.meduni.liferay.portlet.rdconnect.service.persistence.AQRRatingPersistence" class="at.meduni.liferay.portlet.rdconnect.service.persistence.AQRRatingPersistenceImpl" parent="basePersistence" />
 	<bean id="at.meduni.liferay.portlet.rdconnect.service.CandidateLocalService" class="at.meduni.liferay.portlet.rdconnect.service.impl.CandidateLocalServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.rdconnect.service.persistence.CandidatePersistence" class="at.meduni.liferay.portlet.rdconnect.service.persistence.CandidatePersistenceImpl" parent="basePersistence" />
+	<bean id="at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalService" class="at.meduni.liferay.portlet.rdconnect.service.impl.MasterCandidateLocalServiceImpl" />
+	<bean id="at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidatePersistence" class="at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidatePersistenceImpl" parent="basePersistence" />
+	<bean id="at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService" class="at.meduni.liferay.portlet.rdconnect.service.impl.MasterCandidateLinkCandidateLocalServiceImpl" />
+	<bean id="at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidateLinkCandidatePersistence" class="at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidateLinkCandidatePersistenceImpl" parent="basePersistence" />
 </beans>

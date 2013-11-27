@@ -50,4 +50,60 @@
 			<finder-column name="country" />
 		</finder>
 	</entity>
+	<entity name="MasterCandidate" local-service="true" remote-service="false" table="rdconnect.master_candidate">
+		<!-- PK fields -->
+		<column name="masterCandidateId" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="name" type="String" />
+		<column name="url" type="String" />
+		<column name="contactperson" type="String" />
+		<column name="candidatetype" type="String" />
+		<column name="country" type="String" />
+		<column name="diseasescodes" type="String" />
+		<column name="diseasesfreetext" type="String" />
+		<column name="comment" type="String" />
+		<column name="address" type="String" />
+		<column name="date" type="Date" />
+		<column name="mail" type="String" />
+		<column name="head" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="country" />
+		</order>
+		
+		<!-- Finder methods -->
+		<finder name="CNST" return-type="Collection">
+			<finder-column name="country" comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="name"  comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="candidatetype"  comparator="LIKE" case-sensitive="false"/>
+		</finder>
+		<finder name="Country" return-type="Collection">
+			<finder-column name="country" />
+		</finder>
+	</entity>
+	<entity name="MasterCandidateLinkCandidate" local-service="true" remote-service="false" table="rdconnect.master_candidate_link_candidate">
+		<!-- PK fields -->
+		<column name="linkId" type="long" primary="true" />
+		
+		<!-- Other fields -->
+		<column name="candidateId" type="long" />
+		<column name="masterCandidateId" type="long" />
+	</entity>
+	<entity name="AQRRating" local-service="true" remote-service="false" table="rdconnect.aqr_rating">
+		<!-- PK fields -->
+		<column name="aqrId" type="long" primary="true" />
+		
+		<!-- Other fields -->
+		<column name="accessability" type="long" />
+		<column name="quality" type="long" />
+		<column name="relevance" type="long" />
+		<column name="masterCandidateId" type="long" />
+		<column name="aqrrater" type="String" />
+		<column name="ratingtype" type="String" />
+		<finder name="Master" return-type="Collection">
+			<finder-column name="masterCandidateId" />
+		</finder>
+	</entity>
 </service-builder>

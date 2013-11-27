@@ -83,6 +83,10 @@
 			<name>copy-request-parameters</name>
 			<value>true</value> 
 		</init-param>
+		<init-param>
+			<name>add-process-action-success-action</name>  
+			<value>false</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
@@ -92,6 +96,39 @@
 		<portlet-info>
 			<title>Candidate Tabel</title>
 			<short-title>Candidate Tabel</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>ddl-reader</portlet-name>
+		<display-name>Ddl Reader</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.test.DDLReader
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/ddlreader/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Ddl Reader</title>
+			<short-title>Ddl Reader</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

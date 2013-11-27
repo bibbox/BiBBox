@@ -16,7 +16,10 @@ package at.meduni.liferay.portlet.rdconnect.service.base;
 
 import at.meduni.liferay.portlet.rdconnect.model.Candidate;
 import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalService;
+import at.meduni.liferay.portlet.rdconnect.service.persistence.AQRRatingPersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.CandidatePersistence;
+import at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidateLinkCandidatePersistence;
+import at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidatePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -279,6 +282,44 @@ public abstract class CandidateLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the a q r rating local service.
+	 *
+	 * @return the a q r rating local service
+	 */
+	public at.meduni.liferay.portlet.rdconnect.service.AQRRatingLocalService getAQRRatingLocalService() {
+		return aqrRatingLocalService;
+	}
+
+	/**
+	 * Sets the a q r rating local service.
+	 *
+	 * @param aqrRatingLocalService the a q r rating local service
+	 */
+	public void setAQRRatingLocalService(
+		at.meduni.liferay.portlet.rdconnect.service.AQRRatingLocalService aqrRatingLocalService) {
+		this.aqrRatingLocalService = aqrRatingLocalService;
+	}
+
+	/**
+	 * Returns the a q r rating persistence.
+	 *
+	 * @return the a q r rating persistence
+	 */
+	public AQRRatingPersistence getAQRRatingPersistence() {
+		return aqrRatingPersistence;
+	}
+
+	/**
+	 * Sets the a q r rating persistence.
+	 *
+	 * @param aqrRatingPersistence the a q r rating persistence
+	 */
+	public void setAQRRatingPersistence(
+		AQRRatingPersistence aqrRatingPersistence) {
+		this.aqrRatingPersistence = aqrRatingPersistence;
+	}
+
+	/**
 	 * Returns the candidate local service.
 	 *
 	 * @return the candidate local service
@@ -314,6 +355,82 @@ public abstract class CandidateLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setCandidatePersistence(
 		CandidatePersistence candidatePersistence) {
 		this.candidatePersistence = candidatePersistence;
+	}
+
+	/**
+	 * Returns the master candidate local service.
+	 *
+	 * @return the master candidate local service
+	 */
+	public at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalService getMasterCandidateLocalService() {
+		return masterCandidateLocalService;
+	}
+
+	/**
+	 * Sets the master candidate local service.
+	 *
+	 * @param masterCandidateLocalService the master candidate local service
+	 */
+	public void setMasterCandidateLocalService(
+		at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalService masterCandidateLocalService) {
+		this.masterCandidateLocalService = masterCandidateLocalService;
+	}
+
+	/**
+	 * Returns the master candidate persistence.
+	 *
+	 * @return the master candidate persistence
+	 */
+	public MasterCandidatePersistence getMasterCandidatePersistence() {
+		return masterCandidatePersistence;
+	}
+
+	/**
+	 * Sets the master candidate persistence.
+	 *
+	 * @param masterCandidatePersistence the master candidate persistence
+	 */
+	public void setMasterCandidatePersistence(
+		MasterCandidatePersistence masterCandidatePersistence) {
+		this.masterCandidatePersistence = masterCandidatePersistence;
+	}
+
+	/**
+	 * Returns the master candidate link candidate local service.
+	 *
+	 * @return the master candidate link candidate local service
+	 */
+	public at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService getMasterCandidateLinkCandidateLocalService() {
+		return masterCandidateLinkCandidateLocalService;
+	}
+
+	/**
+	 * Sets the master candidate link candidate local service.
+	 *
+	 * @param masterCandidateLinkCandidateLocalService the master candidate link candidate local service
+	 */
+	public void setMasterCandidateLinkCandidateLocalService(
+		at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService masterCandidateLinkCandidateLocalService) {
+		this.masterCandidateLinkCandidateLocalService = masterCandidateLinkCandidateLocalService;
+	}
+
+	/**
+	 * Returns the master candidate link candidate persistence.
+	 *
+	 * @return the master candidate link candidate persistence
+	 */
+	public MasterCandidateLinkCandidatePersistence getMasterCandidateLinkCandidatePersistence() {
+		return masterCandidateLinkCandidatePersistence;
+	}
+
+	/**
+	 * Sets the master candidate link candidate persistence.
+	 *
+	 * @param masterCandidateLinkCandidatePersistence the master candidate link candidate persistence
+	 */
+	public void setMasterCandidateLinkCandidatePersistence(
+		MasterCandidateLinkCandidatePersistence masterCandidateLinkCandidatePersistence) {
+		this.masterCandidateLinkCandidatePersistence = masterCandidateLinkCandidatePersistence;
 	}
 
 	/**
@@ -492,10 +609,22 @@ public abstract class CandidateLocalServiceBaseImpl extends BaseLocalServiceImpl
 		}
 	}
 
+	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.AQRRatingLocalService.class)
+	protected at.meduni.liferay.portlet.rdconnect.service.AQRRatingLocalService aqrRatingLocalService;
+	@BeanReference(type = AQRRatingPersistence.class)
+	protected AQRRatingPersistence aqrRatingPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.CandidateLocalService.class)
 	protected at.meduni.liferay.portlet.rdconnect.service.CandidateLocalService candidateLocalService;
 	@BeanReference(type = CandidatePersistence.class)
 	protected CandidatePersistence candidatePersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalService.class)
+	protected at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalService masterCandidateLocalService;
+	@BeanReference(type = MasterCandidatePersistence.class)
+	protected MasterCandidatePersistence masterCandidatePersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService.class)
+	protected at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService masterCandidateLinkCandidateLocalService;
+	@BeanReference(type = MasterCandidateLinkCandidatePersistence.class)
+	protected MasterCandidateLinkCandidatePersistence masterCandidateLinkCandidatePersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

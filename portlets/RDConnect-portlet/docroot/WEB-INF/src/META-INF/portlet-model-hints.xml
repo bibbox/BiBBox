@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="at.meduni.liferay.portlet.rdconnect.model.AQRRating">
+		<field name="aqrId" type="long" />
+		<field name="accessability" type="long" />
+		<field name="quality" type="long" />
+		<field name="relevance" type="long" />
+		<field name="masterCandidateId" type="long" />
+		<field name="aqrrater" type="String" />
+		<field name="ratingtype" type="String" />
+	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.Candidate">
 		<field name="candidateId" type="long" />
 		<field name="source" type="String" />
@@ -46,5 +55,25 @@
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="validated" type="boolean" />
+	</model>
+	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate">
+		<field name="masterCandidateId" type="long" />
+		<field name="name" type="String" />
+		<field name="url" type="String" />
+		<field name="contactperson" type="String" />
+		<field name="candidatetype" type="String" />
+		<field name="country" type="String" />
+		<field name="diseasescodes" type="String" />
+		<field name="diseasesfreetext" type="String" />
+		<field name="comment" type="String" />
+		<field name="address" type="String" />
+		<field name="date" type="Date" />
+		<field name="mail" type="String" />
+		<field name="head" type="String" />
+	</model>
+	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate">
+		<field name="linkId" type="long" />
+		<field name="candidateId" type="long" />
+		<field name="masterCandidateId" type="long" />
 	</model>
 </model-hints>

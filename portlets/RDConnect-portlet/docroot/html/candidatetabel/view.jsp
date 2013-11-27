@@ -26,11 +26,24 @@ String name = ParamUtil.getString(request, "name");
 if(name.equalsIgnoreCase("")) {
 	name = "";
 }
+
+if(renderRequest.getParameter("action-status") != null) {
+	if(renderRequest.getParameter("action-status").equalsIgnoreCase("clear")) {
+		country = "all";
+		request.setAttribute("country", "all");
+		source = "all";
+		request.setAttribute("source", "all");
+		candidatetype = "all";
+		request.setAttribute("candidatetype", "all");
+		name = "";
+		request.setAttribute("name", "");
+	}
+}
 	
-String disease = ParamUtil.getString(request, "disease");
+/*String disease = ParamUtil.getString(request, "disease");
 if(disease.equalsIgnoreCase("")) {
 	disease = "";
-}
+}*/
 %>
 
 <% 
@@ -40,7 +53,8 @@ String[] sources = CandidateLocalServiceUtil.getSource();
 %>
 
 <portlet:actionURL name='filterCandidates' var="filterCandidatesURL" />
-<aui:form action="<%= filterCandidatesURL.toString() %>" method="post" >
+<portlet:actionURL name='clearFilterCandidates' var="clearFilterCandidatesURL" />
+<aui:form name="filterform" action="<%= filterCandidatesURL.toString() %>" method="post" >
 <aui:fieldset  column="true">
 <div style="float:left;">
 <aui:input name="name" label="Name Search Filter:" size="90" value="<%= name %>" />
@@ -72,12 +86,26 @@ String[] sources = CandidateLocalServiceUtil.getSource();
 	<% } %>
 </aui:select>
 </div>
-<aui:input name="disease" label="Search Disease:" size="90"  value="<%= disease %>" />
+<%--<aui:input name="disease" label="Search Disease:" size="90"  value="<%= disease %>" />--%>
 <aui:button-row>
-<aui:button name="Filter" type="submit" value="filter" />
+<aui:button name="filter" type="submit" value="filter" label="Filter" onClick="submitForm('filter')" />
+<aui:button name="clear" type="submit" value="clear" label="Clear" onClick="submitForm('clear')" />
 </aui:button-row>
 </aui:fieldset>
 </aui:form>
+
+<script type="text/javascript" charset="utf-8">
+var A = AUI();
+function submitForm(action){
+  if(action=='filter'){
+     A.one('#<portlet:namespace/>filterform').set('action',"<%= filterCandidatesURL %>").submit();
+  }else{
+	  if(action=='clear'){
+     	A.one('#<portlet:namespace/>filterform').set('action',"<%= clearFilterCandidatesURL %>").submit();
+	  }
+  }
+}
+</script>
 
 <%      
 	Integer count = (Integer)request.getAttribute("count");        
@@ -87,13 +115,13 @@ String[] sources = CandidateLocalServiceUtil.getSource();
         cur = 1;
     }
     if(delta == null){
-        delta = 2;
+        delta = 10;
     }
     if(count == null){
         count = 0;
     }
     PortletURL portletURL = renderResponse.createActionURL();
-    portletURL.setParameter("disease", disease);
+    //portletURL.setParameter("disease", disease);
     portletURL.setParameter("country", country);
     portletURL.setParameter("source", source);
     portletURL.setParameter("candidatetype", candidatetype);
@@ -141,7 +169,7 @@ property="source"
 </liferay-ui:search-container-row>
 <%        
 portletURL.setParameter("cur", String.valueOf(cur)); 
-portletURL.setParameter("disease", disease);
+//portletURL.setParameter("disease", disease);
 portletURL.setParameter("country", country);
 portletURL.setParameter("source", source);
 portletURL.setParameter("candidatetype", candidatetype);

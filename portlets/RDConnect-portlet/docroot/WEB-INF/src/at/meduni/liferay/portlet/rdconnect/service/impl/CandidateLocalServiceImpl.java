@@ -84,7 +84,10 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		if(type.equals("all")) {
 			type = "%";
 		} else {
-			type = "%" + type + "%";
+			if(type.equals("Registry"))
+				type = "%" + "Registr" + "%";
+			else
+				type = "%" + type + "%";
 		}
 		if(source.equals("all")) {
 			source = "%";

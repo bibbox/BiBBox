@@ -7,6 +7,20 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.AQRRatingModelImpl">
+		<attributes>
+			<id name="aqrId" />
+			<basic name="accessability" />
+			<basic name="quality" />
+			<basic name="relevance" />
+			<basic name="masterCandidateId" />
+			<basic name="aqrrater" />
+			<basic name="ratingtype" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.CandidateModelImpl">
 		<attributes>
 			<id name="candidateId" />
@@ -39,8 +53,55 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateModelImpl">
+		<attributes>
+			<id name="masterCandidateId" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="contactperson" />
+			<basic name="candidatetype" />
+			<basic name="country" />
+			<basic name="diseasescodes" />
+			<basic name="diseasesfreetext" />
+			<basic name="comment">
+				<column name="COMMENT_" />
+			</basic>
+			<basic name="address" />
+			<basic name="date">
+				<column name="DATE_" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="mail" />
+			<basic name="head" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateModelImpl">
+		<attributes>
+			<id name="linkId" />
+			<basic name="candidateId" />
+			<basic name="masterCandidateId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.AQRRatingImpl" name="AQRRating">
+		<table name="rdconnect.aqr_rating" />
+		<attributes />
+	</entity>
 	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl" name="Candidate">
 		<table name="rdconnect.candidate" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl" name="MasterCandidate">
+		<table name="rdconnect.master_candidate" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl" name="MasterCandidateLinkCandidate">
+		<table name="rdconnect.master_candidate_link_candidate" />
 		<attributes />
 	</entity>
 </entity-mappings>

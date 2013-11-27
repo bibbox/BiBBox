@@ -2,7 +2,22 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.meduni.liferay.portlet.rdconnect.model.AQRRating" />
 	<import class="at.meduni.liferay.portlet.rdconnect.model.Candidate" />
+	<import class="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate" />
+	<import class="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate" />
+	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.AQRRatingImpl" table="rdconnect.aqr_rating">
+		<cache usage="read-write" />
+		<id name="aqrId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="accessability" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="quality" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="relevance" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="masterCandidateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="aqrrater" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ratingtype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl" table="rdconnect.candidate">
 		<cache usage="read-write" />
 		<id name="candidateId" type="long">
@@ -27,5 +42,31 @@
 		<property name="submittername" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="submitteremail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="validated" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl" table="rdconnect.master_candidate">
+		<cache usage="read-write" />
+		<id name="masterCandidateId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactperson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="candidatetype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseasescodes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseasesfreetext" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="comment" type="com.liferay.portal.dao.orm.hibernate.StringType" column="comment_" />
+		<property name="address" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="date" type="org.hibernate.type.TimestampType" column="date_" />
+		<property name="mail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="head" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl" table="rdconnect.master_candidate_link_candidate">
+		<cache usage="read-write" />
+		<id name="linkId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="candidateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="masterCandidateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

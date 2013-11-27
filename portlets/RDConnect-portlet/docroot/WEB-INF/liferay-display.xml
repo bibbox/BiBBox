@@ -9,4 +9,7 @@
 		<portlet id="candidate-propose"></portlet>
 		<portlet id="candidate-tabel"></portlet>
 	</category>
+	<category name="Meduni Test">
+		<portlet id="ddl-reader"></portlet>
+	</category>
 </display>

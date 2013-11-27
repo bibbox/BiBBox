@@ -14,8 +14,11 @@
 
 package at.meduni.liferay.portlet.rdconnect.service.messaging;
 
+import at.meduni.liferay.portlet.rdconnect.service.AQRRatingLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.ClpSerializer;
+import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalServiceUtil;
+import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -35,7 +38,13 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			AQRRatingLocalServiceUtil.clearService();
+
 			CandidateLocalServiceUtil.clearService();
+
+			MasterCandidateLocalServiceUtil.clearService();
+
+			MasterCandidateLinkCandidateLocalServiceUtil.clearService();
 		}
 	}
 }

@@ -35,6 +35,11 @@
 <%@ page import="com.liferay.portal.security.permission.ActionKeys"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.Fields" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.Field" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil" %>
+
 <%@ page import="at.meduni.liferay.portlet.rdconnect.model.Candidate"%>
 <%@ page import="at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil"%>
 

@@ -14,7 +14,10 @@
 
 package at.meduni.liferay.portlet.rdconnect.service;
 
+import at.meduni.liferay.portlet.rdconnect.model.AQRRatingClp;
 import at.meduni.liferay.portlet.rdconnect.model.CandidateClp;
+import at.meduni.liferay.portlet.rdconnect.model.MasterCandidateClp;
+import at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidateClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -102,8 +105,21 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(AQRRatingClp.class.getName())) {
+			return translateInputAQRRating(oldModel);
+		}
+
 		if (oldModelClassName.equals(CandidateClp.class.getName())) {
 			return translateInputCandidate(oldModel);
+		}
+
+		if (oldModelClassName.equals(MasterCandidateClp.class.getName())) {
+			return translateInputMasterCandidate(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					MasterCandidateLinkCandidateClp.class.getName())) {
+			return translateInputMasterCandidateLinkCandidate(oldModel);
 		}
 
 		return oldModel;
@@ -121,10 +137,41 @@ public class ClpSerializer {
 		return newList;
 	}
 
+	public static Object translateInputAQRRating(BaseModel<?> oldModel) {
+		AQRRatingClp oldClpModel = (AQRRatingClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getAQRRatingRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputCandidate(BaseModel<?> oldModel) {
 		CandidateClp oldClpModel = (CandidateClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getCandidateRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputMasterCandidate(BaseModel<?> oldModel) {
+		MasterCandidateClp oldClpModel = (MasterCandidateClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getMasterCandidateRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputMasterCandidateLinkCandidate(
+		BaseModel<?> oldModel) {
+		MasterCandidateLinkCandidateClp oldClpModel = (MasterCandidateLinkCandidateClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getMasterCandidateLinkCandidateRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -149,8 +196,23 @@ public class ClpSerializer {
 		String oldModelClassName = oldModelClass.getName();
 
 		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.rdconnect.model.impl.AQRRatingImpl")) {
+			return translateOutputAQRRating(oldModel);
+		}
+
+		if (oldModelClassName.equals(
 					"at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl")) {
 			return translateOutputCandidate(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl")) {
+			return translateOutputMasterCandidate(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl")) {
+			return translateOutputMasterCandidateLinkCandidate(oldModel);
 		}
 
 		return oldModel;
@@ -234,11 +296,36 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.meduni.liferay.portlet.rdconnect.NoSuchAQRRatingException")) {
+			return new at.meduni.liferay.portlet.rdconnect.NoSuchAQRRatingException();
+		}
+
+		if (className.equals(
 					"at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException")) {
 			return new at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException();
 		}
 
+		if (className.equals(
+					"at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException")) {
+			return new at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException();
+		}
+
+		if (className.equals(
+					"at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateLinkCandidateException")) {
+			return new at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateLinkCandidateException();
+		}
+
 		return throwable;
+	}
+
+	public static Object translateOutputAQRRating(BaseModel<?> oldModel) {
+		AQRRatingClp newModel = new AQRRatingClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setAQRRatingRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputCandidate(BaseModel<?> oldModel) {
@@ -247,6 +334,27 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setCandidateRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputMasterCandidate(BaseModel<?> oldModel) {
+		MasterCandidateClp newModel = new MasterCandidateClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setMasterCandidateRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputMasterCandidateLinkCandidate(
+		BaseModel<?> oldModel) {
+		MasterCandidateLinkCandidateClp newModel = new MasterCandidateLinkCandidateClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setMasterCandidateLinkCandidateRemoteModel(oldModel);
 
 		return newModel;
 	}
