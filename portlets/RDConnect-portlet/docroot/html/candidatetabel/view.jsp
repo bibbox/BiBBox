@@ -27,9 +27,11 @@ if(name.equalsIgnoreCase("")) {
 	name = "";
 }
 
+/*
 if(renderRequest.getParameter("action-status") != null) {
 	if(renderRequest.getParameter("action-status").equalsIgnoreCase("clear")) {
 		country = "all";
+		renderRequest.setAttribute("<portlet:namespace/>country", "all");
 		request.setAttribute("country", "all");
 		source = "all";
 		request.setAttribute("source", "all");
@@ -37,8 +39,9 @@ if(renderRequest.getParameter("action-status") != null) {
 		request.setAttribute("candidatetype", "all");
 		name = "";
 		request.setAttribute("name", "");
+		renderRequest.setAttribute("<portlet:namespace/>name", "all");
 	}
-}
+}*/
 	
 /*String disease = ParamUtil.getString(request, "disease");
 if(disease.equalsIgnoreCase("")) {
@@ -53,7 +56,6 @@ String[] sources = CandidateLocalServiceUtil.getSource();
 %>
 
 <portlet:actionURL name='filterCandidates' var="filterCandidatesURL" />
-<portlet:actionURL name='clearFilterCandidates' var="clearFilterCandidatesURL" />
 <aui:form name="filterform" action="<%= filterCandidatesURL.toString() %>" method="post" >
 <aui:fieldset  column="true">
 <div style="float:left;">
@@ -101,7 +103,7 @@ function submitForm(action){
      A.one('#<portlet:namespace/>filterform').set('action',"<%= filterCandidatesURL %>").submit();
   }else{
 	  if(action=='clear'){
-     	A.one('#<portlet:namespace/>filterform').set('action',"<%= clearFilterCandidatesURL %>").submit();
+		  window.location.href = '<%= redirect %>';
 	  }
   }
 }

@@ -15,10 +15,12 @@ public class CandidateTabel extends MVCPortlet {
 		response.setRenderParameter("action-status", "filter");
 	}
 	
+	/*
 	public void clearFilterCandidates(ActionRequest request, ActionResponse response) throws Exception {
 		System.out.println("clear");
 		response.setRenderParameter("action-status", "clear");
-	}
+		sendRedirect(request, response);
+	}*/
 	
 	/*public void search(ActionRequest request, ActionResponse response) throws Exception {
 		//String country = ParamUtil.getString(request, "s2");
