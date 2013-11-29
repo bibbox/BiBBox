@@ -39,6 +39,8 @@
 		<property name="sourceId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="mail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="head" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="coverage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="network" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="submittername" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="submitteremail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="validated" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
@@ -60,6 +62,8 @@
 		<property name="date" type="org.hibernate.type.TimestampType" column="date_" />
 		<property name="mail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="head" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl" table="rdconnect.master_candidate_link_candidate">
 		<cache usage="read-write" />

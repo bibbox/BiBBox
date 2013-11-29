@@ -66,6 +66,8 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 		attributes.put("sourceId", getSourceId());
 		attributes.put("mail", getMail());
 		attributes.put("head", getHead());
+		attributes.put("coverage", getCoverage());
+		attributes.put("network", getNetwork());
 		attributes.put("submittername", getSubmittername());
 		attributes.put("submitteremail", getSubmitteremail());
 		attributes.put("validated", getValidated());
@@ -175,6 +177,18 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 
 		if (head != null) {
 			setHead(head);
+		}
+
+		String coverage = (String)attributes.get("coverage");
+
+		if (coverage != null) {
+			setCoverage(coverage);
+		}
+
+		String network = (String)attributes.get("network");
+
+		if (network != null) {
+			setNetwork(network);
 		}
 
 		String submittername = (String)attributes.get("submittername");
@@ -554,6 +568,46 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 	@Override
 	public void setHead(java.lang.String head) {
 		_candidate.setHead(head);
+	}
+
+	/**
+	* Returns the coverage of this candidate.
+	*
+	* @return the coverage of this candidate
+	*/
+	@Override
+	public java.lang.String getCoverage() {
+		return _candidate.getCoverage();
+	}
+
+	/**
+	* Sets the coverage of this candidate.
+	*
+	* @param coverage the coverage of this candidate
+	*/
+	@Override
+	public void setCoverage(java.lang.String coverage) {
+		_candidate.setCoverage(coverage);
+	}
+
+	/**
+	* Returns the network of this candidate.
+	*
+	* @return the network of this candidate
+	*/
+	@Override
+	public java.lang.String getNetwork() {
+		return _candidate.getNetwork();
+	}
+
+	/**
+	* Sets the network of this candidate.
+	*
+	* @param network the network of this candidate
+	*/
+	@Override
+	public void setNetwork(java.lang.String network) {
+		_candidate.setNetwork(network);
 	}
 
 	/**

@@ -63,6 +63,8 @@ public class MasterCandidateWrapper implements MasterCandidate,
 		attributes.put("date", getDate());
 		attributes.put("mail", getMail());
 		attributes.put("head", getHead());
+		attributes.put("groupid", getGroupid());
+		attributes.put("companyid", getCompanyid());
 
 		return attributes;
 	}
@@ -145,6 +147,18 @@ public class MasterCandidateWrapper implements MasterCandidate,
 
 		if (head != null) {
 			setHead(head);
+		}
+
+		Long groupid = (Long)attributes.get("groupid");
+
+		if (groupid != null) {
+			setGroupid(groupid);
+		}
+
+		Long companyid = (Long)attributes.get("companyid");
+
+		if (companyid != null) {
+			setCompanyid(companyid);
 		}
 	}
 
@@ -428,6 +442,46 @@ public class MasterCandidateWrapper implements MasterCandidate,
 		_masterCandidate.setHead(head);
 	}
 
+	/**
+	* Returns the groupid of this master candidate.
+	*
+	* @return the groupid of this master candidate
+	*/
+	@Override
+	public long getGroupid() {
+		return _masterCandidate.getGroupid();
+	}
+
+	/**
+	* Sets the groupid of this master candidate.
+	*
+	* @param groupid the groupid of this master candidate
+	*/
+	@Override
+	public void setGroupid(long groupid) {
+		_masterCandidate.setGroupid(groupid);
+	}
+
+	/**
+	* Returns the companyid of this master candidate.
+	*
+	* @return the companyid of this master candidate
+	*/
+	@Override
+	public long getCompanyid() {
+		return _masterCandidate.getCompanyid();
+	}
+
+	/**
+	* Sets the companyid of this master candidate.
+	*
+	* @param companyid the companyid of this master candidate
+	*/
+	@Override
+	public void setCompanyid(long companyid) {
+		_masterCandidate.setCompanyid(companyid);
+	}
+
 	@Override
 	public boolean isNew() {
 		return _masterCandidate.isNew();
@@ -492,7 +546,8 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	}
 
 	@Override
-	public int compareTo(MasterCandidate masterCandidate) {
+	public int compareTo(
+		at.meduni.liferay.portlet.rdconnect.model.MasterCandidate masterCandidate) {
 		return _masterCandidate.compareTo(masterCandidate);
 	}
 
@@ -502,17 +557,17 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<MasterCandidate> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> toCacheModel() {
 		return _masterCandidate.toCacheModel();
 	}
 
 	@Override
-	public MasterCandidate toEscapedModel() {
+	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidate toEscapedModel() {
 		return new MasterCandidateWrapper(_masterCandidate.toEscapedModel());
 	}
 
 	@Override
-	public MasterCandidate toUnescapedModel() {
+	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidate toUnescapedModel() {
 		return new MasterCandidateWrapper(_masterCandidate.toUnescapedModel());
 	}
 

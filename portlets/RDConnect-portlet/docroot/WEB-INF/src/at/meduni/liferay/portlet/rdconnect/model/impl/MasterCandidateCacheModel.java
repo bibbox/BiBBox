@@ -38,7 +38,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{masterCandidateId=");
 		sb.append(masterCandidateId);
@@ -66,6 +66,10 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		sb.append(mail);
 		sb.append(", head=");
 		sb.append(head);
+		sb.append(", groupid=");
+		sb.append(groupid);
+		sb.append(", companyid=");
+		sb.append(companyid);
 		sb.append("}");
 
 		return sb.toString();
@@ -161,6 +165,9 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 			masterCandidateImpl.setHead(head);
 		}
 
+		masterCandidateImpl.setGroupid(groupid);
+		masterCandidateImpl.setCompanyid(companyid);
+
 		masterCandidateImpl.resetOriginalValues();
 
 		return masterCandidateImpl;
@@ -181,6 +188,8 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		date = objectInput.readLong();
 		mail = objectInput.readUTF();
 		head = objectInput.readUTF();
+		groupid = objectInput.readLong();
+		companyid = objectInput.readLong();
 	}
 
 	@Override
@@ -266,6 +275,9 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		else {
 			objectOutput.writeUTF(head);
 		}
+
+		objectOutput.writeLong(groupid);
+		objectOutput.writeLong(companyid);
 	}
 
 	public long masterCandidateId;
@@ -281,4 +293,6 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	public long date;
 	public String mail;
 	public String head;
+	public long groupid;
+	public long companyid;
 }

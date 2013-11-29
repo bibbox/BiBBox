@@ -2301,6 +2301,8 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 		candidateImpl.setSourceId(candidate.getSourceId());
 		candidateImpl.setMail(candidate.getMail());
 		candidateImpl.setHead(candidate.getHead());
+		candidateImpl.setCoverage(candidate.getCoverage());
+		candidateImpl.setNetwork(candidate.getNetwork());
 		candidateImpl.setSubmittername(candidate.getSubmittername());
 		candidateImpl.setSubmitteremail(candidate.getSubmitteremail());
 		candidateImpl.setValidated(candidate.isValidated());

@@ -71,9 +71,11 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			{ "address", Types.VARCHAR },
 			{ "date_", Types.TIMESTAMP },
 			{ "mail", Types.VARCHAR },
-			{ "head", Types.VARCHAR }
+			{ "head", Types.VARCHAR },
+			{ "groupid", Types.BIGINT },
+			{ "companyid", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.master_candidate (masterCandidateId LONG not null primary key,name VARCHAR(75) null,url VARCHAR(75) null,contactperson VARCHAR(75) null,candidatetype VARCHAR(75) null,country VARCHAR(75) null,diseasescodes VARCHAR(75) null,diseasesfreetext VARCHAR(75) null,comment_ VARCHAR(75) null,address VARCHAR(75) null,date_ DATE null,mail VARCHAR(75) null,head VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.master_candidate (masterCandidateId LONG not null primary key,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,mail VARCHAR(255) null,head TEXT null,groupid LONG,companyid LONG)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.master_candidate";
 	public static final String ORDER_BY_JPQL = " ORDER BY masterCandidate.country ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.master_candidate.country ASC";
@@ -145,6 +147,8 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		attributes.put("date", getDate());
 		attributes.put("mail", getMail());
 		attributes.put("head", getHead());
+		attributes.put("groupid", getGroupid());
+		attributes.put("companyid", getCompanyid());
 
 		return attributes;
 	}
@@ -227,6 +231,18 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 		if (head != null) {
 			setHead(head);
+		}
+
+		Long groupid = (Long)attributes.get("groupid");
+
+		if (groupid != null) {
+			setGroupid(groupid);
+		}
+
+		Long companyid = (Long)attributes.get("companyid");
+
+		if (companyid != null) {
+			setCompanyid(companyid);
 		}
 	}
 
@@ -445,6 +461,26 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		_head = head;
 	}
 
+	@Override
+	public long getGroupid() {
+		return _groupid;
+	}
+
+	@Override
+	public void setGroupid(long groupid) {
+		_groupid = groupid;
+	}
+
+	@Override
+	public long getCompanyid() {
+		return _companyid;
+	}
+
+	@Override
+	public void setCompanyid(long companyid) {
+		_companyid = companyid;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -489,6 +525,8 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		masterCandidateImpl.setDate(getDate());
 		masterCandidateImpl.setMail(getMail());
 		masterCandidateImpl.setHead(getHead());
+		masterCandidateImpl.setGroupid(getGroupid());
+		masterCandidateImpl.setCompanyid(getCompanyid());
 
 		masterCandidateImpl.resetOriginalValues();
 
@@ -651,12 +689,16 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			masterCandidateCacheModel.head = null;
 		}
 
+		masterCandidateCacheModel.groupid = getGroupid();
+
+		masterCandidateCacheModel.companyid = getCompanyid();
+
 		return masterCandidateCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{masterCandidateId=");
 		sb.append(getMasterCandidateId());
@@ -684,6 +726,10 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		sb.append(getMail());
 		sb.append(", head=");
 		sb.append(getHead());
+		sb.append(", groupid=");
+		sb.append(getGroupid());
+		sb.append(", companyid=");
+		sb.append(getCompanyid());
 		sb.append("}");
 
 		return sb.toString();
@@ -691,7 +737,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.MasterCandidate");
@@ -749,6 +795,14 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			"<column><column-name>head</column-name><column-value><![CDATA[");
 		sb.append(getHead());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupid</column-name><column-value><![CDATA[");
+		sb.append(getGroupid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyid</column-name><column-value><![CDATA[");
+		sb.append(getCompanyid());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -775,6 +829,8 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 	private Date _date;
 	private String _mail;
 	private String _head;
+	private long _groupid;
+	private long _companyid;
 	private long _columnBitmask;
 	private MasterCandidate _escapedModel;
 }

@@ -1592,6 +1592,8 @@ public class MasterCandidatePersistenceImpl extends BasePersistenceImpl<MasterCa
 		masterCandidateImpl.setDate(masterCandidate.getDate());
 		masterCandidateImpl.setMail(masterCandidate.getMail());
 		masterCandidateImpl.setHead(masterCandidate.getHead());
+		masterCandidateImpl.setGroupid(masterCandidate.getGroupid());
+		masterCandidateImpl.setCompanyid(masterCandidate.getCompanyid());
 
 		return masterCandidateImpl;
 	}

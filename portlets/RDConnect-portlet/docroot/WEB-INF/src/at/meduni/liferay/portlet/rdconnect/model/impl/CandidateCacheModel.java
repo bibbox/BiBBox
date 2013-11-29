@@ -38,7 +38,7 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{candidateId=");
 		sb.append(candidateId);
@@ -74,6 +74,10 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		sb.append(mail);
 		sb.append(", head=");
 		sb.append(head);
+		sb.append(", coverage=");
+		sb.append(coverage);
+		sb.append(", network=");
+		sb.append(network);
 		sb.append(", submittername=");
 		sb.append(submittername);
 		sb.append(", submitteremail=");
@@ -203,6 +207,20 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 			candidateImpl.setHead(head);
 		}
 
+		if (coverage == null) {
+			candidateImpl.setCoverage(StringPool.BLANK);
+		}
+		else {
+			candidateImpl.setCoverage(coverage);
+		}
+
+		if (network == null) {
+			candidateImpl.setNetwork(StringPool.BLANK);
+		}
+		else {
+			candidateImpl.setNetwork(network);
+		}
+
 		if (submittername == null) {
 			candidateImpl.setSubmittername(StringPool.BLANK);
 		}
@@ -243,6 +261,8 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		sourceId = objectInput.readUTF();
 		mail = objectInput.readUTF();
 		head = objectInput.readUTF();
+		coverage = objectInput.readUTF();
+		network = objectInput.readUTF();
 		submittername = objectInput.readUTF();
 		submitteremail = objectInput.readUTF();
 		validated = objectInput.readBoolean();
@@ -360,6 +380,20 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 			objectOutput.writeUTF(head);
 		}
 
+		if (coverage == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(coverage);
+		}
+
+		if (network == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(network);
+		}
+
 		if (submittername == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -394,6 +428,8 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 	public String sourceId;
 	public String mail;
 	public String head;
+	public String coverage;
+	public String network;
 	public String submittername;
 	public String submitteremail;
 	public boolean validated;

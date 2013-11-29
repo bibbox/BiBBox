@@ -252,6 +252,34 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	 */
 	public void setHead(String head);
 
+	/**
+	 * Returns the groupid of this master candidate.
+	 *
+	 * @return the groupid of this master candidate
+	 */
+	public long getGroupid();
+
+	/**
+	 * Sets the groupid of this master candidate.
+	 *
+	 * @param groupid the groupid of this master candidate
+	 */
+	public void setGroupid(long groupid);
+
+	/**
+	 * Returns the companyid of this master candidate.
+	 *
+	 * @return the companyid of this master candidate
+	 */
+	public long getCompanyid();
+
+	/**
+	 * Sets the companyid of this master candidate.
+	 *
+	 * @param companyid the companyid of this master candidate
+	 */
+	public void setCompanyid(long companyid);
+
 	@Override
 	public boolean isNew();
 

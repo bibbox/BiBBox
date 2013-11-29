@@ -45,6 +45,8 @@
 			<basic name="sourceId" />
 			<basic name="mail" />
 			<basic name="head" />
+			<basic name="coverage" />
+			<basic name="network" />
 			<basic name="submittername" />
 			<basic name="submitteremail" />
 			<basic name="validated" />
@@ -73,6 +75,8 @@
 			</basic>
 			<basic name="mail" />
 			<basic name="head" />
+			<basic name="groupid" />
+			<basic name="companyid" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

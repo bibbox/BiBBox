@@ -313,6 +313,36 @@ public interface CandidateModel extends BaseModel<Candidate> {
 	public void setHead(String head);
 
 	/**
+	 * Returns the coverage of this candidate.
+	 *
+	 * @return the coverage of this candidate
+	 */
+	@AutoEscape
+	public String getCoverage();
+
+	/**
+	 * Sets the coverage of this candidate.
+	 *
+	 * @param coverage the coverage of this candidate
+	 */
+	public void setCoverage(String coverage);
+
+	/**
+	 * Returns the network of this candidate.
+	 *
+	 * @return the network of this candidate
+	 */
+	@AutoEscape
+	public String getNetwork();
+
+	/**
+	 * Sets the network of this candidate.
+	 *
+	 * @param network the network of this candidate
+	 */
+	public void setNetwork(String network);
+
+	/**
 	 * Returns the submittername of this candidate.
 	 *
 	 * @return the submittername of this candidate

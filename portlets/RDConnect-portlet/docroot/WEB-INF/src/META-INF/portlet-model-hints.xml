@@ -17,7 +17,7 @@
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="url" type="String">
-			<hint name="max-length">255</hint>
+			<hint name="max-length">10000</hint>
 		</field>
 		<field name="contactperson" type="String">
 			<hint name="max-length">10000</hint>
@@ -39,7 +39,7 @@
 		</field>
 		<field name="date" type="Date" />
 		<field name="searchurl" type="String">
-			<hint name="max-length">255</hint>
+			<hint name="max-length">10000</hint>
 		</field>
 		<field name="sourceId" type="String" />
 		<field name="mail" type="String">
@@ -48,9 +48,11 @@
 		<field name="head" type="String">
 			<hint name="max-length">10000</hint>
 		</field>
-		<field name="submittername" type="String">
+		<field name="coverage" type="String" />
+		<field name="network" type="String">
 			<hint name="max-length">255</hint>
 		</field>
+		<field name="submittername" type="String" />
 		<field name="submitteremail" type="String">
 			<hint name="max-length">255</hint>
 		</field>
@@ -58,18 +60,38 @@
 	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate">
 		<field name="masterCandidateId" type="long" />
-		<field name="name" type="String" />
-		<field name="url" type="String" />
-		<field name="contactperson" type="String" />
+		<field name="name" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="url" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="contactperson" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 		<field name="candidatetype" type="String" />
 		<field name="country" type="String" />
-		<field name="diseasescodes" type="String" />
-		<field name="diseasesfreetext" type="String" />
-		<field name="comment" type="String" />
-		<field name="address" type="String" />
+		<field name="diseasescodes" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="diseasesfreetext" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="comment" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="address" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 		<field name="date" type="Date" />
-		<field name="mail" type="String" />
-		<field name="head" type="String" />
+		<field name="mail" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="head" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="groupid" type="long" />
+		<field name="companyid" type="long" />
 	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate">
 		<field name="linkId" type="long" />

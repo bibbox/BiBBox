@@ -76,11 +76,13 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 			{ "sourceId", Types.VARCHAR },
 			{ "mail", Types.VARCHAR },
 			{ "head", Types.VARCHAR },
+			{ "coverage", Types.VARCHAR },
+			{ "network", Types.VARCHAR },
 			{ "submittername", Types.VARCHAR },
 			{ "submitteremail", Types.VARCHAR },
 			{ "validated", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.candidate (candidateId LONG not null primary key,source VARCHAR(75) null,name VARCHAR(255) null,url VARCHAR(255) null,contactperson TEXT null,candidatetype VARCHAR(75) null,subunitof VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,searchurl VARCHAR(255) null,sourceId VARCHAR(75) null,mail VARCHAR(255) null,head TEXT null,submittername VARCHAR(255) null,submitteremail VARCHAR(255) null,validated BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.candidate (candidateId LONG not null primary key,source VARCHAR(75) null,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,subunitof VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,searchurl TEXT null,sourceId VARCHAR(75) null,mail VARCHAR(255) null,head TEXT null,coverage VARCHAR(75) null,network VARCHAR(255) null,submittername VARCHAR(75) null,submitteremail VARCHAR(255) null,validated BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.candidate";
 	public static final String ORDER_BY_JPQL = " ORDER BY candidate.country ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.candidate.country ASC";
@@ -158,6 +160,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		attributes.put("sourceId", getSourceId());
 		attributes.put("mail", getMail());
 		attributes.put("head", getHead());
+		attributes.put("coverage", getCoverage());
+		attributes.put("network", getNetwork());
 		attributes.put("submittername", getSubmittername());
 		attributes.put("submitteremail", getSubmitteremail());
 		attributes.put("validated", getValidated());
@@ -267,6 +271,18 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 		if (head != null) {
 			setHead(head);
+		}
+
+		String coverage = (String)attributes.get("coverage");
+
+		if (coverage != null) {
+			setCoverage(coverage);
+		}
+
+		String network = (String)attributes.get("network");
+
+		if (network != null) {
+			setNetwork(network);
 		}
 
 		String submittername = (String)attributes.get("submittername");
@@ -584,6 +600,36 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 	}
 
 	@Override
+	public String getCoverage() {
+		if (_coverage == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _coverage;
+		}
+	}
+
+	@Override
+	public void setCoverage(String coverage) {
+		_coverage = coverage;
+	}
+
+	@Override
+	public String getNetwork() {
+		if (_network == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _network;
+		}
+	}
+
+	@Override
+	public void setNetwork(String network) {
+		_network = network;
+	}
+
+	@Override
 	public String getSubmittername() {
 		if (_submittername == null) {
 			return StringPool.BLANK;
@@ -676,6 +722,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		candidateImpl.setSourceId(getSourceId());
 		candidateImpl.setMail(getMail());
 		candidateImpl.setHead(getHead());
+		candidateImpl.setCoverage(getCoverage());
+		candidateImpl.setNetwork(getNetwork());
 		candidateImpl.setSubmittername(getSubmittername());
 		candidateImpl.setSubmitteremail(getSubmitteremail());
 		candidateImpl.setValidated(getValidated());
@@ -877,6 +925,22 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 			candidateCacheModel.head = null;
 		}
 
+		candidateCacheModel.coverage = getCoverage();
+
+		String coverage = candidateCacheModel.coverage;
+
+		if ((coverage != null) && (coverage.length() == 0)) {
+			candidateCacheModel.coverage = null;
+		}
+
+		candidateCacheModel.network = getNetwork();
+
+		String network = candidateCacheModel.network;
+
+		if ((network != null) && (network.length() == 0)) {
+			candidateCacheModel.network = null;
+		}
+
 		candidateCacheModel.submittername = getSubmittername();
 
 		String submittername = candidateCacheModel.submittername;
@@ -900,7 +964,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{candidateId=");
 		sb.append(getCandidateId());
@@ -936,6 +1000,10 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		sb.append(getMail());
 		sb.append(", head=");
 		sb.append(getHead());
+		sb.append(", coverage=");
+		sb.append(getCoverage());
+		sb.append(", network=");
+		sb.append(getNetwork());
 		sb.append(", submittername=");
 		sb.append(getSubmittername());
 		sb.append(", submitteremail=");
@@ -949,7 +1017,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.Candidate");
@@ -1024,6 +1092,14 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		sb.append(getHead());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>coverage</column-name><column-value><![CDATA[");
+		sb.append(getCoverage());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>network</column-name><column-value><![CDATA[");
+		sb.append(getNetwork());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>submittername</column-name><column-value><![CDATA[");
 		sb.append(getSubmittername());
 		sb.append("]]></column-value></column>");
@@ -1067,6 +1143,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 	private String _sourceId;
 	private String _mail;
 	private String _head;
+	private String _coverage;
+	private String _network;
 	private String _submittername;
 	private String _submitteremail;
 	private boolean _validated;

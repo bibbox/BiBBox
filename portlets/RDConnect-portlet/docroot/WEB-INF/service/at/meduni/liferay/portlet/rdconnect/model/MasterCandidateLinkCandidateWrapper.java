@@ -224,7 +224,7 @@ public class MasterCandidateLinkCandidateWrapper
 
 	@Override
 	public int compareTo(
-		MasterCandidateLinkCandidate masterCandidateLinkCandidate) {
+		at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate masterCandidateLinkCandidate) {
 		return _masterCandidateLinkCandidate.compareTo(masterCandidateLinkCandidate);
 	}
 
@@ -234,17 +234,17 @@ public class MasterCandidateLinkCandidateWrapper
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<MasterCandidateLinkCandidate> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate> toCacheModel() {
 		return _masterCandidateLinkCandidate.toCacheModel();
 	}
 
 	@Override
-	public MasterCandidateLinkCandidate toEscapedModel() {
+	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate toEscapedModel() {
 		return new MasterCandidateLinkCandidateWrapper(_masterCandidateLinkCandidate.toEscapedModel());
 	}
 
 	@Override
-	public MasterCandidateLinkCandidate toUnescapedModel() {
+	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate toUnescapedModel() {
 		return new MasterCandidateLinkCandidateWrapper(_masterCandidateLinkCandidate.toUnescapedModel());
 	}
 

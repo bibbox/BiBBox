@@ -47,6 +47,8 @@ public class CandidateSoap implements Serializable {
 		soapModel.setSourceId(model.getSourceId());
 		soapModel.setMail(model.getMail());
 		soapModel.setHead(model.getHead());
+		soapModel.setCoverage(model.getCoverage());
+		soapModel.setNetwork(model.getNetwork());
 		soapModel.setSubmittername(model.getSubmittername());
 		soapModel.setSubmitteremail(model.getSubmitteremail());
 		soapModel.setValidated(model.getValidated());
@@ -238,6 +240,22 @@ public class CandidateSoap implements Serializable {
 		_head = head;
 	}
 
+	public String getCoverage() {
+		return _coverage;
+	}
+
+	public void setCoverage(String coverage) {
+		_coverage = coverage;
+	}
+
+	public String getNetwork() {
+		return _network;
+	}
+
+	public void setNetwork(String network) {
+		_network = network;
+	}
+
 	public String getSubmittername() {
 		return _submittername;
 	}
@@ -283,6 +301,8 @@ public class CandidateSoap implements Serializable {
 	private String _sourceId;
 	private String _mail;
 	private String _head;
+	private String _coverage;
+	private String _network;
 	private String _submittername;
 	private String _submitteremail;
 	private boolean _validated;

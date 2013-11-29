@@ -328,7 +328,8 @@ public class AQRRatingWrapper implements AQRRating, ModelWrapper<AQRRating> {
 	}
 
 	@Override
-	public int compareTo(AQRRating aqrRating) {
+	public int compareTo(
+		at.meduni.liferay.portlet.rdconnect.model.AQRRating aqrRating) {
 		return _aqrRating.compareTo(aqrRating);
 	}
 
@@ -338,17 +339,17 @@ public class AQRRatingWrapper implements AQRRating, ModelWrapper<AQRRating> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<AQRRating> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.meduni.liferay.portlet.rdconnect.model.AQRRating> toCacheModel() {
 		return _aqrRating.toCacheModel();
 	}
 
 	@Override
-	public AQRRating toEscapedModel() {
+	public at.meduni.liferay.portlet.rdconnect.model.AQRRating toEscapedModel() {
 		return new AQRRatingWrapper(_aqrRating.toEscapedModel());
 	}
 
 	@Override
-	public AQRRating toUnescapedModel() {
+	public at.meduni.liferay.portlet.rdconnect.model.AQRRating toUnescapedModel() {
 		return new AQRRatingWrapper(_aqrRating.toUnescapedModel());
 	}
 

@@ -87,6 +87,8 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		attributes.put("date", getDate());
 		attributes.put("mail", getMail());
 		attributes.put("head", getHead());
+		attributes.put("groupid", getGroupid());
+		attributes.put("companyid", getCompanyid());
 
 		return attributes;
 	}
@@ -169,6 +171,18 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 		if (head != null) {
 			setHead(head);
+		}
+
+		Long groupid = (Long)attributes.get("groupid");
+
+		if (groupid != null) {
+			setGroupid(groupid);
+		}
+
+		Long companyid = (Long)attributes.get("companyid");
+
+		if (companyid != null) {
+			setCompanyid(companyid);
 		}
 	}
 
@@ -473,6 +487,52 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		}
 	}
 
+	@Override
+	public long getGroupid() {
+		return _groupid;
+	}
+
+	@Override
+	public void setGroupid(long groupid) {
+		_groupid = groupid;
+
+		if (_masterCandidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterCandidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupid", long.class);
+
+				method.invoke(_masterCandidateRemoteModel, groupid);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyid() {
+		return _companyid;
+	}
+
+	@Override
+	public void setCompanyid(long companyid) {
+		_companyid = companyid;
+
+		if (_masterCandidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterCandidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyid", long.class);
+
+				method.invoke(_masterCandidateRemoteModel, companyid);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getMasterCandidateRemoteModel() {
 		return _masterCandidateRemoteModel;
 	}
@@ -557,6 +617,8 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		clone.setDate(getDate());
 		clone.setMail(getMail());
 		clone.setHead(getHead());
+		clone.setGroupid(getGroupid());
+		clone.setCompanyid(getCompanyid());
 
 		return clone;
 	}
@@ -603,7 +665,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{masterCandidateId=");
 		sb.append(getMasterCandidateId());
@@ -631,6 +693,10 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		sb.append(getMail());
 		sb.append(", head=");
 		sb.append(getHead());
+		sb.append(", groupid=");
+		sb.append(getGroupid());
+		sb.append(", companyid=");
+		sb.append(getCompanyid());
 		sb.append("}");
 
 		return sb.toString();
@@ -638,7 +704,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.MasterCandidate");
@@ -696,6 +762,14 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 			"<column><column-name>head</column-name><column-value><![CDATA[");
 		sb.append(getHead());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupid</column-name><column-value><![CDATA[");
+		sb.append(getGroupid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyid</column-name><column-value><![CDATA[");
+		sb.append(getCompanyid());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -715,5 +789,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 	private Date _date;
 	private String _mail;
 	private String _head;
+	private long _groupid;
+	private long _companyid;
 	private BaseModel<?> _masterCandidateRemoteModel;
 }

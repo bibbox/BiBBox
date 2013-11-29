@@ -90,6 +90,8 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		attributes.put("sourceId", getSourceId());
 		attributes.put("mail", getMail());
 		attributes.put("head", getHead());
+		attributes.put("coverage", getCoverage());
+		attributes.put("network", getNetwork());
 		attributes.put("submittername", getSubmittername());
 		attributes.put("submitteremail", getSubmitteremail());
 		attributes.put("validated", getValidated());
@@ -199,6 +201,18 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 		if (head != null) {
 			setHead(head);
+		}
+
+		String coverage = (String)attributes.get("coverage");
+
+		if (coverage != null) {
+			setCoverage(coverage);
+		}
+
+		String network = (String)attributes.get("network");
+
+		if (network != null) {
+			setNetwork(network);
 		}
 
 		String submittername = (String)attributes.get("submittername");
@@ -613,6 +627,52 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 	}
 
 	@Override
+	public String getCoverage() {
+		return _coverage;
+	}
+
+	@Override
+	public void setCoverage(String coverage) {
+		_coverage = coverage;
+
+		if (_candidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _candidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCoverage", String.class);
+
+				method.invoke(_candidateRemoteModel, coverage);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getNetwork() {
+		return _network;
+	}
+
+	@Override
+	public void setNetwork(String network) {
+		_network = network;
+
+		if (_candidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _candidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setNetwork", String.class);
+
+				method.invoke(_candidateRemoteModel, network);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getSubmittername() {
 		return _submittername;
 	}
@@ -773,6 +833,8 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		clone.setSourceId(getSourceId());
 		clone.setMail(getMail());
 		clone.setHead(getHead());
+		clone.setCoverage(getCoverage());
+		clone.setNetwork(getNetwork());
 		clone.setSubmittername(getSubmittername());
 		clone.setSubmitteremail(getSubmitteremail());
 		clone.setValidated(getValidated());
@@ -822,7 +884,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{candidateId=");
 		sb.append(getCandidateId());
@@ -858,6 +920,10 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		sb.append(getMail());
 		sb.append(", head=");
 		sb.append(getHead());
+		sb.append(", coverage=");
+		sb.append(getCoverage());
+		sb.append(", network=");
+		sb.append(getNetwork());
 		sb.append(", submittername=");
 		sb.append(getSubmittername());
 		sb.append(", submitteremail=");
@@ -871,7 +937,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.Candidate");
@@ -946,6 +1012,14 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		sb.append(getHead());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>coverage</column-name><column-value><![CDATA[");
+		sb.append(getCoverage());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>network</column-name><column-value><![CDATA[");
+		sb.append(getNetwork());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>submittername</column-name><column-value><![CDATA[");
 		sb.append(getSubmittername());
 		sb.append("]]></column-value></column>");
@@ -980,6 +1054,8 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 	private String _sourceId;
 	private String _mail;
 	private String _head;
+	private String _coverage;
+	private String _network;
 	private String _submittername;
 	private String _submitteremail;
 	private boolean _validated;

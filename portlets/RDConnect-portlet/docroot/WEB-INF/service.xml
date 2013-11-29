@@ -26,6 +26,8 @@
 		<column name="sourceId" type="String" />
 		<column name="mail" type="String" />
 		<column name="head" type="String" />
+		<column name="coverage" type="String" />
+		<column name="network" type="String" />
 		<column name="submittername" type="String" />
 		<column name="submitteremail" type="String" />
         <column name="validated" type="boolean"></column>
@@ -67,6 +69,8 @@
 		<column name="date" type="Date" />
 		<column name="mail" type="String" />
 		<column name="head" type="String" />
+		<column name="groupid" type="long" />
+		<column name="companyid" type="long" />
 
 		<!-- Order -->
 		<order by="asc">
