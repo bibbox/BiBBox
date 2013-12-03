@@ -9,6 +9,7 @@
 
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
@@ -40,8 +41,16 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil" %>
 
+<%@ page import="com.liferay.portal.service.OrganizationLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.UserLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.User" %>
+<%@ page import="com.liferay.portal.model.Organization" %>
+<%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
+
 <%@ page import="at.meduni.liferay.portlet.rdconnect.model.Candidate"%>
 <%@ page import="at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil"%>
+<%@ page import="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate"%>
+<%@ page import="at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil"%>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />

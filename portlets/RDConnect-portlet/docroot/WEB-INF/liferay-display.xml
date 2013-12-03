@@ -8,6 +8,13 @@
 	<category name="RDConnect">
 		<portlet id="candidate-propose"></portlet>
 		<portlet id="candidate-tabel"></portlet>
+		<portlet id="master-publish"></portlet>
+		<portlet id="ddl-contect"></portlet>
+		<portlet id="people"></portlet>
+		<portlet id="core-information"></portlet>
+		<portlet id="organisation-logo-display"></portlet>
+		<portlet id="master-table"></portlet>
+		<portlet id="overview-information"></portlet>
 	</category>
 	<category name="Meduni Test">
 		<portlet id="ddl-reader"></portlet>

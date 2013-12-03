@@ -115,6 +115,12 @@ public class MasterCandidateLocalServiceClp
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getFilterdCandidates";
+
+		_methodParameterTypes19 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -667,6 +673,42 @@ public class MasterCandidateLocalServiceClp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> getFilterdCandidates(
+		java.lang.String name, java.lang.String country, java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(country),
+						
+					ClpSerializer.translateInput(type)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -704,4 +746,6 @@ public class MasterCandidateLocalServiceClp
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

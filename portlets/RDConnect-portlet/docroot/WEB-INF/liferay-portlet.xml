@@ -36,6 +36,73 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>ddl-reader-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>master-publish</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>master-publish-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>ddl-contect</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>ddl-contect-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>people</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>people-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>core-information</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>core-information-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>organisation-logo-display</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			organisation-logo-display-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>master-table</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>master-table-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>overview-information</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			overview-information-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

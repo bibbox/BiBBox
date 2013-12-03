@@ -113,6 +113,12 @@ public class MasterCandidateLocalServiceClpInvoker {
 		_methodName45 = "setBeanIdentifier";
 
 		_methodParameterTypes45 = new String[] { "java.lang.String" };
+
+		_methodName50 = "getFilterdCandidates";
+
+		_methodParameterTypes50 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +222,12 @@ public class MasterCandidateLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			return MasterCandidateLocalServiceUtil.getFilterdCandidates((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +267,6 @@ public class MasterCandidateLocalServiceClpInvoker {
 	private String[] _methodParameterTypes44;
 	private String _methodName45;
 	private String[] _methodParameterTypes45;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
 }

@@ -14,12 +14,12 @@
 
 <body class="${css_class}">
 
-<a href="#main-content" id="skip-to-content"><@liferay.language key="skip-to-content" /></a>
-
 ${theme.include(body_top_include)}
 
 <#if is_signed_in>
-	<@liferay.dockbar />
+
+		<@liferay.dockbar />
+
 </#if>
 
 <div class="container-fluid" id="wrapper">

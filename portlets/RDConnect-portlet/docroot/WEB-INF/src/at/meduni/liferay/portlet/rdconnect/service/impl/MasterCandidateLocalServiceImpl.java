@@ -14,6 +14,12 @@
 
 package at.meduni.liferay.portlet.rdconnect.service.impl;
 
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+
+import at.meduni.liferay.portlet.rdconnect.model.Candidate;
+import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.service.base.MasterCandidateLocalServiceBaseImpl;
 
 /**
@@ -37,4 +43,26 @@ public class MasterCandidateLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil} to access the master candidate local service.
 	 */
+	public List<MasterCandidate> getFilterdCandidates(String name, String country, String type) throws SystemException {
+		if(country.equals("all")) {
+			country = "%";
+		} else {
+			country = "%" + country + "%";
+		}
+		if(type.equals("all")) {
+			type = "%";
+		} else {
+			if(type.equals("Registry"))
+				type = "%" + "Registr" + "%";
+			else
+				type = "%" + type + "%";
+		}
+		if(name.equals("")) {
+			name = "%";
+		} else {
+			name = "%" + name + "%";
+		}
+		List<MasterCandidate> mastercandidate = masterCandidatePersistence.findByCNST(country, name, type);
+		return mastercandidate;	
+	}
 }

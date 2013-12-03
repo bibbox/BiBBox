@@ -289,6 +289,14 @@ public class MasterCandidateLocalServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> getFilterdCandidates(
+		java.lang.String name, java.lang.String country, java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _masterCandidateLocalService.getFilterdCandidates(name, country,
+			type);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
