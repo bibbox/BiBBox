@@ -2,48 +2,27 @@
 
 <portlet:defineObjects />
 
+RD - Connect <br />
+
 <%
 long organizationId = 0;
 long userId2 = themeDisplay.getUserId();
 List<Organization> organisations = OrganizationLocalServiceUtil.getUserOrganizations(userId2);
 for(Organization o : organisations) {
 	organizationId = o.getOrganizationId();
-	/*if(organizationId == 16527)
+	if(organizationId == 16527)
 		continue;
 	if(organizationId == 16520)
 		continue;
 	if(organizationId == 26585)
-		continue;*/
+		continue;
     ///image/user_portrait?screenName=mue&companyId=22945
     ///image/layout_set_logo?img_id=30100&t=1385933683439
 	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+o.getLogoId();
-
 %>
-	<img alt="logo" src="<%= imgPath %>" width="120px" /><br>
-	<%=themeDisplay.getURLPortal() %>/web<%= o.getGroup().getFriendlyURL().toString() %>
-	
-	
+	<img alt="logo" src="<%= imgPath %>" width="180px" />
 <%
-
- com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
- //if (currentGroup.isOrganization()){
-            String furl = currentGroup.getFriendlyURL().toString();
-            %>
-            
-            >>>>> <%= furl %> <<<<<
-            
-            <%
- //}
- 
-
-
-//break;
-
-
-
+break;
 }
 %>
 <br />
-
-
-

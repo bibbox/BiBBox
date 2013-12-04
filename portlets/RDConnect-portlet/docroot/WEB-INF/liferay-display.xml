@@ -15,8 +15,13 @@
 		<portlet id="organisation-logo-display"></portlet>
 		<portlet id="master-table"></portlet>
 		<portlet id="overview-information"></portlet>
+		<portlet id="organisation-navigation"></portlet>
 	</category>
 	<category name="Meduni Test">
 		<portlet id="ddl-reader"></portlet>
+	</category>
+	<category name="RDConnectHeading">
+		<portlet id="portal-logo"></portlet>
+		<portlet id="portal-menu"></portlet>
 	</category>
 </display>

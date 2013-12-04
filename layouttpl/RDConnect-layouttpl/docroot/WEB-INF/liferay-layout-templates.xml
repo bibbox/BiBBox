@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.2.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_2_0.dtd">
+
+<layout-templates>
+	<custom>
+		<layout-template id="RDConnect" name="RDConnect">
+			<template-path>/RDConnect.tpl</template-path>
+			<wap-template-path>/RDConnect.wap.tpl</wap-template-path>
+			<thumbnail-path>/RDConnect.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="rdcard" name="RDCard">
+			<template-path>/rdcard.tpl</template-path>
+			<wap-template-path>/rdcard.wap.tpl</wap-template-path>
+			<thumbnail-path>/rdcard.png</thumbnail-path>
+		</layout-template>
+	</custom>
+</layout-templates>

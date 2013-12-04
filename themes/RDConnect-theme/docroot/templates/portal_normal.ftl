@@ -23,35 +23,7 @@ ${theme.include(body_top_include)}
 </#if>
 
 <div class="container-fluid" id="wrapper">
-	<header id="banner" role="banner">
-		<div id="heading">
-			<h1 class="site-title">
-				<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-					<img alt="${logo_description}" height="${site_logo_height}" src="${site_logo}" width="${site_logo_width}" />
-				</a>
-
-				<#if show_site_name>
-					<span class="site-name" title="<@liferay.language_format objects="${site_name}" key="go-to-x" />">
-						${site_name}
-					</span>
-				</#if>
-			</h1>
-
-			<h2 class="page-title">
-				<span>${the_title}</span>
-			</h2>
-		</div>
-
-		<#if !is_signed_in>
-			<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a>
-		</#if>
-
-		<#if has_navigation || is_signed_in>
-			<#include "${full_templates_path}/navigation.ftl" />
-		</#if>
-	</header>
-
-	<div id="content">
+	<div id="content"> 
 
 		<#if selectable>
 			${theme.include(content_include)}
@@ -63,12 +35,6 @@ ${theme.include(body_top_include)}
 			${theme.wrapPortlet("portlet.ftl", content_include)}
 		</#if>
 	</div>
-
-	<footer id="footer" role="contentinfo">
-		<p class="powered-by">
-			<@liferay.language key="powered-by" /> <a href="http://www.liferay.com" rel="external">Liferay</a>
-		</p>
-	</footer>
 </div>
 
 ${theme.include(body_bottom_include)}

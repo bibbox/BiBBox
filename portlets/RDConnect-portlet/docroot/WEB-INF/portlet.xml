@@ -381,4 +381,106 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>organisation-navigation</portlet-name>
+		<display-name>Organisation Navigation</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.rdconnect.OrganisationNavigation
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/theme/organisationnavigation/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Organisation Navigation</title>
+			<short-title>Organisation Navigation</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>portal-logo</portlet-name>
+		<display-name>Portal Logo</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.rdconnect.heading.PortalLogo
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/heading/portallogo/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Portal Logo</title>
+			<short-title>Portal Logo</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>portal-menu</portlet-name>
+		<display-name>Portal Menu</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.rdconnect.heading.PortalMenu
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/heading/portalmenu/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Portal Menu</title>
+			<short-title>Portal Menu</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

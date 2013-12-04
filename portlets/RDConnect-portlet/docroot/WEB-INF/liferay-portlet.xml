@@ -103,6 +103,35 @@
 			overview-information-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>organisation-navigation</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			organisation-navigation-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>portal-logo</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>portal-logo-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>portal-menu</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>portal-menu-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
