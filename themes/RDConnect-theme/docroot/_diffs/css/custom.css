@@ -32,24 +32,23 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 
 /* ---------- RDC Layout  styles ---------- */
-
+body{
+	background: url(@theme_image_path@/background.png) repeat-x;
+}
 #column-1 {
 	width: 180px;
 	height: 230px;
 	float: left;
-	background: red;
 }
 #column-2 {
 	width: 820px;
 	height: 50px;
 	float: left;
-	background: #5F975A;
 }
 #column-3 {
 	width: 820px;
 	height: 180px;
 	float: left;
-	background: blue;
 }
 #column-4 {
 	width: 590px;
@@ -63,7 +62,18 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 #wrapper {
 	width: 1000px;
-	float: left;
+	margin:auto;
+	padding: 0;
+}
+.aui .portlet-borderless-container {
+    padding: 0;
+    
+}
+
+.aui .portlet, .aui .portlet-borderless-container {
+    background: transparent;
+    margin: 0;
+    padding: 0;
 }
 
 /* ---------- Base styles ---------- */

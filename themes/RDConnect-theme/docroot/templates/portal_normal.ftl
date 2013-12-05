@@ -17,7 +17,7 @@
 ${theme.include(body_top_include)}
 
 <#if is_signed_in>
-
+ 
 		<@liferay.dockbar />
 
 </#if>

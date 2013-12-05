@@ -1,0 +1,15 @@
+#rd-heading-shortinformation {
+	width: 550px;
+	height: 150px;
+	float: left;
+}
+#rd-heading-submenue {
+	width: 550px;
+	height: 30px;
+	float: left;
+}
+#rd-heading-aktions {
+	width: 269px;
+	height: 180px;
+	float: right;
+}

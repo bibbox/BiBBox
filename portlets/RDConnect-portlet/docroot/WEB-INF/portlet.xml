@@ -483,4 +483,72 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>portal-information</portlet-name>
+		<display-name>Portal Information</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.rdconnect.heading.PortalInformation
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/heading/portalinformation/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Portal Information</title>
+			<short-title>Portal Information</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>disease-categories-ic-d10</portlet-name>
+		<display-name>Disease Categories Ic D10</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.rdconnect.questionnaire.DiseaseCategoriesICD10
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/questionnaire/diseasecategoriesicd10/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Disease Categories Ic D10</title>
+			<short-title>Disease Categories Ic D10</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

@@ -42,12 +42,15 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
+<%@ page import="com.liferay.portal.model.Layout" %>
+<%@ page import="com.liferay.portal.service.CountryServiceUtil" %>
 
 <%@ page import="com.liferay.portal.service.OrganizationLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.UserLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.model.User" %>
 <%@ page import="com.liferay.portal.model.Organization" %>
 <%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
+<%@ page import="at.meduni.liferay.portlet.rdconnect.questionnaire.DiseaseCategoriesICD10" %>
 
 <%@ page import="at.meduni.liferay.portlet.rdconnect.model.Candidate"%>
 <%@ page import="at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil"%>
