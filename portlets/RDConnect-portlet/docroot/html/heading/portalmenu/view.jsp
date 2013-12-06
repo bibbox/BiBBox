@@ -12,7 +12,7 @@ for(Organization o : organisations) {
 	String orgPath = themeDisplay.getURLPortal()+"/web"+o.getGroup().getFriendlyURL();
 	
 	%>
-	<aui:a href="<%= orgPath %>"><img alt="logo" src="<%= imgPath %>" height="40" width="40" /><%= o.getName() %></aui:a>
+	<aui:a href="<%= orgPath %>"><img alt="logo" src="<%= imgPath %>" height="40" width="40" /></aui:a>
 	<%
 }
 
@@ -23,6 +23,6 @@ for(Organization o : organisations) {
 
 <% String useraccountedit = themeDisplay.getURLPortal() + "/my_account"; %>
 
-<aui:a href="<%= useraccountedit %>"><%= themeDisplay.getUser().getFullName() %></aui:a>
+<!--<aui:a href="<%= useraccountedit %>"><%= themeDisplay.getUser().getFullName() %></aui:a>-->
 
 </span>

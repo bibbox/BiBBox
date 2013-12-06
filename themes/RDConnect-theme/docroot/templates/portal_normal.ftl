@@ -12,7 +12,7 @@
 	${theme.include(top_head_include)}
 </head>
 
-<body class="${css_class}">
+<body class="${css_class} rdbody">
 
 ${theme.include(body_top_include)}
 
@@ -21,6 +21,12 @@ ${theme.include(body_top_include)}
 		<@liferay.dockbar />
 
 </#if>
+
+<div id="rd-header-signin">
+	<#if !is_signed_in>
+		<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a>
+	</#if>
+</div>
 
 <div class="container-fluid" id="wrapper">
 	<div id="content"> 

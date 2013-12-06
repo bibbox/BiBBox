@@ -17,30 +17,12 @@ for(Organization o : organisations) {
     ///image/user_portrait?screenName=mue&companyId=22945
     ///image/layout_set_logo?img_id=30100&t=1385933683439
 	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+o.getLogoId();
-
+	String orgPath = themeDisplay.getURLPortal()+"/web"+o.getGroup().getFriendlyURL();
 %>
-	<img alt="logo" src="<%= imgPath %>" width="120px" /><br>
-	<%=themeDisplay.getURLPortal() %>/web<%= o.getGroup().getFriendlyURL().toString() %>
+	<p><aui:a href="<%= orgPath %>"><img alt="logo" src="<%= imgPath %>" width="120px" /><br><%= o.getName() %></aui:a></p>
 	
 	
 <%
-
- com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
- //if (currentGroup.isOrganization()){
-            String furl = currentGroup.getFriendlyURL().toString();
-            %>
-            
-            >>>>> <%= furl %> <<<<<
-            
-            <%
- //}
- 
-
-
-//break;
-
-
-
 }
 %>
 <br />

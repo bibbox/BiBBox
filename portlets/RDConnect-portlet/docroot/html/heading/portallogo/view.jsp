@@ -1,28 +1,38 @@
 <%@include file="/html/init.jsp" %>
 
 <portlet:defineObjects />
-
-RD - Connect <br />
+<!--  <div id="rd-heading-rdlogo"><img alt="logoRDConnect IDCard" src="<%= request.getContextPath() %>/images/RDLogo.png" width="180px" /></div> -->
 
 <%
 long organizationId = 0;
-long userId2 = themeDisplay.getUserId();
-List<Organization> organisations = OrganizationLocalServiceUtil.getUserOrganizations(userId2);
-for(Organization o : organisations) {
-	organizationId = o.getOrganizationId();
-	if(organizationId == 16527)
-		continue;
-	if(organizationId == 16520)
-		continue;
-	if(organizationId == 26585)
-		continue;
-    ///image/user_portrait?screenName=mue&companyId=22945
-    ///image/layout_set_logo?img_id=30100&t=1385933683439
-	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+o.getLogoId();
-%>
-	<img alt="logo" src="<%= imgPath %>" width="180px" />
-<%
-break;
+long comunity_id = 0;
+com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
+if (currentGroup.isUser()) {
+ 	// the group is a private user community
+ 	// getting the userId of the group's owner is
+  	organizationId = currentGroup.getClassPK();
+  	//System.out.println("user group - user id :" +  userId );
+}
+else if (currentGroup.isOrganization()) {
+  	// the group is an Organization
+  	organizationId = currentGroup.getClassPK();
+  	//System.out.println("Organization group - organizationId  :" +  organizationId );
+}
+else {
+ 	// its a normal community
+ 	//System.out.println("its a normal community");
+	comunity_id = currentGroup.getClassPK();
+}
+if(organizationId != 0) {
+	Organization organisations = OrganizationLocalServiceUtil.getOrganization(organizationId);
+	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organisations.getLogoId();
+	%>
+		<img alt="logo" src="<%= imgPath %>" width="180px" />
+	<%
+} else {
+	%>
+		<img alt="logo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" width="180px" />
+	<%
 }
 %>
 <br />

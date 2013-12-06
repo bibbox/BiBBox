@@ -6,6 +6,7 @@
 <div id="rd-heading-shortinformation" >
 <%
 		long organizationId = 0;
+		long currentgroup = 0;
 			com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
             if (currentGroup.isUser()) {
              // the group is a private user community
@@ -20,6 +21,7 @@
             }
             else {
              // its a normal community
+             	currentgroup = currentGroup.getClassPK();
                 System.out.println("its a normal community");
            }
 	if(organizationId != 0) {
@@ -31,15 +33,19 @@
 		
 		
 %>
-<h3><%= organisation.getName() %> <%= organizationId %></h3>
+<h3><%= organisation.getName() %></h3>
 <h6><%= organisation.getAddress().getCity() %>, <%= country %></h6>
 
 <%				
-	}
+	} else if (currentgroup != 0) {
+%>
+<h3><%= currentGroup.getName() %></h3>
+<%				
+	} 
 %>
 </div>
 <div id="rd-heading-aktions">
-Aktions
+<div id="ProfileComplededProgressBar"></div>
 </div>
 <div id="rd-heading-submenue">
 <%@ include file="/html/heading/portalinformation/submenu.jsp" %>

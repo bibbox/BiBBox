@@ -6,16 +6,19 @@
 @import url(color_schemes/dark.css);
 @import url(color_schemes/light.css);
 
-$dockbarGradientEnd: #1273C7;
-$dockbarGradientStart: #118ADE;
+$dockbarGradientEnd: #303030;
+$dockbarGradientStart: #303030;
 
-$dockbarOpenGradientEnd: #0993DD;
-$dockbarOpenGradientStart: #0EA6F9;
+$dockbarOpenGradientEnd: #303030;
+$dockbarOpenGradientStart: #303030;
 
 /* ---------- RDC  styles ---------- */
 #rdheading {
-	background: #5F975A;
+	background: #303030;
 	height: 220px;
+}
+#rd-layout-heading {
+	background: #303030;
 }
 #rdlogo {
 	margin-left: 40px;
@@ -32,38 +35,60 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 
 /* ---------- RDC Layout  styles ---------- */
-body{
-	background: url(@theme_image_path@/background.png) repeat-x;
+.dockbar .navbar-inner .container {
+	background: url(@theme_image_path@/RDLogo.png) no-repeat;
 }
-#column-1 {
+div.portlet-body {
+    max-width: 1200px;
+    min-width: 100px;
+}
+#rd-header-signin {
+	float: right;
+	margin: 30px;
+}
+.rd-connect-column-1 {
 	width: 180px;
 	height: 230px;
 	float: left;
+	background: #303030;
 }
-#column-2 {
+.rd-connect-column-1 {
+	width: 180px;
+	height: 180px;
+	float: left;
+	background: #303030;
+}
+.rd-connect-column-2 {
 	width: 820px;
 	height: 50px;
 	float: left;
+	background: #303030;
+	display:none;
 }
-#column-3 {
+.rd-connect-column-3 {
 	width: 820px;
 	height: 180px;
 	float: left;
+	background: #303030;
 }
-#column-4 {
+.rd-connect-column-4 {
 	width: 590px;
 	float: left;
-	background: yellow;
 }
-#column-5 {
+.rd-connect-column-4-w100 {
+	width: 1000px;
+	float: left;
+}
+.rd-connect-column-5 {
 	width: 410px;
 	float: left;
-	background: orange;
 }
 #wrapper {
 	width: 1000px;
-	margin:auto;
-	padding: 0;
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+	padding: 0px;
 }
 .aui .portlet-borderless-container {
     padding: 0;
@@ -111,8 +136,8 @@ body{
 		font-weight: bold;
 		padding: 5px 5px 5px 25px;
 		position: absolute;
-		right: 0;
-		top: -1.2em;
+		right: 10px;
+		top: 10px;
 	}
 
 	.redirected-to-message {
