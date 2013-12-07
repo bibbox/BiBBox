@@ -10,6 +10,10 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	${theme.include(top_head_include)}
+	
+	<#if is_signed_in>
+		<meta http-equiv="refresh" content="0; url=http://rd-connect.bibbox.org/home" />
+	</#if>
 </head>
 
 <body class="${css_class}">

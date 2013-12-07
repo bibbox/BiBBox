@@ -2,6 +2,7 @@
 
 <portlet:defineObjects />
 <span>
+<aui:a href="<%= themeDisplay.getURLHome() %>"><img alt="homelogo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" height="40" width="40" /></aui:a>
 <%
 long organizationId = 0;
 long userId = themeDisplay.getUserId();

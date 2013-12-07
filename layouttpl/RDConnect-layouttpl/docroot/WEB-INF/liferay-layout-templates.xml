@@ -13,5 +13,15 @@
 			<wap-template-path>/rdcard.wap.tpl</wap-template-path>
 			<thumbnail-path>/rdcard.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="rdhubicol" name="RDHubICol">
+			<template-path>/rdhubicol.tpl</template-path>
+			<wap-template-path>/rdhubicol.wap.tpl</wap-template-path>
+			<thumbnail-path>/rdhubicol.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="rdhubiicol" name="RDHubIICol">
+			<template-path>/rdhubiicol.tpl</template-path>
+			<wap-template-path>/rdhubiicol.wap.tpl</wap-template-path>
+			<thumbnail-path>/rdhubiicol.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>
