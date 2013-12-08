@@ -6,11 +6,11 @@
 @import url(color_schemes/dark.css);
 @import url(color_schemes/light.css);
 
-$dockbarGradientEnd: #303030;
-$dockbarGradientStart: #303030;
+$dockbarGradientEnd: #1273C7;
+$dockbarGradientStart: #118ADE;
 
-$dockbarOpenGradientEnd: #303030;
-$dockbarOpenGradientStart: #303030;
+$dockbarOpenGradientEnd: #0993DD;
+$dockbarOpenGradientStart: #0EA6F9;
 
 /* ---------- Base styles ---------- */
 .lfr-translation-manager {

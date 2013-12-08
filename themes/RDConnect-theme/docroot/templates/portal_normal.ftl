@@ -22,10 +22,6 @@ ${theme.include(body_top_include)}
 
 </#if>
 
-<div id="logo-rdconnect-Public">
-	<img alt="${logo_description}" height="61px" src="/RDConnectPublic-theme/images/RDLogoNew.png" width="240px" />
-</div>
-
 <div id="rd-header-signin">
 	<#if !is_signed_in>
 		<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a>
@@ -46,12 +42,14 @@ ${theme.include(body_top_include)}
 		</#if>
 	</div>
 	
-	<footer id="footer" role="contentinfo">
+	
+</div>
+
+<footer id="footer" role="contentinfo">
 		<p class="powered-by">
 			Linking up rare disease resarch across the world<br/> <a href="http://www.rd-connect.eu" rel="external">RD-Connect</a>
 		</p>
 	</footer>
-</div>
 
 ${theme.include(body_bottom_include)}
 

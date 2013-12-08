@@ -6,13 +6,16 @@
 @import url(color_schemes/dark.css);
 @import url(color_schemes/light.css);
 
-$dockbarGradientEnd: #303030;
-$dockbarGradientStart: #303030;
+$dockbarGradientEnd: #1273C7;
+$dockbarGradientStart: #118ADE;
 
-$dockbarOpenGradientEnd: #303030;
-$dockbarOpenGradientStart: #303030;
+$dockbarOpenGradientEnd: #0993DD;
+$dockbarOpenGradientStart: #0EA6F9;
 
 /* ---------- Base styles ---------- */
+.aui form {
+    margin: 0;
+}
 #wrapper {
 	width: 1000px;
 	margin-left: auto;
@@ -25,8 +28,10 @@ div.portlet-body {
     min-width: 100px;
 }
 .rd-hub-column1 {
-	background: #303030;
-	width: 1000px;
+	width: 998px;
+	border-color: #B2F150;
+	border-style: solid;
+	border-width: 1px;
 }
 .rd-hub-column2-w100 {
 	width: 1000px;
@@ -39,9 +44,6 @@ div.portlet-body {
 .rd-hub-column3-w30 {
 	width: 300px;
 	float: left;
-}
-.public-page {
-	background: #D9D9D9;
 }
 .lfr-translation-manager {
 	display: none;

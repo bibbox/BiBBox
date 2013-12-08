@@ -16,10 +16,6 @@
 
 ${theme.include(body_top_include)}
 
-<div id="logo-rdconnect-Public">
-	<img alt="${logo_description}" height="61px" src="/RDConnectPublic-theme/images/RDLogoNew.png" width="240px" />
-</div>
-
 <#if is_signed_in>
 	<@liferay.dockbar />
 </#if>
