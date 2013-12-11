@@ -44,6 +44,8 @@
 		<property name="submittername" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="submitteremail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="validated" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="accepted" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="masterId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl" table="rdconnect.master_candidate">
 		<cache usage="read-write" />

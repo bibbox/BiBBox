@@ -39,7 +39,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/candidatepropose/view.jsp</value>
+			<value>/html/candidate/candidatepropose/view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>copy-request-parameters</name>
@@ -77,7 +77,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/candidatetabel/view.jsp</value>
+			<value>/html/candidate/candidatetabel/view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>copy-request-parameters</name>
@@ -152,7 +152,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/masterpublish/view.jsp</value>
+			<value>/html/candidate/masterpublish/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -321,7 +321,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/mastertable/view.jsp</value>
+			<value>/html/candidate/mastertable/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -570,6 +570,39 @@
 		<portlet-info>
 			<title>Portal Sub Menu</title>
 			<short-title>Portal Sub Menu</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>ajaxtest</portlet-name>
+		<display-name>Ajaxtest</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.test.Ajaxtest
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/ajaxtest/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Ajaxtest</title>
+			<short-title>Ajaxtest</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

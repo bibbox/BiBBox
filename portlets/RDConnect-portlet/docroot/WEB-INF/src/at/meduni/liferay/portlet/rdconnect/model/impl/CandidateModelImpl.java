@@ -80,12 +80,14 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 			{ "network", Types.VARCHAR },
 			{ "submittername", Types.VARCHAR },
 			{ "submitteremail", Types.VARCHAR },
-			{ "validated", Types.BOOLEAN }
+			{ "validated", Types.BOOLEAN },
+			{ "accepted", Types.BOOLEAN },
+			{ "masterId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.candidate (candidateId LONG not null primary key,source VARCHAR(75) null,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,subunitof VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,searchurl TEXT null,sourceId VARCHAR(75) null,mail VARCHAR(255) null,head TEXT null,coverage VARCHAR(75) null,network VARCHAR(255) null,submittername VARCHAR(75) null,submitteremail VARCHAR(255) null,validated BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.candidate (candidateId LONG not null primary key,source VARCHAR(75) null,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,subunitof VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,searchurl TEXT null,sourceId VARCHAR(75) null,mail VARCHAR(255) null,head TEXT null,coverage VARCHAR(75) null,network VARCHAR(255) null,submittername VARCHAR(75) null,submitteremail VARCHAR(255) null,validated BOOLEAN,accepted BOOLEAN,masterId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.candidate";
-	public static final String ORDER_BY_JPQL = " ORDER BY candidate.country ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.candidate.country ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY candidate.candidateId ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.candidate.candidateId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -103,6 +105,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 	public static long NAME_COLUMN_BITMASK = 4L;
 	public static long SOURCE_COLUMN_BITMASK = 8L;
 	public static long SUBUNITOF_COLUMN_BITMASK = 16L;
+	public static long CANDIDATEID_COLUMN_BITMASK = 32L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.meduni.liferay.portlet.rdconnect.model.Candidate"));
 
@@ -165,6 +168,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		attributes.put("submittername", getSubmittername());
 		attributes.put("submitteremail", getSubmitteremail());
 		attributes.put("validated", getValidated());
+		attributes.put("accepted", getAccepted());
+		attributes.put("masterId", getMasterId());
 
 		return attributes;
 	}
@@ -302,6 +307,18 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		if (validated != null) {
 			setValidated(validated);
 		}
+
+		Boolean accepted = (Boolean)attributes.get("accepted");
+
+		if (accepted != null) {
+			setAccepted(accepted);
+		}
+
+		Long masterId = (Long)attributes.get("masterId");
+
+		if (masterId != null) {
+			setMasterId(masterId);
+		}
 	}
 
 	@Override
@@ -311,6 +328,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	@Override
 	public void setCandidateId(long candidateId) {
+		_columnBitmask = -1L;
+
 		_candidateId = candidateId;
 	}
 
@@ -456,7 +475,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	@Override
 	public void setCountry(String country) {
-		_columnBitmask = -1L;
+		_columnBitmask |= COUNTRY_COLUMN_BITMASK;
 
 		if (_originalCountry == null) {
 			_originalCountry = _country;
@@ -674,6 +693,31 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		_validated = validated;
 	}
 
+	@Override
+	public boolean getAccepted() {
+		return _accepted;
+	}
+
+	@Override
+	public boolean isAccepted() {
+		return _accepted;
+	}
+
+	@Override
+	public void setAccepted(boolean accepted) {
+		_accepted = accepted;
+	}
+
+	@Override
+	public long getMasterId() {
+		return _masterId;
+	}
+
+	@Override
+	public void setMasterId(long masterId) {
+		_masterId = masterId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -727,6 +771,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		candidateImpl.setSubmittername(getSubmittername());
 		candidateImpl.setSubmitteremail(getSubmitteremail());
 		candidateImpl.setValidated(getValidated());
+		candidateImpl.setAccepted(getAccepted());
+		candidateImpl.setMasterId(getMasterId());
 
 		candidateImpl.resetOriginalValues();
 
@@ -737,7 +783,15 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 	public int compareTo(Candidate candidate) {
 		int value = 0;
 
-		value = getCountry().compareTo(candidate.getCountry());
+		if (getCandidateId() < candidate.getCandidateId()) {
+			value = -1;
+		}
+		else if (getCandidateId() > candidate.getCandidateId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -959,12 +1013,16 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 		candidateCacheModel.validated = getValidated();
 
+		candidateCacheModel.accepted = getAccepted();
+
+		candidateCacheModel.masterId = getMasterId();
+
 		return candidateCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{candidateId=");
 		sb.append(getCandidateId());
@@ -1010,6 +1068,10 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		sb.append(getSubmitteremail());
 		sb.append(", validated=");
 		sb.append(getValidated());
+		sb.append(", accepted=");
+		sb.append(getAccepted());
+		sb.append(", masterId=");
+		sb.append(getMasterId());
 		sb.append("}");
 
 		return sb.toString();
@@ -1017,7 +1079,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.Candidate");
@@ -1111,6 +1173,14 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 			"<column><column-name>validated</column-name><column-value><![CDATA[");
 		sb.append(getValidated());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>accepted</column-name><column-value><![CDATA[");
+		sb.append(getAccepted());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>masterId</column-name><column-value><![CDATA[");
+		sb.append(getMasterId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1148,6 +1218,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 	private String _submittername;
 	private String _submitteremail;
 	private boolean _validated;
+	private boolean _accepted;
+	private long _masterId;
 	private long _columnBitmask;
 	private Candidate _escapedModel;
 }

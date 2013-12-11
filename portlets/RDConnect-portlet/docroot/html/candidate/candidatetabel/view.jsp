@@ -27,32 +27,10 @@ if(name.equalsIgnoreCase("")) {
 	name = "";
 }
 
-/*
-if(renderRequest.getParameter("action-status") != null) {
-	if(renderRequest.getParameter("action-status").equalsIgnoreCase("clear")) {
-		country = "all";
-		renderRequest.setAttribute("<portlet:namespace/>country", "all");
-		request.setAttribute("country", "all");
-		source = "all";
-		request.setAttribute("source", "all");
-		candidatetype = "all";
-		request.setAttribute("candidatetype", "all");
-		name = "";
-		request.setAttribute("name", "");
-		renderRequest.setAttribute("<portlet:namespace/>name", "all");
-	}
-}*/
-	
-/*String disease = ParamUtil.getString(request, "disease");
-if(disease.equalsIgnoreCase("")) {
-	disease = "";
-}*/
-%>
-
-<% 
 String[] countrylist = CandidateLocalServiceUtil.getCountryNames();
 String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 String[] sources = CandidateLocalServiceUtil.getSource();
+String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent().split("\\?")[0]+"/";
 %>
 
 <portlet:actionURL name='filterCandidates' var="filterCandidatesURL" />
@@ -90,29 +68,18 @@ String[] sources = CandidateLocalServiceUtil.getSource();
 </div>
 <%--<aui:input name="disease" label="Search Disease:" size="90"  value="<%= disease %>" />--%>
 <aui:button-row>
-<aui:button name="filter" type="submit" value="filter" label="Filter" onClick="submitForm('filter')" />
-<aui:button name="clear" type="submit" value="clear" label="Clear" onClick="submitForm('clear')" />
+	<aui:button name="filter" type="submit" value="filter" label="Filter" onClick="submitFormRDConnectCandidatePropose('filter')" />
+	<aui:button name="clear" type="submit" value="clear" label="Clear" onClick="<%= urltounfilterd %>" />
 </aui:button-row>
 </aui:fieldset>
 </aui:form>
 
-<script type="text/javascript" charset="utf-8">
-var A = AUI();
-function submitForm(action){
-  if(action=='filter'){
-     A.one('#<portlet:namespace/>filterform').set('action',"<%= filterCandidatesURL %>").submit();
-  }else{
-	  if(action=='clear'){
-		  window.location.href = '<%= redirect %>';
-	  }
-  }
-}
-</script>
+
 
 <%      
-	Integer count = (Integer)request.getAttribute("count");        
-	Integer delta = (Integer)request.getAttribute("delta");        
-	Integer cur = (Integer)request.getAttribute("cur");         
+	Integer count = (Integer)request.getAttribute("#<portlet:namespace/>count");        
+	Integer delta = (Integer)request.getAttribute("#<portlet:namespace/>delta");        
+	Integer cur = (Integer)request.getAttribute("#<portlet:namespace/>cur");         
     if(cur == null){
         cur = 1;
     }
@@ -129,7 +96,12 @@ function submitForm(action){
     portletURL.setParameter("candidatetype", candidatetype);
     portletURL.setParameter("name", name);
     portletURL.setParameter("action", "search");
+    
+    
 %>
+<div class="rdc-candidate-table">
+
+
 
 <liferay-ui:search-container 
 iteratorURL="<%= portletURL %>" 
@@ -146,15 +118,23 @@ pageContext.setAttribute("results", results);
 pageContext.setAttribute("total", total);
 %>
 
+<p><b>Number of Candidates: <%= total %></b></p>
+
 </liferay-ui:search-container-results>
+
 <liferay-ui:search-container-row 
 className="at.meduni.liferay.portlet.rdconnect.model.Candidate"
 keyProperty="candidateId"
 modelVar="candidate">
 <liferay-ui:search-container-column-text
+name="Candidate Id"
+property="candidateId"
+/>
+<liferay-ui:search-container-column-text
 name="name"
 property="name"
-orderable="<%=true %>"
+href="<%=candidate.getUrl()%>"
+target="_blank"
 />
 <liferay-ui:search-container-column-text
 name="country"
@@ -168,7 +148,17 @@ property="candidatetype"
 name="source"
 property="source"
 />
+<liferay-ui:search-container-column-jsp
+align="right" 
+path="/html/candidate/candidatetabel/editsub.jsp"
+/>
+<liferay-ui:search-container-column-button
+name="Save"
+href="#"
+cssClass="search-container-column-button-save-table"
+/>
 </liferay-ui:search-container-row>
+
 <%        
 portletURL.setParameter("cur", String.valueOf(cur)); 
 //portletURL.setParameter("disease", disease);
@@ -179,3 +169,29 @@ portletURL.setParameter("name", name);
 searchContainer.setIteratorURL(portletURL);    %>
     <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </liferay-ui:search-container>
+</div>
+
+<portlet:actionURL name='updateCandidateTableData' var="updateCandidateTableDataURL" />
+
+<aui:script use="aui-io-request, event, node">
+	AUI().use('aui-io-request', 'event', 'node', function(A){
+		var nodeObject = A.all('.search-container-column-button-save-table');
+		nodeObject.on('click', function(event){
+			var url = '<%= updateCandidateTableDataURL.toString() %>';
+			A.io.request(url,{
+				//this is the data that you are sending to the action method
+				data: {
+					
+				   <portlet:namespace />candidateid: event.target.get('parentNode').get('parentNode').one('#candidateid').get('value'),
+				   <portlet:namespace />masterid: event.target.get('parentNode').get('parentNode').one('#masterid').get('value'),
+				   <portlet:namespace />accepted: event.target.get('parentNode').get('parentNode').one('#accepted').get('checked'),
+				},
+				dataType: 'json',
+				on: {
+				  failure: function() { alert('failure'); },
+				  success: function(event, id, obj) { "success" }
+				}
+			});
+		});
+	});
+</aui:script>

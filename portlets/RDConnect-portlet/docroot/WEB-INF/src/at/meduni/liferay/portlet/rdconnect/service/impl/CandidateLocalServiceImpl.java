@@ -18,7 +18,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
+import at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException;
 import at.meduni.liferay.portlet.rdconnect.model.Candidate;
 import at.meduni.liferay.portlet.rdconnect.service.base.CandidateLocalServiceBaseImpl;
 
@@ -42,6 +44,37 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil} to access the candidate local service.
 	 */
+	public void updateCandidate(long candidateId, boolean accepted, long masterId) {
+		try {
+			Candidate candidate = candidatePersistence.findByPrimaryKey(candidateId);
+			candidate.setAccepted(accepted);
+			candidate.setMasterId(masterId);
+			candidatePersistence.update(candidate);
+		} catch (NoSuchCandidateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	public String getTestString(String candidateId) {
+		/*Candidate candidate;
+		try {
+			candidate = candidatePersistence.findByPrimaryKey(candidateId);
+			candidate.setAccepted(true);
+			candidatePersistence.update(candidate);
+		} catch (NoSuchCandidateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	*/	
+		System.out.println(candidateId);
+		return "Hello Test";
+	}
 	
 	public Candidate addCandidate(Candidate newCandidate) throws SystemException {
 		Candidate candidate = candidatePersistence.create((int) counterLocalService.increment(Candidate.class.getName()) + 10000);

@@ -50,6 +50,8 @@
 			<basic name="submittername" />
 			<basic name="submitteremail" />
 			<basic name="validated" />
+			<basic name="accepted" />
+			<basic name="masterId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

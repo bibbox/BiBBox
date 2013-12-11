@@ -95,6 +95,8 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		attributes.put("submittername", getSubmittername());
 		attributes.put("submitteremail", getSubmitteremail());
 		attributes.put("validated", getValidated());
+		attributes.put("accepted", getAccepted());
+		attributes.put("masterId", getMasterId());
 
 		return attributes;
 	}
@@ -231,6 +233,18 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 		if (validated != null) {
 			setValidated(validated);
+		}
+
+		Boolean accepted = (Boolean)attributes.get("accepted");
+
+		if (accepted != null) {
+			setAccepted(accepted);
+		}
+
+		Long masterId = (Long)attributes.get("masterId");
+
+		if (masterId != null) {
+			setMasterId(masterId);
 		}
 	}
 
@@ -747,6 +761,57 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		}
 	}
 
+	@Override
+	public boolean getAccepted() {
+		return _accepted;
+	}
+
+	@Override
+	public boolean isAccepted() {
+		return _accepted;
+	}
+
+	@Override
+	public void setAccepted(boolean accepted) {
+		_accepted = accepted;
+
+		if (_candidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _candidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAccepted", boolean.class);
+
+				method.invoke(_candidateRemoteModel, accepted);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getMasterId() {
+		return _masterId;
+	}
+
+	@Override
+	public void setMasterId(long masterId) {
+		_masterId = masterId;
+
+		if (_candidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _candidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMasterId", long.class);
+
+				method.invoke(_candidateRemoteModel, masterId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getCandidateRemoteModel() {
 		return _candidateRemoteModel;
 	}
@@ -838,6 +903,8 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		clone.setSubmittername(getSubmittername());
 		clone.setSubmitteremail(getSubmitteremail());
 		clone.setValidated(getValidated());
+		clone.setAccepted(getAccepted());
+		clone.setMasterId(getMasterId());
 
 		return clone;
 	}
@@ -846,7 +913,15 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 	public int compareTo(Candidate candidate) {
 		int value = 0;
 
-		value = getCountry().compareTo(candidate.getCountry());
+		if (getCandidateId() < candidate.getCandidateId()) {
+			value = -1;
+		}
+		else if (getCandidateId() > candidate.getCandidateId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -884,7 +959,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{candidateId=");
 		sb.append(getCandidateId());
@@ -930,6 +1005,10 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		sb.append(getSubmitteremail());
 		sb.append(", validated=");
 		sb.append(getValidated());
+		sb.append(", accepted=");
+		sb.append(getAccepted());
+		sb.append(", masterId=");
+		sb.append(getMasterId());
 		sb.append("}");
 
 		return sb.toString();
@@ -937,7 +1016,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.Candidate");
@@ -1031,6 +1110,14 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 			"<column><column-name>validated</column-name><column-value><![CDATA[");
 		sb.append(getValidated());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>accepted</column-name><column-value><![CDATA[");
+		sb.append(getAccepted());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>masterId</column-name><column-value><![CDATA[");
+		sb.append(getMasterId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1059,5 +1146,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 	private String _submittername;
 	private String _submitteremail;
 	private boolean _validated;
+	private boolean _accepted;
+	private long _masterId;
 	private BaseModel<?> _candidateRemoteModel;
 }

@@ -54,24 +54,11 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 </aui:select>
 </div>
 <aui:button-row>
-<aui:button name="filter" type="submit" value="filter" label="Filter" onClick="submitForm('filter')" />
-<aui:button name="clear" type="submit" value="clear" label="Clear" onClick="submitForm('clear')" />
+<aui:button name="filter" type="submit" value="filter" label="Filter" onClick="submitFormRDConnectCandidatePropose('filter')" />
+<aui:button name="clear" type="submit" value="clear" label="Clear" onClick="submitFormRDConnectCandidatePropose('clear')" />
 </aui:button-row>
 </aui:fieldset>
 </aui:form>
-
-<script type="text/javascript" charset="utf-8">
-var A = AUI();
-function submitForm(action){
-  if(action=='filter'){
-     A.one('#<portlet:namespace/>filterform').set('action',"<%= filterCandidatesURL %>").submit();
-  }else{
-	  if(action=='clear'){
-		  window.location.href = '<%= redirect %>';
-	  }
-  }
-}
-</script>
 
 <%      
 	Integer count = (Integer)request.getAttribute("count");        

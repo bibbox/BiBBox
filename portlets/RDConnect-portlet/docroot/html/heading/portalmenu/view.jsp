@@ -2,7 +2,7 @@
 
 <portlet:defineObjects />
 <span>
-<aui:a href="<%= themeDisplay.getURLHome() %>"><img alt="homelogo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" height="40" width="40" /></aui:a>
+<aui:a href='<%= themeDisplay.getURLPortal()+"/home" %>'><img alt="homelogo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" height="40" width="40" /></aui:a>
 <%
 long organizationId = 0;
 long userId = themeDisplay.getUserId();
@@ -13,7 +13,7 @@ for(Organization o : organisations) {
 	String orgPath = themeDisplay.getURLPortal()+"/web"+o.getGroup().getFriendlyURL();
 	
 	%>
-	<aui:a href="<%= orgPath %>"><img alt="logo" src="<%= imgPath %>" height="40" width="40" /></aui:a>
+	<aui:a href="<%= orgPath %>"><img alt="logo" height="40" width="40" src="<%= imgPath %>" /></aui:a>
 	<%
 }
 

@@ -275,6 +275,15 @@ public class CandidateLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static void updateCandidate(long candidateId, boolean accepted,
+		long masterId) {
+		getService().updateCandidate(candidateId, accepted, masterId);
+	}
+
+	public static java.lang.String getTestString(java.lang.String candidateId) {
+		return getService().getTestString(candidateId);
+	}
+
 	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getAllCandidates()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAllCandidates();

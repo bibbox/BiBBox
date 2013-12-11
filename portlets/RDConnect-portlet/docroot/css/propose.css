@@ -1,16 +1,23 @@
 .proposebuttonrow{
 	text-align: right;
+	margin-left: 25px;
+	margin-right: 25px;
+	padding-bottom: 25px;
 }
 .proposeheadline{
-	color: #385696;
+	color: #FFFFFF;
+	margin: 0 0 10px 0;
+	background-color: #377CB5;
+	padding: 3px 0 3px 5px;
 }
-hr.propose{
-	background-color: #385696;
-    color: #385696;
-    height: 1px;
+#rdc-candidate-propose {
+	margin: 0;
+	background-color: #F4F4E1;
+	width:100%;
 }
 .proposelayout{
-	margin-left:25px;
+	margin-left: 25px;
+	margin-right: 25px;
 }
 div.portlet-body{
 	min-width:600px;
@@ -32,8 +39,11 @@ span.proposerequired{
 }
 input.propose{
 	max-width: 600px;
-	width:95%;
+	width:85%;
 }
 textarea.propose{
-	width:95%;
+	width:85%;
+}
+.aui .rdc-candidate-table .table {
+	font-size: small;
 }

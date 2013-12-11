@@ -31,10 +31,12 @@
 		<column name="submittername" type="String" />
 		<column name="submitteremail" type="String" />
         <column name="validated" type="boolean"></column>
+        <column name="accepted" type="boolean"></column>
+        <column name="masterId" type="long"/>
 
 		<!-- Order -->
 		<order by="asc">
-			<order-column name="country" />
+			<order-column name="candidateId" />
 		</order>
 		
 		<!-- Finder methods -->
@@ -52,6 +54,7 @@
 			<finder-column name="country" />
 		</finder>
 	</entity>
+	
 	<entity name="MasterCandidate" local-service="true" remote-service="false" table="rdconnect.master_candidate">
 		<!-- PK fields -->
 		<column name="masterCandidateId" type="long" primary="true" />

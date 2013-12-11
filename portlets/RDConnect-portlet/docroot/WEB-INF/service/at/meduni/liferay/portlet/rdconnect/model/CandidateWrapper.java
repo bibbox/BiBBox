@@ -71,6 +71,8 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 		attributes.put("submittername", getSubmittername());
 		attributes.put("submitteremail", getSubmitteremail());
 		attributes.put("validated", getValidated());
+		attributes.put("accepted", getAccepted());
+		attributes.put("masterId", getMasterId());
 
 		return attributes;
 	}
@@ -207,6 +209,18 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 
 		if (validated != null) {
 			setValidated(validated);
+		}
+
+		Boolean accepted = (Boolean)attributes.get("accepted");
+
+		if (accepted != null) {
+			setAccepted(accepted);
+		}
+
+		Long masterId = (Long)attributes.get("masterId");
+
+		if (masterId != null) {
+			setMasterId(masterId);
 		}
 	}
 
@@ -678,6 +692,56 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 	@Override
 	public void setValidated(boolean validated) {
 		_candidate.setValidated(validated);
+	}
+
+	/**
+	* Returns the accepted of this candidate.
+	*
+	* @return the accepted of this candidate
+	*/
+	@Override
+	public boolean getAccepted() {
+		return _candidate.getAccepted();
+	}
+
+	/**
+	* Returns <code>true</code> if this candidate is accepted.
+	*
+	* @return <code>true</code> if this candidate is accepted; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isAccepted() {
+		return _candidate.isAccepted();
+	}
+
+	/**
+	* Sets whether this candidate is accepted.
+	*
+	* @param accepted the accepted of this candidate
+	*/
+	@Override
+	public void setAccepted(boolean accepted) {
+		_candidate.setAccepted(accepted);
+	}
+
+	/**
+	* Returns the master ID of this candidate.
+	*
+	* @return the master ID of this candidate
+	*/
+	@Override
+	public long getMasterId() {
+		return _candidate.getMasterId();
+	}
+
+	/**
+	* Sets the master ID of this candidate.
+	*
+	* @param masterId the master ID of this candidate
+	*/
+	@Override
+	public void setMasterId(long masterId) {
+		_candidate.setMasterId(masterId);
 	}
 
 	@Override

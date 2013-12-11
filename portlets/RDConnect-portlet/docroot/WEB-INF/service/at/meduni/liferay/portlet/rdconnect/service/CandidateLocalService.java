@@ -249,6 +249,12 @@ public interface CandidateLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	public void updateCandidate(long candidateId, boolean accepted,
+		long masterId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getTestString(java.lang.String candidateId);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getAllCandidates()
 		throws com.liferay.portal.kernel.exception.SystemException;

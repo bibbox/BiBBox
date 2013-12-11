@@ -30,7 +30,9 @@ create table rdconnect.candidate (
 	network VARCHAR(255) null,
 	submittername VARCHAR(75) null,
 	submitteremail VARCHAR(255) null,
-	validated BOOLEAN
+	validated BOOLEAN,
+	accepted BOOLEAN,
+	masterId LONG
 );
 
 create table rdconnect.master_candidate (

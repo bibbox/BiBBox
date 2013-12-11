@@ -38,7 +38,7 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{candidateId=");
 		sb.append(candidateId);
@@ -84,6 +84,10 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		sb.append(submitteremail);
 		sb.append(", validated=");
 		sb.append(validated);
+		sb.append(", accepted=");
+		sb.append(accepted);
+		sb.append(", masterId=");
+		sb.append(masterId);
 		sb.append("}");
 
 		return sb.toString();
@@ -236,6 +240,8 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		}
 
 		candidateImpl.setValidated(validated);
+		candidateImpl.setAccepted(accepted);
+		candidateImpl.setMasterId(masterId);
 
 		candidateImpl.resetOriginalValues();
 
@@ -266,6 +272,8 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		submittername = objectInput.readUTF();
 		submitteremail = objectInput.readUTF();
 		validated = objectInput.readBoolean();
+		accepted = objectInput.readBoolean();
+		masterId = objectInput.readLong();
 	}
 
 	@Override
@@ -409,6 +417,8 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		}
 
 		objectOutput.writeBoolean(validated);
+		objectOutput.writeBoolean(accepted);
+		objectOutput.writeLong(masterId);
 	}
 
 	public long candidateId;
@@ -433,4 +443,6 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 	public String submittername;
 	public String submitteremail;
 	public boolean validated;
+	public boolean accepted;
+	public long masterId;
 }

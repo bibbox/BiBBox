@@ -54,13 +54,14 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.sites.util.SitesUtil;
 
 /**
  * Portlet implementation class MasterPublish
  */
 public class MasterPublish extends MVCPortlet {
 	
-	String counter = "12";
+	String counter = "14";
 	
 	public void publishToGate(ActionRequest request, ActionResponse response) throws Exception {
 		System.out.println("Publish");
@@ -68,7 +69,7 @@ public class MasterPublish extends MVCPortlet {
 		createOrganisation2(companyId);
 	}
 	
-	public void createOrganisation2(long companyId) throws PortalException, SystemException {
+	public void createOrganisation2(long companyId) throws Exception {
 		
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
@@ -88,6 +89,26 @@ public class MasterPublish extends MVCPortlet {
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 				"Test Organisation "+counter+", Inc", true);
 		
+		long publicLayoutSetPrototypeId = 23302;
+		boolean publicLayoutSetPrototypeLinkEnabled = true;
+		long privateLayoutSetPrototypeId = 0;
+		boolean privateLayoutSetPrototypeLinkEnabled = false;
+		
+		Group organizationGroup = organization.getGroup();
+		
+		//if (GroupPermissionUtil.contains(themeDisplay.getPermissionChecker(), organizationGroup.getGroupId(), ActionKeys.UPDATE)) {
+
+			SitesUtil.updateLayoutSetPrototypesLinks(
+				organizationGroup, publicLayoutSetPrototypeId,
+				privateLayoutSetPrototypeId,
+				publicLayoutSetPrototypeLinkEnabled,
+				privateLayoutSetPrototypeLinkEnabled);
+		//}
+		
+		
+		//organization.getGroup().setType(23302);
+		
+		/*
 		// Create Fiendly URL
 		String friendlyUrl = organization.getName();
 		friendlyUrl= friendlyUrl.trim();
@@ -105,15 +126,15 @@ public class MasterPublish extends MVCPortlet {
 		
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)extranetLayout.getLayoutType();		
-		
+		*/
 		/*layoutTypePortlet.addPortletId(
 			0, PortletKeys.SEARCH, "column-1", -1, false);
 		layoutTypePortlet.addPortletId(
 			0, PortletKeys.MESSAGE_BOARDS, "column-2", -1, false);*/
 
-		LayoutLocalServiceUtil.updateLayout(
+		/*LayoutLocalServiceUtil.updateLayout(
 			extranetLayout.getGroupId(), false, extranetLayout.getLayoutId(),
-			extranetLayout.getTypeSettings());
+			extranetLayout.getTypeSettings());*/
 
 		/*Layout intranetLayout = LayoutLocalServiceUtil.addLayout(
 			defaultUser.getUserId(), organization.getGroupId(), true,

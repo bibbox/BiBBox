@@ -57,6 +57,8 @@
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="validated" type="boolean" />
+		<field name="accepted" type="boolean" />
+		<field name="masterId" type="long" />
 	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate">
 		<field name="masterCandidateId" type="long" />

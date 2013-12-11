@@ -952,8 +952,7 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 			CandidateModelImpl.FINDER_CACHE_ENABLED, CandidateImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBySubRemover",
 			new String[] { String.class.getName() },
-			CandidateModelImpl.SUBUNITOF_COLUMN_BITMASK |
-			CandidateModelImpl.COUNTRY_COLUMN_BITMASK);
+			CandidateModelImpl.SUBUNITOF_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_SUBREMOVER = new FinderPath(CandidateModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBySubRemover",
@@ -2306,6 +2305,8 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 		candidateImpl.setSubmittername(candidate.getSubmittername());
 		candidateImpl.setSubmitteremail(candidate.getSubmitteremail());
 		candidateImpl.setValidated(candidate.isValidated());
+		candidateImpl.setAccepted(candidate.isAccepted());
+		candidateImpl.setMasterId(candidate.getMasterId());
 
 		return candidateImpl;
 	}

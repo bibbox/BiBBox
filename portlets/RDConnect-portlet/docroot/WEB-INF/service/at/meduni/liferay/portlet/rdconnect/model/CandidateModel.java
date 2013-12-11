@@ -393,6 +393,41 @@ public interface CandidateModel extends BaseModel<Candidate> {
 	 */
 	public void setValidated(boolean validated);
 
+	/**
+	 * Returns the accepted of this candidate.
+	 *
+	 * @return the accepted of this candidate
+	 */
+	public boolean getAccepted();
+
+	/**
+	 * Returns <code>true</code> if this candidate is accepted.
+	 *
+	 * @return <code>true</code> if this candidate is accepted; <code>false</code> otherwise
+	 */
+	public boolean isAccepted();
+
+	/**
+	 * Sets whether this candidate is accepted.
+	 *
+	 * @param accepted the accepted of this candidate
+	 */
+	public void setAccepted(boolean accepted);
+
+	/**
+	 * Returns the master ID of this candidate.
+	 *
+	 * @return the master ID of this candidate
+	 */
+	public long getMasterId();
+
+	/**
+	 * Sets the master ID of this candidate.
+	 *
+	 * @param masterId the master ID of this candidate
+	 */
+	public void setMasterId(long masterId);
+
 	@Override
 	public boolean isNew();
 

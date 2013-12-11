@@ -52,6 +52,8 @@ public class CandidateSoap implements Serializable {
 		soapModel.setSubmittername(model.getSubmittername());
 		soapModel.setSubmitteremail(model.getSubmitteremail());
 		soapModel.setValidated(model.getValidated());
+		soapModel.setAccepted(model.getAccepted());
+		soapModel.setMasterId(model.getMasterId());
 
 		return soapModel;
 	}
@@ -284,6 +286,26 @@ public class CandidateSoap implements Serializable {
 		_validated = validated;
 	}
 
+	public boolean getAccepted() {
+		return _accepted;
+	}
+
+	public boolean isAccepted() {
+		return _accepted;
+	}
+
+	public void setAccepted(boolean accepted) {
+		_accepted = accepted;
+	}
+
+	public long getMasterId() {
+		return _masterId;
+	}
+
+	public void setMasterId(long masterId) {
+		_masterId = masterId;
+	}
+
 	private long _candidateId;
 	private String _source;
 	private String _name;
@@ -306,4 +328,6 @@ public class CandidateSoap implements Serializable {
 	private String _submittername;
 	private String _submitteremail;
 	private boolean _validated;
+	private boolean _accepted;
+	private long _masterId;
 }

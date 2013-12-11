@@ -287,6 +287,17 @@ public class CandidateLocalServiceWrapper implements CandidateLocalService,
 	}
 
 	@Override
+	public void updateCandidate(long candidateId, boolean accepted,
+		long masterId) {
+		_candidateLocalService.updateCandidate(candidateId, accepted, masterId);
+	}
+
+	@Override
+	public java.lang.String getTestString(java.lang.String candidateId) {
+		return _candidateLocalService.getTestString(candidateId);
+	}
+
+	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getAllCandidates()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _candidateLocalService.getAllCandidates();

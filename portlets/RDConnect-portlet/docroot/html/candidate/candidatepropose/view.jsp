@@ -1,4 +1,5 @@
 <%@include file="/html/init.jsp" %>
+<div id="rdc-candidate-propose">
 
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);	
@@ -40,8 +41,7 @@
 	
 %>
 
-<div class="proposeheadline">Propose Candidate</div>
-<hr class="propose" />
+
 
 <liferay-ui:success key="candidate-saved-successfully" message="candidate-saved-successfully" />
 <liferay-ui:error key="fields-required" message="fields-required" />
@@ -54,6 +54,8 @@
 		<aui:input type="hidden" name="source" value="online propose" />
 		<aui:input type="hidden" name="subunit_of" value="" />
 		
+		<div>
+		<div class="proposeheadline">Propose Candidate</div>
 		<aui:layout cssClass="proposelayout">  
 			<aui:column columnWidth="25" first="true">
 				<aui:select name="candidatetype" label="Type" value ="<%= type %>" >
@@ -90,7 +92,7 @@
 	 		<aui:column columnWidth="50" last="true">
 	 			<liferay-ui:error key="candidate-email-required" message="candidate-email-required" />
 				<liferay-ui:error key="candidate-email-error" message="candidate-email-error" />	
-				<aui:input name="mail" type="text" label='Contact Person e-mail <div class="proposerequired" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>' value ="<%= mail %>" cssClass="propose" />
+				<aui:input name="mail" type="text" label='Contact e-mail <div class="proposerequired" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>' value ="<%= mail %>" cssClass="propose" />
 			</aui:column>
 			
 	 		<aui:column columnWidth="50" first="true">
@@ -108,11 +110,12 @@
 	 		<aui:column columnWidth="50" last="true">
 				<aui:input name="comment" label="Comment" type="textarea" value ="<%= commend %>" cssClass="propose" />
 			</aui:column>
-
+			
 		</aui:layout>
+		</div>
 		
+		<div>
 		<div class="proposeheadline">Submitter</div>
-		<hr class="propose" />
 		<aui:layout cssClass="proposelayout"> 
   			<aui:column columnWidth="50" first="true">
   				<liferay-ui:error key="candidate-submitter_name-required" message="candidate-submitter_name-required" />
@@ -133,6 +136,7 @@
 				<% } %>
 			</aui:column>
 		</aui:layout>
+		</div>
 	</aui:fieldset>
 
 	
@@ -143,4 +147,4 @@
 		<aui:button type="cancel"  onClick="<%= redirect %>" last="true" />
 	</aui:button-row>
 </aui:form>
-
+</div>
