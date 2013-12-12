@@ -102,10 +102,12 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 			true);
 	public static long CANDIDATETYPE_COLUMN_BITMASK = 1L;
 	public static long COUNTRY_COLUMN_BITMASK = 2L;
-	public static long NAME_COLUMN_BITMASK = 4L;
-	public static long SOURCE_COLUMN_BITMASK = 8L;
-	public static long SUBUNITOF_COLUMN_BITMASK = 16L;
-	public static long CANDIDATEID_COLUMN_BITMASK = 32L;
+	public static long DISEASESCODES_COLUMN_BITMASK = 4L;
+	public static long DISEASESFREETEXT_COLUMN_BITMASK = 8L;
+	public static long NAME_COLUMN_BITMASK = 16L;
+	public static long SOURCE_COLUMN_BITMASK = 32L;
+	public static long SUBUNITOF_COLUMN_BITMASK = 64L;
+	public static long CANDIDATEID_COLUMN_BITMASK = 128L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.meduni.liferay.portlet.rdconnect.model.Candidate"));
 
@@ -500,7 +502,17 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	@Override
 	public void setDiseasescodes(String diseasescodes) {
+		_columnBitmask |= DISEASESCODES_COLUMN_BITMASK;
+
+		if (_originalDiseasescodes == null) {
+			_originalDiseasescodes = _diseasescodes;
+		}
+
 		_diseasescodes = diseasescodes;
+	}
+
+	public String getOriginalDiseasescodes() {
+		return GetterUtil.getString(_originalDiseasescodes);
 	}
 
 	@Override
@@ -515,7 +527,17 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	@Override
 	public void setDiseasesfreetext(String diseasesfreetext) {
+		_columnBitmask |= DISEASESFREETEXT_COLUMN_BITMASK;
+
+		if (_originalDiseasesfreetext == null) {
+			_originalDiseasesfreetext = _diseasesfreetext;
+		}
+
 		_diseasesfreetext = diseasesfreetext;
+	}
+
+	public String getOriginalDiseasesfreetext() {
+		return GetterUtil.getString(_originalDiseasesfreetext);
 	}
 
 	@Override
@@ -840,6 +862,10 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		candidateModelImpl._originalSubunitof = candidateModelImpl._subunitof;
 
 		candidateModelImpl._originalCountry = candidateModelImpl._country;
+
+		candidateModelImpl._originalDiseasescodes = candidateModelImpl._diseasescodes;
+
+		candidateModelImpl._originalDiseasesfreetext = candidateModelImpl._diseasesfreetext;
 
 		candidateModelImpl._columnBitmask = 0;
 	}
@@ -1205,7 +1231,9 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 	private String _country;
 	private String _originalCountry;
 	private String _diseasescodes;
+	private String _originalDiseasescodes;
 	private String _diseasesfreetext;
+	private String _originalDiseasesfreetext;
 	private String _comment;
 	private String _address;
 	private Date _date;

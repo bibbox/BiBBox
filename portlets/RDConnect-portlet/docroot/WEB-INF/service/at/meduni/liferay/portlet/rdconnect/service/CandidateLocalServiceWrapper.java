@@ -306,6 +306,15 @@ public class CandidateLocalServiceWrapper implements CandidateLocalService,
 	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
 		java.lang.String name, java.lang.String country, java.lang.String type,
+		java.lang.String source, java.lang.String diseases)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _candidateLocalService.getFilterdCandidates(name, country, type,
+			source, diseases);
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
+		java.lang.String name, java.lang.String country, java.lang.String type,
 		java.lang.String source)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _candidateLocalService.getFilterdCandidates(name, country, type,

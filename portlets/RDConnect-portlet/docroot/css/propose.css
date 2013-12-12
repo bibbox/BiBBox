@@ -47,3 +47,50 @@ textarea.propose{
 .aui .rdc-candidate-table .table {
 	font-size: small;
 }
+.rdc-candidate-table .candidate-table-candidateId {
+	width:35px;
+	padding: 4px;
+}
+.rdc-candidate-table .candidate-table-name {
+	width:450px;
+	patting: 4px;
+}
+.rdc-candidate-table .candidate-table-country {
+	width:90px;
+	padding: 4px;
+}
+.rdc-candidate-table .candidate-table-candidatetype {
+	width:85px;
+	padding: 4px;
+}
+.rdc-candidate-table .candidate-table-source {
+	width:95px;
+	padding: 4px;
+}
+.rdc-candidate-table .candidate-table-editsub {
+	width:110px;
+	padding: 4px;
+}
+.aui .rdc-candidate-table .table th, .aui .table td {
+    padding: 4px;
+} 
+.aui .rdc-filter-form select {
+	width:120px;
+}
+.tooltip-help {
+    z-index: 500 !important; 
+}
+.rdc-filter-name-help {
+	width:28px;
+	height: 24px;
+    color: #8BBF39;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+  	background: #377CB5;
+  	border-bottom: 2px solid #8BBF39;
+}
+.aui .rdc-filter-button {
+	margin-left: 5px;
+	margin-top: 5px;
+}

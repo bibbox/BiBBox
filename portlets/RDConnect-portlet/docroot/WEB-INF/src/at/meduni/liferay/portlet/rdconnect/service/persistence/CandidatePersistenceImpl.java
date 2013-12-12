@@ -937,6 +937,1032 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 	private static final String _FINDER_COLUMN_CNST_SUBUNITOF_1 = "candidate.subunitof IS NULL";
 	private static final String _FINDER_COLUMN_CNST_SUBUNITOF_2 = "candidate.subunitof = ?";
 	private static final String _FINDER_COLUMN_CNST_SUBUNITOF_3 = "(candidate.subunitof IS NULL OR candidate.subunitof = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CNSTDD = new FinderPath(CandidateModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateModelImpl.FINDER_CACHE_ENABLED, CandidateImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCNSTDD",
+			new String[] {
+				String.class.getName(), String.class.getName(),
+				String.class.getName(), String.class.getName(),
+				String.class.getName(), String.class.getName(),
+				String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_CNSTDD = new FinderPath(CandidateModelImpl.ENTITY_CACHE_ENABLED,
+			CandidateModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByCNSTDD",
+			new String[] {
+				String.class.getName(), String.class.getName(),
+				String.class.getName(), String.class.getName(),
+				String.class.getName(), String.class.getName(),
+				String.class.getName()
+			});
+
+	/**
+	 * Returns all the candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @return the matching candidates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Candidate> findByCNSTDD(String country, String name,
+		String source, String candidatetype, String diseasesfreetext,
+		String diseasescodes, String subunitof) throws SystemException {
+		return findByCNSTDD(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.rdconnect.model.impl.CandidateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @param start the lower bound of the range of candidates
+	 * @param end the upper bound of the range of candidates (not inclusive)
+	 * @return the range of matching candidates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Candidate> findByCNSTDD(String country, String name,
+		String source, String candidatetype, String diseasesfreetext,
+		String diseasescodes, String subunitof, int start, int end)
+		throws SystemException {
+		return findByCNSTDD(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.rdconnect.model.impl.CandidateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @param start the lower bound of the range of candidates
+	 * @param end the upper bound of the range of candidates (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching candidates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Candidate> findByCNSTDD(String country, String name,
+		String source, String candidatetype, String diseasesfreetext,
+		String diseasescodes, String subunitof, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CNSTDD;
+		finderArgs = new Object[] {
+				country, name, source, candidatetype, diseasesfreetext,
+				diseasescodes, subunitof,
+				
+				start, end, orderByComparator
+			};
+
+		List<Candidate> list = (List<Candidate>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Candidate candidate : list) {
+				if (!StringUtil.wildcardMatches(candidate.getCountry(),
+							country, CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, false) ||
+						!StringUtil.wildcardMatches(candidate.getName(), name,
+							CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, false) ||
+						!StringUtil.wildcardMatches(candidate.getSource(),
+							source, CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, false) ||
+						!StringUtil.wildcardMatches(
+							candidate.getCandidatetype(), candidatetype,
+							CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, false) ||
+						!StringUtil.wildcardMatches(
+							candidate.getDiseasesfreetext(), diseasesfreetext,
+							CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, false) ||
+						!StringUtil.wildcardMatches(
+							candidate.getDiseasescodes(), diseasescodes,
+							CharPool.UNDERLINE, CharPool.PERCENT,
+							CharPool.BACK_SLASH, false) ||
+						!Validator.equals(subunitof, candidate.getSubunitof())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(9 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(9);
+			}
+
+			query.append(_SQL_SELECT_CANDIDATE_WHERE);
+
+			boolean bindCountry = false;
+
+			if (country == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_1);
+			}
+			else if (country.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_3);
+			}
+			else {
+				bindCountry = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_2);
+			}
+
+			boolean bindName = false;
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_NAME_1);
+			}
+			else if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_NAME_2);
+			}
+
+			boolean bindSource = false;
+
+			if (source == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_SOURCE_1);
+			}
+			else if (source.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_SOURCE_3);
+			}
+			else {
+				bindSource = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_SOURCE_2);
+			}
+
+			boolean bindCandidatetype = false;
+
+			if (candidatetype == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_1);
+			}
+			else if (candidatetype.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_3);
+			}
+			else {
+				bindCandidatetype = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_2);
+			}
+
+			boolean bindDiseasesfreetext = false;
+
+			if (diseasesfreetext == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_1);
+			}
+			else if (diseasesfreetext.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_3);
+			}
+			else {
+				bindDiseasesfreetext = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_2);
+			}
+
+			boolean bindDiseasescodes = false;
+
+			if (diseasescodes == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_1);
+			}
+			else if (diseasescodes.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_3);
+			}
+			else {
+				bindDiseasescodes = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_2);
+			}
+
+			boolean bindSubunitof = false;
+
+			if (subunitof == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_1);
+			}
+			else if (subunitof.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_3);
+			}
+			else {
+				bindSubunitof = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CandidateModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCountry) {
+					qPos.add(country.toLowerCase());
+				}
+
+				if (bindName) {
+					qPos.add(name.toLowerCase());
+				}
+
+				if (bindSource) {
+					qPos.add(source.toLowerCase());
+				}
+
+				if (bindCandidatetype) {
+					qPos.add(candidatetype.toLowerCase());
+				}
+
+				if (bindDiseasesfreetext) {
+					qPos.add(diseasesfreetext.toLowerCase());
+				}
+
+				if (bindDiseasescodes) {
+					qPos.add(diseasescodes.toLowerCase());
+				}
+
+				if (bindSubunitof) {
+					qPos.add(subunitof);
+				}
+
+				if (!pagination) {
+					list = (List<Candidate>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Candidate>(list);
+				}
+				else {
+					list = (List<Candidate>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching candidate
+	 * @throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException if a matching candidate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Candidate findByCNSTDD_First(String country, String name,
+		String source, String candidatetype, String diseasesfreetext,
+		String diseasescodes, String subunitof,
+		OrderByComparator orderByComparator)
+		throws NoSuchCandidateException, SystemException {
+		Candidate candidate = fetchByCNSTDD_First(country, name, source,
+				candidatetype, diseasesfreetext, diseasescodes, subunitof,
+				orderByComparator);
+
+		if (candidate != null) {
+			return candidate;
+		}
+
+		StringBundler msg = new StringBundler(16);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("country=");
+		msg.append(country);
+
+		msg.append(", name=");
+		msg.append(name);
+
+		msg.append(", source=");
+		msg.append(source);
+
+		msg.append(", candidatetype=");
+		msg.append(candidatetype);
+
+		msg.append(", diseasesfreetext=");
+		msg.append(diseasesfreetext);
+
+		msg.append(", diseasescodes=");
+		msg.append(diseasescodes);
+
+		msg.append(", subunitof=");
+		msg.append(subunitof);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCandidateException(msg.toString());
+	}
+
+	/**
+	 * Returns the first candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching candidate, or <code>null</code> if a matching candidate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Candidate fetchByCNSTDD_First(String country, String name,
+		String source, String candidatetype, String diseasesfreetext,
+		String diseasescodes, String subunitof,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Candidate> list = findByCNSTDD(country, name, source,
+				candidatetype, diseasesfreetext, diseasescodes, subunitof, 0,
+				1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching candidate
+	 * @throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException if a matching candidate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Candidate findByCNSTDD_Last(String country, String name,
+		String source, String candidatetype, String diseasesfreetext,
+		String diseasescodes, String subunitof,
+		OrderByComparator orderByComparator)
+		throws NoSuchCandidateException, SystemException {
+		Candidate candidate = fetchByCNSTDD_Last(country, name, source,
+				candidatetype, diseasesfreetext, diseasescodes, subunitof,
+				orderByComparator);
+
+		if (candidate != null) {
+			return candidate;
+		}
+
+		StringBundler msg = new StringBundler(16);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("country=");
+		msg.append(country);
+
+		msg.append(", name=");
+		msg.append(name);
+
+		msg.append(", source=");
+		msg.append(source);
+
+		msg.append(", candidatetype=");
+		msg.append(candidatetype);
+
+		msg.append(", diseasesfreetext=");
+		msg.append(diseasesfreetext);
+
+		msg.append(", diseasescodes=");
+		msg.append(diseasescodes);
+
+		msg.append(", subunitof=");
+		msg.append(subunitof);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCandidateException(msg.toString());
+	}
+
+	/**
+	 * Returns the last candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching candidate, or <code>null</code> if a matching candidate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Candidate fetchByCNSTDD_Last(String country, String name,
+		String source, String candidatetype, String diseasesfreetext,
+		String diseasescodes, String subunitof,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByCNSTDD(country, name, source, candidatetype,
+				diseasesfreetext, diseasescodes, subunitof);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Candidate> list = findByCNSTDD(country, name, source,
+				candidatetype, diseasesfreetext, diseasescodes, subunitof,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the candidates before and after the current candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * @param candidateId the primary key of the current candidate
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next candidate
+	 * @throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException if a candidate with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Candidate[] findByCNSTDD_PrevAndNext(long candidateId,
+		String country, String name, String source, String candidatetype,
+		String diseasesfreetext, String diseasescodes, String subunitof,
+		OrderByComparator orderByComparator)
+		throws NoSuchCandidateException, SystemException {
+		Candidate candidate = findByPrimaryKey(candidateId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Candidate[] array = new CandidateImpl[3];
+
+			array[0] = getByCNSTDD_PrevAndNext(session, candidate, country,
+					name, source, candidatetype, diseasesfreetext,
+					diseasescodes, subunitof, orderByComparator, true);
+
+			array[1] = candidate;
+
+			array[2] = getByCNSTDD_PrevAndNext(session, candidate, country,
+					name, source, candidatetype, diseasesfreetext,
+					diseasescodes, subunitof, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Candidate getByCNSTDD_PrevAndNext(Session session,
+		Candidate candidate, String country, String name, String source,
+		String candidatetype, String diseasesfreetext, String diseasescodes,
+		String subunitof, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CANDIDATE_WHERE);
+
+		boolean bindCountry = false;
+
+		if (country == null) {
+			query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_1);
+		}
+		else if (country.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_3);
+		}
+		else {
+			bindCountry = true;
+
+			query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_2);
+		}
+
+		boolean bindName = false;
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_CNSTDD_NAME_1);
+		}
+		else if (name.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_CNSTDD_NAME_3);
+		}
+		else {
+			bindName = true;
+
+			query.append(_FINDER_COLUMN_CNSTDD_NAME_2);
+		}
+
+		boolean bindSource = false;
+
+		if (source == null) {
+			query.append(_FINDER_COLUMN_CNSTDD_SOURCE_1);
+		}
+		else if (source.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_CNSTDD_SOURCE_3);
+		}
+		else {
+			bindSource = true;
+
+			query.append(_FINDER_COLUMN_CNSTDD_SOURCE_2);
+		}
+
+		boolean bindCandidatetype = false;
+
+		if (candidatetype == null) {
+			query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_1);
+		}
+		else if (candidatetype.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_3);
+		}
+		else {
+			bindCandidatetype = true;
+
+			query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_2);
+		}
+
+		boolean bindDiseasesfreetext = false;
+
+		if (diseasesfreetext == null) {
+			query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_1);
+		}
+		else if (diseasesfreetext.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_3);
+		}
+		else {
+			bindDiseasesfreetext = true;
+
+			query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_2);
+		}
+
+		boolean bindDiseasescodes = false;
+
+		if (diseasescodes == null) {
+			query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_1);
+		}
+		else if (diseasescodes.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_3);
+		}
+		else {
+			bindDiseasescodes = true;
+
+			query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_2);
+		}
+
+		boolean bindSubunitof = false;
+
+		if (subunitof == null) {
+			query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_1);
+		}
+		else if (subunitof.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_3);
+		}
+		else {
+			bindSubunitof = true;
+
+			query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CandidateModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindCountry) {
+			qPos.add(country.toLowerCase());
+		}
+
+		if (bindName) {
+			qPos.add(name.toLowerCase());
+		}
+
+		if (bindSource) {
+			qPos.add(source.toLowerCase());
+		}
+
+		if (bindCandidatetype) {
+			qPos.add(candidatetype.toLowerCase());
+		}
+
+		if (bindDiseasesfreetext) {
+			qPos.add(diseasesfreetext.toLowerCase());
+		}
+
+		if (bindDiseasescodes) {
+			qPos.add(diseasescodes.toLowerCase());
+		}
+
+		if (bindSubunitof) {
+			qPos.add(subunitof);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(candidate);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Candidate> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63; from the database.
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByCNSTDD(String country, String name, String source,
+		String candidatetype, String diseasesfreetext, String diseasescodes,
+		String subunitof) throws SystemException {
+		for (Candidate candidate : findByCNSTDD(country, name, source,
+				candidatetype, diseasesfreetext, diseasescodes, subunitof,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(candidate);
+		}
+	}
+
+	/**
+	 * Returns the number of candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	 *
+	 * @param country the country
+	 * @param name the name
+	 * @param source the source
+	 * @param candidatetype the candidatetype
+	 * @param diseasesfreetext the diseasesfreetext
+	 * @param diseasescodes the diseasescodes
+	 * @param subunitof the subunitof
+	 * @return the number of matching candidates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByCNSTDD(String country, String name, String source,
+		String candidatetype, String diseasesfreetext, String diseasescodes,
+		String subunitof) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_CNSTDD;
+
+		Object[] finderArgs = new Object[] {
+				country, name, source, candidatetype, diseasesfreetext,
+				diseasescodes, subunitof
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(8);
+
+			query.append(_SQL_COUNT_CANDIDATE_WHERE);
+
+			boolean bindCountry = false;
+
+			if (country == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_1);
+			}
+			else if (country.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_3);
+			}
+			else {
+				bindCountry = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_COUNTRY_2);
+			}
+
+			boolean bindName = false;
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_NAME_1);
+			}
+			else if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_NAME_2);
+			}
+
+			boolean bindSource = false;
+
+			if (source == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_SOURCE_1);
+			}
+			else if (source.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_SOURCE_3);
+			}
+			else {
+				bindSource = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_SOURCE_2);
+			}
+
+			boolean bindCandidatetype = false;
+
+			if (candidatetype == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_1);
+			}
+			else if (candidatetype.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_3);
+			}
+			else {
+				bindCandidatetype = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_CANDIDATETYPE_2);
+			}
+
+			boolean bindDiseasesfreetext = false;
+
+			if (diseasesfreetext == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_1);
+			}
+			else if (diseasesfreetext.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_3);
+			}
+			else {
+				bindDiseasesfreetext = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_2);
+			}
+
+			boolean bindDiseasescodes = false;
+
+			if (diseasescodes == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_1);
+			}
+			else if (diseasescodes.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_3);
+			}
+			else {
+				bindDiseasescodes = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_DISEASESCODES_2);
+			}
+
+			boolean bindSubunitof = false;
+
+			if (subunitof == null) {
+				query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_1);
+			}
+			else if (subunitof.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_3);
+			}
+			else {
+				bindSubunitof = true;
+
+				query.append(_FINDER_COLUMN_CNSTDD_SUBUNITOF_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCountry) {
+					qPos.add(country.toLowerCase());
+				}
+
+				if (bindName) {
+					qPos.add(name.toLowerCase());
+				}
+
+				if (bindSource) {
+					qPos.add(source.toLowerCase());
+				}
+
+				if (bindCandidatetype) {
+					qPos.add(candidatetype.toLowerCase());
+				}
+
+				if (bindDiseasesfreetext) {
+					qPos.add(diseasesfreetext.toLowerCase());
+				}
+
+				if (bindDiseasescodes) {
+					qPos.add(diseasescodes.toLowerCase());
+				}
+
+				if (bindSubunitof) {
+					qPos.add(subunitof);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_CNSTDD_COUNTRY_1 = "candidate.country LIKE NULL AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_COUNTRY_2 = "lower(candidate.country) LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_COUNTRY_3 = "(candidate.country IS NULL OR candidate.country LIKE '') AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_NAME_1 = "candidate.name LIKE NULL AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_NAME_2 = "lower(candidate.name) LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_NAME_3 = "(candidate.name IS NULL OR candidate.name LIKE '') AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_SOURCE_1 = "candidate.source LIKE NULL AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_SOURCE_2 = "lower(candidate.source) LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_SOURCE_3 = "(candidate.source IS NULL OR candidate.source LIKE '') AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_CANDIDATETYPE_1 = "candidate.candidatetype LIKE NULL AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_CANDIDATETYPE_2 = "lower(candidate.candidatetype) LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_CANDIDATETYPE_3 = "(candidate.candidatetype IS NULL OR candidate.candidatetype LIKE '') AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_1 = "candidate.diseasesfreetext LIKE NULL AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_2 = "lower(candidate.diseasesfreetext) LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_DISEASESFREETEXT_3 = "(candidate.diseasesfreetext IS NULL OR candidate.diseasesfreetext LIKE '') AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_DISEASESCODES_1 = "candidate.diseasescodes LIKE NULL AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_DISEASESCODES_2 = "lower(candidate.diseasescodes) LIKE ? AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_DISEASESCODES_3 = "(candidate.diseasescodes IS NULL OR candidate.diseasescodes LIKE '') AND ";
+	private static final String _FINDER_COLUMN_CNSTDD_SUBUNITOF_1 = "candidate.subunitof IS NULL";
+	private static final String _FINDER_COLUMN_CNSTDD_SUBUNITOF_2 = "candidate.subunitof = ?";
+	private static final String _FINDER_COLUMN_CNSTDD_SUBUNITOF_3 = "(candidate.subunitof IS NULL OR candidate.subunitof = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SUBREMOVER =
 		new FinderPath(CandidateModelImpl.ENTITY_CACHE_ENABLED,
 			CandidateModelImpl.FINDER_CACHE_ENABLED, CandidateImpl.class,

@@ -47,6 +47,15 @@
 			<finder-column name="candidatetype"  comparator="LIKE" case-sensitive="false"/>
 			<finder-column name="subunitof"/>
 		</finder>
+		<finder name="CNSTDD" return-type="Collection">
+			<finder-column name="country" comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="name"  comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="source"  comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="candidatetype"  comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="diseasesfreetext"  comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="diseasescodes"  comparator="LIKE" case-sensitive="false"/>
+			<finder-column name="subunitof"/>
+		</finder>
 		<finder name="SubRemover" return-type="Collection">
 			<finder-column name="subunitof" />
 		</finder>

@@ -10,5 +10,5 @@ if(candidate.getAccepted())
 %>
 
 <input id="candidateid"  type="hidden" name="candidateid" value="<%= candidate.getCandidateId() %>" />
-<input id="masterid" style="width: 60px;" type="text" name="masterid" value="<%= candidate.getMasterId() %>" />
+<input id="masterid" style="width: 45px;" type="text" name="masterid" value="<%= candidate.getMasterId() %>" />
 <input id="accepted" type="checkbox" name="accepted" <%= checked %> />

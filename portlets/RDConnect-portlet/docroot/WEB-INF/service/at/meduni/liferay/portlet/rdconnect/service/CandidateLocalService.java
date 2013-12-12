@@ -262,6 +262,12 @@ public interface CandidateLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
 		java.lang.String name, java.lang.String country, java.lang.String type,
+		java.lang.String source, java.lang.String diseases)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
+		java.lang.String name, java.lang.String country, java.lang.String type,
 		java.lang.String source)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

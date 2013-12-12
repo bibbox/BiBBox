@@ -92,20 +92,19 @@
 	 		<aui:column columnWidth="50" last="true">
 	 			<liferay-ui:error key="candidate-email-required" message="candidate-email-required" />
 				<liferay-ui:error key="candidate-email-error" message="candidate-email-error" />	
-				<aui:input name="mail" type="text" label='Contact e-mail <div class="proposerequired" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>' value ="<%= mail %>" cssClass="propose" />
+				<aui:input name="mail" type="text" label='Contact E-Mail <div class="proposerequired" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>' value ="<%= mail %>" cssClass="propose" />
 			</aui:column>
 			
 	 		<aui:column columnWidth="50" first="true">
-	 			<liferay-ui:error key="candidate-url-required" message="candidate-url-required" />
-				<aui:input name="url" type="text" label='URL <div class="proposerequired" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>' value ="<%= url %>" cssClass="propose" />
+				<aui:input name="url" type="text" label='URL' value ="<%= url %>" cssClass="propose" />
 			</aui:column>
 	 		<aui:column columnWidth="50" last="true">
-				<aui:input name="head" type="text" label="Head of Biobank" value ="<%= head %>" cssClass="propose" />
+				<aui:input name="head" type="text" label="Head of Registry/Biobank" value ="<%= head %>" cssClass="propose" />
 			</aui:column>
 			
 	 		<aui:column columnWidth="50" first="true">
-				<aui:input name="diseasescodes" type="text" label="Disease Codes (ORPHANET, ICD10, OMIM, UMLS, MESH, MEDDRA, SNOMEDCT)" value ="<%= diseases_icd10 %>" cssClass="propose" />
-				<aui:input name="diseasesfreetext" type="text" label="Disease description" value ="<%= diseases_free %>" cssClass="propose" />
+				<aui:input name="diseasescodes" type="text" label='Disease Codes <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="You can enter multiple disease codes with ; separated (ORPHANET, ICD10, OMIM, UMLS, MESH, MEDDRA, SNOMEDCT)"><b>&nbsp;?&nbsp;</b></span>' value ="<%= diseases_icd10 %>" cssClass="propose" />
+				<aui:input name="diseasesfreetext" type="text" label='Disease description <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="You can enter multiple diseases with ; separated"><b>&nbsp;?&nbsp;</b></span>' value ="<%= diseases_free %>" cssClass="propose" />
 			</aui:column>
 	 		<aui:column columnWidth="50" last="true">
 				<aui:input name="comment" label="Comment" type="textarea" value ="<%= commend %>" cssClass="propose" />

@@ -136,24 +136,31 @@ public class CandidateLocalServiceClpInvoker {
 
 		_methodParameterTypes54 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName55 = "getFilterdCandidates";
+
+		_methodParameterTypes55 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName55 = "getSource";
-
-		_methodParameterTypes55 = new String[] {  };
-
-		_methodName56 = "getTypesOfCandidates";
+		_methodName56 = "getSource";
 
 		_methodParameterTypes56 = new String[] {  };
 
-		_methodName57 = "getTypesOfCandidatesNewEntry";
+		_methodName57 = "getTypesOfCandidates";
 
 		_methodParameterTypes57 = new String[] {  };
 
-		_methodName58 = "getCountryNames";
+		_methodName58 = "getTypesOfCandidatesNewEntry";
 
 		_methodParameterTypes58 = new String[] {  };
+
+		_methodName59 = "getCountryNames";
+
+		_methodParameterTypes59 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -285,26 +292,33 @@ public class CandidateLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
 			return CandidateLocalServiceUtil.getFilterdCandidates((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3]);
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4]);
 		}
 
 		if (_methodName55.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
-			return CandidateLocalServiceUtil.getSource();
+			return CandidateLocalServiceUtil.getFilterdCandidates((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3]);
 		}
 
 		if (_methodName56.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
-			return CandidateLocalServiceUtil.getTypesOfCandidates();
+			return CandidateLocalServiceUtil.getSource();
 		}
 
 		if (_methodName57.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
-			return CandidateLocalServiceUtil.getTypesOfCandidatesNewEntry();
+			return CandidateLocalServiceUtil.getTypesOfCandidates();
 		}
 
 		if (_methodName58.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+			return CandidateLocalServiceUtil.getTypesOfCandidatesNewEntry();
+		}
+
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
 			return CandidateLocalServiceUtil.getCountryNames();
 		}
 
@@ -365,4 +379,6 @@ public class CandidateLocalServiceClpInvoker {
 	private String[] _methodParameterTypes57;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
 }

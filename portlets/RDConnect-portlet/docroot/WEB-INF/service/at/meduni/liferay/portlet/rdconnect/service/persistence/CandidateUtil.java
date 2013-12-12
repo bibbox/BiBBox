@@ -346,6 +346,276 @@ public class CandidateUtil {
 	}
 
 	/**
+	* Returns all the candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @return the matching candidates
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> findByCNSTDD(
+		java.lang.String country, java.lang.String name,
+		java.lang.String source, java.lang.String candidatetype,
+		java.lang.String diseasesfreetext, java.lang.String diseasescodes,
+		java.lang.String subunitof)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCNSTDD(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof);
+	}
+
+	/**
+	* Returns a range of all the candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.rdconnect.model.impl.CandidateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @param start the lower bound of the range of candidates
+	* @param end the upper bound of the range of candidates (not inclusive)
+	* @return the range of matching candidates
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> findByCNSTDD(
+		java.lang.String country, java.lang.String name,
+		java.lang.String source, java.lang.String candidatetype,
+		java.lang.String diseasesfreetext, java.lang.String diseasescodes,
+		java.lang.String subunitof, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCNSTDD(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.rdconnect.model.impl.CandidateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @param start the lower bound of the range of candidates
+	* @param end the upper bound of the range of candidates (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching candidates
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> findByCNSTDD(
+		java.lang.String country, java.lang.String name,
+		java.lang.String source, java.lang.String candidatetype,
+		java.lang.String diseasesfreetext, java.lang.String diseasescodes,
+		java.lang.String subunitof, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCNSTDD(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching candidate
+	* @throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException if a matching candidate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.Candidate findByCNSTDD_First(
+		java.lang.String country, java.lang.String name,
+		java.lang.String source, java.lang.String candidatetype,
+		java.lang.String diseasesfreetext, java.lang.String diseasescodes,
+		java.lang.String subunitof,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCNSTDD_First(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof, orderByComparator);
+	}
+
+	/**
+	* Returns the first candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching candidate, or <code>null</code> if a matching candidate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.Candidate fetchByCNSTDD_First(
+		java.lang.String country, java.lang.String name,
+		java.lang.String source, java.lang.String candidatetype,
+		java.lang.String diseasesfreetext, java.lang.String diseasescodes,
+		java.lang.String subunitof,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByCNSTDD_First(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof, orderByComparator);
+	}
+
+	/**
+	* Returns the last candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching candidate
+	* @throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException if a matching candidate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.Candidate findByCNSTDD_Last(
+		java.lang.String country, java.lang.String name,
+		java.lang.String source, java.lang.String candidatetype,
+		java.lang.String diseasesfreetext, java.lang.String diseasescodes,
+		java.lang.String subunitof,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCNSTDD_Last(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof, orderByComparator);
+	}
+
+	/**
+	* Returns the last candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching candidate, or <code>null</code> if a matching candidate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.Candidate fetchByCNSTDD_Last(
+		java.lang.String country, java.lang.String name,
+		java.lang.String source, java.lang.String candidatetype,
+		java.lang.String diseasesfreetext, java.lang.String diseasescodes,
+		java.lang.String subunitof,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByCNSTDD_Last(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof, orderByComparator);
+	}
+
+	/**
+	* Returns the candidates before and after the current candidate in the ordered set where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* @param candidateId the primary key of the current candidate
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next candidate
+	* @throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException if a candidate with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.Candidate[] findByCNSTDD_PrevAndNext(
+		long candidateId, java.lang.String country, java.lang.String name,
+		java.lang.String source, java.lang.String candidatetype,
+		java.lang.String diseasesfreetext, java.lang.String diseasescodes,
+		java.lang.String subunitof,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCNSTDD_PrevAndNext(candidateId, country, name,
+			source, candidatetype, diseasesfreetext, diseasescodes, subunitof,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63; from the database.
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByCNSTDD(java.lang.String country,
+		java.lang.String name, java.lang.String source,
+		java.lang.String candidatetype, java.lang.String diseasesfreetext,
+		java.lang.String diseasescodes, java.lang.String subunitof)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence()
+			.removeByCNSTDD(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof);
+	}
+
+	/**
+	* Returns the number of candidates where country LIKE &#63; and name LIKE &#63; and source LIKE &#63; and candidatetype LIKE &#63; and diseasesfreetext LIKE &#63; and diseasescodes LIKE &#63; and subunitof = &#63;.
+	*
+	* @param country the country
+	* @param name the name
+	* @param source the source
+	* @param candidatetype the candidatetype
+	* @param diseasesfreetext the diseasesfreetext
+	* @param diseasescodes the diseasescodes
+	* @param subunitof the subunitof
+	* @return the number of matching candidates
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByCNSTDD(java.lang.String country,
+		java.lang.String name, java.lang.String source,
+		java.lang.String candidatetype, java.lang.String diseasesfreetext,
+		java.lang.String diseasescodes, java.lang.String subunitof)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByCNSTDD(country, name, source, candidatetype,
+			diseasesfreetext, diseasescodes, subunitof);
+	}
+
+	/**
 	* Returns all the candidates where subunitof = &#63;.
 	*
 	* @param subunitof the subunitof

@@ -118,10 +118,6 @@ public class CandidatePropose extends MVCPortlet {
 			errors.add("candidate-name-required");
 			valid = false;
 		}
-		if (Validator.isNull(candidate.getUrl())) {
-			errors.add("candidate-url-required");
-			valid = false;
-		}
 		if (Validator.isNull(candidate.getContactperson())) {
 			errors.add("candidate-contact_person-required");
 			valid = false;

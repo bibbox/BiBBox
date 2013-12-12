@@ -27,20 +27,26 @@ if(name.equalsIgnoreCase("")) {
 	name = "";
 }
 
+String diseases = ParamUtil.getString(request, "diseases");
+if(diseases.equalsIgnoreCase("")) {
+	diseases = "";
+}
+
 String[] countrylist = CandidateLocalServiceUtil.getCountryNames();
 String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 String[] sources = CandidateLocalServiceUtil.getSource();
 String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent().split("\\?")[0]+"/";
 %>
 
+<div class="rdc-filter-form">
 <portlet:actionURL name='filterCandidates' var="filterCandidatesURL" />
 <aui:form name="filterform" action="<%= filterCandidatesURL.toString() %>" method="post" >
 <aui:fieldset  column="true">
 <div style="float:left;">
-<aui:input name="name" label="Name Search Filter:" size="90" value="<%= name %>" />
+<aui:input name='name' label='Filter: <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="Search for Name, Disease name and Disease Code (Example: Cell Bank or Duchenne and Becker muscular dystrophy or ORPHA269)"><b>&nbsp;?&nbsp;</b></span>' size="90" value="<%= name %>" cssClass="rdc-filter-name" />
 </div>
 <div style="float:left;">
-<aui:select name="country" label="Country Filter:">
+<aui:select name="country" label="Country Filter:" cssClass="rdc-filter-input" >
 	<% for (String string : countrylist) { %>
 	<aui:option value="<%= string %>" selected="<%= country.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
@@ -49,7 +55,7 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 </aui:select>
 </div>
 <div style="float:left;">
-<aui:select name="candidatetype" label="Type Filter:">
+<aui:select name="candidatetype" label="Type Filter:" cssClass="rdc-filter-input" >
 	<% for (String string : types) { %>
 	<aui:option value="<%= string %>" selected="<%= candidatetype.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
@@ -58,7 +64,7 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 </aui:select>
 </div>
 <div style="float:left;">
-<aui:select name="source" label="Source Filter:" >
+<aui:select name="source" label="Source Filter:" cssClass="rdc-filter-input" >
 	<% for (String string : sources) { %>
 	<aui:option value="<%= string %>" selected="<%= source.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
@@ -66,13 +72,16 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 	<% } %>
 </aui:select>
 </div>
-<%--<aui:input name="disease" label="Search Disease:" size="90"  value="<%= disease %>" />--%>
+<!--<aui:input name="diseases" label="Search Disease:" size="90"  value="<%= diseases %>" />-->
+<div style="float:left;">
 <aui:button-row>
-	<aui:button name="filter" type="submit" value="filter" label="Filter" onClick="submitFormRDConnectCandidatePropose('filter')" />
-	<aui:button name="clear" type="submit" value="clear" label="Clear" onClick="<%= urltounfilterd %>" />
+	<aui:button name="filter" type="submit" value="filter" label="Filter" cssClass="rdc-filter-button" />
+	<!--<aui:button name="clear" type="clear" value="clear" label="Clear" cssClass="clearFilterButton" />-->
 </aui:button-row>
+</div>
 </aui:fieldset>
 </aui:form>
+</div>
 
 
 
@@ -93,6 +102,7 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
     //portletURL.setParameter("disease", disease);
     portletURL.setParameter("country", country);
     portletURL.setParameter("source", source);
+    portletURL.setParameter("diseases", diseases);    
     portletURL.setParameter("candidatetype", candidatetype);
     portletURL.setParameter("name", name);
     portletURL.setParameter("action", "search");
@@ -100,16 +110,13 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
     
 %>
 <div class="rdc-candidate-table">
-
-
-
 <liferay-ui:search-container 
 iteratorURL="<%= portletURL %>" 
 emptyResultsMessage="there-are-no-candidates" 
 delta="<%= delta %>">
 <liferay-ui:search-container-results>
 <%
-List<Candidate> tempResults = CandidateLocalServiceUtil.getFilterdCandidates(name, country, candidatetype, source);
+List<Candidate> tempResults = CandidateLocalServiceUtil.getFilterdCandidates(name, country, candidatetype, source, diseases);
 //results = CandidateLocalServiceUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
 //List<Candidate> tempResults = ActionUtil.getProducts(renderRequest);
 results = ListUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
@@ -127,35 +134,36 @@ className="at.meduni.liferay.portlet.rdconnect.model.Candidate"
 keyProperty="candidateId"
 modelVar="candidate">
 <liferay-ui:search-container-column-text
-name="Candidate Id"
+name="Can.Id"
 property="candidateId"
+cssClass="candidate-table-candidateId"
 />
 <liferay-ui:search-container-column-text
 name="name"
 property="name"
 href="<%=candidate.getUrl()%>"
 target="_blank"
+cssClass="candidate-table-name"
 />
 <liferay-ui:search-container-column-text
 name="country"
 property="country"
+cssClass="candidate-table-country"
 />
 <liferay-ui:search-container-column-text
 name="type"
 property="candidatetype"
+cssClass="candidate-table-candidatetype"
 />
 <liferay-ui:search-container-column-text
 name="source"
 property="source"
+cssClass="candidate-table-source"
 />
 <liferay-ui:search-container-column-jsp
 align="right" 
 path="/html/candidate/candidatetabel/editsub.jsp"
-/>
-<liferay-ui:search-container-column-button
-name="Save"
-href="#"
-cssClass="search-container-column-button-save-table"
+cssClass="candidate-table-editsub"
 />
 </liferay-ui:search-container-row>
 
@@ -164,6 +172,7 @@ portletURL.setParameter("cur", String.valueOf(cur));
 //portletURL.setParameter("disease", disease);
 portletURL.setParameter("country", country);
 portletURL.setParameter("source", source);
+portletURL.setParameter("diseases", diseases);
 portletURL.setParameter("candidatetype", candidatetype);
 portletURL.setParameter("name", name);
 searchContainer.setIteratorURL(portletURL);    %>
@@ -173,9 +182,29 @@ searchContainer.setIteratorURL(portletURL);    %>
 
 <portlet:actionURL name='updateCandidateTableData' var="updateCandidateTableDataURL" />
 
-<aui:script use="aui-io-request, event, node">
+<aui:script use="aui-io-request, event, node, aui-popover, valuechange, event-hover, aui-tooltip">
+	AUI().use('aui-io-request', 'event-valuechange', 'node', function(A){
+		var nodeObject = A.all('#masterid');
+		nodeObject.on('valuechange', function(event){
+			var url = '<%= updateCandidateTableDataURL.toString() %>';
+			A.io.request(url,{
+				//this is the data that you are sending to the action method
+				data: {
+					
+				   <portlet:namespace />candidateid: event.target.get('parentNode').get('parentNode').one('#candidateid').get('value'),
+				   <portlet:namespace />masterid: event.target.get('parentNode').get('parentNode').one('#masterid').get('value'),
+				   <portlet:namespace />accepted: event.target.get('parentNode').get('parentNode').one('#accepted').get('checked'),
+				},
+				dataType: 'json',
+				on: {
+				  failure: function() { alert('failure'); },
+				  success: function(event, id, obj) { "success" }
+				}
+			});
+		});
+	});
 	AUI().use('aui-io-request', 'event', 'node', function(A){
-		var nodeObject = A.all('.search-container-column-button-save-table');
+		var nodeObject = A.all('#accepted');
 		nodeObject.on('click', function(event){
 			var url = '<%= updateCandidateTableDataURL.toString() %>';
 			A.io.request(url,{
@@ -194,4 +223,24 @@ searchContainer.setIteratorURL(portletURL);    %>
 			});
 		});
 	});
+	AUI().use('event', 'node', function(A){
+		var nodeObject = A.all('.clearFilterButton');
+		nodeObject.on('click', function(event){
+			var url = '<%= urltounfilterd %>';
+			alert(url);
+			window.location.assign(url);
+		});
+	});
+	AUI().use('node', function(A){
+		var nodeObject = A.all('#_candidatetabel_WAR_RDConnectportlet_candidatesSearchContainer_col-6');
+		nodeObject.setHTML('J / A');
+	});
+	AUI().use('aui-tooltip', function(A) {
+    	new A.Tooltip(
+      	{
+        	trigger: '#rdc-filter-name-help',
+        	position: 'right',
+        	cssClass: 'tooltip-help'
+      	});
+  	});
 </aui:script>

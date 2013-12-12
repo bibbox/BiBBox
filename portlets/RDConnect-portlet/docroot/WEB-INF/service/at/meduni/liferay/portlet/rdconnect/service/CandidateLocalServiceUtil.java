@@ -291,6 +291,14 @@ public class CandidateLocalServiceUtil {
 
 	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
 		java.lang.String name, java.lang.String country, java.lang.String type,
+		java.lang.String source, java.lang.String diseases)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFilterdCandidates(name, country, type, source, diseases);
+	}
+
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
+		java.lang.String name, java.lang.String country, java.lang.String type,
 		java.lang.String source)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFilterdCandidates(name, country, type, source);
