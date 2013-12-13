@@ -65,6 +65,7 @@ public class MasterCandidateWrapper implements MasterCandidate,
 		attributes.put("head", getHead());
 		attributes.put("groupid", getGroupid());
 		attributes.put("companyid", getCompanyid());
+		attributes.put("joinId", getJoinId());
 
 		return attributes;
 	}
@@ -159,6 +160,12 @@ public class MasterCandidateWrapper implements MasterCandidate,
 
 		if (companyid != null) {
 			setCompanyid(companyid);
+		}
+
+		Long joinId = (Long)attributes.get("joinId");
+
+		if (joinId != null) {
+			setJoinId(joinId);
 		}
 	}
 
@@ -480,6 +487,26 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	@Override
 	public void setCompanyid(long companyid) {
 		_masterCandidate.setCompanyid(companyid);
+	}
+
+	/**
+	* Returns the join ID of this master candidate.
+	*
+	* @return the join ID of this master candidate
+	*/
+	@Override
+	public long getJoinId() {
+		return _masterCandidate.getJoinId();
+	}
+
+	/**
+	* Sets the join ID of this master candidate.
+	*
+	* @param joinId the join ID of this master candidate
+	*/
+	@Override
+	public void setJoinId(long joinId) {
+		_masterCandidate.setJoinId(joinId);
 	}
 
 	@Override

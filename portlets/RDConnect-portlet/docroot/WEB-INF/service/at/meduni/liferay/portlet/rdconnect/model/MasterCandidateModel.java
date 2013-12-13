@@ -280,6 +280,20 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	 */
 	public void setCompanyid(long companyid);
 
+	/**
+	 * Returns the join ID of this master candidate.
+	 *
+	 * @return the join ID of this master candidate
+	 */
+	public long getJoinId();
+
+	/**
+	 * Sets the join ID of this master candidate.
+	 *
+	 * @param joinId the join ID of this master candidate
+	 */
+	public void setJoinId(long joinId);
+
 	@Override
 	public boolean isNew();
 

@@ -89,6 +89,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		attributes.put("head", getHead());
 		attributes.put("groupid", getGroupid());
 		attributes.put("companyid", getCompanyid());
+		attributes.put("joinId", getJoinId());
 
 		return attributes;
 	}
@@ -183,6 +184,12 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 		if (companyid != null) {
 			setCompanyid(companyid);
+		}
+
+		Long joinId = (Long)attributes.get("joinId");
+
+		if (joinId != null) {
+			setJoinId(joinId);
 		}
 	}
 
@@ -533,6 +540,29 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		}
 	}
 
+	@Override
+	public long getJoinId() {
+		return _joinId;
+	}
+
+	@Override
+	public void setJoinId(long joinId) {
+		_joinId = joinId;
+
+		if (_masterCandidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterCandidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setJoinId", long.class);
+
+				method.invoke(_masterCandidateRemoteModel, joinId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getMasterCandidateRemoteModel() {
 		return _masterCandidateRemoteModel;
 	}
@@ -619,6 +649,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		clone.setHead(getHead());
 		clone.setGroupid(getGroupid());
 		clone.setCompanyid(getCompanyid());
+		clone.setJoinId(getJoinId());
 
 		return clone;
 	}
@@ -665,7 +696,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{masterCandidateId=");
 		sb.append(getMasterCandidateId());
@@ -697,6 +728,8 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		sb.append(getGroupid());
 		sb.append(", companyid=");
 		sb.append(getCompanyid());
+		sb.append(", joinId=");
+		sb.append(getJoinId());
 		sb.append("}");
 
 		return sb.toString();
@@ -704,7 +737,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.MasterCandidate");
@@ -770,6 +803,10 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 			"<column><column-name>companyid</column-name><column-value><![CDATA[");
 		sb.append(getCompanyid());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>joinId</column-name><column-value><![CDATA[");
+		sb.append(getJoinId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -791,5 +828,6 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 	private String _head;
 	private long _groupid;
 	private long _companyid;
+	private long _joinId;
 	private BaseModel<?> _masterCandidateRemoteModel;
 }

@@ -675,7 +675,8 @@ public class MasterCandidateLocalServiceClp
 
 	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> getFilterdCandidates(
-		java.lang.String name, java.lang.String country, java.lang.String type)
+		java.lang.String searchstring, java.lang.String country,
+		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -683,7 +684,7 @@ public class MasterCandidateLocalServiceClp
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
 					new Object[] {
-						ClpSerializer.translateInput(name),
+						ClpSerializer.translateInput(searchstring),
 						
 					ClpSerializer.translateInput(country),
 						

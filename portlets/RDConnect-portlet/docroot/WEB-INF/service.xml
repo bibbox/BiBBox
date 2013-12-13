@@ -83,6 +83,7 @@
 		<column name="head" type="String" />
 		<column name="groupid" type="long" />
 		<column name="companyid" type="long" />
+		<column name="joinId" type="long"/>
 
 		<!-- Order -->
 		<order by="asc">

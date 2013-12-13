@@ -94,6 +94,7 @@
 		</field>
 		<field name="groupid" type="long" />
 		<field name="companyid" type="long" />
+		<field name="joinId" type="long" />
 	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate">
 		<field name="linkId" type="long" />

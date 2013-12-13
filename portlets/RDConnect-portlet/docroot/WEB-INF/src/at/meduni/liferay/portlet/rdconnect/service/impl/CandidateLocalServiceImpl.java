@@ -152,11 +152,13 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		
 		dynamicQuery.add(criterion);
 		
-		//Order countryOrder = OrderFactoryUtil.desc("country");
-		Order candidateidOrder = OrderFactoryUtil.asc("candidateId");
+		Order countryOrder = OrderFactoryUtil.desc("country");
+		Order nameOrder = OrderFactoryUtil.desc("name");
+		//Order candidateidOrder = OrderFactoryUtil.asc("candidateId");
 		//Order masteridOrder = OrderFactoryUtil.desc("masterId");
 		 
-		dynamicQuery.addOrder(candidateidOrder);
+		dynamicQuery.addOrder(countryOrder);
+		dynamicQuery.addOrder(nameOrder);
 		
 		List<Candidate> candidates = CandidateLocalServiceUtil.dynamicQuery(dynamicQuery);
 	

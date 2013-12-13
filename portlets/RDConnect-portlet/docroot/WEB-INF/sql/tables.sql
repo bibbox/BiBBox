@@ -50,7 +50,8 @@ create table rdconnect.master_candidate (
 	mail VARCHAR(255) null,
 	head TEXT null,
 	groupid LONG,
-	companyid LONG
+	companyid LONG,
+	joinId LONG
 );
 
 create table rdconnect.master_candidate_link_candidate (

@@ -73,9 +73,10 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			{ "mail", Types.VARCHAR },
 			{ "head", Types.VARCHAR },
 			{ "groupid", Types.BIGINT },
-			{ "companyid", Types.BIGINT }
+			{ "companyid", Types.BIGINT },
+			{ "joinId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.master_candidate (masterCandidateId LONG not null primary key,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,mail VARCHAR(255) null,head TEXT null,groupid LONG,companyid LONG)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.master_candidate (masterCandidateId LONG not null primary key,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,mail VARCHAR(255) null,head TEXT null,groupid LONG,companyid LONG,joinId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.master_candidate";
 	public static final String ORDER_BY_JPQL = " ORDER BY masterCandidate.country ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.master_candidate.country ASC";
@@ -149,6 +150,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		attributes.put("head", getHead());
 		attributes.put("groupid", getGroupid());
 		attributes.put("companyid", getCompanyid());
+		attributes.put("joinId", getJoinId());
 
 		return attributes;
 	}
@@ -243,6 +245,12 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 		if (companyid != null) {
 			setCompanyid(companyid);
+		}
+
+		Long joinId = (Long)attributes.get("joinId");
+
+		if (joinId != null) {
+			setJoinId(joinId);
 		}
 	}
 
@@ -481,6 +489,16 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		_companyid = companyid;
 	}
 
+	@Override
+	public long getJoinId() {
+		return _joinId;
+	}
+
+	@Override
+	public void setJoinId(long joinId) {
+		_joinId = joinId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -527,6 +545,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		masterCandidateImpl.setHead(getHead());
 		masterCandidateImpl.setGroupid(getGroupid());
 		masterCandidateImpl.setCompanyid(getCompanyid());
+		masterCandidateImpl.setJoinId(getJoinId());
 
 		masterCandidateImpl.resetOriginalValues();
 
@@ -693,12 +712,14 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 		masterCandidateCacheModel.companyid = getCompanyid();
 
+		masterCandidateCacheModel.joinId = getJoinId();
+
 		return masterCandidateCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{masterCandidateId=");
 		sb.append(getMasterCandidateId());
@@ -730,6 +751,8 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		sb.append(getGroupid());
 		sb.append(", companyid=");
 		sb.append(getCompanyid());
+		sb.append(", joinId=");
+		sb.append(getJoinId());
 		sb.append("}");
 
 		return sb.toString();
@@ -737,7 +760,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.MasterCandidate");
@@ -803,6 +826,10 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			"<column><column-name>companyid</column-name><column-value><![CDATA[");
 		sb.append(getCompanyid());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>joinId</column-name><column-value><![CDATA[");
+		sb.append(getJoinId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -831,6 +858,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 	private String _head;
 	private long _groupid;
 	private long _companyid;
+	private long _joinId;
 	private long _columnBitmask;
 	private MasterCandidate _escapedModel;
 }

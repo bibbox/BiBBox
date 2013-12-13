@@ -45,6 +45,7 @@ public class MasterCandidateSoap implements Serializable {
 		soapModel.setHead(model.getHead());
 		soapModel.setGroupid(model.getGroupid());
 		soapModel.setCompanyid(model.getCompanyid());
+		soapModel.setJoinId(model.getJoinId());
 
 		return soapModel;
 	}
@@ -219,6 +220,14 @@ public class MasterCandidateSoap implements Serializable {
 		_companyid = companyid;
 	}
 
+	public long getJoinId() {
+		return _joinId;
+	}
+
+	public void setJoinId(long joinId) {
+		_joinId = joinId;
+	}
+
 	private long _masterCandidateId;
 	private String _name;
 	private String _url;
@@ -234,4 +243,5 @@ public class MasterCandidateSoap implements Serializable {
 	private String _head;
 	private long _groupid;
 	private long _companyid;
+	private long _joinId;
 }

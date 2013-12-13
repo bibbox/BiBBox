@@ -22,9 +22,6 @@ if(name.equalsIgnoreCase("")) {
 	name = "";
 }
 
-%>
-
-<% 
 String[] countrylist = CandidateLocalServiceUtil.getCountryNames();
 String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 %>
@@ -54,31 +51,31 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 </aui:select>
 </div>
 <aui:button-row>
-<aui:button name="filter" type="submit" value="filter" label="Filter" onClick="submitFormRDConnectCandidatePropose('filter')" />
-<aui:button name="clear" type="submit" value="clear" label="Clear" onClick="submitFormRDConnectCandidatePropose('clear')" />
+<aui:button name="filter" type="submit" value="filter" label="Filter" />
+<!--<aui:button name="clear" type="submit" value="clear" label="Clear" />-->
 </aui:button-row>
 </aui:fieldset>
 </aui:form>
 
 <%      
-	Integer count = (Integer)request.getAttribute("count");        
-	Integer delta = (Integer)request.getAttribute("delta");        
-	Integer cur = (Integer)request.getAttribute("cur");         
+	Integer count = (Integer)request.getAttribute("#<portlet:namespace/>count");        
+	Integer delta = (Integer)request.getAttribute("#<portlet:namespace/>delta");        
+	Integer cur = (Integer)request.getAttribute("#<portlet:namespace/>cur");         
     if(cur == null){
         cur = 1;
     }
     if(delta == null){
-        delta = 10;
+        delta = 50;
     }
     if(count == null){
         count = 0;
     }
     PortletURL portletURL = renderResponse.createActionURL();
-    //portletURL.setParameter("disease", disease);
-    portletURL.setParameter("country", country);
+    portletURL.setParameter("country", country);    
     portletURL.setParameter("candidatetype", candidatetype);
     portletURL.setParameter("name", name);
     portletURL.setParameter("action", "search");
+     
 %>
 
 <liferay-ui:search-container 
@@ -113,6 +110,10 @@ property="country"
 <liferay-ui:search-container-column-text
 name="type"
 property="candidatetype"
+/>
+<liferay-ui:search-container-column-jsp
+	align="right"
+	path="/html/candidate/mastertable/mastertable_actions.jsp"
 />
 </liferay-ui:search-container-row>
 <%        

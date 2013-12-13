@@ -79,6 +79,7 @@
 			<basic name="head" />
 			<basic name="groupid" />
 			<basic name="companyid" />
+			<basic name="joinId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

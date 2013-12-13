@@ -16,10 +16,19 @@ package at.meduni.liferay.portlet.rdconnect.service.impl;
 
 import java.util.List;
 
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Order;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 
 import at.meduni.liferay.portlet.rdconnect.model.Candidate;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
+import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
+import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.base.MasterCandidateLocalServiceBaseImpl;
 
 /**
@@ -43,26 +52,45 @@ public class MasterCandidateLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil} to access the master candidate local service.
 	 */
-	public List<MasterCandidate> getFilterdCandidates(String name, String country, String type) throws SystemException {
+	public List<MasterCandidate> getFilterdCandidates(String searchstring, String country, String type) throws SystemException {
 		if(country.equals("all")) {
-			country = "%";
-		} else {
-			country = "%" + country + "%";
+			country = "";
 		}
 		if(type.equals("all")) {
-			type = "%";
+			type = "";
 		} else {
 			if(type.equals("Registry"))
-				type = "%" + "Registr" + "%";
-			else
-				type = "%" + type + "%";
+				type = "Registr";
 		}
-		if(name.equals("")) {
-			name = "%";
-		} else {
-			name = "%" + name + "%";
-		}
-		List<MasterCandidate> mastercandidate = masterCandidatePersistence.findByCNST(country, name, type);
+		
+		// Dynamic Query for search
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MasterCandidate.class);
+				
+		Criterion criterion = null;
+				
+		Criterion criterion_stringsearch = RestrictionsFactoryUtil.ilike("diseasesfreetext", StringPool.PERCENT + searchstring + StringPool.PERCENT);
+		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("diseasescodes", StringPool.PERCENT + searchstring + StringPool.PERCENT));
+		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT + searchstring + StringPool.PERCENT));
+				
+		criterion = RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT);
+		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
+		criterion = RestrictionsFactoryUtil.and(criterion, criterion_stringsearch);
+				
+		dynamicQuery.add(criterion);
+		
+		Order countryOrder = OrderFactoryUtil.desc("country");
+		Order joinIdOrder = OrderFactoryUtil.desc("joinId");
+		Order nameOrder = OrderFactoryUtil.desc("name");
+		//Order candidateidOrder = OrderFactoryUtil.asc("candidateId");
+		//Order masteridOrder = OrderFactoryUtil.desc("masterId");
+		 
+		dynamicQuery.addOrder(countryOrder);
+		dynamicQuery.addOrder(joinIdOrder);
+		dynamicQuery.addOrder(nameOrder);
+		
+		List<MasterCandidate> mastercandidate = MasterCandidateLocalServiceUtil.dynamicQuery(dynamicQuery);
+
+		//List<MasterCandidate> mastercandidate = masterCandidatePersistence.findByCNST(country, name, type);
 		return mastercandidate;	
 	}
 }

@@ -154,6 +154,10 @@
 			<name>view-template</name>
 			<value>/html/candidate/masterpublish/view.jsp</value>
 		</init-param>
+		<init-param>
+			<name>copy-request-parameters</name>
+			<value>true</value> 
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
@@ -322,6 +326,10 @@
 		<init-param>
 			<name>view-template</name>
 			<value>/html/candidate/mastertable/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>copy-request-parameters</name>
+			<value>true</value> 
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
