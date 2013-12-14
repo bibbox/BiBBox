@@ -38,7 +38,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{masterCandidateId=");
 		sb.append(masterCandidateId);
@@ -72,6 +72,8 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		sb.append(companyid);
 		sb.append(", joinId=");
 		sb.append(joinId);
+		sb.append(", accepted=");
+		sb.append(accepted);
 		sb.append("}");
 
 		return sb.toString();
@@ -170,6 +172,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		masterCandidateImpl.setGroupid(groupid);
 		masterCandidateImpl.setCompanyid(companyid);
 		masterCandidateImpl.setJoinId(joinId);
+		masterCandidateImpl.setAccepted(accepted);
 
 		masterCandidateImpl.resetOriginalValues();
 
@@ -194,6 +197,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		groupid = objectInput.readLong();
 		companyid = objectInput.readLong();
 		joinId = objectInput.readLong();
+		accepted = objectInput.readBoolean();
 	}
 
 	@Override
@@ -283,6 +287,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		objectOutput.writeLong(groupid);
 		objectOutput.writeLong(companyid);
 		objectOutput.writeLong(joinId);
+		objectOutput.writeBoolean(accepted);
 	}
 
 	public long masterCandidateId;
@@ -301,4 +306,5 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	public long groupid;
 	public long companyid;
 	public long joinId;
+	public boolean accepted;
 }

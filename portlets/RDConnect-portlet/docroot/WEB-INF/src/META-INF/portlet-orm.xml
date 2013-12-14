@@ -80,6 +80,7 @@
 			<basic name="groupid" />
 			<basic name="companyid" />
 			<basic name="joinId" />
+			<basic name="accepted" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

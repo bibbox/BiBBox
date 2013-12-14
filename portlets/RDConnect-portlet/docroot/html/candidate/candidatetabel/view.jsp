@@ -138,12 +138,10 @@ name="Can.Id"
 property="candidateId"
 cssClass="candidate-table-candidateId"
 />
-<liferay-ui:search-container-column-text
-name="name"
-property="name"
-href="<%=candidate.getUrl()%>"
-target="_blank"
-cssClass="candidate-table-name"
+<liferay-ui:search-container-column-jsp
+align="right" 
+path="/html/candidate/candidatetabel/candidatetable_name.jsp"
+cssClass="candidate-table-namecontainer"
 />
 <liferay-ui:search-container-column-text
 name="country"

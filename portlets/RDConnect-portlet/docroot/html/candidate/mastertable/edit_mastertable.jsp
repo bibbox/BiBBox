@@ -56,6 +56,8 @@
 
 		<aui:input name="joinId" />
 		
+		<aui:input name="accepted" />
+		
 	</aui:fieldset>
 
 	<aui:button-row>

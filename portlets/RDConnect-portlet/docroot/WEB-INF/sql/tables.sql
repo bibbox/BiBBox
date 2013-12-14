@@ -51,7 +51,8 @@ create table rdconnect.master_candidate (
 	head TEXT null,
 	groupid LONG,
 	companyid LONG,
-	joinId LONG
+	joinId LONG,
+	accepted BOOLEAN
 );
 
 create table rdconnect.master_candidate_link_candidate (

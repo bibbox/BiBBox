@@ -66,6 +66,7 @@ public class MasterCandidateWrapper implements MasterCandidate,
 		attributes.put("groupid", getGroupid());
 		attributes.put("companyid", getCompanyid());
 		attributes.put("joinId", getJoinId());
+		attributes.put("accepted", getAccepted());
 
 		return attributes;
 	}
@@ -166,6 +167,12 @@ public class MasterCandidateWrapper implements MasterCandidate,
 
 		if (joinId != null) {
 			setJoinId(joinId);
+		}
+
+		Boolean accepted = (Boolean)attributes.get("accepted");
+
+		if (accepted != null) {
+			setAccepted(accepted);
 		}
 	}
 
@@ -507,6 +514,36 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	@Override
 	public void setJoinId(long joinId) {
 		_masterCandidate.setJoinId(joinId);
+	}
+
+	/**
+	* Returns the accepted of this master candidate.
+	*
+	* @return the accepted of this master candidate
+	*/
+	@Override
+	public boolean getAccepted() {
+		return _masterCandidate.getAccepted();
+	}
+
+	/**
+	* Returns <code>true</code> if this master candidate is accepted.
+	*
+	* @return <code>true</code> if this master candidate is accepted; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isAccepted() {
+		return _masterCandidate.isAccepted();
+	}
+
+	/**
+	* Sets whether this master candidate is accepted.
+	*
+	* @param accepted the accepted of this master candidate
+	*/
+	@Override
+	public void setAccepted(boolean accepted) {
+		_masterCandidate.setAccepted(accepted);
 	}
 
 	@Override

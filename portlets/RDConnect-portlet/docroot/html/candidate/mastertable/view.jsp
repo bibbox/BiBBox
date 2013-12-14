@@ -95,21 +95,26 @@ pageContext.setAttribute("total", total);
 
 </liferay-ui:search-container-results>
 <liferay-ui:search-container-row 
-className="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate"
-keyProperty="masterCandidateId"
-modelVar="MasterCandidate">
+	className="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate"
+	keyProperty="masterCandidateId"
+	modelVar="MasterCandidate">
 <liferay-ui:search-container-column-text
-name="name"
-property="name"
-orderable="<%=true %>"
+	name="Can.Id"
+	property="masterCandidateId"
+	cssClass="candidate-table-candidateId"
+/>
+<liferay-ui:search-container-column-jsp
+	align="right" 
+	path="/html/candidate/mastertable/candidatemastertable_name.jsp"
+	cssClass="candidate-table-namecontainer"
 />
 <liferay-ui:search-container-column-text
-name="country"
-property="country"
+	name="country"
+	property="country"
 />
 <liferay-ui:search-container-column-text
-name="type"
-property="candidatetype"
+	name="type"
+	property="candidatetype"
 />
 <liferay-ui:search-container-column-jsp
 	align="right"

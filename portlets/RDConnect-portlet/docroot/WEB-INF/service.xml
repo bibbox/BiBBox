@@ -84,6 +84,7 @@
 		<column name="groupid" type="long" />
 		<column name="companyid" type="long" />
 		<column name="joinId" type="long"/>
+		<column name="accepted" type="boolean"></column>
 
 		<!-- Order -->
 		<order by="asc">

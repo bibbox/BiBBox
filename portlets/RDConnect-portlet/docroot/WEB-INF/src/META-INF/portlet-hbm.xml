@@ -67,6 +67,7 @@
 		<property name="groupid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="joinId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="accepted" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl" table="rdconnect.master_candidate_link_candidate">
 		<cache usage="read-write" />

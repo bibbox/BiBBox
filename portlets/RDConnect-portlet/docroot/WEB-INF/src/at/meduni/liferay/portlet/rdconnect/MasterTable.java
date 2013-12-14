@@ -3,9 +3,11 @@ package at.meduni.liferay.portlet.rdconnect;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import at.meduni.liferay.portlet.rdconnect.model.Candidate;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
+import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -22,9 +24,14 @@ public class MasterTable extends MVCPortlet {
 	}
 
 	public void updateMasterCandidate(ActionRequest request, ActionResponse response) throws Exception {
-		MasterCandidate master = MasterCandidateLocalServiceUtil
-				.getMasterCandidate(ParamUtil.getLong(request,
-						"masterCandidateId"));
+		long mastercandidateid = ParamUtil.getLong(request, "masterCandidateId");
+		MasterCandidate master = MasterCandidateLocalServiceUtil.getMasterCandidate(mastercandidateid);
+		if(master.getAccepted() != ParamUtil.getBoolean(request, "accepted") || master.getJoinId() != ParamUtil.getLong(request, "joinId")) {
+			Candidate candidate = CandidateLocalServiceUtil.getCandidate(mastercandidateid);
+			candidate.setAccepted(ParamUtil.getBoolean(request, "accepted"));
+			candidate.setMasterId(ParamUtil.getLong(request, "joinId"));
+			CandidateLocalServiceUtil.updateCandidate(candidate);
+		}
 		master = updateMasterCandidateFromRequest(request, master);
 		MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
 		/* Placeholder for SessionMessages */
@@ -45,6 +52,7 @@ public class MasterTable extends MVCPortlet {
 		master.setMail(ParamUtil.getString(request, "mail"));
 		master.setHead(ParamUtil.getString(request, "head"));
 		master.setJoinId(ParamUtil.getLong(request, "joinId"));
+		master.setAccepted(ParamUtil.getBoolean(request, "accepted"));
 		return master;
 	}
 

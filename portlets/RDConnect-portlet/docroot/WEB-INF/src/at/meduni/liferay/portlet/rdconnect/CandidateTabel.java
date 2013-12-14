@@ -7,7 +7,9 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import at.meduni.liferay.portlet.rdconnect.model.Candidate;
+import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
+import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -35,6 +37,12 @@ public class CandidateTabel extends MVCPortlet {
 		if(candidateid != 0) {
 			System.out.println("CandidateID: " + candidateid + " MasterID: " + masterid + " Accepted: " + accepted);
 			CandidateLocalServiceUtil.updateCandidate(candidateid, accepted, masterid);
+			MasterCandidate master = MasterCandidateLocalServiceUtil.getMasterCandidate(candidateid);
+			if(master.getAccepted() != accepted || master.getJoinId() != masterid) {
+				master.setAccepted(accepted);
+				master.setJoinId(masterid);
+				MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
+			}
 		}
 	}
 	

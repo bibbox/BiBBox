@@ -75,6 +75,7 @@ public class MasterCandidateLocalServiceImpl
 		criterion = RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
 		criterion = RestrictionsFactoryUtil.and(criterion, criterion_stringsearch);
+		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("accepted", true));
 				
 		dynamicQuery.add(criterion);
 		

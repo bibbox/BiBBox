@@ -294,6 +294,27 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	 */
 	public void setJoinId(long joinId);
 
+	/**
+	 * Returns the accepted of this master candidate.
+	 *
+	 * @return the accepted of this master candidate
+	 */
+	public boolean getAccepted();
+
+	/**
+	 * Returns <code>true</code> if this master candidate is accepted.
+	 *
+	 * @return <code>true</code> if this master candidate is accepted; <code>false</code> otherwise
+	 */
+	public boolean isAccepted();
+
+	/**
+	 * Sets whether this master candidate is accepted.
+	 *
+	 * @param accepted the accepted of this master candidate
+	 */
+	public void setAccepted(boolean accepted);
+
 	@Override
 	public boolean isNew();
 

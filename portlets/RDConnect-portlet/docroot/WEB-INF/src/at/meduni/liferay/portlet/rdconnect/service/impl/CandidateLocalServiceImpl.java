@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -55,14 +56,17 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	 */
 	public void updateCandidate(long candidateId, boolean accepted, long masterId) {
 		try {
-			Candidate candidate = candidatePersistence.findByPrimaryKey(candidateId);
+			Candidate candidate = CandidateLocalServiceUtil.getCandidate(candidateId);
 			candidate.setAccepted(accepted);
 			candidate.setMasterId(masterId);
-			candidatePersistence.update(candidate);
+			CandidateLocalServiceUtil.updateCandidate(candidate);
 		} catch (NoSuchCandidateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	

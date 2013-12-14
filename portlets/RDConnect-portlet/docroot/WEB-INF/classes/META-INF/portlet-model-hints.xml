@@ -95,6 +95,7 @@
 		<field name="groupid" type="long" />
 		<field name="companyid" type="long" />
 		<field name="joinId" type="long" />
+		<field name="accepted" type="boolean" />
 	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate">
 		<field name="linkId" type="long" />

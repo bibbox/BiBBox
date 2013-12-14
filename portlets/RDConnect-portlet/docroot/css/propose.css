@@ -94,3 +94,22 @@ textarea.propose{
 	margin-left: 5px;
 	margin-top: 5px;
 }
+.candidate-table-namecontainer {
+	width:458px;
+}
+.rdc-table-nameentry{
+	width:450px;
+}
+.rdc-table-nameentry-name {
+	font-size:10px;
+	font-weight:bold;
+	width:450px;
+}
+.rdc-table-nameentry-diseases {
+	font-size:9px;
+	width:450px;
+}
+.rdc-table-nameentry-contact {
+	font-size:9px;
+	width:450px;
+}
