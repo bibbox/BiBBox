@@ -101,15 +101,19 @@ textarea.propose{
 	width:450px;
 }
 .rdc-table-nameentry-name {
-	font-size:10px;
+	font-size:12px;
+	line-height: 12px;
 	font-weight:bold;
 	width:450px;
 }
 .rdc-table-nameentry-diseases {
 	font-size:9px;
+	line-height: 9px;
 	width:450px;
 }
 .rdc-table-nameentry-contact {
 	font-size:9px;
+	line-height: 9px;
 	width:450px;
+	font-style:italic;
 }
