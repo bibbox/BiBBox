@@ -36,6 +36,7 @@ public class CandidateSoap implements Serializable {
 		soapModel.setUrl(model.getUrl());
 		soapModel.setContactperson(model.getContactperson());
 		soapModel.setCandidatetype(model.getCandidatetype());
+		soapModel.setCandidatesubtype(model.getCandidatesubtype());
 		soapModel.setSubunitof(model.getSubunitof());
 		soapModel.setCountry(model.getCountry());
 		soapModel.setDiseasescodes(model.getDiseasescodes());
@@ -54,6 +55,7 @@ public class CandidateSoap implements Serializable {
 		soapModel.setValidated(model.getValidated());
 		soapModel.setAccepted(model.getAccepted());
 		soapModel.setMasterId(model.getMasterId());
+		soapModel.setState(model.getState());
 
 		return soapModel;
 	}
@@ -152,6 +154,14 @@ public class CandidateSoap implements Serializable {
 
 	public void setCandidatetype(String candidatetype) {
 		_candidatetype = candidatetype;
+	}
+
+	public String getCandidatesubtype() {
+		return _candidatesubtype;
+	}
+
+	public void setCandidatesubtype(String candidatesubtype) {
+		_candidatesubtype = candidatesubtype;
 	}
 
 	public String getSubunitof() {
@@ -306,12 +316,21 @@ public class CandidateSoap implements Serializable {
 		_masterId = masterId;
 	}
 
+	public String getState() {
+		return _state;
+	}
+
+	public void setState(String state) {
+		_state = state;
+	}
+
 	private long _candidateId;
 	private String _source;
 	private String _name;
 	private String _url;
 	private String _contactperson;
 	private String _candidatetype;
+	private String _candidatesubtype;
 	private String _subunitof;
 	private String _country;
 	private String _diseasescodes;
@@ -330,4 +349,5 @@ public class CandidateSoap implements Serializable {
 	private boolean _validated;
 	private boolean _accepted;
 	private long _masterId;
+	private String _state;
 }

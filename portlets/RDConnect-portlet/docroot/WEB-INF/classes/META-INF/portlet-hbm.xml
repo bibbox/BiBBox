@@ -28,6 +28,7 @@
 		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="contactperson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="candidatetype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="candidatesubtype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="subunitof" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseasescodes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -46,6 +47,7 @@
 		<property name="validated" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="accepted" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="masterId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="state" type="com.liferay.portal.dao.orm.hibernate.StringType" column="state_" />
 	</class>
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl" table="rdconnect.master_candidate">
 		<cache usage="read-write" />
@@ -56,6 +58,7 @@
 		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="contactperson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="candidatetype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="candidatesubtype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseasescodes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseasesfreetext" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -66,8 +69,10 @@
 		<property name="head" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="groupid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organisationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="joinId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="accepted" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="state" type="com.liferay.portal.dao.orm.hibernate.StringType" column="state_" />
 	</class>
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl" table="rdconnect.master_candidate_link_candidate">
 		<cache usage="read-write" />

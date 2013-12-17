@@ -277,9 +277,10 @@ public class MasterCandidateLocalServiceUtil {
 
 	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> getFilterdCandidates(
 		java.lang.String searchstring, java.lang.String country,
-		java.lang.String type)
+		java.lang.String type, java.lang.String state)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFilterdCandidates(searchstring, country, type);
+		return getService()
+				   .getFilterdCandidates(searchstring, country, type, state);
 	}
 
 	public static void clearService() {

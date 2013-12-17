@@ -55,6 +55,7 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 		attributes.put("url", getUrl());
 		attributes.put("contactperson", getContactperson());
 		attributes.put("candidatetype", getCandidatetype());
+		attributes.put("candidatesubtype", getCandidatesubtype());
 		attributes.put("subunitof", getSubunitof());
 		attributes.put("country", getCountry());
 		attributes.put("diseasescodes", getDiseasescodes());
@@ -73,6 +74,7 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 		attributes.put("validated", getValidated());
 		attributes.put("accepted", getAccepted());
 		attributes.put("masterId", getMasterId());
+		attributes.put("state", getState());
 
 		return attributes;
 	}
@@ -113,6 +115,12 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 
 		if (candidatetype != null) {
 			setCandidatetype(candidatetype);
+		}
+
+		String candidatesubtype = (String)attributes.get("candidatesubtype");
+
+		if (candidatesubtype != null) {
+			setCandidatesubtype(candidatesubtype);
 		}
 
 		String subunitof = (String)attributes.get("subunitof");
@@ -221,6 +229,12 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 
 		if (masterId != null) {
 			setMasterId(masterId);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
 		}
 	}
 
@@ -362,6 +376,26 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 	@Override
 	public void setCandidatetype(java.lang.String candidatetype) {
 		_candidate.setCandidatetype(candidatetype);
+	}
+
+	/**
+	* Returns the candidatesubtype of this candidate.
+	*
+	* @return the candidatesubtype of this candidate
+	*/
+	@Override
+	public java.lang.String getCandidatesubtype() {
+		return _candidate.getCandidatesubtype();
+	}
+
+	/**
+	* Sets the candidatesubtype of this candidate.
+	*
+	* @param candidatesubtype the candidatesubtype of this candidate
+	*/
+	@Override
+	public void setCandidatesubtype(java.lang.String candidatesubtype) {
+		_candidate.setCandidatesubtype(candidatesubtype);
 	}
 
 	/**
@@ -742,6 +776,26 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 	@Override
 	public void setMasterId(long masterId) {
 		_candidate.setMasterId(masterId);
+	}
+
+	/**
+	* Returns the state of this candidate.
+	*
+	* @return the state of this candidate
+	*/
+	@Override
+	public java.lang.String getState() {
+		return _candidate.getState();
+	}
+
+	/**
+	* Sets the state of this candidate.
+	*
+	* @param state the state of this candidate
+	*/
+	@Override
+	public void setState(java.lang.String state) {
+		_candidate.setState(state);
 	}
 
 	@Override

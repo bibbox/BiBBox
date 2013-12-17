@@ -65,6 +65,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 			{ "url", Types.VARCHAR },
 			{ "contactperson", Types.VARCHAR },
 			{ "candidatetype", Types.VARCHAR },
+			{ "candidatesubtype", Types.VARCHAR },
 			{ "subunitof", Types.VARCHAR },
 			{ "country", Types.VARCHAR },
 			{ "diseasescodes", Types.VARCHAR },
@@ -82,9 +83,10 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 			{ "submitteremail", Types.VARCHAR },
 			{ "validated", Types.BOOLEAN },
 			{ "accepted", Types.BOOLEAN },
-			{ "masterId", Types.BIGINT }
+			{ "masterId", Types.BIGINT },
+			{ "state_", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.candidate (candidateId LONG not null primary key,source VARCHAR(75) null,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,subunitof VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,searchurl TEXT null,sourceId VARCHAR(75) null,mail VARCHAR(255) null,head TEXT null,coverage VARCHAR(75) null,network VARCHAR(255) null,submittername VARCHAR(75) null,submitteremail VARCHAR(255) null,validated BOOLEAN,accepted BOOLEAN,masterId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.candidate (candidateId LONG not null primary key,source VARCHAR(75) null,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,candidatesubtype VARCHAR(75) null,subunitof VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,searchurl TEXT null,sourceId VARCHAR(75) null,mail VARCHAR(255) null,head TEXT null,coverage VARCHAR(75) null,network VARCHAR(255) null,submittername VARCHAR(75) null,submitteremail VARCHAR(255) null,validated BOOLEAN,accepted BOOLEAN,masterId LONG,state_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.candidate";
 	public static final String ORDER_BY_JPQL = " ORDER BY candidate.candidateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.candidate.candidateId ASC";
@@ -154,6 +156,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		attributes.put("url", getUrl());
 		attributes.put("contactperson", getContactperson());
 		attributes.put("candidatetype", getCandidatetype());
+		attributes.put("candidatesubtype", getCandidatesubtype());
 		attributes.put("subunitof", getSubunitof());
 		attributes.put("country", getCountry());
 		attributes.put("diseasescodes", getDiseasescodes());
@@ -172,6 +175,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		attributes.put("validated", getValidated());
 		attributes.put("accepted", getAccepted());
 		attributes.put("masterId", getMasterId());
+		attributes.put("state", getState());
 
 		return attributes;
 	}
@@ -212,6 +216,12 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 		if (candidatetype != null) {
 			setCandidatetype(candidatetype);
+		}
+
+		String candidatesubtype = (String)attributes.get("candidatesubtype");
+
+		if (candidatesubtype != null) {
+			setCandidatesubtype(candidatesubtype);
 		}
 
 		String subunitof = (String)attributes.get("subunitof");
@@ -320,6 +330,12 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 		if (masterId != null) {
 			setMasterId(masterId);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
 		}
 	}
 
@@ -438,6 +454,21 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	public String getOriginalCandidatetype() {
 		return GetterUtil.getString(_originalCandidatetype);
+	}
+
+	@Override
+	public String getCandidatesubtype() {
+		if (_candidatesubtype == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _candidatesubtype;
+		}
+	}
+
+	@Override
+	public void setCandidatesubtype(String candidatesubtype) {
+		_candidatesubtype = candidatesubtype;
 	}
 
 	@Override
@@ -740,6 +771,21 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		_masterId = masterId;
 	}
 
+	@Override
+	public String getState() {
+		if (_state == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _state;
+		}
+	}
+
+	@Override
+	public void setState(String state) {
+		_state = state;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -777,6 +823,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		candidateImpl.setUrl(getUrl());
 		candidateImpl.setContactperson(getContactperson());
 		candidateImpl.setCandidatetype(getCandidatetype());
+		candidateImpl.setCandidatesubtype(getCandidatesubtype());
 		candidateImpl.setSubunitof(getSubunitof());
 		candidateImpl.setCountry(getCountry());
 		candidateImpl.setDiseasescodes(getDiseasescodes());
@@ -795,6 +842,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		candidateImpl.setValidated(getValidated());
 		candidateImpl.setAccepted(getAccepted());
 		candidateImpl.setMasterId(getMasterId());
+		candidateImpl.setState(getState());
 
 		candidateImpl.resetOriginalValues();
 
@@ -914,6 +962,14 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 		if ((candidatetype != null) && (candidatetype.length() == 0)) {
 			candidateCacheModel.candidatetype = null;
+		}
+
+		candidateCacheModel.candidatesubtype = getCandidatesubtype();
+
+		String candidatesubtype = candidateCacheModel.candidatesubtype;
+
+		if ((candidatesubtype != null) && (candidatesubtype.length() == 0)) {
+			candidateCacheModel.candidatesubtype = null;
 		}
 
 		candidateCacheModel.subunitof = getSubunitof();
@@ -1043,12 +1099,20 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 		candidateCacheModel.masterId = getMasterId();
 
+		candidateCacheModel.state = getState();
+
+		String state = candidateCacheModel.state;
+
+		if ((state != null) && (state.length() == 0)) {
+			candidateCacheModel.state = null;
+		}
+
 		return candidateCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{candidateId=");
 		sb.append(getCandidateId());
@@ -1062,6 +1126,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		sb.append(getContactperson());
 		sb.append(", candidatetype=");
 		sb.append(getCandidatetype());
+		sb.append(", candidatesubtype=");
+		sb.append(getCandidatesubtype());
 		sb.append(", subunitof=");
 		sb.append(getSubunitof());
 		sb.append(", country=");
@@ -1098,6 +1164,8 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		sb.append(getAccepted());
 		sb.append(", masterId=");
 		sb.append(getMasterId());
+		sb.append(", state=");
+		sb.append(getState());
 		sb.append("}");
 
 		return sb.toString();
@@ -1105,7 +1173,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.Candidate");
@@ -1134,6 +1202,10 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 		sb.append(
 			"<column><column-name>candidatetype</column-name><column-value><![CDATA[");
 		sb.append(getCandidatetype());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>candidatesubtype</column-name><column-value><![CDATA[");
+		sb.append(getCandidatesubtype());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>subunitof</column-name><column-value><![CDATA[");
@@ -1207,6 +1279,10 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 			"<column><column-name>masterId</column-name><column-value><![CDATA[");
 		sb.append(getMasterId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1226,6 +1302,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 	private String _contactperson;
 	private String _candidatetype;
 	private String _originalCandidatetype;
+	private String _candidatesubtype;
 	private String _subunitof;
 	private String _originalSubunitof;
 	private String _country;
@@ -1248,6 +1325,7 @@ public class CandidateModelImpl extends BaseModelImpl<Candidate>
 	private boolean _validated;
 	private boolean _accepted;
 	private long _masterId;
+	private String _state;
 	private long _columnBitmask;
 	private Candidate _escapedModel;
 }

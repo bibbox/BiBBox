@@ -79,6 +79,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		attributes.put("url", getUrl());
 		attributes.put("contactperson", getContactperson());
 		attributes.put("candidatetype", getCandidatetype());
+		attributes.put("candidatesubtype", getCandidatesubtype());
 		attributes.put("country", getCountry());
 		attributes.put("diseasescodes", getDiseasescodes());
 		attributes.put("diseasesfreetext", getDiseasesfreetext());
@@ -89,8 +90,10 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		attributes.put("head", getHead());
 		attributes.put("groupid", getGroupid());
 		attributes.put("companyid", getCompanyid());
+		attributes.put("organisationid", getOrganisationid());
 		attributes.put("joinId", getJoinId());
 		attributes.put("accepted", getAccepted());
+		attributes.put("state", getState());
 
 		return attributes;
 	}
@@ -125,6 +128,12 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 		if (candidatetype != null) {
 			setCandidatetype(candidatetype);
+		}
+
+		String candidatesubtype = (String)attributes.get("candidatesubtype");
+
+		if (candidatesubtype != null) {
+			setCandidatesubtype(candidatesubtype);
 		}
 
 		String country = (String)attributes.get("country");
@@ -187,6 +196,12 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 			setCompanyid(companyid);
 		}
 
+		Long organisationid = (Long)attributes.get("organisationid");
+
+		if (organisationid != null) {
+			setOrganisationid(organisationid);
+		}
+
 		Long joinId = (Long)attributes.get("joinId");
 
 		if (joinId != null) {
@@ -197,6 +212,12 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 		if (accepted != null) {
 			setAccepted(accepted);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
 		}
 	}
 
@@ -309,6 +330,30 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 				Method method = clazz.getMethod("setCandidatetype", String.class);
 
 				method.invoke(_masterCandidateRemoteModel, candidatetype);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCandidatesubtype() {
+		return _candidatesubtype;
+	}
+
+	@Override
+	public void setCandidatesubtype(String candidatesubtype) {
+		_candidatesubtype = candidatesubtype;
+
+		if (_masterCandidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterCandidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCandidatesubtype",
+						String.class);
+
+				method.invoke(_masterCandidateRemoteModel, candidatesubtype);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -548,6 +593,29 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 	}
 
 	@Override
+	public long getOrganisationid() {
+		return _organisationid;
+	}
+
+	@Override
+	public void setOrganisationid(long organisationid) {
+		_organisationid = organisationid;
+
+		if (_masterCandidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterCandidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setOrganisationid", long.class);
+
+				method.invoke(_masterCandidateRemoteModel, organisationid);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getJoinId() {
 		return _joinId;
 	}
@@ -591,6 +659,29 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 				Method method = clazz.getMethod("setAccepted", boolean.class);
 
 				method.invoke(_masterCandidateRemoteModel, accepted);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getState() {
+		return _state;
+	}
+
+	@Override
+	public void setState(String state) {
+		_state = state;
+
+		if (_masterCandidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterCandidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setState", String.class);
+
+				method.invoke(_masterCandidateRemoteModel, state);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -674,6 +765,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		clone.setUrl(getUrl());
 		clone.setContactperson(getContactperson());
 		clone.setCandidatetype(getCandidatetype());
+		clone.setCandidatesubtype(getCandidatesubtype());
 		clone.setCountry(getCountry());
 		clone.setDiseasescodes(getDiseasescodes());
 		clone.setDiseasesfreetext(getDiseasesfreetext());
@@ -684,8 +776,10 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		clone.setHead(getHead());
 		clone.setGroupid(getGroupid());
 		clone.setCompanyid(getCompanyid());
+		clone.setOrganisationid(getOrganisationid());
 		clone.setJoinId(getJoinId());
 		clone.setAccepted(getAccepted());
+		clone.setState(getState());
 
 		return clone;
 	}
@@ -732,7 +826,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{masterCandidateId=");
 		sb.append(getMasterCandidateId());
@@ -744,6 +838,8 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		sb.append(getContactperson());
 		sb.append(", candidatetype=");
 		sb.append(getCandidatetype());
+		sb.append(", candidatesubtype=");
+		sb.append(getCandidatesubtype());
 		sb.append(", country=");
 		sb.append(getCountry());
 		sb.append(", diseasescodes=");
@@ -764,10 +860,14 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		sb.append(getGroupid());
 		sb.append(", companyid=");
 		sb.append(getCompanyid());
+		sb.append(", organisationid=");
+		sb.append(getOrganisationid());
 		sb.append(", joinId=");
 		sb.append(getJoinId());
 		sb.append(", accepted=");
 		sb.append(getAccepted());
+		sb.append(", state=");
+		sb.append(getState());
 		sb.append("}");
 
 		return sb.toString();
@@ -775,7 +875,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.MasterCandidate");
@@ -800,6 +900,10 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		sb.append(
 			"<column><column-name>candidatetype</column-name><column-value><![CDATA[");
 		sb.append(getCandidatetype());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>candidatesubtype</column-name><column-value><![CDATA[");
+		sb.append(getCandidatesubtype());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>country</column-name><column-value><![CDATA[");
@@ -842,12 +946,20 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		sb.append(getCompanyid());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>organisationid</column-name><column-value><![CDATA[");
+		sb.append(getOrganisationid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>joinId</column-name><column-value><![CDATA[");
 		sb.append(getJoinId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>accepted</column-name><column-value><![CDATA[");
 		sb.append(getAccepted());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -860,6 +972,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 	private String _url;
 	private String _contactperson;
 	private String _candidatetype;
+	private String _candidatesubtype;
 	private String _country;
 	private String _diseasescodes;
 	private String _diseasesfreetext;
@@ -870,7 +983,9 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 	private String _head;
 	private long _groupid;
 	private long _companyid;
+	private long _organisationid;
 	private long _joinId;
 	private boolean _accepted;
+	private String _state;
 	private BaseModel<?> _masterCandidateRemoteModel;
 }

@@ -27,35 +27,44 @@ public class CandidateTabel extends MVCPortlet {
 	
 	public void updateCandidateTableData(ActionRequest request, ActionResponse response) throws Exception {		
 		long candidateid = 0;
-		boolean accepted = false;
+		String state = "0";
 		long masterid = 0;
 		
 		candidateid = ParamUtil.getLong(request, "candidateid");
 		masterid = ParamUtil.getLong(request, "masterid");
-		accepted = ParamUtil.getBoolean(request, "accepted");
+		state = ParamUtil.getString(request, "state");
+		
+		System.out.println("State b if: " + state);
+		
+		if(!state.equalsIgnoreCase("x") &&  !state.equalsIgnoreCase("0") &&
+				!state.equalsIgnoreCase("1") && !state.equalsIgnoreCase("2") &&
+				!state.equalsIgnoreCase("3") && !state.equalsIgnoreCase("4") &&
+				!state.equalsIgnoreCase("5") && !state.equalsIgnoreCase("P")) {
+			System.out.println("if");
+			state = "0";
+		}
 		
 		if(candidateid != 0) {
-			System.out.println("CandidateID: " + candidateid + " MasterID: " + masterid + " Accepted: " + accepted);
-			CandidateLocalServiceUtil.updateCandidate(candidateid, accepted, masterid);
+			System.out.println("CandidateID: " + candidateid + " MasterID: " + masterid + " State: " + state);
+			CandidateLocalServiceUtil.updateCandidate(candidateid, state.toUpperCase(), masterid);
 			MasterCandidate master = MasterCandidateLocalServiceUtil.getMasterCandidate(candidateid);
-			if(master.getAccepted() != accepted || master.getJoinId() != masterid) {
-				master.setAccepted(accepted);
-				master.setJoinId(masterid);
-				MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
-			}
+			master.setState(state.toUpperCase());
+			master.setJoinId(masterid);
+			MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
 		}
 	}
 	
+	/*
 	public void updateCandidateToMaster(ActionRequest request, ActionResponse response) throws Exception {
 		long candidateId = ParamUtil.getLong(request, "candidateId");
 		System.out.println("candidateId: " + candidateId);
-		System.out.println(ParamUtil.getBoolean(request, "accepted"));
+		System.out.println(ParamUtil.getString(request, "state"));
 		if(candidateId == 0) {
 			System.out.println("RETURN");
 			return;
 		} else {
 			System.out.println("update");
-			CandidateLocalServiceUtil.updateCandidate(candidateId, ParamUtil.getBoolean(request, "accepted"), ParamUtil.getLong(request, "masterId"));
+			CandidateLocalServiceUtil.updateCandidate(candidateId, ParamUtil.getString(request, "state"), ParamUtil.getLong(request, "masterId"));
 		}		
-	}
+	}*/
 }

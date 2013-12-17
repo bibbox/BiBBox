@@ -15,6 +15,7 @@ create table rdconnect.candidate (
 	url TEXT null,
 	contactperson TEXT null,
 	candidatetype VARCHAR(75) null,
+	candidatesubtype VARCHAR(75) null,
 	subunitof VARCHAR(75) null,
 	country VARCHAR(75) null,
 	diseasescodes TEXT null,
@@ -32,7 +33,8 @@ create table rdconnect.candidate (
 	submitteremail VARCHAR(255) null,
 	validated BOOLEAN,
 	accepted BOOLEAN,
-	masterId LONG
+	masterId LONG,
+	state_ VARCHAR(75) null
 );
 
 create table rdconnect.master_candidate (
@@ -41,6 +43,7 @@ create table rdconnect.master_candidate (
 	url TEXT null,
 	contactperson TEXT null,
 	candidatetype VARCHAR(75) null,
+	candidatesubtype VARCHAR(75) null,
 	country VARCHAR(75) null,
 	diseasescodes TEXT null,
 	diseasesfreetext TEXT null,
@@ -51,8 +54,10 @@ create table rdconnect.master_candidate (
 	head TEXT null,
 	groupid LONG,
 	companyid LONG,
+	organisationid LONG,
 	joinId LONG,
-	accepted BOOLEAN
+	accepted BOOLEAN,
+	state_ VARCHAR(75) null
 );
 
 create table rdconnect.master_candidate_link_candidate (

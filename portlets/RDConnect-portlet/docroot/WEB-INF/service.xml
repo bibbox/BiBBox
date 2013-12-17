@@ -15,6 +15,7 @@
 		<column name="url" type="String" />
 		<column name="contactperson" type="String" />
 		<column name="candidatetype" type="String" />
+		<column name="candidatesubtype" type="String" />
 		<column name="subunitof" type="String" />
 		<column name="country" type="String" />
 		<column name="diseasescodes" type="String" />
@@ -33,6 +34,7 @@
         <column name="validated" type="boolean"></column>
         <column name="accepted" type="boolean"></column>
         <column name="masterId" type="long"/>
+        <column name="state" type="String" />
 
 		<!-- Order -->
 		<order by="asc">
@@ -73,6 +75,7 @@
 		<column name="url" type="String" />
 		<column name="contactperson" type="String" />
 		<column name="candidatetype" type="String" />
+		<column name="candidatesubtype" type="String" />
 		<column name="country" type="String" />
 		<column name="diseasescodes" type="String" />
 		<column name="diseasesfreetext" type="String" />
@@ -83,8 +86,10 @@
 		<column name="head" type="String" />
 		<column name="groupid" type="long" />
 		<column name="companyid" type="long" />
+		<column name="organisationid" type="long" />
 		<column name="joinId" type="long"/>
 		<column name="accepted" type="boolean"></column>
+		<column name="state" type="String" />
 
 		<!-- Order -->
 		<order by="asc">

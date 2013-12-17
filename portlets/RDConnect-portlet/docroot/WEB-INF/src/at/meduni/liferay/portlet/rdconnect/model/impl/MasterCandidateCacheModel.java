@@ -38,7 +38,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{masterCandidateId=");
 		sb.append(masterCandidateId);
@@ -50,6 +50,8 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		sb.append(contactperson);
 		sb.append(", candidatetype=");
 		sb.append(candidatetype);
+		sb.append(", candidatesubtype=");
+		sb.append(candidatesubtype);
 		sb.append(", country=");
 		sb.append(country);
 		sb.append(", diseasescodes=");
@@ -70,10 +72,14 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		sb.append(groupid);
 		sb.append(", companyid=");
 		sb.append(companyid);
+		sb.append(", organisationid=");
+		sb.append(organisationid);
 		sb.append(", joinId=");
 		sb.append(joinId);
 		sb.append(", accepted=");
 		sb.append(accepted);
+		sb.append(", state=");
+		sb.append(state);
 		sb.append("}");
 
 		return sb.toString();
@@ -111,6 +117,13 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		}
 		else {
 			masterCandidateImpl.setCandidatetype(candidatetype);
+		}
+
+		if (candidatesubtype == null) {
+			masterCandidateImpl.setCandidatesubtype(StringPool.BLANK);
+		}
+		else {
+			masterCandidateImpl.setCandidatesubtype(candidatesubtype);
 		}
 
 		if (country == null) {
@@ -171,8 +184,16 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 
 		masterCandidateImpl.setGroupid(groupid);
 		masterCandidateImpl.setCompanyid(companyid);
+		masterCandidateImpl.setOrganisationid(organisationid);
 		masterCandidateImpl.setJoinId(joinId);
 		masterCandidateImpl.setAccepted(accepted);
+
+		if (state == null) {
+			masterCandidateImpl.setState(StringPool.BLANK);
+		}
+		else {
+			masterCandidateImpl.setState(state);
+		}
 
 		masterCandidateImpl.resetOriginalValues();
 
@@ -186,6 +207,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		url = objectInput.readUTF();
 		contactperson = objectInput.readUTF();
 		candidatetype = objectInput.readUTF();
+		candidatesubtype = objectInput.readUTF();
 		country = objectInput.readUTF();
 		diseasescodes = objectInput.readUTF();
 		diseasesfreetext = objectInput.readUTF();
@@ -196,8 +218,10 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		head = objectInput.readUTF();
 		groupid = objectInput.readLong();
 		companyid = objectInput.readLong();
+		organisationid = objectInput.readLong();
 		joinId = objectInput.readLong();
 		accepted = objectInput.readBoolean();
+		state = objectInput.readUTF();
 	}
 
 	@Override
@@ -231,6 +255,13 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		}
 		else {
 			objectOutput.writeUTF(candidatetype);
+		}
+
+		if (candidatesubtype == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(candidatesubtype);
 		}
 
 		if (country == null) {
@@ -286,8 +317,16 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 
 		objectOutput.writeLong(groupid);
 		objectOutput.writeLong(companyid);
+		objectOutput.writeLong(organisationid);
 		objectOutput.writeLong(joinId);
 		objectOutput.writeBoolean(accepted);
+
+		if (state == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(state);
+		}
 	}
 
 	public long masterCandidateId;
@@ -295,6 +334,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	public String url;
 	public String contactperson;
 	public String candidatetype;
+	public String candidatesubtype;
 	public String country;
 	public String diseasescodes;
 	public String diseasesfreetext;
@@ -305,6 +345,8 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	public String head;
 	public long groupid;
 	public long companyid;
+	public long organisationid;
 	public long joinId;
 	public boolean accepted;
+	public String state;
 }

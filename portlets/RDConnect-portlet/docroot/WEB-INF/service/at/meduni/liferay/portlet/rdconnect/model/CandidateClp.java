@@ -79,6 +79,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		attributes.put("url", getUrl());
 		attributes.put("contactperson", getContactperson());
 		attributes.put("candidatetype", getCandidatetype());
+		attributes.put("candidatesubtype", getCandidatesubtype());
 		attributes.put("subunitof", getSubunitof());
 		attributes.put("country", getCountry());
 		attributes.put("diseasescodes", getDiseasescodes());
@@ -97,6 +98,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		attributes.put("validated", getValidated());
 		attributes.put("accepted", getAccepted());
 		attributes.put("masterId", getMasterId());
+		attributes.put("state", getState());
 
 		return attributes;
 	}
@@ -137,6 +139,12 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 		if (candidatetype != null) {
 			setCandidatetype(candidatetype);
+		}
+
+		String candidatesubtype = (String)attributes.get("candidatesubtype");
+
+		if (candidatesubtype != null) {
+			setCandidatesubtype(candidatesubtype);
 		}
 
 		String subunitof = (String)attributes.get("subunitof");
@@ -245,6 +253,12 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 		if (masterId != null) {
 			setMasterId(masterId);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
 		}
 	}
 
@@ -379,6 +393,30 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 				Method method = clazz.getMethod("setCandidatetype", String.class);
 
 				method.invoke(_candidateRemoteModel, candidatetype);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCandidatesubtype() {
+		return _candidatesubtype;
+	}
+
+	@Override
+	public void setCandidatesubtype(String candidatesubtype) {
+		_candidatesubtype = candidatesubtype;
+
+		if (_candidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _candidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCandidatesubtype",
+						String.class);
+
+				method.invoke(_candidateRemoteModel, candidatesubtype);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -812,6 +850,29 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		}
 	}
 
+	@Override
+	public String getState() {
+		return _state;
+	}
+
+	@Override
+	public void setState(String state) {
+		_state = state;
+
+		if (_candidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _candidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setState", String.class);
+
+				method.invoke(_candidateRemoteModel, state);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getCandidateRemoteModel() {
 		return _candidateRemoteModel;
 	}
@@ -887,6 +948,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		clone.setUrl(getUrl());
 		clone.setContactperson(getContactperson());
 		clone.setCandidatetype(getCandidatetype());
+		clone.setCandidatesubtype(getCandidatesubtype());
 		clone.setSubunitof(getSubunitof());
 		clone.setCountry(getCountry());
 		clone.setDiseasescodes(getDiseasescodes());
@@ -905,6 +967,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		clone.setValidated(getValidated());
 		clone.setAccepted(getAccepted());
 		clone.setMasterId(getMasterId());
+		clone.setState(getState());
 
 		return clone;
 	}
@@ -959,7 +1022,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{candidateId=");
 		sb.append(getCandidateId());
@@ -973,6 +1036,8 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		sb.append(getContactperson());
 		sb.append(", candidatetype=");
 		sb.append(getCandidatetype());
+		sb.append(", candidatesubtype=");
+		sb.append(getCandidatesubtype());
 		sb.append(", subunitof=");
 		sb.append(getSubunitof());
 		sb.append(", country=");
@@ -1009,6 +1074,8 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		sb.append(getAccepted());
 		sb.append(", masterId=");
 		sb.append(getMasterId());
+		sb.append(", state=");
+		sb.append(getState());
 		sb.append("}");
 
 		return sb.toString();
@@ -1016,7 +1083,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.Candidate");
@@ -1045,6 +1112,10 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		sb.append(
 			"<column><column-name>candidatetype</column-name><column-value><![CDATA[");
 		sb.append(getCandidatetype());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>candidatesubtype</column-name><column-value><![CDATA[");
+		sb.append(getCandidatesubtype());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>subunitof</column-name><column-value><![CDATA[");
@@ -1118,6 +1189,10 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 			"<column><column-name>masterId</column-name><column-value><![CDATA[");
 		sb.append(getMasterId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1130,6 +1205,7 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 	private String _url;
 	private String _contactperson;
 	private String _candidatetype;
+	private String _candidatesubtype;
 	private String _subunitof;
 	private String _country;
 	private String _diseasescodes;
@@ -1148,5 +1224,6 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 	private boolean _validated;
 	private boolean _accepted;
 	private long _masterId;
+	private String _state;
 	private BaseModel<?> _candidateRemoteModel;
 }

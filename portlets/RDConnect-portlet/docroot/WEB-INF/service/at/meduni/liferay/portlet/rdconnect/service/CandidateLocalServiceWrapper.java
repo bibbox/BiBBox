@@ -287,9 +287,9 @@ public class CandidateLocalServiceWrapper implements CandidateLocalService,
 	}
 
 	@Override
-	public void updateCandidate(long candidateId, boolean accepted,
+	public void updateCandidate(long candidateId, java.lang.String state,
 		long masterId) {
-		_candidateLocalService.updateCandidate(candidateId, accepted, masterId);
+		_candidateLocalService.updateCandidate(candidateId, state, masterId);
 	}
 
 	@Override
@@ -306,10 +306,10 @@ public class CandidateLocalServiceWrapper implements CandidateLocalService,
 	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
 		java.lang.String name, java.lang.String country, java.lang.String type,
-		java.lang.String source, java.lang.String diseases)
+		java.lang.String source, java.lang.String state)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _candidateLocalService.getFilterdCandidates(name, country, type,
-			source, diseases);
+			source, state);
 	}
 
 	@Override

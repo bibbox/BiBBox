@@ -38,7 +38,7 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{candidateId=");
 		sb.append(candidateId);
@@ -52,6 +52,8 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		sb.append(contactperson);
 		sb.append(", candidatetype=");
 		sb.append(candidatetype);
+		sb.append(", candidatesubtype=");
+		sb.append(candidatesubtype);
 		sb.append(", subunitof=");
 		sb.append(subunitof);
 		sb.append(", country=");
@@ -88,6 +90,8 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		sb.append(accepted);
 		sb.append(", masterId=");
 		sb.append(masterId);
+		sb.append(", state=");
+		sb.append(state);
 		sb.append("}");
 
 		return sb.toString();
@@ -132,6 +136,13 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		}
 		else {
 			candidateImpl.setCandidatetype(candidatetype);
+		}
+
+		if (candidatesubtype == null) {
+			candidateImpl.setCandidatesubtype(StringPool.BLANK);
+		}
+		else {
+			candidateImpl.setCandidatesubtype(candidatesubtype);
 		}
 
 		if (subunitof == null) {
@@ -243,6 +254,13 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		candidateImpl.setAccepted(accepted);
 		candidateImpl.setMasterId(masterId);
 
+		if (state == null) {
+			candidateImpl.setState(StringPool.BLANK);
+		}
+		else {
+			candidateImpl.setState(state);
+		}
+
 		candidateImpl.resetOriginalValues();
 
 		return candidateImpl;
@@ -256,6 +274,7 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		url = objectInput.readUTF();
 		contactperson = objectInput.readUTF();
 		candidatetype = objectInput.readUTF();
+		candidatesubtype = objectInput.readUTF();
 		subunitof = objectInput.readUTF();
 		country = objectInput.readUTF();
 		diseasescodes = objectInput.readUTF();
@@ -274,6 +293,7 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		validated = objectInput.readBoolean();
 		accepted = objectInput.readBoolean();
 		masterId = objectInput.readLong();
+		state = objectInput.readUTF();
 	}
 
 	@Override
@@ -314,6 +334,13 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		}
 		else {
 			objectOutput.writeUTF(candidatetype);
+		}
+
+		if (candidatesubtype == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(candidatesubtype);
 		}
 
 		if (subunitof == null) {
@@ -419,6 +446,13 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 		objectOutput.writeBoolean(validated);
 		objectOutput.writeBoolean(accepted);
 		objectOutput.writeLong(masterId);
+
+		if (state == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(state);
+		}
 	}
 
 	public long candidateId;
@@ -427,6 +461,7 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 	public String url;
 	public String contactperson;
 	public String candidatetype;
+	public String candidatesubtype;
 	public String subunitof;
 	public String country;
 	public String diseasescodes;
@@ -445,4 +480,5 @@ public class CandidateCacheModel implements CacheModel<Candidate>,
 	public boolean validated;
 	public boolean accepted;
 	public long masterId;
+	public String state;
 }

@@ -54,10 +54,10 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil} to access the candidate local service.
 	 */
-	public void updateCandidate(long candidateId, boolean accepted, long masterId) {
+	public void updateCandidate(long candidateId, String state, long masterId) {
 		try {
 			Candidate candidate = CandidateLocalServiceUtil.getCandidate(candidateId);
-			candidate.setAccepted(accepted);
+			candidate.setState(state);
 			candidate.setMasterId(masterId);
 			CandidateLocalServiceUtil.updateCandidate(candidate);
 		} catch (NoSuchCandidateException e) {
@@ -121,7 +121,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		return candidates;	
 	}
 	
-	public List<Candidate> getFilterdCandidates(String name, String country, String type, String source, String diseases) throws SystemException {
+	public List<Candidate> getFilterdCandidates(String name, String country, String type, String source, String state) throws SystemException {
 		if(country.equals("all")) {
 			country = "";
 		}
@@ -133,6 +133,9 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		}
 		if(source.equals("all")) {
 			source = "";
+		}
+		if(state.equals("all")) {
+			state = "";
 		}
 
 		
@@ -151,6 +154,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		criterion = RestrictionsFactoryUtil.ilike("source", StringPool.PERCENT + source + StringPool.PERCENT);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT));
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
+		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + state + StringPool.PERCENT));
 		criterion = RestrictionsFactoryUtil.and(criterion, criterion_diseases);
 		criterion = RestrictionsFactoryUtil.and(criterion, criterion_subunit);
 		
@@ -200,7 +204,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	
 	public String[] getSource() {
 		String[] array = new String[] { "all", "orpha.net", "bbmri.eu", "rd-neuromics.eu", "ee", "eurobiobank.org", "online propose",
-				"CORDIS", "ECSF website", "EPIRARE", "EUROCAT website", "EURORDIS", "HQIP", "MM", "propose", "Severe Chronic Neutropenia Registry - SCNIR",
+				"CORDIS", "ECSF website", "EPIRARE", "EUROCAT website", "EURORDIS", "HQIP", "MM", "ONLINE PROPOSED", "Severe Chronic Neutropenia Registry - SCNIR",
 				"SPANISH NETWORK", "SPANISH REGISTRIES", "Telethon", "TREAT NMD"};
 		return array;
 	}
@@ -218,49 +222,58 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	public String[] getCountryNames() {
 		String[] array = new String[] { 
 				"all",
-				"AUSTRALIA",
-				"AUSTRIA",
-				"BELGIUM",
-				"BULGARIA",
-				"CANADA",
-				"CROATIA",
-				"CYPRUS",
-				"CZECH REPUBLIC",
-				"DENMARK",
-				"ESTONIA",
-				"FINLAND",
-				"FRANCE",
-				"GEORGIA",
-				"GERMANY",
-				"GREECE",
-				"HUNGARY",
-				"ICELAND",
-				"INTERNATIONAL",
-				"IRELAND",
-				"ISRAEL",
-				"ITALY",
-				"LATVIA",
-				"LITHUANIA",
-				"LUXEMBOURG",
-				"MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF",
-				"MALTA",
-				"MOROCCO",
-				"NETHERLANDS",
-				"NORWAY",
-				"POLAND",
-				"PORTUGAL",
-				"ROMANIA",
-				"RUSSIA",
-				"SERBIA",
-				"SLOVAKIA",
-				"SLOVENIA",
-				"SPAIN",
-				"SWEDEN",
-				"SWITZERLAND",
-				"TURKEY",
-				"UKRAINE",
-				"UNITED KINGDOM",
-				"UNITED STATES" };
+				"Algeria",
+				"Australia",
+				"Austria",
+				"Belarus",
+				"Belgium",
+				"Bulgaria",
+				"Canada",
+				"China",
+				"Croatia",
+				"Cyprus",
+				"Czech Republic",
+				"Denmark",
+				"Egypt",
+				"Estonia",
+				"Europe",
+				"Finland",
+				"France",
+				"Georgia",
+				"Germany",
+				"Greece",
+				"Hungary",
+				"Iceland",
+				"International",
+				"Iran",
+				"Ireland",
+				"Israel",
+				"Italy",
+				"Japan",
+				"Latvia",
+				"Lithuania",
+				"Luxembourg",
+				"Macedonia",
+				"Malta",
+				"Mexico",
+				"Morocco",
+				"Netherlands",
+				"New Zaeland",
+				"Norway",
+				"Poland",
+				"Portugal",
+				"Romania",
+				"Russia",
+				"Serbia",
+				"Slovakia",
+				"Slovenia",
+				"Spain",
+				"Sweden",
+				"Switzerland",
+				"Turkey",
+				"Ukraine",
+				"United Kingdom",
+				"USA" };
 		return array;
 	}
 }

@@ -32,6 +32,11 @@ if(diseases.equalsIgnoreCase("")) {
 	diseases = "";
 }
 
+String state =  ParamUtil.getString(request, "state");
+if(state.equalsIgnoreCase("")) {
+	state = "";
+}
+
 String[] countrylist = CandidateLocalServiceUtil.getCountryNames();
 String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 String[] sources = CandidateLocalServiceUtil.getSource();
@@ -71,6 +76,19 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 	</aui:option>
 	<% } %>
 </aui:select>
+</div>
+<div style="float:left;">
+	<aui:select name="state" label="state Filter:" cssClass="rdc-filter-input" >
+				<aui:option value="all" selected='<%= state.equalsIgnoreCase("all") ? true : false %>' >all</aui:option>
+				<aui:option value="X" selected='<%= state.equalsIgnoreCase("X") ? true : false %>' >rejected</aui:option>
+				<aui:option value="0" selected='<%= state.equalsIgnoreCase("0") ? true : false %>' >not decided</aui:option>
+				<aui:option value="1" selected='<%= state.equalsIgnoreCase("1") ? true : false %>' >data checked 1</aui:option>
+				<aui:option value="2" selected='<%= state.equalsIgnoreCase("2") ? true : false %>' >data checked 2</aui:option>
+				<aui:option value="3" selected='<%= state.equalsIgnoreCase("3") ? true : false %>' >data checked 3</aui:option>
+				<aui:option value="4" selected='<%= state.equalsIgnoreCase("4") ? true : false %>' >data checked 4</aui:option>
+				<aui:option value="5" selected='<%= state.equalsIgnoreCase("5") ? true : false %>' >data checked 5</aui:option>
+				<aui:option value="P" selected='<%= state.equalsIgnoreCase("P") ? true : false %>' >published</aui:option>
+	</aui:select>
 </div>
 <!--<aui:input name="diseases" label="Search Disease:" size="90"  value="<%= diseases %>" />-->
 <div style="float:left;">
@@ -116,7 +134,7 @@ emptyResultsMessage="there-are-no-candidates"
 delta="<%= delta %>">
 <liferay-ui:search-container-results>
 <%
-List<Candidate> tempResults = CandidateLocalServiceUtil.getFilterdCandidates(name, country, candidatetype, source, diseases);
+List<Candidate> tempResults = CandidateLocalServiceUtil.getFilterdCandidates(name, country, candidatetype, source, state);
 //results = CandidateLocalServiceUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
 //List<Candidate> tempResults = ActionUtil.getProducts(renderRequest);
 results = ListUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
@@ -134,7 +152,7 @@ className="at.meduni.liferay.portlet.rdconnect.model.Candidate"
 keyProperty="candidateId"
 modelVar="candidate">
 <liferay-ui:search-container-column-text
-name="Can.Id"
+name="ID"
 property="candidateId"
 cssClass="candidate-table-candidateId"
 />
@@ -148,9 +166,9 @@ name="country"
 property="country"
 cssClass="candidate-table-country"
 />
-<liferay-ui:search-container-column-text
-name="type"
-property="candidatetype"
+<liferay-ui:search-container-column-jsp
+align="right" 
+path="/html/candidate/candidatetabel/candidatetable_types.jsp"
 cssClass="candidate-table-candidatetype"
 />
 <liferay-ui:search-container-column-text
@@ -191,7 +209,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 					
 				   <portlet:namespace />candidateid: event.target.get('parentNode').get('parentNode').one('#candidateid').get('value'),
 				   <portlet:namespace />masterid: event.target.get('parentNode').get('parentNode').one('#masterid').get('value'),
-				   <portlet:namespace />accepted: event.target.get('parentNode').get('parentNode').one('#accepted').get('checked'),
+				   <portlet:namespace />state: event.target.get('parentNode').get('parentNode').one('#state').get('value'),
 				},
 				dataType: 'json',
 				on: {
@@ -202,16 +220,16 @@ searchContainer.setIteratorURL(portletURL);    %>
 		});
 	});
 	AUI().use('aui-io-request', 'event', 'node', function(A){
-		var nodeObject = A.all('#accepted');
+		var nodeObject = A.all('#state');
 		nodeObject.on('click', function(event){
 			var url = '<%= updateCandidateTableDataURL.toString() %>';
 			A.io.request(url,{
 				//this is the data that you are sending to the action method
 				data: {
 					
-				   <portlet:namespace />candidateid: event.target.get('parentNode').get('parentNode').one('#candidateid').get('value'),
-				   <portlet:namespace />masterid: event.target.get('parentNode').get('parentNode').one('#masterid').get('value'),
-				   <portlet:namespace />accepted: event.target.get('parentNode').get('parentNode').one('#accepted').get('checked'),
+				   <portlet:namespace />candidateid: 	event.target.get('parentNode').get('parentNode').one('#candidateid').get('value'),
+				   <portlet:namespace />masterid: 		event.target.get('parentNode').get('parentNode').one('#masterid').get('value'),
+				   <portlet:namespace />state: 			event.target.get('parentNode').get('parentNode').one('#state').get('value'),
 				},
 				dataType: 'json',
 				on: {
@@ -231,7 +249,15 @@ searchContainer.setIteratorURL(portletURL);    %>
 	});
 	AUI().use('node', function(A){
 		var nodeObject = A.all('#_candidatetabel_WAR_RDConnectportlet_candidatesSearchContainer_col-6');
-		nodeObject.setHTML('J / A');
+		nodeObject.setHTML('J / S');
+	});
+	AUI().use('node', function(A){
+		var nodeObject = A.all('#_candidatetabel_WAR_RDConnectportlet_candidatesSearchContainer_col-2');
+		nodeObject.setHTML('Information');
+	});
+	AUI().use('node', function(A){
+		var nodeObject = A.all('#_candidatetabel_WAR_RDConnectportlet_candidatesSearchContainer_col-4');
+		nodeObject.setHTML('Type');
 	});
 	AUI().use('aui-tooltip', function(A) {
     	new A.Tooltip(

@@ -103,7 +103,6 @@ textarea.propose{
 .rdc-table-nameentry-name {
 	font-size:12px;
 	line-height: 12px;
-	font-weight:bold;
 	width:450px;
 }
 .rdc-table-nameentry-diseases {
@@ -115,5 +114,19 @@ textarea.propose{
 	font-size:9px;
 	line-height: 9px;
 	width:450px;
+	font-style:italic;
+}
+.rdc-table-candidatetype {
+	width:150px;
+}
+.rdc-table-candidatetype-type {
+	width:150px;
+	font-size:11px;
+	line-height:11px;
+}
+.rdc-table-candidatetype-subtype {
+	width:150px;
+	font-size:10px;
+	line-height:10px;
 	font-style:italic;
 }

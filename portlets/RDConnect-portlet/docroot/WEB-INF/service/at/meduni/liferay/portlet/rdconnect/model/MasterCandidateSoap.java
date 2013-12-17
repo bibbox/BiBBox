@@ -35,6 +35,7 @@ public class MasterCandidateSoap implements Serializable {
 		soapModel.setUrl(model.getUrl());
 		soapModel.setContactperson(model.getContactperson());
 		soapModel.setCandidatetype(model.getCandidatetype());
+		soapModel.setCandidatesubtype(model.getCandidatesubtype());
 		soapModel.setCountry(model.getCountry());
 		soapModel.setDiseasescodes(model.getDiseasescodes());
 		soapModel.setDiseasesfreetext(model.getDiseasesfreetext());
@@ -45,8 +46,10 @@ public class MasterCandidateSoap implements Serializable {
 		soapModel.setHead(model.getHead());
 		soapModel.setGroupid(model.getGroupid());
 		soapModel.setCompanyid(model.getCompanyid());
+		soapModel.setOrganisationid(model.getOrganisationid());
 		soapModel.setJoinId(model.getJoinId());
 		soapModel.setAccepted(model.getAccepted());
+		soapModel.setState(model.getState());
 
 		return soapModel;
 	}
@@ -141,6 +144,14 @@ public class MasterCandidateSoap implements Serializable {
 		_candidatetype = candidatetype;
 	}
 
+	public String getCandidatesubtype() {
+		return _candidatesubtype;
+	}
+
+	public void setCandidatesubtype(String candidatesubtype) {
+		_candidatesubtype = candidatesubtype;
+	}
+
 	public String getCountry() {
 		return _country;
 	}
@@ -221,6 +232,14 @@ public class MasterCandidateSoap implements Serializable {
 		_companyid = companyid;
 	}
 
+	public long getOrganisationid() {
+		return _organisationid;
+	}
+
+	public void setOrganisationid(long organisationid) {
+		_organisationid = organisationid;
+	}
+
 	public long getJoinId() {
 		return _joinId;
 	}
@@ -241,11 +260,20 @@ public class MasterCandidateSoap implements Serializable {
 		_accepted = accepted;
 	}
 
+	public String getState() {
+		return _state;
+	}
+
+	public void setState(String state) {
+		_state = state;
+	}
+
 	private long _masterCandidateId;
 	private String _name;
 	private String _url;
 	private String _contactperson;
 	private String _candidatetype;
+	private String _candidatesubtype;
 	private String _country;
 	private String _diseasescodes;
 	private String _diseasesfreetext;
@@ -256,6 +284,8 @@ public class MasterCandidateSoap implements Serializable {
 	private String _head;
 	private long _groupid;
 	private long _companyid;
+	private long _organisationid;
 	private long _joinId;
 	private boolean _accepted;
+	private String _state;
 }

@@ -64,6 +64,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			{ "url", Types.VARCHAR },
 			{ "contactperson", Types.VARCHAR },
 			{ "candidatetype", Types.VARCHAR },
+			{ "candidatesubtype", Types.VARCHAR },
 			{ "country", Types.VARCHAR },
 			{ "diseasescodes", Types.VARCHAR },
 			{ "diseasesfreetext", Types.VARCHAR },
@@ -74,10 +75,12 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			{ "head", Types.VARCHAR },
 			{ "groupid", Types.BIGINT },
 			{ "companyid", Types.BIGINT },
+			{ "organisationid", Types.BIGINT },
 			{ "joinId", Types.BIGINT },
-			{ "accepted", Types.BOOLEAN }
+			{ "accepted", Types.BOOLEAN },
+			{ "state_", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.master_candidate (masterCandidateId LONG not null primary key,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,mail VARCHAR(255) null,head TEXT null,groupid LONG,companyid LONG,joinId LONG,accepted BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.master_candidate (masterCandidateId LONG not null primary key,name VARCHAR(255) null,url TEXT null,contactperson TEXT null,candidatetype VARCHAR(75) null,candidatesubtype VARCHAR(75) null,country VARCHAR(75) null,diseasescodes TEXT null,diseasesfreetext TEXT null,comment_ TEXT null,address TEXT null,date_ DATE null,mail VARCHAR(255) null,head TEXT null,groupid LONG,companyid LONG,organisationid LONG,joinId LONG,accepted BOOLEAN,state_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.master_candidate";
 	public static final String ORDER_BY_JPQL = " ORDER BY masterCandidate.country ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.master_candidate.country ASC";
@@ -141,6 +144,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		attributes.put("url", getUrl());
 		attributes.put("contactperson", getContactperson());
 		attributes.put("candidatetype", getCandidatetype());
+		attributes.put("candidatesubtype", getCandidatesubtype());
 		attributes.put("country", getCountry());
 		attributes.put("diseasescodes", getDiseasescodes());
 		attributes.put("diseasesfreetext", getDiseasesfreetext());
@@ -151,8 +155,10 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		attributes.put("head", getHead());
 		attributes.put("groupid", getGroupid());
 		attributes.put("companyid", getCompanyid());
+		attributes.put("organisationid", getOrganisationid());
 		attributes.put("joinId", getJoinId());
 		attributes.put("accepted", getAccepted());
+		attributes.put("state", getState());
 
 		return attributes;
 	}
@@ -187,6 +193,12 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 		if (candidatetype != null) {
 			setCandidatetype(candidatetype);
+		}
+
+		String candidatesubtype = (String)attributes.get("candidatesubtype");
+
+		if (candidatesubtype != null) {
+			setCandidatesubtype(candidatesubtype);
 		}
 
 		String country = (String)attributes.get("country");
@@ -249,6 +261,12 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			setCompanyid(companyid);
 		}
 
+		Long organisationid = (Long)attributes.get("organisationid");
+
+		if (organisationid != null) {
+			setOrganisationid(organisationid);
+		}
+
 		Long joinId = (Long)attributes.get("joinId");
 
 		if (joinId != null) {
@@ -259,6 +277,12 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 		if (accepted != null) {
 			setAccepted(accepted);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
 		}
 	}
 
@@ -350,6 +374,21 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 	public String getOriginalCandidatetype() {
 		return GetterUtil.getString(_originalCandidatetype);
+	}
+
+	@Override
+	public String getCandidatesubtype() {
+		if (_candidatesubtype == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _candidatesubtype;
+		}
+	}
+
+	@Override
+	public void setCandidatesubtype(String candidatesubtype) {
+		_candidatesubtype = candidatesubtype;
 	}
 
 	@Override
@@ -498,6 +537,16 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 	}
 
 	@Override
+	public long getOrganisationid() {
+		return _organisationid;
+	}
+
+	@Override
+	public void setOrganisationid(long organisationid) {
+		_organisationid = organisationid;
+	}
+
+	@Override
 	public long getJoinId() {
 		return _joinId;
 	}
@@ -520,6 +569,21 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 	@Override
 	public void setAccepted(boolean accepted) {
 		_accepted = accepted;
+	}
+
+	@Override
+	public String getState() {
+		if (_state == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _state;
+		}
+	}
+
+	@Override
+	public void setState(String state) {
+		_state = state;
 	}
 
 	public long getColumnBitmask() {
@@ -558,6 +622,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		masterCandidateImpl.setUrl(getUrl());
 		masterCandidateImpl.setContactperson(getContactperson());
 		masterCandidateImpl.setCandidatetype(getCandidatetype());
+		masterCandidateImpl.setCandidatesubtype(getCandidatesubtype());
 		masterCandidateImpl.setCountry(getCountry());
 		masterCandidateImpl.setDiseasescodes(getDiseasescodes());
 		masterCandidateImpl.setDiseasesfreetext(getDiseasesfreetext());
@@ -568,8 +633,10 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		masterCandidateImpl.setHead(getHead());
 		masterCandidateImpl.setGroupid(getGroupid());
 		masterCandidateImpl.setCompanyid(getCompanyid());
+		masterCandidateImpl.setOrganisationid(getOrganisationid());
 		masterCandidateImpl.setJoinId(getJoinId());
 		masterCandidateImpl.setAccepted(getAccepted());
+		masterCandidateImpl.setState(getState());
 
 		masterCandidateImpl.resetOriginalValues();
 
@@ -667,6 +734,14 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 			masterCandidateCacheModel.candidatetype = null;
 		}
 
+		masterCandidateCacheModel.candidatesubtype = getCandidatesubtype();
+
+		String candidatesubtype = masterCandidateCacheModel.candidatesubtype;
+
+		if ((candidatesubtype != null) && (candidatesubtype.length() == 0)) {
+			masterCandidateCacheModel.candidatesubtype = null;
+		}
+
 		masterCandidateCacheModel.country = getCountry();
 
 		String country = masterCandidateCacheModel.country;
@@ -736,16 +811,26 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 		masterCandidateCacheModel.companyid = getCompanyid();
 
+		masterCandidateCacheModel.organisationid = getOrganisationid();
+
 		masterCandidateCacheModel.joinId = getJoinId();
 
 		masterCandidateCacheModel.accepted = getAccepted();
+
+		masterCandidateCacheModel.state = getState();
+
+		String state = masterCandidateCacheModel.state;
+
+		if ((state != null) && (state.length() == 0)) {
+			masterCandidateCacheModel.state = null;
+		}
 
 		return masterCandidateCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{masterCandidateId=");
 		sb.append(getMasterCandidateId());
@@ -757,6 +842,8 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		sb.append(getContactperson());
 		sb.append(", candidatetype=");
 		sb.append(getCandidatetype());
+		sb.append(", candidatesubtype=");
+		sb.append(getCandidatesubtype());
 		sb.append(", country=");
 		sb.append(getCountry());
 		sb.append(", diseasescodes=");
@@ -777,10 +864,14 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		sb.append(getGroupid());
 		sb.append(", companyid=");
 		sb.append(getCompanyid());
+		sb.append(", organisationid=");
+		sb.append(getOrganisationid());
 		sb.append(", joinId=");
 		sb.append(getJoinId());
 		sb.append(", accepted=");
 		sb.append(getAccepted());
+		sb.append(", state=");
+		sb.append(getState());
 		sb.append("}");
 
 		return sb.toString();
@@ -788,7 +879,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.MasterCandidate");
@@ -813,6 +904,10 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		sb.append(
 			"<column><column-name>candidatetype</column-name><column-value><![CDATA[");
 		sb.append(getCandidatetype());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>candidatesubtype</column-name><column-value><![CDATA[");
+		sb.append(getCandidatesubtype());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>country</column-name><column-value><![CDATA[");
@@ -855,12 +950,20 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		sb.append(getCompanyid());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>organisationid</column-name><column-value><![CDATA[");
+		sb.append(getOrganisationid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>joinId</column-name><column-value><![CDATA[");
 		sb.append(getJoinId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>accepted</column-name><column-value><![CDATA[");
 		sb.append(getAccepted());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -879,6 +982,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 	private String _contactperson;
 	private String _candidatetype;
 	private String _originalCandidatetype;
+	private String _candidatesubtype;
 	private String _country;
 	private String _originalCountry;
 	private String _diseasescodes;
@@ -890,8 +994,10 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 	private String _head;
 	private long _groupid;
 	private long _companyid;
+	private long _organisationid;
 	private long _joinId;
 	private boolean _accepted;
+	private String _state;
 	private long _columnBitmask;
 	private MasterCandidate _escapedModel;
 }

@@ -26,9 +26,17 @@ public class MasterTable extends MVCPortlet {
 	public void updateMasterCandidate(ActionRequest request, ActionResponse response) throws Exception {
 		long mastercandidateid = ParamUtil.getLong(request, "masterCandidateId");
 		MasterCandidate master = MasterCandidateLocalServiceUtil.getMasterCandidate(mastercandidateid);
-		if(master.getAccepted() != ParamUtil.getBoolean(request, "accepted") || master.getJoinId() != ParamUtil.getLong(request, "joinId")) {
+		String state = "0";
+		state = ParamUtil.getString(request, "state");
+		if(!state.equalsIgnoreCase("x") &&  !state.equalsIgnoreCase("0") &&
+				!state.equalsIgnoreCase("1") && !state.equalsIgnoreCase("2") &&
+				!state.equalsIgnoreCase("3") && !state.equalsIgnoreCase("4") &&
+				!state.equalsIgnoreCase("5") && !state.equalsIgnoreCase("P")) {
+			state = "0";
+		}
+		if(state.equalsIgnoreCase(ParamUtil.getString(request, "state")) || master.getJoinId() != ParamUtil.getLong(request, "joinId")) {
 			Candidate candidate = CandidateLocalServiceUtil.getCandidate(mastercandidateid);
-			candidate.setAccepted(ParamUtil.getBoolean(request, "accepted"));
+			candidate.setState(state);
 			candidate.setMasterId(ParamUtil.getLong(request, "joinId"));
 			CandidateLocalServiceUtil.updateCandidate(candidate);
 		}
@@ -52,7 +60,15 @@ public class MasterTable extends MVCPortlet {
 		master.setMail(ParamUtil.getString(request, "mail"));
 		master.setHead(ParamUtil.getString(request, "head"));
 		master.setJoinId(ParamUtil.getLong(request, "joinId"));
-		master.setAccepted(ParamUtil.getBoolean(request, "accepted"));
+		String state = "0";
+		state = ParamUtil.getString(request, "state");
+		if(!state.equalsIgnoreCase("x") &&  !state.equalsIgnoreCase("0") &&
+				!state.equalsIgnoreCase("1") && !state.equalsIgnoreCase("2") &&
+				!state.equalsIgnoreCase("3") && !state.equalsIgnoreCase("4") &&
+				!state.equalsIgnoreCase("5") && !state.equalsIgnoreCase("P")) {
+			state = "0";
+		}
+		master.setState(state.toUpperCase());
 		return master;
 	}
 

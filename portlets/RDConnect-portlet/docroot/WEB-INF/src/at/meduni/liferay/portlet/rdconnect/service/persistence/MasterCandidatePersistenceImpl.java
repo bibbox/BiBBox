@@ -1584,6 +1584,7 @@ public class MasterCandidatePersistenceImpl extends BasePersistenceImpl<MasterCa
 		masterCandidateImpl.setUrl(masterCandidate.getUrl());
 		masterCandidateImpl.setContactperson(masterCandidate.getContactperson());
 		masterCandidateImpl.setCandidatetype(masterCandidate.getCandidatetype());
+		masterCandidateImpl.setCandidatesubtype(masterCandidate.getCandidatesubtype());
 		masterCandidateImpl.setCountry(masterCandidate.getCountry());
 		masterCandidateImpl.setDiseasescodes(masterCandidate.getDiseasescodes());
 		masterCandidateImpl.setDiseasesfreetext(masterCandidate.getDiseasesfreetext());
@@ -1594,8 +1595,10 @@ public class MasterCandidatePersistenceImpl extends BasePersistenceImpl<MasterCa
 		masterCandidateImpl.setHead(masterCandidate.getHead());
 		masterCandidateImpl.setGroupid(masterCandidate.getGroupid());
 		masterCandidateImpl.setCompanyid(masterCandidate.getCompanyid());
+		masterCandidateImpl.setOrganisationid(masterCandidate.getOrganisationid());
 		masterCandidateImpl.setJoinId(masterCandidate.getJoinId());
 		masterCandidateImpl.setAccepted(masterCandidate.isAccepted());
+		masterCandidateImpl.setState(masterCandidate.getState());
 
 		return masterCandidateImpl;
 	}
@@ -1922,7 +1925,7 @@ public class MasterCandidatePersistenceImpl extends BasePersistenceImpl<MasterCa
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(MasterCandidatePersistenceImpl.class);
 	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"comment", "date"
+				"comment", "date", "state"
 			});
 	private static MasterCandidate _nullMasterCandidate = new MasterCandidateImpl() {
 			@Override

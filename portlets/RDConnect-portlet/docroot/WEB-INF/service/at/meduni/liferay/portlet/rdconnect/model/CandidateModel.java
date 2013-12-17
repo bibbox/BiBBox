@@ -149,6 +149,21 @@ public interface CandidateModel extends BaseModel<Candidate> {
 	public void setCandidatetype(String candidatetype);
 
 	/**
+	 * Returns the candidatesubtype of this candidate.
+	 *
+	 * @return the candidatesubtype of this candidate
+	 */
+	@AutoEscape
+	public String getCandidatesubtype();
+
+	/**
+	 * Sets the candidatesubtype of this candidate.
+	 *
+	 * @param candidatesubtype the candidatesubtype of this candidate
+	 */
+	public void setCandidatesubtype(String candidatesubtype);
+
+	/**
 	 * Returns the subunitof of this candidate.
 	 *
 	 * @return the subunitof of this candidate
@@ -427,6 +442,21 @@ public interface CandidateModel extends BaseModel<Candidate> {
 	 * @param masterId the master ID of this candidate
 	 */
 	public void setMasterId(long masterId);
+
+	/**
+	 * Returns the state of this candidate.
+	 *
+	 * @return the state of this candidate
+	 */
+	@AutoEscape
+	public String getState();
+
+	/**
+	 * Sets the state of this candidate.
+	 *
+	 * @param state the state of this candidate
+	 */
+	public void setState(String state);
 
 	@Override
 	public boolean isNew();

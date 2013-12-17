@@ -116,7 +116,9 @@ public class CandidateLocalServiceClpInvoker {
 
 		_methodName50 = "updateCandidate";
 
-		_methodParameterTypes50 = new String[] { "long", "boolean", "long" };
+		_methodParameterTypes50 = new String[] {
+				"long", "java.lang.String", "long"
+			};
 
 		_methodName51 = "getTestString";
 
@@ -267,8 +269,7 @@ public class CandidateLocalServiceClpInvoker {
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
 			CandidateLocalServiceUtil.updateCandidate(((Long)arguments[0]).longValue(),
-				((Boolean)arguments[1]).booleanValue(),
-				((Long)arguments[2]).longValue());
+				(java.lang.String)arguments[1], ((Long)arguments[2]).longValue());
 
 			return null;
 		}

@@ -116,7 +116,9 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 
 		_methodName19 = "updateCandidate";
 
-		_methodParameterTypes19 = new String[] { "long", "boolean", "long" };
+		_methodParameterTypes19 = new String[] {
+				"long", "java.lang.String", "long"
+			};
 
 		_methodName20 = "getTestString";
 
@@ -708,12 +710,18 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 	}
 
 	@Override
-	public void updateCandidate(long candidateId, boolean accepted,
+	public void updateCandidate(long candidateId, java.lang.String state,
 		long masterId) {
 		try {
 			_invokableLocalService.invokeMethod(_methodName19,
 				_methodParameterTypes19,
-				new Object[] { candidateId, accepted, masterId });
+				new Object[] {
+					candidateId,
+					
+				ClpSerializer.translateInput(state),
+					
+				masterId
+				});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -783,7 +791,7 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
 		java.lang.String name, java.lang.String country, java.lang.String type,
-		java.lang.String source, java.lang.String diseases)
+		java.lang.String source, java.lang.String state)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -799,7 +807,7 @@ public class CandidateLocalServiceClp implements CandidateLocalService {
 						
 					ClpSerializer.translateInput(source),
 						
-					ClpSerializer.translateInput(diseases)
+					ClpSerializer.translateInput(state)
 					});
 		}
 		catch (Throwable t) {

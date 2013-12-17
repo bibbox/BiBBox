@@ -29,6 +29,7 @@
 			<basic name="url" />
 			<basic name="contactperson" />
 			<basic name="candidatetype" />
+			<basic name="candidatesubtype" />
 			<basic name="subunitof" />
 			<basic name="country" />
 			<basic name="diseasescodes" />
@@ -52,6 +53,9 @@
 			<basic name="validated" />
 			<basic name="accepted" />
 			<basic name="masterId" />
+			<basic name="state">
+				<column name="STATE_" />
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -64,6 +68,7 @@
 			<basic name="url" />
 			<basic name="contactperson" />
 			<basic name="candidatetype" />
+			<basic name="candidatesubtype" />
 			<basic name="country" />
 			<basic name="diseasescodes" />
 			<basic name="diseasesfreetext" />
@@ -79,8 +84,12 @@
 			<basic name="head" />
 			<basic name="groupid" />
 			<basic name="companyid" />
+			<basic name="organisationid" />
 			<basic name="joinId" />
 			<basic name="accepted" />
+			<basic name="state">
+				<column name="STATE_" />
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

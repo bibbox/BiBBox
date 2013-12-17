@@ -275,9 +275,9 @@ public class CandidateLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static void updateCandidate(long candidateId, boolean accepted,
-		long masterId) {
-		getService().updateCandidate(candidateId, accepted, masterId);
+	public static void updateCandidate(long candidateId,
+		java.lang.String state, long masterId) {
+		getService().updateCandidate(candidateId, state, masterId);
 	}
 
 	public static java.lang.String getTestString(java.lang.String candidateId) {
@@ -291,10 +291,10 @@ public class CandidateLocalServiceUtil {
 
 	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(
 		java.lang.String name, java.lang.String country, java.lang.String type,
-		java.lang.String source, java.lang.String diseases)
+		java.lang.String source, java.lang.String state)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getFilterdCandidates(name, country, type, source, diseases);
+				   .getFilterdCandidates(name, country, type, source, state);
 	}
 
 	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.Candidate> getFilterdCandidates(

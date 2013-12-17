@@ -55,6 +55,7 @@ public class MasterCandidateWrapper implements MasterCandidate,
 		attributes.put("url", getUrl());
 		attributes.put("contactperson", getContactperson());
 		attributes.put("candidatetype", getCandidatetype());
+		attributes.put("candidatesubtype", getCandidatesubtype());
 		attributes.put("country", getCountry());
 		attributes.put("diseasescodes", getDiseasescodes());
 		attributes.put("diseasesfreetext", getDiseasesfreetext());
@@ -65,8 +66,10 @@ public class MasterCandidateWrapper implements MasterCandidate,
 		attributes.put("head", getHead());
 		attributes.put("groupid", getGroupid());
 		attributes.put("companyid", getCompanyid());
+		attributes.put("organisationid", getOrganisationid());
 		attributes.put("joinId", getJoinId());
 		attributes.put("accepted", getAccepted());
+		attributes.put("state", getState());
 
 		return attributes;
 	}
@@ -101,6 +104,12 @@ public class MasterCandidateWrapper implements MasterCandidate,
 
 		if (candidatetype != null) {
 			setCandidatetype(candidatetype);
+		}
+
+		String candidatesubtype = (String)attributes.get("candidatesubtype");
+
+		if (candidatesubtype != null) {
+			setCandidatesubtype(candidatesubtype);
 		}
 
 		String country = (String)attributes.get("country");
@@ -163,6 +172,12 @@ public class MasterCandidateWrapper implements MasterCandidate,
 			setCompanyid(companyid);
 		}
 
+		Long organisationid = (Long)attributes.get("organisationid");
+
+		if (organisationid != null) {
+			setOrganisationid(organisationid);
+		}
+
 		Long joinId = (Long)attributes.get("joinId");
 
 		if (joinId != null) {
@@ -173,6 +188,12 @@ public class MasterCandidateWrapper implements MasterCandidate,
 
 		if (accepted != null) {
 			setAccepted(accepted);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
 		}
 	}
 
@@ -294,6 +315,26 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	@Override
 	public void setCandidatetype(java.lang.String candidatetype) {
 		_masterCandidate.setCandidatetype(candidatetype);
+	}
+
+	/**
+	* Returns the candidatesubtype of this master candidate.
+	*
+	* @return the candidatesubtype of this master candidate
+	*/
+	@Override
+	public java.lang.String getCandidatesubtype() {
+		return _masterCandidate.getCandidatesubtype();
+	}
+
+	/**
+	* Sets the candidatesubtype of this master candidate.
+	*
+	* @param candidatesubtype the candidatesubtype of this master candidate
+	*/
+	@Override
+	public void setCandidatesubtype(java.lang.String candidatesubtype) {
+		_masterCandidate.setCandidatesubtype(candidatesubtype);
 	}
 
 	/**
@@ -497,6 +538,26 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	}
 
 	/**
+	* Returns the organisationid of this master candidate.
+	*
+	* @return the organisationid of this master candidate
+	*/
+	@Override
+	public long getOrganisationid() {
+		return _masterCandidate.getOrganisationid();
+	}
+
+	/**
+	* Sets the organisationid of this master candidate.
+	*
+	* @param organisationid the organisationid of this master candidate
+	*/
+	@Override
+	public void setOrganisationid(long organisationid) {
+		_masterCandidate.setOrganisationid(organisationid);
+	}
+
+	/**
 	* Returns the join ID of this master candidate.
 	*
 	* @return the join ID of this master candidate
@@ -544,6 +605,26 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	@Override
 	public void setAccepted(boolean accepted) {
 		_masterCandidate.setAccepted(accepted);
+	}
+
+	/**
+	* Returns the state of this master candidate.
+	*
+	* @return the state of this master candidate
+	*/
+	@Override
+	public java.lang.String getState() {
+		return _masterCandidate.getState();
+	}
+
+	/**
+	* Sets the state of this master candidate.
+	*
+	* @param state the state of this master candidate
+	*/
+	@Override
+	public void setState(java.lang.String state) {
+		_masterCandidate.setState(state);
 	}
 
 	@Override

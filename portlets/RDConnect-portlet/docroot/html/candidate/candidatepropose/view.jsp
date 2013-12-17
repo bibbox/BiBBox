@@ -11,7 +11,7 @@
 	
 	boolean success = ParamUtil.getBoolean(request, "success");
 	
-	String name = "qwertz";
+	String name = "";
 	String url = "";
 	String contact_person = "";
 	String type = "";
@@ -24,6 +24,7 @@
 	String head = "";
 	String submitter_name = ParamUtil.getString(request, "submittername");
 	String submitter_email = ParamUtil.getString(request, "submitteremail");
+	String candidatesubtype = "";
 	
 	if(!success) {
 		name = ParamUtil.getString(request, "name");
@@ -37,6 +38,7 @@
 		address = ParamUtil.getString(request, "address");
 		mail = ParamUtil.getString(request, "mail");
 		head = ParamUtil.getString(request, "head");
+		candidatesubtype = ParamUtil.getString(request, "candidatesubtype");
 	}
 	
 %>
@@ -51,22 +53,13 @@
 <aui:form action="<%= addCandidateURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
-		<aui:input type="hidden" name="source" value="online propose" />
+		<aui:input type="hidden" name="source" value="ONLINE PROPOSED" />
 		<aui:input type="hidden" name="subunit_of" value="" />
 		
 		<div>
 		<div class="proposeheadline">Propose Candidate</div>
 		<aui:layout cssClass="proposelayout">  
 			<aui:column columnWidth="25" first="true">
-				<aui:select name="candidatetype" label="Type" value ="<%= type %>" >
-					<% for (String string : types) { %>
-					<aui:option value="<%= string %>" >
-						<%= string %>
-					</aui:option>
-					<% } %>
-				</aui:select>
-			</aui:column>
-	 		<aui:column columnWidth="35">
 				<aui:select name="country" label="Country" value ="<%= country %>">
 					<% for (String string : countrylist) { %>
 					<aui:option value="<%= string %>">
@@ -75,7 +68,18 @@
 					<% } %>
 				</aui:select>
 			</aui:column>
-			<aui:column columnWidth="40" last="true" />
+			<aui:column columnWidth="25" >
+				<aui:select name="candidatetype" label="Type" value ="<%= type %>" >
+					<% for (String string : types) { %>
+					<aui:option value="<%= string %>" >
+						<%= string %>
+					</aui:option>
+					<% } %>
+				</aui:select>
+			</aui:column>
+			<aui:column columnWidth="50" last="true">
+				<aui:input name="candidatesubtype" type="text" value ="<%= candidatesubtype %>" cssClass="propose" />
+			</aui:column>
 			
 	 		<aui:column columnWidth="50" first="true">
 				<liferay-ui:error key="candidate-name-required" message="candidate-name-required" />

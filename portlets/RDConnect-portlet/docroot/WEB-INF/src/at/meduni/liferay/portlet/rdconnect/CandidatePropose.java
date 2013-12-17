@@ -109,6 +109,7 @@ public class CandidatePropose extends MVCPortlet {
 		candidate.setSubmittername(ParamUtil.getString(request, "submittername"));
 		candidate.setSubmitteremail(ParamUtil.getString(request, "submitteremail"));
 		candidate.setValidated(ParamUtil.getBoolean(request, "validated"));
+		candidate.setState("0");
 		return candidate;
 	}
 	

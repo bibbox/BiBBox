@@ -134,6 +134,21 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	public void setCandidatetype(String candidatetype);
 
 	/**
+	 * Returns the candidatesubtype of this master candidate.
+	 *
+	 * @return the candidatesubtype of this master candidate
+	 */
+	@AutoEscape
+	public String getCandidatesubtype();
+
+	/**
+	 * Sets the candidatesubtype of this master candidate.
+	 *
+	 * @param candidatesubtype the candidatesubtype of this master candidate
+	 */
+	public void setCandidatesubtype(String candidatesubtype);
+
+	/**
 	 * Returns the country of this master candidate.
 	 *
 	 * @return the country of this master candidate
@@ -281,6 +296,20 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	public void setCompanyid(long companyid);
 
 	/**
+	 * Returns the organisationid of this master candidate.
+	 *
+	 * @return the organisationid of this master candidate
+	 */
+	public long getOrganisationid();
+
+	/**
+	 * Sets the organisationid of this master candidate.
+	 *
+	 * @param organisationid the organisationid of this master candidate
+	 */
+	public void setOrganisationid(long organisationid);
+
+	/**
 	 * Returns the join ID of this master candidate.
 	 *
 	 * @return the join ID of this master candidate
@@ -314,6 +343,21 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	 * @param accepted the accepted of this master candidate
 	 */
 	public void setAccepted(boolean accepted);
+
+	/**
+	 * Returns the state of this master candidate.
+	 *
+	 * @return the state of this master candidate
+	 */
+	@AutoEscape
+	public String getState();
+
+	/**
+	 * Sets the state of this master candidate.
+	 *
+	 * @param state the state of this master candidate
+	 */
+	public void setState(String state);
 
 	@Override
 	public boolean isNew();

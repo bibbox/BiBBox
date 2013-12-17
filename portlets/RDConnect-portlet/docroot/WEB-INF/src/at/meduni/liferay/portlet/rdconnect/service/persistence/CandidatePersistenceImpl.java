@@ -3315,6 +3315,7 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 		candidateImpl.setUrl(candidate.getUrl());
 		candidateImpl.setContactperson(candidate.getContactperson());
 		candidateImpl.setCandidatetype(candidate.getCandidatetype());
+		candidateImpl.setCandidatesubtype(candidate.getCandidatesubtype());
 		candidateImpl.setSubunitof(candidate.getSubunitof());
 		candidateImpl.setCountry(candidate.getCountry());
 		candidateImpl.setDiseasescodes(candidate.getDiseasescodes());
@@ -3333,6 +3334,7 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 		candidateImpl.setValidated(candidate.isValidated());
 		candidateImpl.setAccepted(candidate.isAccepted());
 		candidateImpl.setMasterId(candidate.getMasterId());
+		candidateImpl.setState(candidate.getState());
 
 		return candidateImpl;
 	}
@@ -3658,7 +3660,7 @@ public class CandidatePersistenceImpl extends BasePersistenceImpl<Candidate>
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(CandidatePersistenceImpl.class);
 	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"comment", "date"
+				"comment", "date", "state"
 			});
 	private static Candidate _nullCandidate = new CandidateImpl() {
 			@Override

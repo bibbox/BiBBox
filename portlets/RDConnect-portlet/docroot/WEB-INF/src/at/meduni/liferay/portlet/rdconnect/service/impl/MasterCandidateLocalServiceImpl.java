@@ -52,7 +52,7 @@ public class MasterCandidateLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil} to access the master candidate local service.
 	 */
-	public List<MasterCandidate> getFilterdCandidates(String searchstring, String country, String type) throws SystemException {
+	public List<MasterCandidate> getFilterdCandidates(String searchstring, String country, String type, String state) throws SystemException {
 		if(country.equals("all")) {
 			country = "";
 		}
@@ -61,6 +61,9 @@ public class MasterCandidateLocalServiceImpl
 		} else {
 			if(type.equals("Registry"))
 				type = "Registr";
+		}
+		if(state.equals("all")) {
+			state = "";
 		}
 		
 		// Dynamic Query for search
@@ -75,7 +78,8 @@ public class MasterCandidateLocalServiceImpl
 		criterion = RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
 		criterion = RestrictionsFactoryUtil.and(criterion, criterion_stringsearch);
-		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("accepted", true));
+		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + state + StringPool.PERCENT));
+		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE 'x'"));
 				
 		dynamicQuery.add(criterion);
 		

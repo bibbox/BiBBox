@@ -23,6 +23,7 @@
 			<hint name="max-length">10000</hint>
 		</field>
 		<field name="candidatetype" type="String" />
+		<field name="candidatesubtype" type="String" />
 		<field name="subunitof" type="String" />
 		<field name="country" type="String" />
 		<field name="diseasescodes" type="String">
@@ -59,6 +60,9 @@
 		<field name="validated" type="boolean" />
 		<field name="accepted" type="boolean" />
 		<field name="masterId" type="long" />
+		<field name="state" type="String">
+			<hint name="default-value">0</hint>
+		</field>
 	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate">
 		<field name="masterCandidateId" type="long" />
@@ -72,6 +76,7 @@
 			<hint name="max-length">10000</hint>
 		</field>
 		<field name="candidatetype" type="String" />
+		<field name="candidatesubtype" type="String" />
 		<field name="country" type="String" />
 		<field name="diseasescodes" type="String">
 			<hint name="max-length">10000</hint>
@@ -94,8 +99,12 @@
 		</field>
 		<field name="groupid" type="long" />
 		<field name="companyid" type="long" />
+		<field name="organisationid" type="long" />
 		<field name="joinId" type="long" />
 		<field name="accepted" type="boolean" />
+		<field name="state" type="String">
+			<hint name="default-value">0</hint>
+		</field>
 	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate">
 		<field name="linkId" type="long" />
