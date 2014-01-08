@@ -12,6 +12,64 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+/* ---------- RDC  header ---------- */
+.rdconnect-header-container {
+	height: 230px;
+	width: 100%;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+.rdconnect-header-container-top {
+	height: 50px;
+	width: 100%;
+	background-image:url('/RDConnectI-theme/images/rdconnectheaderbackgound.png');
+	background-size:100%;
+}
+.rdconnect-header-container-bottom {
+	height: 180px;
+	width: 100%;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	background: #FAFAF0;
+}
+.rdconnect-header-container-inner {
+	width: 1000px;
+	margin: auto;
+}
+.rdconnect-header-container-top-rdlogo {
+	width: 178px;
+	border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	float: left;
+}
+.rdconnect-header-container-top-menue {
+	width: 818px;
+	border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 0;
+	float: left;
+	height: 50px;
+}
+.rdconnect-header-container-bottom-grouplogo {
+	width: 178px;
+	height: 180px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	float: left;
+	background: #FFFFFF;
+}
+.rdconnect-header-container-bottom-portalinformation {
+	width: 818px;
+	height: 180px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 0 0;
+	background: #FFFFFF;
+	float: left;
+}
 /* ---------- RDC  styles ---------- */
 .aui form {
     margin: 0;
@@ -27,10 +85,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 .lfr-translation-manager {
 	display: none;
 }
-/*.aui body {
-    background: #D9D9D9;
+.aui body {
+    background: #F4F4E1;
 }
-*/
 #footer a {
 	color: #303030;
 }
@@ -595,7 +652,11 @@ div.portlet-body {
 	/* ---------- Footer ---------- */
 
 	#footer {
-		text-align: right;
+		text-align: center;
+		border-color: #8C8A8C;
+		border-style: solid;
+		border-width: 1px 0 0 0;
+		background: #FAFAF0;
 	}
 
 	/* ---------- Hudcrumbs ---------- */

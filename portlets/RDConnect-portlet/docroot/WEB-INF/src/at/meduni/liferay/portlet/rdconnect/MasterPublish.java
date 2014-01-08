@@ -1,5 +1,11 @@
 package at.meduni.liferay.portlet.rdconnect;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
@@ -26,6 +32,7 @@ import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.CountryUtil;
@@ -35,6 +42,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Account;
@@ -54,6 +62,16 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSetConstants;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordServiceUtil;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
 
 /**
@@ -61,16 +79,68 @@ import com.liferay.portlet.sites.util.SitesUtil;
  */
 public class MasterPublish extends MVCPortlet {
 	
-	String counter = "14";
+	String counter = "15";
 	
 	public void publishToGate(ActionRequest request, ActionResponse response) throws Exception {
 		System.out.println("Publish");
 		long companyId = 10154;
-		createOrganisation2(companyId);
+		//createOrganisation2(companyId);
+		//createRecordSet(request);
+		deleteOrganisation(24501);
+	}
+	
+	public void deleteOrganisation(long organisationid) throws PortalException, SystemException {
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(organisationid);
+		List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+		for(User u : userlist) {
+			OrganizationLocalServiceUtil.deleteUserOrganization(u.getUserId(), organization);
+		}
+		OrganizationLocalServiceUtil.deleteOrganization(organization);
+	}
+	
+	public void createRecordSet(ActionRequest request) throws PortalException, SystemException {
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(24501);
+		if(organization != null) {
+			System.out.println("---->notnull");
+		} else {
+			System.out.println("---->null");
+		}
+		long groupId = organization.getGroupId();
+		long ddmStructureId = 14503;
+		String recordSetKey = null;
+		String[] languageid = {"0"};
+		String[] names = {"DDL Structure Name 2"};
+		String[] description = {"DDL Structure description"};
+		Map<Locale,String> nameMap = LocalizationUtil.getLocalizationMap(languageid, names);
+		Map<Locale,String> descriptionMap = LocalizationUtil.getLocalizationMap(languageid, description);
+		int scope = 0;
+		
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(DDLRecordSet.class.getName(), request);
+		System.out.println("Add Record Set");
+		DDLRecordSet recordSet = DDLRecordSetServiceUtil.addRecordSet(groupId, ddmStructureId, recordSetKey, nameMap, 
+				descriptionMap, DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope, serviceContext);
+		System.out.println("Done Add Record Set");
+		System.out.println("Record set generated: " + recordSet.getRecordSetId());
+		//recordSet = DDLRecordSetLocalServiceUtil.getDDLRecordSet(recordSet.getRecordSetId());
+		//DDMStructure ddmStructure = recordSet.getDDMStructure();
+		
+		//Fields fields = DDMUtil.getFields(ddmStructure.getStructureId(), serviceContext);
+		
+		Map<String,Serializable> fields = new HashMap<String, Serializable>();
+		fields.put("TextNr1", "AutotestValue1");
+		
+		//fields.get("TextNr1").setValue("AutotestValue");
+		System.out.println("Add Record 1");
+		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
+		//fields.get("TextNr1").setValue("zweites Valuze");
+		System.out.println("Add Record 2");
+		fields.put("TextNr1", "zweites Valuze");
+		DDLRecord r2 = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
 	}
 	
 	public void createOrganisation2(long companyId) throws Exception {
 		
+		// Create Organisation		
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
 		Account account = company.getAccount();
@@ -89,6 +159,7 @@ public class MasterPublish extends MVCPortlet {
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
 				"Test Organisation "+counter+", Inc", true);
 		
+		// Create Public Pages
 		long publicLayoutSetPrototypeId = 23302;
 		boolean publicLayoutSetPrototypeLinkEnabled = true;
 		long privateLayoutSetPrototypeId = 0;
@@ -106,53 +177,9 @@ public class MasterPublish extends MVCPortlet {
 		//}
 		
 		
-		//organization.getGroup().setType(23302);
 		
-		/*
-		// Create Fiendly URL
-		String friendlyUrl = organization.getName();
-		friendlyUrl= friendlyUrl.trim();
-		if(friendlyUrl.contains(" ")) { 
-			friendlyUrl = friendlyUrl.replaceAll("\\s+", "-"); 
-		} 
-		GroupLocalServiceUtil.updateFriendlyURL(
-			organization.getGroupId(), "/" + friendlyUrl);
 
-		Layout extranetLayout = LayoutLocalServiceUtil.addLayout(
-			defaultUser.getUserId(), organization.getGroupId(), false,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "Test Organisation V"+counter+" liferay Extranet",
-			null, null, LayoutConstants.TYPE_PORTLET, false, "/idcard",
-			new ServiceContext());
-		
-		LayoutTypePortlet layoutTypePortlet =
-			(LayoutTypePortlet)extranetLayout.getLayoutType();		
-		*/
-		/*layoutTypePortlet.addPortletId(
-			0, PortletKeys.SEARCH, "column-1", -1, false);
-		layoutTypePortlet.addPortletId(
-			0, PortletKeys.MESSAGE_BOARDS, "column-2", -1, false);*/
-
-		/*LayoutLocalServiceUtil.updateLayout(
-			extranetLayout.getGroupId(), false, extranetLayout.getLayoutId(),
-			extranetLayout.getTypeSettings());*/
-
-		/*Layout intranetLayout = LayoutLocalServiceUtil.addLayout(
-			defaultUser.getUserId(), organization.getGroupId(), true,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "Test Organisation V liferay Intranet",
-			null, null, LayoutConstants.TYPE_PORTLET, false, "/intranet",
-			new ServiceContext());
-
-		layoutTypePortlet = (LayoutTypePortlet)intranetLayout.getLayoutType();
-
-		layoutTypePortlet.addPortletId(
-			0, PortletKeys.SEARCH, "column-1", -1, false);
-		layoutTypePortlet.addPortletId(
-			0, PortletKeys.MESSAGE_BOARDS, "column-2", -1, false);
-
-		LayoutLocalServiceUtil.updateLayout(
-			intranetLayout.getGroupId(), true, intranetLayout.getLayoutId(),
-			intranetLayout.getTypeSettings());*/
-
+		// Create User
 		User user = UserLocalServiceUtil.fetchUserByEmailAddress(
 			company.getCompanyId(), "robert.reihs@gmail.com");
 		System.out.println("Company ID = 10154? " + company.getCompanyId());
@@ -170,11 +197,58 @@ public class MasterPublish extends MVCPortlet {
 		}
 
 		user.setPasswordReset(false);
-
 		UserLocalServiceUtil.updateUser(user);
-
 		OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization);
+		
+		// Create DDLs
 	}
+	
+	//organization.getGroup().setType(23302);
+	
+			/*
+			// Create Fiendly URL
+			String friendlyUrl = organization.getName();
+			friendlyUrl= friendlyUrl.trim();
+			if(friendlyUrl.contains(" ")) { 
+				friendlyUrl = friendlyUrl.replaceAll("\\s+", "-"); 
+			} 
+			GroupLocalServiceUtil.updateFriendlyURL(
+				organization.getGroupId(), "/" + friendlyUrl);
+
+			Layout extranetLayout = LayoutLocalServiceUtil.addLayout(
+				defaultUser.getUserId(), organization.getGroupId(), false,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "Test Organisation V"+counter+" liferay Extranet",
+				null, null, LayoutConstants.TYPE_PORTLET, false, "/idcard",
+				new ServiceContext());
+			
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)extranetLayout.getLayoutType();		
+			*/
+			/*layoutTypePortlet.addPortletId(
+				0, PortletKeys.SEARCH, "column-1", -1, false);
+			layoutTypePortlet.addPortletId(
+				0, PortletKeys.MESSAGE_BOARDS, "column-2", -1, false);*/
+
+			/*LayoutLocalServiceUtil.updateLayout(
+				extranetLayout.getGroupId(), false, extranetLayout.getLayoutId(),
+				extranetLayout.getTypeSettings());*/
+
+			/*Layout intranetLayout = LayoutLocalServiceUtil.addLayout(
+				defaultUser.getUserId(), organization.getGroupId(), true,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "Test Organisation V liferay Intranet",
+				null, null, LayoutConstants.TYPE_PORTLET, false, "/intranet",
+				new ServiceContext());
+
+			layoutTypePortlet = (LayoutTypePortlet)intranetLayout.getLayoutType();
+
+			layoutTypePortlet.addPortletId(
+				0, PortletKeys.SEARCH, "column-1", -1, false);
+			layoutTypePortlet.addPortletId(
+				0, PortletKeys.MESSAGE_BOARDS, "column-2", -1, false);
+
+			LayoutLocalServiceUtil.updateLayout(
+				intranetLayout.getGroupId(), true, intranetLayout.getLayoutId(),
+				intranetLayout.getTypeSettings());*/
 	
 	public void createOrganisation() {
 		//http://docs.liferay.com/portal/6.2/javadocs/com/liferay/portal/service/OrganizationLocalServiceUtil.html#addOrganization(long, long, java.lang.String, java.lang.String, long, long, int, java.lang.String, boolean, com.liferay.portal.service.ServiceContext)

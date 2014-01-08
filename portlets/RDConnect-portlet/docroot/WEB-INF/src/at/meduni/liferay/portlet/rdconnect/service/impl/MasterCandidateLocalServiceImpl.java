@@ -74,12 +74,14 @@ public class MasterCandidateLocalServiceImpl
 		Criterion criterion_stringsearch = RestrictionsFactoryUtil.ilike("diseasesfreetext", StringPool.PERCENT + searchstring + StringPool.PERCENT);
 		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("diseasescodes", StringPool.PERCENT + searchstring + StringPool.PERCENT));
 		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT + searchstring + StringPool.PERCENT));
+		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("candidatesubtype", StringPool.PERCENT + searchstring + StringPool.PERCENT));
 				
 		criterion = RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
 		criterion = RestrictionsFactoryUtil.and(criterion, criterion_stringsearch);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + state + StringPool.PERCENT));
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE 'x'"));
+		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE '0'"));
 				
 		dynamicQuery.add(criterion);
 		

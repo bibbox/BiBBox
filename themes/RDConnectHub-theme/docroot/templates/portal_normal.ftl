@@ -20,6 +20,8 @@ ${theme.include(body_top_include)}
 	<@liferay.dockbar />
 </#if>
 
+
+
 <div class="container-fluid" id="wrapper">
 	<header id="banner" role="banner">
 		<div id="heading">

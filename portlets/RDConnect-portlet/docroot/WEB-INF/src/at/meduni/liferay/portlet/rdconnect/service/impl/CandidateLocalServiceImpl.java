@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Country;
+import com.liferay.portal.service.CountryServiceUtil;
 
 import at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException;
 import at.meduni.liferay.portlet.rdconnect.model.Candidate;
@@ -150,6 +152,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		Criterion criterion_diseases = RestrictionsFactoryUtil.ilike("diseasesfreetext", StringPool.PERCENT + name + StringPool.PERCENT);
 		criterion_diseases = RestrictionsFactoryUtil.or(criterion_diseases, RestrictionsFactoryUtil.ilike("diseasescodes", StringPool.PERCENT + name + StringPool.PERCENT));
 		criterion_diseases = RestrictionsFactoryUtil.or(criterion_diseases, RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT + name + StringPool.PERCENT));
+		criterion_diseases = RestrictionsFactoryUtil.or(criterion_diseases, RestrictionsFactoryUtil.ilike("candidatesubtype", StringPool.PERCENT + name + StringPool.PERCENT));
 		
 		criterion = RestrictionsFactoryUtil.ilike("source", StringPool.PERCENT + source + StringPool.PERCENT);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT));
@@ -220,7 +223,25 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	}
 	
 	public String[] getCountryNames() {
-		String[] array = new String[] { 
+		String[] array;
+		try {
+			List<Country> countrys =  CountryServiceUtil.getCountries();
+			array = new String[countrys.size()+2];
+			array[0] = "all";
+			array[1] = "International";
+			int count = 2;
+			for(Country c : countrys) {
+				array[count] = c.getNameCurrentValue();
+				count++;
+			}
+			return array;
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		array = new String[] { 
 				"all",
 				"Algeria",
 				"Australia",

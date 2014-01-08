@@ -2,8 +2,6 @@
 
 <portlet:defineObjects />
 
-<div>
-<div id="rd-heading-shortinformation" >
 <%
 		long organizationId = 0;
 		long currentgroup = 0;
@@ -24,32 +22,37 @@
              	currentgroup = currentGroup.getClassPK();
                 System.out.println("its a normal community");
            }
-	if(organizationId != 0) {
-		Organization organisation = OrganizationLocalServiceUtil.getOrganization(organizationId);
-		
-		String country = "";
-		if(organisation.getAddress().getCountryId() != 0)
-			country = CountryServiceUtil.getCountry(organisation.getAddress().getCountryId()).getNameCurrentValue();
-		
-		
+	
 %>
-<h3><%= organisation.getName() %></h3>
-<h6><%= organisation.getAddress().getCity() %>, <%= country %></h6>
-
-<%				
-	} else if (currentgroup != 0) {
-%>
-<h3><%= currentGroup.getName() %></h3>
-<%				
-	} 
-%>
-</div>
-<div id="rd-heading-aktions">
-<div id="ProfileComplededProgressBar"></div>
-</div>
-<div id="rd-heading-submenue">
-<%@ include file="/html/heading/portalinformation/submenu.jsp" %>
-</div>
-
-
+<div class="rdconnect-information-container">
+	<div class="rd-heading-shortinformation">
+		<%
+		if(organizationId != 0) {
+			Organization organisation = OrganizationLocalServiceUtil.getOrganization(organizationId);
+			
+			String country = "";
+			if(organisation.getAddress().getCountryId() != 0)
+				country = CountryServiceUtil.getCountry(organisation.getAddress().getCountryId()).getNameCurrentValue();
+		%>
+		<h3><%= organisation.getName() %></h3>
+		<h6><%= organisation.getAddress().getCity() %>, <%= country %></h6>
+		
+		<%				
+			} else if (currentgroup != 0) {
+		%>
+		<h3>RD Connect ID Card</h3>
+		<h6>Number of Registries: 2067</h6>
+		<h6>Number of Biobanks:   599</h6>
+		<%				
+			} 
+		%>
+	</div>
+	<div class="rd-heading-aktions">
+		<div id="ProfileComplededProgressBar">
+		<img alt="RD Score" src="<%= request.getContextPath() %>/images/rdscore.png" width="140px" height="140px" />
+		</div>
+	</div>
+	<div class="rd-heading-submenue">
+		<%@ include file="/html/heading/portalinformation/submenu.jsp" %> 
+	</div>
 </div>

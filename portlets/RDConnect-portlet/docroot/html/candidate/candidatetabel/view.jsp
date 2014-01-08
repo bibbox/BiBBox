@@ -48,10 +48,10 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 <aui:form name="filterform" action="<%= filterCandidatesURL.toString() %>" method="post" >
 <aui:fieldset  column="true">
 <div style="float:left;">
-<aui:input name='name' label='Filter: <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="Search for Name, Disease name and Disease Code (Example: Cell Bank or Duchenne and Becker muscular dystrophy or ORPHA269)"><b>&nbsp;?&nbsp;</b></span>' size="90" value="<%= name %>" cssClass="rdc-filter-name" />
+<aui:input name='name' label='Name/Disease/Subtype: <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="Search for Name, Disease name and Disease Code (Example: Cell Bank or Duchenne and Becker muscular dystrophy or ORPHA269)"><b>&nbsp;?&nbsp;</b></span>' size="90" value="<%= name %>" cssClass="rdc-filter-name" />
 </div>
 <div style="float:left;">
-<aui:select name="country" label="Country Filter:" cssClass="rdc-filter-input" >
+<aui:select name="country" label="Country:" cssClass="rdc-filter-input" >
 	<% for (String string : countrylist) { %>
 	<aui:option value="<%= string %>" selected="<%= country.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
@@ -60,7 +60,7 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 </aui:select>
 </div>
 <div style="float:left;">
-<aui:select name="candidatetype" label="Type Filter:" cssClass="rdc-filter-input" >
+<aui:select name="candidatetype" label="Type:" cssClass="rdc-filter-input" >
 	<% for (String string : types) { %>
 	<aui:option value="<%= string %>" selected="<%= candidatetype.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
@@ -69,7 +69,7 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 </aui:select>
 </div>
 <div style="float:left;">
-<aui:select name="source" label="Source Filter:" cssClass="rdc-filter-input" >
+<aui:select name="source" label="Source:" cssClass="rdc-filter-input" >
 	<% for (String string : sources) { %>
 	<aui:option value="<%= string %>" selected="<%= source.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
@@ -78,15 +78,11 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 </aui:select>
 </div>
 <div style="float:left;">
-	<aui:select name="state" label="state Filter:" cssClass="rdc-filter-input" >
+	<aui:select name="state" label="State:" cssClass="rdc-filter-input" >
 				<aui:option value="all" selected='<%= state.equalsIgnoreCase("all") ? true : false %>' >all</aui:option>
 				<aui:option value="X" selected='<%= state.equalsIgnoreCase("X") ? true : false %>' >rejected</aui:option>
 				<aui:option value="0" selected='<%= state.equalsIgnoreCase("0") ? true : false %>' >not decided</aui:option>
-				<aui:option value="1" selected='<%= state.equalsIgnoreCase("1") ? true : false %>' >data checked 1</aui:option>
-				<aui:option value="2" selected='<%= state.equalsIgnoreCase("2") ? true : false %>' >data checked 2</aui:option>
-				<aui:option value="3" selected='<%= state.equalsIgnoreCase("3") ? true : false %>' >data checked 3</aui:option>
-				<aui:option value="4" selected='<%= state.equalsIgnoreCase("4") ? true : false %>' >data checked 4</aui:option>
-				<aui:option value="5" selected='<%= state.equalsIgnoreCase("5") ? true : false %>' >data checked 5</aui:option>
+				<aui:option value="1" selected='<%= state.equalsIgnoreCase("1") ? true : false %>' >accepted</aui:option>
 				<aui:option value="P" selected='<%= state.equalsIgnoreCase("P") ? true : false %>' >published</aui:option>
 	</aui:select>
 </div>
@@ -249,7 +245,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 	});
 	AUI().use('node', function(A){
 		var nodeObject = A.all('#_candidatetabel_WAR_RDConnectportlet_candidatesSearchContainer_col-6');
-		nodeObject.setHTML('J / S');
+		nodeObject.setHTML('J / A');
 	});
 	AUI().use('node', function(A){
 		var nodeObject = A.all('#_candidatetabel_WAR_RDConnectportlet_candidatesSearchContainer_col-2');

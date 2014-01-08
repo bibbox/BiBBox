@@ -12,8 +12,11 @@
 	${theme.include(top_head_include)}
 	
 	<#if is_signed_in>
-		<meta http-equiv="refresh" content="0; url=http://rd-connect.bibbox.org/home" />
+		<#if !isadmin>
+ 			<meta http-equiv="refresh" content="0; url=http://rd-connect.bibbox.org/home" />
+ 		</#if>
 	</#if>
+	
 </head>
 
 <body class="${css_class}">
@@ -22,17 +25,27 @@
 
 ${theme.include(body_top_include)}
 
-
+<#if isadmin>
+	<@liferay.dockbar />
+</#if>
 
 <div class="container-fluid" id="wrapper">
 	<div id="rd-heading">
+		<#if !is_signed_in>
+			<div class="signinfloatingtext">already a member?</div>
 			<div id="signin">
-			<#if !is_signed_in>
-				<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a>
-			</#if>
+				<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a>		
 			</div>	
-			
-		</div>
+		</#if>
+		<#if the_title != "Welcome">
+			<div id="logoleft">
+				<img alt="RD-Connect-IDCard-Logo" height="81px" width="287px" src="/RDConnectPublic-theme/images/rdconnectlogoidcard.png"  />
+			</div>
+			<div id="logocenter">
+				<img alt="RD-Connect-IDCard-Logo-center" height="123px" width="184px" src="/RDConnectPublic-theme/images/centerlogo.png"  />
+			</div>
+		</#if>	
+	</div>
 
 	<div id="content">
 
@@ -47,21 +60,19 @@ ${theme.include(body_top_include)}
 		</#if>
 	</div>
 
+	
+</div>
+
 	<footer id="footer" role="contentinfo">
 		<p class="powered-by">
 			Linking up rare disease resarch across the world<br/> <a href="http://www.rd-connect.eu" rel="external">RD-Connect</a>
 		</p>
 	</footer>
-</div>
 
 ${theme.include(body_bottom_include)}
 
 ${theme.include(bottom_include)}
 
-
-<div id="logo-rdconnect-Public">
-	<img alt="${logo_description}" height="61px" src="/RDConnectPublic-theme/images/RDLogoNew.png" width="240px" />
-</div>
 </body>
 
 </html>

@@ -16,6 +16,7 @@
 		<portlet id="master-table"></portlet>
 		<portlet id="overview-information"></portlet>
 		<portlet id="organisation-navigation"></portlet>
+		<portlet id="rdcddl-display"></portlet>
 	</category>
 	<category name="Meduni Test">
 		<portlet id="ddl-reader"></portlet>

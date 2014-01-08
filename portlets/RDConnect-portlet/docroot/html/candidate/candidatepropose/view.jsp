@@ -78,7 +78,7 @@
 				</aui:select>
 			</aui:column>
 			<aui:column columnWidth="50" last="true">
-				<aui:input name="candidatesubtype" type="text" value ="<%= candidatesubtype %>" cssClass="propose" />
+				<aui:input name="candidatesubtype" label="Subtype" type="text" value ="<%= candidatesubtype %>" cssClass="propose" />
 			</aui:column>
 			
 	 		<aui:column columnWidth="50" first="true">

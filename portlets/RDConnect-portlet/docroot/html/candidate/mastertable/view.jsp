@@ -35,10 +35,10 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 <aui:form name="filterform" action="<%= filterCandidatesURL.toString() %>" method="post" >
 <aui:fieldset  column="true">
 <div style="float:left;">
-<aui:input name="name" label="Name Search Filter:" size="90" value="<%= name %>" />
+<aui:input name="name" label="Name/Disease/Subtype:" size="90" value="<%= name %>" />
 </div>
 <div style="float:left;">
-<aui:select name="country" label="Country Filter:" cssClass="rdc-filter-input" >
+<aui:select name="country" label="Country:" cssClass="rdc-filter-input" >
 	<% for (String string : countrylist) { %>
 	<aui:option value="<%= string %>" selected="<%= country.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
@@ -47,7 +47,7 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 </aui:select>
 </div>
 <div style="float:left;">
-<aui:select name="candidatetype" label="Type Filter:" cssClass="rdc-filter-input" >
+<aui:select name="candidatetype" label="Type:" cssClass="rdc-filter-input" >
 	<% for (String string : types) { %>
 	<aui:option value="<%= string %>" selected="<%= candidatetype.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
@@ -56,14 +56,9 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 </aui:select>
 </div>
 <div style="float:left;">
-	<aui:select name="state" label="state Filter:" cssClass="rdc-filter-input" >
+	<aui:select name="state" label="State:" cssClass="rdc-filter-input" >
 				<aui:option value="all" selected='<%= state.equalsIgnoreCase("all") ? true : false %>' >all</aui:option>
-				<aui:option value="0" selected='<%= state.equalsIgnoreCase("0") ? true : false %>' >not decided</aui:option>
-				<aui:option value="1" selected='<%= state.equalsIgnoreCase("1") ? true : false %>' >data checked 1</aui:option>
-				<aui:option value="2" selected='<%= state.equalsIgnoreCase("2") ? true : false %>' >data checked 2</aui:option>
-				<aui:option value="3" selected='<%= state.equalsIgnoreCase("3") ? true : false %>' >data checked 3</aui:option>
-				<aui:option value="4" selected='<%= state.equalsIgnoreCase("4") ? true : false %>' >data checked 4</aui:option>
-				<aui:option value="5" selected='<%= state.equalsIgnoreCase("5") ? true : false %>' >data checked 5</aui:option>
+				<aui:option value="1" selected='<%= state.equalsIgnoreCase("1") ? true : false %>' >not published</aui:option>
 				<aui:option value="P" selected='<%= state.equalsIgnoreCase("P") ? true : false %>' >published</aui:option>
 	</aui:select>
 </div>
@@ -137,6 +132,11 @@ pageContext.setAttribute("total", total);
 	cssClass="candidate-table-namecontainer"
 />
 <liferay-ui:search-container-column-jsp
+	align="right" 
+	path="/html/candidate/mastertable/candidatemaster_state.jsp"
+	cssClass="candidate-table-state"
+/>
+<liferay-ui:search-container-column-jsp
 	align="right"
 	path="/html/candidate/mastertable/mastertable_actions.jsp"
 />
@@ -159,5 +159,9 @@ searchContainer.setIteratorURL(portletURL);    %>
 	AUI().use('node', function(A){
 		var nodeObject = A.all('#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-4');
 		nodeObject.setHTML('Type');
+	});
+	AUI().use('node', function(A){
+		var nodeObject = A.all('#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-5');
+		nodeObject.setHTML('State');
 	});
 </aui:script>

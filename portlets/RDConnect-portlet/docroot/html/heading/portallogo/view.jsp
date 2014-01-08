@@ -1,7 +1,7 @@
 <%@include file="/html/init.jsp" %>
 
 <portlet:defineObjects />
-<div id="rd-heading-rdlogo"><img alt="logoRDConnect IDCard" src="<%= request.getContextPath() %>/images/RDLogo.png" width="180px" /></div>
+<!-- <div id="rd-heading-rdlogo"><img alt="logoRDConnect IDCard" src="<%= request.getContextPath() %>/images/RDLogo.png" width="180px" /></div> -->
 
 <%
 long organizationId = 0;
@@ -27,11 +27,11 @@ if(organizationId != 0) {
 	Organization organisations = OrganizationLocalServiceUtil.getOrganization(organizationId);
 	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organisations.getLogoId();
 	%>
-		<img alt="logo" src="<%= imgPath %>" width="180px" />
+		<img alt="logo" src="<%= imgPath %>" width="180px" height="180px" />
 	<%
 } else {
 	%>
-		<img alt="logo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" width="180px" />
+		<img alt="logo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" width="180px" height="180px" />
 	<%
 }
 %>

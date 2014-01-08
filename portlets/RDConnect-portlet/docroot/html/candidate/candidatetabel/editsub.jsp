@@ -11,16 +11,14 @@ String state = candidate.getState();
 %>
 
 <input id="candidateid"  type="hidden" name="candidateid" value="<%= candidate.getCandidateId() %>" />
-J:<input id="masterid" style="width: 45px;" type="text" name="masterid" value="<%= candidate.getMasterId() %>" />
+J:<input id="masterid" style="width: 55px;margin-left:7px;" type="text" name="masterid" value="<%= candidate.getMasterId() %>" />
 <!-- <input id="accepted" type="checkbox" name="accepted" <%= checked %> /> -->
-<br>S:<% if(state.equalsIgnoreCase("P")) { %> published <% } else { %>
-<select id="state" style="width: 45px;" type="text" name="state">
-	<option value="X" selected='<%= state.equalsIgnoreCase("X") ? true : false %>' >X</option>
-	<option value="0" selected='<%= state.equalsIgnoreCase("0") ? true : false %>' >0</option>
-	<option value="1" selected='<%= state.equalsIgnoreCase("1") ? true : false %>' >1</option>
-	<option value="2" selected='<%= state.equalsIgnoreCase("2") ? true : false %>' >2</option>
-	<option value="3" selected='<%= state.equalsIgnoreCase("3") ? true : false %>' >3</option>
-	<option value="4" selected='<%= state.equalsIgnoreCase("4") ? true : false %>' >4</option>
-	<option value="5" selected='<%= state.equalsIgnoreCase("5") ? true : false %>' >5</option>
+<br>S:<% if(state.equalsIgnoreCase("P")) { %> 
+published 
+<% } else { %>
+<select id="state" style="width: 70px;" type="text" name="state">
+	<option value="X" <%= state.equalsIgnoreCase("X") ? "selected" : "" %> >REJ</option>
+	<option value="0" <%= state.equalsIgnoreCase("0") ? "selected" : "" %> >NOD</option>
+	<option value="1" <%= state.equalsIgnoreCase("1") ? "selected" : "" %> >ACC</option>
 </select>
 <% } %>

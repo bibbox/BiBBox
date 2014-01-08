@@ -88,11 +88,7 @@
 			<aui:select name="state" cssClass="propose" label="Data checked">
 				<aui:option value="X" selected='<%= master.getState().equalsIgnoreCase("X") ? true : false %>' >rejected</aui:option>
 				<aui:option value="0" selected='<%= master.getState().equalsIgnoreCase("0") ? true : false %>' >not decided</aui:option>
-				<aui:option value="1" selected='<%= master.getState().equalsIgnoreCase("1") ? true : false %>' >data checked 1</aui:option>
-				<aui:option value="2" selected='<%= master.getState().equalsIgnoreCase("2") ? true : false %>' >data checked 2</aui:option>
-				<aui:option value="3" selected='<%= master.getState().equalsIgnoreCase("3") ? true : false %>' >data checked 3</aui:option>
-				<aui:option value="4" selected='<%= master.getState().equalsIgnoreCase("4") ? true : false %>' >data checked 4</aui:option>
-				<aui:option value="5" selected='<%= master.getState().equalsIgnoreCase("5") ? true : false %>' >data checked 5</aui:option>
+				<aui:option value="1" selected='<%= master.getState().equalsIgnoreCase("1") ? true : false %>' >data checked</aui:option>
 			</aui:select>
 		<% } %>
 	</aui:column>

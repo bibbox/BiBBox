@@ -17,23 +17,45 @@ $dockbarOpenGradientStart: #0EA6F9;
 	display: none;
 }
 .aui body {
-    background: #D9D9D9;
+    background: #F4F4E1;
 }
 body {
-	background: #D9D9D9;
+	background: #F4F4E1;
 }
 #footer a {
-	color: #303030;
+	color: #B3B3B3;
+	font-size:14px;
+}
+#footer {
+	background: #377CB5;
+	margin: auto;
+	height: 120px;
+	vertical-align:middle;
+	color: #B3B3B3;
+}
+.aui #footer p {
+	margin: auto;
+	padding-top: 40px;
+	height: 120px;
+	font-size:20px;
+}
+.powered-by {
+	height: 120px;
+	vertical-align:middle;
+	margin: auto;
 }
 #rd-heading {
     margin-top: 0;
-    background: #303030;
-    clear: both;
+    background: #F4F4E1;
     height: 50px;
-    
+    margin-bottom: 70px;
 }
 #rd-heading a {
-	color: #B2F150;
+	color: #377CB5;
+	border-color: #377CB5;
+	border-style: solid;
+	border-width: 1px;
+	padding: 10px;
 }
 #logo-rdconnect-Public {
 	position:absolute;
@@ -48,6 +70,22 @@ body {
 	text-align: center;
 }
 
+.signinfloatingtext {
+	float: right;
+	position:absolute;
+	right: 150px;
+	top: 18px;
+}
+#logoleft {
+	width: 287px;
+}
+#logocenter {
+	width: 184px;
+    position: absolute;
+    top: 0px;
+    left: 50%;	
+  	margin-left: -82px;
+}
 .aui {
 	.separator {
 		border-color: #BFBFBF transparent #FFF;
@@ -58,7 +96,7 @@ body {
 	#wrapper {
 		position: relative;
 		padding: 0;
-		background: #D9D9D9;
+		background: #F4F4E1;
 		clear: both;
 	}
 
