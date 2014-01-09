@@ -36,6 +36,10 @@ catch (NoSuchRecordSetException nsrse) {
 }
 
 request.setAttribute("record_set_action.jsp-selRecordSet", selRecordSet);
+
+String rdcstructure = GetterUtil.getString(portletPreferences.getValue("rdcstructure", StringPool.BLANK));
+long rdctemplateid = GetterUtil.getLong(portletPreferences.getValue("rdctemplateid", StringPool.BLANK));
+boolean rdcspreadsheet = GetterUtil.getBoolean(portletPreferences.getValue("rdcspreadsheet", StringPool.BLANK));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
@@ -56,6 +60,8 @@ request.setAttribute("record_set_action.jsp-selRecordSet", selRecordSet);
 			<liferay-ui:message key="displaying-list" />: <span class="displaying-record-set-id"><%= selRecordSet != null ? HtmlUtil.escape(selRecordSet.getName(locale)) : StringPool.BLANK %></span>
 		</span>
 	</div>
+	
+	
 
 	<c:if test="<%= selRecordSet != null %>">
 
@@ -190,6 +196,10 @@ request.setAttribute("record_set_action.jsp-selRecordSet", selRecordSet);
 	<aui:input name="preferences--formDDMTemplateId--" type="hidden" value="<%= formDDMTemplateId %>" />
 	<aui:input name="preferences--editable--" type="hidden" value="<%= editable %>" />
 	<aui:input name="preferences--spreadsheet--" type="hidden" value="<%= spreadsheet %>" />
+	
+	<aui:input name="preferences--rdcstructure--" type="text" value="<%= rdcstructure %>" />
+	<aui:input name="preferences--rdctemplateid--" type="text" value="<%= rdctemplateid %>" />
+	<aui:input name="preferences--rdcspreadsheet--" type="checkbox" value="<%= rdcspreadsheet %>" />
 
 	<aui:fieldset>
 		<aui:field-wrapper label="portlet-id">
