@@ -1,6 +1,8 @@
 package at.meduni.liferay.portlet.rdconnect;
 
 import java.io.Serializable;
+import java.net.URLEncoder;
+import java.text.Collator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -87,6 +89,7 @@ public class MasterPublish extends MVCPortlet {
 		//createOrganisation2(companyId);
 		//createRecordSet(request);
 		deleteOrganisation(24501);
+		//Collator myCollator = Collator.getInstance();
 	}
 	
 	public void deleteOrganisation(long organisationid) throws PortalException, SystemException {

@@ -7,6 +7,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -17,5 +19,11 @@ public class Ajaxtest extends MVCPortlet {
 		System.out.println("ID: " + ParamUtil.getString(actionRequest, "id"));
 		System.out.println("Name: " + ParamUtil.getString(actionRequest, "name"));
 		System.out.println("Somthing has happend");
+		
+		//DDLRecordSet rs = DDLRecordSetLocalServiceUtil.getR;
+		
+		//DDLRecordSet rs = DDLRecordSetLocalServiceUtil.getRecordSet(14503);
+		
+		//rs.getNameCurrentValue()
 	} 
 }
