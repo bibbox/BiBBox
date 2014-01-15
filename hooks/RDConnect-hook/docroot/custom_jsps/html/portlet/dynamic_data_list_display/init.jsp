@@ -68,7 +68,7 @@ if (rdcstructure.length() != 0) {
 	  	// Read the editabel config
 	  	editable = GetterUtil.getBoolean(portletPreferences.getValue("rdceditable", StringPool.BLANK));
 	  	// Read if Spredsheed view enabeling
-	  	spreadsheet = GetterUtil.getBoolean(portletPreferences.getValue("rdctemplateid", StringPool.BLANK));
+	  	spreadsheet = GetterUtil.getBoolean(portletPreferences.getValue("rdcspreadsheet", StringPool.BLANK));
 	}
 }
 //Read displayDDMTemplateId from setting

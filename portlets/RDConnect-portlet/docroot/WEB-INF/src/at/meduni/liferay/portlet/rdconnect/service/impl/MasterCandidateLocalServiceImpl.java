@@ -85,9 +85,9 @@ public class MasterCandidateLocalServiceImpl
 				
 		dynamicQuery.add(criterion);
 		
-		Order countryOrder = OrderFactoryUtil.desc("country");
-		Order joinIdOrder = OrderFactoryUtil.desc("joinId");
-		Order nameOrder = OrderFactoryUtil.desc("name");
+		Order countryOrder = OrderFactoryUtil.asc("country");
+		Order joinIdOrder = OrderFactoryUtil.asc("joinId");
+		Order nameOrder = OrderFactoryUtil.asc("name");
 		//Order candidateidOrder = OrderFactoryUtil.asc("candidateId");
 		//Order masteridOrder = OrderFactoryUtil.desc("masterId");
 		 

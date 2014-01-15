@@ -1,7 +1,6 @@
 <%@include file="/html/init.jsp" %>
 
 <portlet:defineObjects />
-<!-- <div id="rd-heading-rdlogo"><img alt="logoRDConnect IDCard" src="<%= request.getContextPath() %>/images/RDLogo.png" width="180px" /></div> -->
 
 <%
 long organizationId = 0;

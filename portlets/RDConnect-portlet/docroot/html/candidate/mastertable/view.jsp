@@ -89,8 +89,12 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
     portletURL.setParameter("candidatetype", candidatetype);
     portletURL.setParameter("name", name);
     portletURL.setParameter("action", "search");
-     
+ 
+    
+    request.setAttribute("proveofconcept", portletURL.toString());
 %>
+
+
 
 <liferay-ui:search-container 
 iteratorURL="<%= portletURL %>" 

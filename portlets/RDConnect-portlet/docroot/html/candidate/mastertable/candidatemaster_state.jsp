@@ -5,10 +5,18 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MasterCandidate candidate = (MasterCandidate)row.getObject();
 
 String state = "";
-if(candidate.getState().equalsIgnoreCase("P")) {
+if(candidate.getState().equalsIgnoreCase("P") && candidate.getOrganisationid()!= 0 ) {
+	Organization organisations = OrganizationLocalServiceUtil.getOrganization(candidate.getOrganisationid());
+	String orgPath = themeDisplay.getURLPortal()+"/web"+organisations.getGroup().getFriendlyURL();
 	state = "P";
+	%>
+	<aui:a href="<%= orgPath %>"><div class="rdc-table-state-publisched"><%= state %></div></aui:a>
+	<%
 } else {
 	state = "NP";
-}
 %>
 <div class="rdc-table-state-publisched"><%= state %></div>
+
+<%
+}
+%>

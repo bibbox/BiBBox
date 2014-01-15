@@ -78,5 +78,26 @@ public class MasterTable extends MVCPortlet {
 		/* Placeholder for SessionMessages */
 		sendRedirect(request, response);
 	}
+	
+	public void publishCandidate(ActionRequest request, ActionResponse response) throws Exception {
+		long masterid = ParamUtil.getLong(request,"masterId");
+		System.out.println("Publish " + masterid);
+		MasterCandidate master = MasterCandidateLocalServiceUtil.getMasterCandidate(masterid);
+		MasterPublish mp = new MasterPublish();
+		mp.publishToGate(request, response, master);
+		sendRedirect(request, response);
+	}
+	
+	public void unpublishCandidate(ActionRequest request, ActionResponse response) throws Exception {
+		long masterid = ParamUtil.getLong(request,"masterId");
+		System.out.println("Unpublish " + masterid);
+		MasterCandidate master = MasterCandidateLocalServiceUtil.getMasterCandidate(masterid);
+		MasterPublish mp = new MasterPublish();
+		mp.deleteOrganisation(master.getOrganisationid());
+		master.setOrganisationid(0);
+		master.setState("1");
+		MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
+		sendRedirect(request, response);
+	}
 
 }
