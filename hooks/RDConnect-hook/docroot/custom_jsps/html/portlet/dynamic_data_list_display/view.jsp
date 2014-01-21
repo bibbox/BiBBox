@@ -15,6 +15,7 @@
 --%>
 
 <%@ include file="/html/portlet/dynamic_data_list_display/init.jsp" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord" %>
 
 <%
 DDLRecordSet recordSet = null;
@@ -83,6 +84,8 @@ catch (NoSuchRecordSetException nsrse) {
 <%
 }
 
+
+
 boolean hasConfigurationPermission = PortletPermissionUtil.contains(permissionChecker, layout, portletDisplay.getId(), ActionKeys.CONFIGURATION);
 
 boolean showAddListIcon = hasConfigurationPermission && DDLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_RECORD_SET);
@@ -90,6 +93,27 @@ boolean showAddTemplateIcon = (recordSet != null) && DDMPermission.contains(perm
 boolean showEditDisplayTemplateIcon = (displayDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, displayDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
 boolean showEditFormTemplateIcon = (formDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, formDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
 %>
+<!-- RDC Edit Link -->
+<% 
+if(rdcstructure.length() != 0 && editable && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {
+	List<DDLRecord> rdcrecords = recordSet.getRecords();
+	for(DDLRecord record : rdcrecords) {
+%>
+		<portlet:renderURL var="editRecordURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="recordId" value="<%= String.valueOf(record.getRecordId()) %>" />
+			<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
+		</portlet:renderURL>
+		
+		<aui:a href="<%= editRecordURL %>">Edit</aui:a>
+<%
+		//break;
+	}
+}
+%>
+<!-- RDC Edit Link END -->
 
 <c:if test="<%= themeDisplay.isSignedIn() && !layout.isLayoutPrototypeLinkActive() && (showAddListIcon || showAddTemplateIcon || showEditDisplayTemplateIcon || showEditFormTemplateIcon || hasConfigurationPermission ) %>">
 	<div class="lfr-meta-actions icons-container">

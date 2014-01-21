@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,8 +50,10 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -76,11 +79,13 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSetConstants;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
 
@@ -91,6 +96,9 @@ public class MasterPublish extends MVCPortlet {
 	
 	String counter = "15";
 	Locale default_locale_ = null;
+	final String alphabet_ = "abcdefghijklmopqrstuvwxyz";
+    final int N_ = alphabet_.length();
+    Random random_ = new Random();
 	
 	public void publishToGate(ActionRequest request, ActionResponse response, MasterCandidate master) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
@@ -105,13 +113,17 @@ public class MasterPublish extends MVCPortlet {
 			master.setOrganisationid(organization.getOrganizationId());
 			master.setState("P");
 			MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
-			// Create Organisation Pages
-			createPages(organization);
 			// Create Users
 			createUsersFromMaster(organization, company, master.getMail(), master.getContactperson(), master.getHead(), ServiceContextFactory.getInstance(User.class.getName(), request));
 			// Create DDL Elements
 			createDDLs(request, organization, master);
-		
+			
+			// Add me
+			//OrganizationLocalServiceUtil.addUserOrganization(themeDisplay.getUserId(), organization);
+			
+			// Create Organisation Pages
+			createPages(organization);
+			
 			OrganizationLocalServiceUtil.rebuildTree(company.getCompanyId());
 		} catch(Exception e) {
 			System.out.println("RDC Exception in MasterPublish:publishToGate");
@@ -125,9 +137,35 @@ public class MasterPublish extends MVCPortlet {
 		// Create Organisation		
 		User defaultUser = company.getDefaultUser();
 		
-		Organization organization = OrganizationLocalServiceUtil.addOrganization(defaultUser.getUserId(),
+		/*Organization organization = OrganizationLocalServiceUtil.addOrganization(defaultUser.getUserId(),
 						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-						master.getName(), true);
+						master.getName(), true);*/
+		
+		long userId = company.getDefaultUser().getUserId();
+        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
+        String name = master.getName();
+        String type = OrganizationConstants.TYPE_REGULAR_ORGANIZATION;
+        boolean recursable = true;
+        long regionId = 0;
+        long countryId = 0;
+        int statusId = GetterUtil.getInteger(PropsUtil.get(
+                "sql.data.com.liferay.portal.model.ListType.organization.status"));
+        String comments = null;
+
+        ServiceContext serviceContext = new ServiceContext();
+
+        serviceContext.setAddGroupPermissions(true);
+        serviceContext.setAddGuestPermissions(true);
+        
+        boolean site = true;
+
+        Organization organization =
+                OrganizationLocalServiceUtil.addOrganization(userId, parentOrganizationId, name, type, regionId, countryId, 
+                		statusId, comments, site, serviceContext);
+        
+        Group group = organization.getGroup();
+        serviceContext.setScopeGroupId(group.getGroupId());
+        
 		return organization;
 	}
 	
@@ -247,14 +285,25 @@ public class MasterPublish extends MVCPortlet {
 						privateLayoutSetPrototypeId,
 						publicLayoutSetPrototypeLinkEnabled,
 						privateLayoutSetPrototypeLinkEnabled);
+		SitesUtil.mergeLayoutSetPrototypeLayouts(organizationGroup, LayoutSetLocalServiceUtil.getLayoutSet(organizationGroup.getGroupId(), false));
 	}
 	
 	private void createDDLs(ActionRequest request, Organization organization, MasterCandidate master) throws PortalException, SystemException {
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(DDLRecordSet.class.getName(), request);
+		ServiceContext serviceContext = new ServiceContext();
+
+        serviceContext.setAddGroupPermissions(true);
+        serviceContext.setAddGuestPermissions(true);
+        Group group = organization.getGroup();
+        serviceContext.setScopeGroupId(group.getGroupId());
+        
+        serviceContext.setUserId(organization.getUserId());
+        
+		ServiceContext serviceContextRecord = serviceContext;
+		long groupId = organization.getGroupId();
 		// create core | ID 28331
 		try {
 			DDLRecordSet recordSet = createRecordSet(request, organization, "core", 28331, serviceContext);
-			creatRecordCore(recordSet, organization.getGroupId(), serviceContext, master);
+			creatRecordCore(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
 			System.out.println("Could not create core");
@@ -279,7 +328,7 @@ public class MasterPublish extends MVCPortlet {
 		// create Quality Indicators | ID 29098
 		try {
 			DDLRecordSet recordSet = createRecordSet(request, organization, "Quality Indicators", 29098, serviceContext);
-			creatRecordQualityIndicator(recordSet, organization.getGroupId(), serviceContext, master);
+			creatRecordQualityIndicator(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
 			System.out.println("Could not create Quality Indicators");
@@ -292,7 +341,7 @@ public class MasterPublish extends MVCPortlet {
 		// create Disease Areas (ICD10) | ID 32842
 		try {
 			DDLRecordSet recordSet = createRecordSet(request, organization, "Disease Areas (ICD10)", 32842, serviceContext);
-			creatRecordDiseaseAreas(recordSet, organization.getGroupId(), serviceContext, master);
+			creatRecordDiseaseAreas(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
 			System.out.println("Could not create Disease Areas (ICD10)");
@@ -317,7 +366,7 @@ public class MasterPublish extends MVCPortlet {
 		// create Accesability | ID 29100
 		try {
 			DDLRecordSet recordSet = createRecordSet(request, organization, "Accesability", 29100, serviceContext);
-			creatRecordAccesability(recordSet, organization.getGroupId(), serviceContext, master);
+			creatRecordAccesability(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
 			System.out.println("Could not create Accesability");
@@ -374,75 +423,139 @@ public class MasterPublish extends MVCPortlet {
 		String[] description = {name};
 		Map<Locale,String> nameMap = LocalizationUtil.getLocalizationMap(languageid, names);
 		Map<Locale,String> descriptionMap = LocalizationUtil.getLocalizationMap(languageid, description);
-		
+
 		DDLRecordSet recordSet = DDLRecordSetServiceUtil.addRecordSet(groupId, ddmStructureId, recordSetKey, nameMap, 
 				descriptionMap, DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope, serviceContext);
 		return recordSet;
 	}
 	
+	private String randomIdGenerator() {
+		String id = "_INSTANCE_";
+	    for (int i = 0; i < 4; i++) {
+	    	id += alphabet_.charAt(random_.nextInt(N_));
+	    }
+	    return id;
+	}
+	
 	private void creatRecordCore(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		Map<String,Serializable> fields = new HashMap<String, Serializable>();
-		fields.put("name", master.getName());
-		fields.put("acronym", "");
-		if(master.getCandidatetype().equalsIgnoreCase("Biobank"))
-			fields.put("Radio2493", "bb");
-		else if(master.getCandidatetype().equalsIgnoreCase("Registry"))
-			fields.put("Radio2493", "reg");
-		else 
-			fields.put("Radio2493", "bb_reg");
-		fields.put("Description", "");
-		fields.put("subtype", master.getCandidatesubtype());
-		fields.put("legalEntity", "");
-		fields.put("countryCode", master.getCountry());
-		fields.put("geographicAreaCovered", "");
-		fields.put("Text5085", "");
-		fields.put("year_of_establishment", "");
-		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
+		try {
+			DDMStructure ddmStructure = recordSet.getDDMStructure();		
+			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
+			// Define Fields
+			Field field_name = new Field("name", master.getName());
+			fields.put(field_name);
+			Field field_acronym = new Field("acronym", "");
+			fields.put(field_acronym);
+			String type = "bb_reg";
+			if(master.getCandidatetype().equalsIgnoreCase("Biobank"))
+				type = "bb";
+			else if(master.getCandidatetype().equalsIgnoreCase("Registry"))
+				type = "reg";
+			Field field_type = new Field("Radio2493", type);
+			fields.put(field_type);
+			Field field_description = new Field("Description", "");
+			fields.put(field_description);
+			Field field_subtype = new Field("subtype", master.getCandidatesubtype());
+			fields.put(field_subtype);
+			Field field_legalEntity = new Field("legalEntity", "");
+			fields.put(field_legalEntity);
+			Field field_countryCode = new Field("countryCode", master.getCountry());
+			fields.put(field_countryCode);
+			Field field_geographicAreaCovered = new Field("geographicAreaCovered", "");
+			fields.put(field_geographicAreaCovered);
+			Field field_Text5085 = new Field("Text5085", "");
+			fields.put(field_Text5085);
+			Field field_year_of_establishment = new Field("year_of_establishment", "");
+			fields.put(field_year_of_establishment);
+			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
+				serviceContext.getUserId(),
+				serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+				DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+				serviceContext);
+		} catch(Exception e) {
+			System.out.println("RDC Exception");
+			e.printStackTrace();
+		}
 	}
 	
 	private void creatRecordQualityIndicator(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		Map<String,Serializable> fields = new HashMap<String, Serializable>();
-		fields.put("Is_the_biobank_part_of_an_accreditation_certification_program", "");
-		fields.put("Accreditation__Certification_Organsiation_", "");
-		fields.put("For_which_steps_is_quality_management_established_", "");
-		fields.put("What_does_the_QM_include", "");
-		fields.put("How_is_sample_safety_and_security_maintained_", "");
-		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
+		try {
+			DDMStructure ddmStructure = recordSet.getDDMStructure();		
+			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
+			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
+					serviceContext.getUserId(),
+					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+					serviceContext);
+		} catch(Exception e) {
+			System.out.println("RDC Exception");
+			e.printStackTrace();
+		}
 	}
 	
 	private void creatRecordDiseaseAreas(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
+		String displaynames = "";
 		Map<String,Serializable> fields = new HashMap<String, Serializable>();
 		fields.put("Boolean5173", "");
+		displaynames += "Boolean5173" + randomIdGenerator();
 		fields.put("Boolean4958", "");
+		displaynames += "," + "Boolean4958" + randomIdGenerator();
 		fields.put("Boolean4743", "");
+		displaynames += "," + "Boolean4743" + randomIdGenerator();
 		fields.put("Boolean4528", "");
+		displaynames += "," + "Boolean4528" + randomIdGenerator();
 		fields.put("Boolean2579", "");
+		displaynames += "," + "Boolean2579" + randomIdGenerator();
 		fields.put("Boolean3227", "");
+		displaynames += "," + "Boolean3227" + randomIdGenerator();
 		fields.put("Boolean3012", "");
+		displaynames += "," + "Boolean3012" + randomIdGenerator();
 		fields.put("Boolean2796", "");
+		displaynames += "," + "Boolean2796" + randomIdGenerator();
 		fields.put("Boolean3443", "");
-		fields.put("Boolean3659", "");		
+		displaynames += "," + "Boolean3443" + randomIdGenerator();
+		fields.put("Boolean3659", "");	
+		displaynames += "," + "Boolean3659" + randomIdGenerator();
 		fields.put("Boolean3875", "");
+		displaynames += "," + "Boolean3875" + randomIdGenerator();
 		fields.put("Boolean4090", "");
+		displaynames += "," + "Boolean4090" + randomIdGenerator();
 		fields.put("Boolean4307", "");
+		displaynames += "," + "Boolean4307" + randomIdGenerator();
 		fields.put("Diseases_of_the_genitourinary_system__N00-N99_", "");
+		displaynames += "," + "Diseases_of_the_genitourinary_system__N00-N99_" + randomIdGenerator();
 		fields.put("Pregnancy__childbirth_and_the_puerperium__O00-O99_", "");
+		displaynames += "," + "Pregnancy__childbirth_and_the_puerperium__O00-O99_" + randomIdGenerator();
 		fields.put("Certain_conditions_originating_in_the_perinatal_period__P00-P96_", "");
+		displaynames += "," + "Certain_conditions_originating_in_the_perinatal_period__P00-P96_" + randomIdGenerator();
 		fields.put("Congenital_malformations__deformations_and_chromosomal_abnormalities__Q00-Q99_", "");
+		displaynames += "," + "Congenital_malformations__deformations_and_chromosomal_abnormalities__Q00-Q99_" + randomIdGenerator();
 		fields.put("others", "");
+		displaynames += "," + "others" + randomIdGenerator();
+		fields.put("_fieldsDisplay", displaynames);
 		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
 	}
 	
 	private void creatRecordAccesability(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
+		String displaynames = "";
 		Map<String,Serializable> fields = new HashMap<String, Serializable>();
 		fields.put("Are_data_or_samples_of_the_biobank_accessible_", "");
+		displaynames += "Are_data_or_samples_of_the_biobank_accessible_" + randomIdGenerator();
 		fields.put("Comment_data___sample_access", "");
+		displaynames += "," + "Comment_data___sample_access" + randomIdGenerator();
 		fields.put("Is_there_an_access_fee_", "");
+		displaynames += "," + "Is_there_an_access_fee_" + randomIdGenerator();
 		fields.put("Are_patients__data_distributed_", "");
+		displaynames += "," + "Are_patients__data_distributed_" + randomIdGenerator();
 		fields.put("Comment_Distribition_of_Patient_Data", "");
+		displaynames += "," + "Comment_Distribition_of_Patient_Data" + randomIdGenerator();
 		fields.put("Is_informed_consent_mandatory_as_per_your_country_s_regulations_", "");
+		displaynames += "," + "Is_informed_consent_mandatory_as_per_your_country_s_regulations_" + randomIdGenerator();
 		fields.put("Which_type_of_consent_is_obtained_from_the_patients__", "");
+		displaynames += "," + "Which_type_of_consent_is_obtained_from_the_patients__" + randomIdGenerator();
 		fields.put("Is_an_ethics_board_decision_already_available_for_the_use_of_the_samples_in_research_", "");
+		displaynames += "," + "Is_an_ethics_board_decision_already_available_for_the_use_of_the_samples_in_research_" + randomIdGenerator();
+		fields.put("_fieldsDisplay", displaynames);
 		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
 	}
 	

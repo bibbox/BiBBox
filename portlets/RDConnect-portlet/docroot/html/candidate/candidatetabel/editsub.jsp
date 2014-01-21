@@ -16,9 +16,9 @@ J:<input id="masterid" style="width: 55px;margin-left:7px;" type="text" name="ma
 <br>S:<% if(state.equalsIgnoreCase("P")) { %> 
 published 
 <% } else { %>
-<select id="state" style="width: 70px;" type="text" name="state">
-	<option value="X" <%= state.equalsIgnoreCase("X") ? "selected" : "" %> >REJ</option>
-	<option value="0" <%= state.equalsIgnoreCase("0") ? "selected" : "" %> >NOD</option>
-	<option value="1" <%= state.equalsIgnoreCase("1") ? "selected" : "" %> >ACC</option>
+<select id="state" style="width: 120px;" type="text" name="state">
+	<option value="X" <%= state.equalsIgnoreCase("X") ? "selected" : "" %> >Rejected</option>
+	<option value="0" <%= state.equalsIgnoreCase("0") ? "selected" : "" %> >Not Decided</option>
+	<option value="1" <%= state.equalsIgnoreCase("1") ? "selected" : "" %> >Acceppted</option>
 </select>
 <% } %>

@@ -68,7 +68,7 @@ textarea.propose{
 	padding: 4px;
 }
 .rdc-candidate-table .candidate-table-editsub {
-	width:110px;
+	width:170px;
 	padding: 4px;
 }
 .aui .rdc-candidate-table .table th, .aui .table td {
@@ -95,25 +95,25 @@ textarea.propose{
 	margin-top: 5px;
 }
 .candidate-table-namecontainer {
-	width:458px;
+	width:408px;
 }
 .rdc-table-nameentry{
-	width:450px;
+	width:400px;
 }
 .rdc-table-nameentry-name {
 	font-size:14px;
 	line-height: 14px;
-	width:450px;
+	width:400px;
 }
 .rdc-table-nameentry-diseases {
 	font-size:11px;
 	line-height: 11px;
-	width:450px;
+	width:400px;
 }
 .rdc-table-nameentry-contact {
 	font-size:11px;
 	line-height: 11px;
-	width:450px;
+	width:400px;
 	font-style:italic;
 }
 .rdc-table-candidatetype {

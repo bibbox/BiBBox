@@ -16,8 +16,11 @@ import javax.portlet.ResourceResponse;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 import at.meduni.liferay.portlet.rdconnect.model.Candidate;
+import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl;
+import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
+import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -61,11 +64,15 @@ public class CandidatePropose extends MVCPortlet {
 		}
 
 		Candidate candidate = candidateFromRequest(request);
+		//MasterCandidate mastercandidate = masterCandidateFromRequest(request);
 		ArrayList<String> errors = new ArrayList<String>();
 		if(validateCandidate(candidate, errors) && recaptcher) {
+			System.out.println(candidate.getState());
 			CandidateLocalServiceUtil.addCandidate(candidate);
+			//MasterCandidateLocalServiceUtil.addMasterCandidate(mastercandidate);
 			SessionMessages.add(request, "candidate-saved-successfully");
-			response.setRenderParameter("success", "true");
+			//response.setRenderParameter("success", "true");
+			sendRedirect(request, response);
 		} else {
 			SessionErrors.add(request, "fields-required");
 			for(String e : errors) {
@@ -90,6 +97,22 @@ public class CandidatePropose extends MVCPortlet {
         System.out.println("--------");
         return null;
     }
+	private MasterCandidate masterCandidateFromRequest(PortletRequest request) {
+		MasterCandidateImpl candidate = new MasterCandidateImpl();
+		candidate.setName(ParamUtil.getString(request, "name"));
+		candidate.setUrl(ParamUtil.getString(request, "url"));
+		candidate.setContactperson(ParamUtil.getString(request, "contactperson"));
+		candidate.setCandidatetype(ParamUtil.getString(request, "candidatetype"));
+		candidate.setCountry(ParamUtil.getString(request, "country"));
+		candidate.setDiseasescodes(ParamUtil.getString(request, "diseasescodes"));
+		candidate.setDiseasesfreetext(ParamUtil.getString(request, "diseasesfreetext"));
+		candidate.setComment(ParamUtil.getString(request, "comment"));
+		candidate.setAddress(ParamUtil.getString(request, "address"));
+		candidate.setMail(ParamUtil.getString(request, "mail"));
+		candidate.setHead(ParamUtil.getString(request, "head"));
+		candidate.setState("0");
+		return candidate;
+	}
 	
 	private Candidate candidateFromRequest(PortletRequest request) {
 		CandidateImpl candidate = new CandidateImpl();

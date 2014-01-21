@@ -21,25 +21,15 @@ String redirect2 = (String)request.getAttribute("proveofconcept");
 
 	<portlet:actionURL name="publishCandidate" var="publishCandidateURL">
 		<portlet:param name="masterId" value="<%= String.valueOf(masterId) %>" />
-		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"/>
+		<portlet:param name="redirect" value="<%= redirect2 %>"/>
 	</portlet:actionURL>
 	
 	<liferay-ui:icon image="publish" url="<%=publishCandidateURL.toString() %>" />
 	
 	<portlet:actionURL name="unpublishCandidate" var="unpublishCandidateURL">
 		<portlet:param name="masterId" value="<%= String.valueOf(masterId) %>" />
-		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"/>
+		<portlet:param name="redirect" value="<%= redirect2 %>"/>
 	</portlet:actionURL>
 	
-	<liferay-ui:icon image="unpublish" url="<%=unpublishCandidateURL.toString() %>" />
-	
-
-	<portlet:actionURL name="deleteCandidate" var="deleteURL">
-		<portlet:param name="masterId" value="<%= String.valueOf(masterId) %>" />
-		<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"/>
-	</portlet:actionURL>
-		
-	<liferay-ui:icon-delete url="<%=deleteURL.toString() %>" />
-	
-	
+	<liferay-ui:icon image="unpublish" url="<%=unpublishCandidateURL.toString() %>" />	
 </liferay-ui:icon-menu>

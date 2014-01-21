@@ -27,12 +27,15 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.service.CountryServiceUtil;
 
 import at.meduni.liferay.portlet.rdconnect.NoSuchCandidateException;
 import at.meduni.liferay.portlet.rdconnect.model.Candidate;
+import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
+import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.base.CandidateLocalServiceBaseImpl;
 
@@ -109,12 +112,24 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		candidate.setSourceId(newCandidate.getSourceId());
 		candidate.setMail(newCandidate.getMail());
 		candidate.setHead(newCandidate.getHead());
+		candidate.setState(newCandidate.getState());
 		
-		//userPersistence
-		//com.liferay.portal.service.persistence.OrganizationPersistence ld;
-		//ld.create(organizationId)
-		
-		
+		MasterCandidate mcandidate = masterCandidatePersistence.create(candidate.getPrimaryKey());
+		mcandidate.setName(newCandidate.getName());
+		mcandidate.setUrl(newCandidate.getUrl());
+		mcandidate.setContactperson(newCandidate.getContactperson());
+		mcandidate.setCandidatetype(newCandidate.getCandidatetype());
+		mcandidate.setCountry(newCandidate.getCountry());
+		mcandidate.setDiseasescodes(newCandidate.getDiseasescodes());
+		mcandidate.setDiseasesfreetext(newCandidate.getDiseasesfreetext());
+		mcandidate.setComment(newCandidate.getComment());
+		mcandidate.setAddress(newCandidate.getAddress());
+		mcandidate.setDate(new Date());
+		mcandidate.setMail(newCandidate.getMail());
+		mcandidate.setHead(newCandidate.getHead());
+		mcandidate.setState(newCandidate.getState());
+		masterCandidatePersistence.update(mcandidate);
+
 		return candidatePersistence.update(candidate);
 	}
 	

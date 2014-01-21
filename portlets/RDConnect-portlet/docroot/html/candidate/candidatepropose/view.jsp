@@ -25,7 +25,7 @@
 	String submitter_name = ParamUtil.getString(request, "submittername");
 	String submitter_email = ParamUtil.getString(request, "submitteremail");
 	String candidatesubtype = "";
-	
+	/*
 	if(!success) {
 		name = ParamUtil.getString(request, "name");
 		url = ParamUtil.getString(request, "url");
@@ -40,7 +40,7 @@
 		head = ParamUtil.getString(request, "head");
 		candidatesubtype = ParamUtil.getString(request, "candidatesubtype");
 	}
-	
+	*/
 %>
 
 

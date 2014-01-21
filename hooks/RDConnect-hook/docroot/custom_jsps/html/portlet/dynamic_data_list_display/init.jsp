@@ -48,7 +48,7 @@ DDMDisplay ddmDisplay = DDMDisplayRegistryUtil.getDDMDisplay(PortletKeys.DYNAMIC
 
 <%
 //Read DDL Structure ID if set by other parameter
-String rdcstructure = GetterUtil.getString(portletPreferences.getValue("rdcstructure", StringPool.BLANK));		 
+String rdcstructure = GetterUtil.getString(portletPreferences.getValue("rdcstructure", StringPool.BLANK));		
 if (rdcstructure.length() != 0) {
 	com.liferay.portal.model.Group rdc_currentGroup =  themeDisplay.getLayout().getGroup();
 	long rdc_organizationId = 0;
