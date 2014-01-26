@@ -353,7 +353,8 @@ public class MasterPublish extends MVCPortlet {
 		}
 		// create Disease Matrix | ID 32833
 		try {
-			createRecordSet(request, organization, "Disease Matrix", 32833, serviceContext);
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Disease Matrix", 32833, serviceContext);
+			creatRecordDiseaseMatrix(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
 			System.out.println("Could not create Disease Matrix");
@@ -451,7 +452,7 @@ public class MasterPublish extends MVCPortlet {
 				type = "bb";
 			else if(master.getCandidatetype().equalsIgnoreCase("Registry"))
 				type = "reg";
-			Field field_type = new Field("Radio2493", type);
+			Field field_type = new Field("Radio2493", "[" + type + "]");
 			fields.put(field_type);
 			Field field_description = new Field("Description", "");
 			fields.put(field_description);
@@ -494,69 +495,83 @@ public class MasterPublish extends MVCPortlet {
 	}
 	
 	private void creatRecordDiseaseAreas(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		String displaynames = "";
-		Map<String,Serializable> fields = new HashMap<String, Serializable>();
-		fields.put("Boolean5173", "");
-		displaynames += "Boolean5173" + randomIdGenerator();
-		fields.put("Boolean4958", "");
-		displaynames += "," + "Boolean4958" + randomIdGenerator();
-		fields.put("Boolean4743", "");
-		displaynames += "," + "Boolean4743" + randomIdGenerator();
-		fields.put("Boolean4528", "");
-		displaynames += "," + "Boolean4528" + randomIdGenerator();
-		fields.put("Boolean2579", "");
-		displaynames += "," + "Boolean2579" + randomIdGenerator();
-		fields.put("Boolean3227", "");
-		displaynames += "," + "Boolean3227" + randomIdGenerator();
-		fields.put("Boolean3012", "");
-		displaynames += "," + "Boolean3012" + randomIdGenerator();
-		fields.put("Boolean2796", "");
-		displaynames += "," + "Boolean2796" + randomIdGenerator();
-		fields.put("Boolean3443", "");
-		displaynames += "," + "Boolean3443" + randomIdGenerator();
-		fields.put("Boolean3659", "");	
-		displaynames += "," + "Boolean3659" + randomIdGenerator();
-		fields.put("Boolean3875", "");
-		displaynames += "," + "Boolean3875" + randomIdGenerator();
-		fields.put("Boolean4090", "");
-		displaynames += "," + "Boolean4090" + randomIdGenerator();
-		fields.put("Boolean4307", "");
-		displaynames += "," + "Boolean4307" + randomIdGenerator();
-		fields.put("Diseases_of_the_genitourinary_system__N00-N99_", "");
-		displaynames += "," + "Diseases_of_the_genitourinary_system__N00-N99_" + randomIdGenerator();
-		fields.put("Pregnancy__childbirth_and_the_puerperium__O00-O99_", "");
-		displaynames += "," + "Pregnancy__childbirth_and_the_puerperium__O00-O99_" + randomIdGenerator();
-		fields.put("Certain_conditions_originating_in_the_perinatal_period__P00-P96_", "");
-		displaynames += "," + "Certain_conditions_originating_in_the_perinatal_period__P00-P96_" + randomIdGenerator();
-		fields.put("Congenital_malformations__deformations_and_chromosomal_abnormalities__Q00-Q99_", "");
-		displaynames += "," + "Congenital_malformations__deformations_and_chromosomal_abnormalities__Q00-Q99_" + randomIdGenerator();
-		fields.put("others", "");
-		displaynames += "," + "others" + randomIdGenerator();
-		fields.put("_fieldsDisplay", displaynames);
-		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
+		try {
+			DDMStructure ddmStructure = recordSet.getDDMStructure();		
+			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
+			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
+					serviceContext.getUserId(),
+					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+					serviceContext);
+		} catch(Exception e) {
+			System.out.println("RDC Exception");
+			e.printStackTrace();
+		}
 	}
 	
 	private void creatRecordAccesability(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		String displaynames = "";
-		Map<String,Serializable> fields = new HashMap<String, Serializable>();
-		fields.put("Are_data_or_samples_of_the_biobank_accessible_", "");
-		displaynames += "Are_data_or_samples_of_the_biobank_accessible_" + randomIdGenerator();
-		fields.put("Comment_data___sample_access", "");
-		displaynames += "," + "Comment_data___sample_access" + randomIdGenerator();
-		fields.put("Is_there_an_access_fee_", "");
-		displaynames += "," + "Is_there_an_access_fee_" + randomIdGenerator();
-		fields.put("Are_patients__data_distributed_", "");
-		displaynames += "," + "Are_patients__data_distributed_" + randomIdGenerator();
-		fields.put("Comment_Distribition_of_Patient_Data", "");
-		displaynames += "," + "Comment_Distribition_of_Patient_Data" + randomIdGenerator();
-		fields.put("Is_informed_consent_mandatory_as_per_your_country_s_regulations_", "");
-		displaynames += "," + "Is_informed_consent_mandatory_as_per_your_country_s_regulations_" + randomIdGenerator();
-		fields.put("Which_type_of_consent_is_obtained_from_the_patients__", "");
-		displaynames += "," + "Which_type_of_consent_is_obtained_from_the_patients__" + randomIdGenerator();
-		fields.put("Is_an_ethics_board_decision_already_available_for_the_use_of_the_samples_in_research_", "");
-		displaynames += "," + "Is_an_ethics_board_decision_already_available_for_the_use_of_the_samples_in_research_" + randomIdGenerator();
-		fields.put("_fieldsDisplay", displaynames);
-		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
+		try {
+			DDMStructure ddmStructure = recordSet.getDDMStructure();		
+			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
+			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
+					serviceContext.getUserId(),
+					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+					serviceContext);
+		} catch(Exception e) {
+			System.out.println("RDC Exception");
+			e.printStackTrace();
+		}
+	}
+	
+	private void creatRecordDiseaseMatrix(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
+		String[] diseascodes = master.getDiseasescodes().split(";");
+		for(String s : diseascodes) {
+			try {
+				DDMStructure ddmStructure = recordSet.getDDMStructure();		
+				Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
+				
+				String fieldtype = "Comment";
+				if(s.equalsIgnoreCase("orpha")) {
+					fieldtype = "Orphanet_Number";
+				}
+				if(s.matches("\\w\\d\\d\\.\\d")) {
+					fieldtype = "ICD10";
+				}
+				if(s.matches("\\d{6}")) {
+					fieldtype = "OMIM";
+				}
+				
+				Field field_code = new Field(fieldtype, s);
+				fields.put(field_code);
+				DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
+						serviceContext.getUserId(),
+						serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+						DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+						serviceContext);
+			} catch(Exception e) {
+				System.out.println("RDC Exception");
+				e.printStackTrace();
+			}
+		}
+		diseascodes = master.getDiseasesfreetext().split(";");
+		for(String s : diseascodes) {
+			try {
+				DDMStructure ddmStructure = recordSet.getDDMStructure();		
+				Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
+					
+				Field field_code = new Field("name", s);
+				fields.put(field_code);
+				DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
+						serviceContext.getUserId(),
+						serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+						DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+						serviceContext);
+			} catch(Exception e) {
+				System.out.println("RDC Exception");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	

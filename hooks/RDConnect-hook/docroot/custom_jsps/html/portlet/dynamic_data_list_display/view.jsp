@@ -94,12 +94,13 @@ boolean showEditDisplayTemplateIcon = (displayDDMTemplateId != 0) && DDMTemplate
 boolean showEditFormTemplateIcon = (formDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, formDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
 %>
 <!-- RDC Edit Link -->
+<!-- Edit Record -->
 <% 
-if(rdcstructure.length() != 0 && editable && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {
+if(rdcstructure.length() != 0 && rdcedirecordlink && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {
 	List<DDLRecord> rdcrecords = recordSet.getRecords();
 	for(DDLRecord record : rdcrecords) {
 %>
-		<portlet:renderURL var="editRecordURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+		<portlet:renderURL var="editRecordURL" windowState="<%= WindowState.NORMAL.toString() %>">
 			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -111,6 +112,33 @@ if(rdcstructure.length() != 0 && editable && !spreadsheet && DDLRecordSetPermiss
 <%
 		//break;
 	}
+}
+%>
+<!-- Edit RecordSet -->
+<% 
+if(rdcstructure.length() != 0 && rdcedirecordsetlink && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {
+%>
+		<portlet:renderURL var="editRecordSetURL" windowState="<%= WindowState.NORMAL.toString() %>">
+			<portlet:param name="struts_action" value="/dynamic_data_lists/view_record_set" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
+			<portlet:param name="spreadsheet" value="true" />
+			<portlet:param name="editable" value="true" />
+		</portlet:renderURL>
+		
+		<portlet:renderURL var="addRecordURL" windowState="<%= WindowState.NORMAL.toString() %>">
+			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
+			<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
+			<portlet:param name="spreadsheet" value="false" />
+			<portlet:param name="editable" value="false" />
+		</portlet:renderURL>
+		
+		<aui:a href="<%= editRecordSetURL %>">Edit</aui:a> / <aui:a href="<%= addRecordURL %>">ADD</aui:a>
+<%
 }
 %>
 <!-- RDC Edit Link END -->

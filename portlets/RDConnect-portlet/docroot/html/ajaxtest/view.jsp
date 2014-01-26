@@ -27,9 +27,6 @@ This is the <b>Ajaxtest</b> portlet in View mode.
 	});
 </aui:script>
 
-
-
-
 <input id="save-button" type="submit" value="1" />
 <input id="save-button" type="submit" value="2" />
 <input id="save-button" type="submit" value="3" />

@@ -48,7 +48,9 @@ DDMDisplay ddmDisplay = DDMDisplayRegistryUtil.getDDMDisplay(PortletKeys.DYNAMIC
 
 <%
 //Read DDL Structure ID if set by other parameter
-String rdcstructure = GetterUtil.getString(portletPreferences.getValue("rdcstructure", StringPool.BLANK));		
+String rdcstructure = GetterUtil.getString(portletPreferences.getValue("rdcstructure", StringPool.BLANK));
+boolean rdcedirecordlink = GetterUtil.getBoolean(portletPreferences.getValue("rdeditrecordlink", StringPool.BLANK));
+boolean rdcedirecordsetlink = GetterUtil.getBoolean(portletPreferences.getValue("rdceditrecordsetlink", StringPool.BLANK));
 if (rdcstructure.length() != 0) {
 	com.liferay.portal.model.Group rdc_currentGroup =  themeDisplay.getLayout().getGroup();
 	long rdc_organizationId = 0;
@@ -66,7 +68,11 @@ if (rdcstructure.length() != 0) {
 	  		}
 	  	}  	
 	  	// Read the editabel config
-	  	editable = GetterUtil.getBoolean(portletPreferences.getValue("rdceditable", StringPool.BLANK));
+	  	if(rdcedirecordsetlink) {
+	  		editable = true;
+	  	} else {
+	  		editable = GetterUtil.getBoolean(portletPreferences.getValue("rdceditable", StringPool.BLANK));
+	  	}
 	  	// Read if Spredsheed view enabeling
 	  	spreadsheet = GetterUtil.getBoolean(portletPreferences.getValue("rdcspreadsheet", StringPool.BLANK));
 	}
@@ -75,6 +81,10 @@ if (rdcstructure.length() != 0) {
 long rdctemplateid = GetterUtil.getLong(portletPreferences.getValue("rdctemplateid", StringPool.BLANK));
 if(rdctemplateid != 0) {
 	displayDDMTemplateId = rdctemplateid;
+}
+long rdcedittemplateid = GetterUtil.getLong(portletPreferences.getValue("rdcedittemplateid", StringPool.BLANK));
+if(rdcedittemplateid != 0) {
+	formDDMTemplateId = rdcedittemplateid;
 }
 %>
 

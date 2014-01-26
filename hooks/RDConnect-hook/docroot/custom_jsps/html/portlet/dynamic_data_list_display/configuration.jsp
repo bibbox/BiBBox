@@ -39,8 +39,11 @@ request.setAttribute("record_set_action.jsp-selRecordSet", selRecordSet);
 
 String rdcstructure_s = GetterUtil.getString(portletPreferences.getValue("rdcstructure", StringPool.BLANK));
 long rdctemplateid_s = GetterUtil.getLong(portletPreferences.getValue("rdctemplateid", StringPool.BLANK));
+long rdcedittemplateid_s = GetterUtil.getLong(portletPreferences.getValue("rdcedittemplateid", StringPool.BLANK));
 boolean rdcspreadsheet_s = GetterUtil.getBoolean(portletPreferences.getValue("rdcspreadsheet", StringPool.BLANK));
 boolean rdceditable_s = GetterUtil.getBoolean(portletPreferences.getValue("rdceditable", StringPool.BLANK));
+boolean rdcedirecordlink_s = GetterUtil.getBoolean(portletPreferences.getValue("rdeditrecordlink", StringPool.BLANK));
+boolean rdcedirecordsetlink_s = GetterUtil.getBoolean(portletPreferences.getValue("rdceditrecordsetlink", StringPool.BLANK));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
@@ -200,8 +203,11 @@ boolean rdceditable_s = GetterUtil.getBoolean(portletPreferences.getValue("rdced
 	
 	<aui:input name="preferences--rdcstructure--" type="text" value="<%= rdcstructure_s %>" />
 	<aui:input name="preferences--rdctemplateid--" type="text" value="<%= rdctemplateid_s %>" />
+	<aui:input name="preferences--rdcedittemplateid--" type="text" value="<%= rdcedittemplateid_s %>" />
 	<aui:input name="preferences--rdcspreadsheet--" type="checkbox" value="<%= rdcspreadsheet_s %>" />
 	<aui:input name="preferences--rdceditable--" type="checkbox" value="<%= rdceditable_s %>" />
+	<aui:input name="preferences--rdeditrecordlink--" type="checkbox" value="<%= rdcedirecordlink_s %>" />
+	<aui:input name="preferences--rdceditrecordsetlink--" type="checkbox" value="<%= rdcedirecordsetlink_s %>" />
 
 	<aui:fieldset>
 		<aui:field-wrapper label="portlet-id">
