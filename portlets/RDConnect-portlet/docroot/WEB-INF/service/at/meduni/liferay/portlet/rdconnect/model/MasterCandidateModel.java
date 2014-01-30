@@ -359,6 +359,21 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	 */
 	public void setState(String state);
 
+	/**
+	 * Returns the diseasescodesauto of this master candidate.
+	 *
+	 * @return the diseasescodesauto of this master candidate
+	 */
+	@AutoEscape
+	public String getDiseasescodesauto();
+
+	/**
+	 * Sets the diseasescodesauto of this master candidate.
+	 *
+	 * @param diseasescodesauto the diseasescodesauto of this master candidate
+	 */
+	public void setDiseasescodesauto(String diseasescodesauto);
+
 	@Override
 	public boolean isNew();
 

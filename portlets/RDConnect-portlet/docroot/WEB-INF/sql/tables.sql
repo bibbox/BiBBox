@@ -57,7 +57,8 @@ create table rdconnect.master_candidate (
 	organisationid LONG,
 	joinId LONG,
 	accepted BOOLEAN,
-	state_ VARCHAR(75) null
+	state_ VARCHAR(75) null,
+	diseasescodesauto VARCHAR(75) null
 );
 
 create table rdconnect.master_candidate_link_candidate (

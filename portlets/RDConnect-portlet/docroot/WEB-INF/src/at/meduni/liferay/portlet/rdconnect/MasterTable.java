@@ -60,6 +60,7 @@ public class MasterTable extends MVCPortlet {
 		master.setMail(ParamUtil.getString(request, "mail"));
 		master.setHead(ParamUtil.getString(request, "head"));
 		master.setJoinId(ParamUtil.getLong(request, "joinId"));
+		master.setDiseasescodesauto(ParamUtil.getString(request, "diseasescodesauto"));
 		String state = "0";
 		state = ParamUtil.getString(request, "state");
 		if(!state.equalsIgnoreCase("x") &&  !state.equalsIgnoreCase("0") &&

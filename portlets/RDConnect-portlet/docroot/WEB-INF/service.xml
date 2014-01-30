@@ -90,6 +90,7 @@
 		<column name="joinId" type="long"/>
 		<column name="accepted" type="boolean"></column>
 		<column name="state" type="String" />
+		<column name="diseasescodesauto" type="String" />
 
 		<!-- Order -->
 		<order by="asc">

@@ -105,6 +105,7 @@
 		<field name="state" type="String">
 			<hint name="default-value">0</hint>
 		</field>
+		<field name="diseasescodesauto" type="String" />
 	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate">
 		<field name="linkId" type="long" />

@@ -38,7 +38,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{masterCandidateId=");
 		sb.append(masterCandidateId);
@@ -80,6 +80,8 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		sb.append(accepted);
 		sb.append(", state=");
 		sb.append(state);
+		sb.append(", diseasescodesauto=");
+		sb.append(diseasescodesauto);
 		sb.append("}");
 
 		return sb.toString();
@@ -195,6 +197,13 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 			masterCandidateImpl.setState(state);
 		}
 
+		if (diseasescodesauto == null) {
+			masterCandidateImpl.setDiseasescodesauto(StringPool.BLANK);
+		}
+		else {
+			masterCandidateImpl.setDiseasescodesauto(diseasescodesauto);
+		}
+
 		masterCandidateImpl.resetOriginalValues();
 
 		return masterCandidateImpl;
@@ -222,6 +231,7 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		joinId = objectInput.readLong();
 		accepted = objectInput.readBoolean();
 		state = objectInput.readUTF();
+		diseasescodesauto = objectInput.readUTF();
 	}
 
 	@Override
@@ -327,6 +337,13 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 		else {
 			objectOutput.writeUTF(state);
 		}
+
+		if (diseasescodesauto == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(diseasescodesauto);
+		}
 	}
 
 	public long masterCandidateId;
@@ -349,4 +366,5 @@ public class MasterCandidateCacheModel implements CacheModel<MasterCandidate>,
 	public long joinId;
 	public boolean accepted;
 	public String state;
+	public String diseasescodesauto;
 }

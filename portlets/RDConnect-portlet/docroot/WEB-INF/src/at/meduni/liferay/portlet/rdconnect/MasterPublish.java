@@ -1,6 +1,12 @@
 package at.meduni.liferay.portlet.rdconnect;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.Collator;
 import java.util.HashMap;
@@ -33,17 +39,22 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
+import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -65,6 +76,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -88,6 +100,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
+import com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicyFactoryUtil;
 
 /**
  * Portlet implementation class MasterPublish
@@ -99,6 +112,8 @@ public class MasterPublish extends MVCPortlet {
 	final String alphabet_ = "abcdefghijklmopqrstuvwxyz";
     final int N_ = alphabet_.length();
     Random random_ = new Random();
+    long ORGANISATION_ADMIN_ROLL = 22956; // local 10166 Server 22956
+    long ADMIN_ROLL = 22951;
 	
 	public void publishToGate(ActionRequest request, ActionResponse response, MasterCandidate master) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
@@ -106,72 +121,100 @@ public class MasterPublish extends MVCPortlet {
 		long companyId = themeDisplay.getCompanyId();
 		
 		try {
+			long[] userids = {themeDisplay.getUserId()};
+			UserLocalServiceUtil.addRoleUsers(ADMIN_ROLL, userids);
+		} catch (Exception e) {
+			System.out.println("RDC Exception in MasterPublish:publishToGate - Promote to admin");
+			e.printStackTrace();
+		}
+		
+		try {
 			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 			// Create Organisation
 			Organization organization = createOrganisation(company, master);
+			// ADD Creator to Organisation
+			/*OrganizationLocalServiceUtil.addUserOrganization(themeDisplay.getUserId(), organization);
+			long[] userids = {themeDisplay.getUserId()};
+			UserGroupRoleServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), ORGANISATION_ADMIN_ROLL);*/
+			
+			
 			// Update Master
 			master.setOrganisationid(organization.getOrganizationId());
 			master.setState("P");
 			MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
 			// Create Users
-			createUsersFromMaster(organization, company, master.getMail(), master.getContactperson(), master.getHead(), ServiceContextFactory.getInstance(User.class.getName(), request));
+			createUsersFromMaster(organization, company, master.getMail(), master.getContactperson(), master.getHead());
 			// Create DDL Elements
 			createDDLs(request, organization, master);
-			
-			// Add me
-			//OrganizationLocalServiceUtil.addUserOrganization(themeDisplay.getUserId(), organization);
 			
 			// Create Organisation Pages
 			createPages(organization);
 			
 			OrganizationLocalServiceUtil.rebuildTree(company.getCompanyId());
+			
+			
+			// REMOVE Creator from Organisation
+			/*UserGroupRoleServiceUtil.deleteUserGroupRoles(userids, organization.getGroupId(), ORGANISATION_ADMIN_ROLL);
+			OrganizationLocalServiceUtil.deleteUserOrganization(themeDisplay.getUserId(), organization);*/
 		} catch(Exception e) {
 			System.out.println("RDC Exception in MasterPublish:publishToGate");
 			e.printStackTrace();
 		}		
 		
-		
+		try {
+			UserLocalServiceUtil.deleteRoleUser(ADMIN_ROLL, themeDisplay.getUserId());
+		} catch (Exception e) {
+			System.out.println("RDC Exception in MasterPublish:publishToGate - remove from admin");
+			e.printStackTrace();
+		}
+	
 	}
 	
 	private Organization createOrganisation(Company company, MasterCandidate master) throws PortalException, SystemException {
-		// Create Organisation		
-		User defaultUser = company.getDefaultUser();
-		
-		/*Organization organization = OrganizationLocalServiceUtil.addOrganization(defaultUser.getUserId(),
-						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-						master.getName(), true);*/
-		
-		long userId = company.getDefaultUser().getUserId();
-        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
-        String name = master.getName();
-        String type = OrganizationConstants.TYPE_REGULAR_ORGANIZATION;
-        boolean recursable = true;
-        long regionId = 0;
-        long countryId = 0;
-        int statusId = GetterUtil.getInteger(PropsUtil.get(
-                "sql.data.com.liferay.portal.model.ListType.organization.status"));
-        String comments = null;
-
-        ServiceContext serviceContext = new ServiceContext();
-
-        serviceContext.setAddGroupPermissions(true);
-        serviceContext.setAddGuestPermissions(true);
-        
-        boolean site = true;
-
-        Organization organization =
-                OrganizationLocalServiceUtil.addOrganization(userId, parentOrganizationId, name, type, regionId, countryId, 
-                		statusId, comments, site, serviceContext);
-        
-        Group group = organization.getGroup();
-        serviceContext.setScopeGroupId(group.getGroupId());
-        
-		return organization;
+		try {
+			// Create Organisation		
+			User defaultUser = company.getDefaultUser();
+			
+			long userId = company.getDefaultUser().getUserId();
+	        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
+	        String name = master.getName();
+	        String type = OrganizationConstants.TYPE_REGULAR_ORGANIZATION;
+	        boolean recursable = true;
+	        long regionId = 0;
+	        long countryId = 0;
+	        int statusId = GetterUtil.getInteger(PropsUtil.get(
+	                "sql.data.com.liferay.portal.model.ListType.organization.status"));
+	        String comments = null;
+	
+	        ServiceContext serviceContext = new ServiceContext();
+	
+	        serviceContext.setAddGroupPermissions(true);
+	        serviceContext.setAddGuestPermissions(true);
+	        
+	        boolean site = true;
+	
+	        Organization organization =
+	                OrganizationLocalServiceUtil.addOrganization(userId, parentOrganizationId, name, type, regionId, countryId, 
+	                		statusId, comments, site, serviceContext);
+	        
+	        Group group = organization.getGroup();
+	        serviceContext.setScopeGroupId(group.getGroupId());
+	        
+			return organization;
+		} catch (Exception e) {
+			System.out.println("RDC Exception in MasterPublish:createOrganisation");
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
-	private void createUsersFromMaster(Organization organization, Company company, String emails, String contactperson, String head, ServiceContext serviceContext) {
+	private void createUsersFromMaster(Organization organization, Company company, String emails, String contactperson, String head) {
 		String pattern_string_mail_ = "\\b([a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4})*)\\b";
 		Pattern pattern_mail_ = Pattern.compile(pattern_string_mail_);
+		
+		ServiceContext serviceContext = new ServiceContext();
+        serviceContext.setAddGroupPermissions(true);
+        serviceContext.setAddGuestPermissions(true);
 		
 		HashSet<String> mails = new HashSet<String>();
 		Matcher matcher = pattern_mail_.matcher(emails);
@@ -216,6 +259,8 @@ public class MasterPublish extends MVCPortlet {
 			createUser(user, company, mail, organization, serviceContext);
 		} else {
 			OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization);
+			long[] userids = {user.getUserId()};
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), ORGANISATION_ADMIN_ROLL);
 		}
 	}
 	
@@ -246,6 +291,8 @@ public class MasterPublish extends MVCPortlet {
 				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 		user.setPasswordReset(false);
 		UserLocalServiceUtil.updateUser(user);
+		long[] userids = {user.getUserId()};
+		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), ORGANISATION_ADMIN_ROLL);
 	}
 	
 	private String getFirstnameFromMail(String mail) {
@@ -273,19 +320,44 @@ public class MasterPublish extends MVCPortlet {
 	}
 	
 	private void createPages(Organization organization) throws Exception {
-		// Create Public Pages
-		long publicLayoutSetPrototypeId = 33202;
-		boolean publicLayoutSetPrototypeLinkEnabled = true;
-		long privateLayoutSetPrototypeId = 0;
-		boolean privateLayoutSetPrototypeLinkEnabled = false;
-				
-		Group organizationGroup = organization.getGroup();
-				
-		SitesUtil.updateLayoutSetPrototypesLinks(organizationGroup, publicLayoutSetPrototypeId,
-						privateLayoutSetPrototypeId,
-						publicLayoutSetPrototypeLinkEnabled,
-						privateLayoutSetPrototypeLinkEnabled);
-		SitesUtil.mergeLayoutSetPrototypeLayouts(organizationGroup, LayoutSetLocalServiceUtil.getLayoutSet(organizationGroup.getGroupId(), false));
+		try {
+			// Create Public Pages
+			long publicLayoutSetPrototypeId = 33202; //10350 Community Site for local
+			boolean publicLayoutSetPrototypeLinkEnabled = true;
+			boolean isPrivateLayout = false;
+			long privateLayoutSetPrototypeId = 0;
+			boolean privateLayoutSetPrototypeLinkEnabled = false;
+					
+			Group organizationGroup = organization.getGroup();
+			
+			long groupId = organizationGroup.getGroupId();
+		    LayoutSetPrototype prototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(publicLayoutSetPrototypeId);
+		    boolean layoutSetPrototypeLinkEnabled = true;
+		    LayoutSetLocalServiceUtil.updateLayoutSetPrototypeLinkEnabled(groupId, isPrivateLayout,
+		            layoutSetPrototypeLinkEnabled, prototype.getUuid());
+		    
+		    LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, isPrivateLayout);
+		    SitesUtil.mergeLayoutSetPrototypeLayouts(organizationGroup, layoutSet);
+			
+			/*SitesUtil.updateLayoutSetPrototypesLinks(organizationGroup, publicLayoutSetPrototypeId,
+							privateLayoutSetPrototypeId,
+							publicLayoutSetPrototypeLinkEnabled,
+							privateLayoutSetPrototypeLinkEnabled);
+			SitesUtil.mergeLayoutSetPrototypeLayouts(organizationGroup, LayoutSetLocalServiceUtil.getLayoutSet(organizationGroup.getGroupId(), false));*/
+		} catch (Exception e) {
+			System.out.println("RDC Exception - MasterPublish::createPages");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		// Update Logo
+		//boolean privateLayout = true;
+		
+		//String url = "http://localhost:8080/documents/10194/0/Biobank/a7b1fd67-d959-4170-9ea4-2139ed7b6047?t=1390941119698";
+	    //File logo = new File(url);    
+		//LayoutSetServiceUtil.updateLogo(organization.getGroupId(), privateLayout, true, logo);//organizationGroup.getGroupId()
+		/*privateLayout = false;
+		LayoutSetServiceUtil.updateLogo(organization.getGroupId(), privateLayout, true, logo);*/
 	}
 	
 	private void createDDLs(ActionRequest request, Organization organization, MasterCandidate master) throws PortalException, SystemException {
@@ -416,6 +488,7 @@ public class MasterPublish extends MVCPortlet {
 	}
 	
 	private DDLRecordSet createRecordSet(ActionRequest request, Organization organization, String name, long ddmStructureId, ServiceContext serviceContext) throws PortalException, SystemException {
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		long groupId = organization.getGroupId();
 		String recordSetKey = null;
 		int scope = 0;
@@ -425,7 +498,7 @@ public class MasterPublish extends MVCPortlet {
 		Map<Locale,String> nameMap = LocalizationUtil.getLocalizationMap(languageid, names);
 		Map<Locale,String> descriptionMap = LocalizationUtil.getLocalizationMap(languageid, description);
 
-		DDLRecordSet recordSet = DDLRecordSetServiceUtil.addRecordSet(groupId, ddmStructureId, recordSetKey, nameMap, 
+		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.addRecordSet(themeDisplay.getUserId(), groupId, ddmStructureId, recordSetKey, nameMap, 
 				descriptionMap, DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope, serviceContext);
 		return recordSet;
 	}
@@ -458,8 +531,6 @@ public class MasterPublish extends MVCPortlet {
 			fields.put(field_description);
 			Field field_subtype = new Field("subtype", master.getCandidatesubtype());
 			fields.put(field_subtype);
-			Field field_legalEntity = new Field("legalEntity", "");
-			fields.put(field_legalEntity);
 			Field field_countryCode = new Field("countryCode", master.getCountry());
 			fields.put(field_countryCode);
 			Field field_geographicAreaCovered = new Field("geographicAreaCovered", "");
@@ -474,7 +545,7 @@ public class MasterPublish extends MVCPortlet {
 				DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
 				serviceContext);
 		} catch(Exception e) {
-			System.out.println("RDC Exception");
+			System.out.println("RDC Exception Core");
 			e.printStackTrace();
 		}
 	}
@@ -489,7 +560,7 @@ public class MasterPublish extends MVCPortlet {
 					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
 					serviceContext);
 		} catch(Exception e) {
-			System.out.println("RDC Exception");
+			System.out.println("RDC Exception QualityIndicator");
 			e.printStackTrace();
 		}
 	}
@@ -504,7 +575,7 @@ public class MasterPublish extends MVCPortlet {
 					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
 					serviceContext);
 		} catch(Exception e) {
-			System.out.println("RDC Exception");
+			System.out.println("RDC Exception DiseaseAreas");
 			e.printStackTrace();
 		}
 	}
@@ -519,7 +590,7 @@ public class MasterPublish extends MVCPortlet {
 					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
 					serviceContext);
 		} catch(Exception e) {
-			System.out.println("RDC Exception");
+			System.out.println("RDC Exception Accesability");
 			e.printStackTrace();
 		}
 	}
@@ -550,7 +621,7 @@ public class MasterPublish extends MVCPortlet {
 						DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
 						serviceContext);
 			} catch(Exception e) {
-				System.out.println("RDC Exception");
+				System.out.println("RDC Exception DiseaseMatrix");
 				e.printStackTrace();
 			}
 		}
@@ -568,7 +639,7 @@ public class MasterPublish extends MVCPortlet {
 						DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
 						serviceContext);
 			} catch(Exception e) {
-				System.out.println("RDC Exception");
+				System.out.println("RDC Exception DiseaseMatrix");
 				e.printStackTrace();
 			}
 		}
@@ -587,411 +658,6 @@ public class MasterPublish extends MVCPortlet {
 		} catch(Exception e) {
 			System.out.println("RDC Exception in MasterPublish:deleteOrganisation");
 			System.out.println("Could not delete Organisation: " + organisationid);
-			e.printStackTrace();
-		}
-	}
-	
-	// --------------------------------------------------------------------
-	// Testing Classes
-	// --------------------------------------------------------------------
-	public void createRecordSet(ActionRequest request) throws PortalException, SystemException {
-		Organization organization = OrganizationLocalServiceUtil.getOrganization(24501);
-		if(organization != null) {
-			System.out.println("---->notnull");
-		} else {
-			System.out.println("---->null");
-		}
-		long groupId = organization.getGroupId();
-		long ddmStructureId = 14503;
-		String recordSetKey = null;
-		String[] languageid = {"0"};
-		String[] names = {"DDL Structure Name 2"};
-		String[] description = {"DDL Structure description"};
-		Map<Locale,String> nameMap = LocalizationUtil.getLocalizationMap(languageid, names);
-		Map<Locale,String> descriptionMap = LocalizationUtil.getLocalizationMap(languageid, description);
-		int scope = 0;
-		
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(DDLRecordSet.class.getName(), request);
-		System.out.println("Add Record Set");
-		DDLRecordSet recordSet = DDLRecordSetServiceUtil.addRecordSet(groupId, ddmStructureId, recordSetKey, nameMap, 
-				descriptionMap, DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope, serviceContext);
-		System.out.println("Done Add Record Set");
-		System.out.println("Record set generated: " + recordSet.getRecordSetId());
-		//recordSet = DDLRecordSetLocalServiceUtil.getDDLRecordSet(recordSet.getRecordSetId());
-		//DDMStructure ddmStructure = recordSet.getDDMStructure();
-		
-		//Fields fields = DDMUtil.getFields(ddmStructure.getStructureId(), serviceContext);
-		
-		Map<String,Serializable> fields = new HashMap<String, Serializable>();
-		fields.put("TextNr1", "AutotestValue1");
-		
-		//fields.get("TextNr1").setValue("AutotestValue");
-		System.out.println("Add Record 1");
-		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-		//fields.get("TextNr1").setValue("zweites Valuze");
-		System.out.println("Add Record 2");
-		fields.put("TextNr1", "zweites Valuze");
-		DDLRecord r2 = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-	}
-	
-	public void createOrganisation2(long companyId) throws Exception {
-		
-		// Create Organisation		
-		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
-
-		Account account = company.getAccount();
-
-		account.setName("Test Organisation V "+counter+" liferay");
-		account.setLegalName("Test Organisation "+counter+", Inc");
-
-		AccountLocalServiceUtil.updateAccount(account);
-
-		User defaultUser = company.getDefaultUser();
-
-		
-		Organization organization =
-			OrganizationLocalServiceUtil.addOrganization(
-				defaultUser.getUserId(),
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-				"Test Organisation "+counter+", Inc", true);
-		
-		// Create Public Pages
-		long publicLayoutSetPrototypeId = 23302;
-		boolean publicLayoutSetPrototypeLinkEnabled = true;
-		long privateLayoutSetPrototypeId = 0;
-		boolean privateLayoutSetPrototypeLinkEnabled = false;
-		
-		Group organizationGroup = organization.getGroup();
-		
-		//if (GroupPermissionUtil.contains(themeDisplay.getPermissionChecker(), organizationGroup.getGroupId(), ActionKeys.UPDATE)) {
-
-			SitesUtil.updateLayoutSetPrototypesLinks(
-				organizationGroup, publicLayoutSetPrototypeId,
-				privateLayoutSetPrototypeId,
-				publicLayoutSetPrototypeLinkEnabled,
-				privateLayoutSetPrototypeLinkEnabled);
-		//}
-		
-		
-		
-
-		// Create User
-		User user = UserLocalServiceUtil.fetchUserByEmailAddress(
-			company.getCompanyId(), "robert.reihs@gmail.com");
-		System.out.println("Company ID = 10154? " + company.getCompanyId());
-
-		if (user == null) {
-			user = UserLocalServiceUtil.addDefaultAdminUser(
-				companyId, "joebloggs"+counter+"", "test"+counter+"@biobank.com",
-				LocaleUtil.getDefault(), "Joe", StringPool.BLANK, "Bloggs");
-		}
-		else {
-			user.setScreenName("joebloggs"+counter+"");
-			user.setGreeting("Welcome Joe Bloggs!");
-			user.setFirstName("Joe");
-			user.setLastName("Bloggs");
-		}
-
-		user.setPasswordReset(false);
-		UserLocalServiceUtil.updateUser(user);
-		OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization);
-		
-		// Create DDLs
-	}
-	
-	//organization.getGroup().setType(23302);
-	
-			/*
-			// Create Fiendly URL
-			String friendlyUrl = organization.getName();
-			friendlyUrl= friendlyUrl.trim();
-			if(friendlyUrl.contains(" ")) { 
-				friendlyUrl = friendlyUrl.replaceAll("\\s+", "-"); 
-			} 
-			GroupLocalServiceUtil.updateFriendlyURL(
-				organization.getGroupId(), "/" + friendlyUrl);
-
-			Layout extranetLayout = LayoutLocalServiceUtil.addLayout(
-				defaultUser.getUserId(), organization.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "Test Organisation V"+counter+" liferay Extranet",
-				null, null, LayoutConstants.TYPE_PORTLET, false, "/idcard",
-				new ServiceContext());
-			
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)extranetLayout.getLayoutType();		
-			*/
-			/*layoutTypePortlet.addPortletId(
-				0, PortletKeys.SEARCH, "column-1", -1, false);
-			layoutTypePortlet.addPortletId(
-				0, PortletKeys.MESSAGE_BOARDS, "column-2", -1, false);*/
-
-			/*LayoutLocalServiceUtil.updateLayout(
-				extranetLayout.getGroupId(), false, extranetLayout.getLayoutId(),
-				extranetLayout.getTypeSettings());*/
-
-			/*Layout intranetLayout = LayoutLocalServiceUtil.addLayout(
-				defaultUser.getUserId(), organization.getGroupId(), true,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "Test Organisation V liferay Intranet",
-				null, null, LayoutConstants.TYPE_PORTLET, false, "/intranet",
-				new ServiceContext());
-
-			layoutTypePortlet = (LayoutTypePortlet)intranetLayout.getLayoutType();
-
-			layoutTypePortlet.addPortletId(
-				0, PortletKeys.SEARCH, "column-1", -1, false);
-			layoutTypePortlet.addPortletId(
-				0, PortletKeys.MESSAGE_BOARDS, "column-2", -1, false);
-
-			LayoutLocalServiceUtil.updateLayout(
-				intranetLayout.getGroupId(), true, intranetLayout.getLayoutId(),
-				intranetLayout.getTypeSettings());*/
-	
-	public void createOrganisation3() {
-		//http://docs.liferay.com/portal/6.2/javadocs/com/liferay/portal/service/OrganizationLocalServiceUtil.html#addOrganization(long, long, java.lang.String, java.lang.String, long, long, int, java.lang.String, boolean, com.liferay.portal.service.ServiceContext)
-		
-		/*
-		 * OrganizationLocalServiceUtil.addOrganization(long userId,
-                long parentOrganizationId,
-                String name,
-                String type,
-                long regionId,
-                long countryId,
-                int statusId,
-                String comments,
-                boolean site,
-                ServiceContext serviceContext);
-		 * 
-		 Parameters:
-			userId - the primary key of the creator/owner of the organization
-			parentOrganizationId - the primary key of the organization's parent organization
-			name - the organization's name
-			type - the organization's type (regular-organization/location)
-			regionId - the primary key of the organization's region
-			countryId - the primary key of the organization's country
-			statusId - the organization's workflow status
-			comments - the comments about the organization
-			site - whether the organization is to be associated with a main site
-			serviceContext - the service context to be applied (optionally null). Can set asset category IDs, asset tag names, and expando bridge attributes for the organization.
-
-		 */
-		long userId = 10434;
-		boolean setsite = true;
-		ServiceContext serviceContext = null;
-		String comments = "Automated Test Organistion";
-		String type = "regular-organization";
-		long regionId = 0;
-		long countryId = 0;
-		int statusId = 12017;
-		long parentOrganizationId = 0;
-		String roleName = "Organization Administrator";
-		String organisationname = "Test Organization V5";
-		
-		System.out.println(parentOrganizationId);
-		
-		Organization organization;
-		
-		try {
-			System.out.println("Create Organisation");
-			organization = OrganizationLocalServiceUtil.addOrganization(userId,
-					parentOrganizationId,
-					organisationname,
-			        type,
-			        regionId,
-			        countryId,
-			        statusId,
-			        comments,
-			        setsite,
-			        serviceContext);
-			System.out.println("Add user to organisation");
-			OrganizationLocalServiceUtil.addUserOrganization(userId, organization);
-			System.out.println("Get the roll id");
-			long roleId = RoleLocalServiceUtil.getRole(organization.getCompanyId(), roleName).getRoleId();
-			System.out.println("Set user roll for organisation");
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userId, organization.getGroup().getGroupId(), new long[] { roleId });
-			
-			// Add Address
-			String className = Organization.class.getName();
-            long classPK = organization.getOrganizationId();
-            String street1 = "Bay St.";
-            String street2 = "";
-            String street3 = "";
-            String city = "Brighton";
-            String zip = "3186";
-            regionId = 0;
-            //countryId = CountryUtil.findByName("austria").getCountryId();
-            int typeId = 12001; // Other
-			boolean mailing = false;
-            boolean primary = false;
-            
-            Group orgnGrp = createGroup(organization, userId);
-            createLayout(orgnGrp, organization);
-            
-            /*		
-            //Create Organisation Pages
-            long companyID = organization.getCompanyId();
-            
-            LayoutSetPrototypeServiceUtil.search(companyID, Boolean.TRUE, null);
-            LayoutSet publicLayoutSet = null;
-            LayoutSetPrototype publicLayoutSetPrototype = null;
-            boolean publicLayoutSetPrototypeLinkEnabled = true;
-            
-            boolean site = false;
-
-            Group organizationGroup = null;
-
-            if (organization != null) {
-            	organizationGroup = organization.getGroup();
-
-            	site = organizationGroup.isSite();
-            	
-            	// Wenn die seite Existiert
-            	if (site) {
-            		try {
-            			LayoutLocalServiceUtil.getLayouts(organizationGroup.getGroupId(), false, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-
-            			privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(organizationGroup.getGroupId(), true);
-
-            			privateLayoutSetPrototypeLinkEnabled = privateLayoutSet.isLayoutSetPrototypeLinkEnabled();
-
-            			String layoutSetPrototypeUuid = privateLayoutSet.getLayoutSetPrototypeUuid();
-
-            			if (Validator.isNotNull(layoutSetPrototypeUuid)) {
-            				privateLayoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuidAndCompanyId(layoutSetPrototypeUuid, company.getCompanyId());
-            			}
-            		}
-            		catch (Exception e) {
-            		}
-
-            		try {
-            			LayoutLocalServiceUtil.getLayouts(organizationGroup.getGroupId(), true, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-
-            			publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(organizationGroup.getGroupId(), false);
-
-            			publicLayoutSetPrototypeLinkEnabled = publicLayoutSet.isLayoutSetPrototypeLinkEnabled();
-
-            			String layoutSetPrototypeUuid = publicLayoutSet.getLayoutSetPrototypeUuid();
-
-            			if (Validator.isNotNull(layoutSetPrototypeUuid)) {
-            				publicLayoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuidAndCompanyId(layoutSetPrototypeUuid, companyID);
-            			}
-            		}
-            		catch (Exception e) {
-            		}
-            	} else {
-            		//publicLayoutSet = 
-            		long plid = CounterLocalServiceUtil.increment(Layout.class.getName());
-            		Layout layout = LayoutLocalServiceUtil.createLayout(plid);
-            		layout.setName("Overview");
-            		
-            		
-            		
-            		//organization
-            	}
-            }
-            */
-            // Seite Erstellen:
-            
-            /*List<LayoutSetPrototype> publicLayoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(companyID, Boolean.TRUE, null);
-            LayoutSetPrototype publicLayoutSetPrototype = null;*/
-            
-            //SitesUtil 
-            
-            final Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
-            indexer.reindex(organization);
-            
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-		
-		
-	}
-	
-	private Group createGroup(Organization organization, long userId) {
-		Group orgnGrp = null;
-		try {
-			long organization_id = organization.getOrganizationId();
-			ClassName clsNameOrgn;
-			
-			clsNameOrgn = ClassNameLocalServiceUtil.getClassName("com.liferay.portal.model.Organization");
-			
-			long classNameId=clsNameOrgn.getClassNameId();
-			System.out.println("organization classNameId got:"+classNameId);
-	
-			//Create Group
-			long gpId = CounterLocalServiceUtil.increment(Group.class.getName()); 
-			orgnGrp = GroupLocalServiceUtil.createGroup(gpId);
-			orgnGrp.setClassNameId(classNameId);
-			orgnGrp.setClassPK(organization_id);
-			orgnGrp.setCompanyId(organization.getCompanyId());
-			orgnGrp.setName(String.valueOf(organization_id));
-			orgnGrp.setCreatorUserId(userId);
-			
-			String frndlyUrl = organization.getName();
-			frndlyUrl= frndlyUrl.trim();
-			if(frndlyUrl.contains(" ")) { 
-				frndlyUrl = frndlyUrl.replaceAll("\\s+", "-"); 
-			} 
-			orgnGrp.setFriendlyURL("/"+frndlyUrl.toLowerCase());
-			
-		} catch (SystemException e) {
-			System.err.println("createGroup in MasterPublisher Error: ");
-			e.printStackTrace();
-		}
-		return orgnGrp;
-	}
-	
-	private void createLayout(Group orgnGrp, Organization organization) {
-		try {
-			//Create Layout for group layout and orgn association 
-			long layoutId = 0L; 
-			
-			layoutId = CounterLocalServiceUtil.increment(Layout.class.getName());
-			
-			Layout layoutGrp =LayoutLocalServiceUtil.createLayout(layoutId);
-			layoutGrp.setCompanyId(organization.getCompanyId());
-			layoutGrp.setName("Layout"+String.valueOf(layoutId) );
-			layoutGrp.setHidden(false);
-			layoutGrp.setPrivateLayout(false);
-			layoutGrp.setFriendlyURL("/"+organization.getName());
-			layoutGrp.setGroupId(orgnGrp.getGroupId());
-			layoutGrp.setLayoutId(2);
-			layoutGrp.setType("portlet"); 
-			LayoutLocalServiceUtil.addLayout(layoutGrp);
-			System.out.println("layoutGrp:"+layoutGrp);
-	
-	
-			//Create LayoutSet 
-			long layoutSetIdPub = CounterLocalServiceUtil.increment(LayoutSet.class.getName());
-			LayoutSet layoutSetPub=LayoutSetLocalServiceUtil.createLayoutSet(layoutSetIdPub);
-			layoutSetPub.setCompanyId(organization.getCompanyId());
-			layoutSetPub.setPrivateLayout(false);
-			layoutSetPub.setGroupId(orgnGrp.getGroupId());
-			layoutSetPub.setThemeId("classic");
-			LayoutSetLocalServiceUtil.addLayoutSet(layoutSetPub);
-			System.out.println("layoutSetPub :"+layoutSetPub);
-	
-			long layoutSetIdPriv= CounterLocalServiceUtil.increment(LayoutSet.class.getName());
-			LayoutSet layoutSetPriv=LayoutSetLocalServiceUtil.createLayoutSet(layoutSetIdPriv);
-			layoutSetPriv.setCompanyId(organization.getCompanyId());
-			layoutSetPriv.setPrivateLayout(true);
-			layoutSetPriv.setThemeId("classic");
-			layoutSetPriv.setGroupId(orgnGrp.getGroupId());
-			LayoutSetLocalServiceUtil.addLayoutSet(layoutSetPriv);
-			System.out.println("layoutSetPriv:"+layoutSetPriv);
-			
-			layoutGrp.setLayoutSet(layoutSetPub);
-	
-			/*System.out.println("publicLayoutSetPrototypeId got add:"+publicLayoutSetPrototypeId);
-			System.out.println("privateLayoutSetPrototypeId got add:"+privateLayoutSetPrototypeId);
-			CommunitiesUtil.applyLayoutSetPrototypes(orgnGrp, publicLayoutSetPrototypeId,privateLayoutSetPrototypeId);*/
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

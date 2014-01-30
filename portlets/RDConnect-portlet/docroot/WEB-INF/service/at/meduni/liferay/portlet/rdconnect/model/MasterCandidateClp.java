@@ -94,6 +94,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		attributes.put("joinId", getJoinId());
 		attributes.put("accepted", getAccepted());
 		attributes.put("state", getState());
+		attributes.put("diseasescodesauto", getDiseasescodesauto());
 
 		return attributes;
 	}
@@ -218,6 +219,12 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 		if (state != null) {
 			setState(state);
+		}
+
+		String diseasescodesauto = (String)attributes.get("diseasescodesauto");
+
+		if (diseasescodesauto != null) {
+			setDiseasescodesauto(diseasescodesauto);
 		}
 	}
 
@@ -689,6 +696,30 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		}
 	}
 
+	@Override
+	public String getDiseasescodesauto() {
+		return _diseasescodesauto;
+	}
+
+	@Override
+	public void setDiseasescodesauto(String diseasescodesauto) {
+		_diseasescodesauto = diseasescodesauto;
+
+		if (_masterCandidateRemoteModel != null) {
+			try {
+				Class<?> clazz = _masterCandidateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDiseasescodesauto",
+						String.class);
+
+				method.invoke(_masterCandidateRemoteModel, diseasescodesauto);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getMasterCandidateRemoteModel() {
 		return _masterCandidateRemoteModel;
 	}
@@ -780,6 +811,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		clone.setJoinId(getJoinId());
 		clone.setAccepted(getAccepted());
 		clone.setState(getState());
+		clone.setDiseasescodesauto(getDiseasescodesauto());
 
 		return clone;
 	}
@@ -826,7 +858,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{masterCandidateId=");
 		sb.append(getMasterCandidateId());
@@ -868,6 +900,8 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		sb.append(getAccepted());
 		sb.append(", state=");
 		sb.append(getState());
+		sb.append(", diseasescodesauto=");
+		sb.append(getDiseasescodesauto());
 		sb.append("}");
 
 		return sb.toString();
@@ -875,7 +909,7 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.rdconnect.model.MasterCandidate");
@@ -961,6 +995,10 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 			"<column><column-name>state</column-name><column-value><![CDATA[");
 		sb.append(getState());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>diseasescodesauto</column-name><column-value><![CDATA[");
+		sb.append(getDiseasescodesauto());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -987,5 +1025,6 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 	private long _joinId;
 	private boolean _accepted;
 	private String _state;
+	private String _diseasescodesauto;
 	private BaseModel<?> _masterCandidateRemoteModel;
 }

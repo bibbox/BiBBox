@@ -70,6 +70,7 @@ public class MasterCandidateWrapper implements MasterCandidate,
 		attributes.put("joinId", getJoinId());
 		attributes.put("accepted", getAccepted());
 		attributes.put("state", getState());
+		attributes.put("diseasescodesauto", getDiseasescodesauto());
 
 		return attributes;
 	}
@@ -194,6 +195,12 @@ public class MasterCandidateWrapper implements MasterCandidate,
 
 		if (state != null) {
 			setState(state);
+		}
+
+		String diseasescodesauto = (String)attributes.get("diseasescodesauto");
+
+		if (diseasescodesauto != null) {
+			setDiseasescodesauto(diseasescodesauto);
 		}
 	}
 
@@ -625,6 +632,26 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	@Override
 	public void setState(java.lang.String state) {
 		_masterCandidate.setState(state);
+	}
+
+	/**
+	* Returns the diseasescodesauto of this master candidate.
+	*
+	* @return the diseasescodesauto of this master candidate
+	*/
+	@Override
+	public java.lang.String getDiseasescodesauto() {
+		return _masterCandidate.getDiseasescodesauto();
+	}
+
+	/**
+	* Sets the diseasescodesauto of this master candidate.
+	*
+	* @param diseasescodesauto the diseasescodesauto of this master candidate
+	*/
+	@Override
+	public void setDiseasescodesauto(java.lang.String diseasescodesauto) {
+		_masterCandidate.setDiseasescodesauto(diseasescodesauto);
 	}
 
 	@Override

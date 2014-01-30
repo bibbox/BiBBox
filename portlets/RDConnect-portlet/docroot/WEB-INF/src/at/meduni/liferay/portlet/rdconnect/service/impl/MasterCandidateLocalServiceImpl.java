@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import at.meduni.liferay.portlet.rdconnect.model.Candidate;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
+import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.base.MasterCandidateLocalServiceBaseImpl;
@@ -67,7 +68,7 @@ public class MasterCandidateLocalServiceImpl
 		}
 		
 		// Dynamic Query for search
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MasterCandidate.class);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MasterCandidateImpl.class);
 				
 		Criterion criterion = null;
 				
