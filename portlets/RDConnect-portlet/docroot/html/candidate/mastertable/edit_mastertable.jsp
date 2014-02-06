@@ -221,7 +221,7 @@ AUI().use(
     
   }
 );
-YUI().use(
+AUI().use(
   'aui-toggler',
   function(Y) {
     new Y.TogglerDelegate(

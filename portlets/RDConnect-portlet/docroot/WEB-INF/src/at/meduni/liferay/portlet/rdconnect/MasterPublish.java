@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +40,9 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -55,6 +59,7 @@ import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -70,14 +75,18 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -100,6 +109,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
+import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 import com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicyFactoryUtil;
 
 /**
@@ -114,6 +124,16 @@ public class MasterPublish extends MVCPortlet {
     Random random_ = new Random();
     long ORGANISATION_ADMIN_ROLL = 22956; // local 10166 Server 22956
     long ADMIN_ROLL = 22951;
+    // Web page
+    int PUBLICWEBSITETYPEID = 12020; // Public: 12020
+    int INTRANETWEBSITETYPEID = 12019; // Public: 12020
+    // E-mail
+    int EMAILADDRESS_TYPEID = 12004;
+    // Address
+    int ADDRESS_BILLING = 12000;
+    int ADDRESS_OTHER = 12001;
+    int ADDRESS_POBOX = 12002;
+    int ADDRESS_SHIPPING = 12003;
 	
 	public void publishToGate(ActionRequest request, ActionResponse response, MasterCandidate master) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
@@ -121,22 +141,9 @@ public class MasterPublish extends MVCPortlet {
 		long companyId = themeDisplay.getCompanyId();
 		
 		try {
-			long[] userids = {themeDisplay.getUserId()};
-			UserLocalServiceUtil.addRoleUsers(ADMIN_ROLL, userids);
-		} catch (Exception e) {
-			System.out.println("RDC Exception in MasterPublish:publishToGate - Promote to admin");
-			e.printStackTrace();
-		}
-		
-		try {
 			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 			// Create Organisation
-			Organization organization = createOrganisation(company, master);
-			// ADD Creator to Organisation
-			/*OrganizationLocalServiceUtil.addUserOrganization(themeDisplay.getUserId(), organization);
-			long[] userids = {themeDisplay.getUserId()};
-			UserGroupRoleServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), ORGANISATION_ADMIN_ROLL);*/
-			
+			Organization organization = createOrganisation(company, master);		
 			
 			// Update Master
 			master.setOrganisationid(organization.getOrganizationId());
@@ -146,28 +153,193 @@ public class MasterPublish extends MVCPortlet {
 			createUsersFromMaster(organization, company, master.getMail(), master.getContactperson(), master.getHead());
 			// Create DDL Elements
 			createDDLs(request, organization, master);
-			
 			// Create Organisation Pages
 			createPages(organization);
+			// Add Organisation details
+			addOrganisationDetails(organization, master, themeDisplay.getUserId());
 			
 			OrganizationLocalServiceUtil.rebuildTree(company.getCompanyId());
-			
-			
-			// REMOVE Creator from Organisation
-			/*UserGroupRoleServiceUtil.deleteUserGroupRoles(userids, organization.getGroupId(), ORGANISATION_ADMIN_ROLL);
-			OrganizationLocalServiceUtil.deleteUserOrganization(themeDisplay.getUserId(), organization);*/
 		} catch(Exception e) {
 			System.out.println("RDC Exception in MasterPublish:publishToGate");
 			e.printStackTrace();
 		}		
 		
-		try {
+		/*try {
 			UserLocalServiceUtil.deleteRoleUser(ADMIN_ROLL, themeDisplay.getUserId());
 		} catch (Exception e) {
 			System.out.println("RDC Exception in MasterPublish:publishToGate - remove from admin");
 			e.printStackTrace();
-		}
+		}*/
 	
+	}
+	
+	private void addOrganisationDetails(Organization organization, MasterCandidate master, long userid) {
+		addWebpageToOrganisation(organization, master);
+		addEmailAddressToOrganisation(organization, master);
+		//addPhoneToOrganisation(organization, master);
+		addAddressToOrganisation(organization, master, userid);
+	}
+	
+	private void addEmailAddressToOrganisation(Organization organization, MasterCandidate master) {
+		try {
+			List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
+			String pattern_string_mail_ = "\\b([a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4})*)\\b";
+			Pattern pattern_mail_ = Pattern.compile(pattern_string_mail_);
+			
+			ServiceContext serviceContext = new ServiceContext();
+	        serviceContext.setAddGroupPermissions(true);
+	        serviceContext.setAddGuestPermissions(true);
+			
+			HashSet<String> mails = new HashSet<String>();
+			Matcher matcher = pattern_mail_.matcher(master.getMail().replaceAll("mailto:", ""));
+			while (matcher.find()) {
+				if(!mails.contains(matcher.group().toLowerCase()))
+					mails.add(matcher.group().toLowerCase());
+			}
+			matcher = pattern_mail_.matcher(master.getContactperson().replaceAll("mailto:", ""));
+			while (matcher.find()) {
+				if(!mails.contains(matcher.group().toLowerCase()))
+					mails.add(matcher.group().toLowerCase());
+			}
+			matcher = pattern_mail_.matcher(master.getHead().replaceAll("mailto:", ""));
+			while (matcher.find()) {
+				if(!mails.contains(matcher.group().toLowerCase()))
+					mails.add(matcher.group().toLowerCase());
+			}
+			
+			boolean primary = true;
+			for(String mail : mails) {
+				EmailAddress emailAddress = EmailAddressLocalServiceUtil.createEmailAddress(0);
+
+				emailAddress.setAddress(mail);
+				emailAddress.setTypeId(EMAILADDRESS_TYPEID);
+				emailAddress.setPrimary(primary);
+				primary = false;
+				emailAddresses.add(emailAddress);
+			}
+			UsersAdminUtil.updateEmailAddresses(Organization.class.getName(), organization.getOrganizationId(), emailAddresses);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception MasterPublish::addEmailAddressToOrganisation");
+			System.out.println("PortalException");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception MasterPublish::addEmailAddressToOrganisation");
+			System.out.println("SystemException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("RDC Exception MasterPublish::addEmailAddressToOrganisation");
+			e.printStackTrace();
+		}
+	}
+	
+	private void addPhoneToOrganisation(Organization organization, MasterCandidate master) {
+		try {
+			List<Phone> phones = new ArrayList<Phone>();
+			UsersAdminUtil.updatePhones(Organization.class.getName(), organization.getOrganizationId(), phones);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception MasterPublish::addPhoneToOrganisation");
+			System.out.println("PortalException");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception MasterPublish::addPhoneToOrganisation");
+			System.out.println("SystemException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("RDC Exception MasterPublish::addPhoneToOrganisation");
+			e.printStackTrace();
+		}
+	}
+	
+	private void addAddressToOrganisation(Organization organization, MasterCandidate master, long userid) {
+		try {
+			List<Address> addresses = new ArrayList<Address>();
+			String street1 = "-";
+			String street2 = "";
+			String street3 = "";
+			String city = "-";
+			String zip = "-";
+			
+			if(!master.getAddress().equalsIgnoreCase("")){ 
+				int end = 0;
+				int start = 0;
+				if(master.getAddress().length() <= 75) {
+					street1 = master.getAddress();
+				} else if (master.getAddress().length() > 75 && master.getAddress().length() <= 150) {
+					end = master.getAddress().substring(start, 75).lastIndexOf(" ");
+					street1 = master.getAddress().substring(start, end);
+				} else if (master.getAddress().length() > 150 && master.getAddress().length() <= 225) {
+					end = master.getAddress().substring(start, 75).lastIndexOf(" ");				
+					street1 = master.getAddress().substring(start, end);
+					start = end;
+					end = start + master.getAddress().substring(start, end+75).lastIndexOf(" ");
+					street2 = master.getAddress().substring(start, end);
+					if(end < master.getAddress().length())
+						street3 = master.getAddress().substring(end);
+				} else if (master.getAddress().length() > 225) {
+					end = master.getAddress().substring(start, 75).lastIndexOf(" ");
+					street1 = master.getAddress().substring(start, end);
+					start = end;
+					end = start + master.getAddress().substring(start, end+75).lastIndexOf(" ");
+					street2 = master.getAddress().substring(start, end);
+					start = end;
+					end = start + master.getAddress().substring(start, start+75).lastIndexOf(" ");
+					street3 = master.getAddress().substring(start, end);
+				}
+			}
+			
+			int typeId = ADDRESS_OTHER;
+			long regionId = 0;
+			long countryId = 0;
+			boolean mailing = false;
+			boolean primary = true;
+			addresses.add(AddressLocalServiceUtil.addAddress(userid, Organization.class.getName(), organization.getOrganizationId(), street1, street2, street3, city, zip, 
+					regionId, countryId, typeId, mailing, primary, new ServiceContext()));
+			UsersAdminUtil.updateAddresses(Organization.class.getName(), organization.getOrganizationId(), addresses);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception MasterPublish::addAddressToOrganisation");
+			System.out.println("PortalException");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception MasterPublish::addAddressToOrganisation");
+			System.out.println("SystemException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("RDC Exception MasterPublish::addAddressToOrganisation");
+			e.printStackTrace();
+		}
+	}
+	
+	private void addWebpageToOrganisation(Organization organization, MasterCandidate master) {
+		try {
+			List<Website> websites = new ArrayList<Website>();
+			String[] urls = master.getUrl().split("[,; ]");
+			boolean primary = true;
+			for(String url : urls) {
+				url = url.trim();
+				if(url.length() == 0)
+					continue;
+				if(!url.startsWith("http"))
+					url = "http://" + url;
+				Website website = WebsiteLocalServiceUtil.createWebsite(0);
+				website.setUrl(url);
+				website.setTypeId(PUBLICWEBSITETYPEID);
+				website.setPrimary(primary);
+				primary = false;
+				websites.add(website);
+			}
+			UsersAdminUtil.updateWebsites(Organization.class.getName(), organization.getOrganizationId(), websites);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception MasterPublish::addWebpageToOrganisation");
+			System.out.println("PortalException");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception MasterPublish::addWebpageToOrganisation");
+			System.out.println("SystemException");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("RDC Exception MasterPublish::addWebpageToOrganisation");
+			e.printStackTrace();
+		}
 	}
 	
 	private Organization createOrganisation(Company company, MasterCandidate master) throws PortalException, SystemException {
@@ -178,6 +350,9 @@ public class MasterPublish extends MVCPortlet {
 			long userId = company.getDefaultUser().getUserId();
 	        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 	        String name = master.getName();
+	        if(name.length() > 100) {
+	        	name = name.substring(0, 100);
+	        }
 	        String type = OrganizationConstants.TYPE_REGULAR_ORGANIZATION;
 	        boolean recursable = true;
 	        long regionId = 0;
@@ -217,17 +392,17 @@ public class MasterPublish extends MVCPortlet {
         serviceContext.setAddGuestPermissions(true);
 		
 		HashSet<String> mails = new HashSet<String>();
-		Matcher matcher = pattern_mail_.matcher(emails);
+		Matcher matcher = pattern_mail_.matcher(emails.replaceAll("mailto:", ""));
 		while (matcher.find()) {
 			if(!mails.contains(matcher.group().toLowerCase()))
 				mails.add(matcher.group().toLowerCase());
 		}
-		matcher = pattern_mail_.matcher(contactperson);
+		matcher = pattern_mail_.matcher(contactperson.replaceAll("mailto:", ""));
 		while (matcher.find()) {
 			if(!mails.contains(matcher.group().toLowerCase()))
 				mails.add(matcher.group().toLowerCase());
 		}
-		matcher = pattern_mail_.matcher(head);
+		matcher = pattern_mail_.matcher(head.replaceAll("mailto:", ""));
 		while (matcher.find()) {
 			if(!mails.contains(matcher.group().toLowerCase()))
 				mails.add(matcher.group().toLowerCase());
@@ -304,7 +479,7 @@ public class MasterPublish extends MVCPortlet {
 				name = split2[0];
 			}
 		}
-		return name;
+		return getNameStringFormat(name);
 	}
 	
 	private String getLastnameFromMail(String mail) {
@@ -316,6 +491,16 @@ public class MasterPublish extends MVCPortlet {
 				name = split2[1];
 			}
 		}
+		return getNameStringFormat(name);
+	}
+	
+	private String getNameStringFormat(String name) {
+		if(name.length() > 1) {
+			name = name.substring(0, 1).toUpperCase() + name.substring(1);
+		} else if(name.length() == 1) {
+			name = name.substring(0, 1).toUpperCase();
+		}
+		System.out.println("Name: " + name);
 		return name;
 	}
 	
@@ -436,17 +621,17 @@ public class MasterPublish extends MVCPortlet {
 			System.out.println("Could not create Disease Matrix");
 			e.printStackTrace();
 		}
-		// create Accesability | ID 29100
+		// create Accessibility | ID 29100
 		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "Accesability", 29100, serviceContext);
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Accessibility", 29100, serviceContext);
 			creatRecordAccesability(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Accesability");
+			System.out.println("Could not create Accessibility");
 			e.printStackTrace();
 		} catch (SystemException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Accesability");
+			System.out.println("Could not create Accessibility");
 			e.printStackTrace();
 		}
 		// create Collections | ID 29093
@@ -603,10 +788,10 @@ public class MasterPublish extends MVCPortlet {
 				Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
 				
 				String fieldtype = "Comment";
-				if(s.equalsIgnoreCase("orpha")) {
+				if(s.contains("orpha")) {
 					fieldtype = "Orphanet_Number";
 				}
-				if(s.matches("\\w\\d\\d\\.\\d")) {
+				if(s.matches("\\w\\d\\d\\.\\d") || s.matches("\\w\\d\\d")) {
 					fieldtype = "ICD10";
 				}
 				if(s.matches("\\d{6}")) {
@@ -631,7 +816,7 @@ public class MasterPublish extends MVCPortlet {
 				DDMStructure ddmStructure = recordSet.getDDMStructure();		
 				Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
 					
-				Field field_code = new Field("name", s);
+				Field field_code = new Field("Name", s);
 				fields.put(field_code);
 				DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
 						serviceContext.getUserId(),

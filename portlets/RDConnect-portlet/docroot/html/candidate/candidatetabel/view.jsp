@@ -229,7 +229,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 				},
 				dataType: 'json',
 				on: {
-				  failure: function() { alert('failure'); },
+				  failure: function() {  },
 				  success: function(event, id, obj) { "success" }
 				}
 			});
