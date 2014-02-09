@@ -3,6 +3,9 @@
 <%@ page import="com.liferay.portal.service.permission.UserPermissionUtil" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
+<%@ page import="com.liferay.portal.model.Role" %>
+<%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.UserGroupRole" %>
 
 
 
@@ -33,18 +36,38 @@ String currentURL = PortalUtil.getCurrentURL(request);
     
     Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
     long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
-    LiferayPortletURL editorganizationURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
-    editorganizationURL.setParameter("struts_action", "/users_admin/edit_user");
-    editorganizationURL.setParameter("redirect", currentURL);
-    editorganizationURL.setParameter("p_p_state", "maximized");
+    LiferayPortletURL adduserURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+    adduserURL.setParameter("struts_action", "/users_admin/edit_user");
+    adduserURL.setParameter("redirect", currentURL);
+    adduserURL.setParameter("p_p_state", "maximized");
+    LiferayPortletURL editusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+    editusersURL.setParameter("struts_action", "/users_admin/view");
+    editusersURL.setParameter("usersListView", "flat-users");
+    editusersURL.setParameter("toolbarItem", "view-all-users");
+    editusersURL.setParameter("controlPanelCategory", "users");
+    editusersURL.setParameter("saveUsersListView", "true");
+    editusersURL.setParameter("redirect", currentURL);
+    editusersURL.setParameter("p_p_state", "maximized");
     
+    boolean portaleditorrole = false;
+    boolean biobankregistryownerrole = false;
+    for(Role role : themeDisplay.getUser().getRoles()) {
+    	if(role.getName().equalsIgnoreCase("Portal Editor"))
+    		portaleditorrole = true;
+    	if(role.getName().equalsIgnoreCase("Administrator"))
+    		portaleditorrole = true;
+    }
+    //Biobank, Registry Owner
+    Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+    for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {
+    	if(ugr.getRole().getName().equalsIgnoreCase("Biobank, Registry Owner"))
+    		biobankregistryownerrole = true;  			
+    }
+    if(biobankregistryownerrole || portaleditorrole) {
     %>
-	    <portlet:renderURL var="addUserURL">
-			<portlet:param name="struts_action" value="/users_admin/edit_user" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-		</portlet:renderURL>
-
-		<aui:nav-item href="<%= editorganizationURL.toString() %>" iconCssClass="icon-user" label="Add User" />
-	<%  %>
+		<div><a href="<%= adduserURL.toString() %>" class="icon-user">Add User</a> / 
+				<a href="<%= editusersURL.toString() %>" class="icon-user">Edit Users</a></div>
+		
+	<% } %>
 
 

@@ -86,6 +86,7 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;

@@ -1,3 +1,8 @@
 @import url(propose.css);
 @import url(heading.css);
+.avatar {
+  margin-right: 15px; }
+
+.rdc-people-dispaly {
+  margin-bottom: 20px; }
 
