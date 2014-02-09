@@ -1,2 +1,9 @@
 @import "propose.css";
 @import "heading.css";
+
+.avatar{
+	margin-right: 15px;
+}
+.rdc-people-dispaly {
+	margin-bottom: 20px;
+}

@@ -1,3 +1,22 @@
+/* ---------- RDC hub information ---------- */
+.rdchubportalinfo {
+	width: 100%;
+	height: 90px;
+}
+.rdchubportalinfologo {
+	float: left;
+	width: 90px;
+}
+.rdchubportalinfoheader {
+	float: left;
+	width: 907px;
+	height: 60px;
+}
+.rdchubportalinfosubmenu {
+	float: left;
+	width: 907px;
+	height: 30px;
+}
 /* ---------- RDC  information ---------- */
 .rdconnect-information-container {
 	width: 818px;

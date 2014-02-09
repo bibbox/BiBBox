@@ -665,4 +665,38 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>portalhubinformation</portlet-name>
+		<display-name>Portalhubinformation</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.rdconnect.heading.portalhubinformation
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/heading/portalhubinformation/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Portalhubinformation</title>
+			<short-title>Portalhubinformation</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

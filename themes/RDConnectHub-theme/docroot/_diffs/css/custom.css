@@ -12,50 +12,66 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
-/* ---------- Base styles ---------- */
+/* ---------- RDC  header ---------- */
+.rdconnect-header-container {
+	height: 230px;
+	width: 100%;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+.rdconnect-header-container-top {
+	height: 50px;
+	width: 100%;
+	background-image:url('/RDConnectI-theme/images/rdconnectheaderbackgound.png');
+	background-size:100%;
+}
+.rdconnect-header-container-bottom {
+	height: 90px;
+	width: 100%;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	background: #FAFAF0;
+}
+.rdconnect-header-container-inner {
+	width: 1000px;
+}
+.rdconnect-header-container-top-rdlogo {
+	width: 178px;
+	border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	float: left;
+}
+.rdconnect-header-container-top-menue {
+	width: 818px;
+	border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 0;
+	float: left;
+}
+.rdconnect-header-container-bottom-grouplogo {
+	width: 178px;
+	height: 180px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	float: left;
+	background: #FFFFFF;
+}
+.rdconnect-header-container-bottom-portalinformation {
+	width: 818px;
+	height: 180px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 0 0;
+	background: #FFFFFF;
+	float: left;
+}
+/* ---------- RDC  styles ---------- */
 .aui form {
     margin: 0;
 }
-#wrapper {
-	width: 1000px;
-	margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-	padding: 0;
-}
-div.portlet-body {
-    max-width: 1200px;
-    min-width: 100px;
-}
-.rd-hub-column1 {
-	width: 998px;
-	border-color: #B2F150;
-	border-style: solid;
-	border-width: 1px;
-}
-.rd-hub-column2-w100 {
-	width: 1000px;
-	float: left;
-}
-.rd-hub-column2-w70 {
-	width: 700px;
-	float: left;
-}
-.rd-hub-column3-w30 {
-	width: 300px;
-	float: left;
-}
-.lfr-translation-manager {
-	display: none;
-}
-/*
-.aui body {
-    background: #D9D9D9;
-}*/
-#footer a {
-	color: #303030;
-}
-
 #logo-rdconnect-Public {
 	position:absolute;
 	left: 50px;
@@ -64,11 +80,111 @@ div.portlet-body {
 	clear: both;
 	z-index: 400;
 }
-
-.powered-by {
-	margin: auto;
-	text-align: center;
+.lfr-translation-manager {
+	display: none;
 }
+.aui body {
+    background: #F4F4E1;
+}
+#footer a {
+	color: #303030;
+}
+#rdheading {
+	/*background: #303030;*/
+	height: 220px;
+	border-color: #B2F150;
+	border-style: solid;
+	border-width: 1px;
+	margin-top: 0;
+	clear: both;
+}
+#rd-layout-heading {
+	background: #FFFFFF;
+}
+#rdlogo {
+	margin-left: 40px;
+	width: 230px;
+	float:left;
+}
+#rdtitle {
+	height: 30px;
+}
+#rdnavigationmysites
+ {
+	height: 30px;
+	float: left;
+}
+
+/* ---------- RDC Layout  styles ---------- */
+div.portlet-body {
+    max-width: 1200px;
+    min-width: 100px;
+}
+#rd-header-signin {
+	float: right;
+	margin: 30px;
+}
+.rd-connect-column-1 {
+	width: 178px;
+	height: 228px;
+	float: left;
+	border-color: #B2F150;
+	border-style: solid;
+	border-width: 1px;
+}
+/*.rd-connect-column-1 {
+	width: 180px;
+	height: 180px;
+	float: left;
+	background: #303030;
+}*/
+.rd-connect-column-2 {
+	width: 818px;
+	height: 48px;
+	float: left;
+	border-color: #B2F150;
+	border-style: solid;
+	border-width: 1px;
+}
+.rd-connect-column-3 {
+	width: 818px;
+	height: 178px;
+	float: left;
+	border-color: #B2F150;
+	border-style: solid;
+	border-width: 1px;
+}
+.rd-connect-column-4 {
+	width: 590px;
+	float: left;
+}
+.rd-connect-column-4-w100 {
+	width: 1000px;
+	float: left;
+}
+.rd-connect-column-5 {
+	width: 410px;
+	float: left;
+}
+#wrapper {
+	width: 1000px;
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+	padding: 0;
+}
+.aui .portlet-borderless-container {
+    padding: 0;
+    
+}
+
+.aui .portlet, .aui .portlet-borderless-container {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- Base styles ---------- */
 
 .aui {
 	.separator {
@@ -103,8 +219,8 @@ div.portlet-body {
 		font-weight: bold;
 		padding: 5px 5px 5px 25px;
 		position: absolute;
-		right: 0;
-		top: -1.2em;
+		right: 10px;
+		top: 10px;
 	}
 
 	.redirected-to-message {
@@ -534,7 +650,11 @@ div.portlet-body {
 	/* ---------- Footer ---------- */
 
 	#footer {
-		text-align: right;
+		text-align: center;
+		border-color: #8C8A8C;
+		border-style: solid;
+		border-width: 1px 0 0 0;
+		background: #FAFAF0;
 	}
 
 	/* ---------- Hudcrumbs ---------- */
