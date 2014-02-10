@@ -41,18 +41,24 @@ String currentURL = PortalUtil.getCurrentURL(request);
     adduserURL.setParameter("redirect", currentURL);
     adduserURL.setParameter("p_p_state", "maximized");
     LiferayPortletURL editusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
-    editusersURL.setParameter("struts_action", "/users_admin/view");
+    // Link to all users
+    /*editusersURL.setParameter("struts_action", "/users_admin/view");
     editusersURL.setParameter("usersListView", "flat-users");
     editusersURL.setParameter("toolbarItem", "view-all-users");
     editusersURL.setParameter("controlPanelCategory", "users");
     editusersURL.setParameter("saveUsersListView", "true");
+    editusersURL.setParameter("redirect", currentURL);
+    editusersURL.setParameter("p_p_state", "maximized");*/
+    editusersURL.setParameter("struts_action", "/users_admin/view");
+    editusersURL.setParameter("organizationId", String.valueOf(organizationId));
+    editusersURL.setParameter("usersListView", "tree");
     editusersURL.setParameter("redirect", currentURL);
     editusersURL.setParameter("p_p_state", "maximized");
     
     boolean portaleditorrole = false;
     boolean biobankregistryownerrole = false;
     for(Role role : themeDisplay.getUser().getRoles()) {
-    	if(role.getName().equalsIgnoreCase("Portal Editor"))
+    	if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
     		portaleditorrole = true;
     	if(role.getName().equalsIgnoreCase("Administrator"))
     		portaleditorrole = true;
@@ -60,7 +66,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
     //Biobank, Registry Owner
     Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
     for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {
-    	if(ugr.getRole().getName().equalsIgnoreCase("Biobank, Registry Owner"))
+    	if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-OWNER"))
     		biobankregistryownerrole = true;  			
     }
     if(biobankregistryownerrole || portaleditorrole) {

@@ -125,6 +125,10 @@ public class MasterPublish extends MVCPortlet {
     Random random_ = new Random();
     long ORGANISATION_ADMIN_ROLL = 22956; // local 10166 Server 22956
     long ADMIN_ROLL = 22951;
+    long BIOBANK_REG_EDITOR = 32822;
+    long BIOBANK_REG_MEMBER = 32821;
+    long BIOBANK_REG_OWNER = 32823;
+    long BiobanK_REG_MAINCONTACT = 71378;
     // Web page
     int PUBLICWEBSITETYPEID = 12020; // Public: 12020
     int INTRANETWEBSITETYPEID = 12019; // Public: 12020
@@ -409,9 +413,11 @@ public class MasterPublish extends MVCPortlet {
 				mails.add(matcher.group().toLowerCase());
 		}
 		
+		boolean first = true;
 		for(String mail : mails) {
 			try {
-				addUsersToOrganisation(organization, company, mail, serviceContext);
+				addUsersToOrganisation(organization, company, mail, serviceContext, first);
+				first = false;
 			} catch (SystemException e) {
 				System.out.println("RDC Exception in MasterPublish:createUsersFromMaster");
 				System.out.println("Could not create USER");
@@ -428,19 +434,24 @@ public class MasterPublish extends MVCPortlet {
 		}
 	}
 	
-	private void addUsersToOrganisation(Organization organization, Company company, String mail, ServiceContext serviceContext) throws SystemException, PortalException {
+	private void addUsersToOrganisation(Organization organization, Company company, String mail, ServiceContext serviceContext, boolean first) throws SystemException, PortalException {
 		// Create User
 		User user = UserLocalServiceUtil.fetchUserByEmailAddress(company.getCompanyId(), mail);
 		if (user == null) {
-			createUser(user, company, mail, organization, serviceContext);
+			user = createUser(user, company, mail, organization, serviceContext);
 		} else {
 			OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization);
-			long[] userids = {user.getUserId()};
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), ORGANISATION_ADMIN_ROLL);
+		}
+		long[] userids = {user.getUserId()};
+		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), BIOBANK_REG_EDITOR);
+		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), BIOBANK_REG_MEMBER);
+		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), BIOBANK_REG_OWNER);
+		if(first) {
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), BiobanK_REG_MAINCONTACT);
 		}
 	}
 	
-	private void createUser(User user, Company company, String mail, Organization organization, ServiceContext serviceContext) throws PortalException, SystemException {
+	private User createUser(User user, Company company, String mail, Organization organization, ServiceContext serviceContext) throws PortalException, SystemException {
 		boolean autoPassword = false;
 		String password1 = "1234";
 		boolean autoScreenName = true;
@@ -467,8 +478,7 @@ public class MasterPublish extends MVCPortlet {
 				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 		user.setPasswordReset(false);
 		UserLocalServiceUtil.updateUser(user);
-		long[] userids = {user.getUserId()};
-		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), ORGANISATION_ADMIN_ROLL);
+		return user;
 	}
 	
 	private String getFirstnameFromMail(String mail) {
@@ -572,7 +582,7 @@ public class MasterPublish extends MVCPortlet {
 			e.printStackTrace();
 		}
 		// create Related Persons | ID 30869
-		try {
+		/*try {
 			createRecordSet(request, organization, "Related Persons", 30869, serviceContext);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
@@ -582,7 +592,7 @@ public class MasterPublish extends MVCPortlet {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
 			System.out.println("Could not create Related Persons");
 			e.printStackTrace();
-		}
+		}*/
 		// create Quality Indicators | ID 29098
 		try {
 			DDLRecordSet recordSet = createRecordSet(request, organization, "Quality Indicators", 29098, serviceContext);
@@ -788,14 +798,16 @@ public class MasterPublish extends MVCPortlet {
 				DDMStructure ddmStructure = recordSet.getDDMStructure();		
 				Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
 				
+				s = s.trim();
+				
 				String fieldtype = "Comment";
-				if(s.contains("orpha")) {
+				if(s.contains("orpha") || s.contains("ORPHA")) {
 					fieldtype = "Orphanet_Number";
 				}
-				if(s.matches("\\w\\d\\d\\.\\d") || s.matches("\\w\\d\\d")) {
+				if(s.matches("\\w\\d\\d\\.\\d") || s.matches("\\w\\d\\d") || s.matches("ICD10:\\w\\d\\d\\.\\d") || s.matches("ICD10:\\w\\d\\d")) {
 					fieldtype = "ICD10";
 				}
-				if(s.matches("\\d{6}")) {
+				if(s.matches("\\d{6}") || s.matches("OMIM:\\d{6}") || s.matches("OMIM\\d{6}")) {
 					fieldtype = "OMIM";
 				}
 				

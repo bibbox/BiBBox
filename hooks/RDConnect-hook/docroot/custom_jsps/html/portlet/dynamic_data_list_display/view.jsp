@@ -96,49 +96,76 @@ boolean showEditFormTemplateIcon = (formDDMTemplateId != 0) && DDMTemplatePermis
 <!-- RDC Edit Link -->
 <!-- Edit Record -->
 <% 
-if(rdcstructure.length() != 0 && rdcedirecordlink && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {
-	List<DDLRecord> rdcrecords = recordSet.getRecords();
-	for(DDLRecord record : rdcrecords) {
-%>
-		<portlet:renderURL var="editRecordURL" windowState="<%= WindowState.NORMAL.toString() %>">
-			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="recordId" value="<%= String.valueOf(record.getRecordId()) %>" />
-			<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
-		</portlet:renderURL>
-		
-		<aui:a href="<%= editRecordURL %>">Edit</aui:a>
-<%
-		//break;
+
+long organizationId = 0;
+com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
+if (currentGroup.isOrganization()) {
+    // the group is an Organization
+	organizationId = currentGroup.getClassPK();
+
+	boolean portaleditorrole = false;
+	boolean biobankregistryownerrole = false;
+	for(Role role : themeDisplay.getUser().getRoles()) {
+		if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
+			portaleditorrole = true;
+		if(role.getName().equalsIgnoreCase("Administrator"))
+			portaleditorrole = true;
 	}
-}
-%>
-<!-- Edit RecordSet -->
-<% 
-if(rdcstructure.length() != 0 && rdcedirecordsetlink && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {
-%>
-		<portlet:renderURL var="editRecordSetURL" windowState="<%= WindowState.NORMAL.toString() %>">
-			<portlet:param name="struts_action" value="/dynamic_data_lists/view_record_set" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
-			<portlet:param name="spreadsheet" value="true" />
-			<portlet:param name="editable" value="true" />
-		</portlet:renderURL>
-		
-		<portlet:renderURL var="addRecordURL" windowState="<%= WindowState.NORMAL.toString() %>">
-			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
-			<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
-			<portlet:param name="spreadsheet" value="false" />
-			<portlet:param name="editable" value="false" />
-		</portlet:renderURL>
-		
-		<aui:a href="<%= editRecordSetURL %>">Edit</aui:a> / <aui:a href="<%= addRecordURL %>">ADD</aui:a>
-<%
+	//Biobank, Registry Owner
+	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+	for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {
+		if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-OWNER"))
+			biobankregistryownerrole = true;  		
+		if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-EDITOR"))
+			biobankregistryownerrole = true;
+	}
+	if(biobankregistryownerrole || portaleditorrole) {
+	
+		if(rdcstructure.length() != 0 && rdcedirecordlink && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {
+			List<DDLRecord> rdcrecords = recordSet.getRecords();
+			for(DDLRecord record : rdcrecords) {
+		%>
+				<portlet:renderURL var="editRecordURL" windowState="<%= WindowState.NORMAL.toString() %>">
+					<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="recordId" value="<%= String.valueOf(record.getRecordId()) %>" />
+					<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
+				</portlet:renderURL>
+				
+				<aui:a href="<%= editRecordURL %>">Edit</aui:a>
+		<%
+				//break;
+			}
+		}
+		%>
+		<!-- Edit RecordSet -->
+		<% 
+		if(rdcstructure.length() != 0 && rdcedirecordsetlink && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {
+		%>
+				<portlet:renderURL var="editRecordSetURL" windowState="<%= WindowState.NORMAL.toString() %>">
+					<portlet:param name="struts_action" value="/dynamic_data_lists/view_record_set" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
+					<portlet:param name="spreadsheet" value="true" />
+					<portlet:param name="editable" value="true" />
+				</portlet:renderURL>
+				
+				<portlet:renderURL var="addRecordURL" windowState="<%= WindowState.NORMAL.toString() %>">
+					<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
+					<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
+					<portlet:param name="spreadsheet" value="false" />
+					<portlet:param name="editable" value="false" />
+				</portlet:renderURL>
+				
+				<aui:a href="<%= editRecordSetURL %>">Edit</aui:a> / <aui:a href="<%= addRecordURL %>">ADD</aui:a>
+		<%
+		}
+	}
 }
 %>
 <!-- RDC Edit Link END -->

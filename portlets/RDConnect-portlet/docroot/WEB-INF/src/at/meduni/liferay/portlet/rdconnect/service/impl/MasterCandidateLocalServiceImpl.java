@@ -76,6 +76,12 @@ public class MasterCandidateLocalServiceImpl
 		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("diseasescodes", StringPool.PERCENT + searchstring + StringPool.PERCENT));
 		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT + searchstring + StringPool.PERCENT));
 		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("candidatesubtype", StringPool.PERCENT + searchstring + StringPool.PERCENT));
+		try {
+			long searchlong = Long.valueOf(searchstring);
+			criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.eq("masterCandidateId", searchlong));
+		} catch (Exception e) {
+			
+		}
 				
 		criterion = RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
