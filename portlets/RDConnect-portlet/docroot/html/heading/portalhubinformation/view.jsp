@@ -11,10 +11,12 @@
 		<h1>Curator Portal - RD-Connect</h1>
 	</div>
 	<div class="rdchubportalinfosubmenu">
+	<div id='cssmenu'>
+	<ul>
 		<%
 		List<Layout> pagelayouts = themeDisplay.getLayouts();
 
-		int width_all = 668 - pagelayouts.size() +1;
+		int width_all = 906 - pagelayouts.size() +1;
 		int width = (int)Math.floor(width_all/pagelayouts.size());
 		int offset = width_all - (width*pagelayouts.size());
 		
@@ -34,5 +36,7 @@
 			<%
 		}
 		%>
+	</ul>
+	</div>
 	</div>
 </div>

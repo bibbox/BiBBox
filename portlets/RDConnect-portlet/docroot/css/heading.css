@@ -6,16 +6,29 @@
 .rdchubportalinfologo {
 	float: left;
 	width: 90px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
 }
 .rdchubportalinfoheader {
 	float: left;
-	width: 907px;
-	height: 60px;
+	width: 891px;
+	height: 59px;
+	padding-left: 15px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 1px 0;
 }
 .rdchubportalinfosubmenu {
 	float: left;
 	width: 907px;
 	height: 30px;
+}
+/* ---------- RDC  Portal Menu ---------- */
+.rdc-portalmenu-div-container {
+	height: 45px;
+	margin-left: 10px;
+	margin-top: 5px;
 }
 /* ---------- RDC  information ---------- */
 .rdconnect-information-container {
@@ -93,7 +106,7 @@
   position: relative;
 }
 #cssmenu ul {
-	width: 818px;
+	width: 100%;
 }
 #cssmenu {
   height: 29px;

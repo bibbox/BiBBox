@@ -4,6 +4,8 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil" %>
 
 <portlet:defineObjects />
+
+<div class="rdc-portalmenu-div-container">
 <span>
 <aui:a href='<%= themeDisplay.getURLPortal()+"/home" %>'><img alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="40" width="34" /></aui:a>
 <%
@@ -24,13 +26,15 @@ for(Organization o : organisations) {
 	  		if(rdc_rsname.equals("core")) {  		
 	  			List<DDLRecord> records = rdc_rs.getRecords();
 	  			for(DDLRecord record : records) {
-	  				String type = record.getFieldValue("Radio2493").toString();
-	  				if(type.equalsIgnoreCase("[bb]")) {
-	  					imgPath = request.getContextPath() + "/images/Biobank.png";
-	  				} else if(type.equalsIgnoreCase("[reg]")) {
-	  					imgPath = request.getContextPath() + "/images/Registry.png";
-	  				} else {
-	  					imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
+	  				if(record.getFieldValue("Radio2493") != null) {
+		  				String type = record.getFieldValue("Radio2493").toString();
+		  				if(type.equalsIgnoreCase("[bb]")) {
+		  					imgPath = request.getContextPath() + "/images/Biobank.png";
+		  				} else if(type.equalsIgnoreCase("[reg]")) {
+		  					imgPath = request.getContextPath() + "/images/Registry.png";
+		  				} else {
+		  					imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
+		  				}
 	  				}
 	  			}
 	  		}
@@ -58,3 +62,4 @@ for(Organization o : organisations) {
 
 </span>
 
+</div>

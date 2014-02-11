@@ -26,7 +26,7 @@ ${theme.include(body_top_include)}
 	<div class="rdconnect-header-container-top">
 		<div class="rdconnect-header-container-inner">
 			<div class="rdconnect-header-container-top-rdlogo">
-				<a href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnectI-theme/images/rdconnectheadertoplogo.png" /></a>
+				<a href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnectHub-theme/images/rdconnectheadertoplogo.png" /></a>
 			</div>
 			<div class="rdconnect-header-container-top-menue">
 				<#assign locPortletId = "portalmenu_WAR_RDConnectportlet" />
