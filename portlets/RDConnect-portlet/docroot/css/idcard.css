@@ -1,0 +1,119 @@
+/* ---------- RDC ID Card ---------- */
+.rdc_idcard_idcardbody {
+	background-color:#E2E3CE;
+	position:relative;
+	left:16px;
+	top:-32px;
+}
+.rdc_idcard_idcardbodymiddle {
+	background-color:#FFFFFF;
+}
+
+.rdc_idcard_idcardbody {
+	border-radius:25px;
+	box-shadow: 10px 10px 20px rgba(90,90,90,0.15);
+}
+
+.rdc_idcard_idcardbody {
+	height:322px;
+	width:544px;
+}
+.rdc_idcard_idcardbodytop {
+	height:32px;
+	width:100%;
+	padding-top: 24px;
+	font-size:12px;
+}
+.rdc_idcard_idcardbodymiddle {
+	height:116px;
+	width:100%;
+}
+.rdc_idcard_idcardbodybottom {
+	height:150px;
+	width:100%;
+}
+/* ------ RDC Formating ----------- */
+/* ------ RDC Formating top ----------- */
+.rdc_idcard_idcardbodytop-id {
+	margin-left: 64px;
+	float: left;
+	width:106px;
+}
+.rdc_idcard_idcardbodytop-dateofinclution {
+	float: left;
+	width: 216px;
+}
+.rdc_idcard_idcardbodytop-type {
+	float: left;
+	width: 158px;
+}
+/* ------ RDC Formating middle ----------- */
+.rdc_idcard_idcardbodymiddle-logo{
+	margin-left: 26px;
+	margin-top: 20px;
+	float: left;
+	margin-right: 20px;
+}
+.aui .rdc_idcard_idcardbodymiddle img {
+	height:85px;
+}
+.rdc_idcard_idcardbodymiddle-organisationname {
+	font-size: 18px;
+	font-weight:bold;
+	color: #8BBF39;
+	width: 100%;
+	height:116px;
+	display: table-cell;
+	vertical-align: middle;
+}
+/* ------ RDC Formating bottom ----------- */
+.rdc_idcard_idcardbodybottom-shortdescription {
+	width: 436px;
+	height:60px;
+	padding-top: 30px;
+	margin-left: 54px;
+	margin-right: 54px;
+	margin-bottom: 20px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+.rdc_idcard_idcardbodybottom-menue {
+	width: 494px;
+	height:40px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+/* ---------- RDC Formating bottom Menu styles ---------- */
+.rdc_idcard_idcardbodybottom-menue ul {
+	padding: 0;
+	margin: 0;
+}
+.rdc_idcard_idcardbodybottom-menue ul li {
+	padding-top: 10px;
+	list-style: none;
+	float:left;
+	background-color:#F4F4E1;
+	margin: 0 3px;
+	text-align: center;
+	height:30px;
+	font-size:12px;
+	font-weight:bold;
+	line-height: 13px;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation {
+	color:#8BBF39;
+}
+
+/* ---------- -------------------------- ---------- */
+/* ---------- -------------------------- ---------- */
+/* ---------- RDC Additional Information ---------- */
+
+.aui .rdc_idcard_idcaibody-flag img {
+	height: 35px;
+}
+.rdc_idcard_idcaibody-flag {
+	float: left;
+}
+.rdc_idcard_idcaibody-webpage {
+	float: right;
+}

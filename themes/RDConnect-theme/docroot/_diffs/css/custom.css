@@ -13,29 +13,32 @@ $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
 /* ---------- RDC  header ---------- */
-.rdconnect-header-container {
-	height: 230px;
+.rdconnect-header-container-idcard {
+	height: 356px;
 	width: 100%;
-	margin: 0 0 10px 0;
+	margin: 48px 0 0 0;
 	padding: 0;
 }
 .rdconnect-header-container-top {
 	height: 50px;
 	width: 100%;
-	background-image:url('/RDConnectI-theme/images/rdconnectheaderbackgound.png');
+	background-image:url('/RDConnect-theme/images/rdconnectheaderbackgound.png');
 	background-size:100%;
 }
 .rdconnect-header-container-bottom {
-	height: 180px;
+	height: 356px;
 	width: 100%;
-	border-color: #8C8A8C;
-	border-style: solid;
-	border-width: 0 0 1px 0;
-	background: #FAFAF0;
 }
 .rdconnect-header-container-inner {
 	width: 1000px;
 	margin: auto;
+}
+.rdconnect-header-container-inner-idcard {
+	height: 356px;
+	width: 1000px;
+	margin: auto;
+	background-color:#FFFFFF;
+	box-shadow: 10px 0 20px rgba(90,90,90,0.15);
 }
 .rdconnect-header-container-top-rdlogo {
 	width: 178px;
@@ -54,21 +57,15 @@ $dockbarOpenGradientStart: #0EA6F9;
 	margin: auto;
 }
 .rdconnect-header-container-bottom-grouplogo {
-	width: 178px;
+	width: 699px;
 	height: 180px;
-	border-color: #8C8A8C;
-	border-style: solid;
-	border-width: 0 1px 0 1px;
 	float: left;
-	background: #FFFFFF;
+	background-color:#FFFFFF;
 }
 .rdconnect-header-container-bottom-portalinformation {
-	width: 818px;
+	width: 299px;
 	height: 180px;
-	border-color: #8C8A8C;
-	border-style: solid;
-	border-width: 0 1px 0 0;
-	background: #FFFFFF;
+	background-color:#FFFFFF;
 	float: left;
 }
 /* ---------- RDC  styles ---------- */
@@ -87,7 +84,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	display: none;
 }
 .aui body {
-    background: #F4F4E1;
+	background-color:#F4F4E1;
 }
 #footer a {
 	color: #303030;
@@ -101,9 +98,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	margin-top: 0;
 	clear: both;
 }
-#rd-layout-heading {
-	background: #FFFFFF;
-}
+
 #rdlogo {
 	margin-left: 40px;
 	width: 230px;
@@ -175,6 +170,7 @@ div.portlet-body {
     margin-right: auto;
     margin-top: 0;
 	padding: 0;
+	background: #FFFFFF;
 }
 .aui .portlet-borderless-container {
     padding: 0;

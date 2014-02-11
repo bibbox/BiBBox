@@ -8,7 +8,7 @@
 		<img alt="logo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" width="180px" height="180px" />
 	</div>
 	<div class="rdchubportalinfoheader">
-		<h1>Curator Portal - RD-Connect</h1>
+		<h3>Curator Portal - RD-Connect</h3>
 	</div>
 	<div class="rdchubportalinfosubmenu">
 	<div id='cssmenu'>

@@ -7,7 +7,7 @@
 
 <div class="rdc-portalmenu-div-container">
 <span>
-<aui:a href='<%= themeDisplay.getURLPortal()+"/home" %>'><img alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="40" width="34" /></aui:a>
+<aui:a href='<%= themeDisplay.getURLPortal()+"/home" %>'><img alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="32" width="30" /></aui:a>
 <%
 long organizationId = 0;
 long userId = themeDisplay.getUserId();

@@ -22,7 +22,7 @@ ${theme.include(body_top_include)}
 
 </#if>
 
-<div class="rdconnect-header-container">
+
 	<div class="rdconnect-header-container-top">
 		<div class="rdconnect-header-container-inner">
 			<div class="rdconnect-header-container-top-rdlogo">
@@ -43,10 +43,12 @@ ${theme.include(body_top_include)}
 			</div>
 		</div>
 	</div>
+	
+<div class="rdconnect-header-container-idcard">
 	<div class="rdconnect-header-container-bottom">
-		<div class="rdconnect-header-container-inner">
+		<div class="rdconnect-header-container-inner-idcard">
 			<div class="rdconnect-header-container-bottom-grouplogo">
-				<#assign locPortletId = "portallogo_WAR_RDConnectportlet" />
+				<#assign locPortletId = "portalidcard_WAR_RDConnectportlet" />
 				 
 				<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
 				<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
@@ -59,7 +61,7 @@ ${theme.include(body_top_include)}
 				${theme.runtime(locPortletId, "", "")}
 			</div>
 			<div class="rdconnect-header-container-bottom-portalinformation">
-				<#assign locPortletId = "portalinformation_WAR_RDConnectportlet" />
+				<#assign locPortletId = "portalidcardadditionalinformation_WAR_RDConnectportlet" />
 				 
 				<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
 				<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />

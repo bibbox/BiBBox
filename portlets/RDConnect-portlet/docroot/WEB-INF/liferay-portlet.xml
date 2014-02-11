@@ -197,6 +197,28 @@
 			portalhubinformation-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>portal-id-card</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>portal-id-card-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>
+			portal-id-card-additional-information
+		</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			portal-id-card-additional-information-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

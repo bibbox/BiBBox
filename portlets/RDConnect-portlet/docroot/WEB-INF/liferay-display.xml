@@ -27,6 +27,8 @@
 		<portlet id="portal-information"></portlet>
 		<portlet id="portal-sub-menu"></portlet>
 		<portlet id="portalhubinformation"></portlet>
+		<portlet id="portal-id-card"></portlet>
+		<portlet id="portal-id-card-additional-information"></portlet>
 	</category>
 	<category name="RDConnectQuestionnaire">
 		<portlet id="disease-categories-ic-d10"></portlet>
