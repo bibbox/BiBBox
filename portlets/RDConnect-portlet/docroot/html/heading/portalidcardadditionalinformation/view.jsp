@@ -3,6 +3,12 @@
 <%@ page import="com.liferay.portal.model.Country" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.UserGroupRole" %>
+<%@ page import="com.liferay.portal.service.WebsiteLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.PhoneLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.Website" %>
+<%@ page import="com.liferay.portal.model.Phone" %>
 
 <portlet:defineObjects />
 
@@ -283,10 +289,11 @@ if (currentGroup.isOrganization()) {
      map.put("Zaire", "ZR");
      map.put("Zimbabwe", "ZW");
     
+     boolean faxset = true;
 %>
 
 <div class="rdc_idcard_idcaibody">
-	<div>
+	<div class="rdc_idcard_idcaibody-top">
 		<div class="rdc_idcard_idcaibody-flag">
 			<% if(map.containsKey(country)) { %>
 			<img id='myImage' src="http://www.geonames.org/flags/x/<%= map.get(country).toLowerCase() %>.gif" />
@@ -294,12 +301,94 @@ if (currentGroup.isOrganization()) {
 				<%= country %>
 			<% } %>
 		</div>
-		<div class="rdc_idcard_idcaibody-webpage">www.</div>
+		<div class="rdc_idcard_idcaibody-webpage">
+			<% 
+				List<Website> websites = WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
+				for(Website website : websites) {
+					if(website.isPrimary()) {
+						%><aui:a href='<%= website.getUrl() %>'><%= website.getUrl() %></aui:a><%
+					}
+				}
+			%>
+		</div>
 	</div>
-	<div>Contact Information
+	<div class="rdc_idcard_idcaibody-contactinformation">
+	<span class="rdc_idcard_idcaibody-headlines">Contact Information</span><br>
+	
+<%
+	String phone = "";
+	String fax = "";
+	List<Phone> phones = PhoneLocalServiceUtil.getPhones(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
+	for(Phone tmpphone : phones) {
+		if(tmpphone.isPrimary()) {
+			phone = "Tel. " + tmpphone.getNumber();
+		}
+		if(tmpphone.getTypeId() == 12007) {
+			fax = "Fax. " + tmpphone.getNumber();
+		}
+	}
+%>
+	
+	<table>
+	<tr><td class="rdc_idcard_idcaibody-contactinformation-tdfirst"><%= organization.getAddress().getStreet1() %></td>
+	<td class="rdc_idcard_idcaibody-contactinformation-tdlast"><%= phone.length() == 0 ? phone : "" %></td></tr>
+	<% if(!organization.getAddress().getStreet2().equalsIgnoreCase("")) { %>
+		<tr><td><%= organization.getAddress().getStreet2() %></td><td><% if(faxset) {
+			faxset = false;
+			%>
+			<%= fax.length() == 0 ? fax : "" %>
+			<%
+		}
+		%></td></tr>
+	<% } %>
+	<% if(!organization.getAddress().getStreet3().equalsIgnoreCase("")) { %>
+		<tr><td><%= organization.getAddress().getStreet3() %></td><td><% if(faxset) {
+			faxset = false;
+			%>
+			<%= fax.length() == 0 ? fax : "" %> 
+			<%
+		}
+		%></td></tr>
+	<% } %>
+	<tr>
+	<td><%= organization.getAddress().getZip() %> <%= organization.getAddress().getCity() %></td><td><% if(faxset) {
+			faxset = false;
+			%>
+			<%= fax.length() == 0 ? fax : "" %> 
+			<%
+		}
+		%></td>
+		</tr>
+	</table>
+	<hr>
 	</div>
-	<div>Main contect
+	
+<%
+User maincontact = null;
+List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+for(User usertmp : userlist) {
+	for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(user.getUserId(), organization.getGroupId())) {
+		if(ugr.getRole().getName().equalsIgnoreCase("BiobanK-REG-MAINCONTACT"))
+			maincontact =  usertmp;
+		if(maincontact != null)
+			break;
+	}
+	if(maincontact != null)
+		break;
+}
+
+if(maincontact != null) {
+String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+maincontact.getScreenName()+"&amp;companyId="+maincontact.getCompanyId();
+%>
+	
+	<div>
+		<span class="rdc_idcard_idcaibody-headlines">Main contect</span><br>
+		<div class="rdc_idcard_idcaibody-avatar"><img alt="" src="<%= imgPath %>" /></div>
+		<span class="rdc_idcard_idcaibody-contactname"><%= maincontact.getFullName() %></span><br>
+		<span class="rdc_idcard_idcaibody-contactemail"><aui:a href='<%= "mailto:" + maincontact.getEmailAddress() %>'><%= maincontact.getEmailAddress() %></aui:a></span>
+		
 	</div>
+<% } %>
 </div>
 
 <%

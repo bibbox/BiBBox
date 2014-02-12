@@ -23,5 +23,10 @@
 			<wap-template-path>/rdhubiicol.wap.tpl</wap-template-path>
 			<thumbnail-path>/rdhubiicol.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="rdc6040" name="RDC6040">
+			<template-path>/rdc6040.tpl</template-path>
+			<wap-template-path>/rdc6040.wap.tpl</wap-template-path>
+			<thumbnail-path>/rdc6040.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>

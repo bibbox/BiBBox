@@ -12,6 +12,15 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+.aui-w60 {
+	width: 59%;
+	float: left;
+}
+.aui-w40 {
+	width: 39%;
+	float: right;
+}
+
 /* ---------- RDC  header ---------- */
 .rdconnect-header-container-idcard {
 	height: 356px;
@@ -57,13 +66,13 @@ $dockbarOpenGradientStart: #0EA6F9;
 	margin: auto;
 }
 .rdconnect-header-container-bottom-grouplogo {
-	width: 699px;
+	width: 599px;
 	height: 180px;
 	float: left;
 	background-color:#FFFFFF;
 }
 .rdconnect-header-container-bottom-portalinformation {
-	width: 299px;
+	width: 399px;
 	height: 180px;
 	background-color:#FFFFFF;
 	float: left;
@@ -171,6 +180,7 @@ div.portlet-body {
     margin-top: 0;
 	padding: 0;
 	background: #FFFFFF;
+	box-shadow: 10px 0 20px rgba(90,90,90,0.15);
 }
 .aui .portlet-borderless-container {
     padding: 0;

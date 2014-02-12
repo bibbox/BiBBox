@@ -93,7 +93,7 @@ if (currentGroup.isOrganization()) {
 	  				}
   				}
   			}
-  			accessibility = "[" + (counted - 1) + "/" + (all - 1) + "]";
+  			accessibility = "[" + counted + "/" + all + "]";
   		}
   		
   		if(rdc_rsname.equals("Quality Indicators")) { 
