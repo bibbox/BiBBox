@@ -19,11 +19,13 @@ for(Organization organization : organizations) {
 		continue;
 	if(organization.getName().equalsIgnoreCase("BBMUSK"))
 		continue;
+	if(organization.getName().equalsIgnoreCase("Medical Univeristy of Shi'Kahr"))
+		continue;
 	
 	
 	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
 	
-	if(organization.getLogoId() == 0) {
+	
 		
 	  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
 	  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
@@ -33,20 +35,29 @@ for(Organization organization : organizations) {
 	  			for(DDLRecord record : records) {
 	  				if(record.getFieldValue("Radio2493") != null) {
 		  				String type = record.getFieldValue("Radio2493").toString();
-		  				if(type.equalsIgnoreCase("[bb]")) {
-		  					imgPath = request.getContextPath() + "/images/Biobank.png";
-		  				} else if(type.equalsIgnoreCase("[reg]")) {
-		  					imgPath = request.getContextPath() + "/images/Registry.png";
+		  				//System.out.println("Type: " + type + " recordid: " + record.getRecordId() + " organisation: " + organization.getName() );
+		  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
+		  					if(organization.getLogoId() == 0) {
+		  						imgPath = request.getContextPath() + "/images/Biobank.png";
+		  					}
+		  					orgPath = orgPath + "/bb_home";
+		  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
+		  					if(organization.getLogoId() == 0) {
+		  						imgPath = request.getContextPath() + "/images/Registry.png";
+		  					}
+		  					orgPath = orgPath + "/home";
 		  				} else {
-		  					imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
+		  					if(organization.getLogoId() == 0) {
+		  						imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
+		  					}
+		  					orgPath = orgPath + "/regbb_home";
 		  				}
 	  				}
 	  			}
 	  		}
-	  	} 
 	}
 %>
-<table style="border: 1px solid #D3D3D3;">
+<table style="border: 1px solid #D3D3D3;" class="rdc_coreinformation_organisation-table-images">
 	<tr>
 		<td rowspan="4"><aui:a href="<%= orgPath %>"><img alt="logo" src="<%= imgPath %>" width="60px" /></aui:a></td>
 		<td><aui:a href="<%= orgPath %>"><%= organization.getName() %></aui:a></td>

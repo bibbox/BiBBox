@@ -7,7 +7,7 @@
 
 <div class="rdc-portalmenu-div-container">
 <span>
-<aui:a href='<%= themeDisplay.getURLPortal()+"/home" %>'><img alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="32" width="30" /></aui:a>
+<aui:a href='<%= themeDisplay.getURLPortal()+"/home" %>'><img class="rdc-portalmenu-div-container-homelogo" alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="32px" width="30px" /></aui:a>
 <%
 long organizationId = 0;
 long userId = themeDisplay.getUserId();
@@ -18,7 +18,7 @@ for(Organization o : organisations) {
 	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+o.getLogoId();
 	String orgPath = themeDisplay.getURLPortal()+"/web"+o.getGroup().getFriendlyURL();
 	
-	if(o.getLogoId() == 0) {
+	
 		List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(o.getGroupId());
 	  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
 	  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
@@ -28,25 +28,34 @@ for(Organization o : organisations) {
 	  			for(DDLRecord record : records) {
 	  				if(record.getFieldValue("Radio2493") != null) {
 		  				String type = record.getFieldValue("Radio2493").toString();
-		  				if(type.equalsIgnoreCase("[bb]")) {
-		  					imgPath = request.getContextPath() + "/images/Biobank.png";
-		  				} else if(type.equalsIgnoreCase("[reg]")) {
-		  					imgPath = request.getContextPath() + "/images/Registry.png";
+		  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
+		  					if(o.getLogoId() == 0) {
+		  						imgPath = request.getContextPath() + "/images/Biobank.png";
+		  					}
+		  					orgPath = orgPath + "/bb_home";
+		  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
+		  					if(o.getLogoId() == 0) {
+		  						imgPath = request.getContextPath() + "/images/Registry.png";
+		  					}
+		  					orgPath = orgPath + "/home";
 		  				} else {
-		  					imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
+		  					if(o.getLogoId() == 0) {
+		  						imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
+		  					}
+		  					orgPath = orgPath + "/regbb_home";
 		  				}
 	  				}
 	  			}
 	  		}
 	  	} 
-	}
+	
 	
 	if(i>4) {
 		continue;
 	}
 	
 	%>
-	<aui:a href="<%= orgPath %>"><img alt="logo" height="40" width="40" src="<%= imgPath %>" /></aui:a>
+	<aui:a href="<%= orgPath %>"><img class="rdc-portalmenu-div-container-logo" alt="logo" height="40px" width="40px" src="<%= imgPath %>" /></aui:a>
 	<%
 	i++;
 }

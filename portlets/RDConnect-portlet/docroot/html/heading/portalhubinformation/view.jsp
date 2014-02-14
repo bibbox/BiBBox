@@ -5,7 +5,7 @@
 
 <div class="rdchubportalinfo">
 	<div class="rdchubportalinfologo">
-		<img alt="logo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" width="180px" height="180px" />
+		<img alt="logo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" width="90px" height="90px" />
 	</div>
 	<div class="rdchubportalinfoheader">
 		<h3>Curator Portal - RD-Connect</h3>

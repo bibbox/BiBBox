@@ -44,6 +44,10 @@ $dockbarOpenGradientStart: #0EA6F9;
 	border-width: 0 1px 0 1px;
 	float: left;
 }
+.rdconnect-header-container-top-rdlogo img {
+	height: 50px;
+	width: 180px;
+}
 .rdconnect-header-container-top-menue {
 	width: 818px;
 	border-color: #000000;

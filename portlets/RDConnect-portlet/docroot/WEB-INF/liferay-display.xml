@@ -36,4 +36,7 @@
 	<category name="RDConnectTest">
 		<portlet id="ajaxtest"></portlet>
 	</category>
+	<category name="RDConnectAdmin">
+		<portlet id="admin-redeploy-dd-ls"></portlet>
+	</category>
 </display>

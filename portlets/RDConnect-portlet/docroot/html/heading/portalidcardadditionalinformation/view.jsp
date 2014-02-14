@@ -9,11 +9,17 @@
 <%@ page import="com.liferay.portal.service.PhoneLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.model.Website" %>
 <%@ page import="com.liferay.portal.model.Phone" %>
+<%@ page import="com.liferay.portal.model.Role" %>
+<%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.UserGroupRole" %>
+<%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
+<%@page import="com.liferay.portal.service.GroupLocalServiceUtil"%>
 
 <portlet:defineObjects />
 
 <%
-
+String currentURL = PortalUtil.getCurrentURL(request);
 long organizationId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 if (currentGroup.isOrganization()) {
@@ -293,6 +299,38 @@ if (currentGroup.isOrganization()) {
 %>
 
 <div class="rdc_idcard_idcaibody">
+<%
+// Edit link
+	boolean portaleditorrole = false;
+    boolean biobankregistryownerrole = false;
+    for(Role role : themeDisplay.getUser().getRoles()) {
+    	if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
+    		portaleditorrole = true;
+    	if(role.getName().equalsIgnoreCase("Administrator"))
+    		portaleditorrole = true;
+    }
+    //Biobank, Registry Owner
+    for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {
+    	if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-OWNER"))
+    		biobankregistryownerrole = true;  			
+    }
+    if(biobankregistryownerrole || portaleditorrole) {
+	String editimgpath = request.getContextPath() + "/images/edit.png";
+	Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
+    long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+	LiferayPortletURL editusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+	editusersURL.setParameter("struts_action", "/users_admin/edit_organization");
+    editusersURL.setParameter("tab", "websites");
+    editusersURL.setParameter("redirect", currentURL);
+    editusersURL.setParameter("p_p_state", "maximized");
+	String editpathaddresses = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_addresses";
+	String editpathphone = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_phoneNumbers";
+	String editpathwebsites = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_websites";
+%>
+	<div class="rdc_idcard_idcaibody-edit-icon-websites"><aui:a href="<%= editpathwebsites %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a> </div>
+	<div class="rdc_idcard_idcaibody-edit-icon-phone"><aui:a href="<%= editpathphone %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a> </div>
+	<div class="rdc_idcard_idcaibody-edit-icon-address"><aui:a href="<%= editpathaddresses %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a> </div>
+<% } %>
 	<div class="rdc_idcard_idcaibody-top">
 		<div class="rdc_idcard_idcaibody-flag">
 			<% if(map.containsKey(country)) { %>
@@ -331,7 +369,7 @@ if (currentGroup.isOrganization()) {
 	
 	<table>
 	<tr><td class="rdc_idcard_idcaibody-contactinformation-tdfirst"><%= organization.getAddress().getStreet1() %></td>
-	<td class="rdc_idcard_idcaibody-contactinformation-tdlast"><%= phone.length() == 0 ? phone : "" %></td></tr>
+	<td class="rdc_idcard_idcaibody-contactinformation-tdlast"><%= phone.length() != 0 ? phone : "" %></td></tr>
 	<% if(!organization.getAddress().getStreet2().equalsIgnoreCase("")) { %>
 		<tr><td><%= organization.getAddress().getStreet2() %></td><td><% if(faxset) {
 			faxset = false;

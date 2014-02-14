@@ -594,9 +594,35 @@ public class MasterPublish extends MVCPortlet {
 			System.out.println("Could not create Related Persons");
 			e.printStackTrace();
 		}*/
-		// create Quality Indicators | ID 29098
+		// create Quality Indicators Registry | ID 82761
 		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "Quality Indicators", 29098, serviceContext);
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Quality Indicators", 82761, serviceContext);
+			creatRecordQualityIndicator(recordSet, groupId, serviceContextRecord, master);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Quality Indicators");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Quality Indicators");
+			e.printStackTrace();
+		}
+		// create Quality Indicators Biobank | ID 29098
+		try {
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Quality Indicators Biobank", 29098, serviceContext);
+			creatRecordQualityIndicator(recordSet, groupId, serviceContextRecord, master);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Quality Indicators");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Quality Indicators");
+			e.printStackTrace();
+		}
+		// create Quality Indicators Registry and Biobank | ID 83537
+		try {
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Quality Indicators Registry and Biobank", 83537, serviceContext);
 			creatRecordQualityIndicator(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
@@ -633,9 +659,35 @@ public class MasterPublish extends MVCPortlet {
 			System.out.println("Could not create Disease Matrix");
 			e.printStackTrace();
 		}
-		// create Accessibility | ID 29100
+		// create Accessibility Registry | ID 82769
 		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "Accessibility", 29100, serviceContext);
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Accessibility", 82769, serviceContext);
+			creatRecordAccesability(recordSet, groupId, serviceContextRecord, master);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Accessibility");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Accessibility");
+			e.printStackTrace();
+		}
+		// create Accessibility Biobank | ID 29100
+		try {
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Accessibility Biobank", 29100, serviceContext);
+			creatRecordAccesability(recordSet, groupId, serviceContextRecord, master);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Accessibility");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Accessibility");
+			e.printStackTrace();
+		}
+		// create Accessibility Registry and Biobank | ID 83539
+		try {
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Accessibility Registry and Biobank", 83539, serviceContext);
 			creatRecordAccesability(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
@@ -713,8 +765,6 @@ public class MasterPublish extends MVCPortlet {
 			DDMStructure ddmStructure = recordSet.getDDMStructure();		
 			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
 			// Define Fields
-			Field field_name = new Field("name", master.getName());
-			fields.put(field_name);
 			Field field_acronym = new Field("acronym", "");
 			fields.put(field_acronym);
 			String type = "bb_reg";
@@ -726,16 +776,8 @@ public class MasterPublish extends MVCPortlet {
 			fields.put(field_type);
 			Field field_description = new Field("Description", "");
 			fields.put(field_description);
-			Field field_subtype = new Field("subtype", master.getCandidatesubtype());
-			fields.put(field_subtype);
 			Field field_countryCode = new Field("countryCode", master.getCountry());
 			fields.put(field_countryCode);
-			Field field_geographicAreaCovered = new Field("geographicAreaCovered", "");
-			fields.put(field_geographicAreaCovered);
-			Field field_Text5085 = new Field("Text5085", "");
-			fields.put(field_Text5085);
-			Field field_year_of_establishment = new Field("year_of_establishment", "");
-			fields.put(field_year_of_establishment);
 			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
 				serviceContext.getUserId(),
 				serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),

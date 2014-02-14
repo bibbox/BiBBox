@@ -107,8 +107,8 @@
 			</aui:column>
 			
 	 		<aui:column columnWidth="50" first="true">
-				<aui:input name="diseasescodes" type="text" label='Disease Codes <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="You can enter multiple disease codes with ; separated (ORPHANET, ICD10, OMIM, UMLS, MESH, MEDDRA, SNOMEDCT)"><b>&nbsp;?&nbsp;</b></span>' value ="<%= diseases_icd10 %>" cssClass="propose" />
-				<aui:input name="diseasesfreetext" type="text" label='Disease description <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="You can enter multiple diseases with ; separated"><b>&nbsp;?&nbsp;</b></span>' value ="<%= diseases_free %>" cssClass="propose" />
+				<aui:input name="diseasescodes" type="text" label='Disease Codes <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="You can enter multiple disease codes with ; separated (ORPHANET, ICD10, OMIM, UMLS, MESH, MEDDRA, SNOMEDCT)"><img class="proposerequired" src="/RDConnect-portlet/images/icon_fragezeichen.png" /></span>' value ="<%= diseases_icd10 %>" cssClass="propose" />
+				<aui:input name="diseasesfreetext" type="text" label='Disease description <span id="rdc-filter-name-help" class="rdc-filter-name-help" title="You can enter multiple diseases with ; separated"><img class="proposerequired" src="/RDConnect-portlet/images/icon_fragezeichen.png" /></span>' value ="<%= diseases_free %>" cssClass="propose" />
 			</aui:column>
 	 		<aui:column columnWidth="50" last="true">
 				<aui:input name="comment" label="Comment" type="textarea" value ="<%= commend %>" cssClass="propose" />

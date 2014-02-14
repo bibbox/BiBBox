@@ -1,4 +1,16 @@
 /* ---------- RDC hub information ---------- */
+.rdc-portalmenu-div-container-homelogo {
+	height: 32px;
+	width: 30px;
+}
+.rdc-portalmenu-div-container-logo {
+	height: 40px;
+	width: 40px;
+}
+.rdchubportalinfologo {
+	width: 90px;
+	height: 90px;
+}
 .rdchubportalinfo {
 	width: 100%;
 	height: 90px;

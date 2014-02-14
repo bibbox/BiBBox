@@ -775,4 +775,38 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>admin-redeploy-dd-ls</portlet-name>
+		<display-name>Admin Redeploy Dd Ls</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.rdconnect.admin.AdminRedeployDDLs
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/admin/adminredeployddls/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Admin Redeploy Dd Ls</title>
+			<short-title>Admin Redeploy Dd Ls</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

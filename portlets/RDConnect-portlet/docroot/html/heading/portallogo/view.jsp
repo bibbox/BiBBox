@@ -37,9 +37,9 @@ if(organizationId != 0) {
 	  			List<DDLRecord> records = rdc_rs.getRecords();
 	  			for(DDLRecord record : records) {
 	  				String type = record.getFieldValue("Radio2493").toString();
-	  				if(type.equalsIgnoreCase("[bb]")) {
+	  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
 	  					imgPath = request.getContextPath() + "/images/Biobank.png";
-	  				} else if(type.equalsIgnoreCase("[reg]")) {
+	  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
 	  					imgPath = request.getContextPath() + "/images/Registry.png";
 	  				} else {
 	  					imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
