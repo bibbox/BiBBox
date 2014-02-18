@@ -360,14 +360,17 @@ $dockbarOpenGradientStart: #0EA6F9;
 	float:left;
 	background-color:#F4F4E1;
 	margin: 0 3px;
-	text-align: center;
+	text-align: left;
 	height:30px;
-	font-size:12px;
+	font-size:14px;
 	font-weight:bold;
-	line-height: 13px;
+	line-height: 15px;
 }
 .rdc_idcard_idcardbodybottom-menue-pageinformation {
 	color:#8BBF39;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation-gray {
+	color:#7F7F7F;
 }
 
 /* ---------- -------------------------- ---------- */
@@ -596,6 +599,11 @@ textarea.propose{
 .aui-w40 {
 	width: 39%;
 	float: right;
+}
+
+.aui-w100 {
+	width: 100%;
+	float: left;
 }
 
 /* ---------- RDC  header ---------- */
@@ -1115,8 +1123,8 @@ div.portlet-body {
 		border-bottom: 1px dotted #000000;
 
 		.portlet-title {
-			font-size: 1em;
-			font-weight: normal;
+			font-size: 1.5em;
+			font-weight: bold;
 			line-height: 2.2;
 			margin: 0;
 

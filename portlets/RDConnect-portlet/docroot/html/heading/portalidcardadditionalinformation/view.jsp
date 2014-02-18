@@ -11,6 +11,7 @@
 <%@ page import="com.liferay.portal.model.Phone" %>
 <%@ page import="com.liferay.portal.model.Role" %>
 <%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.UserGroupRoleLocalService" %>
 <%@ page import="com.liferay.portal.model.UserGroupRole" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
@@ -20,6 +21,7 @@
 
 <%
 String currentURL = PortalUtil.getCurrentURL(request);
+long BiobanK_REG_MAINCONTACT = 71378;
 long organizationId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 if (currentGroup.isOrganization()) {
@@ -296,6 +298,9 @@ if (currentGroup.isOrganization()) {
      map.put("Zimbabwe", "ZW");
     
      boolean faxset = true;
+     Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
+     long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+     String editimgpath = request.getContextPath() + "/images/edit.png";
 %>
 
 <div class="rdc_idcard_idcaibody">
@@ -315,9 +320,8 @@ if (currentGroup.isOrganization()) {
     		biobankregistryownerrole = true;  			
     }
     if(biobankregistryownerrole || portaleditorrole) {
-	String editimgpath = request.getContextPath() + "/images/edit.png";
-	Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
-    long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+	
+	
 	LiferayPortletURL editusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
 	editusersURL.setParameter("struts_action", "/users_admin/edit_organization");
     editusersURL.setParameter("tab", "websites");
@@ -405,26 +409,45 @@ if (currentGroup.isOrganization()) {
 User maincontact = null;
 List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
 for(User usertmp : userlist) {
-	for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(user.getUserId(), organization.getGroupId())) {
-		if(ugr.getRole().getName().equalsIgnoreCase("BiobanK-REG-MAINCONTACT"))
+	List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(usertmp.getUserId(), organization.getGroup().getGroupId());
+	for (UserGroupRole ugr : usergrouprolles) {
+		if(ugr.getRole().getName().equalsIgnoreCase("BiobanK-REG-MAINCONTACT")
+				|| ugr.getRole().getName().equalsIgnoreCase("Biobank, Registry Main Contact")
+				|| ugr.getRole().getName().equalsIgnoreCase("BiobanK-REG-MAINCONTACT")) {
 			maincontact =  usertmp;
-		if(maincontact != null)
-			break;
+		}
 	}
-	if(maincontact != null)
-		break;
 }
+
+LiferayPortletURL editmaincontactURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+editmaincontactURL.setParameter("struts_action", "/users_admin/edit_user_roles");
+editmaincontactURL.setParameter("redirect", currentURL);
+editmaincontactURL.setParameter("p_p_state", "maximized");
+editmaincontactURL.setParameter("p_p_mode", "view");
+editmaincontactURL.setParameter("p_p_mode", "view");
+editmaincontactURL.setParameter("groupId", String.valueOf(organization.getGroupId()));
+editmaincontactURL.setParameter("roleId", String.valueOf(BiobanK_REG_MAINCONTACT));
 
 if(maincontact != null) {
 String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+maincontact.getScreenName()+"&amp;companyId="+maincontact.getCompanyId();
+
 %>
 	
 	<div>
-		<span class="rdc_idcard_idcaibody-headlines">Main contect</span><br>
+		<span class="rdc_idcard_idcaibody-headlines">Main contact</span>
+		<% if(biobankregistryownerrole || portaleditorrole) { %>
+		<aui:a href="<%= editmaincontactURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+		<% } %>
+		<br>
 		<div class="rdc_idcard_idcaibody-avatar"><img alt="" src="<%= imgPath %>" /></div>
 		<span class="rdc_idcard_idcaibody-contactname"><%= maincontact.getFullName() %></span><br>
 		<span class="rdc_idcard_idcaibody-contactemail"><aui:a href='<%= "mailto:" + maincontact.getEmailAddress() %>'><%= maincontact.getEmailAddress() %></aui:a></span>
 		
+	</div>
+<% } else if(biobankregistryownerrole || portaleditorrole) { %>
+	<div>
+		<span class="rdc_idcard_idcaibody-headlines">Main contact</span>
+		<aui:a href="<%= editmaincontactURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
 	</div>
 <% } %>
 </div>

@@ -37,6 +37,7 @@ if (currentGroup.isOrganization()) {
   	String shortdiscription = "";
   	int diseasecount = 0;
   	int documents = 0;
+  	String corecount = "";
   	String quality = "";
   	String accessibility = "";
   	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
@@ -88,6 +89,35 @@ if (currentGroup.isOrganization()) {
   			diseasecount = rdc_rs.getRecords().size();
   		}
   		
+  	// All
+  		if(rdc_rsname.equals("core")) { 
+  			int all = 0;
+  			int counted = 0;
+  			List<DDLRecord> records = rdc_rs.getRecords();
+  			for(DDLRecord record : records) {
+  				long ddmstructureid = rdc_rs.getDDMStructureId();
+  				DDMStructure dms = DDMStructureLocalServiceUtil.fetchStructure(ddmstructureid);
+  				if(dms != null) {
+	  				Set<String> fieldnames = dms.getFieldNames();
+	  				for(String s : fieldnames) {
+	  					if(!dms.isFieldPrivate(s)) {
+	  						all++;
+		  					if(record.getFieldValue(s) != null) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]")) {
+		  							counted++;
+		  						}
+		  					}
+	  					}
+	  				}
+  				}
+  			}
+  			if(counted >= (all/2)) {
+  				corecount = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				corecount = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
+  		}
+  		
   		// Registry
   		if(rdc_rsname.equals("Accessibility") && organisationtype.equalsIgnoreCase("Registry")) { 
   			int all = 0;
@@ -110,7 +140,11 @@ if (currentGroup.isOrganization()) {
 	  				}
   				}
   			}
-  			accessibility = "[" + counted + "/" + all + "]";
+  			if(counted >= (all/2)) {
+  				accessibility = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				accessibility = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
   		}
   		
   		if(rdc_rsname.equals("Quality Indicators") && organisationtype.equalsIgnoreCase("Registry")) { 
@@ -134,7 +168,11 @@ if (currentGroup.isOrganization()) {
 	  				}
   				}
   			}
-  			quality = "[" + counted + "/" + all + "]";
+  			if(counted >= (all/2)) {
+  				quality = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				quality = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
   		}
   		
   		// Biobank
@@ -159,7 +197,11 @@ if (currentGroup.isOrganization()) {
 	  				}
   				}
   			}
-  			accessibility = "[" + counted + "/" + all + "]";
+  			if(counted >= (all/2)) {
+  				accessibility = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				accessibility = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
   		}
   		
   		if(rdc_rsname.equals("Quality Indicators Biobank") && organisationtype.equalsIgnoreCase("Biobank")) { 
@@ -183,7 +225,11 @@ if (currentGroup.isOrganization()) {
 	  				}
   				}
   			}
-  			quality = "[" + counted + "/" + all + "]";
+  			if(counted >= (all/2)) {
+  				quality = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				quality = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
   		}
   		// Registry/Biobank
   		if(rdc_rsname.equals("Accessibility Registry and Biobank") && organisationtype.equalsIgnoreCase("Registry/Biobank")) { 
@@ -207,7 +253,11 @@ if (currentGroup.isOrganization()) {
 	  				}
   				}
   			}
-  			accessibility = "[" + counted + "/" + all + "]";
+  			if(counted >= (all/2)) {
+  				accessibility = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				accessibility = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
   		}
   		
   		if(rdc_rsname.equals("Quality Indicators Registry and Biobank") && organisationtype.equalsIgnoreCase("Registry/Biobank")) { 
@@ -231,7 +281,11 @@ if (currentGroup.isOrganization()) {
 	  				}
   				}
   			}
-  			quality = "[" + counted + "/" + all + "]";
+  			if(counted >= (all/2)) {
+  				quality = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				quality = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
   		}
   	} 
 %>
@@ -333,11 +387,14 @@ if (currentGroup.isOrganization()) {
 				
 				String pageinformation = "";
 				
-				// Page count finder
+				// Page count finder corecount
+				if(l.equalsIgnoreCase("Overview")) {
+					pageinformation = corecount;
+				}
 				if(l.equalsIgnoreCase("Persons")) {
 					pageinformation = "[" + UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId()).size() + "]";
 				}
-				if(l.equalsIgnoreCase("Diseases")) {
+				if(l.equalsIgnoreCase("Disease Matrix") || l.equalsIgnoreCase("Disease")) {
 					pageinformation = "[" + diseasecount + "]";
 				}
 				if(l.equalsIgnoreCase("Quality")) {
@@ -349,7 +406,7 @@ if (currentGroup.isOrganization()) {
 				
 				%>	
 				<%= aktiveli %><aui:a href="<%= pagesurl %>"><%= l %>
-				</aui:a><br><span class="rdc_idcard_idcardbodybottom-menue-pageinformation"><%= pageinformation %></span></li>
+				</aui:a><br><span id="rdc_idcard_idcardbodybottom-menue-help" class="rdc_idcard_idcardbodybottom-menue-help" title="Number of fields specified"><%= pageinformation %><span></span></li>
 				<%
 			}
 			}
@@ -362,3 +419,14 @@ if (currentGroup.isOrganization()) {
 <%
 }
 %>
+
+<aui:script use="aui-tooltip">
+	AUI().use('aui-tooltip', function(A) {
+    	new A.Tooltip(
+      	{
+        	trigger: '#rdc_idcard_idcardbodybottom-menue-help',
+        	position: 'right',
+        	cssClass: 'tooltip-help'
+      	});
+  	});
+</aui:script>

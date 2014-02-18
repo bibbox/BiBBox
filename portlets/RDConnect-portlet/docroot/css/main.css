@@ -2,6 +2,7 @@
 @import "heading.css";
 @import "idcard.css";
 @import "infoportlets.css";
+@import "search.css";
 
 .avatar{
 	margin-right: 15px;

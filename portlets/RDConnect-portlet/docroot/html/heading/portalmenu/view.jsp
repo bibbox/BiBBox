@@ -64,11 +64,20 @@ for(Organization o : organisations) {
 </span>
 
 <span>
-
-<% String useraccountedit = themeDisplay.getURLPortal() + "/my_account"; %>
-
-<!--<aui:a href="<%= useraccountedit %>"><%= themeDisplay.getUser().getFullName() %></aui:a>-->
-
+<% 
+String filterCandidatesURL = themeDisplay.getURLPortal() + "/unified-list";
+%>
+<aui:form name="filterform" action="<%= filterCandidatesURL %>" method="post" >
+<aui:input name="name" label="" size="90"/>
+<aui:button-row>
+<aui:button name="filter" type="submit" value="filter" label="Filter"  cssClass="rdc-filter-button" />
+</aui:button-row>
+</aui:form>
 </span>
+
+<!--  <span>
+<% String useraccountedit = "";//themeDisplay.getURLPortal() + "/my_account"; %>
+<aui:a href="<%= useraccountedit %>"><%= themeDisplay.getUser().getFullName() %></aui:a>
+</span>-->
 
 </div>

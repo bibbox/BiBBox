@@ -104,14 +104,17 @@
 	float:left;
 	background-color:#F4F4E1;
 	margin: 0 3px;
-	text-align: center;
+	text-align: left;
 	height:30px;
-	font-size:12px;
+	font-size:14px;
 	font-weight:bold;
-	line-height: 13px;
+	line-height: 15px;
 }
 .rdc_idcard_idcardbodybottom-menue-pageinformation {
 	color:#8BBF39;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation-gray {
+	color:#7F7F7F;
 }
 
 /* ---------- -------------------------- ---------- */

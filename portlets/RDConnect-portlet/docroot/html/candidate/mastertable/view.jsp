@@ -1,4 +1,5 @@
-<%@include file="/html/init.jsp" %>
+<%@ include file="/html/init.jsp" %>
+<%@ page import="com.liferay.portal.model.Role" %>
 
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);	
@@ -140,10 +141,21 @@ pageContext.setAttribute("total", total);
 	path="/html/candidate/mastertable/candidatemaster_state.jsp"
 	cssClass="candidate-table-state"
 />
+<%
+boolean portaleditorrole = false;
+for(Role role : themeDisplay.getUser().getRoles()) {
+	if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
+		portaleditorrole = true;
+	if(role.getName().equalsIgnoreCase("Administrator"))
+		portaleditorrole = true;
+}
+if(portaleditorrole) {
+%>
 <liferay-ui:search-container-column-jsp
 	align="right"
 	path="/html/candidate/mastertable/mastertable_actions.jsp"
 />
+<% } %>
 </liferay-ui:search-container-row>
 <%        
 portletURL.setParameter("cur", String.valueOf(cur)); 

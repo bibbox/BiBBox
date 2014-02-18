@@ -1,4 +1,5 @@
 <%@include file="/html/init.jsp" %>
+<%@ page import="com.liferay.portal.model.Role" %>
 
 <portlet:defineObjects />
 
@@ -8,7 +9,20 @@
 		<img alt="logo" src="<%= request.getContextPath() %>/images/RDLogoglobe.png" width="90px" height="90px" />
 	</div>
 	<div class="rdchubportalinfoheader">
-		<h3>Curator Portal - RD-Connect</h3>
+	<% 
+			boolean portaleditorrole = false;
+			String titlecuratorportal = "Linking up rare disease resarch across the world";
+		    for(Role role : themeDisplay.getUser().getRoles()) {
+		    	if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
+		    		portaleditorrole = true;
+		    	if(role.getName().equalsIgnoreCase("Administrator"))
+		    		portaleditorrole = true;
+		    }
+		    if(portaleditorrole) {
+		    	titlecuratorportal = "Curator Portal - RD-Connect";
+		    }
+    %>
+		<h3><%= titlecuratorportal %></h3>
 	</div>
 	<div class="rdchubportalinfosubmenu">
 	<div id='cssmenu'>

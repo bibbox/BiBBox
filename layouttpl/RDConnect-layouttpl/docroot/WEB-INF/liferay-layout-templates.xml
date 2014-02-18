@@ -28,5 +28,10 @@
 			<wap-template-path>/rdc6040.wap.tpl</wap-template-path>
 			<thumbnail-path>/rdc6040.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="rdc6040100" name="RDC6040100">
+			<template-path>/rdc6040100.tpl</template-path>
+			<wap-template-path>/rdc6040100.wap.tpl</wap-template-path>
+			<thumbnail-path>/rdc6040100.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>

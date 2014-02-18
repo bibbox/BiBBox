@@ -12,6 +12,20 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+.aui-w60 {
+	width: 59%;
+	float: left;
+}
+.aui-w40 {
+	width: 39%;
+	float: right;
+}
+
+.aui-w100 {
+	width: 100%;
+	float: left;
+}
+
 /* ---------- RDC  header ---------- */
 .rdconnect-header-container {
 	height: 150px;
@@ -179,6 +193,8 @@ div.portlet-body {
     margin-right: auto;
     margin-top: 0;
 	padding: 0;
+	background: #FFFFFF;
+	box-shadow: 10px 20px 20px rgba(90,90,90,0.15);
 }
 .aui .portlet-borderless-container {
     padding: 0;
@@ -518,19 +534,20 @@ div.portlet-body {
 	/* ---------- Portlet wrapper and icons ---------- */
 
 	.portlet-content, .portlet-minimized .portlet-content-container {
-		border: 1px solid #EAEAEA;
-		border-top-width: 0;
-		padding: 12px 10px 10px;
+		padding: 12px 30px 10px;
 	}
 
 	.portlet-topper {
-		background: #D3D3D3;
-		color: #FFF;
+		background: #FFFFFF;
+		color: #8BBF39;
 		padding: 0;
+		margin-left: 30px;
+		margin-right: 30px;
+		border-bottom: 1px dotted #000000;
 
 		.portlet-title {
-			font-size: 1em;
-			font-weight: normal;
+			font-size: 1.5em;
+			font-weight: bold;
 			line-height: 2.2;
 			margin: 0;
 

@@ -765,7 +765,7 @@ public class MasterPublish extends MVCPortlet {
 			DDMStructure ddmStructure = recordSet.getDDMStructure();		
 			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
 			// Define Fields
-			Field field_acronym = new Field("acronym", "");
+			Field field_acronym = new Field("acronym", master.getCandidatesubtype());
 			fields.put(field_acronym);
 			String type = "bb_reg";
 			if(master.getCandidatetype().equalsIgnoreCase("Biobank"))
