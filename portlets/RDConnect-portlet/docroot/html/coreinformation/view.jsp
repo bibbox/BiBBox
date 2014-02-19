@@ -4,6 +4,8 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.WebsiteLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.UserLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.UserGroupRole" %>
 
 <portlet:defineObjects />
 
@@ -57,7 +59,7 @@ for(Organization organization : organizations) {
 	  		}
 	}
 %>
-<table style="border: 1px solid #D3D3D3;" class="rdc_coreinformation_organisation-table-images">
+<table class="rdc_coreinformation_organisation-table-images">
 	<tr>
 		<td rowspan="4"><aui:a href="<%= orgPath %>"><img alt="logo" src="<%= imgPath %>" width="60px" /></aui:a></td>
 		<td><aui:a href="<%= orgPath %>"><%= organization.getName() %></aui:a></td>
@@ -89,66 +91,34 @@ for(Organization organization : organizations) {
 	</tr>
 	
 <tr>
-		<td>PI:
+		<td>Contact:
 <%
-	String pistring = "";
-	boolean first = true;
-	List<String> emails = Collections.emptyList();
-	// Data from Organisation
-	for(User userpi : UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId())) {
-		if(userpi.getJobTitle().equalsIgnoreCase("PI")) {
-			if(!emails.contains(userpi.getEmailAddress())) {
-				if(!first)
-					pistring += "<br>";
-				pistring += userpi.getFullName();
-				String mail = userpi.getEmailAddress();
-				pistring += " - " + "<a href=\"mailto:" + mail + "\" target=\"_top\">" + mail + "</a>";
-				emails.add(mail);
-				first = false;
-			}
+User maincontact = null;
+List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+for(User usertmp : userlist) {
+	List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(usertmp.getUserId(), organization.getGroup().getGroupId());
+	for (UserGroupRole ugr : usergrouprolles) {
+		if(ugr.getRole().getName().equalsIgnoreCase("BiobanK-REG-MAINCONTACT")
+				|| ugr.getRole().getName().equalsIgnoreCase("Biobank, Registry Main Contact")
+				|| ugr.getRole().getName().equalsIgnoreCase("BiobanK-REG-MAINCONTACT")) {
+			maincontact =  usertmp;
 		}
 	}
-	// Data from DDL
-	for(DDLRecordSet rdc_rs : rdc_recordlist) {
-		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
-		
-		if(rdc_rsname.equals("Related Persons")) {  		
-			List<DDLRecord> records = rdc_rs.getRecords();
-			for(DDLRecord record : records) {
-				String role = record.getFieldValue("Role").toString();
-				if(role.equalsIgnoreCase("PI")) {
-					if(record.getFieldValue("e-mail_Address") != null) {
-						String mail = record.getFieldValue("e-mail_Address").toString();
-						if(!emails.contains(mail)) {
-							if(record.getFieldValue("First_Name") != null && record.getFieldValue("Name") != null) {
-								if(!first)
-									pistring += "<br>";
-								first = false;
-								pistring += record.getFieldValue("First_Name").toString() + " " + record.getFieldValue("Name").toString();
-								
-								emails.add(mail);
-								if(mail.length() != 0)
-									pistring += " - " + "<a href=\"mailto:" + mail + "\" target=\"_top\">" + mail + "</a>";
-							}
-						}
-					}
-				}
-			}
-		}
-	} 
-%>
+}
+
+if(maincontact != null) {
+%> 
+<a href="mailto:<%= maincontact.getEmailAddress() %>"><%= maincontact.getFullName() %></a>
+<% } %>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<%
-				first = true;
 				for(com.liferay.portal.model.Website website : WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId())) {
 			%>
-			<%= first ? "<br>" : "" %>
 			<aui:a href="<%= website.getUrl() %>"><%= website.getUrl() %></aui:a>
 			<%
-				first = false;
 				}
 			%>
 		</td>

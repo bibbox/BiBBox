@@ -12,9 +12,6 @@ if(candidate.getState().equalsIgnoreCase("P") && candidate.getOrganisationid()!=
 	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
 	
 	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
-	
-	
-	
   	for(DDLRecordSet rdc_rs : rdc_recordlist) {
   		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
   		
@@ -33,7 +30,7 @@ if(candidate.getState().equalsIgnoreCase("P") && candidate.getOrganisationid()!=
   				}
   			}
   		}
-}
+	}
 	
 	state = "P";
 	%>

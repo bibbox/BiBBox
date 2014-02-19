@@ -116,6 +116,11 @@ textarea.propose{
 	width:400px;
 	font-style:italic;
 }
+.rdc-table-nameentry-url {
+	font-size:11px;
+	line-height: 11px;
+	width:400px;
+}
 .rdc-table-candidatetype {
 	width:150px;
 }

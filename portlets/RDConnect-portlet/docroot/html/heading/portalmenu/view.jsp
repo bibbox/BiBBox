@@ -63,16 +63,14 @@ for(Organization o : organisations) {
 %>
 </span>
 
-<span>
-<% 
-String filterCandidatesURL = themeDisplay.getURLPortal() + "/unified-list";
-%>
-<aui:form name="filterform" action="<%= filterCandidatesURL %>" method="post" >
-<aui:input name="name" label="" size="90"/>
-<aui:button-row>
-<aui:button name="filter" type="submit" value="filter" label="Filter"  cssClass="rdc-filter-button" />
-</aui:button-row>
+<span class="rdc_portalmenu-search-input" style="float:right;">
+<portlet:actionURL name='searchRDC' var="searchRDCURL" />
+<% String searchurl1 = themeDisplay.getURLPortal()+"/web/guest/unified-list"; %>
+<aui:form name="filterform" action="<%= searchurl1 %>" method="get" >
+<aui:input name="name" label="" size="190" />
 </aui:form>
+<% String imgLupePath = request.getContextPath() + "/images/lupe.png"; %>
+<div class="rdc_portalmenu-search-input-lupe"><img class="rdc_portalmenu-search-input-lupe-img" alt="logo" height="25px" width="25px" src="<%= imgLupePath %>" /></div>
 </span>
 
 <!--  <span>

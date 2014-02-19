@@ -859,3 +859,16 @@ div.portlet-body {
 		}
 	}
 }
+/* --------- Portalmenu Searchfield -------------*/
+.aui .rdc_portalmenu-search-input input {
+	background-color: #444444;
+	color: #FFFFFF;
+	border-color: #8C8A8C;
+	margin-top: 5px;
+}
+.rdc_portalmenu-search-input-lupe {
+	position: absolute;
+	right: 1px;
+	top: 7px;
+	z-index: 100;
+}

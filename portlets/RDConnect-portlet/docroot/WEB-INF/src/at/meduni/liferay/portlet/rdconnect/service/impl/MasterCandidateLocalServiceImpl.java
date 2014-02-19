@@ -67,44 +67,65 @@ public class MasterCandidateLocalServiceImpl
 			state = "";
 		}
 		
-		// Dynamic Query for search
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MasterCandidateImpl.class);
-				
-		Criterion criterion = null;
-				
-		Criterion criterion_stringsearch = RestrictionsFactoryUtil.ilike("diseasesfreetext", StringPool.PERCENT + searchstring + StringPool.PERCENT);
-		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("diseasescodes", StringPool.PERCENT + searchstring + StringPool.PERCENT));
-		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT + searchstring + StringPool.PERCENT));
-		criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("candidatesubtype", StringPool.PERCENT + searchstring + StringPool.PERCENT));
+		List<MasterCandidate> mastercandidate = null;
+		
 		try {
-			long searchlong = Long.valueOf(searchstring);
-			criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.eq("masterCandidateId", searchlong));
-		} catch (Exception e) {
+			// Dynamic Query for search
+			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MasterCandidateImpl.class);
+					
+			Criterion criterion = null;
+			Criterion criterion_stringsearch_grouped = null;
 			
+			String[] searchstringarray = searchstring.split(" ");
+			
+			for (String searchstringsplit : searchstringarray) {
+				Criterion criterion_stringsearch = RestrictionsFactoryUtil.ilike("diseasesfreetext", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT);
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("diseasescodes", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("candidatesubtype", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("url", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("contactperson", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("comment", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("address", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("mail", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("head", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				try {
+					long searchlong = Long.valueOf(searchstringsplit);
+					criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.eq("masterCandidateId", searchlong));
+				} catch (Exception e) {
+					
+				}
+				if(criterion_stringsearch_grouped == null) {
+					criterion_stringsearch_grouped = criterion_stringsearch;
+				} else {
+					criterion_stringsearch_grouped = RestrictionsFactoryUtil.or(criterion_stringsearch_grouped, criterion_stringsearch);
+				}
+			}
+					
+			criterion = RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT);
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
+			criterion = RestrictionsFactoryUtil.and(criterion, criterion_stringsearch_grouped);
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + state + StringPool.PERCENT));
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE 'x'"));
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE '0'"));
+					
+			dynamicQuery.add(criterion);
+			
+			Order countryOrder = OrderFactoryUtil.asc("country");
+			Order joinIdOrder = OrderFactoryUtil.asc("joinId");
+			Order nameOrder = OrderFactoryUtil.asc("name");
+			 
+			dynamicQuery.addOrder(countryOrder);
+			dynamicQuery.addOrder(joinIdOrder);
+			dynamicQuery.addOrder(nameOrder);
+			
+			
+			mastercandidate = MasterCandidateLocalServiceUtil.dynamicQuery(dynamicQuery);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-				
-		criterion = RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT);
-		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
-		criterion = RestrictionsFactoryUtil.and(criterion, criterion_stringsearch);
-		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + state + StringPool.PERCENT));
-		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE 'x'"));
-		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE '0'"));
-				
-		dynamicQuery.add(criterion);
-		
-		Order countryOrder = OrderFactoryUtil.asc("country");
-		Order joinIdOrder = OrderFactoryUtil.asc("joinId");
-		Order nameOrder = OrderFactoryUtil.asc("name");
-		//Order candidateidOrder = OrderFactoryUtil.asc("candidateId");
-		//Order masteridOrder = OrderFactoryUtil.desc("masterId");
-		 
-		dynamicQuery.addOrder(countryOrder);
-		dynamicQuery.addOrder(joinIdOrder);
-		dynamicQuery.addOrder(nameOrder);
-		
-		List<MasterCandidate> mastercandidate = MasterCandidateLocalServiceUtil.dynamicQuery(dynamicQuery);
-
-		//List<MasterCandidate> mastercandidate = masterCandidatePersistence.findByCNST(country, name, type);
 		return mastercandidate;	
 	}
 }

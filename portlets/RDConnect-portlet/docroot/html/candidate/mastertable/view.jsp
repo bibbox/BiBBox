@@ -7,6 +7,13 @@
 
 <!-- Read the search parameters from the action urls for filtering -->
 <%
+String name2 = "";
+HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
+httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
+name2 = httpRequest.getParameter("_portalmenu_WAR_RDConnectportlet_name");
+if(name2 == null) {
+	name2 = "";
+}
 
 String country = ParamUtil.getString(request, "country");
 if(country.equalsIgnoreCase("")) {
@@ -20,7 +27,11 @@ if(candidatetype.equalsIgnoreCase("")) {
 
 String name = ParamUtil.getString(request, "name");
 if(name.equalsIgnoreCase("")) {
-	name = "";
+	if(name2.equalsIgnoreCase("")) {
+		name = "";
+	} else {
+		name = name2;
+	}
 }
 
 String state =  ParamUtil.getString(request, "state");
