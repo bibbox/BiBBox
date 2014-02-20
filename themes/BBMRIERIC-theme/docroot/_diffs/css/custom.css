@@ -12,6 +12,57 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+/* ---------- New Header ----------- */
+.bbmri_eric_header-maincontainer {
+	height: 325px;
+	box-shadow: 5px 7px 20px rgba(0,0,0,0.2);
+	margin-bottom: 30px;
+	
+	background: -webkit-linear-gradient(left, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
+	background: -o-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* Standard syntax (must be last) */
+}
+.bbmri_eric_header-maincontainer-verlauf {
+	float: left;
+	clear:both;
+}
+.bbmri_eric_header-innercontainer {
+	width: 1000px;
+	margin: auto;
+}
+.bbmri_eric_header-logo {
+	height: 143px;
+	float: right;
+	margin-top: 42px;
+}
+.bbmri_eric_header-menucontainer {
+	z-index: 100;
+	position: absolute;
+	left: 0px;
+	top: 185px;
+	margin: auto;
+}
+.bbmri_eric_header-mainmenu {
+	float: right;
+	align: right;
+	width: 1000px;
+	margin: auto;
+}
+.bbmri_eric_header-mainmenu ui {
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+.bbmri_eric_header-mainmenu li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+/* ---------- New Header ende ----------- */
+
 /* ---------- My Styling ----------- */
 .aui body {
 	background: -webkit-linear-gradient(left, #FFFFFF , #b3b2b2); /* For Safari */

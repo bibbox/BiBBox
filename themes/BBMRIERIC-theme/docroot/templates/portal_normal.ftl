@@ -13,7 +13,26 @@
 </head>
 
 <body class="${css_class}">
+<!-- New Header -->
 
+<div class="bbmri_eric_header-maincontainer">
+	<div class="bbmri_eric_header-maincontainer-verlauf"><img  alt="${logo_description}" height="325px" src="/BBMRIERIC-theme/images/BBMRI-Logo-homepage-bg.png" width="449px" ></div>
+	<div class="bbmri_eric_header-innercontainer">
+		<div class="bbmri_eric_header-logo"><img  alt="${logo_description}" height="100px" src="/BBMRIERIC-theme/images/bbmri_eric_logo.png" width="320px" ></div>
+	</div>
+</div>
+
+<div class="bbmri_eric_header-menucontainer">
+	<div class="bbmri_eric_header-mainmenu">
+		<#if has_navigation || is_signed_in>
+			<#include "${full_templates_path}/navigation.ftl" />
+		</#if>
+	</div>
+</div>
+
+<hr><br><br><br><hr>
+
+<!-- New Header End -->
 <a href="#main-content" id="skip-to-content"><@liferay.language key="skip-to-content" /></a>
 
 ${theme.include(body_top_include)}

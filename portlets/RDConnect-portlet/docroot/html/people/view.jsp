@@ -24,20 +24,6 @@ adduserURL.setParameter("struts_action", "/users_admin/edit_user");
 adduserURL.setParameter("redirect", currentURL);
 adduserURL.setParameter("p_p_state", "maximized");
 
-// Link to all users
-/*editusersURL.setParameter("struts_action", "/users_admin/view");
-editusersURL.setParameter("usersListView", "flat-users");
-editusersURL.setParameter("toolbarItem", "view-all-users");
-editusersURL.setParameter("controlPanelCategory", "users");
-editusersURL.setParameter("saveUsersListView", "true");
-editusersURL.setParameter("redirect", currentURL);
-editusersURL.setParameter("p_p_state", "maximized");
-editusersURL.setParameter("struts_action", "/users_admin/view");
-editusersURL.setParameter("organizationId", String.valueOf(organizationId));
-editusersURL.setParameter("usersListView", "tree");
-editusersURL.setParameter("redirect", currentURL);
-editusersURL.setParameter("p_p_state", "maximized");*/
-
 	long organizationId = 0;
 	com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 	String editimgpath = request.getContextPath() + "/images/edit.png";
@@ -61,20 +47,34 @@ editusersURL.setParameter("p_p_state", "maximized");*/
         }
         
         for(User u : users) {
-        	
-        	LiferayPortletURL editusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
-        	editusersURL.setParameter("struts_action", "/users_admin/edit_user");
-        	editusersURL.setParameter("redirect", currentURL);
-        	editusersURL.setParameter("p_p_state", "maximized");
-        	editusersURL.setParameter("p_u_i_d", String.valueOf(u.getUserId()));
+        	LiferayPortletURL editusersURL = null;
+        	if(u.getUserId() == themeDisplay.getUserId()) {
+        		editusersURL = PortletURLFactoryUtil.create(request, "2", controlPanelPlid, "RENDER_PHASE");
+        		editusersURL.setParameter("redirect", currentURL);
+	        	editusersURL.setParameter("p_p_state", "maximized");
+	        	editusersURL.setParameter("controlPanelCategory", "my");
+	        	editusersURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getUser().getGroupId()));
+        	} else {
+	        	editusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+	        	editusersURL.setParameter("struts_action", "/users_admin/edit_user");
+	        	editusersURL.setParameter("redirect", currentURL);
+	        	editusersURL.setParameter("p_p_state", "maximized");
+	        	editusersURL.setParameter("p_u_i_d", String.valueOf(u.getUserId()));
+        	}
         	
         	String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+u.getScreenName()+"&amp;companyId="+u.getCompanyId();
 %>
 			<div class="rdc-people-dispaly"><img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="35" /> 
 			<%= u.getFullName() %> 
-			<% if(biobankregistryownerrole || portaleditorrole) { %>
-			<a href="<%= editusersURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
-			<% } %>
+			<% 
+			if(biobankregistryownerrole || portaleditorrole) { 
+				if(u.getUserId() == themeDisplay.getUserId()) { %>
+					<img id="myuseredit" style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" />
+			<% } else { %>
+				<a href="<%= editusersURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
+			<% 
+				}
+			} %>
 			<br>
 			<%= u.getJobTitle() %> <br>
 			</div>
@@ -89,4 +89,29 @@ editusersURL.setParameter("p_p_state", "maximized");*/
 		
 	<% } %>
 
-
+<% 
+LiferayPortletURL editmyusersURL = PortletURLFactoryUtil.create(request, "2", controlPanelPlid, "RENDER_PHASE");
+editmyusersURL.setParameter("p_p_state", "maximized");
+editmyusersURL.setParameter("controlPanelCategory", "my");
+//editmyusersURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getUser().getGroupId())); 
+String portletResource = ParamUtil.getString(request, "portletResource");
+%>
+<aui:script use="aui-base">
+				A.one('#myuseredit').on(
+					'click',
+					function(event) {
+						Liferay.Util.selectEntity(
+							{
+								dialog: {
+									constrain: true,
+									modal: true,
+									width: 1000
+								},
+								id: '_<%=HtmlUtil.escapeJS(portletResource)%>_selectFolder',
+								title: 'Edit my account.',
+								uri: '<%=editmyusersURL.toString()%>'
+							}
+						);
+					}
+				);
+</aui:script>

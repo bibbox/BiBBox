@@ -36,7 +36,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 .rdconnect-header-container-top {
 	height: 50px;
 	width: 100%;
-	background-image:url('/RDConnectHub-theme/images/rdconnectheaderbackgound.png');
+	background-image:url('@theme_image_path@/bg_gradient.png');
+	background-repeat:repeat-x;
 	background-size:100%;
 }
 .rdconnect-header-container-bottom {
@@ -57,6 +58,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 	border-style: solid;
 	border-width: 0 1px 0 1px;
 	float: left;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
 }
 .rdconnect-header-container-top-rdlogo img {
 	height: 50px;
@@ -64,9 +68,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 .rdconnect-header-container-top-menue {
 	width: 818px;
-	border-color: #000000;
-	border-style: solid;
-	border-width: 0 1px 0 0;
 	float: left;
 	height: 50px;
 	margin: auto;
@@ -859,16 +860,198 @@ div.portlet-body {
 		}
 	}
 }
-/* --------- Portalmenu Searchfield -------------*/
-.aui .rdc_portalmenu-search-input input {
-	background-color: #444444;
-	color: #FFFFFF;
+/* ----------------- -------------- */
+.rdc-portalmenu-div-container-homelogo {
+	height: 16px;
+	width: 19px;
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+	margin-top: 17px;
+}
+.rdc-portalmenu-div-container-logo {
+	height: 40px;
+	width: 40px;
+}
+.rdchubportalinfologo {
+	width: 90px;
+	height: 90px;
+}
+.rdchubportalinfo {
+	width: 100%;
+	height: 90px;
+}
+.rdchubportalinfologo {
+	float: left;
+	width: 90px;
 	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+}
+.rdchubportalinfoheader {
+	float: left;
+	width: 891px;
+	height: 59px;
+	padding-left: 15px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 1px 0;
+}
+.rdchubportalinfosubmenu {
+	float: left;
+	width: 907px;
+	height: 30px;
+}
+/* ---------- RDC  Portal Menu ---------- */
+.rdc-portalmenu-div-container {
+	height: 45px;
+	margin-left: 15px;
 	margin-top: 5px;
+}
+/* --------- Portalmenu Searchfield -------------*/
+.rdc_portalmenu-myuseraccount-container {
+	position: absolute;
+    top: 0;
+    right: 0px;
+    width: 36px;
+    height: 38px;
+    padding-top: 12px;
+    padding-left: 24px;
+    
+    border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+}
+.aui .rdc_portalmenu-search-input {
+	position: absolute;
+    top: 0;
+    left: 235px;
+	width: 505px;
+	height: 45px;
+	padding-top: 5px;
+}
+.aui .rdc_portalmenu-search-input input {
+	background-color: rgba(0,0,0,0.25);
+	color: #FFFFFF;
+	border-color: #1B1B1B #404040 #404040 #1B1B1B;
+	margin-top: 5px;
+	width: 495px;
 }
 .rdc_portalmenu-search-input-lupe {
 	position: absolute;
-	right: 1px;
-	top: 7px;
+	right: 2px;
+	top: 13px;
 	z-index: 100;
+}
+.rdc_portalmenu-search-input-lupe-img {
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+}
+/* ---------- RDC  Portal Menu ---------- */
+.rdc-portalmenu-div-container {
+	height: 50px;
+	margin: 0;
+}
+.rdc-portalmenu-div-container-homologocontainer {
+	height: 50px;
+	width: 39px;
+	padding-left: 20px;
+}
+.rdc-portalmenu-div-container-myorganisations {
+	height: 38px;
+	width: 140px;
+	float: left;
+	list-style: none;
+	position: absolute;
+    left: 60px;
+    top: 0px;
+    padding-top: 12px;
+    padding-left: 20px;
+    color: #9A9A9A;
+    border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+}
+.aui .rdc-portalmenu-div-container-myorganisations ul {
+	float: left;
+	list-style: none;
+	margin: 0;
+}
+.aui .rdc-portalmenu-div-container-myorganisations ul:after {
+	content: ""; 
+	clear: both; 
+	display: block;
+}
+.rdc-portalmenu-div-container-myorganisations ul ul {
+	display: none;
+	background: #5f6975; 
+	border-radius: 0px; 
+	padding: 0;
+	position: absolute; 
+	top: 100%;
+	left: 0px;
+	z-index: 500;
+}
+.rdc-portalmenu-div-container-myorganisations ul ul li {
+	border-top: 1px solid #6b727c;
+	border-bottom: 1px solid #575f6a;
+	position: relative;
+	float: left;
+	width: 300px;
+}
+.rdc-portalmenu-div-container-myorganisations ul ul li a {
+	color: #A4A4A4;
+}
+.aui .rdc-portalmenu-div-container-myorganisations ul ul li a:hover {
+	color: #A4A4A4;
+}
+.rdc-portalmenu-div-container-myorganisations:hover > ul ul {
+	display: block;
+}
+.aui input.span9, .aui textarea.span9, .aui .uneditable-input.span9 {
+    width: 170px;
+}
+/* ---------- My User -------- */
+.aui .rdc_portalmenu-myuseraccount-container ul {
+	float: left;
+	list-style: none;
+	margin: 0;
+}
+.aui .rdc_portalmenu-myuseraccount-container ul:after {
+	content: ""; 
+	clear: both; 
+	display: block;
+}
+.rdc_portalmenu-myuseraccount-container ul ul {
+	display: none;
+	background: #5f6975; 
+	border-radius: 0px; 
+	padding: 0;
+	position: absolute; 
+	top: 100%;
+	left: -87px;
+	z-index: 500;
+}
+.rdc_portalmenu-myuseraccount-container ul ul li {
+	border-top: 1px solid #6b727c;
+	border-bottom: 1px solid #575f6a;
+	position: relative;
+	float: left;
+	width: 150px;
+	color: #A4A4A4;
+	padding-left: 5px;
+}
+.rdc_portalmenu-myuseraccount-container ul ul li a {
+	color: #A4A4A4;
+}
+.aui .rdc_portalmenu-myuseraccount-container ul ul li a:hover {
+	color: #A4A4A4;
+}
+.rdc_portalmenu-myuseraccount-container:hover > ul ul {
+	display: block;
 }

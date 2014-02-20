@@ -1,7 +1,10 @@
 /* ---------- RDC hub information ---------- */
 .rdc-portalmenu-div-container-homelogo {
-	height: 32px;
-	width: 30px;
+	height: 16px;
+	width: 19px;
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+	margin-top: 11px;
 }
 .rdc-portalmenu-div-container-logo {
 	height: 40px;
@@ -38,21 +41,24 @@
 }
 /* ---------- RDC  Portal Menu ---------- */
 .rdc-portalmenu-div-container {
-	height: 45px;
-	margin-left: 10px;
-	margin-top: 5px;
+	height: 50px;
+	margin: 0;
 }
 .aui .rdc_portalmenu-search-input input {
-	background-color: #444444;
+	background-color: rgba(0,0,0,0.25);
 	color: #FFFFFF;
-	border-color: #8C8A8C;
+	border-color: #1B1B1B #404040 #404040 #1B1B1B;
 	margin-top: 5px;
 }
 .rdc_portalmenu-search-input-lupe {
 	position: absolute;
-	right: 1px;
-	top: 7px;
+	right: 3px;
+	top: 9px;
 	z-index: 100;
+}
+.rdc_portalmenu-search-input-lupe-img {
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
 }
 /* ---------- RDC  information ---------- */
 .rdconnect-information-container {
