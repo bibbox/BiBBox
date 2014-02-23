@@ -25,22 +25,6 @@
 	String submitter_name = ParamUtil.getString(request, "submittername");
 	String submitter_email = ParamUtil.getString(request, "submitteremail");
 	String candidatesubtype = "";
-	/*
-	if(!success) {
-		name = ParamUtil.getString(request, "name");
-		url = ParamUtil.getString(request, "url");
-		contact_person = ParamUtil.getString(request, "contactperson");
-		type = ParamUtil.getString(request, "candidatetype");
-		country = ParamUtil.getString(request, "country");
-		diseases_icd10 = ParamUtil.getString(request, "diseasescodes");
-		diseases_free = ParamUtil.getString(request, "diseasesfreetext");
-		commend = ParamUtil.getString(request, "comment");
-		address = ParamUtil.getString(request, "address");
-		mail = ParamUtil.getString(request, "mail");
-		head = ParamUtil.getString(request, "head");
-		candidatesubtype = ParamUtil.getString(request, "candidatesubtype");
-	}
-	*/
 %>
 
 

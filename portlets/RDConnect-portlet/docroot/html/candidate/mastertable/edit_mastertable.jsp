@@ -51,7 +51,7 @@
 		</aui:select>
 	</aui:column>
 	<aui:column columnWidth="25" last="true">	
-		<aui:input name="candidatesubtype" label="Acronym" cssClass="propose" label="Subtype" />
+		<aui:input name="candidatesubtype" label="Acronym" cssClass="propose" />
 	</aui:column>
 	<aui:column columnWidth="100" first="true">			
 		<aui:input name="url" cssClass="propose" />

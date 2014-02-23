@@ -30,7 +30,6 @@ div.proposerequired{
 	background-repeat: no-repeat;
 }
 img.proposerequired{
-	float: left;
 	display: inline;
 }
 span.proposerequired{
@@ -81,14 +80,9 @@ textarea.propose{
     z-index: 500 !important; 
 }
 .rdc-filter-name-help {
-	width:28px;
-	height: 24px;
+	width:14px;
+	height: 13px;
     color: #8BBF39;
-    border-radius: 10px 10px 10px 10px;
-    -moz-border-radius: 10px 10px 10px 10px;
-    -webkit-border-radius: 10px 10px 10px 10px;
-  	background: #377CB5;
-  	border-bottom: 2px solid #8BBF39;
 }
 .aui .rdc-filter-button {
 	margin-left: 5px;

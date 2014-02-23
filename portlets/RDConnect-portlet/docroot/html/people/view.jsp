@@ -70,6 +70,7 @@ adduserURL.setParameter("p_p_state", "maximized");
 			if(biobankregistryownerrole || portaleditorrole) { 
 				if(u.getUserId() == themeDisplay.getUserId()) { %>
 					<img id="myuseredit" style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" />
+					<!-- <a href="<%= themeDisplay.getURLMyAccount() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a> -->
 			<% } else { %>
 				<a href="<%= editusersURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
 			<% 
@@ -95,9 +96,11 @@ editmyusersURL.setParameter("p_p_state", "maximized");
 editmyusersURL.setParameter("controlPanelCategory", "my");
 //editmyusersURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getUser().getGroupId())); 
 String portletResource = ParamUtil.getString(request, "portletResource");
+//String editurlaccount = themeDisplay.getURLMyAccount().toString();
 %>
-<aui:script use="aui-base">
-				A.one('#myuseredit').on(
+
+<aui:script use="aui-base,event">
+		A.all('#myuseredit').on(
 					'click',
 					function(event) {
 						Liferay.Util.selectEntity(
@@ -109,9 +112,11 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 								},
 								id: '_<%=HtmlUtil.escapeJS(portletResource)%>_selectFolder',
 								title: 'Edit my account.',
-								uri: '<%=editmyusersURL.toString()%>'
+								uri: '<%= editmyusersURL.toString() %>'
 							}
 						);
 					}
 				);
+			
+		
 </aui:script>

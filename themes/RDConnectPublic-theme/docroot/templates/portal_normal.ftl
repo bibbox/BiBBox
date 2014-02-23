@@ -39,10 +39,10 @@ ${theme.include(body_top_include)}
 		</#if>
 		<#if the_title != "Welcome">
 			<div id="logoleft">
-				<img alt="RD-Connect-IDCard-Logo" height="81px" width="287px" src="/RDConnectPublic-theme/images/rdconnectlogoidcard.png"  />
+				<a class="" href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo" height="81px" width="287px" src="/RDConnectPublic-theme/images/rdconnectlogoidcard.png"  /></a>
 			</div>
 			<div id="logocenter">
-				<img alt="RD-Connect-IDCard-Logo-center" height="123px" width="184px" src="/RDConnectPublic-theme/images/centerlogo.png"  />
+				<a href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo-center" height="123px" width="184px" src="/RDConnectPublic-theme/images/centerlogo.png"  /></a>
 			</div>
 		</#if>	
 	</div>

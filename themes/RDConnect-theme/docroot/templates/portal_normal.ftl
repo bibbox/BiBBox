@@ -17,16 +17,22 @@
 ${theme.include(body_top_include)}
 
 <#if is_signed_in>
- 
+	<#if user_id == 32810>
 		<@liferay.dockbar />
-
+	</#if>
+	<#if user_id == 22987>
+		<@liferay.dockbar />
+	</#if>
+	<#if user_id == 23771>
+		<@liferay.dockbar />
+	</#if>
 </#if>
 
 
 	<div class="rdconnect-header-container-top">
 		<div class="rdconnect-header-container-inner">
 			<div class="rdconnect-header-container-top-rdlogo">
-				<a href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnect-theme/images/rdconnectheadertoplogo.png" /></a>
+				<a href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnect-theme/images/rdconnectheadertoplogo-bgtransparent.png" /></a>
 			</div>
 			<div class="rdconnect-header-container-top-menue">
 				<#assign locPortletId = "portalmenu_WAR_RDConnectportlet" />
@@ -75,12 +81,6 @@ ${theme.include(body_top_include)}
 			</div>
 		</div>
 	</div>
-</div>
-
-<div id="rd-header-signin">
-	<#if !is_signed_in>
-		<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a>
-	</#if>
 </div>
 
 <div class="container-fluid" id="wrapper">

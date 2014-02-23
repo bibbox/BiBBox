@@ -418,7 +418,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 /* ------ RDC Formating ----------- */
 /* ------ RDC Formating top ----------- */
 .rdc_idcard_idcardbodytop-id {
-	margin-left: 64px;
+	margin-left: 40px;
 	float: left;
 	width:106px;
 }
@@ -472,22 +472,28 @@ $dockbarOpenGradientStart: #0EA6F9;
 	margin: 0;
 }
 .rdc_idcard_idcardbodybottom-menue ul li {
-	padding-top: 10px;
+	padding-top: 4px;
+	padding-left: 4px;
 	list-style: none;
 	float:left;
 	background-color:#F4F4E1;
 	margin: 0 3px;
 	text-align: left;
-	height:30px;
+	height:36px;
 	font-size:14px;
 	font-weight:bold;
 	line-height: 15px;
 }
 .rdc_idcard_idcardbodybottom-menue-pageinformation {
 	color:#8BBF39;
+	font-weight: normal;
 }
 .rdc_idcard_idcardbodybottom-menue-pageinformation-gray {
 	color:#7F7F7F;
+	font-weight: normal;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates {
+	font-weight: normal;
 }
 
 /* ---------- -------------------------- ---------- */
@@ -1244,8 +1250,9 @@ div.portlet-body {
 		.portlet-title {
 			font-size: 1.5em;
 			font-weight: bold;
-			line-height: 2.2;
+			line-height: 1.6;
 			margin: 0;
+			padding: 10px 0 0 0;
 
 			i, span img {
 				display: none;
@@ -1600,4 +1607,16 @@ div.portlet-body {
 .rdc_portalmenu-search-input-lupe-img {
 	opacity:0.5;
 	filter:alpha(opacity=50); /* For IE8 and earlier */
+}
+.aui .rdc_coreinformation_organisation-table-images img {
+	margin-right: 30px;
+}
+.rdc_coreinformation_organisation-table-images {
+	width: 100%;
+}
+.rdc_coreinformation_organisation-table-images-bottomborder {
+	border-color: #CCCCCC;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	padding-bottom: 10px;
 }

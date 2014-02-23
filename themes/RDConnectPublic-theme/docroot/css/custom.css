@@ -12,6 +12,15 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+
+#rd-heading #logoleft a, #rd-heading #logocenter a {
+    border-color: #377CB5;
+    border-style: solid;
+    border-width: 0px;
+    color: #377CB5;
+    padding: 10px;
+}
+
 /* ---------- Base styles ---------- */
 .lfr-translation-manager {
 	display: none;

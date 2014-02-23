@@ -12,6 +12,10 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-6 {
+	width: 115px;
+}
+
 .aui-w60 {
 	width: 59%;
 	float: left;
@@ -28,9 +32,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 /* ---------- RDC  header ---------- */
 .rdconnect-header-container {
-	height: 150px;
+	height: 140px;
 	width: 100%;
-	margin: 0 0 10px 0;
+	margin: 0;
 	padding: 0;
 }
 .rdconnect-header-container-top {
@@ -41,12 +45,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 	background-size:100%;
 }
 .rdconnect-header-container-bottom {
-	height: 90px;
+	height: 88px;
 	width: 100%;
-	border-color: #8C8A8C;
-	border-style: solid;
-	border-width: 0 0 1px 0;
-	background: #FAFAF0;
+	background: #F4F4E1;
 }
 .rdconnect-header-container-inner {
 	width: 1000px;
@@ -549,8 +550,9 @@ div.portlet-body {
 		.portlet-title {
 			font-size: 1.5em;
 			font-weight: bold;
-			line-height: 2.2;
+			line-height: 1.6;
 			margin: 0;
+			padding: 10px 0 0 0;
 
 			i, span img {
 				display: none;
@@ -879,27 +881,19 @@ div.portlet-body {
 .rdchubportalinfo {
 	width: 100%;
 	height: 90px;
-}
-.rdchubportalinfologo {
-	float: left;
-	width: 90px;
-	border-color: #8C8A8C;
-	border-style: solid;
-	border-width: 0 1px 0 1px;
+	background-color: #F4F4E1;
 }
 .rdchubportalinfoheader {
 	float: left;
-	width: 891px;
+	width: 985px;
 	height: 59px;
 	padding-left: 15px;
-	border-color: #8C8A8C;
-	border-style: solid;
-	border-width: 0 1px 1px 0;
 }
 .rdchubportalinfosubmenu {
 	float: left;
-	width: 907px;
+	width: 1000px;
 	height: 30px;
+	background-color: #FFFFFF;
 }
 /* ---------- RDC  Portal Menu ---------- */
 .rdc-portalmenu-div-container {
@@ -1054,4 +1048,108 @@ div.portlet-body {
 }
 .rdc_portalmenu-myuseraccount-container:hover > ul ul {
 	display: block;
+}
+/* -------- ------- */
+.rdconnect-heading-submenue-rdscore {
+	float: right;
+	width: 149px;
+	text-align: center;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+}
+.rdconnect-heading-submenue-border-left {
+	text-align: center;
+	-moz-box-shadow:    inset 8px 0 6px -6px #B9B9B9;
+   	-webkit-box-shadow:  inset 8px 0 6px -6px #B9B9B9;
+   	box-shadow:          inset 8px 0 6px -6px #B9B9B9;
+   	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+}
+.rdconnect-heading-submenue-border-right {
+	text-align: center;
+	-moz-box-shadow:    inset -8px 0 6px -6px #B9B9B9;
+   	-webkit-box-shadow:  inset -8px 0 6px -6px #B9B9B9;
+   	box-shadow:          inset -8px 0 6px -6px #B9B9B9;
+   	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+}
+.rdconnect-heading-submenue-border-active {
+	text-align: center;
+	border-color: #FFFFFF;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+}
+#cssmenu ul,
+#cssmenu li,
+#cssmenu span,
+#cssmenu a {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+#cssmenu ul {
+	width: 100%;
+}
+#cssmenu {
+  height: 30px;
+  width: auto;
+}
+#cssmenu:after,
+#cssmenu ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+#cssmenu a {
+  color: #000000;
+  display: inline-block;
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  font-size: 12px;
+  line-height: 30px;
+  padding: 0 1px;
+  text-decoration: none;
+}
+#cssmenu ul {
+  list-style: none;
+}
+#cssmenu > ul {
+  float: left;
+}
+#cssmenu > ul > li {
+  float: left;
+}
+#cssmenu > ul > li > a {
+  color: #000000;
+  font-size: 12px;
+}
+#cssmenu > ul > li:hover:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+}
+#cssmenu > ul > li.active:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+}
+.aui .rdc_coreinformation_organisation-table-images img {
+	margin-right: 30px;
+}
+.rdc_coreinformation_organisation-table-images {
+	width: 100%;
+}
+.rdc_coreinformation_organisation-table-images-bottomborder {
+	border-color: #CCCCCC;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	padding-bottom: 10px;
 }

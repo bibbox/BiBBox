@@ -364,6 +364,12 @@ if (currentGroup.isOrganization()) {
 	for(Phone tmpphone : phones) {
 		if(tmpphone.isPrimary()) {
 			phone = "Tel. " + tmpphone.getNumber();
+			if(phone.length() >= 17) {
+				phone = phone.replaceAll(" ", "");
+				if(phone.length() >= 17) {
+					phone = "<span style=\"font-size: 80%\">" + phone + "</span>";
+				}
+			} 
 		}
 		if(tmpphone.getTypeId() == 12007) {
 			fax = "Fax. " + tmpphone.getNumber();
@@ -436,7 +442,7 @@ String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+mainco
 	<div>
 		<span class="rdc_idcard_idcaibody-headlines">Main contact</span>
 		<% if(biobankregistryownerrole || portaleditorrole) { %>
-		<aui:a href="<%= editmaincontactURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+		&nbsp;&nbsp;<aui:a href="<%= editmaincontactURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
 		<% } %>
 		<br>
 		<div class="rdc_idcard_idcaibody-avatar"><img alt="" src="<%= imgPath %>" /></div>

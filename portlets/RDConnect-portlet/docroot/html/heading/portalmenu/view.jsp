@@ -86,17 +86,34 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 <div class="rdc_portalmenu-myuseraccount-container">
 <ul><li>
+<% if(themeDisplay.isSignedIn()) { %>
 <img style="opacity:0.5;filter:alpha(opacity=50);" alt="myaccount" height="18px" width="10px" src="<%= request.getContextPath() %>/images/profile.png" />
 <ul>
 <li id="portalmyuseredit" style="cursor:pointer;"><%= themeDisplay.getUser().getFullName() %></li>
 <li class="sign-out"><aui:a href="<%= themeDisplay.getURLSignOut() %>">Sign Out</aui:a></li>
 </ul>
+<% } else { %>
+<img alt="myaccount" height="18px" width="18px" src="<%= request.getContextPath() %>/images/signinkey.png" />
+<ul>
+<%
+LiferayPortletURL createaccountURL = PortletURLFactoryUtil.create(request, "58", controlPanelPlid, "RENDER_PHASE");
+editmyusersURL.setParameter("p_p_state", "maximized");
+editmyusersURL.setParameter("struts_action", "/login/create_account");
+editmyusersURL.setParameter("saveLastPath", "false");
+editmyusersURL.setParameter("p_p_lifecycle", "0");
+String register = "http://rd-connect.bibbox.org/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account";
+%>
+<li class="sign-in"><aui:a href="<%= themeDisplay.getURLSignIn() %>">Sign In</aui:a></li>
+<li class="sign-in"><aui:a href="<%= register %>">Register</aui:a></li>
+<li style="visibility:hidden;" id="portalmyuseredit" style="cursor:pointer;"><%= themeDisplay.getUser().getFullName() %></li>
+</ul>
+<% } %>
 </li></ul>
 </div>
 
 </div>
 <aui:script use="aui-base">
-				A.one('#portalmyuseredit').on(
+				A.all('#portalmyuseredit').on(
 					'click',
 					function(event) {
 						Liferay.Util.selectEntity(

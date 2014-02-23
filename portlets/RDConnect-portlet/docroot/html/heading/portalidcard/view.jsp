@@ -43,6 +43,8 @@ if (currentGroup.isOrganization()) {
   	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
   	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
   	
+  	java.util.Date modifieddate = organization.getModifiedDate();
+  	
   	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
   	for(DDLRecordSet rdc_rs : rdc_recordlist) {
   		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
@@ -50,6 +52,9 @@ if (currentGroup.isOrganization()) {
   		if(rdc_rsname.equals("core")) {  		
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) {
+  				if (modifieddate.before(record.getModifiedDate())) {
+  					modifieddate = record.getModifiedDate();
+  				}
   				recordid = record.getRecordId();
   				if(record.getFieldValue("Radio2493") != null) {
 	  				String type = record.getFieldValue("Radio2493").toString();
@@ -78,6 +83,13 @@ if (currentGroup.isOrganization()) {
   				}
   				if(record.getFieldValue("Description") != null) {
   					shortdiscription = record.getFieldValue("Description").toString();
+  				}
+  			}
+  		} else {
+  			List<DDLRecord> records = rdc_rs.getRecords();
+  			for(DDLRecord record : records) {
+  				if (modifieddate.before(record.getModifiedDate())) {
+  					modifieddate = record.getModifiedDate();
   				}
   			}
   		}
@@ -337,7 +349,7 @@ if (currentGroup.isOrganization()) {
 	<div class="rdc_idcard_idcardbodytop">
 		<span class="rdc_idcard_idcardbodytop-id">ID # <%= organizationId %></span>
 		<span class="rdc_idcard_idcardbodytop-dateofinclution">Date of Inclusion: <%= dateFormat.format(organization.getCreateDate()) %> </span>
-		<span class="rdc_idcard_idcardbodytop-type">Type: <%= organisationtype %> </span>
+		<span class="rdc_idcard_idcardbodytop-type">Last Activities: <%= dateFormat.format(modifieddate) %> </span>
 	</div>
 	<!-- middle -->
 	<div class="rdc_idcard_idcardbodymiddle">
@@ -368,11 +380,14 @@ if (currentGroup.isOrganization()) {
 				}
 				if(organisationtype.equalsIgnoreCase("Registry/Biobank") && l.getNameCurrentValue().startsWith("regbb_")) {
 					pages_display.put(l.getNameCurrentValue().replaceAll("regbb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
-				}
+				} /* else {
+					pages_display.put(l.getNameCurrentValue().replaceAll("regbb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
+				}*/
+				
 			}
 			
 			if(pages_display.size() != 0) {
-			int width_all = 488 - pages_display.size() - ((pages_display.size()-1)*6);
+			int width_all = 488 - pages_display.size() - ((pages_display.size()-1)*10);
 			int width = (int)Math.floor(width_all/pages_display.size());
 			int offset = width_all - (width*pages_display.size());
 			boolean first = true;
@@ -392,10 +407,10 @@ if (currentGroup.isOrganization()) {
 					pageinformation = corecount;
 				}
 				if(l.equalsIgnoreCase("Persons")) {
-					pageinformation = "[" + UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId()).size() + "]";
+					pageinformation = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates\">[" + UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId()).size() + "]</span>";
 				}
-				if(l.equalsIgnoreCase("Disease Matrix") || l.equalsIgnoreCase("Disease")) {
-					pageinformation = "[" + diseasecount + "]";
+				if(l.equalsIgnoreCase("Disease Matrix") || l.equalsIgnoreCase("Disease") || l.equalsIgnoreCase("Diseases")) {
+					pageinformation = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates\">[" + diseasecount + "]</span>";
 				}
 				if(l.equalsIgnoreCase("Quality")) {
 					pageinformation = quality;
@@ -404,9 +419,14 @@ if (currentGroup.isOrganization()) {
 					pageinformation = accessibility;
 				}
 				
+				String items = "";
+				if(!pageinformation.equalsIgnoreCase("")) {
+					items = pageinformation.substring((pageinformation.indexOf("[")+1), (pageinformation.indexOf("]")));
+				}
+				
 				%>	
 				<%= aktiveli %><aui:a href="<%= pagesurl %>"><%= l %>
-				</aui:a><br><span id="rdc_idcard_idcardbodybottom-menue-help" class="rdc_idcard_idcardbodybottom-menue-help" title="Number of fields specified"><%= pageinformation %><span></span></li>
+				</aui:a><br><span id="rdc_idcard_idcardbodybottom-menue-help" class="rdc_idcard_idcardbodybottom-menue-help" title="<%= items %> items specified"><%= pageinformation %><span></span></li>
 				<%
 			}
 			}

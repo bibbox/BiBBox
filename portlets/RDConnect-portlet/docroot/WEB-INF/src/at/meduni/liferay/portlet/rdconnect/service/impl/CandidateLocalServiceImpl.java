@@ -96,7 +96,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	}
 	
 	public Candidate addCandidate(Candidate newCandidate) throws SystemException {
-		Candidate candidate = candidatePersistence.create((int) counterLocalService.increment(CandidateImpl.class.getName()) + 10000);
+		Candidate candidate = candidatePersistence.create((int) counterLocalService.increment(CandidateImpl.class.getName()) + 15000);
 		candidate.setName(newCandidate.getName());
 		candidate.setSource(newCandidate.getSource());
 		candidate.setUrl(newCandidate.getUrl());
