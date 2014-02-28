@@ -6,7 +6,7 @@
 <%@ page import="com.liferay.portal.model.Role" %>
 <%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.model.UserGroupRole" %>
-
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 
 
 
@@ -82,11 +82,16 @@ adduserURL.setParameter("p_p_state", "maximized");
 
 <%
         }
-	}   
+	}  
+    
     
     if(biobankregistryownerrole || portaleditorrole) {
     %>
-		<div><a href="<%= adduserURL.toString() %>" class="icon-user">Add User</a></div>
+    	<portlet:renderURL var="adduser2URL">
+			<portlet:param name="mvcPath" value="/html/people/adduser.jsp" />
+			<portlet:param name="redirect" value="<%= currentURL %>"/>
+		</portlet:renderURL>
+		<div><a href="<%= adduser2URL %>" class="icon-user">Add User</a></div>
 		
 	<% } %>
 
@@ -99,24 +104,21 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 //String editurlaccount = themeDisplay.getURLMyAccount().toString();
 %>
 
-<aui:script use="aui-base,event">
+
+<aui:script use="aui-base,event,aui-dialog,aui-dialog-iframe">
 		A.all('#myuseredit').on(
-					'click',
-					function(event) {
-						Liferay.Util.selectEntity(
-							{
-								dialog: {
-									constrain: true,
-									modal: true,
-									width: 1000
-								},
-								id: '_<%=HtmlUtil.escapeJS(portletResource)%>_selectFolder',
-								title: 'Edit my account.',
-								uri: '<%= editmyusersURL.toString() %>'
-							}
-						);
-					}
-				);
-			
-		
+			'click',
+			function(event) {
+				Liferay.Util.selectEntity({
+					dialog: {
+						constrain: true,
+						modal: true,
+						width: 1000
+					},
+					id: '_<%=HtmlUtil.escapeJS(portletResource)%>_selectFolder',
+					title: 'Edit my account.',
+					uri: '<%= editmyusersURL.toString() %>'
+				});
+			}
+		);
 </aui:script>

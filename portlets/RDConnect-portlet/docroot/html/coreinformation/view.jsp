@@ -75,7 +75,7 @@ for(Organization organization : organizations) {
 	  	
 	  	tableandcontent += "<table class=\"rdc_coreinformation_organisation-table-images\">";
 	  	tableandcontent += "<tr>";
-	  	tableandcontent += "<td rowspan=\"4\" width=\"80px\"><a href=" + orgPath + "\"><img alt=\"logo\" src=\"" + imgPath + "\" width=\"60px\" /></a></td>";
+	  	tableandcontent += "<td rowspan=\"4\" width=\"80px\"><a href=\"" + orgPath + "\"><img alt=\"logo\" src=\"" + imgPath + "\" width=\"60px\" /></a></td>";
 	  	tableandcontent += "<td><a href=\"" + orgPath + "\">" + organization.getName() + "</a></td>";
 	  	tableandcontent += "</tr>";
 	  	// Deseases -------------------------------------------------------------

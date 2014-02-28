@@ -305,6 +305,7 @@ if (currentGroup.isOrganization()) {
 // Edit link
 	boolean portaleditorrole = false;
     boolean biobankregistryownerrole = false;
+    boolean biobankregistryeditorrole = false;
     for(Role role : themeDisplay.getUser().getRoles()) {
     	if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
     		portaleditorrole = true;
@@ -314,7 +315,9 @@ if (currentGroup.isOrganization()) {
     //Biobank, Registry Owner
     for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {
     	if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-OWNER"))
-    		biobankregistryownerrole = true;  			
+    		biobankregistryownerrole = true; 
+    	if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-EDITOR"))
+    		biobankregistryeditorrole = true;
     }
     String editpathorganisation = "";
     String editpathcoredll = "";
@@ -355,7 +358,7 @@ if (currentGroup.isOrganization()) {
 	<div class="rdc_idcard_idcardbodymiddle">
 		<aui:a href="<%= orgPath %>"><img alt="logo" class="rdc_idcard_idcardbodymiddle-logo" src="<%= imgPath %>" height="85px" /></aui:a>
 		<div class="rdc_idcard_idcardbodymiddle-organisationname"><%= organization.getName() %>
-			<% if(biobankregistryownerrole || portaleditorrole) { %>
+			<% if(biobankregistryownerrole || portaleditorrole || biobankregistryeditorrole) { %>
 			<aui:a href="<%= editpathorganisation %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
 			<% } %>
 		</div>
