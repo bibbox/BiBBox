@@ -16,6 +16,7 @@ java.util.Date modifieddate = null;
 java.util.TreeMap<java.util.Date, String> sortetdata = new java.util.TreeMap<java.util.Date, String>(Collections.reverseOrder());
 List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
 for(Organization organization : organizations) {
+	String country = "";
 	modifieddate = organization.getModifiedDate();
 	organizationId = organization.getOrganizationId();
 	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
@@ -41,26 +42,41 @@ for(Organization organization : organizations) {
 	  				if (modifieddate.before(record.getModifiedDate())) {
 	  					modifieddate = record.getModifiedDate();
 	  				}
-	  				if(record.getFieldValue("Radio2493") != null) {
-		  				String type = record.getFieldValue("Radio2493").toString();
-		  				//System.out.println("Type: " + type + " recordid: " + record.getRecordId() + " organisation: " + organization.getName() );
-		  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
-		  					if(organization.getLogoId() == 0) {
-		  						imgPath = request.getContextPath() + "/images/Biobank.png";
-		  					}
-		  					orgPath = orgPath + "/bb_home";
-		  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
-		  					if(organization.getLogoId() == 0) {
-		  						imgPath = request.getContextPath() + "/images/Registry.png";
-		  					}
-		  					orgPath = orgPath + "/home";
-		  				} else {
-		  					if(organization.getLogoId() == 0) {
-		  						imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
-		  					}
-		  					orgPath = orgPath + "/regbb_home";
-		  				}
+	  				if(record.getFieldValue("countryCode") != null) {
+	  					country = record.getFieldValue("countryCode").toString();
 	  				}
+	  				
+		  			if(record.getFieldValue("Radio2493") != null) {
+			  			String type = record.getFieldValue("Radio2493").toString();
+			  			if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
+			  				if(organization.getLogoId() == 0) {
+			  					imgPath = request.getContextPath() + "/images/Biobank.png";
+			  				}
+			  				if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+			  					orgPath = orgPath + "/at_home";
+			  				} else {
+			  					orgPath = orgPath + "/bb_home";
+			  				}
+			  			} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
+			  				if(organization.getLogoId() == 0) {
+			  					imgPath = request.getContextPath() + "/images/Registry.png";
+			  				}
+			  				if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+			  					orgPath = orgPath + "/at_home";
+			  				} else {
+			  					orgPath = orgPath + "/home";
+			  				}
+			  			} else {
+			  				if(organization.getLogoId() == 0) {
+			  					imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
+			  				}
+			  				if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+			  					orgPath = orgPath + "/at_home";
+			  				} else {
+			  					orgPath = orgPath + "/regbb_home";
+			  				}
+			  			}
+		  			}
 	  			}
 	  		} else {
 	  			List<DDLRecord> records = rdc_rs.getRecords();
@@ -127,11 +143,22 @@ for(Organization organization : organizations) {
 		tableandcontent += "</td></tr>";
 		tableandcontent += "</table><br>";
 		
-		if(sortetdata.containsKey(modifieddate)) {
-			String tmp = sortetdata.get(modifieddate);
-			sortetdata.put(modifieddate, tmp + tableandcontent);
+		if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+			if(country.equalsIgnoreCase("Austria")) {
+				if(sortetdata.containsKey(modifieddate)) {
+					String tmp = sortetdata.get(modifieddate);
+					sortetdata.put(modifieddate, tmp + tableandcontent);
+				} else {
+					sortetdata.put(modifieddate, tableandcontent);
+				}
+			}
 		} else {
-			sortetdata.put(modifieddate, tableandcontent);
+			if(sortetdata.containsKey(modifieddate)) {
+				String tmp = sortetdata.get(modifieddate);
+				sortetdata.put(modifieddate, tmp + tableandcontent);
+			} else {
+				sortetdata.put(modifieddate, tableandcontent);
+			}
 		}
 	}
 

@@ -38,17 +38,29 @@ for(Organization o : organisations) {
 		  					if(o.getLogoId() == 0) {
 		  						imgPath = request.getContextPath() + "/images/Biobank.png";
 		  					}
-		  					orgPath = orgPath + "/bb_home";
+		  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+			  					orgPath = orgPath + "/at_home";
+			  				} else {
+		  						orgPath = orgPath + "/bb_home";
+			  				}
 		  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
 		  					if(o.getLogoId() == 0) {
 		  						imgPath = request.getContextPath() + "/images/Registry.png";
 		  					}
-		  					orgPath = orgPath + "/home";
+		  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+			  					orgPath = orgPath + "/at_home";
+			  				} else {
+		  						orgPath = orgPath + "/home";
+			  				}
 		  				} else {
 		  					if(o.getLogoId() == 0) {
 		  						imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
 		  					}
-		  					orgPath = orgPath + "/regbb_home";
+		  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+			  					orgPath = orgPath + "/at_home";
+			  				} else {
+		  						orgPath = orgPath + "/regbb_home";
+			  				}
 		  				}
 	  				}
 	  			}

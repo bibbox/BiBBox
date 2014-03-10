@@ -12,44 +12,67 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+.container-fluid {
+	width: 1000px;
+	margin: auto;
+}
+
 /* ---------- New Header ----------- */
 .bbmri_eric_header-maincontainer {
 	height: 325px;
 	box-shadow: 5px 7px 20px rgba(0,0,0,0.2);
-	margin-bottom: 30px;
+	margin-bottom: 0;
 	
-	background: -webkit-linear-gradient(left, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
+	background: -webkit-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
 	background: -o-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* Standard syntax (must be last) */
 }
 .bbmri_eric_header-maincontainer-verlauf {
-	float: left;
-	clear:both;
+	margin: auto;
+}
+.bbmri_eric_header-maincontainer-verlauf-inner {
+	margin: auto;
+	width: 1200px;
 }
 .bbmri_eric_header-innercontainer {
-	width: 1000px;
 	margin: auto;
+	position: absolute;
+    top: 0px;
+    width: 100%;
 }
 .bbmri_eric_header-logo {
+	width: 1000px;
 	height: 143px;
-	float: right;
-	margin-top: 42px;
+	margin: auto;
 }
+.bbmri_eric_header-logo-floating {
+	margin-top: 42px;
+	float: right;
+}
+/* menu */
 .bbmri_eric_header-menucontainer {
-	z-index: 100;
+	width: 100%;
+	height: 65px;
+	margin: auto;
 	position: absolute;
 	left: 0px;
-	top: 185px;
-	margin: auto;
+	top: 180px;
+	-webkit-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+	-moz-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+	box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+}
+.bbmri_eric_header-mainmenu-floating {
+	float: right;
 }
 .bbmri_eric_header-mainmenu {
-	float: right;
-	align: right;
 	width: 1000px;
 	margin: auto;
+	text-align: right;
 }
 .bbmri_eric_header-mainmenu ui {
+	float: right;
+	text-align: right;
 	padding:0px;
 	margin:0px;
 	list-style-type: none;
@@ -58,17 +81,155 @@ $dockbarOpenGradientStart: #0EA6F9;
 	float: left;
 	list-style-type: none;
 	margin: auto;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 50px;
+}
+/* submenu */
+.bbmri_eric_header-submenucontainer {
+	width: 100%;
+	height: 45px;
+	margin: auto;
+	position: absolute;
+	left: 0px;
+	top: 245px;
+	-webkit-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+	-moz-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+	box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+}
+.bbmri_eric_header-submainmenu {
+	width: 1000px;
+	margin: auto;
+	text-align: right;
+}
+.bbmri_eric_header-submainmenu-floating {
+	float: right;
+}
+.bbmri_eric_header-submainmenu ui {
+	float: right;
+	text-align: right;
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+.bbmri_eric_header-submainmenu li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 45px;
+}
+.bbmri_eric_header-submainmenu a {
+	color: #000000;
+}
+.bbmri_eric_header-submainmenu a:hover {
+	color: #000000;
+	text-decoration:none;
+}
+/* subsubmenu */
+.bbmri_eric_header-subsubmenucontainer {
+	width: 100%;
+	height: 35px;
+	margin: auto;
+	position: absolute;
+	left: 0px;
+	top: 290px;
+	background-color: rgba(21,74,191,0.8);
+	-webkit-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+	-moz-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+	box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+}
+.bbmri_eric_header-subsubmainmenu {
+	width: 1000px;
+	margin: auto;
+	text-align: right;
+	color: #FFFFFF;
+}
+.bbmri_eric_header-subsubmainmenu-floating {
+	float: right;
+}
+.bbmri_eric_header-subsubmainmenu ui {
+	float: right;
+	text-align: right;
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+.bbmri_eric_header-subsubmainmenu li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 35px;
+}
+.bbmri_eric_header-subsubmainmenu a {
+	color: #FFFFFF;
+}
+.bbmri_eric_header-subsubmainmenu a:hover {
+	color: #FFFFFF;
+	text-decoration:none;
 }
 /* ---------- New Header ende ----------- */
 
+.container-fluid-background {
+	width: 1200px;
+	margin: auto;
+	background: url(@theme_image_path@/BBMRI-ERIC_Background.png) repeat-y;
+}
+
+/* ---------- Footer ----------- */
+.bbmrieric-footer {
+	width: 100%;
+	background-color: #184B8A;
+	height: 165px;
+	padding-top: 45px;
+}
+#footer {
+	width: 1000px;
+	margin: auto;
+}
+.bbmrieric-footer-menue {
+	width: 1000px;
+	margin: auto;
+	height: 70px;
+	margin-bottom: 35px;
+	border-style: solid;
+	border-color: #FFFFFF;
+	border-width: 1px 0 1px 0;
+}
+.aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.bbmrieric-footer-menue {
+	width: 1000px;
+	margin: auto;
+	text-align: right;
+}
+.bbmrieric-footer-menue ui {
+	float: right;
+	text-align: right;
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+.bbmrieric-footer-menue li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 50px;
+}
+/* ---------- Footer ende ----------- */
 /* ---------- My Styling ----------- */
 .aui body {
-	background: -webkit-linear-gradient(left, #FFFFFF , #b3b2b2); /* For Safari */
-	background: -o-linear-gradient(right, #FFFFFF, #b3b2b2); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #FFFFFF, #b3b2b2); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #FFFFFF , #b3b2b2); /* Standard syntax (must be last) */
+	background: -webkit-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
+	background: -o-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* Standard syntax (must be last) */
 }
 .bbmri-eric-header-container {
 	height: 300px;
@@ -79,17 +240,17 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 .bbmri-eric-header-container-top {
 	height: 130px;
-	background: -webkit-linear-gradient(left, #FFFFFF , #b3b2b2); /* For Safari */
-	background: -o-linear-gradient(right, #FFFFFF, #b3b2b2); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #FFFFFF, #b3b2b2); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #FFFFFF , #b3b2b2); /* Standard syntax (must be last) */
+	background: -webkit-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
+	background: -o-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* Standard syntax (must be last) */
 }
 .bbmri-eric-header-container-bottom {
 	height: 30px;
-	background: -webkit-linear-gradient(left, #FFFFFF , #b3b2b2); /* For Safari */
-	background: -o-linear-gradient(right, #FFFFFF, #b3b2b2); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #FFFFFF, #b3b2b2); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #FFFFFF , #b3b2b2); /* Standard syntax (must be last) */
+	background: -webkit-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
+	background: -o-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* Standard syntax (must be last) */
 	opacity:0.6;
 	filter:alpha(opacity=60); /* For IE8 and earlier */
 }
@@ -146,7 +307,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	background: #ED660A;
 	border-color: #ED660A;
 	float: left;
-	margin-top: 10px;
+	margin-top: 20px;
 	margin-right: 10px;
 }
 .bbmri-eric-square-blue {
@@ -157,7 +318,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	background: #184B8A;
 	border-color: #184B8A;
 	float: left;
-	margin-top: 10px;
+	margin-top: 20px;
 	margin-right: 10px;
 }
 .bbmri-eric-submenue {
@@ -497,17 +658,18 @@ $dockbarOpenGradientStart: #0EA6F9;
 	.portlet-content, .portlet-minimized .portlet-content-container {
 		border: 1px solid #EAEAEA;
 		border-top-width: 0;
+		border-left-width: 0;
+		border-right-width: 0;
 		padding: 12px 10px 10px;
 	}
 
 	.portlet-topper {
-		background: #D3D3D3;
-		color: #FFF;
+		color: #184B8A;
 		padding: 0;
 
 		.portlet-title {
 			font-size: 1em;
-			font-weight: normal;
+			font-weight: bold;
 			line-height: 2.2;
 			margin: 0;
 
@@ -634,7 +796,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	/* ---------- Footer ---------- */
 
 	#footer {
-		text-align: right;
+		text-align: center;
 	}
 
 	/* ---------- Hudcrumbs ---------- */
@@ -752,6 +914,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	.portlet-nested-portlets .portlet-body {
 		.portlet, .portlet-borderless-container {
 			@include box-shadow(none);
+			background: none;
 		}
 	}
 
@@ -814,4 +977,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 			margin-top: -2px;
 		}
 	}
+}
+.aui .portlet, .aui .portlet-borderless-container {
+	background-color:transparent;
 }

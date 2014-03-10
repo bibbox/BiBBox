@@ -18,6 +18,9 @@
 		    if(portaleditorrole) {
 		    	titlecuratorportal = "Curator Portal - RD-Connect";
 		    }
+		    if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+		    	titlecuratorportal = "BBMRI.AT";
+		    }
     %>
 		<h3><%= titlecuratorportal %></h3>
 	</div>

@@ -114,6 +114,12 @@ emptyResultsMessage="there-are-no-candidates"
 delta="<%= delta %>">
 <liferay-ui:search-container-results>
 <%
+/*
+AT Hook
+*/
+if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+	country = "Austria";
+}
 List<MasterCandidate> tempResults = MasterCandidateLocalServiceUtil.getFilterdCandidates(name, country, candidatetype, state);
 //results = CandidateLocalServiceUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
 //List<Candidate> tempResults = ActionUtil.getProducts(renderRequest);

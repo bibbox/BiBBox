@@ -1,0 +1,54 @@
+/* ----- bbmrilogin -----*/
+.bbmrieric-logincontainer {
+	height: 20px;
+}
+.bbmrieric-logincontainer-login {
+	float: right;
+	width: 100px;
+	height: 20px;
+	background-color: #D8DEEA;
+	padding-right: 5px;
+	font-size: 11px;
+	text-align: right;
+}
+.bbmrieric-logincontainer-webinarlogin{
+	float: right;
+	margin-left: 17px;
+	width: 100px;
+	height: 20px;
+	background-color: #D8DEEA;
+	padding-right: 5px;
+	font-size: 11px;
+	text-align: right;
+	color: #000000;
+}
+.bbmrieric-logincontainer-square-login {
+	height: 8px;
+	width: 8px;
+	border:1px solid;
+	border-radius:2px;
+	background: #ED660A;
+	border-color: #ED660A;
+	position: relative;
+	left: -5px;
+	top: -15px;
+}
+.bbmrieric-logincontainer-square-webinarlogin {
+	height: 8px;
+	width: 8px;
+	border:1px solid;
+	border-radius:2px;
+	background: #343434;
+	border-color: #343434;
+	position: relative;
+	left: -5px;
+	top: -15px;
+}
+.aui .bbmrieric-logincontainer-login a, 
+.aui .bbmrieric-logincontainer-login a:hover {
+	color: #000000;
+	text-decoration: none;
+}
+.bbmrieric-bold {
+	font-weight: bold;
+}

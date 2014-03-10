@@ -7,6 +7,8 @@
 <head>
 	<title>${the_title} - ${company_name}</title>
 
+	<meta name="GOOGLEBOT" content="NOINDEX, NOFOLLOW">
+	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	${theme.include(top_head_include)}
@@ -32,7 +34,15 @@ ${theme.include(body_top_include)}
 	<div class="rdconnect-header-container-top">
 		<div class="rdconnect-header-container-inner">
 			<div class="rdconnect-header-container-top-rdlogo">
-				<a href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnect-theme/images/rdconnectheadertoplogo-bgtransparent.png" /></a>
+				<a href="http://rd-connect.bibbox.org/home">
+					<#if user_id == 105078>
+						<img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnect-theme/images/BBMRIatTmpLogo.png" />
+					<#elseif user_id == 105092>
+						<img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnect-theme/images/BBMRIatTmpLogo.png" />
+					<#else>
+						<img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnect-theme/images/rdconnectheadertoplogo-bgtransparent.png" />
+					</#if>
+				</a>
 			</div>
 			<div class="rdconnect-header-container-top-menue">
 				<#assign locPortletId = "portalmenu_WAR_RDConnectportlet" />

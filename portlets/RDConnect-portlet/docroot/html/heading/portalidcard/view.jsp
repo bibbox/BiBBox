@@ -60,13 +60,25 @@ if (currentGroup.isOrganization()) {
 	  				String type = record.getFieldValue("Radio2493").toString();
 	  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
 	  					organisationtype = "Biobank";
-	  					orgPath = orgPath + "/bb_home";
+	  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+		  					orgPath = orgPath + "/at_home";
+		  				} else {
+	  						orgPath = orgPath + "/bb_home";
+		  				}
 	  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
 	  					organisationtype = "Registry";
-	  					orgPath = orgPath + "/home";
+	  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+		  					orgPath = orgPath + "/at_home";
+		  				} else {
+	  						orgPath = orgPath + "/home";
+		  				}
 	  				} else {
 	  					organisationtype = "Registry/Biobank";
-	  					orgPath = orgPath + "/regbb_home";
+	  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+		  					orgPath = orgPath + "/at_home";
+		  				} else {
+	  						orgPath = orgPath + "/regbb_home";
+		  				}
 	  				}
   				}
   				if(organization.getLogoId() == 0) {
@@ -375,18 +387,23 @@ if (currentGroup.isOrganization()) {
 			// Determin which pages to show
 			LinkedHashMap<String, String> pages_display = new LinkedHashMap<String, String>(); 
 			for(Layout l : pagelayouts) { 
-				if(organisationtype.equalsIgnoreCase("Registry") && (!l.getNameCurrentValue().startsWith("bb_") && !l.getNameCurrentValue().startsWith("regbb_"))) {
-					pages_display.put(l.getNameCurrentValue(), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
+				if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+					if(l.getNameCurrentValue().startsWith("at_")) {
+						pages_display.put(l.getNameCurrentValue().replaceAll("at_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
+					}
+				} else  {
+					if(organisationtype.equalsIgnoreCase("Registry") && (!l.getNameCurrentValue().startsWith("bb_") && !l.getNameCurrentValue().startsWith("regbb_") && !l.getNameCurrentValue().startsWith("at_"))) {
+						pages_display.put(l.getNameCurrentValue(), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
+					}
+					if(organisationtype.equalsIgnoreCase("Biobank") && l.getNameCurrentValue().startsWith("bb_")) {
+						pages_display.put(l.getNameCurrentValue().replaceAll("bb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
+					}
+					if(organisationtype.equalsIgnoreCase("Registry/Biobank") && l.getNameCurrentValue().startsWith("regbb_")) {
+						pages_display.put(l.getNameCurrentValue().replaceAll("regbb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
+					} /* else {
+						pages_display.put(l.getNameCurrentValue().replaceAll("regbb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
+					}*/
 				}
-				if(organisationtype.equalsIgnoreCase("Biobank") && l.getNameCurrentValue().startsWith("bb_")) {
-					pages_display.put(l.getNameCurrentValue().replaceAll("bb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
-				}
-				if(organisationtype.equalsIgnoreCase("Registry/Biobank") && l.getNameCurrentValue().startsWith("regbb_")) {
-					pages_display.put(l.getNameCurrentValue().replaceAll("regbb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
-				} /* else {
-					pages_display.put(l.getNameCurrentValue().replaceAll("regbb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
-				}*/
-				
 			}
 			
 			if(pages_display.size() != 0) {

@@ -7,6 +7,8 @@
 <head>
 	<title>${the_title} - ${company_name}</title>
 
+	<meta name="GOOGLEBOT" content="NOINDEX, NOFOLLOW">
+	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	${theme.include(top_head_include)}

@@ -47,6 +47,9 @@ for(Organization organization : organisations) {
   			}
   		}
 	}
+  	if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+		orgPath = orgPath + "/at_home";
+	}
 %>
 	<p><aui:a href="<%= orgPath %>"><img alt="logo" src="<%= imgPath %>" width="120px" /><br><%= organization.getName() %></aui:a></p>
 	

@@ -252,6 +252,33 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>search-display-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>austria-map</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>austria-map-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>bbmrieric-map</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>bbmrieric-map-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>portal-search</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>portal-search-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

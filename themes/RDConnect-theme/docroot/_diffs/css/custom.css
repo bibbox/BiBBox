@@ -1620,3 +1620,6 @@ div.portlet-body {
 	border-width: 0 0 1px 0;
 	padding-bottom: 10px;
 }
+.aui select, .aui input, .aui textarea, .aui .uneditable-input {
+	width: 500px;
+}

@@ -29,6 +29,7 @@
 		<portlet id="portalhubinformation"></portlet>
 		<portlet id="portal-id-card"></portlet>
 		<portlet id="portal-id-card-additional-information"></portlet>
+		<portlet id="portal-search"></portlet>
 	</category>
 	<category name="RDConnectQuestionnaire">
 		<portlet id="disease-categories-ic-d10"></portlet>
@@ -42,5 +43,9 @@
 	<category name="RDConnectSearch">
 		<portlet id="search-field"></portlet>
 		<portlet id="search-display"></portlet>
+	</category>
+	<category name="RDCMaps">
+		<portlet id="austria-map"></portlet>
+		<portlet id="bbmrieric-map"></portlet>
 	</category>
 </display>

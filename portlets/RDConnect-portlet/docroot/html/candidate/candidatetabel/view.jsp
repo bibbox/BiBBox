@@ -130,6 +130,13 @@ emptyResultsMessage="there-are-no-candidates"
 delta="<%= delta %>">
 <liferay-ui:search-container-results>
 <%
+
+/*
+	AT Hook
+*/
+if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+	country = "Austria";
+}
 List<Candidate> tempResults = CandidateLocalServiceUtil.getFilterdCandidates(name, country, candidatetype, source, state);
 //results = CandidateLocalServiceUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
 //List<Candidate> tempResults = ActionUtil.getProducts(renderRequest);
@@ -194,7 +201,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 
 <portlet:actionURL name='updateCandidateTableData' var="updateCandidateTableDataURL" />
 
-<aui:script use="aui-io-request, event, node, aui-popover, valuechange, event-hover, aui-tooltip">
+<aui:script use="aui-io-request, event, node, aui-popover, valuechange, event-hover, aui-tooltip, event-valuechange, click">
 	AUI().use('aui-io-request', 'event-valuechange', 'node', function(A){
 		var nodeObject = A.all('#masterid');
 		nodeObject.on('valuechange', function(event){
@@ -215,9 +222,10 @@ searchContainer.setIteratorURL(portletURL);    %>
 			});
 		});
 	});
-	AUI().use('aui-io-request', 'event', 'node', function(A){
+	AUI().use('aui-io-request', 'event', 'node', 'event-valuechange', 'click', function(A){
 		var nodeObject = A.all('#state');
 		nodeObject.on('click', function(event){
+			alert('Click Event');
 			var url = '<%= updateCandidateTableDataURL.toString() %>';
 			A.io.request(url,{
 				//this is the data that you are sending to the action method
@@ -229,7 +237,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 				},
 				dataType: 'json',
 				on: {
-				  failure: function() {  },
+				  failure: function() { alert('failure'); },
 				  success: function(event, id, obj) { "success" }
 				}
 			});

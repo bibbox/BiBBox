@@ -11,25 +11,29 @@ if(candidate.getState().equalsIgnoreCase("P") && candidate.getOrganisationid()!=
 	Organization organization = OrganizationLocalServiceUtil.getOrganization(candidate.getOrganisationid());
 	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
 	
-	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
-  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
-  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
-  		
-  		if(rdc_rsname.equals("core")) {  		
-  			List<DDLRecord> records = rdc_rs.getRecords();
-  			for(DDLRecord record : records) {
-  				if(record.getFieldValue("Radio2493") != null) {
-	  				String type = record.getFieldValue("Radio2493").toString();
-	  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
-	  					orgPath = orgPath + "/bb_home";
-	  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
-	  					orgPath = orgPath + "/home";
-	  				} else {
-	  					orgPath = orgPath + "/regbb_home";
+	if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
+		orgPath = orgPath + "/at_home";
+	} else {
+		List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+	  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+	  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+	  		
+	  		if(rdc_rsname.equals("core")) {  		
+	  			List<DDLRecord> records = rdc_rs.getRecords();
+	  			for(DDLRecord record : records) {
+	  				if(record.getFieldValue("Radio2493") != null) {
+		  				String type = record.getFieldValue("Radio2493").toString();
+		  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
+		  					orgPath = orgPath + "/bb_home";
+		  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
+		  					orgPath = orgPath + "/home";
+		  				} else {
+		  					orgPath = orgPath + "/regbb_home";
+		  				}
 	  				}
-  				}
-  			}
-  		}
+	  			}
+	  		}
+		}
 	}
 	
 	state = "P";
