@@ -3,6 +3,8 @@
 <portlet:defineObjects />
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 long organizationId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 String editimgpath = request.getContextPath() + "/images/edit.png";
@@ -10,7 +12,7 @@ if (currentGroup.isOrganization()) {
 	organizationId = currentGroup.getClassPK();
 %>
 	
-	<h1>Add User</h1>
+	<h3>Add User</h3>
 	
 	<liferay-ui:success key="candidate-saved-successfully" message="candidate-saved-successfully" />
 	<liferay-ui:error key="fields-required" message="fields-required" />
@@ -42,6 +44,7 @@ if (currentGroup.isOrganization()) {
 		
 		<aui:button-row>
 			<aui:button type="submit"/>
+			<aui:button type="cancel"  onClick="<%= redirect %>" />
 		</aui:button-row>
 	</aui:form>
 	<% 

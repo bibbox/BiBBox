@@ -134,9 +134,19 @@ pageContext.setAttribute("total", total);
 	className="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate"
 	keyProperty="masterCandidateId"
 	modelVar="MasterCandidate">
-<liferay-ui:search-container-column-text
-	name="ID"
-	property="masterCandidateId"
+<%
+boolean portaleditorrole = false;
+for(Role role : themeDisplay.getUser().getRoles()) {
+	if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
+		portaleditorrole = true;
+	if(role.getName().equalsIgnoreCase("Administrator"))
+		portaleditorrole = true;
+}
+
+%>
+<liferay-ui:search-container-column-jsp
+	align="right" 
+	path="/html/candidate/mastertable/candidatemastertable_idcard.jsp"
 	cssClass="candidate-table-candidateId"
 />
 <liferay-ui:search-container-column-jsp
@@ -159,13 +169,6 @@ pageContext.setAttribute("total", total);
 	cssClass="candidate-table-state"
 />
 <%
-boolean portaleditorrole = false;
-for(Role role : themeDisplay.getUser().getRoles()) {
-	if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
-		portaleditorrole = true;
-	if(role.getName().equalsIgnoreCase("Administrator"))
-		portaleditorrole = true;
-}
 if(portaleditorrole) {
 %>
 <liferay-ui:search-container-column-jsp

@@ -13,6 +13,8 @@
 <%@ page import="javax.portlet.ActionRequest" %>
 <%@ page import="javax.portlet.PortletPreferences" %>
 
+<%@ page import="java.util.List" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 

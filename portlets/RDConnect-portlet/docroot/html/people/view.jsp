@@ -13,7 +13,7 @@
 <portlet:defineObjects />
 
 <% 
-	String currentURL = PortalUtil.getCurrentURL(request);
+String currentURL = PortalUtil.getCurrentURL(request);
 boolean portaleditorrole = false;
 boolean biobankregistryownerrole = false;
 
@@ -27,6 +27,7 @@ adduserURL.setParameter("p_p_state", "maximized");
 	long organizationId = 0;
 	com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 	String editimgpath = request.getContextPath() + "/images/edit.png";
+	String editroleimgpath = request.getContextPath() + "/images/person-icon.png";
     if (currentGroup.isOrganization()) {
         // the group is an Organization
     	organizationId = currentGroup.getClassPK();
@@ -62,6 +63,15 @@ adduserURL.setParameter("p_p_state", "maximized");
 	        	editusersURL.setParameter("p_u_i_d", String.valueOf(u.getUserId()));
         	}
         	
+        	%>
+        	<portlet:renderURL var="edituserrollURL">
+    			<portlet:param name="mvcPath" value="/html/people/edituserrolle.jsp" />
+    			<portlet:param name="redirect" value="<%= currentURL %>"/>
+    			<portlet:param name="rdcuserid" value="<%= String.valueOf(u.getUserId()) %>"/>
+    		</portlet:renderURL>
+    		
+    		<%
+        	
         	String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+u.getScreenName()+"&amp;companyId="+u.getCompanyId();
 %>
 			<div class="rdc-people-dispaly"><img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="35" /> 
@@ -70,9 +80,11 @@ adduserURL.setParameter("p_p_state", "maximized");
 			if(biobankregistryownerrole || portaleditorrole) { 
 				if(u.getUserId() == themeDisplay.getUserId()) { %>
 					<img id="myuseredit" style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" />
+					<a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editroleimgpath %>" width="10px" height="10px" /></a>
 					<!-- <a href="<%= themeDisplay.getURLMyAccount() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a> -->
 			<% } else { %>
 				<a href="<%= editusersURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
+				<a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editroleimgpath %>" width="10px" height="10px" /></a>
 			<% 
 				}
 			} %>

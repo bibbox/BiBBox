@@ -1620,6 +1620,6 @@ div.portlet-body {
 	border-width: 0 0 1px 0;
 	padding-bottom: 10px;
 }
-.aui select, .aui input, .aui textarea, .aui .uneditable-input {
+.aui .portlet-dynamic-data-list-display select, .aui .portlet-dynamic-data-list-display input, .aui textarea, .aui .portlet-dynamic-data-list-display .uneditable-input {
 	width: 500px;
 }

@@ -95,6 +95,7 @@ if (currentGroup.isOrganization()) {
   				}
   				if(record.getFieldValue("Description") != null) {
   					shortdiscription = record.getFieldValue("Description").toString();
+  					shortdiscription = shortdiscription.replaceAll("<.*?>", "");
   				}
   			}
   		} else {

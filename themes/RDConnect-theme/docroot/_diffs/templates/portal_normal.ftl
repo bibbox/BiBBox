@@ -29,6 +29,7 @@ ${theme.include(body_top_include)}
 		<@liferay.dockbar />
 	</#if>
 </#if>
+<@liferay.dockbar />
 
 
 	<div class="rdconnect-header-container-top">

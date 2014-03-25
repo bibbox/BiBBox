@@ -6,27 +6,31 @@
 @import url(color_schemes/dark.css);
 @import url(color_schemes/light.css);
 
+
 $dockbarGradientEnd: #1273C7;
 $dockbarGradientStart: #118ADE;
 
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+.aui h1, .aui h2, .aui h3, .aui h4, .aui h5, .aui h6 {
+	color: #184B8A;
+}
+.aui h1, .aui h2, .aui h3 {
+	font-size: 14px;
+}
+
 .container-fluid {
 	width: 1000px;
 	margin: auto;
 }
-
+.aui a {
+    color: #184B8A;
+}
 /* ---------- New Header ----------- */
 .bbmri_eric_header-maincontainer {
-	height: 325px;
-	box-shadow: 5px 7px 20px rgba(0,0,0,0.2);
+	height: 321px;
 	margin-bottom: 0;
-	
-	background: -webkit-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
-	background: -o-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* Standard syntax (must be last) */
 }
 .bbmri_eric_header-maincontainer-verlauf {
 	margin: auto;
@@ -58,17 +62,19 @@ $dockbarOpenGradientStart: #0EA6F9;
 	position: absolute;
 	left: 0px;
 	top: 180px;
-	-webkit-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
-	-moz-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
-	box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
+}
+.bbmri_eric_header-mainmenu-position {
+	width: 1000px;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 .bbmri_eric_header-mainmenu-floating {
 	float: right;
 }
 .bbmri_eric_header-mainmenu {
-	width: 1000px;
+	width: 1200px;
+	height: 65px;
 	margin: auto;
-	text-align: right;
 }
 .bbmri_eric_header-mainmenu ui {
 	float: right;
@@ -81,7 +87,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	float: left;
 	list-style-type: none;
 	margin: auto;
-	padding-left: 5px;
+	padding-left: 35px;
 	padding-right: 5px;
 	line-height: 50px;
 }
@@ -93,14 +99,16 @@ $dockbarOpenGradientStart: #0EA6F9;
 	position: absolute;
 	left: 0px;
 	top: 245px;
-	-webkit-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
-	-moz-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
-	box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
 }
 .bbmri_eric_header-submainmenu {
-	width: 1000px;
+	width: 1200px;
 	margin: auto;
 	text-align: right;
+}
+.bbmri_eric_header-submainmenu-position {
+	width: 1000px;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 .bbmri_eric_header-submainmenu-floating {
 	float: right;
@@ -116,7 +124,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	float: left;
 	list-style-type: none;
 	margin: auto;
-	padding-left: 5px;
+	padding-left: 35px;
 	padding-right: 5px;
 	line-height: 45px;
 }
@@ -128,7 +136,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	text-decoration:none;
 }
 /* subsubmenu */
-.bbmri_eric_header-subsubmenucontainer {
+.bbmri_eric_header-subsubmenucontainer-needwork {
 	width: 100%;
 	height: 35px;
 	margin: auto;
@@ -136,9 +144,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 	left: 0px;
 	top: 290px;
 	background-color: rgba(21,74,191,0.8);
-	-webkit-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
-	-moz-box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
-	box-shadow: inset 0px 17px 19px -7px rgba(0,0,0,0.44);
 }
 .bbmri_eric_header-subsubmainmenu {
 	width: 1000px;
@@ -176,43 +181,47 @@ $dockbarOpenGradientStart: #0EA6F9;
 .container-fluid-background {
 	width: 1200px;
 	margin: auto;
-	background: url(@theme_image_path@/BBMRI-ERIC_Background.png) repeat-y;
+	background: url(@theme_image_path@/02_content_background.png) repeat-y;
 }
 
 /* ---------- Footer ----------- */
-.bbmrieric-footer {
+.bbmrieric-footer-container {
 	width: 100%;
-	background-color: #184B8A;
+	height: 210px;
+}
+.bbmrieric-footer {
+	margin: auto;
+	width: 1200px;
 	height: 165px;
 	padding-top: 45px;
+	background: url(@theme_image_path@/03_footer_background.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
 }
 #footer {
 	width: 1000px;
 	margin: auto;
-}
-.bbmrieric-footer-menue {
-	width: 1000px;
-	margin: auto;
-	height: 70px;
-	margin-bottom: 35px;
-	border-style: solid;
-	border-color: #FFFFFF;
-	border-width: 1px 0 1px 0;
 }
 .aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
 	color: #FFFFFF;
 	text-decoration:none;
 }
 .bbmrieric-footer-menue {
-	width: 1000px;
+	width: 900px;
 	margin: auto;
+	height: 70px;
+	margin-bottom: 30px;
 	text-align: right;
 }
-.bbmrieric-footer-menue ui {
-	float: right;
-	text-align: right;
-	padding:0px;
-	margin:0px;
+.bbmrieric-footer-menue-float {
+	width: 900px;
+	height: 70px;
+	margin: auto;
+}
+.bbmrieric-footer-menue ul {
+	text-align: center;
+	padding: 0px;
+	margin: auto;
 	list-style-type: none;
 }
 .bbmrieric-footer-menue li {
@@ -220,16 +229,13 @@ $dockbarOpenGradientStart: #0EA6F9;
 	list-style-type: none;
 	margin: auto;
 	padding-left: 5px;
-	padding-right: 5px;
+	padding-right: 25px;
 	line-height: 50px;
 }
 /* ---------- Footer ende ----------- */
 /* ---------- My Styling ----------- */
 .aui body {
-	background: -webkit-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
-	background: -o-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* Standard syntax (must be last) */
+	background-color: #0C2848;
 }
 .bbmri-eric-header-container {
 	height: 300px;
@@ -303,7 +309,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 	height: 6px;
 	width: 6px;
 	border:1px solid;
-	border-radius:2px;
 	background: #ED660A;
 	border-color: #ED660A;
 	float: left;
@@ -314,7 +319,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	height: 6px;
 	width: 6px;
 	border:1px solid;
-	border-radius:2px;
+	border-radius:4px;
 	background: #184B8A;
 	border-color: #184B8A;
 	float: left;
@@ -981,3 +986,11 @@ $dockbarOpenGradientStart: #0EA6F9;
 .aui .portlet, .aui .portlet-borderless-container {
 	background-color:transparent;
 }
+.aui .portlet-asset-publisher .asset-content, .aui .portlet-asset-publisher .asset-summary, .aui .portlet-asset-publisher .asset-title, .aui .portlet-asset-publisher .header-title, .aui .portlet-asset-publisher li.title-list, .aui .portlet-blogs .entry-body, .aui .portlet-blogs .entry-title, .aui .portlet-blogs .header-title, .aui .portlet-journal-content .journal-content-article, .aui .portlet-message-boards .header-title, .aui .portlet-message-boards .thread-body {
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    hyphens: none;
+    word-break: normal;
+}
+
+@import url(custom_additional.css);

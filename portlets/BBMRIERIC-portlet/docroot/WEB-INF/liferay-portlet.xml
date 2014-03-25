@@ -18,6 +18,42 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>bbmri-login-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>member-menu</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>member-menu-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>bbmri-portalmenu</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>portalmenu-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>my-site-list</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>my-site-list-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>mailing-list</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>mailing-list-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

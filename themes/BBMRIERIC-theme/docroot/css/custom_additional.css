@@ -1,0 +1,7 @@
+.portlet-search select, .portlet-search input {
+	display: none;
+}
+.portlet-search input {
+	align: right;
+	text-align: right;
+}

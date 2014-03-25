@@ -338,7 +338,11 @@ if (currentGroup.isOrganization()) {
 	<div class="rdc_idcard_idcaibody-top">
 		<div class="rdc_idcard_idcaibody-flag">
 			<% if(map.containsKey(country)) { %>
-			<img id='myImage' src="http://www.geonames.org/flags/x/<%= map.get(country).toLowerCase() %>.gif" />
+			<img id='countryflag' src="http://www.geonames.org/flags/x/<%= map.get(country).toLowerCase() %>.gif" />
+			<% } else if(country.equalsIgnoreCase("International")) { 
+				String wordimage = request.getContextPath() + "/images/world.png";
+			%>
+			<img id='countryflag' src="<%= wordimage %>" />
 			<% } else { %>
 				<%= country %>
 			<% } %>

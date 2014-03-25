@@ -7,5 +7,9 @@
 	</category>
 	<category name="BBMRI-ERIC">
 		<portlet id="bbmri-login"></portlet>
+		<portlet id="member-menu"></portlet>
+		<portlet id="portalmenu"></portlet>
+		<portlet id="my-site-list"></portlet>
+		<portlet id="mailing-list"></portlet>
 	</category>
 </display>

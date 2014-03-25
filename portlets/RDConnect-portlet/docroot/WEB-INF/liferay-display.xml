@@ -39,6 +39,7 @@
 	</category>
 	<category name="RDConnectAdmin">
 		<portlet id="admin-redeploy-dd-ls"></portlet>
+		<portlet id="admin-reset-user-oragnisation-password"></portlet>
 	</category>
 	<category name="RDConnectSearch">
 		<portlet id="search-field"></portlet>
