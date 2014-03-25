@@ -5,3 +5,54 @@
 	align: right;
 	text-align: right;
 }
+
+#portlet_mailinglist_WAR_BBMRIERICportlet .indicates-required {
+	display: none;
+}
+
+#portlet_mailinglist_WAR_BBMRIERICportlet .portlet-topper {
+	display: none;
+}
+
+#portlet_mailinglist_WAR_BBMRIERICportlet .mc-field-group {
+	float: right;
+}
+#portlet_mailinglist_WAR_BBMRIERICportlet .portlet-content {
+	padding: 0;
+	height: 70px;
+}
+#mc_embed_signup{
+	clear:left; 
+	font:12px Helvetica,Arial,sans-serif; 
+}
+
+.mc-field-group-float {
+	float: right;
+}
+#mc_embed_signup .mc-field-group {
+	width: 100%;
+}
+.mc-field-group-float {
+	width: 100%;
+}
+#mc_embed_signup .mc-field-group-float #mc-embedded-subscribe {
+	background-color: #b3b2b2;
+	color: #FFFFFF;
+	width: 45px;
+	height: 25px;
+	padding: 0;
+	margin: 0;
+	clear: none;
+	border: 0px solid #999999;
+	display: inline;
+}
+#mc_embed_signup .mc-field-group-float #mce-EMAIL {
+	width: 242px;
+	padding: 0;
+	margin: 0;
+	clear: none;
+	border: 0px solid #999999;
+	display: inline;
+}
+
+
