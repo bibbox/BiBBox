@@ -53,6 +53,10 @@ public class MasterCandidateLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil} to access the master candidate local service.
 	 */
+	public List<MasterCandidate> getFilterdCandidates(long organisationId) throws SystemException {
+		return masterCandidatePersistence.findByOrganisationId(organisationId);
+	}
+	
 	public List<MasterCandidate> getFilterdCandidates(String searchstring, String country, String type, String state) throws SystemException {
 		if(country.equals("all")) {
 			country = "";

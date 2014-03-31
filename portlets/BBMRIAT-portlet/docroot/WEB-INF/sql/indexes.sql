@@ -1,0 +1,1 @@
+create index IX_2F07FC61 on bbmriat.ddllinkingtable (recordid);

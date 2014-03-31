@@ -1,11 +1,9 @@
-.portlet-search select, .portlet-search input {
+.js .controls-hidden .lfr-meta-actions, .js .controls-hidden .portlet-borderless-bar, .js .controls-hidden .portlet-topper-toolbar, .js .controls-hidden .lfr-configurator-visibility {
+	display: inline;
+}
+.portlet-title-text {
 	display: none;
 }
-.portlet-search input {
-	align: right;
-	text-align: right;
-}
-
 #portlet_mailinglist_WAR_BBMRIERICportlet .indicates-required {
 	display: none;
 }
@@ -19,7 +17,7 @@
 }
 #portlet_mailinglist_WAR_BBMRIERICportlet .portlet-content {
 	padding: 0;
-	height: 70px;
+	height: 180px;
 }
 #mc_embed_signup{
 	clear:left; 
@@ -28,17 +26,15 @@
 
 .mc-field-group-float {
 	float: right;
-}
-#mc_embed_signup .mc-field-group {
 	width: 100%;
 }
-.mc-field-group-float {
+#mc_embed_signup .mc-field-group {
 	width: 100%;
 }
 #mc_embed_signup .mc-field-group-float #mc-embedded-subscribe {
 	background-color: #b3b2b2;
 	color: #FFFFFF;
-	width: 45px;
+	width: 16%;
 	height: 25px;
 	padding: 0;
 	margin: 0;
@@ -47,12 +43,39 @@
 	display: inline;
 }
 #mc_embed_signup .mc-field-group-float #mce-EMAIL {
-	width: 242px;
+	width: 82%;
 	padding: 0;
 	margin: 0;
 	clear: none;
 	border: 0px solid #999999;
 	display: inline;
 }
-
-
+#mc_embed_signup .mc-field-group-float #mce-SEARCH {
+	width: 82%;
+	padding: 0;
+	margin: 0;
+	clear: none;
+	border: 0px solid #999999;
+	display: inline;
+}
+.portlet-content {
+	padding: 0;
+}
+.portlet-asset-publisher .asset-full-content.show-asset-title .asset-content {
+    margin-right: 0;
+}
+.portlet-asset-publisher .asset-content {
+    clear: right;
+    margin-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
+}
+.aui .bbmriericrecentnews {
+	color: #ED660A;
+}
+.taglib-header {
+	display: none;
+}
+.asset-title {
+	display: none;
+}

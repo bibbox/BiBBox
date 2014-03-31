@@ -100,6 +100,7 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 	public static long CANDIDATETYPE_COLUMN_BITMASK = 1L;
 	public static long COUNTRY_COLUMN_BITMASK = 2L;
 	public static long NAME_COLUMN_BITMASK = 4L;
+	public static long ORGANISATIONID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.meduni.liferay.portlet.rdconnect.model.MasterCandidate"));
 
@@ -551,7 +552,19 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 
 	@Override
 	public void setOrganisationid(long organisationid) {
+		_columnBitmask |= ORGANISATIONID_COLUMN_BITMASK;
+
+		if (!_setOriginalOrganisationid) {
+			_setOriginalOrganisationid = true;
+
+			_originalOrganisationid = _organisationid;
+		}
+
 		_organisationid = organisationid;
+	}
+
+	public long getOriginalOrganisationid() {
+		return _originalOrganisationid;
 	}
 
 	@Override
@@ -716,6 +729,10 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 		masterCandidateModelImpl._originalCandidatetype = masterCandidateModelImpl._candidatetype;
 
 		masterCandidateModelImpl._originalCountry = masterCandidateModelImpl._country;
+
+		masterCandidateModelImpl._originalOrganisationid = masterCandidateModelImpl._organisationid;
+
+		masterCandidateModelImpl._setOriginalOrganisationid = false;
 
 		masterCandidateModelImpl._columnBitmask = 0;
 	}
@@ -1033,6 +1050,8 @@ public class MasterCandidateModelImpl extends BaseModelImpl<MasterCandidate>
 	private long _groupid;
 	private long _companyid;
 	private long _organisationid;
+	private long _originalOrganisationid;
+	private boolean _setOriginalOrganisationid;
 	private long _joinId;
 	private boolean _accepted;
 	private String _state;

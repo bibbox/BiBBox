@@ -9,6 +9,8 @@
 <% 
 String redirect = ParamUtil.getString(request, "redirect");
 long rdcuserid = ParamUtil.getLong(request, "rdcuserid");
+String rdcuserjob = ParamUtil.getString(request, "rdcuserjob");
+
 
 long organizationId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
@@ -20,7 +22,7 @@ if (currentGroup.isOrganization()) {
 	boolean edithor = false;
 	
 	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-    for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {
+    for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(rdcuserid, organization.getGroupId())) {
     	if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-OWNER"))
     		owner = true;  
     	if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-EDITOR"))
@@ -39,11 +41,11 @@ if (currentGroup.isOrganization()) {
 			<aui:input type="hidden" name="rdccreaterid" value="<%= themeDisplay.getUserId() %>" />
 			<aui:input type="hidden" name="rdcuserid" value="<%= rdcuserid %>" />
 			
-			<aui:input name="rdcorganisationmember" label="Registry/Biobank Member" type="checkbox" value ="" checked="true"/>
+			<aui:input name="rdcorganisationmember" label="Registry/Biobank Member" type="checkbox" value="true" checked="true"/>
 			<hr>
-			<aui:input name="rdcposition" label="Position" type="text" value =""/>
-			<aui:input name="rdcroleowner" label="Owner" type="checkbox" value ="" checked="<%= owner %>" />
-			<aui:input name="rdcroleeditor" label="Editor" type="checkbox" value =""  checked="<%= edithor %>" />
+			<aui:input name="rdcposition" label="Position" type="text" value ="rdcuserjob"/>
+			<aui:input name="rdcroleowner" label="Owner" type="checkbox" value="<%= owner %>" />
+			<aui:input name="rdcroleeditor" label="Editor" type="checkbox" value="<%= edithor %>" />
 			
 		</aui:fieldset>
 	

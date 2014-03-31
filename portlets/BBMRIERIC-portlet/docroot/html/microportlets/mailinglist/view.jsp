@@ -1,6 +1,28 @@
 <%@ include file="/html/init.jsp" %>
+<%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
+<%@ page import="com.liferay.portal.model.Group" %>
+<%@ page import="com.liferay.portal.model.Layout" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <portlet:defineObjects />
+
+<!-- Begin Search Form -->
+
+<div id="mc_embed_signup">
+	<div class="mc-field-group" style="width: 315px;">
+	        <label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Search</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+		<div class="mc-field-group-float">
+	        <input type="text" placeholder="What are you looking for?" value="" name="SEARCH" class="required email" id="mce-SEARCH">
+	        <input type="submit" value="GO" name="subscribe" id="mc-embedded-subscribe">
+	    </div>
+	</div>
+</div>
+
+<!-- END Search Form -->
 
 <!-- Begin MailChimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
@@ -8,11 +30,11 @@
 <div id="mc_embed_signup">
 <form action="http://bbmri-eric.us8.list-manage.com/subscribe/post?u=c7415c09f5c4d908a6ec9388d&amp;id=39dc000a0f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 
-<div class="mc-field-group" style="width: 290px;">
-        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL">Subscribe to our <span style="font-weight:bold;">Newsletter</spam></label>
+<div class="mc-field-group" style="width: 315px;">
+        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL">Subscribe to our <span style="font-weight:bold;">Newsletter</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 	<div class="mc-field-group-float">
-        <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-        <input type="submit" value="Send" name="subscribe" id="mc-embedded-subscribe">
+        <input type="email" placeholder="Please enter mail address" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+        <input type="submit" value="SEND" name="subscribe" id="mc-embedded-subscribe">
     </div>
 </div>
 <div class="mc-field-group" style="display: none;">
@@ -223,3 +245,14 @@ function mce_success_cb(resp){
 
 </script>
 <!--End mc_embed_signup-->
+
+
+<!-- Begin Search Form -->
+
+<div id="mc_embed_signup">
+	<div class="mc-field-group" style="width: 315px;">
+	        <a href="/web/guest/contact"><label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Contact</spam> us <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label> </a>
+	</div>
+</div>
+
+<!-- END Search Form -->

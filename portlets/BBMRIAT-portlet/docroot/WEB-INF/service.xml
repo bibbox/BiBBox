@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.meduni.liferay.portlet.bbmriat">
+	<author>Robert Reihs</author>
+	<namespace>bbmriat</namespace>
+
+	<entity name="ddllinkingtable" local-service="true" remote-service="false" table="bbmriat.ddllinkingtable">
+
+		<!-- PK fields -->
+
+		<column name="ddllinkingtable" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="recordid" type="long" />
+		<column name="recordsetid" type="long" />
+		<column name="linkrecordid" type="long" />
+		<column name="linkrecordsetid" type="long" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="recordid" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Recordid" return-type="Collection">
+			<finder-column name="recordid" />
+		</finder>
+	</entity>
+</service-builder>

@@ -473,6 +473,173 @@ public class MasterCandidateUtil {
 	}
 
 	/**
+	* Returns all the master candidates where organisationid = &#63;.
+	*
+	* @param organisationid the organisationid
+	* @return the matching master candidates
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> findByOrganisationId(
+		long organisationid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByOrganisationId(organisationid);
+	}
+
+	/**
+	* Returns a range of all the master candidates where organisationid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param organisationid the organisationid
+	* @param start the lower bound of the range of master candidates
+	* @param end the upper bound of the range of master candidates (not inclusive)
+	* @return the range of matching master candidates
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> findByOrganisationId(
+		long organisationid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByOrganisationId(organisationid, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the master candidates where organisationid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param organisationid the organisationid
+	* @param start the lower bound of the range of master candidates
+	* @param end the upper bound of the range of master candidates (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching master candidates
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> findByOrganisationId(
+		long organisationid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganisationId(organisationid, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first master candidate in the ordered set where organisationid = &#63;.
+	*
+	* @param organisationid the organisationid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching master candidate
+	* @throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException if a matching master candidate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.MasterCandidate findByOrganisationId_First(
+		long organisationid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganisationId_First(organisationid, orderByComparator);
+	}
+
+	/**
+	* Returns the first master candidate in the ordered set where organisationid = &#63;.
+	*
+	* @param organisationid the organisationid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching master candidate, or <code>null</code> if a matching master candidate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.MasterCandidate fetchByOrganisationId_First(
+		long organisationid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByOrganisationId_First(organisationid,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last master candidate in the ordered set where organisationid = &#63;.
+	*
+	* @param organisationid the organisationid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching master candidate
+	* @throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException if a matching master candidate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.MasterCandidate findByOrganisationId_Last(
+		long organisationid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganisationId_Last(organisationid, orderByComparator);
+	}
+
+	/**
+	* Returns the last master candidate in the ordered set where organisationid = &#63;.
+	*
+	* @param organisationid the organisationid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching master candidate, or <code>null</code> if a matching master candidate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.MasterCandidate fetchByOrganisationId_Last(
+		long organisationid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByOrganisationId_Last(organisationid, orderByComparator);
+	}
+
+	/**
+	* Returns the master candidates before and after the current master candidate in the ordered set where organisationid = &#63;.
+	*
+	* @param masterCandidateId the primary key of the current master candidate
+	* @param organisationid the organisationid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next master candidate
+	* @throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException if a master candidate with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.rdconnect.model.MasterCandidate[] findByOrganisationId_PrevAndNext(
+		long masterCandidateId, long organisationid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganisationId_PrevAndNext(masterCandidateId,
+			organisationid, orderByComparator);
+	}
+
+	/**
+	* Removes all the master candidates where organisationid = &#63; from the database.
+	*
+	* @param organisationid the organisationid
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByOrganisationId(long organisationid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByOrganisationId(organisationid);
+	}
+
+	/**
+	* Returns the number of master candidates where organisationid = &#63;.
+	*
+	* @param organisationid the organisationid
+	* @return the number of matching master candidates
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByOrganisationId(long organisationid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByOrganisationId(organisationid);
+	}
+
+	/**
 	* Caches the master candidate in the entity cache if it is enabled.
 	*
 	* @param masterCandidate the master candidate

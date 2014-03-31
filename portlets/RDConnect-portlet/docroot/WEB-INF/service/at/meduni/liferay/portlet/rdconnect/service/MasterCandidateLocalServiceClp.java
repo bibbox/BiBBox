@@ -118,7 +118,11 @@ public class MasterCandidateLocalServiceClp
 
 		_methodName19 = "getFilterdCandidates";
 
-		_methodParameterTypes19 = new String[] {
+		_methodParameterTypes19 = new String[] { "long" };
+
+		_methodName20 = "getFilterdCandidates";
+
+		_methodParameterTypes20 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
@@ -676,14 +680,43 @@ public class MasterCandidateLocalServiceClp
 
 	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> getFilterdCandidates(
+		long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] { organisationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> getFilterdCandidates(
 		java.lang.String searchstring, java.lang.String country,
 		java.lang.String type, java.lang.String state)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19,
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
 					new Object[] {
 						ClpSerializer.translateInput(searchstring),
 						
@@ -752,4 +785,6 @@ public class MasterCandidateLocalServiceClp
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

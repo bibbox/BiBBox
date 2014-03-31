@@ -49,6 +49,7 @@ portletURL.setParameter("format", format);
 
 request.setAttribute("search.jsp-portletURL", portletURL);
 request.setAttribute("search.jsp-returnToFullPageURL", portletDisplay.getURLBack());
+
 %>
 
 <liferay-portlet:renderURL varImpl="searchURL">
@@ -61,7 +62,10 @@ request.setAttribute("search.jsp-returnToFullPageURL", portletDisplay.getURLBack
 	<aui:input name="format" type="hidden" value="<%= format %>" />
 
 	<aui:fieldset id="searchContainer">
-		<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" inlineField="<%= true %>" label="" name="keywords" size="30" value="<%= HtmlUtil.escape(keywords) %>" />
+	
+		<aui:input name="TestField" type="text" />
+	
+		<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" inlineField="<%= true %>" label="" name="keywords" size="30" value="123<%= HtmlUtil.escape(keywords) %>" />
 
 		<aui:input inlineField="<%= true %>" label="" name="search" src='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' title="search" type="image" />
 

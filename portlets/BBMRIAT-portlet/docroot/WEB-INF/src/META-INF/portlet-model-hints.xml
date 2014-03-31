@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable">
+		<field name="ddllinkingtable" type="long" />
+		<field name="recordid" type="long" />
+		<field name="recordsetid" type="long" />
+		<field name="linkrecordid" type="long" />
+		<field name="linkrecordsetid" type="long" />
+	</model>
+</model-hints>

@@ -68,6 +68,7 @@ adduserURL.setParameter("p_p_state", "maximized");
     			<portlet:param name="mvcPath" value="/html/people/edituserrolle.jsp" />
     			<portlet:param name="redirect" value="<%= currentURL %>"/>
     			<portlet:param name="rdcuserid" value="<%= String.valueOf(u.getUserId()) %>"/>
+    			<portlet:param name="rdcuserjob" value="<%= u.getJobTitle() %>"/>
     		</portlet:renderURL>
     		
     		<%
@@ -79,12 +80,15 @@ adduserURL.setParameter("p_p_state", "maximized");
 			<% 
 			if(biobankregistryownerrole || portaleditorrole) { 
 				if(u.getUserId() == themeDisplay.getUserId()) { %>
-					<img id="myuseredit" style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" />
-					<a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editroleimgpath %>" width="10px" height="10px" /></a>
-					<!-- <a href="<%= themeDisplay.getURLMyAccount() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a> -->
+					<a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
+					<% if(portaleditorrole) { %>
+						<img id="myuseredit" style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editroleimgpath %>" width="10px" height="10px" />
+					<% } %>
 			<% } else { %>
-				<a href="<%= editusersURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
-				<a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editroleimgpath %>" width="10px" height="10px" /></a>
+					<a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
+					<% if(portaleditorrole) { %>
+						<a href="<%= editusersURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editroleimgpath %>" width="10px" height="10px" /></a>
+					<% } %>
 			<% 
 				}
 			} %>

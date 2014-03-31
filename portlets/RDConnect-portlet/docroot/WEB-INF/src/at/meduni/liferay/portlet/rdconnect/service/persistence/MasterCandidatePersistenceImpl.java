@@ -1316,6 +1316,509 @@ public class MasterCandidatePersistenceImpl extends BasePersistenceImpl<MasterCa
 	private static final String _FINDER_COLUMN_COUNTRY_COUNTRY_1 = "masterCandidate.country IS NULL";
 	private static final String _FINDER_COLUMN_COUNTRY_COUNTRY_2 = "masterCandidate.country = ?";
 	private static final String _FINDER_COLUMN_COUNTRY_COUNTRY_3 = "(masterCandidate.country IS NULL OR masterCandidate.country = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ORGANISATIONID =
+		new FinderPath(MasterCandidateModelImpl.ENTITY_CACHE_ENABLED,
+			MasterCandidateModelImpl.FINDER_CACHE_ENABLED,
+			MasterCandidateImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByOrganisationId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANISATIONID =
+		new FinderPath(MasterCandidateModelImpl.ENTITY_CACHE_ENABLED,
+			MasterCandidateModelImpl.FINDER_CACHE_ENABLED,
+			MasterCandidateImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByOrganisationId",
+			new String[] { Long.class.getName() },
+			MasterCandidateModelImpl.ORGANISATIONID_COLUMN_BITMASK |
+			MasterCandidateModelImpl.COUNTRY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ORGANISATIONID = new FinderPath(MasterCandidateModelImpl.ENTITY_CACHE_ENABLED,
+			MasterCandidateModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByOrganisationId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the master candidates where organisationid = &#63;.
+	 *
+	 * @param organisationid the organisationid
+	 * @return the matching master candidates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<MasterCandidate> findByOrganisationId(long organisationid)
+		throws SystemException {
+		return findByOrganisationId(organisationid, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the master candidates where organisationid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param organisationid the organisationid
+	 * @param start the lower bound of the range of master candidates
+	 * @param end the upper bound of the range of master candidates (not inclusive)
+	 * @return the range of matching master candidates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<MasterCandidate> findByOrganisationId(long organisationid,
+		int start, int end) throws SystemException {
+		return findByOrganisationId(organisationid, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the master candidates where organisationid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param organisationid the organisationid
+	 * @param start the lower bound of the range of master candidates
+	 * @param end the upper bound of the range of master candidates (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching master candidates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<MasterCandidate> findByOrganisationId(long organisationid,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANISATIONID;
+			finderArgs = new Object[] { organisationid };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ORGANISATIONID;
+			finderArgs = new Object[] {
+					organisationid,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<MasterCandidate> list = (List<MasterCandidate>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (MasterCandidate masterCandidate : list) {
+				if ((organisationid != masterCandidate.getOrganisationid())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_MASTERCANDIDATE_WHERE);
+
+			query.append(_FINDER_COLUMN_ORGANISATIONID_ORGANISATIONID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(MasterCandidateModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(organisationid);
+
+				if (!pagination) {
+					list = (List<MasterCandidate>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<MasterCandidate>(list);
+				}
+				else {
+					list = (List<MasterCandidate>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first master candidate in the ordered set where organisationid = &#63;.
+	 *
+	 * @param organisationid the organisationid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching master candidate
+	 * @throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException if a matching master candidate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public MasterCandidate findByOrganisationId_First(long organisationid,
+		OrderByComparator orderByComparator)
+		throws NoSuchMasterCandidateException, SystemException {
+		MasterCandidate masterCandidate = fetchByOrganisationId_First(organisationid,
+				orderByComparator);
+
+		if (masterCandidate != null) {
+			return masterCandidate;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("organisationid=");
+		msg.append(organisationid);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchMasterCandidateException(msg.toString());
+	}
+
+	/**
+	 * Returns the first master candidate in the ordered set where organisationid = &#63;.
+	 *
+	 * @param organisationid the organisationid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching master candidate, or <code>null</code> if a matching master candidate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public MasterCandidate fetchByOrganisationId_First(long organisationid,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<MasterCandidate> list = findByOrganisationId(organisationid, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last master candidate in the ordered set where organisationid = &#63;.
+	 *
+	 * @param organisationid the organisationid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching master candidate
+	 * @throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException if a matching master candidate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public MasterCandidate findByOrganisationId_Last(long organisationid,
+		OrderByComparator orderByComparator)
+		throws NoSuchMasterCandidateException, SystemException {
+		MasterCandidate masterCandidate = fetchByOrganisationId_Last(organisationid,
+				orderByComparator);
+
+		if (masterCandidate != null) {
+			return masterCandidate;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("organisationid=");
+		msg.append(organisationid);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchMasterCandidateException(msg.toString());
+	}
+
+	/**
+	 * Returns the last master candidate in the ordered set where organisationid = &#63;.
+	 *
+	 * @param organisationid the organisationid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching master candidate, or <code>null</code> if a matching master candidate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public MasterCandidate fetchByOrganisationId_Last(long organisationid,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByOrganisationId(organisationid);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<MasterCandidate> list = findByOrganisationId(organisationid,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the master candidates before and after the current master candidate in the ordered set where organisationid = &#63;.
+	 *
+	 * @param masterCandidateId the primary key of the current master candidate
+	 * @param organisationid the organisationid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next master candidate
+	 * @throws at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateException if a master candidate with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public MasterCandidate[] findByOrganisationId_PrevAndNext(
+		long masterCandidateId, long organisationid,
+		OrderByComparator orderByComparator)
+		throws NoSuchMasterCandidateException, SystemException {
+		MasterCandidate masterCandidate = findByPrimaryKey(masterCandidateId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			MasterCandidate[] array = new MasterCandidateImpl[3];
+
+			array[0] = getByOrganisationId_PrevAndNext(session,
+					masterCandidate, organisationid, orderByComparator, true);
+
+			array[1] = masterCandidate;
+
+			array[2] = getByOrganisationId_PrevAndNext(session,
+					masterCandidate, organisationid, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected MasterCandidate getByOrganisationId_PrevAndNext(Session session,
+		MasterCandidate masterCandidate, long organisationid,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MASTERCANDIDATE_WHERE);
+
+		query.append(_FINDER_COLUMN_ORGANISATIONID_ORGANISATIONID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(MasterCandidateModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(organisationid);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(masterCandidate);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MasterCandidate> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the master candidates where organisationid = &#63; from the database.
+	 *
+	 * @param organisationid the organisationid
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByOrganisationId(long organisationid)
+		throws SystemException {
+		for (MasterCandidate masterCandidate : findByOrganisationId(
+				organisationid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(masterCandidate);
+		}
+	}
+
+	/**
+	 * Returns the number of master candidates where organisationid = &#63;.
+	 *
+	 * @param organisationid the organisationid
+	 * @return the number of matching master candidates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByOrganisationId(long organisationid)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ORGANISATIONID;
+
+		Object[] finderArgs = new Object[] { organisationid };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MASTERCANDIDATE_WHERE);
+
+			query.append(_FINDER_COLUMN_ORGANISATIONID_ORGANISATIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(organisationid);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ORGANISATIONID_ORGANISATIONID_2 = "masterCandidate.organisationid = ?";
 
 	public MasterCandidatePersistenceImpl() {
 		setModelClass(MasterCandidate.class);
@@ -1558,6 +2061,25 @@ public class MasterCandidatePersistenceImpl extends BasePersistenceImpl<MasterCa
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_COUNTRY, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COUNTRY,
+					args);
+			}
+
+			if ((masterCandidateModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANISATIONID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						masterCandidateModelImpl.getOriginalOrganisationid()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ORGANISATIONID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANISATIONID,
+					args);
+
+				args = new Object[] { masterCandidateModelImpl.getOrganisationid() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ORGANISATIONID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANISATIONID,
 					args);
 			}
 		}

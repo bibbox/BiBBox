@@ -12,7 +12,7 @@
 	${theme.include(top_head_include)}
 </head>
 
-<body class="${css_class}">
+<body class="${css_class} bbmri-eric-body">
 
 ${theme.include(body_top_include)}
 
@@ -86,12 +86,10 @@ ${theme.include(body_top_include)}
 <div class="bbmrieric-footer-container">
 	<div class="bbmrieric-footer">
 		<div class="bbmrieric-footer-menue">
-			<div class="bbmrieric-footer-menue-float">
-				<#include "${full_templates_path}/navigation_footer.ftl" />
-			</div>
+			<#include "${full_templates_path}/navigation_footer.ftl" />
 		</div>	
 		<footer id="footer" role="contentinfo">
-			<a href="/web/guest/contact">Contact</a> <span style="color: #FFFFFF;">|</span> <a href="/web/guest/impressum">IMPRESSUM</a>
+			<a href="/web/guest/contact">Contact</a> <span style="color: #FFFFFF;">|</span> <a href="/web/guest/imprint">IMPRINT</a>
 		</footer>
 	</div>
 </div>

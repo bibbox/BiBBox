@@ -116,7 +116,11 @@ public class MasterCandidateLocalServiceClpInvoker {
 
 		_methodName50 = "getFilterdCandidates";
 
-		_methodParameterTypes50 = new String[] {
+		_methodParameterTypes50 = new String[] { "long" };
+
+		_methodName51 = "getFilterdCandidates";
+
+		_methodParameterTypes51 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
@@ -225,6 +229,11 @@ public class MasterCandidateLocalServiceClpInvoker {
 
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			return MasterCandidateLocalServiceUtil.getFilterdCandidates(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			return MasterCandidateLocalServiceUtil.getFilterdCandidates((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3]);
@@ -271,4 +280,6 @@ public class MasterCandidateLocalServiceClpInvoker {
 	private String[] _methodParameterTypes45;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
 }

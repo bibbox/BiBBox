@@ -106,6 +106,9 @@
 		<finder name="Country" return-type="Collection">
 			<finder-column name="country" />
 		</finder>
+		<finder name="OrganisationId" return-type="Collection">
+			<finder-column name="organisationid" />
+		</finder>
 	</entity>
 	<entity name="MasterCandidateLinkCandidate" local-service="true" remote-service="false" table="rdconnect.master_candidate_link_candidate">
 		<!-- PK fields -->
