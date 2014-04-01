@@ -11,5 +11,6 @@
 		<portlet id="portalmenu"></portlet>
 		<portlet id="my-site-list"></portlet>
 		<portlet id="mailing-list"></portlet>
+		<portlet id="search-result"></portlet>
 	</category>
 </display>

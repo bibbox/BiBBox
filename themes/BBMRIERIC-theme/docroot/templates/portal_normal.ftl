@@ -54,11 +54,9 @@ ${theme.include(body_top_include)}
 		</div>
 	</div>
 	<div class="bbmri_eric_header-subsubmenucontainer">
-		<div class="bbmri_eric_header-subsubmainmenu">
-			<div class="bbmri_eric_header-subsubmainmenu-floating">
-				
-			</div>
-		</div>
+		<#if has_navigation || is_signed_in>
+			<#include "${full_templates_path}/navigation_sub_sub.ftl" />
+		</#if>				
 	</div>
 </div>
 <!-- New Header End -->

@@ -16,8 +16,13 @@
 	<div class="mc-field-group" style="width: 315px;">
 	        <label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Search</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 		<div class="mc-field-group-float">
-	        <input type="text" placeholder="What are you looking for?" value="" name="SEARCH" class="required email" id="mce-SEARCH">
-	        <input type="submit" value="GO" name="subscribe" id="mc-embedded-subscribe">
+		
+		
+			<% String searchurl1 = themeDisplay.getURLPortal()+"/web/guest/search"; %>
+			<aui:form name="filterform" action="<%= searchurl1 %>" method="get" style="padding: 0;">
+		        <input type="text" placeholder="What are you looking for?" value="" name="SEARCH" class="required email" id="mce-SEARCH">
+		        <input type="submit" value="GO" name="subscribe" id="mc-embedded-subscribe">
+	        </aui:form>
 	    </div>
 	</div>
 </div>
@@ -52,6 +57,7 @@
     <div style="position: absolute; left: -5000px;"><input type="text" name="b_c7415c09f5c4d908a6ec9388d_39dc000a0f" value=""></div>
         <div class="clear" style="display: none;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 </form>
+<hr style="background-color:#FFFFFF; border-width:0; color:#FFFFFF; height:1px; lineheight:0; display: inline-block; text-align: left; width:100%;margin-bottom: 5px;margin-top: 10px;">
 </div>
 <script type="text/javascript">
 var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';
@@ -245,14 +251,3 @@ function mce_success_cb(resp){
 
 </script>
 <!--End mc_embed_signup-->
-
-
-<!-- Begin Search Form -->
-
-<div id="mc_embed_signup">
-	<div class="mc-field-group" style="width: 315px;">
-	        <a href="/web/guest/contact"><label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Contact</spam> us <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label> </a>
-	</div>
-</div>
-
-<!-- END Search Form -->

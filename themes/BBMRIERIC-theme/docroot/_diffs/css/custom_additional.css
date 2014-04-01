@@ -17,13 +17,22 @@
 }
 #portlet_mailinglist_WAR_BBMRIERICportlet .portlet-content {
 	padding: 0;
-	height: 180px;
+	border-width: 0;
+}
+#portlet_bbmrilogin_WAR_BBMRIERICportlet .portlet-content {
+	padding: 0;
+	border-width: 0;
 }
 #mc_embed_signup{
 	clear:left; 
 	font:12px Helvetica,Arial,sans-serif; 
 }
-
+#mc_embed_signup form {
+    display: block;
+    padding: 0;
+    position: relative;
+    text-align: left;
+}
 .mc-field-group-float {
 	float: right;
 	width: 100%;

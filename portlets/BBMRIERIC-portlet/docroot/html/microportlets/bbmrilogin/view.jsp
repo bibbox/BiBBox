@@ -18,3 +18,4 @@
 		<div class="bbmrieric-logincontainer-square-login"></div>
 	</div>
 </div>
+<hr style="background-color:#FFFFFF; border-width:0; color:#FFFFFF; height:1px; lineheight:0; display: inline-block; text-align: left; width:100%;margin-bottom: 5px;margin-top: 10px;">
