@@ -43,7 +43,16 @@ if (currentGroup.isOrganization()) {
 			
 			<aui:input name="rdcorganisationmember" label="Registry/Biobank Member" type="checkbox" value="true" checked="true"/>
 			<hr>
-			<aui:input name="rdcposition" label="Position" type="text" value ="rdcuserjob"/>
+			<aui:select name="rdcposition" label="Position" value ="rdcuserjob">
+				<aui:option value=""  <%= rdcuserjob.equalsIgnoreCase("") ? "selected=\"true\"" : "" %>></aui:option>
+				<aui:option value="Coordinator" <%= rdcuserjob.equalsIgnoreCase("Coordinator") ? "selected=\"true\"" : "" %>>Coordinator</aui:option>
+				<aui:option value="Data protection"  <%= rdcuserjob.equalsIgnoreCase("Data protection") ? "selected=\"true\"" : "" %>>Data protection</aui:option>
+				<aui:option value="Information Technology"  <%= rdcuserjob.equalsIgnoreCase("Information Technology") ? "selected=\"true\"" : "" %>>Information Technology</aui:option>
+				<aui:option value="Scientific"  <%= rdcuserjob.equalsIgnoreCase("Scientific") ? "selected=\"true\"" : "" %>>Scientific</aui:option>
+				<aui:option value="Statistical"  <%= rdcuserjob.equalsIgnoreCase("Statistical") ? "selected=\"true\"" : "" %>>Statistical</aui:option>
+				<aui:option value="Management"  <%= rdcuserjob.equalsIgnoreCase("Management") ? "selected=\"true\"" : "" %>>Management</aui:option>
+				<aui:option value="Other"  <%= rdcuserjob.equalsIgnoreCase("Other") ? "selected=\"true\"" : "" %>>Other</aui:option>
+			</aui:select>
 			<aui:input name="rdcroleowner" label="Owner" type="checkbox" value="<%= owner %>" />
 			<aui:input name="rdcroleeditor" label="Editor" type="checkbox" value="<%= edithor %>" />
 			

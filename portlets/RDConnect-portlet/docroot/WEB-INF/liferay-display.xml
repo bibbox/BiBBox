@@ -17,6 +17,7 @@
 		<portlet id="overview-information"></portlet>
 		<portlet id="organisation-navigation"></portlet>
 		<portlet id="rdcddl-display"></portlet>
+		<portlet id="file-to-ddl-to-file"></portlet>
 	</category>
 	<category name="Meduni Test">
 		<portlet id="ddl-reader"></portlet>

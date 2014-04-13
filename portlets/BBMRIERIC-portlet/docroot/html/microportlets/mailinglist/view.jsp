@@ -36,7 +36,7 @@
 <form action="http://bbmri-eric.us8.list-manage.com/subscribe/post?u=c7415c09f5c4d908a6ec9388d&amp;id=39dc000a0f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 
 <div class="mc-field-group" style="width: 315px;">
-        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL">Subscribe to our <span style="font-weight:bold;">Newsletter</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL">Subscribe to our <span style="font-weight:bold;">Newsletter & Mailing List</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 	<div class="mc-field-group-float">
         <input type="email" placeholder="Please enter mail address" value="" name="EMAIL" class="required email" id="mce-EMAIL">
         <input type="submit" value="SEND" name="subscribe" id="mc-embedded-subscribe">

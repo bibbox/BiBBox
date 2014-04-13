@@ -355,7 +355,7 @@ if (currentGroup.isOrganization()) {
 		editddlURL.setParameter("recordId", String.valueOf(recordid));
 		editpathcoredll = editddlURL.toString();
 		%>
-		<div class="rdc_idcard_idcaibody-edit-icon-coreddl"><aui:a href="<%= editpathcoredll %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a></div>
+		<div class="rdc_idcard_idcaibody-edit-icon-coreddl"><aui:a href="<%= editpathcoredll %>"><img style="width: 10px;height: 10px;" alt="Edit" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a></div>
 		<%
 	} %>
 

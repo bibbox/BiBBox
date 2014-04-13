@@ -23,12 +23,22 @@
 <%@ page import="com.liferay.portal.kernel.search.facet.config.FacetConfigurationUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.facet.util.FacetFactoryUtil" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
+<%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
+<%@ page import="javax.portlet.PortletRequest" %>
 
 <portlet:defineObjects />
 
 <!--  -->
 <% 
+String portletId = themeDisplay.getPpid();
+PortletURL portletURL = PortletURLFactoryUtil.create(request, portletId, plid, PortletRequest.RENDER_PHASE);
+SearchContainer mainSearchSearchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+
+
 SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 searchContext.setAttribute("paginationType", "more");
@@ -76,18 +86,12 @@ String searchConfiguration = "{\"facets\": ["+
 		"    \"order\": \"OrderHitsDesc\","+
 		"    \"data\": {"+
 		"        \"values\": ["+
-		"            \"com.liferay.portal.model.User\","+
-		"            \"com.liferay.portlet.bookmarks.model.BookmarksEntry\","+
-		"            \"com.liferay.portlet.bookmarks.model.BookmarksFolder\","+
-		"            \"com.liferay.portlet.blogs.model.BlogsEntry\","+
 		"            \"com.liferay.portlet.documentlibrary.model.DLFileEntry\","+
 		"            \"com.liferay.portlet.documentlibrary.model.DLFolder\","+
 		"            \"com.liferay.portlet.journal.model.JournalArticle\","+
 		"            \"com.liferay.portlet.journal.model.JournalFolder\","+
 		"            \"com.liferay.portlet.messageboards.model.MBMessage\","+
-		"            \"com.liferay.portlet.wiki.model.WikiPage\","+
-		"            \"com.liferay.portlet.dynamicdatalists.model.DDLRecord\","+
-		"            \"com.liferay.portlet.dynamicdatalists.model.DDLRecordSet\""+
+		"            \"com.liferay.portlet.wiki.model.WikiPage\""+
 		"        ],"+
 		"        \"frequencyThreshold\": 1"+
 		"    },"+
@@ -191,34 +195,83 @@ List<Document> docs = hits.toList();
 
 Document[] docs2 = hits.getDocs();
 
+
+Map<String, Facet> facets = searchContext.getFacets();
+List<Facet> facetsList = ListUtil.fromCollection(facets.values());
+// Exception!!!!!
+//facetsList = ListUtil.sort(facetsList, new PropertyComparator("facetConfiguration.weight", false, false));
+
+for (Facet facet : facetsList) {
+	if (facet.isStatic()) {
+		continue;
+	}
+
+	FacetConfiguration facetConfiguration = facet.getFacetConfiguration();
+	request.setAttribute("search.jsp-facet", facet);
+	FacetCollector facetCollector = facet.getFacetCollector();
+	List<TermCollector> termCollectors = facetCollector.getTermCollectors();
+
+
 %>
-Search for: <%= keywords %>
-<br>
-Number of hits: <%= hits.getLength() %>/<%= docs.size() %>/<%= docs2.length %>
-<br>
-SearchTime: <%= hits.getSearchTime() %>
-<br>
-<hr>
-<!--  -->
+	<liferay-util:include page='<%= "/html/portlet/search/facets/" + facetConfiguration.getDisplayStyle() + ".jsp" %>' />
 
 <%
-for(Document d : docs) {
-	com.liferay.portal.kernel.search.Field fil = d.getField("organizationIds");
+}	
+
+
+boolean displayResultsInDocumentForm = true;
+boolean displayMainQuery = false;
 %>
-	Document: <%= d.getUID() %>/<%= d.getClass().toString() %>/
-	<% if(fil != null) { %>
-		<%= fil.getName() %>:<%= fil.getValue() %><br>
-	<% } %>
-<%
-	Map<String, com.liferay.portal.kernel.search.Field> fiels = d.getFields();
-	for(String key : fiels.keySet()) {
-		com.liferay.portal.kernel.search.Field f = fiels.get(key);
-		if(f != null) {
-			%>
-			- Fields: <%= key %>/<%= f.getName() %>:<%= f.getValue() %><br>
+
+
+
+
+		<liferay-ui:search-container
+			searchContainer="<%= mainSearchSearchContainer %>"
+			total="<%= hits.getLength() %>"
+		>
+			<liferay-ui:search-container-results
+				results="<%= hits.toList() %>"
+			/>
+
+			<liferay-ui:search-container-row
+				className="com.liferay.portal.kernel.search.Document"
+				escapedModel="<%= false %>"
+				keyProperty="UID"
+				modelVar="document"
+				stringKey="<%= true %>"
+			>
+			<!-- -Problem- -->
+			<liferay-ui:search-container-column-jsp path="ROOT/html/portlet/search/main_search_document_form.jsp" />
+			
+				
+			</liferay-ui:search-container-row>
+
 			<%
-		}
-	}
-}
-%>
+			String[] entryClassNames = searchContext.getEntryClassNames();
+
+			if (entryClassNames.length == 1) {
+				portletURL.setParameter("entryClassName", entryClassNames[0]);
+			}
+			%>
+
+			<liferay-ui:search-iterator type="more" />
+
+			<c:if test="<%= displayMainQuery && (hits.getQuery() != null) %>">
+				<table class="full-query">
+					<tr>
+						<td valign="top">
+							<div class="container">
+								<code>
+									<%= HtmlUtil.escape(hits.getQuery().toString()) %>
+								</code>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</c:if>
+		</liferay-ui:search-container>
+
+
+
 

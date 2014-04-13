@@ -34,7 +34,16 @@ if (currentGroup.isOrganization()) {
 				<aui:option value="male" selected="true" >Male</aui:option>
 				<aui:option value="female" >Female</aui:option>
 			</aui:select>
-			<aui:input name="rdcposition" label="Position" type="text" value =""/>
+			<aui:select name="rdcposition" label="Position" value ="">
+				<aui:option value="" selected="true" ></aui:option>
+				<aui:option value="Coordinator" >Coordinator</aui:option>
+				<aui:option value="Data protection" >Data protection</aui:option>
+				<aui:option value="Information Technology" >Information Technology</aui:option>
+				<aui:option value="Scientific" >Scientific</aui:option>
+				<aui:option value="Statistical" >Statistical</aui:option>
+				<aui:option value="Management" >Management</aui:option>
+				<aui:option value="Other" >Other</aui:option>
+			</aui:select>
 			
 			<aui:input name="rdcroleowner" label="Owner" type="checkbox" value =""/>
 			<aui:input name="rdcroleeditor" label="Editor" type="checkbox" value =""/>

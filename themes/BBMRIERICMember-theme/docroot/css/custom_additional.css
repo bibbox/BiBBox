@@ -1,0 +1,193 @@
+.aui .bbmri-eric-body {
+	background-color: #0C2848;
+}
+/* ---------- BBMRI Member top menu ----------- */
+.bbmri_eric_header-top-menu {
+	height: 53px;
+	width: 100%;
+	margin: auto;
+}
+.bbmri_eric_header-top-menu-container {
+	width: 1198px;
+	height: 52px;
+	margin: auto;
+	background-color: #FDFDFD;
+	border-style: solid;
+	border-color: #E4E5E9;
+	border-width: 0 1px 1px 1px;
+}
+.bbmri_eric_header-top-menu-container-logo {
+	width: 142px;
+	height: 52px;
+	float: left;
+}
+.bbmri_eric_header-top-menu-container-menu {
+	width: 350px;
+	height: 52px;
+	float: left;
+	border-style: solid;
+	border-color: #E4E5E9;
+	border-width: 0 1px 0 1px;
+}
+.aui .bbmri_eric_header-maincontainer-inner-topmenue a, .aui .bbmri_eric_header-maincontainer-inner-topmenue a:hover {
+	color: #184B8A;
+}
+/* ---------- END BBMRI Member top menu ----------- */
+/* ---------- New Header ----------- */
+
+.bbmri_eric_header-maincontainer {
+	height: 145px;
+	width: 100%;
+	margin: 0;
+}
+.bbmri_eric_header-maincontainer-inner {
+	height: 144px;
+	margin: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 1198px;
+	background-color: #FDFDFD;
+	border-style: solid;
+	border-color: #E4E5E9;
+	border-width: 0 1px 1px 1px;
+}
+.bbmri_eric_header-maincontainer-inner-image {
+	width: 142px;
+	height: 144px;
+	float: left;
+}
+.bbmri_eric_header-maincontainer-inner-topmenue {
+	height: 144px;
+	width: 350px;
+	margin-top: 0;
+	margin-bottom: 0;
+	float: left;
+	border-style: solid;
+	border-color: #E4E5E9;
+	border-width: 0 1px 0 1px;
+}
+.bbmri_eric_header-maincontainer-inner-float {
+	float: rigth;
+}
+.bbmri_eric_header-maincontainer-inner-sitemenue-main {
+	height: 30px;
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: right;
+}
+.bbmri_eric_header-maincontainer-inner-sitemenue-sub {
+	height: 20px;
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: right;
+}
+/* ---------- END New Header ----------- */
+/* ---------- Site Menue ---------- */
+.bbmri_eric_header-menucontainer {
+	height: 40px;
+	width: 100%;
+	margin: 0;
+}
+.bbmri_eric_header-menucontainer-inner {
+	height: 39px;
+	margin: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 1198px;
+	background-color: #FDFDFD;
+	border-style: solid;
+	border-color: #E4E5E9;
+	border-width: 0 1px 1px 1px;
+}
+.bbmri-eric-square-orange {
+	height: 6px;
+	width: 6px;
+	border:1px solid;
+	background: #ED660A;
+	border-color: #ED660A;
+	float: left;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.bbmri-eric-square-blue {
+	height: 6px;
+	width: 6px;
+	border:1px solid;
+	border-radius:4px;
+	background: #184B8A;
+	border-color: #184B8A;
+	float: left;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.bbmri-eric-square-white {
+	height: 6px;
+	width: 6px;
+	border:1px solid;
+	border-radius:4px;
+	background: #FFFFFF;
+	border-color: #FFFFFF;
+	float: left;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.bbmri_eric_header-menucontainer-inner .bbmri-eric-square-orange, 
+.bbmri_eric_header-menucontainer-inner .bbmri-eric-square-blue, 
+.bbmri_eric_header-menucontainer-inner .bbmri-eric-square-white {
+	margin-top: 6px;
+	margin-right: 5px;
+}
+/* ---------- Site Menue Level1 ---------- */
+.bbmri_eric_header-menucontainer-inner-sitemenue-main {
+	width: 100%;
+	height: 20px;
+}
+.aui .bbmri_eric_header-menucontainer-inner-sitemenue-main ul {
+	float: right;
+	text-align: right;
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+.aui .bbmri_eric_header-menucontainer-inner-sitemenue-main li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 20px;
+	padding-right: 5px;
+	line-height: 20px;
+}
+.aui .bbmri_eric_header-menucontainer-inner-sitemenue-main li:a, .aui .bbmri_eric_header-menucontainer-inner-sitemenue-main li:a:hover {
+	color: #184B8A;
+}
+/* ---------- END Site Menue Level1 ---------- */
+/* ---------- Site Menue Level2 ---------- */
+.bbmri_eric_header-menucontainer-inner-sitemenue-sub {
+	width: 100%;
+	height: 15px;
+}
+.bbmri_eric_header-menucontainer-inner-sitemenue-sub ul {
+	float: right;
+	text-align: right;
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+.bbmri_eric_header-menucontainer-inner-sitemenue-sub li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 35px;
+	padding-right: 5px;
+	line-height: 15px;
+}
+.bbmri_eric_header-menucontainer-inner-sitemenue-sub a {
+	color: #000000;
+	font-size: 12px;
+}
+.bbmri_eric_header-menucontainer-inner-sitemenue-sub a:hover {
+	color: #000000;
+	text-decoration:none;
+}
+/* ---------- END Site Menue Level2 ---------- */
+/* ---------- END Site Menue ---------- */

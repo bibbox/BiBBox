@@ -1,36 +1,42 @@
 <%@include file="/html/init.jsp" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
 
 <portlet:defineObjects />
 
 This is the <b>Ajaxtest</b> portlet in View mode.
 
-<portlet:actionURL name='somethingHappensHere' var="somethingHappensHereURL" />
+<%
 
-<aui:script use="aui-io-request, event, node">
-	AUI().use('aui-io-request', 'event', 'node', function(A){
-		var nodeObject = A.one('#save-button');
-		nodeObject.on('click', function(event){
-			var url = '<%= somethingHappensHereURL.toString() %>';
-			A.io.request(url,{
-				//this is the data that you are sending to the action method
-				data: {
-				   <portlet:namespace />id: event.target.getAttribute('value'),
-				   <portlet:namespace />name: 'wsd',
-				},
-				dataType: 'json',
-				on: {
-				  failure: function() { alert('failure'); },
-				  success: function(event, id, obj) { alert('success'); }
-				}
-			});
-		});
+%>
+
+<liferay-theme:defineObjects />
+<div>
+<h5>Iframe Dialog Please click on button  and see Portlet Y is open In AUI Dialog....
+</h5><br/>
+<aui:button value="Click Me I will Open PortletY" id="openPortletY" name="openPortletY"></aui:button>
+</div>
+<aui:script use="liferay-util-window,aui-dialog-iframe-deprecated,aui-io-plugin-deprecated,aui-base,aui-io-deprecated,liferay-portlet-url">
+AUI().use('aui-base','liferay-util-window','aui-dialog-iframe-deprecated','aui-io-plugin-deprecated','aui-io-deprecated','liferay-portlet-url',function(A) {
+A.one('#<portlet:namespace/>openPortletY').on('click', function(event){
+    var url =Liferay.PortletURL.createRenderURL();    
+    url.setPortletId("ajaxtest_WAR_RDConnectportlet_INSTANCE_vAP4"); 
+    url.setWindowState('pop_up');  
+    var urlstring = url.toString();
+    Liferay.Util.Window.getWindow( {
+    	centered: true,
+    	constrain2view: true,
+    	modal: true,
+    	resizable: false,
+    	width: 450}).plug(A.Plugin.IO,{uri: urlstring}).render();             
 	});
+});
 </aui:script>
 
-<input id="save-button" type="submit" value="1" />
-<input id="save-button" type="submit" value="2" />
-<input id="save-button" type="submit" value="3" />
-<input id="save-button" type="submit" value="4" />
-<input id="save-button" type="submit" value="5" />
+<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="popupURL" >
+    			<portlet:param name="mvcPath" value="/html/people/adduser.jsp" />
+</portlet:renderURL>
+
+<a href="<%= popupURL %>" target="_blank">Popup</a>
 
 

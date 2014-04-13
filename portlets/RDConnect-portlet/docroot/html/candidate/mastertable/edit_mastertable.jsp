@@ -63,13 +63,13 @@
 		<aui:input name="mail" cssClass="propose" />
 	</aui:column>
 	<aui:column columnWidth="100" first="true" >	
-		<aui:input name="address" cssClass="propose"/>
+		<aui:input type="hidden" name="address" cssClass="propose"/>
 	</aui:column>
 	<aui:column columnWidth="50" first="true">
-		<aui:input name="diseasescodes" cssClass="propose" />
+		<aui:input type="hidden" name="diseasescodes" cssClass="propose" />
 	</aui:column>
 	<aui:column columnWidth="50" last="true">
-		<aui:input name="diseasesfreetext" cssClass="propose" />
+		<aui:input type="hidden" name="diseasesfreetext" cssClass="propose" />
 	</aui:column>
 	<!--<aui:column columnWidth="100" first="true">
 		<aui:input name="diseasescodesauto" type="hidden" />
@@ -81,7 +81,7 @@
 		</div>	
 	</aui:column>-->
 	<aui:column columnWidth="100" first="true">
-		<aui:input name="comment"  cssClass="propose" />	
+		<aui:input type="hidden" name="comment"  cssClass="propose" />	
 	</aui:column>
 	<aui:column columnWidth="50" first="true">
 		<aui:input name="head" cssClass="propose"  />

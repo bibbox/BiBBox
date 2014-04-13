@@ -411,6 +411,8 @@ if (currentGroup.isOrganization()) {
 		}
 		%></td>
 		</tr>
+		<tr><td><%= organization.getAddress().getCountry().getNameCurrentValue() %></td><td></td>
+		</tr>
 	</table>
 	<hr>
 	</div>
