@@ -1,0 +1,5 @@
+<model name="Fully Qualified path of Model">
+	<field name="name" type="String">
+		<hint name="max-length">2000</hint>
+	</field>
+</model>

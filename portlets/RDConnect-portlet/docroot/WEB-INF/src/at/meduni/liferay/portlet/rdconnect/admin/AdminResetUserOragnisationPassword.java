@@ -39,3 +39,4 @@ public class AdminResetUserOragnisationPassword extends MVCPortlet {
 		sendRedirect(request, response);
 	}
 }
+

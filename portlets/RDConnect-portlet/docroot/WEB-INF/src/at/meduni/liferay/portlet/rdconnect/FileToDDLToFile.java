@@ -22,7 +22,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-/*import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -30,14 +30,16 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import au.com.bytecode.opencsv.CSVReader;*/
+import au.com.bytecode.opencsv.CSVReader;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
@@ -48,7 +50,9 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class FileToDDLToFile
  */
 public class FileToDDLToFile extends MVCPortlet {
-	/*public void uploadFile(ActionRequest request, ActionResponse response) throws Exception {
+	private ThemeDisplay themeDisplay = null;
+	
+	public void uploadFile(ActionRequest request, ActionResponse response) throws Exception {
 	try {
 		UploadPortletRequest upreq = PortalUtil.getUploadPortletRequest(request);
 		System.out.println(upreq.getFileName("fileupload"));
@@ -80,7 +84,7 @@ private void readXLSFile(InputStream file) throws IOException {
 	HSSFWorkbook workbook = new HSSFWorkbook(file);
 	 
 	//Get first sheet from the workbook
-	HSSFSheet sheet = workbook.getSheetAt(0);
+	HSSFSheet sheet = workbook.getSheet("Disease Matrix");
 	 
 	//Get iterator to all the rows in current sheet
 	Iterator<Row> rowIterator = sheet.iterator();
@@ -111,10 +115,6 @@ private void readXLSFile(InputStream file) throws IOException {
     file.close();
 }
 
-private void createDiseasMatrixRows() {
-	
-}
-
 private Workbook writeXLSFile(long organizationId) throws PortalException, SystemException {
 	HSSFWorkbook workbook = new HSSFWorkbook();
 	HSSFSheet sheet = workbook.createSheet("Disease Matrix");
@@ -129,22 +129,31 @@ private Workbook writeXLSFile(long organizationId) throws PortalException, Syste
   			Row row = sheet.createRow(rownum++);
   			int cellnum = 0;
   			for(String fieldname : fieldnames) {
-  				Cell cell = row.createCell(cellnum++);
-  				cell.setCellValue(fieldname);
+  				if(!fieldname.equalsIgnoreCase("_fieldsDisplay")) {
+	  				Cell cell = row.createCell(cellnum++);
+	  				String local_filedname = rdc_rs.getDDMStructure().getFieldLabel(fieldname, themeDisplay.getLocale());
+	  				cell.setCellValue(local_filedname);
+  				}
   			}
   			
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) {
+  				cellnum = 0;
   				row = sheet.createRow(rownum++);
   				for(String fieldname : fieldnames) {
-  					String fieldvalue = record.getFieldValue(fieldname).toString();
-  					Cell cell = row.createCell(cellnum++);
-	  				cell.setCellValue(fieldvalue);
+  					if(!fieldname.equalsIgnoreCase("_fieldsDisplay")) {
+	  					String fieldvalue = "";
+	  					if(record.getFieldValue(fieldname) != null) {
+	  						fieldvalue = record.getFieldValue(fieldname).toString();
+	  					}
+	  					Cell cell = row.createCell(cellnum++);
+		  				cell.setCellValue(fieldvalue);
+  					}
   				}
   			}
   		}
-  	}*/
-	/* 
+  	}
+	/*
 	Map<String, Object[]> data = new HashMap<String, Object[]>();
 	data.put("1", new Object[] {"Emp No.", "Name", "Salary"});
 	data.put("2", new Object[] {1d, "John", 1500000d});
@@ -169,7 +178,7 @@ private Workbook writeXLSFile(long organizationId) throws PortalException, Syste
 	            cell.setCellValue((Double)obj);
 	    }
 	}*/
-	/*return workbook;
+	return workbook;
 }
 
 private void readXLSXFile(InputStream file) throws IOException {
@@ -202,7 +211,45 @@ private void readXLSXFile(InputStream file) throws IOException {
     file.close();
 }
 
-private Workbook writeXLSXFile() {
+private Workbook writeXLSXFile(long organizationId) throws PortalException, SystemException {
+	XSSFWorkbook workbook = new XSSFWorkbook();
+	XSSFSheet sheet = workbook.createSheet("Disease Matrix");
+	
+	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+	int rownum = 0;
+  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+  		if(rdc_rsname.equals("Disease Matrix")) {
+  			Set<String> fieldnames = rdc_rs.getDDMStructure().getFieldNames();
+  			Row row = sheet.createRow(rownum++);
+  			int cellnum = 0;
+  			for(String fieldname : fieldnames) {
+  				if(!fieldname.equalsIgnoreCase("_fieldsDisplay")) {
+	  				Cell cell = row.createCell(cellnum++);
+	  				String local_filedname = rdc_rs.getDDMStructure().getFieldLabel(fieldname, themeDisplay.getLocale());
+	  				cell.setCellValue(local_filedname);
+  				}
+  			}
+  			
+  			List<DDLRecord> records = rdc_rs.getRecords();
+  			for(DDLRecord record : records) {
+  				cellnum = 0;
+  				row = sheet.createRow(rownum++);
+  				for(String fieldname : fieldnames) {
+  					if(!fieldname.equalsIgnoreCase("_fieldsDisplay")) {
+	  					String fieldvalue = "";
+	  					if(record.getFieldValue(fieldname) != null) {
+	  						fieldvalue = record.getFieldValue(fieldname).toString();
+	  					}
+	  					Cell cell = row.createCell(cellnum++);
+		  				cell.setCellValue(fieldvalue);
+  					}
+  				}
+  			}
+  		}
+  	}
+	/*
 	XSSFWorkbook workbook = new XSSFWorkbook();
 	XSSFSheet sheet = workbook.createSheet("Sample sheet");
 	 
@@ -229,7 +276,7 @@ private Workbook writeXLSXFile() {
 	        else if(obj instanceof Double)
 	            cell.setCellValue((Double)obj);
 	    }
-	}
+	}*/
 	return workbook;
 }
 
@@ -244,6 +291,7 @@ private void readCsvFile(BufferedReader file) throws IOException {
 
 @Override
 public void serveResource(ResourceRequest request, ResourceResponse response) throws IOException {
+	themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 	String cmd = request.getParameter(Constants.CMD);
 	long organizationId = Long.valueOf(request.getParameter("RDCOrganisationId"));
 	System.out.println(cmd);
@@ -280,11 +328,20 @@ public void serveResource(ResourceRequest request, ResourceResponse response) th
 		fileName += "xlsx";
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		response.addProperty("Content-disposition", "atachment; filename="+fileName);
-		Workbook wb = writeXLSXFile();
-		wb.write(out);
+		Workbook wb;
+		try {
+			wb = writeXLSXFile(organizationId);
+			wb.write(out);
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	out.flush();
 	out.close();
-}*/
+}
 
 }

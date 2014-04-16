@@ -29,6 +29,16 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
 <%@ page import="javax.portlet.PortletRequest" %>
+<%@ page import="com.liferay.portal.kernel.search.Field" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
+<%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
+<%@ page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.Layout" %>
 
 <portlet:defineObjects />
 
@@ -201,7 +211,7 @@ List<Facet> facetsList = ListUtil.fromCollection(facets.values());
 // Exception!!!!!
 //facetsList = ListUtil.sort(facetsList, new PropertyComparator("facetConfiguration.weight", false, false));
 
-for (Facet facet : facetsList) {
+/*for (Facet facet : facetsList) {
 	if (facet.isStatic()) {
 		continue;
 	}
@@ -216,62 +226,111 @@ for (Facet facet : facetsList) {
 	<liferay-util:include page='<%= "/html/portlet/search/facets/" + facetConfiguration.getDisplayStyle() + ".jsp" %>' />
 
 <%
-}	
+}*/	
 
 
 boolean displayResultsInDocumentForm = true;
 boolean displayMainQuery = false;
+
+for(Document d : docs2) {
+	String title = d.get(locale, Field.TITLE);
+	Map<String, Field> fieldmap = d.getFields();
+	Field f = fieldmap.get("classTypeId");
+	String class_type_id = "";
+	if(f != null) {
+		class_type_id = f.getValue();
+	}
+	Field f_class = fieldmap.get("entryClassName");
+	String class_type = "";
+	if(f_class != null) {
+		class_type = f_class.getValue();
+	}
+	/*if(class_type.equalsIgnoreCase("com.liferay.portlet.journal.model.JournalArticle")) {
+		%>
+		<%= class_type %> == com.liferay.portlet.journal.model.JournalArticle<br>
+		<%
+		continue;
+	}*/
+	String content = "";
+	Field f_content = fieldmap.get("content");
+	if(f_content != null) {
+		content = f_content.getValue();
+		content = StringUtil.shorten(HtmlUtil.stripHtml(content), 200);
+	}
+	String entryClassName = d.get(Field.ENTRY_CLASS_NAME);
+	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(entryClassName);
+	long classPK = GetterUtil.getLong(d.get(Field.ENTRY_CLASS_PK));
+	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
+	
+	String href = "";
+	int hitsize = 0;
+	if(class_type_id.equalsIgnoreCase("")) {
+		class_type_id = "Articel";
+		String articleid = "";
+		Field f_articleid = fieldmap.get("articleId");
+		if(f_articleid != null) {
+			articleid = f_articleid.getValue();
+		}
+		List<Long> hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(themeDisplay.getSiteGroupId(), false, articleid); 
+		hitsize = hitLayoutIds.size();
+		if (hitLayoutIds.size() > 0) {
+			Long hitLayoutId = hitLayoutIds.get(0);
+			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+			layout.getGroupId(), layout.isPrivateLayout(),
+			hitLayoutId.longValue());
+			href = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+		}
+	} else if(class_type_id.equalsIgnoreCase("10822")) {
+		class_type_id = "News";
+		href = "http://new.bbmri-eric.eu/web/guest/news/-/asset_publisher/V6WfCYIg8I5M/content/" + assetRenderer.getUrlTitle();
+	} else if(class_type_id.equalsIgnoreCase("12029")) {
+		class_type_id = "Event";
+		href = "http://new.bbmri-eric.eu/web/guest/meetings/-/asset_publisher/5XsIcWr0VUL7/content/" + assetRenderer.getUrlTitle();
+	}
 %>
+	<div style="border-style:solid;border-width:3px;border-color:red;">
+		<%= class_type_id %>[<%= hitsize %>] | <a href="<%= href %>"><h3><%= title %></h3></a>
+		<a href="<%= href %>" style="font-size: 10px;"><%= href %></a><br>
+		<%= content %>
+	</div>
+	<br>
+<%	
+	
+}
+
+%>
+	
+<br><br>
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+<br><br>
+<%
 
 
+for(Document d : docs2) {
+%>
+<hr>
+<div style="border-style:solid;border-width:3px;">
+Documnet Name:<%= d.get(locale, Field.TITLE) %><br>
+<%	
+	
+	Map<String, Field> fieldmap = d.getFields();
+	for(String key : fieldmap.keySet()) {
+		Field f = fieldmap.get(key);
+		String value = f.getValue();
+		if((key.contains("ddm/10822/HTML") && !key.endsWith("en_US ")) || (key.contains("ddm/12029/HTML") && !key.endsWith("en_US "))) {
+			value = "yy";
+		}
+%>
+		<%= key %> - <%= f.getName() %> - <%= value %> <br>
+<%
+	}
+	
+%>
+</div>
+<%
+}
 
-
-		<liferay-ui:search-container
-			searchContainer="<%= mainSearchSearchContainer %>"
-			total="<%= hits.getLength() %>"
-		>
-			<liferay-ui:search-container-results
-				results="<%= hits.toList() %>"
-			/>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.kernel.search.Document"
-				escapedModel="<%= false %>"
-				keyProperty="UID"
-				modelVar="document"
-				stringKey="<%= true %>"
-			>
-			<!-- -Problem- -->
-			<liferay-ui:search-container-column-jsp path="ROOT/html/portlet/search/main_search_document_form.jsp" />
-			
-				
-			</liferay-ui:search-container-row>
-
-			<%
-			String[] entryClassNames = searchContext.getEntryClassNames();
-
-			if (entryClassNames.length == 1) {
-				portletURL.setParameter("entryClassName", entryClassNames[0]);
-			}
-			%>
-
-			<liferay-ui:search-iterator type="more" />
-
-			<c:if test="<%= displayMainQuery && (hits.getQuery() != null) %>">
-				<table class="full-query">
-					<tr>
-						<td valign="top">
-							<div class="container">
-								<code>
-									<%= HtmlUtil.escape(hits.getQuery().toString()) %>
-								</code>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</c:if>
-		</liferay-ui:search-container>
-
+%>
 
 
 
