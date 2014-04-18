@@ -58,6 +58,7 @@
 	clear: none;
 	border: 0px solid #999999;
 	display: inline;
+	height: 25px;
 }
 #mc_embed_signup .mc-field-group-float #mce-SEARCH {
 	width: 82%;
@@ -66,6 +67,7 @@
 	clear: none;
 	border: 0px solid #999999;
 	display: inline;
+	height: 25px;
 }
 .portlet-content {
 	padding: 0;
@@ -87,4 +89,96 @@
 }
 .asset-title {
 	display: none;
+}
+.portlet-asset-publisher .asset-content, .aui .portlet-asset-publisher .asset-content li {
+	text-align: justify;
+	font-family: 'PT Sans', normal, sans-serif;
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+.portlet-journal-content, .aui .portlet-journal-content li  {
+	text-align: justify;
+	font-family: 'PT Sans', normal, sans-serif;
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+.bbmri-eric-recent-news, .aui .bbmri-eric-recent-news li  {
+	text-align: justify;
+	font-family: 'PT Sans', normal, sans-serif;
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+.bbmri-eric-news, .aui .bbmri-eric-news li  {
+	text-align: justify;
+	font-family: 'PT Sans', normal, sans-serif;
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+
+.aui h1, .aui h2 {
+	font-size: 13pt;
+	line-height: 18pt;
+	font-weight: bold;
+}
+.aui h3, .aui h4  {
+	font-size: 10.5pt;
+	line-height: 16pt;
+	font-weight: bold;
+}
+.aui h5, .aui h6 {
+	font-size: 10.5pt;
+	line-height: 16pt;
+	font-weight: normal;
+}
+.aui h1, .aui h3, .aui h5 {
+	color: #184B8A;
+	font-family: 'PT Sans', normal, sans-serif;
+	text-align:initial;
+}
+.aui h2, .aui h4, .aui h6 {
+	color: #000000;
+	font-family: 'PT Sans', normal, sans-serif;
+	text-align:initial;
+}
+
+.container-fluid {
+	width: 1000px;
+	margin: auto;
+}
+.aui a, .aui a:hover {
+    color: #184B8A;
+    text-decoration:none;
+}
+.bbmri_eric_header-submainmenu a {
+	color: #000000;
+}
+.bbmri_eric_header-submainmenu a:hover {
+	color: #000000;
+	text-decoration:none;
+}
+.bbmri_eric_header-subsubmainmenu a {
+	color: #FFFFFF;
+}
+.bbmri_eric_header-subsubmainmenu a:hover {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.aui .portlet-journal-content .lfr-icon-actions {
+	font-size: 14px;
+	line-height: 20px;
+}
+.bbmri-eric-article-image img
+{
+    filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(1); /* Google Chrome & Safari 6+ */
+}
+.bbmri-eric-article-image img:hover
+{
+    filter: none;
+    -webkit-filter: none;
 }

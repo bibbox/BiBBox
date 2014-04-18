@@ -32,14 +32,24 @@
 													</#if>
 													<#if nav_child_child.getName()?contains("BBMRI.")>
 														<li ${nav_item_attr_selected} class="${nav_item_css_class} " id="layout_${nav_item.getLayoutId()}" role="presentation">
-															<a aria-labelledby="layout_${nav_child_child.getLayoutId()}" href="${nav_child_child.getURL()}" ${nav_child_child.getTarget()} role="menuitem">
-																<img id='countryflag' src="http://www.geonames.org/flags/x/${nav_child_child.getName()?substring(6, 8)?lower_case}.gif"  width="21px" height="17px" />
+															<a class="tooltips" aria-labelledby="layout_${nav_child_child.getLayoutId()}" href="${nav_child_child.getURL()}" ${nav_child_child.getTarget()} role="menuitem">
+																<img style="height:15px;" id='countryflag' src="http://www.geonames.org/flags/x/${nav_child_child.getName()?substring(6, 8)?lower_case}.gif" height="15px" />
+																<div class="bbmrieric-tooltip-div">
+																	<img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/NationalNodesSymbol.png" >
+																	<div class="bbmrieric-tooltip-short">${nav_child_child.getName()}</div>
+																	<div class="bbmrieric-tooltip-long">${nav_child_child.getLayout().getExpandoBridge().getAttribute("BBMRIERICNodeDescription")}</div>
+																</div>
 															</a>
 														</li>
 													<#elseif nav_child_child.getName()?contains("GERMAN BIOBANK NODE")>
 														<li ${nav_item_attr_selected} class="${nav_item_css_class} " id="layout_${nav_item.getLayoutId()}" role="presentation">
-															<a aria-labelledby="layout_${nav_child_child.getLayoutId()}" href="${nav_child_child.getURL()}" ${nav_child_child.getTarget()} role="menuitem">
-																<img id='countryflag' src="http://www.geonames.org/flags/x/de.gif"  width="21px" height="17px" />
+															<a class="tooltips" aria-labelledby="layout_${nav_child_child.getLayoutId()}" href="${nav_child_child.getURL()}" ${nav_child_child.getTarget()} role="menuitem">
+																<img style="height:15px;" id='countryflag' src="http://www.geonames.org/flags/x/de.gif"  height="15px" />
+																<div class="bbmrieric-tooltip-div">
+																	<img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/NationalNodesSymbol.png" >
+																	<div class="bbmrieric-tooltip-short">${nav_child_child.getName()}</div>
+																	<div class="bbmrieric-tooltip-long">${nav_child_child.getLayout().getExpandoBridge().getAttribute("BBMRIERICNodeDescription")}</div>
+																</div>
 															</a>
 														</li>
 													<#else>
