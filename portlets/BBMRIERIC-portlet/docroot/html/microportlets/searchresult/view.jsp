@@ -1,7 +1,4 @@
 <%@ include file="/html/init.jsp" %>
-
-<portlet:defineObjects />
-
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@ page import="com.liferay.portal.kernel.search.SearchContext"%>
 <%@ page import="com.liferay.portal.kernel.search.SearchContextFactory"%>
@@ -263,10 +260,12 @@ for(Document d : docs2) {
 	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
 	
 	String href = "";
+	String image_url = "";
 	int hitsize = 0;
 	if(class_type_id.equalsIgnoreCase("")) {
 		class_type_id = "Articel";
 		String articleid = "";
+		image_url = request.getContextPath() + "/images/article.png";
 		Field f_articleid = fieldmap.get("articleId");
 		if(f_articleid != null) {
 			articleid = f_articleid.getValue();
@@ -282,16 +281,22 @@ for(Document d : docs2) {
 		}
 	} else if(class_type_id.equalsIgnoreCase("10822")) {
 		class_type_id = "News";
+		image_url = request.getContextPath() + "/images/news.png";
 		href = "http://new.bbmri-eric.eu/web/guest/news/-/asset_publisher/V6WfCYIg8I5M/content/" + assetRenderer.getUrlTitle();
 	} else if(class_type_id.equalsIgnoreCase("12029")) {
 		class_type_id = "Event";
+		image_url = request.getContextPath() + "/images/event.png";
 		href = "http://new.bbmri-eric.eu/web/guest/meetings/-/asset_publisher/5XsIcWr0VUL7/content/" + assetRenderer.getUrlTitle();
 	}
 %>
-	<div style="border-style:solid;border-width:3px;border-color:red;">
-		<%= class_type_id %>[<%= hitsize %>] | <a href="<%= href %>"><h3><%= title %></h3></a>
-		<a href="<%= href %>" style="font-size: 10px;"><%= href %></a><br>
+	<div class="bbmri-eric-search-container">
+	  <div class="bbmri-eric-search-images">
+	     <a href="<%= href %>"><img src="<%= image_url %>" height="30px" width="31px" /></a>
+	  </div>
+	  <div class="bbmri-eric-search-result">
+		<a href="<%= href %>"><h3><%= title %></h3></a>
 		<%= content %>
+		</div>
 	</div>
 	<br>
 <%	
@@ -300,11 +305,8 @@ for(Document d : docs2) {
 
 %>
 	
-<br><br>
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-<br><br>
 <%
-
+/*
 
 for(Document d : docs2) {
 %>
@@ -329,7 +331,7 @@ Documnet Name:<%= d.get(locale, Field.TITLE) %><br>
 </div>
 <%
 }
-
+*/
 %>
 
 

@@ -1,1 +1,22 @@
 @import "microportlets.css";
+
+.bbmri-eric-search-container {
+	border-style:solid;
+	border-width:0px;
+	border-color:red;
+	margin: auto;
+	height: 110px;
+	width: 100%;
+}
+.bbmri-eric-search-images {
+	width: 40px;
+	float: left;
+	margin: auto;
+	margin-top: 35px;
+	height: 40px;
+}
+.bbmri-eric-search-result {
+	width: 550px;
+	float: right; 
+	margin-left: 10px;
+}
