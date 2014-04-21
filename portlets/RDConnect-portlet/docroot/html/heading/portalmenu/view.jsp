@@ -8,6 +8,16 @@
 
 <portlet:defineObjects />
 
+<%
+   String keywords = "";
+   HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
+   httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
+   keywords = httpRequest.getParameter("SEARCH");
+   if (keywords == null) {
+      keywords = "";
+   }
+%>
+
 <div class="rdc-portalmenu-div-container">
 <div class="rdc-portalmenu-div-container-homologocontainer">
 <aui:a href='<%= themeDisplay.getURLPortal()+"/home" %>'><img class="rdc-portalmenu-div-container-homelogo" alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="16px" width="19px" /></aui:a>
@@ -79,9 +89,10 @@ for(Organization o : organisations) {
 
 <div class="rdc_portalmenu-search-input">
 <portlet:actionURL name='searchRDC' var="searchRDCURL" />
-<% String searchurl1 = themeDisplay.getURLPortal()+"/web/guest/unified-list"; %>
+<% String searchurl1 = themeDisplay.getURLPortal()+"/web/guest/search"; %>
 <aui:form name="filterform" action="<%= searchurl1 %>" method="get" >
-<aui:input name="name" label="" size="190" />
+<!-- <aui:input name="name" label="" size="190" /> -->
+<input type="text" placeholder="What are you looking for?" value="<%= keywords %>" name="SEARCH" size="190">
 </aui:form>
 <% String imgLupePath = request.getContextPath() + "/images/search.png"; %>
 <div class="rdc_portalmenu-search-input-lupe"><img class="rdc_portalmenu-search-input-lupe-img" alt="logo" height="19px" width="20px" src="<%= imgLupePath %>" /></div>
