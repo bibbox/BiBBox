@@ -13,26 +13,6 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
-.aui h1, .aui h2, .aui h3, .aui h5, .aui h6 {
-	color: #184B8A;
-}
-.aui h1, .aui h2, .aui h3 {
-	font-size: 14px;
-}
-.aui h4, .aui h5, .aui h6 {
-	font-size: 12px;
-}
-.aui h4 {
-	color: #000000;
-}
-
-.container-fluid {
-	width: 1000px;
-	margin: auto;
-}
-.aui a {
-    color: #184B8A;
-}
 /* ---------- New Header ----------- */
 .bbmri_eric_header-maincontainer {
 	height: 321px;
@@ -134,13 +114,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 	padding-right: 5px;
 	line-height: 35px;
 }
-.bbmri_eric_header-submainmenu a {
-	color: #000000;
-}
-.bbmri_eric_header-submainmenu a:hover {
-	color: #000000;
-	text-decoration:none;
-}
 /* subsubmenu */
 .bbmri_eric_header-subsubmenucontainer {
 	width: 100%;
@@ -166,11 +139,11 @@ $dockbarOpenGradientStart: #0EA6F9;
 .bbmri_eric_header-subsubmainmenu-floating {
 	float: right;
 }
-.bbmri_eric_header-subsubmainmenu ui {
+.bbmri_eric_header-subsubmainmenu ul {
 	float: right;
 	text-align: right;
 	padding:0px;
-	margin:0px;
+	margin-top: 6px;
 	list-style-type: none;
 }
 .bbmri_eric_header-subsubmainmenu li {
@@ -180,13 +153,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 	padding-left: 15px;
 	padding-right: 5px;
 	line-height: 15px;
-}
-.bbmri_eric_header-subsubmainmenu a {
-	color: #FFFFFF;
-}
-.bbmri_eric_header-subsubmainmenu a:hover {
-	color: #FFFFFF;
-	text-decoration:none;
 }
 /* ---------- New Header ende ----------- */
 
@@ -213,10 +179,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 #footer {
 	width: 1000px;
 	margin: auto;
-}
-.aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
-	color: #FFFFFF;
-	text-decoration:none;
 }
 .bbmrieric-footer-menue {
 	width: 900px;
@@ -1019,3 +981,4 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 @import url(custom_additional.css);
 @import url(custom_search.css);
+@import url(custom_tooltip.css);

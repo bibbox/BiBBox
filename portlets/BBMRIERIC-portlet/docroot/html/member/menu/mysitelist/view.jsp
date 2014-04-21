@@ -5,7 +5,7 @@
 
 <portlet:defineObjects />
 
-<ul style="float: right;">
+<ul style="float: left;">
 <li style="list-style-type: none;">
 		<div style="float: left;">
 			<div class="<%= themeDisplay.getURLCurrent().contains(PrefsPropsUtil.getString(themeDisplay.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH)) ? "bbmri-eric-square-orange" : "bbmri-eric-square-blue" %>"></div>

@@ -1,5 +1,5 @@
 <!--<nav class="${nav_css_class}" id="navigation" role="navigation">-->
-	<ul aria-label="<@liferay.language key="site-pages" />" role="menubar">
+	<ul aria-label="<@liferay.language key="site-pages" />" role="menubar" style="margin-right:10px;">
 		<#list nav_items as nav_item>
 			<#if nav_item.isSelected()>
 				<#list nav_item.getChildren() as nav_child>
