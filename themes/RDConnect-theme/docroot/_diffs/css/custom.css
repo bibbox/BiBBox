@@ -88,7 +88,7 @@ $dockbarOpenGradientStart: #0EA6F9;
     top: 0px;
     padding-top: 12px;
     padding-left: 20px;
-    color: #9A9A9A;
+    color: #D7E2D9;
     border-color: #000000;
 	border-style: solid;
 	border-width: 0 1px 0 1px;
@@ -254,7 +254,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 #cssmenu {
   height: 29px;
-  border-bottom: 1px solid #B2F150;
+  border-bottom: 1px solid #5f9267;
   width: auto;
 }
 #cssmenu:after,
@@ -295,7 +295,7 @@ $dockbarOpenGradientStart: #0EA6F9;
   bottom: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-bottom: 7px solid #B2F150;
+  border-bottom: 7px solid #5f9267;
   margin-left: -7px;
 }
 #cssmenu > ul > li:first-child > a {
@@ -313,7 +313,7 @@ $dockbarOpenGradientStart: #0EA6F9;
   bottom: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-bottom: 7px solid #B2F150;
+  border-bottom: 7px solid #5f9267;
   margin-left: -7px;
 }
 #cssmenu > ul > li.active > a {
@@ -343,8 +343,8 @@ $dockbarOpenGradientStart: #0EA6F9;
   *margin-bottom: -1px;
 }
 #cssmenu .has-sub ul li a {
-  background: #B2F150;
-  border-bottom: 1px dotted #B2F150;
+  background: #5f9267;
+  border-bottom: 1px dotted #5f9267;
   filter: none;
   font-size: 11px;
   display: block;
@@ -739,9 +739,8 @@ textarea.propose{
 .rdconnect-header-container-top {
 	height: 50px;
 	width: 100%;
-	background-image:url('@theme_image_path@/bg_gradient.png');
+	background-image:url('@theme_image_path@/leiste_neu.png');
 	background-repeat:repeat-x;
-	background-size:100%;
 }
 .rdconnect-header-container-bottom {
 	height: 356px;
@@ -769,8 +768,9 @@ textarea.propose{
 	box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
 }
 .rdconnect-header-container-top-rdlogo img {
-	height: 50px;
-	width: 180px;
+	height: 27px;
+   width: 168px;
+   margin: 12px 6px 11px 6px;
 }
 .rdconnect-header-container-top-menue {
 	width: 818px;
@@ -815,7 +815,7 @@ textarea.propose{
 #rdheading {
 	/*background: #303030;*/
 	height: 220px;
-	border-color: #B2F150;
+	border-color: #5f9267;
 	border-style: solid;
 	border-width: 1px;
 	margin-top: 0;
@@ -849,7 +849,7 @@ div.portlet-body {
 	width: 178px;
 	height: 228px;
 	float: left;
-	border-color: #B2F150;
+	border-color: #5f9267;
 	border-style: solid;
 	border-width: 1px;
 }
@@ -863,7 +863,7 @@ div.portlet-body {
 	width: 818px;
 	height: 48px;
 	float: left;
-	border-color: #B2F150;
+	border-color: #5f9267;
 	border-style: solid;
 	border-width: 1px;
 }
@@ -871,7 +871,7 @@ div.portlet-body {
 	width: 818px;
 	height: 178px;
 	float: left;
-	border-color: #B2F150;
+	border-color: #5f9267;
 	border-style: solid;
 	border-width: 1px;
 }

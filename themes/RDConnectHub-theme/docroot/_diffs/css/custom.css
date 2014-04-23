@@ -40,9 +40,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 .rdconnect-header-container-top {
 	height: 50px;
 	width: 100%;
-	background-image:url('@theme_image_path@/bg_gradient.png');
+	background-image:url('@theme_image_path@/leiste_neu.png');
 	background-repeat:repeat-x;
-	background-size:100%;
 }
 .rdconnect-header-container-bottom {
 	height: 88px;
@@ -64,8 +63,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 	box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
 }
 .rdconnect-header-container-top-rdlogo img {
-	height: 50px;
-	width: 180px;
+	height: 27px;
+	width: 168px;
+	margin: 12px 6px 11px 6px;
 }
 .rdconnect-header-container-top-menue {
 	width: 818px;
@@ -115,7 +115,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 #rdheading {
 	/*background: #303030;*/
 	height: 220px;
-	border-color: #B2F150;
+	border-color: #5f9267;
 	border-style: solid;
 	border-width: 1px;
 	margin-top: 0;
@@ -151,7 +151,7 @@ div.portlet-body {
 	width: 178px;
 	height: 228px;
 	float: left;
-	border-color: #B2F150;
+	border-color: #5f9267;
 	border-style: solid;
 	border-width: 1px;
 }
@@ -165,7 +165,7 @@ div.portlet-body {
 	width: 818px;
 	height: 48px;
 	float: left;
-	border-color: #B2F150;
+	border-color: #5f9267;
 	border-style: solid;
 	border-width: 1px;
 }
@@ -173,7 +173,7 @@ div.portlet-body {
 	width: 818px;
 	height: 178px;
 	float: left;
-	border-color: #B2F150;
+	border-color: #5f9267;
 	border-style: solid;
 	border-width: 1px;
 }
@@ -963,7 +963,7 @@ div.portlet-body {
     top: 0px;
     padding-top: 12px;
     padding-left: 20px;
-    color: #9A9A9A;
+    color: #D7E2D9;
     border-color: #000000;
 	border-style: solid;
 	border-width: 0 1px 0 1px;

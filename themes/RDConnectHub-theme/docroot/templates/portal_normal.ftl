@@ -43,7 +43,7 @@ ${theme.include(body_top_include)}
 					<#elseif user_id == 105092>
 						<img alt="BBMRI-AT-IDCard-Logo" height="50px" width="180px" src="/RDConnectHub-theme/images/BBMRIatTmpLogo.png" />
 					<#else>
-						<img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnectHub-theme/images/rdconnectheadertoplogo-bgtransparent.png" />
+						<img alt="RD-Connect-IDCard-Logo" height="27px" width="168px" src="/RDConnectHub-theme/images/rd_connect.png" />
 					</#if>
 				</a>
 			</div>

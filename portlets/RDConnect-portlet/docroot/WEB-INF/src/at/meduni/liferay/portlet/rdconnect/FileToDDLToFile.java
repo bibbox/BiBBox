@@ -128,6 +128,9 @@ private Workbook writeXLSFile(long organizationId) throws PortalException, Syste
   			Set<String> fieldnames = rdc_rs.getDDMStructure().getFieldNames();
   			Row row = sheet.createRow(rownum++);
   			int cellnum = 0;
+  			// Create id field
+  			Cell cell_id_field = row.createCell(cellnum++);
+  			cell_id_field.setCellValue("Disease Matrix Id");
   			for(String fieldname : fieldnames) {
   				if(!fieldname.equalsIgnoreCase("_fieldsDisplay")) {
 	  				Cell cell = row.createCell(cellnum++);
@@ -140,6 +143,8 @@ private Workbook writeXLSFile(long organizationId) throws PortalException, Syste
   			for(DDLRecord record : records) {
   				cellnum = 0;
   				row = sheet.createRow(rownum++);
+  				cell_id_field = row.createCell(cellnum++);
+  				cell_id_field.setCellValue(record.getRecordId());
   				for(String fieldname : fieldnames) {
   					if(!fieldname.equalsIgnoreCase("_fieldsDisplay")) {
 	  					String fieldvalue = "";
@@ -153,31 +158,6 @@ private Workbook writeXLSFile(long organizationId) throws PortalException, Syste
   			}
   		}
   	}
-	/*
-	Map<String, Object[]> data = new HashMap<String, Object[]>();
-	data.put("1", new Object[] {"Emp No.", "Name", "Salary"});
-	data.put("2", new Object[] {1d, "John", 1500000d});
-	data.put("3", new Object[] {2d, "Sam", 800000d});
-	data.put("4", new Object[] {3d, "Dean", 700000d});
-	 
-	Set<String> keyset = data.keySet();
-	int rownum = 0;
-	for (String key : keyset) {
-	    Row row = sheet.createRow(rownum++);
-	    Object [] objArr = data.get(key);
-	    int cellnum = 0;
-	    for (Object obj : objArr) {
-	        Cell cell = row.createCell(cellnum++);
-	        if(obj instanceof Date) 
-	            cell.setCellValue((Date)obj);
-	        else if(obj instanceof Boolean)
-	            cell.setCellValue((Boolean)obj);
-	        else if(obj instanceof String)
-	            cell.setCellValue((String)obj);
-	        else if(obj instanceof Double)
-	            cell.setCellValue((Double)obj);
-	    }
-	}*/
 	return workbook;
 }
 

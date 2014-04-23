@@ -28,5 +28,5 @@ String organizationId_string = String.valueOf(organizationId);
 </br>
 <!-- <a href="<portlet:resourceURL><portlet:param name="<%= Constants.CMD %>" value="export_csv" /><portlet:param name="RDCOrganisationId" value="<%= organizationId_string %>" /></portlet:resourceURL>">Download CSV File</a> -->
 <a href="<portlet:resourceURL><portlet:param name="<%= Constants.CMD %>" value="export_xls" /><portlet:param name="RDCOrganisationId" value="<%= organizationId_string %>" /></portlet:resourceURL>">Download XLS File</a>
-<a href="<portlet:resourceURL><portlet:param name="<%= Constants.CMD %>" value="export_xlsx" /><portlet:param name="RDCOrganisationId" value="<%= organizationId_string %>" /></portlet:resourceURL>">Download XLSX File</a>
+<!-- <a href="<portlet:resourceURL><portlet:param name="<%= Constants.CMD %>" value="export_xlsx" /><portlet:param name="RDCOrganisationId" value="<%= organizationId_string %>" /></portlet:resourceURL>">Download XLSX File</a> -->
 
