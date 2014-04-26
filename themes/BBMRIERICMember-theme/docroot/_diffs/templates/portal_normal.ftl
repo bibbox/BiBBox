@@ -34,7 +34,7 @@ ${theme.include(body_top_include)}
 <div class="bbmri_eric_header-top-menu">
 	<div class="bbmri_eric_header-top-menu-container">
 		<div class="bbmri_eric_header-top-menu-container-logo">
-			<a href="http://new.bbmri-eric.eu/"><img alt="BBMRI-ERIC-Logo" height="50px" width="142px" src="/BBMRIERICMember-theme/images/bbmri-logo.png" /></a>
+			<a href="/web/guest/about"><img alt="BBMRI-ERIC-Logo" height="50px" width="142px" src="/BBMRIERICMember-theme/images/bbmri-logo.png" /></a>
 		</div>
 		<div class="bbmri_eric_header-top-menu-container-menu">
 			Container 1

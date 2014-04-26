@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,14 +37,24 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -54,6 +65,8 @@ public class FileToDDLToFile extends MVCPortlet {
 	
 	public void uploadFile(ActionRequest request, ActionResponse response) throws Exception {
 	try {
+		long organisation_id = ParamUtil.getLong(request, "rdc_organisation_id");
+		System.out.println("Organisation_id: " + organisation_id);
 		UploadPortletRequest upreq = PortalUtil.getUploadPortletRequest(request);
 		System.out.println(upreq.getFileName("fileupload"));
 		InputStream inputStream = null;
@@ -70,7 +83,7 @@ public class FileToDDLToFile extends MVCPortlet {
 			BufferedReader file = new BufferedReader(new InputStreamReader(inputStream));
 			//readCsvFile(file);
 		} else if(upreq.getFileName("fileupload").endsWith(".xls")) {
-			readXLSFile(inputStream);
+			readXLSFile(inputStream, organisation_id);
 		} else if(upreq.getFileName("fileupload").endsWith(".xlsx")) {
 			readXLSXFile(inputStream);
 		}
@@ -79,40 +92,105 @@ public class FileToDDLToFile extends MVCPortlet {
 	}
 }
 
-private void readXLSFile(InputStream file) throws IOException {
-	//Get the workbook instance for XLS file 
-	HSSFWorkbook workbook = new HSSFWorkbook(file);
-	 
-	//Get first sheet from the workbook
-	HSSFSheet sheet = workbook.getSheet("Disease Matrix");
-	 
-	//Get iterator to all the rows in current sheet
-	Iterator<Row> rowIterator = sheet.iterator();
-	 
-	while(rowIterator.hasNext()) {
-        Row row = rowIterator.next();
-         
-        //For each row, iterate through each columns
-        Iterator<Cell> cellIterator = row.cellIterator();
-        while(cellIterator.hasNext()) {
-             
-            Cell cell = cellIterator.next();
-             
-            switch(cell.getCellType()) {
-                case Cell.CELL_TYPE_BOOLEAN:
-                    System.out.print(cell.getBooleanCellValue() + "\t\t");
-                    break;
-                case Cell.CELL_TYPE_NUMERIC:
-                    System.out.print(cell.getNumericCellValue() + "\t\t");
-                    break;
-                case Cell.CELL_TYPE_STRING:
-                    System.out.print(cell.getStringCellValue() + "\t\t");
-                    break;
-            }
-        }
-        System.out.println("");
-    }
-    file.close();
+private void readXLSFile(InputStream file, long organizationId) throws IOException, PortalException, SystemException {
+	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+	List<Long> record_id_list =  new ArrayList<Long>();
+	
+	ServiceContext serviceContext = new ServiceContext();
+
+    serviceContext.setAddGroupPermissions(true);
+    serviceContext.setAddGuestPermissions(true);
+    Group group = organization.getGroup();
+    serviceContext.setScopeGroupId(group.getGroupId());
+    serviceContext.setUserId(organization.getUserId());
+	
+	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+		if(rdc_rsname.equals("Disease Matrix")) {
+			// ------
+			// Get all Record Ids
+			List<DDLRecord> records = rdc_rs.getRecords();
+  			for(DDLRecord record : records) {
+  				record_id_list.add(record.getRecordId());
+  			}
+  			// ------
+  			// Read xls entrys
+  			//Get the workbook instance for XLS file 
+  			HSSFWorkbook workbook = new HSSFWorkbook(file);
+  			//Get first sheet from the workbook
+  			HSSFSheet sheet = workbook.getSheet("Disease Matrix");
+  			//Get iterator to all the rows in current sheet
+  			Iterator<Row> rowIterator = sheet.iterator();	
+  			boolean header = true;
+  			Map<Integer, String> headers = new HashMap<Integer, String>();
+  			while(rowIterator.hasNext()) {
+  		        Row row = rowIterator.next();
+  		        int cellcounter = 0;
+  		        if(header) {
+  		        	Iterator<Cell> cellIterator = row.cellIterator();
+  	  		        while(cellIterator.hasNext()) { 
+  	  		            Cell cell = cellIterator.next();
+  	  		            headers.put(cellcounter, cell.getStringCellValue());
+  	  		            cellcounter++;
+  	  		        }
+  		        	header = false;
+  		        	continue;
+  		        }
+  		        // Create Fields or Load Fields
+  		        Cell cell_id = row.getCell(0);
+  		        Fields fields;
+  		        if(cell_id.getCellType() != Cell.CELL_TYPE_NUMERIC) {		
+  					fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
+  					DDLRecordLocalServiceUtil.addRecord(
+  							serviceContext.getUserId(),
+  							serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
+  							DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+  							serviceContext);
+  		        } else {
+  		        	long record_id_in_table = (long)cell_id.getNumericCellValue();
+  		        	if(record_id_list.contains(record_id_in_table)) {
+  		        		record_id_list.remove(record_id_in_table);
+  		        		fields = DDLRecordLocalServiceUtil.getRecord(record_id_in_table).getFields();
+  		        	} else {
+  		        		fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
+  		        		DDLRecordLocalServiceUtil.addRecord(
+  	  							serviceContext.getUserId(),
+  	  							serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
+  	  							DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+  	  							serviceContext);
+  		        	}
+  		        }
+  		        //For each row, iterate through each columns
+  		        Iterator<Cell> cellIterator = row.cellIterator();
+  		        while(cellIterator.hasNext()) {
+  		        	if(cellcounter == 0) {
+  		        		cellcounter++;
+  		        		continue;
+  		        	}
+  		        	Field tmp_field = null;
+  		            Cell cell = cellIterator.next();   
+  		            switch(cell.getCellType()) {
+  		                case Cell.CELL_TYPE_NUMERIC:
+  		                	tmp_field = new Field(headers.get(cellcounter), cell.getNumericCellValue());
+  		                    break;
+  		                case Cell.CELL_TYPE_STRING:
+  		                	tmp_field = new Field(headers.get(cellcounter), cell.getStringCellValue());
+  		                    break;
+  		            }
+  		            fields.put(tmp_field);
+  		            cellcounter++;
+  		        }
+  		        DDLRecordLocalServiceUtil.updateRecord(serviceContext.getUserId(), rdc_rs.getRecordSetId(), true, DDLRecordConstants.DISPLAY_INDEX_DEFAULT, 
+  		        		fields, false, serviceContext);
+  		    }
+  		    file.close();
+  		    for(long record_id_remove : record_id_list) {
+  		    	DDLRecordLocalServiceUtil.deleteRecord(record_id_remove);
+  		    }
+		}
+	}
+	
 }
 
 private Workbook writeXLSFile(long organizationId) throws PortalException, SystemException {

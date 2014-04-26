@@ -1028,6 +1028,10 @@
 			at.meduni.liferay.portlet.rdconnect.FileToDDLToFile
 		</portlet-class>
 		<init-param>
+         <name>copy-request-parameters</name>
+         <value>true</value> 
+      </init-param>
+		<init-param>
 			<name>view-template</name>
 			<value>/html/filetoddltofile/view.jsp</value>
 		</init-param>

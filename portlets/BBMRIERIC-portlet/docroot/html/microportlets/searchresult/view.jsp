@@ -21,7 +21,6 @@
 <%@ page import="com.liferay.portal.kernel.search.facet.util.FacetFactoryUtil" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
@@ -36,6 +35,7 @@
 <%@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.model.Layout" %>
+<%@ page import="java.util.Map" %>
 
 <portlet:defineObjects />
 
