@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
 
-<project name="BBMRIAT-theme" basedir="." default="deploy">
+<project name="abschauen-theme" basedir="." default="deploy">
 	<import file="../build-common-theme.xml" />
 
-	<property name="theme.parent" value="_styled" />
+	<property name="theme.parent" value="classic" />
+	<property name="theme.type" value="ftl" />
 </project>

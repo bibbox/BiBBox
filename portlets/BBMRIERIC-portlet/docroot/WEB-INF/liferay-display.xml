@@ -12,5 +12,8 @@
 		<portlet id="my-site-list"></portlet>
 		<portlet id="mailing-list"></portlet>
 		<portlet id="search-result"></portlet>
+		<portlet id="bbmrieric-committees"></portlet>
+		<portlet id="bbmrieric-user"></portlet>
+		<portlet id="bbmrieric-committees-area"></portlet>
 	</category>
 </display>

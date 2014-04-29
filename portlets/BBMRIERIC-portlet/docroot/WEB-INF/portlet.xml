@@ -269,4 +269,110 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>bbmrieric-committees</portlet-name>
+		<display-name>Bbmrieric Committees</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.bbmrieric.member.menu.BBMRIERICCommittees
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/member/menu/bbmriericcommittees/view.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Bbmrieric Committees</title>
+			<short-title>Bbmrieric Committees</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>bbmrieric-user</portlet-name>
+		<display-name>Bbmrieric User</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.bbmrieric.member.menu.BBMRIERICUserPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/member/menu/bbmriericuser/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Bbmrieric User</title>
+			<short-title>Bbmrieric User</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>bbmrieric-committees-area</portlet-name>
+		<display-name>Bbmrieric Committees Area</display-name>
+		<portlet-class>
+			at.meduni.liferay.portlet.bbmrieric.member.menu.BBMRIERICCommitteesArea
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/member/menu/bbmriericcommitteesarea/view.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Bbmrieric Committees Area</title>
+			<short-title>Bbmrieric Committees Area</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

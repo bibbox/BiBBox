@@ -1,0 +1,222 @@
+.aui .bbmri-eric-member-area-top-menue  .portlet-borderless-container,
+.aui .bbmri-eric-member-area-top-area-expand  .portlet-borderless-container {
+	padding: 0;
+	margin: 0;
+}
+.aui .bbmri-eric-member-area-top-menue  .portlet, .aui .bbmri-eric-member-area-top-menue  .portlet-borderless-container,
+.aui .bbmri-eric-member-area-top-area-expand  .portlet, .aui .bbmri-eric-member-area-top-area-expand  .portlet-borderless-container {
+	padding: 0;
+   margin: 0;
+}
+
+.bbmri-eric-member-area-top-menue {
+   width: 100%;
+   height: 50px;
+   margin: auto;
+   
+   background-color: #0C2848;
+}
+.bbmri-eric-member-area-top-menue-container {
+	width: 1000px;
+	height: 50px;
+	margin: auto;
+	
+	background: -webkit-linear-gradient(left, #F5F7FA , #BABFC6); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, #F5F7FA, #BABFC6); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #F5F7FA, #BABFC6); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #F5F7FA , #BABFC6); /* Standard syntax */
+}
+.bbmri-eric-member-area-top-menue-container-bbmri-member-logo {
+	width: 160px;
+   height: 47px;
+   float: left;
+   
+   padding-left: 20px;
+   padding-top: 3px;
+}
+.bbmri-eric-member-area-top-menue-container-username {
+	width: 238px;
+   height: 32px;
+   float: left;
+   
+   padding-left: 20px;
+   padding-top: 17px;
+   
+   border-color: #FFFFFF;
+   border-style: solid;
+   border-width: 0 1px 1px 1px;
+}
+.bbmri-eric-member-area-top-menue-container-search {
+	width: 279px;
+   height: 49px;
+   float: left;
+   
+   border-color: #FFFFFF;
+   border-style: solid;
+   border-width: 0 1px 1px 1px;
+}
+.bbmri-eric-member-area-top-menue-container-committees {
+   width: 279px;
+   height: 49px;
+   float: left;
+   
+   border-color: #FFFFFF;
+   border-style: solid;
+   border-width: 0 0 1px 0;
+}
+.bbmri-eric-member-area-top-menue-container-committees-dropdown {
+   height: 33px;
+   width: 260px;
+   float: left;
+   list-style: none;
+   padding-top: 17px;
+   padding-left: 20px;
+   position: absolute;
+   left: 0px;
+   top: 0px;
+   color: #96989A;
+}
+.aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul {
+   float: left;
+   list-style: none;
+   margin: 0;
+}
+.aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul:after {
+   content: ""; 
+   clear: both; 
+   display: block;
+}
+.bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul {
+   display: none;
+   background: #5f6975; 
+   border-radius: 0px; 
+   padding: 0;
+   position: absolute; 
+   top: 100%;
+   left: 0px;
+   z-index: 500;
+}
+.bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li {
+   border-top: 1px solid #6b727c;
+   border-bottom: 1px solid #575f6a;
+   position: relative;
+   float: left;
+   width: 300px;
+}
+.bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li a {
+   color: #A4A4A4;
+}
+.aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li a:hover {
+   color: #A4A4A4;
+}
+.bbmri-eric-member-area-top-menue-container-committees-dropdown:hover > ul ul {
+   display: block;
+}
+
+/* ---------- area expand ----------- */
+.bbmri-eric-member-area-top-area-expand {
+	width: 100%;
+   height: 180px;
+   margin: auto;
+   
+   background-color: #0C2848;
+}
+.bbmri-eric-member-area-top-area-expand-container {
+	width: 1000px;
+   height: 180px;
+   margin: auto;
+   
+   background: -webkit-linear-gradient(left, #F5F7FA , #D1D3D5); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, #F5F7FA , #D1D3D5); /* Standard syntax */
+}
+.bbmri-eric-member-area-top-area-expand-container-user-portlet {
+	width: 439px;
+   height: 179px;
+   margin: auto;
+   float: left;
+   
+   border-color: #FFFFFF;
+   border-style: solid;
+   border-width: 0 1px 1px 0;
+}
+.bbmri-eric-member-area-top-area-expand-container-user-portlet-user-image {
+   width: 180px;
+   height: 180px;
+   float: left;
+}
+.bbmri-eric-member-area-top-area-expand-container-user-portlet-user-edit {
+   width: 239px;
+   height: 160px;
+   float: left;
+   
+   padding-left: 20px;
+   padding-top: 30px;
+   
+   vertical-align: middle;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees {
+   width: 560px;
+   height: 180px;
+   margin: auto;
+   float: left;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-4 {
+	width: 279px;
+   height: 89px;
+   float: left;
+   
+   border-color: #FFFFFF;
+   border-style: solid;
+   border-width: 0 1px 1px 0;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-4-icon {
+	width: 70px;
+	height: 89px;
+	float: left;
+	
+	padding-left: 30px;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-4-text {
+	width: 179px;
+   height: 89px;
+   float: left;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-8 {
+   width: 280px;
+   height: 45px;
+   float: left;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-24 {
+   width: 186px;
+   height: 22px;
+   float: left;
+}
+
+/* ---------- area not expand ----------- */
+.bbmri-eric-member-area-top-area-not-expand {
+	width: 100%;
+   height: 20px;
+   margin: auto;
+   
+   background-color: #0C2848;
+}
+.bbmri-eric-member-area-top-area-not-expand-container {
+	width: 1000px;
+   height: 20px;
+   margin: auto;
+   
+   background: -webkit-linear-gradient(left, #F5F7FA , #D1D3D5); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, #F5F7FA , #D1D3D5); /* Standard syntax */
+}
+.bbmri-eric-member-area-top-area-not-expand-container-toggle {
+	width: 40px;
+   height: 20px;
+   margin: auto;
+   background: #2C445E;
+   border-bottom-right-radius: 5px;
+   border-bottom-left-radius: 5px; 
+}
