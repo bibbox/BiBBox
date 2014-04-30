@@ -20,19 +20,35 @@
    Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
    long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
    
-   LiferayPortletURL editusersURL = null;
-   editusersURL = PortletURLFactoryUtil.create(request, "2", controlPanelPlid, "RENDER_PHASE");
-   editusersURL.setParameter("redirect", currentURL);
-   editusersURL.setParameter("p_p_state", "maximized");
-   editusersURL.setParameter("controlPanelCategory", "my");
-   editusersURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getUser().getGroupId()));
+   LiferayPortletURL editmyusersURL = PortletURLFactoryUtil.create(request, "2", controlPanelPlid, "RENDER_PHASE");
+   editmyusersURL.setParameter("p_p_state", "maximized");
+   editmyusersURL.setParameter("controlPanelCategory", "my");
+   String portletResource = com.liferay.portal.kernel.util.ParamUtil.getString(request, "portletResource");
 
    %>
    <img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="180" /> 
 </div>
 <div class="bbmri-eric-member-area-top-area-expand-container-user-portlet-user-edit">
    <%= themeDisplay.getUser().getJobTitle() %><br>
-   <aui:a href="<%= editusersURL.toString() %>">Add Position <img id="myuseredit" style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a><br>
+   <span id="myuseredit" style="cursor:pointer;">Add Position <img style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span><br>
    <aui:a href="/web/home">Configure Member Area</aui:a><br>
    <aui:a href="<%= themeDisplay.getURLSignOut() %>">Sign Out</aui:a>
 </div>
+
+<aui:script use="aui-base,event,aui-dialog,aui-dialog-iframe">
+      A.all('#myuseredit').on(
+         'click',
+         function(event) {
+            Liferay.Util.selectEntity({
+               dialog: {
+                  constrain: true,
+                  modal: true,
+                  width: 1000
+               },
+               id: '_<%=HtmlUtil.escapeJS(portletResource)%>_selectFolder',
+               title: 'Edit my account.',
+               uri: '<%= editmyusersURL.toString() %>'
+            });
+         }
+      );
+</aui:script>

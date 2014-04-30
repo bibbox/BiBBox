@@ -84,12 +84,6 @@ ${theme.include(body_top_include)}
          </div>
       </div>
    </div>
-   <div class="bbmri-eric-member-area-top-area-not-expand">
-      <div class="bbmri-eric-member-area-top-area-not-expand-container">
-         <div class="bbmri-eric-member-area-top-area-not-expand-container-toggle">
-         </div>
-      </div>
-   </div>
 </div>
 <!-- BBMRI MEMBER Area Top Area -->
 
@@ -102,13 +96,6 @@ ${theme.include(body_top_include)}
 			<div class="bbmri_eric_header-menucontainer-inner-sitemenue-main">
 				<#if has_navigation || is_signed_in>
 					<#include "${full_templates_path}/navigation.ftl" />
-				</#if>
-			</div>
-		</div>
-		<div class="bbmri_eric_header-menucontainer-inner-float">
-			<div class="bbmri_eric_header-menucontainer-inner-sitemenue-sub">
-				<#if has_navigation || is_signed_in>
-					<#include "${full_templates_path}/navigation_sub.ftl" />
 				</#if>
 			</div>
 		</div>
@@ -128,16 +115,6 @@ ${theme.include(body_top_include)}
 				${theme.wrapPortlet("portlet.ftl", content_include)}-->
 			</#if>
 		</div>
-	</div>
-</div>
-<div class="bbmrieric-footer-container">
-	<div class="bbmrieric-footer">
-		<div class="bbmrieric-footer-menue">
-			<#include "${full_templates_path}/navigation_footer.ftl" />
-		</div>	
-		<footer id="footer" role="contentinfo">
-			<a href="mailto:contact@bbmri-eric.eu">contact@bbmri-eric.eu</a> 
-		</footer>
 	</div>
 </div>
 

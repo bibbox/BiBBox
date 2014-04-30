@@ -1,103 +1,42 @@
+.container-fluid-background {
+   width: 100%;
+   margin: auto;
+   background-color: #0C2848;
+}
+.container-fluid {
+   width: 1000px;
+   margin: auto;
+   
+   background: -webkit-linear-gradient(left, #F5F7FA , #D1D3D5); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, #F5F7FA , #D1D3D5); /* Standard syntax */
+}
+
+#wrapper {
+    padding: 5px 0 0 0;
+}
+
 .aui .bbmri-eric-body {
 	background-color: #0C2848;
 }
-/* ---------- BBMRI Member top menu ----------- */
-.bbmri_eric_header-top-menu {
-	height: 53px;
-	width: 100%;
-	margin: auto;
-}
-.bbmri_eric_header-top-menu-container {
-	width: 1198px;
-	height: 52px;
-	margin: auto;
-	background-color: #FDFDFD;
-	border-style: solid;
-	border-color: #E4E5E9;
-	border-width: 0 1px 1px 1px;
-}
-.bbmri_eric_header-top-menu-container-logo {
-	width: 142px;
-	height: 52px;
-	float: left;
-}
-.bbmri_eric_header-top-menu-container-menu {
-	width: 350px;
-	height: 52px;
-	float: left;
-	border-style: solid;
-	border-color: #E4E5E9;
-	border-width: 0 1px 0 1px;
-}
-.aui .bbmri_eric_header-maincontainer-inner-topmenue a, .aui .bbmri_eric_header-maincontainer-inner-topmenue a:hover {
-	color: #184B8A;
-}
-/* ---------- END BBMRI Member top menu ----------- */
-/* ---------- New Header ----------- */
-
-.bbmri_eric_header-maincontainer {
-	height: 145px;
-	width: 100%;
-	margin: 0;
-}
-.bbmri_eric_header-maincontainer-inner {
-	height: 144px;
-	margin: auto;
-	margin-top: 0;
-	margin-bottom: 0;
-	width: 1198px;
-	background-color: #FDFDFD;
-	border-style: solid;
-	border-color: #E4E5E9;
-	border-width: 0 1px 1px 1px;
-}
-.bbmri_eric_header-maincontainer-inner-image {
-	width: 142px;
-	height: 144px;
-	float: left;
-}
-.bbmri_eric_header-maincontainer-inner-topmenue {
-	height: 144px;
-	width: 350px;
-	margin-top: 0;
-	margin-bottom: 0;
-	float: left;
-	border-style: solid;
-	border-color: #E4E5E9;
-	border-width: 0 1px 0 1px;
-}
-.bbmri_eric_header-maincontainer-inner-float {
-	float: rigth;
-}
-.bbmri_eric_header-maincontainer-inner-sitemenue-main {
-	height: 30px;
-	margin-top: 0;
-	margin-bottom: 0;
-	text-align: right;
-}
-.bbmri_eric_header-maincontainer-inner-sitemenue-sub {
-	height: 20px;
-	margin-top: 0;
-	margin-bottom: 0;
-	text-align: right;
-}
-/* ---------- END New Header ----------- */
 /* ---------- Site Menue ---------- */
 .bbmri_eric_header-menucontainer {
-	height: 40px;
+	height: 30px;
 	width: 100%;
-	margin: 0;
+   margin: auto;
+   background-color: #0C2848;
 }
 .bbmri_eric_header-menucontainer-inner {
-	height: 39px;
+	height: 29px;
 	margin: auto;
 	margin-top: 0;
 	margin-bottom: 0;
-	width: 1198px;
+	width: 1000px;
 	background-color: #FDFDFD;
 	border-style: solid;
 	border-color: #E4E5E9;
-	border-width: 0 1px 1px 1px;
+	border-width: 0 0 1px 0;
 }
 .bbmri-eric-square-orange {
 	height: 6px;
@@ -140,7 +79,7 @@
 /* ---------- Site Menue Level1 ---------- */
 .bbmri_eric_header-menucontainer-inner-sitemenue-main {
 	width: 100%;
-	height: 20px;
+	height: 29px;
 }
 .aui .bbmri_eric_header-menucontainer-inner-sitemenue-main ul {
 	float: right;
@@ -155,39 +94,11 @@
 	margin: auto;
 	padding-left: 20px;
 	padding-right: 5px;
+	padding-top: 4px;
 	line-height: 20px;
 }
 .aui .bbmri_eric_header-menucontainer-inner-sitemenue-main li:a, .aui .bbmri_eric_header-menucontainer-inner-sitemenue-main li:a:hover {
 	color: #184B8A;
 }
 /* ---------- END Site Menue Level1 ---------- */
-/* ---------- Site Menue Level2 ---------- */
-.bbmri_eric_header-menucontainer-inner-sitemenue-sub {
-	width: 100%;
-	height: 15px;
-}
-.bbmri_eric_header-menucontainer-inner-sitemenue-sub ul {
-	float: right;
-	text-align: right;
-	padding:0px;
-	margin:0px;
-	list-style-type: none;
-}
-.bbmri_eric_header-menucontainer-inner-sitemenue-sub li {
-	float: left;
-	list-style-type: none;
-	margin: auto;
-	padding-left: 35px;
-	padding-right: 5px;
-	line-height: 15px;
-}
-.bbmri_eric_header-menucontainer-inner-sitemenue-sub a {
-	color: #000000;
-	font-size: 12px;
-}
-.bbmri_eric_header-menucontainer-inner-sitemenue-sub a:hover {
-	color: #000000;
-	text-decoration:none;
-}
-/* ---------- END Site Menue Level2 ---------- */
 /* ---------- END Site Menue ---------- */

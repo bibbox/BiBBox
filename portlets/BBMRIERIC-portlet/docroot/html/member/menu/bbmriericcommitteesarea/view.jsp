@@ -26,6 +26,8 @@
 		String url = themeDisplay.getURLPortal()
 	            + group.getPathFriendlyURL(false, themeDisplay)
 	            + group.getFriendlyURL();
+		String short_title = group.getExpandoBridge().getAttribute("Short Name").toString();
+		String long_title = group.getDescriptiveName();
 		if (number_of_groups == 4) {
 			   committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-4\">";
 			   committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-4-icon\">";
@@ -33,7 +35,8 @@
 			   committees += "<img id=\"committeelogo\" alt=\"committeelogo\" src=\"" + request.getContextPath() + "/images/committees_big.png\" width=\"50px\" height=\"50px\" />";
 			   committees += "</div>";
 			   committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-4-text\">";
-			   committees += "<a href=\"" + url + "\">" + group.getDescriptiveName() + "</a>";
+			   committees += "<span class=\"bbmri-eric-member-area-top-area-expand-container-committees-4-text-short\"><a href=\"" + url + "\">" + short_title + "</a></span><br>";
+			   committees += "<span class=\"bbmri-eric-member-area-top-area-expand-container-committees-4-text-long\"><a href=\"" + url + "\">" + long_title + "</a></span>";
 			   committees += "</div>";
 			   committees += "</div>";
 		}
@@ -44,13 +47,17 @@
             committees += "<img id=\"committeelogo\" alt=\"committeelogo\" src=\"" + request.getContextPath() + "/images/committees_big.png\" width=\"30px\" height=\"35px\" />";
             committees += "</div>";
             committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-8-text\">";
-            committees += "<a href=\"" + url + "\">" + group.getDescriptiveName() + "</a>";
+            committees += "<span class=\"bbmri-eric-member-area-top-area-expand-container-committees-8-text-short\"><a href=\"" + url + "\">" + short_title + "</a></span><br>";
+            committees += "<span class=\"bbmri-eric-member-area-top-area-expand-container-committees-8-text-long\"><a href=\"" + url + "\">" + long_title + "</a></span>";
             committees += "</div>";
             committees += "</div>";
       }
 		if (number_of_groups == 24) {
+			   if(short_title.length() == 0) {
+				   short_title = long_title;
+			   }
             committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-24\">";
-            committees += "<a href=\"" + url + "\">" + group.getDescriptiveName() + "</a>";
+            committees += "<a href=\"" + url + "\">" + short_title + "</a>";
             committees += "</div>";
       }
 		

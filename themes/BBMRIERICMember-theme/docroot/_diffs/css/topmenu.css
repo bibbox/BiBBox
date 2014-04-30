@@ -65,11 +65,11 @@
    border-width: 0 0 1px 0;
 }
 .bbmri-eric-member-area-top-menue-container-committees-dropdown {
-   height: 33px;
+   height: 40px;
    width: 260px;
    float: left;
    list-style: none;
-   padding-top: 17px;
+   padding-top: 10px;
    padding-left: 20px;
    position: absolute;
    left: 0px;
@@ -145,6 +145,7 @@
    width: 180px;
    height: 180px;
    float: left;
+   overflow: hidden;
 }
 .bbmri-eric-member-area-top-area-expand-container-user-portlet-user-edit {
    width: 239px;
@@ -154,7 +155,14 @@
    padding-left: 20px;
    padding-top: 30px;
    
+   color: #A4A4A4;
+   font-size: 12px;
    vertical-align: middle;
+}
+.bbmri-eric-member-area-top-area-expand-container-user-portlet-user-edit a, .bbmri-eric-member-area-top-area-expand-container-user-portlet-user-edit a:hover {
+	color: #A4A4A4;
+   font-size: 12px;
+   text-decoration:none;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees {
    width: 560px;
@@ -180,9 +188,25 @@
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-4-text {
 	width: 179px;
-   height: 59px;
+   height: 69px;
    float: left;
-   margin-top: 30px;
+   margin-top: 20px;
+   line-height: 16px;
+   
+   white-space:nowrap;  
+   overflow:hidden;
+   text-overflow:ellipsis;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-4-text-short a, .bbmri-eric-member-area-top-area-expand-container-committees-4-text-short a:hover {
+	color: #184B8A;
+	font-size: 12px;
+	text-decoration:none;
+	font-weight:bold;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-4-text-long a, .bbmri-eric-member-area-top-area-expand-container-committees-4-text-long a:hover {
+	color: #A4A4A4;
+	font-size: 12px;
+	text-decoration:none;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-8 {
    width: 279px;
@@ -202,7 +226,7 @@
    margin-top: 5px;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-8-text {
-   width: 222px;
+   width: 221px;
    height: 40px;
    float: left;
    
@@ -211,17 +235,42 @@
    text-overflow:ellipsis; 
    
    margin-top: 5px;
+   line-height: 16px;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-8-text-short a, .bbmri-eric-member-area-top-area-expand-container-committees-8-text-short a:hover {
+   color: #184B8A;
+   font-size: 12px;
+   text-decoration:none;
+   font-weight:bold;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-8-text-long a, .bbmri-eric-member-area-top-area-expand-container-committees-8-text-long a:hover {
+   color: #A4A4A4;
+   font-size: 12px;
+   text-decoration:none;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-24 {
-   width: 185px;
-   height: 21px;
+   width: 182px;
+   height: 19px;
    float: left;
+   margin-top: 2px;
+   margin-left: 3px;
+   
+   white-space:nowrap;  
+   overflow:hidden;
+   text-overflow:ellipsis; 
    
    border-color: #FFFFFF;
    border-style: solid;
    border-width: 0 1px 1px 0;
+   line-height: 16px;
+   font-weight:bold;
 }
-
+.bbmri-eric-member-area-top-area-expand-container-committees-24 a, .bbmri-eric-member-area-top-area-expand-container-committees-24 a:hover {
+   color: #184B8A;
+   font-size: 12px;
+   text-decoration:none;
+   font-weight:bold;
+}
 /* ---------- area not expand ----------- */
 .bbmri-eric-member-area-top-area-not-expand {
 	width: 100%;

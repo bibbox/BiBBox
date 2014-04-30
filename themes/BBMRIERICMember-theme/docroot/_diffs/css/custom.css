@@ -12,10 +12,7 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
-.container-fluid {
-	width: 1000px;
-	margin: auto;
-}
+
 
 .bbmri_eric_header-member-menu {
 	position: absolute;
@@ -69,11 +66,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 /* ---------- New Header ende ----------- */
 
-.container-fluid-background {
-	width: 1200px;
-	margin: auto;
-	background: url(@theme_image_path@/02_content_background.png) repeat-y;
-}
+
 
 /* ---------- Footer ----------- */
 .bbmrieric-footer-container {
