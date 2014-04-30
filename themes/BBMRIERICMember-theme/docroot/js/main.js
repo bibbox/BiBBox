@@ -20,3 +20,16 @@ AUI().ready(
 		}
 	}
 );
+AUI().use(
+		  'aui-toggler',
+		  function(A) {
+		    new A.Toggler(
+		      {
+		        container: '#bbmri-eric-member-area-top-toggler-xyz',
+		        content: '.bbmri-eric-member-area-top-area-expand',
+		        expanded: false,
+		        header: '.bbmri-eric-member-area-top-area-not-expand-container-toggle'
+		      }
+		    );
+		  }
+		);

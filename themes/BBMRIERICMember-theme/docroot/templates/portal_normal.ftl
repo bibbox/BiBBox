@@ -59,33 +59,35 @@ ${theme.include(body_top_include)}
    </div>
 <div>
 <!-- END BBMRI MEMBER Area Top Menue -->
-<div class="bbmri-eric-member-area-top-area-expand">
-   <div class="bbmri-eric-member-area-top-area-expand-container">
-      <div class="bbmri-eric-member-area-top-area-expand-container-user-portlet">
-         <#assign userportletPortletId = "bbmriericuser_WAR_BBMRIERICportlet" />
-         <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-         <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, userportletPortletId) />
-         <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-            <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-            <#assign temp = portletSetup.store() />
-         </#if>
-         ${theme.runtime(userportletPortletId, "", "")}
-      </div>
-      <div class="bbmri-eric-member-area-top-area-expand-container-committees">
-         <#assign committeesareaPortletId = "bbmriericcommitteesarea_WAR_BBMRIERICportlet" />
-         <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-         <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, committeesareaPortletId) />
-         <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-            <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-            <#assign temp = portletSetup.store() />
-         </#if>
-         ${theme.runtime(committeesareaPortletId, "", "")}
+<div id="bbmri-eric-member-area-top-toggler">
+   <div class="bbmri-eric-member-area-top-area-expand">
+      <div class="bbmri-eric-member-area-top-area-expand-container">
+         <div class="bbmri-eric-member-area-top-area-expand-container-user-portlet">
+            <#assign userportletPortletId = "bbmriericuser_WAR_BBMRIERICportlet" />
+            <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
+            <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, userportletPortletId) />
+            <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
+               <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
+               <#assign temp = portletSetup.store() />
+            </#if>
+            ${theme.runtime(userportletPortletId, "", "")}
+         </div>
+         <div class="bbmri-eric-member-area-top-area-expand-container-committees">
+            <#assign committeesareaPortletId = "bbmriericcommitteesarea_WAR_BBMRIERICportlet" />
+            <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
+            <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, committeesareaPortletId) />
+            <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
+               <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
+               <#assign temp = portletSetup.store() />
+            </#if>
+            ${theme.runtime(committeesareaPortletId, "", "")}
+         </div>
       </div>
    </div>
-</div>
-<div class="bbmri-eric-member-area-top-area-not-expand">
-   <div class="bbmri-eric-member-area-top-area-not-expand-container">
-      <div class="bbmri-eric-member-area-top-area-not-expand-container-toggle">
+   <div class="bbmri-eric-member-area-top-area-not-expand">
+      <div class="bbmri-eric-member-area-top-area-not-expand-container">
+         <div class="bbmri-eric-member-area-top-area-not-expand-container-toggle">
+         </div>
       </div>
    </div>
 </div>
@@ -93,48 +95,7 @@ ${theme.include(body_top_include)}
 
 <!-- END BBMRI MEMBER Area Top Area -->
 
-<!-- BBMRI Member top menu -->
-<div class="bbmri_eric_header-top-menu">
-	<div class="bbmri_eric_header-top-menu-container">
-		<div class="bbmri_eric_header-top-menu-container-logo">
-			<a href="/web/guest/about"><img alt="BBMRI-ERIC-Logo" height="50px" width="142px" src="/BBMRIERICMember-theme/images/bbmri-logo.png" /></a>
-		</div>
-		<div class="bbmri_eric_header-top-menu-container-menu">
-			Container 1
-		</div>
-		<div class="bbmri_eric_header-top-menu-container-menu">
-			Container 2
-		</div>
-		<div class="bbmri_eric_header-top-menu-container-menu">
-			Container 3
-		</div>
-	</div>
-</div>
 
-<!-- New Header -->
-<div class="bbmri_eric_header-maincontainer">
-	<div class="bbmri_eric_header-maincontainer-inner">
-		<div class="bbmri_eric_header-maincontainer-inner-image">
-		<img alt="BBMRI-ERIC-Logo" height="144px" width="142px" src="/BBMRIERICMember-theme/images/testimage.png" />
-		</div>
-		<div class="bbmri_eric_header-maincontainer-inner-topmenue">
-		Container 1
-		</div>
-		<div class="bbmri_eric_header-maincontainer-inner-topmenue">
-			<#assign locPortletId = "mysitelist_WAR_BBMRIERICportlet" />
-			<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-			<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
-			<#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-				<#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-				<#assign temp = portletSetup.store() />
-			</#if>
-			${theme.runtime(locPortletId, "", "")}
-		</div>
-		<div class="bbmri_eric_header-maincontainer-inner-topmenue">
-			Container 3
-		</div>
-	</div>
-</div>
 <div class="bbmri_eric_header-menucontainer">
 	<div class="bbmri_eric_header-menucontainer-inner">
 		<div class="bbmri_eric_header-menucontainer-inner-float">

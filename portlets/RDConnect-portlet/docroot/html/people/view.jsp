@@ -72,7 +72,7 @@ adduserURL.setParameter("p_p_state", "maximized");
     		</portlet:renderURL>
     		
     		<%
-        	
+    		
         	String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+u.getScreenName()+"&amp;companyId="+u.getCompanyId();
 %>
 			<div class="rdc-people-dispaly"><img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="35" /> 

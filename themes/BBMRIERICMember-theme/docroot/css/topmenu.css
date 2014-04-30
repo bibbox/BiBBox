@@ -173,25 +173,53 @@
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-4-icon {
 	width: 70px;
-	height: 89px;
+	height: 74px;
 	float: left;
-	
 	padding-left: 30px;
+	margin-top: 15px;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-4-text {
 	width: 179px;
-   height: 89px;
+   height: 59px;
    float: left;
+   margin-top: 30px;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-8 {
-   width: 280px;
-   height: 45px;
+   width: 279px;
+   height: 44px;
    float: left;
+   
+   border-color: #FFFFFF;
+   border-style: solid;
+   border-width: 0 1px 1px 0;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-8-icon {
+   width: 43px;
+   height: 40px;
+   float: left;
+   
+   padding-left: 15px;
+   margin-top: 5px;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-8-text {
+   width: 222px;
+   height: 40px;
+   float: left;
+   
+   white-space:nowrap;  
+   overflow:hidden;
+   text-overflow:ellipsis; 
+   
+   margin-top: 5px;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-24 {
-   width: 186px;
-   height: 22px;
+   width: 185px;
+   height: 21px;
    float: left;
+   
+   border-color: #FFFFFF;
+   border-style: solid;
+   border-width: 0 1px 1px 0;
 }
 
 /* ---------- area not expand ----------- */
