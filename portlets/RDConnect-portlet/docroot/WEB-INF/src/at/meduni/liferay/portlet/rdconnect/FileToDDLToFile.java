@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.EmailAddress;
@@ -65,8 +66,7 @@ public class FileToDDLToFile extends MVCPortlet {
 	
 	public void uploadFile(ActionRequest request, ActionResponse response) throws Exception {
 	try {
-		long organisation_id = ParamUtil.getLong(request, "rdc_organisation_id");
-		System.out.println("Organisation_id: " + organisation_id);
+		long organisation_id = ParamUtil.getLong(request, "rdc_organisation");
 		UploadPortletRequest upreq = PortalUtil.getUploadPortletRequest(request);
 		System.out.println(upreq.getFileName("fileupload"));
 		InputStream inputStream = null;
@@ -77,7 +77,7 @@ public class FileToDDLToFile extends MVCPortlet {
 			System.err.println("Error on Reading File"+e.getMessage());
 		}
 		
-		System.out.println(upreq.getContentType("fileupload"));
+		//System.out.println(upreq.getContentType("fileupload"));
 		
 		if(upreq.getFileName("fileupload").endsWith(".csv")) {
 			BufferedReader file = new BufferedReader(new InputStreamReader(inputStream));
@@ -132,59 +132,84 @@ private void readXLSFile(InputStream file, long organizationId) throws IOExcepti
   	  		        while(cellIterator.hasNext()) { 
   	  		            Cell cell = cellIterator.next();
   	  		            headers.put(cellcounter, cell.getStringCellValue());
+  	  		            System.out.println("Header: " + cellcounter + ":" + cell.getStringCellValue());
   	  		            cellcounter++;
   	  		        }
   		        	header = false;
   		        	continue;
   		        }
   		        // Create Fields or Load Fields
+  		        System.out.println("Create Fields or Load Fields");
   		        Cell cell_id = row.getCell(0);
   		        Fields fields;
-  		        if(cell_id.getCellType() != Cell.CELL_TYPE_NUMERIC) {		
-  					fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
-  					DDLRecordLocalServiceUtil.addRecord(
+  		      long record_id = 0;
+  		        if(cell_id == null) {
+  		        	fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
+  					DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
   							serviceContext.getUserId(),
   							serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
   							DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
   							serviceContext);
+  					record_id = record.getRecordId();
+  					System.out.println("0. Create Record with id:" + record.getRecordId());
+  		        } else if(cell_id.getCellType() != Cell.CELL_TYPE_NUMERIC) {		
+  					fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
+  					DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
+  							serviceContext.getUserId(),
+  							serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
+  							DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+  							serviceContext);
+  					record_id = record.getRecordId();
+  					System.out.println("1. Create Record with id:" + record.getRecordId());
   		        } else {
   		        	long record_id_in_table = (long)cell_id.getNumericCellValue();
   		        	if(record_id_list.contains(record_id_in_table)) {
   		        		record_id_list.remove(record_id_in_table);
   		        		fields = DDLRecordLocalServiceUtil.getRecord(record_id_in_table).getFields();
+  		        		record_id = record_id_in_table;
+  		        		System.out.println("3. Record exists with id:" + record_id);
   		        	} else {
   		        		fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
-  		        		DDLRecordLocalServiceUtil.addRecord(
+  		        		DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
   	  							serviceContext.getUserId(),
   	  							serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
   	  							DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
   	  							serviceContext);
+  		        		record_id = record.getRecordId();
+  		        		System.out.println("2. Create Record with id:" + record.getRecordId());
   		        	}
   		        }
   		        //For each row, iterate through each columns
-  		        Iterator<Cell> cellIterator = row.cellIterator();
-  		        while(cellIterator.hasNext()) {
-  		        	if(cellcounter == 0) {
-  		        		cellcounter++;
-  		        		continue;
-  		        	}
+  		        System.out.println("For each row, iterate through each columns");
+  		        for(cellcounter = 1; cellcounter < headers.size(); cellcounter++) {
+  		        	
   		        	Field tmp_field = null;
-  		            Cell cell = cellIterator.next();   
+  		            Cell cell = row.getCell(cellcounter); 
+  		            if(cell == null) {
+  		            	continue;
+  		            }
   		            switch(cell.getCellType()) {
   		                case Cell.CELL_TYPE_NUMERIC:
   		                	tmp_field = new Field(headers.get(cellcounter), cell.getNumericCellValue());
+  		                	System.out.println("Fieldname: " + headers.get(cellcounter) + ", Value: " + cell.getNumericCellValue());
   		                    break;
   		                case Cell.CELL_TYPE_STRING:
   		                	tmp_field = new Field(headers.get(cellcounter), cell.getStringCellValue());
+  		                	System.out.println("Fieldname: " + headers.get(cellcounter) + ", Value: " + cell.getStringCellValue());
+  		                    break;
+  		                default:
+  		                	tmp_field = new Field(headers.get(cellcounter), cell.getStringCellValue());
+  		                	System.out.println("Fieldname: " + headers.get(cellcounter) + ", Value: " + cell.getStringCellValue());
   		                    break;
   		            }
   		            fields.put(tmp_field);
-  		            cellcounter++;
   		        }
-  		        DDLRecordLocalServiceUtil.updateRecord(serviceContext.getUserId(), rdc_rs.getRecordSetId(), true, DDLRecordConstants.DISPLAY_INDEX_DEFAULT, 
+  		        DDLRecordLocalServiceUtil.updateRecord(serviceContext.getUserId(), record_id, true, DDLRecordConstants.DISPLAY_INDEX_DEFAULT, 
   		        		fields, false, serviceContext);
   		    }
   		    file.close();
+  		    //Delete Records
+  		    System.out.println("Delete Records");
   		    for(long record_id_remove : record_id_list) {
   		    	DDLRecordLocalServiceUtil.deleteRecord(record_id_remove);
   		    }
@@ -212,8 +237,9 @@ private Workbook writeXLSFile(long organizationId) throws PortalException, Syste
   			for(String fieldname : fieldnames) {
   				if(!fieldname.equalsIgnoreCase("_fieldsDisplay")) {
 	  				Cell cell = row.createCell(cellnum++);
-	  				String local_filedname = rdc_rs.getDDMStructure().getFieldLabel(fieldname, themeDisplay.getLocale());
-	  				cell.setCellValue(local_filedname);
+	  				//String local_filedname = rdc_rs.getDDMStructure().getFieldLabel(fieldname, themeDisplay.getLocale());
+	  				//cell.setCellValue(local_filedname);
+	  				cell.setCellValue(fieldname);
   				}
   			}
   			

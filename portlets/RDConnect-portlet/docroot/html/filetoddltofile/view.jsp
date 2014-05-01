@@ -19,8 +19,7 @@
 <aui:form action="<%=uploadFileURL%>" enctype="multipart/form-data"
 	method="post" name="fm">
 	<aui:fieldset>
-		<aui:input type="hidden" name="rdc_organisation_idxyz" value="<%= organizationId %>" />
-		<input type="hidden" name="rdc_organisation_id" value="<%= organizationId %>" />
+		<aui:input type="hidden" name="rdc_organisation" value="<%= organizationId %>" />
 		<input type="file" name="fileupload" id="fileupload" size="40" />
 	</aui:fieldset>
 	<br>
