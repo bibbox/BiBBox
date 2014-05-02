@@ -12,30 +12,26 @@
    }
 
    String organizationId_string = String.valueOf(organizationId);
+   
 %>
 
 <portlet:actionURL name='<%="uploadFile"%>' var="uploadFileURL"
 	windowState="normal" />
+<div style="width: 900px;flaot:left;">
 <aui:form action="<%=uploadFileURL%>" enctype="multipart/form-data"
 	method="post" name="fm">
+	<div style="width: 200px;flaot:left;">
 	<aui:fieldset>
 		<aui:input type="hidden" name="rdc_organisation" value="<%= organizationId %>" />
-		<input type="file" name="fileupload" id="fileupload" size="40" />
+		<input type="file" name="fileupload" id="fileupload" size="60" />
 	</aui:fieldset>
-	<br>
-	<br>
+	</div>
+	<div style="width: 200px;flaot:left;">
 	<aui:button-row>
 		<aui:button name="saveButton" type="submit" value="save" />
 	</aui:button-row>
+	</div>
 </aui:form>
-
-<portlet:resourceURL var="fileDownloadURL" id="fileDownload" />
-
-
-</br>
-<!-- <a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_csv" /><portlet:param name="RDCOrganisationId" value="<%=organizationId_string%>" /></portlet:resourceURL>">Download CSV File</a> -->
-<a
-	href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xls" /><portlet:param name="RDCOrganisationId" value="<%=organizationId_string%>" /></portlet:resourceURL>">Download
-	XLS File</a>
-<!-- <a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xlsx" /><portlet:param name="RDCOrganisationId" value="<%=organizationId_string%>" /></portlet:resourceURL>">Download XLSX File</a> -->
-
+</div>
+<portlet:resourceURL var="fileDownloadURL" id="fileDownload" /><a
+	href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xls" /><portlet:param name="RDCOrganisationId" value="<%=organizationId_string%>" /></portlet:resourceURL>">Download Disease Matrix as XLS File</a>

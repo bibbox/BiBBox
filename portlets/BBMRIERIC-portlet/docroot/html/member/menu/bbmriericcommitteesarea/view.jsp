@@ -32,7 +32,7 @@
 			   committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-4\">";
 			   committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-4-icon\">";
 			   String editroleimgpath = request.getContextPath() + "/images/person-icon.png";
-			   committees += "<img id=\"committeelogo\" alt=\"committeelogo\" src=\"" + request.getContextPath() + "/images/committees_big.png\" width=\"50px\" height=\"50px\" />";
+			   committees += "<a href=\"" + url + "\"><img id=\"committeelogo\" alt=\"committeelogo\" src=\"" + request.getContextPath() + "/images/committees_big.png\" width=\"50px\" height=\"50px\" /></a>";
 			   committees += "</div>";
 			   committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-4-text\">";
 			   committees += "<span class=\"bbmri-eric-member-area-top-area-expand-container-committees-4-text-short\"><a href=\"" + url + "\">" + short_title + "</a></span><br>";
@@ -44,7 +44,7 @@
             committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-8\">";
             committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-8-icon\">";
             String editroleimgpath = request.getContextPath() + "/images/person-icon.png";
-            committees += "<img id=\"committeelogo\" alt=\"committeelogo\" src=\"" + request.getContextPath() + "/images/committees_big.png\" width=\"30px\" height=\"35px\" />";
+            committees += "<a href=\"" + url + "\"><img id=\"committeelogo\" alt=\"committeelogo\" src=\"" + request.getContextPath() + "/images/committees_big.png\" width=\"30px\" height=\"35px\" /></a>";
             committees += "</div>";
             committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-8-text\">";
             committees += "<span class=\"bbmri-eric-member-area-top-area-expand-container-committees-8-text-short\"><a href=\"" + url + "\">" + short_title + "</a></span><br>";
@@ -53,11 +53,8 @@
             committees += "</div>";
       }
 		if (number_of_groups == 24) {
-			   if(short_title.length() == 0) {
-				   short_title = long_title;
-			   }
             committees += "<div class=\"bbmri-eric-member-area-top-area-expand-container-committees-24\">";
-            committees += "<a href=\"" + url + "\">" + short_title + "</a>";
+            committees += "<a href=\"" + url + "\">" + long_title + "</a>";
             committees += "</div>";
       }
 		

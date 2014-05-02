@@ -6,6 +6,7 @@
 <%@ page import="com.liferay.portal.model.Group"%>
 <%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.util.PortalUtil"%>
+<%@ page import="com.liferay.portal.model.Phone"%>
 
 <portlet:defineObjects />
 
@@ -29,8 +30,19 @@
    <img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="180" /> 
 </div>
 <div class="bbmri-eric-member-area-top-area-expand-container-user-portlet-user-edit">
-   <%= themeDisplay.getUser().getJobTitle() %><br>
-   <span id="myuseredit" style="cursor:pointer;">Add Position <img style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span><br>
+   <%= themeDisplay.getUser().getEmailAddress() %><span id="myuseredit" style="cursor:pointer;margin-left: 3px;"><img style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span><br>
+<%
+List<Phone> phones = themeDisplay.getUser().getPhones();
+for(Phone phone : phones) {
+	String type = phone.getType().getName();
+	type = type.substring(0, 1).toUpperCase() + type.substring(1);
+%>
+   <%= phone.getType().getName() %>: <%= phone.getNumber() %><br>
+<%
+}
+%>
+   
+   <br>
    <aui:a href="/web/home">Configure Member Area</aui:a><br>
    <aui:a href="<%= themeDisplay.getURLSignOut() %>">Sign Out</aui:a>
 </div>

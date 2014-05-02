@@ -42,25 +42,25 @@
    padding-left: 20px;
    padding-top: 17px;
    
-   border-color: #FFFFFF;
+   border-color: #D9DBDD;
    border-style: solid;
    border-width: 0 1px 1px 1px;
 }
 .bbmri-eric-member-area-top-menue-container-search {
-	width: 279px;
+	width: 280px;
    height: 49px;
    float: left;
    
-   border-color: #FFFFFF;
+   border-color: #D9DBDD;
    border-style: solid;
-   border-width: 0 1px 1px 1px;
+   border-width: 0 1px 1px 0;
 }
 .bbmri-eric-member-area-top-menue-container-committees {
    width: 279px;
    height: 49px;
    float: left;
    
-   border-color: #FFFFFF;
+   border-color: #D9DBDD;
    border-style: solid;
    border-width: 0 0 1px 0;
 }
@@ -88,7 +88,7 @@
 }
 .bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul {
    display: none;
-   background: #5f6975; 
+   background: #BABFC6; 
    border-radius: 0px; 
    padding: 0;
    position: absolute; 
@@ -126,10 +126,10 @@
    height: 180px;
    margin: auto;
    
-   background: -webkit-linear-gradient(left, #F5F7FA , #D1D3D5); /* For Safari 5.1 to 6.0 */
-   background: -o-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Opera 11.1 to 12.0 */
-   background: -moz-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Firefox 3.6 to 15 */
-   background: linear-gradient(to right, #F5F7FA , #D1D3D5); /* Standard syntax */
+   background: -webkit-linear-gradient(left, #FFFFFF , #E4E5E6); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, #FFFFFF, #E4E5E6); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, #FFFFFF, #E4E5E6); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, #FFFFFF , #E4E5E6); /* Standard syntax */
 }
 .bbmri-eric-member-area-top-area-expand-container-user-portlet {
 	width: 439px;
@@ -137,7 +137,7 @@
    margin: auto;
    float: left;
    
-   border-color: #FFFFFF;
+   border-color: #D9DBDD;
    border-style: solid;
    border-width: 0 1px 1px 0;
 }
@@ -149,11 +149,11 @@
 }
 .bbmri-eric-member-area-top-area-expand-container-user-portlet-user-edit {
    width: 239px;
-   height: 160px;
+   height: 170px;
    float: left;
    
    padding-left: 20px;
-   padding-top: 30px;
+   padding-top: 20px;
    
    color: #A4A4A4;
    font-size: 12px;
@@ -175,7 +175,7 @@
    height: 89px;
    float: left;
    
-   border-color: #FFFFFF;
+   border-color: #D9DBDD;
    border-style: solid;
    border-width: 0 1px 1px 0;
 }
@@ -213,7 +213,7 @@
    height: 44px;
    float: left;
    
-   border-color: #FFFFFF;
+   border-color: #D9DBDD;
    border-style: solid;
    border-width: 0 1px 1px 0;
 }
@@ -252,14 +252,14 @@
    width: 182px;
    height: 19px;
    float: left;
-   margin-top: 2px;
-   margin-left: 3px;
+   padding-top: 2px;
+   padding-left: 3px;
    
    white-space:nowrap;  
    overflow:hidden;
    text-overflow:ellipsis; 
    
-   border-color: #FFFFFF;
+   border-color: #D9DBDD;
    border-style: solid;
    border-width: 0 1px 1px 0;
    line-height: 16px;
