@@ -17,6 +17,20 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+//BBMRI-ERIC Update
+//list of all actions inherit by subFolder or Documents
+List<String> supportedActions = new ArrayList<String>();
+supportedActions.add(ActionKeys.ACCESS);
+supportedActions.add(ActionKeys.VIEW);
+supportedActions.add(ActionKeys.UPDATE);
+supportedActions.add(ActionKeys.PERMISSIONS);
+supportedActions.add(ActionKeys.DELETE);
+supportedActions.add(ActionKeys.ADD_DOCUMENT);
+supportedActions.add(ActionKeys.ADD_SHORTCUT);
+supportedActions.add(ActionKeys.ADD_SUBFOLDER);
+supportedActions.add(ActionKeys.ADD_DISCUSSION);
+supportedActions.add(ActionKeys.DELETE_DISCUSSION);
+
 Folder folder = (Folder)request.getAttribute("view.jsp-folder");
 
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
@@ -38,15 +52,66 @@ if ((folder == null) || folder.isSupportsMetadata()) {
 }
 
 boolean hasAddDocumentPermission = DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT);
+
+//BBMRI-ERIC Update
+//permissions of the parrentFolder as a list for all roles
+List<ResourcePermission> parrentFolderPermissions = null;
+try {
+	parrentFolderPermissions = ResourcePermissionLocalServiceUtil.getResourcePermissions(themeDisplay.getCompanyId(),
+		DLFolder.class.getName(),
+		ResourceConstants.SCOPE_INDIVIDUAL,
+		String.valueOf(folderId));
+} catch (Exception e) {
+	   e.printStackTrace();
+}
 %>
 
 <aui:nav-item dropdown="<%= true %>" id="addButtonContainer" label="add">
+
+   <c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
+      <portlet:renderURL var="bbmriericAddFolderURL">
+         <portlet:param name="struts_action" value="/document_library/create_folder_bbmri_eric" />
+         <portlet:param name="redirect" value="<%= currentURL %>" />
+         <portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
+         <portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
+      </portlet:renderURL>
+
+      <aui:nav-item href="<%= bbmriericAddFolderURL %>" iconCssClass="icon-folder-open" label='BBMRI-ERIC-Add Folder' />
+   </c:if>
+         
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
 		<portlet:renderURL var="addFolderURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
+			<%--additional Parameter for Document inheritance --%>
+
+            <%-- set the viewable part of permission input --%>
+            <%
+               for (ResourcePermission rp : parrentFolderPermissions) {
+            %>
+            <c:if test="<%=rp.hasActionId(ActionKeys.VIEW)%>">
+                <portlet:param name="inputPermissionsViewRole" value="<%=RoleLocalServiceUtil.getRole(rp.getRoleId()).getName()%>" />
+            </c:if>
+
+            <%--set checkBoxes --%>
+            <%
+                for (String action : supportedActions) {
+            %>
+            <c:if test="<%=rp.hasActionId(action)%>">
+                <c:if test="<%=RoleLocalServiceUtil.getRole(rp.getRoleId()).getName().equals(RoleConstants.GUEST)%>">
+                    <portlet:param name="guestPermissions" value="<%=action%>" />
+                </c:if>
+                <c:if test="<%=!RoleLocalServiceUtil.getRole(rp.getRoleId()).getName().equals(RoleConstants.GUEST)%>">
+                    <portlet:param name="groupPermissions" value="<%=action%>" />
+                </c:if>
+            </c:if>
+            <%
+                }
+            }
+            %>
+            <%--end of additonal parameters --%>
 		</portlet:renderURL>
 
 		<aui:nav-item href="<%= addFolderURL %>" iconCssClass="icon-folder-open" label='<%= (folder != null) ? "subfolder" : "folder" %>' />
