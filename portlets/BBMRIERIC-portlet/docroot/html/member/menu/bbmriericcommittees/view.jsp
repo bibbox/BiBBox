@@ -6,7 +6,7 @@
 <portlet:defineObjects />
 <div class="bbmri-eric-member-area-top-menue-container-committees-dropdown">
 	<ul>
-		<li>Committees<img src="<%=request.getContextPath()%>/images/arrow.png" height="9px" width="13px" />
+		<li class="bbmri-eric-member-area-top-menue-container-committees-dropdown-ul-li">COMMITTEES<img src="<%=request.getContextPath()%>/images/arrow.png" height="9px" width="13px" />
 			<ul>
 				<% 
 				List<Group> groups = themeDisplay.getUser().getMySiteGroups();

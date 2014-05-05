@@ -27,24 +27,34 @@
    String portletResource = com.liferay.portal.kernel.util.ParamUtil.getString(request, "portletResource");
 
    %>
-   <img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="180" /> 
+   <img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="180px" height="180px" /> 
 </div>
 <div class="bbmri-eric-member-area-top-area-expand-container-user-portlet-user-edit">
-   <%= themeDisplay.getUser().getEmailAddress() %><span id="myuseredit" style="cursor:pointer;margin-left: 3px;"><img style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span><br>
+   <%= themeDisplay.getUser().getEmailAddress() %><br>
 <%
 List<Phone> phones = themeDisplay.getUser().getPhones();
+String tel = "tel: ";
+String mobile = "mobile: ";
 for(Phone phone : phones) {
 	String type = phone.getType().getName();
-	type = type.substring(0, 1).toUpperCase() + type.substring(1);
-%>
-   <%= phone.getType().getName() %>: <%= phone.getNumber() %><br>
-<%
+	if(type.equalsIgnoreCase("business")) {
+		tel += phone.getNumber();
+	}
+	if(type.equalsIgnoreCase("mobile-phone")) {
+		mobile += phone.getNumber();
+	}
+}
+String selected_class = "";
+if(currentURL.startsWith("/web/home")) {
+	selected_class = "bbmri-eric-member-color-yellow";
 }
 %>
-   
+   <%= tel %><br>
+   <%= mobile %><span id="myuseredit" style="cursor:pointer;margin-left: 3px;"><img style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span><br>
    <br>
-   <aui:a href="/web/home">Configure Member Area</aui:a><br>
-   <aui:a href="<%= themeDisplay.getURLSignOut() %>">Sign Out</aui:a>
+   
+   <span class="<%= selected_class %>"><aui:a href="/web/home"><img alt="" src="<%= request.getContextPath() %>/images/intranet_configure.png" width="13px" height="12px" />&nbsp;Configure Member Area</aui:a></span><br>
+   <aui:a href="<%= themeDisplay.getURLSignOut() %>"><img alt="" src="<%= request.getContextPath() %>/images/intranet_logout.png" width="10px" height="13px" />&nbsp;&nbsp;Sign Out</aui:a>
 </div>
 
 <aui:script use="aui-base,event,aui-dialog,aui-dialog-iframe">

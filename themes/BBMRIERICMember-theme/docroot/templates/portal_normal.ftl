@@ -38,14 +38,16 @@ ${theme.include(body_top_include)}
          
       </div>
       <div class="bbmri-eric-member-area-top-menue-container-search">
-         <#assign committeesPortletId = "bbmriericcommittees_WAR_BBMRIERICportlet" />
-         <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-         <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, committeesPortletId) />
-         <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-            <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-            <#assign temp = portletSetup.store() />
+         <#if is_signed_in>
+            <#assign committeesPortletId = "bbmriericcommittees_WAR_BBMRIERICportlet" />
+            <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
+            <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, committeesPortletId) />
+            <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
+               <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
+               <#assign temp = portletSetup.store() />
+            </#if>
+            ${theme.runtime(committeesPortletId, "", "")}
          </#if>
-         ${theme.runtime(committeesPortletId, "", "")}
       </div>
    </div>
 <div>

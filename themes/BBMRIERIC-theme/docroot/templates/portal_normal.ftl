@@ -16,6 +16,9 @@
 
 ${theme.include(body_top_include)}
 
+<#if is_signed_in>
+<#if user_middle_name?starts_with("$")>
+
 <!-- New Header -->
 
 <div class="bbmri_eric_header-maincontainer">
@@ -91,6 +94,9 @@ ${theme.include(body_top_include)}
 		</footer>
 	</div>
 </div>
+
+</#if>
+</#if>
 
 ${theme.include(body_bottom_include)}
 

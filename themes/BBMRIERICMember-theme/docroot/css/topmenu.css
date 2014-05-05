@@ -28,16 +28,22 @@
 }
 .bbmri-eric-member-area-top-menue-container-bbmri-member-logo {
 	width: 160px;
-   height: 47px;
+   height: 41px;
    float: left;
    
    padding-left: 20px;
-   padding-top: 3px;
+   padding-top: 8px;
+   
+   border-color: #D9DBDD;
+   border-style: solid;
+   border-width: 0 0 1px 0;
 }
 .bbmri-eric-member-area-top-menue-container-username {
 	width: 238px;
    height: 32px;
    float: left;
+   
+   color: #64666A;
    
    padding-left: 20px;
    padding-top: 17px;
@@ -66,7 +72,7 @@
 }
 .bbmri-eric-member-area-top-menue-container-committees-dropdown {
    height: 40px;
-   width: 260px;
+   width: 259px;
    float: left;
    list-style: none;
    padding-top: 10px;
@@ -74,12 +80,20 @@
    position: absolute;
    left: 0px;
    top: 0px;
-   color: #96989A;
+   color: #EEF0F4;
+   align: right;
 }
 .aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul {
    float: left;
    list-style: none;
    margin: 0;
+}
+.aui .bbmri-eric-member-area-top-menue-container-committees-dropdown .bbmri-eric-member-area-top-menue-container-committees-dropdown-ul-li {
+   width: 200px;
+   align: right;
+   text-align: right;
+   padding-right: 5px;
+   color: #64666A;
 }
 .aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul:after {
    content: ""; 
@@ -97,17 +111,21 @@
    z-index: 500;
 }
 .bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li {
-   border-top: 1px solid #6b727c;
-   border-bottom: 1px solid #575f6a;
+   border-top: 1px solid #BAC2C9;
+   border-bottom: 1px solid #BAC2C9;
    position: relative;
    float: left;
-   width: 300px;
+   width: 276px;
+   padding-left: 3px;
+   align: left;
+   text-align: left;
 }
 .bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li a {
-   color: #A4A4A4;
+   color: #FFFFFF;
 }
 .aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li a:hover {
-   color: #A4A4A4;
+   color: #FFFFFF;
+   text-decoration:none;
 }
 .bbmri-eric-member-area-top-menue-container-committees-dropdown:hover > ul ul {
    display: block;
@@ -207,6 +225,11 @@
 	color: #A4A4A4;
 	font-size: 12px;
 	text-decoration:none;
+	
+	overflow:hidden;
+   text-overflow:ellipsis;
+   height: 40px;
+   width: 179px;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-8 {
    width: 279px;
@@ -218,15 +241,15 @@
    border-width: 0 1px 1px 0;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-8-icon {
-   width: 43px;
-   height: 40px;
+   width: 45px;
+   height: 30px;
    float: left;
    
    padding-left: 15px;
    margin-top: 5px;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-8-text {
-   width: 221px;
+   width: 215px;
    height: 40px;
    float: left;
    
@@ -242,6 +265,12 @@
    font-size: 12px;
    text-decoration:none;
    font-weight:bold;
+}
+.bbmri-eric-member-area-top-area-expand-container-committees-8-text-long {
+	white-space:nowrap;  
+   overflow:hidden;
+   text-overflow:ellipsis;
+   height: 20px;
 }
 .bbmri-eric-member-area-top-area-expand-container-committees-8-text-long a, .bbmri-eric-member-area-top-area-expand-container-committees-8-text-long a:hover {
    color: #A4A4A4;
@@ -296,4 +325,11 @@
    background: #2C445E;
    border-bottom-right-radius: 5px;
    border-bottom-left-radius: 5px; 
+}
+.bbmri-eric-member-color-yellow, .bbmri-eric-member-color-yellow a {
+	color: #ED660A;
+}
+.bbmri-eric-member-color-yellow a:hover {
+   color: #ED660A;
+   text-decoration:none;
 }
