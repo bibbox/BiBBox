@@ -10,6 +10,13 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	${theme.include(top_head_include)}
+	
+	<#if !is_signed_in>
+	  <#assign canseepage = user_middle_name?starts_with("$") />
+      <#if !canseepage>
+         <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
+      </#if>
+   </#if>
 </head>
 
 <body class="${css_class} bbmri-eric-body">

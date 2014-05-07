@@ -1,6 +1,6 @@
 DELEGATES_PREFERENCE=delegateValidatorList
-USER_BUILD_PREFERENCE=enabledBuildValidatorListorg.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator;org.jboss.tools.common.validation.ValidatorManager;org.eclipse.wst.wsi.ui.internal.WSIMessageValidator;
-USER_MANUAL_PREFERENCE=enabledManualValidatorListorg.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator;org.jboss.tools.common.validation.ValidatorManager;org.eclipse.wst.wsi.ui.internal.WSIMessageValidator;
+USER_BUILD_PREFERENCE=enabledBuildValidatorListorg.eclipse.wst.wsi.ui.internal.WSIMessageValidator;org.jboss.tools.common.validation.ValidatorManager;org.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator;
+USER_MANUAL_PREFERENCE=enabledManualValidatorListorg.eclipse.wst.wsi.ui.internal.WSIMessageValidator;org.jboss.tools.common.validation.ValidatorManager;org.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator;
 USER_PREFERENCE=overrideGlobalPreferencestruedisableAllValidationfalseversion1.2.501.v201311151800
 eclipse.preferences.version=1
 override=true

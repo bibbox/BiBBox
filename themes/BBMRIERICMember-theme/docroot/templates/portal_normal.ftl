@@ -10,9 +10,27 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	${theme.include(top_head_include)}
+	
+	<#if !is_signed_in>
+     <#assign loginpage = themeDisplay.getURLCurrent()?starts_with("/web/home/login") />
+      <#if !loginpage>
+         <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
+      </#if>
+   </#if>
+   
+   <#if is_signed_in>
+      <#if !is_admin>
+         <style>
+            .portlet-borderless-bar {
+               visibility:hidden;
+            }
+         </style>
+      </#if>
+   </#if>
+	
 </head>
 
-<body class="${css_class} bbmri-eric-body">
+<body class="${css_class} bbmri-eric-body custom-background">
 
 ${theme.include(body_top_include)}
 
@@ -51,8 +69,8 @@ ${theme.include(body_top_include)}
       </div>
    </div>
 <div>
-<#if is_signed_in>
    <!-- END BBMRI MEMBER Area Top Menue -->
+<#if is_signed_in>
    <div id="bbmri-eric-member-area-top-toggler">
       <div class="bbmri-eric-member-area-top-area-expand">
          <div class="bbmri-eric-member-area-top-area-expand-container">
@@ -95,6 +113,7 @@ ${theme.include(body_top_include)}
    		</div>
    	</div>
    </div>
+</#if>
    <!-- New Header End -->
    <div class="container-fluid-background">
    	<div class="container-fluid" id="wrapper">
@@ -111,22 +130,7 @@ ${theme.include(body_top_include)}
    		</div>
    	</div>
    </div>
-<#else>
-   
-   <div class="bbmri-eric-member-area-login">
-      <div class="bbmri-eric-member-area-login-container">
-         <#assign loginPortletId = "58" />
-         <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-         <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, loginPortletId) />
-         <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-            <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-            <#assign temp = portletSetup.store() />
-         </#if>
-         ${theme.runtime(loginPortletId, "", "")}
-         
-      </div>
-   </div>
-</#if>
+
 ${theme.include(body_bottom_include)}
 
 ${theme.include(bottom_include)}
