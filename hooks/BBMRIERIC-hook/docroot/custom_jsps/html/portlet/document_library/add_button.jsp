@@ -67,17 +67,6 @@ try {
 %>
 
 <aui:nav-item dropdown="<%= true %>" id="addButtonContainer" label="add">
-
-   <c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
-      <portlet:renderURL var="bbmriericAddFolderURL">
-         <portlet:param name="struts_action" value="/document_library/create_folder_bbmri_eric" />
-         <portlet:param name="redirect" value="<%= currentURL %>" />
-         <portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
-         <portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
-      </portlet:renderURL>
-
-      <aui:nav-item href="<%= bbmriericAddFolderURL %>" iconCssClass="icon-folder-open" label='BBMRI-ERIC-Add Folder' />
-   </c:if>
          
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
 		<portlet:renderURL var="addFolderURL">

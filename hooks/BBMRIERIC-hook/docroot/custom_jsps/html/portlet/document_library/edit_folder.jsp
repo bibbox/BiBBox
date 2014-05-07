@@ -43,7 +43,7 @@ if (workflowEnabled) {
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <portlet:actionURL var="editFolderURL">
-	<portlet:param name="struts_action" value="/document_library/edit_folder_bbmri_eric" />
+	<portlet:param name="struts_action" value="/document_library/edit_folder" />
 </portlet:actionURL>
 
 <liferay-util:buffer var="removeFileEntryTypeIcon">

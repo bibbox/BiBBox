@@ -29,6 +29,7 @@ pageContext.setAttribute("portletURL", portletURL);
 request.setAttribute("view.jsp-tabs1", tabs1);
 %>
 
+
 <liferay-ui:success key="membershipRequestSent" message="your-request-was-sent-you-will-receive-a-reply-by-email" />
 
 <aui:form action="<%= portletURL.toString() %>" method="get" name="fm">
@@ -139,6 +140,11 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
 				rowURL.setWindowState(WindowState.NORMAL);
 			}
+			rowURL = null;
+			
+	      if((group.getType() == GroupConstants.TYPE_SITE_OPEN) || ((group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) && SiteMembershipPolicyUtil.isMembershipAllowed(user.getUserId(), group.getGroupId()) && group.isManualMembership())) {
+	    	  
+	    	  
 			%>
 
 			<liferay-ui:search-container-column-text
@@ -175,6 +181,7 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 
 			userParams.put("inherit", Boolean.TRUE);
 			userParams.put("usersGroups", new Long(group.getGroupId()));
+			
 			%>
 
 			<liferay-ui:search-container-column-text
@@ -202,7 +209,9 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 				align="right"
 				path="/html/portlet/my_sites/site_action.jsp"
 			/>
-
+         <%
+	      }
+         %>
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator />
