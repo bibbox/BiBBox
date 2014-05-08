@@ -121,28 +121,14 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 
 			<%
 			PortletURL rowURL = null;
+			String my_site_url = "";
 
-			if (group.getPublicLayoutsPageCount() > 0) {
-				rowURL = renderResponse.createActionURL();
-
-				rowURL.setParameter("struts_action", "/sites_admin/page");
-				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
-				rowURL.setWindowState(WindowState.NORMAL);
+			if (tabs1.equals("my-sites") && group.getPublicLayoutsPageCount() > 0) {
+				my_site_url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+				
 			}
-			else if (tabs1.equals("my-sites") && (group.getPrivateLayoutsPageCount() > 0)) {
-				rowURL = renderResponse.createActionURL();
-
-				rowURL.setParameter("struts_action", "/sites_admin/page");
-				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
-				rowURL.setWindowState(WindowState.NORMAL);
-			}
-			rowURL = null;
 			
-	      if((group.getType() == GroupConstants.TYPE_SITE_OPEN) || ((group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) && SiteMembershipPolicyUtil.isMembershipAllowed(user.getUserId(), group.getGroupId()) && group.isManualMembership())) {
+	      if((tabs1.equals("my-sites")) || ((group.getType() == GroupConstants.TYPE_SITE_OPEN) || ((group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) && SiteMembershipPolicyUtil.isMembershipAllowed(user.getUserId(), group.getGroupId()) && group.isManualMembership()))) {
 	    	  
 	    	  
 			%>
@@ -154,9 +140,9 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 			>
 
 			<%
-			if (rowURL != null) {
+			if (my_site_url.length() != 0) {
 				buffer.append("<a href=\"");
-				buffer.append(rowURL.toString());
+				buffer.append(my_site_url);
 				buffer.append("\" target=\"_blank\"><strong>");
 				buffer.append(HtmlUtil.escape(group.getDescriptiveName(locale)));
 				buffer.append("</strong></a>");
