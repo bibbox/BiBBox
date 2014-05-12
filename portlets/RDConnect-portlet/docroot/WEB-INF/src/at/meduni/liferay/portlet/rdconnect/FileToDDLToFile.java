@@ -190,7 +190,7 @@ private void readXLSFile(InputStream file, long organizationId) throws IOExcepti
   		            }
   		            switch(cell.getCellType()) {
   		                case Cell.CELL_TYPE_NUMERIC:
-  		                	tmp_field = new Field(headers.get(cellcounter), cell.getNumericCellValue());
+  		                	tmp_field = new Field(headers.get(cellcounter), (long)cell.getNumericCellValue());
   		                	System.out.println("Fieldname: " + headers.get(cellcounter) + ", Value: " + cell.getNumericCellValue());
   		                    break;
   		                case Cell.CELL_TYPE_STRING:
