@@ -14,7 +14,7 @@ long organizationId = 0;
 long userId2 = themeDisplay.getUserId();
 java.util.Date modifieddate = null;
 java.util.TreeMap<java.util.Date, String> sortetdata = new java.util.TreeMap<java.util.Date, String>(Collections.reverseOrder());
-List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(themeDisplay.getCompanyId(), 0);
 for(Organization organization : organizations) {
 	String country = "";
 	modifieddate = organization.getModifiedDate();

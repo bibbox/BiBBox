@@ -1,0 +1,1625 @@
+@import "compass";
+@import "mixins";
+
+@import url(custom_common.css);
+@import url(color_schemes/common.css);
+@import url(color_schemes/dark.css);
+@import url(color_schemes/light.css);
+
+$dockbarGradientEnd: #1273C7;
+$dockbarGradientStart: #118ADE;
+
+$dockbarOpenGradientEnd: #0993DD;
+$dockbarOpenGradientStart: #0EA6F9;
+
+.aui-w60 {
+	width: 59%;
+	float: left;
+}
+.aui-w40 {
+	width: 39%;
+	float: right;
+}
+
+.aui-w100 {
+	width: 100%;
+	float: left;
+}
+
+/* ---------- RDC  import portlet css ---------- */
+/* ---------- RDC hub information ---------- */
+.rdc-portalmenu-div-container-homelogo {
+	height: 16px;
+	width: 19px;
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+	margin-top: 17px;
+}
+.rdc-portalmenu-div-container-logo {
+	height: 40px;
+	width: 40px;
+}
+.rdchubportalinfologo {
+	width: 90px;
+	height: 90px;
+}
+.rdchubportalinfo {
+	width: 100%;
+	height: 90px;
+}
+.rdchubportalinfologo {
+	float: left;
+	width: 90px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+}
+.rdchubportalinfoheader {
+	float: left;
+	width: 891px;
+	height: 59px;
+	padding-left: 15px;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 1px 0;
+}
+.rdchubportalinfosubmenu {
+	float: left;
+	width: 907px;
+	height: 30px;
+}
+/* ---------- RDC  Portal Menu ---------- */
+.rdc-portalmenu-div-container {
+	height: 50px;
+	margin: 0;
+}
+.rdc-portalmenu-div-container-homologocontainer {
+	height: 50px;
+	width: 39px;
+	padding-left: 20px;
+}
+.rdc-portalmenu-div-container-myorganisations {
+	height: 38px;
+	width: 140px;
+	float: left;
+	list-style: none;
+	position: absolute;
+    left: 60px;
+    top: 0px;
+    padding-top: 12px;
+    padding-left: 20px;
+    color: #D7E2D9;
+    border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+}
+.aui .rdc-portalmenu-div-container-myorganisations ul {
+	float: left;
+	list-style: none;
+	margin: 0;
+}
+.aui .rdc-portalmenu-div-container-myorganisations ul:after {
+	content: ""; 
+	clear: both; 
+	display: block;
+}
+.rdc-portalmenu-div-container-myorganisations ul ul {
+	display: none;
+	background: #5f6975; 
+	border-radius: 0px; 
+	padding: 0;
+	position: absolute; 
+	top: 100%;
+	left: 0px;
+	z-index: 500;
+}
+.rdc-portalmenu-div-container-myorganisations ul ul li {
+	border-top: 1px solid #6b727c;
+	border-bottom: 1px solid #575f6a;
+	position: relative;
+	float: left;
+	width: 300px;
+}
+.rdc-portalmenu-div-container-myorganisations ul ul li a {
+	color: #A4A4A4;
+}
+.aui .rdc-portalmenu-div-container-myorganisations ul ul li a:hover {
+	color: #A4A4A4;
+}
+.rdc-portalmenu-div-container-myorganisations:hover > ul ul {
+	display: block;
+}
+.aui input.span9, .aui textarea.span9, .aui .uneditable-input.span9 {
+    width: 170px;
+}
+/* ---------- My User -------- */
+.aui .rdc_portalmenu-myuseraccount-container ul {
+	float: left;
+	list-style: none;
+	margin: 0;
+}
+.aui .rdc_portalmenu-myuseraccount-container ul:after {
+	content: ""; 
+	clear: both; 
+	display: block;
+}
+.rdc_portalmenu-myuseraccount-container ul ul {
+	display: none;
+	background: #5f6975; 
+	border-radius: 0px; 
+	padding: 0;
+	position: absolute; 
+	top: 100%;
+	left: -87px;
+	z-index: 500;
+}
+.rdc_portalmenu-myuseraccount-container ul ul li {
+	border-top: 1px solid #6b727c;
+	border-bottom: 1px solid #575f6a;
+	position: relative;
+	float: left;
+	width: 150px;
+	color: #A4A4A4;
+	padding-left: 5px;
+}
+.rdc_portalmenu-myuseraccount-container ul ul li a {
+	color: #A4A4A4;
+}
+.aui .rdc_portalmenu-myuseraccount-container ul ul li a:hover {
+	color: #A4A4A4;
+}
+.rdc_portalmenu-myuseraccount-container:hover > ul ul {
+	display: block;
+}
+/* ---------- RDC  information ---------- */
+.rdconnect-information-container {
+	width: 818px;
+	height: 180px;
+}
+.rd-heading-shortinformation {
+	width: 648px;
+	height: 127px;
+	float: left;
+	padding: 10px;
+}
+.rd-heading-aktions {
+	width: 149px;
+	height: 149px;
+	float: right;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 0 0 1px;
+}
+.rd-heading-submenue {
+	width: 818px;
+	height: 30px;
+	float: left;
+	background: #FAFAF0;
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 1px 0 0 0;
+}
+/* ---------- RDC  submenue ---------- */
+
+.rdconnect-heading-submenue-rdscore {
+	float: right;
+	width: 149px;
+	text-align: center;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
+}
+.rdconnect-heading-submenue-border {
+	border-color: #8C8A8C;
+	border-style: solid;
+	border-width: 0 1px 0 0;
+	text-align: center;
+}
+
+#rd-heading-submenue a {
+	color: #FFFFFF;
+}
+#rd-heading-submenue a:link {
+	color: #FFFFFF;
+}  /* unvisited link */
+#rd-heading-submenue a:visited {
+	color: #FFFFFF;
+}  /* visited link */
+#rd-heading-submenue a:hover {
+	color: #FFFFFF;
+}  /* mouse over link */
+#rd-heading-submenue a:active {
+	color: #FFFFFF;
+}   /* selected link */
+#rd-heading-submenue a {
+	
+}
+
+#rd-heading-rdlogo {
+	height: 50px;
+}
+
+/* ---------- Menu  styles ---------- */
+#cssmenu ul,
+#cssmenu li,
+#cssmenu span,
+#cssmenu a {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+#cssmenu ul {
+	width: 100%;
+}
+#cssmenu {
+  height: 29px;
+  border-bottom: 1px solid #5f9267;
+  width: auto;
+}
+#cssmenu:after,
+#cssmenu ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+#cssmenu a {
+  color: #000000;
+  display: inline-block;
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  font-size: 12px;
+  line-height: 28px;
+  padding: 0 1px;
+  text-decoration: none;
+}
+#cssmenu ul {
+  list-style: none;
+}
+#cssmenu > ul {
+  float: left;
+}
+#cssmenu > ul > li {
+  float: left;
+}
+#cssmenu > ul > li > a {
+  color: #000000;
+  font-size: 12px;
+}
+#cssmenu > ul > li:hover:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #5f9267;
+  margin-left: -7px;
+}
+#cssmenu > ul > li:first-child > a {
+  border-radius: 5px 0 0 0;
+  -moz-border-radius: 5px 0 0 0;
+  -webkit-border-radius: 5px 0 0 0;
+}
+#cssmenu > ul > li.active:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #5f9267;
+  margin-left: -7px;
+}
+#cssmenu > ul > li.active > a {
+  -moz-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+#cssmenu > ul > li:hover > a {
+  -moz-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+#cssmenu .has-sub {
+  z-index: 1;
+}
+#cssmenu .has-sub:hover > ul {
+  display: block;
+}
+#cssmenu .has-sub ul {
+  display: none;
+  position: absolute;
+  width: 200px;
+  top: 100%;
+  left: 0;
+}
+#cssmenu .has-sub ul li {
+  *margin-bottom: -1px;
+}
+#cssmenu .has-sub ul li a {
+  background: #5f9267;
+  border-bottom: 1px dotted #5f9267;
+  filter: none;
+  font-size: 11px;
+  display: block;
+  line-height: 120%;
+  padding: 10px;
+  color: #000000;
+}
+#cssmenu .has-sub ul li:hover a {
+  background: #a80008;
+}
+#cssmenu .has-sub .has-sub:hover > ul {
+  display: block;
+}
+#cssmenu .has-sub .has-sub ul {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+}
+#cssmenu .has-sub .has-sub ul li a {
+  background: #a80008;
+  border-bottom: 1px dotted #ff0f1b;
+}
+#cssmenu .has-sub .has-sub ul li a:hover {
+  background: #8f0007;
+}
+/* ---------- RDC ID Card ---------- */
+.rdc_idcard_idcaibody-edit-icon-coreddl {
+	position: absolute;
+	right: 70px;
+	top: 160px;
+	z-index: 100;
+}
+.rdc_idcard_idcaibody-edit-icon-coreddl img {
+	width: 10px;
+	height: 10px;
+}
+.rdc_idcard_idcardbody {
+	background-color:#E2E3CE;
+	position:relative;
+	left:16px;
+	top:-32px;
+}
+.rdc_idcard_idcardbodymiddle {
+	background-color:#FFFFFF;
+}
+
+.rdc_idcard_idcardbody {
+	border-radius:25px;
+	box-shadow: 5px 7px 20px rgba(0,0,0,0.2);
+}
+
+.rdc_idcard_idcardbody {
+	height:322px;
+	width:544px;
+}
+.rdc_idcard_idcardbodytop {
+	height:32px;
+	width:100%;
+	padding-top: 24px;
+	font-size:12px;
+}
+.rdc_idcard_idcardbodymiddle {
+	height:116px;
+	width:100%;
+}
+.rdc_idcard_idcardbodybottom {
+	height:150px;
+	width:100%;
+}
+/* ------ RDC Formating ----------- */
+/* ------ RDC Formating top ----------- */
+.rdc_idcard_idcardbodytop-id {
+	margin-left: 40px;
+	float: left;
+	width:106px;
+}
+.rdc_idcard_idcardbodytop-dateofinclution {
+	float: left;
+	width: 216px;
+}
+.rdc_idcard_idcardbodytop-type {
+	float: left;
+	width: 158px;
+}
+/* ------ RDC Formating middle ----------- */
+.rdc_idcard_idcardbodymiddle-logo{
+	margin-left: 26px;
+	margin-top: 20px;
+	float: left;
+	margin-right: 20px;
+}
+.aui .rdc_idcard_idcardbodymiddle img {
+	height:85px;
+}
+.rdc_idcard_idcardbodymiddle-organisationname {
+	font-size: 18px;
+	font-weight:bold;
+	color: #8BBF39;
+	width: 100%;
+	height:116px;
+	display: table-cell;
+	vertical-align: middle;
+}
+/* ------ RDC Formating bottom ----------- */
+.rdc_idcard_idcardbodybottom-shortdescription {
+	width: 436px;
+	height:60px;
+	padding-top: 30px;
+	margin-left: 54px;
+	margin-right: 54px;
+	margin-bottom: 20px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+.rdc_idcard_idcardbodybottom-menue {
+	width: 494px;
+	height:40px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+/* ---------- RDC Formating bottom Menu styles ---------- */
+.rdc_idcard_idcardbodybottom-menue ul {
+	padding: 0;
+	margin: 0;
+}
+.rdc_idcard_idcardbodybottom-menue ul li {
+	padding-top: 4px;
+	padding-left: 4px;
+	list-style: none;
+	float:left;
+	background-color:#F4F4E1;
+	margin: 0 3px;
+	text-align: left;
+	height:36px;
+	font-size:14px;
+	font-weight:bold;
+	line-height: 15px;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation {
+	color:#8BBF39;
+	font-weight: normal;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation-gray {
+	color:#7F7F7F;
+	font-weight: normal;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates {
+	font-weight: normal;
+}
+
+/* ---------- -------------------------- ---------- */
+/* ---------- -------------------------- ---------- */
+/* ---------- RDC Additional Information ---------- */
+.rdc_idcard_idcaibody-edit-icon-websites {
+	position: relative;
+	right: 0px;
+	top: -25px;
+	float: right;
+}
+.rdc_idcard_idcaibody-edit-icon-phone {
+	position: absolute;
+	right: 30px;
+	top: 65px;
+	z-index: 100;
+}
+.rdc_idcard_idcaibody-edit-icon-address {
+	position: absolute;
+	right: 170px;
+	top: 65px;
+	z-index: 100;
+}
+.rdc_idcard_idcaibody-edit-icon-websites img, .rdc_idcard_idcaibody-edit-icon-phone img, .rdc_idcard_idcaibody-edit-icon-address img {
+	width: 10px;
+	height: 10px;
+}
+.rdc_idcard_idcaibody {
+	width: 369px;
+}
+.rdc_idcard_idcaibody-top {
+	width: 100%;
+	height: 35px;
+	margin: 48px 0 30px 0;
+}
+.aui .rdc_idcard_idcaibody-flag img {
+	height: 35px;
+}
+.rdc_idcard_idcaibody-flag {
+	float: left;
+}
+.rdc_idcard_idcaibody-webpage {
+	float: right;
+}
+.rdc_idcard_idcaibody-contactinformation hr {
+  	border-top: 1px dotted #000000;
+  	height: 1px;
+  	width:100%;
+}
+.rdc_idcard_idcaibody-contactinformation-tdfirst {
+	width: 259px;
+}
+.rdc_idcard_idcaibody-contactinformation-tdlast {
+	width: 140px;
+	text-align:right;
+}
+.rdc_idcard_idcaibody-headlines {
+	font-weight:bold;
+	float: left;
+}
+.rdc_idcard_idcaibody-contactname {
+	float: left;
+}
+.rdc_idcard_idcaibody-contactemail {
+	float: left;
+}
+.rdc_idcard_idcaibody-avatar {
+	float:right;
+}
+.aui .rdc_idcard_idcaibody-avatar img {
+	float:right;
+	height: 50px;
+}
+.rdc_coreinformation_organisation-table-images img {
+	width: 60px;
+}
+.avatar{
+	margin-right: 15px;
+}
+.rdc-people-dispaly {
+	margin-bottom: 20px;
+}
+.proposebuttonrow{
+	text-align: right;
+	margin-left: 25px;
+	margin-right: 25px;
+	padding-bottom: 25px;
+}
+.proposeheadline{
+	color: #FFFFFF;
+	margin: 0 0 10px 0;
+	background-color: #377CB5;
+	padding: 3px 0 3px 5px;
+}
+#rdc-candidate-propose {
+	margin: 0;
+	background-color: #F4F4E1;
+	width:100%;
+}
+.proposelayout{
+	margin-left: 25px;
+	margin-right: 25px;
+}
+div.portlet-body{
+	min-width:1000px;
+	max-width:1200px;
+}
+div.proposerequired{
+	width:16px;
+	display: inline;
+	background-image: url('../images/required.png');
+	background-repeat: no-repeat;
+}
+img.proposerequired{
+	float: left;
+	display: inline;
+}
+span.proposerequired{
+	float: left;
+	display: inline;
+}
+input.propose{
+	max-width: 600px;
+	width:85%;
+}
+textarea.propose{
+	width:85%;
+}
+.aui .rdc-candidate-table .table {
+	font-size: small;
+}
+.rdc-candidate-table .candidate-table-candidateId {
+	width:35px;
+	padding: 4px;
+}
+.rdc-candidate-table .candidate-table-name {
+	width:450px;
+	patting: 4px;
+}
+.rdc-candidate-table .candidate-table-country {
+	width:90px;
+	padding: 4px;
+}
+.rdc-candidate-table .candidate-table-candidatetype {
+	width:85px;
+	padding: 4px;
+}
+.rdc-candidate-table .candidate-table-source {
+	width:95px;
+	padding: 4px;
+}
+.rdc-candidate-table .candidate-table-editsub {
+	width:170px;
+	padding: 4px;
+}
+.aui .rdc-candidate-table .table th, .aui .table td {
+    padding: 4px;
+} 
+.aui .rdc-filter-form select {
+	width:120px;
+}
+.tooltip-help {
+    z-index: 500 !important; 
+}
+.rdc-filter-name-help {
+	width:28px;
+	height: 24px;
+    color: #8BBF39;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+  	background: #377CB5;
+  	border-bottom: 2px solid #8BBF39;
+}
+.aui .rdc-filter-button {
+	margin-left: 5px;
+	margin-top: 5px;
+}
+.candidate-table-namecontainer {
+	width:408px;
+}
+.rdc-table-nameentry{
+	width:400px;
+}
+.rdc-table-nameentry-name {
+	font-size:14px;
+	line-height: 14px;
+	width:400px;
+}
+.rdc-table-nameentry-diseases {
+	font-size:11px;
+	line-height: 11px;
+	width:400px;
+}
+.rdc-table-nameentry-contact {
+	font-size:11px;
+	line-height: 11px;
+	width:400px;
+	font-style:italic;
+}
+.rdc-table-candidatetype {
+	width:150px;
+}
+.rdc-table-candidatetype-type {
+	width:150px;
+	font-size:14px;
+	line-height:14px;
+}
+.rdc-table-candidatetype-subtype {
+	width:150px;
+	font-size:11px;
+	line-height:11px;
+	font-style:italic;
+}
+.rdc-table-state-publisched {
+	font-size:14px;
+	line-height: 14px;
+	width:20px;
+}
+/* ---------- RDC  import portlet css ---------- */
+
+.aui-w60 {
+	width: 59%;
+	float: left;
+}
+.aui-w40 {
+	width: 39%;
+	float: right;
+}
+
+.aui-w100 {
+	width: 100%;
+	float: left;
+}
+
+/* ---------- RDC  header ---------- */
+.rdconnect-header-container-idcard {
+	height: 356px;
+	width: 100%;
+	margin: 48px 0 0 0;
+	padding: 0;
+}
+.rdconnect-header-container-top {
+	height: 50px;
+	width: 100%;
+	background-image:url('@theme_image_path@/leiste_neu.png');
+	background-repeat:repeat-x;
+}
+.rdconnect-header-container-bottom {
+	height: 356px;
+	width: 100%;
+}
+.rdconnect-header-container-inner {
+	width: 1000px;
+	margin: auto;
+}
+.rdconnect-header-container-inner-idcard {
+	height: 356px;
+	width: 1000px;
+	margin: auto;
+	background-color:#FFFFFF;
+	box-shadow: 10px 0 20px rgba(90,90,90,0.15);
+}
+.rdconnect-header-container-top-rdlogo {
+	width: 178px;
+	border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	float: left;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+}
+.rdconnect-header-container-top-rdlogo img {
+	height: 27px;
+   width: 168px;
+   margin: 12px 6px 11px 6px;
+}
+.rdconnect-header-container-top-menue {
+	width: 818px;
+	float: left;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+}
+.rdconnect-header-container-bottom-grouplogo {
+	width: 599px;
+	height: 180px;
+	float: left;
+	background-color:#FFFFFF;
+}
+.rdconnect-header-container-bottom-portalinformation {
+	width: 399px;
+	height: 180px;
+	background-color:#FFFFFF;
+	float: left;
+}
+/* ---------- RDC  styles ---------- */
+.aui form {
+    margin: 0;
+}
+#logo-rdconnect-Public {
+	position:absolute;
+	left: 50px;
+	top: 11px;
+	width: 300px;
+	clear: both;
+	z-index: 400;
+}
+.lfr-translation-manager {
+	display: none;
+}
+.aui body {
+	background-color:#F4F4E1;
+}
+#footer a {
+	color: #303030;
+}
+#rdheading {
+	/*background: #303030;*/
+	height: 220px;
+	border-color: #5f9267;
+	border-style: solid;
+	border-width: 1px;
+	margin-top: 0;
+	clear: both;
+}
+
+#rdlogo {
+	margin-left: 40px;
+	width: 230px;
+	float:left;
+}
+#rdtitle {
+	height: 30px;
+}
+#rdnavigationmysites
+ {
+	height: 30px;
+	float: left;
+}
+
+/* ---------- RDC Layout  styles ---------- */
+div.portlet-body {
+    max-width: 1200px;
+    min-width: 100px;
+}
+#rd-header-signin {
+	float: right;
+	margin: 30px;
+}
+.rd-connect-column-1 {
+	width: 178px;
+	height: 228px;
+	float: left;
+	border-color: #5f9267;
+	border-style: solid;
+	border-width: 1px;
+}
+/*.rd-connect-column-1 {
+	width: 180px;
+	height: 180px;
+	float: left;
+	background: #303030;
+}*/
+.rd-connect-column-2 {
+	width: 818px;
+	height: 48px;
+	float: left;
+	border-color: #5f9267;
+	border-style: solid;
+	border-width: 1px;
+}
+.rd-connect-column-3 {
+	width: 818px;
+	height: 178px;
+	float: left;
+	border-color: #5f9267;
+	border-style: solid;
+	border-width: 1px;
+}
+.rd-connect-column-4 {
+	width: 590px;
+	float: left;
+}
+.rd-connect-column-4-w100 {
+	width: 1000px;
+	float: left;
+}
+.rd-connect-column-5 {
+	width: 410px;
+	float: left;
+}
+#wrapper {
+	width: 1000px;
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+	padding: 0;
+	background: #FFFFFF;
+	box-shadow: 10px 20px 20px rgba(90,90,90,0.15);
+}
+.aui .portlet-borderless-container {
+    padding: 0;
+    
+}
+
+.aui .portlet, .aui .portlet-borderless-container {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- Base styles ---------- */
+
+.aui {
+	.separator {
+		border-color: #BFBFBF transparent #FFF;
+		border-style: solid;
+		border-width: 1px 0;
+	}
+
+	#wrapper {
+		position: relative;
+	}
+
+	.site-title {
+		a:hover {
+			text-decoration: none;
+		}
+
+		.site-name {
+			display: inline-block;
+		}
+	}
+
+	#skip-to-content:focus {
+		clip: rect(auto auto auto auto);
+		margin-top: 35px;
+		right: 5px;
+		z-index: 200;
+	}
+
+	#sign-in {
+		background: url(@theme_image_path@/common/key.png) no-repeat 3px 50%;
+		font-weight: bold;
+		padding: 5px 5px 5px 25px;
+		position: absolute;
+		right: 10px;
+		top: 10px;
+	}
+
+	.redirected-to-message {
+		margin-right: 10px;
+
+		a {
+			background: #ECFBFF;
+			border: 1px solid #ADE5FA;
+			color: #8D8D8D;
+			padding: 5px;
+		}
+	}
+
+	.site-navigation {
+		margin-bottom: 6px;
+	}
+
+	.taglib-portal-message {
+		margin-bottom: 0;
+	}
+
+	/* ---------- Dockbar ---------- */
+
+	.dockbar {
+		&.navbar {
+			.nav {
+				li {
+					&.dropdown {
+						&.active {
+							.dropdown-toggle {
+								background-color: transparent;
+
+								&:hover {
+									color: #FFF;
+								}
+							}
+						}
+
+						&.staging-toggle .dropdown-menu {
+							background-color: #55B8EC;
+						}
+					}
+				}
+
+				> li {
+					> a {
+						margin: 0 5px 0 0;
+						padding: 6px 10px;
+
+						&:hover {
+							background-color: #2FA4F5;
+						}
+					}
+				}
+			}
+		}
+
+		.info-button {
+			top: 9px;
+
+			a {
+				margin-top: -4px;
+
+				&:hover {
+					color: #FFF;
+				}
+			}
+		}
+
+		.staging-bar {
+			.staging-toggle {
+				color: #FFF;
+
+				li a {
+					color: #FFF;
+					font-weight: 300;
+					text-decoration: none;
+				}
+
+				.btn-link {
+					color: #FFF;
+					font-size: 12px;
+				}
+			}
+		}
+
+		.page-customization-bar .btn {
+			border-color: transparent;
+
+			&:hover, &:focus {
+				background: transparent;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.dockbar, .dockbar-split .dockbar {
+		.navbar-inner {
+			background-color: $dockbarGradientStart;
+
+			@include background-image(linear-gradient($dockbarGradientStart 0%, $dockbarGradientStart 47%, $dockbarGradientEnd 100%));
+
+			.nav {
+				> li {
+					background-color: $dockbarGradientStart;
+
+					@include background-image(linear-gradient($dockbarGradientStart 0%, $dockbarGradientStart 47%, $dockbarGradientEnd 100%));
+				}
+			}
+		}
+	}
+
+	.dockbar-split .dockbar {
+		.info-button {
+			top: 9px;
+		}
+
+		.navbar-inner {
+			.nav-account-controls {
+				border-top: 1px solid #00AEFF;
+
+				&.nav-account-controls-notice {
+					margin-top: 10px;
+					top: 50px;
+				}
+			}
+
+			.nav-add-controls {
+				background: transparent;
+				border-top-width: 0;
+
+				&.nav-add-controls-notice {
+					top: 70px;
+				}
+
+				> li {
+					background-color: transparent;
+
+					@include background-image(none);
+
+					> a {
+						background: #45CBF5;
+						line-height: inherit;
+						padding: 6px 8px;
+
+						@include respond-to(phone, tablet) {
+							background: transparent;
+						}
+
+						&:hover {
+							background: #5BBAE8;
+						}
+
+						&.toggle-controls-link {
+							background: #92F545;
+
+							@include respond-to(phone, tablet) {
+								background: transparent;
+							}
+						}
+					}
+				}
+			}
+
+			.page-customization-bar {
+				background-color: #6DA4E4;
+				background-color: rgba(109, 168, 228, 0.9);
+				line-height: 20px;
+			}
+
+			.page-customization-bar-text {
+				height: 43px;
+			}
+
+			.staging-bar {
+				margin: 6px 0;
+
+				> li {
+					background: transparent;
+				}
+			}
+		}
+	}
+
+	/* ---------- Main navigation ---------- */
+
+	#navigation {
+		.add-page-editor {
+			input {
+				margin-top: 0;
+			}
+		}
+
+		.brand {
+			padding: 0;
+			padding-right: 20px;
+			margin-left: 0;
+
+			img {
+				height: 40px;
+				width: auto;
+			}
+		}
+
+		.nav {
+			li {
+				&.dropdown {
+					> .dropdown-toggle {
+						.caret {
+							border-bottom-color: #FFF;
+							border-top-color: #FFF;
+						}
+					}
+				}
+
+				&.open {
+					> a {
+						background-color: #A3A3A3;
+						color: #FFF;
+					}
+				}
+
+				&.active > a {
+					background-color: $dockbarGradientStart;
+				}
+			}
+
+			> li > a {
+				padding: 4px 15px 5px;
+			}
+
+			.dropdown-menu {
+				background: #00ACFF;
+				border-width: 0;
+				margin: 0;
+
+				&:after, &:before {
+					border-width: 0;
+				}
+
+				a {
+					color: #FFF;
+
+					&:hover {
+						background: none;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+		.navbar-inner {
+			background: #555;
+			border-width: 0;
+			min-height: 36px;
+
+			li a {
+				color: #FFF;
+			}
+		}
+	}
+
+	.modify-pages .delete-tab {
+		background: #555;
+		border: 2px solid #FFF;
+		color: #FFF;
+		font-size: 16px;
+		padding: 4px;
+		right: -10px;
+		top: 0;
+		z-index: 300;
+	}
+
+	/* ---------- Breadcrumbs ---------- */
+
+	.breadcrumb {
+		background-color: #FAFAFA;
+	}
+
+	#breadcrumbs {
+		margin-bottom: 45px;
+
+		.breadcrumb {
+			margin-bottom: 0;
+		}
+	}
+
+	/* ---------- Portlet wrapper and icons ---------- */
+
+/* ---------- Portlet Headers ---------- */
+
+	.portlet-content, .portlet-minimized .portlet-content-container {
+		padding: 12px 30px 10px;
+	}
+
+	.portlet-topper {
+		background: #FFFFFF;
+		color: #8BBF39;
+		padding: 0;
+		margin-left: 30px;
+		margin-right: 30px;
+		border-bottom: 1px dotted #000000;
+
+		.portlet-title {
+			font-size: 1.5em;
+			font-weight: bold;
+			line-height: 1.6;
+			margin: 0;
+			padding: 10px 0 0 0;
+
+			i, span img {
+				display: none;
+			}
+		}
+
+		.portlet-topper-toolbar {
+			font-size: 0.8em;
+			margin: -10px 0 0;
+			padding: 0;
+			right: 10px;
+			top: 50%;
+		}
+	}
+
+	.lfr-configurator-visibility .portlet-topper {
+		background-color: #A9A9A9;
+	}
+
+	.portlet-borderless-bar .portlet-options {
+		.dropdown-toggle {
+			background-image: url(../images/portlet/options_borderless.png);
+		}
+	}
+
+	.signed-in.controls-visible .portlet-title {
+		padding-right: 80px;
+	}
+
+	.portlet-asset-publisher .asset-content, .portlet-asset-publisher .asset-summary, .portlet-asset-publisher .asset-title, .portlet-asset-publisher .header-title, .portlet-asset-publisher li.title-list, .portlet-blogs .entry-body, .portlet-blogs .entry-title, .portlet-blogs .header-title, .portlet-journal-content .journal-content-article, .portlet-message-boards .header-title, .portlet-message-boards .thread-body {
+		@include hyphenation;
+	}
+
+	.portlet-icons {
+		float: none;
+	}
+
+	.page-maximized .portlet-icons {
+		font-size: 11px;
+	}
+
+	.dropdown-menu > li.portlet-close > a {
+		color: #C00;
+		font-weight: bold;
+
+		&:focus, &:hover {
+			background-color: #C00;
+			background-image: none;
+			color: #FFF;
+		}
+	}
+	
+	.portlet-title {
+    	padding: 0;
+	}
+
+	/* ---------- Set password reminder portlet ---------- */
+
+	.update-reminder-query {
+		.control-group {
+			max-width: 350px;
+		}
+
+		.reminder-query-answer {
+			height: 30px;
+			width: 100%;
+		}
+
+		.reminder-query-question {
+			width: 100%;
+		}
+	}
+
+	/* ---------- Staging bar ---------- */
+
+	.navbar-inner .nav.staging-bar {
+		border-top-width: 0;
+		position: static;
+
+		li {
+			.page-variations {
+				display: inline-block;
+				margin-left: 8px;
+
+				a {
+					text-decoration: none;
+				}
+			}
+		}
+
+		li.dropdown {
+			position: static;
+		}
+	}
+
+	.portlet-staging-bar {
+		.row-fluid .layout-revision-info {
+			.layout-revision-version {
+				label {
+					color: #B6DDF5;
+				}
+			}
+		}
+
+		.label-submit {
+			background-color: #469DE3;
+		}
+
+		.layout-branch-selector, .layout-set-branch-selector {
+			.icon-caret-down {
+				background-color: #469DE3;
+			}
+		}
+
+		.page-variations-options, .site-pages-variation-options {
+			.lfr-icon-menu {
+				background-color: #50AFE9;
+
+				.icon-globe, .icon-file {
+					background-color: #469DE3;
+				}
+			}
+		}
+	}
+
+	/* ---------- Footer ---------- */
+
+	#footer {
+		text-align: center;
+		border-color: #8C8A8C;
+		border-style: solid;
+		border-width: 1px 0 0 0;
+		background: #FAFAF0;
+	}
+
+	/* ---------- Hudcrumbs ---------- */
+
+	.lfr-hudcrumbs {
+		position: fixed;
+		top: 0;
+		z-index: 300;
+
+		.breadcrumb {
+			background: #414445;
+			background: rgba(0, 0, 0, 0.8);
+
+			li {
+				a, span {
+					color: #FFF;
+				}
+			}
+		}
+	}
+
+	/* ---------- Miscellaneous ---------- */
+
+	.lfr-panel-container {
+		background-color: transparent;
+	}
+
+	.lfr-portlet-title-editable-content .field {
+		display: inline;
+		float: none;
+	}
+
+	.portlet-journal-content .lfr-icon-actions {
+		margin-bottom: 3px;
+	}
+
+	/* ---------- Extras ---------- */
+
+	#navigation {
+		.nav {
+			li {
+				&.open {
+					> a {
+						@include box-shadow(none);
+					}
+				}
+			}
+
+			.dropdown-menu {
+				@include border-radius(0);
+			}
+
+			> .active > a {
+				background-color: $dockbarGradientStart;
+
+				@include background-image(linear-gradient($dockbarGradientStart 0%, $dockbarGradientStart 47%, $dockbarGradientEnd 100%));
+				@include box-shadow(none);
+				@include filter-gradient($dockbarGradientStart, $dockbarGradientEnd, vertical);
+			}
+		}
+
+		.navbar-inner {
+			@include border-radius(0);
+			@include box-shadow(none);
+
+			li a {
+				@include text-shadow(none);
+			}
+		}
+	}
+
+	.update-reminder-query .reminder-query-answer {
+		@include box-sizing(border-box);
+	}
+
+	.modify-pages .delete-tab {
+		@include border-radius(50%);
+		@include text-shadow(none);
+		@include transition(opacity 0.3s ease);
+
+		&:hover {
+			@include box-shadow(0 1px 1px -1px #000);
+		}
+	}
+
+	%portlet-action-bar-custom {
+		@include border-radius(20px);
+		@include box-shadow(inset 0 1px 3px #000);
+	}
+
+	.portlet-borderless-bar {
+		@extend %portlet-action-bar-custom;
+	}
+
+	.portlet-content, .portlet-minimized .portlet-content-container {
+		@include border-radius(0 0 3px 3px);
+	}
+
+	.portlet-content {
+		.lfr-icon-actions {
+			@extend %portlet-action-bar-custom;
+		}
+	}
+
+	.portlet-minimized {
+		.portlet-content {
+			border-width: 0;
+		}
+
+		.portlet-topper {
+			@include border-radius(3px);
+		}
+	}
+
+	.portlet-nested-portlets .portlet-body {
+		.portlet, .portlet-borderless-container {
+			@include box-shadow(none);
+		}
+	}
+
+	.portlet-topper {
+		@include border-radius(3px 3px 0 0);
+	}
+
+	.dockbar .staging-bar .staging-toggle > a {
+		@include border-radius(3px);
+	}
+
+	.dockbar-split .dockbar {
+		.navbar-inner {
+			@include box-shadow(none);
+			@include text-shadow(none);
+
+			@include respond-to(phone, tablet) {
+				background-color: $dockbarGradientStart;
+
+				@include background-image(linear-gradient($dockbarGradientStart, $dockbarGradientEnd));
+			}
+
+			.nav {
+				li.dropdown.open {
+					> .dropdown-toggle {
+						background-color: $dockbarOpenGradientStart;
+
+						@include background-image(linear-gradient($dockbarOpenGradientStart, $dockbarOpenGradientEnd));
+						@include box-shadow(none);
+					}
+				}
+
+				li.dropdown.active {
+					> .staging-link.dropdown-toggle {
+						background-color: #55B8EC;
+						background-image: none;
+					}
+				}
+			}
+		}
+	}
+
+	.lfr-hudcrumbs {
+		ul {
+			@include border-top-left-radius(0);
+			@include border-top-right-radius(0);
+		}
+
+		.breadcrumb li {
+			a, span {
+				@include text-shadow(-1px -1px #000);
+			}
+		}
+	}
+
+	/* ---------- IE8 ---------- */
+
+	&.ie8 {
+		.dockbar-split .dockbar .navbar-inner .info-button a {
+			margin-top: -2px;
+		}
+	}
+}
+/* --------- Portalmenu Searchfield -------------*/
+.rdc_portalmenu-myuseraccount-container {
+	position: absolute;
+    top: 0;
+    right: 0px;
+    width: 36px;
+    height: 38px;
+    padding-top: 12px;
+    padding-left: 24px;
+    
+    border-color: #000000;
+	border-style: solid;
+	border-width: 0 1px 0 1px;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+	box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+}
+.aui .rdc_portalmenu-search-input {
+	position: absolute;
+    top: 0;
+    left: 235px;
+	width: 505px;
+	height: 45px;
+	padding-top: 5px;
+}
+.aui .rdc_portalmenu-search-input input {
+	background-color: rgba(0,0,0,0.25);
+	color: #FFFFFF;
+	border-color: #1B1B1B #404040 #404040 #1B1B1B;
+	margin-top: 5px;
+	width: 495px;
+}
+.rdc_portalmenu-search-input-lupe {
+	position: absolute;
+	right: 2px;
+	top: 13px;
+	z-index: 100;
+}
+.rdc_portalmenu-search-input-lupe-img {
+	opacity:0.5;
+	filter:alpha(opacity=50); /* For IE8 and earlier */
+}
+.aui .rdc_coreinformation_organisation-table-images img {
+	margin-right: 30px;
+}
+.rdc_coreinformation_organisation-table-images {
+	width: 100%;
+}
+.rdc_coreinformation_organisation-table-images-bottomborder {
+	border-color: #CCCCCC;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	padding-bottom: 10px;
+}
+.aui .portlet-dynamic-data-list-display select, .aui .portlet-dynamic-data-list-display input, .aui textarea, .aui .portlet-dynamic-data-list-display .uneditable-input {
+	width: 500px;
+}

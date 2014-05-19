@@ -19,16 +19,7 @@
 ${theme.include(body_top_include)}
 
 <#if is_signed_in>
-	<#if user_id == 124556>
-		<@liferay.dockbar />
-	</#if>
-	<#if user_id == 32810>
-		<@liferay.dockbar />
-	</#if>
-	<#if user_id == 22987>
-		<@liferay.dockbar />
-	</#if>
-	<#if user_id == 23771>
+	<#if is_admin>
 		<@liferay.dockbar />
 	</#if>
 </#if>
