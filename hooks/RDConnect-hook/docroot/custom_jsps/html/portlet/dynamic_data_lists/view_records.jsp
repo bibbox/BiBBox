@@ -60,7 +60,7 @@ portletURL.setParameter("recordSetId", String.valueOf(recordSet.getRecordSetId()
 	}
 
 	if (editable) {
-		headerNames.add("status");
+		//headerNames.add("status");
 		headerNames.add("modified-date");
 		headerNames.add("author");
 		headerNames.add(StringPool.BLANK);
@@ -81,7 +81,7 @@ portletURL.setParameter("recordSetId", String.valueOf(recordSet.getRecordSetId()
 						<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
 					</portlet:renderURL>
 
-					<aui:nav-item href="<%= addRecordURL %>" iconCssClass="icon-plus" label='<%= LanguageUtil.format(pageContext, "add-x", HtmlUtil.escape(ddmStructure.getName(locale))) %>' />
+					<aui:nav-item href="<%= addRecordURL %>" iconClass="icon-plus" label='<%= LanguageUtil.format(pageContext, "add-x", HtmlUtil.escape(ddmStructure.getName(locale))) %>' />
 				</c:if>
 			</aui:nav>
 
@@ -133,7 +133,7 @@ portletURL.setParameter("recordSetId", String.valueOf(recordSet.getRecordSetId()
 			}
 
 			if (editable) {
-				row.addStatus(recordVersion.getStatus(), recordVersion.getStatusByUserId(), recordVersion.getStatusDate(), rowURL);
+				//row.addStatus(recordVersion.getStatus(), recordVersion.getStatusByUserId(), recordVersion.getStatusDate(), rowURL);
 				row.addDate(record.getModifiedDate(), rowURL);
 				row.addText(HtmlUtil.escape(PortalUtil.getUserName(recordVersion)), rowURL);
 

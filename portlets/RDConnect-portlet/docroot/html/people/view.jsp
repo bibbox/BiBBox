@@ -81,14 +81,16 @@ adduserURL.setParameter("p_p_state", "maximized");
 			<% 
 			if(biobankregistryownerrole || portaleditorrole) { 
 				if(u.getUserId() == themeDisplay.getUserId()) { %>
-					<a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
-					<% if(portaleditorrole) { %>
-						<img id="myuseredit" style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editroleimgpath %>" width="10px" height="10px" />
+					<!--  <a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
+					
+					--><% if(portaleditorrole) { %>
+						<img id="myuseredit" style="cursor:pointer;width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" />
 					<% } %>
 			<% } else { %>
-					<a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
+					<!-- <a href="<%= edituserrollURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
+					-->
 					<% if(portaleditorrole) { %>
-						<a href="<%= editusersURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editroleimgpath %>" width="10px" height="10px" /></a>
+						<a href="<%= editusersURL.toString() %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></a>
 					<% } %>
 			<% 
 				}

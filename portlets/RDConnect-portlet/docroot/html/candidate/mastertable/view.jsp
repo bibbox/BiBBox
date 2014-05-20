@@ -47,7 +47,7 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 <aui:form name="filterform" action="<%= filterCandidatesURL.toString() %>" method="post" >
 <aui:fieldset  column="true">
 <div style="float:left;">
-<aui:input name="name" label="Name/Disease/Subtype:" size="90" value="<%= name %>" />
+<aui:input name="name" label="Keyword:" size="90" value="<%= name %>" />
 </div>
 <div style="float:left;">
 <aui:select name="country" label="Country:" cssClass="rdc-filter-input" >
@@ -67,13 +67,14 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 	<% } %>
 </aui:select>
 </div>
-<div style="float:left;">
+<%--  <div style="float:left;">
 	<aui:select name="state" label="State:" cssClass="rdc-filter-input" >
 				<aui:option value="all" selected='<%= state.equalsIgnoreCase("all") ? true : false %>' >all</aui:option>
 				<aui:option value="1" selected='<%= state.equalsIgnoreCase("1") ? true : false %>' >not published</aui:option>
 				<aui:option value="P" selected='<%= state.equalsIgnoreCase("P") ? true : false %>' >published</aui:option>
 	</aui:select>
-</div>
+</div> --%>
+
 <div style="float:left;">
 <aui:button-row>
 <aui:button name="filter" type="submit" value="filter" label="Filter"  cssClass="rdc-filter-button" />
@@ -163,11 +164,7 @@ for(Role role : themeDisplay.getUser().getRoles()) {
 	path="/html/candidate/mastertable/candidatemastertable_types.jsp"
 	cssClass="candidate-table-namecontainer"
 />
-<liferay-ui:search-container-column-jsp
-	align="right" 
-	path="/html/candidate/mastertable/candidatemaster_state.jsp"
-	cssClass="candidate-table-state"
-/>
+
 <%
 if(portaleditorrole) {
 %>
@@ -196,8 +193,5 @@ searchContainer.setIteratorURL(portletURL);    %>
 		var nodeObject = A.all('#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-4');
 		nodeObject.setHTML('Type');
 	});
-	AUI().use('node', function(A){
-		var nodeObject = A.all('#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-5');
-		nodeObject.setHTML('State');
-	});
+	
 </aui:script>
