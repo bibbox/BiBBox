@@ -92,7 +92,7 @@ for(Organization o : organisations) {
 <% String searchurl1 = themeDisplay.getURLPortal()+"/web/guest/search"; %>
 <aui:form name="filterform" action="<%= searchurl1 %>" method="get" >
 <!-- <aui:input name="name" label="" size="190" /> -->
-<input type="text" placeholder="What are you looking for?" value="<%= keywords %>" name="SEARCH" size="190">
+<input type="text" placeholder="search by: Disease Name, Gene, ORPHACODE,  ICD10, OMIM" value="<%= keywords %>" name="SEARCH" size="190">
 </aui:form>
 <% String imgLupePath = request.getContextPath() + "/images/search.png"; %>
 <div class="rdc_portalmenu-search-input-lupe"><img class="rdc_portalmenu-search-input-lupe-img" alt="logo" height="19px" width="20px" src="<%= imgLupePath %>" /></div>

@@ -31,13 +31,12 @@ ${theme.include(body_top_include)}
 <div class="bbmri_eric_header-maincontainer">
 	<div class="bbmri_eric_header-maincontainer-verlauf">
 		<div class="bbmri_eric_header-maincontainer-verlauf-inner">
-			<img  alt="${logo_description}" height="321px" src="/BBMRIERIC-theme/images/01_header_title.png" width="1200px" >
+			<img  alt="${logo_description}" height="215px" src="/BBMRIERIC-theme/images/BBMRI-ERIC_new_header_image.png" width="1200px" >
 		</div>
 	</div>
 	<div class="bbmri_eric_header-innercontainer">
 		<div class="bbmri_eric_header-logo">
 			<div class="bbmri_eric_header-logo-floating">
-				<!--<img  alt="${logo_description}" height="100px" src="/BBMRIERIC-theme/images/bbmri_eric_logo.png" width="320px" >-->
 			</div>
 		</div>
 	</div>
@@ -55,6 +54,9 @@ ${theme.include(body_top_include)}
 	<div class="bbmri_eric_header-submenucontainer">
 		<div class="bbmri_eric_header-submainmenu">
 			<div class="bbmri_eric_header-submainmenu-position">
+			   <div class="bbmri_eric_header-submainmenu-floating-runing-text">
+			      Biobanks provide the critical mass of samples ...
+			   </div>
 				<div class="bbmri_eric_header-submainmenu-floating">
 					<#if has_navigation || is_signed_in>
 						<#include "${full_templates_path}/navigation_sub.ftl" />
@@ -63,11 +65,11 @@ ${theme.include(body_top_include)}
 			</div>
 		</div>
 	</div>
-	<div class="bbmri_eric_header-subsubmenucontainer">
+	<!--<div class="bbmri_eric_header-subsubmenucontainer">
 		<#if has_navigation || is_signed_in>
 			<#include "${full_templates_path}/navigation_sub_sub.ftl" />
 		</#if>				
-	</div>
+	</div>-->
 </div>
 <!-- New Header End -->
 <div class="container-fluid-background">

@@ -11,7 +11,7 @@
 <portlet:defineObjects />
 
 <!-- Begin Search Form -->
-
+<!-- 
 <div id="mc_embed_signup">
 	<div class="mc-field-group" style="width: 315px;">
 	        <label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Search</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
@@ -26,7 +26,7 @@
 	    </div>
 	</div>
 </div>
-
+ -->
 <!-- END Search Form -->
 
 <!-- Begin MailChimp Signup Form -->
@@ -35,8 +35,8 @@
 <div id="mc_embed_signup">
 <form action="http://bbmri-eric.us8.list-manage.com/subscribe/post?u=c7415c09f5c4d908a6ec9388d&amp;id=39dc000a0f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 
-<div class="mc-field-group" style="width: 315px;">
-        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL">Subscribe to our <span style="font-weight:bold;">Newsletter & Mailing List</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+<div class="mc-field-group" style="width: 315px;padding-bottom:0;">
+        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL"><span style="font-weight:bold;">Newsletter</spam> and <span style="font-weight:bold;">Mailinglist</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 	<div class="mc-field-group-float">
         <input type="email" placeholder="Please enter mail address" value="" name="EMAIL" class="required email" id="mce-EMAIL">
         <input type="submit" value="SEND" name="subscribe" id="mc-embedded-subscribe">
@@ -57,8 +57,32 @@
     <div style="position: absolute; left: -5000px;"><input type="text" name="b_c7415c09f5c4d908a6ec9388d_39dc000a0f" value=""></div>
         <div class="clear" style="display: none;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 </form>
-<hr style="background-color:#FFFFFF; border-width:0; color:#FFFFFF; height:1px; lineheight:0; display: inline-block; text-align: left; width:100%;margin-bottom: 5px;margin-top: 10px;">
+<hr style="background-color:#FFFFFF; border-width:0; color:#FFFFFF; height:0px; lineheight:0; display: inline-block; text-align: left; width:100%;margin-bottom:0;margin-top: 0;">
 </div>
+
+<!--End mc_embed_signup-->
+<!-- Catalogue -->
+<div>
+<a href="https://www.bbmriportal.eu/bbmri2.0/jsp/core/login.jsf" target="_blank">
+<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Catalogue</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+</a>
+</div>
+<!-- Wiki -->
+<div>
+<a href="http://www.bbmri-wp4.eu/wiki/index.php/Main_Page" target="_blank">
+<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Wiki</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+</a>
+</div>
+<!-- hCERN -->
+<div>
+<a href="http://www.hsern.eu/" target="_blank">
+<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">hCERN</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+</a>
+</div>
+
+
+<hr style="background-color:#FFFFFF; border-width:0; color:#FFFFFF; height:1px; lineheight:0; display: inline-block; text-align: left; width:100%;margin-bottom: 5px;margin-top: 10px;">
+
 <script type="text/javascript">
 var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';
 try {
@@ -250,4 +274,3 @@ function mce_success_cb(resp){
 }
 
 </script>
-<!--End mc_embed_signup-->

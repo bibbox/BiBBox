@@ -23,6 +23,13 @@
 	padding: 0;
 	border-width: 0;
 }
+#mc_embed_signup .mc-field-group {
+	clear:left; 
+	position:relative; 
+	width:96%; 
+	padding-bottom:0; 
+	min-height:50px;
+}
 #mc_embed_signup{
 	clear:left; 
 	font:12px Helvetica,Arial,sans-serif; 
@@ -157,10 +164,12 @@
 }
 .bbmri_eric_header-submainmenu a {
 	color: #505050;
+	font-size: 9.5pt;
 }
 .bbmri_eric_header-submainmenu a:hover {
 	color: #505050;
 	text-decoration:none;
+	font-size: 9.5pt;
 }
 .bbmri_eric_header-subsubmainmenu a {
 	color: #FFFFFF;
@@ -172,6 +181,10 @@
 .aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
 	color: #FFFFFF;
 	text-decoration:none;
+}
+.aui .bbmrieric-footer .bbmrieric-footer-menue a, .aui .bbmrieric-footer .bbmrieric-footer-menue a:hover {
+   color: #4A4A49;
+   text-decoration:none;
 }
 .aui .portlet-journal-content .lfr-icon-actions {
 	font-size: 9.5pt;

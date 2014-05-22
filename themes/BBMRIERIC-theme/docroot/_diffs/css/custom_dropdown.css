@@ -1,0 +1,33 @@
+.bbmri_eric_header-submainmenu-floating ul:after {
+   content: ""; 
+   clear: both; 
+   display: block;
+}
+.bbmri_eric_header-submainmenu-floating ul ul {
+   display: none;
+   background: rgba(24, 75, 138, 0.75); 
+   border-radius: 0px; 
+   padding: 0;
+   position: absolute; 
+   top: 30px;
+   left: 0px;
+   z-index: 500;
+}
+.bbmri_eric_header-submainmenu-floating ul ul li {
+   position: relative;
+   float: left;
+   width: 186px;
+   padding-left: 20px;
+   align: left;
+   text-align: left;
+}
+.bbmri_eric_header-submainmenu-floating ul ul li a {
+   color: #FFFFFF;
+}
+.bbmri_eric_header-submainmenu-floating ul ul li a:hover {
+   color: #FFFFFF;
+   text-decoration:none;
+}
+.bbmri_eric_header-submainmenu-floating ul li:hover > ul {
+   display: block;
+}

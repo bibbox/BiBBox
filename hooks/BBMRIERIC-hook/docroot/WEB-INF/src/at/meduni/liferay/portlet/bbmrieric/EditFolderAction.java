@@ -56,6 +56,7 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 		System.out.println("inside the process actionwhile creating the account>>>");
 		
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		actionRequest.setAttribute(Constants.CMD, "---");
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
@@ -91,9 +92,13 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 				updateWorkflowDefinitions(actionRequest);
 			}
 			//sendRedirect(actionRequest, actionResponse);
-			originalStrutsPortletAction.processAction(portletConfig, actionRequest, actionResponse);
+			//originalStrutsPortletAction.processAction(originalStrutsPortletAction, portletConfig, actionRequest, actionResponse);
+			//originalStrutsPortletAction.processAction(portletConfig, actionRequest, actionResponse);
+			super.processAction(originalStrutsPortletAction, portletConfig, actionRequest, actionResponse);
+			System.out.println("End of creation");
 		}
 		catch (Exception e) {
+			System.out.println("Exception");
 			if (e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
@@ -112,7 +117,7 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 			}
 		}
 		
-		
+		System.out.println("End of Action");
 		//super.processAction(originalStrutsPortletAction, portletConfig, actionRequest, actionResponse);
 	}
 
@@ -123,12 +128,10 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 			RenderResponse renderResponse) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("inside the render action while creating the account>>>");
-		if(originalStrutsPortletAction == null) {
-			System.out.println("originalStrutsPortletAction");
-		}
-		 String ret = originalStrutsPortletAction.render(null, portletConfig, renderRequest, renderResponse);
-		 renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.TRUE);
-		 return ret;
+		String ret = originalStrutsPortletAction.render(null, portletConfig, renderRequest, renderResponse);
+		renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.TRUE);
+		//return super.render(portletConfig, renderRequest, renderResponse);
+		return ret;
 	}
 	
 	@Override
@@ -145,7 +148,7 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 
     }
 	
-	// coopyed from EditFolderAction.java
+	// copied from EditFolderAction.java
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 

@@ -15,7 +15,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 /* ---------- New Header ----------- */
 .bbmri_eric_header-maincontainer {
-	height: 321px;
+	height: 255px;
 	margin-bottom: 0;
 }
 .bbmri_eric_header-maincontainer-verlauf {
@@ -28,12 +28,13 @@ $dockbarOpenGradientStart: #0EA6F9;
 .bbmri_eric_header-innercontainer {
 	margin: auto;
 	position: absolute;
-    top: 0px;
-    width: 100%;
+   top: 0px;
+   width: 100%;
+   height: 176px;
 }
 .bbmri_eric_header-logo {
 	width: 1000px;
-	height: 143px;
+	height: 176px;
 	margin: auto;
 }
 .bbmri_eric_header-logo-floating {
@@ -43,11 +44,11 @@ $dockbarOpenGradientStart: #0EA6F9;
 /* menu */
 .bbmri_eric_header-menucontainer {
 	width: 100%;
-	height: 65px;
+	height: 40px;
 	margin: auto;
 	position: absolute;
 	left: 0px;
-	top: 180px;
+	top: 176px;
 }
 .bbmri_eric_header-mainmenu-position {
 	width: 1000px;
@@ -59,7 +60,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 .bbmri_eric_header-mainmenu {
 	width: 1200px;
-	height: 65px;
+	height: 40px;
 	margin: auto;
 }
 .bbmri_eric_header-mainmenu ui {
@@ -75,29 +76,40 @@ $dockbarOpenGradientStart: #0EA6F9;
 	margin: auto;
 	padding-left: 35px;
 	padding-right: 5px;
-	line-height: 50px;
+	line-height: 20px;
 }
 /* submenu */
 .bbmri_eric_header-submenucontainer {
 	width: 100%;
-	height: 45px;
+	height: 40px;
 	margin: auto;
 	position: absolute;
 	left: 0px;
-	top: 245px;
+	top: 215px;
 }
 .bbmri_eric_header-submainmenu {
 	width: 1200px;
 	margin: auto;
-	text-align: right;
+	text-align: left;
+	height: 40px;
+	background: url(@theme_image_path@/02_content_background.png) repeat-y;
+	-webkit-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
+   -moz-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
+   box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
 }
 .bbmri_eric_header-submainmenu-position {
 	width: 1000px;
 	margin-left: 100px;
 	margin-right: 100px;
 }
+.bbmri_eric_header-submainmenu-floating-runing-text {
+   float: left;
+   width: 275px;
+   margin-top: 12px;
+}
 .bbmri_eric_header-submainmenu-floating {
-	float: right;
+	float: left;
+	width: 725px;
 }
 .bbmri_eric_header-submainmenu ui {
 	float: right;
@@ -110,9 +122,10 @@ $dockbarOpenGradientStart: #0EA6F9;
 	float: left;
 	list-style-type: none;
 	margin: auto;
-	padding-left: 35px;
+	padding-left: 30px;
 	padding-right: 5px;
-	line-height: 35px;
+	line-height: 20px;
+	height: 40px;
 }
 /* subsubmenu */
 .bbmri_eric_header-subsubmenucontainer {
@@ -160,6 +173,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 	width: 1200px;
 	margin: auto;
 	background: url(@theme_image_path@/02_content_background.png) repeat-y;
+	-webkit-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
+   -moz-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
+   box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
 }
 
 /* ---------- Footer ----------- */
@@ -181,11 +197,12 @@ $dockbarOpenGradientStart: #0EA6F9;
 	margin: auto;
 }
 .bbmrieric-footer-menue {
-	width: 900px;
-	height: 70px;
+	width: 1000px;
+	height: 20px;
 	margin: auto;
 	text-align: center;
 	align: center;
+	margin-top: 23px;
 	margin-bottom: 30px;
 }
 .bbmrieric-footer-menue ul {
@@ -196,12 +213,11 @@ $dockbarOpenGradientStart: #0EA6F9;
 	height: 70px;
 }
 .bbmrieric-footer-menue li {
-
 	list-style-type: none;
-	margin-left: 20px;
+	margin-left: 5px;
 	padding-left: 5px;
-	padding-right: 25px;
-	line-height: 50px;
+	padding-right: 5px;
+	line-height: 20px;
 }
 /* ---------- Footer ende ----------- */
 /* ---------- My Styling ----------- */
@@ -283,8 +299,19 @@ $dockbarOpenGradientStart: #0EA6F9;
 	background: #ED660A;
 	border-color: #ED660A;
 	float: left;
-	margin-top: 20px;
-	margin-right: 10px;
+	margin-top: 7px;
+	margin-right: 17px;
+}
+.bbmri-eric-square-blue {
+   height: 6px;
+   width: 6px;
+   border:1px solid;
+   border-radius:4px;
+   background: #184B8A;
+   border-color: #184B8A;
+   float: left;
+   margin-top: 7px;
+   margin-right: 17px;
 }
 .bbmri-eric-text-square-orange {
 	height: 7px;
@@ -300,17 +327,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 	border-radius:4px;
 	background: #184B8A;
 	border-color: #184B8A;
-}
-.bbmri-eric-square-blue {
-	height: 6px;
-	width: 6px;
-	border:1px solid;
-	border-radius:4px;
-	background: #184B8A;
-	border-color: #184B8A;
-	float: left;
-	margin-top: 20px;
-	margin-right: 10px;
 }
 .bbmri-eric-submenue {
 	color: #4A4A49;
@@ -982,3 +998,4 @@ $dockbarOpenGradientStart: #0EA6F9;
 @import url(custom_additional.css);
 @import url(custom_search.css);
 @import url(custom_tooltip.css);
+@import url(custom_dropdown.css);

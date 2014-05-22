@@ -42,6 +42,10 @@ if (workflowEnabled) {
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
+<portlet:actionURL var="editBBMRIERICFolderURL">
+   <portlet:param name="struts_action" value="/document_library/edit_folder_bbmri" />
+</portlet:actionURL>
+
 <portlet:actionURL var="editFolderURL">
 	<portlet:param name="struts_action" value="/document_library/edit_folder" />
 </portlet:actionURL>
@@ -54,7 +58,8 @@ if (workflowEnabled) {
 	/>
 </liferay-util:buffer>
 
-<aui:form action="<%= editFolderURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>
+
+<aui:form action="<%= editBBMRIERICFolderURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value='<%= rootFolder ? "updateWorkflowDefinitions" : ((folder == null) ? Constants.ADD : Constants.UPDATE) %>' />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
