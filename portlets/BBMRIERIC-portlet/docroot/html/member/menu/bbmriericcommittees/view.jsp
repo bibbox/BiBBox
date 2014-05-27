@@ -71,6 +71,11 @@ LiferayPortletURL editmyusersURL = PortletURLFactoryUtil.create(request, "2", co
 editmyusersURL.setParameter("p_p_state", "maximized");
 editmyusersURL.setParameter("controlPanelCategory", "my");
 String portletResource = ParamUtil.getString(request, "portletResource");
+
+/*editmyusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+editmyusersURL.setParameter("struts_action", "/users_admin/edit_user");
+editmyusersURL.setParameter("p_p_state", "maximized");
+editmyusersURL.setParameter("p_u_i_d", String.valueOf(themeDisplay.getUserId()));*/
 %>
    <ul><li>
 	<% if(themeDisplay.isSignedIn()) { %>

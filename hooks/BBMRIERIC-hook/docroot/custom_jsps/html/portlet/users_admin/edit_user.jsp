@@ -180,7 +180,7 @@ if (selUser != null) {
 
 	<div id="breadcrumb">
 		<liferay-ui:breadcrumb showCurrentGroup="<%= false %>" showCurrentPortlet="<%= false %>" showGuestGroup="<%= false %>" showLayout="<%= false %>" showPortletBreadcrumb="<%= true %>" />
-	</div>
+ 	</div>
 
 	<liferay-ui:header
 		backURL="<%= backURL %>"
@@ -199,7 +199,7 @@ if (selUser != null) {
 	<portlet:param name="backURL" value="<%= backURL %>" />
 </portlet:renderURL>
 
-<aui:form action="<%= editUserActionURL %>" method="post" name="fm">
+<aui:form action="<%= editUserActionURL %>" method="post" name="fm" autocomplete="off" autocorrect="off" autocapitalize="off">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (selUser == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= editUserRenderURL %>" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
