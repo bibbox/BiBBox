@@ -56,7 +56,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 	margin-right: 100px;
 }
 .bbmri_eric_header-mainmenu-floating {
-	float: right;
+	float: left;
+	margin-left: 270px;
 }
 .bbmri_eric_header-mainmenu {
 	width: 1200px;
@@ -74,7 +75,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	float: left;
 	list-style-type: none;
 	margin: auto;
-	padding-left: 35px;
+	padding-left: 25px;
 	padding-right: 5px;
 	line-height: 20px;
 }
@@ -106,6 +107,9 @@ $dockbarOpenGradientStart: #0EA6F9;
    float: left;
    width: 275px;
    margin-top: 12px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
 }
 .bbmri_eric_header-submainmenu-floating {
 	float: left;
@@ -172,7 +176,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 .container-fluid-background {
 	width: 1200px;
 	margin: auto;
-	background: url(@theme_image_path@/02_content_background.png) repeat-y;
+	background: url(/BBMRIERIC-theme/images/02_content_background.png) repeat-y;
 	-webkit-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
    box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
@@ -188,7 +192,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	width: 1200px;
 	height: 165px;
 	padding-top: 45px;
-	background: url(@theme_image_path@/03_footer_background.png);
+	background: url(/BBMRIERIC-theme/images/03_footer_background.png);
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
@@ -226,7 +230,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 .bbmri-eric-header-container {
 	height: 300px;
-	background: url(@theme_image_path@/Fotolia_13157710_XL.jpg) no-repeat;
+	background: url(/BBMRIERIC-theme/images/Fotolia_13157710_XL.jpg) no-repeat;
 }
 .bbmri-eric-header-container-spacer {
 	height: 70px;
@@ -293,25 +297,25 @@ $dockbarOpenGradientStart: #0EA6F9;
 	padding-right: 10px;
 }
 .bbmri-eric-square-orange {
-	height: 6px;
-	width: 6px;
+	height: 8px;
+	width: 8px;
 	border:1px solid;
 	background: #ED660A;
 	border-color: #ED660A;
 	float: left;
-	margin-top: 7px;
-	margin-right: 17px;
+	margin-top: 5px;
+	margin-right: 10px;
 }
 .bbmri-eric-square-blue {
-   height: 6px;
-   width: 6px;
+   height: 8px;
+   width: 8px;
    border:1px solid;
-   border-radius:4px;
+   border-radius:5px;
    background: #184B8A;
    border-color: #184B8A;
    float: left;
-   margin-top: 7px;
-   margin-right: 17px;
+   margin-top: 5px;
+   margin-right: 10px;
 }
 .bbmri-eric-text-square-orange {
 	height: 7px;
@@ -367,7 +371,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	}
 
 	#sign-in {
-		background: url(@theme_image_path@/common/key.png) no-repeat 3px 50%;
+		background: url(/BBMRIERIC-theme/images/common/key.png) no-repeat 3px 50%;
 		font-weight: bold;
 		padding: 5px 5px 5px 25px;
 		position: absolute;

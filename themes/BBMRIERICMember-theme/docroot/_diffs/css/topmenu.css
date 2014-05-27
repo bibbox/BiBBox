@@ -38,79 +38,115 @@
    border-style: solid;
    border-width: 0 0 1px 0;
 }
-.bbmri-eric-member-area-top-menue-container-username {
-	width: 238px;
-   height: 32px;
+.bbmri-eric-member-area-top-menue-container-menu {
+	width: 818px;
+   height: 49px;
    float: left;
-   
-   color: #64666A;
-   
-   padding-left: 20px;
-   padding-top: 17px;
    
    border-color: #D9DBDD;
    border-style: solid;
    border-width: 0 1px 1px 1px;
 }
-.bbmri-eric-member-area-top-menue-container-search {
-	width: 280px;
-   height: 49px;
+.bbmri-eric-member-area-top-menue-container-menu-home {
+	width: 34px;
+   height: 36px;
    float: left;
    
    border-color: #D9DBDD;
    border-style: solid;
-   border-width: 0 1px 1px 0;
-}
-.bbmri-eric-member-area-top-menue-container-committees {
-   width: 279px;
-   height: 49px;
-   float: left;
+   border-width: 0 1px 0 0;
    
-   border-color: #D9DBDD;
-   border-style: solid;
-   border-width: 0 0 1px 0;
+   padding: 13px 0 0 15px;
 }
-.bbmri-eric-member-area-top-menue-container-committees-dropdown {
-   height: 40px;
-   width: 259px;
+.bbmri-eric-member-area-top-menue-container-menu-current-site {
+   width: 218px;
+   height: 36px;
    float: left;
    list-style: none;
-   padding-top: 10px;
-   padding-left: 20px;
-   position: absolute;
-   left: 0px;
-   top: 0px;
-   color: #EEF0F4;
-   align: right;
+   
+   border-color: #D9DBDD;
+   border-style: solid;
+   border-width: 0 1px 0 0;
+   
+   padding: 13px 0 0 20px;
+   
+   list-style: none;
+   
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
 }
-.aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul {
+.bbmri-eric-member-area-top-menue-container-menu-current-site ul, .bbmri-eric-member-area-top-menue-container-menu-current-site ul li {
+	list-style: none;
+}
+.bbmri-eric-member-area-top-menue-container-menu-workinggroups {
+   width: 219px;
+   height: 36px;
+   float: left;
+   
+   border-color: #D9DBDD;
+   border-style: solid;
+   border-width: 0 1px 0 0;
+   
+   list-style: none;
+   
+   padding: 13px 0 0 20px;
+}
+.bbmri-eric-member-area-top-menue-container-menu-user {
+   width: 29px;
+   height: 40px;
+   float: left;
+   
+   list-style: none;
+   
+   padding: 10px 0 0 20px;
+   
+   position: absolute;
+   top: 0;
+   right: 0px;
+}
+.bbmri-eric-member-area-top-menue-container-committees {
+   width: 219px;
+   height: 36px;
+   float: left;
+   
+   border-color: #D9DBDD;
+   border-style: solid;
+   border-width: 0 1px 0 0;
+   
+   list-style: none;
+   
+   padding: 13px 0 0 20px;
+}
+.aui .bbmri-eric-member-area-top-menue-container-committees ul {
    float: left;
    list-style: none;
    margin: 0;
 }
-.aui .bbmri-eric-member-area-top-menue-container-committees-dropdown .bbmri-eric-member-area-top-menue-container-committees-dropdown-ul-li {
+.aui .bbmri-eric-member-area-top-menue-container-committees .bbmri-eric-member-area-top-menue-container-committees-ul-li {
    width: 200px;
    align: right;
-   text-align: right;
+   text-align: left;
    padding-right: 5px;
    color: #64666A;
 }
-.aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul:after {
+.aui .bbmri-eric-member-area-top-menue-container-committees ul:after {
    content: ""; 
    clear: both; 
    display: block;
 }
-.bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul {
+.bbmri-eric-member-area-top-menue-container-committees ul ul {
    display: none;
    background: #BABFC6; 
    border-radius: 0px; 
    padding: 0;
    position: absolute; 
-   top: 100%;
-   left: 0px;
+   top: 49px;
+   left: 289px;
    z-index: 500;
+   width: 280px;
 }
-.bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li {
+.bbmri-eric-member-area-top-menue-container-committees ul ul li {
    border-top: 1px solid #BAC2C9;
    border-bottom: 1px solid #BAC2C9;
    position: relative;
@@ -119,18 +155,116 @@
    padding-left: 3px;
    align: left;
    text-align: left;
+   
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
 }
-.bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li a {
+.bbmri-eric-member-area-top-menue-container-committees ul ul li a {
    color: #FFFFFF;
 }
-.aui .bbmri-eric-member-area-top-menue-container-committees-dropdown ul ul li a:hover {
+.aui .bbmri-eric-member-area-top-menue-container-committees ul ul li a:hover {
    color: #FFFFFF;
    text-decoration:none;
 }
-.bbmri-eric-member-area-top-menue-container-committees-dropdown:hover > ul ul {
+.bbmri-eric-member-area-top-menue-container-committees:hover > ul ul {
    display: block;
 }
-
+/* ---------- working groups -------- */
+.aui .bbmri-eric-member-area-top-menue-container-menu-workinggroups ul {
+   float: left;
+   list-style: none;
+   margin: 0;
+}
+.aui .bbmri-eric-member-area-top-menue-container-menu-workinggroups .bbmri-eric-member-area-top-menue-container-menu-workinggroups-ul-li {
+   width: 200px;
+   align: right;
+   text-align: left;
+   padding-right: 5px;
+   color: #64666A;
+}
+.aui .bbmri-eric-member-area-top-menue-container-menu-workinggroups ul:after {
+   content: ""; 
+   clear: both; 
+   display: block;
+}
+.bbmri-eric-member-area-top-menue-container-menu-workinggroups ul ul {
+   display: none;
+   background: #BABFC6; 
+   border-radius: 0px; 
+   padding: 0;
+   position: absolute; 
+   top: 49px;
+   left: 529px;
+   z-index: 500;
+   width: 280px;
+}
+.bbmri-eric-member-area-top-menue-container-menu-workinggroups ul ul li {
+   border-top: 1px solid #BAC2C9;
+   border-bottom: 1px solid #BAC2C9;
+   position: relative;
+   float: left;
+   width: 276px;
+   padding-left: 3px;
+   align: left;
+   text-align: left;
+   
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+}
+.bbmri-eric-member-area-top-menue-container-menu-workinggroups ul ul li a {
+   color: #FFFFFF;
+}
+.aui .bbmri-eric-member-area-top-menue-container-menu-workinggroups ul ul li a:hover {
+   color: #FFFFFF;
+   text-decoration:none;
+}
+.bbmri-eric-member-area-top-menue-container-menu-workinggroups:hover > ul ul {
+   display: block;
+}
+/* ---------- user nemu ------------- */
+.aui .bbmri-eric-member-area-top-menue-container-menu-user ul {
+   float: left;
+   list-style: none;
+   margin: 0;
+}
+.aui .bbmri-eric-member-area-top-menue-container-menu-user ul:after {
+   content: ""; 
+   clear: both; 
+   display: block;
+}
+.bbmri-eric-member-area-top-menue-container-menu-user ul ul {
+   display: none;
+   width: 155px;
+   background: #BABFC6; 
+   border-radius: 0px; 
+   padding: 0;
+   margin: 0;
+   position: absolute; 
+   top: 49px;
+   right: 0;
+   z-index: 500;
+}
+.bbmri-eric-member-area-top-menue-container-menu-user ul ul li {
+   border-top: 1px solid #BAC2C9;
+   border-bottom: 1px solid #BAC2C9;
+   position: relative;
+   float: left;
+   width: 150px;
+   color: #FFFFFF;
+   padding-left: 5px;
+   margin: 0;
+}
+.bbmri-eric-member-area-top-menue-container-menu-user ul ul li a {
+   color: #FFFFFF;
+}
+.aui .bbmri-eric-member-area-top-menue-container-menu-user ul ul li a:hover {
+   color: #FFFFFF;
+}
+.bbmri-eric-member-area-top-menue-container-menu-user:hover > ul ul {
+   display: block;
+}
 /* ---------- area expand ----------- */
 .bbmri-eric-member-area-top-area-expand {
 	width: 100%;

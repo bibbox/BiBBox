@@ -47,15 +47,7 @@ ${theme.include(body_top_include)}
       <div class="bbmri-eric-member-area-top-menue-container-bbmri-member-logo">
          <a href="/web/guest/about"><img alt="BBMRI-ERIC-Logo" height="40px" width="140px" src="/BBMRIERICMember-theme/images/bbmri_eric_logo.png" /></a>
       </div>
-      <div class="bbmri-eric-member-area-top-menue-container-username">
-         <#if is_signed_in>
-            ${user_name}
-         </#if>
-      </div>
-      <div class="bbmri-eric-member-area-top-menue-container-committees">
-         
-      </div>
-      <div class="bbmri-eric-member-area-top-menue-container-search">
+      <div class="bbmri-eric-member-area-top-menue-container-menu">
          <#if is_signed_in>
             <#assign committeesPortletId = "bbmriericcommittees_WAR_BBMRIERICportlet" />
             <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
@@ -71,6 +63,7 @@ ${theme.include(body_top_include)}
 <div>
    <!-- END BBMRI MEMBER Area Top Menue -->
 <#if is_signed_in>
+<!--
    <div id="bbmri-eric-member-area-top-toggler">
       <div class="bbmri-eric-member-area-top-area-expand">
          <div class="bbmri-eric-member-area-top-area-expand-container">
@@ -97,6 +90,7 @@ ${theme.include(body_top_include)}
          </div>
       </div>
    </div>
+   -->
    <!-- BBMRI MEMBER Area Top Area -->
    
    <!-- END BBMRI MEMBER Area Top Area -->

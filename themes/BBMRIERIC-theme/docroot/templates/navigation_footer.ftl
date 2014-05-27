@@ -8,8 +8,8 @@
 					<li id="layout_${nav_item.getLayoutId()}" role="presentation" style="display:inline-block;">
 						<a aria-labelledby="layout_${nav_child.getLayoutId()}" href="${company_url}${nav_child.getFriendlyURL()}" ${nav_child.getTarget()} role="menuitem">
 						<div style="margin: auto;display:inline-block;background: #FEFEFE;height: 20px;width:100px;">
-   						<div style="height: 6px;width: 6px;border:1px solid;background: #ED660A;border-color: #ED660A;margin-top: 5px;margin-left: -4px;float: left;"></div>
-   						<div style="float: left;height: 20px;width:80px;font-size: 12px;">${nav_child.getName()}</div>
+   						<div style="height: 8px;width: 8px;border:1px solid;background: #ED660A;border-color: #ED660A;margin-top: 5px;margin-left: -5px;float: left;"></div>
+   						<div style="float: left;height: 18px;width:80px;font-size: 11px;">${nav_child.getName()}</div>
 						</div>
 						</a>
 					</li>
@@ -17,7 +17,7 @@
 					<#if navcount == 2>
 					 <li style="display:inline-block;">
 					    <div style="margin: auto;display:inline-block;">
-					       <div style="float: left;color: #FFFFFF;">BBMRI-ERIC Neue Stiftingtalstrasse 2/B/6, 8010 Graz - AUSTRIA</div>
+					       <div style="float: left;color: #FFFFFF;font-size: 11px;">BBMRI-ERIC | Neue Stiftingtalstrasse 2/B/6 | 8010 Graz - AUSTRIA</div>
 					    </div>
 					 </li>
 					</#if>

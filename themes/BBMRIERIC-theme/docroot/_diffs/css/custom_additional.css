@@ -59,13 +59,20 @@
 	display: inline;
 }
 #mc_embed_signup .mc-field-group-float #mce-EMAIL {
-	width: 82%;
+	width: 81%;
 	padding: 0;
 	margin: 0;
 	clear: none;
 	border: 0px solid #999999;
 	display: inline;
 	height: 25px;
+	text-align: right;
+	color: #184B8A;
+	padding: 0 3px 0 0;
+	background: -webkit-linear-gradient(left, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* Standard syntax */
 }
 #mc_embed_signup .mc-field-group-float #mce-SEARCH {
 	width: 82%;
@@ -97,6 +104,12 @@
 .asset-title {
 	display: none;
 }
+.portlet-asset-publisher-aaaaaaaa {
+	text-align: justify;
+   font-family: 'PT Sans', normal, sans-serif;
+   font-size: 9.5pt;
+   line-height: 16pt;
+}
 .portlet-asset-publisher .asset-content, .aui .portlet-asset-publisher .asset-content li {
 	text-align: justify;
 	font-family: 'PT Sans', normal, sans-serif;
@@ -121,39 +134,64 @@
 	font-size: 9.5pt;
 	line-height: 16pt;
 }
-.aui .portlet-asset-publisher p, .aui .portlet-journal-content p, .aui .bbmri-eric-recent-news p, .aui .bbmri-eric-news p {
-    margin: 0 0 16pt 0;
-}
-
-.aui h1, .aui h2 {
-	font-size: 13pt;
-	line-height: 16pt;
-	font-weight: bold;
-	margin: 0 0 16pt 0;
-}
-.aui h3, .aui h4  {
+/* --- Header devinitions --- */
+.aui h1  {
+	font-size: 11.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   text-transform: uppercase;
+   margin: 0;
+} 
+.aui h2 {
 	font-size: 10.5pt;
 	line-height: 16pt;
 	font-weight: bold;
-	margin: 0 0 16pt 0;
+	color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
 }
-.aui h5, .aui h6 {
-	font-size: 10.5pt;
+.aui h3 {
+	font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   font-style:italic;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+} 
+.aui h4  {
+	font-size: 9.5pt;
+	line-height: 16pt;
+	font-style:italic;
+	font-weight: normal;
+	color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h5 {
+	font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: normal;
+   color: #505050;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h6 {
+	font-size: 9.5pt;
 	line-height: 16pt;
 	font-weight: normal;
-	margin: 0 0 16pt 0;
-}
-.aui h1, .aui h3, .aui h5 {
-	color: #184B8A;
-	font-family: 'PT Sans', normal, sans-serif;
-	text-align:initial;
-}
-.aui h2, .aui h4, .aui h6 {
 	color: #505050;
-	font-family: 'PT Sans', normal, sans-serif;
-	text-align:initial;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
 }
-
 .container-fluid {
 	width: 1000px;
 	margin: auto;
@@ -163,13 +201,15 @@
     text-decoration:none;
 }
 .bbmri_eric_header-submainmenu a {
-	color: #505050;
+	color: #184B8A;
 	font-size: 9.5pt;
+	text-transform:uppercase;
 }
 .bbmri_eric_header-submainmenu a:hover {
-	color: #505050;
+	color: #184B8A;
 	text-decoration:none;
 	font-size: 9.5pt;
+	text-transform:uppercase;
 }
 .bbmri_eric_header-subsubmainmenu a {
 	color: #FFFFFF;
@@ -200,4 +240,13 @@
 {
     filter: none;
     -webkit-filter: none;
+}
+.bbmri-eric-recent-events {
+	text-align: right;
+}
+.bbmri-eric-recent-news {
+	text-align: right;
+}
+.aui p {
+    margin: 0;
 }
