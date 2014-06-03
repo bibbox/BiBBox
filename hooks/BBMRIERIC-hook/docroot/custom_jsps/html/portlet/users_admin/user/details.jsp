@@ -84,10 +84,10 @@ if (selContact != null) {
 		<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
 			<c:choose>
 				<c:when test='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || !UsersAdminUtil.hasUpdateFieldPermission(selUser, "screenName") %>'>
-					<aui:input disabled="<%= true %>" name="screenName" />
+					<aui:input disabled="<%= true %>" name="screenName"  autocomplete="off" autocorrect="off" autocapitalize="off"/>
 				</c:when>
 				<c:otherwise>
-					<aui:input name="screenName" />
+					<aui:input name="screenName"  autocomplete="off" autocorrect="off" autocapitalize="off"/>
 				</c:otherwise>
 			</c:choose>
 		</c:if>

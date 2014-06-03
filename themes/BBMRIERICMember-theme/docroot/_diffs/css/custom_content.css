@@ -1,0 +1,133 @@
+.portlet-content {
+   padding: 0;
+}
+.portlet-asset-publisher .asset-full-content.show-asset-title .asset-content {
+    margin-right: 0;
+}
+.portlet-asset-publisher .asset-content {
+    clear: right;
+    margin-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
+}
+.aui .bbmriericrecentnews {
+   color: #ED660A;
+}
+.taglib-header {
+   display: none;
+}
+.asset-title {
+   display: none;
+}
+.portlet-asset-publisher-aaaaaaaa {
+   text-align: justify;
+   font-family: 'PT Sans', normal, sans-serif;
+   font-size: 9.5pt;
+   line-height: 16pt;
+}
+.portlet-asset-publisher .asset-content, .aui .portlet-asset-publisher .asset-content li {
+   text-align: justify;
+   font-family: 'PT Sans', normal, sans-serif;
+   font-size: 9.5pt;
+   line-height: 16pt;
+}
+.portlet-journal-content, .aui .portlet-journal-content li  {
+   text-align: justify;
+   font-family: 'PT Sans', normal, sans-serif;
+   font-size: 9.5pt;
+   line-height: 16pt;
+}
+.bbmri-eric-recent-news, .aui .bbmri-eric-recent-news li  {
+   text-align: justify;
+   font-family: 'PT Sans', normal, sans-serif;
+   font-size: 9.5pt;
+   line-height: 16pt;
+}
+.bbmri-eric-news, .aui .bbmri-eric-news li  {
+   text-align: justify;
+   font-family: 'PT Sans', normal, sans-serif;
+   font-size: 9.5pt;
+   line-height: 16pt;
+}
+.aui, .aui body {
+	   font-family: 'PT Sans', normal, sans-serif;
+}
+.aui .portlet-content, .aui .portlet-minimized .portlet-content-container  {
+   font-family: 'PT Sans', normal, sans-serif;
+   font-size: 9.5pt;
+   line-height: 16pt;
+}
+/* --- Header devinitions --- */
+.aui h1  {
+   font-size: 11.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   text-transform: uppercase;
+   margin: 0;
+} 
+.aui .h1-node  {
+   font-size: 11.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+} 
+.aui h2 {
+   font-size: 10.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h3 {
+   font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   font-style:italic;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+} 
+.aui h4  {
+   font-size: 9.5pt;
+   line-height: 16pt;
+   font-style:italic;
+   font-weight: normal;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h5 {
+   font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: normal;
+   color: #505050;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h6 {
+   font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: normal;
+   color: #505050;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui a, .aui a:hover {
+    color: #184B8A;
+    text-decoration:none;
+}
+.aui p {
+    margin: 0;
+}

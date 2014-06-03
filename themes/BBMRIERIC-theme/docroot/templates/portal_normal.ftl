@@ -10,13 +10,14 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	${theme.include(top_head_include)}
-	
+<#if true>
 	<#if !is_signed_in>
 	  <#assign canseepage = user_middle_name?starts_with("$") />
       <#if !canseepage>
          <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
       </#if>
    </#if>
+</#if>
 </head>
 
 <body class="${css_class} bbmri-eric-body">
@@ -55,7 +56,7 @@ ${theme.include(body_top_include)}
 		<div class="bbmri_eric_header-submainmenu">
 			<div class="bbmri_eric_header-submainmenu-position">
 			   <div class="bbmri_eric_header-submainmenu-floating-runing-text">
-			      Biobanks provide the critical mass of samples ...
+               Biobanks provide the critical mass of samples ...
 			   </div>
 				<div class="bbmri_eric_header-submainmenu-floating">
 					<#if has_navigation || is_signed_in>
@@ -103,7 +104,6 @@ ${theme.include(body_top_include)}
 		</footer>
 	</div>
 </div>
-
 </#if>
 </#if>
 

@@ -17,14 +17,14 @@
    background-color: #0C2848;
 }
 .bbmri-eric-member-area-top-menue-container {
-	width: 1000px;
+	width: 1200px;
 	height: 50px;
 	margin: auto;
 	
-	background: -webkit-linear-gradient(left, #F5F7FA , #BABFC6); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(right, #F5F7FA, #BABFC6); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #F5F7FA, #BABFC6); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, #F5F7FA , #BABFC6); /* Standard syntax */
+	background: -webkit-linear-gradient(#B5B5B5, #C5C5C5, #B5B5B5); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(#B5B5B5, #C5C5C5, #B5B5B5); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(#B5B5B5, #C5C5C5, #B5B5B5); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(#B5B5B5, #C5C5C5, #B5B5B5); /* Standard syntax */
 }
 .bbmri-eric-member-area-top-menue-container-bbmri-member-logo {
 	width: 160px;
@@ -39,7 +39,7 @@
    border-width: 0 0 1px 0;
 }
 .bbmri-eric-member-area-top-menue-container-menu {
-	width: 818px;
+	width: 1018px;
    height: 49px;
    float: left;
    
@@ -59,22 +59,34 @@
    padding: 13px 0 0 15px;
 }
 .bbmri-eric-member-area-top-menue-container-menu-current-site {
-   width: 218px;
+   width: 418px;
    height: 36px;
    float: left;
-   list-style: none;
+   font-weight:bold;
+   
+   color: #ED660A;
    
    border-color: #D9DBDD;
    border-style: solid;
    border-width: 0 1px 0 0;
    
-   padding: 13px 0 0 20px;
+   padding: 13px 10px 0 10px;
    
    list-style: none;
    
    text-overflow: ellipsis;
    white-space: nowrap;
    overflow: hidden;
+}
+.aui .bbmri-eric-member-area-top-menue-container-menu-current-site a, .bbmri-eric-member-area-top-menue-container-menu-current-site a:hover {
+	color: #ED660A;
+	font-weight:bold;
+	text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+}
+.aui .bbmri-eric-member-area-top-menue-container-menu-current-site ul {
+   margin: 0;	
 }
 .bbmri-eric-member-area-top-menue-container-menu-current-site ul, .bbmri-eric-member-area-top-menue-container-menu-current-site ul li {
 	list-style: none;
@@ -126,7 +138,7 @@
 .aui .bbmri-eric-member-area-top-menue-container-committees .bbmri-eric-member-area-top-menue-container-committees-ul-li {
    width: 200px;
    align: right;
-   text-align: left;
+   text-align: right;
    padding-right: 5px;
    color: #64666A;
 }
@@ -137,21 +149,21 @@
 }
 .bbmri-eric-member-area-top-menue-container-committees ul ul {
    display: none;
-   background: #BABFC6; 
+   background: #C5C5C5; 
    border-radius: 0px; 
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 289px;
+   left: 489px;
    z-index: 500;
-   width: 280px;
+   width: 285px;
 }
 .bbmri-eric-member-area-top-menue-container-committees ul ul li {
-   border-top: 1px solid #BAC2C9;
-   border-bottom: 1px solid #BAC2C9;
+   border-top: 1px solid #C5C5C5;
+   border-bottom: 1px solid #C5C5C5;
    position: relative;
    float: left;
-   width: 276px;
+   width: 281px;
    padding-left: 3px;
    align: left;
    text-align: left;
@@ -179,7 +191,7 @@
 .aui .bbmri-eric-member-area-top-menue-container-menu-workinggroups .bbmri-eric-member-area-top-menue-container-menu-workinggroups-ul-li {
    width: 200px;
    align: right;
-   text-align: left;
+   text-align: right;
    padding-right: 5px;
    color: #64666A;
 }
@@ -190,21 +202,21 @@
 }
 .bbmri-eric-member-area-top-menue-container-menu-workinggroups ul ul {
    display: none;
-   background: #BABFC6; 
+   background: #C5C5C5; 
    border-radius: 0px; 
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 529px;
+   left: 729px;
    z-index: 500;
-   width: 280px;
+   width: 285px;
 }
 .bbmri-eric-member-area-top-menue-container-menu-workinggroups ul ul li {
-   border-top: 1px solid #BAC2C9;
-   border-bottom: 1px solid #BAC2C9;
+   border-top: 1px solid #C5C5C5;
+   border-bottom: 1px solid #C5C5C5;
    position: relative;
    float: left;
-   width: 276px;
+   width: 281px;
    padding-left: 3px;
    align: left;
    text-align: left;
@@ -237,7 +249,7 @@
 .bbmri-eric-member-area-top-menue-container-menu-user ul ul {
    display: none;
    width: 155px;
-   background: #BABFC6; 
+   background: #C5C5C5; 
    border-radius: 0px; 
    padding: 0;
    margin: 0;
@@ -247,8 +259,8 @@
    z-index: 500;
 }
 .bbmri-eric-member-area-top-menue-container-menu-user ul ul li {
-   border-top: 1px solid #BAC2C9;
-   border-bottom: 1px solid #BAC2C9;
+   border-top: 1px solid #C5C5C5;
+   border-bottom: 1px solid #C5C5C5;
    position: relative;
    float: left;
    width: 150px;

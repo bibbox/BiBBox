@@ -13,6 +13,14 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+.aui {
+   background-color: #0C2848;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
+
 /* ---------- New Header ----------- */
 .bbmri_eric_header-maincontainer {
 	height: 255px;
@@ -114,6 +122,14 @@ $dockbarOpenGradientStart: #0EA6F9;
 .bbmri_eric_header-submainmenu-floating {
 	float: left;
 	width: 725px;
+}
+.bbmri_eric_header-submainmenu-floating ul {
+   float: left;
+   margin: 10px 0 10px 15px;
+}
+.bbmri_eric_header-submainmenu-floating ul ul {
+   float: left;
+   margin: 0 0 10px 25px;
 }
 .bbmri_eric_header-submainmenu ui {
 	float: right;

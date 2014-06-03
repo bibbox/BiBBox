@@ -28,7 +28,7 @@ ${theme.include(body_top_include)}
 	<div class="rdconnect-header-container-top">
 		<div class="rdconnect-header-container-inner">
 			<div class="rdconnect-header-container-top-rdlogo">
-				<a href="http://rd-connect.bibbox.org/home">
+				<a href="/home">
 				  <img alt="RD-Connect-IDCard-Logo" height="27px" width="168px" src="/BBMRIATHub-theme/images/bbmriat.png" />
 				</a>
 			</div>
@@ -39,8 +39,8 @@ ${theme.include(body_top_include)}
 				<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
 				 
 				<#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-					<#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-					<#assign temp = portletSetup.store() />
+					<#assign temp1 = portletSetup.setValue("portletSetupShowBorders", "false") />
+					<#assign temp1 = portletSetup.store() />
 				</#if>
 				 
 				${theme.runtime(locPortletId, "", "")}
@@ -49,17 +49,17 @@ ${theme.include(body_top_include)}
 	</div>
 	<div class="rdconnect-header-container-bottom">
 		<div class="rdconnect-header-container-inner">
-			<#assign locPortletId = "portalhubinformation_WAR_RDConnectportlet" />
+			<#assign locATPortletId = "hubportalheader_WAR_BBMRIATportlet" />
 				 
 			<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-			<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
+			<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locATPortletId) />
 				 
 			<#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-				<#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-				<#assign temp = portletSetup.store() />
+				<#assign temp2 = portletSetup.setValue("portletSetupShowBorders", "false") />
+				<#assign temp2 = portletSetup.store() />
 			</#if>
 				 
-			${theme.runtime(locPortletId, "", "")}
+			${theme.runtime(locATPortletId, "", "")}
 		</div>
 	</div>
 </div>
@@ -81,9 +81,11 @@ ${theme.include(body_top_include)}
 	
 </div>
 <footer id="footer" role="contentinfo">
+   <div class="bbmri-at-footer">
 		<p class="powered-by">
-			Linking up rare disease resarch across the world<br/> <a href="http://www.rd-connect.eu" rel="external">RD-Connect</a>
+			BBMRI.at | Neue Stiftingtalstrasse 2/B/6 | 8010 Graz - AUSTRIA
 		</p>
+	</div>
 </footer>
 ${theme.include(body_bottom_include)}
 

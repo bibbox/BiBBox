@@ -45,7 +45,7 @@
                      </a>
                   </li>
                <#elseif nav_child.getName()?contains("Central Executive Management Office")>
-                  <li style="padding-left: 10px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <li style="padding-left: 30px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/hqFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">

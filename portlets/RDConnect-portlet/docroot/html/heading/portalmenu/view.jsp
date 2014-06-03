@@ -23,6 +23,9 @@
 <aui:a href='<%= themeDisplay.getURLPortal()+"/home" %>'><img class="rdc-portalmenu-div-container-homelogo" alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="16px" width="19px" /></aui:a>
 </div>
 <div class="rdc-portalmenu-div-container-myorganisations">
+<%
+if(themeDisplay.isSignedIn()) {
+%>
 <ul>
 <li>my organisations <img src="<%= request.getContextPath() %>/images/arrow.png" height="9px" width="13px" /><ul>
 <%
@@ -85,6 +88,9 @@ for(Organization o : organisations) {
 %>
 </ul></li>
 </ul>
+<%
+}
+%>
 </div>
 
 <div class="rdc_portalmenu-search-input">

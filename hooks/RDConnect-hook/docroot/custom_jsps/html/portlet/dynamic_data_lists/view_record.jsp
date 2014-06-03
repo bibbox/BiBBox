@@ -101,3 +101,21 @@ portletURL.setParameter("recordSetId", String.valueOf(recordSetId));
 PortalUtil.addPortletBreadcrumbEntry(request, recordSet.getName(locale), portletURL.toString());
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.format(pageContext, "view-x", ddmStructure.getName(locale)), currentURL);
 %>
+
+<hr>
+<br>
+<h1>Test</h1>
+<% 
+long displayDDMTemplateId = ParamUtil.getLong(request, "displayDDMTemplateId"); 
+
+%>
+<liferay-util:include page="/html/portlet/dynamic_data_lists/view_template_records.jsp" />
+
+<%
+if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
+   PortalUtil.setPageSubtitle(recordSet.getName(locale), request);
+   PortalUtil.setPageDescription(recordSet.getDescription(locale), request);
+}
+
+PortalUtil.addPortletBreadcrumbEntry(request, recordSet.getName(locale), currentURL);
+%>

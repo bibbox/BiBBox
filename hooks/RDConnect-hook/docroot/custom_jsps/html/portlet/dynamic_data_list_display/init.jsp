@@ -79,11 +79,11 @@ if (rdcstructure.length() != 0) {
 }
 //Read displayDDMTemplateId from setting
 long rdctemplateid = GetterUtil.getLong(portletPreferences.getValue("rdctemplateid", StringPool.BLANK));
-if(rdctemplateid != 0) {
+if(rdctemplateid != 0 && displayDDMTemplateId == 0) {
 	displayDDMTemplateId = rdctemplateid;
 }
 long rdcedittemplateid = GetterUtil.getLong(portletPreferences.getValue("rdcedittemplateid", StringPool.BLANK));
-if(rdcedittemplateid != 0) {
+if(rdcedittemplateid != 0 && formDDMTemplateId == 0) {
 	formDDMTemplateId = rdcedittemplateid;
 }
 %>

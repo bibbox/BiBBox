@@ -7,5 +7,6 @@
 	</category>
 	<category name="BBMRI.AT">
 		<portlet id="ddl-record-hierarchy"></portlet>
+		<portlet id="hub-portal-header"></portlet>
 	</category>
 </display>

@@ -16,8 +16,10 @@
 
 <%@ include file="/html/portlet/dynamic_data_list_display/init.jsp" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord" %>
+<theme:defineObjects/>
 
 <%
+
 DDLRecordSet recordSet = null;
 
 try {

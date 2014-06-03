@@ -2,28 +2,41 @@ body.custom-background {
     background-color: #555555;
     display: block;
     margin: 0;
+    -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
 }
 .container-fluid-background {
-   width: 100%;
+   width: 1200px;
    margin: auto;
    background-color: #0C2848;
-}
-.container-fluid {
-   width: 1000px;
-   margin: auto;
-   
    background: -webkit-linear-gradient(left, #F5F7FA , #D1D3D5); /* For Safari 5.1 to 6.0 */
    background: -o-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Opera 11.1 to 12.0 */
    background: -moz-linear-gradient(right, #F5F7FA, #D1D3D5); /* For Firefox 3.6 to 15 */
    background: linear-gradient(to right, #F5F7FA , #D1D3D5); /* Standard syntax */
 }
+.container-fluid {
+   width: 1000px;
+   margin: auto;
+}
 
 #wrapper {
     padding: 5px 0 0 0;
 }
-
+.aui {
+	background-color: #0C2848;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
 .aui .bbmri-eric-body {
 	background-color: #0C2848;
+	-webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
 }
 /* ---------- Login Area ---------- */
 .bbmri-eric-member-area-login {
@@ -53,7 +66,7 @@ body.custom-background {
 	margin: auto;
 	margin-top: 0;
 	margin-bottom: 0;
-	width: 1000px;
+	width: 1200px;
 	background-color: #FDFDFD;
 	border-style: solid;
 	border-color: #E4E5E9;

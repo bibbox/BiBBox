@@ -12,6 +12,10 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+#portlet_coreinformation_WAR_RDConnectportlet table, #portlet_coreinformation_WAR_RDConnectportlet th, #portlet_coreinformation_WAR_RDConnectportlet td {
+    border: 0px solid #FFFFFF;
+}
+
 .aui-w60 {
 	width: 59%;
 	float: left;
@@ -24,6 +28,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 .aui-w100 {
 	width: 100%;
 	float: left;
+}
+.portlet-dynamic-data-list-display .taglib-header {
+    display: none;
 }
 
 /* ---------- RDC  import portlet css ---------- */
@@ -810,7 +817,7 @@ textarea.propose{
 	background-color:#F4F4E1;
 }
 #footer a {
-	color: #303030;
+	color: #D7E2D9;
 }
 #rdheading {
 	/*background: #303030;*/
@@ -1386,7 +1393,19 @@ div.portlet-body {
 		border-style: solid;
 		border-width: 1px 0 0 0;
 		background: #FAFAF0;
+		height: 50px;
 	}
+	.bbmri-at-footer{
+     height: 50px;
+     width: 1000px;
+     margin: auto;
+     background-image: url('@theme_image_path@/leiste_neu.png');
+     background-repeat: repeat;
+     color: #D7E2D9;
+   }
+   .bbmri-at-footer p {
+     padding-top: 15px;
+   }
 
 	/* ---------- Hudcrumbs ---------- */
 
@@ -1590,6 +1609,7 @@ div.portlet-body {
 	width: 505px;
 	height: 45px;
 	padding-top: 5px;
+	visibility:hidden;
 }
 .aui .rdc_portalmenu-search-input input {
 	background-color: rgba(0,0,0,0.25);

@@ -124,6 +124,17 @@ ${theme.include(body_top_include)}
    		</div>
    	</div>
    </div>
+   
+<div class="bbmrieric-footer-container">
+   <div class="bbmrieric-footer">
+      <div class="bbmrieric-footer-menue">
+         <#include "${full_templates_path}/navigation_footer.ftl" />
+      </div>   
+      <footer id="footer" role="contentinfo">
+         <a href="/web/guest/contact">contact</a> <span style="color: #FFFFFF;">|</span> <a href="/web/guest/imprint">IMPRINT</a>
+      </footer>
+   </div>
+</div>
 
 ${theme.include(body_bottom_include)}
 

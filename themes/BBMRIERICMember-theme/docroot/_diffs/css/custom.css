@@ -91,26 +91,35 @@ $dockbarOpenGradientStart: #0EA6F9;
 	text-decoration:none;
 }
 .bbmrieric-footer-menue {
-	width: 900px;
-	margin: auto;
-	height: 70px;
-	margin-bottom: 30px;
-	text-align: right;
+	width: 1000px;
+   height: 20px;
+   margin: auto;
+   text-align: center;
+   align: center;
+   margin-top: 23px;
+   margin-bottom: 30px;
 }
-.bbmrieric-footer-menue ui {
-	float: right;
-	text-align: right;
-	padding:0px;
-	margin:0px;
-	list-style-type: none;
+.bbmrieric-footer-menue ul {
+	text-align: center;
+   padding: 0px;
+   margin: auto;
+   list-style-type: none;
+   height: 70px;
 }
 .bbmrieric-footer-menue li {
-	float: left;
 	list-style-type: none;
-	margin: auto;
-	padding-left: 5px;
-	padding-right: 5px;
-	line-height: 50px;
+   margin-left: 5px;
+   padding-left: 5px;
+   padding-right: 5px;
+   line-height: 20px;
+}
+.aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
+   color: #FFFFFF;
+   text-decoration:none;
+}
+.aui .bbmrieric-footer .bbmrieric-footer-menue a, .aui .bbmrieric-footer .bbmrieric-footer-menue a:hover {
+   color: #4A4A49;
+   text-decoration:none;
 }
 /* ---------- Footer ende ----------- */
 /* ---------- My Styling ----------- */
@@ -843,5 +852,10 @@ $dockbarOpenGradientStart: #0EA6F9;
 	background-color:transparent;
 }
 
+.aui .portlet-asset-publisher .asset-content, .aui .portlet-asset-publisher .asset-summary, .aui .portlet-asset-publisher .asset-title, .aui .portlet-asset-publisher .header-title, .aui .portlet-asset-publisher li.title-list, .aui .portlet-blogs .entry-body, .aui .portlet-blogs .entry-title, .aui .portlet-blogs .header-title, .aui .portlet-journal-content .journal-content-article, .aui .portlet-message-boards .header-title, .aui .portlet-message-boards .thread-body {
+   word-break: normal;
+}
+
 @import url(custom_additional.css);
 @import url(topmenu.css);
+@import url(custom_content.css);

@@ -28,7 +28,7 @@ ${theme.include(body_top_include)}
 	<div class="rdconnect-header-container-top">
 		<div class="rdconnect-header-container-inner">
 			<div class="rdconnect-header-container-top-rdlogo">
-				<a href="http://rd-connect.bibbox.org/home">
+				<a href="/home">
 						<img alt="BBMRIAT-IDCard-Logo" height="27px" width="168px" src="/BBMRIATIDCard-theme/images/bbmriat.png" />
 				</a>
 			</div>
@@ -98,9 +98,11 @@ ${theme.include(body_top_include)}
 	
 </div>
 <footer id="footer" role="contentinfo">
-		<p class="powered-by">
-			Linking up rare disease resarch across the world<br/> <a href="http://www.rd-connect.eu" rel="external">RD-Connect</a>
-		</p>
+   <div class="bbmri-at-footer">
+      <p class="powered-by">
+         BBMRI.at | Neue Stiftingtalstrasse 2/B/6 | 8010 Graz - AUSTRIA
+      </p>
+   </div>
 </footer>
 ${theme.include(body_bottom_include)}
 
