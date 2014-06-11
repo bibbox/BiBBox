@@ -89,7 +89,9 @@ ${theme.include(body_top_include)}
 	
 		<div>
 			<#if is_signed_in>
-				<@liferay.dockbar />
+			   <#if is_admin>
+				  <@liferay.dockbar />
+				</#if>
 			</#if>
 		</div>
 	</div>

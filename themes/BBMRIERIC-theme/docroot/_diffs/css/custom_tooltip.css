@@ -53,4 +53,5 @@ a:hover.tooltips .bbmrieric-tooltip-div {
 	font-size: 10pt;
 }
 .bbmrieric-tooltip-div {
+	text-transform: none;
 }

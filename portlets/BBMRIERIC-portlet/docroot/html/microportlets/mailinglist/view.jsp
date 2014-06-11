@@ -11,9 +11,8 @@
 <portlet:defineObjects />
 
 <!-- Begin Search Form -->
-<!-- 
 <div id="mc_embed_signup">
-	<div class="mc-field-group" style="width: 315px;">
+	<div class="mc-field-group" style="width: 315px;padding-bottom:0;">
 	        <label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Search</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 		<div class="mc-field-group-float">
 		
@@ -26,7 +25,6 @@
 	    </div>
 	</div>
 </div>
- -->
 <!-- END Search Form -->
 
 <!-- Begin MailChimp Signup Form -->
@@ -36,7 +34,7 @@
 <form action="http://bbmri-eric.us8.list-manage.com/subscribe/post?u=c7415c09f5c4d908a6ec9388d&amp;id=39dc000a0f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 
 <div class="mc-field-group" style="width: 315px;padding-bottom:0;">
-        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL"><span style="font-weight:bold;">Newsletter</spam> and <span style="font-weight:bold;">Mailinglist</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL">sign up for <span style="font-weight:bold;">Newsletter</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 	<div class="mc-field-group-float">
         <input type="email" placeholder="Please enter mail address" value="" name="EMAIL" class="required email" id="mce-EMAIL">
         <input type="submit" value="SEND" name="subscribe" id="mc-embedded-subscribe">
@@ -69,14 +67,8 @@
 </div>
 <!-- Wiki -->
 <div>
-<a href="http://www.bbmri-wp4.eu/wiki/index.php/Main_Page" target="_blank">
-<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Wiki</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
-</a>
-</div>
-<!-- hCERN -->
-<div>
-<a href="http://www.hsern.eu/" target="_blank">
-<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">hCERN</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+<a href="/etools">
+<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">eTools</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 </a>
 </div>
 

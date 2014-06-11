@@ -30,6 +30,32 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>hub-portal-header-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>iris-database-protortyper</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.meduni.liferay.portlet.bbmriat.iris.IrisDatabaseProtortyperConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			iris-database-protortyper-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>iris-linked-open-data</portlet-name>
+		<icon>/icon.png</icon>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+      <friendly-url-mapping>web-of-rdconnect</friendly-url-mapping>
+      <friendly-url-routes>at/meduni/liferay/portlet/bbmriat/iris/iris-linked-open-data-friendly-url-routes.xml</friendly-url-routes>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			iris-linked-open-data-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

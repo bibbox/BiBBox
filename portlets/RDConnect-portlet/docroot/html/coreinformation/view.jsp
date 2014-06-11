@@ -21,12 +21,15 @@ for(Organization organization : organizations) {
 	organizationId = organization.getOrganizationId();
 	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
 	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
-	if(organization.getName().equalsIgnoreCase("National Biobank of Test"))
+	if(organization.getName().equalsIgnoreCase("National Biobank of Test")) {
 		continue;
-	if(organization.getName().equalsIgnoreCase("BBMUSK"))
+	}
+	if(organization.getName().equalsIgnoreCase("BBMUSK")) {
 		continue;
-	if(organization.getName().equalsIgnoreCase("Medical Univeristy of Shi'Kahr"))
+	}
+	if(organization.getName().equalsIgnoreCase("Medical Univeristy of Shi'Kahr")) {
 		continue;
+	}
 	
 	
 	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());

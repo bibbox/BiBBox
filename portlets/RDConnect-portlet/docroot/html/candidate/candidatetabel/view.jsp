@@ -216,7 +216,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 				},
 				dataType: 'json',
 				on: {
-				  failure: function() { alert('failure'); },
+				  failure: function() { "failure" },
 				  success: function(event, id, obj) { "success" }
 				}
 			});
@@ -237,7 +237,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 				},
 				dataType: 'json',
 				on: {
-				  failure: function() { alert('failure'); },
+				  failure: function() { "failure" },
 				  success: function(event, id, obj) { "success" }
 				}
 			});

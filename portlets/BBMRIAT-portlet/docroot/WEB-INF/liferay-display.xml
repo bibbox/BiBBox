@@ -9,4 +9,8 @@
 		<portlet id="ddl-record-hierarchy"></portlet>
 		<portlet id="hub-portal-header"></portlet>
 	</category>
+	<category name="Iris">
+		<portlet id="iris-database-protortyper"></portlet>
+		<portlet id="iris-linked-open-data"></portlet>
+	</category>
 </display>

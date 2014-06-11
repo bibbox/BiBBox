@@ -282,11 +282,11 @@ for(Document d : docs2) {
 	} else if(class_type_id.equalsIgnoreCase("10822")) {
 		class_type_id = "News";
 		image_url = request.getContextPath() + "/images/news.png";
-		href = "http://new.bbmri-eric.eu/web/guest/news/-/asset_publisher/V6WfCYIg8I5M/content/" + assetRenderer.getUrlTitle();
+		href = "/web/guest/news/-/asset_publisher/V6WfCYIg8I5M/content/" + assetRenderer.getUrlTitle();
 	} else if(class_type_id.equalsIgnoreCase("12029")) {
 		class_type_id = "Event";
 		image_url = request.getContextPath() + "/images/event.png";
-		href = "http://new.bbmri-eric.eu/web/guest/meetings/-/asset_publisher/5XsIcWr0VUL7/content/" + assetRenderer.getUrlTitle();
+		href = "/web/guest/meetings/-/asset_publisher/5XsIcWr0VUL7/content/" + assetRenderer.getUrlTitle();
 	}
 %>
 	<div class="bbmri-eric-search-container">

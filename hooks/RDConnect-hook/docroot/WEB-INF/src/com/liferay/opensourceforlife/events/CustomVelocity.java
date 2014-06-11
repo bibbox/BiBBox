@@ -27,7 +27,7 @@ public class CustomVelocity extends Action {
 	 * @see com.liferay.portal.kernel.events.Action#run(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void run(HttpServletRequest request, HttpServletResponse response) throws ActionException {
-		System.out.println("CustomVelocity.run()");
+		/*System.out.println("CustomVelocity.run()");
 		String pid = (String) request.getAttribute(WebKeys.PORTLET_SESSION);
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		
@@ -44,7 +44,7 @@ public class CustomVelocity extends Action {
 		vmVariables.put("rdcPortalId", var);
 		vmVariables.put("rdctest", "test");
 		
-		request.setAttribute(WebKeys.VM_VARIABLES, vmVariables);
+		request.setAttribute(WebKeys.VM_VARIABLES, vmVariables);*/
 	}
 
 }
