@@ -16,18 +16,39 @@
 
 <%@ include file="/html/portlet/directory/user/search_columns_user_name.jspf" %>
 
+<span style="text-transform:uppercase;">
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
-	name="screen-name"
-	orderable="<%= true %>"
+	name="Initials"
+	orderable="<%= false %>"
 	property="screenName"
+	cssClass="bbmri-eric-initials"
 />
+</span>
+
+<%
+String user_role = "Member";
+String cssclass = "";
+List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), themeDisplay.getSiteGroupId());
+for (UserGroupRole ugr : usergrouprolles) {
+   if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Chair")) {
+	   user_role =  "Chair";
+	   cssclass = "bbmri-eric-chair";
+   }
+   if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Co-Chair")) {
+	   user_role =  "Co-Chair";
+	   cssclass = "bbmri-eric-co-chair";
+	}
+}
+
+%>
 
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
-	name="job-title"
-	orderable="<%= true %>"
-	value="<%= user2.getJobTitle() %>"
+	name="Role"
+	orderable="<%= false %>"
+	value="<%= user_role %>"
+	cssClass="<%= cssclass %>"
 />
 
 <liferay-ui:search-container-column-text

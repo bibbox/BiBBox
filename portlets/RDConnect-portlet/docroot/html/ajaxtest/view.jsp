@@ -2,11 +2,14 @@
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
 
+<%@ page import="com.liferay.portal.service.OrganizationLocalServiceUtil" %>
+
 <portlet:defineObjects />
 
 This is the <b>Ajaxtest</b> portlet in View mode.
 
 <%
+
 
 %>
 

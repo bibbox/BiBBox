@@ -135,9 +135,11 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 			<portlet:param name="tabs1" value="<%= HtmlUtil.escape(tabs1) %>" />
 			<portlet:param name="redirect" value="<%= userSearchContainer.getIteratorURL().toString() %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+			<portlet:param name="cmd" value="xyz" />
 		</liferay-portlet:renderURL>
-
+      <% if(!user2.getMiddleName().equals("$$$")) { %>
 		<%@ include file="/html/portlet/directory/user/search_columns.jspf" %>
+		<% } %>
 	</liferay-ui:search-container-row>
 
 	<c:if test="<%= (organization != null) || (userGroup != null) %>">

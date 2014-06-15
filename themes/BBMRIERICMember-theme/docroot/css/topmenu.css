@@ -59,7 +59,7 @@
    padding: 13px 0 0 15px;
 }
 .bbmri-eric-member-area-top-menue-container-menu-current-site {
-   width: 418px;
+   width: 329px;
    height: 36px;
    float: left;
    font-weight:bold;
@@ -91,19 +91,7 @@
 .bbmri-eric-member-area-top-menue-container-menu-current-site ul, .bbmri-eric-member-area-top-menue-container-menu-current-site ul li {
 	list-style: none;
 }
-.bbmri-eric-member-area-top-menue-container-menu-workinggroups {
-   width: 219px;
-   height: 36px;
-   float: left;
-   
-   border-color: #D9DBDD;
-   border-style: solid;
-   border-width: 0 1px 0 0;
-   
-   list-style: none;
-   
-   padding: 13px 0 0 20px;
-}
+
 .bbmri-eric-member-area-top-menue-container-menu-user {
    width: 29px;
    height: 40px;
@@ -117,8 +105,9 @@
    top: 0;
    right: 0px;
 }
-.bbmri-eric-member-area-top-menue-container-committees {
-   width: 219px;
+/* ----------------------------------------------- */
+.bbmri-eric-member-area-top-menue-container-adhoc {
+   width: 179px;
    height: 36px;
    float: left;
    
@@ -128,7 +117,73 @@
    
    list-style: none;
    
-   padding: 13px 0 0 20px;
+   padding: 13px 0 0 10px;
+}
+.aui .bbmri-eric-member-area-top-menue-container-adhoc ul {
+   float: left;
+   list-style: none;
+   margin: 0;
+}
+.aui .bbmri-eric-member-area-top-menue-container-adhoc .bbmri-eric-member-area-top-menue-container-adhoc-ul-li {
+   width: 160px;
+   align: right;
+   text-align: right;
+   padding-right: 5px;
+   color: #64666A;
+}
+.aui .bbmri-eric-member-area-top-menue-container-adhoc ul:after {
+   content: ""; 
+   clear: both; 
+   display: block;
+}
+.bbmri-eric-member-area-top-menue-container-adhoc ul ul {
+   display: none;
+   background: #C5C5C5; 
+   border-radius: 0px; 
+   padding: 0;
+   position: absolute; 
+   top: 49px;
+   left: 400px;
+   z-index: 500;
+   width: 240px;
+}
+.bbmri-eric-member-area-top-menue-container-adhoc ul ul li {
+   border-top: 1px solid #C5C5C5;
+   border-bottom: 1px solid #C5C5C5;
+   position: relative;
+   float: left;
+   width: 237px;
+   padding-left: 3px;
+   align: left;
+   text-align: left;
+   
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+}
+.bbmri-eric-member-area-top-menue-container-adhoc ul ul li a {
+   color: #FFFFFF;
+}
+.aui .bbmri-eric-member-area-top-menue-container-adhoc ul ul li a:hover {
+   color: #FFFFFF;
+   text-decoration:none;
+}
+.bbmri-eric-member-area-top-menue-container-adhoc:hover > ul ul {
+   display: block;
+}
+/* ----------------------------------------------- */
+.bbmri-eric-member-area-top-menue-container-committees {
+   width: 179px;
+   height: 36px;
+   float: left;
+   
+   border-color: #D9DBDD;
+   border-style: solid;
+   border-width: 0 1px 0 0;
+   
+   list-style: none;
+   
+   padding: 13px 0 0 10px;
 }
 .aui .bbmri-eric-member-area-top-menue-container-committees ul {
    float: left;
@@ -136,7 +191,7 @@
    margin: 0;
 }
 .aui .bbmri-eric-member-area-top-menue-container-committees .bbmri-eric-member-area-top-menue-container-committees-ul-li {
-   width: 200px;
+   width: 160px;
    align: right;
    text-align: right;
    padding-right: 5px;
@@ -154,16 +209,16 @@
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 489px;
+   left: 590px;
    z-index: 500;
-   width: 285px;
+   width: 240px;
 }
 .bbmri-eric-member-area-top-menue-container-committees ul ul li {
    border-top: 1px solid #C5C5C5;
    border-bottom: 1px solid #C5C5C5;
    position: relative;
    float: left;
-   width: 281px;
+   width: 237px;
    padding-left: 3px;
    align: left;
    text-align: left;
@@ -183,13 +238,26 @@
    display: block;
 }
 /* ---------- working groups -------- */
+.bbmri-eric-member-area-top-menue-container-menu-workinggroups {
+   width: 179px;
+   height: 36px;
+   float: left;
+   
+   border-color: #D9DBDD;
+   border-style: solid;
+   border-width: 0 1px 0 0;
+   
+   list-style: none;
+   
+   padding: 13px 0 0 10px;
+}
 .aui .bbmri-eric-member-area-top-menue-container-menu-workinggroups ul {
    float: left;
    list-style: none;
    margin: 0;
 }
 .aui .bbmri-eric-member-area-top-menue-container-menu-workinggroups .bbmri-eric-member-area-top-menue-container-menu-workinggroups-ul-li {
-   width: 200px;
+   width: 160px;
    align: right;
    text-align: right;
    padding-right: 5px;
@@ -207,16 +275,16 @@
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 729px;
+   left: 780px;
    z-index: 500;
-   width: 285px;
+   width: 240px;
 }
 .bbmri-eric-member-area-top-menue-container-menu-workinggroups ul ul li {
    border-top: 1px solid #C5C5C5;
    border-bottom: 1px solid #C5C5C5;
    position: relative;
    float: left;
-   width: 281px;
+   width: 237px;
    padding-left: 3px;
    align: left;
    text-align: left;

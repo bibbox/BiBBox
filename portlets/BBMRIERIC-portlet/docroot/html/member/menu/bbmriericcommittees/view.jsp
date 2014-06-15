@@ -7,9 +7,13 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
-<%@ page import="com.liferay.portal.service.GroupLocalServiceUtil"%>
-<%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil"%>
+<%@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="java.io.Serializable" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
 
 <portlet:defineObjects />
 <div class="bbmri-eric-member-area-top-menue-container-menu-home">
@@ -19,26 +23,57 @@
 <%
 
 String url_home = themeDisplay.getURLPortal() + themeDisplay.getSiteGroup().getPathFriendlyURL(false, themeDisplay) + themeDisplay.getSiteGroup().getFriendlyURL();
+
 %>
    <aui:a href="<%= url_home %>"><ul><li><%= themeDisplay.getSiteGroupName() %></li></ul></aui:a>
+</div>
+<div class="bbmri-eric-member-area-top-menue-container-adhoc">
+   <ul>
+      <li class="bbmri-eric-member-area-top-menue-container-adhoc-ul-li">AD-HOC<img src="<%=request.getContextPath()%>/images/arrow.png" height="13px" width="19px" />
+         <ul>
+            <% 
+            List<Group> groups = themeDisplay.getUser().getMySiteGroups();
+            
+            for(Group group : groups) {
+               List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
+               for(AssetTag tag : tags) {
+               
+	               if(tag.getName().equalsIgnoreCase("ad-hoc working group")) {
+	               
+	                  String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+	                  %>
+	                  <li>
+	                    <aui:a href="<%= url %>"><%= group.getDescriptiveName() %></aui:a>
+	                  </li>
+	                  <%
+	               }
+               }
+            }
+            %>
+         </ul>
+      </li>
+   </ul>
 </div>
 <div class="bbmri-eric-member-area-top-menue-container-committees">
 	<ul>
 		<li class="bbmri-eric-member-area-top-menue-container-committees-ul-li">COMMITTEES<img src="<%=request.getContextPath()%>/images/arrow.png" height="13px" width="19px" />
 			<ul>
 				<% 
-				List<Group> groups = themeDisplay.getUser().getMySiteGroups();
+				groups = themeDisplay.getUser().getMySiteGroups();
 				
 				for(Group group : groups) {
-					if(group.getDescriptiveName().startsWith("WG")) {
-						continue;
+					List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
+					for(AssetTag tag : tags) {
+						if(tag.getName().equalsIgnoreCase("committee")) {
+						
+							String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+							%>
+							<li>
+							  <aui:a href="<%= url %>"><%= group.getDescriptiveName() %></aui:a>
+							</li>
+							<%
+						}
 					}
-				   String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
-				%>
-				<li>
-				  <aui:a href="<%= url %>"><%= group.getDescriptiveName() %></aui:a>
-				</li>
-				<%
 				}
 				%>
 		   </ul>
@@ -52,15 +87,18 @@ String url_home = themeDisplay.getURLPortal() + themeDisplay.getSiteGroup().getP
             <% 
             
             for(Group group : groups) {
-               if(!group.getDescriptiveName().startsWith("WG")) {
-                  continue;
-               }
-               String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
-            %>
-            <li>
-              <aui:a href="<%= url %>"><%= group.getDescriptiveName() %></aui:a>
-            </li>
-            <%
+            	List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
+                for(AssetTag tag : tags) {
+                
+	                if(tag.getName().equalsIgnoreCase("working group")) {
+			            String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+			            %>
+			            <li>
+			              <aui:a href="<%= url %>"><%= group.getDescriptiveName() %></aui:a>
+			            </li>
+			            <%
+	                }
+                }
             }
             %>
          </ul>

@@ -13,10 +13,15 @@
  * details.
  */
 --%>
-
-<%@ include file="/html/portlet/directory/init.jsp" %>
-<h1>xyi</h1>
 <%
+System.out.println("P-1");
+%>
+		 
+<%@ include file="/html/portlet/directory/init.jsp" %>
+
+<%
+System.out.println("P0");
+
 User selUser = PortalUtil.getSelectedUser(request);
 
 System.out.println("P1");

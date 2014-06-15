@@ -56,7 +56,6 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 		System.out.println("inside the process actionwhile creating the account>>>");
 		
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-		actionRequest.setAttribute(Constants.CMD, "---");
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
@@ -128,10 +127,9 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 			RenderResponse renderResponse) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("inside the render action while creating the account>>>");
-		String ret = originalStrutsPortletAction.render(null, portletConfig, renderRequest, renderResponse);
-		renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.TRUE);
-		//return super.render(portletConfig, renderRequest, renderResponse);
-		return ret;
+		 String ret = originalStrutsPortletAction.render(null, portletConfig, renderRequest, renderResponse);
+		 renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.TRUE);
+		 return ret;
 	}
 	
 	@Override

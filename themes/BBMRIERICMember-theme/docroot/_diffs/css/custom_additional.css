@@ -136,3 +136,14 @@ body.custom-background {
 }
 /* ---------- END Site Menue Level1 ---------- */
 /* ---------- END Site Menue ---------- */
+
+.aui .bbmri-eric-chair a, .aui .bbmri-eric-chair a:hover {
+	color: #ED660A;
+	font-weight:bold;
+}
+.aui .bbmri-eric-co-chair a, .aui .bbmri-eric-co-chair a:hover {
+   color: #ED660A;
+}
+.aui .bbmri-eric-initials a, .aui .bbmri-eric-initials a:hover {
+	text-transform:uppercase;
+}
