@@ -216,7 +216,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 				},
 				dataType: 'json',
 				on: {
-				  failure: function() { "failure" },
+				  failure: function() { alert('failure'); },
 				  success: function(event, id, obj) { "success" }
 				}
 			});
@@ -225,7 +225,6 @@ searchContainer.setIteratorURL(portletURL);    %>
 	AUI().use('aui-io-request', 'event', 'node', 'event-valuechange', 'click', function(A){
 		var nodeObject = A.all('#state');
 		nodeObject.on('click', function(event){
-			alert('Click Event');
 			var url = '<%= updateCandidateTableDataURL.toString() %>';
 			A.io.request(url,{
 				//this is the data that you are sending to the action method
@@ -237,7 +236,7 @@ searchContainer.setIteratorURL(portletURL);    %>
 				},
 				dataType: 'json',
 				on: {
-				  failure: function() { "failure" },
+				  failure: function() { alert('failure'); },
 				  success: function(event, id, obj) { "success" }
 				}
 			});

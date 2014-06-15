@@ -435,6 +435,7 @@ if (currentGroup.isOrganization()) {
 				}
 				if(l.equalsIgnoreCase("Quality")) {
 					pageinformation = quality;
+					l="Standards";
 				}
 				if(l.equalsIgnoreCase("Accessibility")) {
 					pageinformation = accessibility;

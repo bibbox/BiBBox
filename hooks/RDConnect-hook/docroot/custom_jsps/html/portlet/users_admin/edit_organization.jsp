@@ -138,5 +138,5 @@ else {
 </aui:script>
 
 <%!
-private static final String[] _CATEGORY_NAMES = {"organization-information", "identification", "miscellaneous"};
+private static final String[] _CATEGORY_NAMES = {"organization-information", "identification"};
 %>

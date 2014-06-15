@@ -242,10 +242,10 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		String[] array;
 		try {
 			List<Country> countrys =  CountryServiceUtil.getCountries();
-			array = new String[countrys.size()+2];
+			array = new String[countrys.size()+1];
 			array[0] = "all";
-			array[1] = "International";
-			int count = 2;
+			//array[1] = "International";
+			int count = 1;
 			for(Country c : countrys) {
 				array[count] = c.getNameCurrentValue();
 				count++;

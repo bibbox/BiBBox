@@ -16,12 +16,11 @@
 
 <%@ include file="/html/portlet/dynamic_data_list_display/init.jsp" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord" %>
-<theme:defineObjects/>
 
 <%
-
 DDLRecordSet recordSet = null;
-
+String editimgpath = "/images/edit.png";
+			
 try {
 	if (Validator.isNotNull(recordSetId)) {
 		recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(recordSetId);
@@ -31,7 +30,6 @@ try {
 		}
 	}
 %>
-
 	<c:choose>
 		<c:when test="<%= (recordSet != null) %>">
 			<c:choose>
@@ -135,7 +133,7 @@ if (currentGroup.isOrganization()) {
 					<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
 				</portlet:renderURL>
 				
-				<aui:a href="<%= editRecordURL %>">Edit</aui:a>
+				<aui:a href="<%= editRecordURL %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
 		<%
 				//break;
 			}
@@ -164,7 +162,7 @@ if (currentGroup.isOrganization()) {
 					<portlet:param name="editable" value="false" />
 				</portlet:renderURL>
 				
-				<aui:a href="<%= editRecordSetURL %>">Edit</aui:a> / <aui:a href="<%= addRecordURL %>">ADD</aui:a>
+				<aui:a href="<%= editRecordSetURL %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a> / <aui:a href="<%= addRecordURL %>">ADD</aui:a>
 		<%
 		}
 	}

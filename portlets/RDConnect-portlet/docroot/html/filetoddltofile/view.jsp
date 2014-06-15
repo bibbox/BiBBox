@@ -15,12 +15,20 @@
    
 %>
 
+
 <portlet:actionURL name='<%="uploadFile"%>' var="uploadFileURL"
 	windowState="normal" />
 <div style="width: 900px;flaot:left;">
+
+<p>
+	you can complete the "disease matrix" also by using this xls file. The file can be downloaded, filled in and uploaded directly into the system
+		
+</p>
 <aui:form action="<%=uploadFileURL%>" enctype="multipart/form-data"
 	method="post" name="fm">
 	<div style="width: 200px;flaot:left;">
+
+		
 	<aui:fieldset>
 		<aui:input type="hidden" name="rdc_organisation" value="<%= organizationId %>" />
 		<input type="file" name="fileupload" id="fileupload" size="60" />
