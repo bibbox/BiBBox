@@ -36,7 +36,7 @@ for (UserGroupRole ugr : usergrouprolles) {
 	   cssclass = "bbmri-eric-chair";
    }
    if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Co-Chair")) {
-	   user_role =  "Co-Chair";
+	   user_role =  "Vice-Chair";
 	   cssclass = "bbmri-eric-co-chair";
 	}
 }

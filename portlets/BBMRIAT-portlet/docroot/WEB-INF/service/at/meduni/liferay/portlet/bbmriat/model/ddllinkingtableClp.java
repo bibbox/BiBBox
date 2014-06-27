@@ -77,7 +77,6 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 		attributes.put("recordid", getRecordid());
 		attributes.put("recordsetid", getRecordsetid());
 		attributes.put("linkrecordid", getLinkrecordid());
-		attributes.put("linkrecordsetid", getLinkrecordsetid());
 
 		return attributes;
 	}
@@ -106,12 +105,6 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 
 		if (linkrecordid != null) {
 			setLinkrecordid(linkrecordid);
-		}
-
-		Long linkrecordsetid = (Long)attributes.get("linkrecordsetid");
-
-		if (linkrecordsetid != null) {
-			setLinkrecordsetid(linkrecordsetid);
 		}
 	}
 
@@ -207,29 +200,6 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 		}
 	}
 
-	@Override
-	public long getLinkrecordsetid() {
-		return _linkrecordsetid;
-	}
-
-	@Override
-	public void setLinkrecordsetid(long linkrecordsetid) {
-		_linkrecordsetid = linkrecordsetid;
-
-		if (_ddllinkingtableRemoteModel != null) {
-			try {
-				Class<?> clazz = _ddllinkingtableRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setLinkrecordsetid", long.class);
-
-				method.invoke(_ddllinkingtableRemoteModel, linkrecordsetid);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
 	public BaseModel<?> getddllinkingtableRemoteModel() {
 		return _ddllinkingtableRemoteModel;
 	}
@@ -305,7 +275,6 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 		clone.setRecordid(getRecordid());
 		clone.setRecordsetid(getRecordsetid());
 		clone.setLinkrecordid(getLinkrecordid());
-		clone.setLinkrecordsetid(getLinkrecordsetid());
 
 		return clone;
 	}
@@ -360,7 +329,7 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{ddllinkingtable=");
 		sb.append(getDdllinkingtable());
@@ -370,8 +339,6 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 		sb.append(getRecordsetid());
 		sb.append(", linkrecordid=");
 		sb.append(getLinkrecordid());
-		sb.append(", linkrecordsetid=");
-		sb.append(getLinkrecordsetid());
 		sb.append("}");
 
 		return sb.toString();
@@ -379,7 +346,7 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable");
@@ -401,10 +368,6 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 			"<column><column-name>linkrecordid</column-name><column-value><![CDATA[");
 		sb.append(getLinkrecordid());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>linkrecordsetid</column-name><column-value><![CDATA[");
-		sb.append(getLinkrecordsetid());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -415,6 +378,5 @@ public class ddllinkingtableClp extends BaseModelImpl<ddllinkingtable>
 	private long _recordid;
 	private long _recordsetid;
 	private long _linkrecordid;
-	private long _linkrecordsetid;
 	private BaseModel<?> _ddllinkingtableRemoteModel;
 }

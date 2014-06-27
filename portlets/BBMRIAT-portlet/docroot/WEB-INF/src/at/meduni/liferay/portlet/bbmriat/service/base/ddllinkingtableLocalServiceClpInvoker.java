@@ -113,6 +113,10 @@ public class ddllinkingtableLocalServiceClpInvoker {
 		_methodName33 = "setBeanIdentifier";
 
 		_methodParameterTypes33 = new String[] { "java.lang.String" };
+
+		_methodName38 = "getDDLEntrysByRecordAndRecordset";
+
+		_methodParameterTypes38 = new String[] { "long", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +220,12 @@ public class ddllinkingtableLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName38.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
+			return ddllinkingtableLocalServiceUtil.getDDLEntrysByRecordAndRecordset(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +265,6 @@ public class ddllinkingtableLocalServiceClpInvoker {
 	private String[] _methodParameterTypes32;
 	private String _methodName33;
 	private String[] _methodParameterTypes33;
+	private String _methodName38;
+	private String[] _methodParameterTypes38;
 }

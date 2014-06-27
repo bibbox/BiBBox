@@ -14,6 +14,11 @@
 
 package at.meduni.liferay.portlet.bbmriat.service.impl;
 
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+
+import at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable;
 import at.meduni.liferay.portlet.bbmriat.service.base.ddllinkingtableLocalServiceBaseImpl;
 
 /**
@@ -37,4 +42,13 @@ public class ddllinkingtableLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.bbmriat.service.ddllinkingtableLocalServiceUtil} to access the ddllinkingtable local service.
 	 */
+	public List<ddllinkingtable> getDDLEntrysByRecordAndRecordset(long recordid, long recordsetid) {
+		try {
+			return ddllinkingtablePersistence.findByRecordsByRecordset(recordid, recordsetid);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

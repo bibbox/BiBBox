@@ -53,7 +53,6 @@ public class ddllinkingtableWrapper implements ddllinkingtable,
 		attributes.put("recordid", getRecordid());
 		attributes.put("recordsetid", getRecordsetid());
 		attributes.put("linkrecordid", getLinkrecordid());
-		attributes.put("linkrecordsetid", getLinkrecordsetid());
 
 		return attributes;
 	}
@@ -82,12 +81,6 @@ public class ddllinkingtableWrapper implements ddllinkingtable,
 
 		if (linkrecordid != null) {
 			setLinkrecordid(linkrecordid);
-		}
-
-		Long linkrecordsetid = (Long)attributes.get("linkrecordsetid");
-
-		if (linkrecordsetid != null) {
-			setLinkrecordsetid(linkrecordsetid);
 		}
 	}
 
@@ -189,26 +182,6 @@ public class ddllinkingtableWrapper implements ddllinkingtable,
 	@Override
 	public void setLinkrecordid(long linkrecordid) {
 		_ddllinkingtable.setLinkrecordid(linkrecordid);
-	}
-
-	/**
-	* Returns the linkrecordsetid of this ddllinkingtable.
-	*
-	* @return the linkrecordsetid of this ddllinkingtable
-	*/
-	@Override
-	public long getLinkrecordsetid() {
-		return _ddllinkingtable.getLinkrecordsetid();
-	}
-
-	/**
-	* Sets the linkrecordsetid of this ddllinkingtable.
-	*
-	* @param linkrecordsetid the linkrecordsetid of this ddllinkingtable
-	*/
-	@Override
-	public void setLinkrecordsetid(long linkrecordsetid) {
-		_ddllinkingtable.setLinkrecordsetid(linkrecordsetid);
 	}
 
 	@Override

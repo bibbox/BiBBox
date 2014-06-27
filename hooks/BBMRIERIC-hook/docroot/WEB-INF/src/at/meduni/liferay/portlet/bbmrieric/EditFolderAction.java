@@ -46,6 +46,7 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 
 	public EditFolderAction() {
 		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	@Override
@@ -56,6 +57,10 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 		System.out.println("inside the process actionwhile creating the account>>>");
 		
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		
+		System.out.println("---->Test" + ParamUtil.getString(actionRequest, "groupPermissions"));
+		System.out.println("---->Test" + ParamUtil.getString(actionRequest, "guestPermissions_ACCESS"));
+		System.out.println("---->Test" + ParamUtil.getString(actionRequest, "inputPermissionsViewRole"));
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
@@ -127,7 +132,8 @@ public class EditFolderAction extends BaseStrutsPortletAction {
 			RenderResponse renderResponse) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("inside the render action while creating the account>>>");
-		 String ret = originalStrutsPortletAction.render(null, portletConfig, renderRequest, renderResponse);
+		String ret = super.render(originalStrutsPortletAction, portletConfig, renderRequest, renderResponse);
+		 //String ret = originalStrutsPortletAction.render(null, portletConfig, renderRequest, renderResponse);
 		 renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.TRUE);
 		 return ret;
 	}

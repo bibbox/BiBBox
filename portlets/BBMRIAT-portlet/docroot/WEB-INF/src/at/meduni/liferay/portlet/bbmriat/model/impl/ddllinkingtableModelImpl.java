@@ -60,10 +60,9 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 			{ "ddllinkingtable", Types.BIGINT },
 			{ "recordid", Types.BIGINT },
 			{ "recordsetid", Types.BIGINT },
-			{ "linkrecordid", Types.BIGINT },
-			{ "linkrecordsetid", Types.BIGINT }
+			{ "linkrecordid", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bbmriat.ddllinkingtable (ddllinkingtable LONG not null primary key,recordid LONG,recordsetid LONG,linkrecordid LONG,linkrecordsetid LONG)";
+	public static final String TABLE_SQL_CREATE = "create table bbmriat.ddllinkingtable (ddllinkingtable LONG not null primary key,recordid LONG,recordsetid LONG,linkrecordid LONG)";
 	public static final String TABLE_SQL_DROP = "drop table bbmriat.ddllinkingtable";
 	public static final String ORDER_BY_JPQL = " ORDER BY ddllinkingtable.recordid ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bbmriat.ddllinkingtable.recordid ASC";
@@ -80,6 +79,7 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 				"value.object.column.bitmask.enabled.at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable"),
 			true);
 	public static long RECORDID_COLUMN_BITMASK = 1L;
+	public static long RECORDSETID_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable"));
 
@@ -124,7 +124,6 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 		attributes.put("recordid", getRecordid());
 		attributes.put("recordsetid", getRecordsetid());
 		attributes.put("linkrecordid", getLinkrecordid());
-		attributes.put("linkrecordsetid", getLinkrecordsetid());
 
 		return attributes;
 	}
@@ -153,12 +152,6 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 
 		if (linkrecordid != null) {
 			setLinkrecordid(linkrecordid);
-		}
-
-		Long linkrecordsetid = (Long)attributes.get("linkrecordsetid");
-
-		if (linkrecordsetid != null) {
-			setLinkrecordsetid(linkrecordsetid);
 		}
 	}
 
@@ -201,7 +194,19 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 
 	@Override
 	public void setRecordsetid(long recordsetid) {
+		_columnBitmask |= RECORDSETID_COLUMN_BITMASK;
+
+		if (!_setOriginalRecordsetid) {
+			_setOriginalRecordsetid = true;
+
+			_originalRecordsetid = _recordsetid;
+		}
+
 		_recordsetid = recordsetid;
+	}
+
+	public long getOriginalRecordsetid() {
+		return _originalRecordsetid;
 	}
 
 	@Override
@@ -212,16 +217,6 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 	@Override
 	public void setLinkrecordid(long linkrecordid) {
 		_linkrecordid = linkrecordid;
-	}
-
-	@Override
-	public long getLinkrecordsetid() {
-		return _linkrecordsetid;
-	}
-
-	@Override
-	public void setLinkrecordsetid(long linkrecordsetid) {
-		_linkrecordsetid = linkrecordsetid;
 	}
 
 	public long getColumnBitmask() {
@@ -259,7 +254,6 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 		ddllinkingtableImpl.setRecordid(getRecordid());
 		ddllinkingtableImpl.setRecordsetid(getRecordsetid());
 		ddllinkingtableImpl.setLinkrecordid(getLinkrecordid());
-		ddllinkingtableImpl.setLinkrecordsetid(getLinkrecordsetid());
 
 		ddllinkingtableImpl.resetOriginalValues();
 
@@ -322,6 +316,10 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 
 		ddllinkingtableModelImpl._setOriginalRecordid = false;
 
+		ddllinkingtableModelImpl._originalRecordsetid = ddllinkingtableModelImpl._recordsetid;
+
+		ddllinkingtableModelImpl._setOriginalRecordsetid = false;
+
 		ddllinkingtableModelImpl._columnBitmask = 0;
 	}
 
@@ -337,14 +335,12 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 
 		ddllinkingtableCacheModel.linkrecordid = getLinkrecordid();
 
-		ddllinkingtableCacheModel.linkrecordsetid = getLinkrecordsetid();
-
 		return ddllinkingtableCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{ddllinkingtable=");
 		sb.append(getDdllinkingtable());
@@ -354,8 +350,6 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 		sb.append(getRecordsetid());
 		sb.append(", linkrecordid=");
 		sb.append(getLinkrecordid());
-		sb.append(", linkrecordsetid=");
-		sb.append(getLinkrecordsetid());
 		sb.append("}");
 
 		return sb.toString();
@@ -363,7 +357,7 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable");
@@ -385,10 +379,6 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 			"<column><column-name>linkrecordid</column-name><column-value><![CDATA[");
 		sb.append(getLinkrecordid());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>linkrecordsetid</column-name><column-value><![CDATA[");
-		sb.append(getLinkrecordsetid());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -404,8 +394,9 @@ public class ddllinkingtableModelImpl extends BaseModelImpl<ddllinkingtable>
 	private long _originalRecordid;
 	private boolean _setOriginalRecordid;
 	private long _recordsetid;
+	private long _originalRecordsetid;
+	private boolean _setOriginalRecordsetid;
 	private long _linkrecordid;
-	private long _linkrecordsetid;
 	private long _columnBitmask;
 	private ddllinkingtable _escapedModel;
 }

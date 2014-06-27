@@ -14,6 +14,13 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
+<%@ page import="com.liferay.portal.model.UserGroupRole" %>
+<%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+
+<%@ page import="java.io.ByteArrayOutputStream" %>
+<%@ page import="java.io.ObjectOutputStream" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>
 
 <portlet:defineObjects />
 <div class="bbmri-eric-member-area-top-menue-container-menu-home">
@@ -21,7 +28,7 @@
 </div>
 <div class="bbmri-eric-member-area-top-menue-container-menu-current-site">
 <%
-
+String currentURL = PortalUtil.getCurrentURL(request);
 String url_home = themeDisplay.getURLPortal() + themeDisplay.getSiteGroup().getPathFriendlyURL(false, themeDisplay) + themeDisplay.getSiteGroup().getFriendlyURL();
 
 %>
@@ -41,9 +48,19 @@ String url_home = themeDisplay.getURLPortal() + themeDisplay.getSiteGroup().getP
 	               if(tag.getName().equalsIgnoreCase("ad-hoc working group")) {
 	               
 	                  String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+	                  //String state = JSONFactoryUtil.looseDeserialize(group.getExpandoBridge().getAttribute("state").toString(), Company.class);
+	                	//String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
+	                  
+	                  
+	                  String grouptitle = group.getDescriptiveName();
+	                  /*if(state.equalsIgnoreCase("closed")) {
+	                	  grouptitle = state + group.getDescriptiveName();
+	                  } else {
+	                	  grouptitle = state + group.getDescriptiveName();
+	                  }*/
 	                  %>
 	                  <li>
-	                    <aui:a href="<%= url %>"><%= group.getDescriptiveName() %></aui:a>
+	                    <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
 	                  </li>
 	                  <%
 	               }
@@ -67,11 +84,21 @@ String url_home = themeDisplay.getURLPortal() + themeDisplay.getSiteGroup().getP
 						if(tag.getName().equalsIgnoreCase("committee")) {
 						
 							String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
-							%>
-							<li>
-							  <aui:a href="<%= url %>"><%= group.getDescriptiveName() %></aui:a>
-							</li>
-							<%
+		                     //String state = JSONFactoryUtil.looseDeserialize(group.getExpandoBridge().getAttribute("state").toString(), Company.class);
+		                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
+		                     
+		                     
+		                     String grouptitle = group.getDescriptiveName();
+		                     /*if(state.equalsIgnoreCase("closed")) {
+		                       grouptitle = state + group.getDescriptiveName();
+		                     } else {
+		                       grouptitle = state + group.getDescriptiveName();
+		                     }*/
+		                     %>
+		                     <li>
+		                       <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
+		                     </li>
+		                     <%
 						}
 					}
 				}
@@ -91,12 +118,22 @@ String url_home = themeDisplay.getURLPortal() + themeDisplay.getSiteGroup().getP
                 for(AssetTag tag : tags) {
                 
 	                if(tag.getName().equalsIgnoreCase("working group")) {
-			            String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
-			            %>
-			            <li>
-			              <aui:a href="<%= url %>"><%= group.getDescriptiveName() %></aui:a>
-			            </li>
-			            <%
+	                	String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+	                     //String state = JSONFactoryUtil.looseDeserialize(group.getExpandoBridge().getAttribute("state").toString(), Company.class);
+	                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
+	                     
+	                     
+	                     String grouptitle = group.getDescriptiveName();
+	                     /*if(state.equalsIgnoreCase("closed")) {
+	                       grouptitle = state + group.getDescriptiveName();
+	                     } else {
+	                       grouptitle = state + group.getDescriptiveName();
+	                     }*/
+	                     %>
+	                     <li>
+	                       <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
+	                     </li>
+	                     <%
 	                }
                 }
             }
@@ -114,6 +151,11 @@ editmyusersURL.setParameter("p_p_state", "maximized");
 editmyusersURL.setParameter("controlPanelCategory", "my");
 String portletResource = ParamUtil.getString(request, "portletResource");
 
+LiferayPortletURL editsitemembershipURL = PortletURLFactoryUtil.create(request, "174", controlPanelPlid, "RENDER_PHASE");
+editsitemembershipURL.setDoAsGroupId(themeDisplay.getSiteGroupId());
+editsitemembershipURL.setControlPanelCategory("current_site.users");
+editsitemembershipURL.setParameter("redirect", currentURL);
+editsitemembershipURL.setWindowState(WindowState.MAXIMIZED);
 /*editmyusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
 editmyusersURL.setParameter("struts_action", "/users_admin/edit_user");
 editmyusersURL.setParameter("p_p_state", "maximized");
@@ -130,10 +172,23 @@ editmyusersURL.setParameter("p_u_i_d", String.valueOf(themeDisplay.getUserId()))
 		<li id="portalmyuseredit" style="cursor:pointer;">
 		<img style="opacity:0.5;filter:alpha(opacity=50);" alt="myaccount" height="20px" width="20px" src="<%= imgPath %>" />
 		<%= themeDisplay.getUser().getFullName() %></li>
+		<!-- Organisation Owner For membership Requests -->
+      <%
+      List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), themeDisplay.getSiteGroupId());
+      for (UserGroupRole ugr : usergrouprolles) {
+         if(ugr.getRole().getName().equalsIgnoreCase("BBMRI ERIC Site Owner")) {
+            %>
+            <li id="sitemembership" style="cursor:pointer;">
+            Site Membership Management</li>
+            <%
+         }
+      }
+      %>
 		<!-- Sign out -->
 		<li class="sign-out"><aui:a href="<%= themeDisplay.getURLSignOut() %>">
 		<img style="opacity:0.5;filter:alpha(opacity=50);" alt="myaccount" height="18px" width="10px" src="<%= request.getContextPath() %>/images/signinkey.png" />
 		Sign Out</aui:a></li>
+		
 		</ul>
 	<% } else { %>
 		<img alt="myaccount" height="18px" width="18px" src="<%= request.getContextPath() %>/images/signinkey.png" />
@@ -160,6 +215,25 @@ editmyusersURL.setParameter("p_u_i_d", String.valueOf(themeDisplay.getUserId()))
                         id: '_<%=HtmlUtil.escapeJS(portletResource)%>_selectFolder',
                         title: 'Edit my account.',
                         uri: '<%=editmyusersURL.toString()%>'
+                     }
+                  );
+               }
+            );
+</aui:script>
+<aui:script use="aui-base">
+            A.all('#sitemembership').on(
+               'click',
+               function(event) {
+                  Liferay.Util.selectEntity(
+                     {
+                        dialog: {
+                           constrain: true,
+                           modal: true,
+                           width: 1000
+                        },
+                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_sitemembership',
+                        title: 'Edit Site Membership.',
+                        uri: '<%=editsitemembershipURL.toString()%>'
                      }
                   );
                }

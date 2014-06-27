@@ -289,6 +289,13 @@ public class ddllinkingtableLocalServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> getDDLEntrysByRecordAndRecordset(
+		long recordid, long recordsetid) {
+		return _ddllinkingtableLocalService.getDDLEntrysByRecordAndRecordset(recordid,
+			recordsetid);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

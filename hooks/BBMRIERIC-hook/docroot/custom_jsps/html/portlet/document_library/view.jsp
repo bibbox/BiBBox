@@ -118,13 +118,7 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 				<liferay-util:include page="/html/portlet/document_library/breadcrumb.jsp" />
 			</div>
 
-			<!-- <div class="hide" id="<portlet:namespace />syncNotification">
-				<div class="alert alert-info sync-notification" id="<portlet:namespace />syncNotificationContent">
-					<a href="http://www.liferay.com/products/liferay-sync" target="_blank">
-						<liferay-ui:message key="access-these-files-offline-using-liferay-sync" />
-					</a>
-				</div>
-			</div> -->
+<!-- Deleted -->
 
 			<liferay-portlet:renderURL varImpl="editFileEntryURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />

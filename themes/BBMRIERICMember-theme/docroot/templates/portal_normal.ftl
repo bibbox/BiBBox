@@ -13,8 +13,11 @@
 	
 	<#if !is_signed_in>
      <#assign loginpage = themeDisplay.getURLCurrent()?starts_with("/web/home/login") />
+     <#assign loginpage2 = themeDisplay.getURLCurrent()?starts_with("/c/portal/update_password") />
       <#if !loginpage>
+        <#if !loginpage2>
          <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
+        </#if>
       </#if>
    </#if>
    
@@ -39,13 +42,17 @@ ${theme.include(body_top_include)}
 	<#if is_admin>
 		<@liferay.dockbar />
 	</#if>
+	<#assign canseedockbar = user_middle_name?contains("$$$") />
+   <#if canseedockbar>
+      <@liferay.dockbar />
+   </#if>
 </#if>
 
 <!-- BBMRI MEMBER Area Top Menue -->
 <div class="bbmri-eric-member-area-top-menue">
    <div class="bbmri-eric-member-area-top-menue-container">
       <div class="bbmri-eric-member-area-top-menue-container-bbmri-member-logo">
-         <a href="/web/guest/about"><img alt="BBMRI-ERIC-Logo" height="40px" width="140px" src="/BBMRIERICMember-theme/images/bbmri_eric_logo.png" /></a>
+         <a href="#"><img alt="BBMRI-ERIC-Logo" height="40px" width="140px" src="/BBMRIERICMember-theme/images/bbmri_eric_logo.png" /></a>
       </div>
       <div class="bbmri-eric-member-area-top-menue-container-menu">
          <#if is_signed_in>
@@ -63,37 +70,6 @@ ${theme.include(body_top_include)}
 <div>
    <!-- END BBMRI MEMBER Area Top Menue -->
 <#if is_signed_in>
-<!--
-   <div id="bbmri-eric-member-area-top-toggler">
-      <div class="bbmri-eric-member-area-top-area-expand">
-         <div class="bbmri-eric-member-area-top-area-expand-container">
-            <div class="bbmri-eric-member-area-top-area-expand-container-user-portlet">
-               <#assign userportletPortletId = "bbmriericuser_WAR_BBMRIERICportlet" />
-               <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-               <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, userportletPortletId) />
-               <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-                  <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-                  <#assign temp = portletSetup.store() />
-               </#if>
-               ${theme.runtime(userportletPortletId, "", "")}
-            </div>
-            <div class="bbmri-eric-member-area-top-area-expand-container-committees">
-               <#assign committeesareaPortletId = "bbmriericcommitteesarea_WAR_BBMRIERICportlet" />
-               <#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-               <#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, committeesareaPortletId) />
-               <#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-                  <#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-                  <#assign temp = portletSetup.store() />
-               </#if>
-               ${theme.runtime(committeesareaPortletId, "", "")}
-            </div>
-         </div>
-      </div>
-   </div>
-   -->
-   <!-- BBMRI MEMBER Area Top Area -->
-   
-   <!-- END BBMRI MEMBER Area Top Area -->
    
    
    <div class="bbmri_eric_header-menucontainer">
@@ -115,11 +91,11 @@ ${theme.include(body_top_include)}
    			<#if selectable>
    				${theme.include(content_include)}
    			<#else>
-   				<!--${portletDisplay.recycle()}
+   				${portletDisplay.recycle()}
    	
    				${portletDisplay.setTitle(the_title)}
    	
-   				${theme.wrapPortlet("portlet.ftl", content_include)}-->
+   				${theme.wrapPortlet("portlet.ftl", content_include)}
    			</#if>
    		</div>
    	</div>

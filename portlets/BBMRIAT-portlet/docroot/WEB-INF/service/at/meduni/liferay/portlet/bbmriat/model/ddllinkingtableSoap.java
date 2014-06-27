@@ -33,7 +33,6 @@ public class ddllinkingtableSoap implements Serializable {
 		soapModel.setRecordid(model.getRecordid());
 		soapModel.setRecordsetid(model.getRecordsetid());
 		soapModel.setLinkrecordid(model.getLinkrecordid());
-		soapModel.setLinkrecordsetid(model.getLinkrecordsetid());
 
 		return soapModel;
 	}
@@ -120,17 +119,8 @@ public class ddllinkingtableSoap implements Serializable {
 		_linkrecordid = linkrecordid;
 	}
 
-	public long getLinkrecordsetid() {
-		return _linkrecordsetid;
-	}
-
-	public void setLinkrecordsetid(long linkrecordsetid) {
-		_linkrecordsetid = linkrecordsetid;
-	}
-
 	private long _ddllinkingtable;
 	private long _recordid;
 	private long _recordsetid;
 	private long _linkrecordid;
-	private long _linkrecordsetid;
 }

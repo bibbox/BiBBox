@@ -1,5 +1,6 @@
 <nav class="${nav_css_class}" id="navigation" role="navigation">
 	<ul aria-label="<@liferay.language key="site-pages" />" role="menubar">
+	  <#assign first = true />
 		<#list nav_items as sub_nav_item>
 			<#if sub_nav_item.isSelected()>
 				<#list sub_nav_item.getChildren() as nav_child>
@@ -9,10 +10,14 @@
 					<#if nav_child.isSelected()>
 						<#assign nav_child_attr_selected = "aria-selected='true'" />
 						<#assign nav_child_css_class = "selected" />
-					</#if>
+					</#if>&nbsp;
                
                <#if nav_child.getName()?contains("BBMRI.")>
-                  <li style="padding-left: 10px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <#if first>
+                     <li style="width: 20px;padding: 0;">&nbsp;</li>
+                     <#assign first = false />
+                  </#if>
+                  <li style="padding-left: 10px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/${nav_child.getName()?substring(6, 8)?lower_case}.gif" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -23,7 +28,11 @@
                      </a>
                   </li>
                <#elseif nav_child.getName()?contains("GERMAN BIOBANK NODE")>
-                  <li style="padding-left: 10px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <#if first>
+                     <li style="width: 20px;padding: 0;">&nbsp;</li>
+                     <#assign first = false />
+                  </#if>
+                  <li style="padding-left: 10px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/de.gif" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -34,7 +43,11 @@
                      </a>
                   </li>
                <#elseif nav_child.getName()?contains("Common Service IT")>
-                  <li style="padding-left: 10px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <#if first>
+                     <li style="width: 20px;padding: 0;">&nbsp;</li>
+                     <#assign first = false />
+                  </#if>
+                  <li style="padding-left: 10px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/itFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -45,7 +58,11 @@
                      </a>
                   </li>
                <#elseif nav_child.getName()?contains("Central Executive Management Office")>
-                  <li style="padding-left: 30px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <#if first>
+                     <li style="width: 20px;padding: 0;">&nbsp;</li>
+                     <#assign first = false />
+                  </#if>
+                  <li style="padding-left: 30px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/hqFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -56,7 +73,11 @@
                      </a>
                   </li>
                <#elseif nav_child.getName()?contains("Common Service ELSI")>
-                  <li style="padding-left: 10px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <#if first>
+                     <li style="width: 20px;padding: 0;">&nbsp;</li>
+                     <#assign first = false />
+                  </#if>
+                  <li style="padding-left: 10px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/elsiFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -67,6 +88,9 @@
                      </a>
                   </li>
                <#else>
+                  <#if first>
+                     <#assign first = false />
+                  </#if>
                   <#list nav_child.getChildren() as nav_child_child>
                      <#if nav_child_child.isSelected()>
                         <#assign nav_child_attr_selected = "aria-selected='true'" />
@@ -96,5 +120,6 @@
 				</#list>
 			</#if>
 		</#list>
+		<li style="width: 5px;padding: 0;">&nbsp;</li>
 	</ul>
 </nav>

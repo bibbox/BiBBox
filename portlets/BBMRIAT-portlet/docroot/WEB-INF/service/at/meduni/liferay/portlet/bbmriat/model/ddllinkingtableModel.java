@@ -112,20 +112,6 @@ public interface ddllinkingtableModel extends BaseModel<ddllinkingtable> {
 	 */
 	public void setLinkrecordid(long linkrecordid);
 
-	/**
-	 * Returns the linkrecordsetid of this ddllinkingtable.
-	 *
-	 * @return the linkrecordsetid of this ddllinkingtable
-	 */
-	public long getLinkrecordsetid();
-
-	/**
-	 * Sets the linkrecordsetid of this ddllinkingtable.
-	 *
-	 * @param linkrecordsetid the linkrecordsetid of this ddllinkingtable
-	 */
-	public void setLinkrecordsetid(long linkrecordsetid);
-
 	@Override
 	public boolean isNew();
 

@@ -275,6 +275,12 @@ public class ddllinkingtableLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> getDDLEntrysByRecordAndRecordset(
+		long recordid, long recordsetid) {
+		return getService()
+				   .getDDLEntrysByRecordAndRecordset(recordid, recordsetid);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -15,5 +15,6 @@
 		<portlet id="bbmrieric-committees"></portlet>
 		<portlet id="bbmrieric-user"></portlet>
 		<portlet id="bbmrieric-committees-area"></portlet>
+		<portlet id="edit-folder"></portlet>
 	</category>
 </display>

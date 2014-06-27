@@ -6,6 +6,5 @@
 		<field name="recordid" type="long" />
 		<field name="recordsetid" type="long" />
 		<field name="linkrecordid" type="long" />
-		<field name="linkrecordsetid" type="long" />
 	</model>
 </model-hints>

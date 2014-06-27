@@ -35,7 +35,7 @@ public class ddllinkingtableCacheModel implements CacheModel<ddllinkingtable>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{ddllinkingtable=");
 		sb.append(ddllinkingtable);
@@ -45,8 +45,6 @@ public class ddllinkingtableCacheModel implements CacheModel<ddllinkingtable>,
 		sb.append(recordsetid);
 		sb.append(", linkrecordid=");
 		sb.append(linkrecordid);
-		sb.append(", linkrecordsetid=");
-		sb.append(linkrecordsetid);
 		sb.append("}");
 
 		return sb.toString();
@@ -60,7 +58,6 @@ public class ddllinkingtableCacheModel implements CacheModel<ddllinkingtable>,
 		ddllinkingtableImpl.setRecordid(recordid);
 		ddllinkingtableImpl.setRecordsetid(recordsetid);
 		ddllinkingtableImpl.setLinkrecordid(linkrecordid);
-		ddllinkingtableImpl.setLinkrecordsetid(linkrecordsetid);
 
 		ddllinkingtableImpl.resetOriginalValues();
 
@@ -73,7 +70,6 @@ public class ddllinkingtableCacheModel implements CacheModel<ddllinkingtable>,
 		recordid = objectInput.readLong();
 		recordsetid = objectInput.readLong();
 		linkrecordid = objectInput.readLong();
-		linkrecordsetid = objectInput.readLong();
 	}
 
 	@Override
@@ -83,12 +79,10 @@ public class ddllinkingtableCacheModel implements CacheModel<ddllinkingtable>,
 		objectOutput.writeLong(recordid);
 		objectOutput.writeLong(recordsetid);
 		objectOutput.writeLong(linkrecordid);
-		objectOutput.writeLong(linkrecordsetid);
 	}
 
 	public long ddllinkingtable;
 	public long recordid;
 	public long recordsetid;
 	public long linkrecordid;
-	public long linkrecordsetid;
 }

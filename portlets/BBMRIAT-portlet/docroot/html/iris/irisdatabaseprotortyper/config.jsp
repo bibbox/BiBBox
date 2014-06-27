@@ -1,5 +1,3 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
-<portlet:defineObjects />
+<%@ include file="/html/iris/init.jsp"%>
 
 This is the <b>Iris Database Protortyper</b> portlet in Config mode.

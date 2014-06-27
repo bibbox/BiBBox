@@ -2,6 +2,7 @@
 <!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.2.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_2_0.dtd">
 
 <hook>
+	<portal-properties>portal.properties</portal-properties>
 	<custom-jsp-dir>/custom_jsps</custom-jsp-dir>
 	<struts-action>
 		<struts-action-path>/document_library/create_folder_bbmri_eric</struts-action-path>

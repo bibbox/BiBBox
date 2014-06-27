@@ -130,7 +130,7 @@ editmyusersURL.setParameter("p_p_state", "maximized");
 editmyusersURL.setParameter("struts_action", "/login/create_account");
 editmyusersURL.setParameter("saveLastPath", "false");
 editmyusersURL.setParameter("p_p_lifecycle", "0");
-String register = "http://rd-connect.bibbox.org/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account";
+String register = "/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account";
 %>
 <li class="sign-in"><aui:a href="<%= themeDisplay.getURLSignIn() %>">Sign In</aui:a></li>
 <li class="sign-in"><aui:a href="<%= register %>">Register</aui:a></li>

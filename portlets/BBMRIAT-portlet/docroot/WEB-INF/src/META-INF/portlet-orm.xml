@@ -13,7 +13,6 @@
 			<basic name="recordid" />
 			<basic name="recordsetid" />
 			<basic name="linkrecordid" />
-			<basic name="linkrecordsetid" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

@@ -15,7 +15,6 @@
 		<column name="recordid" type="long" />
 		<column name="recordsetid" type="long" />
 		<column name="linkrecordid" type="long" />
-		<column name="linkrecordsetid" type="long" />
 
 		<!-- Order -->
 
@@ -28,5 +27,9 @@
 		<finder name="Recordid" return-type="Collection">
 			<finder-column name="recordid" />
 		</finder>
+		<finder name="RecordsByRecordset" return-type="Collection">
+         <finder-column name="recordid" />
+         <finder-column name="recordsetid" />
+      </finder>
 	</entity>
 </service-builder>
