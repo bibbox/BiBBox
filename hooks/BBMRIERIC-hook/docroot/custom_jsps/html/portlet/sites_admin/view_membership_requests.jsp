@@ -51,6 +51,12 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 	<liferay-util:param name="toolbarItem" value="view-membership-requests" />
 </liferay-util:include>
 
+   <liferay-ui:header
+      backURL="<%= redirect %>"
+      localizeTitle="<%= false %>"
+      title="View Membership Requests"
+   />
+
 <liferay-ui:tabs
 	names="pending,approved,denied"
 	url="<%= currentURL %>"
