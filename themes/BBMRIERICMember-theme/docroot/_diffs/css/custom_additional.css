@@ -116,7 +116,7 @@ body.custom-background {
 	height: 29px;
 }
 .aui .bbmri_eric_header-menucontainer-inner-sitemenue-main ul {
-	float: right;
+	float: left;
 	text-align: right;
 	padding:0px;
 	margin:0px;

@@ -1075,3 +1075,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 .dialog-iframe-root-node .dockbar {
    display: none;
 }
+.bbmri-eric-header-redisplay .taglib-header {
+    display: inline;
+}

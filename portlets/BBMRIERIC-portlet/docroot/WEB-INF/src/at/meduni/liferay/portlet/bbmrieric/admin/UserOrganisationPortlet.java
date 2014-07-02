@@ -1,6 +1,7 @@
 package at.meduni.liferay.portlet.bbmrieric.admin;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -18,11 +19,13 @@ import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.util.ContentUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -34,14 +37,23 @@ public class UserOrganisationPortlet extends MVCPortlet {
 	public void sendUserEmailForOrganisations(ActionRequest request, ActionResponse response) throws Exception {
 		try {
 			//Session session = connectMailserver();
+			List<String> emails = new ArrayList();
 			String subject = ParamUtil.getString(request, "subject");
-			String mailbody = ParamUtil.getString(request, "subject");
+			String mailbody = ParamUtil.getString(request, "mailbody");
 
 			Integer numberoforganisations = ParamUtil.getInteger(request, "numberoforganisations");
 			for(int i = 0; i < numberoforganisations; i++) {
 				if(ParamUtil.getBoolean(request, "mail_" + i)) {
-					sendUserEmailForOrganisation(ParamUtil.getLong(request, "organisationmail_" + i), subject, mailbody);
+					List<String> tmp_mail = sendUserEmailForOrganisation(request, ParamUtil.getLong(request, "organisationmail_" + i), subject, mailbody);
+					for(String m : tmp_mail) {
+						if(!emails.contains(m)) {
+							emails.add(m);
+						}
+					}
 				}
+			}
+			for(String email : emails) {
+				sendEmail(request, email, subject, mailbody);
 			}
 		} catch (Exception e) {
 			System.out.println("UserOrganisationPortlet::resetUserPasswordForOrganisations");
@@ -50,73 +62,64 @@ public class UserOrganisationPortlet extends MVCPortlet {
 		sendRedirect(request, response);
 	}
 	
-	private void sendUserEmailForOrganisation(long groupid, String subject, String mailbody) {
+	private void sendEmail(ActionRequest request, String email, String mailSubject, String mailBody) {
+		System.out.println("====sendMailMessage===");
+		System.out.println("email:" + email);
+		System.out.println("Subject:" + mailSubject);
+		System.out.println("Body:" + mailBody);
+        String senderMailAddress="contact@bbmri-eric.eu";
+        String receiverMailAddress=email;
+        try {
+                    MailMessage mailMessage=new MailMessage();
+	    mailMessage.setBody(mailBody);
+	    mailMessage.setSubject(mailSubject);
+	    mailMessage.setFrom(new InternetAddress(senderMailAddress));
+	    mailMessage.setTo(new InternetAddress(receiverMailAddress));
+        MailServiceUtil.sendEmail(mailMessage);
+        SessionMessages.add(request.getPortletSession(),"mail-send-success");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
+	private List<String> sendUserEmailForOrganisation(ActionRequest request, long groupid, String subject, String mailbody) {
+		List<String> emails = new ArrayList();
 		try {
+			// Get the Group
 			Group group = GroupLocalServiceUtil.getGroup(groupid);
+			// Get first set of Users
+			
 			List<User> users = UserLocalServiceUtil.getGroupUsers(group.getGroupId());
-			if(users.size() == 0) {
-				users = UserLocalServiceUtil.getOrganizationUsers(group.getOrganizationId());
-				for(User user : users) {
-					sendEmail(user, subject, mailbody);
+			for(User u : users) {
+				if(!emails.contains(u.getEmailAddress())) {
+					emails.add(u.getEmailAddress());
 				}
 			}
+			// Get all users from usergroups
+			List<UserGroup> usergroups = UserGroupLocalServiceUtil.getGroupUserGroups(group.getGroupId());
+			for(UserGroup g : usergroups) {
+				List<User> tmpuserlist = UserLocalServiceUtil.getUserGroupUsers(g.getUserGroupId());
+				for(User u : tmpuserlist) {
+					if(!emails.contains(u.getEmailAddress())) {
+						emails.add(u.getEmailAddress());
+					}
+				}
+			}
+			List<User> tmpuserlist = UserLocalServiceUtil.getOrganizationUsers(group.getOrganizationId());
+			for(User u : tmpuserlist) {
+				if(!emails.contains(u.getEmailAddress())) {
+					emails.add(u.getEmailAddress());
+				}
+			}
+
+			
 		} catch (PortalException | SystemException e) {
 			// TODO Auto-generated catch block
 			System.out.println("UserOrganisationPortlet::sendUserEmailForOrganisation");
 			e.printStackTrace();
 		} 
-	}
-	
-	private void sendEmail(User user, String subject, String mailbody) {  
-		try {
-			InternetAddress from = new InternetAddress("contact@bbmri-eric.eu", "BBMRI-ERIC Contact");
-			   
-			MailMessage mailMessage = new MailMessage();
-			mailMessage.setFrom(from);
-			mailMessage.setBody(mailbody);
-			mailMessage.setSubject(subject);
-			mailMessage.setTo(new InternetAddress(user.getEmailAddress(), user.getFullName()));
-			MailServiceUtil.sendEmail(mailMessage);
-		} catch(UnsupportedEncodingException e) {
-			System.out.println("UserOrganisationPortlet::sendEmail");
-			e.printStackTrace();
-		}
-
-	}
-	
-	private void sendEmaila(Session session, User user, String subject, String mailbody) {
-		try {
-			Message msg = new MimeMessage(session);
-			msg.addRecipient(Message.RecipientType.TO,
-			             new InternetAddress(user.getEmailAddress(), user.getFullName()));        
-	        msg.setSubject(subject);        
-	        msg.setText(mailbody);
-	        Transport.send(msg);
-		} catch (UnsupportedEncodingException | MessagingException e) {
-			// TODO Auto-generated catch block
-			System.out.println("UserOrganisationPortlet::sendEmail");
-			e.printStackTrace();
-		} 
-	}
-	
-	private Session connectMailserver() {
-		final String username = "robert.reihs@bbmri-eric.eu";
-		final String password = "gizmo123$";
-		
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.user", username);
-		props.put("mail.smtp.starttls.enable", "false");
-		props.put("mail.smtp.host", "mail.acpcloud.de");
-		props.put("mail.smtp.port", "25");
-
-		Session session = Session.getInstance(props,
-				  new javax.mail.Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(username, password);
-					}
-				  });
-		return session;
+		return emails;
 	}
 	
 	public void resetUserPasswordForOrganisations(ActionRequest request, ActionResponse response) throws Exception {
@@ -140,13 +143,31 @@ public class UserOrganisationPortlet extends MVCPortlet {
 	private void resetUserPasswordForOrganisation(long organisation_id, String password, boolean passwordreset, boolean silentchange) {
 		try {
 			silentchange = true;
+			passwordreset = true;
+			// Get the Group
 			Group group = GroupLocalServiceUtil.getGroup(organisation_id);
+			// Get first set of Users
 			List<User> users = UserLocalServiceUtil.getGroupUsers(group.getGroupId());
-			if(users.size() == 0) {
-				users = UserLocalServiceUtil.getOrganizationUsers(group.getOrganizationId());
+			changePasswordForUser(users, organisation_id, password, passwordreset, silentchange);
+			// Get all users from usergroups
+			List<UserGroup> tmpusergroups = UserGroupLocalServiceUtil.getGroupUserGroups(group.getGroupId());
+			for(UserGroup g : tmpusergroups) {
+				users = UserLocalServiceUtil.getUserGroupUsers(g.getUserGroupId());
+				changePasswordForUser(users, organisation_id, password, passwordreset, silentchange);
 			}
-			//System.out.println(group.getDescriptiveName() + " - Number of Organisation Users: " + users.size());
-			for(User user : users) {
+			List<User> tmpuserlist = UserLocalServiceUtil.getOrganizationUsers(group.getOrganizationId());
+			changePasswordForUser(users, organisation_id, password, passwordreset, silentchange);
+			
+		} catch (SystemException | PortalException e) {
+			System.out.println("UserOrganisationPortlet::resetUserPasswordForOrganisation");
+			e.printStackTrace();
+		} 
+	}
+	
+	private void changePasswordForUser(List<User> users, long organisation_id, String password, boolean passwordreset, boolean silentchange) {
+		//System.out.println(group.getDescriptiveName() + " - Number of Organisation Users: " + users.size());
+		for(User user : users) {
+			try {
 				System.out.println(user.getFullName());
 				List<UserGroup> usergroups = user.getUserGroups();
 				boolean change = true;
@@ -166,13 +187,17 @@ public class UserOrganisationPortlet extends MVCPortlet {
 					//System.out.println("      " + usergroup.getName());
 				}
 				if(change) {
+				
+					System.out.println("Change password for:" + user.getFullName());
+					passwordreset = true;
 					UserLocalServiceUtil.updatePassword(user.getUserId(), password, password, passwordreset, silentchange);
+				
 				}
-			}
-		} catch (SystemException | PortalException e) {
-			System.out.println("UserOrganisationPortlet::resetUserPasswordForOrganisation");
-			e.printStackTrace();
-		} 
+			} catch (SystemException | PortalException e) {
+				System.out.println("UserOrganisationPortlet::resetUserPasswordForOrganisation-password Change failed");
+				e.printStackTrace();
+			} 
+		}
 	}
 
 }

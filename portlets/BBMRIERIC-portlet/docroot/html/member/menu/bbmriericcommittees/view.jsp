@@ -31,59 +31,183 @@
 String currentURL = PortalUtil.getCurrentURL(request);
 String url_home = themeDisplay.getURLPortal() + themeDisplay.getSiteGroup().getPathFriendlyURL(false, themeDisplay) + themeDisplay.getSiteGroup().getFriendlyURL();
 
+List<Group> groups = themeDisplay.getUser().getMySiteGroups();
+boolean adhoc = false;
+boolean committees = false;
+boolean wg = false;
+for(Group group : groups) {
+	//System.out.println("----------------------");
+	//System.out.println(group.getDescriptiveName());
+	List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
+   for(AssetTag tag : tags) {
+	   if(tag.getName().equalsIgnoreCase("ad-hoc working group")) {
+		   adhoc = true;
+		   //System.out.println("ad-hoc working group");
+      }
+	   if(tag.getName().equalsIgnoreCase("committee")) {
+		   committees = true;
+		   //System.out.println("committee");
+	   }
+	   if(tag.getName().equalsIgnoreCase("working group")) {
+		   wg = true;
+		   //System.out.println("working group");
+	   }
+   }
+}
+String g1 = "";
+String g2 = "";
+String g3 = "";
+String tg1 = "";
+String tg2 = "";
+String tg3 = "";
+if(adhoc && committees && wg) {
+	g1 = "ad-hoc working group";
+	g2 = "committee";
+	g3 = "working group";
+	tg1 = "AD-HOC Groups";
+	tg2 = "COMMITTEES";
+	tg3 = "WORKING GROUPS";
+} else {
+	if(adhoc && committees && !wg) {
+		g2 = "ad-hoc working group";
+		g3 = "committee";
+		g1 = "";
+		tg1 = "";
+		tg2 = "AD-HOC Groups";
+		tg3 = "COMMITTEES";
+	}
+	if(adhoc && !committees && wg) {
+		g2 = "ad-hoc working group";
+		g1 = "";
+		g3 = "working group";
+		tg1 = "";
+		tg2 = "AD-HOC Groups";
+		tg3 = "WORKING GROUPS";
+	}
+	if(!adhoc && committees && wg) {
+		g1 = "";
+		g2 = "committee";
+		g3 = "working group"; 
+		tg1 = "";
+		tg2 = "COMMITTEES";
+		tg3 = "WORKING GROUPS";
+	}
+	if(adhoc && !committees && !wg) {
+	   g3 = "ad-hoc working group";
+	   g2 = "";
+	   g1 = "";
+	   tg1 = "";
+	   tg2 = "";
+	   tg3 = "AD-HOC Groups";
+	}
+	if(!adhoc && wg && !committees) {
+	   g2 = "";
+	   g1 = "";
+	   g3 = "working group"; 
+	   tg1 = "";
+	   tg2 = "";
+	   tg3 = "WORKING GROUPS";
+	}
+	if(committees && !wg && !adhoc) {
+	   g1 = "";
+	   g3 = "committee";
+	   g2 = "";   
+	   tg1 = "";
+	   tg2 = "";
+	   tg3 = "COMMITTEES";
+	}
+}
+
+
 %>
    <aui:a href="<%= url_home %>"><ul><li><%= themeDisplay.getSiteGroupName() %></li></ul></aui:a>
 </div>
 <div class="bbmri-eric-member-area-top-menue-container-adhoc">
    <ul>
-      <li class="bbmri-eric-member-area-top-menue-container-adhoc-ul-li">AD-HOC<img src="<%=request.getContextPath()%>/images/arrow.png" height="13px" width="19px" />
-         <ul>
-            <% 
-            List<Group> groups = themeDisplay.getUser().getMySiteGroups();
-            
-            for(Group group : groups) {
-               List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
-               for(AssetTag tag : tags) {
-               
-	               if(tag.getName().equalsIgnoreCase("ad-hoc working group")) {
+      <% if(!g1.equalsIgnoreCase("")) { %>
+	      <li class="bbmri-eric-member-area-top-menue-container-adhoc-ul-li"><%= tg1 %><img style="margin-left: 10px;" src="<%=request.getContextPath()%>/images/arrow.png" height="9px" width="11px" />
+	         <ul>
+	            <%    
+	            for(Group group : groups) {
+	               List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
+	               for(AssetTag tag : tags) {
 	               
-	                  String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
-	                  //String state = JSONFactoryUtil.looseDeserialize(group.getExpandoBridge().getAttribute("state").toString(), Company.class);
-	                	//String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
-	                  
-	                  
-	                  String grouptitle = group.getDescriptiveName();
-	                  /*if(state.equalsIgnoreCase("closed")) {
-	                	  grouptitle = state + group.getDescriptiveName();
-	                  } else {
-	                	  grouptitle = state + group.getDescriptiveName();
-	                  }*/
-	                  %>
-	                  <li>
-	                    <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
-	                  </li>
-	                  <%
+		               if(tag.getName().equalsIgnoreCase(g1)) {
+		               
+		                  String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+		                  //String state = JSONFactoryUtil.looseDeserialize(group.getExpandoBridge().getAttribute("state").toString(), Company.class);
+		                	//String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
+		                  
+		                  
+		                  String grouptitle = group.getDescriptiveName();
+		                  /*if(state.equalsIgnoreCase("closed")) {
+		                	  grouptitle = state + group.getDescriptiveName();
+		                  } else {
+		                	  grouptitle = state + group.getDescriptiveName();
+		                  }*/
+		                  %>
+		                  <li>
+		                    <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
+		                  </li>
+		                  <%
+		               }
 	               }
-               }
-            }
-            %>
-         </ul>
-      </li>
+	            }
+	            %>
+	         </ul>
+	      </li>
+      <% } %>
    </ul>
 </div>
 <div class="bbmri-eric-member-area-top-menue-container-committees">
 	<ul>
-		<li class="bbmri-eric-member-area-top-menue-container-committees-ul-li">COMMITTEES<img src="<%=request.getContextPath()%>/images/arrow.png" height="13px" width="19px" />
+	  <% if(!g2.equalsIgnoreCase("")) { %>
+		<li class="bbmri-eric-member-area-top-menue-container-committees-ul-li"><%= tg2 %><img style="margin-left: 10px;" src="<%=request.getContextPath()%>/images/arrow.png" height="9px" width="11px" />
 			<ul>
 				<% 
-				groups = themeDisplay.getUser().getMySiteGroups();
-				
-				for(Group group : groups) {
-					List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
-					for(AssetTag tag : tags) {
-						if(tag.getName().equalsIgnoreCase("committee")) {
-						
-							String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+					for(Group group : groups) {
+						List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
+						for(AssetTag tag : tags) {
+							if(tag.getName().equalsIgnoreCase(g2)) {
+							
+								String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
+			                     //String state = JSONFactoryUtil.looseDeserialize(group.getExpandoBridge().getAttribute("state").toString(), Company.class);
+			                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
+			                     
+			                     
+			                     String grouptitle = group.getDescriptiveName();
+			                     /*if(state.equalsIgnoreCase("closed")) {
+			                       grouptitle = state + group.getDescriptiveName();
+			                     } else {
+			                       grouptitle = state + group.getDescriptiveName();
+			                     }*/
+			                     %>
+			                     <li>
+			                       <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
+			                     </li>
+			                     <%
+							}
+						}
+					}
+					%>
+			   </ul>
+		   </li>
+	   <% } %>
+	</ul>
+</div>
+<div class="bbmri-eric-member-area-top-menue-container-menu-workinggroups">
+   <ul>
+      <% if(!g3.equalsIgnoreCase("")) { %>
+	      <li class="bbmri-eric-member-area-top-menue-container-menu-workinggroups-ul-li"><%= tg3 %><img style="margin-left: 10px;" src="<%=request.getContextPath()%>/images/arrow.png" height="9px" width="11px" />
+	         <ul>
+	            <% 
+            
+	            for(Group group : groups) {
+	            	List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
+	                for(AssetTag tag : tags) {
+	                
+		                if(tag.getName().equalsIgnoreCase(g3)) {
+		                	String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
 		                     //String state = JSONFactoryUtil.looseDeserialize(group.getExpandoBridge().getAttribute("state").toString(), Company.class);
 		                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
 		                     
@@ -99,47 +223,14 @@ String url_home = themeDisplay.getURLPortal() + themeDisplay.getSiteGroup().getP
 		                       <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
 		                     </li>
 		                     <%
-						}
-					}
-				}
-				%>
-		   </ul>
-	   </li>
-	</ul>
-</div>
-<div class="bbmri-eric-member-area-top-menue-container-menu-workinggroups">
-   <ul>
-      <li class="bbmri-eric-member-area-top-menue-container-menu-workinggroups-ul-li">WORKINGGROUPS<img src="<%=request.getContextPath()%>/images/arrow.png" height="13px" width="19px" />
-         <ul>
-            <% 
-            
-            for(Group group : groups) {
-            	List<AssetTag> tags = AssetTagServiceUtil.getTags(Group.class.getName(), group.getPrimaryKey());
-                for(AssetTag tag : tags) {
-                
-	                if(tag.getName().equalsIgnoreCase("working group")) {
-	                	String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
-	                     //String state = JSONFactoryUtil.looseDeserialize(group.getExpandoBridge().getAttribute("state").toString(), Company.class);
-	                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
-	                     
-	                     
-	                     String grouptitle = group.getDescriptiveName();
-	                     /*if(state.equalsIgnoreCase("closed")) {
-	                       grouptitle = state + group.getDescriptiveName();
-	                     } else {
-	                       grouptitle = state + group.getDescriptiveName();
-	                     }*/
-	                     %>
-	                     <li>
-	                       <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
-	                     </li>
-	                     <%
+		                }
 	                }
-                }
-            }
-            %>
-         </ul>
-      </li>
+	            }
+            
+	            %>
+	         </ul>
+	      </li>
+	   <% } %>
    </ul>
 </div>
 <div class="bbmri-eric-member-area-top-menue-container-menu-user">
@@ -163,14 +254,14 @@ editmyusersURL.setParameter("p_u_i_d", String.valueOf(themeDisplay.getUserId()))
 %>
    <ul><li>
 	<% if(themeDisplay.isSignedIn()) { %>
-		<img style="opacity:0.5;filter:alpha(opacity=50);" alt="myaccount" height="18px" width="10px" src="<%= request.getContextPath() %>/images/profile.png" />
+		<img alt="myaccount" height="18px" width="10px" src="<%= request.getContextPath() %>/images/profile.png" />
 		<ul>
 		<!-- User -->
 		<%
       String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+themeDisplay.getUser().getScreenName()+"&amp;companyId="+themeDisplay.getUser().getCompanyId();
       %>
 		<li id="portalmyuseredit" style="cursor:pointer;">
-		<img style="opacity:0.5;filter:alpha(opacity=50);" alt="myaccount" height="20px" width="20px" src="<%= imgPath %>" />
+		<img style="opacity:0.5;filter:alpha(opacity=50); alt="myaccount" height="20px" width="20px" src="<%= imgPath %>" />
 		<%= themeDisplay.getUser().getFullName() %></li>
 		<!-- Organisation Owner For membership Requests -->
       <%
@@ -179,14 +270,15 @@ editmyusersURL.setParameter("p_u_i_d", String.valueOf(themeDisplay.getUserId()))
          if(ugr.getRole().getName().equalsIgnoreCase("BBMRI ERIC Site Owner")) {
             %>
             <li id="sitemembership" style="cursor:pointer;">
-            Site Membership Management</li>
+            <img alt="sitemembership" height="16px" width="16px" src="<%= request.getContextPath() %>/images/icon_membership.png" />
+            Membership Management</li>
             <%
          }
       }
       %>
 		<!-- Sign out -->
 		<li class="sign-out"><aui:a href="<%= themeDisplay.getURLSignOut() %>">
-		<img style="opacity:0.5;filter:alpha(opacity=50);" alt="myaccount" height="18px" width="10px" src="<%= request.getContextPath() %>/images/signinkey.png" />
+		<img style="opacity:0.3;filter:alpha(opacity=30);" alt="myaccount" height="18px" width="10px" src="<%= request.getContextPath() %>/images/icon_sign_out.png" />
 		Sign Out</aui:a></li>
 		
 		</ul>
@@ -195,7 +287,7 @@ editmyusersURL.setParameter("p_u_i_d", String.valueOf(themeDisplay.getUserId()))
 		<ul>
 		<!-- Sign in -->
 		<li class="sign-in"><aui:a href="<%= themeDisplay.getURLSignIn() %>">
-		<img style="opacity:0.5;filter:alpha(opacity=50);" alt="myaccount" height="18px" width="10px" src="<%= request.getContextPath() %>/images/signinkey.png" />
+		<img style="opacity:0.3;filter:alpha(opacity=30);" alt="myaccount" height="18px" width="10px" src="<%= request.getContextPath() %>/images/signinkey.png" />
 		Sign In</aui:a></li>
 		</ul>
 	<% } %>

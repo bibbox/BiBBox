@@ -12,10 +12,10 @@
 	${theme.include(top_head_include)}
 
 	<#if !is_signed_in>
-	  <#assign canseepage = user_middle_name?starts_with("$") />
-      <#if !canseepage>
-         <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
-      </#if>
+       <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
+   </#if>
+   <#if !user_middle_name?starts_with("$")>
+      <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
    </#if>
 
 </head>
@@ -109,6 +109,10 @@ ${theme.include(body_top_include)}
 			<a href="/web/guest/contact">contact</a> <span style="color: #FFFFFF;">|</span> <a href="/web/guest/imprint">IMPRINT</a>
 		</footer>
 	</div>
+</div>
+<#else>
+<div class="bbmri_eric_header-maincontainer">
+<a href="http://member.bbmri-eric.eu/web/home/login"> Back to Member Area</a>
 </div>
 </#if>
 </#if>

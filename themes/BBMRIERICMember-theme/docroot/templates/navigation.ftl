@@ -19,7 +19,7 @@
 				<#else>
 					<div class="bbmri-eric-square-blue"></div>
 				</#if>
-				<div style="float: left;color: #184B8A;">${nav_item.icon()} ${nav_item.getName()}</div>
+				<div style="float: left;">${nav_item.icon()} ${nav_item.getName()}</div>
 				</div></a>
 			</li>
 		</#list>

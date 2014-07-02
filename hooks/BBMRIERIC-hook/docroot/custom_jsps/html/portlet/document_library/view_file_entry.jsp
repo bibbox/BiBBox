@@ -100,6 +100,14 @@ request.setAttribute(WebKeys.LAYOUT_ASSET_ENTRY, layoutAssetEntry);
 request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 %>
 
+<div class="bbmri-eric-header-redisplay">
+<liferay-ui:header
+      backURL="<%= redirect %>"
+      localizeTitle="<%= false %>"
+      title="<%= fileVersion.getTitle() %>"
+   />
+</div>
+
 <portlet:actionURL var="editFileEntry">
 	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 </portlet:actionURL>
@@ -109,14 +117,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="fileEntryId" type="hidden" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 </aui:form>
-
-<c:if test="<%= showHeader && (folder != null) %>">
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		localizeTitle="<%= false %>"
-		title="<%= fileVersion.getTitle() %>"
-	/>
-</c:if>
 
 <div class="view">
 	<c:if test="<%= showActions %>">

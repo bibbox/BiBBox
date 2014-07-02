@@ -856,6 +856,18 @@ $dockbarOpenGradientStart: #0EA6F9;
    word-break: normal;
 }
 
+.bbmri-eric-header-redisplay .taglib-header {
+    display: block;
+}
+
+.bbmri-eric-header-redisplay .taglib-header .header-back-to a {
+	padding: 0.1em 0.5em 0.5em 0;
+}
+
+#_20_show-sync-message {
+	display: none;
+}
+
 @import url(custom_additional.css);
 @import url(topmenu.css);
 @import url(custom_content.css);

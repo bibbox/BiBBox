@@ -8,6 +8,7 @@
 	<title>${the_title} - ${company_name}</title>
 
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	${theme.include(top_head_include)}
 	
@@ -39,10 +40,11 @@ ${theme.include(body_top_include)}
 
 <!-- Liferay Dockbar if Admin -->
 <#if is_signed_in>
-	<#if is_admin>
-		<@liferay.dockbar />
-	</#if>
 	<#assign canseedockbar = user_middle_name?contains("$$$") />
+	<#if is_admin>
+      <@liferay.dockbar />
+      <#assign canseedockbar = false />
+   </#if>
    <#if canseedockbar>
       <@liferay.dockbar />
    </#if>
@@ -106,9 +108,7 @@ ${theme.include(body_top_include)}
       <div class="bbmrieric-footer-menue">
          <#include "${full_templates_path}/navigation_footer.ftl" />
       </div>   
-      <footer id="footer" role="contentinfo">
-         <a href="/web/guest/contact">contact</a> <span style="color: #FFFFFF;">|</span> <a href="/web/guest/imprint">IMPRINT</a>
-      </footer>
+      
    </div>
 </div>
 
