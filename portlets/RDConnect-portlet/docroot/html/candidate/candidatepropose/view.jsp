@@ -25,6 +25,7 @@
 	String submitter_name = ParamUtil.getString(request, "submittername");
 	String submitter_email = ParamUtil.getString(request, "submitteremail");
 	String candidatesubtype = "";
+	
 %>
 
 

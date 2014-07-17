@@ -16,6 +16,7 @@ package at.meduni.liferay.portlet.bbmriat.service.base;
 
 import at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable;
 import at.meduni.liferay.portlet.bbmriat.service.ddllinkingtableLocalService;
+import at.meduni.liferay.portlet.bbmriat.service.persistence.HistoryPersistence;
 import at.meduni.liferay.portlet.bbmriat.service.persistence.ddllinkingtablePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -319,6 +320,43 @@ public abstract class ddllinkingtableLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the history local service.
+	 *
+	 * @return the history local service
+	 */
+	public at.meduni.liferay.portlet.bbmriat.service.HistoryLocalService getHistoryLocalService() {
+		return historyLocalService;
+	}
+
+	/**
+	 * Sets the history local service.
+	 *
+	 * @param historyLocalService the history local service
+	 */
+	public void setHistoryLocalService(
+		at.meduni.liferay.portlet.bbmriat.service.HistoryLocalService historyLocalService) {
+		this.historyLocalService = historyLocalService;
+	}
+
+	/**
+	 * Returns the history persistence.
+	 *
+	 * @return the history persistence
+	 */
+	public HistoryPersistence getHistoryPersistence() {
+		return historyPersistence;
+	}
+
+	/**
+	 * Sets the history persistence.
+	 *
+	 * @param historyPersistence the history persistence
+	 */
+	public void setHistoryPersistence(HistoryPersistence historyPersistence) {
+		this.historyPersistence = historyPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -498,6 +536,10 @@ public abstract class ddllinkingtableLocalServiceBaseImpl
 	protected at.meduni.liferay.portlet.bbmriat.service.ddllinkingtableLocalService ddllinkingtableLocalService;
 	@BeanReference(type = ddllinkingtablePersistence.class)
 	protected ddllinkingtablePersistence ddllinkingtablePersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmriat.service.HistoryLocalService.class)
+	protected at.meduni.liferay.portlet.bbmriat.service.HistoryLocalService historyLocalService;
+	@BeanReference(type = HistoryPersistence.class)
+	protected HistoryPersistence historyPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

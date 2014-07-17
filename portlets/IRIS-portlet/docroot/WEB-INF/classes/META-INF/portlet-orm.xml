@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="at.meduni.graz.patho.haybaeck.model.impl.PatientModelImpl">
+		<attributes>
+			<id name="patient_Id">
+				<column name="ID" />
+			</id>
+			<basic name="identifier" />
+			<basic name="cohort" />
+			<basic name="first_name" />
+			<basic name="last_name" />
+			<basic name="date_of_birth">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="date_of_death">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="couse_of_death" />
+			<basic name="gender" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.meduni.graz.patho.haybaeck.model.impl.SampleModelImpl">
+		<attributes>
+			<id name="sample_Id">
+				<column name="ID" />
+			</id>
+			<basic name="patient_id" />
+			<basic name="t" />
+			<basic name="n" />
+			<basic name="m" />
+			<basic name="g" />
+			<basic name="r" />
+			<basic name="p" />
+			<basic name="l" />
+			<basic name="v" />
+			<basic name="stage" />
+			<basic name="operation" />
+			<basic name="post_op_treatment" />
+			<basic name="recurrence" />
+			<basic name="recurrence_date">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="dead_live" />
+			<basic name="last_follow_up_date">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="hospital" />
+			<basic name="tnm_staging" />
+			<basic name="diagnosis" />
+			<basic name="operation_date">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="tmp_identifier" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.meduni.graz.patho.haybaeck.model.impl.TMAModelImpl">
+		<attributes>
+			<id name="tma_Id">
+				<column name="ID" />
+			</id>
+			<basic name="sample_id" />
+			<basic name="tma_name" />
+			<basic name="tma_number" />
+			<basic name="tma_comment" />
+			<basic name="cytoplasmic_stat_5_intensity" />
+			<basic name="cytoplasmic_stat_5_density" />
+			<basic name="nuclear_stat_5_intensity" />
+			<basic name="nuclear_stat_5_density" />
+			<basic name="cytoplasmic_cjun_intensity" />
+			<basic name="cytoplasmic_cjun_density" />
+			<basic name="nuclear_cjun_intensity" />
+			<basic name="nuclear_cjun_density" />
+			<basic name="cytoplasmic_pstat_3_intensity" />
+			<basic name="cytoplasmic_pstat_3_density" />
+			<basic name="nuclear_pstat_3_intensity" />
+			<basic name="nuclear_pstat_3_density" />
+			<basic name="cytoplasmic_pstat_5_intensity" />
+			<basic name="cytoplasmic_pstat_5_density" />
+			<basic name="nuclear_pstat_5_intensity" />
+			<basic name="nuclear_pstat_5_density" />
+			<basic name="cytoplasmic_pstat_1_intensity" />
+			<basic name="cytoplasmic_pstat_1_density" />
+			<basic name="nuclear_pstat_1_intensity" />
+			<basic name="cytoplasmic_il6r_intensity" />
+			<basic name="cytoplasmic_il6r_density" />
+			<basic name="nuclear_il6r_intensity" />
+			<basic name="nuclear_il6r_density" />
+			<basic name="cytoplasmic_socs1_intensity" />
+			<basic name="cytoplasmic_socs1_density" />
+			<basic name="nuclear_socs1_intensity" />
+			<basic name="nuclear_socs1_density" />
+			<basic name="cytoplasmic_socs3_intensity" />
+			<basic name="cytoplasmic_socs3_density" />
+			<basic name="nuclear_socs3_intensity" />
+			<basic name="nuclear_socs3_density" />
+			<basic name="cytoplasmic_junb_intensity" />
+			<basic name="cytoplasmic_junb_density" />
+			<basic name="nuclear_junb_intensity" />
+			<basic name="nuclear_junb_density" />
+			<basic name="cytoplasmic_stat_3_intensity" />
+			<basic name="cytoplasmic_stat_3_density" />
+			<basic name="nuclear_stat_3_intensity" />
+			<basic name="nuclear_stat_3_density" />
+			<basic name="cytoplasmic_stat_5a_intensity" />
+			<basic name="cytoplasmic_stat_5a_density" />
+			<basic name="nuclear_stat_5a_intensity" />
+			<basic name="nuclear_stat_5a_density" />
+			<basic name="cytoplasmic_stat_5b_intensity" />
+			<basic name="cytoplasmic_stat_5b_density" />
+			<basic name="nuclear_stat_5b_intensity" />
+			<basic name="nuclear_stat_5b_density" />
+			<basic name="cytoplasmic_eif3a_intensity" />
+			<basic name="cytoplasmic_eif3a_density" />
+			<basic name="cytoplasmic_eif3a_peter_intensity" />
+			<basic name="cytoplasmic_eif3a_peter_density" />
+			<basic name="cytoplasmic_itih_5_o1_intensity" />
+			<basic name="cytoplasmic_itih_5_o1_density" />
+			<basic name="nuclear_itih_5_o1_intensity" />
+			<basic name="nuclear_itih_5_o1_density" />
+			<basic name="cytoplasmic_itih_5_o2_intensity" />
+			<basic name="cytoplasmic_itih_5_o2_density" />
+			<basic name="nuclear_itih_5_o2_intensity" />
+			<basic name="nuclear_itih_5_o2_density" />
+			<basic name="cytoplasmic_imp2_2_intensity" />
+			<basic name="cytoplasmic_imp2_2_density" />
+			<basic name="cytoplasmic_stat_1_intensity" />
+			<basic name="cytoplasmic_stat_1_density" />
+			<basic name="nuclear_stat_1_intensity" />
+			<basic name="nuclear_stat_1_density" />
+			<basic name="cytoplasmic_nfkb1_intensity" />
+			<basic name="cytoplasmic_nfkb1_density" />
+			<basic name="nuclear_nfkb1_intensity" />
+			<basic name="nuclear_nfkb1_density" />
+			<basic name="cytoplasmic_nfkb2_intensity" />
+			<basic name="cytoplasmic_nfkb2_density" />
+			<basic name="nuclear_nfkb2_intensity" />
+			<basic name="nuclear_nfkb2_density" />
+			<basic name="cytoplasmic_pikb_intensity" />
+			<basic name="cytoplasmic_pikb_density" />
+			<basic name="cytoplasmic_phoshpo_pakt_o1_intensity" />
+			<basic name="cytoplasmic_phoshpo_pakt_o1_density" />
+			<basic name="nuclear_phoshpo_pakt_o1_intensity" />
+			<basic name="nuclear_phoshpo_pakt_o1_density" />
+			<basic name="cytoplasmic_phoshpo_pakt_o2_intensity" />
+			<basic name="cytoplasmic_phoshpo_pakt_o2_density" />
+			<basic name="nuclear_phoshpo_pakt_o2_intensity" />
+			<basic name="nuclear_phoshpo_pakt_o2_density" />
+			<basic name="cytoplasmic_phoshpo_pmtor_o1_intensity" />
+			<basic name="cytoplasmic_phoshpo_pmtor_o1_density" />
+			<basic name="nuclear_phoshpo_pmtor_o1_intensity" />
+			<basic name="nuclear_phoshpo_pmtor_o1_density" />
+			<basic name="cytoplasmic_phoshpo_pmtor_o2_intensity" />
+			<basic name="cytoplasmic_phoshpo_pmtor_o2_density" />
+			<basic name="nuclear_phoshpo_pmtor_o2_intensity" />
+			<basic name="nuclear_phoshpo_pmtor_o2_density" />
+			<basic name="cytoplasmic_phoshpo_pp70s6k_o1_density" />
+			<basic name="nuclear_phoshpo_pp70s6k_o1_intensity" />
+			<basic name="nuclear_phoshpo_pp70s6k_o1_density" />
+			<basic name="cytoplasmic_phoshpo_pp70s6k_o2_intensity" />
+			<basic name="cytoplasmic_phoshpo_pp70s6k_o2_density" />
+			<basic name="nuclear_phoshpo_pp70s6k_o2_intensity" />
+			<basic name="nuclear_phoshpo_pp70s6k_o2_density" />
+			<basic name="cytoplasmic_phoshpo_pp70s6k_o1_intensity" />
+			<basic name="cytoplasmic_phoshpo_pten_o1_intensity" />
+			<basic name="cytoplasmic_phoshpo_pten_o1_density" />
+			<basic name="nuclear_phoshpo_pten_o1_intensity" />
+			<basic name="nuclear_phoshpo_pten_o1_density" />
+			<basic name="cytoplasmic_phoshpo_pten_o2_intensity" />
+			<basic name="cytoplasmic_phoshpo_pten_o2_density" />
+			<basic name="nuclear_phoshpo_pten_o2_intensity" />
+			<basic name="nuclear_phoshpo_pten_o2_density" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="at.meduni.graz.patho.haybaeck.model.impl.PatientImpl" name="Patient">
+		<table name="haybaeck.patient" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.graz.patho.haybaeck.model.impl.SampleImpl" name="Sample">
+		<table name="haybaeck.sample" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.graz.patho.haybaeck.model.impl.TMAImpl" name="TMA">
+		<table name="haybaeck.tma" />
+		<attributes />
+	</entity>
+</entity-mappings>

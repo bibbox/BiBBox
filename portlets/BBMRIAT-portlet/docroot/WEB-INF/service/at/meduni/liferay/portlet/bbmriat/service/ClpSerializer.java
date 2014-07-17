@@ -14,6 +14,7 @@
 
 package at.meduni.liferay.portlet.bbmriat.service;
 
+import at.meduni.liferay.portlet.bbmriat.model.HistoryClp;
 import at.meduni.liferay.portlet.bbmriat.model.ddllinkingtableClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -106,6 +107,10 @@ public class ClpSerializer {
 			return translateInputddllinkingtable(oldModel);
 		}
 
+		if (oldModelClassName.equals(HistoryClp.class.getName())) {
+			return translateInputHistory(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +130,16 @@ public class ClpSerializer {
 		ddllinkingtableClp oldClpModel = (ddllinkingtableClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getddllinkingtableRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputHistory(BaseModel<?> oldModel) {
+		HistoryClp oldClpModel = (HistoryClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getHistoryRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +166,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableImpl")) {
 			return translateOutputddllinkingtable(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.bbmriat.model.impl.HistoryImpl")) {
+			return translateOutputHistory(oldModel);
 		}
 
 		return oldModel;
@@ -238,6 +258,11 @@ public class ClpSerializer {
 			return new at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException();
 		}
 
+		if (className.equals(
+					"at.meduni.liferay.portlet.bbmriat.NoSuchHistoryException")) {
+			return new at.meduni.liferay.portlet.bbmriat.NoSuchHistoryException();
+		}
+
 		return throwable;
 	}
 
@@ -247,6 +272,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setddllinkingtableRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputHistory(BaseModel<?> oldModel) {
+		HistoryClp newModel = new HistoryClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setHistoryRemoteModel(oldModel);
 
 		return newModel;
 	}

@@ -15,6 +15,7 @@
 package at.meduni.liferay.portlet.bbmriat.service.messaging;
 
 import at.meduni.liferay.portlet.bbmriat.service.ClpSerializer;
+import at.meduni.liferay.portlet.bbmriat.service.HistoryLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmriat.service.ddllinkingtableLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -36,6 +37,8 @@ public class ClpMessageListener extends BaseMessageListener {
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
 			ddllinkingtableLocalServiceUtil.clearService();
+
+			HistoryLocalServiceUtil.clearService();
 		}
 	}
 }

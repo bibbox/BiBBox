@@ -14,7 +14,7 @@
 
 package at.meduni.liferay.portlet.bbmriat.model.impl;
 
-import at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable;
+import at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable;
 
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.CacheModel;
@@ -25,13 +25,13 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 /**
- * The cache model class for representing ddllinkingtable in entity cache.
+ * The cache model class for representing DDLLinkingTable in entity cache.
  *
  * @author Robert Reihs
- * @see ddllinkingtable
+ * @see DDLLinkingTable
  * @generated
  */
-public class ddllinkingtableCacheModel implements CacheModel<ddllinkingtable>,
+public class DDLLinkingTableCacheModel implements CacheModel<DDLLinkingTable>,
 	Externalizable {
 	@Override
 	public String toString() {
@@ -51,17 +51,17 @@ public class ddllinkingtableCacheModel implements CacheModel<ddllinkingtable>,
 	}
 
 	@Override
-	public ddllinkingtable toEntityModel() {
-		ddllinkingtableImpl ddllinkingtableImpl = new ddllinkingtableImpl();
+	public DDLLinkingTable toEntityModel() {
+		DDLLinkingTableImpl ddlLinkingTableImpl = new DDLLinkingTableImpl();
 
-		ddllinkingtableImpl.setDdllinkingtable(ddllinkingtable);
-		ddllinkingtableImpl.setRecordid(recordid);
-		ddllinkingtableImpl.setRecordsetid(recordsetid);
-		ddllinkingtableImpl.setLinkrecordid(linkrecordid);
+		ddlLinkingTableImpl.setDdllinkingtable(ddllinkingtable);
+		ddlLinkingTableImpl.setRecordid(recordid);
+		ddlLinkingTableImpl.setRecordsetid(recordsetid);
+		ddlLinkingTableImpl.setLinkrecordid(linkrecordid);
 
-		ddllinkingtableImpl.resetOriginalValues();
+		ddlLinkingTableImpl.resetOriginalValues();
 
-		return ddllinkingtableImpl;
+		return ddlLinkingTableImpl;
 	}
 
 	@Override

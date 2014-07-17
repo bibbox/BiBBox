@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="at.meduni.graz.patho.haybaeck.service.PatientLocalService" class="at.meduni.graz.patho.haybaeck.service.impl.PatientLocalServiceImpl" />
+	<bean id="at.meduni.graz.patho.haybaeck.service.persistence.PatientPersistence" class="at.meduni.graz.patho.haybaeck.service.persistence.PatientPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="haybaeckDataSource" />
+		<property name="sessionFactory" ref="haybaeckSessionFactory" />
+	</bean>
+	<bean id="at.meduni.graz.patho.haybaeck.service.SampleLocalService" class="at.meduni.graz.patho.haybaeck.service.impl.SampleLocalServiceImpl" />
+	<bean id="at.meduni.graz.patho.haybaeck.service.persistence.SamplePersistence" class="at.meduni.graz.patho.haybaeck.service.persistence.SamplePersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="haybaeckDataSource" />
+		<property name="sessionFactory" ref="haybaeckSessionFactory" />
+	</bean>
+	<bean id="at.meduni.graz.patho.haybaeck.service.TMALocalService" class="at.meduni.graz.patho.haybaeck.service.impl.TMALocalServiceImpl" />
+	<bean id="at.meduni.graz.patho.haybaeck.service.persistence.TMAPersistence" class="at.meduni.graz.patho.haybaeck.service.persistence.TMAPersistenceImpl" parent="basePersistence">
+		<property name="dataSource" ref="haybaeckDataSource" />
+		<property name="sessionFactory" ref="haybaeckSessionFactory" />
+	</bean>
+</beans>

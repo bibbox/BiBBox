@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.meduni.graz.patho.haybaeck">
+	<author>reihsr</author>
+	<namespace>iris</namespace>
+
+	<entity data-source="haybaeckDataSource" local-service="true" name="Patient" table="haybaeck.patient" remote-service="false" session-factory="haybaeckSessionFactory" tx-manager="haybaeckTransactionManager">
+		<column name="patient_Id" db-name="id" type="long" primary="true" />
+		<column name="identifier" type="String" />
+		<column name="cohort" type="String" />
+		<column name="first_name" type="String" />
+		<column name="last_name" type="String" />
+		<column name="date_of_birth" type="Date" />
+		<column name="date_of_death" type="Date" />
+		<column name="couse_of_death" type="String" />
+		<column name="gender" type="String" />
+	</entity>
+	<entity data-source="haybaeckDataSource" local-service="true" name="Sample" table="haybaeck.sample" remote-service="false" session-factory="haybaeckSessionFactory" tx-manager="haybaeckTransactionManager">
+		<column name="sample_Id" db-name="id" type="long" primary="true" />
+		<column name="patient_id" type="long" />
+		<column name="t" type="String" />
+		<column name="n" type="String" />
+		<column name="m" type="String" />
+		<column name="g" type="String" />
+		<column name="r" type="String" />
+		<column name="p" type="String" />
+		<column name="l" type="String" />
+		<column name="v" type="String" />
+		<column name="stage" type="String" />
+		<column name="operation" type="String" />
+		<column name="post_op_treatment" type="String" />
+		<column name="recurrence" type="boolean" />
+		<column name="recurrence_date" type="Date" />
+		<column name="dead_live" type="String" />
+		<column name="last_follow_up_date" type="Date" />
+		<column name="hospital" type="String" />
+		<column name="tnm_staging" type="String" />
+		<column name="diagnosis" type="String" />
+		<column name="operation_date" type="Date" />
+		<column name="tmp_identifier" type="String" />
+	</entity>
+	<entity data-source="haybaeckDataSource" local-service="true" name="TMA" table="haybaeck.tma" remote-service="false" session-factory="haybaeckSessionFactory" tx-manager="haybaeckTransactionManager">
+		<column name="tma_Id" db-name="id" type="long" primary="true" />
+		<column name="sample_id" type="long" />
+		<column name="tma_name" type="String" />
+		<column name="tma_number" type="String" />
+		<column name="tma_comment" type="String" />
+		<column name="cytoplasmic_stat_5_intensity" type="long" />
+		<column name="cytoplasmic_stat_5_density" type="long" />
+		<column name="nuclear_stat_5_intensity" type="long" />
+		<column name="nuclear_stat_5_density" type="long" />
+		<column name="cytoplasmic_cjun_intensity" type="long" />
+		<column name="cytoplasmic_cjun_density" type="long" />
+		<column name="nuclear_cjun_intensity" type="long" />
+		<column name="nuclear_cjun_density" type="long" />
+		<column name="cytoplasmic_pstat_3_intensity" type="long" />
+		<column name="cytoplasmic_pstat_3_density" type="long" />
+		<column name="nuclear_pstat_3_intensity" type="long" />
+		<column name="nuclear_pstat_3_density" type="long" />
+		<column name="cytoplasmic_pstat_5_intensity" type="long" />
+		<column name="cytoplasmic_pstat_5_density" type="long" />
+		<column name="nuclear_pstat_5_intensity" type="long" />
+		<column name="nuclear_pstat_5_density" type="long" />
+		<column name="cytoplasmic_pstat_1_intensity" type="long" />
+		<column name="cytoplasmic_pstat_1_density" type="long" />
+		<column name="nuclear_pstat_1_intensity" type="long" />
+		<column name="cytoplasmic_il6r_intensity" type="long" />
+		<column name="cytoplasmic_il6r_density" type="long" />
+		<column name="nuclear_il6r_intensity" type="long" />
+		<column name="nuclear_il6r_density" type="long" />
+		<column name="cytoplasmic_socs1_intensity" type="long" />
+		<column name="cytoplasmic_socs1_density" type="long" />
+		<column name="nuclear_socs1_intensity" type="long" />
+		<column name="nuclear_socs1_density" type="long" />
+		<column name="cytoplasmic_socs3_intensity" type="long" />
+		<column name="cytoplasmic_socs3_density" type="long" />
+		<column name="nuclear_socs3_intensity" type="long" />
+		<column name="nuclear_socs3_density" type="long" />
+		<column name="cytoplasmic_junb_intensity" type="long" />
+		<column name="cytoplasmic_junb_density" type="long" />
+		<column name="nuclear_junb_intensity" type="long" />
+		<column name="nuclear_junb_density" type="long" />
+		<column name="cytoplasmic_stat_3_intensity" type="long" />
+		<column name="cytoplasmic_stat_3_density" type="long" />
+		<column name="nuclear_stat_3_intensity" type="long" />
+		<column name="nuclear_stat_3_density" type="long" />
+		<column name="cytoplasmic_stat_5a_intensity" type="long" />
+		<column name="cytoplasmic_stat_5a_density" type="long" />
+		<column name="nuclear_stat_5a_intensity" type="long" />
+		<column name="nuclear_stat_5a_density" type="long" />
+		<column name="cytoplasmic_stat_5b_intensity" type="long" />
+		<column name="cytoplasmic_stat_5b_density" type="long" />
+		<column name="nuclear_stat_5b_intensity" type="long" />
+		<column name="nuclear_stat_5b_density" type="long" />
+		<column name="cytoplasmic_eif3a_intensity" type="long" />
+		<column name="cytoplasmic_eif3a_density" type="long" />
+		<column name="cytoplasmic_eif3a_peter_intensity" type="long" />
+		<column name="cytoplasmic_eif3a_peter_density" type="long" />
+		<column name="cytoplasmic_itih_5_o1_intensity" type="long" />
+		<column name="cytoplasmic_itih_5_o1_density" type="long" />
+		<column name="nuclear_itih_5_o1_intensity" type="long" />
+		<column name="nuclear_itih_5_o1_density" type="long" />
+		<column name="cytoplasmic_itih_5_o2_intensity" type="long" />
+		<column name="cytoplasmic_itih_5_o2_density" type="long" />
+		<column name="nuclear_itih_5_o2_intensity" type="long" />
+		<column name="nuclear_itih_5_o2_density" type="long" />
+		<column name="cytoplasmic_imp2_2_intensity" type="long" />
+		<column name="cytoplasmic_imp2_2_density" type="long" />
+		<column name="cytoplasmic_stat_1_intensity" type="long" />
+		<column name="cytoplasmic_stat_1_density" type="long" />
+		<column name="nuclear_stat_1_intensity" type="long" />
+		<column name="nuclear_stat_1_density" type="long" />
+		<column name="cytoplasmic_nfkb1_intensity" type="long" />
+		<column name="cytoplasmic_nfkb1_density" type="long" />
+		<column name="nuclear_nfkb1_intensity" type="long" />
+		<column name="nuclear_nfkb1_density" type="long" />
+		<column name="cytoplasmic_nfkb2_intensity" type="long" />
+		<column name="cytoplasmic_nfkb2_density" type="long" />
+		<column name="nuclear_nfkb2_intensity" type="long" />
+		<column name="nuclear_nfkb2_density" type="long" />
+		<column name="cytoplasmic_pikb_intensity" type="long" />
+		<column name="cytoplasmic_pikb_density" type="long" />
+		<column name="cytoplasmic_phoshpo_pakt_o1_intensity" type="long" />
+		<column name="cytoplasmic_phoshpo_pakt_o1_density" type="long" />
+		<column name="nuclear_phoshpo_pakt_o1_intensity" type="long" />
+		<column name="nuclear_phoshpo_pakt_o1_density" type="long" />
+		<column name="cytoplasmic_phoshpo_pakt_o2_intensity" type="long" />
+		<column name="cytoplasmic_phoshpo_pakt_o2_density" type="long" />
+		<column name="nuclear_phoshpo_pakt_o2_intensity" type="long" />
+		<column name="nuclear_phoshpo_pakt_o2_density" type="long" />
+		<column name="cytoplasmic_phoshpo_pmtor_o1_intensity" type="long" />
+		<column name="cytoplasmic_phoshpo_pmtor_o1_density" type="long" />
+		<column name="nuclear_phoshpo_pmtor_o1_intensity" type="long" />
+		<column name="nuclear_phoshpo_pmtor_o1_density" type="long" />
+		<column name="cytoplasmic_phoshpo_pmtor_o2_intensity" type="long" />
+		<column name="cytoplasmic_phoshpo_pmtor_o2_density" type="long" />
+		<column name="nuclear_phoshpo_pmtor_o2_intensity" type="long" />
+		<column name="nuclear_phoshpo_pmtor_o2_density" type="long" />
+		<column name="cytoplasmic_phoshpo_pp70s6k_o1_density" type="long" />
+		<column name="nuclear_phoshpo_pp70s6k_o1_intensity" type="long" />
+		<column name="nuclear_phoshpo_pp70s6k_o1_density" type="long" />
+		<column name="cytoplasmic_phoshpo_pp70s6k_o2_intensity" type="long" />
+		<column name="cytoplasmic_phoshpo_pp70s6k_o2_density" type="long" />
+		<column name="nuclear_phoshpo_pp70s6k_o2_intensity" type="long" />
+		<column name="nuclear_phoshpo_pp70s6k_o2_density" type="long" />
+		<column name="cytoplasmic_phoshpo_pp70s6k_o1_intensity" type="long" />
+		<column name="cytoplasmic_phoshpo_pten_o1_intensity" type="long" />
+		<column name="cytoplasmic_phoshpo_pten_o1_density" type="long" />
+		<column name="nuclear_phoshpo_pten_o1_intensity" type="long" />
+		<column name="nuclear_phoshpo_pten_o1_density" type="long" />
+		<column name="cytoplasmic_phoshpo_pten_o2_intensity" type="long" />
+		<column name="cytoplasmic_phoshpo_pten_o2_density" type="long" />
+		<column name="nuclear_phoshpo_pten_o2_intensity" type="long" />
+		<column name="nuclear_phoshpo_pten_o2_density" type="long" />
+	</entity>
+</service-builder>

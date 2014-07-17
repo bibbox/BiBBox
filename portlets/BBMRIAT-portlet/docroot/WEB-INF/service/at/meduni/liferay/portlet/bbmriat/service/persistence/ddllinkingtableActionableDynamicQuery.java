@@ -14,8 +14,8 @@
 
 package at.meduni.liferay.portlet.bbmriat.service.persistence;
 
-import at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable;
-import at.meduni.liferay.portlet.bbmriat.service.ddllinkingtableLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable;
+import at.meduni.liferay.portlet.bbmriat.service.DDLLinkingTableLocalServiceUtil;
 
 import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -24,11 +24,11 @@ import com.liferay.portal.kernel.exception.SystemException;
  * @author Robert Reihs
  * @generated
  */
-public abstract class ddllinkingtableActionableDynamicQuery
+public abstract class DDLLinkingTableActionableDynamicQuery
 	extends BaseActionableDynamicQuery {
-	public ddllinkingtableActionableDynamicQuery() throws SystemException {
-		setBaseLocalService(ddllinkingtableLocalServiceUtil.getService());
-		setClass(ddllinkingtable.class);
+	public DDLLinkingTableActionableDynamicQuery() throws SystemException {
+		setBaseLocalService(DDLLinkingTableLocalServiceUtil.getService());
+		setClass(DDLLinkingTable.class);
 
 		setClassLoader(at.meduni.liferay.portlet.bbmriat.service.ClpSerializer.class.getClassLoader());
 

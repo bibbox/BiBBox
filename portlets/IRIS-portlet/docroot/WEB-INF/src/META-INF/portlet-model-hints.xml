@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.meduni.graz.patho.haybaeck.model.Patient">
+		<field name="patient_Id" type="long" />
+		<field name="identifier" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="cohort" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="first_name" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="last_name" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="date_of_birth" type="Date" />
+		<field name="date_of_death" type="Date" />
+		<field name="couse_of_death" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="gender" type="String">
+			<hint name="max-length">1</hint>
+		</field>
+	</model>
+	<model name="at.meduni.graz.patho.haybaeck.model.Sample">
+		<field name="sample_Id" type="long" />
+		<field name="patient_id" type="long" />
+		<field name="t" type="String" />
+		<field name="n" type="String" />
+		<field name="m" type="String" />
+		<field name="g" type="String" />
+		<field name="r" type="String" />
+		<field name="p" type="String" />
+		<field name="l" type="String" />
+		<field name="v" type="String" />
+		<field name="stage" type="String" />
+		<field name="operation" type="String" />
+		<field name="post_op_treatment" type="String" />
+		<field name="recurrence" type="boolean" />
+		<field name="recurrence_date" type="Date" />
+		<field name="dead_live" type="String" />
+		<field name="last_follow_up_date" type="Date" />
+		<field name="hospital" type="String" />
+		<field name="tnm_staging" type="String" />
+		<field name="diagnosis" type="String" />
+		<field name="operation_date" type="Date" />
+		<field name="tmp_identifier" type="String" />
+	</model>
+	<model name="at.meduni.graz.patho.haybaeck.model.TMA">
+		<field name="tma_Id" type="long" />
+		<field name="sample_id" type="long" />
+		<field name="tma_name" type="String" />
+		<field name="tma_number" type="String" />
+		<field name="tma_comment" type="String" />
+		<field name="cytoplasmic_stat_5_intensity" type="long" />
+		<field name="cytoplasmic_stat_5_density" type="long" />
+		<field name="nuclear_stat_5_intensity" type="long" />
+		<field name="nuclear_stat_5_density" type="long" />
+		<field name="cytoplasmic_cjun_intensity" type="long" />
+		<field name="cytoplasmic_cjun_density" type="long" />
+		<field name="nuclear_cjun_intensity" type="long" />
+		<field name="nuclear_cjun_density" type="long" />
+		<field name="cytoplasmic_pstat_3_intensity" type="long" />
+		<field name="cytoplasmic_pstat_3_density" type="long" />
+		<field name="nuclear_pstat_3_intensity" type="long" />
+		<field name="nuclear_pstat_3_density" type="long" />
+		<field name="cytoplasmic_pstat_5_intensity" type="long" />
+		<field name="cytoplasmic_pstat_5_density" type="long" />
+		<field name="nuclear_pstat_5_intensity" type="long" />
+		<field name="nuclear_pstat_5_density" type="long" />
+		<field name="cytoplasmic_pstat_1_intensity" type="long" />
+		<field name="cytoplasmic_pstat_1_density" type="long" />
+		<field name="nuclear_pstat_1_intensity" type="long" />
+		<field name="cytoplasmic_il6r_intensity" type="long" />
+		<field name="cytoplasmic_il6r_density" type="long" />
+		<field name="nuclear_il6r_intensity" type="long" />
+		<field name="nuclear_il6r_density" type="long" />
+		<field name="cytoplasmic_socs1_intensity" type="long" />
+		<field name="cytoplasmic_socs1_density" type="long" />
+		<field name="nuclear_socs1_intensity" type="long" />
+		<field name="nuclear_socs1_density" type="long" />
+		<field name="cytoplasmic_socs3_intensity" type="long" />
+		<field name="cytoplasmic_socs3_density" type="long" />
+		<field name="nuclear_socs3_intensity" type="long" />
+		<field name="nuclear_socs3_density" type="long" />
+		<field name="cytoplasmic_junb_intensity" type="long" />
+		<field name="cytoplasmic_junb_density" type="long" />
+		<field name="nuclear_junb_intensity" type="long" />
+		<field name="nuclear_junb_density" type="long" />
+		<field name="cytoplasmic_stat_3_intensity" type="long" />
+		<field name="cytoplasmic_stat_3_density" type="long" />
+		<field name="nuclear_stat_3_intensity" type="long" />
+		<field name="nuclear_stat_3_density" type="long" />
+		<field name="cytoplasmic_stat_5a_intensity" type="long" />
+		<field name="cytoplasmic_stat_5a_density" type="long" />
+		<field name="nuclear_stat_5a_intensity" type="long" />
+		<field name="nuclear_stat_5a_density" type="long" />
+		<field name="cytoplasmic_stat_5b_intensity" type="long" />
+		<field name="cytoplasmic_stat_5b_density" type="long" />
+		<field name="nuclear_stat_5b_intensity" type="long" />
+		<field name="nuclear_stat_5b_density" type="long" />
+		<field name="cytoplasmic_eif3a_intensity" type="long" />
+		<field name="cytoplasmic_eif3a_density" type="long" />
+		<field name="cytoplasmic_eif3a_peter_intensity" type="long" />
+		<field name="cytoplasmic_eif3a_peter_density" type="long" />
+		<field name="cytoplasmic_itih_5_o1_intensity" type="long" />
+		<field name="cytoplasmic_itih_5_o1_density" type="long" />
+		<field name="nuclear_itih_5_o1_intensity" type="long" />
+		<field name="nuclear_itih_5_o1_density" type="long" />
+		<field name="cytoplasmic_itih_5_o2_intensity" type="long" />
+		<field name="cytoplasmic_itih_5_o2_density" type="long" />
+		<field name="nuclear_itih_5_o2_intensity" type="long" />
+		<field name="nuclear_itih_5_o2_density" type="long" />
+		<field name="cytoplasmic_imp2_2_intensity" type="long" />
+		<field name="cytoplasmic_imp2_2_density" type="long" />
+		<field name="cytoplasmic_stat_1_intensity" type="long" />
+		<field name="cytoplasmic_stat_1_density" type="long" />
+		<field name="nuclear_stat_1_intensity" type="long" />
+		<field name="nuclear_stat_1_density" type="long" />
+		<field name="cytoplasmic_nfkb1_intensity" type="long" />
+		<field name="cytoplasmic_nfkb1_density" type="long" />
+		<field name="nuclear_nfkb1_intensity" type="long" />
+		<field name="nuclear_nfkb1_density" type="long" />
+		<field name="cytoplasmic_nfkb2_intensity" type="long" />
+		<field name="cytoplasmic_nfkb2_density" type="long" />
+		<field name="nuclear_nfkb2_intensity" type="long" />
+		<field name="nuclear_nfkb2_density" type="long" />
+		<field name="cytoplasmic_pikb_intensity" type="long" />
+		<field name="cytoplasmic_pikb_density" type="long" />
+		<field name="cytoplasmic_phoshpo_pakt_o1_intensity" type="long" />
+		<field name="cytoplasmic_phoshpo_pakt_o1_density" type="long" />
+		<field name="nuclear_phoshpo_pakt_o1_intensity" type="long" />
+		<field name="nuclear_phoshpo_pakt_o1_density" type="long" />
+		<field name="cytoplasmic_phoshpo_pakt_o2_intensity" type="long" />
+		<field name="cytoplasmic_phoshpo_pakt_o2_density" type="long" />
+		<field name="nuclear_phoshpo_pakt_o2_intensity" type="long" />
+		<field name="nuclear_phoshpo_pakt_o2_density" type="long" />
+		<field name="cytoplasmic_phoshpo_pmtor_o1_intensity" type="long" />
+		<field name="cytoplasmic_phoshpo_pmtor_o1_density" type="long" />
+		<field name="nuclear_phoshpo_pmtor_o1_intensity" type="long" />
+		<field name="nuclear_phoshpo_pmtor_o1_density" type="long" />
+		<field name="cytoplasmic_phoshpo_pmtor_o2_intensity" type="long" />
+		<field name="cytoplasmic_phoshpo_pmtor_o2_density" type="long" />
+		<field name="nuclear_phoshpo_pmtor_o2_intensity" type="long" />
+		<field name="nuclear_phoshpo_pmtor_o2_density" type="long" />
+		<field name="cytoplasmic_phoshpo_pp70s6k_o1_density" type="long" />
+		<field name="nuclear_phoshpo_pp70s6k_o1_intensity" type="long" />
+		<field name="nuclear_phoshpo_pp70s6k_o1_density" type="long" />
+		<field name="cytoplasmic_phoshpo_pp70s6k_o2_intensity" type="long" />
+		<field name="cytoplasmic_phoshpo_pp70s6k_o2_density" type="long" />
+		<field name="nuclear_phoshpo_pp70s6k_o2_intensity" type="long" />
+		<field name="nuclear_phoshpo_pp70s6k_o2_density" type="long" />
+		<field name="cytoplasmic_phoshpo_pp70s6k_o1_intensity" type="long" />
+		<field name="cytoplasmic_phoshpo_pten_o1_intensity" type="long" />
+		<field name="cytoplasmic_phoshpo_pten_o1_density" type="long" />
+		<field name="nuclear_phoshpo_pten_o1_intensity" type="long" />
+		<field name="nuclear_phoshpo_pten_o1_density" type="long" />
+		<field name="cytoplasmic_phoshpo_pten_o2_intensity" type="long" />
+		<field name="cytoplasmic_phoshpo_pten_o2_density" type="long" />
+		<field name="nuclear_phoshpo_pten_o2_intensity" type="long" />
+		<field name="nuclear_phoshpo_pten_o2_density" type="long" />
+	</model>
+</model-hints>

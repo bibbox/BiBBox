@@ -10,22 +10,48 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	${theme.include(top_head_include)}
-
+	
 	<#if !is_signed_in>
-       <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
+                <#assign loginpage = themeDisplay.getURLCurrent()?contains("_58_struts_action=%2Flogin%2Flogin") />
+                <#if !loginpage>
+                FALSCH
+                <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/about?p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin&p_p_id=58&p_p_lifecycle=0&_58_redirect=%2Fweb%2Fhome%2F" />
+        <#else>
+                ELSE
+        </#if>
    </#if>
-   <#if !user_middle_name?starts_with("$")>
-      <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
-   </#if>
+	
+   
 
 </head>
 
 <body class="${css_class} bbmri-eric-body">
 
+
+
 ${theme.include(body_top_include)}
 
+<#assign loginpage = themeDisplay.getURLCurrent()?contains("_58_struts_action=%2Flogin%2Flogin") />
+<#if loginpage>
+<div class="container-fluid-background">
+	<div class="container-fluid" id="wrapper">
+		<div id="content">
+			<#if selectable>
+				${theme.include(content_include)}
+			<#else>
+				${portletDisplay.recycle()}
+	
+				${portletDisplay.setTitle(the_title)}
+	
+				${theme.wrapPortlet("portlet.ftl", content_include)}
+			</#if>
+		</div>
+	</div>
+</div>
+</#if>
+
 <#if is_signed_in>
-<#if user_middle_name?starts_with("$")>
+
 
 <!-- New Header -->
 
@@ -56,7 +82,7 @@ ${theme.include(body_top_include)}
 		<div class="bbmri_eric_header-submainmenu">
 			<div class="bbmri_eric_header-submainmenu-position">
 			   <div class="bbmri_eric_header-submainmenu-floating-runing-text">
-               Biobanks provide the critical mass of samples ...
+               
 			   </div>
 				<div class="bbmri_eric_header-submainmenu-floating">
 					<#if has_navigation || is_signed_in>
@@ -89,10 +115,12 @@ ${theme.include(body_top_include)}
 	
 		<div>
 			<#if is_signed_in>
+				<#assign canseedockbar = user_middle_name?contains("$$$") />
 			   <#if is_admin>
+			   	<#assign canseedockbar = false />
 				  <@liferay.dockbar />
 				</#if>
-				<#assign canseedockbar = user_middle_name?contains("$$$") />
+				
             <#if canseedockbar>
                <@liferay.dockbar />
             </#if>
@@ -114,7 +142,7 @@ ${theme.include(body_top_include)}
 <div class="bbmri_eric_header-maincontainer">
 <a href="http://member.bbmri-eric.eu/web/home/login"> Back to Member Area</a>
 </div>
-</#if>
+
 </#if>
 
 ${theme.include(body_bottom_include)}

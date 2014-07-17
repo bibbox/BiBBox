@@ -14,7 +14,7 @@
 
 package at.meduni.liferay.portlet.bbmriat.service.persistence;
 
-import at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable;
+import at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -26,18 +26,18 @@ import com.liferay.portal.service.ServiceContext;
 import java.util.List;
 
 /**
- * The persistence utility for the ddllinkingtable service. This utility wraps {@link ddllinkingtablePersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the d d l linking table service. This utility wraps {@link DDLLinkingTablePersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Robert Reihs
- * @see ddllinkingtablePersistence
- * @see ddllinkingtablePersistenceImpl
+ * @see DDLLinkingTablePersistence
+ * @see DDLLinkingTablePersistenceImpl
  * @generated
  */
-public class ddllinkingtableUtil {
+public class DDLLinkingTableUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -54,8 +54,8 @@ public class ddllinkingtableUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#clearCache(com.liferay.portal.model.BaseModel)
 	 */
-	public static void clearCache(ddllinkingtable ddllinkingtable) {
-		getPersistence().clearCache(ddllinkingtable);
+	public static void clearCache(DDLLinkingTable ddlLinkingTable) {
+		getPersistence().clearCache(ddlLinkingTable);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class ddllinkingtableUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
 	 */
-	public static List<ddllinkingtable> findWithDynamicQuery(
+	public static List<DDLLinkingTable> findWithDynamicQuery(
 		DynamicQuery dynamicQuery) throws SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
@@ -77,7 +77,7 @@ public class ddllinkingtableUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
 	 */
-	public static List<ddllinkingtable> findWithDynamicQuery(
+	public static List<DDLLinkingTable> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -86,7 +86,7 @@ public class ddllinkingtableUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
 	 */
-	public static List<ddllinkingtable> findWithDynamicQuery(
+	public static List<DDLLinkingTable> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		return getPersistence()
@@ -97,66 +97,66 @@ public class ddllinkingtableUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel)
 	 */
-	public static ddllinkingtable update(ddllinkingtable ddllinkingtable)
+	public static DDLLinkingTable update(DDLLinkingTable ddlLinkingTable)
 		throws SystemException {
-		return getPersistence().update(ddllinkingtable);
+		return getPersistence().update(ddlLinkingTable);
 	}
 
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, ServiceContext)
 	 */
-	public static ddllinkingtable update(ddllinkingtable ddllinkingtable,
+	public static DDLLinkingTable update(DDLLinkingTable ddlLinkingTable,
 		ServiceContext serviceContext) throws SystemException {
-		return getPersistence().update(ddllinkingtable, serviceContext);
+		return getPersistence().update(ddlLinkingTable, serviceContext);
 	}
 
 	/**
-	* Returns all the ddllinkingtables where recordid = &#63;.
+	* Returns all the d d l linking tables where recordid = &#63;.
 	*
 	* @param recordid the recordid
-	* @return the matching ddllinkingtables
+	* @return the matching d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findByRecordid(
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findByRecordid(
 		long recordid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByRecordid(recordid);
 	}
 
 	/**
-	* Returns a range of all the ddllinkingtables where recordid = &#63;.
+	* Returns a range of all the d d l linking tables where recordid = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param recordid the recordid
-	* @param start the lower bound of the range of ddllinkingtables
-	* @param end the upper bound of the range of ddllinkingtables (not inclusive)
-	* @return the range of matching ddllinkingtables
+	* @param start the lower bound of the range of d d l linking tables
+	* @param end the upper bound of the range of d d l linking tables (not inclusive)
+	* @return the range of matching d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findByRecordid(
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findByRecordid(
 		long recordid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByRecordid(recordid, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the ddllinkingtables where recordid = &#63;.
+	* Returns an ordered range of all the d d l linking tables where recordid = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param recordid the recordid
-	* @param start the lower bound of the range of ddllinkingtables
-	* @param end the upper bound of the range of ddllinkingtables (not inclusive)
+	* @param start the lower bound of the range of d d l linking tables
+	* @param end the upper bound of the range of d d l linking tables (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching ddllinkingtables
+	* @return the ordered range of matching d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findByRecordid(
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findByRecordid(
 		long recordid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -165,31 +165,31 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the first ddllinkingtable in the ordered set where recordid = &#63;.
+	* Returns the first d d l linking table in the ordered set where recordid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching ddllinkingtable
-	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a matching ddllinkingtable could not be found
+	* @return the first matching d d l linking table
+	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a matching d d l linking table could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable findByRecordid_First(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable findByRecordid_First(
 		long recordid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException,
+		throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByRecordid_First(recordid, orderByComparator);
 	}
 
 	/**
-	* Returns the first ddllinkingtable in the ordered set where recordid = &#63;.
+	* Returns the first d d l linking table in the ordered set where recordid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching ddllinkingtable, or <code>null</code> if a matching ddllinkingtable could not be found
+	* @return the first matching d d l linking table, or <code>null</code> if a matching d d l linking table could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable fetchByRecordid_First(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable fetchByRecordid_First(
 		long recordid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -198,31 +198,31 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the last ddllinkingtable in the ordered set where recordid = &#63;.
+	* Returns the last d d l linking table in the ordered set where recordid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching ddllinkingtable
-	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a matching ddllinkingtable could not be found
+	* @return the last matching d d l linking table
+	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a matching d d l linking table could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable findByRecordid_Last(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable findByRecordid_Last(
 		long recordid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException,
+		throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByRecordid_Last(recordid, orderByComparator);
 	}
 
 	/**
-	* Returns the last ddllinkingtable in the ordered set where recordid = &#63;.
+	* Returns the last d d l linking table in the ordered set where recordid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching ddllinkingtable, or <code>null</code> if a matching ddllinkingtable could not be found
+	* @return the last matching d d l linking table, or <code>null</code> if a matching d d l linking table could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable fetchByRecordid_Last(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable fetchByRecordid_Last(
 		long recordid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -230,19 +230,19 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the ddllinkingtables before and after the current ddllinkingtable in the ordered set where recordid = &#63;.
+	* Returns the d d l linking tables before and after the current d d l linking table in the ordered set where recordid = &#63;.
 	*
-	* @param ddllinkingtable the primary key of the current ddllinkingtable
+	* @param ddllinkingtable the primary key of the current d d l linking table
 	* @param recordid the recordid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next ddllinkingtable
-	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	* @return the previous, current, and next d d l linking table
+	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable[] findByRecordid_PrevAndNext(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable[] findByRecordid_PrevAndNext(
 		long ddllinkingtable, long recordid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException,
+		throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByRecordid_PrevAndNext(ddllinkingtable, recordid,
@@ -250,7 +250,7 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Removes all the ddllinkingtables where recordid = &#63; from the database.
+	* Removes all the d d l linking tables where recordid = &#63; from the database.
 	*
 	* @param recordid the recordid
 	* @throws SystemException if a system exception occurred
@@ -261,10 +261,10 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the number of ddllinkingtables where recordid = &#63;.
+	* Returns the number of d d l linking tables where recordid = &#63;.
 	*
 	* @param recordid the recordid
-	* @return the number of matching ddllinkingtables
+	* @return the number of matching d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int countByRecordid(long recordid)
@@ -273,34 +273,34 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns all the ddllinkingtables where recordid = &#63; and recordsetid = &#63;.
+	* Returns all the d d l linking tables where recordid = &#63; and recordsetid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
-	* @return the matching ddllinkingtables
+	* @return the matching d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findByRecordsByRecordset(
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findByRecordsByRecordset(
 		long recordid, long recordsetid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByRecordsByRecordset(recordid, recordsetid);
 	}
 
 	/**
-	* Returns a range of all the ddllinkingtables where recordid = &#63; and recordsetid = &#63;.
+	* Returns a range of all the d d l linking tables where recordid = &#63; and recordsetid = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
-	* @param start the lower bound of the range of ddllinkingtables
-	* @param end the upper bound of the range of ddllinkingtables (not inclusive)
-	* @return the range of matching ddllinkingtables
+	* @param start the lower bound of the range of d d l linking tables
+	* @param end the upper bound of the range of d d l linking tables (not inclusive)
+	* @return the range of matching d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findByRecordsByRecordset(
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findByRecordsByRecordset(
 		long recordid, long recordsetid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
@@ -308,21 +308,21 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns an ordered range of all the ddllinkingtables where recordid = &#63; and recordsetid = &#63;.
+	* Returns an ordered range of all the d d l linking tables where recordid = &#63; and recordsetid = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
-	* @param start the lower bound of the range of ddllinkingtables
-	* @param end the upper bound of the range of ddllinkingtables (not inclusive)
+	* @param start the lower bound of the range of d d l linking tables
+	* @param end the upper bound of the range of d d l linking tables (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching ddllinkingtables
+	* @return the ordered range of matching d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findByRecordsByRecordset(
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findByRecordsByRecordset(
 		long recordid, long recordsetid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -332,19 +332,19 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the first ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	* Returns the first d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching ddllinkingtable
-	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a matching ddllinkingtable could not be found
+	* @return the first matching d d l linking table
+	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a matching d d l linking table could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable findByRecordsByRecordset_First(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable findByRecordsByRecordset_First(
 		long recordid, long recordsetid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException,
+		throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByRecordsByRecordset_First(recordid, recordsetid,
@@ -352,15 +352,15 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the first ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	* Returns the first d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching ddllinkingtable, or <code>null</code> if a matching ddllinkingtable could not be found
+	* @return the first matching d d l linking table, or <code>null</code> if a matching d d l linking table could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable fetchByRecordsByRecordset_First(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable fetchByRecordsByRecordset_First(
 		long recordid, long recordsetid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -370,19 +370,19 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the last ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	* Returns the last d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching ddllinkingtable
-	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a matching ddllinkingtable could not be found
+	* @return the last matching d d l linking table
+	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a matching d d l linking table could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable findByRecordsByRecordset_Last(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable findByRecordsByRecordset_Last(
 		long recordid, long recordsetid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException,
+		throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByRecordsByRecordset_Last(recordid, recordsetid,
@@ -390,15 +390,15 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the last ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	* Returns the last d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching ddllinkingtable, or <code>null</code> if a matching ddllinkingtable could not be found
+	* @return the last matching d d l linking table, or <code>null</code> if a matching d d l linking table could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable fetchByRecordsByRecordset_Last(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable fetchByRecordsByRecordset_Last(
 		long recordid, long recordsetid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -408,20 +408,20 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the ddllinkingtables before and after the current ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	* Returns the d d l linking tables before and after the current d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	*
-	* @param ddllinkingtable the primary key of the current ddllinkingtable
+	* @param ddllinkingtable the primary key of the current d d l linking table
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next ddllinkingtable
-	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	* @return the previous, current, and next d d l linking table
+	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable[] findByRecordsByRecordset_PrevAndNext(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable[] findByRecordsByRecordset_PrevAndNext(
 		long ddllinkingtable, long recordid, long recordsetid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException,
+		throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByRecordsByRecordset_PrevAndNext(ddllinkingtable,
@@ -429,7 +429,7 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Removes all the ddllinkingtables where recordid = &#63; and recordsetid = &#63; from the database.
+	* Removes all the d d l linking tables where recordid = &#63; and recordsetid = &#63; from the database.
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
@@ -442,11 +442,11 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the number of ddllinkingtables where recordid = &#63; and recordsetid = &#63;.
+	* Returns the number of d d l linking tables where recordid = &#63; and recordsetid = &#63;.
 	*
 	* @param recordid the recordid
 	* @param recordsetid the recordsetid
-	* @return the number of matching ddllinkingtables
+	* @return the number of matching d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int countByRecordsByRecordset(long recordid, long recordsetid)
@@ -455,128 +455,128 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Caches the ddllinkingtable in the entity cache if it is enabled.
+	* Caches the d d l linking table in the entity cache if it is enabled.
 	*
-	* @param ddllinkingtable the ddllinkingtable
+	* @param ddlLinkingTable the d d l linking table
 	*/
 	public static void cacheResult(
-		at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable ddllinkingtable) {
-		getPersistence().cacheResult(ddllinkingtable);
+		at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable ddlLinkingTable) {
+		getPersistence().cacheResult(ddlLinkingTable);
 	}
 
 	/**
-	* Caches the ddllinkingtables in the entity cache if it is enabled.
+	* Caches the d d l linking tables in the entity cache if it is enabled.
 	*
-	* @param ddllinkingtables the ddllinkingtables
+	* @param ddlLinkingTables the d d l linking tables
 	*/
 	public static void cacheResult(
-		java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> ddllinkingtables) {
-		getPersistence().cacheResult(ddllinkingtables);
+		java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> ddlLinkingTables) {
+		getPersistence().cacheResult(ddlLinkingTables);
 	}
 
 	/**
-	* Creates a new ddllinkingtable with the primary key. Does not add the ddllinkingtable to the database.
+	* Creates a new d d l linking table with the primary key. Does not add the d d l linking table to the database.
 	*
-	* @param ddllinkingtable the primary key for the new ddllinkingtable
-	* @return the new ddllinkingtable
+	* @param ddllinkingtable the primary key for the new d d l linking table
+	* @return the new d d l linking table
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable create(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable create(
 		long ddllinkingtable) {
 		return getPersistence().create(ddllinkingtable);
 	}
 
 	/**
-	* Removes the ddllinkingtable with the primary key from the database. Also notifies the appropriate model listeners.
+	* Removes the d d l linking table with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddllinkingtable the primary key of the ddllinkingtable
-	* @return the ddllinkingtable that was removed
-	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	* @param ddllinkingtable the primary key of the d d l linking table
+	* @return the d d l linking table that was removed
+	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable remove(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable remove(
 		long ddllinkingtable)
-		throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException,
+		throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(ddllinkingtable);
 	}
 
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable updateImpl(
-		at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable ddllinkingtable)
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable updateImpl(
+		at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable ddlLinkingTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().updateImpl(ddllinkingtable);
+		return getPersistence().updateImpl(ddlLinkingTable);
 	}
 
 	/**
-	* Returns the ddllinkingtable with the primary key or throws a {@link at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException} if it could not be found.
+	* Returns the d d l linking table with the primary key or throws a {@link at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException} if it could not be found.
 	*
-	* @param ddllinkingtable the primary key of the ddllinkingtable
-	* @return the ddllinkingtable
-	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	* @param ddllinkingtable the primary key of the d d l linking table
+	* @return the d d l linking table
+	* @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable findByPrimaryKey(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable findByPrimaryKey(
 		long ddllinkingtable)
-		throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException,
+		throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(ddllinkingtable);
 	}
 
 	/**
-	* Returns the ddllinkingtable with the primary key or returns <code>null</code> if it could not be found.
+	* Returns the d d l linking table with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param ddllinkingtable the primary key of the ddllinkingtable
-	* @return the ddllinkingtable, or <code>null</code> if a ddllinkingtable with the primary key could not be found
+	* @param ddllinkingtable the primary key of the d d l linking table
+	* @return the d d l linking table, or <code>null</code> if a d d l linking table with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable fetchByPrimaryKey(
+	public static at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable fetchByPrimaryKey(
 		long ddllinkingtable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(ddllinkingtable);
 	}
 
 	/**
-	* Returns all the ddllinkingtables.
+	* Returns all the d d l linking tables.
 	*
-	* @return the ddllinkingtables
+	* @return the d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findAll()
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
 	/**
-	* Returns a range of all the ddllinkingtables.
+	* Returns a range of all the d d l linking tables.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of ddllinkingtables
-	* @param end the upper bound of the range of ddllinkingtables (not inclusive)
-	* @return the range of ddllinkingtables
+	* @param start the lower bound of the range of d d l linking tables
+	* @param end the upper bound of the range of d d l linking tables (not inclusive)
+	* @return the range of d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findAll(
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the ddllinkingtables.
+	* Returns an ordered range of all the d d l linking tables.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of ddllinkingtables
-	* @param end the upper bound of the range of ddllinkingtables (not inclusive)
+	* @param start the lower bound of the range of d d l linking tables
+	* @param end the upper bound of the range of d d l linking tables (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of ddllinkingtables
+	* @return the ordered range of d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable> findAll(
+	public static java.util.List<at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -584,7 +584,7 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Removes all the ddllinkingtables from the database.
+	* Removes all the d d l linking tables from the database.
 	*
 	* @throws SystemException if a system exception occurred
 	*/
@@ -594,9 +594,9 @@ public class ddllinkingtableUtil {
 	}
 
 	/**
-	* Returns the number of ddllinkingtables.
+	* Returns the number of d d l linking tables.
 	*
-	* @return the number of ddllinkingtables
+	* @return the number of d d l linking tables
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int countAll()
@@ -604,12 +604,12 @@ public class ddllinkingtableUtil {
 		return getPersistence().countAll();
 	}
 
-	public static ddllinkingtablePersistence getPersistence() {
+	public static DDLLinkingTablePersistence getPersistence() {
 		if (_persistence == null) {
-			_persistence = (ddllinkingtablePersistence)PortletBeanLocatorUtil.locate(at.meduni.liferay.portlet.bbmriat.service.ClpSerializer.getServletContextName(),
-					ddllinkingtablePersistence.class.getName());
+			_persistence = (DDLLinkingTablePersistence)PortletBeanLocatorUtil.locate(at.meduni.liferay.portlet.bbmriat.service.ClpSerializer.getServletContextName(),
+					DDLLinkingTablePersistence.class.getName());
 
-			ReferenceRegistry.registerReference(ddllinkingtableUtil.class,
+			ReferenceRegistry.registerReference(DDLLinkingTableUtil.class,
 				"_persistence");
 		}
 
@@ -619,8 +619,8 @@ public class ddllinkingtableUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
-	public void setPersistence(ddllinkingtablePersistence persistence) {
+	public void setPersistence(DDLLinkingTablePersistence persistence) {
 	}
 
-	private static ddllinkingtablePersistence _persistence;
+	private static DDLLinkingTablePersistence _persistence;
 }

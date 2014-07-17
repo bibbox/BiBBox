@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable" />
+	<import class="at.meduni.liferay.portlet.bbmriat.model.History" />
 	<class name="at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableImpl" table="bbmriat.ddllinkingtable">
 		<cache usage="read-write" />
 		<id name="ddllinkingtable" type="long">
@@ -11,5 +12,16 @@
 		<property name="recordid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="recordsetid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="linkrecordid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.bbmriat.model.impl.HistoryImpl" table="history">
+		<cache usage="read-write" />
+		<id name="historyId" column="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="action" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="time" type="org.hibernate.type.TimestampType" column="time_" />
+		<property name="histo_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="workplace_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="order_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

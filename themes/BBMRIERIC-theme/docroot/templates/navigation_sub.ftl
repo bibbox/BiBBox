@@ -14,10 +14,10 @@
                
                <#if nav_child.getName()?contains("BBMRI.")>
                   <#if first>
-                     <li style="width: 20px;padding: 0;">&nbsp;</li>
+                     <li style="width: 25px;padding: 0;">&nbsp;</li>
                      <#assign first = false />
                   </#if>
-                  <li style="padding-left: 10px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <li style="padding-left: 5px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/${nav_child.getName()?substring(6, 8)?lower_case}.gif" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -27,12 +27,14 @@
                         </div>
                      </a>
                   </li>
+               <#elseif nav_child.getName()?contains("splitter")>
+               		<li style="padding-left: 5px;padding-right: 5px;font-weight:bold;">|</li>
                <#elseif nav_child.getName()?contains("GERMAN BIOBANK NODE")>
                   <#if first>
-                     <li style="width: 20px;padding: 0;">&nbsp;</li>
+                     <li style="width: 25px;padding: 0;">&nbsp;</li>
                      <#assign first = false />
                   </#if>
-                  <li style="padding-left: 10px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <li style="padding-left: 5px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/de.gif" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -44,14 +46,29 @@
                   </li>
                <#elseif nav_child.getName()?contains("Common Service IT")>
                   <#if first>
-                     <li style="width: 20px;padding: 0;">&nbsp;</li>
+                     <li style="width: 25px;padding: 0;">&nbsp;</li>
                      <#assign first = false />
                   </#if>
-                  <li style="padding-left: 10px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <li style="padding-left: 5px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/itFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
                            <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/itIcon.png" >
+                           <div class="bbmrieric-tooltip-short">${nav_child.getName()}</div>
+                           <div class="bbmrieric-tooltip-long"></div>
+                        </div>
+                     </a>
+                  </li>
+                  <#elseif nav_child.getName()?contains("IARC")>
+                  <#if first>
+                     <li style="width: 25px;padding: 0;">&nbsp;</li>
+                     <#assign first = false />
+                  </#if>
+                  <li style="padding-left: 5px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
+                        <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/iarc.gif" height="15px" />
+                        <div class="bbmrieric-tooltip-div">
+                           <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/NationalNodesSymbol.png" >
                            <div class="bbmrieric-tooltip-short">${nav_child.getName()}</div>
                            <div class="bbmrieric-tooltip-long"></div>
                         </div>

@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.meduni.graz.patho.haybaeck.model.Patient" />
+	<import class="at.meduni.graz.patho.haybaeck.model.Sample" />
+	<import class="at.meduni.graz.patho.haybaeck.model.TMA" />
+	<class name="at.meduni.graz.patho.haybaeck.model.impl.PatientImpl" table="haybaeck.patient">
+		<cache usage="read-write" />
+		<id name="patient_Id" column="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="identifier" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cohort" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="first_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="last_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="date_of_birth" type="org.hibernate.type.TimestampType" />
+		<property name="date_of_death" type="org.hibernate.type.TimestampType" />
+		<property name="couse_of_death" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.meduni.graz.patho.haybaeck.model.impl.SampleImpl" table="haybaeck.sample">
+		<cache usage="read-write" />
+		<id name="sample_Id" column="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="patient_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="t" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="n" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="m" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="g" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="r" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="p" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="l" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="v" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="operation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="post_op_treatment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="recurrence" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="recurrence_date" type="org.hibernate.type.TimestampType" />
+		<property name="dead_live" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="last_follow_up_date" type="org.hibernate.type.TimestampType" />
+		<property name="hospital" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tnm_staging" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diagnosis" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="operation_date" type="org.hibernate.type.TimestampType" />
+		<property name="tmp_identifier" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.meduni.graz.patho.haybaeck.model.impl.TMAImpl" table="haybaeck.tma">
+		<cache usage="read-write" />
+		<id name="tma_Id" column="id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="sample_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="tma_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tma_number" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tma_comment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cytoplasmic_stat_5_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_5_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_5_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_5_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_cjun_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_cjun_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_cjun_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_cjun_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_pstat_3_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_pstat_3_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_pstat_3_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_pstat_3_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_pstat_5_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_pstat_5_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_pstat_5_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_pstat_5_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_pstat_1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_pstat_1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_pstat_1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_il6r_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_il6r_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_il6r_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_il6r_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_socs1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_socs1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_socs1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_socs1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_socs3_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_socs3_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_socs3_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_socs3_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_junb_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_junb_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_junb_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_junb_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_3_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_3_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_3_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_3_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_5a_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_5a_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_5a_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_5a_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_5b_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_5b_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_5b_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_5b_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_eif3a_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_eif3a_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_eif3a_peter_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_eif3a_peter_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_itih_5_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_itih_5_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_itih_5_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_itih_5_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_itih_5_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_itih_5_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_itih_5_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_itih_5_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_imp2_2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_imp2_2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_stat_1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_stat_1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_nfkb1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_nfkb1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_nfkb1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_nfkb1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_nfkb2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_nfkb2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_nfkb2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_nfkb2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_pikb_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_pikb_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pakt_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pakt_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pakt_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pakt_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pakt_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pakt_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pakt_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pakt_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pmtor_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pmtor_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pmtor_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pmtor_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pmtor_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pmtor_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pmtor_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pmtor_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pp70s6k_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pp70s6k_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pp70s6k_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pp70s6k_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pp70s6k_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pp70s6k_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pp70s6k_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pp70s6k_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pten_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pten_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pten_o1_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pten_o1_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pten_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cytoplasmic_phoshpo_pten_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pten_o2_intensity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nuclear_phoshpo_pten_o2_density" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

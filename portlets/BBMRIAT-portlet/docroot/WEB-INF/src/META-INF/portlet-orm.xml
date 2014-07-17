@@ -18,8 +18,30 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.bbmriat.model.impl.HistoryModelImpl">
+		<attributes>
+			<id name="historyId">
+				<column name="ID" />
+			</id>
+			<basic name="action" />
+			<basic name="time">
+				<column name="TIME_" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="histo_id" />
+			<basic name="workplace_id" />
+			<basic name="order_id" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableImpl" name="ddllinkingtable">
 		<table name="bbmriat.ddllinkingtable" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.bbmriat.model.impl.HistoryImpl" name="History">
+		<table name="history" />
 		<attributes />
 	</entity>
 </entity-mappings>

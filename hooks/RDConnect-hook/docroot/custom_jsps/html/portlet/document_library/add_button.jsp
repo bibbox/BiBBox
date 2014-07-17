@@ -48,9 +48,11 @@ boolean hasAddDocumentPermission = DLFolderPermission.contains(permissionChecker
 			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
-<!--
+
+		
+<% if(themeDisplay.getCompany().getName().equalsIgnoreCase("BBMRI.at")) { %>
 		<aui:nav-item href="<%= addFolderURL %>" iconClass="icon-folder-open" label='<%= (folder != null) ? "subfolder" : "folder" %>' />
-	-->
+<% } %>
 	
 	</c:if>
 

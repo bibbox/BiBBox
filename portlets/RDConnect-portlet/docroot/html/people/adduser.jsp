@@ -29,7 +29,7 @@ if (currentGroup.isOrganization()) {
 			<aui:input name="rdcmiddlename" label="Middle Name" type="text" value =""/>
 			<aui:input name="rdclastname" label="Last Name" type="text" value =""/>
 			
-			<aui:input name="rdcemail" label="e-Mail" type="text" value =""/>
+			<aui:input name="rdcemail" label="E-mail" type="text" value =""/>
 			<aui:select name="rdcgender" label="Gender" value ="male">
 				<aui:option value="male" selected="true" >Male</aui:option>
 				<aui:option value="female" >Female</aui:option>

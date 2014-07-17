@@ -11,17 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	${theme.include(top_head_include)}
-	
-	<#if !is_signed_in>
-     <#assign loginpage = themeDisplay.getURLCurrent()?starts_with("/web/home/login") />
-     <#assign loginpage2 = themeDisplay.getURLCurrent()?starts_with("/c/portal/update_password") />
-      <#if !loginpage>
-        <#if !loginpage2>
-         <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/web/home/login" />
-        </#if>
-      </#if>
-   </#if>
-   
+
    <#if is_signed_in>
       <#if !is_admin>
          <style>
@@ -86,6 +76,7 @@ ${theme.include(body_top_include)}
    	</div>
    </div>
 </#if>
+
    <!-- New Header End -->
    <div class="container-fluid-background">
    	<div class="container-fluid" id="wrapper">

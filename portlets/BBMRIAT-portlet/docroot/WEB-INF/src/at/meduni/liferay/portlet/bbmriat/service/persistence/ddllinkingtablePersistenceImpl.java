@@ -14,10 +14,10 @@
 
 package at.meduni.liferay.portlet.bbmriat.service.persistence;
 
-import at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException;
-import at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable;
-import at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableImpl;
-import at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl;
+import at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException;
+import at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable;
+import at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableImpl;
+import at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl;
 
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
@@ -50,43 +50,43 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence implementation for the ddllinkingtable service.
+ * The persistence implementation for the d d l linking table service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Robert Reihs
- * @see ddllinkingtablePersistence
- * @see ddllinkingtableUtil
+ * @see DDLLinkingTablePersistence
+ * @see DDLLinkingTableUtil
  * @generated
  */
-public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinkingtable>
-	implements ddllinkingtablePersistence {
+public class DDLLinkingTablePersistenceImpl extends BasePersistenceImpl<DDLLinkingTable>
+	implements DDLLinkingTablePersistence {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link ddllinkingtableUtil} to access the ddllinkingtable persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use {@link DDLLinkingTableUtil} to access the d d l linking table persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = ddllinkingtableImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_ENTITY = DDLLinkingTableImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
 		".List1";
 	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
 		".List2";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED,
-			ddllinkingtableImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED,
+			DDLLinkingTableImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
 			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED,
-			ddllinkingtableImpl.class,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED,
+			DDLLinkingTableImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED, Long.class,
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_RECORDID = new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED,
-			ddllinkingtableImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_RECORDID = new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED,
+			DDLLinkingTableImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
 			"findByRecordid",
 			new String[] {
 				Long.class.getName(),
@@ -95,66 +95,66 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 				OrderByComparator.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RECORDID =
-		new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED,
-			ddllinkingtableImpl.class,
+		new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED,
+			DDLLinkingTableImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByRecordid",
 			new String[] { Long.class.getName() },
-			ddllinkingtableModelImpl.RECORDID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_RECORDID = new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			DDLLinkingTableModelImpl.RECORDID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_RECORDID = new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByRecordid",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the ddllinkingtables where recordid = &#63;.
+	 * Returns all the d d l linking tables where recordid = &#63;.
 	 *
 	 * @param recordid the recordid
-	 * @return the matching ddllinkingtables
+	 * @return the matching d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findByRecordid(long recordid)
+	public List<DDLLinkingTable> findByRecordid(long recordid)
 		throws SystemException {
 		return findByRecordid(recordid, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
 	/**
-	 * Returns a range of all the ddllinkingtables where recordid = &#63;.
+	 * Returns a range of all the d d l linking tables where recordid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param recordid the recordid
-	 * @param start the lower bound of the range of ddllinkingtables
-	 * @param end the upper bound of the range of ddllinkingtables (not inclusive)
-	 * @return the range of matching ddllinkingtables
+	 * @param start the lower bound of the range of d d l linking tables
+	 * @param end the upper bound of the range of d d l linking tables (not inclusive)
+	 * @return the range of matching d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findByRecordid(long recordid, int start,
+	public List<DDLLinkingTable> findByRecordid(long recordid, int start,
 		int end) throws SystemException {
 		return findByRecordid(recordid, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the ddllinkingtables where recordid = &#63;.
+	 * Returns an ordered range of all the d d l linking tables where recordid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param recordid the recordid
-	 * @param start the lower bound of the range of ddllinkingtables
-	 * @param end the upper bound of the range of ddllinkingtables (not inclusive)
+	 * @param start the lower bound of the range of d d l linking tables
+	 * @param end the upper bound of the range of d d l linking tables (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching ddllinkingtables
+	 * @return the ordered range of matching d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findByRecordid(long recordid, int start,
+	public List<DDLLinkingTable> findByRecordid(long recordid, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -171,12 +171,12 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			finderArgs = new Object[] { recordid, start, end, orderByComparator };
 		}
 
-		List<ddllinkingtable> list = (List<ddllinkingtable>)FinderCacheUtil.getResult(finderPath,
+		List<DDLLinkingTable> list = (List<DDLLinkingTable>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if ((list != null) && !list.isEmpty()) {
-			for (ddllinkingtable ddllinkingtable : list) {
-				if ((recordid != ddllinkingtable.getRecordid())) {
+			for (DDLLinkingTable ddlLinkingTable : list) {
+				if ((recordid != ddlLinkingTable.getRecordid())) {
 					list = null;
 
 					break;
@@ -205,7 +205,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			}
 			else
 			 if (pagination) {
-				query.append(ddllinkingtableModelImpl.ORDER_BY_JPQL);
+				query.append(DDLLinkingTableModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -222,15 +222,15 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 				qPos.add(recordid);
 
 				if (!pagination) {
-					list = (List<ddllinkingtable>)QueryUtil.list(q,
+					list = (List<DDLLinkingTable>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 
 					Collections.sort(list);
 
-					list = new UnmodifiableList<ddllinkingtable>(list);
+					list = new UnmodifiableList<DDLLinkingTable>(list);
 				}
 				else {
-					list = (List<ddllinkingtable>)QueryUtil.list(q,
+					list = (List<DDLLinkingTable>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
 
@@ -252,23 +252,23 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Returns the first ddllinkingtable in the ordered set where recordid = &#63;.
+	 * Returns the first d d l linking table in the ordered set where recordid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching ddllinkingtable
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a matching ddllinkingtable could not be found
+	 * @return the first matching d d l linking table
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a matching d d l linking table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable findByRecordid_First(long recordid,
+	public DDLLinkingTable findByRecordid_First(long recordid,
 		OrderByComparator orderByComparator)
-		throws NoSuchddllinkingtableException, SystemException {
-		ddllinkingtable ddllinkingtable = fetchByRecordid_First(recordid,
+		throws NoSuchDDLLinkingTableException, SystemException {
+		DDLLinkingTable ddlLinkingTable = fetchByRecordid_First(recordid,
 				orderByComparator);
 
-		if (ddllinkingtable != null) {
-			return ddllinkingtable;
+		if (ddlLinkingTable != null) {
+			return ddlLinkingTable;
 		}
 
 		StringBundler msg = new StringBundler(4);
@@ -280,21 +280,21 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-		throw new NoSuchddllinkingtableException(msg.toString());
+		throw new NoSuchDDLLinkingTableException(msg.toString());
 	}
 
 	/**
-	 * Returns the first ddllinkingtable in the ordered set where recordid = &#63;.
+	 * Returns the first d d l linking table in the ordered set where recordid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching ddllinkingtable, or <code>null</code> if a matching ddllinkingtable could not be found
+	 * @return the first matching d d l linking table, or <code>null</code> if a matching d d l linking table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable fetchByRecordid_First(long recordid,
+	public DDLLinkingTable fetchByRecordid_First(long recordid,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<ddllinkingtable> list = findByRecordid(recordid, 0, 1,
+		List<DDLLinkingTable> list = findByRecordid(recordid, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -305,23 +305,23 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Returns the last ddllinkingtable in the ordered set where recordid = &#63;.
+	 * Returns the last d d l linking table in the ordered set where recordid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching ddllinkingtable
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a matching ddllinkingtable could not be found
+	 * @return the last matching d d l linking table
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a matching d d l linking table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable findByRecordid_Last(long recordid,
+	public DDLLinkingTable findByRecordid_Last(long recordid,
 		OrderByComparator orderByComparator)
-		throws NoSuchddllinkingtableException, SystemException {
-		ddllinkingtable ddllinkingtable = fetchByRecordid_Last(recordid,
+		throws NoSuchDDLLinkingTableException, SystemException {
+		DDLLinkingTable ddlLinkingTable = fetchByRecordid_Last(recordid,
 				orderByComparator);
 
-		if (ddllinkingtable != null) {
-			return ddllinkingtable;
+		if (ddlLinkingTable != null) {
+			return ddlLinkingTable;
 		}
 
 		StringBundler msg = new StringBundler(4);
@@ -333,19 +333,19 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-		throw new NoSuchddllinkingtableException(msg.toString());
+		throw new NoSuchDDLLinkingTableException(msg.toString());
 	}
 
 	/**
-	 * Returns the last ddllinkingtable in the ordered set where recordid = &#63;.
+	 * Returns the last d d l linking table in the ordered set where recordid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching ddllinkingtable, or <code>null</code> if a matching ddllinkingtable could not be found
+	 * @return the last matching d d l linking table, or <code>null</code> if a matching d d l linking table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable fetchByRecordid_Last(long recordid,
+	public DDLLinkingTable fetchByRecordid_Last(long recordid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByRecordid(recordid);
 
@@ -353,7 +353,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			return null;
 		}
 
-		List<ddllinkingtable> list = findByRecordid(recordid, count - 1, count,
+		List<DDLLinkingTable> list = findByRecordid(recordid, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -364,34 +364,34 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Returns the ddllinkingtables before and after the current ddllinkingtable in the ordered set where recordid = &#63;.
+	 * Returns the d d l linking tables before and after the current d d l linking table in the ordered set where recordid = &#63;.
 	 *
-	 * @param ddllinkingtable the primary key of the current ddllinkingtable
+	 * @param ddllinkingtable the primary key of the current d d l linking table
 	 * @param recordid the recordid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next ddllinkingtable
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	 * @return the previous, current, and next d d l linking table
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable[] findByRecordid_PrevAndNext(long ddllinkingtable,
+	public DDLLinkingTable[] findByRecordid_PrevAndNext(long ddllinkingtable,
 		long recordid, OrderByComparator orderByComparator)
-		throws NoSuchddllinkingtableException, SystemException {
-		ddllinkingtable ddllinkingtable = findByPrimaryKey(ddllinkingtable);
+		throws NoSuchDDLLinkingTableException, SystemException {
+		DDLLinkingTable ddlLinkingTable = findByPrimaryKey(ddllinkingtable);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ddllinkingtable[] array = new ddllinkingtableImpl[3];
+			DDLLinkingTable[] array = new DDLLinkingTableImpl[3];
 
-			array[0] = getByRecordid_PrevAndNext(session, ddllinkingtable,
+			array[0] = getByRecordid_PrevAndNext(session, ddlLinkingTable,
 					recordid, orderByComparator, true);
 
-			array[1] = ddllinkingtable;
+			array[1] = ddlLinkingTable;
 
-			array[2] = getByRecordid_PrevAndNext(session, ddllinkingtable,
+			array[2] = getByRecordid_PrevAndNext(session, ddlLinkingTable,
 					recordid, orderByComparator, false);
 
 			return array;
@@ -404,8 +404,8 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 		}
 	}
 
-	protected ddllinkingtable getByRecordid_PrevAndNext(Session session,
-		ddllinkingtable ddllinkingtable, long recordid,
+	protected DDLLinkingTable getByRecordid_PrevAndNext(Session session,
+		DDLLinkingTable ddlLinkingTable, long recordid,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -477,7 +477,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			}
 		}
 		else {
-			query.append(ddllinkingtableModelImpl.ORDER_BY_JPQL);
+			query.append(DDLLinkingTableModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -492,14 +492,14 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 		qPos.add(recordid);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(ddllinkingtable);
+			Object[] values = orderByComparator.getOrderByConditionValues(ddlLinkingTable);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<ddllinkingtable> list = q.list();
+		List<DDLLinkingTable> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -510,24 +510,24 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Removes all the ddllinkingtables where recordid = &#63; from the database.
+	 * Removes all the d d l linking tables where recordid = &#63; from the database.
 	 *
 	 * @param recordid the recordid
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public void removeByRecordid(long recordid) throws SystemException {
-		for (ddllinkingtable ddllinkingtable : findByRecordid(recordid,
+		for (DDLLinkingTable ddlLinkingTable : findByRecordid(recordid,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(ddllinkingtable);
+			remove(ddlLinkingTable);
 		}
 	}
 
 	/**
-	 * Returns the number of ddllinkingtables where recordid = &#63;.
+	 * Returns the number of d d l linking tables where recordid = &#63;.
 	 *
 	 * @param recordid the recordid
-	 * @return the number of matching ddllinkingtables
+	 * @return the number of matching d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -576,11 +576,11 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_RECORDID_RECORDID_2 = "ddllinkingtable.recordid = ?";
+	private static final String _FINDER_COLUMN_RECORDID_RECORDID_2 = "ddlLinkingTable.recordid = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_RECORDSBYRECORDSET =
-		new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED,
-			ddllinkingtableImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+		new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED,
+			DDLLinkingTableImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
 			"findByRecordsByRecordset",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
@@ -589,72 +589,72 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 				OrderByComparator.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RECORDSBYRECORDSET =
-		new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED,
-			ddllinkingtableImpl.class,
+		new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED,
+			DDLLinkingTableImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByRecordsByRecordset",
 			new String[] { Long.class.getName(), Long.class.getName() },
-			ddllinkingtableModelImpl.RECORDID_COLUMN_BITMASK |
-			ddllinkingtableModelImpl.RECORDSETID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_RECORDSBYRECORDSET = new FinderPath(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			DDLLinkingTableModelImpl.RECORDID_COLUMN_BITMASK |
+			DDLLinkingTableModelImpl.RECORDSETID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_RECORDSBYRECORDSET = new FinderPath(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByRecordsByRecordset",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the ddllinkingtables where recordid = &#63; and recordsetid = &#63;.
+	 * Returns all the d d l linking tables where recordid = &#63; and recordsetid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
-	 * @return the matching ddllinkingtables
+	 * @return the matching d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findByRecordsByRecordset(long recordid,
+	public List<DDLLinkingTable> findByRecordsByRecordset(long recordid,
 		long recordsetid) throws SystemException {
 		return findByRecordsByRecordset(recordid, recordsetid,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the ddllinkingtables where recordid = &#63; and recordsetid = &#63;.
+	 * Returns a range of all the d d l linking tables where recordid = &#63; and recordsetid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
-	 * @param start the lower bound of the range of ddllinkingtables
-	 * @param end the upper bound of the range of ddllinkingtables (not inclusive)
-	 * @return the range of matching ddllinkingtables
+	 * @param start the lower bound of the range of d d l linking tables
+	 * @param end the upper bound of the range of d d l linking tables (not inclusive)
+	 * @return the range of matching d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findByRecordsByRecordset(long recordid,
+	public List<DDLLinkingTable> findByRecordsByRecordset(long recordid,
 		long recordsetid, int start, int end) throws SystemException {
 		return findByRecordsByRecordset(recordid, recordsetid, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the ddllinkingtables where recordid = &#63; and recordsetid = &#63;.
+	 * Returns an ordered range of all the d d l linking tables where recordid = &#63; and recordsetid = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
-	 * @param start the lower bound of the range of ddllinkingtables
-	 * @param end the upper bound of the range of ddllinkingtables (not inclusive)
+	 * @param start the lower bound of the range of d d l linking tables
+	 * @param end the upper bound of the range of d d l linking tables (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching ddllinkingtables
+	 * @return the ordered range of matching d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findByRecordsByRecordset(long recordid,
+	public List<DDLLinkingTable> findByRecordsByRecordset(long recordid,
 		long recordsetid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -676,13 +676,13 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 				};
 		}
 
-		List<ddllinkingtable> list = (List<ddllinkingtable>)FinderCacheUtil.getResult(finderPath,
+		List<DDLLinkingTable> list = (List<DDLLinkingTable>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if ((list != null) && !list.isEmpty()) {
-			for (ddllinkingtable ddllinkingtable : list) {
-				if ((recordid != ddllinkingtable.getRecordid()) ||
-						(recordsetid != ddllinkingtable.getRecordsetid())) {
+			for (DDLLinkingTable ddlLinkingTable : list) {
+				if ((recordid != ddlLinkingTable.getRecordid()) ||
+						(recordsetid != ddlLinkingTable.getRecordsetid())) {
 					list = null;
 
 					break;
@@ -713,7 +713,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			}
 			else
 			 if (pagination) {
-				query.append(ddllinkingtableModelImpl.ORDER_BY_JPQL);
+				query.append(DDLLinkingTableModelImpl.ORDER_BY_JPQL);
 			}
 
 			String sql = query.toString();
@@ -732,15 +732,15 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 				qPos.add(recordsetid);
 
 				if (!pagination) {
-					list = (List<ddllinkingtable>)QueryUtil.list(q,
+					list = (List<DDLLinkingTable>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 
 					Collections.sort(list);
 
-					list = new UnmodifiableList<ddllinkingtable>(list);
+					list = new UnmodifiableList<DDLLinkingTable>(list);
 				}
 				else {
-					list = (List<ddllinkingtable>)QueryUtil.list(q,
+					list = (List<DDLLinkingTable>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
 
@@ -762,24 +762,24 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Returns the first ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	 * Returns the first d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching ddllinkingtable
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a matching ddllinkingtable could not be found
+	 * @return the first matching d d l linking table
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a matching d d l linking table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable findByRecordsByRecordset_First(long recordid,
+	public DDLLinkingTable findByRecordsByRecordset_First(long recordid,
 		long recordsetid, OrderByComparator orderByComparator)
-		throws NoSuchddllinkingtableException, SystemException {
-		ddllinkingtable ddllinkingtable = fetchByRecordsByRecordset_First(recordid,
+		throws NoSuchDDLLinkingTableException, SystemException {
+		DDLLinkingTable ddlLinkingTable = fetchByRecordsByRecordset_First(recordid,
 				recordsetid, orderByComparator);
 
-		if (ddllinkingtable != null) {
-			return ddllinkingtable;
+		if (ddlLinkingTable != null) {
+			return ddlLinkingTable;
 		}
 
 		StringBundler msg = new StringBundler(6);
@@ -794,23 +794,23 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-		throw new NoSuchddllinkingtableException(msg.toString());
+		throw new NoSuchDDLLinkingTableException(msg.toString());
 	}
 
 	/**
-	 * Returns the first ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	 * Returns the first d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching ddllinkingtable, or <code>null</code> if a matching ddllinkingtable could not be found
+	 * @return the first matching d d l linking table, or <code>null</code> if a matching d d l linking table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable fetchByRecordsByRecordset_First(long recordid,
+	public DDLLinkingTable fetchByRecordsByRecordset_First(long recordid,
 		long recordsetid, OrderByComparator orderByComparator)
 		throws SystemException {
-		List<ddllinkingtable> list = findByRecordsByRecordset(recordid,
+		List<DDLLinkingTable> list = findByRecordsByRecordset(recordid,
 				recordsetid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -821,24 +821,24 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Returns the last ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	 * Returns the last d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching ddllinkingtable
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a matching ddllinkingtable could not be found
+	 * @return the last matching d d l linking table
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a matching d d l linking table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable findByRecordsByRecordset_Last(long recordid,
+	public DDLLinkingTable findByRecordsByRecordset_Last(long recordid,
 		long recordsetid, OrderByComparator orderByComparator)
-		throws NoSuchddllinkingtableException, SystemException {
-		ddllinkingtable ddllinkingtable = fetchByRecordsByRecordset_Last(recordid,
+		throws NoSuchDDLLinkingTableException, SystemException {
+		DDLLinkingTable ddlLinkingTable = fetchByRecordsByRecordset_Last(recordid,
 				recordsetid, orderByComparator);
 
-		if (ddllinkingtable != null) {
-			return ddllinkingtable;
+		if (ddlLinkingTable != null) {
+			return ddlLinkingTable;
 		}
 
 		StringBundler msg = new StringBundler(6);
@@ -853,20 +853,20 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-		throw new NoSuchddllinkingtableException(msg.toString());
+		throw new NoSuchDDLLinkingTableException(msg.toString());
 	}
 
 	/**
-	 * Returns the last ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	 * Returns the last d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching ddllinkingtable, or <code>null</code> if a matching ddllinkingtable could not be found
+	 * @return the last matching d d l linking table, or <code>null</code> if a matching d d l linking table could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable fetchByRecordsByRecordset_Last(long recordid,
+	public DDLLinkingTable fetchByRecordsByRecordset_Last(long recordid,
 		long recordsetid, OrderByComparator orderByComparator)
 		throws SystemException {
 		int count = countByRecordsByRecordset(recordid, recordsetid);
@@ -875,7 +875,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			return null;
 		}
 
-		List<ddllinkingtable> list = findByRecordsByRecordset(recordid,
+		List<DDLLinkingTable> list = findByRecordsByRecordset(recordid,
 				recordsetid, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -886,38 +886,38 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Returns the ddllinkingtables before and after the current ddllinkingtable in the ordered set where recordid = &#63; and recordsetid = &#63;.
+	 * Returns the d d l linking tables before and after the current d d l linking table in the ordered set where recordid = &#63; and recordsetid = &#63;.
 	 *
-	 * @param ddllinkingtable the primary key of the current ddllinkingtable
+	 * @param ddllinkingtable the primary key of the current d d l linking table
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next ddllinkingtable
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	 * @return the previous, current, and next d d l linking table
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable[] findByRecordsByRecordset_PrevAndNext(
+	public DDLLinkingTable[] findByRecordsByRecordset_PrevAndNext(
 		long ddllinkingtable, long recordid, long recordsetid,
 		OrderByComparator orderByComparator)
-		throws NoSuchddllinkingtableException, SystemException {
-		ddllinkingtable ddllinkingtable = findByPrimaryKey(ddllinkingtable);
+		throws NoSuchDDLLinkingTableException, SystemException {
+		DDLLinkingTable ddlLinkingTable = findByPrimaryKey(ddllinkingtable);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ddllinkingtable[] array = new ddllinkingtableImpl[3];
+			DDLLinkingTable[] array = new DDLLinkingTableImpl[3];
 
 			array[0] = getByRecordsByRecordset_PrevAndNext(session,
-					ddllinkingtable, recordid, recordsetid, orderByComparator,
+					ddlLinkingTable, recordid, recordsetid, orderByComparator,
 					true);
 
-			array[1] = ddllinkingtable;
+			array[1] = ddlLinkingTable;
 
 			array[2] = getByRecordsByRecordset_PrevAndNext(session,
-					ddllinkingtable, recordid, recordsetid, orderByComparator,
+					ddlLinkingTable, recordid, recordsetid, orderByComparator,
 					false);
 
 			return array;
@@ -930,8 +930,8 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 		}
 	}
 
-	protected ddllinkingtable getByRecordsByRecordset_PrevAndNext(
-		Session session, ddllinkingtable ddllinkingtable, long recordid,
+	protected DDLLinkingTable getByRecordsByRecordset_PrevAndNext(
+		Session session, DDLLinkingTable ddlLinkingTable, long recordid,
 		long recordsetid, OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1005,7 +1005,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			}
 		}
 		else {
-			query.append(ddllinkingtableModelImpl.ORDER_BY_JPQL);
+			query.append(DDLLinkingTableModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -1022,14 +1022,14 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 		qPos.add(recordsetid);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(ddllinkingtable);
+			Object[] values = orderByComparator.getOrderByConditionValues(ddlLinkingTable);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<ddllinkingtable> list = q.list();
+		List<DDLLinkingTable> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1040,7 +1040,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Removes all the ddllinkingtables where recordid = &#63; and recordsetid = &#63; from the database.
+	 * Removes all the d d l linking tables where recordid = &#63; and recordsetid = &#63; from the database.
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
@@ -1049,19 +1049,19 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	@Override
 	public void removeByRecordsByRecordset(long recordid, long recordsetid)
 		throws SystemException {
-		for (ddllinkingtable ddllinkingtable : findByRecordsByRecordset(
+		for (DDLLinkingTable ddlLinkingTable : findByRecordsByRecordset(
 				recordid, recordsetid, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				null)) {
-			remove(ddllinkingtable);
+			remove(ddlLinkingTable);
 		}
 	}
 
 	/**
-	 * Returns the number of ddllinkingtables where recordid = &#63; and recordsetid = &#63;.
+	 * Returns the number of d d l linking tables where recordid = &#63; and recordsetid = &#63;.
 	 *
 	 * @param recordid the recordid
 	 * @param recordsetid the recordsetid
-	 * @return the number of matching ddllinkingtables
+	 * @return the number of matching d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1115,49 +1115,49 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_RECORDSBYRECORDSET_RECORDID_2 = "ddllinkingtable.recordid = ? AND ";
-	private static final String _FINDER_COLUMN_RECORDSBYRECORDSET_RECORDSETID_2 = "ddllinkingtable.recordsetid = ?";
+	private static final String _FINDER_COLUMN_RECORDSBYRECORDSET_RECORDID_2 = "ddlLinkingTable.recordid = ? AND ";
+	private static final String _FINDER_COLUMN_RECORDSBYRECORDSET_RECORDSETID_2 = "ddlLinkingTable.recordsetid = ?";
 
-	public ddllinkingtablePersistenceImpl() {
-		setModelClass(ddllinkingtable.class);
+	public DDLLinkingTablePersistenceImpl() {
+		setModelClass(DDLLinkingTable.class);
 	}
 
 	/**
-	 * Caches the ddllinkingtable in the entity cache if it is enabled.
+	 * Caches the d d l linking table in the entity cache if it is enabled.
 	 *
-	 * @param ddllinkingtable the ddllinkingtable
+	 * @param ddlLinkingTable the d d l linking table
 	 */
 	@Override
-	public void cacheResult(ddllinkingtable ddllinkingtable) {
-		EntityCacheUtil.putResult(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableImpl.class, ddllinkingtable.getPrimaryKey(),
-			ddllinkingtable);
+	public void cacheResult(DDLLinkingTable ddlLinkingTable) {
+		EntityCacheUtil.putResult(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableImpl.class, ddlLinkingTable.getPrimaryKey(),
+			ddlLinkingTable);
 
-		ddllinkingtable.resetOriginalValues();
+		ddlLinkingTable.resetOriginalValues();
 	}
 
 	/**
-	 * Caches the ddllinkingtables in the entity cache if it is enabled.
+	 * Caches the d d l linking tables in the entity cache if it is enabled.
 	 *
-	 * @param ddllinkingtables the ddllinkingtables
+	 * @param ddlLinkingTables the d d l linking tables
 	 */
 	@Override
-	public void cacheResult(List<ddllinkingtable> ddllinkingtables) {
-		for (ddllinkingtable ddllinkingtable : ddllinkingtables) {
+	public void cacheResult(List<DDLLinkingTable> ddlLinkingTables) {
+		for (DDLLinkingTable ddlLinkingTable : ddlLinkingTables) {
 			if (EntityCacheUtil.getResult(
-						ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-						ddllinkingtableImpl.class,
-						ddllinkingtable.getPrimaryKey()) == null) {
-				cacheResult(ddllinkingtable);
+						DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+						DDLLinkingTableImpl.class,
+						ddlLinkingTable.getPrimaryKey()) == null) {
+				cacheResult(ddlLinkingTable);
 			}
 			else {
-				ddllinkingtable.resetOriginalValues();
+				ddlLinkingTable.resetOriginalValues();
 			}
 		}
 	}
 
 	/**
-	 * Clears the cache for all ddllinkingtables.
+	 * Clears the cache for all d d l linking tables.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
@@ -1166,10 +1166,10 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
-			CacheRegistryUtil.clear(ddllinkingtableImpl.class.getName());
+			CacheRegistryUtil.clear(DDLLinkingTableImpl.class.getName());
 		}
 
-		EntityCacheUtil.clearCache(ddllinkingtableImpl.class.getName());
+		EntityCacheUtil.clearCache(DDLLinkingTableImpl.class.getName());
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
@@ -1177,93 +1177,93 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Clears the cache for the ddllinkingtable.
+	 * Clears the cache for the d d l linking table.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
 	@Override
-	public void clearCache(ddllinkingtable ddllinkingtable) {
-		EntityCacheUtil.removeResult(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableImpl.class, ddllinkingtable.getPrimaryKey());
+	public void clearCache(DDLLinkingTable ddlLinkingTable) {
+		EntityCacheUtil.removeResult(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableImpl.class, ddlLinkingTable.getPrimaryKey());
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
 	@Override
-	public void clearCache(List<ddllinkingtable> ddllinkingtables) {
+	public void clearCache(List<DDLLinkingTable> ddlLinkingTables) {
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (ddllinkingtable ddllinkingtable : ddllinkingtables) {
-			EntityCacheUtil.removeResult(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-				ddllinkingtableImpl.class, ddllinkingtable.getPrimaryKey());
+		for (DDLLinkingTable ddlLinkingTable : ddlLinkingTables) {
+			EntityCacheUtil.removeResult(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+				DDLLinkingTableImpl.class, ddlLinkingTable.getPrimaryKey());
 		}
 	}
 
 	/**
-	 * Creates a new ddllinkingtable with the primary key. Does not add the ddllinkingtable to the database.
+	 * Creates a new d d l linking table with the primary key. Does not add the d d l linking table to the database.
 	 *
-	 * @param ddllinkingtable the primary key for the new ddllinkingtable
-	 * @return the new ddllinkingtable
+	 * @param ddllinkingtable the primary key for the new d d l linking table
+	 * @return the new d d l linking table
 	 */
 	@Override
-	public ddllinkingtable create(long ddllinkingtable) {
-		ddllinkingtable ddllinkingtable = new ddllinkingtableImpl();
+	public DDLLinkingTable create(long ddllinkingtable) {
+		DDLLinkingTable ddlLinkingTable = new DDLLinkingTableImpl();
 
-		ddllinkingtable.setNew(true);
-		ddllinkingtable.setPrimaryKey(ddllinkingtable);
+		ddlLinkingTable.setNew(true);
+		ddlLinkingTable.setPrimaryKey(ddllinkingtable);
 
-		return ddllinkingtable;
+		return ddlLinkingTable;
 	}
 
 	/**
-	 * Removes the ddllinkingtable with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the d d l linking table with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddllinkingtable the primary key of the ddllinkingtable
-	 * @return the ddllinkingtable that was removed
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	 * @param ddllinkingtable the primary key of the d d l linking table
+	 * @return the d d l linking table that was removed
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable remove(long ddllinkingtable)
-		throws NoSuchddllinkingtableException, SystemException {
+	public DDLLinkingTable remove(long ddllinkingtable)
+		throws NoSuchDDLLinkingTableException, SystemException {
 		return remove((Serializable)ddllinkingtable);
 	}
 
 	/**
-	 * Removes the ddllinkingtable with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the d d l linking table with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the ddllinkingtable
-	 * @return the ddllinkingtable that was removed
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	 * @param primaryKey the primary key of the d d l linking table
+	 * @return the d d l linking table that was removed
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable remove(Serializable primaryKey)
-		throws NoSuchddllinkingtableException, SystemException {
+	public DDLLinkingTable remove(Serializable primaryKey)
+		throws NoSuchDDLLinkingTableException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			ddllinkingtable ddllinkingtable = (ddllinkingtable)session.get(ddllinkingtableImpl.class,
+			DDLLinkingTable ddlLinkingTable = (DDLLinkingTable)session.get(DDLLinkingTableImpl.class,
 					primaryKey);
 
-			if (ddllinkingtable == null) {
+			if (ddlLinkingTable == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 				}
 
-				throw new NoSuchddllinkingtableException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				throw new NoSuchDDLLinkingTableException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 					primaryKey);
 			}
 
-			return remove(ddllinkingtable);
+			return remove(ddlLinkingTable);
 		}
-		catch (NoSuchddllinkingtableException nsee) {
+		catch (NoSuchDDLLinkingTableException nsee) {
 			throw nsee;
 		}
 		catch (Exception e) {
@@ -1275,22 +1275,22 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	@Override
-	protected ddllinkingtable removeImpl(ddllinkingtable ddllinkingtable)
+	protected DDLLinkingTable removeImpl(DDLLinkingTable ddlLinkingTable)
 		throws SystemException {
-		ddllinkingtable = toUnwrappedModel(ddllinkingtable);
+		ddlLinkingTable = toUnwrappedModel(ddlLinkingTable);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (!session.contains(ddllinkingtable)) {
-				ddllinkingtable = (ddllinkingtable)session.get(ddllinkingtableImpl.class,
-						ddllinkingtable.getPrimaryKeyObj());
+			if (!session.contains(ddlLinkingTable)) {
+				ddlLinkingTable = (DDLLinkingTable)session.get(DDLLinkingTableImpl.class,
+						ddlLinkingTable.getPrimaryKeyObj());
 			}
 
-			if (ddllinkingtable != null) {
-				session.delete(ddllinkingtable);
+			if (ddlLinkingTable != null) {
+				session.delete(ddlLinkingTable);
 			}
 		}
 		catch (Exception e) {
@@ -1300,35 +1300,35 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			closeSession(session);
 		}
 
-		if (ddllinkingtable != null) {
-			clearCache(ddllinkingtable);
+		if (ddlLinkingTable != null) {
+			clearCache(ddlLinkingTable);
 		}
 
-		return ddllinkingtable;
+		return ddlLinkingTable;
 	}
 
 	@Override
-	public ddllinkingtable updateImpl(
-		at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable ddllinkingtable)
+	public DDLLinkingTable updateImpl(
+		at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable ddlLinkingTable)
 		throws SystemException {
-		ddllinkingtable = toUnwrappedModel(ddllinkingtable);
+		ddlLinkingTable = toUnwrappedModel(ddlLinkingTable);
 
-		boolean isNew = ddllinkingtable.isNew();
+		boolean isNew = ddlLinkingTable.isNew();
 
-		ddllinkingtableModelImpl ddllinkingtableModelImpl = (ddllinkingtableModelImpl)ddllinkingtable;
+		DDLLinkingTableModelImpl ddlLinkingTableModelImpl = (DDLLinkingTableModelImpl)ddlLinkingTable;
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (ddllinkingtable.isNew()) {
-				session.save(ddllinkingtable);
+			if (ddlLinkingTable.isNew()) {
+				session.save(ddlLinkingTable);
 
-				ddllinkingtable.setNew(false);
+				ddlLinkingTable.setNew(false);
 			}
 			else {
-				session.merge(ddllinkingtable);
+				session.merge(ddlLinkingTable);
 			}
 		}
 		catch (Exception e) {
@@ -1340,33 +1340,33 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew || !ddllinkingtableModelImpl.COLUMN_BITMASK_ENABLED) {
+		if (isNew || !DDLLinkingTableModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		else {
-			if ((ddllinkingtableModelImpl.getColumnBitmask() &
+			if ((ddlLinkingTableModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RECORDID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						ddllinkingtableModelImpl.getOriginalRecordid()
+						ddlLinkingTableModelImpl.getOriginalRecordid()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_RECORDID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RECORDID,
 					args);
 
-				args = new Object[] { ddllinkingtableModelImpl.getRecordid() };
+				args = new Object[] { ddlLinkingTableModelImpl.getRecordid() };
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_RECORDID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RECORDID,
 					args);
 			}
 
-			if ((ddllinkingtableModelImpl.getColumnBitmask() &
+			if ((ddlLinkingTableModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RECORDSBYRECORDSET.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						ddllinkingtableModelImpl.getOriginalRecordid(),
-						ddllinkingtableModelImpl.getOriginalRecordsetid()
+						ddlLinkingTableModelImpl.getOriginalRecordid(),
+						ddlLinkingTableModelImpl.getOriginalRecordsetid()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_RECORDSBYRECORDSET,
@@ -1375,8 +1375,8 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 					args);
 
 				args = new Object[] {
-						ddllinkingtableModelImpl.getRecordid(),
-						ddllinkingtableModelImpl.getRecordsetid()
+						ddlLinkingTableModelImpl.getRecordid(),
+						ddlLinkingTableModelImpl.getRecordsetid()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_RECORDSBYRECORDSET,
@@ -1386,108 +1386,108 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			}
 		}
 
-		EntityCacheUtil.putResult(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-			ddllinkingtableImpl.class, ddllinkingtable.getPrimaryKey(),
-			ddllinkingtable);
+		EntityCacheUtil.putResult(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+			DDLLinkingTableImpl.class, ddlLinkingTable.getPrimaryKey(),
+			ddlLinkingTable);
 
-		return ddllinkingtable;
+		return ddlLinkingTable;
 	}
 
-	protected ddllinkingtable toUnwrappedModel(ddllinkingtable ddllinkingtable) {
-		if (ddllinkingtable instanceof ddllinkingtableImpl) {
-			return ddllinkingtable;
+	protected DDLLinkingTable toUnwrappedModel(DDLLinkingTable ddlLinkingTable) {
+		if (ddlLinkingTable instanceof DDLLinkingTableImpl) {
+			return ddlLinkingTable;
 		}
 
-		ddllinkingtableImpl ddllinkingtableImpl = new ddllinkingtableImpl();
+		DDLLinkingTableImpl ddlLinkingTableImpl = new DDLLinkingTableImpl();
 
-		ddllinkingtableImpl.setNew(ddllinkingtable.isNew());
-		ddllinkingtableImpl.setPrimaryKey(ddllinkingtable.getPrimaryKey());
+		ddlLinkingTableImpl.setNew(ddlLinkingTable.isNew());
+		ddlLinkingTableImpl.setPrimaryKey(ddlLinkingTable.getPrimaryKey());
 
-		ddllinkingtableImpl.setDdllinkingtable(ddllinkingtable.getDdllinkingtable());
-		ddllinkingtableImpl.setRecordid(ddllinkingtable.getRecordid());
-		ddllinkingtableImpl.setRecordsetid(ddllinkingtable.getRecordsetid());
-		ddllinkingtableImpl.setLinkrecordid(ddllinkingtable.getLinkrecordid());
+		ddlLinkingTableImpl.setDdllinkingtable(ddlLinkingTable.getDdllinkingtable());
+		ddlLinkingTableImpl.setRecordid(ddlLinkingTable.getRecordid());
+		ddlLinkingTableImpl.setRecordsetid(ddlLinkingTable.getRecordsetid());
+		ddlLinkingTableImpl.setLinkrecordid(ddlLinkingTable.getLinkrecordid());
 
-		return ddllinkingtableImpl;
+		return ddlLinkingTableImpl;
 	}
 
 	/**
-	 * Returns the ddllinkingtable with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Returns the d d l linking table with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the ddllinkingtable
-	 * @return the ddllinkingtable
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	 * @param primaryKey the primary key of the d d l linking table
+	 * @return the d d l linking table
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchddllinkingtableException, SystemException {
-		ddllinkingtable ddllinkingtable = fetchByPrimaryKey(primaryKey);
+	public DDLLinkingTable findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchDDLLinkingTableException, SystemException {
+		DDLLinkingTable ddlLinkingTable = fetchByPrimaryKey(primaryKey);
 
-		if (ddllinkingtable == null) {
+		if (ddlLinkingTable == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + primaryKey);
 			}
 
-			throw new NoSuchddllinkingtableException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+			throw new NoSuchDDLLinkingTableException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
 				primaryKey);
 		}
 
-		return ddllinkingtable;
+		return ddlLinkingTable;
 	}
 
 	/**
-	 * Returns the ddllinkingtable with the primary key or throws a {@link at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException} if it could not be found.
+	 * Returns the d d l linking table with the primary key or throws a {@link at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException} if it could not be found.
 	 *
-	 * @param ddllinkingtable the primary key of the ddllinkingtable
-	 * @return the ddllinkingtable
-	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchddllinkingtableException if a ddllinkingtable with the primary key could not be found
+	 * @param ddllinkingtable the primary key of the d d l linking table
+	 * @return the d d l linking table
+	 * @throws at.meduni.liferay.portlet.bbmriat.NoSuchDDLLinkingTableException if a d d l linking table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable findByPrimaryKey(long ddllinkingtable)
-		throws NoSuchddllinkingtableException, SystemException {
+	public DDLLinkingTable findByPrimaryKey(long ddllinkingtable)
+		throws NoSuchDDLLinkingTableException, SystemException {
 		return findByPrimaryKey((Serializable)ddllinkingtable);
 	}
 
 	/**
-	 * Returns the ddllinkingtable with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d d l linking table with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the ddllinkingtable
-	 * @return the ddllinkingtable, or <code>null</code> if a ddllinkingtable with the primary key could not be found
+	 * @param primaryKey the primary key of the d d l linking table
+	 * @return the d d l linking table, or <code>null</code> if a d d l linking table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable fetchByPrimaryKey(Serializable primaryKey)
+	public DDLLinkingTable fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
-		ddllinkingtable ddllinkingtable = (ddllinkingtable)EntityCacheUtil.getResult(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-				ddllinkingtableImpl.class, primaryKey);
+		DDLLinkingTable ddlLinkingTable = (DDLLinkingTable)EntityCacheUtil.getResult(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+				DDLLinkingTableImpl.class, primaryKey);
 
-		if (ddllinkingtable == _nullddllinkingtable) {
+		if (ddlLinkingTable == _nullDDLLinkingTable) {
 			return null;
 		}
 
-		if (ddllinkingtable == null) {
+		if (ddlLinkingTable == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ddllinkingtable = (ddllinkingtable)session.get(ddllinkingtableImpl.class,
+				ddlLinkingTable = (DDLLinkingTable)session.get(DDLLinkingTableImpl.class,
 						primaryKey);
 
-				if (ddllinkingtable != null) {
-					cacheResult(ddllinkingtable);
+				if (ddlLinkingTable != null) {
+					cacheResult(ddlLinkingTable);
 				}
 				else {
-					EntityCacheUtil.putResult(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-						ddllinkingtableImpl.class, primaryKey,
-						_nullddllinkingtable);
+					EntityCacheUtil.putResult(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+						DDLLinkingTableImpl.class, primaryKey,
+						_nullDDLLinkingTable);
 				}
 			}
 			catch (Exception e) {
-				EntityCacheUtil.removeResult(ddllinkingtableModelImpl.ENTITY_CACHE_ENABLED,
-					ddllinkingtableImpl.class, primaryKey);
+				EntityCacheUtil.removeResult(DDLLinkingTableModelImpl.ENTITY_CACHE_ENABLED,
+					DDLLinkingTableImpl.class, primaryKey);
 
 				throw processException(e);
 			}
@@ -1496,66 +1496,66 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			}
 		}
 
-		return ddllinkingtable;
+		return ddlLinkingTable;
 	}
 
 	/**
-	 * Returns the ddllinkingtable with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the d d l linking table with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param ddllinkingtable the primary key of the ddllinkingtable
-	 * @return the ddllinkingtable, or <code>null</code> if a ddllinkingtable with the primary key could not be found
+	 * @param ddllinkingtable the primary key of the d d l linking table
+	 * @return the d d l linking table, or <code>null</code> if a d d l linking table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ddllinkingtable fetchByPrimaryKey(long ddllinkingtable)
+	public DDLLinkingTable fetchByPrimaryKey(long ddllinkingtable)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)ddllinkingtable);
 	}
 
 	/**
-	 * Returns all the ddllinkingtables.
+	 * Returns all the d d l linking tables.
 	 *
-	 * @return the ddllinkingtables
+	 * @return the d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findAll() throws SystemException {
+	public List<DDLLinkingTable> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the ddllinkingtables.
+	 * Returns a range of all the d d l linking tables.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of ddllinkingtables
-	 * @param end the upper bound of the range of ddllinkingtables (not inclusive)
-	 * @return the range of ddllinkingtables
+	 * @param start the lower bound of the range of d d l linking tables
+	 * @param end the upper bound of the range of d d l linking tables (not inclusive)
+	 * @return the range of d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findAll(int start, int end)
+	public List<DDLLinkingTable> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the ddllinkingtables.
+	 * Returns an ordered range of all the d d l linking tables.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of ddllinkingtables
-	 * @param end the upper bound of the range of ddllinkingtables (not inclusive)
+	 * @param start the lower bound of the range of d d l linking tables
+	 * @param end the upper bound of the range of d d l linking tables (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of ddllinkingtables
+	 * @return the ordered range of d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ddllinkingtable> findAll(int start, int end,
+	public List<DDLLinkingTable> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1572,7 +1572,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 			finderArgs = new Object[] { start, end, orderByComparator };
 		}
 
-		List<ddllinkingtable> list = (List<ddllinkingtable>)FinderCacheUtil.getResult(finderPath,
+		List<DDLLinkingTable> list = (List<DDLLinkingTable>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1594,7 +1594,7 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 				sql = _SQL_SELECT_DDLLINKINGTABLE;
 
 				if (pagination) {
-					sql = sql.concat(ddllinkingtableModelImpl.ORDER_BY_JPQL);
+					sql = sql.concat(DDLLinkingTableModelImpl.ORDER_BY_JPQL);
 				}
 			}
 
@@ -1606,15 +1606,15 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 				Query q = session.createQuery(sql);
 
 				if (!pagination) {
-					list = (List<ddllinkingtable>)QueryUtil.list(q,
+					list = (List<DDLLinkingTable>)QueryUtil.list(q,
 							getDialect(), start, end, false);
 
 					Collections.sort(list);
 
-					list = new UnmodifiableList<ddllinkingtable>(list);
+					list = new UnmodifiableList<DDLLinkingTable>(list);
 				}
 				else {
-					list = (List<ddllinkingtable>)QueryUtil.list(q,
+					list = (List<DDLLinkingTable>)QueryUtil.list(q,
 							getDialect(), start, end);
 				}
 
@@ -1636,21 +1636,21 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Removes all the ddllinkingtables from the database.
+	 * Removes all the d d l linking tables from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public void removeAll() throws SystemException {
-		for (ddllinkingtable ddllinkingtable : findAll()) {
-			remove(ddllinkingtable);
+		for (DDLLinkingTable ddlLinkingTable : findAll()) {
+			remove(ddlLinkingTable);
 		}
 	}
 
 	/**
-	 * Returns the number of ddllinkingtables.
+	 * Returns the number of d d l linking tables.
 	 *
-	 * @return the number of ddllinkingtables
+	 * @return the number of d d l linking tables
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
@@ -1686,19 +1686,19 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	/**
-	 * Initializes the ddllinkingtable persistence.
+	 * Initializes the d d l linking table persistence.
 	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.util.service.ServiceProps.get(
-						"value.object.listener.at.meduni.liferay.portlet.bbmriat.model.ddllinkingtable")));
+						"value.object.listener.at.meduni.liferay.portlet.bbmriat.model.DDLLinkingTable")));
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener<ddllinkingtable>> listenersList = new ArrayList<ModelListener<ddllinkingtable>>();
+				List<ModelListener<DDLLinkingTable>> listenersList = new ArrayList<ModelListener<DDLLinkingTable>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<ddllinkingtable>)InstanceFactory.newInstance(
+					listenersList.add((ModelListener<DDLLinkingTable>)InstanceFactory.newInstance(
 							getClassLoader(), listenerClassName));
 				}
 
@@ -1711,38 +1711,38 @@ public class ddllinkingtablePersistenceImpl extends BasePersistenceImpl<ddllinki
 	}
 
 	public void destroy() {
-		EntityCacheUtil.removeCache(ddllinkingtableImpl.class.getName());
+		EntityCacheUtil.removeCache(DDLLinkingTableImpl.class.getName());
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	private static final String _SQL_SELECT_DDLLINKINGTABLE = "SELECT ddllinkingtable FROM ddllinkingtable ddllinkingtable";
-	private static final String _SQL_SELECT_DDLLINKINGTABLE_WHERE = "SELECT ddllinkingtable FROM ddllinkingtable ddllinkingtable WHERE ";
-	private static final String _SQL_COUNT_DDLLINKINGTABLE = "SELECT COUNT(ddllinkingtable) FROM ddllinkingtable ddllinkingtable";
-	private static final String _SQL_COUNT_DDLLINKINGTABLE_WHERE = "SELECT COUNT(ddllinkingtable) FROM ddllinkingtable ddllinkingtable WHERE ";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "ddllinkingtable.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ddllinkingtable exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ddllinkingtable exists with the key {";
+	private static final String _SQL_SELECT_DDLLINKINGTABLE = "SELECT ddlLinkingTable FROM DDLLinkingTable ddlLinkingTable";
+	private static final String _SQL_SELECT_DDLLINKINGTABLE_WHERE = "SELECT ddlLinkingTable FROM DDLLinkingTable ddlLinkingTable WHERE ";
+	private static final String _SQL_COUNT_DDLLINKINGTABLE = "SELECT COUNT(ddlLinkingTable) FROM DDLLinkingTable ddlLinkingTable";
+	private static final String _SQL_COUNT_DDLLINKINGTABLE_WHERE = "SELECT COUNT(ddlLinkingTable) FROM DDLLinkingTable ddlLinkingTable WHERE ";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "ddlLinkingTable.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDLLinkingTable exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDLLinkingTable exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
-	private static Log _log = LogFactoryUtil.getLog(ddllinkingtablePersistenceImpl.class);
-	private static ddllinkingtable _nullddllinkingtable = new ddllinkingtableImpl() {
+	private static Log _log = LogFactoryUtil.getLog(DDLLinkingTablePersistenceImpl.class);
+	private static DDLLinkingTable _nullDDLLinkingTable = new DDLLinkingTableImpl() {
 			@Override
 			public Object clone() {
 				return this;
 			}
 
 			@Override
-			public CacheModel<ddllinkingtable> toCacheModel() {
-				return _nullddllinkingtableCacheModel;
+			public CacheModel<DDLLinkingTable> toCacheModel() {
+				return _nullDDLLinkingTableCacheModel;
 			}
 		};
 
-	private static CacheModel<ddllinkingtable> _nullddllinkingtableCacheModel = new CacheModel<ddllinkingtable>() {
+	private static CacheModel<DDLLinkingTable> _nullDDLLinkingTableCacheModel = new CacheModel<DDLLinkingTable>() {
 			@Override
-			public ddllinkingtable toEntityModel() {
-				return _nullddllinkingtable;
+			public DDLLinkingTable toEntityModel() {
+				return _nullDDLLinkingTable;
 			}
 		};
 }

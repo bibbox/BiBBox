@@ -17,18 +17,18 @@ package at.meduni.liferay.portlet.bbmriat.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the ddllinkingtable service. Represents a row in the &quot;bbmriat.ddllinkingtable&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the DDLLinkingTable service. Represents a row in the &quot;bbmriat.ddllinkingtable&quot; database table, with each column mapped to a property of this class.
  *
  * @author Robert Reihs
- * @see ddllinkingtableModel
- * @see at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableImpl
- * @see at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableModelImpl
+ * @see DDLLinkingTableModel
+ * @see at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableImpl
+ * @see at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableModelImpl
  * @generated
  */
-public interface ddllinkingtable extends ddllinkingtableModel, PersistedModel {
+public interface DDLLinkingTable extends DDLLinkingTableModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link at.meduni.liferay.portlet.bbmriat.model.impl.ddllinkingtableImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link at.meduni.liferay.portlet.bbmriat.model.impl.DDLLinkingTableImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

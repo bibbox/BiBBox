@@ -27,6 +27,9 @@ for(Organization organization : organizations) {
 	if(organization.getName().equalsIgnoreCase("BBMUSK")) {
 		continue;
 	}
+	if(organization.getName().equalsIgnoreCase("BBMRI.at")) {
+		continue;
+	}
 	if(organization.getName().equalsIgnoreCase("Medical Univeristy of Shi'Kahr")) {
 		continue;
 	}

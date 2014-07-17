@@ -118,6 +118,9 @@ $dockbarOpenGradientStart: #0EA6F9;
    text-overflow: ellipsis;
    white-space: nowrap;
    overflow: hidden;
+   text-align: center;
+   font-weight: bold;
+   font-style: italic;
 }
 .bbmri_eric_header-submainmenu-floating {
 	float: left;
