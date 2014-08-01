@@ -1,0 +1,17 @@
+<%@ include file="/html/init.jsp" %> 
+
+<%@ page import="com.liferay.portal.kernel.util.KeyValuePair" %>
+<%@ page import="com.liferay.portal.kernel.util.KeyValuePairComparator" %>
+<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+
+<!-- Includes for searching the Site Templates -->
+<%@ page import="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" %>
+<%@ page import="com.liferay.portal.model.LayoutSetPrototype" %>
+
+<!-- Read all DDMStructures for DDL creation -->
+<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
+
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="com.liferay.portal.kernel.util.ArrayUtil" %>

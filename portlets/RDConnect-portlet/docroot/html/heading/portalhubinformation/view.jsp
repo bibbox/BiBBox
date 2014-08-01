@@ -21,7 +21,11 @@
 		    if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
 		    	titlecuratorportal = "BBMRI.AT";
 		    }
+		    if(themeDisplay.getURLPortal().contains("bbmri.at")) {
+		    	titlecuratorportal = "Biobanking and BioMolecular resources Research Infrastructure Austria";
+		    }
     %>
+    
 		<h3><%= titlecuratorportal %></h3>
 	</div>
 	<div class="rdchubportalinfosubmenu">

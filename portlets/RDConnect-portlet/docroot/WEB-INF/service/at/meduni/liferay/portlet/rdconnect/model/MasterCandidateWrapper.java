@@ -718,8 +718,7 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	}
 
 	@Override
-	public int compareTo(
-		at.meduni.liferay.portlet.rdconnect.model.MasterCandidate masterCandidate) {
+	public int compareTo(MasterCandidate masterCandidate) {
 		return _masterCandidate.compareTo(masterCandidate);
 	}
 
@@ -729,17 +728,17 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<MasterCandidate> toCacheModel() {
 		return _masterCandidate.toCacheModel();
 	}
 
 	@Override
-	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidate toEscapedModel() {
+	public MasterCandidate toEscapedModel() {
 		return new MasterCandidateWrapper(_masterCandidate.toEscapedModel());
 	}
 
 	@Override
-	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidate toUnescapedModel() {
+	public MasterCandidate toUnescapedModel() {
 		return new MasterCandidateWrapper(_masterCandidate.toUnescapedModel());
 	}
 

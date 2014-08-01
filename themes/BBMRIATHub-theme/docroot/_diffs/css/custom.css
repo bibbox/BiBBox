@@ -1179,3 +1179,6 @@ div.portlet-body {
 .aui .portlet-asset-publisher .asset-content, .aui .portlet-asset-publisher .asset-summary, .aui .portlet-asset-publisher .asset-title, .aui .portlet-asset-publisher .header-title, .aui .portlet-asset-publisher li.title-list, .aui .portlet-blogs .entry-body, .aui .portlet-blogs .entry-title, .aui .portlet-blogs .header-title, .aui .portlet-journal-content .journal-content-article, .aui .portlet-message-boards .header-title, .aui .portlet-message-boards .thread-body {
 	word-break: normal;
 }
+table, th, td {
+    border: 0px solid black;
+}

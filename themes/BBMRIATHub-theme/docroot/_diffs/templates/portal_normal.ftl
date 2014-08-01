@@ -47,7 +47,7 @@ ${theme.include(body_top_include)}
 	</div>
 	<div class="rdconnect-header-container-bottom">
 		<div class="rdconnect-header-container-inner">
-			<#assign locATPortletId = "hubportalheader_WAR_BBMRIATportlet" />
+			<#assign locATPortletId = "portalhubinformation_WAR_RDConnectportlet" />
 				 
 			<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
 			<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locATPortletId) />

@@ -17,7 +17,7 @@
                      <li style="width: 25px;padding: 0;">&nbsp;</li>
                      <#assign first = false />
                   </#if>
-                  <li style="padding-left: 5px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <li style="padding-left: 4px;padding-right: 4px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/${nav_child.getName()?substring(6, 8)?lower_case}.gif" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -28,13 +28,13 @@
                      </a>
                   </li>
                <#elseif nav_child.getName()?contains("splitter")>
-               		<li style="padding-left: 5px;padding-right: 5px;font-weight:bold;">|</li>
+               		<li style="padding-left: 3px;padding-right: 3px;font-weight:bold;margin-top:1px;">|</li>
                <#elseif nav_child.getName()?contains("GERMAN BIOBANK NODE")>
                   <#if first>
                      <li style="width: 25px;padding: 0;">&nbsp;</li>
                      <#assign first = false />
                   </#if>
-                  <li style="padding-left: 5px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <li style="padding-left: 4px;padding-right: 4px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/de.gif" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -49,7 +49,7 @@
                      <li style="width: 25px;padding: 0;">&nbsp;</li>
                      <#assign first = false />
                   </#if>
-                  <li style="padding-left: 5px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <li style="padding-left: 4px;padding-right: 4px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/itFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
@@ -64,9 +64,9 @@
                      <li style="width: 25px;padding: 0;">&nbsp;</li>
                      <#assign first = false />
                   </#if>
-                  <li style="padding-left: 5px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
+                  <li style="padding-left: 4px;padding-right: 4px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
                      <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
-                        <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/iarc.gif" height="15px" />
+                        <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/iarc-logo.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
                            <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/NationalNodesSymbol.png" >
                            <div class="bbmrieric-tooltip-short">${nav_child.getName()}</div>
@@ -118,6 +118,9 @@
    						<a aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">${nav_child.getName()}</a>
    					    <!-- Dropdown Menue -->
    					    <ul>
+   					    <#if nav_child.hasChildren()>
+   					    	<li style="height: 10px;padding: 0;">&nbsp;</li>
+   					    </#if>
    					    <#list nav_child.getChildren() as nav_child_child>
    					       <#assign nav_child_child_attr_selected = "" />
                          <#assign nav_child_child_css_class = "" />
@@ -131,6 +134,9 @@
    					          <a class="${nav_child_child_css_class_weight}" aria-labelledby="layout_${nav_child_child.getLayoutId()}" href="${nav_child_child.getURL()}" ${nav_child_child.getTarget()} role="menuitem">${nav_child_child.getName()}</a>
    					       </li>
    					    </#list>
+   					    <#if nav_child.hasChildren()>
+   					    	<li style="height: 10px;padding: 0;">&nbsp;</li>
+   					    </#if>
    					    </ul>
    					</li>
 					</#if>

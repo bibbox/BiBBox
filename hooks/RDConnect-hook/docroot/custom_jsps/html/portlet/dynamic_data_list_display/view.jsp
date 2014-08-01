@@ -30,69 +30,6 @@ try {
 		}
 	}
 %>
-	<c:choose>
-		<c:when test="<%= (recordSet != null) %>">
-			<c:choose>
-				<c:when test="<%= DDLRecordSetPermission.contains(permissionChecker, recordSetId, ActionKeys.VIEW) %>">
-
-					<%
-					renderRequest.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET, recordSet);
-					%>
-
-					<liferay-util:include page="/html/portlet/dynamic_data_lists/view_record_set.jsp">
-						<liferay-util:param name="displayDDMTemplateId" value="<%= String.valueOf(displayDDMTemplateId) %>" />
-						<liferay-util:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
-						<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
-						<liferay-util:param name="spreadsheet" value="<%= String.valueOf(spreadsheet) %>" />
-					</liferay-util:include>
-				</c:when>
-				<c:otherwise>
-
-					<%
-					renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
-					%>
-
-					<div class="alert alert-error">
-						<liferay-ui:message key="you-do-not-have-the-roles-required-to-access-this-dynamic-data-list-record-set" />
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</c:when>
-		<c:otherwise>
-
-			<%
-			renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
-			%>
-
-			<br />
-
-			<div class="alert alert-info">
-				<liferay-ui:message key="select-an-existing-list-or-add-a-list-to-be-displayed-in-this-portlet" />
-			</div>
-		</c:otherwise>
-	</c:choose>
-
-<%
-}
-catch (NoSuchRecordSetException nsrse) {
-%>
-
-	<div class="alert alert-error">
-		<%= LanguageUtil.get(pageContext, "the-selected-list-no-longer-exists") %>
-	</div>
-
-<%
-}
-
-
-
-boolean hasConfigurationPermission = PortletPermissionUtil.contains(permissionChecker, layout, portletDisplay.getId(), ActionKeys.CONFIGURATION);
-
-boolean showAddListIcon = hasConfigurationPermission && DDLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_RECORD_SET);
-boolean showAddTemplateIcon = (recordSet != null) && DDMPermission.contains(permissionChecker, scopeGroupId, ddmDisplay.getResourceName(), ddmDisplay.getAddTemplateActionId());
-boolean showEditDisplayTemplateIcon = (displayDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, displayDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
-boolean showEditFormTemplateIcon = (formDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, formDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
-%>
 <!-- RDC Edit Link -->
 <!-- Edit Record -->
 <% 
@@ -169,6 +106,71 @@ if (currentGroup.isOrganization()) {
 }
 %>
 <!-- RDC Edit Link END -->
+
+	<c:choose>
+		<c:when test="<%= (recordSet != null) %>">
+			<c:choose>
+				<c:when test="<%= DDLRecordSetPermission.contains(permissionChecker, recordSetId, ActionKeys.VIEW) %>">
+
+					<%
+					renderRequest.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET, recordSet);
+					%>
+
+					<liferay-util:include page="/html/portlet/dynamic_data_lists/view_record_set.jsp">
+						<liferay-util:param name="displayDDMTemplateId" value="<%= String.valueOf(displayDDMTemplateId) %>" />
+						<liferay-util:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
+						<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+						<liferay-util:param name="spreadsheet" value="<%= String.valueOf(spreadsheet) %>" />
+					</liferay-util:include>
+				</c:when>
+				<c:otherwise>
+
+					<%
+					renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+					%>
+
+					<div class="alert alert-error">
+						<liferay-ui:message key="you-do-not-have-the-roles-required-to-access-this-dynamic-data-list-record-set" />
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+
+			<%
+			renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+			%>
+
+			<br />
+
+			<div class="alert alert-info">
+				<liferay-ui:message key="select-an-existing-list-or-add-a-list-to-be-displayed-in-this-portlet" />
+			</div>
+		</c:otherwise>
+	</c:choose>
+
+<%
+}
+catch (NoSuchRecordSetException nsrse) {
+%>
+
+	<div class="alert alert-error">
+		<%= LanguageUtil.get(pageContext, "the-selected-list-no-longer-exists") %>
+	</div>
+
+<%
+}
+
+
+
+boolean hasConfigurationPermission = PortletPermissionUtil.contains(permissionChecker, layout, portletDisplay.getId(), ActionKeys.CONFIGURATION);
+
+boolean showAddListIcon = hasConfigurationPermission && DDLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_RECORD_SET);
+boolean showAddTemplateIcon = (recordSet != null) && DDMPermission.contains(permissionChecker, scopeGroupId, ddmDisplay.getResourceName(), ddmDisplay.getAddTemplateActionId());
+boolean showEditDisplayTemplateIcon = (displayDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, displayDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
+boolean showEditFormTemplateIcon = (formDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, formDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
+%>
+
 
 <c:if test="<%= themeDisplay.isSignedIn() && !layout.isLayoutPrototypeLinkActive() && (showAddListIcon || showAddTemplateIcon || showEditDisplayTemplateIcon || showEditFormTemplateIcon || hasConfigurationPermission ) %>">
 	<div class="lfr-meta-actions icons-container">

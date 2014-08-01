@@ -1,30 +1,24 @@
 package at.meduni.liferay.portlet.rdconnect;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -37,10 +31,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
@@ -52,7 +44,6 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
@@ -85,7 +76,7 @@ public class FileToDDLToFile extends MVCPortlet {
 		} else if(upreq.getFileName("fileupload").endsWith(".xls")) {
 			readXLSFile(inputStream, organisation_id);
 		} else if(upreq.getFileName("fileupload").endsWith(".xlsx")) {
-			readXLSXFile(inputStream);
+			//readXLSXFile(inputStream);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
@@ -265,7 +256,7 @@ private Workbook writeXLSFile(long organizationId) throws PortalException, Syste
 	return workbook;
 }
 
-private void readXLSXFile(InputStream file) throws IOException {
+/*private void readXLSXFile(InputStream file) throws IOException {
 	//Get the workbook instance for XLS file 
 	XSSFWorkbook workbook = new XSSFWorkbook(file);
 	//Get first sheet from the workbook
@@ -332,7 +323,7 @@ private Workbook writeXLSXFile(long organizationId) throws PortalException, Syst
   				}
   			}
   		}
-  	}
+  	}*/
 	/*
 	XSSFWorkbook workbook = new XSSFWorkbook();
 	XSSFSheet sheet = workbook.createSheet("Sample sheet");
@@ -361,8 +352,8 @@ private Workbook writeXLSXFile(long organizationId) throws PortalException, Syst
 	            cell.setCellValue((Double)obj);
 	    }
 	}*/
-	return workbook;
-}
+	/*return workbook;
+}*/
 
 private void readCsvFile(BufferedReader file) throws IOException {
 	CSVReader csv = new CSVReader(file);
@@ -409,7 +400,7 @@ public void serveResource(ResourceRequest request, ResourceResponse response) th
 			e.printStackTrace();
 		}		
 	} else if(cmd.equalsIgnoreCase("export_xlsx")) {
-		fileName += "xlsx";
+		/*fileName += "xlsx";
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		response.addProperty("Content-disposition", "atachment; filename="+fileName);
 		Workbook wb;
@@ -422,7 +413,7 @@ public void serveResource(ResourceRequest request, ResourceResponse response) th
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}*/		
 	}
 	out.flush();
 	out.close();

@@ -201,48 +201,7 @@ $dockbarOpenGradientStart: #0EA6F9;
    box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
 }
 
-/* ---------- Footer ----------- */
-.bbmrieric-footer-container {
-	width: 100%;
-	height: 210px;
-}
-.bbmrieric-footer {
-	margin: auto;
-	width: 1200px;
-	height: 165px;
-	padding-top: 45px;
-	background: url(/BBMRIERIC-theme/images/03_footer_background.png);
-	background-size: 100%;
-	background-repeat: no-repeat;
-}
-#footer {
-	width: 1000px;
-	margin: auto;
-}
-.bbmrieric-footer-menue {
-	width: 1000px;
-	height: 20px;
-	margin: auto;
-	text-align: center;
-	align: center;
-	margin-top: 23px;
-	margin-bottom: 30px;
-}
-.bbmrieric-footer-menue ul {
-	text-align: center;
-	padding: 0px;
-	margin: auto;
-	list-style-type: none;
-	height: 70px;
-}
-.bbmrieric-footer-menue li {
-	list-style-type: none;
-	margin-left: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
-	line-height: 20px;
-}
-/* ---------- Footer ende ----------- */
+
 /* ---------- My Styling ----------- */
 .aui .bbmri-eric-body {
 	background-color: #0C2848;
@@ -1022,3 +981,4 @@ $dockbarOpenGradientStart: #0EA6F9;
 @import url(custom_search.css);
 @import url(custom_tooltip.css);
 @import url(custom_dropdown.css);
+@import url(custom_footer.css);

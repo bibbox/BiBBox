@@ -20,7 +20,6 @@ import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
-import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;

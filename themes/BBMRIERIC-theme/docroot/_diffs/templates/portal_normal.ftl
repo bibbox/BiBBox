@@ -10,19 +10,6 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	${theme.include(top_head_include)}
-	
-	<#if !is_signed_in>
-                <#assign loginpage = themeDisplay.getURLCurrent()?contains("_58_struts_action=%2Flogin%2Flogin") />
-                <#if !loginpage>
-                FALSCH
-                <meta http-equiv="refresh" content="0; url=http://member.bbmri-eric.eu/about?p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin&p_p_id=58&p_p_lifecycle=0&_58_redirect=%2Fweb%2Fhome%2F" />
-        <#else>
-                ELSE
-        </#if>
-   </#if>
-	
-   
-
 </head>
 
 <body class="${css_class} bbmri-eric-body">
@@ -32,7 +19,7 @@
 ${theme.include(body_top_include)}
 
 <#assign loginpage = themeDisplay.getURLCurrent()?contains("_58_struts_action=%2Flogin%2Flogin") />
-<#if loginpage>
+<#if false>
 <div class="container-fluid-background">
 	<div class="container-fluid" id="wrapper">
 		<div id="content">
@@ -50,8 +37,6 @@ ${theme.include(body_top_include)}
 </div>
 </#if>
 
-<#if is_signed_in>
-
 
 <!-- New Header -->
 
@@ -61,12 +46,12 @@ ${theme.include(body_top_include)}
 			<img  alt="${logo_description}" height="215px" src="/BBMRIERIC-theme/images/BBMRI-ERIC_new_header_image.png" width="1200px" >
 		</div>
 	</div>
-	<div class="bbmri_eric_header-innercontainer">
+	<a href="/about"><div class="bbmri_eric_header-innercontainer">
 		<div class="bbmri_eric_header-logo">
 			<div class="bbmri_eric_header-logo-floating">
 			</div>
 		</div>
-	</div>
+	</div></a>
 	<div class="bbmri_eric_header-menucontainer">
 		<div class="bbmri_eric_header-mainmenu">
 			<div class="bbmri_eric_header-mainmenu-position">
@@ -101,19 +86,7 @@ ${theme.include(body_top_include)}
 <!-- New Header End -->
 <div class="container-fluid-background">
 	<div class="container-fluid" id="wrapper">
-		<div id="content">
-			<#if selectable>
-				${theme.include(content_include)}
-			<#else>
-				${portletDisplay.recycle()}
-	
-				${portletDisplay.setTitle(the_title)}
-	
-				${theme.wrapPortlet("portlet.ftl", content_include)}
-			</#if>
-		</div>
-	
-		<div>
+	<div>
 			<#if is_signed_in>
 				<#assign canseedockbar = user_middle_name?contains("$$$") />
 			   <#if is_admin>
@@ -126,10 +99,28 @@ ${theme.include(body_top_include)}
             </#if>
 			</#if>
 		</div>
+		<div id="content">
+			<#if selectable>
+				${theme.include(content_include)}
+			<#else>
+				${portletDisplay.recycle()}
+	
+				${portletDisplay.setTitle(the_title)}
+	
+				${theme.wrapPortlet("portlet.ftl", content_include)}
+			</#if>
+		</div>
 	</div>
 </div>
 <div class="bbmrieric-footer-container">
 	<div class="bbmrieric-footer">
+		<div class="bbmrieric-footer-twitter">
+			<a href="https://twitter.com/BBMRIERIC" target="_blank"><img id="bbmrieric-footer-twitter-slide"  src="/BBMRIERIC-theme/images/twitter.png" /></a>
+		</div>
+		<div class="bbmrieric-footer-linkedin">
+			<a href="http://www.linkedin.com/company/bbmri-eric" target="_blank"><img id="bbmrieric-footer-linkedin-slide"  src="/BBMRIERIC-theme/images/linkedin.png" /></a>
+		</div>
+		
 		<div class="bbmrieric-footer-menue">
 			<#include "${full_templates_path}/navigation_footer.ftl" />
 		</div>	
@@ -138,12 +129,7 @@ ${theme.include(body_top_include)}
 		</footer>
 	</div>
 </div>
-<#else>
-<div class="bbmri_eric_header-maincontainer">
-<a href="http://member.bbmri-eric.eu/web/home/login"> Back to Member Area</a>
-</div>
 
-</#if>
 
 ${theme.include(body_bottom_include)}
 

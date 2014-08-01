@@ -17,7 +17,7 @@
 					<#if navcount == 1>
 					 <li style="display:inline-block;">
 					    <div style="margin: auto;display:inline-block;">
-					       <div style="float: left;color: #FFFFFF;font-size: 11px;">BBMRI-ERIC | Neue Stiftingtalstrasse 2/B/6 | 8010 Graz - AUSTRIA</div>
+					       <div style="float: left;color: #FFFFFF;font-size: 14px;margin-left: 20px;margin-right: 25px;">BBMRI-ERIC | Neue Stiftingtalstrasse 2/B/6 | 8010 Graz - AUSTRIA</div>
 					    </div>
 					 </li>
 					</#if>

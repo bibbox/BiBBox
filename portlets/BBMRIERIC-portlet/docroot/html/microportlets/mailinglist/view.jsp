@@ -10,31 +10,16 @@
 
 <portlet:defineObjects />
 
-<!-- Begin Search Form -->
-<div id="mc_embed_signup">
-	<div class="mc-field-group" style="width: 315px;padding-bottom:0;">
-	        <label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Search</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
-		<div class="mc-field-group-float">
-		
-		
-			<% String searchurl1 = themeDisplay.getURLPortal()+"/web/guest/search"; %>
-			<aui:form name="filterform" action="<%= searchurl1 %>" method="get" style="padding: 0;">
-		        <input type="text" placeholder="What are you looking for?" value="" name="SEARCH" class="required email" id="mce-SEARCH">
-		        <input type="submit" value="GO" name="subscribe" id="mc-embedded-subscribe">
-	        </aui:form>
-	    </div>
-	</div>
-</div>
-<!-- END Search Form -->
+
 
 <!-- Begin MailChimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
 
 <div id="mc_embed_signup">
-<form action="http://bbmri-eric.us8.list-manage.com/subscribe/post?u=c7415c09f5c4d908a6ec9388d&amp;id=39dc000a0f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<form action="//bbmri-eric.us8.list-manage.com/subscribe/post?u=c7415c09f5c4d908a6ec9388d&amp;id=75f8e7acd2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 
 <div class="mc-field-group" style="width: 315px;padding-bottom:0;">
-        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL">Sign up for our <span style="font-weight:bold;">News Service</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+        <label style="text-align: right;color: #184B8A;" for="mce-EMAIL">Sign up for our <span style="font-weight:bold;">News Services</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 	<div class="mc-field-group-float">
         <input type="email" placeholder="Please enter mail address" value="" name="EMAIL" class="required email" id="mce-EMAIL">
         <input type="submit" value="SEND" name="subscribe" id="mc-embedded-subscribe">
@@ -52,23 +37,50 @@
                 <div class="response" id="mce-error-response" style="display:none;"></div>
                 <div class="response" id="mce-success-response" style="display:none;"></div>
         </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;"><input type="text" name="b_c7415c09f5c4d908a6ec9388d_39dc000a0f" value=""></div>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_c7415c09f5c4d908a6ec9388d_75f8e7acd2" tabindex="-1" value=""></div>
         <div class="clear" style="display: none;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 </form>
 <hr style="background-color:#FFFFFF; border-width:0; color:#FFFFFF; height:0px; lineheight:0; display: inline-block; text-align: left; width:100%;margin-bottom:0;margin-top: 0;">
 </div>
 
 <!--End mc_embed_signup-->
+
+<!-- Begin Search Form -->
+<div id="mc_embed_signup" style="margin-bottom:10px;height:50px;">
+	<div class="mc-field-group" style="width: 315px;padding-bottom:0;">
+	        <label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Search</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+		<div class="mc-field-group-float">
+		
+		
+			<% String searchurl1 = themeDisplay.getURLPortal()+"/web/guest/search"; %>
+			<aui:form name="filterform" action="<%= searchurl1 %>" method="get" style="padding: 0;">
+		        <input type="text" placeholder="What are you looking for?" value="" name="SEARCH" class="required email" id="mce-SEARCH">
+		        <input type="submit" value="GO" name="subscribe" id="mc-embedded-subscribe">
+	        </aui:form>
+	    </div>
+	</div>
+</div>
+<!-- END Search Form -->
+
 <!-- Catalogue -->
 <div>
 <a href="https://www.bbmriportal.eu/bbmri2.0/jsp/core/login.jsf" target="_blank">
-<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Catalogue</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Catalogue</spam> 
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 </a>
 </div>
 <!-- Wiki -->
-<div>
-<a href="/etools">
-<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">eTools</spam> <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+<div style="margin-top:10px;">
+<a href="http://www.bbmri-wp4.eu/wiki/index.php/Main_Page" target="_blank">
+<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Legal Wiki</spam> 
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+</a>
+</div>
+<!-- hSern -->
+<div style="margin-top:10px;">
+<a href="http://www.hsern.eu/" target="_blank">
+<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">hSERN</spam> 
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 </a>
 </div>
 
@@ -140,7 +152,7 @@ function mce_init_form(){
       var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function(){}, onfocusout:function(){}, onblur:function(){}  };
       var mce_validator = $("#mc-embedded-subscribe-form").validate(options);
       $("#mc-embedded-subscribe-form").unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
-      options = { url: 'http://bbmri-eric.us8.list-manage1.com/subscribe/post-json?u=c7415c09f5c4d908a6ec9388d&id=39dc000a0f&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
+      options = { url: 'http://bbmri-eric.us8.list-manage1.com/subscribe/post-json?u=c7415c09f5c4d908a6ec9388d&amp;id=75f8e7acd2&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
                     beforeSubmit: function(){
                         $('#mce_tmp_error_msg').remove();
                         $('.datefield','#mc_embed_signup').each(
