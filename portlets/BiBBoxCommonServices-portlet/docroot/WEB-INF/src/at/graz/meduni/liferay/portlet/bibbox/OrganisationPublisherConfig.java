@@ -28,17 +28,11 @@ public class OrganisationPublisherConfig extends DefaultConfigurationAction {//C
 			throws Exception {
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
 		
-		/*String portletResource = ParamUtil.getString(actionRequest, "portletResource"); 
-		PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(actionRequest, portletResource); 
-		//Read, validate, and then set form parameters as portlet preferences
-		String type = ParamUtil.getString(actionRequest, "type"); 
-		prefs.setValue("type", type);
-		prefs.store();
-		SessionMessages.add(actionRequest, portletConfig.getPortletName() + ".doConfigure");*/
 		long numberofddls = ParamUtil.getLong(actionRequest, "bibbox_cs_numberofddls");
 		String ddloption = "";
 		for(int i=0; i<numberofddls; i++) {
 			ddloption += ParamUtil.getString(actionRequest, "bibbox_cs_ddlstatus_" + i);
+			ddloption += "\"" + ParamUtil.getString(actionRequest, "bibbox_cs_ddlname_" + i) + "\"_";		
 		}
 		super.setPreference(actionRequest, "optionsDDLGeneration", ddloption);
 		super.processAction(portletConfig, actionRequest, actionResponse);
@@ -49,13 +43,5 @@ public class OrganisationPublisherConfig extends DefaultConfigurationAction {//C
 
         System.out.println("optionsOrganisationName=" + optionsOrganisationName +" in ConfigurationActionImpl.processAction().");
 	}
-
-	/*@Override
-	public String render(PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
-			throws Exception {
-		System.out.println("-------------------------------------------------");
-		return "/html/organisation/organisationpublisher/config.jsp";
-	}*/
 
 }

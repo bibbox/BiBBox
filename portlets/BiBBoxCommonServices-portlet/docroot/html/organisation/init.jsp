@@ -12,6 +12,10 @@
 <%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
 
+<!-- Includes for regex -->
+<%@ page import="java.util.regex.Pattern" %>
+<%@ page import="java.util.regex.Matcher" %>
+
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="com.liferay.portal.kernel.util.ArrayUtil" %>

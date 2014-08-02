@@ -47,7 +47,7 @@ Create new <b>Organisation Publisher</b> portlet in Config mode.
 			</aui:column>
 		</aui:layout>
 		DDL Options:
-		<div style="border-style: solid; border-width: 1px;">
+		<div style="border-style: solid; border-width: 1px;padding:5px;">
 			<aui:layout>
 			<!-- DDL selection -->
 				<%
@@ -56,9 +56,16 @@ Create new <b>Organisation Publisher</b> portlet in Config mode.
 				for(DDMStructure ddm_structure : ddm_structures) { 
 					if(ddm_structure.getClassName().equals("com.liferay.portlet.dynamicdatalists.model.DDLRecordSet")) {
 						String fieldname_ddlstatus = "bibbox_cs_" + "ddlstatus_" + ddlcount;
-						ddlcount ++;
-					%>
-						<aui:column columnWidth="100" first="true">
+						String fieldname_ddlname = "bibbox_cs_" + "ddlname_" + ddlcount;
+						String pattern_string = ".*_" + ddm_structure.getPrimaryKey() + "_\\w_\"(.*?)\"_.*";
+						Pattern pattern = Pattern.compile(pattern_string);
+						Matcher matcher = pattern.matcher(optionsDDLGeneration_cfg);
+						String ddlname = ddm_structure.getName(themeDisplay.getLocale());
+						while (matcher.find()) {
+							ddlname = matcher.group(1);
+						}
+						%>
+						<aui:column columnWidth="50" first="true">
 							<aui:select label="<%= ddm_structure.getName() %>" name="<%= fieldname_ddlstatus %>">
 								<aui:option value="<%= \"_\" + ddm_structure.getPrimaryKey() + \"_x_\" %>" selected="<%=optionsDDLGeneration_cfg.contains(\"_\" + ddm_structure.getPrimaryKey() + \"_x_\") %>" >do not create</aui:option>
 								<aui:option value="<%= \"_\" + ddm_structure.getPrimaryKey() + \"_c_\" %>" selected="<%=optionsDDLGeneration_cfg.contains(\"_\" + ddm_structure.getPrimaryKey() + \"_c_\") %>" >create</aui:option>
@@ -67,7 +74,11 @@ Create new <b>Organisation Publisher</b> portlet in Config mode.
 								<aui:option value="<%= \"_\" + ddm_structure.getPrimaryKey() + \"_i_\" %>" selected="<%=optionsDDLGeneration_cfg.contains(\"_\" + ddm_structure.getPrimaryKey() + \"_i_\") %>" >insert Information</aui:option>
 							</aui:select>
 						</aui:column>
-				<% 
+						<aui:column columnWidth="50" last="true">
+							<aui:input name="<%=fieldname_ddlname %>" label="DDL Title" type="text" value ="<%= ddlname %>" />
+						</aui:column>
+						<% 
+						ddlcount ++;
 					}
 				}
 				%>

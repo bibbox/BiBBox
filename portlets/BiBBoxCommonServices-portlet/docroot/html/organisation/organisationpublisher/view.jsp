@@ -22,7 +22,7 @@ if(optionsParentOrganisationNameOption_option.equalsIgnoreCase("name")) {
 	}
 }
 %>
-
+<%= optionsDDLGeneration_option %><br>
 Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_option %>:
 
 <liferay-ui:success key="organisation-created-successfully" message="organisation-created-successfully" />
@@ -31,7 +31,10 @@ Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_
 <portlet:actionURL name='<%= "createOrganisation" %>' var="createOrganisationURL" windowState="normal" />
 <aui:form action="<%= createOrganisationURL %>" method="POST" name="fm">
 	<aui:fieldset>
+		<!-- hidden elements direct from config -->
 		<aui:input name="bibbox_cs_pagetemplate" type="hidden" value ="<%= optionsPageTemplate_option %>" />
+		<aui:input name="bibbox_cs_ddlgeneration" type="hidden" value ="<%= optionsDDLGeneration_option %>" />
+		
 		<aui:layout cssClass="bibbox_cs_organisationname">
 			<aui:column columnWidth="100" first="true">
 				<aui:input name="bibbox_cs_organisationname" label="<%= organisationName_option %>" type="text" value ="" cssClass="propose" />
@@ -41,15 +44,15 @@ Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_
 		<!-- DDL Information -->
 		<div>
 			<aui:layout>
-				<aui:input name="bibbox_cs_ddlgeneration" type="hidden" value ="<%= optionsPageTemplate_option %>" />	
+					
 				<%
 				String[] ddloptionsplited = optionsDDLGeneration_option.split("__");
 				for(String ddloptions : ddloptionsplited) {
-					if(ddloptions.contains("x")) {
+					if(ddloptions.contains("_x_")) {
 						continue;
-					} else if(ddloptions.contains("c")) {
+					} else if(ddloptions.contains("_c_")) {
 						continue;
-					} else if(ddloptions.contains("o")) {
+					} else if(ddloptions.contains("_o_")) {
 						continue;
 					} else {
 						String[] split = ddloptions.split("_");
