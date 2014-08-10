@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistenceImpl" parent="basePersistence" />
+</beans>

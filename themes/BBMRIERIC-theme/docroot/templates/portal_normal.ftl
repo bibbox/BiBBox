@@ -114,10 +114,10 @@ ${theme.include(body_top_include)}
 </div>
 <div class="bbmrieric-footer-container">
 	<div class="bbmrieric-footer">
-		<div class="bbmrieric-footer-twitter">
+		<div class="bbmrieric-footer-twitter"  style="visibility: hidden;">
 			<a href="https://twitter.com/BBMRIERIC" target="_blank"><img id="bbmrieric-footer-twitter-slide"  src="/BBMRIERIC-theme/images/twitter.png" /></a>
 		</div>
-		<div class="bbmrieric-footer-linkedin">
+		<div class="bbmrieric-footer-linkedin"  style="visibility: hidden;">
 			<a href="http://www.linkedin.com/company/bbmri-eric" target="_blank"><img id="bbmrieric-footer-linkedin-slide"  src="/BBMRIERIC-theme/images/linkedin.png" /></a>
 		</div>
 		

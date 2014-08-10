@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
  * @author reihsr
  *
  */
-public class OrganisationPublisherConfig extends DefaultConfigurationAction {//ConfigurationAction {
+public class OrganisationPublisherConfig extends DefaultConfigurationAction {
 
 	public void processAction(PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)

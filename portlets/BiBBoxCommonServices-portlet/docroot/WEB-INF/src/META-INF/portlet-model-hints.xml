@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation">
+		<field name="invitationID" type="long" />
+	</model>
+</model-hints>

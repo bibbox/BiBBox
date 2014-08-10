@@ -1,5 +1,6 @@
 package at.graz.meduni.liferay.portlet.bibbox;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -28,9 +29,16 @@ import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSetConstants;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -71,7 +79,7 @@ public class OrganisationPublisher extends MVCPortlet {
 			createPages(organization, pagetemplate);
 		}
 		// Create DDLs
-		createDDLs(ddlgeneration, organization.getGroupId(), themeDisplay.getUserId(), serviceContext);
+		createDDLs(ddlgeneration, organization.getGroupId(), themeDisplay.getUserId(), serviceContext, request);
 		
 	}
 	
@@ -87,7 +95,7 @@ public class OrganisationPublisher extends MVCPortlet {
 	 * @param  variable Description text text text.          (3)
 	 * @return The new created Organization.
 	 */
-	private void createDDLs(String ddlgeneration, long groupId, long userId, ServiceContext serviceContext) {
+	private void createDDLs(String ddlgeneration, long groupId, long userId, ServiceContext serviceContext, ActionRequest request) {
 		String[] split_ddlsoptions = ddlgeneration.split("__");
 		System.out.println("Size: " + split_ddlsoptions.length);
 		for(String ddloption : split_ddlsoptions) {
@@ -101,7 +109,16 @@ public class OrganisationPublisher extends MVCPortlet {
 				String ddmtitle = matcher.group(3);
 				System.out.println("Option: " + ddmstructureid + " - " + option + " - " + ddmtitle);
 				if(!option.equals("x")) {
-					createDDLRecordSet(Long.parseLong(ddmstructureid), ddmtitle, groupId, userId, serviceContext);
+					// Create DDL Record Set
+					DDLRecordSet recordset = createDDLRecordSet(Long.parseLong(ddmstructureid), ddmtitle, groupId, userId, serviceContext);
+					// Create empty DDL Record
+					if(option.equals("o")) {
+						createDDLRecord(recordset, groupId, serviceContext);
+					}
+					// Create one DDL Record
+					if(option.equals("i")) {
+						createDDLRecord(recordset, groupId, serviceContext, request);
+					}
 				}
 			}
 		}
@@ -141,6 +158,68 @@ public class OrganisationPublisher extends MVCPortlet {
 			e.printStackTrace();
 		}
 		return recordSet;
+	}
+	
+	/**
+	 * Create empty DDL Record.                           (1)
+	 * <p>
+	 * Longer description. If there were any, it would be    [2]
+	 * here.
+	 * <p>
+	 * And even more explanations to follow in consecutive
+	 * paragraphs separated by HTML paragraph breaks.
+	 *
+	 * @param  variable Description text text text.          (3)
+	 * @return The new created Organization.
+	 */
+	private void createDDLRecord(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext) {
+		try {	
+			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
+			DDLRecordLocalServiceUtil.addRecord(
+					serviceContext.getUserId(),
+					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+					serviceContext);
+		} catch(Exception e) {
+			System.out.println("----------------------------------------------------------");
+			System.out.println("BiBBox Exception in OrganisationPublisher::createDDLRecord");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Create (one) information DDL Record.                           (1)
+	 * <p>
+	 * Longer description. If there were any, it would be    [2]
+	 * here.
+	 * <p>
+	 * And even more explanations to follow in consecutive
+	 * paragraphs separated by HTML paragraph breaks.
+	 *
+	 * @param  variable Description text text text.          (3)
+	 * @return The new created Organization.
+	 */
+	private void createDDLRecord(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, ActionRequest request) {
+		try {	
+			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
+			List<Fields> fields1 = recordSet.getRecordsFieldsList();
+			for(Fields fi : fields1) {
+				for(String fieldname : fi.getNames()) {
+					Field field = fi.get(fieldname);
+					System.out.println("Field Name:" + fieldname);
+					System.out.println("Field Type:" + field.getType());
+				}
+			}
+			DDLRecordLocalServiceUtil.addRecord(
+					serviceContext.getUserId(),
+					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+					serviceContext);
+		} catch(Exception e) {
+			System.out.println("----------------------------------------------------------");
+			System.out.println("BiBBox Exception in OrganisationPublisher::createDDLRecord");
+			e.printStackTrace();
+		}
 	}
 
 	/**

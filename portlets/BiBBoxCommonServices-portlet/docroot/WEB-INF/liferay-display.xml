@@ -6,4 +6,7 @@
 	<category name="BiBBox Organisation">
 		<portlet id="organisation-publisher"></portlet>
 	</category>
+	<category name="BiBBox User">
+		<portlet id="people"></portlet>
+	</category>
 </display>
