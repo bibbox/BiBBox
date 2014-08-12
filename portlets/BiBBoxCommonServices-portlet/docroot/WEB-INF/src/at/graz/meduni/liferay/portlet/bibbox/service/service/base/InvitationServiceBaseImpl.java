@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.base;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -103,6 +104,63 @@ public abstract class InvitationServiceBaseImpl extends BaseServiceImpl
 	public void setInvitationPersistence(
 		InvitationPersistence invitationPersistence) {
 		this.invitationPersistence = invitationPersistence;
+	}
+
+	/**
+	 * Returns the invitation organisation local service.
+	 *
+	 * @return the invitation organisation local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalService getInvitationOrganisationLocalService() {
+		return invitationOrganisationLocalService;
+	}
+
+	/**
+	 * Sets the invitation organisation local service.
+	 *
+	 * @param invitationOrganisationLocalService the invitation organisation local service
+	 */
+	public void setInvitationOrganisationLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalService invitationOrganisationLocalService) {
+		this.invitationOrganisationLocalService = invitationOrganisationLocalService;
+	}
+
+	/**
+	 * Returns the invitation organisation remote service.
+	 *
+	 * @return the invitation organisation remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService getInvitationOrganisationService() {
+		return invitationOrganisationService;
+	}
+
+	/**
+	 * Sets the invitation organisation remote service.
+	 *
+	 * @param invitationOrganisationService the invitation organisation remote service
+	 */
+	public void setInvitationOrganisationService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService invitationOrganisationService) {
+		this.invitationOrganisationService = invitationOrganisationService;
+	}
+
+	/**
+	 * Returns the invitation organisation persistence.
+	 *
+	 * @return the invitation organisation persistence
+	 */
+	public InvitationOrganisationPersistence getInvitationOrganisationPersistence() {
+		return invitationOrganisationPersistence;
+	}
+
+	/**
+	 * Sets the invitation organisation persistence.
+	 *
+	 * @param invitationOrganisationPersistence the invitation organisation persistence
+	 */
+	public void setInvitationOrganisationPersistence(
+		InvitationOrganisationPersistence invitationOrganisationPersistence) {
+		this.invitationOrganisationPersistence = invitationOrganisationPersistence;
 	}
 
 	/**
@@ -282,6 +340,12 @@ public abstract class InvitationServiceBaseImpl extends BaseServiceImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService invitationService;
 	@BeanReference(type = InvitationPersistence.class)
 	protected InvitationPersistence invitationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalService invitationOrganisationLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService invitationOrganisationService;
+	@BeanReference(type = InvitationOrganisationPersistence.class)
+	protected InvitationOrganisationPersistence invitationOrganisationPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

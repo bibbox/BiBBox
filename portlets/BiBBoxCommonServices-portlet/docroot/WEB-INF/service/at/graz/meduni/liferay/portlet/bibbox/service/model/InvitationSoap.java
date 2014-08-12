@@ -17,6 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,7 +31,13 @@ public class InvitationSoap implements Serializable {
 	public static InvitationSoap toSoapModel(Invitation model) {
 		InvitationSoap soapModel = new InvitationSoap();
 
-		soapModel.setInvitationID(model.getInvitationID());
+		soapModel.setInvitationId(model.getInvitationId());
+		soapModel.setName(model.getName());
+		soapModel.setSubject(model.getSubject());
+		soapModel.setBody(model.getBody());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setLastchanged(model.getLastchanged());
+		soapModel.setLastchanger(model.getLastchanger());
 
 		return soapModel;
 	}
@@ -76,20 +83,74 @@ public class InvitationSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _invitationID;
+		return _invitationId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setInvitationID(pk);
+		setInvitationId(pk);
 	}
 
-	public long getInvitationID() {
-		return _invitationID;
+	public long getInvitationId() {
+		return _invitationId;
 	}
 
-	public void setInvitationID(long invitationID) {
-		_invitationID = invitationID;
+	public void setInvitationId(long invitationId) {
+		_invitationId = invitationId;
 	}
 
-	private long _invitationID;
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public String getSubject() {
+		return _subject;
+	}
+
+	public void setSubject(String subject) {
+		_subject = subject;
+	}
+
+	public String getBody() {
+		return _body;
+	}
+
+	public void setBody(String body) {
+		_body = body;
+	}
+
+	public long getStatus() {
+		return _status;
+	}
+
+	public void setStatus(long status) {
+		_status = status;
+	}
+
+	public Date getLastchanged() {
+		return _lastchanged;
+	}
+
+	public void setLastchanged(Date lastchanged) {
+		_lastchanged = lastchanged;
+	}
+
+	public long getLastchanger() {
+		return _lastchanger;
+	}
+
+	public void setLastchanger(long lastchanger) {
+		_lastchanger = lastchanger;
+	}
+
+	private long _invitationId;
+	private String _name;
+	private String _subject;
+	private String _body;
+	private long _status;
+	private Date _lastchanged;
+	private long _lastchanger;
 }

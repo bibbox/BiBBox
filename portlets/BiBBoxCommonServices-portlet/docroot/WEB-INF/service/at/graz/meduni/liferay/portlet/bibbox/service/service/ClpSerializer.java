@@ -15,6 +15,7 @@
 package at.graz.meduni.liferay.portlet.bibbox.service.service;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationClp;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisationClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -106,6 +107,10 @@ public class ClpSerializer {
 			return translateInputInvitation(oldModel);
 		}
 
+		if (oldModelClassName.equals(InvitationOrganisationClp.class.getName())) {
+			return translateInputInvitationOrganisation(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +130,17 @@ public class ClpSerializer {
 		InvitationClp oldClpModel = (InvitationClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getInvitationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputInvitationOrganisation(
+		BaseModel<?> oldModel) {
+		InvitationOrganisationClp oldClpModel = (InvitationOrganisationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getInvitationOrganisationRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +167,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl")) {
 			return translateOutputInvitation(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationOrganisationImpl")) {
+			return translateOutputInvitationOrganisation(oldModel);
 		}
 
 		return oldModel;
@@ -238,6 +259,11 @@ public class ClpSerializer {
 			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException();
 		}
 
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException();
+		}
+
 		return throwable;
 	}
 
@@ -247,6 +273,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setInvitationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputInvitationOrganisation(
+		BaseModel<?> oldModel) {
+		InvitationOrganisationClp newModel = new InvitationOrganisationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setInvitationOrganisationRemoteModel(oldModel);
 
 		return newModel;
 	}

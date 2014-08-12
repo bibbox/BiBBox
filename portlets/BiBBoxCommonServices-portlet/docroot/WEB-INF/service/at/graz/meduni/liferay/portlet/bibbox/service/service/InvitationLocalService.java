@@ -59,22 +59,22 @@ public interface InvitationLocalService extends BaseLocalService,
 	/**
 	* Creates a new invitation with the primary key. Does not add the invitation to the database.
 	*
-	* @param invitationID the primary key for the new invitation
+	* @param invitationId the primary key for the new invitation
 	* @return the new invitation
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation createInvitation(
-		long invitationID);
+		long invitationId);
 
 	/**
 	* Deletes the invitation with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param invitationID the primary key of the invitation
+	* @param invitationId the primary key of the invitation
 	* @return the invitation that was removed
 	* @throws PortalException if a invitation with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation deleteInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -168,20 +168,20 @@ public interface InvitationLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation fetchInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns the invitation with the primary key.
 	*
-	* @param invitationID the primary key of the invitation
+	* @param invitationId the primary key of the invitation
 	* @return the invitation
 	* @throws PortalException if a invitation with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation getInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

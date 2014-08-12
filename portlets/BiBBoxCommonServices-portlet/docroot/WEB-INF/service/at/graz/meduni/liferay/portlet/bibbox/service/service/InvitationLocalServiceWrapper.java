@@ -47,29 +47,29 @@ public class InvitationLocalServiceWrapper implements InvitationLocalService,
 	/**
 	* Creates a new invitation with the primary key. Does not add the invitation to the database.
 	*
-	* @param invitationID the primary key for the new invitation
+	* @param invitationId the primary key for the new invitation
 	* @return the new invitation
 	*/
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation createInvitation(
-		long invitationID) {
-		return _invitationLocalService.createInvitation(invitationID);
+		long invitationId) {
+		return _invitationLocalService.createInvitation(invitationId);
 	}
 
 	/**
 	* Deletes the invitation with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param invitationID the primary key of the invitation
+	* @param invitationId the primary key of the invitation
 	* @return the invitation that was removed
 	* @throws PortalException if a invitation with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation deleteInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _invitationLocalService.deleteInvitation(invitationID);
+		return _invitationLocalService.deleteInvitation(invitationId);
 	}
 
 	/**
@@ -185,25 +185,25 @@ public class InvitationLocalServiceWrapper implements InvitationLocalService,
 
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation fetchInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _invitationLocalService.fetchInvitation(invitationID);
+		return _invitationLocalService.fetchInvitation(invitationId);
 	}
 
 	/**
 	* Returns the invitation with the primary key.
 	*
-	* @param invitationID the primary key of the invitation
+	* @param invitationId the primary key of the invitation
 	* @return the invitation
 	* @throws PortalException if a invitation with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation getInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _invitationLocalService.getInvitation(invitationID);
+		return _invitationLocalService.getInvitation(invitationId);
 	}
 
 	@Override

@@ -32,6 +32,6 @@ public abstract class InvitationActionableDynamicQuery
 
 		setClassLoader(at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer.class.getClassLoader());
 
-		setPrimaryKeyPropertyName("invitationID");
+		setPrimaryKeyPropertyName("invitationId");
 	}
 }

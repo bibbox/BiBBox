@@ -17,6 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,17 +49,59 @@ public class InvitationWrapper implements Invitation, ModelWrapper<Invitation> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("invitationID", getInvitationID());
+		attributes.put("invitationId", getInvitationId());
+		attributes.put("name", getName());
+		attributes.put("subject", getSubject());
+		attributes.put("body", getBody());
+		attributes.put("status", getStatus());
+		attributes.put("lastchanged", getLastchanged());
+		attributes.put("lastchanger", getLastchanger());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Long invitationID = (Long)attributes.get("invitationID");
+		Long invitationId = (Long)attributes.get("invitationId");
 
-		if (invitationID != null) {
-			setInvitationID(invitationID);
+		if (invitationId != null) {
+			setInvitationId(invitationId);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
+		}
+
+		String subject = (String)attributes.get("subject");
+
+		if (subject != null) {
+			setSubject(subject);
+		}
+
+		String body = (String)attributes.get("body");
+
+		if (body != null) {
+			setBody(body);
+		}
+
+		Long status = (Long)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Date lastchanged = (Date)attributes.get("lastchanged");
+
+		if (lastchanged != null) {
+			setLastchanged(lastchanged);
+		}
+
+		Long lastchanger = (Long)attributes.get("lastchanger");
+
+		if (lastchanger != null) {
+			setLastchanger(lastchanger);
 		}
 	}
 
@@ -83,23 +126,143 @@ public class InvitationWrapper implements Invitation, ModelWrapper<Invitation> {
 	}
 
 	/**
-	* Returns the invitation i d of this invitation.
+	* Returns the invitation ID of this invitation.
 	*
-	* @return the invitation i d of this invitation
+	* @return the invitation ID of this invitation
 	*/
 	@Override
-	public long getInvitationID() {
-		return _invitation.getInvitationID();
+	public long getInvitationId() {
+		return _invitation.getInvitationId();
 	}
 
 	/**
-	* Sets the invitation i d of this invitation.
+	* Sets the invitation ID of this invitation.
 	*
-	* @param invitationID the invitation i d of this invitation
+	* @param invitationId the invitation ID of this invitation
 	*/
 	@Override
-	public void setInvitationID(long invitationID) {
-		_invitation.setInvitationID(invitationID);
+	public void setInvitationId(long invitationId) {
+		_invitation.setInvitationId(invitationId);
+	}
+
+	/**
+	* Returns the name of this invitation.
+	*
+	* @return the name of this invitation
+	*/
+	@Override
+	public java.lang.String getName() {
+		return _invitation.getName();
+	}
+
+	/**
+	* Sets the name of this invitation.
+	*
+	* @param name the name of this invitation
+	*/
+	@Override
+	public void setName(java.lang.String name) {
+		_invitation.setName(name);
+	}
+
+	/**
+	* Returns the subject of this invitation.
+	*
+	* @return the subject of this invitation
+	*/
+	@Override
+	public java.lang.String getSubject() {
+		return _invitation.getSubject();
+	}
+
+	/**
+	* Sets the subject of this invitation.
+	*
+	* @param subject the subject of this invitation
+	*/
+	@Override
+	public void setSubject(java.lang.String subject) {
+		_invitation.setSubject(subject);
+	}
+
+	/**
+	* Returns the body of this invitation.
+	*
+	* @return the body of this invitation
+	*/
+	@Override
+	public java.lang.String getBody() {
+		return _invitation.getBody();
+	}
+
+	/**
+	* Sets the body of this invitation.
+	*
+	* @param body the body of this invitation
+	*/
+	@Override
+	public void setBody(java.lang.String body) {
+		_invitation.setBody(body);
+	}
+
+	/**
+	* Returns the status of this invitation.
+	*
+	* @return the status of this invitation
+	*/
+	@Override
+	public long getStatus() {
+		return _invitation.getStatus();
+	}
+
+	/**
+	* Sets the status of this invitation.
+	*
+	* @param status the status of this invitation
+	*/
+	@Override
+	public void setStatus(long status) {
+		_invitation.setStatus(status);
+	}
+
+	/**
+	* Returns the lastchanged of this invitation.
+	*
+	* @return the lastchanged of this invitation
+	*/
+	@Override
+	public java.util.Date getLastchanged() {
+		return _invitation.getLastchanged();
+	}
+
+	/**
+	* Sets the lastchanged of this invitation.
+	*
+	* @param lastchanged the lastchanged of this invitation
+	*/
+	@Override
+	public void setLastchanged(java.util.Date lastchanged) {
+		_invitation.setLastchanged(lastchanged);
+	}
+
+	/**
+	* Returns the lastchanger of this invitation.
+	*
+	* @return the lastchanger of this invitation
+	*/
+	@Override
+	public long getLastchanger() {
+		return _invitation.getLastchanger();
+	}
+
+	/**
+	* Sets the lastchanger of this invitation.
+	*
+	* @param lastchanger the lastchanger of this invitation
+	*/
+	@Override
+	public void setLastchanger(long lastchanger) {
+		_invitation.setLastchanger(lastchanger);
 	}
 
 	@Override

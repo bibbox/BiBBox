@@ -20,9 +20,11 @@ import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationSoap;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.json.JSON;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -35,6 +37,7 @@ import java.io.Serializable;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,12 +65,18 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 	 */
 	public static final String TABLE_NAME = "bibboxcs.invitation";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "invitationID", Types.BIGINT }
+			{ "invitationId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "subject", Types.VARCHAR },
+			{ "body", Types.VARCHAR },
+			{ "status", Types.BIGINT },
+			{ "lastchanged", Types.TIMESTAMP },
+			{ "lastchanger", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation (invitationID LONG not null primary key)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation (invitationId LONG not null primary key,name VARCHAR(75) null,subject VARCHAR(75) null,body VARCHAR(75) null,status LONG,lastchanged DATE null,lastchanger LONG)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.invitation";
-	public static final String ORDER_BY_JPQL = " ORDER BY invitation.invitationID ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.invitation.invitationID ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY invitation.lastchanged DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.invitation.lastchanged DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -77,7 +86,12 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"),
+			true);
+	public static long INVITATIONID_COLUMN_BITMASK = 1L;
+	public static long STATUS_COLUMN_BITMASK = 2L;
+	public static long LASTCHANGED_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -92,7 +106,13 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 		Invitation model = new InvitationImpl();
 
-		model.setInvitationID(soapModel.getInvitationID());
+		model.setInvitationId(soapModel.getInvitationId());
+		model.setName(soapModel.getName());
+		model.setSubject(soapModel.getSubject());
+		model.setBody(soapModel.getBody());
+		model.setStatus(soapModel.getStatus());
+		model.setLastchanged(soapModel.getLastchanged());
+		model.setLastchanger(soapModel.getLastchanger());
 
 		return model;
 	}
@@ -125,17 +145,17 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 	@Override
 	public long getPrimaryKey() {
-		return _invitationID;
+		return _invitationId;
 	}
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setInvitationID(primaryKey);
+		setInvitationId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _invitationID;
+		return _invitationId;
 	}
 
 	@Override
@@ -157,29 +177,182 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("invitationID", getInvitationID());
+		attributes.put("invitationId", getInvitationId());
+		attributes.put("name", getName());
+		attributes.put("subject", getSubject());
+		attributes.put("body", getBody());
+		attributes.put("status", getStatus());
+		attributes.put("lastchanged", getLastchanged());
+		attributes.put("lastchanger", getLastchanger());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Long invitationID = (Long)attributes.get("invitationID");
+		Long invitationId = (Long)attributes.get("invitationId");
 
-		if (invitationID != null) {
-			setInvitationID(invitationID);
+		if (invitationId != null) {
+			setInvitationId(invitationId);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
+		}
+
+		String subject = (String)attributes.get("subject");
+
+		if (subject != null) {
+			setSubject(subject);
+		}
+
+		String body = (String)attributes.get("body");
+
+		if (body != null) {
+			setBody(body);
+		}
+
+		Long status = (Long)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Date lastchanged = (Date)attributes.get("lastchanged");
+
+		if (lastchanged != null) {
+			setLastchanged(lastchanged);
+		}
+
+		Long lastchanger = (Long)attributes.get("lastchanger");
+
+		if (lastchanger != null) {
+			setLastchanger(lastchanger);
 		}
 	}
 
 	@JSON
 	@Override
-	public long getInvitationID() {
-		return _invitationID;
+	public long getInvitationId() {
+		return _invitationId;
 	}
 
 	@Override
-	public void setInvitationID(long invitationID) {
-		_invitationID = invitationID;
+	public void setInvitationId(long invitationId) {
+		_columnBitmask |= INVITATIONID_COLUMN_BITMASK;
+
+		if (!_setOriginalInvitationId) {
+			_setOriginalInvitationId = true;
+
+			_originalInvitationId = _invitationId;
+		}
+
+		_invitationId = invitationId;
+	}
+
+	public long getOriginalInvitationId() {
+		return _originalInvitationId;
+	}
+
+	@JSON
+	@Override
+	public String getName() {
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
+	}
+
+	@Override
+	public void setName(String name) {
+		_name = name;
+	}
+
+	@JSON
+	@Override
+	public String getSubject() {
+		if (_subject == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _subject;
+		}
+	}
+
+	@Override
+	public void setSubject(String subject) {
+		_subject = subject;
+	}
+
+	@JSON
+	@Override
+	public String getBody() {
+		if (_body == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _body;
+		}
+	}
+
+	@Override
+	public void setBody(String body) {
+		_body = body;
+	}
+
+	@JSON
+	@Override
+	public long getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(long status) {
+		_columnBitmask |= STATUS_COLUMN_BITMASK;
+
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
+		_status = status;
+	}
+
+	public long getOriginalStatus() {
+		return _originalStatus;
+	}
+
+	@JSON
+	@Override
+	public Date getLastchanged() {
+		return _lastchanged;
+	}
+
+	@Override
+	public void setLastchanged(Date lastchanged) {
+		_columnBitmask = -1L;
+
+		_lastchanged = lastchanged;
+	}
+
+	@JSON
+	@Override
+	public long getLastchanger() {
+		return _lastchanger;
+	}
+
+	@Override
+	public void setLastchanger(long lastchanger) {
+		_lastchanger = lastchanger;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -209,7 +382,13 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 	public Object clone() {
 		InvitationImpl invitationImpl = new InvitationImpl();
 
-		invitationImpl.setInvitationID(getInvitationID());
+		invitationImpl.setInvitationId(getInvitationId());
+		invitationImpl.setName(getName());
+		invitationImpl.setSubject(getSubject());
+		invitationImpl.setBody(getBody());
+		invitationImpl.setStatus(getStatus());
+		invitationImpl.setLastchanged(getLastchanged());
+		invitationImpl.setLastchanger(getLastchanger());
 
 		invitationImpl.resetOriginalValues();
 
@@ -218,17 +397,17 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 	@Override
 	public int compareTo(Invitation invitation) {
-		long primaryKey = invitation.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = DateUtil.compareTo(getLastchanged(), invitation.getLastchanged());
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override
@@ -260,30 +439,91 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 	@Override
 	public void resetOriginalValues() {
+		InvitationModelImpl invitationModelImpl = this;
+
+		invitationModelImpl._originalInvitationId = invitationModelImpl._invitationId;
+
+		invitationModelImpl._setOriginalInvitationId = false;
+
+		invitationModelImpl._originalStatus = invitationModelImpl._status;
+
+		invitationModelImpl._setOriginalStatus = false;
+
+		invitationModelImpl._columnBitmask = 0;
 	}
 
 	@Override
 	public CacheModel<Invitation> toCacheModel() {
 		InvitationCacheModel invitationCacheModel = new InvitationCacheModel();
 
-		invitationCacheModel.invitationID = getInvitationID();
+		invitationCacheModel.invitationId = getInvitationId();
+
+		invitationCacheModel.name = getName();
+
+		String name = invitationCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
+			invitationCacheModel.name = null;
+		}
+
+		invitationCacheModel.subject = getSubject();
+
+		String subject = invitationCacheModel.subject;
+
+		if ((subject != null) && (subject.length() == 0)) {
+			invitationCacheModel.subject = null;
+		}
+
+		invitationCacheModel.body = getBody();
+
+		String body = invitationCacheModel.body;
+
+		if ((body != null) && (body.length() == 0)) {
+			invitationCacheModel.body = null;
+		}
+
+		invitationCacheModel.status = getStatus();
+
+		Date lastchanged = getLastchanged();
+
+		if (lastchanged != null) {
+			invitationCacheModel.lastchanged = lastchanged.getTime();
+		}
+		else {
+			invitationCacheModel.lastchanged = Long.MIN_VALUE;
+		}
+
+		invitationCacheModel.lastchanger = getLastchanger();
 
 		return invitationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(3);
+		StringBundler sb = new StringBundler(15);
 
-		sb.append("{invitationID=");
-		sb.append(getInvitationID());
+		sb.append("{invitationId=");
+		sb.append(getInvitationId());
+		sb.append(", name=");
+		sb.append(getName());
+		sb.append(", subject=");
+		sb.append(getSubject());
+		sb.append(", body=");
+		sb.append(getBody());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", lastchanged=");
+		sb.append(getLastchanged());
+		sb.append(", lastchanger=");
+		sb.append(getLastchanger());
+		sb.append("}");
 
 		return sb.toString();
 	}
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -291,8 +531,32 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>invitationID</column-name><column-value><![CDATA[");
-		sb.append(getInvitationID());
+			"<column><column-name>invitationId</column-name><column-value><![CDATA[");
+		sb.append(getInvitationId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>subject</column-name><column-value><![CDATA[");
+		sb.append(getSubject());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>body</column-name><column-value><![CDATA[");
+		sb.append(getBody());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastchanged</column-name><column-value><![CDATA[");
+		sb.append(getLastchanged());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastchanger</column-name><column-value><![CDATA[");
+		sb.append(getLastchanger());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -304,6 +568,17 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Invitation.class
 		};
-	private long _invitationID;
+	private long _invitationId;
+	private long _originalInvitationId;
+	private boolean _setOriginalInvitationId;
+	private String _name;
+	private String _subject;
+	private String _body;
+	private long _status;
+	private long _originalStatus;
+	private boolean _setOriginalStatus;
+	private Date _lastchanged;
+	private long _lastchanger;
+	private long _columnBitmask;
 	private Invitation _escapedModel;
 }

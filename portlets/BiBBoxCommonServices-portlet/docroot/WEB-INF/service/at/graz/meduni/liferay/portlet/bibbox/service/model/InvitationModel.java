@@ -14,6 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.model;
 
+import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
@@ -21,6 +22,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
+
+import java.util.Date;
 
 /**
  * The base model interface for the Invitation service. Represents a row in the &quot;bibboxcs.invitation&quot; database table, with each column mapped to a property of this class.
@@ -57,18 +60,105 @@ public interface InvitationModel extends BaseModel<Invitation> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the invitation i d of this invitation.
+	 * Returns the invitation ID of this invitation.
 	 *
-	 * @return the invitation i d of this invitation
+	 * @return the invitation ID of this invitation
 	 */
-	public long getInvitationID();
+	public long getInvitationId();
 
 	/**
-	 * Sets the invitation i d of this invitation.
+	 * Sets the invitation ID of this invitation.
 	 *
-	 * @param invitationID the invitation i d of this invitation
+	 * @param invitationId the invitation ID of this invitation
 	 */
-	public void setInvitationID(long invitationID);
+	public void setInvitationId(long invitationId);
+
+	/**
+	 * Returns the name of this invitation.
+	 *
+	 * @return the name of this invitation
+	 */
+	@AutoEscape
+	public String getName();
+
+	/**
+	 * Sets the name of this invitation.
+	 *
+	 * @param name the name of this invitation
+	 */
+	public void setName(String name);
+
+	/**
+	 * Returns the subject of this invitation.
+	 *
+	 * @return the subject of this invitation
+	 */
+	@AutoEscape
+	public String getSubject();
+
+	/**
+	 * Sets the subject of this invitation.
+	 *
+	 * @param subject the subject of this invitation
+	 */
+	public void setSubject(String subject);
+
+	/**
+	 * Returns the body of this invitation.
+	 *
+	 * @return the body of this invitation
+	 */
+	@AutoEscape
+	public String getBody();
+
+	/**
+	 * Sets the body of this invitation.
+	 *
+	 * @param body the body of this invitation
+	 */
+	public void setBody(String body);
+
+	/**
+	 * Returns the status of this invitation.
+	 *
+	 * @return the status of this invitation
+	 */
+	public long getStatus();
+
+	/**
+	 * Sets the status of this invitation.
+	 *
+	 * @param status the status of this invitation
+	 */
+	public void setStatus(long status);
+
+	/**
+	 * Returns the lastchanged of this invitation.
+	 *
+	 * @return the lastchanged of this invitation
+	 */
+	public Date getLastchanged();
+
+	/**
+	 * Sets the lastchanged of this invitation.
+	 *
+	 * @param lastchanged the lastchanged of this invitation
+	 */
+	public void setLastchanged(Date lastchanged);
+
+	/**
+	 * Returns the lastchanger of this invitation.
+	 *
+	 * @return the lastchanger of this invitation
+	 */
+	public long getLastchanger();
+
+	/**
+	 * Sets the lastchanger of this invitation.
+	 *
+	 * @param lastchanger the lastchanger of this invitation
+	 */
+	public void setLastchanger(long lastchanger);
 
 	@Override
 	public boolean isNew();

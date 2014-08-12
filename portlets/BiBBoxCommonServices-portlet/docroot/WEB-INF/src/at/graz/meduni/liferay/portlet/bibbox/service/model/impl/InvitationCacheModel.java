@@ -17,12 +17,15 @@ package at.graz.meduni.liferay.portlet.bibbox.service.model.impl;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation;
 
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+
+import java.util.Date;
 
 /**
  * The cache model class for representing Invitation in entity cache.
@@ -35,10 +38,23 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(3);
+		StringBundler sb = new StringBundler(15);
 
-		sb.append("{invitationID=");
-		sb.append(invitationID);
+		sb.append("{invitationId=");
+		sb.append(invitationId);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append(", subject=");
+		sb.append(subject);
+		sb.append(", body=");
+		sb.append(body);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", lastchanged=");
+		sb.append(lastchanged);
+		sb.append(", lastchanger=");
+		sb.append(lastchanger);
+		sb.append("}");
 
 		return sb.toString();
 	}
@@ -47,7 +63,39 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 	public Invitation toEntityModel() {
 		InvitationImpl invitationImpl = new InvitationImpl();
 
-		invitationImpl.setInvitationID(invitationID);
+		invitationImpl.setInvitationId(invitationId);
+
+		if (name == null) {
+			invitationImpl.setName(StringPool.BLANK);
+		}
+		else {
+			invitationImpl.setName(name);
+		}
+
+		if (subject == null) {
+			invitationImpl.setSubject(StringPool.BLANK);
+		}
+		else {
+			invitationImpl.setSubject(subject);
+		}
+
+		if (body == null) {
+			invitationImpl.setBody(StringPool.BLANK);
+		}
+		else {
+			invitationImpl.setBody(body);
+		}
+
+		invitationImpl.setStatus(status);
+
+		if (lastchanged == Long.MIN_VALUE) {
+			invitationImpl.setLastchanged(null);
+		}
+		else {
+			invitationImpl.setLastchanged(new Date(lastchanged));
+		}
+
+		invitationImpl.setLastchanger(lastchanger);
 
 		invitationImpl.resetOriginalValues();
 
@@ -56,14 +104,51 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		invitationID = objectInput.readLong();
+		invitationId = objectInput.readLong();
+		name = objectInput.readUTF();
+		subject = objectInput.readUTF();
+		body = objectInput.readUTF();
+		status = objectInput.readLong();
+		lastchanged = objectInput.readLong();
+		lastchanger = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
-		objectOutput.writeLong(invitationID);
+		objectOutput.writeLong(invitationId);
+
+		if (name == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(name);
+		}
+
+		if (subject == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(subject);
+		}
+
+		if (body == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(body);
+		}
+
+		objectOutput.writeLong(status);
+		objectOutput.writeLong(lastchanged);
+		objectOutput.writeLong(lastchanger);
 	}
 
-	public long invitationID;
+	public long invitationId;
+	public String name;
+	public String subject;
+	public String body;
+	public long status;
+	public long lastchanged;
+	public long lastchanger;
 }

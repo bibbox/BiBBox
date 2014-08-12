@@ -4,4 +4,7 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationOrganisationLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationOrganisationServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistenceImpl" parent="basePersistence" />
 </beans>

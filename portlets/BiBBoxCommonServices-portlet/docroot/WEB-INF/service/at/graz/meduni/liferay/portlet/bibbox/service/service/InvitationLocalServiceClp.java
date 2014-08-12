@@ -148,12 +148,12 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation createInvitation(
-		long invitationID) {
+		long invitationId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName1,
-					_methodParameterTypes1, new Object[] { invitationID });
+					_methodParameterTypes1, new Object[] { invitationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -172,14 +172,14 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation deleteInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName2,
-					_methodParameterTypes2, new Object[] { invitationID });
+					_methodParameterTypes2, new Object[] { invitationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -433,13 +433,13 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation fetchInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName10,
-					_methodParameterTypes10, new Object[] { invitationID });
+					_methodParameterTypes10, new Object[] { invitationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -462,14 +462,14 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation getInvitation(
-		long invitationID)
+		long invitationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName11,
-					_methodParameterTypes11, new Object[] { invitationID });
+					_methodParameterTypes11, new Object[] { invitationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

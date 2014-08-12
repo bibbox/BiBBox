@@ -6,6 +6,37 @@
 	<namespace>bibboxcs</namespace>
 
 	<entity name="Invitation" local-service="true" remote-service="true" table="bibboxcs.invitation">
-		<column name="invitationID" primary="true" type="long"></column>
+		<column name="invitationId" primary="true" type="long"></column>
+		<column name="name" type="String"></column>
+		<column name="subject" type="String"></column>
+		<column name="body" type="String"></column>
+		<column name="status" type="long"></column>
+		<column name="lastchanged" type="Date"></column>
+		<column name="lastchanger" type="long"></column>
+		<column name="invitationOrganisationId" type="Collection" entity="InvitationOrganisation" ></column>
+        <order by="desc">
+            <order-column name="lastchanged"></order-column>
+        </order>
+		<finder return-type="Collection" name="Status">
+			<finder-column name="status"></finder-column>
+		</finder>
+		<finder return-type="Invitation" name="Invitation">
+			<finder-column name="invitationId"></finder-column>
+		</finder>
+	</entity>
+	
+	<entity name="InvitationOrganisation" local-service="true" remote-service="true" table="bibboxcs.invitation_organisation">
+		<column name="invitationOrganisationId" primary="true" type="long"></column>
+		<column name="invitationId" type="long"></column>
+		<column name="organisationId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="lastchanged" type="Date"></column>
+		<column name="lastchanger" type="long"></column>
+		<finder return-type="Collection" name="Organisation">
+			<finder-column name="organisationId"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="InvitationOrganisations">
+			<finder-column name="invitationId"></finder-column>
+		</finder>
 	</entity>
 </service-builder>

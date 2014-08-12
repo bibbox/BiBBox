@@ -32,11 +32,6 @@ if(organizationId != 0) {
 		middlename = edit_user.getMiddleName();
 		lastname = edit_user.getLastName();
 		email = edit_user.getEmailAddress();
-		if(edit_user.getMale()) {
-			gender = "male";
-		} else {
-			gender = "female";
-		}
 		String[] user_positions = edit_user.getExpandoBridge().getAttribute("Role within the organisation").toString().split(";");
 		for(String user_position : user_positions) {
 			String[] our = user_position.split("_");
@@ -68,22 +63,19 @@ if(organizationId != 0) {
 	<portlet:actionURL name='<%= user_id == 0 ? "addUser" : "editUser" %>' var="addEditUserURL" windowState="normal" />
 	<aui:form action="<%= addEditUserURL %>" method="POST" name="fm">
 		<aui:fieldset>
-			<aui:input type="hidden" name="bibbox_cs_redirect" value=""<%= redirect %> />
+			<aui:input type="hidden" name="bibbox_cs_redirect" value="<%= redirect %>" />
 			<aui:input type="hidden" name="bibbox_cs_organisationid" value="<%= organizationId %>" />
+			<aui:input type="hidden" name="bibbox_cs_userid" value="<%= String.valueOf(user_id) %>" />
 			<aui:input type="hidden" name="bibbox_cs_creatorid" value="<%= themeDisplay.getUserId() %>" />
-			<aui:input type="hidden" name="bibbox_cs_editorrole" value=""<%= editorrole %> />
-			<aui:input type="hidden" name="bibbox_cs_ownerrole" value=""<%= ownerrole %> />
-			<aui:input type="hidden" name="bibbox_cs_maincontact" value=""<%= maincontactrole %> />
+			<aui:input type="hidden" name="bibbox_cs_editorrole" value="<%= editorrole %>" />
+			<aui:input type="hidden" name="bibbox_cs_ownerrole" value="<%= ownerrole %>" />
+			<aui:input type="hidden" name="bibbox_cs_maincontact" value="<%= maincontactrole %>" />
 			
 			<aui:input name="bibbox_cs_firstname" label="First Name" type="text" value ="<%= firstname %>"/>
 			<aui:input name="bibbox_cs_middlename" label="Middle Name" type="text" value ="<%= middlename %>"/>
 			<aui:input name="bibbox_cs_lastname" label="Last Name" type="text" value ="<%= lastname %>"/>
 			
 			<aui:input name="bibbox_cs_email" label="E-mail" type="text" value ="<%= email %>"/>
-			<aui:select name="bibbox_cs_gender" label="Gender" value ="male">
-				<aui:option value="male" selected='<%= "male".equals(gender) ? true : false %>' >Male</aui:option>
-				<aui:option value="female" selected='<%= "female".equals(gender) ? true : false %>' >Female</aui:option>
-			</aui:select>
 			<aui:select name="bibbox_cs_position" label="Position" value ="">
 				<aui:option value="" selected="true" ></aui:option>
 				<aui:option value="Coordinator/Principal Investigator" selected='<%= "Coordinator/Principal Investigator".equals(position) ? true : false %>' >Coordinator/Principal Investigator</aui:option>

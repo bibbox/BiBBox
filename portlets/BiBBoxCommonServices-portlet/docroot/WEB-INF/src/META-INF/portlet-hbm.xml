@@ -3,10 +3,28 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" table="bibboxcs.invitation">
 		<cache usage="read-write" />
-		<id name="invitationID" type="long">
+		<id name="invitationId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subject" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="body" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lastchanged" type="org.hibernate.type.TimestampType" />
+		<property name="lastchanger" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationOrganisationImpl" table="bibboxcs.invitation_organisation">
+		<cache usage="read-write" />
+		<id name="invitationOrganisationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="invitationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organisationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lastchanged" type="org.hibernate.type.TimestampType" />
+		<property name="lastchanger" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

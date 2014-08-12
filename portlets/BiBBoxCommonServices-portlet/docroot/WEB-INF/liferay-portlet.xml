@@ -19,6 +19,8 @@
 		<portlet-name>people</portlet-name>
 		<icon>/icon.png</icon>
 		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.PeopleConfig</configuration-action-class>
+		<render-weight>0</render-weight>
+		<ajaxable>true</ajaxable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js

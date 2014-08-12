@@ -86,6 +86,17 @@ if(optionsDisplayMaincontact_option) {
 <!-- Personal List -->
 <div style="height:100%;width:100%;">
 	<span class="rdc_idcard_idcaibody-headlines"  style="height:100%;width:100%;">Personal
+		<c:choose>
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_user) %>">
+				<portlet:renderURL var="addUserURL">
+					<portlet:param name="mvcPath" value="/html/user/people/edit.jsp" />
+					<portlet:param name="redirect" value="<%= currentURL %>"/>
+					<portlet:param name="bibbox_cs_userid" value="0"/>
+					<portlet:param name="bibbox_cs_organizationid" value="<%= String.valueOf(organizationId) %>"/>
+				</portlet:renderURL>
+				&nbsp;&nbsp;/&nbsp;&nbsp;<aui:a  href="<%= addUserURL.toString() %>" cssClass="icon-user">&nbsp;Add User</aui:a>
+			</c:when>
+		</c:choose>
 	</span>
 </div>
 <% 
@@ -109,6 +120,18 @@ for(User user_om : users) {
 	<div class="rdc-people-dispaly"  style="height:100%;width:100%;">
 		<img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="35" /> 
 		<%= user_om.getFullName() %>
+		<c:choose>
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_user) %>">
+				<portlet:renderURL var="editUserURL">
+					<portlet:param name="mvcPath" value="/html/user/people/edit.jsp" />
+					<portlet:param name="redirect" value="<%= currentURL %>"/>
+					<portlet:param name="bibbox_cs_userid" value="<%= String.valueOf(user_om.getUserId()) %>"/>
+					<portlet:param name="bibbox_cs_organizationid" value="<%= String.valueOf(organizationId) %>"/>
+				</portlet:renderURL>
+				&nbsp;&nbsp;<aui:a  href="<%= editUserURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+				&nbsp;&nbsp;<a id="deleteUserFromOrganisation" class="icon-remove" style="color: red;"></a>
+			</c:when>
+		</c:choose>
 		<br>
 		<%= role %> 
 		<br>
@@ -117,4 +140,15 @@ for(User user_om : users) {
 }
 %>
 
-
+<aui:script use="aui-base,event">
+	A.all('#deleteUserFromOrganisation').on(
+			'click',
+			function(event) {
+				var confirmation_to_delete_user = confirm("Are you sure you won't to delete the user from your Organization?");
+				if (confirmation_to_delete_user == true) {
+				    Liferay.Portlet.refresh('#p_p_id_people_WAR_BiBBoxCommonServicesportlet_');
+				} 	 
+				return false;
+			}
+		);
+</aui:script>
