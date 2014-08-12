@@ -92,6 +92,7 @@ if(optionsDisplayMaincontact_option) {
 					<portlet:param name="mvcPath" value="/html/user/people/edit.jsp" />
 					<portlet:param name="redirect" value="<%= currentURL %>"/>
 					<portlet:param name="bibbox_cs_userid" value="0"/>
+					<portlet:param name="bibbox_cs_cmd" value="add"/>
 					<portlet:param name="bibbox_cs_organizationid" value="<%= String.valueOf(organizationId) %>"/>
 				</portlet:renderURL>
 				&nbsp;&nbsp;/&nbsp;&nbsp;<aui:a  href="<%= addUserURL.toString() %>" cssClass="icon-user">&nbsp;Add User</aui:a>
@@ -113,7 +114,11 @@ for(User user_om : users) {
 		}
 		long orgid = Long.parseLong(our[0]);
 		if(orgid == organizationId) {
-			role = our[1];
+			if(our.length == 1) {
+				role = "";
+			} else {
+				role = our[1];
+			}
 		}
 	}
 	%>
@@ -126,6 +131,7 @@ for(User user_om : users) {
 					<portlet:param name="mvcPath" value="/html/user/people/edit.jsp" />
 					<portlet:param name="redirect" value="<%= currentURL %>"/>
 					<portlet:param name="bibbox_cs_userid" value="<%= String.valueOf(user_om.getUserId()) %>"/>
+					<portlet:param name="bibbox_cs_cmd" value="edit"/>
 					<portlet:param name="bibbox_cs_organizationid" value="<%= String.valueOf(organizationId) %>"/>
 				</portlet:renderURL>
 				&nbsp;&nbsp;<aui:a  href="<%= editUserURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>

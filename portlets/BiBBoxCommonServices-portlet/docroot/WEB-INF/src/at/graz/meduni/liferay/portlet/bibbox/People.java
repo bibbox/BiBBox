@@ -45,7 +45,7 @@ public class People extends MVCPortlet {
 	
 	public void addUser(ActionRequest request, ActionResponse response) throws Exception {
 		User user = getUserFromRequest(request, null);
-		UserLocalServiceUtil.addUser(user);
+		user = UserLocalServiceUtil.addUser(user);
 		setUserRolesInOrganisation(request, user.getUserId());
 		user = updateOrganisationJobDiscription(request, user);
 		UserLocalServiceUtil.updateUser(user);
@@ -69,23 +69,33 @@ public class People extends MVCPortlet {
 			long maincontact = ParamUtil.getLong(request, "bibbox_cs_maincontact");
 			long[] userids = {userid};
 			if(ParamUtil.getBoolean(request, "bibbox_cs_roleowner")) {
-				UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userids, organization.getGroupId(), ownerrole);
-			} else {
 				UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), ownerrole);
+			} else {
+				UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userids, organization.getGroupId(), ownerrole);
 			}
 			if(ParamUtil.getBoolean(request, "bibbox_cs_roleeditor")) {
-				UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userids, organization.getGroupId(), editorrole);
-			} else {
 				UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), editorrole);
+			} else {
+				UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userids, organization.getGroupId(), editorrole);
 			}
 			if(ParamUtil.getBoolean(request, "bibbox_cs_rolemaincontact")) {
-				UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userids, organization.getGroupId(), maincontact);
-			} else {
+				removeAllMaincontactUseres(maincontact, organization.getOrganizationId(), organization.getGroupId());
 				UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), maincontact);
+			} else {
+				UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userids, organization.getGroupId(), maincontact);
 			}
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void removeAllMaincontactUseres(long roleid, long organizationid, long groupid) {
+		try {
+			UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(UserLocalServiceUtil.getOrganizationUserIds(organizationid), groupid, roleid);
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,6 +123,7 @@ public class People extends MVCPortlet {
 		if(nohit) {
 			new_user_roles += organizationId + "_" + ParamUtil.getString(request, "bibbox_cs_position") + ";";
 		}
+		user.getExpandoBridge().setAttribute("Role within the organisation", new_user_roles);
 		return user;
 	}
 	

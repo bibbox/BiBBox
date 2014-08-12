@@ -15,7 +15,10 @@ long editorrole = GetterUtil.getLong(portletPreferences.getValue("optionsEditorR
 long ownerrole = GetterUtil.getLong(portletPreferences.getValue("optionsOwnerRole", "0"));
 long maincontactrole = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
 String redirect = ParamUtil.getString(request, "redirect");
+String cmd = ParamUtil.getString(request, "bibbox_cs_cmd");
 if(organizationId != 0) {
+	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+	
 	String firstname = "";
 	String middlename = "";
 	String lastname = "";
@@ -40,9 +43,14 @@ if(organizationId != 0) {
 			}
 			long orgid = Long.parseLong(our[0]);
 			if(orgid == organizationId) {
-				position = our[1];
+				if(our.length == 1) {
+					position = "";
+				} else {
+					position = our[1];
+				}
 			}
 		}
+
 		for(long roleid : edit_user.getRoleIds()) {
 			if(roleid == editorrole) {
 				editor = true;
@@ -53,11 +61,22 @@ if(organizationId != 0) {
 			if(roleid == maincontactrole) {
 				maincontact = true;
 			}
-		}		
+		}
+		for(UserGroupRole usergrouprole : UserGroupRoleLocalServiceUtil.getUserGroupRoles(edit_user.getUserId(), organization.getGroupId())) {
+			long roleid = usergrouprole.getRoleId();
+			if(roleid == editorrole) {
+				editor = true;
+			}
+			if(roleid == ownerrole) {
+				owner = true;
+			}
+			if(roleid == maincontactrole) {
+				maincontact = true;
+			}
+		}
 	}
 	%>
 	<liferay-ui:success key="user-added-successfully" message="user-added-successfully" />
-	<liferay-ui:error key="fields-required" message="fields-required" />
 	
 	<aui:model-context bean="<%= user %>" model="<%= User.class %>" />
 	<portlet:actionURL name='<%= user_id == 0 ? "addUser" : "editUser" %>' var="addEditUserURL" windowState="normal" />
