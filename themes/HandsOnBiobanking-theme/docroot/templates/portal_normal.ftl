@@ -48,7 +48,14 @@ ${theme.include(body_top_include)}
 	</div>
 	<a href="/about"><div class="bbmri_eric_header-innercontainer">
 		<div class="bbmri_eric_header-logo">
-			<div class="bbmri_eric_header-logo-floating">
+			<div class="bbmri_eric_header-logo-flaot">
+				<div class="bbmri_eric_header-logo-white">
+					<span style="font-size: 40px;font-weight: bold;line-height: 45px;">HandsOn: Biobanks 2015</span><br />
+					<span style="font-size: 20px;line-height: 25px;">Clinical Biobanks</span>
+				</div>
+				<div class="bbmri_eric_header-logo-orange">
+					<span style="font-size: 20px;color: #FFFFFF;line-height: 25px;">29-31 July + EXPO + Milan, Italy</span>
+				</div>
 			</div>
 		</div>
 	</div></a>
@@ -122,10 +129,12 @@ ${theme.include(body_top_include)}
 		</div>
 		
 		<div class="bbmrieric-footer-menue">
-			<#include "${full_templates_path}/navigation_footer.ftl" />
+			<div style="margin: auto;display:inline-block;">
+				<div style="float: left;color: #FFFFFF;font-size: 14px;margin-left: 20px;margin-right: 25px;">HandsOn Biobanks 2015: EXPO | University of Milano-Bicocca | Piazza dell'Ateneo Nuovo, 1 | 20126, Milano/ITALY</div>
+			</div>
 		</div>	
 		<footer id="footer" role="contentinfo">
-			<a href="/web/guest/contact">contact</a> <span style="color: #FFFFFF;">|</span> <a href="/web/guest/imprint">IMPRINT</a>
+			<a href="/web/guest/contact">contact</a>
 		</footer>
 	</div>
 </div>

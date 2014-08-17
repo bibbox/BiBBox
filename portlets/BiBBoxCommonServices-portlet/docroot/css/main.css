@@ -1,0 +1,20 @@
+.aui select[multiple].bibbox_cs_position_selection {
+	height: 170px;
+}
+
+.aui .rdc_idcard_idcaibody-contactname {
+	width: 55%;
+}
+
+.aui .rdc_idcard_idcaibody-contactemail {
+	width: 55%;
+}
+
+.aui .rdc_idcard_idcaibody-contactrole {
+	width: 55%;
+}
+
+.aui div.portlet-body {
+    max-width: 1200px;
+    min-width: 100px;
+}

@@ -41,13 +41,40 @@ $dockbarOpenGradientStart: #0EA6F9;
    height: 176px;
 }
 .bbmri_eric_header-logo {
-	width: 1000px;
+	width: 1200px;
 	height: 176px;
 	margin: auto;
 }
-.bbmri_eric_header-logo-floating {
-	margin-top: 42px;
+.bbmri_eric_header-logo-flaot {
+	margin-top: 76px;
+	width: 600px;
 	float: right;
+}
+.bbmri_eric_header-logo-white {
+	margin-top: 0px;
+	padding-right: 15px;
+	width: 590px;
+	height: 70px;
+	float: right;
+	align: right;
+	text-align: right;
+	background: -webkit-linear-gradient(left, rgba(255,255,255,0) , rgba(255,255,255,0.9)); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, rgba(255,255,255,0), rgba(255,255,255,0.9)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, rgba(255,255,255,0), rgba(255,255,255,0.9)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, rgba(255,255,255,0) , rgba(255,255,255,0.9)); /* Standard syntax */
+}
+.bbmri_eric_header-logo-orange {
+	margin-top: 0;
+	padding-right: 15px;
+	width: 560px;
+	height: 26px;
+	float: right;
+	align: right;
+	text-align: right;
+	background: -webkit-linear-gradient(left, rgba(237,102,10,0) , rgba(237,102,10,0.9)); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, rgba(237,102,10,0), rgba(237,102,10,0.9)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, rgba(237,102,10,0), rgba(237,102,10,0.9)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, rgba(237,102,10,0) , rgba(237,102,10,0.9)); /* Standard syntax */
 }
 /* menu */
 .bbmri_eric_header-menucontainer {
@@ -65,7 +92,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 .bbmri_eric_header-mainmenu-floating {
 	float: left;
-	margin-left: 270px;
+	margin-left: 210px;
 }
 .bbmri_eric_header-mainmenu {
 	width: 1200px;
@@ -113,7 +140,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 .bbmri_eric_header-submainmenu-floating-runing-text {
    float: left;
-   width: 275px;
+   width: 215px;
    margin-top: 12px;
    text-overflow: ellipsis;
    white-space: nowrap;
@@ -124,7 +151,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 .bbmri_eric_header-submainmenu-floating {
 	float: left;
-	width: 725px;
+	width: 785px;
 }
 .bbmri_eric_header-submainmenu-floating ul {
    float: left;

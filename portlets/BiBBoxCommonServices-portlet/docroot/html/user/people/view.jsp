@@ -22,6 +22,7 @@ String actionId_edit_user = "EDIT_USER";
 <%
 long optionsMainContactRole_option = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
 boolean optionsDisplayMaincontact_option = GetterUtil.getBoolean(portletPreferences.getValue("optionsDisplayMaincontact", "false"));
+String optionsDisplayMaincontactTitle_option = GetterUtil.getString(portletPreferences.getValue("optionsDisplayMaincontactTitle", "Main contact"));
 String redirect = ParamUtil.getString(request, "redirect");
 
 String currentURL = PortalUtil.getCurrentURL(request);
@@ -36,9 +37,9 @@ if (currentGroup.isOrganization()) {
   	organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 }
 
+long maincontactid = 0;
 if(optionsDisplayMaincontact_option) {
 	User maincontact = null;
-	long maincontactid = 0;
 	List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organizationId);
 	for(User user_mc : userlist) {
 		List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user_mc.getUserId(), organization.getGroup().getGroupId());
@@ -59,7 +60,7 @@ if(optionsDisplayMaincontact_option) {
 	
 	
 	<div style="height:100%;width:100%;">
-		<span class="rdc_idcard_idcaibody-headlines"  style="height:100%;width:100%;">Main contact
+		<span class="rdc_idcard_idcaibody-headlines" style="height:100%;width:100%;margin-bottom:5px;"><b style="font-size: 20px;"><%= optionsDisplayMaincontactTitle_option %></b>
 			<c:choose>
 				<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_manage_maincontact) %>">
 					&nbsp;&nbsp;<aui:a href="<%= editmaincontactURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
@@ -69,10 +70,47 @@ if(optionsDisplayMaincontact_option) {
 		<% 
 		if(maincontact != null) {
 			String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+maincontact.getScreenName()+"&amp;companyId="+maincontact.getCompanyId();
+			String role = "";
+			String[] user_roles = maincontact.getExpandoBridge().getAttribute("Role within the organisation").toString().split(";");
+			for(String user_role : user_roles) {
+				String[] our = user_role.split("_");
+				if(our.length == 0 || our[0].length() == 0) {
+					continue;
+				}
+				long orgid = Long.parseLong(our[0]);
+				if(orgid == organizationId) {
+					if(our.length == 1) {
+						role = "";
+					} else {
+						role = our[1];
+					}
+				}
+			}
 			%>
-			<br>
-			<div class="rdc_idcard_idcaibody-avatar"><img alt="" src="<%= imgPath %>" /></div>
-			<span class="rdc_idcard_idcaibody-contactname"><%= maincontact.getFullName() %></span><br>
+			<br><br>
+			<div class="rdc_idcard_idcaibody-avatar"><img alt="" style="margin-left:10px;float:right;" src="<%= imgPath %>" /></div>
+			<span class="rdc_idcard_idcaibody-contactname"><%= maincontact.getFullName() %>
+			<c:choose>
+				<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_user) %>">
+					<portlet:renderURL var="editUserURL">
+						<portlet:param name="mvcPath" value="/html/user/people/edit.jsp" />
+						<portlet:param name="redirect" value="<%= currentURL %>"/>
+						<portlet:param name="bibbox_cs_userid" value="<%= String.valueOf(maincontact.getUserId()) %>"/>
+						<portlet:param name="bibbox_cs_cmd" value="edit"/>
+						<portlet:param name="bibbox_cs_organizationid" value="<%= String.valueOf(organizationId) %>"/>
+					</portlet:renderURL>
+					&nbsp;&nbsp;<aui:a  href="<%= editUserURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+					&nbsp;&nbsp;<a id="deleteUserFromOrganisation" class="icon-remove" style="color: red;" organisationid="<%= organizationId %>" userid="<%= maincontact.getUserId() %>" userfulename="<%= maincontact.getFullName() %>"></a>
+				</c:when>
+			</c:choose>
+			</span><br />
+			<%
+			if(role.length() != 0) {
+				%>
+				<span class="rdc_idcard_idcaibody-contactrole"><%= role %></span><br />
+				<%
+			}
+			%>
 			<span class="rdc_idcard_idcaibody-contactemail"><aui:a href='<%= "mailto:" + maincontact.getEmailAddress() %>'><%= maincontact.getEmailAddress() %></aui:a></span>
 			<%
 		}
@@ -84,8 +122,11 @@ if(optionsDisplayMaincontact_option) {
 }
 %>
 <!-- Personal List -->
+<%
+String optionsDisplayPeopleTitle_option = GetterUtil.getString(portletPreferences.getValue("optionsDisplayPeopleTitle", "Personal"));
+%>
 <div style="height:100%;width:100%;">
-	<span class="rdc_idcard_idcaibody-headlines"  style="height:100%;width:100%;">Personal
+	<span class="rdc_idcard_idcaibody-headlines"  style="height:100%;width:100%;margin-bottom:5px;"><b style="font-size: 20px;"><%= optionsDisplayPeopleTitle_option %></b>
 		<c:choose>
 			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_user) %>">
 				<portlet:renderURL var="addUserURL">
@@ -100,10 +141,14 @@ if(optionsDisplayMaincontact_option) {
 		</c:choose>
 	</span>
 </div>
+<br>
 <% 
 //Get Users From Organisations
 List<User> users = UserLocalServiceUtil.getOrganizationUsers(organizationId);
 for(User user_om : users) {
+	if(maincontactid == user_om.getUserId()) {
+		continue;
+	}
 	String role = "";
 	String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+user_om.getScreenName()+"&amp;companyId="+user_om.getCompanyId();
 	String[] user_roles = user_om.getExpandoBridge().getAttribute("Role within the organisation").toString().split(";");
@@ -123,7 +168,7 @@ for(User user_om : users) {
 	}
 	%>
 	<div class="rdc-people-dispaly"  style="height:100%;width:100%;">
-		<img style="float:left;" alt="" class="avatar" src="<%= imgPath %>" width="35" /> 
+		<img style="float:left;margin-right:10px;" alt="" class="avatar" src="<%= imgPath %>" width="35" /> 
 		<%= user_om.getFullName() %>
 		<c:choose>
 			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_user) %>">
@@ -135,7 +180,7 @@ for(User user_om : users) {
 					<portlet:param name="bibbox_cs_organizationid" value="<%= String.valueOf(organizationId) %>"/>
 				</portlet:renderURL>
 				&nbsp;&nbsp;<aui:a  href="<%= editUserURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
-				&nbsp;&nbsp;<a id="deleteUserFromOrganisation" class="icon-remove" style="color: red;"></a>
+				&nbsp;&nbsp;<a id="deleteUserFromOrganisation" class="icon-remove" style="color: red;" organisationid="<%= organizationId %>" userid="<%= user_om.getUserId() %>" userfulename="<%= user_om.getFullName() %>"></a>
 			</c:when>
 		</c:choose>
 		<br>
@@ -146,12 +191,27 @@ for(User user_om : users) {
 }
 %>
 
+<portlet:actionURL name='deleteUserFromOrganisation' var="deleteUserFromOrganisationURL" />
+
 <aui:script use="aui-base,event">
 	A.all('#deleteUserFromOrganisation').on(
 			'click',
 			function(event) {
-				var confirmation_to_delete_user = confirm("Are you sure you won't to delete the user from your Organization?");
+				var confirmation_to_delete_user = confirm("Are you sure you want to delete the user " + event.currentTarget.getAttribute('userfulename') + " from your Organization?");
 				if (confirmation_to_delete_user == true) {
+					var url = '<%= deleteUserFromOrganisationURL.toString() %>';
+					A.io.request(url,{
+						//this is the data that you are sending to the action method
+						data: {
+						   <portlet:namespace />bibbox_cs_organisationid: event.currentTarget.getAttribute('organisationid'),
+						   <portlet:namespace />bibbox_cs_userid: event.currentTarget.getAttribute('userid'),
+						},
+						dataType: 'json',
+						on: {
+						  failure: function() { alert('There is a problem with the server connection.'); },
+						  success: function() { "success" }
+						}
+					});
 				    Liferay.Portlet.refresh('#p_p_id_people_WAR_BiBBoxCommonServicesportlet_');
 				} 	 
 				return false;

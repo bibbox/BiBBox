@@ -10,6 +10,8 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 long optionsEditorRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsEditorRole", ""));
 long optionsOwnerRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsOwnerRole", ""));
 boolean optionsDisplayMaincontact_cfg = GetterUtil.getBoolean(portletPreferences.getValue("optionsDisplayMaincontact", "false"));
+String optionsDisplayMaincontactTitle_cfg = GetterUtil.getString(portletPreferences.getValue("optionsDisplayMaincontactTitle", "Main contact"));
+String optionsDisplayPeopleTitle_cfg = GetterUtil.getString(portletPreferences.getValue("optionsDisplayPeopleTitle", "Personal"));
 
 int[] role_type = {RoleConstants.TYPE_ORGANIZATION};
 List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), role_type);
@@ -19,6 +21,10 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 	<aui:fieldset>
 		<aui:layout>
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+			<!-- Display Main Contact Title -->
+			<aui:column columnWidth="100" first="true">
+				<aui:input name="preferences--optionsDisplayMaincontactTitle--" value="<%= optionsDisplayMaincontactTitle_cfg %>" label="Main Contact Title" />
+			</aui:column>
 			<!-- Display Main Contact -->
 			<aui:column columnWidth="100" first="true">
 				<aui:input name="preferences--optionsDisplayMaincontact--" type="checkbox" value="<%= optionsDisplayMaincontact_cfg %>" label="Display Main Contact" />
@@ -35,6 +41,13 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 					}
 					%>
 				</aui:select>
+			</aui:column>
+			<br />
+			<hr>
+			<br />
+			<!-- Display People Title -->
+			<aui:column columnWidth="100" first="true">
+				<aui:input name="preferences--optionsDisplayPeopleTitle--" value="<%= optionsDisplayPeopleTitle_cfg %>" label="People Title" />
 			</aui:column>
 			<!-- Select Owner Role -->
 			<aui:column columnWidth="100" first="true">
