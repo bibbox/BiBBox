@@ -6,7 +6,7 @@
 	<portlet>
 		<portlet-name>organisation-publisher</portlet-name>
 		<icon>/icon.png</icon>
-		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.OrganisationPublisherConfig</configuration-action-class>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.organisation.OrganisationPublisherConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -18,7 +18,7 @@
 	<portlet>
 		<portlet-name>people</portlet-name>
 		<icon>/icon.png</icon>
-		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.PeopleConfig</configuration-action-class>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.PeopleConfig</configuration-action-class>
 		<render-weight>0</render-weight>
 		<ajaxable>true</ajaxable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
@@ -26,6 +26,27 @@
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>people-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>organisation-lister</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.organisation.OrganisationListerConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			organisation-lister-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>invitation</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>invitation-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

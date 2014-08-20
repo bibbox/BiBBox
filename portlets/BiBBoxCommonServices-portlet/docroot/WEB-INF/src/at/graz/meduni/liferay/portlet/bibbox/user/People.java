@@ -1,4 +1,4 @@
-package at.graz.meduni.liferay.portlet.bibbox;
+package at.graz.meduni.liferay.portlet.bibbox.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;

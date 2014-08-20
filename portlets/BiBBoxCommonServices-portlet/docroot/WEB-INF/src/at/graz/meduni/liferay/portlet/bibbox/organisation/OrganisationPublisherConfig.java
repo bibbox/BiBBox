@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.graz.meduni.liferay.portlet.bibbox;
+package at.graz.meduni.liferay.portlet.bibbox.organisation;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

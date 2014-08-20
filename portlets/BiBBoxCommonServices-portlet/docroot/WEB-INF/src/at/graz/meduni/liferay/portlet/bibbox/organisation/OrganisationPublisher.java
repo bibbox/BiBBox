@@ -1,4 +1,4 @@
-package at.graz.meduni.liferay.portlet.bibbox;
+package at.graz.meduni.liferay.portlet.bibbox.organisation;
 
 import java.util.List;
 import java.util.Locale;
@@ -59,13 +59,12 @@ public class OrganisationPublisher extends MVCPortlet {
 		String organization_name = ParamUtil.getString(request, "bibbox_cs_organisationname");
 		long pagetemplate = ParamUtil.getLong(request, "bibbox_cs_pagetemplate");
 		String ddlgeneration = ParamUtil.getString(request, "bibbox_cs_ddlgeneration");
-		
-		
-		
-		
+		long parentorganisation = ParamUtil.getLong(request, "bibbox_cs_parentorganization");
+		String organizationtype = ParamUtil.getString(request, "bibbox_cs_organizationtype");
+			
 		// Create Organization
 		boolean site = pagetemplate == 0 ? false : true;
-		Organization organization = createOrganization(organization_name, company, site);
+		Organization organization = createOrganization(organization_name, company, site, parentorganisation);
 		
 		ServiceContext serviceContext = new ServiceContext();
         serviceContext.setAddGroupPermissions(true);
@@ -78,6 +77,8 @@ public class OrganisationPublisher extends MVCPortlet {
 		if(site) {
 			createPages(organization, pagetemplate);
 		}
+		// Set Organization Type
+		organization.getExpandoBridge().setAttribute("Organization Type", organizationtype);
 		// Create DDLs
 		createDDLs(ddlgeneration, organization.getGroupId(), themeDisplay.getUserId(), serviceContext, request);
 		
@@ -115,9 +116,13 @@ public class OrganisationPublisher extends MVCPortlet {
 					if(option.equals("o")) {
 						createDDLRecord(recordset, groupId, serviceContext);
 					}
-					// Create one DDL Record
+					// Create DDL Record with data
 					if(option.equals("i")) {
-						createDDLRecord(recordset, groupId, serviceContext, request);
+						createDDLRecord(recordset, groupId, serviceContext);
+					}
+					// Create DDL Record with data from file
+					if(option.equals("f")) {
+						createDDLRecord(recordset, groupId, serviceContext);
 					}
 				}
 			}
@@ -234,18 +239,14 @@ public class OrganisationPublisher extends MVCPortlet {
 	 * @param  variable Description text text text.          (3)
 	 * @return The new created Organization.
 	 */
-	private Organization createOrganization(String organization_name, Company company, boolean site) {
+	private Organization createOrganization(String organization_name, Company company, boolean site, long parentorganisation) {
 		try {
 			// Create Organization		
-			User defaultUser = company.getDefaultUser();
-			
 			long userId = company.getDefaultUser().getUserId();
-	        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 	        if(organization_name.length() > 100) {
 	        	organization_name = organization_name.substring(0, 100);
 	        }
 	        String type = OrganizationConstants.TYPE_REGULAR_ORGANIZATION;
-	        boolean recursable = true;
 	        long regionId = 0;
 	        long countryId = 0;
 	        int statusId = GetterUtil.getInteger(PropsUtil.get("sql.data.com.liferay.portal.model.ListType.organization.status"));
@@ -257,7 +258,7 @@ public class OrganisationPublisher extends MVCPortlet {
 	        serviceContext.setAddGuestPermissions(true);
 	
 	        Organization organization =
-	                OrganizationLocalServiceUtil.addOrganization(userId, parentOrganizationId, organization_name, type, regionId, countryId, 
+	                OrganizationLocalServiceUtil.addOrganization(userId, parentorganisation, organization_name, type, regionId, countryId, 
 	                		statusId, comments, site, serviceContext);
 	        
 	        Group group = organization.getGroup();

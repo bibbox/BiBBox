@@ -5,8 +5,10 @@
 	
 	<category name="BiBBox Organisation">
 		<portlet id="organisation-publisher"></portlet>
+		<portlet id="organisation-lister"></portlet>
 	</category>
 	<category name="BiBBox User">
 		<portlet id="people"></portlet>
+		<portlet id="invitation"></portlet>
 	</category>
 </display>

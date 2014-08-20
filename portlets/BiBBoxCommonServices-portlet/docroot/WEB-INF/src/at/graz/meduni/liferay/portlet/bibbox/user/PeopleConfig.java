@@ -1,4 +1,4 @@
-package at.graz.meduni.liferay.portlet.bibbox;
+package at.graz.meduni.liferay.portlet.bibbox.user;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

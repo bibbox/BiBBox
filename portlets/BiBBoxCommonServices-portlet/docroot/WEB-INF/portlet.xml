@@ -6,7 +6,7 @@
 		<portlet-name>organisation-publisher</portlet-name>
 		<display-name>Organisation Publisher</display-name>
 		<portlet-class>
-			at.graz.meduni.liferay.portlet.bibbox.OrganisationPublisher
+			at.graz.meduni.liferay.portlet.bibbox.organisation.OrganisationPublisher
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
@@ -49,7 +49,7 @@
 		<portlet-name>people</portlet-name>
 		<display-name>People</display-name>
 		<portlet-class>
-			at.graz.meduni.liferay.portlet.bibbox.People
+			at.graz.meduni.liferay.portlet.bibbox.user.People
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
@@ -73,6 +73,84 @@
 		<portlet-info>
 			<title>People</title>
 			<short-title>People</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>organisation-lister</portlet-name>
+		<display-name>Organisation Lister</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.organisation.OrganisationLister
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/organisation/organisationlister/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/organisation/organisationlister/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Organisation Lister</title>
+			<short-title>Organisation Lister</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>invitation</portlet-name>
+		<display-name>Invitation</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.user.Invitation
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/user/invitation/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/user/invitation/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Invitation</title>
+			<short-title>Invitation</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

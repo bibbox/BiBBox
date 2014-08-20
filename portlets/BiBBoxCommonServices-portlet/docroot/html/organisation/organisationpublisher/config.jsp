@@ -9,9 +9,9 @@ String optionsOrganisationName_cfg = GetterUtil.getString(portletPreferences.get
 String optionsParentOrganisationName_cfg = GetterUtil.getString(portletPreferences.getValue("optionsParentOrganisationName", "Portal"));
 long optionsPageTemplate_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsPageTemplate", "0"));
 String optionsDDLGeneration_cfg = GetterUtil.getString(portletPreferences.getValue("optionsDDLGeneration", ""));
+long optionsWhereToCreateOrganisation_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsWhereToCreateOrganisation", "0"));
+String optionsOrganizationType_cfg = GetterUtil.getString(portletPreferences.getValue("optionsOrganizationType", ""));
 %>
-
-Create new <b>Organisation Publisher</b> portlet in Config mode.
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
@@ -32,6 +32,24 @@ Create new <b>Organisation Publisher</b> portlet in Config mode.
 			</aui:column>
 			<aui:column columnWidth="75" last="true">
 				<aui:input name="preferences--optionsParentOrganisationName--" label="Set Specific Name" type="text" value ="<%= optionsParentOrganisationName_cfg %>" cssClass="propose" />
+			</aui:column>
+			<!-- Select where to create the Organization -->
+			<aui:column columnWidth="25" first="true">
+				<aui:select label="Select Parent Organisation for Organisation" name="preferences--optionsWhereToCreateOrganisation--">
+					<aui:option value="0" selected='<%= optionsWhereToCreateOrganisation_cfg == 0 ? true : false %>' >As Main Organization</aui:option>
+					<aui:option value="1" selected='<%= optionsWhereToCreateOrganisation_cfg == 1 ? true : false %>' >In the Organization of the portlet</aui:option>
+					<%
+					List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(themeDisplay.getCompanyId(), 0);
+					for(Organization organization : organizations) {
+						%>
+						<aui:option value="<%= organization.getOrganizationId() %>" selected='<%= optionsWhereToCreateOrganisation_cfg == organization.getOrganizationId() ? true : false %>' >In Organization: <%= organization.getName() %></aui:option>
+						<%
+					}
+					%>
+				</aui:select>
+			</aui:column>
+			<aui:column columnWidth="75" last="true">
+				<aui:input name="preferences--optionsOrganizationType--" label="Set OrganisationType" type="text" value ="<%= optionsOrganizationType_cfg %>" />
 			</aui:column>
 			<!-- Select Site Template for creation -->
 			<aui:column columnWidth="100" first="true">

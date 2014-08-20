@@ -11,6 +11,8 @@
 <!-- Read all DDMStructures for DDL creation -->
 <%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMUtil" %>
 
 <!-- Includes for regex -->
 <%@ page import="java.util.regex.Pattern" %>
@@ -19,3 +21,5 @@
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="com.liferay.portal.kernel.util.ArrayUtil" %>
+
+<%@ page import="com.liferay.portal.service.ServiceContext" %>
