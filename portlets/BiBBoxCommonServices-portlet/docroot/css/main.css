@@ -18,3 +18,7 @@
     max-width: 1200px;
     min-width: 100px;
 }
+
+.aui .bibbox_cs_width_100 {
+	width: 100%;
+}
