@@ -248,4 +248,35 @@ public interface InvitationOrganisationLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* Gets the number of organizations for invitation
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getOrganisationByInvitationCount(long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Get organizations by invitation
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getOrganisationByInvitation(
+		long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Get organizations by invitation
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationsByOrganisation(
+		long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Get organizations by invitation
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation getInvitationOrganisation(
+		long invitationId, long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

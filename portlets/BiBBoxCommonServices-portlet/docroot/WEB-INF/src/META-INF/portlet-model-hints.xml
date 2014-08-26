@@ -7,6 +7,7 @@
 		<field name="subject" type="String" />
 		<field name="body" type="String" />
 		<field name="status" type="long" />
+		<field name="invitationsend" type="Date" />
 		<field name="lastchanged" type="Date" />
 		<field name="lastchanger" type="long" />
 	</model>

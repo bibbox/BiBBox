@@ -8,6 +8,7 @@ String optionsParentOrganisationNameOption_cfg = GetterUtil.getString(portletPre
 String optionsParentOrganisationName_cfg = GetterUtil.getString(portletPreferences.getValue("optionsParentOrganisationName", "Portal"));
 long optionsParentOrganisation_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsParentOrganisation", "0"));
 String optionsTypeFilter_cfg = GetterUtil.getString(portletPreferences.getValue("optionsTypeFilter", ""));
+long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", ""));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -43,6 +44,21 @@ String optionsTypeFilter_cfg = GetterUtil.getString(portletPreferences.getValue(
 			</aui:column>
 			<aui:column columnWidth="75" last="true">
 				<aui:input name="preferences--optionsTypeFilter--" label="Set Organisation Filter Type" type="text" value ="<%= optionsTypeFilter_cfg %>" />
+			</aui:column>
+			<!-- Select Main Contact Role -->
+			<aui:column columnWidth="100" first="true">
+				<aui:select label="Select Main Contact Role for Organisation" name="preferences--optionsMainContactRole--">
+					<%
+					int[] role_type = {RoleConstants.TYPE_ORGANIZATION};
+					List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), role_type);
+					for(Role role : roles) {
+						
+						%>
+						<aui:option value="<%= role.getRoleId() %>" selected='<%= optionsMainContactRole_cfg == role.getRoleId() ? true : false %>' ><%= role.getName() %></aui:option>
+						<%
+					}
+					%>
+				</aui:select>
 			</aui:column>
 		</aui:layout>
 	</aui:fieldset>

@@ -30,3 +30,7 @@
 
 <!-- Counter from insert -->
 <%@ page import="com.liferay.counter.service.CounterLocalServiceUtil" %>
+
+<!-- DDLs -->
+<%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil" %>

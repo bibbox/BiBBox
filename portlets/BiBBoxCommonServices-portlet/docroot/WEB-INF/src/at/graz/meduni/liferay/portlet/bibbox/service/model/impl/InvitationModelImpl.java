@@ -70,10 +70,11 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 			{ "subject", Types.VARCHAR },
 			{ "body", Types.VARCHAR },
 			{ "status", Types.BIGINT },
+			{ "invitationsend", Types.TIMESTAMP },
 			{ "lastchanged", Types.TIMESTAMP },
 			{ "lastchanger", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation (invitationId LONG not null primary key,name VARCHAR(75) null,subject VARCHAR(75) null,body VARCHAR(75) null,status LONG,lastchanged DATE null,lastchanger LONG)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation (invitationId LONG not null primary key,name VARCHAR(75) null,subject VARCHAR(75) null,body VARCHAR(75) null,status LONG,invitationsend DATE null,lastchanged DATE null,lastchanger LONG)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.invitation";
 	public static final String ORDER_BY_JPQL = " ORDER BY invitation.lastchanged DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.invitation.lastchanged DESC";
@@ -111,6 +112,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		model.setSubject(soapModel.getSubject());
 		model.setBody(soapModel.getBody());
 		model.setStatus(soapModel.getStatus());
+		model.setInvitationsend(soapModel.getInvitationsend());
 		model.setLastchanged(soapModel.getLastchanged());
 		model.setLastchanger(soapModel.getLastchanger());
 
@@ -182,6 +184,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		attributes.put("subject", getSubject());
 		attributes.put("body", getBody());
 		attributes.put("status", getStatus());
+		attributes.put("invitationsend", getInvitationsend());
 		attributes.put("lastchanged", getLastchanged());
 		attributes.put("lastchanger", getLastchanger());
 
@@ -218,6 +221,12 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 		if (status != null) {
 			setStatus(status);
+		}
+
+		Date invitationsend = (Date)attributes.get("invitationsend");
+
+		if (invitationsend != null) {
+			setInvitationsend(invitationsend);
 		}
 
 		Date lastchanged = (Date)attributes.get("lastchanged");
@@ -329,6 +338,17 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 	@JSON
 	@Override
+	public Date getInvitationsend() {
+		return _invitationsend;
+	}
+
+	@Override
+	public void setInvitationsend(Date invitationsend) {
+		_invitationsend = invitationsend;
+	}
+
+	@JSON
+	@Override
 	public Date getLastchanged() {
 		return _lastchanged;
 	}
@@ -387,6 +407,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		invitationImpl.setSubject(getSubject());
 		invitationImpl.setBody(getBody());
 		invitationImpl.setStatus(getStatus());
+		invitationImpl.setInvitationsend(getInvitationsend());
 		invitationImpl.setLastchanged(getLastchanged());
 		invitationImpl.setLastchanger(getLastchanger());
 
@@ -484,6 +505,15 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 		invitationCacheModel.status = getStatus();
 
+		Date invitationsend = getInvitationsend();
+
+		if (invitationsend != null) {
+			invitationCacheModel.invitationsend = invitationsend.getTime();
+		}
+		else {
+			invitationCacheModel.invitationsend = Long.MIN_VALUE;
+		}
+
 		Date lastchanged = getLastchanged();
 
 		if (lastchanged != null) {
@@ -500,7 +530,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{invitationId=");
 		sb.append(getInvitationId());
@@ -512,6 +542,8 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		sb.append(getBody());
 		sb.append(", status=");
 		sb.append(getStatus());
+		sb.append(", invitationsend=");
+		sb.append(getInvitationsend());
 		sb.append(", lastchanged=");
 		sb.append(getLastchanged());
 		sb.append(", lastchanger=");
@@ -523,7 +555,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -549,6 +581,10 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>invitationsend</column-name><column-value><![CDATA[");
+		sb.append(getInvitationsend());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>lastchanged</column-name><column-value><![CDATA[");
@@ -577,6 +613,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 	private long _status;
 	private long _originalStatus;
 	private boolean _setOriginalStatus;
+	private Date _invitationsend;
 	private Date _lastchanged;
 	private long _lastchanger;
 	private long _columnBitmask;

@@ -327,7 +327,8 @@ public class InvitationOrganisationWrapper implements InvitationOrganisation,
 	}
 
 	@Override
-	public int compareTo(InvitationOrganisation invitationOrganisation) {
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation invitationOrganisation) {
 		return _invitationOrganisation.compareTo(invitationOrganisation);
 	}
 
@@ -337,17 +338,17 @@ public class InvitationOrganisationWrapper implements InvitationOrganisation,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<InvitationOrganisation> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> toCacheModel() {
 		return _invitationOrganisation.toCacheModel();
 	}
 
 	@Override
-	public InvitationOrganisation toEscapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation toEscapedModel() {
 		return new InvitationOrganisationWrapper(_invitationOrganisation.toEscapedModel());
 	}
 
 	@Override
-	public InvitationOrganisation toUnescapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation toUnescapedModel() {
 		return new InvitationOrganisationWrapper(_invitationOrganisation.toUnescapedModel());
 	}
 

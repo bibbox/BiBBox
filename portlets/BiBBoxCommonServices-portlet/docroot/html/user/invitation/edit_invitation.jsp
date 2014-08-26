@@ -42,7 +42,6 @@ String tmpTitle = "new-invatiation";
 	title='<%= tmpTitle %>'
 />
 
-<aui:model-context bean="<%= invitation %>" model="<%= Invitation.class %>" />
 <portlet:actionURL name='<%= createinvitation ? "addInvitation" : "updateInvitation" %>' var="editInvitationURL" windowState="normal" />
 <aui:form action="<%= editInvitationURL %>" method="POST" name="fm">
 	<aui:fieldset>
@@ -57,23 +56,9 @@ String tmpTitle = "new-invatiation";
 			</aui:column>
 			<!-- OrganisationList -->
 			<aui:column columnWidth="100" first="true">
-				<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "10")) %>' emptyResultsMessage="invitation-organization-empty-results-message">
-					<liferay-ui:search-container-results
-						results="<%= InvitationOrganisationLocalServiceUtil.getInvitationOrganisations(searchContainer.getStart(), searchContainer.getEnd()) %>"
-						total="<%= InvitationOrganisationLocalServiceUtil.getInvitationOrganisationsCount() %>"
-					/>
-					<liferay-ui:search-container-row
-						className="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation"
-						keyProperty="invitationOrganisationId"
-						modelVar="invitationorganisation" escapedModel="<%= true %>"
-					>
-					<liferay-ui:search-container-column-text
-						name="id"
-						value="<%= Long.toString(invitationorganisation.getInvitationOrganisationId()) %>"
-					/>
-					</liferay-ui:search-container-row>
-					<liferay-ui:search-iterator />
-				</liferay-ui:search-container>
+				Organization <i id="refreschorganizationlist" class="icon-refresh"></i>
+				<div id="organisationlist" >
+				</div>
 			</aui:column>
 			<aui:column columnWidth="100" first="true">
 				<aui:input name="subject" cssClass="bibbox_cs_width_100"></aui:input>
@@ -104,7 +89,11 @@ Bei cancle einfügen wenn noch nicht erstellt dann wird im javascriptgelöscht und
 */
 %>
 
-<% String addOrganizationURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/invitation/organisations/" + invitationId; %>
+<% 
+String addOrganizationURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/invitation/organisations/" + invitationId;
+String addOrganizationListURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/invitation/vieworganisations/" + invitationId;
+%>
+<portlet:actionURL name='deleteOrganizationFromInvitation' var="deleteOrganizationFromInvitationURL" />
 
 <aui:script use="aui-base">
             A.all('#addorganisations').on(
@@ -113,6 +102,7 @@ Bei cancle einfügen wenn noch nicht erstellt dann wird im javascriptgelöscht und
                   Liferay.Util.selectEntity(
                      {
                         dialog: {
+                           cache: false,
                            constrain: true,
                            modal: true,
                            width: 1000
@@ -124,4 +114,78 @@ Bei cancle einfügen wenn noch nicht erstellt dann wird im javascriptgelöscht und
                   );
                }
             );
+</aui:script>
+<aui:script use="aui-base,aui-io-request">
+	AUI().use('aui-base', function(A){
+         var contentNode = A.one('#organisationlist');
+      
+         if(contentNode) {
+            contentNode.empty();
+           contentNode.html('<div class="loading-animation"></div>');
+           
+           contentNode.load('<%= addOrganizationListURL %>');
+           
+         }
+   });
+</aui:script>
+<aui:script use="aui-base,aui-io-request,click">
+AUI().ready(
+  'aui-base',
+  'aui-io-request',
+  'click',
+  function(A) {
+    A.all('#refreschorganizationlist').each(function() {
+      this.on('click', function(event){
+         var url = '<%= addOrganizationListURL %>';
+         A.io.request(url,{
+         on: {
+              failure: function() { alert('Unable to Load Data'); },
+              success: function() { 
+               A.one('#organisationlist').setHTML(this.get('responseData'));
+               // Delete Script
+               AUI().use(
+              'aui-base',
+			  'aui-io-request',
+			  'click',
+			  function(A) {
+	               A.all('#deleteOragnizationFromInvitation').on(
+					'click',
+					function(event) {
+						var confirmation_to_delete_user = confirm("Are you sure you want to delete the Organization from the list?");
+						if (confirmation_to_delete_user == true) {
+							var url = '<%= deleteOrganizationFromInvitationURL.toString() %>';
+							A.io.request(url,{
+								//this is the data that you are sending to the action method
+								data: {
+								   <portlet:namespace />bibbox_cs_organisationid: event.currentTarget.getAttribute('organisationid'),
+								   <portlet:namespace />bibbox_cs_invitationid: event.currentTarget.getAttribute('invitationid'),
+								},
+								dataType: 'json',
+								on: {
+								  failure: function() { alert('There is a problem with the server connection.'); },
+								  success: function() { 
+										var url = '<%= addOrganizationListURL %>';
+								         A.io.request(url,{
+								         on: {
+								              failure: function() { alert('Unable to Load Data'); },
+								              success: function() { 
+								               A.one('#organisationlist').setHTML(this.get('responseData'));
+								               }
+								            }
+								         });
+								  }
+								}
+							});
+						    
+						} 	 
+						return false;
+					}
+				);});
+               //Delete Script
+               }
+            }
+         });
+     });
+ });
+});
 </aui:script>

@@ -277,6 +277,42 @@ public class InvitationOrganisationLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Gets the number of organizations for invitation
+	*/
+	public static int getOrganisationByInvitationCount(long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getOrganisationByInvitationCount(invitationId);
+	}
+
+	/**
+	* Get organizations by invitation
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getOrganisationByInvitation(
+		long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getOrganisationByInvitation(invitationId);
+	}
+
+	/**
+	* Get organizations by invitation
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationsByOrganisation(
+		long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getInvitationsByOrganisation(organisationId);
+	}
+
+	/**
+	* Get organizations by invitation
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation getInvitationOrganisation(
+		long invitationId, long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getInvitationOrganisation(invitationId, organisationId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

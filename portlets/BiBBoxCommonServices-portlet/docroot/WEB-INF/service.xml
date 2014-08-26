@@ -11,6 +11,7 @@
 		<column name="subject" type="String"></column>
 		<column name="body" type="String"></column>
 		<column name="status" type="long"></column>
+		<column name="invitationsend" type="Date"></column>
 		<column name="lastchanged" type="Date"></column>
 		<column name="lastchanger" type="long"></column>
 		<column name="invitationOrganisationId" type="Collection" entity="InvitationOrganisation" ></column>
@@ -37,6 +38,10 @@
 		</finder>
 		<finder return-type="Collection" name="InvitationOrganisations">
 			<finder-column name="invitationId"></finder-column>
+		</finder>
+		<finder return-type="InvitationOrganisation" name="InvitationIdAndOrganisationId">
+			<finder-column name="invitationId"></finder-column>
+			<finder-column name="organisationId"></finder-column>
 		</finder>
 	</entity>
 </service-builder>

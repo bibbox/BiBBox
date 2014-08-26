@@ -46,6 +46,14 @@
 }
 
 /* ---------- Footer ----------- */
+.aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.aui .bbmrieric-footer .bbmrieric-footer-menue a, .aui .bbmrieric-footer .bbmrieric-footer-menue a:hover {
+   color: #FFFFFF;
+   text-decoration:none;
+}
 .bbmrieric-footer-container {
 	width: 100%;
 	height: 210px;
@@ -63,21 +71,35 @@
 	width: 1000px;
 	margin: auto;
 }
-.bbmrieric-footer-menue {
-	width: 1000px;
+.bbmrieric-footer-menue-left {
+	width: 400px;
 	height: 20px;
-	margin: auto;
-	text-align: center;
-	align: center;
-	margin-top: -75px;
+	margin-left: 100px;
+	margin-right: 0;
+	text-align: left;
+	align: left;
+	margin-top: -70px;
 	margin-bottom: 30px;
+	float: left;
+	color: #ffffff;
+}
+.bbmrieric-footer-menue {
+	width: 400px;
+	height: 20px;
+	margin-right: 100px;
+	text-align: right;
+	align: right;
+	margin-top: -70px;
+	margin-bottom: 30px;
+	float: right;
+	color: #ffffff;
 }
 .bbmrieric-footer-menue ul {
-	text-align: center;
 	padding: 0px;
-	margin: auto;
 	list-style-type: none;
 	height: 70px;
+	float: right;
+	width: 400px;
 }
 .bbmrieric-footer-menue li {
 	list-style-type: none;
@@ -85,5 +107,6 @@
 	padding-left: 5px;
 	padding-right: 5px;
 	line-height: 20px;
+	float: right;
 }
 /* ---------- Footer ende ----------- */

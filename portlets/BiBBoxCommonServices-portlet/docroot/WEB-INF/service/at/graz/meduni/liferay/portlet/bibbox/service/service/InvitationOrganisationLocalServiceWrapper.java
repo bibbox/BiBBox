@@ -291,6 +291,46 @@ public class InvitationOrganisationLocalServiceWrapper
 	}
 
 	/**
+	* Gets the number of organizations for invitation
+	*/
+	@Override
+	public int getOrganisationByInvitationCount(long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _invitationOrganisationLocalService.getOrganisationByInvitationCount(invitationId);
+	}
+
+	/**
+	* Get organizations by invitation
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getOrganisationByInvitation(
+		long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _invitationOrganisationLocalService.getOrganisationByInvitation(invitationId);
+	}
+
+	/**
+	* Get organizations by invitation
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationsByOrganisation(
+		long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _invitationOrganisationLocalService.getInvitationsByOrganisation(organisationId);
+	}
+
+	/**
+	* Get organizations by invitation
+	*/
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation getInvitationOrganisation(
+		long invitationId, long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _invitationOrganisationLocalService.getInvitationOrganisation(invitationId,
+			organisationId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public InvitationOrganisationLocalService getWrappedInvitationOrganisationLocalService() {

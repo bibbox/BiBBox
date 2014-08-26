@@ -450,6 +450,90 @@ public class InvitationOrganisationUtil {
 	}
 
 	/**
+	* Returns the invitation organisation where invitationId = &#63; and organisationId = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException} if it could not be found.
+	*
+	* @param invitationId the invitation ID
+	* @param organisationId the organisation ID
+	* @return the matching invitation organisation
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException if a matching invitation organisation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation findByInvitationIdAndOrganisationId(
+		long invitationId, long organisationId)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByInvitationIdAndOrganisationId(invitationId,
+			organisationId);
+	}
+
+	/**
+	* Returns the invitation organisation where invitationId = &#63; and organisationId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param invitationId the invitation ID
+	* @param organisationId the organisation ID
+	* @return the matching invitation organisation, or <code>null</code> if a matching invitation organisation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation fetchByInvitationIdAndOrganisationId(
+		long invitationId, long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByInvitationIdAndOrganisationId(invitationId,
+			organisationId);
+	}
+
+	/**
+	* Returns the invitation organisation where invitationId = &#63; and organisationId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param invitationId the invitation ID
+	* @param organisationId the organisation ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching invitation organisation, or <code>null</code> if a matching invitation organisation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation fetchByInvitationIdAndOrganisationId(
+		long invitationId, long organisationId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByInvitationIdAndOrganisationId(invitationId,
+			organisationId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the invitation organisation where invitationId = &#63; and organisationId = &#63; from the database.
+	*
+	* @param invitationId the invitation ID
+	* @param organisationId the organisation ID
+	* @return the invitation organisation that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation removeByInvitationIdAndOrganisationId(
+		long invitationId, long organisationId)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .removeByInvitationIdAndOrganisationId(invitationId,
+			organisationId);
+	}
+
+	/**
+	* Returns the number of invitation organisations where invitationId = &#63; and organisationId = &#63;.
+	*
+	* @param invitationId the invitation ID
+	* @param organisationId the organisation ID
+	* @return the number of matching invitation organisations
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByInvitationIdAndOrganisationId(long invitationId,
+		long organisationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByInvitationIdAndOrganisationId(invitationId,
+			organisationId);
+	}
+
+	/**
 	* Caches the invitation organisation in the entity cache if it is enabled.
 	*
 	* @param invitationOrganisation the invitation organisation

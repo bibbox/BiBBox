@@ -38,7 +38,7 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{invitationId=");
 		sb.append(invitationId);
@@ -50,6 +50,8 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 		sb.append(body);
 		sb.append(", status=");
 		sb.append(status);
+		sb.append(", invitationsend=");
+		sb.append(invitationsend);
 		sb.append(", lastchanged=");
 		sb.append(lastchanged);
 		sb.append(", lastchanger=");
@@ -88,6 +90,13 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 
 		invitationImpl.setStatus(status);
 
+		if (invitationsend == Long.MIN_VALUE) {
+			invitationImpl.setInvitationsend(null);
+		}
+		else {
+			invitationImpl.setInvitationsend(new Date(invitationsend));
+		}
+
 		if (lastchanged == Long.MIN_VALUE) {
 			invitationImpl.setLastchanged(null);
 		}
@@ -109,6 +118,7 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 		subject = objectInput.readUTF();
 		body = objectInput.readUTF();
 		status = objectInput.readLong();
+		invitationsend = objectInput.readLong();
 		lastchanged = objectInput.readLong();
 		lastchanger = objectInput.readLong();
 	}
@@ -140,6 +150,7 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 		}
 
 		objectOutput.writeLong(status);
+		objectOutput.writeLong(invitationsend);
 		objectOutput.writeLong(lastchanged);
 		objectOutput.writeLong(lastchanger);
 	}
@@ -149,6 +160,7 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 	public String subject;
 	public String body;
 	public long status;
+	public long invitationsend;
 	public long lastchanged;
 	public long lastchanger;
 }

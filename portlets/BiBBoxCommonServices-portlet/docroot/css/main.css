@@ -22,3 +22,55 @@
 .aui .bibbox_cs_width_100 {
 	width: 100%;
 }
+
+.bibboc-cs-datatable-header {
+    background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.21)) repeat-x scroll 0 0 #fff;
+    color: #000;
+    font-weight: normal;
+    text-align: left;
+    text-shadow: 0 1px 1px #fff;
+    vertical-align: bottom;
+    white-space: nowrap;
+    border-width: 0 0 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 4px 10px;
+    border-left: 1px solid #cbcbcb;
+}
+
+.bibboc-cs-datatable-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: arial,sans-serif;
+    empty-cells: show;
+    border: 1px solid #cbcbcb;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: arial,sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.bibbox-cs-datatable-cell-first {
+	border-left-width: 0;
+}
+
+.aui .bibbox-cs-datatable-cell-odd {
+	background-color: #fff;
+	border-width: 0 1 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 4px 10px;
+    border-left: 1px solid #cbcbcb;
+}
+
+.aui .bibbox-cs-datatable-cell-even {
+	background-color: #edf5ff;
+	border-width: 0 1 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 4px 10px;
+    border-left: 1px solid #cbcbcb;
+}

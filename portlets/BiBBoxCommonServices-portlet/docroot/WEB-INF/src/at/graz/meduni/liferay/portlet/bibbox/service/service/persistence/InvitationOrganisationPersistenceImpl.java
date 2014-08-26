@@ -1101,6 +1101,257 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 
 	private static final String _FINDER_COLUMN_INVITATIONORGANISATIONS_INVITATIONID_2 =
 		"invitationOrganisation.invitationId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID =
+		new FinderPath(InvitationOrganisationModelImpl.ENTITY_CACHE_ENABLED,
+			InvitationOrganisationModelImpl.FINDER_CACHE_ENABLED,
+			InvitationOrganisationImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByInvitationIdAndOrganisationId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			InvitationOrganisationModelImpl.INVITATIONID_COLUMN_BITMASK |
+			InvitationOrganisationModelImpl.ORGANISATIONID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_INVITATIONIDANDORGANISATIONID =
+		new FinderPath(InvitationOrganisationModelImpl.ENTITY_CACHE_ENABLED,
+			InvitationOrganisationModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByInvitationIdAndOrganisationId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the invitation organisation where invitationId = &#63; and organisationId = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException} if it could not be found.
+	 *
+	 * @param invitationId the invitation ID
+	 * @param organisationId the organisation ID
+	 * @return the matching invitation organisation
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException if a matching invitation organisation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation findByInvitationIdAndOrganisationId(
+		long invitationId, long organisationId)
+		throws NoSuchInvitationOrganisationException, SystemException {
+		InvitationOrganisation invitationOrganisation = fetchByInvitationIdAndOrganisationId(invitationId,
+				organisationId);
+
+		if (invitationOrganisation == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("invitationId=");
+			msg.append(invitationId);
+
+			msg.append(", organisationId=");
+			msg.append(organisationId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchInvitationOrganisationException(msg.toString());
+		}
+
+		return invitationOrganisation;
+	}
+
+	/**
+	 * Returns the invitation organisation where invitationId = &#63; and organisationId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param invitationId the invitation ID
+	 * @param organisationId the organisation ID
+	 * @return the matching invitation organisation, or <code>null</code> if a matching invitation organisation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation fetchByInvitationIdAndOrganisationId(
+		long invitationId, long organisationId) throws SystemException {
+		return fetchByInvitationIdAndOrganisationId(invitationId,
+			organisationId, true);
+	}
+
+	/**
+	 * Returns the invitation organisation where invitationId = &#63; and organisationId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param invitationId the invitation ID
+	 * @param organisationId the organisation ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching invitation organisation, or <code>null</code> if a matching invitation organisation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation fetchByInvitationIdAndOrganisationId(
+		long invitationId, long organisationId, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { invitationId, organisationId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+					finderArgs, this);
+		}
+
+		if (result instanceof InvitationOrganisation) {
+			InvitationOrganisation invitationOrganisation = (InvitationOrganisation)result;
+
+			if ((invitationId != invitationOrganisation.getInvitationId()) ||
+					(organisationId != invitationOrganisation.getOrganisationId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_INVITATIONORGANISATION_WHERE);
+
+			query.append(_FINDER_COLUMN_INVITATIONIDANDORGANISATIONID_INVITATIONID_2);
+
+			query.append(_FINDER_COLUMN_INVITATIONIDANDORGANISATIONID_ORGANISATIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(invitationId);
+
+				qPos.add(organisationId);
+
+				List<InvitationOrganisation> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"InvitationOrganisationPersistenceImpl.fetchByInvitationIdAndOrganisationId(long, long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					InvitationOrganisation invitationOrganisation = list.get(0);
+
+					result = invitationOrganisation;
+
+					cacheResult(invitationOrganisation);
+
+					if ((invitationOrganisation.getInvitationId() != invitationId) ||
+							(invitationOrganisation.getOrganisationId() != organisationId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+							finderArgs, invitationOrganisation);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (InvitationOrganisation)result;
+		}
+	}
+
+	/**
+	 * Removes the invitation organisation where invitationId = &#63; and organisationId = &#63; from the database.
+	 *
+	 * @param invitationId the invitation ID
+	 * @param organisationId the organisation ID
+	 * @return the invitation organisation that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation removeByInvitationIdAndOrganisationId(
+		long invitationId, long organisationId)
+		throws NoSuchInvitationOrganisationException, SystemException {
+		InvitationOrganisation invitationOrganisation = findByInvitationIdAndOrganisationId(invitationId,
+				organisationId);
+
+		return remove(invitationOrganisation);
+	}
+
+	/**
+	 * Returns the number of invitation organisations where invitationId = &#63; and organisationId = &#63;.
+	 *
+	 * @param invitationId the invitation ID
+	 * @param organisationId the organisation ID
+	 * @return the number of matching invitation organisations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByInvitationIdAndOrganisationId(long invitationId,
+		long organisationId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_INVITATIONIDANDORGANISATIONID;
+
+		Object[] finderArgs = new Object[] { invitationId, organisationId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_INVITATIONORGANISATION_WHERE);
+
+			query.append(_FINDER_COLUMN_INVITATIONIDANDORGANISATIONID_INVITATIONID_2);
+
+			query.append(_FINDER_COLUMN_INVITATIONIDANDORGANISATIONID_ORGANISATIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(invitationId);
+
+				qPos.add(organisationId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_INVITATIONIDANDORGANISATIONID_INVITATIONID_2 =
+		"invitationOrganisation.invitationId = ? AND ";
+	private static final String _FINDER_COLUMN_INVITATIONIDANDORGANISATIONID_ORGANISATIONID_2 =
+		"invitationOrganisation.organisationId = ?";
 
 	public InvitationOrganisationPersistenceImpl() {
 		setModelClass(InvitationOrganisation.class);
@@ -1116,6 +1367,12 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 		EntityCacheUtil.putResult(InvitationOrganisationModelImpl.ENTITY_CACHE_ENABLED,
 			InvitationOrganisationImpl.class,
 			invitationOrganisation.getPrimaryKey(), invitationOrganisation);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+			new Object[] {
+				invitationOrganisation.getInvitationId(),
+				invitationOrganisation.getOrganisationId()
+			}, invitationOrganisation);
 
 		invitationOrganisation.resetOriginalValues();
 	}
@@ -1176,6 +1433,8 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(invitationOrganisation);
 	}
 
 	@Override
@@ -1187,6 +1446,67 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 			EntityCacheUtil.removeResult(InvitationOrganisationModelImpl.ENTITY_CACHE_ENABLED,
 				InvitationOrganisationImpl.class,
 				invitationOrganisation.getPrimaryKey());
+
+			clearUniqueFindersCache(invitationOrganisation);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		InvitationOrganisation invitationOrganisation) {
+		if (invitationOrganisation.isNew()) {
+			Object[] args = new Object[] {
+					invitationOrganisation.getInvitationId(),
+					invitationOrganisation.getOrganisationId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_INVITATIONIDANDORGANISATIONID,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+				args, invitationOrganisation);
+		}
+		else {
+			InvitationOrganisationModelImpl invitationOrganisationModelImpl = (InvitationOrganisationModelImpl)invitationOrganisation;
+
+			if ((invitationOrganisationModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						invitationOrganisation.getInvitationId(),
+						invitationOrganisation.getOrganisationId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_INVITATIONIDANDORGANISATIONID,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+					args, invitationOrganisation);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		InvitationOrganisation invitationOrganisation) {
+		InvitationOrganisationModelImpl invitationOrganisationModelImpl = (InvitationOrganisationModelImpl)invitationOrganisation;
+
+		Object[] args = new Object[] {
+				invitationOrganisation.getInvitationId(),
+				invitationOrganisation.getOrganisationId()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_INVITATIONIDANDORGANISATIONID,
+			args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+			args);
+
+		if ((invitationOrganisationModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					invitationOrganisationModelImpl.getOriginalInvitationId(),
+					invitationOrganisationModelImpl.getOriginalOrganisationId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_INVITATIONIDANDORGANISATIONID,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_INVITATIONIDANDORGANISATIONID,
+				args);
 		}
 	}
 
@@ -1379,6 +1699,9 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 		EntityCacheUtil.putResult(InvitationOrganisationModelImpl.ENTITY_CACHE_ENABLED,
 			InvitationOrganisationImpl.class,
 			invitationOrganisation.getPrimaryKey(), invitationOrganisation);
+
+		clearUniqueFindersCache(invitationOrganisation);
+		cacheUniqueFindersCache(invitationOrganisation);
 
 		return invitationOrganisation;
 	}

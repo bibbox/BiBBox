@@ -78,11 +78,6 @@ ${theme.include(body_top_include)}
 			</div>
 		</div>
 	</div>
-	<!--<div class="bbmri_eric_header-subsubmenucontainer">
-		<#if has_navigation || is_signed_in>
-			<#include "${full_templates_path}/navigation_sub_sub.ftl" />
-		</#if>				
-	</div>-->
 </div>
 <!-- New Header End -->
 <div class="container-fluid-background">
@@ -122,12 +117,12 @@ ${theme.include(body_top_include)}
 			<a href="http://www.linkedin.com/company/bbmri-eric" target="_blank"><img id="bbmrieric-footer-linkedin-slide"  src="/BBMRIERIC-theme/images/linkedin.png" /></a>
 		</div>
 		
+		<div class="bbmrieric-footer-menue-left">
+			<span style="color:#ed660a">${company_name}</span> | ${potaladdress}
+		</div>	
 		<div class="bbmrieric-footer-menue">
 			<#include "${full_templates_path}/navigation_footer.ftl" />
 		</div>	
-		<footer id="footer" role="contentinfo">
-			<a href="/web/guest/contact">contact</a> <span style="color: #FFFFFF;">|</span> <a href="/web/guest/imprint">IMPRINT</a>
-		</footer>
 	</div>
 </div>
 

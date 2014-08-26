@@ -267,14 +267,7 @@
 	color: #FFFFFF;
 	text-decoration:none;
 }
-.aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
-	color: #FFFFFF;
-	text-decoration:none;
-}
-.aui .bbmrieric-footer .bbmrieric-footer-menue a, .aui .bbmrieric-footer .bbmrieric-footer-menue a:hover {
-   color: #4A4A49;
-   text-decoration:none;
-}
+
 .aui .portlet-journal-content .lfr-icon-actions {
 	font-size: 9.5pt;
 	line-height: 16pt;

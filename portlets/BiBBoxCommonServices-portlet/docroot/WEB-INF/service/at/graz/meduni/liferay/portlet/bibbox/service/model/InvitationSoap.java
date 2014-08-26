@@ -36,6 +36,7 @@ public class InvitationSoap implements Serializable {
 		soapModel.setSubject(model.getSubject());
 		soapModel.setBody(model.getBody());
 		soapModel.setStatus(model.getStatus());
+		soapModel.setInvitationsend(model.getInvitationsend());
 		soapModel.setLastchanged(model.getLastchanged());
 		soapModel.setLastchanger(model.getLastchanger());
 
@@ -130,6 +131,14 @@ public class InvitationSoap implements Serializable {
 		_status = status;
 	}
 
+	public Date getInvitationsend() {
+		return _invitationsend;
+	}
+
+	public void setInvitationsend(Date invitationsend) {
+		_invitationsend = invitationsend;
+	}
+
 	public Date getLastchanged() {
 		return _lastchanged;
 	}
@@ -151,6 +160,7 @@ public class InvitationSoap implements Serializable {
 	private String _subject;
 	private String _body;
 	private long _status;
+	private Date _invitationsend;
 	private Date _lastchanged;
 	private long _lastchanger;
 }

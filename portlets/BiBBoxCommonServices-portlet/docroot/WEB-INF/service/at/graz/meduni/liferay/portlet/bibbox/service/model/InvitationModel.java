@@ -133,6 +133,20 @@ public interface InvitationModel extends BaseModel<Invitation> {
 	public void setStatus(long status);
 
 	/**
+	 * Returns the invitationsend of this invitation.
+	 *
+	 * @return the invitationsend of this invitation
+	 */
+	public Date getInvitationsend();
+
+	/**
+	 * Sets the invitationsend of this invitation.
+	 *
+	 * @param invitationsend the invitationsend of this invitation
+	 */
+	public void setInvitationsend(Date invitationsend);
+
+	/**
 	 * Returns the lastchanged of this invitation.
 	 *
 	 * @return the lastchanged of this invitation

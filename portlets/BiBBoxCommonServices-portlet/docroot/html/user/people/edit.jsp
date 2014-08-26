@@ -132,8 +132,6 @@ if(organizationId != 0) {
 }
 %>
 
-<portlet:actionURL name='checkEmailForUser2' var="checkEmailForUserURL2" />
-
 <portlet:resourceURL var="checkEmailForUserURL"></portlet:resourceURL>
 
 <aui:script use="aui-base,aui-io-request,aui-io-request,event,node,aui-popover,valuechange,event-hover,aui-tooltip,event-valuechange,click">

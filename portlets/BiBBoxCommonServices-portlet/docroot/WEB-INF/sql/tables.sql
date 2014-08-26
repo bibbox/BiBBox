@@ -4,6 +4,7 @@ create table bibboxcs.invitation (
 	subject VARCHAR(75) null,
 	body VARCHAR(75) null,
 	status LONG,
+	invitationsend DATE null,
 	lastchanged DATE null,
 	lastchanger LONG
 );

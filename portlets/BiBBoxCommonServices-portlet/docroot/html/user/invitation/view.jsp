@@ -18,7 +18,7 @@ String actionId_edit_invitation = "EDIT_INVITATION";
 %>
 
 <%
-	String redirect = PortalUtil.getCurrentURL(renderRequest);	
+	String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
 
 <c:choose>

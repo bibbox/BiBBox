@@ -80,6 +80,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 		attributes.put("subject", getSubject());
 		attributes.put("body", getBody());
 		attributes.put("status", getStatus());
+		attributes.put("invitationsend", getInvitationsend());
 		attributes.put("lastchanged", getLastchanged());
 		attributes.put("lastchanger", getLastchanger());
 
@@ -116,6 +117,12 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 
 		if (status != null) {
 			setStatus(status);
+		}
+
+		Date invitationsend = (Date)attributes.get("invitationsend");
+
+		if (invitationsend != null) {
+			setInvitationsend(invitationsend);
 		}
 
 		Date lastchanged = (Date)attributes.get("lastchanged");
@@ -247,6 +254,29 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 	}
 
 	@Override
+	public Date getInvitationsend() {
+		return _invitationsend;
+	}
+
+	@Override
+	public void setInvitationsend(Date invitationsend) {
+		_invitationsend = invitationsend;
+
+		if (_invitationRemoteModel != null) {
+			try {
+				Class<?> clazz = _invitationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setInvitationsend", Date.class);
+
+				method.invoke(_invitationRemoteModel, invitationsend);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public Date getLastchanged() {
 		return _lastchanged;
 	}
@@ -366,6 +396,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 		clone.setSubject(getSubject());
 		clone.setBody(getBody());
 		clone.setStatus(getStatus());
+		clone.setInvitationsend(getInvitationsend());
 		clone.setLastchanged(getLastchanged());
 		clone.setLastchanger(getLastchanger());
 
@@ -416,7 +447,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{invitationId=");
 		sb.append(getInvitationId());
@@ -428,6 +459,8 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 		sb.append(getBody());
 		sb.append(", status=");
 		sb.append(getStatus());
+		sb.append(", invitationsend=");
+		sb.append(getInvitationsend());
 		sb.append(", lastchanged=");
 		sb.append(getLastchanged());
 		sb.append(", lastchanger=");
@@ -439,7 +472,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -467,6 +500,10 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>invitationsend</column-name><column-value><![CDATA[");
+		sb.append(getInvitationsend());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>lastchanged</column-name><column-value><![CDATA[");
 		sb.append(getLastchanged());
 		sb.append("]]></column-value></column>");
@@ -485,6 +522,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 	private String _subject;
 	private String _body;
 	private long _status;
+	private Date _invitationsend;
 	private Date _lastchanged;
 	private long _lastchanger;
 	private BaseModel<?> _invitationRemoteModel;

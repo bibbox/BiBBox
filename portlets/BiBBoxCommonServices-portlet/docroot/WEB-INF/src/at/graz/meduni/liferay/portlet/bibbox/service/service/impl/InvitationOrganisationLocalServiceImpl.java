@@ -14,6 +14,12 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+
+import at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.InvitationOrganisationLocalServiceBaseImpl;
 
 /**
@@ -37,4 +43,39 @@ public class InvitationOrganisationLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil} to access the invitation organisation local service.
 	 */
+	
+	/**
+	 * Gets the number of organizations for invitation
+	 */
+	public int getOrganisationByInvitationCount(long invitationId) throws SystemException {
+		return invitationOrganisationPersistence.countByInvitationOrganisations(invitationId);
+	}
+	
+	/**
+	 * Get organizations by invitation
+	 */
+	public List<InvitationOrganisation> getOrganisationByInvitation(long invitationId) throws SystemException {
+		return invitationOrganisationPersistence.findByInvitationOrganisations(invitationId);
+	}
+	
+	/**
+	 * Get organizations by invitation
+	 */
+	public List<InvitationOrganisation> getInvitationsByOrganisation(long organisationId) throws SystemException {
+		return invitationOrganisationPersistence.findByOrganisation(organisationId);
+	}
+	
+	/**
+	 * Get organizations by invitation
+	 */
+	public InvitationOrganisation getInvitationOrganisation(long invitationId, long organisationId) throws SystemException {
+		try {
+			return invitationOrganisationPersistence.findByInvitationIdAndOrganisationId(invitationId, organisationId);
+		} catch (NoSuchInvitationOrganisationException e) {
+			System.out.println("-------------------------------------------------------------------------------------");
+			System.out.println("BiBBox Exception in InvitationOrganisationLocalServiceImpl::getInvitationOrganisation");
+			//e.printStackTrace();
+		}
+		return null;
+	}
 }

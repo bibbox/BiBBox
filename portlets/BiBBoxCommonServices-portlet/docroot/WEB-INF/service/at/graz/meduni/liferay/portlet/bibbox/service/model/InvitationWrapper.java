@@ -54,6 +54,7 @@ public class InvitationWrapper implements Invitation, ModelWrapper<Invitation> {
 		attributes.put("subject", getSubject());
 		attributes.put("body", getBody());
 		attributes.put("status", getStatus());
+		attributes.put("invitationsend", getInvitationsend());
 		attributes.put("lastchanged", getLastchanged());
 		attributes.put("lastchanger", getLastchanger());
 
@@ -90,6 +91,12 @@ public class InvitationWrapper implements Invitation, ModelWrapper<Invitation> {
 
 		if (status != null) {
 			setStatus(status);
+		}
+
+		Date invitationsend = (Date)attributes.get("invitationsend");
+
+		if (invitationsend != null) {
+			setInvitationsend(invitationsend);
 		}
 
 		Date lastchanged = (Date)attributes.get("lastchanged");
@@ -223,6 +230,26 @@ public class InvitationWrapper implements Invitation, ModelWrapper<Invitation> {
 	@Override
 	public void setStatus(long status) {
 		_invitation.setStatus(status);
+	}
+
+	/**
+	* Returns the invitationsend of this invitation.
+	*
+	* @return the invitationsend of this invitation
+	*/
+	@Override
+	public java.util.Date getInvitationsend() {
+		return _invitation.getInvitationsend();
+	}
+
+	/**
+	* Sets the invitationsend of this invitation.
+	*
+	* @param invitationsend the invitationsend of this invitation
+	*/
+	@Override
+	public void setInvitationsend(java.util.Date invitationsend) {
+		_invitation.setInvitationsend(invitationsend);
 	}
 
 	/**

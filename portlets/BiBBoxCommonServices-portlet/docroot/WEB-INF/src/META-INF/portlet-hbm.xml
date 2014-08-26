@@ -13,6 +13,7 @@
 		<property name="subject" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="body" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="invitationsend" type="org.hibernate.type.TimestampType" />
 		<property name="lastchanged" type="org.hibernate.type.TimestampType" />
 		<property name="lastchanger" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>

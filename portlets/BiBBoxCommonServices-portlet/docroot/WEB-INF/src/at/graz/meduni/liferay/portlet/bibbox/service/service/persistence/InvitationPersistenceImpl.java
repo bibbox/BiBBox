@@ -1468,6 +1468,7 @@ public class InvitationPersistenceImpl extends BasePersistenceImpl<Invitation>
 		invitationImpl.setSubject(invitation.getSubject());
 		invitationImpl.setBody(invitation.getBody());
 		invitationImpl.setStatus(invitation.getStatus());
+		invitationImpl.setInvitationsend(invitation.getInvitationsend());
 		invitationImpl.setLastchanged(invitation.getLastchanged());
 		invitationImpl.setLastchanger(invitation.getLastchanger());
 
