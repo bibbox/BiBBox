@@ -11,6 +11,11 @@ long optionsPageTemplate_cfg = GetterUtil.getLong(portletPreferences.getValue("o
 String optionsDDLGeneration_cfg = GetterUtil.getString(portletPreferences.getValue("optionsDDLGeneration", ""));
 long optionsWhereToCreateOrganisation_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsWhereToCreateOrganisation", "0"));
 String optionsOrganizationType_cfg = GetterUtil.getString(portletPreferences.getValue("optionsOrganizationType", ""));
+String optionsSelectUser_cfg = GetterUtil.getString(portletPreferences.getValue("optionsSelectUser", "no"));
+long optionsRoleForUser_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsRoleForUser", "0"));
+
+int[] role_type = {RoleConstants.TYPE_ORGANIZATION};
+List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), role_type);
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -52,7 +57,7 @@ String optionsOrganizationType_cfg = GetterUtil.getString(portletPreferences.get
 				<aui:input name="preferences--optionsOrganizationType--" label="Set OrganisationType" type="text" value ="<%= optionsOrganizationType_cfg %>" />
 			</aui:column>
 			<!-- Select Site Template for creation -->
-			<aui:column columnWidth="100" first="true">
+			<aui:column columnWidth="25" first="true">
 				<%
 				List<LayoutSetPrototype> site_templates = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 				%>
@@ -63,11 +68,32 @@ String optionsOrganizationType_cfg = GetterUtil.getString(portletPreferences.get
 					<% } %>
 				</aui:select>
 			</aui:column>
+			<!-- Select User Selection -->
+			<aui:column columnWidth="25">
+				<aui:select lable="Select User for Organisation" name="preferences--optionsSelectUser--">
+					<aui:option value="no" selected='<%= "no".equals(optionsSelectUser_cfg) %>'>Do not create User</aui:option>
+					<aui:option value="selectfromorganisation" selected='<%= "selectfromorganisation".equals(optionsSelectUser_cfg) %>'>Select User from Organization Users</aui:option>
+				</aui:select>
+			</aui:column>
+			<!-- Select Role for User -->
+			<aui:column columnWidth="50" last="true">
+				<aui:select lable="Select Role for User" name="preferences--optionsRoleForUser--">
+					<%
+					for(Role role : roles) {
+						
+						%>
+						<aui:option value="<%= role.getRoleId() %>" selected='<%= optionsRoleForUser_cfg == role.getRoleId() ? true : false %>' ><%= role.getName() %></aui:option>
+						<%
+					}
+					%>
+				</aui:select>
+			</aui:column>
 		</aui:layout>
+		<!-- DDL selection -->
 		DDL Options:
 		<div style="border-style: solid; border-width: 1px;padding:5px;">
 			<aui:layout>
-			<!-- DDL selection -->
+			
 				<%
 				List<DDMStructure> ddm_structures = DDMStructureLocalServiceUtil.getStructures(themeDisplay.getCompanyGroupId());
 				int ddlcount = 0;

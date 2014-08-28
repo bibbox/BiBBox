@@ -1,0 +1,26 @@
+.bbmriat-header-container-subidcard {
+	height: 240px;
+	width: 100%;
+	margin: 48px 0 0 0;
+	padding: 0;
+}
+.bbmriat-header-container-subidcard-area {
+	height: 240px;
+	width: 100%;
+}
+.bbmriat-header-container-subidcard-area-center {
+	height: 240px;
+	width: 1000px;
+	margin: auto;
+	background-color:#FFFFFF;
+	box-shadow: 10px 0 20px rgba(90,90,90,0.15);
+}
+.bbmriat-header-container-subidcard-area-center-magnetticstrip {
+	background-image:url('@theme_image_path@/leiste_neu.png');
+	background-repeat:repeat;
+	position:relative;
+	right:0px;
+	top:16px;
+	height:87px;
+	width:100%;
+}

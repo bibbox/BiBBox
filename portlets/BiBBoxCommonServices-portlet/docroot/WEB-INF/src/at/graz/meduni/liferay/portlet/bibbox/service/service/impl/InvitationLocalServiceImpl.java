@@ -14,7 +14,10 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
+import javax.portlet.PortletRequest;
+
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.InvitationLocalServiceBaseImpl;
+import at.graz.meduni.liferay.portlet.bibbox.user.Invitation;
 
 /**
  * The implementation of the invitation local service.
@@ -36,4 +39,11 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalServiceUtil} to access the invitation local service.
 	 */
+	
+	/**
+	 * Convenience method to create a Invitation object out of the request.
+	 */
+	private Invitation invitationFromRequest(PortletRequest request) {
+		return null;
+	}
 }

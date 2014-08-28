@@ -1,88 +1,16 @@
 <?xml version="1.0"?>
 
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
+	
 	<portlet>
-		<portlet-name>BBMRIAT</portlet-name>
-		<display-name>BBMRIAT</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
-		<init-param>
-			<name>view-template</name>
-			<value>/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<portlet-info>
-			<title>BBMRIAT</title>
-			<short-title>BBMRIAT</short-title>
-			<keywords>BBMRIAT</keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>ddl-record-hierarchy</portlet-name>
-		<display-name>Ddl Record Hierarchy</display-name>
+		<portlet-name>sub-id-card</portlet-name>
+		<display-name>Sub Id Card</display-name>
 		<portlet-class>
-			at.meduni.liferay.portlet.bbmriat.datamanagment.DDLRecordHierarchy
+			at.graz.meduni.liferay.portlet.bbmriat.SubIDCard
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>
-				/html/datamanagment/ddlrecordhierarchy/view.jsp
-			</value>
-		</init-param>
-		<init-param>
-			<name>config-template</name>
-			<value>
-				/html/datamanagment/ddlrecordhierarchy/config.jsp
-			</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-			<portlet-mode>config</portlet-mode>
-		</supports>
-		<resource-bundle>content/Language</resource-bundle>
-		<portlet-info>
-			<title>Ddl Record Hierarchy</title>
-			<short-title>Ddl Record Hierarchy</short-title>
-			<keywords></keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>hub-portal-header</portlet-name>
-		<display-name>Hub Portal Header</display-name>
-		<portlet-class>
-			at.meduni.liferay.portlet.bbmriat.HubPortalHeader
-		</portlet-class>
-		<init-param>
-			<name>view-template</name>
-			<value>/html/hubportalheader/view.jsp</value>
+			<value>/html/header/subidcard/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -91,86 +19,8 @@
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>Hub Portal Header</title>
-			<short-title>Hub Portal Header</short-title>
-			<keywords></keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>iris-database-protortyper</portlet-name>
-		<display-name>Iris Database Protortyper</display-name>
-		<portlet-class>
-			at.meduni.liferay.portlet.bbmriat.iris.IrisDatabaseProtortyper
-		</portlet-class>
-		<init-param>
-			<name>view-template</name>
-			<value>/html/iris/irisdatabaseprotortyper/view.jsp</value>
-		</init-param>
-		<init-param>
-			<name>config-template</name>
-			<value>/html/iris/irisdatabaseprotortyper/config.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-			<portlet-mode>config</portlet-mode>
-		</supports>
-		<resource-bundle>content.Language</resource-bundle>
-		<portlet-info>
-			<title>Iris Database Protortyper</title>
-			<short-title>Iris Database Protortyper</short-title>
-			<keywords></keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>iris-linked-open-data</portlet-name>
-		<display-name>Iris Linked Open Data</display-name>
-		<portlet-class>
-			at.meduni.liferay.portlet.bbmriat.iris.IrisLinkedOpenData
-		</portlet-class>
-		<init-param>
-			<name>view-template</name>
-			<value>/html/iris/irislinkedopendata/view.jsp</value>
-		</init-param>
-		<init-param>
-			<name>config-template</name>
-			<value>/html/iris/irislinkedopendata/config.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-			<portlet-mode>config</portlet-mode>
-		</supports>
-		<resource-bundle>content.Language</resource-bundle>
-		<portlet-info>
-			<title>Iris Linked Open Data</title>
-			<short-title>Iris Linked Open Data</short-title>
+			<title>Sub Id Card</title>
+			<short-title>Sub Id Card</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

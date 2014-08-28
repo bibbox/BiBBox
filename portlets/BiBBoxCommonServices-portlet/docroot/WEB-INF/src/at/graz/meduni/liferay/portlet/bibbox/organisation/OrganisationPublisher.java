@@ -28,6 +28,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
@@ -82,6 +83,13 @@ public class OrganisationPublisher extends MVCPortlet {
 		// Create DDLs
 		createDDLs(ddlgeneration, organization.getGroupId(), themeDisplay.getUserId(), serviceContext, request);
 		
+		// Add user to the Organization
+		long[] userroleid_array = {ParamUtil.getLong(request, "bibbox_cs_selectuserrole")};
+		if(!ParamUtil.getString(request, "bibbox_cs_selectuser").equals("no")) {
+			long userid = ParamUtil.getLong(request, "bibbox_cs_userfororganization");
+			OrganizationLocalServiceUtil.addUserOrganization(userid, organization.getOrganizationId());
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userid, organization.getGroup().getGroupId(), userroleid_array);
+		}
 	}
 	
 	/**

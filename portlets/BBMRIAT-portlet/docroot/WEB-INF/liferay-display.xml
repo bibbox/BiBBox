@@ -2,15 +2,8 @@
 <!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.2.0//EN" "http://www.liferay.com/dtd/liferay-display_6_2_0.dtd">
 
 <display>
-	<category name="category.sample">
-		<portlet id="BBMRIAT" />
-	</category>
-	<category name="BBMRI.AT">
-		<portlet id="ddl-record-hierarchy"></portlet>
-		<portlet id="hub-portal-header"></portlet>
-	</category>
-	<category name="Iris">
-		<portlet id="iris-database-protortyper"></portlet>
-		<portlet id="iris-linked-open-data"></portlet>
+	
+	<category name="BBMRIAT-Header">
+		<portlet id="sub-id-card"></portlet>
 	</category>
 </display>

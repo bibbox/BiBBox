@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
@@ -51,8 +52,8 @@ public class Invitation extends MVCPortlet {
 		}
 	}
 	
-	/*
-	 * 
+	/**
+	 * Delete an Organization from the Invitation
 	 */
 	public void deleteOrganizationFromInvitation(ActionRequest request, ActionResponse response) throws Exception {
 		long organizationId = ParamUtil.getLong(request,"bibbox_cs_organisationid");
@@ -61,8 +62,8 @@ public class Invitation extends MVCPortlet {
 		System.out.println("Delete");
 	}
 
-	/*
-	 * 
+	/**
+	 * Update the list of all Organizations in the Invitation
 	 */
 	public void updateOrganisationForInvitation(ActionRequest request, ActionResponse response) throws Exception {
 		long counter = ParamUtil.getLong(request,"bibbox_cs_counter");
@@ -101,6 +102,20 @@ public class Invitation extends MVCPortlet {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * Create a new Invitation
+	 */
+	public void addInvitation(ActionRequest request, ActionResponse response) throws Exception {
+		
+	}
+	
+	/**
+	 * Update the Invitation
+	 */
+	public void updateInvitation(ActionRequest request, ActionResponse response) throws Exception {
+		
 	}
 	
 }

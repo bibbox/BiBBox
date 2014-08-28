@@ -10,6 +10,8 @@ long optionsPageTemplate_option = GetterUtil.getLong(portletPreferences.getValue
 String optionsDDLGeneration_option = GetterUtil.getString(portletPreferences.getValue("optionsDDLGeneration", ""));
 long optionsWhereToCreateOrganisation_option = GetterUtil.getLong(portletPreferences.getValue("optionsWhereToCreateOrganisation", "0"));
 String optionsOrganizationType_option = GetterUtil.getString(portletPreferences.getValue("optionsOrganizationType", ""));
+String optionsSelectUser_option = GetterUtil.getString(portletPreferences.getValue("optionsSelectUser", "no"));
+long optionsRoleForUser_option = GetterUtil.getLong(portletPreferences.getValue("optionsRoleForUser", "0"));
 
 Organization organization = null;
 
@@ -68,6 +70,28 @@ Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_
 					<%
 				}
 				%>
+			</aui:column>
+			<aui:input name="bibbox_cs_selectuser" type="hidden" value ="<%= optionsSelectUser_option %>" />
+			<aui:input name="bibbox_cs_selectuserrole" type="hidden" value ="<%= optionsRoleForUser_option %>" />
+			<%
+			if(!optionsSelectUser_option.equals("no")) {
+				%>
+				<aui:column columnWidth="100" first="true">
+					<aui:select label="Select Editor for new Organization" name="bibbox_cs_userfororganization" >
+					<%
+					List<User> users = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+					for(User user_om : users) {
+						%>
+						<aui:option value="<%= user_om.getUserId() %>" ><%= user_om.getFullName() %></aui:option>
+						<%
+					}
+					%>
+					</aui:select>
+				</aui:column>
+				<%
+			}
+			%>
+			<aui:column columnWidth="100" first="true">
 			</aui:column>
 		</aui:layout>
 		<!-- DDL Information -->
