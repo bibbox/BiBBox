@@ -151,18 +151,23 @@ for(User user_om : users) {
 	}
 	String role = "";
 	String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+user_om.getScreenName()+"&amp;companyId="+user_om.getCompanyId();
-	String[] user_roles = user_om.getExpandoBridge().getAttribute("Role within the organisation").toString().split(";");
-	for(String user_role : user_roles) {
-		String[] our = user_role.split("_");
-		if(our.length == 0 || our[0].length() == 0) {
-			continue;
-		}
-		long orgid = Long.parseLong(our[0]);
-		if(orgid == organizationId) {
-			if(our.length == 1) {
-				role = "";
-			} else {
-				role = our[1];
+	if(user_om.getExpandoBridge() != null) {
+		if(user_om.getExpandoBridge().getAttribute("Role within the organisation") != null) {
+			String user_roles_string = user_om.getExpandoBridge().getAttribute("Role within the organisation").toString();
+			String[] user_roles = user_roles_string.split(";");
+			for(String user_role : user_roles) {
+				String[] our = user_role.split("_");
+				if(our.length == 0 || our[0].length() == 0) {
+					continue;
+				}
+				long orgid = Long.parseLong(our[0]);
+				if(orgid == organizationId) {
+					if(our.length == 1) {
+						role = "";
+					} else {
+						role = our[1];
+					}
+				}
 			}
 		}
 	}

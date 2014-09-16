@@ -21,6 +21,21 @@ if (currentGroup.isOrganization()) {
   	}
   	String parent_organisationlink = themeDisplay.getURLPortal() + "/web" + parent_organization.getGroup().getFriendlyURL();
   	String parent_organisationimgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+parent_organization.getLogoId();
+  	
+  	String shortdiscription = "";
+  	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+  		if(rdc_rsname.equals("Collection")) {  		
+  			List<DDLRecord> records = rdc_rs.getRecords();
+  			for(DDLRecord record : records) {
+  				recordid = record.getRecordId();
+  				if(record.getFieldValue("Description") != null) {
+  					shortdiscription = record.getFieldValue("Description").toString();
+  				}
+  			}
+  		}
+  	}
 	%>
 	
 	<!-- SUB ID Card -->
@@ -38,7 +53,27 @@ if (currentGroup.isOrganization()) {
 		</div>
 		<!-- bottom -->
 		<div class="bbmriat_subidcard_idcardbodybottom">
-		789
+			<div class="bbmriat_subidcard_idcardbodybottom_area">
+				<div class="bbmriat_subidcard_idcardbodybottom-shortdescription"><%= shortdiscription %>
+				</div>
+			</div>
+			<!-- menu -->
+			<div class="bbmriat_subidcard_idcardbodybottom_menue">
+				<ul>
+					<%
+					List<Layout> parentorganization_layouts = LayoutLocalServiceUtil.getLayouts(parent_organization.getGroupId(), false);
+					int width = (358 / parentorganization_layouts.size()) - 12; 
+					for(Layout parentorganization_layout : parentorganization_layouts) { 
+						String url = themeDisplay.getURLPortal() + "/web" + parent_organization.getGroup().getFriendlyURL() + parentorganization_layout.getFriendlyURL();
+						%>
+						<li style="width:<%= width %>px;">
+							<aui:a href="<%= url %>"><%= parentorganization_layout.getNameCurrentValue().replaceAll("bb_", "") %></aui:a>
+						</li>
+						<%
+					}
+					%>
+				</ul>
+			</div>
 		</div>
 	</div>
 	

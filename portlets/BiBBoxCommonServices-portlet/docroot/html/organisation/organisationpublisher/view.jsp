@@ -15,6 +15,8 @@ long optionsRoleForUser_option = GetterUtil.getLong(portletPreferences.getValue(
 
 Organization organization = null;
 
+
+
 if(optionsParentOrganisationNameOption_option.equalsIgnoreCase("name")) {
 } else if(optionsParentOrganisationNameOption_option.equalsIgnoreCase("portal")) {
 	optionsParentOrganisationNameOption_option = themeDisplay.getServerName();
@@ -29,7 +31,27 @@ if(optionsParentOrganisationNameOption_option.equalsIgnoreCase("name")) {
 	if(optionsWhereToCreateOrganisation_option == 1) {
 		optionsWhereToCreateOrganisation_option = organizationId;
 	}
+	if(optionsWhereToCreateOrganisation_option == 2) {
+		boolean parentfound = false;
+	  	Organization parent_organization = organization;
+	  	optionsWhereToCreateOrganisation_option = parent_organization.getOrganizationId();
+	  	while(!parentfound) {
+	  		if(parent_organization.getParentOrganizationId() == 0) {
+	  			parentfound = true;
+	  		} else {
+	  			parent_organization = parent_organization.getParentOrganization();
+	  			optionsWhereToCreateOrganisation_option = parent_organization.getOrganizationId();
+	  		}
+	  	}
+	}
 }
+//Parameters for permission Checking
+long groupId = scopeGroupId;
+String name = portletDisplay.getRootPortletId();
+String primKey = portletDisplay.getResourcePK();
+String actionId_create_organization = "CREATE_ORGANIZATION";
+if(permissionChecker.hasPermission(groupId, name, primKey, actionId_create_organization)) {
+
 %>
 
 Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_option %>:
@@ -176,3 +198,10 @@ Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
+<%
+} else {
+%>
+You can not create a new <b><%= organisationName_option %></b> for <%= parentOrganisationName_option %>
+<%
+}
+%>

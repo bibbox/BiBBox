@@ -18,7 +18,8 @@ String actionId_edit_invitation = "EDIT_INVITATION";
 %>
 
 <%
-	String redirect = PortalUtil.getCurrentURL(renderRequest);
+String redirect = PortalUtil.getCurrentURL(renderRequest);
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 %>
 
 <c:choose>
@@ -43,10 +44,42 @@ String actionId_edit_invitation = "EDIT_INVITATION";
 		keyProperty="invitationId"
 		modelVar="invitation" escapedModel="<%= true %>"
 	>
-	<liferay-ui:search-container-column-text
-		name="id"
-		value="<%= Long.toString(invitation.getInvitationId()) %>"
-	/>
+		<liferay-ui:search-container-column-text
+			name="Name"
+			value="<%= invitation.getName() %>"
+		/>
+		<%
+		String status_text = "";
+		if(invitation.getStatus() == 1) {
+			status_text = "In Process";
+		} else if (invitation.getStatus() == 2) {
+			status_text = "Simulated";
+		} else if (invitation.getStatus() == 3) {
+			status_text = "Invitation Send";
+		}
+		%>
+		<liferay-ui:search-container-column-text
+			name="Status"
+			value='<%= status_text %>'
+		/>
+		<liferay-ui:search-container-column-text
+			name="Last Edited"
+			value='<%= dateFormat.format(invitation.getLastchanged()) %>'
+		/>
+		<liferay-ui:search-container-column-text
+			name="Number of Organizations"
+			value='<%= "" + InvitationOrganisationLocalServiceUtil.getOrganisationByInvitationCount(invitation.getInvitationId()) %>'
+		/>
+		<%
+		if (permissionChecker.isOmniadmin() || true) { 
+			%>
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/user/invitation/invitation_actions.jsp"
+			/>
+			<% 
+		} 
+		%>
 	</liferay-ui:search-container-row>
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

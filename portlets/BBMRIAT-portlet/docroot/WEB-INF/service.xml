@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder
+	package-path="at.graz.meduni.liferay.portlet.bbmriat.service">
+	<author>Reihs Robert</author>
+	<namespace>bbmriat</namespace>
+
+	<entity name="Organizationlink" local-service="true" remote-service="false"  table="bbmriat.organizationlink">
+		<column name="organizationlinkId" primary="true" type="long"></column>
+		<column name="parentorganizationId" type="long"></column>
+		<column name="organizationId" type="long"></column>
+		<finder return-type="Collection" name="Parentorganization">
+			<finder-column name="parentorganizationId"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="Organization">
+			<finder-column name="organizationId"></finder-column>
+		</finder>
+	</entity>
+</service-builder>

@@ -24,6 +24,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 <% 
 long organizationId = 0;
+long recordId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 if (currentGroup.isOrganization()) {
   	// the group is an Organization
@@ -52,6 +53,7 @@ if (currentGroup.isOrganization()) {
   		if(rdc_rsname.equals("core")) {  		
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) {
+  				recordId = record.getPrimaryKey();
   				if (modifieddate.before(record.getModifiedDate())) {
   					modifieddate = record.getModifiedDate();
   				}
@@ -331,6 +333,10 @@ if (currentGroup.isOrganization()) {
     		biobankregistryownerrole = true; 
     	if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-EDITOR"))
     		biobankregistryeditorrole = true;
+    	if(ugr.getRole().getName().equalsIgnoreCase("BB-REG-EDITOR"))
+			biobankregistryownerrole = true;
+		if(ugr.getRole().getName().equalsIgnoreCase("BB-REG-OWNER"))
+			biobankregistryownerrole = true;
     }
     String editpathorganisation = "";
     String editpathcoredll = "";
@@ -355,7 +361,7 @@ if (currentGroup.isOrganization()) {
 		editddlURL.setParameter("recordId", String.valueOf(recordid));
 		editpathcoredll = editddlURL.toString();
 		%>
-		<div class="rdc_idcard_idcaibody-edit-icon-coreddl"><aui:a href="<%= editpathcoredll %>"><img style="width: 10px;height: 10px;" alt="Edit" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a></div>
+		<div class="rdc_idcard_idcaibody-edit-icon-coreddl"><span id="coreddledit" style="cursor:pointer;"><img style="width: 10px;height: 10px;" alt="Edit" src="<%= editimgpath %>" width="10px" height="10px" /></span></div>
 		<%
 	} %>
 
@@ -372,7 +378,7 @@ if (currentGroup.isOrganization()) {
 		<aui:a href="<%= orgPath %>"><img alt="logo" class="rdc_idcard_idcardbodymiddle-logo" src="<%= imgPath %>" height="85px" /></aui:a>
 		<div class="rdc_idcard_idcardbodymiddle-organisationname"><%= organization.getName() %>
 			<% if(biobankregistryownerrole || portaleditorrole || biobankregistryeditorrole) { %>
-			<aui:a href="<%= editpathorganisation %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+			<span id="organizationedit" style="cursor:pointer;"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span>
 			<% } %>
 		</div>
 	</div>
@@ -409,8 +415,8 @@ if (currentGroup.isOrganization()) {
 			
 			if(pages_display.size() != 0) {
 			int width_all = 488 - pages_display.size() - ((pages_display.size()-1)*10);
-			int width = (int)Math.floor(width_all/pages_display.size());
-			int offset = width_all - (width*pages_display.size());
+			int width = (int)Math.floor((width_all/pages_display.size())-1);
+			int offset = width_all - (width*pages_display.size()-1);
 			boolean first = true;
 			//for(Layout l : pagelayouts) {
 			for(String l : pages_display.keySet()) {
@@ -418,7 +424,7 @@ if (currentGroup.isOrganization()) {
 				
 				String aktiveli = "<li style='width:" + width + "px;'>";
 				if(first)
-					aktiveli = "<li style='width:" + (width+offset) + "px;'>";
+					aktiveli = "<li style='width:" + (width) + "px;'>";
 				first = false;
 				
 				String pageinformation = "";
@@ -471,4 +477,67 @@ if (currentGroup.isOrganization()) {
         	cssClass: 'tooltip-help'
       	});
   	});
+</aui:script>
+<%
+String portletResource = ParamUtil.getString(request, "portletResource");
+Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
+long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+// Edit Organization Link
+LiferayPortletURL editorganizationURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+editorganizationURL.setDoAsGroupId(themeDisplay.getSiteGroupId());
+editorganizationURL.setParameter("redirect", currentURL);
+editorganizationURL.setWindowState(WindowState.MAXIMIZED);
+editorganizationURL.setParameter("organizationId", "" + organizationId);
+editorganizationURL.setParameter("struts_action", "/users_admin/edit_organization");
+
+// Edit Core DDL Link
+LiferayPortletURL editcoreddlURL = PortletURLFactoryUtil.create(request, "167", controlPanelPlid, "RENDER_PHASE");
+editcoreddlURL.setDoAsGroupId(themeDisplay.getSiteGroupId());
+editcoreddlURL.setParameter("redirect", currentURL);
+editcoreddlURL.setWindowState(WindowState.MAXIMIZED);
+editcoreddlURL.setParameter("cmd", "update");
+editcoreddlURL.setParameter("struts_action", "/dynamic_data_lists/edit_record");
+editcoreddlURL.setControlPanelCategory("current_site.content");
+editcoreddlURL.setParameter("recordId", "" + recordId);
+editcoreddlURL.setParameter("formDDMTemplateId", "0");
+
+%>
+<aui:script use="aui-base">
+            A.all('#organizationedit').on(
+               'click',
+               function(event) {
+                  Liferay.Util.selectEntity(
+                     {
+                        dialog: {
+                           constrain: true,
+                           modal: true,
+                           width: 1200
+                        },
+                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_editorganization',
+                        title: 'Edit Organization',
+                        uri: '<%=editorganizationURL.toString()%>'
+                     }
+                  );
+               }
+            );
+</aui:script>
+
+<aui:script use="aui-base">
+            A.all('#coreddledit').on(
+               'click',
+               function(event) {
+                  Liferay.Util.selectEntity(
+                     {
+                        dialog: {
+                           constrain: true,
+                           modal: true,
+                           width: 1200
+                        },
+                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_editcoreddl',
+                        title: 'Edit Core',
+                        uri: '<%=editcoreddlURL.toString()%>'
+                     }
+                  );
+               }
+            );
 </aui:script>

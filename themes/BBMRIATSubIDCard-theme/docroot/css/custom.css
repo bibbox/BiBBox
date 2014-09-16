@@ -438,53 +438,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 	width: 158px;
 }
 
-/* ------ RDC Formating bottom ----------- */
-.rdc_idcard_idcardbodybottom-shortdescription {
-	width: 436px;
-	height:60px;
-	padding-top: 30px;
-	margin-left: 54px;
-	margin-right: 54px;
-	margin-bottom: 20px;
-	overflow: hidden;
-  	text-overflow: ellipsis;
-}
-.rdc_idcard_idcardbodybottom-menue {
-	width: 494px;
-	height:40px;
-	margin-left: 25px;
-	margin-right: 25px;
-}
-/* ---------- RDC Formating bottom Menu styles ---------- */
-.rdc_idcard_idcardbodybottom-menue ul {
-	padding: 0;
-	margin: 0;
-}
-.rdc_idcard_idcardbodybottom-menue ul li {
-	padding-top: 4px;
-	padding-left: 4px;
-	list-style: none;
-	float:left;
-	background-color:#F4F4E1;
-	margin: 0 3px;
-	text-align: left;
-	height:36px;
-	font-size:14px;
-	font-weight:bold;
-	line-height: 15px;
-}
-.rdc_idcard_idcardbodybottom-menue-pageinformation {
-	color:#8BBF39;
-	font-weight: normal;
-}
-.rdc_idcard_idcardbodybottom-menue-pageinformation-gray {
-	color:#7F7F7F;
-	font-weight: normal;
-}
-.rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates {
-	font-weight: normal;
-}
-
 /* ---------- -------------------------- ---------- */
 /* ---------- -------------------------- ---------- */
 /* ---------- RDC Additional Information ---------- */
@@ -753,12 +706,7 @@ textarea.propose{
 	margin: 0;
 	padding: 0;
 }
-.rdconnect-header-container-bottom-grouplogo {
-	width: 599px;
-	height: 180px;
-	float: left;
-	background-color:#FFFFFF;
-}
+
 .rdconnect-header-container-bottom-portalinformation {
 	width: 399px;
 	height: 180px;

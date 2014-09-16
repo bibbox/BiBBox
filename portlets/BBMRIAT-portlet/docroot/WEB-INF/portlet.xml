@@ -36,4 +36,87 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>sub-collection-information</portlet-name>
+		<display-name>Sub Collection Information</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bbmriat.SubCollectionInformation
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/header/subcollectioninformation/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>copy-request-parameters</name>
+			<value>true</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Sub Collection Information</title>
+			<short-title>Sub Collection Information</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>sop-organisation-lister</portlet-name>
+		<display-name>Sop Organisation Lister</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bbmriat.SOPOrganisationLister
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/organization/soporganisationlister/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/organization/soporganisationlister/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Sop Organisation Lister</title>
+			<short-title>Sop Organisation Lister</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

@@ -1,3 +1,5 @@
+<%@page import="com.liferay.portal.service.persistence.PhoneUtil"%>
+<%@page import="com.liferay.portal.model.PhoneModel"%>
 <%@ include file="/html/init.jsp" %>
 <%@ page import="com.liferay.portal.service.persistence.CountryUtil" %>
 <%@ page import="com.liferay.portal.model.Country" %>
@@ -317,7 +319,11 @@ if (currentGroup.isOrganization()) {
     //Biobank, Registry Owner
     for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {
     	if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-OWNER"))
-    		biobankregistryownerrole = true;  			
+    		biobankregistryownerrole = true; 
+    	if(ugr.getRole().getName().equalsIgnoreCase("BB-REG-EDITOR"))
+			biobankregistryownerrole = true;
+		if(ugr.getRole().getName().equalsIgnoreCase("BB-REG-OWNER"))
+			biobankregistryownerrole = true;
     }
     if(biobankregistryownerrole || portaleditorrole) {
 	
@@ -331,9 +337,9 @@ if (currentGroup.isOrganization()) {
 	String editpathphone = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_phoneNumbers";
 	String editpathwebsites = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_websites";
 %>
-	<div class="rdc_idcard_idcaibody-edit-icon-websites"><aui:a href="<%= editpathwebsites %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a> </div>
-	<div class="rdc_idcard_idcaibody-edit-icon-phone"><aui:a href="<%= editpathphone %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a> </div>
-	<div class="rdc_idcard_idcaibody-edit-icon-address"><aui:a href="<%= editpathaddresses %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a> </div>
+	<div class="rdc_idcard_idcaibody-edit-icon-websites"><span id="organizationeditwebsite" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
+	<div class="rdc_idcard_idcaibody-edit-icon-phone"><span id="organizationeditphone" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
+	<div class="rdc_idcard_idcaibody-edit-icon-address"><span id="organizationeditaddress" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
 <% } %>
 	<div class="rdc_idcard_idcaibody-top">
 		<div class="rdc_idcard_idcaibody-flag">
@@ -367,7 +373,7 @@ if (currentGroup.isOrganization()) {
 	List<Phone> phones = PhoneLocalServiceUtil.getPhones(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
 	for(Phone tmpphone : phones) {
 		if(tmpphone.isPrimary()) {
-			phone = "Tel. " + tmpphone.getNumber();
+			phone = "Tel. " + tmpphone.getNumber() + "-" + tmpphone.getExtension();
 			if(phone.length() >= 17) {
 				phone = phone.replaceAll(" ", "");
 				if(phone.length() >= 17) {
@@ -376,7 +382,13 @@ if (currentGroup.isOrganization()) {
 			} 
 		}
 		if(tmpphone.getTypeId() == 12007) {
-			fax = "Fax. " + tmpphone.getNumber();
+			fax = "Fax. " + tmpphone.getNumber() + "-" + tmpphone.getExtension();
+			if(fax.length() >= 17) {
+				fax = fax.replaceAll(" ", "");
+				if(fax.length() >= 17) {
+					fax = "<span style=\"font-size: 80%\">" + fax + "</span>";
+				}
+			}
 		}
 	}
 %>
@@ -384,29 +396,33 @@ if (currentGroup.isOrganization()) {
 	<table>
 	<tr><td class="rdc_idcard_idcaibody-contactinformation-tdfirst"><%= organization.getAddress().getStreet1() %></td>
 	<td class="rdc_idcard_idcaibody-contactinformation-tdlast"><%= phone.length() != 0 ? phone : "" %></td></tr>
-	<% if(!organization.getAddress().getStreet2().equalsIgnoreCase("")) { %>
-		<tr><td><%= organization.getAddress().getStreet2() %></td><td><% if(faxset) {
+	<% 
+	String street2 = "";
+	if(!organization.getAddress().getStreet2().equalsIgnoreCase("")) { 
+		street2 = organization.getAddress().getStreet2();
+	%>
+		<tr><td><%= street2 %></td><td class="rdc_idcard_idcaibody-contactinformation-tdlast"><% if(faxset) {
 			faxset = false;
 			%>
-			<%= fax.length() == 0 ? fax : "" %>
+			<%= fax.length() != 0 ? fax : "" %>
 			<%
 		}
 		%></td></tr>
 	<% } %>
 	<% if(!organization.getAddress().getStreet3().equalsIgnoreCase("")) { %>
-		<tr><td><%= organization.getAddress().getStreet3() %></td><td><% if(faxset) {
+		<tr><td><%= organization.getAddress().getStreet3() %></td><td class="rdc_idcard_idcaibody-contactinformation-tdlast"><% if(faxset) {
 			faxset = false;
 			%>
-			<%= fax.length() == 0 ? fax : "" %> 
+			<%= fax.length() != 0 ? fax : "" %> 
 			<%
 		}
 		%></td></tr>
 	<% } %>
 	<tr>
-	<td><%= organization.getAddress().getZip() %> <%= organization.getAddress().getCity() %></td><td><% if(faxset) {
+	<td><%= organization.getAddress().getZip() %> <%= organization.getAddress().getCity() %></td><td class="rdc_idcard_idcaibody-contactinformation-tdlast"><% if(faxset) {
 			faxset = false;
 			%>
-			<%= fax.length() == 0 ? fax : "" %> 
+			<%= fax.length() != 0 ? fax : "" %> 
 			<%
 		}
 		%></td>
@@ -414,56 +430,85 @@ if (currentGroup.isOrganization()) {
 		<tr><td><%= organization.getAddress().getCountry().getNameCurrentValue() %></td><td></td>
 		</tr>
 	</table>
-	<hr>
 	</div>
-	
-<%
-User maincontact = null;
-List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
-for(User usertmp : userlist) {
-	List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(usertmp.getUserId(), organization.getGroup().getGroupId());
-	for (UserGroupRole ugr : usergrouprolles) {
-		if(ugr.getRole().getName().equalsIgnoreCase("BiobanK-REG-MAINCONTACT")
-				|| ugr.getRole().getName().equalsIgnoreCase("Biobank, Registry Main Contact")
-				|| ugr.getRole().getName().equalsIgnoreCase("BiobanK-REG-MAINCONTACT")) {
-			maincontact =  usertmp;
-		}
-	}
-}
-
-LiferayPortletURL editmaincontactURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
-editmaincontactURL.setParameter("struts_action", "/users_admin/edit_user_roles");
-editmaincontactURL.setParameter("redirect", currentURL);
-editmaincontactURL.setParameter("p_p_state", "maximized");
-editmaincontactURL.setParameter("p_p_mode", "view");
-editmaincontactURL.setParameter("p_p_mode", "view");
-editmaincontactURL.setParameter("groupId", String.valueOf(organization.getGroupId()));
-editmaincontactURL.setParameter("roleId", String.valueOf(BiobanK_REG_MAINCONTACT));
-
-if(maincontact != null) {
-String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+maincontact.getScreenName()+"&amp;companyId="+maincontact.getCompanyId();
-
-%>
-	
-	<div>
-		<span class="rdc_idcard_idcaibody-headlines">Main contact</span>
-		<% if(biobankregistryownerrole || portaleditorrole) { %>
-		&nbsp;&nbsp;<aui:a href="<%= editmaincontactURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
-		<% } %>
-		<br>
-		<div class="rdc_idcard_idcaibody-avatar"><img alt="" src="<%= imgPath %>" /></div>
-		<span class="rdc_idcard_idcaibody-contactname"><%= maincontact.getFullName() %></span><br>
-		<span class="rdc_idcard_idcaibody-contactemail"><aui:a href='<%= "mailto:" + maincontact.getEmailAddress() %>'><%= maincontact.getEmailAddress() %></aui:a></span>
-		
-	</div>
-<% } else if(biobankregistryownerrole || portaleditorrole) { %>
-	<div>
-		<span class="rdc_idcard_idcaibody-headlines">Main contact</span>
-		<aui:a href="<%= editmaincontactURL.toString() %>"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
-	</div>
-<% } %>
-</div>
-
 <%
 }
-%>
+
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
+long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+// Edit Organization Link
+LiferayPortletURL editorganizationURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+editorganizationURL.setDoAsGroupId(themeDisplay.getSiteGroupId());
+editorganizationURL.setParameter("redirect", currentURL);
+editorganizationURL.setWindowState(WindowState.MAXIMIZED);
+editorganizationURL.setParameter("organizationId", "" + organizationId);
+editorganizationURL.setParameter("struts_action", "/users_admin/edit_organization");
+/*editusersURL.setParameter("tab", "websites");
+editusersURL.setParameter("redirect", currentURL);
+editusersURL.setParameter("p_p_state", "maximized");
+String editpathaddresses = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_addresses";
+String editpathphone = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_phoneNumbers";
+String editpathwebsites = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_websites";*/
+
+%>	
+
+
+<aui:script use="aui-base">
+            A.all('#organizationeditaddress').on(
+               'click',
+               function(event) {
+                  Liferay.Util.selectEntity(
+                     {
+                        dialog: {
+                           constrain: true,
+                           modal: true,
+                           width: 1200
+                        },
+                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_editorganizationaddresses',
+                        title: 'Edit Organization',
+                        uri: '<%=editorganizationURL.toString() + "#_125_tab=_125_addresses" %>'
+                     }
+                  );
+               }
+            );
+</aui:script>
+<aui:script use="aui-base">
+            A.all('#organizationeditphone').on(
+               'click',
+               function(event) {
+                  Liferay.Util.selectEntity(
+                     {
+                        dialog: {
+                           constrain: true,
+                           modal: true,
+                           width: 1200
+                        },
+                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_editorganizationphonenumbers',
+                        title: 'Edit Organization',
+                        uri: '<%=editorganizationURL.toString() + "#_125_tab=_125_phoneNumbers" %>'
+                     }
+                  );
+               }
+            );
+</aui:script>
+<aui:script use="aui-base">
+            A.all('#organizationeditwebsite').on(
+               'click',
+               function(event) {
+                  Liferay.Util.selectEntity(
+                     {
+                        dialog: {
+                           constrain: true,
+                           modal: true,
+                           width: 1200
+                        },
+                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_editorganizationwebpages',
+                        title: 'Edit Organization',
+                        uri: '<%=editorganizationURL.toString() + "#_125_tab=_125_websites" %>'
+                     }
+                  );
+               }
+            );
+</aui:script>

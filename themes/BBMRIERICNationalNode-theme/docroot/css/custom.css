@@ -13,6 +13,11 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+div.portlet-body {
+    max-width: 1200px;
+    min-width: 100px;
+}
+
 .aui {
    background-color: #0C2848;
    -webkit-background-size: cover;
@@ -984,3 +989,4 @@ $dockbarOpenGradientStart: #0EA6F9;
 @import url(custom_tooltip.css);
 @import url(custom_dropdown.css);
 @import url(custom_footer.css);
+

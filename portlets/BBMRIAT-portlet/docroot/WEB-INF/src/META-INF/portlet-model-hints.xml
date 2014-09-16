@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.meduni.liferay.portlet.bbmriat.service.model.Organizationlink">
+		<field name="organizationlinkId" type="long" />
+		<field name="parentorganizationId" type="long" />
+		<field name="organizationId" type="long" />
+	</model>
+</model-hints>

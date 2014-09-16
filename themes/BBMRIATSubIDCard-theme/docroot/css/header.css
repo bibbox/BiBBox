@@ -24,3 +24,64 @@
 	height:87px;
 	width:100%;
 }
+/* ------ BBMRI-AT Header Sub Collection Information ----------- */
+.bbmriat-header-container-subidcard-area-center-subcollectioninformation {
+	position:relative;
+	right:0px;
+	top:-87px;
+	width:570px;
+	height: 220px;
+	float: left;
+	background-color: transparent;
+}
+.bbmriat_header_subcollectioninformation_container {
+	width:570px;
+	margin: 20px 0 0 0;
+}
+.aui .bbmriat_header_subcollectioninformation_container a, .aui .bbmriat_header_subcollectioninformation_container a:hover {
+	color: #FFFFFF;
+}
+.bbmriat_header_subcollectioninformation_container-breadcrump {
+	width:550px;
+	height: 59px;
+	color: #FFFFFF;
+	margin: 0 10px;
+}
+.bbmriat_header_subcollectioninformation_container-menue {
+	width:100%;
+	height: 24px;
+}
+.bbmriat_header_subcollectioninformation_container-menue ul {
+	padding: 0;
+	margin: 0;
+}
+.bbmriat_header_subcollectioninformation_container-menue ul li {
+	list-style: none;
+	float:left;
+	background-color:#F4F4E1;
+	margin: 0 3px;
+	padding: 3px 5px 0 5px;
+	text-align: center;
+	height:21px;
+	font-size:14px;
+	line-height: 17px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+.aui .bbmriat_header_subcollectioninformation_container-menue a, .aui .bbmriat_header_subcollectioninformation_container-menue a:hover {
+	color: #184B8A;
+}
+.bbmriat_header_subcollectioninformation_container_collectioninformation {
+	width:530px;
+	height: 110px;
+	margin: 5px 0 0 30px;
+}
+/* ------ BBMRI-AT Header Sub Collection Information ----------- */
+.bbmriat_subidcard_idcardbodybottom-shortdescription {
+	width: 390px;
+	height:60px;
+	padding: 0;
+	margin: 10px 0 0 0;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+}

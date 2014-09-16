@@ -24,17 +24,19 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 <%
 boolean createinvitation = false;
+String tmpTitle = "new-invatiation";
 Invitation invitation = null;
 long invitationId = ParamUtil.getLong(request, "invitationId");
 if(invitationId > 0) {
 	invitation = InvitationLocalServiceUtil.getInvitation(invitationId);
 	createinvitation = false;
+	tmpTitle = invitation.getName();
 } else {
 	invitation = InvitationLocalServiceUtil.createInvitation(CounterLocalServiceUtil.increment(Invitation.class.getName()));
 	createinvitation = true;
 }
 invitationId = invitation.getInvitationId();
-String tmpTitle = "new-invatiation";
+
 %>
 
 <liferay-ui:header
@@ -49,7 +51,7 @@ String tmpTitle = "new-invatiation";
 		<aui:input type="hidden" name="invitationId" value='<%= invitation.getInvitationId() %>'/>
 		<aui:layout>
 			<aui:column columnWidth="75" first="true">
-				<aui:input name="name"></aui:input>
+				<aui:input name="name" value='<%= invitation.getName() %>'></aui:input>
 			</aui:column>
 			<aui:column columnWidth="25" last="true">
 				<button id="addorganisations" type="button">Add Organisation</button>/Clear List
@@ -61,10 +63,10 @@ String tmpTitle = "new-invatiation";
 				</div>
 			</aui:column>
 			<aui:column columnWidth="100" first="true">
-				<aui:input name="subject" cssClass="bibbox_cs_width_100"></aui:input>
+				<aui:input name="subject" cssClass="bibbox_cs_width_100"  value='<%= invitation.getSubject() %>'></aui:input>
 			</aui:column>
 			<aui:column columnWidth="100" first="true">
-				<aui:input name="body" type="textarea" cssClass="bibbox_cs_width_100" ></aui:input>
+				<aui:input name="body" type="textarea" cssClass="bibbox_cs_width_100"  value='<%= invitation.getBody() %>'></aui:input>
 			</aui:column>
 			<aui:column columnWidth="100" first="true">
 				<p>Subject and Body Terms:<br />[$TO_NAME$]</p>

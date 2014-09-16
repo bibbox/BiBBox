@@ -288,6 +288,15 @@ public class InvitationLocalServiceWrapper implements InvitationLocalService,
 	}
 
 	/**
+	* Convenience method to create a Invitation object out of the request.
+	*/
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitationFromRequest(
+		javax.portlet.PortletRequest request) {
+		return _invitationLocalService.invitationFromRequest(request);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public InvitationLocalService getWrappedInvitationLocalService() {

@@ -5,5 +5,9 @@
 	
 	<category name="BBMRIAT-Header">
 		<portlet id="sub-id-card"></portlet>
+		<portlet id="sub-collection-information"></portlet>
+	</category>
+	<category name="BBMRIAT-Organization">
+		<portlet id="sop-organisation-lister"></portlet>
 	</category>
 </display>

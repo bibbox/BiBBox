@@ -12,6 +12,30 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>sub-id-card-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>sub-collection-information</portlet-name>
+		<icon>/icon.png</icon>
+		<render-weight>0</render-weight>
+ 		<ajaxable>true</ajaxable>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			sub-collection-information-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>sop-organisation-lister</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			sop-organisation-lister-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

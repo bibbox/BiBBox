@@ -51,8 +51,10 @@ ${theme.include(body_top_include)}
 <div class="bbmriat-header-container-subidcard">
 	<div class="bbmriat-header-container-subidcard-area">
 		<div class="bbmriat-header-container-subidcard-area-center">
-			<div class="rdconnect-header-container-bottom-grouplogo">
-				<#assign locPortletId = "portalidcardadditionalinformation_WAR_RDConnectportlet" />
+			<div class="bbmriat-header-container-subidcard-area-center-magnetticstrip">
+			</div>
+			<div class="bbmriat-header-container-subidcard-area-center-subcollectioninformation">
+				<#assign locPortletId = "subcollectioninformation_WAR_BBMRIATportlet" />
 				 
 				<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
 				<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
@@ -64,8 +66,7 @@ ${theme.include(body_top_include)}
 				 
 				${theme.runtime(locPortletId, "", "")}
 			</div>
-			<div class="bbmriat-header-container-subidcard-area-center-magnetticstrip">
-			</div>
+			
 			<div class="rdconnect-header-container-bottom-portalinformation">
 				<#assign locPortletId = "subidcard_WAR_BBMRIATportlet" />
 				 

@@ -275,6 +275,14 @@ public class InvitationLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Convenience method to create a Invitation object out of the request.
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitationFromRequest(
+		javax.portlet.PortletRequest request) {
+		return getService().invitationFromRequest(request);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

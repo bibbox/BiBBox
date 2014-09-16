@@ -43,6 +43,7 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 				<aui:select label="Select Parent Organisation for Organisation" name="preferences--optionsWhereToCreateOrganisation--">
 					<aui:option value="0" selected='<%= optionsWhereToCreateOrganisation_cfg == 0 ? true : false %>' >As Main Organization</aui:option>
 					<aui:option value="1" selected='<%= optionsWhereToCreateOrganisation_cfg == 1 ? true : false %>' >In the Organization of the portlet</aui:option>
+					<aui:option value="2" selected='<%= optionsWhereToCreateOrganisation_cfg == 2 ? true : false %>' >The Parent Organization of the current Organization</aui:option>
 					<%
 					List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(themeDisplay.getCompanyId(), 0);
 					for(Organization organization : organizations) {

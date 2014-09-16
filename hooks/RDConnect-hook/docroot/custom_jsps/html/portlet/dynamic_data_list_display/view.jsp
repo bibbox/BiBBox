@@ -55,6 +55,10 @@ if (currentGroup.isOrganization()) {
 			biobankregistryownerrole = true;  		
 		if(ugr.getRole().getName().equalsIgnoreCase("BIOBANK-REG-EDITOR"))
 			biobankregistryownerrole = true;
+		if(ugr.getRole().getName().equalsIgnoreCase("BB-REG-EDITOR"))
+			biobankregistryownerrole = true;
+		if(ugr.getRole().getName().equalsIgnoreCase("BB-REG-OWNER"))
+			biobankregistryownerrole = true;
 	}
 	if(biobankregistryownerrole || portaleditorrole) {
 	
@@ -70,7 +74,9 @@ if (currentGroup.isOrganization()) {
 					<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
 				</portlet:renderURL>
 				
-				<aui:a href="<%= editRecordURL %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+				<div style="position: relative;left:550px;width: 15px;">
+					<aui:a href="<%= editRecordURL %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+				</div>
 		<%
 				//break;
 			}

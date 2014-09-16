@@ -148,7 +148,7 @@ user/edit_invitation
 		if(lastinvitation != null) {
 			lastcontacted = ((now.getTime() - lastinvitation.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(lastinvitation) + ") / s:" + numberofsendinvitations + "/ i:" + numberofinvitations;
 		} else {
-			lastcontacted = "invitations: " + numberofinvitations;
+			lastcontacted = "in invitations: " + numberofinvitations;
 		}
 		tablerow += "<td class=\"" + rowcss + "\">" + lastcontacted + "</td>";
 		tablerow += "<td class=\"" + rowcss + "\">" + "<a id=\"deleteOragnizationFromInvitation\" class=\"icon-remove\" style=\"color: red;\" organisationid=\"" + organization.getOrganizationId() + "\" invitationid=\"" + invitationId + "\" ></a>" + "</td>";

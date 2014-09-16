@@ -2,7 +2,6 @@
 .bbmriat_subidcard_idcardbody {
 	background-color:#E2E3CE;
 	position:relative;
-	right:16px;
 	top:-119px;
 	border-radius:25px;
 	box-shadow: 5px 7px 20px rgba(0,0,0,0.2);
@@ -49,3 +48,50 @@
 	vertical-align: middle;
 }
 /* ------ BBMRI-AT Sub ID Card Middle ----------- */
+/* ------ BBMRI-AT Sub ID Card Bottom ----------- */
+.bbmriat_subidcard_idcardbodybottom_area {
+	width: 388px;
+	height:77px;
+	padding-top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+.bbmriat_subidcard_idcardbodybottom_menue {
+	width: 358px;
+	height:25px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+.bbmriat_subidcard_idcardbodybottom_menue ul {
+	padding: 0;
+	margin: 0;
+}
+.bbmriat_subidcard_idcardbodybottom_menue ul li {
+	list-style: none;
+	float:left;
+	background-color:#F4F4E1;
+	margin: 0 3px;
+	padding: 5px 3px 0 3px;
+	text-align: center;
+	height:20px;
+	font-size:14px;
+	font-weight:bold;
+	line-height: 17px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation {
+	color:#8BBF39;
+	font-weight: normal;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation-gray {
+	color:#7F7F7F;
+	font-weight: normal;
+}
+.rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates {
+	font-weight: normal;
+}
+/* ------ BBMRI-AT Sub ID Card Bottom ----------- */

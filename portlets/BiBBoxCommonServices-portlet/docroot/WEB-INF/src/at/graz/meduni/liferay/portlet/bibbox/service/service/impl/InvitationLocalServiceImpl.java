@@ -14,10 +14,17 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
+import java.util.Date;
+
 import javax.portlet.PortletRequest;
 
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+
+import at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.InvitationLocalServiceBaseImpl;
-import at.graz.meduni.liferay.portlet.bibbox.user.Invitation;
 
 /**
  * The implementation of the invitation local service.
@@ -43,7 +50,25 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 	/**
 	 * Convenience method to create a Invitation object out of the request.
 	 */
-	private Invitation invitationFromRequest(PortletRequest request) {
-		return null;
+	public Invitation invitationFromRequest(PortletRequest request) {
+		InvitationImpl invitation = new InvitationImpl();
+		
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		
+		invitation.setInvitationId(ParamUtil.getLong(request, "invitationId"));
+		invitation.setName(ParamUtil.getString(request, "name"));
+		invitation.setSubject(ParamUtil.getString(request, "subject"));
+		invitation.setBody(ParamUtil.getString(request, "body"));
+		/*
+		 * Status:
+		 * 1 ... Saved
+		 * 2 ... Send
+		 */
+		invitation.setStatus(1);
+		invitation.setLastchanged(new Date());
+		invitation.setLastchanger(themeDisplay.getUserId());
+		
+		return invitation;
 	}
+
 }

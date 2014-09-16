@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
@@ -14,11 +15,15 @@ import javax.portlet.ResourceResponse;
 import at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationOrganisationImpl;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -108,14 +113,54 @@ public class Invitation extends MVCPortlet {
 	 * Create a new Invitation
 	 */
 	public void addInvitation(ActionRequest request, ActionResponse response) throws Exception {
+		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation = InvitationLocalServiceUtil.invitationFromRequest(request);
+		InvitationLocalServiceUtil.addInvitation(invitation);
+		
+		sendRedirect(request, response);
+	}
+	
+	/**
+	 * Deletes a invitation from the database.
+	 *
+	 */
+	public void deleteInvitation(ActionRequest request, ActionResponse response)
+		throws Exception {
+		long invitationId = ParamUtil.getLong(request, "invitationId");
+		List<InvitationOrganisation> invitationorganisations = InvitationOrganisationLocalServiceUtil.getOrganisationByInvitation(invitationId);
+		for(InvitationOrganisation invitationorganisation : invitationorganisations) {
+			InvitationOrganisationLocalServiceUtil.deleteInvitationOrganisation(invitationorganisation);
+		}
+		InvitationLocalServiceUtil.deleteInvitation(invitationId);
+		sendRedirect(request, response);
+	}
+	
+	/**
+	 * Simulate Invitation send email
+	 *
+	 */
+	public void simulateInvitation(ActionRequest request, ActionResponse response) {
 		
 	}
 	
 	/**
-	 * Update the Invitation
+	 * Sending email to specified user
 	 */
-	public void updateInvitation(ActionRequest request, ActionResponse response) throws Exception {
-		
+	private void sendEmail(String email, String mailSubject, String mailBody) {
+		System.out.println("====sendMailMessage===");
+		System.out.println("email:" + email);
+		System.out.println("Subject:" + mailSubject);
+		System.out.println("Body:" + mailBody);
+        String senderMailAddress="robert.reihs@medunigraz.at";
+        String receiverMailAddress=email;
+        try {
+        	MailMessage mailMessage=new MailMessage();
+		    mailMessage.setBody(mailBody);
+		    mailMessage.setSubject(mailSubject);
+		    mailMessage.setFrom(new InternetAddress(senderMailAddress));
+		    mailMessage.setTo(new InternetAddress(receiverMailAddress));
+	        MailServiceUtil.sendEmail(mailMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
-	
 }

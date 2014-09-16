@@ -248,4 +248,10 @@ public interface InvitationLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* Convenience method to create a Invitation object out of the request.
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitationFromRequest(
+		javax.portlet.PortletRequest request);
 }

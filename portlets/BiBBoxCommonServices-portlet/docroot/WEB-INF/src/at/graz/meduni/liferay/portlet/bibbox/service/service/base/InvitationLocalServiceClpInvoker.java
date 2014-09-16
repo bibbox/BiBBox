@@ -113,6 +113,10 @@ public class InvitationLocalServiceClpInvoker {
 		_methodName41 = "setBeanIdentifier";
 
 		_methodParameterTypes41 = new String[] { "java.lang.String" };
+
+		_methodName46 = "invitationFromRequest";
+
+		_methodParameterTypes46 = new String[] { "javax.portlet.PortletRequest" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +220,11 @@ public class InvitationLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName46.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+			return InvitationLocalServiceUtil.invitationFromRequest((javax.portlet.PortletRequest)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +264,6 @@ public class InvitationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes40;
 	private String _methodName41;
 	private String[] _methodParameterTypes41;
+	private String _methodName46;
+	private String[] _methodParameterTypes46;
 }
