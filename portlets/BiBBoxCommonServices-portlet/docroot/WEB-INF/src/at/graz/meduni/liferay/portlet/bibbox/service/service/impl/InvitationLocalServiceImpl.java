@@ -59,16 +59,33 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 		invitation.setName(ParamUtil.getString(request, "name"));
 		invitation.setSubject(ParamUtil.getString(request, "subject"));
 		invitation.setBody(ParamUtil.getString(request, "body"));
-		/*
-		 * Status:
-		 * 1 ... Saved
-		 * 2 ... Send
-		 */
-		invitation.setStatus(1);
+		invitation.setStatus(ParamUtil.getLong(request, "status"));
 		invitation.setLastchanged(new Date());
 		invitation.setLastchanger(themeDisplay.getUserId());
 		
 		return invitation;
+	}
+	
+	/**
+	 * Return Status from String
+	 * Status:
+	 *  0 ... Error
+	 *  1 ... Saved
+	 *  5 ... Simulated
+	 * 10 ... Send
+	 */
+	public long getStatusFromString(String string_status) {
+		long status = 0;
+		if(string_status.equalsIgnoreCase("saved")) {
+			return 1;
+		}
+		if(string_status.equalsIgnoreCase("simulated")) {
+			return 5;
+		}
+		if(string_status.equalsIgnoreCase("send")) {
+			return 10;
+		}
+		return 0;
 	}
 
 }

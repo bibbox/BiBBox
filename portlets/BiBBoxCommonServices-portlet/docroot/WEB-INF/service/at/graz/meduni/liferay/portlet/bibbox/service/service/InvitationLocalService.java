@@ -254,4 +254,15 @@ public interface InvitationLocalService extends BaseLocalService,
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitationFromRequest(
 		javax.portlet.PortletRequest request);
+
+	/**
+	* Return Status from String
+	* Status:
+	*  0 ... Error
+	*  1 ... Saved
+	*  5 ... Simulated
+	* 10 ... Send
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getStatusFromString(java.lang.String string_status);
 }

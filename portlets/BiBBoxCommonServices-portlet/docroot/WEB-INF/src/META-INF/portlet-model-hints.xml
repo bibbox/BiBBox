@@ -4,8 +4,12 @@
 	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation">
 		<field name="invitationId" type="long" />
 		<field name="name" type="String" />
-		<field name="subject" type="String" />
-		<field name="body" type="String" />
+		<field name="subject" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="body" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="status" type="long" />
 		<field name="invitationsend" type="Date" />
 		<field name="lastchanged" type="Date" />

@@ -117,6 +117,10 @@ public class InvitationLocalServiceClpInvoker {
 		_methodName46 = "invitationFromRequest";
 
 		_methodParameterTypes46 = new String[] { "javax.portlet.PortletRequest" };
+
+		_methodName47 = "getStatusFromString";
+
+		_methodParameterTypes47 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -225,6 +229,11 @@ public class InvitationLocalServiceClpInvoker {
 			return InvitationLocalServiceUtil.invitationFromRequest((javax.portlet.PortletRequest)arguments[0]);
 		}
 
+		if (_methodName47.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+			return InvitationLocalServiceUtil.getStatusFromString((java.lang.String)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -266,4 +275,6 @@ public class InvitationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes41;
 	private String _methodName46;
 	private String[] _methodParameterTypes46;
+	private String _methodName47;
+	private String[] _methodParameterTypes47;
 }

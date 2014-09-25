@@ -862,7 +862,8 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 	}
 
 	@Override
-	public int compareTo(Candidate candidate) {
+	public int compareTo(
+		at.meduni.liferay.portlet.rdconnect.model.Candidate candidate) {
 		return _candidate.compareTo(candidate);
 	}
 
@@ -872,17 +873,17 @@ public class CandidateWrapper implements Candidate, ModelWrapper<Candidate> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<Candidate> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.meduni.liferay.portlet.rdconnect.model.Candidate> toCacheModel() {
 		return _candidate.toCacheModel();
 	}
 
 	@Override
-	public Candidate toEscapedModel() {
+	public at.meduni.liferay.portlet.rdconnect.model.Candidate toEscapedModel() {
 		return new CandidateWrapper(_candidate.toEscapedModel());
 	}
 
 	@Override
-	public Candidate toUnescapedModel() {
+	public at.meduni.liferay.portlet.rdconnect.model.Candidate toUnescapedModel() {
 		return new CandidateWrapper(_candidate.toUnescapedModel());
 	}
 

@@ -45,9 +45,28 @@ invitationId = invitation.getInvitationId();
 />
 
 <portlet:actionURL name='<%= createinvitation ? "addInvitation" : "updateInvitation" %>' var="editInvitationURL" windowState="normal" />
+<portlet:actionURL name='simulateInvitation' var="simulateInvitationURL" windowState="normal" />
+<portlet:actionURL name='sendInvitation' var="sendInvitationURL" windowState="normal" />
+
+<aui:script use="aui-base">
+	Liferay.provide(window, 'invitationSubmitForm', function(action) {
+		if(action=='save'){
+     		A.one('#<portlet:namespace/>fm').set('action','<%=editInvitationURL.toString()%>');
+  		}
+   		if(action=='simulate'){
+     		A.one('#<portlet:namespace/>fm').set('action','<%=simulateInvitationURL.toString()%>');
+  		}
+		if(action=='send'){
+     		A.one('#<portlet:namespace/>fm').set('action','<%=sendInvitationURL.toString()%>');
+  		}
+	});
+</aui:script>
+
 <aui:form action="<%= editInvitationURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
+		<aui:input type="hidden" name="cmd" value="<%= createinvitation %>" />
+		<aui:input type="hidden" name="status" value="<%= invitation.getStatus() %>" />
 		<aui:input type="hidden" name="invitationId" value='<%= invitation.getInvitationId() %>'/>
 		<aui:layout>
 			<aui:column columnWidth="75" first="true">
@@ -68,28 +87,30 @@ invitationId = invitation.getInvitationId();
 			<aui:column columnWidth="100" first="true">
 				<aui:input name="body" type="textarea" cssClass="bibbox_cs_width_100"  value='<%= invitation.getBody() %>'></aui:input>
 			</aui:column>
-			<aui:column columnWidth="100" first="true">
-				<p>Subject and Body Terms:<br />[$TO_NAME$]</p>
-			</aui:column>
 		</aui:layout>
 	</aui:fieldset>
 	<aui:button-row>
-		<aui:button type="submit" />
-		<aui:button type="cancel"  onClick="<%= redirect %>" />
-		<aui:button type="submit" value="Simulate" />
-		<aui:button type="submit" value="Send" />
+		<aui:button type="submit" onClick="invitationSubmitForm('save')" />
+		<aui:button type="cancel" onClick="<%= redirect %>" />
+		<aui:button type="submit" value="Simulate"  onClick="invitationSubmitForm('simulate')" />
+		<aui:button type="submit" value="Send"  onClick="invitationSubmitForm('send')" />
 	</aui:button-row>
 </aui:form>
 
-<%
-/*
-
-Einen not Saved status dazufügen, um die invitation zu erstellen aber wenn sie nicht gespeichert wird wieder löschen.
-
-Bei cancle einfügen wenn noch nicht erstellt dann wird im javascriptgelöscht und dann erst redirect
-
-*/
-%>
+<p>Tags for Subject and Body:<br />
+<table style="margin-left:30px;">
+<tr><td>[$TO_NAME$]</td><td>...</td><td>Replace with the full name</td></tr>
+<tr><td>[$url$]</td><td>...</td><td>Replace with the portal-URL and the invitation tracking code</td></tr>
+<tr><td>[$reject-url$]</td><td>...</td><td>Replace with the URL and the invitation tracking code for rejection the participation</td></tr>
+</table>
+<br />
+Example:<br />
+Dear [$TO_NAME$],<br />
+You can visit your ID-Card at [$url$]. If you do not won't to participate in the portal pleas visit this link [$reject-url$], and you will not be contacted again.<br />
+---------<br />
+Dear <%= themeDisplay.getUser().getFullName() %>,<br />
+You can visit your ID-Card at <%= themeDisplay.getPortalURL() %>. If you do not won't to participate in the portal pleas visit this link <%= themeDisplay.getPortalURL() %>/reject, and you will not be contacted again.<br />
+</p>
 
 <% 
 String addOrganizationURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/invitation/organisations/" + invitationId;

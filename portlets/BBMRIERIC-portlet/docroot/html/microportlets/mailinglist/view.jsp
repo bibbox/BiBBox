@@ -69,6 +69,13 @@
 <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
 </a>
 </div>
+<!-- Miabis -->
+<div style="margin-top:10px;">
+<a href="http://bbmri-wiki.wikidot.com/en:dataset" target="_blank">
+<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Wiki: MIABIS 2.0</spam> 
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+</a>
+</div>
 <!-- Wiki -->
 <div style="margin-top:10px;">
 <a href="http://www.bbmri-wp4.eu/wiki/index.php/Main_Page" target="_blank">

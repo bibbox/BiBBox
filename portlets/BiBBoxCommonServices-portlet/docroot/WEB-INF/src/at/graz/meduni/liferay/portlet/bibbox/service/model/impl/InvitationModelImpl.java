@@ -74,7 +74,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 			{ "lastchanged", Types.TIMESTAMP },
 			{ "lastchanger", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation (invitationId LONG not null primary key,name VARCHAR(75) null,subject VARCHAR(75) null,body VARCHAR(75) null,status LONG,invitationsend DATE null,lastchanged DATE null,lastchanger LONG)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation (invitationId LONG not null primary key,name VARCHAR(75) null,subject VARCHAR(255) null,body TEXT null,status LONG,invitationsend DATE null,lastchanged DATE null,lastchanger LONG)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.invitation";
 	public static final String ORDER_BY_JPQL = " ORDER BY invitation.lastchanged DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.invitation.lastchanged DESC";

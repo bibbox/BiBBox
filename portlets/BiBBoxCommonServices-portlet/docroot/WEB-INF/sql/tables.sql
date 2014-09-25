@@ -1,8 +1,8 @@
 create table bibboxcs.invitation (
 	invitationId LONG not null primary key,
 	name VARCHAR(75) null,
-	subject VARCHAR(75) null,
-	body VARCHAR(75) null,
+	subject VARCHAR(255) null,
+	body TEXT null,
 	status LONG,
 	invitationsend DATE null,
 	lastchanged DATE null,

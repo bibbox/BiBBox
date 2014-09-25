@@ -36,6 +36,9 @@ for(Organization organization : organizations) {
 	if(organization.getName().equalsIgnoreCase("Medical Univeristy of Shi'Kahr")) {
 		continue;
 	}
+	if(organization.getName().equalsIgnoreCase("National Biobank of Vulcan") && !permissionChecker.isOmniadmin()) {
+		continue;
+	}
 	
 	
 	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());

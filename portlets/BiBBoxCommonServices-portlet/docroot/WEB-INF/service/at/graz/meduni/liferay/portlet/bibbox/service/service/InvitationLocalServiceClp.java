@@ -118,6 +118,10 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 		_methodName19 = "invitationFromRequest";
 
 		_methodParameterTypes19 = new String[] { "javax.portlet.PortletRequest" };
+
+		_methodName20 = "getStatusFromString";
+
+		_methodParameterTypes20 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -695,6 +699,30 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 		return (at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public long getStatusFromString(java.lang.String string_status) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] { ClpSerializer.translateInput(string_status) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Long)returnObj).longValue();
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -734,4 +762,6 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

@@ -114,7 +114,19 @@ public class Invitation extends MVCPortlet {
 	 */
 	public void addInvitation(ActionRequest request, ActionResponse response) throws Exception {
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation = InvitationLocalServiceUtil.invitationFromRequest(request);
+		invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("saved"));
 		InvitationLocalServiceUtil.addInvitation(invitation);
+		
+		sendRedirect(request, response);
+	}
+	
+	/**
+	 * Update a new Invitation
+	 */
+	public void updateInvitation(ActionRequest request, ActionResponse response) throws Exception {
+		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation = InvitationLocalServiceUtil.invitationFromRequest(request);
+		invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("saved"));
+		InvitationLocalServiceUtil.updateInvitation(invitation);
 		
 		sendRedirect(request, response);
 	}
@@ -138,8 +150,68 @@ public class Invitation extends MVCPortlet {
 	 * Simulate Invitation send email
 	 *
 	 */
-	public void simulateInvitation(ActionRequest request, ActionResponse response) {
-		
+	public void simulateInvitation(ActionRequest request, ActionResponse response) throws Exception {
+		System.out.println("Simulate Invitation");
+		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation = InvitationLocalServiceUtil.invitationFromRequest(request);
+		// Save the invitation
+		invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("simulated"));
+		boolean createinvitation = ParamUtil.getBoolean(request, "cmd");
+		if(createinvitation) {
+			InvitationLocalServiceUtil.addInvitation(invitation);
+		} else {
+			InvitationLocalServiceUtil.updateInvitation(invitation);
+		}
+		// Send the Simulation Mails
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		String email = themeDisplay.getUser().getEmailAddress();
+		// prepare for replacing
+		String organizationfriendlyurl = "";
+		String organizationpath = organizationfriendlyurl + "?invitation="+invitation.getInvitationId();//replace with OrganisationInvitationId for organizationselection
+		String securitylinktoken = "";
+		String securitytoken = "";
+		String organizationrejectpath = organizationfriendlyurl + "?invitation="+invitation.getInvitationId()+"&securitylinktoken=";//replace with OrganisationInvitationId for organizationselection
+		//replacing Strings
+		String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay,organizationpath);
+		String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay,organizationpath);
+		sendEmail(email, mailSubject, mailBody);
+		// Redirect
+		sendRedirect(request, response);
+	}
+	
+	/**
+	 * Send Invitation send email
+	 *
+	 */
+	public void sendInvitation(ActionRequest request, ActionResponse response) throws Exception {
+		System.out.println("Send Invitation");
+		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation = InvitationLocalServiceUtil.invitationFromRequest(request);
+		// Save the invitation
+		invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("send"));
+		boolean createinvitation = ParamUtil.getBoolean(request, "cmd");
+		if(createinvitation) {
+			InvitationLocalServiceUtil.addInvitation(invitation);
+		} else {
+			InvitationLocalServiceUtil.updateInvitation(invitation);
+		}
+		// Redirect
+		sendRedirect(request, response);
+	}
+	
+	/**
+	 * Replace Body Naming
+	 *
+	 */
+	private String replaceTagsInString(String string, boolean simulate, ThemeDisplay themedisplay, String organizationpath) {
+		// replace [$TO_NAME$]
+		if(simulate) {
+			string = string.replaceAll("\\[\\$TO_NAME\\$\\]", themedisplay.getUser().getFullName());
+		} else {
+			//TODO: replace the name for the invitation send.
+		}
+		// replace [$url$]
+		String organisation_link = themedisplay.getURLPortal()+"/web"+organizationpath;
+		string = string.replaceAll("\\[\\$url\\$\\]", themedisplay.getUser().getFullName());
+		return string;
 	}
 	
 	/**
@@ -162,5 +234,12 @@ public class Invitation extends MVCPortlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+	}
+	
+	/**
+	 * Create Security Token
+	 */
+	private String createSecurityToken() {
+		return "";
 	}
 }

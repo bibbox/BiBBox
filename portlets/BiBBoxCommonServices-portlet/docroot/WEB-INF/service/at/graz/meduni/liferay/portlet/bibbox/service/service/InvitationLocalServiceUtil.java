@@ -283,6 +283,18 @@ public class InvitationLocalServiceUtil {
 		return getService().invitationFromRequest(request);
 	}
 
+	/**
+	* Return Status from String
+	* Status:
+	*  0 ... Error
+	*  1 ... Saved
+	*  5 ... Simulated
+	* 10 ... Send
+	*/
+	public static long getStatusFromString(java.lang.String string_status) {
+		return getService().getStatusFromString(string_status);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
