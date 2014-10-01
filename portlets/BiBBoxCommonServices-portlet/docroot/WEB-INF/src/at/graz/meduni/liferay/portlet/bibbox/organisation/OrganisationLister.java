@@ -47,7 +47,19 @@ public class OrganisationLister extends MVCPortlet {
 	public void deleteOrganization(ActionRequest request, ActionResponse response) throws Exception {
 		try {
 			long organizationid = ParamUtil.getLong(request, "bibbox_cs_organisationid");
-			deleteOrganization(organizationid);
+			long deleteto = ParamUtil.getLong(request, "bibbox_cs_deleteto");
+			if(deleteto == 0) {
+				deleteOrganization(organizationid);
+			} else {
+				try {
+					Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationid);
+					organization.setParentOrganizationId(deleteto);
+					OrganizationLocalServiceUtil.updateOrganization(organization);
+				} catch(Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 
 		} catch (Exception e) {
 			System.out.println("------------------------------------------------------");

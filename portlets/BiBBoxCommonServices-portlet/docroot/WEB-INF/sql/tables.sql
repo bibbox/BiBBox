@@ -15,5 +15,10 @@ create table bibboxcs.invitation_organisation (
 	organisationId LONG,
 	userId LONG,
 	lastchanged DATE null,
-	lastchanger LONG
+	lastchanger LONG,
+	reactdate DATE null,
+	lastusedlink DATE null,
+	rejectdate DATE null,
+	securitylinktoken LONG,
+	securitytoken LONG
 );

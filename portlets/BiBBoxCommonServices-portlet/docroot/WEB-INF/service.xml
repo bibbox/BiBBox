@@ -33,6 +33,11 @@
 		<column name="userId" type="long"></column>
 		<column name="lastchanged" type="Date"></column>
 		<column name="lastchanger" type="long"></column>
+		<column name="reactdate" type="Date"></column>
+		<column name="lastusedlink" type="Date"></column>
+		<column name="rejectdate" type="Date"></column>
+		<column name="securitylinktoken" type="long"></column>
+		<column name="securitytoken" type="long"></column>
 		<finder return-type="Collection" name="Organisation">
 			<finder-column name="organisationId"></finder-column>
 		</finder>

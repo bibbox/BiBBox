@@ -27,5 +27,10 @@
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="lastchanged" type="org.hibernate.type.TimestampType" />
 		<property name="lastchanger" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="reactdate" type="org.hibernate.type.TimestampType" />
+		<property name="lastusedlink" type="org.hibernate.type.TimestampType" />
+		<property name="rejectdate" type="org.hibernate.type.TimestampType" />
+		<property name="securitylinktoken" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="securitytoken" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

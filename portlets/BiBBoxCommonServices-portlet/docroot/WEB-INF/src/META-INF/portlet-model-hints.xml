@@ -22,5 +22,10 @@
 		<field name="userId" type="long" />
 		<field name="lastchanged" type="Date" />
 		<field name="lastchanger" type="long" />
+		<field name="reactdate" type="Date" />
+		<field name="lastusedlink" type="Date" />
+		<field name="rejectdate" type="Date" />
+		<field name="securitylinktoken" type="long" />
+		<field name="securitytoken" type="long" />
 	</model>
 </model-hints>

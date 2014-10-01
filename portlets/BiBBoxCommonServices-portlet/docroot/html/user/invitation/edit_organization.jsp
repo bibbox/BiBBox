@@ -181,3 +181,9 @@ for(java.util.Date date : sortetdata.keySet()) {
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script use="aui-base,aui-io-request">
+	AUI().use('aui-base', function(A){
+         Liferay.Util.getOpener().refreshOrganizationListPortlet();
+   });
+</aui:script>

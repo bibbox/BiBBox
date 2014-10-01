@@ -1723,6 +1723,11 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 		invitationOrganisationImpl.setUserId(invitationOrganisation.getUserId());
 		invitationOrganisationImpl.setLastchanged(invitationOrganisation.getLastchanged());
 		invitationOrganisationImpl.setLastchanger(invitationOrganisation.getLastchanger());
+		invitationOrganisationImpl.setReactdate(invitationOrganisation.getReactdate());
+		invitationOrganisationImpl.setLastusedlink(invitationOrganisation.getLastusedlink());
+		invitationOrganisationImpl.setRejectdate(invitationOrganisation.getRejectdate());
+		invitationOrganisationImpl.setSecuritylinktoken(invitationOrganisation.getSecuritylinktoken());
+		invitationOrganisationImpl.setSecuritytoken(invitationOrganisation.getSecuritytoken());
 
 		return invitationOrganisationImpl;
 	}

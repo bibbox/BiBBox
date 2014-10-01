@@ -9,6 +9,7 @@ String optionsParentOrganisationName_cfg = GetterUtil.getString(portletPreferenc
 long optionsParentOrganisation_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsParentOrganisation", "0"));
 String optionsTypeFilter_cfg = GetterUtil.getString(portletPreferences.getValue("optionsTypeFilter", ""));
 long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", ""));
+String optionsDefaultBodyText_cfg = GetterUtil.getString(portletPreferences.getValue("optionsDefaultBodyText", ""));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -60,9 +61,27 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 					%>
 				</aui:select>
 			</aui:column>
+			<aui:column columnWidth="100" first="true">
+				<aui:input name="preferences--optionsDefaultBodyText--" cssClass="bibbox_cs_width_100" label="Set Default Body" type="textarea" value ="<%= optionsDefaultBodyText_cfg %>" />
+			</aui:column>
 		</aui:layout>
 	</aui:fieldset>
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
+<p>Tags for Subject and Body:<br />
+<table style="margin-left:30px;">
+<tr><td>[$TO_NAME$]</td><td>...</td><td>Replace with the full name</td></tr>
+<tr><td>[$ORGANIZATION_NAME$]</td><td>...</td><td>Replace with the name of the registry/biobank</td></tr>
+<tr><td>[$URL$]</td><td>...</td><td>Replace with the portal-URL and the invitation tracking code</td></tr>
+<tr><td>[$REJECT_URL$]</td><td>...</td><td>Replace with the URL and the invitation tracking code for rejection the participation</td></tr>
+</table>
+<br />
+Example:<br />
+Dear [$TO_NAME$],<br />
+You can visit your ID-Card at [$url$]. If you do not won't to participate in the portal pleas visit this link [$reject-url$], and you will not be contacted again.<br />
+---------<br />
+Dear <%= themeDisplay.getUser().getFullName() %>,<br />
+You can visit your ID-Card at <%= themeDisplay.getPortalURL() %>. If you do not won't to participate in the portal pleas visit this link <%= themeDisplay.getPortalURL() %>/reject, and you will not be contacted again.<br />
+</p>

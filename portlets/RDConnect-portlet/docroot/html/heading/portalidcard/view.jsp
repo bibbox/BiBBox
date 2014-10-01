@@ -384,6 +384,11 @@ if (currentGroup.isOrganization()) {
 	</div>
 	<!-- bottom -->
 	<div class="rdc_idcard_idcardbodybottom">
+		<%
+		if(organization.getParentOrganizationId() != 0) {
+			shortdiscription = "<p style=\"color: red;text-align: center;font-size:20px;\">Organization was deleted</p>";
+		}
+		%>
 		<div class="rdc_idcard_idcardbodybottom-shortdescription"><%= shortdiscription %>
 		</div>
 		<div class="rdc_idcard_idcardbodybottom-menue">

@@ -20,6 +20,8 @@ String actionId_edit_invitation = "EDIT_INVITATION";
 <%
 String redirect = ParamUtil.getString(request, "redirect");	
 String portletResource = ParamUtil.getString(request, "portletResource");
+long optionsMainContactRole_option = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
+String optionsDefaultBodyText_option = GetterUtil.getString(portletPreferences.getValue("optionsDefaultBodyText", ""));
 %>
 
 <%
@@ -33,6 +35,7 @@ if(invitationId > 0) {
 	tmpTitle = invitation.getName();
 } else {
 	invitation = InvitationLocalServiceUtil.createInvitation(CounterLocalServiceUtil.increment(Invitation.class.getName()));
+	invitation.setBody(optionsDefaultBodyText_option);
 	createinvitation = true;
 }
 invitationId = invitation.getInvitationId();
@@ -68,6 +71,7 @@ invitationId = invitation.getInvitationId();
 		<aui:input type="hidden" name="cmd" value="<%= createinvitation %>" />
 		<aui:input type="hidden" name="status" value="<%= invitation.getStatus() %>" />
 		<aui:input type="hidden" name="invitationId" value='<%= invitation.getInvitationId() %>'/>
+		<aui:input type="hidden" name="optionsMainContactRole_option" value='<%= String.valueOf(optionsMainContactRole_option) %>'/>
 		<aui:layout>
 			<aui:column columnWidth="75" first="true">
 				<aui:input name="name" value='<%= invitation.getName() %>'></aui:input>
@@ -100,8 +104,9 @@ invitationId = invitation.getInvitationId();
 <p>Tags for Subject and Body:<br />
 <table style="margin-left:30px;">
 <tr><td>[$TO_NAME$]</td><td>...</td><td>Replace with the full name</td></tr>
-<tr><td>[$url$]</td><td>...</td><td>Replace with the portal-URL and the invitation tracking code</td></tr>
-<tr><td>[$reject-url$]</td><td>...</td><td>Replace with the URL and the invitation tracking code for rejection the participation</td></tr>
+<tr><td>[$ORGANIZATION_NAME$]</td><td>...</td><td>Replace with the name of the registry/biobank</td></tr>
+<tr><td>[$URL$]</td><td>...</td><td>Replace with the portal-URL and the invitation tracking code</td></tr>
+<tr><td>[$REJECT_URL$]</td><td>...</td><td>Replace with the URL and the invitation tracking code for rejection the participation</td></tr>
 </table>
 <br />
 Example:<br />
@@ -116,7 +121,10 @@ You can visit your ID-Card at <%= themeDisplay.getPortalURL() %>. If you do not 
 String addOrganizationURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/invitation/organisations/" + invitationId;
 String addOrganizationListURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/invitation/vieworganisations/" + invitationId;
 %>
+
 <portlet:actionURL name='deleteOrganizationFromInvitation' var="deleteOrganizationFromInvitationURL" />
+
+ <button onclick="refreshOrganizationListPortlet()">Click me</button> 
 
 <aui:script use="aui-base">
             A.all('#addorganisations').on(
@@ -128,11 +136,17 @@ String addOrganizationListURL = themeDisplay.getURLCurrent().split("[?]")[0] + "
                            cache: false,
                            constrain: true,
                            modal: true,
-                           width: 1000
+                           on: {
+                                   destroy : function(event){
+                                      alert("close");
+                                   },
+
+                               },
+                           width: 1000,
                         },
                         id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addorganisation',
                         title: 'Add Organisations.',
-                        uri: '<%= addOrganizationURL %>'
+                        uri: '<%= addOrganizationURL %>',
                      }
                   );
                }
@@ -212,3 +226,59 @@ AUI().ready(
  });
 });
 </aui:script>
+
+<script>
+Liferay.provide(window, 'refreshOrganizationListPortlet', function() {
+        var A = AUI();
+        	var url = '<%= addOrganizationListURL %>';
+	         A.io.request(url,{
+	         on: {
+	              failure: function() { alert('Unable to Load Data'); },
+	              success: function() { 
+	               A.one('#organisationlist').setHTML(this.get('responseData'));
+	               // Delete Script
+	               AUI().use(
+	              'aui-base',
+				  'aui-io-request',
+				  'click',
+				  function(A) {
+		               A.all('#deleteOragnizationFromInvitation').on(
+						'click',
+						function(event) {
+							var confirmation_to_delete_user = confirm("Are you sure you want to delete the Organization from the list?");
+							if (confirmation_to_delete_user == true) {
+								var url = '<%= deleteOrganizationFromInvitationURL.toString() %>';
+								A.io.request(url,{
+									//this is the data that you are sending to the action method
+									data: {
+									   <portlet:namespace />bibbox_cs_organisationid: event.currentTarget.getAttribute('organisationid'),
+									   <portlet:namespace />bibbox_cs_invitationid: event.currentTarget.getAttribute('invitationid'),
+									},
+									dataType: 'json',
+									on: {
+									  failure: function() { alert('There is a problem with the server connection.'); },
+									  success: function() { 
+											var url = '<%= addOrganizationListURL %>';
+									         A.io.request(url,{
+									         on: {
+									              failure: function() { alert('Unable to Load Data'); },
+									              success: function() { 
+									               A.one('#organisationlist').setHTML(this.get('responseData'));
+									               }
+									            }
+									         });
+									  }
+									}
+								});
+							    
+							} 	 
+							return false;
+						}
+					);});
+	               }
+	            }
+	         });
+    },
+    ['aui-base','aui-io-request']
+    );
+</script>

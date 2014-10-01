@@ -70,9 +70,14 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 			{ "organisationId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "lastchanged", Types.TIMESTAMP },
-			{ "lastchanger", Types.BIGINT }
+			{ "lastchanger", Types.BIGINT },
+			{ "reactdate", Types.TIMESTAMP },
+			{ "lastusedlink", Types.TIMESTAMP },
+			{ "rejectdate", Types.TIMESTAMP },
+			{ "securitylinktoken", Types.BIGINT },
+			{ "securitytoken", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation_organisation (invitationOrganisationId LONG not null primary key,invitationId LONG,organisationId LONG,userId LONG,lastchanged DATE null,lastchanger LONG)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation_organisation (invitationOrganisationId LONG not null primary key,invitationId LONG,organisationId LONG,userId LONG,lastchanged DATE null,lastchanger LONG,reactdate DATE null,lastusedlink DATE null,rejectdate DATE null,securitylinktoken LONG,securitytoken LONG)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.invitation_organisation";
 	public static final String ORDER_BY_JPQL = " ORDER BY invitationOrganisation.invitationOrganisationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.invitation_organisation.invitationOrganisationId ASC";
@@ -112,6 +117,11 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		model.setUserId(soapModel.getUserId());
 		model.setLastchanged(soapModel.getLastchanged());
 		model.setLastchanger(soapModel.getLastchanger());
+		model.setReactdate(soapModel.getReactdate());
+		model.setLastusedlink(soapModel.getLastusedlink());
+		model.setRejectdate(soapModel.getRejectdate());
+		model.setSecuritylinktoken(soapModel.getSecuritylinktoken());
+		model.setSecuritytoken(soapModel.getSecuritytoken());
 
 		return model;
 	}
@@ -183,6 +193,11 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		attributes.put("userId", getUserId());
 		attributes.put("lastchanged", getLastchanged());
 		attributes.put("lastchanger", getLastchanger());
+		attributes.put("reactdate", getReactdate());
+		attributes.put("lastusedlink", getLastusedlink());
+		attributes.put("rejectdate", getRejectdate());
+		attributes.put("securitylinktoken", getSecuritylinktoken());
+		attributes.put("securitytoken", getSecuritytoken());
 
 		return attributes;
 	}
@@ -224,6 +239,36 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 		if (lastchanger != null) {
 			setLastchanger(lastchanger);
+		}
+
+		Date reactdate = (Date)attributes.get("reactdate");
+
+		if (reactdate != null) {
+			setReactdate(reactdate);
+		}
+
+		Date lastusedlink = (Date)attributes.get("lastusedlink");
+
+		if (lastusedlink != null) {
+			setLastusedlink(lastusedlink);
+		}
+
+		Date rejectdate = (Date)attributes.get("rejectdate");
+
+		if (rejectdate != null) {
+			setRejectdate(rejectdate);
+		}
+
+		Long securitylinktoken = (Long)attributes.get("securitylinktoken");
+
+		if (securitylinktoken != null) {
+			setSecuritylinktoken(securitylinktoken);
+		}
+
+		Long securitytoken = (Long)attributes.get("securitytoken");
+
+		if (securitytoken != null) {
+			setSecuritytoken(securitytoken);
 		}
 	}
 
@@ -327,6 +372,61 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		_lastchanger = lastchanger;
 	}
 
+	@JSON
+	@Override
+	public Date getReactdate() {
+		return _reactdate;
+	}
+
+	@Override
+	public void setReactdate(Date reactdate) {
+		_reactdate = reactdate;
+	}
+
+	@JSON
+	@Override
+	public Date getLastusedlink() {
+		return _lastusedlink;
+	}
+
+	@Override
+	public void setLastusedlink(Date lastusedlink) {
+		_lastusedlink = lastusedlink;
+	}
+
+	@JSON
+	@Override
+	public Date getRejectdate() {
+		return _rejectdate;
+	}
+
+	@Override
+	public void setRejectdate(Date rejectdate) {
+		_rejectdate = rejectdate;
+	}
+
+	@JSON
+	@Override
+	public long getSecuritylinktoken() {
+		return _securitylinktoken;
+	}
+
+	@Override
+	public void setSecuritylinktoken(long securitylinktoken) {
+		_securitylinktoken = securitylinktoken;
+	}
+
+	@JSON
+	@Override
+	public long getSecuritytoken() {
+		return _securitytoken;
+	}
+
+	@Override
+	public void setSecuritytoken(long securitytoken) {
+		_securitytoken = securitytoken;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -364,6 +464,11 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		invitationOrganisationImpl.setUserId(getUserId());
 		invitationOrganisationImpl.setLastchanged(getLastchanged());
 		invitationOrganisationImpl.setLastchanger(getLastchanger());
+		invitationOrganisationImpl.setReactdate(getReactdate());
+		invitationOrganisationImpl.setLastusedlink(getLastusedlink());
+		invitationOrganisationImpl.setRejectdate(getRejectdate());
+		invitationOrganisationImpl.setSecuritylinktoken(getSecuritylinktoken());
+		invitationOrganisationImpl.setSecuritytoken(getSecuritytoken());
 
 		invitationOrganisationImpl.resetOriginalValues();
 
@@ -450,12 +555,43 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 		invitationOrganisationCacheModel.lastchanger = getLastchanger();
 
+		Date reactdate = getReactdate();
+
+		if (reactdate != null) {
+			invitationOrganisationCacheModel.reactdate = reactdate.getTime();
+		}
+		else {
+			invitationOrganisationCacheModel.reactdate = Long.MIN_VALUE;
+		}
+
+		Date lastusedlink = getLastusedlink();
+
+		if (lastusedlink != null) {
+			invitationOrganisationCacheModel.lastusedlink = lastusedlink.getTime();
+		}
+		else {
+			invitationOrganisationCacheModel.lastusedlink = Long.MIN_VALUE;
+		}
+
+		Date rejectdate = getRejectdate();
+
+		if (rejectdate != null) {
+			invitationOrganisationCacheModel.rejectdate = rejectdate.getTime();
+		}
+		else {
+			invitationOrganisationCacheModel.rejectdate = Long.MIN_VALUE;
+		}
+
+		invitationOrganisationCacheModel.securitylinktoken = getSecuritylinktoken();
+
+		invitationOrganisationCacheModel.securitytoken = getSecuritytoken();
+
 		return invitationOrganisationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{invitationOrganisationId=");
 		sb.append(getInvitationOrganisationId());
@@ -469,6 +605,16 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		sb.append(getLastchanged());
 		sb.append(", lastchanger=");
 		sb.append(getLastchanger());
+		sb.append(", reactdate=");
+		sb.append(getReactdate());
+		sb.append(", lastusedlink=");
+		sb.append(getLastusedlink());
+		sb.append(", rejectdate=");
+		sb.append(getRejectdate());
+		sb.append(", securitylinktoken=");
+		sb.append(getSecuritylinktoken());
+		sb.append(", securitytoken=");
+		sb.append(getSecuritytoken());
 		sb.append("}");
 
 		return sb.toString();
@@ -476,7 +622,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -507,6 +653,26 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 			"<column><column-name>lastchanger</column-name><column-value><![CDATA[");
 		sb.append(getLastchanger());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>reactdate</column-name><column-value><![CDATA[");
+		sb.append(getReactdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastusedlink</column-name><column-value><![CDATA[");
+		sb.append(getLastusedlink());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rejectdate</column-name><column-value><![CDATA[");
+		sb.append(getRejectdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>securitylinktoken</column-name><column-value><![CDATA[");
+		sb.append(getSecuritylinktoken());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>securitytoken</column-name><column-value><![CDATA[");
+		sb.append(getSecuritytoken());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -528,6 +694,11 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 	private String _userUuid;
 	private Date _lastchanged;
 	private long _lastchanger;
+	private Date _reactdate;
+	private Date _lastusedlink;
+	private Date _rejectdate;
+	private long _securitylinktoken;
+	private long _securitytoken;
 	private long _columnBitmask;
 	private InvitationOrganisation _escapedModel;
 }

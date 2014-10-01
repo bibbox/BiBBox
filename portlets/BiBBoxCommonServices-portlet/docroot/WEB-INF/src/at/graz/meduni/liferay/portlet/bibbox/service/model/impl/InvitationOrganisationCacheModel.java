@@ -37,7 +37,7 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{invitationOrganisationId=");
 		sb.append(invitationOrganisationId);
@@ -51,6 +51,16 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		sb.append(lastchanged);
 		sb.append(", lastchanger=");
 		sb.append(lastchanger);
+		sb.append(", reactdate=");
+		sb.append(reactdate);
+		sb.append(", lastusedlink=");
+		sb.append(lastusedlink);
+		sb.append(", rejectdate=");
+		sb.append(rejectdate);
+		sb.append(", securitylinktoken=");
+		sb.append(securitylinktoken);
+		sb.append(", securitytoken=");
+		sb.append(securitytoken);
 		sb.append("}");
 
 		return sb.toString();
@@ -74,6 +84,30 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 
 		invitationOrganisationImpl.setLastchanger(lastchanger);
 
+		if (reactdate == Long.MIN_VALUE) {
+			invitationOrganisationImpl.setReactdate(null);
+		}
+		else {
+			invitationOrganisationImpl.setReactdate(new Date(reactdate));
+		}
+
+		if (lastusedlink == Long.MIN_VALUE) {
+			invitationOrganisationImpl.setLastusedlink(null);
+		}
+		else {
+			invitationOrganisationImpl.setLastusedlink(new Date(lastusedlink));
+		}
+
+		if (rejectdate == Long.MIN_VALUE) {
+			invitationOrganisationImpl.setRejectdate(null);
+		}
+		else {
+			invitationOrganisationImpl.setRejectdate(new Date(rejectdate));
+		}
+
+		invitationOrganisationImpl.setSecuritylinktoken(securitylinktoken);
+		invitationOrganisationImpl.setSecuritytoken(securitytoken);
+
 		invitationOrganisationImpl.resetOriginalValues();
 
 		return invitationOrganisationImpl;
@@ -87,6 +121,11 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		userId = objectInput.readLong();
 		lastchanged = objectInput.readLong();
 		lastchanger = objectInput.readLong();
+		reactdate = objectInput.readLong();
+		lastusedlink = objectInput.readLong();
+		rejectdate = objectInput.readLong();
+		securitylinktoken = objectInput.readLong();
+		securitytoken = objectInput.readLong();
 	}
 
 	@Override
@@ -98,6 +137,11 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		objectOutput.writeLong(userId);
 		objectOutput.writeLong(lastchanged);
 		objectOutput.writeLong(lastchanger);
+		objectOutput.writeLong(reactdate);
+		objectOutput.writeLong(lastusedlink);
+		objectOutput.writeLong(rejectdate);
+		objectOutput.writeLong(securitylinktoken);
+		objectOutput.writeLong(securitytoken);
 	}
 
 	public long invitationOrganisationId;
@@ -106,4 +150,9 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 	public long userId;
 	public long lastchanged;
 	public long lastchanger;
+	public long reactdate;
+	public long lastusedlink;
+	public long rejectdate;
+	public long securitylinktoken;
+	public long securitytoken;
 }

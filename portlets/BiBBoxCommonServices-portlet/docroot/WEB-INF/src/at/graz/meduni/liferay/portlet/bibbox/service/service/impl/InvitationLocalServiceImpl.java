@@ -87,5 +87,18 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 		}
 		return 0;
 	}
+	
+	public String getStatusFromLong(long status) {
+		if(status == 1) {
+			return "saved";
+		}
+		if(status == 5) {
+			return "simulated";
+		}
+		if(status == 10) {
+			return "send";
+		}
+		return "";
+	}
 
 }

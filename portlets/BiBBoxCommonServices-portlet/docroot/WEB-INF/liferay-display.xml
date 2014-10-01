@@ -10,5 +10,7 @@
 	<category name="BiBBox User">
 		<portlet id="people"></portlet>
 		<portlet id="invitation"></portlet>
+		<portlet id="invitation-util-reader"></portlet>
+		<portlet id="invitation-util-reject"></portlet>
 	</category>
 </display>

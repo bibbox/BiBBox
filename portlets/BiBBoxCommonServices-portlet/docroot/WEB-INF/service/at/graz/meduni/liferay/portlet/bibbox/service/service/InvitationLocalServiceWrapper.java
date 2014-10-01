@@ -309,6 +309,11 @@ public class InvitationLocalServiceWrapper implements InvitationLocalService,
 		return _invitationLocalService.getStatusFromString(string_status);
 	}
 
+	@Override
+	public java.lang.String getStatusFromLong(long status) {
+		return _invitationLocalService.getStatusFromLong(status);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

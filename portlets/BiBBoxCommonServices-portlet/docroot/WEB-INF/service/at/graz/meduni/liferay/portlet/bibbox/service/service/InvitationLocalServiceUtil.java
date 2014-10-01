@@ -295,6 +295,10 @@ public class InvitationLocalServiceUtil {
 		return getService().getStatusFromString(string_status);
 	}
 
+	public static java.lang.String getStatusFromLong(long status) {
+		return getService().getStatusFromLong(status);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

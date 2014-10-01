@@ -44,23 +44,15 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 		keyProperty="invitationId"
 		modelVar="invitation" escapedModel="<%= true %>"
 	>
+		
 		<liferay-ui:search-container-column-text
 			name="Name"
 			value="<%= invitation.getName() %>"
 		/>
-		<%
-		String status_text = "";
-		if(invitation.getStatus() == 1) {
-			status_text = "In Process";
-		} else if (invitation.getStatus() == 2) {
-			status_text = "Simulated";
-		} else if (invitation.getStatus() == 3) {
-			status_text = "Invitation Send";
-		}
-		%>
+		
 		<liferay-ui:search-container-column-text
 			name="Status"
-			value='<%= status_text %>'
+			value='<%= InvitationLocalServiceUtil.getStatusFromLong(invitation.getStatus()) %>'
 		/>
 		<liferay-ui:search-container-column-text
 			name="Last Edited"

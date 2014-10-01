@@ -36,6 +36,17 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="lastchanger" />
+			<basic name="reactdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="lastusedlink">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="rejectdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="securitylinktoken" />
+			<basic name="securitytoken" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

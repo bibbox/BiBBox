@@ -57,6 +57,11 @@ public class InvitationOrganisationWrapper implements InvitationOrganisation,
 		attributes.put("userId", getUserId());
 		attributes.put("lastchanged", getLastchanged());
 		attributes.put("lastchanger", getLastchanger());
+		attributes.put("reactdate", getReactdate());
+		attributes.put("lastusedlink", getLastusedlink());
+		attributes.put("rejectdate", getRejectdate());
+		attributes.put("securitylinktoken", getSecuritylinktoken());
+		attributes.put("securitytoken", getSecuritytoken());
 
 		return attributes;
 	}
@@ -98,6 +103,36 @@ public class InvitationOrganisationWrapper implements InvitationOrganisation,
 
 		if (lastchanger != null) {
 			setLastchanger(lastchanger);
+		}
+
+		Date reactdate = (Date)attributes.get("reactdate");
+
+		if (reactdate != null) {
+			setReactdate(reactdate);
+		}
+
+		Date lastusedlink = (Date)attributes.get("lastusedlink");
+
+		if (lastusedlink != null) {
+			setLastusedlink(lastusedlink);
+		}
+
+		Date rejectdate = (Date)attributes.get("rejectdate");
+
+		if (rejectdate != null) {
+			setRejectdate(rejectdate);
+		}
+
+		Long securitylinktoken = (Long)attributes.get("securitylinktoken");
+
+		if (securitylinktoken != null) {
+			setSecuritylinktoken(securitylinktoken);
+		}
+
+		Long securitytoken = (Long)attributes.get("securitytoken");
+
+		if (securitytoken != null) {
+			setSecuritytoken(securitytoken);
 		}
 	}
 
@@ -261,6 +296,106 @@ public class InvitationOrganisationWrapper implements InvitationOrganisation,
 	@Override
 	public void setLastchanger(long lastchanger) {
 		_invitationOrganisation.setLastchanger(lastchanger);
+	}
+
+	/**
+	* Returns the reactdate of this invitation organisation.
+	*
+	* @return the reactdate of this invitation organisation
+	*/
+	@Override
+	public java.util.Date getReactdate() {
+		return _invitationOrganisation.getReactdate();
+	}
+
+	/**
+	* Sets the reactdate of this invitation organisation.
+	*
+	* @param reactdate the reactdate of this invitation organisation
+	*/
+	@Override
+	public void setReactdate(java.util.Date reactdate) {
+		_invitationOrganisation.setReactdate(reactdate);
+	}
+
+	/**
+	* Returns the lastusedlink of this invitation organisation.
+	*
+	* @return the lastusedlink of this invitation organisation
+	*/
+	@Override
+	public java.util.Date getLastusedlink() {
+		return _invitationOrganisation.getLastusedlink();
+	}
+
+	/**
+	* Sets the lastusedlink of this invitation organisation.
+	*
+	* @param lastusedlink the lastusedlink of this invitation organisation
+	*/
+	@Override
+	public void setLastusedlink(java.util.Date lastusedlink) {
+		_invitationOrganisation.setLastusedlink(lastusedlink);
+	}
+
+	/**
+	* Returns the rejectdate of this invitation organisation.
+	*
+	* @return the rejectdate of this invitation organisation
+	*/
+	@Override
+	public java.util.Date getRejectdate() {
+		return _invitationOrganisation.getRejectdate();
+	}
+
+	/**
+	* Sets the rejectdate of this invitation organisation.
+	*
+	* @param rejectdate the rejectdate of this invitation organisation
+	*/
+	@Override
+	public void setRejectdate(java.util.Date rejectdate) {
+		_invitationOrganisation.setRejectdate(rejectdate);
+	}
+
+	/**
+	* Returns the securitylinktoken of this invitation organisation.
+	*
+	* @return the securitylinktoken of this invitation organisation
+	*/
+	@Override
+	public long getSecuritylinktoken() {
+		return _invitationOrganisation.getSecuritylinktoken();
+	}
+
+	/**
+	* Sets the securitylinktoken of this invitation organisation.
+	*
+	* @param securitylinktoken the securitylinktoken of this invitation organisation
+	*/
+	@Override
+	public void setSecuritylinktoken(long securitylinktoken) {
+		_invitationOrganisation.setSecuritylinktoken(securitylinktoken);
+	}
+
+	/**
+	* Returns the securitytoken of this invitation organisation.
+	*
+	* @return the securitytoken of this invitation organisation
+	*/
+	@Override
+	public long getSecuritytoken() {
+		return _invitationOrganisation.getSecuritytoken();
+	}
+
+	/**
+	* Sets the securitytoken of this invitation organisation.
+	*
+	* @param securitytoken the securitytoken of this invitation organisation
+	*/
+	@Override
+	public void setSecuritytoken(long securitytoken) {
+		_invitationOrganisation.setSecuritytoken(securitytoken);
 	}
 
 	@Override

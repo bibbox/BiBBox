@@ -265,4 +265,7 @@ public interface InvitationLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getStatusFromString(java.lang.String string_status);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getStatusFromLong(long status);
 }

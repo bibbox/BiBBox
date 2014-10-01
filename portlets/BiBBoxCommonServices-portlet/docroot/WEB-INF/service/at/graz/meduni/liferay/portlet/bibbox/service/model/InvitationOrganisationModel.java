@@ -158,6 +158,76 @@ public interface InvitationOrganisationModel extends BaseModel<InvitationOrganis
 	 */
 	public void setLastchanger(long lastchanger);
 
+	/**
+	 * Returns the reactdate of this invitation organisation.
+	 *
+	 * @return the reactdate of this invitation organisation
+	 */
+	public Date getReactdate();
+
+	/**
+	 * Sets the reactdate of this invitation organisation.
+	 *
+	 * @param reactdate the reactdate of this invitation organisation
+	 */
+	public void setReactdate(Date reactdate);
+
+	/**
+	 * Returns the lastusedlink of this invitation organisation.
+	 *
+	 * @return the lastusedlink of this invitation organisation
+	 */
+	public Date getLastusedlink();
+
+	/**
+	 * Sets the lastusedlink of this invitation organisation.
+	 *
+	 * @param lastusedlink the lastusedlink of this invitation organisation
+	 */
+	public void setLastusedlink(Date lastusedlink);
+
+	/**
+	 * Returns the rejectdate of this invitation organisation.
+	 *
+	 * @return the rejectdate of this invitation organisation
+	 */
+	public Date getRejectdate();
+
+	/**
+	 * Sets the rejectdate of this invitation organisation.
+	 *
+	 * @param rejectdate the rejectdate of this invitation organisation
+	 */
+	public void setRejectdate(Date rejectdate);
+
+	/**
+	 * Returns the securitylinktoken of this invitation organisation.
+	 *
+	 * @return the securitylinktoken of this invitation organisation
+	 */
+	public long getSecuritylinktoken();
+
+	/**
+	 * Sets the securitylinktoken of this invitation organisation.
+	 *
+	 * @param securitylinktoken the securitylinktoken of this invitation organisation
+	 */
+	public void setSecuritylinktoken(long securitylinktoken);
+
+	/**
+	 * Returns the securitytoken of this invitation organisation.
+	 *
+	 * @return the securitytoken of this invitation organisation
+	 */
+	public long getSecuritytoken();
+
+	/**
+	 * Sets the securitytoken of this invitation organisation.
+	 *
+	 * @param securitytoken the securitytoken of this invitation organisation
+	 */
+	public void setSecuritytoken(long securitytoken);
+
 	@Override
 	public boolean isNew();
 

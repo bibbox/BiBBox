@@ -20,13 +20,25 @@ import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisat
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.security.RandomUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -121,11 +133,13 @@ public class Invitation extends MVCPortlet {
 	}
 	
 	/**
-	 * Update a new Invitation
+	 * Update a Invitation
 	 */
 	public void updateInvitation(ActionRequest request, ActionResponse response) throws Exception {
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation = InvitationLocalServiceUtil.invitationFromRequest(request);
-		invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("saved"));
+		if(invitation.getStatus() < InvitationLocalServiceUtil.getStatusFromString("saved")) {
+			invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("saved"));
+		}
 		InvitationLocalServiceUtil.updateInvitation(invitation);
 		
 		sendRedirect(request, response);
@@ -154,7 +168,9 @@ public class Invitation extends MVCPortlet {
 		System.out.println("Simulate Invitation");
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation = InvitationLocalServiceUtil.invitationFromRequest(request);
 		// Save the invitation
-		invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("simulated"));
+		if(invitation.getStatus() < InvitationLocalServiceUtil.getStatusFromString("simulated")) {
+			invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("simulated"));
+		}
 		boolean createinvitation = ParamUtil.getBoolean(request, "cmd");
 		if(createinvitation) {
 			InvitationLocalServiceUtil.addInvitation(invitation);
@@ -169,10 +185,10 @@ public class Invitation extends MVCPortlet {
 		String organizationpath = organizationfriendlyurl + "?invitation="+invitation.getInvitationId();//replace with OrganisationInvitationId for organizationselection
 		String securitylinktoken = "";
 		String securitytoken = "";
-		String organizationrejectpath = organizationfriendlyurl + "?invitation="+invitation.getInvitationId()+"&securitylinktoken=";//replace with OrganisationInvitationId for organizationselection
+		String organizationrejectpath = "organizationnname" + "/reject?invitation="+invitation.getInvitationId()+"&securitylinktoken=" + createSecurityToken(10);//replace with OrganisationInvitationId for organizationselection
 		//replacing Strings
-		String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay,organizationpath);
-		String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay,organizationpath);
+		String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay, "name", organizationpath, organizationrejectpath, "organization name", createSecurityToken(5));
+		String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay, "name", organizationpath, organizationrejectpath, "organization name", createSecurityToken(5));
 		sendEmail(email, mailSubject, mailBody);
 		// Redirect
 		sendRedirect(request, response);
@@ -185,32 +201,118 @@ public class Invitation extends MVCPortlet {
 	public void sendInvitation(ActionRequest request, ActionResponse response) throws Exception {
 		System.out.println("Send Invitation");
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation = InvitationLocalServiceUtil.invitationFromRequest(request);
+		long maincontact_role = ParamUtil.getLong(request, "optionsMainContactRole_option");
 		// Save the invitation
-		invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("send"));
+		if(invitation.getStatus() < InvitationLocalServiceUtil.getStatusFromString("send")) {
+			invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("send"));
+		}
 		boolean createinvitation = ParamUtil.getBoolean(request, "cmd");
 		if(createinvitation) {
 			InvitationLocalServiceUtil.addInvitation(invitation);
 		} else {
 			InvitationLocalServiceUtil.updateInvitation(invitation);
 		}
+		// Load Organizations
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		for(InvitationOrganisation invitationorganisation : InvitationOrganisationLocalServiceUtil.getOrganisationByInvitation(invitation.getInvitationId())) {
+			try {
+				Organization organization = OrganizationLocalServiceUtil.getOrganization(invitationorganisation.getOrganisationId());
+				User maincontact = getEmailFromMaincontact(organization, maincontact_role);
+				
+				// prepare for replacing
+				String organizationfriendlyurl = getOrganisationFriendlyLink(organization);
+				String organizationpath = organizationfriendlyurl + "?invitation="+invitationorganisation.getInvitationOrganisationId();//replace with OrganisationInvitationId for organizationselection
+				String securitylinktoken = createSecurityToken(10);
+				String securitytoken = createSecurityToken(5);
+				String organizationrejectpath = organization.getGroup().getFriendlyURL() + "/reject?invitation="+invitationorganisation.getInvitationOrganisationId()+"&securitylinktoken=" + securitylinktoken;//replace with OrganisationInvitationId for organizationselection
+				//replacing Strings
+				String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay, maincontact.getFullName(), organizationpath, organizationrejectpath, organization.getName(), securitytoken);
+				String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay, maincontact.getFullName(), organizationpath, organizationrejectpath, organization.getName(), securitytoken);
+				sendEmail(maincontact.getEmailAddress(), mailSubject, mailBody);
+				invitationorganisation.setSecuritylinktoken(Long.parseLong(securitylinktoken));
+				invitationorganisation.setSecuritytoken(Long.parseLong(securitytoken));
+				InvitationOrganisationLocalServiceUtil.updateInvitationOrganisation(invitationorganisation);
+			} catch(Exception e) {
+				System.err.println("Ivitation::sendInvitation");
+				e.printStackTrace();
+			}
+		}
 		// Redirect
 		sendRedirect(request, response);
 	}
 	
+	private String getOrganisationFriendlyLink(Organization organization) {
+		String organisationlink = organization.getGroup().getFriendlyURL();
+		String orgPath = "";
+		try {
+			List<DDLRecordSet> recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+			for(DDLRecordSet recordset : recordlist) {
+				String recordsetname = String.valueOf(recordset.getNameCurrentValue());
+				if(recordsetname.equals("core")) { 
+					List<DDLRecord> records = recordset.getRecords();
+		  			for(DDLRecord record : records) {
+		  				if(record.getFieldValue("Radio2493") != null) {
+		  					String type = record.getFieldValue("Radio2493").toString();
+				  			if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
+				  				orgPath = "/bb_home";
+				  			} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
+				  				orgPath = "/home";
+				  			} else {
+				  				orgPath = "/bb_home";
+				  			}
+		  				}
+		  			}
+				}
+			}
+			organisationlink += orgPath;
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return organisationlink;
+	}
+
+	private User getEmailFromMaincontact(Organization organization, long maincontact_role) {
+		User maincontact = null;
+		try {
+			List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+			for(User user_mc : userlist) {
+				List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user_mc.getUserId(), organization.getGroup().getGroupId());
+				for (UserGroupRole ugr : usergrouprolles) {
+					if(ugr.getRoleId() == maincontact_role) {
+						maincontact =  user_mc;
+					}
+				}
+			}
+		} catch(Exception e) {
+			System.err.println("Ivitation::getEmailFromMaincontact");
+			e.printStackTrace();
+		}
+		return maincontact;
+	}
+
 	/**
 	 * Replace Body Naming
 	 *
 	 */
-	private String replaceTagsInString(String string, boolean simulate, ThemeDisplay themedisplay, String organizationpath) {
+	private String replaceTagsInString(String string, boolean simulate, ThemeDisplay themedisplay, String name, String organizationpath, String organization_reject_path, String organization_name, String securitytoken) {
 		// replace [$TO_NAME$]
 		if(simulate) {
 			string = string.replaceAll("\\[\\$TO_NAME\\$\\]", themedisplay.getUser().getFullName());
 		} else {
-			//TODO: replace the name for the invitation send.
+			string = string.replaceAll("\\[\\$TO_NAME\\$\\]", name);
 		}
+		// replace [$ORGANIZATION_NAME$]
+		string = string.replaceAll("\\[\\$ORGANIZATION_NAME\\$\\]", organization_name);
 		// replace [$url$]
-		String organisation_link = themedisplay.getURLPortal()+"/web"+organizationpath;
-		string = string.replaceAll("\\[\\$url\\$\\]", themedisplay.getUser().getFullName());
+		String organization_link = themedisplay.getURLPortal()+"/web"+organizationpath;
+		string = string.replaceAll("\\[\\$URL\\$\\]", organization_link);
+		// replace [$REJECT_URL$]
+		String organization_reject_link = themedisplay.getURLPortal()+"/web"+organization_reject_path;
+		string = string.replaceAll("\\[\\$REJECT_URL\\$\\]", organization_reject_link + " - Secureity Code: " + securitytoken);
 		return string;
 	}
 	
@@ -226,6 +328,7 @@ public class Invitation extends MVCPortlet {
         String receiverMailAddress=email;
         try {
         	MailMessage mailMessage=new MailMessage();
+        	mailMessage.setHTMLFormat(true);
 		    mailMessage.setBody(mailBody);
 		    mailMessage.setSubject(mailSubject);
 		    mailMessage.setFrom(new InternetAddress(senderMailAddress));
@@ -239,7 +342,11 @@ public class Invitation extends MVCPortlet {
 	/**
 	 * Create Security Token
 	 */
-	private String createSecurityToken() {
-		return "";
+	private String createSecurityToken(int count) {
+		String returnstring = "";
+		for(int i : RandomUtil.nextInts(10, count)) {
+			returnstring += i;
+		}
+		return returnstring;
 	}
 }

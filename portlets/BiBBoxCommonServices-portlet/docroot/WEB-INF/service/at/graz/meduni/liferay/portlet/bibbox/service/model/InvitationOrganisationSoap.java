@@ -38,6 +38,11 @@ public class InvitationOrganisationSoap implements Serializable {
 		soapModel.setUserId(model.getUserId());
 		soapModel.setLastchanged(model.getLastchanged());
 		soapModel.setLastchanger(model.getLastchanger());
+		soapModel.setReactdate(model.getReactdate());
+		soapModel.setLastusedlink(model.getLastusedlink());
+		soapModel.setRejectdate(model.getRejectdate());
+		soapModel.setSecuritylinktoken(model.getSecuritylinktoken());
+		soapModel.setSecuritytoken(model.getSecuritytoken());
 
 		return soapModel;
 	}
@@ -141,10 +146,55 @@ public class InvitationOrganisationSoap implements Serializable {
 		_lastchanger = lastchanger;
 	}
 
+	public Date getReactdate() {
+		return _reactdate;
+	}
+
+	public void setReactdate(Date reactdate) {
+		_reactdate = reactdate;
+	}
+
+	public Date getLastusedlink() {
+		return _lastusedlink;
+	}
+
+	public void setLastusedlink(Date lastusedlink) {
+		_lastusedlink = lastusedlink;
+	}
+
+	public Date getRejectdate() {
+		return _rejectdate;
+	}
+
+	public void setRejectdate(Date rejectdate) {
+		_rejectdate = rejectdate;
+	}
+
+	public long getSecuritylinktoken() {
+		return _securitylinktoken;
+	}
+
+	public void setSecuritylinktoken(long securitylinktoken) {
+		_securitylinktoken = securitylinktoken;
+	}
+
+	public long getSecuritytoken() {
+		return _securitytoken;
+	}
+
+	public void setSecuritytoken(long securitytoken) {
+		_securitytoken = securitytoken;
+	}
+
 	private long _invitationOrganisationId;
 	private long _invitationId;
 	private long _organisationId;
 	private long _userId;
 	private Date _lastchanged;
 	private long _lastchanger;
+	private Date _reactdate;
+	private Date _lastusedlink;
+	private Date _rejectdate;
+	private long _securitylinktoken;
+	private long _securitytoken;
 }
