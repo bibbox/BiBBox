@@ -42,7 +42,7 @@ public class People extends MVCPortlet {
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) {
 		try {
 			JSONObject json = JSONFactoryUtil.createJSONObject();
-			String email = ParamUtil.getString(resourceRequest, "email");
+			String email = ParamUtil.getString(resourceRequest, "email").toLowerCase();
 			User user = null;
 			if(email.length() != 0) {
 				ThemeDisplay themeDisplay = (ThemeDisplay) resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
@@ -134,7 +134,7 @@ public class People extends MVCPortlet {
 			} else {
 				try {
 					ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-					user = UserLocalServiceUtil.getUserByEmailAddress(themeDisplay.getCompanyId(), ParamUtil.getString(request, "bibbox_cs_email"));
+					user = UserLocalServiceUtil.getUserByEmailAddress(themeDisplay.getCompanyId(), ParamUtil.getString(request, "bibbox_cs_email").toLowerCase());
 				} catch(Exception e) {
 					System.out.println("-----------------------------------");
 					System.out.println("BiBBox Exception in People::addUser");
@@ -284,7 +284,7 @@ public class People extends MVCPortlet {
 			String firstname = ParamUtil.getString(request, "bibbox_cs_firstname");
 			String middlname = ParamUtil.getString(request, "bibbox_cs_middlename");
 			String lastname = ParamUtil.getString(request, "bibbox_cs_lastname");
-			String email = ParamUtil.getString(request, "bibbox_cs_email");
+			String email = ParamUtil.getString(request, "bibbox_cs_email").toLowerCase();
 			if (user == null) {
 				ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 				ServiceContext serviceContext = new ServiceContext();

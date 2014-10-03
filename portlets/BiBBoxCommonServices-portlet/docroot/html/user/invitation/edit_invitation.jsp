@@ -136,12 +136,6 @@ String addOrganizationListURL = themeDisplay.getURLCurrent().split("[?]")[0] + "
                            cache: false,
                            constrain: true,
                            modal: true,
-                           on: {
-                                   destroy : function(event){
-                                      alert("close");
-                                   },
-
-                               },
                            width: 1000,
                         },
                         id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addorganisation',

@@ -124,9 +124,16 @@ Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_
 			ServiceContext serviceContext = new ServiceContext();
 	        serviceContext.setAddGroupPermissions(true);
 	        serviceContext.setAddGuestPermissions(true);
-	        Group group = organization.getGroup();
+	        Group group = null;
+	        
+	        if(organization == null) {
+	        	group = themeDisplay.getScopeGroup();
+	        } else {
+	        	group = organization.getGroup();
+	        }
+	        
 	        serviceContext.setScopeGroupId(group.getGroupId());
-	        serviceContext.setUserId(organization.getUserId());
+	        serviceContext.setUserId(themeDisplay.getUserId());
 			
 			for(String ddloptions : ddloptionsplited) {
 				%>
@@ -204,4 +211,5 @@ Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_
 You can not create a new <b><%= organisationName_option %></b> for <%= parentOrganisationName_option %>
 <%
 }
+
 %>
