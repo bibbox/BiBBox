@@ -4,12 +4,4 @@
 <hook>
 	<portal-properties>portal.properties</portal-properties>
 	<custom-jsp-dir>/custom_jsps</custom-jsp-dir>
-	<struts-action>
-		<struts-action-path>/document_library/create_folder_bbmri_eric</struts-action-path>
-		<struts-action-impl>at.meduni.liferay.portlet.bbmrieric.BBMRIERICDocumentLibraryCreateFolder</struts-action-impl>
-	</struts-action>
-	<struts-action>
-      <struts-action-path>/document_library/edit_folder_bbmri</struts-action-path>
-      <struts-action-impl>at.meduni.liferay.portlet.bbmrieric.EditFolderAction</struts-action-impl>
-   </struts-action>
 </hook>

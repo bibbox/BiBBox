@@ -14,6 +14,7 @@ long organizationId = ParamUtil.getLong(request, "bibbox_cs_organizationid");
 long editorrole = GetterUtil.getLong(portletPreferences.getValue("optionsEditorRole", "0"));
 long ownerrole = GetterUtil.getLong(portletPreferences.getValue("optionsOwnerRole", "0"));
 long maincontactrole = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
+boolean optionsSendMailNotification_cfg = GetterUtil.getBoolean(portletPreferences.getValue("optionsSendMailNotification", "false"));
 String redirect = ParamUtil.getString(request, "redirect");
 String cmd = ParamUtil.getString(request, "bibbox_cs_cmd");
 if(organizationId != 0) {
@@ -88,6 +89,8 @@ if(organizationId != 0) {
 			<aui:input type="hidden" name="bibbox_cs_editorrole" value="<%= editorrole %>" />
 			<aui:input type="hidden" name="bibbox_cs_ownerrole" value="<%= ownerrole %>" />
 			<aui:input type="hidden" name="bibbox_cs_maincontact" value="<%= maincontactrole %>" />
+			<aui:input type="hidden" name="bibbox_cs_sendmailnotification" value="<%= optionsSendMailNotification_cfg %>" />
+			
 			
 			<aui:input name="bibbox_cs_email" label="E-mail&nbsp;&nbsp;&nbsp;<a id='checkemail'>Check if user exists</a>" type="text" value ="<%= email %>"/> 
 			

@@ -52,7 +52,10 @@ public class BBMRIERICDLFolderListener implements ModelListener<DLFolder>  {
 				String[] permissions = rolesacces[i][1];
 				System.out.println(rolesacces[i][0][0] + ": " + roleId + " - " + permissions.toString());
 				ResourcePermissionLocalServiceUtil.setResourcePermissions(companyId,DLFolder.class.getName(),ResourceConstants.SCOPE_INDIVIDUAL,""+model.getFolderId(), roleId, permissions);	
-			} catch (PortalException | SystemException e) {
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -75,7 +78,10 @@ public class BBMRIERICDLFolderListener implements ModelListener<DLFolder>  {
 		// TODO Auto-generated method stub
 		try {
 			ResourcePermissionLocalServiceUtil.setResourcePermissions(companyId,DLFolder.class.getName(),ResourceConstants.SCOPE_INDIVIDUAL,""+model.getFolderId(), RoleLocalServiceUtil.getRole(companyId,"Owner").getRoleId(), noAccess);
-		} catch (PortalException | SystemException e) {
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

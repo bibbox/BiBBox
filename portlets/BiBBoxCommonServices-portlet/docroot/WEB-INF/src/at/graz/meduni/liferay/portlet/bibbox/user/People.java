@@ -135,6 +135,7 @@ public class People extends MVCPortlet {
 				try {
 					ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 					user = UserLocalServiceUtil.getUserByEmailAddress(themeDisplay.getCompanyId(), ParamUtil.getString(request, "bibbox_cs_email").toLowerCase());
+					OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), ParamUtil.getLong(request, "bibbox_cs_organisationid"));
 				} catch(Exception e) {
 					System.out.println("-----------------------------------");
 					System.out.println("BiBBox Exception in People::addUser");
@@ -307,7 +308,7 @@ public class People extends MVCPortlet {
 				long[] roleIds = new long[0];
 				long[] userGroupIds = new long[0];
 				boolean male = false;
-				boolean sendEmail = false;
+				boolean sendEmail = ParamUtil.getBoolean(request, "bibbox_cs_sendmailnotification");;
 				try {
 					user = UserLocalServiceUtil.addUser(themeDisplay.getUserId(), themeDisplay.getCompanyId(), autoPassword, password1, password1, autoScreenName, screenName, email,
 							facebookId, openId, themeDisplay.getLocale(), firstname, middlname, lastname, prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,

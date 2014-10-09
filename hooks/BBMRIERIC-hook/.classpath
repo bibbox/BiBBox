@@ -8,7 +8,7 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/opt/webserver/liferay-6.2.0/tomcat-7.0.42/webapps/ROOT/WEB-INF/lib/portal-impl.jar" sourcepath="/opt/webserver/liferay-6.2.0/liferay-portal-src-6.2.0-ce-ga1">
+	<classpathentry kind="lib" path="/Users/reihsr/Documents/Liferay/liferay-portal-6.2.0-ce-ga1/tomcat-7.0.42/webapps/ROOT/WEB-INF/lib/portal-impl.jar" sourcepath="/opt/webserver/liferay-6.2.0/liferay-portal-src-6.2.0-ce-ga1">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/opt/webserver/liferay-6.2.0/liferay-portal-doc-6.2.0-ce-ga1-20131101192857659.zip!/liferay-portal-doc-6.2.0-ce-ga1/javadocs-all/"/>
 		</attributes>

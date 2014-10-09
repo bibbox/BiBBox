@@ -3,4 +3,7 @@
 
 <display>
 	
+	<category name="Molgenis">
+		<portlet id="molgenis-i-fram-catalog"></portlet>
+	</category>
 </display>

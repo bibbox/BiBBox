@@ -438,9 +438,10 @@ $dockbarOpenGradientStart: #0EA6F9;
 	margin-right: 20px;
 }
 .aui .rdc_idcard_idcardbodymiddle img {
-	height:85px;
+	max-height: 85px;
+	max-width: 250px;
 }
-.rdc_idcard_idcardbodymiddle-organisationname {
+.aui .rdc_idcard_idcardbodymiddle-organisationname {
 	font-size: 18px;
 	font-weight:bold;
 	color: #8BBF39;

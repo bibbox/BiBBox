@@ -375,7 +375,7 @@ if (currentGroup.isOrganization()) {
 	</div>
 	<!-- middle -->
 	<div class="rdc_idcard_idcardbodymiddle">
-		<aui:a href="<%= orgPath %>"><img alt="logo" class="rdc_idcard_idcardbodymiddle-logo" src="<%= imgPath %>" height="85px" /></aui:a>
+		<aui:a href="<%= orgPath %>"><img alt="logo" class="rdc_idcard_idcardbodymiddle-logo" src="<%= imgPath %>" /></aui:a>
 		<div class="rdc_idcard_idcardbodymiddle-organisationname"><%= organization.getName() %>
 			<% if(biobankregistryownerrole || portaleditorrole || biobankregistryeditorrole) { %>
 			<span id="organizationedit" style="cursor:pointer;"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span>

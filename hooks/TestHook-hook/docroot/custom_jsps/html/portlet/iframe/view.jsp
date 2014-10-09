@@ -81,6 +81,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 </c:choose>
 
 <script  type="text/javascript">
+	var tocken = "";
 	window.onload = function() {
 		var xmlhttp = new XMLHttpRequest(); 
 		xmlhttp.open("Post", "http://localhost:8080/api/v1/login", false);
@@ -89,7 +90,8 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		var elem = document.getElementById("x-molgenis-token");
 		
 		var a = JSON.parse(xmlhttp.responseText);
-		alert(a.token);
+		//alert(a.token);
+		tocken = a.token;
 		elem.value = a.token;
 	};
 </script>
@@ -129,6 +131,18 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		'<portlet:namespace />init',
 		function() {
 			var A = AUI();
+			
+			var xmlhttp = new XMLHttpRequest(); 
+			xmlhttp.open("Post", "http://localhost:8080/api/v1/login", false);
+			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify({username:"admin",password:"admin"}));
+			var elem = document.getElementById("x-molgenis-token");
+			
+			var a = JSON.parse(xmlhttp.responseText);
+			//alert(a.token);
+			
+			
+			A.io.header('x-molgenis-token', a.token);
 
 			var hash = document.location.hash.replace('#', '');
 
@@ -152,7 +166,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 				src += hash;
 
 				var iframe = A.one('#<portlet:namespace />iframe');
-
+				
 				if (iframe) {
 					iframe.attr('src', src);
 				}
@@ -166,6 +180,18 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		'<portlet:namespace />updateHash',
 		function(url) {
 			var A = AUI();
+
+			var xmlhttp = new XMLHttpRequest(); 
+			xmlhttp.open("Post", "http://localhost:8080/api/v1/login", false);
+			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xmlhttp.send(JSON.stringify({username:"admin",password:"admin"}));
+			var elem = document.getElementById("x-molgenis-token");
+			
+			var a = JSON.parse(xmlhttp.responseText);
+			//alert(a.token);
+			
+			
+			A.io.header('x-molgenis-token', a.token);
 
 			var hash = document.location.hash.replace('#', '');
 
@@ -220,6 +246,18 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 			'load',
 			function() {
 				var height = A.Plugin.AutosizeIframe.getContentHeight(iframe);
+				
+				var xmlhttp = new XMLHttpRequest(); 
+				xmlhttp.open("Post", "http://localhost:8080/api/v1/login", false);
+				xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+				xmlhttp.send(JSON.stringify({username:"admin",password:"admin"}));
+				var elem = document.getElementById("x-molgenis-token");
+				
+				var a = JSON.parse(xmlhttp.responseText);
+				//alert(a.token);
+				
+				
+				A.io.header('x-molgenis-token', a.token);
 
 				if (height == null) {
 					height = '<%= HtmlUtil.escapeJS(heightNormal) %>';
