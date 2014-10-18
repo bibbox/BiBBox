@@ -92,10 +92,11 @@ public class OrganizationAggregater {
 					result.put("numberofsubcollections", 0);
 					HashMap<String, java.util.Date> modifieddatehash = new HashMap<String, java.util.Date>();
 					modifieddatehash.put("submodifieddate", modifieddate);
-					recursiveAggregateOrganizationData(result, suborgaization, diseaserecordsetid, materialrecordsetid, modifieddatehash);
+					result = recursiveAggregateOrganizationData(result, suborgaization, diseaserecordsetid, materialrecordsetid, modifieddatehash);
 					organizations += suborgaization.getOrganizationId() + ";";
-					json.put("numberofdoners" + suborgaization.getOrganizationId(), result.get("numberofdoners"));
-					json.put("numberofsamples" + suborgaization.getOrganizationId(), result.get("numberofsamples"));
+					System.out.println(suborgaization.getOrganizationId() + " " + result.get("numberofdoners").toString() + " " + result.get("numberofsamples").toString());
+					json.put("numberofdoners" + suborgaization.getOrganizationId(), result.get("numberofdoners").toString());
+					json.put("numberofsamples" + suborgaization.getOrganizationId(), result.get("numberofsamples").toString());
 				}
 			} catch (SystemException e) {
 				// TODO Auto-generated catch block
@@ -191,7 +192,7 @@ public class OrganizationAggregater {
 			
 			try {
 				for(Organization suborgaization : organization.getSuborganizations()) {
-					recursiveAggregateOrganizationData(result, suborgaization, diseaserecordsetid, materialrecordsetid, modifieddatehash);
+					result = recursiveAggregateOrganizationData(result, suborgaization, diseaserecordsetid, materialrecordsetid, modifieddatehash);
 				}
 			} catch (SystemException e) {
 				// TODO Auto-generated catch block
@@ -277,7 +278,7 @@ public class OrganizationAggregater {
 		}
 		try {
 			for(Organization suborgaization : organization.getSuborganizations()) {
-				recursiveAggregateOrganizationData(result, suborgaization, diseaserecordsetid, materialrecordsetid, modifieddatehash);
+				result = recursiveAggregateOrganizationData(result, suborgaization, diseaserecordsetid, materialrecordsetid, modifieddatehash);
 			}
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block

@@ -173,7 +173,11 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		criterion = RestrictionsFactoryUtil.ilike("source", StringPool.PERCENT + source + StringPool.PERCENT);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT));
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("candidatetype", StringPool.PERCENT + type + StringPool.PERCENT));
-		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + state + StringPool.PERCENT));
+		if(state.equalsIgnoreCase("")) {
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.not(RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + "X" + StringPool.PERCENT)));
+		} else {
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + state + StringPool.PERCENT));
+		}
 		criterion = RestrictionsFactoryUtil.and(criterion, criterion_diseases);
 		criterion = RestrictionsFactoryUtil.and(criterion, criterion_subunit);
 		

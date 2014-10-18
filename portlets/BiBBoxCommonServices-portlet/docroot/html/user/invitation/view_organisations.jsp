@@ -42,6 +42,7 @@ user/edit_invitation
 					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Main Contact</th>
 					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Main Contact last login</th>
 					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Last Contacted</th>
+					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Response</th>
 					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Remove</th>
 				</tr>
 			</thead>
@@ -128,18 +129,18 @@ user/edit_invitation
 		for(InvitationOrganisation invitationorganisation : invitationorganisations) {
 			numberofinvitations++;
 			try {
-			Invitation invitation = InvitationLocalServiceUtil.getInvitation(invitationorganisation.getInvitationId());
-			if(invitation.getStatus() == 1) {
-				numberofsendinvitations++;
-				java.util.Date datesend = invitation.getInvitationsend();
-				if(lastinvitation == null) {
-					lastinvitation = datesend;
-				} else {
-					if(lastinvitation.before(datesend)) {
+				Invitation invitation = InvitationLocalServiceUtil.getInvitation(invitationorganisation.getInvitationId());
+				if(invitation.getStatus() >= InvitationLocalServiceUtil.getStatusFromString("send")) {
+					numberofsendinvitations++;
+					java.util.Date datesend = invitation.getInvitationsend();
+					if(lastinvitation == null) {
 						lastinvitation = datesend;
+					} else {
+						if(lastinvitation.before(datesend)) {
+							lastinvitation = datesend;
+						}
 					}
 				}
-			}
 			} catch(Exception e) {
 				
 			}
@@ -151,6 +152,7 @@ user/edit_invitation
 			lastcontacted = "in invitations: " + numberofinvitations;
 		}
 		tablerow += "<td class=\"" + rowcss + "\">" + lastcontacted + "</td>";
+		tablerow += "<td class=\"" + rowcss + "\">response</td>";
 		tablerow += "<td class=\"" + rowcss + "\">" + "<a id=\"deleteOragnizationFromInvitation\" class=\"icon-remove\" style=\"color: red;\" organisationid=\"" + organization.getOrganizationId() + "\" invitationid=\"" + invitationId + "\" ></a>" + "</td>";
 		tablerow += "</tr>";
 

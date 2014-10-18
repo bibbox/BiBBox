@@ -206,6 +206,7 @@ public class Invitation extends MVCPortlet {
 		if(invitation.getStatus() < InvitationLocalServiceUtil.getStatusFromString("send")) {
 			invitation.setStatus(InvitationLocalServiceUtil.getStatusFromString("send"));
 		}
+		invitation.setInvitationsend(new Date());
 		boolean createinvitation = ParamUtil.getBoolean(request, "cmd");
 		if(createinvitation) {
 			InvitationLocalServiceUtil.addInvitation(invitation);

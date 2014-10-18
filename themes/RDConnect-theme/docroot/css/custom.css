@@ -25,7 +25,10 @@ $dockbarOpenGradientStart: #0EA6F9;
 	width: 100%;
 	float: left;
 }
-
+/* - Hide Sign in after user signed in - */
+.signed-in #p_p_id_58_ {
+	display: none;
+}
 /* ---------- RDC  import portlet css ---------- */
 /* ---------- RDC hub information ---------- */
 .rdc-portalmenu-div-container-homelogo {
@@ -1624,3 +1627,5 @@ div.portlet-body {
 .aui .portlet-dynamic-data-list-display select, .aui .portlet-dynamic-data-list-display input, .aui textarea, .aui .portlet-dynamic-data-list-display .uneditable-input {
 	width: 500px;
 }
+
+@import url(signin.css);

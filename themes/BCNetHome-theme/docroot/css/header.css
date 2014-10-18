@@ -1,0 +1,159 @@
+div#page-header{
+	height:auto;
+	padding-bottom:10px;
+}
+
+
+div#logo-position{
+	float:left;
+	margin-top:11px;
+	max-height:82px;
+	width:35%;
+	max-width:320px;
+}
+
+div#logo-position a{
+	display:block;
+	height:auto;
+}
+
+
+div#section-logo-position{
+	float:left;
+	margin-top:11px;
+	width:35%;
+	max-width:320px;
+	padding-left:0;
+}
+
+div#section-logo-position a{
+	display:block;
+	height:auto;
+	padding-left:10px;
+}
+
+div#section-logo-position a img{
+	width:100%;
+}
+
+
+
+div#links-position{
+	padding-top:10px;
+	height:18px;
+	float:right;
+}
+
+div#links-position ul li{
+	float:left;
+}
+
+ul#networks{
+	float:right;
+	margin-top:4px;
+}
+
+ul#networks li{
+	height:10px;
+	border-left:1px solid #cfcfcf;
+	padding:0 5px;
+}
+
+ul#networks li a{
+	margin-top:-4px;
+	display:block;
+}
+
+ul#networks li.firstli{
+	border-left:medium none;
+}
+
+ul#networks li.lastli{
+	padding-right:0;
+}
+
+div#bottom-links{
+	display:none;
+}
+
+#section-link-position h1{
+	display: none;
+	font-weight: bold;
+	background-color: transparent;
+	color: #00a0dc;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	line-height: 15px;
+	font-size: 12px;
+	padding: 0;
+	margin: 5px 0 0 0;
+	text-align: right;
+	max-width: 300px;
+	float: right;
+}
+
+
+
+
+
+@media screen and (max-width:8in), screen and (max-width:700px){
+	div#logo-position{
+		width:70%;
+		margin-top:15px;
+	}
+	
+	div#logo-position a img{
+		min-width:151px;
+		min-height:33px;
+	}
+	
+	div#section-logo-position img{
+		display:none;
+	}
+	
+	div#section-logo-position{
+		display: block;
+		position:absolute;
+		right: 16px;
+		top: 56px;
+		min-width: 250px;
+		margin-top: 8px;
+	}
+	
+	div#links-position{
+		width:30%;
+		padding-right:0;
+		margin-right:0;
+		position:relative;
+	}
+	
+	div#links-position ul{
+		display:none;
+	}
+	
+	div#links-position div.break{
+		clear:none;
+	}
+	
+	ul#networks{
+		display:block;
+	}
+	
+	div#bottom-links, div#bottom-links ul#networks{
+		display:block;
+	}
+	
+	div#bottom-links ul#networks{
+		margin:0 auto;
+		float:none;
+		width:117px;
+		height:30px;
+	}
+	
+	div#bottom-links ul#networks li{
+		float:left;
+	}
+	
+	#section-link-position h1{
+		display:block;
+	}
+}

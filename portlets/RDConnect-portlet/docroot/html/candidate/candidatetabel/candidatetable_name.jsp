@@ -19,4 +19,5 @@ if(candidate.getUrl().equalsIgnoreCase("")) {
 <div class="rdc-table-nameentry-name"><%= name %></div>
 <div class="rdc-table-nameentry-diseases"><%= candidate.getDiseasesfreetext() %>, <%= candidate.getDiseasescodes() %></div>
 <div class="rdc-table-nameentry-contact"><%= candidate.getContactperson() %>, <%= candidate.getMail() %></div>
+<div class="rdc-table-nameentry-contact"><%= candidate.getDate() %></div>
 </div>

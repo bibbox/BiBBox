@@ -9,6 +9,7 @@ String optionsTypeFilter_cfg = GetterUtil.getString(portletPreferences.getValue(
 String optionsIgnoreOrganisations_cfg = GetterUtil.getString(portletPreferences.getValue("optionsIgnoreOrganisations", ""));
 long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
 long optionsDeleteTo_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsDeleteTo", "0"));
+boolean optionsEnableSearch_cfg = GetterUtil.getBoolean(portletPreferences.getValue("optionsEnableSearch", "false"));
 
 int[] role_type = {RoleConstants.TYPE_ORGANIZATION};
 List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), role_type);
@@ -67,6 +68,10 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 					}
 					%>
 				</aui:select>
+			</aui:column>
+			<!-- Enable Search -->
+			<aui:column columnWidth="100">
+				<aui:input name="preferences--optionsEnableSearch--" type="checkbox" value="<%= optionsEnableSearch_cfg %>" label="Enable Search" />
 			</aui:column>
 		</aui:layout>
 	</aui:fieldset>

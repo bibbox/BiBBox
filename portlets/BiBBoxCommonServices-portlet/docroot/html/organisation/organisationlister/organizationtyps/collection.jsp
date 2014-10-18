@@ -87,8 +87,9 @@ for(Organization organization : organizations) {
        var response = this.get('responseData');
        var organizationarray = response['organizations'].split(';');
        A.Array.each(organizationarray, function(value, index) {
-       	A.one('#olnumberofdoners'+value).setHTML(response['numberofdoners'+value]);
-       	A.one('#olnumberofsamples'+value).setHTML(response['numberofsamples'+value]);
+       	//alert('#olnumberofdoners'+value + ' - ' + response['numberofdoners'+value]);
+       	A.all('#olnumberofdoners'+value).setHTML(response['numberofdoners'+value]);
+       	A.all('#olnumberofsamples'+value).setHTML(response['numberofsamples'+value]);
        }) ;
       }
     }

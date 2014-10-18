@@ -28,7 +28,7 @@
 %>
 <aui:form action="<%= searchurl1 %>" method="POST" name="fm">
 	<aui:fieldset>
-		<input style="width: 420px;" type="text" placeholder="search by: Disease Name, Gene, ORPHACODE,  ICD10, OMIM" value="<%= keywords %>" name="SEARCH" size="60">
+		<input style="width: 420px;" type="text" placeholder="search by: Disease Name, Gene, ORPHACODE,  ICD10, OMIM ..." value="<%= keywords %>" name="SEARCH" size="60">
 	</aui:fieldset>
 	<aui:button-row cssClass="searchFiledFloat">
 		<aui:button type="submit" value="Search" />

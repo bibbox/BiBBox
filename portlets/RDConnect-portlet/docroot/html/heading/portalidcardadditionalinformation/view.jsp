@@ -1,3 +1,11 @@
+<!-- 
+RDConnect
+heading/portalidcardadditionalinformation/view.jsp
+
+Display the information of an organization (URL, address, phone, fax)
+Used in the ID-Card theme next to the card.
+ -->
+
 <%@page import="com.liferay.portal.service.persistence.PhoneUtil"%>
 <%@page import="com.liferay.portal.model.PhoneModel"%>
 <%@ include file="/html/init.jsp" %>
@@ -45,13 +53,9 @@ if (currentGroup.isOrganization()) {
 	  		}
   		}
   	}
-  	
-  	/*Map<String, String> countries = new HashMap<>();
-    for (String iso : Locale.getISOCountries()) {
-        Locale l = new Locale("", iso);
-        countries.put(l.getDisplayCountry(), iso);
-    }*/
     
+  	// create a map with countrys and countrycodes
+  	//TODO: fix with liferay country object
     Map<String, String> map = new HashMap<String, String>();
 
      map.put("Andorra, Principality Of", "AD");
@@ -306,8 +310,8 @@ if (currentGroup.isOrganization()) {
 %>
 
 <div class="rdc_idcard_idcaibody">
-<%
-// Edit link
+	<%
+	// Edit link
 	boolean portaleditorrole = false;
     boolean biobankregistryownerrole = false;
     for(Role role : themeDisplay.getUser().getRoles()) {
@@ -328,109 +332,149 @@ if (currentGroup.isOrganization()) {
     if(biobankregistryownerrole || portaleditorrole) {
 	
 	
-	LiferayPortletURL editusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
-	editusersURL.setParameter("struts_action", "/users_admin/edit_organization");
-    editusersURL.setParameter("tab", "websites");
-    editusersURL.setParameter("redirect", currentURL);
-    editusersURL.setParameter("p_p_state", "maximized");
-	String editpathaddresses = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_addresses";
-	String editpathphone = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_phoneNumbers";
-	String editpathwebsites = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_websites";
-%>
-	<div class="rdc_idcard_idcaibody-edit-icon-websites"><span id="organizationeditwebsite" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
-	<div class="rdc_idcard_idcaibody-edit-icon-phone"><span id="organizationeditphone" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
-	<div class="rdc_idcard_idcaibody-edit-icon-address"><span id="organizationeditaddress" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
-<% } %>
+		LiferayPortletURL editusersURL = PortletURLFactoryUtil.create(request, "125", controlPanelPlid, "RENDER_PHASE");
+		editusersURL.setParameter("struts_action", "/users_admin/edit_organization");
+	    editusersURL.setParameter("tab", "websites");
+	    editusersURL.setParameter("redirect", currentURL);
+	    editusersURL.setParameter("p_p_state", "maximized");
+		String editpathaddresses = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_addresses";
+		String editpathphone = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_phoneNumbers";
+		String editpathwebsites = editusersURL.toString() + "&_125_organizationId=" + organizationId + "#_125_tab=_125_websites";
+		%>
+		<div class="rdc_idcard_idcaibody-edit-icon-websites"><span id="organizationeditwebsite" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
+		<div class="rdc_idcard_idcaibody-edit-icon-phone"><span id="organizationeditphone" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
+		<div class="rdc_idcard_idcaibody-edit-icon-address"><span id="organizationeditaddress" style="cursor:pointer;"><img alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></span> </div>
+		<% 
+	} 
+	%>
 	<div class="rdc_idcard_idcaibody-top">
 		<div class="rdc_idcard_idcaibody-flag">
-			<% if(map.containsKey(country)) { %>
-			<img id='countryflag' src="http://www.geonames.org/flags/x/<%= map.get(country).toLowerCase() %>.gif" />
-			<% } else if(country.equalsIgnoreCase("International")) { 
+			<% 
+			if(map.containsKey(country)) { 
+				%>
+				<img id='countryflag' src="http://www.geonames.org/flags/x/<%= map.get(country).toLowerCase() %>.gif" />
+				<% 
+			} else if(country.equalsIgnoreCase("International")) { 
 				String wordimage = request.getContextPath() + "/images/world.png";
-			%>
-			<img id='countryflag' src="<%= wordimage %>" />
-			<% } else { %>
+				%>
+				<img id='countryflag' src="<%= wordimage %>" />
+				<% 
+			} else { 
+				%>
 				<%= country %>
-			<% } %>
+				<% 
+			} 
+			%>
 		</div>
 		<div class="rdc_idcard_idcaibody-webpage">
 			<% 
-				List<Website> websites = WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
-				for(Website website : websites) {
-					if(website.isPrimary()) {
-						%><aui:a href='<%= website.getUrl() %>'><%= website.getUrl() %></aui:a><%
-					}
+			List<Website> websites = WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
+			boolean first = true; 
+			for(Website website : websites) {
+				if(!first) {
+					%><br /><%
 				}
+				//if(website.isPrimary()) {
+				%><aui:a href='<%= website.getUrl() %>' target="blank"><%= website.getUrl() %></aui:a><%
+				//}
+				first = false;
+			}
 			%>
 		</div>
 	</div>
 	<div class="rdc_idcard_idcaibody-contactinformation">
-	<span class="rdc_idcard_idcaibody-headlines">Address</span><br>
+		<span class="rdc_idcard_idcaibody-headlines">Address</span><br>
 	
-<%
-	String phone = "";
-	String fax = "";
-	List<Phone> phones = PhoneLocalServiceUtil.getPhones(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
-	for(Phone tmpphone : phones) {
-		if(tmpphone.isPrimary()) {
-			phone = "Tel. " + tmpphone.getNumber() + "-" + tmpphone.getExtension();
-			if(phone.length() >= 17) {
-				phone = phone.replaceAll(" ", "");
+		<%
+		String phone = "";
+		String fax = "";
+		List<Phone> phones = PhoneLocalServiceUtil.getPhones(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
+		for(Phone tmpphone : phones) {
+			if(tmpphone.isPrimary()) {
+				phone = "Tel. " + tmpphone.getNumber() + "-" + tmpphone.getExtension();
 				if(phone.length() >= 17) {
-					phone = "<span style=\"font-size: 80%\">" + phone + "</span>";
-				}
-			} 
-		}
-		if(tmpphone.getTypeId() == 12007) {
-			fax = "Fax. " + tmpphone.getNumber() + "-" + tmpphone.getExtension();
-			if(fax.length() >= 17) {
-				fax = fax.replaceAll(" ", "");
+					phone = phone.replaceAll(" ", "");
+					if(phone.length() >= 17) {
+						phone = "<span style=\"font-size: 80%\">" + phone + "</span>";
+					}
+				} 
+			}
+			if(tmpphone.getTypeId() == 12007) {
+				fax = "Fax. " + tmpphone.getNumber() + "-" + tmpphone.getExtension();
 				if(fax.length() >= 17) {
-					fax = "<span style=\"font-size: 80%\">" + fax + "</span>";
+					fax = fax.replaceAll(" ", "");
+					if(fax.length() >= 17) {
+						fax = "<span style=\"font-size: 80%\">" + fax + "</span>";
+					}
 				}
 			}
 		}
-	}
-%>
+		%>
 	
-	<table>
-	<tr><td class="rdc_idcard_idcaibody-contactinformation-tdfirst"><%= organization.getAddress().getStreet1() %></td>
-	<td class="rdc_idcard_idcaibody-contactinformation-tdlast"><%= phone.length() != 0 ? phone : "" %></td></tr>
-	<% 
-	String street2 = "";
-	if(!organization.getAddress().getStreet2().equalsIgnoreCase("")) { 
-		street2 = organization.getAddress().getStreet2();
-	%>
-		<tr><td><%= street2 %></td><td class="rdc_idcard_idcaibody-contactinformation-tdlast"><% if(faxset) {
-			faxset = false;
+		<table>
+			<tr>
+				<td class="rdc_idcard_idcaibody-contactinformation-tdfirst"><%= organization.getAddress().getStreet1() %></td>
+				<td class="rdc_idcard_idcaibody-contactinformation-tdlast"><%= phone.length() != 0 ? phone : "" %></td>
+			</tr>
+			<% 
+			String street2 = "";
+			if(!organization.getAddress().getStreet2().equalsIgnoreCase("")) { 
+				street2 = organization.getAddress().getStreet2();
+				%>
+				<tr>
+					<td><%= street2 %></td><td class="rdc_idcard_idcaibody-contactinformation-tdlast">
+					<% 
+					if(faxset) {
+						faxset = false;
+						%>
+						<%= fax.length() != 0 ? fax : "" %>
+						<%
+					}
+					%>
+					</td>
+				</tr>
+				<% 
+			} 
 			%>
-			<%= fax.length() != 0 ? fax : "" %>
-			<%
-		}
-		%></td></tr>
-	<% } %>
-	<% if(!organization.getAddress().getStreet3().equalsIgnoreCase("")) { %>
-		<tr><td><%= organization.getAddress().getStreet3() %></td><td class="rdc_idcard_idcaibody-contactinformation-tdlast"><% if(faxset) {
-			faxset = false;
+			<% 
+			if(!organization.getAddress().getStreet3().equalsIgnoreCase("")) { 
+				%>
+				<tr>
+					<td><%= organization.getAddress().getStreet3() %></td>
+					<td class="rdc_idcard_idcaibody-contactinformation-tdlast">
+					<% 
+					if(faxset) {
+						faxset = false;
+						%>
+						<%= fax.length() != 0 ? fax : "" %> 
+						<%
+					}
+					%>
+					</td>
+				</tr>
+				<% 
+			} 
 			%>
-			<%= fax.length() != 0 ? fax : "" %> 
-			<%
-		}
-		%></td></tr>
-	<% } %>
-	<tr>
-	<td><%= organization.getAddress().getZip() %> <%= organization.getAddress().getCity() %></td><td class="rdc_idcard_idcaibody-contactinformation-tdlast"><% if(faxset) {
-			faxset = false;
-			%>
-			<%= fax.length() != 0 ? fax : "" %> 
-			<%
-		}
-		%></td>
-		</tr>
-		<tr><td><%= organization.getAddress().getCountry().getNameCurrentValue() %></td><td></td>
-		</tr>
-	</table>
+			<tr>
+				<td><%= organization.getAddress().getZip() %> <%= organization.getAddress().getCity() %></td>
+				<td class="rdc_idcard_idcaibody-contactinformation-tdlast">
+				<% 
+				if(faxset) {
+					faxset = false;
+					%>
+					<%= fax.length() != 0 ? fax : "" %> 
+					<%
+				}
+				%>
+				</td>
+			</tr>
+			<tr>
+				<td><%= organization.getAddress().getCountry().getNameCurrentValue() %></td>
+				<td></td>
+			</tr>
+		</table>
 	</div>
+</div>
 <%
 }
 

@@ -15,11 +15,10 @@ String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 String actionId_add_invitation = "ADD_INVITATION";
 String actionId_edit_invitation = "EDIT_INVITATION";
-%>
 
-<%
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
 %>
 
 <c:choose>
@@ -59,8 +58,10 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 			value='<%= dateFormat.format(invitation.getLastchanged()) %>'
 		/>
 		<liferay-ui:search-container-column-text
-			name="Number of Organizations"
-			value='<%= "" + InvitationOrganisationLocalServiceUtil.getOrganisationByInvitationCount(invitation.getInvitationId()) %>'
+			name='Number of Organizations (all/respons/rejected)'
+			value='<%= "" + InvitationOrganisationLocalServiceUtil.getOrganisationByInvitationCount(invitation.getInvitationId()) 
+				+ "/" + InvitationOrganisationLocalServiceUtil.getInvitationRespons(invitation.getInvitationId())
+			%>'
 		/>
 		<%
 		if (permissionChecker.isOmniadmin() || true) { 

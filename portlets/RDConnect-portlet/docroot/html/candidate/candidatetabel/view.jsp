@@ -80,7 +80,7 @@ String urltounfilterd = themeDisplay.getURLPortal() + themeDisplay.getURLCurrent
 <div style="float:left;">
 	<aui:select name="state" label="State:" cssClass="rdc-filter-input" >
 				<aui:option value="all" selected='<%= state.equalsIgnoreCase("all") ? true : false %>' >all</aui:option>
-				<aui:option value="X" selected='<%= state.equalsIgnoreCase("X") ? true : false %>' >rejected</aui:option>
+				<aui:option value="X" selected='<%= state.equalsIgnoreCase("X") ? true : false %>' >deleted</aui:option>
 				<aui:option value="0" selected='<%= state.equalsIgnoreCase("0") ? true : false %>' >not decided</aui:option>
 				<aui:option value="1" selected='<%= state.equalsIgnoreCase("1") ? true : false %>' >accepted</aui:option>
 				<aui:option value="P" selected='<%= state.equalsIgnoreCase("P") ? true : false %>' >published</aui:option>

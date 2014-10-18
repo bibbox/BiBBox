@@ -313,6 +313,14 @@ public class InvitationOrganisationLocalServiceUtil {
 				   .getInvitationOrganisation(invitationId, organisationId);
 	}
 
+	/**
+	* Get organizations responded by invitation
+	*/
+	public static java.lang.String getInvitationRespons(long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getInvitationRespons(invitationId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

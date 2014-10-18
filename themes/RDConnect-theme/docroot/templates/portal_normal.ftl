@@ -25,34 +25,28 @@ ${theme.include(body_top_include)}
 </#if>
 
 
-	<div class="rdconnect-header-container-top">
-		<div class="rdconnect-header-container-inner">
-			<div class="rdconnect-header-container-top-rdlogo">
-				<a href="http://rd-connect.bibbox.org/home">
-					<#if user_id == 105078>
-						<img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnect-theme/images/BBMRIatTmpLogo.png" />
-					<#elseif user_id == 105092>
-						<img alt="RD-Connect-IDCard-Logo" height="50px" width="180px" src="/RDConnect-theme/images/BBMRIatTmpLogo.png" />
-					<#else>
-						<img alt="RD-Connect-IDCard-Logo" height="27px" width="168px" src="/RDConnect-theme/images/rd_connect.png" />
-					</#if>
-				</a>
-			</div>
-			<div class="rdconnect-header-container-top-menue">
-				<#assign locPortletId = "portalmenu_WAR_RDConnectportlet" />
+<div class="rdconnect-header-container-top">
+	<div class="rdconnect-header-container-inner">
+		<div class="rdconnect-header-container-top-rdlogo">
+			<a href="http://rd-connect.bibbox.org/home">
+				<img alt="RD-Connect-IDCard-Logo" height="27px" width="168px" src="/RDConnect-theme/images/rd_connect.png" />
+			</a>
+		</div>
+		<div class="rdconnect-header-container-top-menue">
+			<#assign locPortletId = "portalmenu_WAR_RDConnectportlet" />
 				 
-				<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
-				<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
+			<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
+			<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
 				 
-				<#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
-					<#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
-					<#assign temp = portletSetup.store() />
-				</#if>
-				 
-				${theme.runtime(locPortletId, "", "")}
-			</div>
+			<#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
+				<#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
+				<#assign temp = portletSetup.store() />
+			</#if>
+			 
+			${theme.runtime(locPortletId, "", "")}
 		</div>
 	</div>
+</div>
 	
 <div class="rdconnect-header-container-idcard">
 	<div class="rdconnect-header-container-bottom">
@@ -99,10 +93,9 @@ ${theme.include(body_top_include)}
 
 			${theme.wrapPortlet("portlet.ftl", content_include)}
 		</#if>
-	</div>
-	
-	
+	</div>	
 </div>
+
 <footer id="footer" role="contentinfo">
 		<p class="powered-by">
 			Linking up rare disease resarch across the world<br/> <a href="http://www.rd-connect.eu" rel="external">RD-Connect</a>

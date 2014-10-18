@@ -331,6 +331,15 @@ public class InvitationOrganisationLocalServiceWrapper
 	}
 
 	/**
+	* Get organizations responded by invitation
+	*/
+	@Override
+	public java.lang.String getInvitationRespons(long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _invitationOrganisationLocalService.getInvitationRespons(invitationId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public InvitationOrganisationLocalService getWrappedInvitationOrganisationLocalService() {

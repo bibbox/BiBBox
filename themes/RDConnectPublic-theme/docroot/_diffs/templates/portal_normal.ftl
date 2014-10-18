@@ -13,12 +13,6 @@
 
 	${theme.include(top_head_include)}
 	
-	<#if is_signed_in>
-		<#if !isadmin>
- 			<meta http-equiv="refresh" content="0; url=http://rd-connect.bibbox.org/home" />
- 		</#if>
-	</#if>
-	
 </head>
 
 <body class="${css_class}">

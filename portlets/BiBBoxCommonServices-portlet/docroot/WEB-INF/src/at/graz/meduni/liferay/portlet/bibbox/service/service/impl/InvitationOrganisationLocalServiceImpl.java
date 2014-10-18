@@ -78,4 +78,22 @@ public class InvitationOrganisationLocalServiceImpl
 		}
 		return null;
 	}
+	
+	/**
+	 * Get organizations responded by invitation
+	 */
+	public String getInvitationRespons(long invitationId) throws SystemException {
+		List<InvitationOrganisation> invitationorganisations = invitationOrganisationPersistence.findByInvitationOrganisations(invitationId);
+		int respons = 0;
+		int rejected = 0;
+		for(InvitationOrganisation invitationorganisation : invitationorganisations) {
+			if(invitationorganisation.getReactdate() != null) {
+				respons ++;
+			}
+			if(invitationorganisation.getRejectdate() != null) {
+				rejected ++;
+			}
+		}
+		return "" + respons + "/" + rejected;
+	}
 }

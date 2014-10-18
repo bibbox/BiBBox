@@ -16,11 +16,11 @@ This is the <b>Molgenis I Fram Catalog</b> portlet in View mode.
 		
 		var a = JSON.parse(xmlhttp.responseText);
 		var token = a.token;
-		alert(token);
+		//alert(token);
 
 		var A = AUI();
 
-		var url = 'http://localhost:8080';
+		var url = 'http://localhost:8080/plugin/dataexplorer';
 		A.io.request(url,{
 			//this is the data that you are sending to the action method
 			data: {

@@ -1,0 +1,238 @@
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+
+@import url(header.css);
+
+
+div#page-position{
+	/*width:983px;*/
+	background-color:white;
+	margin:0 auto 50px auto;
+	/*max-width:983px;*/
+}
+
+
+div#page-position #wrapper{
+	padding-top: 0;
+}
+
+@media (max-width:983px){
+	div#page-position{
+		min-width:0;
+		width:100%;
+		max-width:100%;
+		min-width:250px;
+		margin-bottom:0;
+	}
+}
+
+div#wrapper-blue{
+	background-color:#0B80B7;
+	padding-left:26px;
+}
+
+
+div#page{
+	background-color:#FFF;
+	padding:0 19px;
+}
+
+.break{
+	clear:both;
+}
+	
+ul{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+
+/***Navigation Menu Start***/
+
+div#topmenu-position{
+	height:31px;
+	padding:0;
+	position:relative;
+	z-index:3;
+}
+
+
+div#topmenu-position ul{
+	display:table;
+	width:100%;
+	table-layout:auto;
+	margin-left:0px;
+}
+
+div#topmenu-position ul li{
+	border-right:1px solid #0a6aa7;
+	border-left:1px solid #199fd1;
+	display:table-cell;
+	width:0%;
+	margin-bottom:0;
+}
+
+div#topmenu-position ul li.firstli{
+	background-image:url('@theme_image_path@/topmenu-firstli.jpg');
+	background-repeat:no-repeat;
+	background-position:top left;
+	padding-left:5px;
+	border-left:medium none;
+	margin-left:0;
+}
+
+div#topmenu-position ul li.firstli:hover{
+	background-position:0px -31px;
+}
+
+div#topmenu-position ul li.lastli{
+	background-image:url('@theme_image_path@/topmenu-lastli.jpg');
+	background-repeat:no-repeat;
+	background-position:top right;
+	padding-right:5px;
+	border-right:medium none;
+	float:none;
+}
+
+div#topmenu-position ul li.lastli:hover{
+	background-position:right -31px;
+}
+
+div#topmenu-position ul li a{
+	font-family:/*"Gill Sans",*/ "Gill Sans MT", Helvetica, Arial, sans-serif;
+	color:#FFF;
+	text-transform:uppercase;
+	font-size:14px;
+	font-weight:normal;
+	line-height:31px;height:31px;
+	display:block;
+	background-image:url('@theme_image_path@/topmenu-bg.jpg');
+	background-repeat:repeat-x;
+	background-position:top left;
+	text-align:center;
+}
+
+
+div#topmenu-position ul li ul{
+	display:none;
+	z-index:10;
+	position:absolute;
+	margin-left:-1px;
+	background-position:bottom left;
+	background-repeat:no-repeat;
+	background-image:url('@theme_image_path@/submenu-bg.png');
+	width:236px;
+	padding-left:1px;
+	padding-right:6px;
+	padding-bottom:18px;
+}
+
+
+div#topmenu-position ul li:hover ul {
+		display: block;
+}
+
+
+div#topmenu-position ul li:hover a{
+	background-position:0px -31px;
+}
+
+div#topmenu-position ul li.firstli ul{
+	margin-left:-5px;
+}
+
+div#topmenu-position ul li.lastli ul{
+	margin-left:-83px;
+}
+
+div#topmenu-position ul li.lastli div{
+	float:right;
+}
+
+
+div#topmenu-position ul li ul li{
+	background-color:transparent;
+	width:210px;
+	display:block;
+	height:auto;
+	padding:0 10px;
+	margin:0;
+	border:medium none;
+}
+
+div#topmenu-position ul li ul li a{
+	letter-spacing:0px;
+	font-size:13px;
+}
+
+div#topmenu-position ul li:hover ul li a, div#topmenu-position ul li.firstli ul li a, div#topmenu-position ul li.lastli ul li a, div#topmenu-position ul li ul li a{
+	text-decoration:none;
+	text-transform:none;
+	background-image:url('@theme_image_path@/leftmenu-arrow.png');
+	background-position:0px 12px;
+	background-repeat:no-repeat;
+	border-bottom:1px dashed silver;
+	text-align:left;
+	display:block;
+	color:#7E7C7D;
+	padding:8px 0 8px 10px;
+	line-height:15px;
+	height:auto;
+}
+
+
+div#topmenu-position ul li:hover ul li:hover a{
+	text-decoration:none;
+	background-image:url('@theme_image_path@/leftmenu-arrow-selected.png');
+	color:#017bba;
+}
+
+div#topmenu-position ul li ul li.firstli, div#topmenu-position ul li ul li.lastli{
+	background-image:none;
+}
+
+div#topmenu-position ul li:hover ul li.lastli a, div#topmenu-position ul li.firstli ul li.lastli a, div#topmenu-position ul li.lastli ul li.lastli a{
+	border-bottom:medium none;
+}
+
+div#topmenu-position ul li:hover ul li.lastli, div#topmenu-position ul li.firstli ul li.lastli, div#topmenu-position ul li.lastli ul li.lastli,
+div#topmenu-position ul li:hover ul li.firstli, div#topmenu-position ul li.firstli ul li.firstli, div#topmenu-position ul li.lastli ul li.firstli{
+	background-image:none;
+	padding:0 10px;
+}
+
+/***Navigation Menu End***/
+
+/***Main Page Content Start***/
+div#main{
+	display:block;
+}
+
+
+div#content{
+	padding-bottom:17px;
+	min-height:500px;
+	width:100%;
+}
+/***Main Page Content End***/
+
+
+/***Footer Start***/
+div#footer {
+	height: 58px;
+	background-color: #eeeeee;
+}
+
+div#footer address {
+	padding-bottom: 10px;
+	padding-top: 18px;
+	color: #000;
+	font-size: 10px;
+	font-weight: normal;
+	text-align: center;
+	font-style: normal;
+}
+
+address {
+	display: block;
+}
+/***Footer End***/

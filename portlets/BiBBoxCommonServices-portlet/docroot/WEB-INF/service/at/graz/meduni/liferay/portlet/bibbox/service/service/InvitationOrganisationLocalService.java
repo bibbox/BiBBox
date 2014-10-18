@@ -279,4 +279,11 @@ public interface InvitationOrganisationLocalService extends BaseLocalService,
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation getInvitationOrganisation(
 		long invitationId, long organisationId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Get organizations responded by invitation
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getInvitationRespons(long invitationId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }
