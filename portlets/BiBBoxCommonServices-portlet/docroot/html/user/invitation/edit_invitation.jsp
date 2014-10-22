@@ -89,7 +89,7 @@ invitationId = invitation.getInvitationId();
 				<aui:input name="subject" cssClass="bibbox_cs_width_100"  value='<%= invitation.getSubject() %>'></aui:input>
 			</aui:column>
 			<aui:column columnWidth="100" first="true">
-				<aui:input name="body" type="textarea" cssClass="bibbox_cs_width_100"  value='<%= invitation.getBody() %>'></aui:input>
+				<aui:input name="body" type="textarea" cssClass="bibbox_cs_width_100 bibbox_cs_height_bigger"  value='<%= invitation.getBody() %>'></aui:input>
 			</aui:column>
 		</aui:layout>
 	</aui:fieldset>
@@ -123,8 +123,6 @@ String addOrganizationListURL = themeDisplay.getURLCurrent().split("[?]")[0] + "
 %>
 
 <portlet:actionURL name='deleteOrganizationFromInvitation' var="deleteOrganizationFromInvitationURL" />
-
- <button onclick="refreshOrganizationListPortlet()">Click me</button> 
 
 <aui:script use="aui-base">
             A.all('#addorganisations').on(

@@ -3,7 +3,7 @@
 		
 		<#assign parentfirst=true/>
 		
-		<#list nav_main_items as nav_item>
+		<#list nav_items as nav_item>
 			<#assign nav_item_attr_has_popup = "" />
 			<#assign nav_item_attr_selected = "" />
 			<#assign nav_item_css_class = "" />

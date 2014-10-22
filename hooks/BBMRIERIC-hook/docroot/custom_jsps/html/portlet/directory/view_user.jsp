@@ -20,21 +20,14 @@ System.out.println("P-1");
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
-System.out.println("P0");
 
 User selUser = PortalUtil.getSelectedUser(request);
-
-System.out.println("P1");
 		 
 selUser = selUser.toEscapedModel();
 
 Contact selContact = selUser.getContact();
 
-System.out.println("P2");
-
 List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(selUser.getUserId());
-
-System.out.println("P3");
 
 request.setAttribute("user.selUser", selUser);
 request.setAttribute("user.selContact", selContact);

@@ -79,9 +79,17 @@ ${theme.include(body_top_include)}
 				</header>
 				
 				<div id="topmenu-position">
-					<#if has_navigation || is_signed_in>
-						<#include "${full_templates_path}/navigation.ftl" />
+					<#assign locPortletId = "bcnetmainmenu_WAR_TestPortletProjectportlet" />
+				 
+					<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
+					<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
+						 
+					<#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
+						<#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
+						<#assign temp = portletSetup.store() />
 					</#if>
+					 
+					${theme.runtime(locPortletId, "", "")}
 				</div>
 				
 				<div class="break"></div>

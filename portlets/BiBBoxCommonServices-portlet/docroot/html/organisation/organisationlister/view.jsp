@@ -8,6 +8,7 @@ String optionsTypeFilter_option = GetterUtil.getString(portletPreferences.getVal
 String optionsIgnoreOrganisations_option = GetterUtil.getString(portletPreferences.getValue("optionsIgnoreOrganisations", ""));
 long optionsMainContactRole_option = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
 long optionsDeleteTo_option = GetterUtil.getLong(portletPreferences.getValue("optionsDeleteTo", "0"));
+boolean optionsEnableSearch_cfg = GetterUtil.getBoolean(portletPreferences.getValue("optionsEnableSearch", "false"));
 
 //Parameters for permission Checking
 long groupId = scopeGroupId;
@@ -43,12 +44,23 @@ if(optionsListOrganizationFromMainOrganization_option == 2) {
 	}
 }
 if(optionsTypeFilter_option.equals("RD-Connect")) {
-	%>
-	<%@ include file="/html/organisation/organisationlister/organizationtyps/rdconnect.jsp" %>
-	<%
+	
+	if(optionsEnableSearch_cfg) {
+		%>
+		<%@ include file="/html/organisation/organisationlister/organizationtyps/rdconnect_search.jsp" %>
+		<%
+	} else {
+		%>
+		<%@ include file="/html/organisation/organisationlister/organizationtyps/rdconnect.jsp" %>
+		<%
+	}
 } else if(optionsTypeFilter_option.equals("Collection")) {
 	%>
 	<%@ include file="/html/organisation/organisationlister/organizationtyps/collection.jsp" %>
+	<%
+} else {
+	%>
+	<%@ include file="/html/organisation/organisationlister/organizationtyps/default.jsp" %>
 	<%
 }
 %>

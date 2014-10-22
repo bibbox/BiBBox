@@ -33,25 +33,33 @@ user/edit_invitation
 	java.util.Date now = new java.util.Date();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	%>
-			<table class="bibboc-cs-datatable-table">
-			<thead class="bibboc-cs-datatable-columns">
+			<table class="bibbox-cs-datatable-table">
+			<thead class="bibbox-cs-datatable-columns">
 				<tr>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-first-header bibboc-cs-datatable-col-name">Name</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Type</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Days since last modified</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Main Contact</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Main Contact last login</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Last Contacted</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Response</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Remove</th>
+					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-first-header bibbox-cs-datatable-col-name">Name</th>
+					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Type</th>
+					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Days since last modified</th>
+					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Main Contact</th>
+					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Main Contact last login</th>
+					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Last Contacted</th>
+					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Response</th>
+					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Remove</th>
 				</tr>
 			</thead>
 	<%
 
 	
 	long counter = 0;
-	List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(themeDisplay.getCompanyId(), optionsParentOrganisation_option);
-	for (Organization organization : organizations) {
+	Invitation invitation = null;
+	try {
+		invitation = InvitationLocalServiceUtil.getInvitation(invitationId);
+	} catch (Exception e) {
+		
+	}
+	List<InvitationOrganisation> invitationorganisations = InvitationOrganisationLocalServiceUtil.getOrganisationByInvitation(invitationId);
+	
+	for(InvitationOrganisation invitationorganisation : invitationorganisations) {
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(invitationorganisation.getOrganisationId());
 		if (!optionsTypeFilter_option.equals("")) {
 			if (!organization.getExpandoBridge().getAttribute("Organization Type").equals(optionsTypeFilter_option)) {
 				continue;
@@ -63,11 +71,19 @@ user/edit_invitation
 		java.util.Date modifieddate = organization.getModifiedDate();
 		String type = "Registry/Biobank";
 		String rowcss = "bibbox-cs-datatable-cell-even";
+
 		if(counter % 2 == 0) {
 			rowcss = "bibbox-cs-datatable-cell-odd";
 		}
 		
-		String tablerow = "<tr class=\"" + rowcss + "\"><td class=\"" + rowcss + "\">" + organization.getName() + "</td>";
+		// Type
+		String css_class_deleted = "";
+		String organization_deleted = "";
+		if(organization.getParentOrganizationId() != 0) {
+			css_class_deleted = "bibbox-cs-datatable-organization-deleted";
+			organization_deleted = " [deleted]";
+		}
+		String tablerow = "<tr class=\"" + rowcss + " " + css_class_deleted + "\"><td class=\"" + rowcss + " " + css_class_deleted + "\">" + organization.getName() + organization_deleted + "</td>";
 		List<DDLRecordSet> ddlrecordsets = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
 		for(DDLRecordSet ddlrecordset : ddlrecordsets) {
 			String ddlrecordsetname = String.valueOf(ddlrecordset.getNameCurrentValue());
@@ -96,6 +112,7 @@ user/edit_invitation
 			}
 		}
 		
+		// Main Contact
 		User maincontact = null;
 		List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
 		for(User user_mc : userlist) {
@@ -122,17 +139,22 @@ user/edit_invitation
 			tablerow += "<td class=\"" + rowcss + "\"></td>";
 			tablerow += "<td class=\"" + rowcss + "\"></td>";
 		}
-		List<InvitationOrganisation> invitationorganisations = InvitationOrganisationLocalServiceUtil.getInvitationsByOrganisation(organization.getOrganizationId());
+		// Last Contacted
+		List<InvitationOrganisation> invitationorganisations_tmp = InvitationOrganisationLocalServiceUtil.getInvitationsByOrganisation(organization.getOrganizationId());
 		long numberofinvitations = 0;
 		long numberofsendinvitations = 0;
+		long numberofrespons = 0;
 		java.util.Date lastinvitation = null;
-		for(InvitationOrganisation invitationorganisation : invitationorganisations) {
+		for(InvitationOrganisation invitationorganisation_tmp : invitationorganisations_tmp) {
 			numberofinvitations++;
+			if(invitationorganisation_tmp.getReactdate() != null || invitationorganisation_tmp.getRejectdate() != null) {
+				numberofrespons ++;
+			}
 			try {
-				Invitation invitation = InvitationLocalServiceUtil.getInvitation(invitationorganisation.getInvitationId());
-				if(invitation.getStatus() >= InvitationLocalServiceUtil.getStatusFromString("send")) {
+				Invitation invitation_tmp = InvitationLocalServiceUtil.getInvitation(invitationorganisation_tmp.getInvitationId());
+				if(invitation_tmp.getStatus() >= InvitationLocalServiceUtil.getStatusFromString("send")) {
 					numberofsendinvitations++;
-					java.util.Date datesend = invitation.getInvitationsend();
+					java.util.Date datesend = invitation_tmp.getInvitationsend();
 					if(lastinvitation == null) {
 						lastinvitation = datesend;
 					} else {
@@ -147,12 +169,22 @@ user/edit_invitation
 		}
 		String lastcontacted = "";
 		if(lastinvitation != null) {
-			lastcontacted = ((now.getTime() - lastinvitation.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(lastinvitation) + ") / s:" + numberofsendinvitations + "/ i:" + numberofinvitations;
+			lastcontacted = ((now.getTime() - lastinvitation.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(lastinvitation) + ") / s:" + numberofsendinvitations + "/ i:" + numberofinvitations + "/ r:" + numberofrespons;
 		} else {
 			lastcontacted = "in invitations: " + numberofinvitations;
 		}
-		tablerow += "<td class=\"" + rowcss + "\">" + lastcontacted + "</td>";
-		tablerow += "<td class=\"" + rowcss + "\">response</td>";
+		tablerow += "<td class=\"" + rowcss + " " + css_class_deleted + "\">" + lastcontacted + "</td>";
+		// Response
+		String response_msg = "no response";
+		if(invitationorganisation.getReactdate() != null) {
+			response_msg = dateFormat.format(invitationorganisation.getReactdate());
+		}
+		if(invitationorganisation.getRejectdate() != null) {
+			response_msg = "rejected [" + dateFormat.format(invitationorganisation.getRejectdate()) + "]";
+		}
+		
+		tablerow += "<td class=\"" + rowcss + "\">" + response_msg + "</td>";
+		// Remove Organization from Invitation
 		tablerow += "<td class=\"" + rowcss + "\">" + "<a id=\"deleteOragnizationFromInvitation\" class=\"icon-remove\" style=\"color: red;\" organisationid=\"" + organization.getOrganizationId() + "\" invitationid=\"" + invitationId + "\" ></a>" + "</td>";
 		tablerow += "</tr>";
 

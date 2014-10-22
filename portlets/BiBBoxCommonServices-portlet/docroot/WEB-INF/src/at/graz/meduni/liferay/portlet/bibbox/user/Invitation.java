@@ -185,7 +185,7 @@ public class Invitation extends MVCPortlet {
 		String organizationpath = organizationfriendlyurl + "?invitation="+invitation.getInvitationId();//replace with OrganisationInvitationId for organizationselection
 		String securitylinktoken = "";
 		String securitytoken = "";
-		String organizationrejectpath = "organizationnname" + "/reject?invitation="+invitation.getInvitationId()+"&securitylinktoken=" + createSecurityToken(10);//replace with OrganisationInvitationId for organizationselection
+		String organizationrejectpath = "/reject?invitation="+invitation.getInvitationId()+"&securitylinktoken=" + createSecurityToken(10);//replace with OrganisationInvitationId for organizationselection
 		//replacing Strings
 		String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay, "name", organizationpath, organizationrejectpath, "organization name", createSecurityToken(5));
 		String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay, "name", organizationpath, organizationrejectpath, "organization name", createSecurityToken(5));
@@ -225,7 +225,7 @@ public class Invitation extends MVCPortlet {
 				String organizationpath = organizationfriendlyurl + "?invitation="+invitationorganisation.getInvitationOrganisationId();//replace with OrganisationInvitationId for organizationselection
 				String securitylinktoken = createSecurityToken(10);
 				String securitytoken = createSecurityToken(5);
-				String organizationrejectpath = organization.getGroup().getFriendlyURL() + "/reject?invitation="+invitationorganisation.getInvitationOrganisationId()+"&securitylinktoken=" + securitylinktoken;//replace with OrganisationInvitationId for organizationselection
+				String organizationrejectpath = "/reject?invitation="+invitationorganisation.getInvitationOrganisationId()+"&securitylinktoken=" + securitylinktoken;//replace with OrganisationInvitationId for organizationselection
 				//replacing Strings
 				String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay, maincontact.getFullName(), organizationpath, organizationrejectpath, organization.getName(), securitytoken);
 				String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay, maincontact.getFullName(), organizationpath, organizationrejectpath, organization.getName(), securitytoken);
@@ -312,8 +312,8 @@ public class Invitation extends MVCPortlet {
 		String organization_link = themedisplay.getURLPortal()+"/web"+organizationpath;
 		string = string.replaceAll("\\[\\$URL\\$\\]", organization_link);
 		// replace [$REJECT_URL$]
-		String organization_reject_link = themedisplay.getURLPortal()+"/web"+organization_reject_path;
-		string = string.replaceAll("\\[\\$REJECT_URL\\$\\]", organization_reject_link + " - Secureity Code: " + securitytoken);
+		String organization_reject_link = themedisplay.getURLPortal()+organization_reject_path;
+		string = string.replaceAll("\\[\\$REJECT_URL\\$\\]", organization_reject_link + " - Security Code: " + securitytoken);
 		return string;
 	}
 	

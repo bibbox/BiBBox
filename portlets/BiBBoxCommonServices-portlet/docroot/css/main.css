@@ -23,7 +23,11 @@
 	width: 100%;
 }
 
-.bibboc-cs-datatable-header {
+.aui .bibbox_cs_height_bigger {
+	height: 300px;
+}
+
+.bibbox-cs-datatable-header {
     background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.21)) repeat-x scroll 0 0 #fff;
     color: #000;
     font-weight: normal;
@@ -39,7 +43,7 @@
     border-left: 1px solid #cbcbcb;
 }
 
-.bibboc-cs-datatable-table {
+.bibbox-cs-datatable-table {
     border-collapse: separate;
     border-spacing: 0;
     font-family: arial,sans-serif;
@@ -74,3 +78,7 @@
     padding: 4px 10px;
     border-left: 1px solid #cbcbcb;
 }
+.aui .bibbox-cs-datatable-organization-deleted {
+	background-color: #ff8585;
+}
+

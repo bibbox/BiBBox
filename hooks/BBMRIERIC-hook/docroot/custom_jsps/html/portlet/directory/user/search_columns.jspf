@@ -27,17 +27,21 @@
 </span>
 
 <%
-String user_role = "Member";
+String user_role = "";
 String cssclass = "";
 List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), themeDisplay.getSiteGroupId());
 for (UserGroupRole ugr : usergrouprolles) {
-   if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Chair")) {
-	   user_role =  "Chair";
-	   cssclass = "bbmri-eric-chair";
-   }
-   if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Co-Chair")) {
-	   user_role =  "Vice-Chair";
-	   cssclass = "bbmri-eric-co-chair";
+	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC WG Member") && !user_role.contains("Chair")) {
+		user_role =  "Member";
+		cssclass = "";
+	}
+	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Chair")) {
+		user_role =  "Chair";
+		cssclass = "bbmri-eric-chair";
+	}
+	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Co-Chair") && !user_role.contains("Chair")) {
+		user_role =  "Vice-Chair";
+		cssclass = "bbmri-eric-co-chair";
 	}
 }
 

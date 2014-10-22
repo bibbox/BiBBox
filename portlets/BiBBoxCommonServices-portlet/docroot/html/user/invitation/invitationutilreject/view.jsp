@@ -23,7 +23,7 @@ securitylinktoken = httpRequest.getParameter("securitylinktoken");
 <br />
 <liferay-ui:success key="organization-successfully-deleted" message="organization-successfully-deleted" />
 <liferay-ui:error key="security-token-missmatch" message="security-token-missmatch" />
-We are sorry you do not won't to participate in the RD-Connect Network. Please fill in the security tocken you recifed with this link to remove your organization from the RD-Connect list.
+We are sorry you don't want to participateopen in the RD-Connect Network. Please fill in the security code you received with this link to remove your organization from the RD-Connect list.
 
 <portlet:actionURL name='rejectParticipation' var="rejectParticipationURL" windowState="normal" />
 <aui:form action="<%= rejectParticipationURL %>" method="POST" name="fm">

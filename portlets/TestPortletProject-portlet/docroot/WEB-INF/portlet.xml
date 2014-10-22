@@ -74,4 +74,37 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>bc-net-main-menu</portlet-name>
+		<display-name>Bc Net Main Menu</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.BCNetMainMenu
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/bcnetmainmenu/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Bc Net Main Menu</title>
+			<short-title>Bc Net Main Menu</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

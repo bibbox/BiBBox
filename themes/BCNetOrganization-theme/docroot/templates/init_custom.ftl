@@ -1,5 +1,5 @@
 <#--
 This file allows you to override and define new FreeMarker variables.
+10181
 -->
-<#assign navLayoutLocalServiceUtil = serviceLocator.findService("com.liferay.portal.service.LayoutLocalService")  />
-<#assign nav_main_items = navLayoutLocalServiceUtil.getLayouts(10181, false) />
+

@@ -34,17 +34,9 @@ action = "GroupASSIGN_MEMBERS";
 boolean organizationUser = GetterUtil.getBoolean(row.getParameter("organizationUser"));
 boolean userGroupUser = GetterUtil.getBoolean(row.getParameter("userGroupUser"));
 %>
-<%
-List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), groupId);
-for (UserGroupRole ugr : usergrouprolles) {
-	ugr.getRole().getName();
-}
-%>
-----
-<%= group.getGroupId() %> <%= groupId %> <%= name %> <%= primKey %> <%= ActionKeys.ASSIGN_MEMBERS %>
-PS:<%= permissionChecker.hasPermission(groupId, name, primKey, action) %>
+
 <liferay-ui:icon-menu showWhenSingleIcon="<%= true %>">
-	<c:if test="<%= permissionChecker.isGroupOwner(group.getGroupId()) || permissionChecker.hasPermission(groupId, name, primKey, ActionKeys.ASSIGN_MEMBERS) %>">
+	<c:if test="<%= permissionChecker.isGroupOwner(group.getGroupId())%>">
 		<portlet:renderURL var="assignURL">
 			<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 			<portlet:param name="tabs1" value="users" />
