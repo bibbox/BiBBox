@@ -1,3 +1,4 @@
+create index IX_6A1E28D9 on bibboxcs.invitation (filter);
 create index IX_D0165B5 on bibboxcs.invitation (invitationId);
 create index IX_E3B3F6D3 on bibboxcs.invitation (status);
 

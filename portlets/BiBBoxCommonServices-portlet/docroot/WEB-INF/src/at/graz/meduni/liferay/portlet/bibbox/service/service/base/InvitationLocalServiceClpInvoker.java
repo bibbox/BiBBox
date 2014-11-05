@@ -118,13 +118,21 @@ public class InvitationLocalServiceClpInvoker {
 
 		_methodParameterTypes46 = new String[] { "javax.portlet.PortletRequest" };
 
-		_methodName47 = "getStatusFromString";
+		_methodName47 = "getInvitations";
 
-		_methodParameterTypes47 = new String[] { "java.lang.String" };
+		_methodParameterTypes47 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName48 = "getStatusFromLong";
+		_methodName48 = "getInvitationsCount";
 
-		_methodParameterTypes48 = new String[] { "long" };
+		_methodParameterTypes48 = new String[] { "java.lang.String" };
+
+		_methodName49 = "getStatusFromString";
+
+		_methodParameterTypes49 = new String[] { "java.lang.String" };
+
+		_methodName50 = "getStatusFromLong";
+
+		_methodParameterTypes50 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -235,11 +243,23 @@ public class InvitationLocalServiceClpInvoker {
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			return InvitationLocalServiceUtil.getStatusFromString((java.lang.String)arguments[0]);
+			return InvitationLocalServiceUtil.getInvitations((java.lang.String)arguments[0],
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+			return InvitationLocalServiceUtil.getInvitationsCount((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+			return InvitationLocalServiceUtil.getStatusFromString((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
 			return InvitationLocalServiceUtil.getStatusFromLong(((Long)arguments[0]).longValue());
 		}
 
@@ -288,4 +308,8 @@ public class InvitationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes47;
 	private String _methodName48;
 	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
 }

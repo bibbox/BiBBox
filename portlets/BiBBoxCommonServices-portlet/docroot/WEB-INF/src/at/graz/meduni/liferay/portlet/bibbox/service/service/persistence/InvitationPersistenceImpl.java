@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
@@ -934,6 +935,943 @@ public class InvitationPersistenceImpl extends BasePersistenceImpl<Invitation>
 	}
 
 	private static final String _FINDER_COLUMN_STATUS_STATUS_2 = "invitation.status = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_FILTER = new FinderPath(InvitationModelImpl.ENTITY_CACHE_ENABLED,
+			InvitationModelImpl.FINDER_CACHE_ENABLED, InvitationImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByFilter",
+			new String[] {
+				String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FILTER =
+		new FinderPath(InvitationModelImpl.ENTITY_CACHE_ENABLED,
+			InvitationModelImpl.FINDER_CACHE_ENABLED, InvitationImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByFilter",
+			new String[] { String.class.getName() },
+			InvitationModelImpl.FILTER_COLUMN_BITMASK |
+			InvitationModelImpl.LASTCHANGED_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_FILTER = new FinderPath(InvitationModelImpl.ENTITY_CACHE_ENABLED,
+			InvitationModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByFilter",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns all the invitations where filter = &#63;.
+	 *
+	 * @param filter the filter
+	 * @return the matching invitations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Invitation> findByFilter(String filter)
+		throws SystemException {
+		return findByFilter(filter, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the invitations where filter = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param filter the filter
+	 * @param start the lower bound of the range of invitations
+	 * @param end the upper bound of the range of invitations (not inclusive)
+	 * @return the range of matching invitations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Invitation> findByFilter(String filter, int start, int end)
+		throws SystemException {
+		return findByFilter(filter, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the invitations where filter = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param filter the filter
+	 * @param start the lower bound of the range of invitations
+	 * @param end the upper bound of the range of invitations (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching invitations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Invitation> findByFilter(String filter, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FILTER;
+			finderArgs = new Object[] { filter };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_FILTER;
+			finderArgs = new Object[] { filter, start, end, orderByComparator };
+		}
+
+		List<Invitation> list = (List<Invitation>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Invitation invitation : list) {
+				if (!Validator.equals(filter, invitation.getFilter())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_INVITATION_WHERE);
+
+			boolean bindFilter = false;
+
+			if (filter == null) {
+				query.append(_FINDER_COLUMN_FILTER_FILTER_1);
+			}
+			else if (filter.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_FILTER_FILTER_3);
+			}
+			else {
+				bindFilter = true;
+
+				query.append(_FINDER_COLUMN_FILTER_FILTER_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(InvitationModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindFilter) {
+					qPos.add(filter);
+				}
+
+				if (!pagination) {
+					list = (List<Invitation>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Invitation>(list);
+				}
+				else {
+					list = (List<Invitation>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first invitation in the ordered set where filter = &#63;.
+	 *
+	 * @param filter the filter
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching invitation
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException if a matching invitation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Invitation findByFilter_First(String filter,
+		OrderByComparator orderByComparator)
+		throws NoSuchInvitationException, SystemException {
+		Invitation invitation = fetchByFilter_First(filter, orderByComparator);
+
+		if (invitation != null) {
+			return invitation;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("filter=");
+		msg.append(filter);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchInvitationException(msg.toString());
+	}
+
+	/**
+	 * Returns the first invitation in the ordered set where filter = &#63;.
+	 *
+	 * @param filter the filter
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching invitation, or <code>null</code> if a matching invitation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Invitation fetchByFilter_First(String filter,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Invitation> list = findByFilter(filter, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last invitation in the ordered set where filter = &#63;.
+	 *
+	 * @param filter the filter
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching invitation
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException if a matching invitation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Invitation findByFilter_Last(String filter,
+		OrderByComparator orderByComparator)
+		throws NoSuchInvitationException, SystemException {
+		Invitation invitation = fetchByFilter_Last(filter, orderByComparator);
+
+		if (invitation != null) {
+			return invitation;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("filter=");
+		msg.append(filter);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchInvitationException(msg.toString());
+	}
+
+	/**
+	 * Returns the last invitation in the ordered set where filter = &#63;.
+	 *
+	 * @param filter the filter
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching invitation, or <code>null</code> if a matching invitation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Invitation fetchByFilter_Last(String filter,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByFilter(filter);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Invitation> list = findByFilter(filter, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the invitations before and after the current invitation in the ordered set where filter = &#63;.
+	 *
+	 * @param invitationId the primary key of the current invitation
+	 * @param filter the filter
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next invitation
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException if a invitation with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Invitation[] findByFilter_PrevAndNext(long invitationId,
+		String filter, OrderByComparator orderByComparator)
+		throws NoSuchInvitationException, SystemException {
+		Invitation invitation = findByPrimaryKey(invitationId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Invitation[] array = new InvitationImpl[3];
+
+			array[0] = getByFilter_PrevAndNext(session, invitation, filter,
+					orderByComparator, true);
+
+			array[1] = invitation;
+
+			array[2] = getByFilter_PrevAndNext(session, invitation, filter,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Invitation getByFilter_PrevAndNext(Session session,
+		Invitation invitation, String filter,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_INVITATION_WHERE);
+
+		boolean bindFilter = false;
+
+		if (filter == null) {
+			query.append(_FINDER_COLUMN_FILTER_FILTER_1);
+		}
+		else if (filter.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_FILTER_FILTER_3);
+		}
+		else {
+			bindFilter = true;
+
+			query.append(_FINDER_COLUMN_FILTER_FILTER_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(InvitationModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindFilter) {
+			qPos.add(filter);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(invitation);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Invitation> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the invitations that the user has permission to view where filter = &#63;.
+	 *
+	 * @param filter the filter
+	 * @return the matching invitations that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Invitation> filterFindByFilter(String filter)
+		throws SystemException {
+		return filterFindByFilter(filter, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the invitations that the user has permission to view where filter = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param filter the filter
+	 * @param start the lower bound of the range of invitations
+	 * @param end the upper bound of the range of invitations (not inclusive)
+	 * @return the range of matching invitations that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Invitation> filterFindByFilter(String filter, int start, int end)
+		throws SystemException {
+		return filterFindByFilter(filter, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the invitations that the user has permissions to view where filter = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param filter the filter
+	 * @param start the lower bound of the range of invitations
+	 * @param end the upper bound of the range of invitations (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching invitations that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Invitation> filterFindByFilter(String filter, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByFilter(filter, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_INVITATION_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_INVITATION_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean bindFilter = false;
+
+		if (filter == null) {
+			query.append(_FINDER_COLUMN_FILTER_FILTER_1);
+		}
+		else if (filter.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_FILTER_FILTER_3);
+		}
+		else {
+			bindFilter = true;
+
+			query.append(_FINDER_COLUMN_FILTER_FILTER_2);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_INVITATION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(InvitationModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(InvitationModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Invitation.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, InvitationImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, InvitationImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (bindFilter) {
+				qPos.add(filter);
+			}
+
+			return (List<Invitation>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the invitations before and after the current invitation in the ordered set of invitations that the user has permission to view where filter = &#63;.
+	 *
+	 * @param invitationId the primary key of the current invitation
+	 * @param filter the filter
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next invitation
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException if a invitation with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Invitation[] filterFindByFilter_PrevAndNext(long invitationId,
+		String filter, OrderByComparator orderByComparator)
+		throws NoSuchInvitationException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByFilter_PrevAndNext(invitationId, filter,
+				orderByComparator);
+		}
+
+		Invitation invitation = findByPrimaryKey(invitationId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Invitation[] array = new InvitationImpl[3];
+
+			array[0] = filterGetByFilter_PrevAndNext(session, invitation,
+					filter, orderByComparator, true);
+
+			array[1] = invitation;
+
+			array[2] = filterGetByFilter_PrevAndNext(session, invitation,
+					filter, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Invitation filterGetByFilter_PrevAndNext(Session session,
+		Invitation invitation, String filter,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_INVITATION_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_INVITATION_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean bindFilter = false;
+
+		if (filter == null) {
+			query.append(_FINDER_COLUMN_FILTER_FILTER_1);
+		}
+		else if (filter.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_FILTER_FILTER_3);
+		}
+		else {
+			bindFilter = true;
+
+			query.append(_FINDER_COLUMN_FILTER_FILTER_2);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_INVITATION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(InvitationModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(InvitationModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Invitation.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, InvitationImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, InvitationImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindFilter) {
+			qPos.add(filter);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(invitation);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Invitation> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the invitations where filter = &#63; from the database.
+	 *
+	 * @param filter the filter
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByFilter(String filter) throws SystemException {
+		for (Invitation invitation : findByFilter(filter, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(invitation);
+		}
+	}
+
+	/**
+	 * Returns the number of invitations where filter = &#63;.
+	 *
+	 * @param filter the filter
+	 * @return the number of matching invitations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByFilter(String filter) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_FILTER;
+
+		Object[] finderArgs = new Object[] { filter };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_INVITATION_WHERE);
+
+			boolean bindFilter = false;
+
+			if (filter == null) {
+				query.append(_FINDER_COLUMN_FILTER_FILTER_1);
+			}
+			else if (filter.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_FILTER_FILTER_3);
+			}
+			else {
+				bindFilter = true;
+
+				query.append(_FINDER_COLUMN_FILTER_FILTER_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindFilter) {
+					qPos.add(filter);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of invitations that the user has permission to view where filter = &#63;.
+	 *
+	 * @param filter the filter
+	 * @return the number of matching invitations that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByFilter(String filter) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByFilter(filter);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_INVITATION_WHERE);
+
+		boolean bindFilter = false;
+
+		if (filter == null) {
+			query.append(_FINDER_COLUMN_FILTER_FILTER_1);
+		}
+		else if (filter.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_FILTER_FILTER_3);
+		}
+		else {
+			bindFilter = true;
+
+			query.append(_FINDER_COLUMN_FILTER_FILTER_2);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Invitation.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (bindFilter) {
+				qPos.add(filter);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_FILTER_FILTER_1 = "invitation.filter IS NULL";
+	private static final String _FINDER_COLUMN_FILTER_FILTER_2 = "invitation.filter = ?";
+	private static final String _FINDER_COLUMN_FILTER_FILTER_3 = "(invitation.filter IS NULL OR invitation.filter = '')";
 	public static final FinderPath FINDER_PATH_FETCH_BY_INVITATION = new FinderPath(InvitationModelImpl.ENTITY_CACHE_ENABLED,
 			InvitationModelImpl.FINDER_CACHE_ENABLED, InvitationImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByInvitation",
@@ -1442,6 +2380,23 @@ public class InvitationPersistenceImpl extends BasePersistenceImpl<Invitation>
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS,
 					args);
 			}
+
+			if ((invitationModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FILTER.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						invitationModelImpl.getOriginalFilter()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FILTER, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FILTER,
+					args);
+
+				args = new Object[] { invitationModelImpl.getFilter() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FILTER, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FILTER,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(InvitationModelImpl.ENTITY_CACHE_ENABLED,
@@ -1471,6 +2426,7 @@ public class InvitationPersistenceImpl extends BasePersistenceImpl<Invitation>
 		invitationImpl.setInvitationsend(invitation.getInvitationsend());
 		invitationImpl.setLastchanged(invitation.getLastchanged());
 		invitationImpl.setLastchanger(invitation.getLastchanger());
+		invitationImpl.setFilter(invitation.getFilter());
 
 		return invitationImpl;
 	}

@@ -83,6 +83,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 		attributes.put("invitationsend", getInvitationsend());
 		attributes.put("lastchanged", getLastchanged());
 		attributes.put("lastchanger", getLastchanger());
+		attributes.put("filter", getFilter());
 
 		return attributes;
 	}
@@ -135,6 +136,12 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 
 		if (lastchanger != null) {
 			setLastchanger(lastchanger);
+		}
+
+		String filter = (String)attributes.get("filter");
+
+		if (filter != null) {
+			setFilter(filter);
 		}
 	}
 
@@ -322,6 +329,29 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 		}
 	}
 
+	@Override
+	public String getFilter() {
+		return _filter;
+	}
+
+	@Override
+	public void setFilter(String filter) {
+		_filter = filter;
+
+		if (_invitationRemoteModel != null) {
+			try {
+				Class<?> clazz = _invitationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setFilter", String.class);
+
+				method.invoke(_invitationRemoteModel, filter);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getInvitationRemoteModel() {
 		return _invitationRemoteModel;
 	}
@@ -399,6 +429,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 		clone.setInvitationsend(getInvitationsend());
 		clone.setLastchanged(getLastchanged());
 		clone.setLastchanger(getLastchanger());
+		clone.setFilter(getFilter());
 
 		return clone;
 	}
@@ -447,7 +478,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{invitationId=");
 		sb.append(getInvitationId());
@@ -465,6 +496,8 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 		sb.append(getLastchanged());
 		sb.append(", lastchanger=");
 		sb.append(getLastchanger());
+		sb.append(", filter=");
+		sb.append(getFilter());
 		sb.append("}");
 
 		return sb.toString();
@@ -472,7 +505,7 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -511,6 +544,10 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 			"<column><column-name>lastchanger</column-name><column-value><![CDATA[");
 		sb.append(getLastchanger());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>filter</column-name><column-value><![CDATA[");
+		sb.append(getFilter());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -525,5 +562,6 @@ public class InvitationClp extends BaseModelImpl<Invitation>
 	private Date _invitationsend;
 	private Date _lastchanged;
 	private long _lastchanger;
+	private String _filter;
 	private BaseModel<?> _invitationRemoteModel;
 }

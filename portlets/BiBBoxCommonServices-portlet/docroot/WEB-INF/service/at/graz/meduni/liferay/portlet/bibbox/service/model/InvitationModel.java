@@ -174,6 +174,21 @@ public interface InvitationModel extends BaseModel<Invitation> {
 	 */
 	public void setLastchanger(long lastchanger);
 
+	/**
+	 * Returns the filter of this invitation.
+	 *
+	 * @return the filter of this invitation
+	 */
+	@AutoEscape
+	public String getFilter();
+
+	/**
+	 * Sets the filter of this invitation.
+	 *
+	 * @param filter the filter of this invitation
+	 */
+	public void setFilter(String filter);
+
 	@Override
 	public boolean isNew();
 

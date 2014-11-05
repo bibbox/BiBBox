@@ -63,31 +63,31 @@
 <!-- END Search Form -->
 
 <!-- Catalogue -->
-<div>
-<a href="https://www.bbmriportal.eu/bbmri2.0/jsp/core/login.jsf" target="_blank">
-<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Catalogue</spam> 
-<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+<div style="text-align: right;">
+<a href="https://www.bbmriportal.eu/bbmri2.0/jsp/core/login.jsf" target="_blank" style="text-align: right;color: #184B8A;font-weight:bold;font-size:15px;">
+Catalogue
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div>
 </a>
 </div>
 <!-- Miabis -->
-<div style="margin-top:10px;">
-<a href="http://bbmri-wiki.wikidot.com/en:dataset" target="_blank">
-<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Wiki: MIABIS 2.0</spam> 
-<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+<div style="margin-top:10px;text-align: right;">
+<a href="http://bbmri-wiki.wikidot.com/en:dataset" target="_blank" style="text-align: right;color: #184B8A;font-weight:bold;font-size:15px;">
+Wiki: MIABIS 2.0 
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div>
 </a>
 </div>
 <!-- Wiki -->
-<div style="margin-top:10px;">
-<a href="http://www.bbmri-wp4.eu/wiki/index.php/Main_Page" target="_blank">
-<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">Legal Wiki</spam> 
-<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+<div style="margin-top:10px;text-align: right;">
+<a href="http://www.bbmri-wp4.eu/wiki/index.php/Main_Page" target="_blank" style="text-align: right;color: #184B8A;font-weight:bold;font-size:15px;">
+Legal Wiki
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div>
 </a>
 </div>
 <!-- hSern -->
-<div style="margin-top:10px;">
-<a href="http://www.hsern.eu/" target="_blank">
-<label style="text-align: right;color: #184B8A;"><span style="font-weight:bold;">hSERN</spam> 
-<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div></label>
+<div style="margin-top:10px;text-align: right;">
+<a href="http://www.hsern.eu/" target="_blank" style="text-align: right;color: #184B8A;font-weight:bold;font-size:15px;">
+hSERN 
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div>
 </a>
 </div>
 

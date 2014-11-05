@@ -14,6 +14,7 @@
 		<field name="invitationsend" type="Date" />
 		<field name="lastchanged" type="Date" />
 		<field name="lastchanger" type="long" />
+		<field name="filter" type="String" />
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation">
 		<field name="invitationOrganisationId" type="long" />

@@ -9,6 +9,8 @@ user/people/edit
 <liferay-theme:defineObjects />
 
 <%
+String currentURL = ParamUtil.getString(request, "redirect");
+
 long user_id = ParamUtil.getLong(request, "bibbox_cs_userid");
 long organizationId = ParamUtil.getLong(request, "bibbox_cs_organizationid");
 long editorrole = GetterUtil.getLong(portletPreferences.getValue("optionsEditorRole", "0"));
@@ -90,6 +92,32 @@ if(organizationId != 0) {
 			<aui:input type="hidden" name="bibbox_cs_ownerrole" value="<%= ownerrole %>" />
 			<aui:input type="hidden" name="bibbox_cs_maincontact" value="<%= maincontactrole %>" />
 			<aui:input type="hidden" name="bibbox_cs_sendmailnotification" value="<%= optionsSendMailNotification_cfg %>" />
+			
+			<div>
+				<c:if test="<%= edit_user != null %>">
+					<c:choose>
+						<c:when test='<%= UsersAdminUtil.hasUpdateFieldPermission(edit_user, "portrait") %>'>
+							<portlet:renderURL var="editUserPortraitURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+								<portlet:param name="struts_action" value="/users_admin/edit_user_portrait" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="p_u_i_d" value="<%= String.valueOf(edit_user.getUserId()) %>" />
+								<portlet:param name="portrait_id" value="<%= String.valueOf(edit_user.getPortraitId()) %>" />
+							</portlet:renderURL>
+	
+							<liferay-ui:logo-selector
+								defaultLogoURL="<%= UserConstants.getPortraitURL(themeDisplay.getPathImage(), edit_user.isMale(), 0) %>"
+								editLogoURL="<%= editUserPortraitURL %>"
+								imageId="<%= edit_user.getPortraitId() %>"
+								logoDisplaySelector=".user-logo"
+							/>
+						</c:when>
+						<c:otherwise>
+							<img src="<%= edit_user.getPortraitURL(themeDisplay) %>" />
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</div>
+			
 			
 			
 			<aui:input name="bibbox_cs_email" label="E-mail&nbsp;&nbsp;&nbsp;<a id='checkemail'>Check if user exists</a>" type="text" value ="<%= email %>"/> 

@@ -38,7 +38,7 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{invitationId=");
 		sb.append(invitationId);
@@ -56,6 +56,8 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 		sb.append(lastchanged);
 		sb.append(", lastchanger=");
 		sb.append(lastchanger);
+		sb.append(", filter=");
+		sb.append(filter);
 		sb.append("}");
 
 		return sb.toString();
@@ -106,6 +108,13 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 
 		invitationImpl.setLastchanger(lastchanger);
 
+		if (filter == null) {
+			invitationImpl.setFilter(StringPool.BLANK);
+		}
+		else {
+			invitationImpl.setFilter(filter);
+		}
+
 		invitationImpl.resetOriginalValues();
 
 		return invitationImpl;
@@ -121,6 +130,7 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 		invitationsend = objectInput.readLong();
 		lastchanged = objectInput.readLong();
 		lastchanger = objectInput.readLong();
+		filter = objectInput.readUTF();
 	}
 
 	@Override
@@ -153,6 +163,13 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 		objectOutput.writeLong(invitationsend);
 		objectOutput.writeLong(lastchanged);
 		objectOutput.writeLong(lastchanger);
+
+		if (filter == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(filter);
+		}
 	}
 
 	public long invitationId;
@@ -163,4 +180,5 @@ public class InvitationCacheModel implements CacheModel<Invitation>,
 	public long invitationsend;
 	public long lastchanged;
 	public long lastchanger;
+	public String filter;
 }

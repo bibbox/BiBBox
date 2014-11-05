@@ -72,9 +72,10 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 			{ "status", Types.BIGINT },
 			{ "invitationsend", Types.TIMESTAMP },
 			{ "lastchanged", Types.TIMESTAMP },
-			{ "lastchanger", Types.BIGINT }
+			{ "lastchanger", Types.BIGINT },
+			{ "filter", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation (invitationId LONG not null primary key,name VARCHAR(75) null,subject VARCHAR(255) null,body TEXT null,status LONG,invitationsend DATE null,lastchanged DATE null,lastchanger LONG)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation (invitationId LONG not null primary key,name VARCHAR(75) null,subject VARCHAR(255) null,body TEXT null,status LONG,invitationsend DATE null,lastchanged DATE null,lastchanger LONG,filter VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.invitation";
 	public static final String ORDER_BY_JPQL = " ORDER BY invitation.lastchanged DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.invitation.lastchanged DESC";
@@ -90,9 +91,10 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"),
 			true);
-	public static long INVITATIONID_COLUMN_BITMASK = 1L;
-	public static long STATUS_COLUMN_BITMASK = 2L;
-	public static long LASTCHANGED_COLUMN_BITMASK = 4L;
+	public static long FILTER_COLUMN_BITMASK = 1L;
+	public static long INVITATIONID_COLUMN_BITMASK = 2L;
+	public static long STATUS_COLUMN_BITMASK = 4L;
+	public static long LASTCHANGED_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -115,6 +117,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		model.setInvitationsend(soapModel.getInvitationsend());
 		model.setLastchanged(soapModel.getLastchanged());
 		model.setLastchanger(soapModel.getLastchanger());
+		model.setFilter(soapModel.getFilter());
 
 		return model;
 	}
@@ -187,6 +190,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		attributes.put("invitationsend", getInvitationsend());
 		attributes.put("lastchanged", getLastchanged());
 		attributes.put("lastchanger", getLastchanger());
+		attributes.put("filter", getFilter());
 
 		return attributes;
 	}
@@ -239,6 +243,12 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 		if (lastchanger != null) {
 			setLastchanger(lastchanger);
+		}
+
+		String filter = (String)attributes.get("filter");
+
+		if (filter != null) {
+			setFilter(filter);
 		}
 	}
 
@@ -371,6 +381,32 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		_lastchanger = lastchanger;
 	}
 
+	@JSON
+	@Override
+	public String getFilter() {
+		if (_filter == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _filter;
+		}
+	}
+
+	@Override
+	public void setFilter(String filter) {
+		_columnBitmask |= FILTER_COLUMN_BITMASK;
+
+		if (_originalFilter == null) {
+			_originalFilter = _filter;
+		}
+
+		_filter = filter;
+	}
+
+	public String getOriginalFilter() {
+		return GetterUtil.getString(_originalFilter);
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -410,6 +446,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		invitationImpl.setInvitationsend(getInvitationsend());
 		invitationImpl.setLastchanged(getLastchanged());
 		invitationImpl.setLastchanger(getLastchanger());
+		invitationImpl.setFilter(getFilter());
 
 		invitationImpl.resetOriginalValues();
 
@@ -470,6 +507,8 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 		invitationModelImpl._setOriginalStatus = false;
 
+		invitationModelImpl._originalFilter = invitationModelImpl._filter;
+
 		invitationModelImpl._columnBitmask = 0;
 	}
 
@@ -525,12 +564,20 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 		invitationCacheModel.lastchanger = getLastchanger();
 
+		invitationCacheModel.filter = getFilter();
+
+		String filter = invitationCacheModel.filter;
+
+		if ((filter != null) && (filter.length() == 0)) {
+			invitationCacheModel.filter = null;
+		}
+
 		return invitationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{invitationId=");
 		sb.append(getInvitationId());
@@ -548,6 +595,8 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 		sb.append(getLastchanged());
 		sb.append(", lastchanger=");
 		sb.append(getLastchanger());
+		sb.append(", filter=");
+		sb.append(getFilter());
 		sb.append("}");
 
 		return sb.toString();
@@ -555,7 +604,7 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -594,6 +643,10 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 			"<column><column-name>lastchanger</column-name><column-value><![CDATA[");
 		sb.append(getLastchanger());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>filter</column-name><column-value><![CDATA[");
+		sb.append(getFilter());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -616,6 +669,8 @@ public class InvitationModelImpl extends BaseModelImpl<Invitation>
 	private Date _invitationsend;
 	private Date _lastchanged;
 	private long _lastchanger;
+	private String _filter;
+	private String _originalFilter;
 	private long _columnBitmask;
 	private Invitation _escapedModel;
 }

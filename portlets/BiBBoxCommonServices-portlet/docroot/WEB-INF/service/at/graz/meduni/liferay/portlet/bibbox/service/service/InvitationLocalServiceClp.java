@@ -119,13 +119,21 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 
 		_methodParameterTypes19 = new String[] { "javax.portlet.PortletRequest" };
 
-		_methodName20 = "getStatusFromString";
+		_methodName20 = "getInvitations";
 
-		_methodParameterTypes20 = new String[] { "java.lang.String" };
+		_methodParameterTypes20 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName21 = "getStatusFromLong";
+		_methodName21 = "getInvitationsCount";
 
-		_methodParameterTypes21 = new String[] { "long" };
+		_methodParameterTypes21 = new String[] { "java.lang.String" };
+
+		_methodName22 = "getStatusFromString";
+
+		_methodParameterTypes22 = new String[] { "java.lang.String" };
+
+		_methodName23 = "getStatusFromLong";
+
+		_methodParameterTypes23 = new String[] { "long" };
 	}
 
 	@Override
@@ -704,12 +712,77 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 	}
 
 	@Override
-	public long getStatusFromString(java.lang.String string_status) {
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getInvitations(
+		java.lang.String filter, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
+					new Object[] {
+						ClpSerializer.translateInput(filter),
+						
+					start,
+						
+					end
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getInvitationsCount(java.lang.String filter)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] { ClpSerializer.translateInput(filter) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public long getStatusFromString(java.lang.String string_status) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
 					new Object[] { ClpSerializer.translateInput(string_status) });
 		}
 		catch (Throwable t) {
@@ -732,8 +805,8 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21, new Object[] { status });
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23, new Object[] { status });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -793,4 +866,8 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
 }

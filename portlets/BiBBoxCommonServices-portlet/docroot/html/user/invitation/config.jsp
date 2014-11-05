@@ -10,6 +10,7 @@ long optionsParentOrganisation_cfg = GetterUtil.getLong(portletPreferences.getVa
 String optionsTypeFilter_cfg = GetterUtil.getString(portletPreferences.getValue("optionsTypeFilter", ""));
 long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", ""));
 String optionsDefaultBodyText_cfg = GetterUtil.getString(portletPreferences.getValue("optionsDefaultBodyText", ""));
+String optionsInvitationTypeFilter_cfg = GetterUtil.getString(portletPreferences.getValue("optionsInvitationTypeFilter", ""));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -43,8 +44,11 @@ String optionsDefaultBodyText_cfg = GetterUtil.getString(portletPreferences.getV
 					%>
 				</aui:select>
 			</aui:column>
-			<aui:column columnWidth="75" last="true">
+			<aui:column columnWidth="25" last="true">
 				<aui:input name="preferences--optionsTypeFilter--" label="Set Organisation Filter Type" type="text" value ="<%= optionsTypeFilter_cfg %>" />
+			</aui:column>
+			<aui:column columnWidth="50" last="true">
+				<aui:input name="preferences--optionsInvitationTypeFilter--" label="Set Invitation Filter Type" type="text" value ="<%= optionsInvitationTypeFilter_cfg %>" />
 			</aui:column>
 			<!-- Select Main Contact Role -->
 			<aui:column columnWidth="100" first="true">

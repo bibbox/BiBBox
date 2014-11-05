@@ -284,6 +284,23 @@ public class InvitationLocalServiceUtil {
 	}
 
 	/**
+	* Returns a filtered list of invitations
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getInvitations(
+		java.lang.String filter, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getInvitations(filter, start, end);
+	}
+
+	/**
+	* Returns the number of filtered invitations
+	*/
+	public static int getInvitationsCount(java.lang.String filter)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getInvitationsCount(filter);
+	}
+
+	/**
 	* Return Status from String
 	* Status:
 	*  0 ... Error

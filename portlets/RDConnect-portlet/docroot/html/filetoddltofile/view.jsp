@@ -41,5 +41,7 @@
 	</div>
 </aui:form>
 </div>
-<portlet:resourceURL var="fileDownloadURL" id="fileDownload" /><a
-	href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xls" /><portlet:param name="RDCOrganisationId" value="<%=organizationId_string%>" /></portlet:resourceURL>">Download Disease Matrix as XLS File</a>
+<portlet:resourceURL var="fileDownloadURL" id="fileDownload" />
+<a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xls" />
+<portlet:param name="RDCOrganisationId" value="<%=organizationId_string%>" />
+</portlet:resourceURL>">Download Disease Matrix as XLS File</a>

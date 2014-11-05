@@ -39,6 +39,7 @@ public class InvitationSoap implements Serializable {
 		soapModel.setInvitationsend(model.getInvitationsend());
 		soapModel.setLastchanged(model.getLastchanged());
 		soapModel.setLastchanger(model.getLastchanger());
+		soapModel.setFilter(model.getFilter());
 
 		return soapModel;
 	}
@@ -155,6 +156,14 @@ public class InvitationSoap implements Serializable {
 		_lastchanger = lastchanger;
 	}
 
+	public String getFilter() {
+		return _filter;
+	}
+
+	public void setFilter(String filter) {
+		_filter = filter;
+	}
+
 	private long _invitationId;
 	private String _name;
 	private String _subject;
@@ -163,4 +172,5 @@ public class InvitationSoap implements Serializable {
 	private Date _invitationsend;
 	private Date _lastchanged;
 	private long _lastchanger;
+	private String _filter;
 }

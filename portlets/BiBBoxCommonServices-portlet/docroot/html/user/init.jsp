@@ -3,6 +3,7 @@
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePair" %>
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePairComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 
 <!-- Roles -->
 <%@ page import="com.liferay.portal.service.RoleLocalServiceUtil" %>
@@ -13,6 +14,8 @@
 
 <!-- User -->
 <%@ page import="com.liferay.portal.model.User" %>
+<%@ page import="com.liferay.portlet.usersadmin.util.UsersAdminUtil" %>
+<%@ page import="com.liferay.portal.model.UserConstants" %>
 
 <!-- Organization -->
 <%@ page import="com.liferay.portal.service.OrganizationLocalServiceUtil" %>

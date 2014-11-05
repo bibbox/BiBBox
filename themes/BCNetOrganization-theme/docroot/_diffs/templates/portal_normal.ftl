@@ -96,7 +96,6 @@ ${theme.include(body_top_include)}
 	
 				<div id="main">
 					<div id="content">
-						<nav id="breadcrumbs"><@liferay.breadcrumbs /></nav>
 				
 						<#if selectable>
 							${theme.include(content_include)}

@@ -6,7 +6,8 @@ create table bibboxcs.invitation (
 	status LONG,
 	invitationsend DATE null,
 	lastchanged DATE null,
-	lastchanger LONG
+	lastchanger LONG,
+	filter VARCHAR(75) null
 );
 
 create table bibboxcs.invitation_organisation (

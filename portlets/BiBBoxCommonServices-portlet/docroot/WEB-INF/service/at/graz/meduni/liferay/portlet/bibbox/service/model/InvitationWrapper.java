@@ -57,6 +57,7 @@ public class InvitationWrapper implements Invitation, ModelWrapper<Invitation> {
 		attributes.put("invitationsend", getInvitationsend());
 		attributes.put("lastchanged", getLastchanged());
 		attributes.put("lastchanger", getLastchanger());
+		attributes.put("filter", getFilter());
 
 		return attributes;
 	}
@@ -109,6 +110,12 @@ public class InvitationWrapper implements Invitation, ModelWrapper<Invitation> {
 
 		if (lastchanger != null) {
 			setLastchanger(lastchanger);
+		}
+
+		String filter = (String)attributes.get("filter");
+
+		if (filter != null) {
+			setFilter(filter);
 		}
 	}
 
@@ -290,6 +297,26 @@ public class InvitationWrapper implements Invitation, ModelWrapper<Invitation> {
 	@Override
 	public void setLastchanger(long lastchanger) {
 		_invitation.setLastchanger(lastchanger);
+	}
+
+	/**
+	* Returns the filter of this invitation.
+	*
+	* @return the filter of this invitation
+	*/
+	@Override
+	public java.lang.String getFilter() {
+		return _invitation.getFilter();
+	}
+
+	/**
+	* Sets the filter of this invitation.
+	*
+	* @param filter the filter of this invitation
+	*/
+	@Override
+	public void setFilter(java.lang.String filter) {
+		_invitation.setFilter(filter);
 	}
 
 	@Override

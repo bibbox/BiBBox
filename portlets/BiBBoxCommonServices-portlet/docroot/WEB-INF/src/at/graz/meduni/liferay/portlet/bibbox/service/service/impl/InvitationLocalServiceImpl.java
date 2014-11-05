@@ -15,9 +15,11 @@
 package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletRequest;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -64,6 +66,20 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 		invitation.setLastchanger(themeDisplay.getUserId());
 		
 		return invitation;
+	}
+	
+	/**
+	 * Returns a filtered list of invitations 
+	 */
+	public List<Invitation> getInvitations(String filter, int start, int end) throws SystemException {
+		return invitationPersistence.filterFindByFilter(filter, start, end);
+	}
+	
+	/**
+	 * Returns the number of filtered invitations 
+	 */
+	public int getInvitationsCount(String filter) throws SystemException {
+		return invitationPersistence.countByFilter(filter);
 	}
 	
 	/**

@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 String portletResource = ParamUtil.getString(request, "portletResource");
 long optionsMainContactRole_option = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
 String optionsDefaultBodyText_option = GetterUtil.getString(portletPreferences.getValue("optionsDefaultBodyText", ""));
+String optionsInvitationTypeFilter_cfg = GetterUtil.getString(portletPreferences.getValue("optionsInvitationTypeFilter", ""));
 %>
 
 <%
@@ -36,6 +37,7 @@ if(invitationId > 0) {
 } else {
 	invitation = InvitationLocalServiceUtil.createInvitation(CounterLocalServiceUtil.increment(Invitation.class.getName()));
 	invitation.setBody(optionsDefaultBodyText_option);
+	invitation.setFilter(optionsInvitationTypeFilter_cfg);
 	createinvitation = true;
 }
 invitationId = invitation.getInvitationId();

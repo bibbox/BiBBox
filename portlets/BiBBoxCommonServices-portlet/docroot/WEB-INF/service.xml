@@ -14,12 +14,16 @@
 		<column name="invitationsend" type="Date"></column>
 		<column name="lastchanged" type="Date"></column>
 		<column name="lastchanger" type="long"></column>
+		<column name="filter" type="String"></column>
 		<column name="invitationOrganisationId" type="Collection" entity="InvitationOrganisation" ></column>
         <order by="desc">
             <order-column name="lastchanged"></order-column>
         </order>
-		<finder return-type="Collection" name="Status">
+        <finder return-type="Collection" name="Status">
 			<finder-column name="status"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="Filter">
+			<finder-column name="filter"></finder-column>
 		</finder>
 		<finder return-type="Invitation" name="Invitation">
 			<finder-column name="invitationId"></finder-column>

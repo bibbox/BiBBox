@@ -256,6 +256,21 @@ public interface InvitationLocalService extends BaseLocalService,
 		javax.portlet.PortletRequest request);
 
 	/**
+	* Returns a filtered list of invitations
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getInvitations(
+		java.lang.String filter, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of filtered invitations
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getInvitationsCount(java.lang.String filter)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Return Status from String
 	* Status:
 	*  0 ... Error

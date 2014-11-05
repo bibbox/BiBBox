@@ -50,4 +50,7 @@
 		<portlet id="austria-map"></portlet>
 		<portlet id="bbmrieric-map"></portlet>
 	</category>
+	<category name="kdssmp">
+		<portlet id="ngs-file-to-ddl"></portlet>
+	</category>
 </display>
