@@ -1,3 +1,4 @@
 *.class
 /themes/abschauen-theme
 .sass-cache
+.classpath
