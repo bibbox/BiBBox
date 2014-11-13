@@ -74,6 +74,7 @@ invitationId = invitation.getInvitationId();
 		<aui:input type="hidden" name="status" value="<%= invitation.getStatus() %>" />
 		<aui:input type="hidden" name="invitationId" value='<%= invitation.getInvitationId() %>'/>
 		<aui:input type="hidden" name="optionsMainContactRole_option" value='<%= String.valueOf(optionsMainContactRole_option) %>'/>
+		<aui:input type="hidden" name="filter" value='<%= optionsInvitationTypeFilter_cfg %>'/>
 		<aui:layout>
 			<aui:column columnWidth="75" first="true">
 				<aui:input name="name" value='<%= invitation.getName() %>'></aui:input>
@@ -109,14 +110,19 @@ invitationId = invitation.getInvitationId();
 <tr><td>[$ORGANIZATION_NAME$]</td><td>...</td><td>Replace with the name of the registry/biobank</td></tr>
 <tr><td>[$URL$]</td><td>...</td><td>Replace with the portal-URL and the invitation tracking code</td></tr>
 <tr><td>[$REJECT_URL$]</td><td>...</td><td>Replace with the URL and the invitation tracking code for rejection the participation</td></tr>
+<tr><td>[$CREDENTIALS$]</td><td>...</td><td>Replace the tag with the login credentials for the user</td></tr>
 </table>
 <br />
 Example:<br />
 Dear [$TO_NAME$],<br />
 You can visit your ID-Card at [$url$]. If you do not won't to participate in the portal pleas visit this link [$reject-url$], and you will not be contacted again.<br />
+[$CREDENTIALS$]<br/>
 ---------<br />
 Dear <%= themeDisplay.getUser().getFullName() %>,<br />
 You can visit your ID-Card at <%= themeDisplay.getPortalURL() %>. If you do not won't to participate in the portal pleas visit this link <%= themeDisplay.getPortalURL() %>/reject, and you will not be contacted again.<br />
+You can login to your account with your e-mail address: robert.reihs@gmail.com. If you have forgotten your password please use the "Forgot Password" link.
+or
+You can login to your account with your e-mail address: robert.reihs+invitationtest@gmail.com. Your password was set to rd-connect2014, please change your password in the portal.
 </p>
 
 <% 

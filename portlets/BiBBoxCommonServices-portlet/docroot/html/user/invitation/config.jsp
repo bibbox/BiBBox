@@ -44,7 +44,7 @@ String optionsInvitationTypeFilter_cfg = GetterUtil.getString(portletPreferences
 					%>
 				</aui:select>
 			</aui:column>
-			<aui:column columnWidth="25" last="true">
+			<aui:column columnWidth="25">
 				<aui:input name="preferences--optionsTypeFilter--" label="Set Organisation Filter Type" type="text" value ="<%= optionsTypeFilter_cfg %>" />
 			</aui:column>
 			<aui:column columnWidth="50" last="true">

@@ -187,8 +187,8 @@ public class Invitation extends MVCPortlet {
 		String securitytoken = "";
 		String organizationrejectpath = "/reject?invitation="+invitation.getInvitationId()+"&securitylinktoken=" + createSecurityToken(10);//replace with OrganisationInvitationId for organizationselection
 		//replacing Strings
-		String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay, "name", organizationpath, organizationrejectpath, "organization name", createSecurityToken(5));
-		String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay, "name", organizationpath, organizationrejectpath, "organization name", createSecurityToken(5));
+		String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay, themeDisplay.getUser(), organizationpath, organizationrejectpath, "organization name", createSecurityToken(5));
+		String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay, themeDisplay.getUser(), organizationpath, organizationrejectpath, "organization name", createSecurityToken(5));
 		sendEmail(email, mailSubject, mailBody);
 		// Redirect
 		sendRedirect(request, response);
@@ -227,8 +227,8 @@ public class Invitation extends MVCPortlet {
 				String securitytoken = createSecurityToken(5);
 				String organizationrejectpath = "/reject?invitation="+invitationorganisation.getInvitationOrganisationId()+"&securitylinktoken=" + securitylinktoken;//replace with OrganisationInvitationId for organizationselection
 				//replacing Strings
-				String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay, maincontact.getFullName(), organizationpath, organizationrejectpath, organization.getName(), securitytoken);
-				String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay, maincontact.getFullName(), organizationpath, organizationrejectpath, organization.getName(), securitytoken);
+				String mailSubject = replaceTagsInString(invitation.getSubject(), true, themeDisplay, maincontact, organizationpath, organizationrejectpath, organization.getName(), securitytoken);
+				String mailBody = replaceTagsInString(invitation.getBody(), true, themeDisplay, maincontact, organizationpath, organizationrejectpath, organization.getName(), securitytoken);
 				sendEmail(maincontact.getEmailAddress(), mailSubject, mailBody);
 				invitationorganisation.setSecuritylinktoken(Long.parseLong(securitylinktoken));
 				invitationorganisation.setSecuritytoken(Long.parseLong(securitytoken));
@@ -299,21 +299,37 @@ public class Invitation extends MVCPortlet {
 	 * Replace Body Naming
 	 *
 	 */
-	private String replaceTagsInString(String string, boolean simulate, ThemeDisplay themedisplay, String name, String organizationpath, String organization_reject_path, String organization_name, String securitytoken) {
+	private String replaceTagsInString(String string, boolean simulate, ThemeDisplay themedisplay, User maincontact, String organizationpath, String organization_reject_path, String organization_name, String securitytoken) {
 		// replace [$TO_NAME$]
-		if(simulate) {
-			string = string.replaceAll("\\[\\$TO_NAME\\$\\]", themedisplay.getUser().getFullName());
-		} else {
-			string = string.replaceAll("\\[\\$TO_NAME\\$\\]", name);
-		}
+		string = string.replaceAll("\\[\\$TO_NAME\\$\\]", maincontact.getFullName());
 		// replace [$ORGANIZATION_NAME$]
 		string = string.replaceAll("\\[\\$ORGANIZATION_NAME\\$\\]", organization_name);
 		// replace [$url$]
-		String organization_link = themedisplay.getURLPortal()+"/web"+organizationpath;
+		String organization_link = "<a href =\"" + themedisplay.getURLPortal()+"/web"+organizationpath + "\">" + themedisplay.getURLPortal()+"/web"+organizationpath + "</a>";
 		string = string.replaceAll("\\[\\$URL\\$\\]", organization_link);
 		// replace [$REJECT_URL$]
-		String organization_reject_link = themedisplay.getURLPortal()+organization_reject_path;
+		String organization_reject_link = "<a href =\"" + themedisplay.getURLPortal()+organization_reject_path + "\">" + themedisplay.getURLPortal()+organization_reject_path + "</a>";
 		string = string.replaceAll("\\[\\$REJECT_URL\\$\\]", organization_reject_link + " - Security Code: " + securitytoken);
+		// replace [$CREDENTIALS$]
+		String account_login_text = "<br><br>Your <b>user ID</b> is: <i>" + maincontact.getEmailAddress() + "</i><br>";
+		if(maincontact.getLastLoginDate() == null) {
+			account_login_text += "Your <b>password</b> is: <i>rd-connect2014</i><br><br>";
+			String password = "rd-connect2014";
+			boolean passwordreset = true;
+			boolean silentchange = true;
+			try {
+				UserLocalServiceUtil.updatePassword(maincontact.getUserId(), password, password, passwordreset, silentchange);
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			account_login_text += "If you have forgotten your password please use the \"Forgot Password\" link.<br>";
+		}
+		string = string.replaceAll("\\[\\$CREDENTIALS\\$\\]", account_login_text);
 		return string;
 	}
 	
@@ -325,7 +341,7 @@ public class Invitation extends MVCPortlet {
 		System.out.println("email:" + email);
 		System.out.println("Subject:" + mailSubject);
 		System.out.println("Body:" + mailBody);
-        String senderMailAddress="robert.reihs@medunigraz.at";
+        String senderMailAddress="catalogue@rd-connect.eu";
         String receiverMailAddress=email;
         try {
         	MailMessage mailMessage=new MailMessage();

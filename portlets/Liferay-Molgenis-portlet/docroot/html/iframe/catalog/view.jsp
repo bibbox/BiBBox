@@ -25,6 +25,7 @@ This is the <b>Molgenis I Fram Catalog</b> portlet in View mode.
 			//this is the data that you are sending to the action method
 			data: {
 				'x-molgenis-token': token,
+				'Access-Control-Allow-Origin': '*',
 			},
 			dataType: 'json',
 			on: {

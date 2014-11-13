@@ -62,6 +62,7 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 		invitation.setSubject(ParamUtil.getString(request, "subject"));
 		invitation.setBody(ParamUtil.getString(request, "body"));
 		invitation.setStatus(ParamUtil.getLong(request, "status"));
+		invitation.setFilter(ParamUtil.getString(request, "filter"));
 		invitation.setLastchanged(new Date());
 		invitation.setLastchanger(themeDisplay.getUserId());
 		
@@ -72,7 +73,7 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 	 * Returns a filtered list of invitations 
 	 */
 	public List<Invitation> getInvitations(String filter, int start, int end) throws SystemException {
-		return invitationPersistence.filterFindByFilter(filter, start, end);
+		return invitationPersistence.filterFindByFilter(filter);
 	}
 	
 	/**

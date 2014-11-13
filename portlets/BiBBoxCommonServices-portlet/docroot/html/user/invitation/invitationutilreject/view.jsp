@@ -7,6 +7,7 @@ user/invitation
 
 <%
 long optionsDeleteParentOrganisation_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsDeleteParentOrganisation", "0"));
+String optionsText_cfg = GetterUtil.getString(portletPreferences.getValue("optionsText", "We are sorry you don't want to participate in the RD-Connect Network. Please fill in the security code you received with this link to remove your organization from the RD-Connect list."));
 %>
 
 <%
@@ -23,7 +24,7 @@ securitylinktoken = httpRequest.getParameter("securitylinktoken");
 <br />
 <liferay-ui:success key="organization-successfully-deleted" message="organization-successfully-deleted" />
 <liferay-ui:error key="security-token-missmatch" message="security-token-missmatch" />
-We are sorry you don't want to participateopen in the RD-Connect Network. Please fill in the security code you received with this link to remove your organization from the RD-Connect list.
+<%= optionsText_cfg %>
 
 <portlet:actionURL name='rejectParticipation' var="rejectParticipationURL" windowState="normal" />
 <aui:form action="<%= rejectParticipationURL %>" method="POST" name="fm">

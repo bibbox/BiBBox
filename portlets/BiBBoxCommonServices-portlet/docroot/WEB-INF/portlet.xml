@@ -246,4 +246,86 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>help-request</portlet-name>
+		<display-name>Help Request</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.user.HelpRequest
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/user/helprequest/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/user/helprequest/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Help Request</title>
+			<short-title>Help Request</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>invitation-help-request</portlet-name>
+		<display-name>Invitation Help Request</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.user.InvitationHelpRequest
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/user/invitation/invitationhelprequest/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/user/invitation/invitationhelprequest/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Invitation Help Request</title>
+			<short-title>Invitation Help Request</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

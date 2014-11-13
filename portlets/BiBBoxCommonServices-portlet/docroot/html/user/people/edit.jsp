@@ -93,7 +93,7 @@ if(organizationId != 0) {
 			<aui:input type="hidden" name="bibbox_cs_maincontact" value="<%= maincontactrole %>" />
 			<aui:input type="hidden" name="bibbox_cs_sendmailnotification" value="<%= optionsSendMailNotification_cfg %>" />
 			
-			<div>
+			<div style="display:none;">
 				<c:if test="<%= edit_user != null %>">
 					<c:choose>
 						<c:when test='<%= UsersAdminUtil.hasUpdateFieldPermission(edit_user, "portrait") %>'>

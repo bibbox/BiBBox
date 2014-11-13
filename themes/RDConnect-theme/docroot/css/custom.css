@@ -1628,4 +1628,9 @@ div.portlet-body {
 	width: 500px;
 }
 
+.aui .rdconnect-header-container-top .portlet-borderless-bar,
+.aui .rdconnect-header-container-idcard .portlet-borderless-bar {
+	display: none;
+}
+
 @import url(signin.css);

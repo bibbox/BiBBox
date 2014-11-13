@@ -5,6 +5,7 @@
 
 <%
 long optionsDeleteParentOrganisation_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsDeleteParentOrganisation", "0"));
+String optionsText_cfg = GetterUtil.getString(portletPreferences.getValue("optionsText", "We are sorry you don't want to participate in the RD-Connect Network. Please fill in the security code you received with this link to remove your organization from the RD-Connect list."));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -23,6 +24,9 @@ long optionsDeleteParentOrganisation_cfg = GetterUtil.getLong(portletPreferences
 					}
 					%>
 				</aui:select>
+			</aui:column>
+			<aui:column columnWidth="100" first="true">
+				<aui:input label="Text to displayed in the portlet" name="preferences--optionsText--" />
 			</aui:column>
 		</aui:layout>
 	</aui:fieldset>

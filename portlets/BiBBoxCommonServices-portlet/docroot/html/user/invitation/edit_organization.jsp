@@ -42,6 +42,7 @@ user/edit_invitation
 			<thead class="bibboc-cs-datatable-columns">
 				<tr>
 					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-first-header bibboc-cs-datatable-col-name"></th>
+					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">ID</th>
 					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Name</th>
 					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Type</th>
 					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Days since last modified</th>
@@ -73,7 +74,7 @@ user/edit_invitation
 		if(InvitationOrganisationLocalServiceUtil.getInvitationOrganisation(invitationId, organization.getOrganizationId()) != null) {
 			checked = "checked=\"true\"";
 		}
-		String tablerow = "<tr class=\"" + rowcss + "\"><td class=\"" + rowcss + "\"><input " + checked + " type=\"checkbox\" name=\"_invitation_WAR_BiBBoxCommonServicesportlet_bibbox_cs_organisations_" + counter + "\" ><input type=\"hidden\" name=\"_invitation_WAR_BiBBoxCommonServicesportlet_bibbox_cs_organisationsid_" + counter + "\"  value=\"" + organization.getOrganizationId() + "\"></td><td class=\"" + rowcss + "\">" + organization.getName() + "</td>";
+		String tablerow = "<tr class=\"" + rowcss + "\"><td class=\"" + rowcss + "\"><input " + checked + " type=\"checkbox\" name=\"_invitation_WAR_BiBBoxCommonServicesportlet_bibbox_cs_organisations_" + counter + "\" ><input type=\"hidden\" name=\"_invitation_WAR_BiBBoxCommonServicesportlet_bibbox_cs_organisationsid_" + counter + "\"  value=\"" + organization.getOrganizationId() + "\"></td><td>" + organization.getOrganizationId() + "</td><td class=\"" + rowcss + "\">" + organization.getName() + "</td>";
 		List<DDLRecordSet> ddlrecordsets = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
 		for(DDLRecordSet ddlrecordset : ddlrecordsets) {
 			String ddlrecordsetname = String.valueOf(ddlrecordset.getNameCurrentValue());

@@ -19,6 +19,7 @@ String actionId_edit_invitation = "EDIT_INVITATION";
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 String optionsInvitationTypeFilter_cfg = GetterUtil.getString(portletPreferences.getValue("optionsInvitationTypeFilter", ""));
+//optionsInvitationTypeFilter_cfg
 %>
 
 <c:choose>
@@ -35,8 +36,8 @@ String optionsInvitationTypeFilter_cfg = GetterUtil.getString(portletPreferences
 
 <liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "10")) %>' emptyResultsMessage="invitation-empty-results-message">
 	<liferay-ui:search-container-results
-		results="<%= InvitationLocalServiceUtil.getInvitations(optionsInvitationTypeFilter_cfg, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= InvitationLocalServiceUtil.getInvitationsCount(optionsInvitationTypeFilter_cfg) %>"
+		results="<%= InvitationLocalServiceUtil.getInvitations(searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= InvitationLocalServiceUtil.getInvitationsCount() %>"
 	/>
 	<liferay-ui:search-container-row
 		className="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"
