@@ -228,6 +228,20 @@ public interface InvitationOrganisationModel extends BaseModel<InvitationOrganis
 	 */
 	public void setSecuritytoken(long securitytoken);
 
+	/**
+	 * Returns the status of this invitation organisation.
+	 *
+	 * @return the status of this invitation organisation
+	 */
+	public long getStatus();
+
+	/**
+	 * Sets the status of this invitation organisation.
+	 *
+	 * @param status the status of this invitation organisation
+	 */
+	public void setStatus(long status);
+
 	@Override
 	public boolean isNew();
 

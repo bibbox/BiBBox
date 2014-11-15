@@ -17,25 +17,18 @@ This is the <b>Molgenis I Fram Catalog</b> portlet in View mode.
 		var a = JSON.parse(xmlhttp.responseText);
 		var token = a.token;
 		//alert(token);
+		
+		var xmlhttp2 = new XMLHttpRequest(); 
+		xmlhttp2.open("Post", "http://localhost:8080/api/v1/entities", false);
+		xmlhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xmlhttp2.send(JSON.stringify({'x-molgenis-token':token}));
+		var a2 = JSON.parse(xmlhttp2.responseText);
+		alert(a2);
+		
+		
+		
+		
 
-		var A = AUI();
-
-		var url = 'http://localhost:8080/plugin/dataexplorer';
-		A.io.request(url,{
-			//this is the data that you are sending to the action method
-			data: {
-				'x-molgenis-token': token,
-				'Access-Control-Allow-Origin': '*',
-			},
-			dataType: 'json',
-			on: {
-				failure: function() { alert('There is a problem with the server connection.'); },
-				success: function() { 
-					alert("laoded");
-					A.one('#iframe_molgenis').attr('src',this.get('responseData'));
-					//.setHTML(this.get('responseData'));
-				}
-			}
-		});
+		
 	}
 </script>

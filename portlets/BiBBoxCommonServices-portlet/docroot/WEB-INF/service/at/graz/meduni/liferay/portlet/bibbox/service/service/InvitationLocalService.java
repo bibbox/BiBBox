@@ -277,6 +277,7 @@ public interface InvitationLocalService extends BaseLocalService,
 	*  1 ... Saved
 	*  5 ... Simulated
 	* 10 ... Send
+	* 20 ... Request Panel Assessment
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getStatusFromString(java.lang.String string_status);

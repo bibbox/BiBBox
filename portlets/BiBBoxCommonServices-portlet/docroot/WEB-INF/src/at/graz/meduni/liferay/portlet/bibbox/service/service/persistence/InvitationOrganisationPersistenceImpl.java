@@ -1728,6 +1728,7 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 		invitationOrganisationImpl.setRejectdate(invitationOrganisation.getRejectdate());
 		invitationOrganisationImpl.setSecuritylinktoken(invitationOrganisation.getSecuritylinktoken());
 		invitationOrganisationImpl.setSecuritytoken(invitationOrganisation.getSecuritytoken());
+		invitationOrganisationImpl.setStatus(invitationOrganisation.getStatus());
 
 		return invitationOrganisationImpl;
 	}

@@ -48,6 +48,7 @@
 			</basic>
 			<basic name="securitylinktoken" />
 			<basic name="securitytoken" />
+			<basic name="status" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

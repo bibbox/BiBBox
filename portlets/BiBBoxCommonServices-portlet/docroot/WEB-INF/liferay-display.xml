@@ -14,5 +14,6 @@
 		<portlet id="invitation-util-reject"></portlet>
 		<portlet id="help-request"></portlet>
 		<portlet id="invitation-help-request"></portlet>
+		<portlet id="invitation-util-request"></portlet>
 	</category>
 </display>

@@ -37,7 +37,7 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{invitationOrganisationId=");
 		sb.append(invitationOrganisationId);
@@ -61,6 +61,8 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		sb.append(securitylinktoken);
 		sb.append(", securitytoken=");
 		sb.append(securitytoken);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append("}");
 
 		return sb.toString();
@@ -107,6 +109,7 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 
 		invitationOrganisationImpl.setSecuritylinktoken(securitylinktoken);
 		invitationOrganisationImpl.setSecuritytoken(securitytoken);
+		invitationOrganisationImpl.setStatus(status);
 
 		invitationOrganisationImpl.resetOriginalValues();
 
@@ -126,6 +129,7 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		rejectdate = objectInput.readLong();
 		securitylinktoken = objectInput.readLong();
 		securitytoken = objectInput.readLong();
+		status = objectInput.readLong();
 	}
 
 	@Override
@@ -142,6 +146,7 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		objectOutput.writeLong(rejectdate);
 		objectOutput.writeLong(securitylinktoken);
 		objectOutput.writeLong(securitytoken);
+		objectOutput.writeLong(status);
 	}
 
 	public long invitationOrganisationId;
@@ -155,4 +160,5 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 	public long rejectdate;
 	public long securitylinktoken;
 	public long securitytoken;
+	public long status;
 }

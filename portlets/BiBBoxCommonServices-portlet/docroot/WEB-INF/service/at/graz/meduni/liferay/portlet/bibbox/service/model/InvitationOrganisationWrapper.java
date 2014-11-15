@@ -62,6 +62,7 @@ public class InvitationOrganisationWrapper implements InvitationOrganisation,
 		attributes.put("rejectdate", getRejectdate());
 		attributes.put("securitylinktoken", getSecuritylinktoken());
 		attributes.put("securitytoken", getSecuritytoken());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -133,6 +134,12 @@ public class InvitationOrganisationWrapper implements InvitationOrganisation,
 
 		if (securitytoken != null) {
 			setSecuritytoken(securitytoken);
+		}
+
+		Long status = (Long)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -396,6 +403,26 @@ public class InvitationOrganisationWrapper implements InvitationOrganisation,
 	@Override
 	public void setSecuritytoken(long securitytoken) {
 		_invitationOrganisation.setSecuritytoken(securitytoken);
+	}
+
+	/**
+	* Returns the status of this invitation organisation.
+	*
+	* @return the status of this invitation organisation
+	*/
+	@Override
+	public long getStatus() {
+		return _invitationOrganisation.getStatus();
+	}
+
+	/**
+	* Sets the status of this invitation organisation.
+	*
+	* @param status the status of this invitation organisation
+	*/
+	@Override
+	public void setStatus(long status) {
+		_invitationOrganisation.setStatus(status);
 	}
 
 	@Override

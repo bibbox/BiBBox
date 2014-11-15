@@ -130,6 +130,8 @@ public class MasterPublish extends MVCPortlet {
     long BIOBANK_REG_MEMBER = 32821;
     long BIOBANK_REG_OWNER = 32823;
     long BiobanK_REG_MAINCONTACT = 71378;
+    
+    long BIOBANK_ASSESSMENT_ORGANIZATION = 235712;
     // Web page
     int PUBLICWEBSITETYPEID = 12020; // Public: 12020
     int INTRANETWEBSITETYPEID = 12019; // Public: 12020
@@ -355,6 +357,9 @@ public class MasterPublish extends MVCPortlet {
 			
 			long userId = company.getDefaultUser().getUserId();
 	        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
+	        if(master.getCandidatetype().equalsIgnoreCase("biobank")) {
+	        	parentOrganizationId = BIOBANK_ASSESSMENT_ORGANIZATION;
+	        }
 	        String name = master.getName();
 	        if(name.length() > 100) {
 	        	name = name.substring(0, 100);
@@ -649,7 +654,7 @@ public class MasterPublish extends MVCPortlet {
 		// create Disease Matrix | ID 32833
 		try {
 			DDLRecordSet recordSet = createRecordSet(request, organization, "Disease Matrix", 32833, serviceContext);
-			creatRecordDiseaseMatrix(recordSet, groupId, serviceContextRecord, master);
+			//creatRecordDiseaseMatrix(recordSet, groupId, serviceContextRecord, master);
 		} catch (PortalException e) {
 			System.out.println("RDC Exception in MasterPublish:createDDLs");
 			System.out.println("Could not create Disease Matrix");
@@ -734,6 +739,31 @@ public class MasterPublish extends MVCPortlet {
 			System.out.println("Could not create Sample Matrix");
 			e.printStackTrace();
 		}
+		// create Scientific publications | ID 238999
+		try {
+			createRecordSet(request, organization, "Scientific publications", 238999, serviceContext);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Sample Matrix");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Sample Matrix");
+			e.printStackTrace();
+		}
+		// create Contribution | ID 240619
+		try {
+			DDLRecordSet recordSet = createRecordSet(request, organization, "Contribution", 240619, serviceContext);
+			creatRecord(recordSet, groupId, serviceContextRecord, master);
+		} catch (PortalException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Sample Matrix");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("RDC Exception in MasterPublish:createDDLs");
+			System.out.println("Could not create Sample Matrix");
+			e.printStackTrace();
+		}
 	}
 	
 	private DDLRecordSet createRecordSet(ActionRequest request, Organization organization, String name, long ddmStructureId, ServiceContext serviceContext) throws PortalException, SystemException {
@@ -800,6 +830,21 @@ public class MasterPublish extends MVCPortlet {
 					serviceContext);
 		} catch(Exception e) {
 			System.out.println("RDC Exception QualityIndicator");
+			e.printStackTrace();
+		}
+	}
+	
+	private void creatRecord(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
+		try {
+			DDMStructure ddmStructure = recordSet.getDDMStructure();		
+			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
+			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
+					serviceContext.getUserId(),
+					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
+					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+					serviceContext);
+		} catch(Exception e) {
+			System.out.println("RDC Exception creatRecord " + recordSet.getName());
 			e.printStackTrace();
 		}
 	}

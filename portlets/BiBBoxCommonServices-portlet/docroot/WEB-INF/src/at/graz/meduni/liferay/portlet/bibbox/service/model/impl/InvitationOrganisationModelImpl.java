@@ -75,9 +75,10 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 			{ "lastusedlink", Types.TIMESTAMP },
 			{ "rejectdate", Types.TIMESTAMP },
 			{ "securitylinktoken", Types.BIGINT },
-			{ "securitytoken", Types.BIGINT }
+			{ "securitytoken", Types.BIGINT },
+			{ "status", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation_organisation (invitationOrganisationId LONG not null primary key,invitationId LONG,organisationId LONG,userId LONG,lastchanged DATE null,lastchanger LONG,reactdate DATE null,lastusedlink DATE null,rejectdate DATE null,securitylinktoken LONG,securitytoken LONG)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation_organisation (invitationOrganisationId LONG not null primary key,invitationId LONG,organisationId LONG,userId LONG,lastchanged DATE null,lastchanger LONG,reactdate DATE null,lastusedlink DATE null,rejectdate DATE null,securitylinktoken LONG,securitytoken LONG,status LONG)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.invitation_organisation";
 	public static final String ORDER_BY_JPQL = " ORDER BY invitationOrganisation.invitationOrganisationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.invitation_organisation.invitationOrganisationId ASC";
@@ -122,6 +123,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		model.setRejectdate(soapModel.getRejectdate());
 		model.setSecuritylinktoken(soapModel.getSecuritylinktoken());
 		model.setSecuritytoken(soapModel.getSecuritytoken());
+		model.setStatus(soapModel.getStatus());
 
 		return model;
 	}
@@ -198,6 +200,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		attributes.put("rejectdate", getRejectdate());
 		attributes.put("securitylinktoken", getSecuritylinktoken());
 		attributes.put("securitytoken", getSecuritytoken());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -269,6 +272,12 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 		if (securitytoken != null) {
 			setSecuritytoken(securitytoken);
+		}
+
+		Long status = (Long)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -427,6 +436,17 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		_securitytoken = securitytoken;
 	}
 
+	@JSON
+	@Override
+	public long getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(long status) {
+		_status = status;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -469,6 +489,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		invitationOrganisationImpl.setRejectdate(getRejectdate());
 		invitationOrganisationImpl.setSecuritylinktoken(getSecuritylinktoken());
 		invitationOrganisationImpl.setSecuritytoken(getSecuritytoken());
+		invitationOrganisationImpl.setStatus(getStatus());
 
 		invitationOrganisationImpl.resetOriginalValues();
 
@@ -586,12 +607,14 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 		invitationOrganisationCacheModel.securitytoken = getSecuritytoken();
 
+		invitationOrganisationCacheModel.status = getStatus();
+
 		return invitationOrganisationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{invitationOrganisationId=");
 		sb.append(getInvitationOrganisationId());
@@ -615,6 +638,8 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		sb.append(getSecuritylinktoken());
 		sb.append(", securitytoken=");
 		sb.append(getSecuritytoken());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append("}");
 
 		return sb.toString();
@@ -622,7 +647,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -673,6 +698,10 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 			"<column><column-name>securitytoken</column-name><column-value><![CDATA[");
 		sb.append(getSecuritytoken());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -699,6 +728,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 	private Date _rejectdate;
 	private long _securitylinktoken;
 	private long _securitytoken;
+	private long _status;
 	private long _columnBitmask;
 	private InvitationOrganisation _escapedModel;
 }

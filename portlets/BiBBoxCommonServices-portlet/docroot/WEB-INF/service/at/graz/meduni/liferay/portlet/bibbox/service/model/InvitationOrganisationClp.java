@@ -86,6 +86,7 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 		attributes.put("rejectdate", getRejectdate());
 		attributes.put("securitylinktoken", getSecuritylinktoken());
 		attributes.put("securitytoken", getSecuritytoken());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -157,6 +158,12 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 
 		if (securitytoken != null) {
 			setSecuritytoken(securitytoken);
+		}
+
+		Long status = (Long)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -427,6 +434,29 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 		}
 	}
 
+	@Override
+	public long getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(long status) {
+		_status = status;
+
+		if (_invitationOrganisationRemoteModel != null) {
+			try {
+				Class<?> clazz = _invitationOrganisationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatus", long.class);
+
+				method.invoke(_invitationOrganisationRemoteModel, status);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getInvitationOrganisationRemoteModel() {
 		return _invitationOrganisationRemoteModel;
 	}
@@ -509,6 +539,7 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 		clone.setRejectdate(getRejectdate());
 		clone.setSecuritylinktoken(getSecuritylinktoken());
 		clone.setSecuritytoken(getSecuritytoken());
+		clone.setStatus(getStatus());
 
 		return clone;
 	}
@@ -557,7 +588,7 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{invitationOrganisationId=");
 		sb.append(getInvitationOrganisationId());
@@ -581,6 +612,8 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 		sb.append(getSecuritylinktoken());
 		sb.append(", securitytoken=");
 		sb.append(getSecuritytoken());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append("}");
 
 		return sb.toString();
@@ -588,7 +621,7 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -639,6 +672,10 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 			"<column><column-name>securitytoken</column-name><column-value><![CDATA[");
 		sb.append(getSecuritytoken());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -657,5 +694,6 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 	private Date _rejectdate;
 	private long _securitylinktoken;
 	private long _securitytoken;
+	private long _status;
 	private BaseModel<?> _invitationOrganisationRemoteModel;
 }

@@ -90,6 +90,7 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 	 *  1 ... Saved
 	 *  5 ... Simulated
 	 * 10 ... Send
+	 * 20 ... Request Panel Assessment
 	 */
 	public long getStatusFromString(String string_status) {
 		long status = 0;
@@ -101,6 +102,9 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 		}
 		if(string_status.equalsIgnoreCase("send")) {
 			return 10;
+		}
+		if(string_status.equalsIgnoreCase("Request Panel Assessment")) {
+			return 20;
 		}
 		return 0;
 	}
@@ -114,6 +118,9 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 		}
 		if(status == 10) {
 			return "send";
+		}
+		if(status == 20) {
+			return "Request Panel Assessment";
 		}
 		return "";
 	}

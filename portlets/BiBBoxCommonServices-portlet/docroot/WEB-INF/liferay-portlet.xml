@@ -101,6 +101,18 @@
 			invitation-help-request-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>invitation-util-request</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.InvitationUtilRequestConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			invitation-util-request-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

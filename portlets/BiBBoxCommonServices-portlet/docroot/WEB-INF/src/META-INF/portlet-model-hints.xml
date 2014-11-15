@@ -28,5 +28,6 @@
 		<field name="rejectdate" type="Date" />
 		<field name="securitylinktoken" type="long" />
 		<field name="securitytoken" type="long" />
+		<field name="status" type="long" />
 	</model>
 </model-hints>
