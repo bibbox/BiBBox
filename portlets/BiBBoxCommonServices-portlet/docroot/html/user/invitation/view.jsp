@@ -6,7 +6,7 @@ user/invitation
 <%@ include file="/html/user/init.jsp" %> 
 
 <portlet:defineObjects />
-<liferay-theme:defineObjects /><column name="status" type="long"></column>
+<liferay-theme:defineObjects />
 
 <%
 // Parameters for permission Checking

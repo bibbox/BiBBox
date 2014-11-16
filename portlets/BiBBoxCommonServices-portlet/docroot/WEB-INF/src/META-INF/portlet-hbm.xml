@@ -2,8 +2,32 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation" />
+	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" table="bibboxcs.invitation_organisation">
+		<cache usage="read-write" />
+		<id name="biobankpanelassessmentId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="dateofassessment" type="org.hibernate.type.TimestampType" />
+		<property name="background1_1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="background1_1_comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="elsi1_2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="quality1_3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="quality1_3_comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cataloguemeetpurposes2_1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="adequateitplatform2_2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="addedvaluecatalogue2_3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="associateddata2_4" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="associateddata2_4_comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="reasonstoaccept3_1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="recommendation3_2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="needadditionalinformation3_3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="finalrecommendation_4" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" table="bibboxcs.invitation">
 		<cache usage="read-write" />
 		<id name="invitationId" type="long">

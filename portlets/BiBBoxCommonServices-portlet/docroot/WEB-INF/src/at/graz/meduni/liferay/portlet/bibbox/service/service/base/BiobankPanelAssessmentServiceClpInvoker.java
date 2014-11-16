@@ -14,7 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.base;
 
-import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,8 +22,8 @@ import java.util.Arrays;
  * @author reihsr
  * @generated
  */
-public class InvitationOrganisationServiceClpInvoker {
-	public InvitationOrganisationServiceClpInvoker() {
+public class BiobankPanelAssessmentServiceClpInvoker {
+	public BiobankPanelAssessmentServiceClpInvoker() {
 		_methodName30 = "getBeanIdentifier";
 
 		_methodParameterTypes30 = new String[] {  };
@@ -37,12 +37,12 @@ public class InvitationOrganisationServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName30.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
-			return InvitationOrganisationServiceUtil.getBeanIdentifier();
+			return BiobankPanelAssessmentServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName31.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
-			InvitationOrganisationServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			BiobankPanelAssessmentServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}

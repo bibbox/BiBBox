@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.base;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.BiobankPanelAssessmentPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence;
 
@@ -49,6 +50,63 @@ public abstract class InvitationOrganisationServiceBaseImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationServiceUtil} to access the invitation organisation remote service.
 	 */
+
+	/**
+	 * Returns the biobank panel assessment local service.
+	 *
+	 * @return the biobank panel assessment local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalService getBiobankPanelAssessmentLocalService() {
+		return biobankPanelAssessmentLocalService;
+	}
+
+	/**
+	 * Sets the biobank panel assessment local service.
+	 *
+	 * @param biobankPanelAssessmentLocalService the biobank panel assessment local service
+	 */
+	public void setBiobankPanelAssessmentLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalService biobankPanelAssessmentLocalService) {
+		this.biobankPanelAssessmentLocalService = biobankPanelAssessmentLocalService;
+	}
+
+	/**
+	 * Returns the biobank panel assessment remote service.
+	 *
+	 * @return the biobank panel assessment remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentService getBiobankPanelAssessmentService() {
+		return biobankPanelAssessmentService;
+	}
+
+	/**
+	 * Sets the biobank panel assessment remote service.
+	 *
+	 * @param biobankPanelAssessmentService the biobank panel assessment remote service
+	 */
+	public void setBiobankPanelAssessmentService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentService biobankPanelAssessmentService) {
+		this.biobankPanelAssessmentService = biobankPanelAssessmentService;
+	}
+
+	/**
+	 * Returns the biobank panel assessment persistence.
+	 *
+	 * @return the biobank panel assessment persistence
+	 */
+	public BiobankPanelAssessmentPersistence getBiobankPanelAssessmentPersistence() {
+		return biobankPanelAssessmentPersistence;
+	}
+
+	/**
+	 * Sets the biobank panel assessment persistence.
+	 *
+	 * @param biobankPanelAssessmentPersistence the biobank panel assessment persistence
+	 */
+	public void setBiobankPanelAssessmentPersistence(
+		BiobankPanelAssessmentPersistence biobankPanelAssessmentPersistence) {
+		this.biobankPanelAssessmentPersistence = biobankPanelAssessmentPersistence;
+	}
 
 	/**
 	 * Returns the invitation local service.
@@ -335,6 +393,12 @@ public abstract class InvitationOrganisationServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalService biobankPanelAssessmentLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentService biobankPanelAssessmentService;
+	@BeanReference(type = BiobankPanelAssessmentPersistence.class)
+	protected BiobankPanelAssessmentPersistence biobankPanelAssessmentPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService invitationLocalService;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService.class)

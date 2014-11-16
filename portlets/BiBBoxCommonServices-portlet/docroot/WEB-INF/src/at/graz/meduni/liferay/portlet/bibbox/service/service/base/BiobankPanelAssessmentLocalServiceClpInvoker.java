@@ -14,7 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.base;
 
-import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author reihsr
  * @generated
  */
-public class InvitationLocalServiceClpInvoker {
-	public InvitationLocalServiceClpInvoker() {
-		_methodName0 = "addInvitation";
+public class BiobankPanelAssessmentLocalServiceClpInvoker {
+	public BiobankPanelAssessmentLocalServiceClpInvoker() {
+		_methodName0 = "addBiobankPanelAssessment";
 
 		_methodParameterTypes0 = new String[] {
-				"at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"
+				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
 			};
 
-		_methodName1 = "createInvitation";
+		_methodName1 = "createBiobankPanelAssessment";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteInvitation";
+		_methodName2 = "deleteBiobankPanelAssessment";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteInvitation";
+		_methodName3 = "deleteBiobankPanelAssessment";
 
 		_methodParameterTypes3 = new String[] {
-				"at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"
+				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class InvitationLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchInvitation";
+		_methodName10 = "fetchBiobankPanelAssessment";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getInvitation";
+		_methodName11 = "getBiobankPanelAssessment";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class InvitationLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getInvitations";
+		_methodName13 = "getBiobankPanelAssessments";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getInvitationsCount";
+		_methodName14 = "getBiobankPanelAssessmentsCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateInvitation";
+		_methodName15 = "updateBiobankPanelAssessment";
 
 		_methodParameterTypes15 = new String[] {
-				"at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"
+				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
 			};
 
 		_methodName46 = "getBeanIdentifier";
@@ -113,70 +113,50 @@ public class InvitationLocalServiceClpInvoker {
 		_methodName47 = "setBeanIdentifier";
 
 		_methodParameterTypes47 = new String[] { "java.lang.String" };
-
-		_methodName52 = "invitationFromRequest";
-
-		_methodParameterTypes52 = new String[] { "javax.portlet.PortletRequest" };
-
-		_methodName53 = "getMyFilteredInvitations";
-
-		_methodParameterTypes53 = new String[] { "java.lang.String" };
-
-		_methodName54 = "getMyFilteredInvitationsCount";
-
-		_methodParameterTypes54 = new String[] { "java.lang.String" };
-
-		_methodName55 = "getStatusFromString";
-
-		_methodParameterTypes55 = new String[] { "java.lang.String" };
-
-		_methodName56 = "getStatusFromLong";
-
-		_methodParameterTypes56 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return InvitationLocalServiceUtil.addInvitation((at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation)arguments[0]);
+			return BiobankPanelAssessmentLocalServiceUtil.addBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return InvitationLocalServiceUtil.createInvitation(((Long)arguments[0]).longValue());
+			return BiobankPanelAssessmentLocalServiceUtil.createBiobankPanelAssessment(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return InvitationLocalServiceUtil.deleteInvitation(((Long)arguments[0]).longValue());
+			return BiobankPanelAssessmentLocalServiceUtil.deleteBiobankPanelAssessment(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return InvitationLocalServiceUtil.deleteInvitation((at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation)arguments[0]);
+			return BiobankPanelAssessmentLocalServiceUtil.deleteBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return InvitationLocalServiceUtil.dynamicQuery();
+			return BiobankPanelAssessmentLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return InvitationLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return BiobankPanelAssessmentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return InvitationLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return BiobankPanelAssessmentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return InvitationLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return BiobankPanelAssessmentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -184,81 +164,56 @@ public class InvitationLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return InvitationLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return BiobankPanelAssessmentLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return InvitationLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return BiobankPanelAssessmentLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return InvitationLocalServiceUtil.fetchInvitation(((Long)arguments[0]).longValue());
+			return BiobankPanelAssessmentLocalServiceUtil.fetchBiobankPanelAssessment(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return InvitationLocalServiceUtil.getInvitation(((Long)arguments[0]).longValue());
+			return BiobankPanelAssessmentLocalServiceUtil.getBiobankPanelAssessment(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return InvitationLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return BiobankPanelAssessmentLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return InvitationLocalServiceUtil.getInvitations(((Integer)arguments[0]).intValue(),
+			return BiobankPanelAssessmentLocalServiceUtil.getBiobankPanelAssessments(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return InvitationLocalServiceUtil.getInvitationsCount();
+			return BiobankPanelAssessmentLocalServiceUtil.getBiobankPanelAssessmentsCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return InvitationLocalServiceUtil.updateInvitation((at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation)arguments[0]);
+			return BiobankPanelAssessmentLocalServiceUtil.updateBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
 		}
 
 		if (_methodName46.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			return InvitationLocalServiceUtil.getBeanIdentifier();
+			return BiobankPanelAssessmentLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			InvitationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			BiobankPanelAssessmentLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
-		}
-
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			return InvitationLocalServiceUtil.invitationFromRequest((javax.portlet.PortletRequest)arguments[0]);
-		}
-
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-			return InvitationLocalServiceUtil.getMyFilteredInvitations((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName54.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
-			return InvitationLocalServiceUtil.getMyFilteredInvitationsCount((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName55.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
-			return InvitationLocalServiceUtil.getStatusFromString((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
-			return InvitationLocalServiceUtil.getStatusFromLong(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();
@@ -300,14 +255,4 @@ public class InvitationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes46;
 	private String _methodName47;
 	private String[] _methodParameterTypes47;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
-	private String _methodName54;
-	private String[] _methodParameterTypes54;
-	private String _methodName55;
-	private String[] _methodParameterTypes55;
-	private String _methodName56;
-	private String[] _methodParameterTypes56;
 }

@@ -58,5 +58,24 @@
 			<finder-column name="status"></finder-column>
 		</finder>
 	</entity>
-	
+	<entity name="BiobankPanelAssessment" local-service="true" remote-service="true" table="bibboxcs.invitation_organisation">
+		<column name="biobankpanelassessmentId" primary="true" type="long"></column>
+		<column name="organizationId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="dateofassessment" type="Date"></column>
+		<column name="background1_1" type="String"></column>
+		<column name="background1_1_comments" type="String"></column>
+		<column name="elsi1_2" type="String"></column>
+		<column name="quality1_3" type="String"></column>
+		<column name="quality1_3_comments" type="String"></column>
+		<column name="cataloguemeetpurposes2_1" type="String"></column>
+		<column name="adequateitplatform2_2" type="String"></column>
+		<column name="addedvaluecatalogue2_3" type="String"></column>
+		<column name="associateddata2_4" type="String"></column>
+		<column name="associateddata2_4_comments" type="String"></column>
+		<column name="reasonstoaccept3_1" type="String"></column>
+		<column name="recommendation3_2" type="String"></column>
+		<column name="needadditionalinformation3_3" type="String"></column>
+		<column name="finalrecommendation_4" type="String"></column>
+	</entity>
 </service-builder>

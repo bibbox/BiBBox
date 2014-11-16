@@ -14,6 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service;
 
+import at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessmentClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisationClp;
 
@@ -103,6 +104,10 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(BiobankPanelAssessmentClp.class.getName())) {
+			return translateInputBiobankPanelAssessment(oldModel);
+		}
+
 		if (oldModelClassName.equals(InvitationClp.class.getName())) {
 			return translateInputInvitation(oldModel);
 		}
@@ -124,6 +129,17 @@ public class ClpSerializer {
 		}
 
 		return newList;
+	}
+
+	public static Object translateInputBiobankPanelAssessment(
+		BaseModel<?> oldModel) {
+		BiobankPanelAssessmentClp oldClpModel = (BiobankPanelAssessmentClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getBiobankPanelAssessmentRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
 	}
 
 	public static Object translateInputInvitation(BaseModel<?> oldModel) {
@@ -163,6 +179,11 @@ public class ClpSerializer {
 		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl")) {
+			return translateOutputBiobankPanelAssessment(oldModel);
+		}
 
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl")) {
@@ -255,6 +276,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchBiobankPanelAssessmentException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchBiobankPanelAssessmentException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException();
 		}
@@ -265,6 +291,17 @@ public class ClpSerializer {
 		}
 
 		return throwable;
+	}
+
+	public static Object translateOutputBiobankPanelAssessment(
+		BaseModel<?> oldModel) {
+		BiobankPanelAssessmentClp newModel = new BiobankPanelAssessmentClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setBiobankPanelAssessmentRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputInvitation(BaseModel<?> oldModel) {

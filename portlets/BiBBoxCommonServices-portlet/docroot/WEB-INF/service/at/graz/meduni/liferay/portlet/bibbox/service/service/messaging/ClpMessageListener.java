@@ -14,6 +14,8 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.messaging;
 
+import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil;
@@ -38,6 +40,9 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			BiobankPanelAssessmentLocalServiceUtil.clearService();
+
+			BiobankPanelAssessmentServiceUtil.clearService();
 			InvitationLocalServiceUtil.clearService();
 
 			InvitationServiceUtil.clearService();

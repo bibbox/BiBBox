@@ -7,6 +7,34 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentModelImpl">
+		<attributes>
+			<id name="biobankpanelassessmentId" />
+			<basic name="organizationId" />
+			<basic name="userId" />
+			<basic name="dateofassessment">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="background1_1" />
+			<basic name="background1_1_comments" />
+			<basic name="elsi1_2" />
+			<basic name="quality1_3" />
+			<basic name="quality1_3_comments" />
+			<basic name="cataloguemeetpurposes2_1" />
+			<basic name="adequateitplatform2_2" />
+			<basic name="addedvaluecatalogue2_3" />
+			<basic name="associateddata2_4" />
+			<basic name="associateddata2_4_comments" />
+			<basic name="reasonstoaccept3_1" />
+			<basic name="recommendation3_2" />
+			<basic name="needadditionalinformation3_3" />
+			<basic name="finalrecommendation_4" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationModelImpl">
 		<attributes>
 			<id name="invitationId" />
@@ -58,6 +86,10 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" name="BiobankPanelAssessment">
+		<table name="bibboxcs.invitation_organisation" />
+		<attributes />
+	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" name="Invitation">
 		<table name="bibboxcs.invitation" />
 		<attributes />
