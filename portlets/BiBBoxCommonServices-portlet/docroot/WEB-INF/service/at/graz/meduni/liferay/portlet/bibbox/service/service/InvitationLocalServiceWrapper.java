@@ -300,19 +300,19 @@ public class InvitationLocalServiceWrapper implements InvitationLocalService,
 	* Returns a filtered list of invitations
 	*/
 	@Override
-	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getInvitations(
-		java.lang.String filter, int start, int end)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getMyFilteredInvitations(
+		java.lang.String filter)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _invitationLocalService.getInvitations(filter, start, end);
+		return _invitationLocalService.getMyFilteredInvitations(filter);
 	}
 
 	/**
 	* Returns the number of filtered invitations
 	*/
 	@Override
-	public int getInvitationsCount(java.lang.String filter)
+	public int getMyFilteredInvitationsCount(java.lang.String filter)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _invitationLocalService.getInvitationsCount(filter);
+		return _invitationLocalService.getMyFilteredInvitationsCount(filter);
 	}
 
 	/**

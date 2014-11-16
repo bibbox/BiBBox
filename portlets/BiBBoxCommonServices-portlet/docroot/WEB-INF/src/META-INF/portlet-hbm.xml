@@ -34,5 +34,6 @@
 		<property name="securitylinktoken" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="securitytoken" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusdate" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

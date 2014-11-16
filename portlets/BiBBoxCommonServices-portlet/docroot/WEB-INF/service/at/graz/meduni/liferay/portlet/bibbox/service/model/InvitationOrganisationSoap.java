@@ -44,6 +44,7 @@ public class InvitationOrganisationSoap implements Serializable {
 		soapModel.setSecuritylinktoken(model.getSecuritylinktoken());
 		soapModel.setSecuritytoken(model.getSecuritytoken());
 		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusdate(model.getStatusdate());
 
 		return soapModel;
 	}
@@ -195,6 +196,14 @@ public class InvitationOrganisationSoap implements Serializable {
 		_status = status;
 	}
 
+	public Date getStatusdate() {
+		return _statusdate;
+	}
+
+	public void setStatusdate(Date statusdate) {
+		_statusdate = statusdate;
+	}
+
 	private long _invitationOrganisationId;
 	private long _invitationId;
 	private long _organisationId;
@@ -207,4 +216,5 @@ public class InvitationOrganisationSoap implements Serializable {
 	private long _securitylinktoken;
 	private long _securitytoken;
 	private long _status;
+	private Date _statusdate;
 }

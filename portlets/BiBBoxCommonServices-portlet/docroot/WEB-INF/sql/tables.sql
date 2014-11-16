@@ -22,5 +22,6 @@ create table bibboxcs.invitation_organisation (
 	rejectdate DATE null,
 	securitylinktoken LONG,
 	securitytoken LONG,
-	status LONG
+	status LONG,
+	statusdate DATE null
 );

@@ -72,14 +72,15 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 	/**
 	 * Returns a filtered list of invitations 
 	 */
-	public List<Invitation> getInvitations(String filter, int start, int end) throws SystemException {
-		return invitationPersistence.filterFindByFilter(filter);
+	public List<Invitation> getMyFilteredInvitations(String filter) throws SystemException {
+		List<Invitation> invitations = invitationPersistence.filterFindByFilter(filter);//.filterFindByRdcInvitatioFilter(filter);
+		return invitations;
 	}
 	
 	/**
 	 * Returns the number of filtered invitations 
 	 */
-	public int getInvitationsCount(String filter) throws SystemException {
+	public int getMyFilteredInvitationsCount(String filter) throws SystemException {
 		return invitationPersistence.countByFilter(filter);
 	}
 	

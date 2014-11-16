@@ -119,11 +119,11 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 
 		_methodParameterTypes19 = new String[] { "javax.portlet.PortletRequest" };
 
-		_methodName20 = "getInvitations";
+		_methodName20 = "getMyFilteredInvitations";
 
-		_methodParameterTypes20 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes20 = new String[] { "java.lang.String" };
 
-		_methodName21 = "getInvitationsCount";
+		_methodName21 = "getMyFilteredInvitationsCount";
 
 		_methodParameterTypes21 = new String[] { "java.lang.String" };
 
@@ -712,21 +712,15 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 	}
 
 	@Override
-	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getInvitations(
-		java.lang.String filter, int start, int end)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getMyFilteredInvitations(
+		java.lang.String filter)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
-					new Object[] {
-						ClpSerializer.translateInput(filter),
-						
-					start,
-						
-					end
-					});
+					new Object[] { ClpSerializer.translateInput(filter) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -748,7 +742,7 @@ public class InvitationLocalServiceClp implements InvitationLocalService {
 	}
 
 	@Override
-	public int getInvitationsCount(java.lang.String filter)
+	public int getMyFilteredInvitationsCount(java.lang.String filter)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 

@@ -29,5 +29,6 @@
 		<field name="securitylinktoken" type="long" />
 		<field name="securitytoken" type="long" />
 		<field name="status" type="long" />
+		<field name="statusdate" type="Date" />
 	</model>
 </model-hints>

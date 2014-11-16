@@ -49,6 +49,9 @@
 			<basic name="securitylinktoken" />
 			<basic name="securitytoken" />
 			<basic name="status" />
+			<basic name="statusdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

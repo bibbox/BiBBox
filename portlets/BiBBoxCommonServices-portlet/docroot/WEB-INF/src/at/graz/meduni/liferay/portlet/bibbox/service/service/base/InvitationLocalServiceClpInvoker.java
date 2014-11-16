@@ -118,11 +118,11 @@ public class InvitationLocalServiceClpInvoker {
 
 		_methodParameterTypes46 = new String[] { "javax.portlet.PortletRequest" };
 
-		_methodName47 = "getInvitations";
+		_methodName47 = "getMyFilteredInvitations";
 
-		_methodParameterTypes47 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes47 = new String[] { "java.lang.String" };
 
-		_methodName48 = "getInvitationsCount";
+		_methodName48 = "getMyFilteredInvitationsCount";
 
 		_methodParameterTypes48 = new String[] { "java.lang.String" };
 
@@ -243,14 +243,12 @@ public class InvitationLocalServiceClpInvoker {
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			return InvitationLocalServiceUtil.getInvitations((java.lang.String)arguments[0],
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
+			return InvitationLocalServiceUtil.getMyFilteredInvitations((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return InvitationLocalServiceUtil.getInvitationsCount((java.lang.String)arguments[0]);
+			return InvitationLocalServiceUtil.getMyFilteredInvitationsCount((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName49.equals(name) &&

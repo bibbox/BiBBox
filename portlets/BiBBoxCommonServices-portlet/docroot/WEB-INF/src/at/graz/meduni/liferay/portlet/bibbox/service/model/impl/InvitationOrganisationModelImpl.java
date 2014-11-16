@@ -76,9 +76,10 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 			{ "rejectdate", Types.TIMESTAMP },
 			{ "securitylinktoken", Types.BIGINT },
 			{ "securitytoken", Types.BIGINT },
-			{ "status", Types.BIGINT }
+			{ "status", Types.BIGINT },
+			{ "statusdate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation_organisation (invitationOrganisationId LONG not null primary key,invitationId LONG,organisationId LONG,userId LONG,lastchanged DATE null,lastchanger LONG,reactdate DATE null,lastusedlink DATE null,rejectdate DATE null,securitylinktoken LONG,securitytoken LONG,status LONG)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.invitation_organisation (invitationOrganisationId LONG not null primary key,invitationId LONG,organisationId LONG,userId LONG,lastchanged DATE null,lastchanger LONG,reactdate DATE null,lastusedlink DATE null,rejectdate DATE null,securitylinktoken LONG,securitytoken LONG,status LONG,statusdate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.invitation_organisation";
 	public static final String ORDER_BY_JPQL = " ORDER BY invitationOrganisation.invitationOrganisationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.invitation_organisation.invitationOrganisationId ASC";
@@ -124,6 +125,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		model.setSecuritylinktoken(soapModel.getSecuritylinktoken());
 		model.setSecuritytoken(soapModel.getSecuritytoken());
 		model.setStatus(soapModel.getStatus());
+		model.setStatusdate(soapModel.getStatusdate());
 
 		return model;
 	}
@@ -201,6 +203,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		attributes.put("securitylinktoken", getSecuritylinktoken());
 		attributes.put("securitytoken", getSecuritytoken());
 		attributes.put("status", getStatus());
+		attributes.put("statusdate", getStatusdate());
 
 		return attributes;
 	}
@@ -278,6 +281,12 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 		if (status != null) {
 			setStatus(status);
+		}
+
+		Date statusdate = (Date)attributes.get("statusdate");
+
+		if (statusdate != null) {
+			setStatusdate(statusdate);
 		}
 	}
 
@@ -447,6 +456,17 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		_status = status;
 	}
 
+	@JSON
+	@Override
+	public Date getStatusdate() {
+		return _statusdate;
+	}
+
+	@Override
+	public void setStatusdate(Date statusdate) {
+		_statusdate = statusdate;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -490,6 +510,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		invitationOrganisationImpl.setSecuritylinktoken(getSecuritylinktoken());
 		invitationOrganisationImpl.setSecuritytoken(getSecuritytoken());
 		invitationOrganisationImpl.setStatus(getStatus());
+		invitationOrganisationImpl.setStatusdate(getStatusdate());
 
 		invitationOrganisationImpl.resetOriginalValues();
 
@@ -609,12 +630,21 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 		invitationOrganisationCacheModel.status = getStatus();
 
+		Date statusdate = getStatusdate();
+
+		if (statusdate != null) {
+			invitationOrganisationCacheModel.statusdate = statusdate.getTime();
+		}
+		else {
+			invitationOrganisationCacheModel.statusdate = Long.MIN_VALUE;
+		}
+
 		return invitationOrganisationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{invitationOrganisationId=");
 		sb.append(getInvitationOrganisationId());
@@ -640,6 +670,8 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		sb.append(getSecuritytoken());
 		sb.append(", status=");
 		sb.append(getStatus());
+		sb.append(", statusdate=");
+		sb.append(getStatusdate());
 		sb.append("}");
 
 		return sb.toString();
@@ -647,7 +679,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -702,6 +734,10 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusdate</column-name><column-value><![CDATA[");
+		sb.append(getStatusdate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -729,6 +765,7 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 	private long _securitylinktoken;
 	private long _securitytoken;
 	private long _status;
+	private Date _statusdate;
 	private long _columnBitmask;
 	private InvitationOrganisation _escapedModel;
 }

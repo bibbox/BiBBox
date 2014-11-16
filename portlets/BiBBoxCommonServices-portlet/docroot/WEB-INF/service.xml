@@ -22,8 +22,8 @@
         <finder return-type="Collection" name="Status">
 			<finder-column name="status"></finder-column>
 		</finder>
-		<finder return-type="Collection" name="Filter">
-			<finder-column name="filter"></finder-column>
+		<finder name="Filter" return-type="Collection" >
+			<finder-column name="filter" />
 		</finder>
 		<finder return-type="Invitation" name="Invitation">
 			<finder-column name="invitationId"></finder-column>
@@ -43,6 +43,7 @@
 		<column name="securitylinktoken" type="long"></column>
 		<column name="securitytoken" type="long"></column>
 		<column name="status" type="long"></column>
+		<column name="statusdate" type="Date"></column>
 		<finder return-type="Collection" name="Organisation">
 			<finder-column name="organisationId"></finder-column>
 		</finder>

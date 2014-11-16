@@ -37,7 +37,7 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{invitationOrganisationId=");
 		sb.append(invitationOrganisationId);
@@ -63,6 +63,8 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		sb.append(securitytoken);
 		sb.append(", status=");
 		sb.append(status);
+		sb.append(", statusdate=");
+		sb.append(statusdate);
 		sb.append("}");
 
 		return sb.toString();
@@ -111,6 +113,13 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		invitationOrganisationImpl.setSecuritytoken(securitytoken);
 		invitationOrganisationImpl.setStatus(status);
 
+		if (statusdate == Long.MIN_VALUE) {
+			invitationOrganisationImpl.setStatusdate(null);
+		}
+		else {
+			invitationOrganisationImpl.setStatusdate(new Date(statusdate));
+		}
+
 		invitationOrganisationImpl.resetOriginalValues();
 
 		return invitationOrganisationImpl;
@@ -130,6 +139,7 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		securitylinktoken = objectInput.readLong();
 		securitytoken = objectInput.readLong();
 		status = objectInput.readLong();
+		statusdate = objectInput.readLong();
 	}
 
 	@Override
@@ -147,6 +157,7 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 		objectOutput.writeLong(securitylinktoken);
 		objectOutput.writeLong(securitytoken);
 		objectOutput.writeLong(status);
+		objectOutput.writeLong(statusdate);
 	}
 
 	public long invitationOrganisationId;
@@ -161,4 +172,5 @@ public class InvitationOrganisationCacheModel implements CacheModel<InvitationOr
 	public long securitylinktoken;
 	public long securitytoken;
 	public long status;
+	public long statusdate;
 }

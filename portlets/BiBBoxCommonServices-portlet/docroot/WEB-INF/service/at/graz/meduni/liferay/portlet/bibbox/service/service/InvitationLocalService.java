@@ -259,15 +259,15 @@ public interface InvitationLocalService extends BaseLocalService,
 	* Returns a filtered list of invitations
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getInvitations(
-		java.lang.String filter, int start, int end)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> getMyFilteredInvitations(
+		java.lang.String filter)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns the number of filtered invitations
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getInvitationsCount(java.lang.String filter)
+	public int getMyFilteredInvitationsCount(java.lang.String filter)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

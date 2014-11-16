@@ -39,6 +39,7 @@ String optionsInvitationTypeFilter_cfg = GetterUtil.getString(portletPreferences
 		results="<%= InvitationLocalServiceUtil.getInvitations(searchContainer.getStart(), searchContainer.getEnd()) %>"
 		total="<%= InvitationLocalServiceUtil.getInvitationsCount() %>"
 	/>
+	
 	<liferay-ui:search-container-row
 		className="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"
 		keyProperty="invitationId"

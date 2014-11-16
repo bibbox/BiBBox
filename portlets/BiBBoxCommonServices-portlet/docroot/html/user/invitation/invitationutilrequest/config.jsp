@@ -23,4 +23,7 @@ String optionsRequestStatusId_cfg = GetterUtil.getString(portletPreferences.getV
    			</aui:column>
    		</aui:layout>
    	</aui:fieldset>
+   	<aui:button-row>
+		<aui:button type="submit" />
+	</aui:button-row>
 </aui:form>

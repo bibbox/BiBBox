@@ -30,6 +30,6 @@ if (currentGroup.isOrganization()) {
 		<aui:input type="hidden" name="organizationId" value="<%= organizationId %>" />
 	</aui:fieldset>
 	<aui:button-row>
-		<aui:button type="submit" value="<%= InvitationLocalServiceUtil.getStatusFromLong(Long.parseLong(optionsRequestStatusId_cfg)) %>" />
+		<aui:button type="submit" value="<%= InvitationLocalServiceUtil.getStatusFromLong(Long.parseLong(optionsRequestStatusId_cfg)) %>" ></aui:button>
 	</aui:button-row>
 </aui:form>

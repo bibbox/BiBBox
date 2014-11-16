@@ -242,6 +242,20 @@ public interface InvitationOrganisationModel extends BaseModel<InvitationOrganis
 	 */
 	public void setStatus(long status);
 
+	/**
+	 * Returns the statusdate of this invitation organisation.
+	 *
+	 * @return the statusdate of this invitation organisation
+	 */
+	public Date getStatusdate();
+
+	/**
+	 * Sets the statusdate of this invitation organisation.
+	 *
+	 * @param statusdate the statusdate of this invitation organisation
+	 */
+	public void setStatusdate(Date statusdate);
+
 	@Override
 	public boolean isNew();
 
