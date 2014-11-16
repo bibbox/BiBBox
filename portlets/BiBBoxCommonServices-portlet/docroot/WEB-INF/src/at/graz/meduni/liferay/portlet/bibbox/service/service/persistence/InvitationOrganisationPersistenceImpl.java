@@ -1352,6 +1352,499 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 		"invitationOrganisation.invitationId = ? AND ";
 	private static final String _FINDER_COLUMN_INVITATIONIDANDORGANISATIONID_ORGANISATIONID_2 =
 		"invitationOrganisation.organisationId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_STATUS = new FinderPath(InvitationOrganisationModelImpl.ENTITY_CACHE_ENABLED,
+			InvitationOrganisationModelImpl.FINDER_CACHE_ENABLED,
+			InvitationOrganisationImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByStatus",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS =
+		new FinderPath(InvitationOrganisationModelImpl.ENTITY_CACHE_ENABLED,
+			InvitationOrganisationModelImpl.FINDER_CACHE_ENABLED,
+			InvitationOrganisationImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByStatus",
+			new String[] { Long.class.getName() },
+			InvitationOrganisationModelImpl.STATUS_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_STATUS = new FinderPath(InvitationOrganisationModelImpl.ENTITY_CACHE_ENABLED,
+			InvitationOrganisationModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByStatus",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the invitation organisations where status = &#63;.
+	 *
+	 * @param status the status
+	 * @return the matching invitation organisations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<InvitationOrganisation> findByStatus(long status)
+		throws SystemException {
+		return findByStatus(status, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the invitation organisations where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationOrganisationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of invitation organisations
+	 * @param end the upper bound of the range of invitation organisations (not inclusive)
+	 * @return the range of matching invitation organisations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<InvitationOrganisation> findByStatus(long status, int start,
+		int end) throws SystemException {
+		return findByStatus(status, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the invitation organisations where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationOrganisationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of invitation organisations
+	 * @param end the upper bound of the range of invitation organisations (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching invitation organisations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<InvitationOrganisation> findByStatus(long status, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS;
+			finderArgs = new Object[] { status };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_STATUS;
+			finderArgs = new Object[] { status, start, end, orderByComparator };
+		}
+
+		List<InvitationOrganisation> list = (List<InvitationOrganisation>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (InvitationOrganisation invitationOrganisation : list) {
+				if ((status != invitationOrganisation.getStatus())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_INVITATIONORGANISATION_WHERE);
+
+			query.append(_FINDER_COLUMN_STATUS_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(InvitationOrganisationModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(status);
+
+				if (!pagination) {
+					list = (List<InvitationOrganisation>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<InvitationOrganisation>(list);
+				}
+				else {
+					list = (List<InvitationOrganisation>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first invitation organisation in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching invitation organisation
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException if a matching invitation organisation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation findByStatus_First(long status,
+		OrderByComparator orderByComparator)
+		throws NoSuchInvitationOrganisationException, SystemException {
+		InvitationOrganisation invitationOrganisation = fetchByStatus_First(status,
+				orderByComparator);
+
+		if (invitationOrganisation != null) {
+			return invitationOrganisation;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchInvitationOrganisationException(msg.toString());
+	}
+
+	/**
+	 * Returns the first invitation organisation in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching invitation organisation, or <code>null</code> if a matching invitation organisation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation fetchByStatus_First(long status,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<InvitationOrganisation> list = findByStatus(status, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last invitation organisation in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching invitation organisation
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException if a matching invitation organisation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation findByStatus_Last(long status,
+		OrderByComparator orderByComparator)
+		throws NoSuchInvitationOrganisationException, SystemException {
+		InvitationOrganisation invitationOrganisation = fetchByStatus_Last(status,
+				orderByComparator);
+
+		if (invitationOrganisation != null) {
+			return invitationOrganisation;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchInvitationOrganisationException(msg.toString());
+	}
+
+	/**
+	 * Returns the last invitation organisation in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching invitation organisation, or <code>null</code> if a matching invitation organisation could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation fetchByStatus_Last(long status,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByStatus(status);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<InvitationOrganisation> list = findByStatus(status, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the invitation organisations before and after the current invitation organisation in the ordered set where status = &#63;.
+	 *
+	 * @param invitationOrganisationId the primary key of the current invitation organisation
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next invitation organisation
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException if a invitation organisation with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public InvitationOrganisation[] findByStatus_PrevAndNext(
+		long invitationOrganisationId, long status,
+		OrderByComparator orderByComparator)
+		throws NoSuchInvitationOrganisationException, SystemException {
+		InvitationOrganisation invitationOrganisation = findByPrimaryKey(invitationOrganisationId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			InvitationOrganisation[] array = new InvitationOrganisationImpl[3];
+
+			array[0] = getByStatus_PrevAndNext(session, invitationOrganisation,
+					status, orderByComparator, true);
+
+			array[1] = invitationOrganisation;
+
+			array[2] = getByStatus_PrevAndNext(session, invitationOrganisation,
+					status, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected InvitationOrganisation getByStatus_PrevAndNext(Session session,
+		InvitationOrganisation invitationOrganisation, long status,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_INVITATIONORGANISATION_WHERE);
+
+		query.append(_FINDER_COLUMN_STATUS_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(InvitationOrganisationModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(invitationOrganisation);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<InvitationOrganisation> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the invitation organisations where status = &#63; from the database.
+	 *
+	 * @param status the status
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByStatus(long status) throws SystemException {
+		for (InvitationOrganisation invitationOrganisation : findByStatus(
+				status, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(invitationOrganisation);
+		}
+	}
+
+	/**
+	 * Returns the number of invitation organisations where status = &#63;.
+	 *
+	 * @param status the status
+	 * @return the number of matching invitation organisations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByStatus(long status) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_STATUS;
+
+		Object[] finderArgs = new Object[] { status };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_INVITATIONORGANISATION_WHERE);
+
+			query.append(_FINDER_COLUMN_STATUS_STATUS_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_STATUS_STATUS_2 = "invitationOrganisation.status = ?";
 
 	public InvitationOrganisationPersistenceImpl() {
 		setModelClass(InvitationOrganisation.class);
@@ -1692,6 +2185,23 @@ public class InvitationOrganisationPersistenceImpl extends BasePersistenceImpl<I
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_INVITATIONORGANISATIONS,
 					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_INVITATIONORGANISATIONS,
+					args);
+			}
+
+			if ((invitationOrganisationModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						invitationOrganisationModelImpl.getOriginalStatus()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_STATUS, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS,
+					args);
+
+				args = new Object[] { invitationOrganisationModelImpl.getStatus() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_STATUS, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUS,
 					args);
 			}
 		}

@@ -371,4 +371,53 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>
+			invitation-util-organization-status-list
+		</portlet-name>
+		<display-name>
+			Invitation Util Organization Status List
+		</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.user.InvitationUtilOrganizationStatusList
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/user/invitation/invitationutilorganizationstatuslist/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/user/invitation/invitationutilorganizationstatuslist/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Invitation Util Organization Status List</title>
+			<short-title>
+				Invitation Util Organization Status List
+			</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

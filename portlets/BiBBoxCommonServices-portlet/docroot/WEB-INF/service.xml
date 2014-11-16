@@ -54,5 +54,9 @@
 			<finder-column name="invitationId"></finder-column>
 			<finder-column name="organisationId"></finder-column>
 		</finder>
+		<finder return-type="Collection" name="Status">
+			<finder-column name="status"></finder-column>
+		</finder>
 	</entity>
+	
 </service-builder>

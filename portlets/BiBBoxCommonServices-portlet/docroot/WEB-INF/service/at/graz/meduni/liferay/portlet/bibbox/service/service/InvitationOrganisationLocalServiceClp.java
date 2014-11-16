@@ -128,13 +128,17 @@ public class InvitationOrganisationLocalServiceClp
 
 		_methodParameterTypes21 = new String[] { "long" };
 
-		_methodName22 = "getInvitationOrganisation";
+		_methodName22 = "getInvitationsByStatus";
 
-		_methodParameterTypes22 = new String[] { "long", "long" };
+		_methodParameterTypes22 = new String[] { "long" };
 
-		_methodName23 = "getInvitationRespons";
+		_methodName23 = "getInvitationOrganisation";
 
-		_methodParameterTypes23 = new String[] { "long" };
+		_methodParameterTypes23 = new String[] { "long", "long" };
+
+		_methodName24 = "getInvitationRespons";
+
+		_methodParameterTypes24 = new String[] { "long" };
 	}
 
 	@Override
@@ -784,14 +788,42 @@ public class InvitationOrganisationLocalServiceClp
 	}
 
 	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationsByStatus(
+		long status) throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22, new Object[] { status });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation getInvitationOrganisation(
 		long invitationId, long organisationId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22,
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
 					new Object[] { invitationId, organisationId });
 		}
 		catch (Throwable t) {
@@ -819,8 +851,8 @@ public class InvitationOrganisationLocalServiceClp
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName23,
-					_methodParameterTypes23, new Object[] { invitationId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24, new Object[] { invitationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -888,4 +920,6 @@ public class InvitationOrganisationLocalServiceClp
 	private String[] _methodParameterTypes22;
 	private String _methodName23;
 	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

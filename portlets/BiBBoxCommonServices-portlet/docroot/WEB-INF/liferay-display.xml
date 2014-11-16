@@ -15,5 +15,6 @@
 		<portlet id="help-request"></portlet>
 		<portlet id="invitation-help-request"></portlet>
 		<portlet id="invitation-util-request"></portlet>
+		<portlet id="invitation-util-organization-status-list"></portlet>
 	</category>
 </display>

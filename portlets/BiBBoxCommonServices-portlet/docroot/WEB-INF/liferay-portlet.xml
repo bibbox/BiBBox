@@ -18,7 +18,7 @@
 	<portlet>
 		<portlet-name>people</portlet-name>
 		<icon>/icon.png</icon>
-		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.PeopleConfig</configuration-action-class>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.config.PeopleConfig</configuration-action-class>
 		<render-weight>0</render-weight>
 		<ajaxable>true</ajaxable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
@@ -45,7 +45,7 @@
 	<portlet>
 		<portlet-name>invitation</portlet-name>
 		<icon>/icon.png</icon>
-		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.InvitationConfig</configuration-action-class>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.config.InvitationConfig</configuration-action-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 	    <friendly-url-mapping>invitation</friendly-url-mapping>
 	    <friendly-url-routes>at/graz/meduni/liferay/portlet/bibbox/user/invitation-friendly-url-routes.xml</friendly-url-routes>
@@ -71,7 +71,7 @@
 	<portlet>
 		<portlet-name>invitation-util-reject</portlet-name>
 		<icon>/icon.png</icon>
-		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.InvitationUtilRejectConfig</configuration-action-class>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.config.InvitationUtilRejectConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -92,7 +92,7 @@
 	<portlet>
 		<portlet-name>invitation-help-request</portlet-name>
 		<icon>/icon.png</icon>
-		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.InvitationHelpRequestConfig</configuration-action-class>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.config.InvitationHelpRequestConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -104,13 +104,27 @@
 	<portlet>
 		<portlet-name>invitation-util-request</portlet-name>
 		<icon>/icon.png</icon>
-		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.InvitationUtilRequestConfig</configuration-action-class>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.config.InvitationUtilRequestConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>
 			invitation-util-request-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>
+			invitation-util-organization-status-list
+		</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.config.InvitationUtilOrganizationStatusListConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			invitation-util-organization-status-list-portlet
 		</css-class-wrapper>
 	</portlet>
 	<role-mapper>

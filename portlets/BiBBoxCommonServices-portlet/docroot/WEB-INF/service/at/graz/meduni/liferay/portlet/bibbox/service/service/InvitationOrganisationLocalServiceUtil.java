@@ -295,12 +295,20 @@ public class InvitationOrganisationLocalServiceUtil {
 	}
 
 	/**
-	* Get organizations by invitation
+	* Get organizations by organisationId
 	*/
 	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationsByOrganisation(
 		long organisationId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getInvitationsByOrganisation(organisationId);
+	}
+
+	/**
+	* Get organizations by status
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationsByStatus(
+		long status) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getInvitationsByStatus(status);
 	}
 
 	/**

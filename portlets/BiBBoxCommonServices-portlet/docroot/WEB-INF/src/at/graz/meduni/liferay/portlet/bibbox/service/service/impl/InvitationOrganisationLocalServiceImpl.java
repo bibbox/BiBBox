@@ -59,10 +59,17 @@ public class InvitationOrganisationLocalServiceImpl
 	}
 	
 	/**
-	 * Get organizations by invitation
+	 * Get organizations by organisationId
 	 */
 	public List<InvitationOrganisation> getInvitationsByOrganisation(long organisationId) throws SystemException {
 		return invitationOrganisationPersistence.findByOrganisation(organisationId);
+	}
+	
+	/**
+	 * Get organizations by status
+	 */
+	public List<InvitationOrganisation> getInvitationsByStatus(long status) throws SystemException {
+		return invitationOrganisationPersistence.findByStatus(status);
 	}
 	
 	/**

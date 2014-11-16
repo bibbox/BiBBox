@@ -310,13 +310,22 @@ public class InvitationOrganisationLocalServiceWrapper
 	}
 
 	/**
-	* Get organizations by invitation
+	* Get organizations by organisationId
 	*/
 	@Override
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationsByOrganisation(
 		long organisationId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _invitationOrganisationLocalService.getInvitationsByOrganisation(organisationId);
+	}
+
+	/**
+	* Get organizations by status
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationsByStatus(
+		long status) throws com.liferay.portal.kernel.exception.SystemException {
+		return _invitationOrganisationLocalService.getInvitationsByStatus(status);
 	}
 
 	/**

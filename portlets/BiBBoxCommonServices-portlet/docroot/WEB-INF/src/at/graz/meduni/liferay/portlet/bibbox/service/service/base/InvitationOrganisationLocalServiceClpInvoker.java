@@ -126,13 +126,17 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 
 		_methodParameterTypes48 = new String[] { "long" };
 
-		_methodName49 = "getInvitationOrganisation";
+		_methodName49 = "getInvitationsByStatus";
 
-		_methodParameterTypes49 = new String[] { "long", "long" };
+		_methodParameterTypes49 = new String[] { "long" };
 
-		_methodName50 = "getInvitationRespons";
+		_methodName50 = "getInvitationOrganisation";
 
-		_methodParameterTypes50 = new String[] { "long" };
+		_methodParameterTypes50 = new String[] { "long", "long" };
+
+		_methodName51 = "getInvitationRespons";
+
+		_methodParameterTypes51 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -253,12 +257,17 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 
 		if (_methodName49.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisation(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+			return InvitationOrganisationLocalServiceUtil.getInvitationsByStatus(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisation(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			return InvitationOrganisationLocalServiceUtil.getInvitationRespons(((Long)arguments[0]).longValue());
 		}
 
@@ -311,4 +320,6 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes49;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
 }

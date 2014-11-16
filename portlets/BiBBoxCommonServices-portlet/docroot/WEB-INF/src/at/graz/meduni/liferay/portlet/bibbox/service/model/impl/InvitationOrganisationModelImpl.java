@@ -97,7 +97,8 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 			true);
 	public static long INVITATIONID_COLUMN_BITMASK = 1L;
 	public static long ORGANISATIONID_COLUMN_BITMASK = 2L;
-	public static long INVITATIONORGANISATIONID_COLUMN_BITMASK = 4L;
+	public static long STATUS_COLUMN_BITMASK = 4L;
+	public static long INVITATIONORGANISATIONID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -453,7 +454,19 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 
 	@Override
 	public void setStatus(long status) {
+		_columnBitmask |= STATUS_COLUMN_BITMASK;
+
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public long getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -570,6 +583,10 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 		invitationOrganisationModelImpl._originalOrganisationId = invitationOrganisationModelImpl._organisationId;
 
 		invitationOrganisationModelImpl._setOriginalOrganisationId = false;
+
+		invitationOrganisationModelImpl._originalStatus = invitationOrganisationModelImpl._status;
+
+		invitationOrganisationModelImpl._setOriginalStatus = false;
 
 		invitationOrganisationModelImpl._columnBitmask = 0;
 	}
@@ -765,6 +782,8 @@ public class InvitationOrganisationModelImpl extends BaseModelImpl<InvitationOrg
 	private long _securitylinktoken;
 	private long _securitytoken;
 	private long _status;
+	private long _originalStatus;
+	private boolean _setOriginalStatus;
 	private Date _statusdate;
 	private long _columnBitmask;
 	private InvitationOrganisation _escapedModel;
