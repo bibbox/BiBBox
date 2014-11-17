@@ -1,3 +1,5 @@
+create index IX_83FB5B8 on bibboxcs.biobankpanelassessment (organizationId);
+
 create index IX_6A1E28D9 on bibboxcs.invitation (filter);
 create index IX_D0165B5 on bibboxcs.invitation (invitationId);
 create index IX_7894EDA5 on bibboxcs.invitation (rdcinvitationfilter);

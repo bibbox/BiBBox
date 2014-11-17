@@ -117,6 +117,10 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 		_methodName52 = "biobankPanelAssessmentFromRequest";
 
 		_methodParameterTypes52 = new String[] { "javax.portlet.ActionRequest" };
+
+		_methodName53 = "getNumberOfAssessmentsForOrganization";
+
+		_methodParameterTypes53 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -225,6 +229,11 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 			return BiobankPanelAssessmentLocalServiceUtil.biobankPanelAssessmentFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+			return BiobankPanelAssessmentLocalServiceUtil.getNumberOfAssessmentsForOrganization(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -266,4 +275,6 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 	private String[] _methodParameterTypes47;
 	private String _methodName52;
 	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
 }

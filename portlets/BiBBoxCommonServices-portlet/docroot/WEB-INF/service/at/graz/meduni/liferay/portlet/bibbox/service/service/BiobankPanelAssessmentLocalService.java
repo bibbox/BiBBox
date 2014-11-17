@@ -257,4 +257,13 @@ public interface BiobankPanelAssessmentLocalService extends BaseLocalService,
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment biobankPanelAssessmentFromRequest(
 		javax.portlet.ActionRequest request)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Get the number of Assessment filled out for the organization
+	*
+	* @param organizationId
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getNumberOfAssessmentsForOrganization(long organizationId);
 }

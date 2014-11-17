@@ -77,4 +77,19 @@ public class BiobankPanelAssessmentLocalServiceImpl
 		biobankpanelassessment.setFinalrecommendation_4(ParamUtil.getString(request, "finalrecommendation_4"));
 		return biobankpanelassessment;
 	}
+	
+	/**
+	 * Get the number of Assessment filled out for the organization
+	 * @param organizationId
+	 * @return
+	 */
+	public int getNumberOfAssessmentsForOrganization(long organizationId) {
+		try {
+			return biobankPanelAssessmentPersistence.countByOrganizationFilter(organizationId);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

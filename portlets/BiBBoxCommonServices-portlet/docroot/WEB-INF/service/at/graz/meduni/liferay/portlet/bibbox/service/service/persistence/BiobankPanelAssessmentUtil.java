@@ -113,6 +113,177 @@ public class BiobankPanelAssessmentUtil {
 	}
 
 	/**
+	* Returns all the biobank panel assessments where organizationId = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @return the matching biobank panel assessments
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment> findByOrganizationFilter(
+		long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByOrganizationFilter(organizationId);
+	}
+
+	/**
+	* Returns a range of all the biobank panel assessments where organizationId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param organizationId the organization ID
+	* @param start the lower bound of the range of biobank panel assessments
+	* @param end the upper bound of the range of biobank panel assessments (not inclusive)
+	* @return the range of matching biobank panel assessments
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment> findByOrganizationFilter(
+		long organizationId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganizationFilter(organizationId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the biobank panel assessments where organizationId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param organizationId the organization ID
+	* @param start the lower bound of the range of biobank panel assessments
+	* @param end the upper bound of the range of biobank panel assessments (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching biobank panel assessments
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment> findByOrganizationFilter(
+		long organizationId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganizationFilter(organizationId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first biobank panel assessment in the ordered set where organizationId = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching biobank panel assessment
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchBiobankPanelAssessmentException if a matching biobank panel assessment could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment findByOrganizationFilter_First(
+		long organizationId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchBiobankPanelAssessmentException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganizationFilter_First(organizationId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first biobank panel assessment in the ordered set where organizationId = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching biobank panel assessment, or <code>null</code> if a matching biobank panel assessment could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment fetchByOrganizationFilter_First(
+		long organizationId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByOrganizationFilter_First(organizationId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last biobank panel assessment in the ordered set where organizationId = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching biobank panel assessment
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchBiobankPanelAssessmentException if a matching biobank panel assessment could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment findByOrganizationFilter_Last(
+		long organizationId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchBiobankPanelAssessmentException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganizationFilter_Last(organizationId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last biobank panel assessment in the ordered set where organizationId = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching biobank panel assessment, or <code>null</code> if a matching biobank panel assessment could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment fetchByOrganizationFilter_Last(
+		long organizationId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByOrganizationFilter_Last(organizationId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the biobank panel assessments before and after the current biobank panel assessment in the ordered set where organizationId = &#63;.
+	*
+	* @param biobankpanelassessmentId the primary key of the current biobank panel assessment
+	* @param organizationId the organization ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next biobank panel assessment
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchBiobankPanelAssessmentException if a biobank panel assessment with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment[] findByOrganizationFilter_PrevAndNext(
+		long biobankpanelassessmentId, long organizationId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchBiobankPanelAssessmentException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByOrganizationFilter_PrevAndNext(biobankpanelassessmentId,
+			organizationId, orderByComparator);
+	}
+
+	/**
+	* Removes all the biobank panel assessments where organizationId = &#63; from the database.
+	*
+	* @param organizationId the organization ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByOrganizationFilter(long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByOrganizationFilter(organizationId);
+	}
+
+	/**
+	* Returns the number of biobank panel assessments where organizationId = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @return the number of matching biobank panel assessments
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByOrganizationFilter(long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByOrganizationFilter(organizationId);
+	}
+
+	/**
 	* Caches the biobank panel assessment in the entity cache if it is enabled.
 	*
 	* @param biobankPanelAssessment the biobank panel assessment

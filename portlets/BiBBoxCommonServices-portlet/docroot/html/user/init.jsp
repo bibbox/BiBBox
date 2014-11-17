@@ -26,6 +26,8 @@
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalServiceUtil" %>
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation" %>
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil" %>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment" %>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalServiceUtil" %>
 
 <!-- URL -->
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>

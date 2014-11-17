@@ -303,6 +303,17 @@ public class BiobankPanelAssessmentLocalServiceWrapper
 	}
 
 	/**
+	* Get the number of Assessment filled out for the organization
+	*
+	* @param organizationId
+	* @return
+	*/
+	@Override
+	public int getNumberOfAssessmentsForOrganization(long organizationId) {
+		return _biobankPanelAssessmentLocalService.getNumberOfAssessmentsForOrganization(organizationId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public BiobankPanelAssessmentLocalService getWrappedBiobankPanelAssessmentLocalService() {

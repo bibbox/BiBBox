@@ -77,5 +77,8 @@
 		<column name="recommendation3_2" type="String"></column>
 		<column name="needadditionalinformation3_3" type="String"></column>
 		<column name="finalrecommendation_4" type="String"></column>
+		<finder return-type="Collection" name="OrganizationFilter">
+			<finder-column name="organizationId"></finder-column>
+		</finder>
 	</entity>
 </service-builder>

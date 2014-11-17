@@ -288,6 +288,16 @@ public class BiobankPanelAssessmentLocalServiceUtil {
 		return getService().biobankPanelAssessmentFromRequest(request);
 	}
 
+	/**
+	* Get the number of Assessment filled out for the organization
+	*
+	* @param organizationId
+	* @return
+	*/
+	public static int getNumberOfAssessmentsForOrganization(long organizationId) {
+		return getService().getNumberOfAssessmentsForOrganization(organizationId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

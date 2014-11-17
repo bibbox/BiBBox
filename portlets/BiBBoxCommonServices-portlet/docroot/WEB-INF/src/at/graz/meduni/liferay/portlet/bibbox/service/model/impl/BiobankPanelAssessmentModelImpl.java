@@ -98,7 +98,11 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"),
+			true);
+	public static long ORGANIZATIONID_COLUMN_BITMASK = 1L;
+	public static long BIOBANKPANELASSESSMENTID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -360,7 +364,19 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 
 	@Override
 	public void setOrganizationId(long organizationId) {
+		_columnBitmask |= ORGANIZATIONID_COLUMN_BITMASK;
+
+		if (!_setOriginalOrganizationId) {
+			_setOriginalOrganizationId = true;
+
+			_originalOrganizationId = _organizationId;
+		}
+
 		_organizationId = organizationId;
+	}
+
+	public long getOriginalOrganizationId() {
+		return _originalOrganizationId;
 	}
 
 	@JSON
@@ -620,6 +636,10 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 		_finalrecommendation_4 = finalrecommendation_4;
 	}
 
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -715,6 +735,13 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 
 	@Override
 	public void resetOriginalValues() {
+		BiobankPanelAssessmentModelImpl biobankPanelAssessmentModelImpl = this;
+
+		biobankPanelAssessmentModelImpl._originalOrganizationId = biobankPanelAssessmentModelImpl._organizationId;
+
+		biobankPanelAssessmentModelImpl._setOriginalOrganizationId = false;
+
+		biobankPanelAssessmentModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -997,6 +1024,8 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 		};
 	private long _biobankpanelassessmentId;
 	private long _organizationId;
+	private long _originalOrganizationId;
+	private boolean _setOriginalOrganizationId;
 	private long _userId;
 	private String _userUuid;
 	private Date _dateofassessment;
@@ -1014,5 +1043,6 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 	private String _recommendation3_2;
 	private String _needadditionalinformation3_3;
 	private String _finalrecommendation_4;
+	private long _columnBitmask;
 	private BiobankPanelAssessment _escapedModel;
 }
