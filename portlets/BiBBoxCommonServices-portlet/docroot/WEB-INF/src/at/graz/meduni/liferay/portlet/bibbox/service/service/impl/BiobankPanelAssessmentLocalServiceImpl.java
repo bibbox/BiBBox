@@ -17,6 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -52,14 +53,14 @@ public class BiobankPanelAssessmentLocalServiceImpl
 	 * Convenience method to create a Invitation object out of the request.
 	 * @throws SystemException 
 	 */
-	public BiobankPanelAssessment biobankPanelAssessmentFromRequest(PortletRequest request) throws SystemException {
+	public BiobankPanelAssessment biobankPanelAssessmentFromRequest(ActionRequest request) throws SystemException {
 		BiobankPanelAssessmentImpl biobankpanelassessment = new BiobankPanelAssessmentImpl();
 		biobankpanelassessment.setBiobankpanelassessmentId(CounterLocalServiceUtil.increment(BiobankPanelAssessment.class.getName()));
 		biobankpanelassessment.setOrganizationId(ParamUtil.getLong(request, "organizationId"));
 		biobankpanelassessment.setUserId(ParamUtil.getLong(request, "userId"));
 		// DateFormat
-		DateFormat dateformat = new SimpleDateFormat("dd.MM.yyyy");
-		biobankpanelassessment.setDateofassessment(ParamUtil.getDate(request, "dateofassessment", dateformat));
+		//DateFormat dateformat = new SimpleDateFormat("dd.MM.yyyy");
+		//biobankpanelassessment.setDateofassessment(ParamUtil.getDate(request, "dateofassessment", dateformat));
 		biobankpanelassessment.setBackground1_1(ParamUtil.getString(request, "background1_1"));
 		biobankpanelassessment.setBackground1_1_comments(ParamUtil.getString(request, "background1_1_comments"));
 		biobankpanelassessment.setElsi1_2(ParamUtil.getString(request, "elsi1_2"));

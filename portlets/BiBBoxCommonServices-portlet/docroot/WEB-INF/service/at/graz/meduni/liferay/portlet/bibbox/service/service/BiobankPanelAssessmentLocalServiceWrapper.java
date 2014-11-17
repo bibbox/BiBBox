@@ -291,6 +291,18 @@ public class BiobankPanelAssessmentLocalServiceWrapper
 	}
 
 	/**
+	* Convenience method to create a Invitation object out of the request.
+	*
+	* @throws SystemException
+	*/
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment biobankPanelAssessmentFromRequest(
+		javax.portlet.ActionRequest request)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _biobankPanelAssessmentLocalService.biobankPanelAssessmentFromRequest(request);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public BiobankPanelAssessmentLocalService getWrappedBiobankPanelAssessmentLocalService() {

@@ -31,7 +31,9 @@
 		<field name="needadditionalinformation3_3" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
-		<field name="finalrecommendation_4" type="String" />
+		<field name="finalrecommendation_4" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation">
 		<field name="invitationId" type="long" />

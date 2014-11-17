@@ -87,7 +87,7 @@
 		</attributes>
 	</mapped-superclass>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" name="BiobankPanelAssessment">
-		<table name="bibboxcs.invitation_organisation" />
+		<table name="bibboxcs.biobankpanelassessment" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" name="Invitation">

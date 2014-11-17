@@ -5,7 +5,7 @@
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation" />
-	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" table="bibboxcs.invitation_organisation">
+	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" table="bibboxcs.biobankpanelassessment">
 		<cache usage="read-write" />
 		<id name="biobankpanelassessmentId" type="long">
 			<generator class="assigned" />

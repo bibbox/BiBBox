@@ -17,7 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the BiobankPanelAssessment service. Represents a row in the &quot;bibboxcs.invitation_organisation&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the BiobankPanelAssessment service. Represents a row in the &quot;bibboxcs.biobankpanelassessment&quot; database table, with each column mapped to a property of this class.
  *
  * @author reihsr
  * @see BiobankPanelAssessmentModel

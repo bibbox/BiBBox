@@ -113,6 +113,10 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 		_methodName47 = "setBeanIdentifier";
 
 		_methodParameterTypes47 = new String[] { "java.lang.String" };
+
+		_methodName52 = "biobankPanelAssessmentFromRequest";
+
+		_methodParameterTypes52 = new String[] { "javax.portlet.ActionRequest" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +220,11 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+			return BiobankPanelAssessmentLocalServiceUtil.biobankPanelAssessmentFromRequest((javax.portlet.ActionRequest)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +264,6 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 	private String[] _methodParameterTypes46;
 	private String _methodName47;
 	private String[] _methodParameterTypes47;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
 }

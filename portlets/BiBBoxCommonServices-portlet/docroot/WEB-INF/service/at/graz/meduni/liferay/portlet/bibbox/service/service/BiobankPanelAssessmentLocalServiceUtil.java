@@ -277,6 +277,17 @@ public class BiobankPanelAssessmentLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Convenience method to create a Invitation object out of the request.
+	*
+	* @throws SystemException
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment biobankPanelAssessmentFromRequest(
+		javax.portlet.ActionRequest request)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().biobankPanelAssessmentFromRequest(request);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

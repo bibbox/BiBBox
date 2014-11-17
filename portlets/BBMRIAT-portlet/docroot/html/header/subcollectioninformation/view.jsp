@@ -44,7 +44,7 @@ if (currentGroup.isOrganization()) {
   		</div>
   		<div class="bbmriat_header_subcollectioninformation_container_collectioninformation">
   			Number of Sub-Collections: <span id="numberofsubcollections"></span><br>
-  			Number of Doners (including Sub-Collections): <span id="numberofdoners"></span><br>
+  			Number of Donors (including Sub-Collections): <span id="numberofdoners"></span><br>
   			Number of Samples (including Sub-Collections): <span id="numberofsaples"></span><br>
   			Number of Aliquots (including Sub-Collections): <span id="numberofaliquots"></span><br>
   			Last Activities: <span id="lastactivitiessubcollection"></span>

@@ -248,4 +248,13 @@ public interface BiobankPanelAssessmentLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* Convenience method to create a Invitation object out of the request.
+	*
+	* @throws SystemException
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment biobankPanelAssessmentFromRequest(
+		javax.portlet.ActionRequest request)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

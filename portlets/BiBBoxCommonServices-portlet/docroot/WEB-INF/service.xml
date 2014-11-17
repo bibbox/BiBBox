@@ -58,7 +58,7 @@
 			<finder-column name="status"></finder-column>
 		</finder>
 	</entity>
-	<entity name="BiobankPanelAssessment" local-service="true" remote-service="true" table="bibboxcs.invitation_organisation">
+	<entity name="BiobankPanelAssessment" local-service="true" remote-service="true" table="bibboxcs.biobankpanelassessment">
 		<column name="biobankpanelassessmentId" primary="true" type="long"></column>
 		<column name="organizationId" type="long"></column>
 		<column name="userId" type="long"></column>
