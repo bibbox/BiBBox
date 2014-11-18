@@ -708,6 +708,11 @@ public class BiobankPanelAssessmentWrapper implements BiobankPanelAssessment,
 	}
 
 	@Override
+	public java.lang.String getAggregatedAnswers() {
+		return _biobankPanelAssessment.getAggregatedAnswers();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

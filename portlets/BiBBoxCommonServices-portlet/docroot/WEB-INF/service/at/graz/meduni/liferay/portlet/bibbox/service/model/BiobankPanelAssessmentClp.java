@@ -670,6 +670,25 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 		}
 	}
 
+	@Override
+	public java.lang.String getAggregatedAnswers() {
+		try {
+			String methodName = "getAggregatedAnswers";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getBiobankPanelAssessmentRemoteModel() {
 		return _biobankPanelAssessmentRemoteModel;
 	}

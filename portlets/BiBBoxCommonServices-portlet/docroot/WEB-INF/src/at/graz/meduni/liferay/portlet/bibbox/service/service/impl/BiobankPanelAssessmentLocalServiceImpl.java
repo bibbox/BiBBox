@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
@@ -91,5 +92,20 @@ public class BiobankPanelAssessmentLocalServiceImpl
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	/**
+	 * Get the Assessments for the organization
+	 * @param organizationId
+	 * @return
+	 */
+	public List<BiobankPanelAssessment> getAssessmentsForOrganization(long organizationId) {
+		try {
+			return biobankPanelAssessmentPersistence.findByOrganizationFilter(organizationId);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

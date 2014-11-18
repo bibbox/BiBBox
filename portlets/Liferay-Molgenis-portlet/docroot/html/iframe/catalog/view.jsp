@@ -4,7 +4,8 @@
 
 This is the <b>Molgenis I Fram Catalog</b> portlet in View mode.
 <br />
-<div id="iframe_molgenis" style="width:100%;height:400px;"></div>
+
+<iframe id="yui-history-iframe" src="#" style="width:100%;height:600px;"></iframe>
 
 <script  type="text/javascript">
 	window.onload = function() {
@@ -39,7 +40,12 @@ This is the <b>Molgenis I Fram Catalog</b> portlet in View mode.
 		        		        		//token = a.token;
 		        		        		//alert(token);
 		        		            	var A = AUI();
-		        		            	A.one('#iframe_molgenis').setHTML(req.responseText);
+		        		            	//A.one('#iframe_molgenis').setHTML(req.responseText);
+		        		            	//A.one('#yui-history-iframe').get('contentWindow.document').one('body').setHTML(req.responseText);
+		        		            	//A.one('#yui-history-iframe').get('contentWindow.document').setHTML(req.responseText);
+		        		            	//A.one('#yui-history-iframe').src = "data:text/html;charset=utf-8," + escape(req.responseText);
+		        		            	var s = document.getElementById('yui-history-iframe');
+										s.contentDocument.write(req.responseText);
 		        		            	//.attr('src',req.responseText);
 		        		            } else {
 		        		                // Handle error case

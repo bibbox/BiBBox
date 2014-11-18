@@ -314,6 +314,18 @@ public class BiobankPanelAssessmentLocalServiceWrapper
 	}
 
 	/**
+	* Get the Assessments for the organization
+	*
+	* @param organizationId
+	* @return
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment> getAssessmentsForOrganization(
+		long organizationId) {
+		return _biobankPanelAssessmentLocalService.getAssessmentsForOrganization(organizationId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public BiobankPanelAssessmentLocalService getWrappedBiobankPanelAssessmentLocalService() {

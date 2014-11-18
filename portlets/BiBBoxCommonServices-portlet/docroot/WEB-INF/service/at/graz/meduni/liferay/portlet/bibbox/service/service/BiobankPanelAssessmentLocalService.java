@@ -266,4 +266,14 @@ public interface BiobankPanelAssessmentLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getNumberOfAssessmentsForOrganization(long organizationId);
+
+	/**
+	* Get the Assessments for the organization
+	*
+	* @param organizationId
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment> getAssessmentsForOrganization(
+		long organizationId);
 }

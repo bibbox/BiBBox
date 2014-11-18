@@ -32,4 +32,5 @@ public interface BiobankPanelAssessment extends BiobankPanelAssessmentModel,
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getAggregatedAnswers();
 }

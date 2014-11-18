@@ -298,6 +298,17 @@ public class BiobankPanelAssessmentLocalServiceUtil {
 		return getService().getNumberOfAssessmentsForOrganization(organizationId);
 	}
 
+	/**
+	* Get the Assessments for the organization
+	*
+	* @param organizationId
+	* @return
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment> getAssessmentsForOrganization(
+		long organizationId) {
+		return getService().getAssessmentsForOrganization(organizationId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
