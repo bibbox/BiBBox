@@ -68,7 +68,9 @@ ${theme.include(body_top_include)}
 		<div class="bbmri_eric_header-submainmenu">
 			<div class="bbmri_eric_header-submainmenu-position">
 			   <div class="bbmri_eric_header-submainmenu-floating-runing-text">
-               
+               		<#if is_signed_in>
+						<a href="${sign_out_url}" data-redirect="${is_login_redirect_required?string}" id="sign-out" rel="nofollow">${sign_out_text}</a>
+					</#if>
 			   </div>
 				<div class="bbmri_eric_header-submainmenu-floating">
 					<#if has_navigation || is_signed_in>

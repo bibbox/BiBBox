@@ -58,6 +58,10 @@ if(optionsTypeFilter_option.equals("RD-Connect")) {
 	%>
 	<%@ include file="/html/organisation/organisationlister/organizationtyps/collection.jsp" %>
 	<%
+} else if(optionsTypeFilter_option.equals("bbmriat")) {
+	%>
+	<%@ include file="/html/organisation/organisationlister/organizationtyps/bbmriat.jsp" %>
+	<%
 } else {
 	%>
 	<%@ include file="/html/organisation/organisationlister/organizationtyps/default.jsp" %>
