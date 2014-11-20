@@ -293,4 +293,11 @@ public interface InvitationOrganisationLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getInvitationRespons(long invitationId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

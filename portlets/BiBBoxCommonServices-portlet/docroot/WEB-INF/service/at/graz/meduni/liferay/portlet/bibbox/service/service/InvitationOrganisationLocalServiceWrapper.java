@@ -349,6 +349,15 @@ public class InvitationOrganisationLocalServiceWrapper
 	}
 
 	/**
+	* @throws SystemException
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _invitationOrganisationLocalService.getInvitationOrganisationByStatus();
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public InvitationOrganisationLocalService getWrappedInvitationOrganisationLocalService() {

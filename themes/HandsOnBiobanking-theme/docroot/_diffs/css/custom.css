@@ -111,7 +111,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	list-style-type: none;
 	margin: auto;
 	padding-left: 25px;
-	padding-right: 5px;
+	padding-right: 0px;
 	line-height: 20px;
 }
 /* submenu */

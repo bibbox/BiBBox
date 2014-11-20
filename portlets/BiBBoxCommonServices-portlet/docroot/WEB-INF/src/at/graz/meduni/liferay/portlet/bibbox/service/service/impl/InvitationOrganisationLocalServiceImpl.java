@@ -16,10 +16,17 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
 import java.util.List;
 
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.InvitationOrganisationLocalServiceBaseImpl;
 
 /**
@@ -102,5 +109,21 @@ public class InvitationOrganisationLocalServiceImpl
 			}
 		}
 		return "" + respons + "/" + rejected;
+	}
+	
+	/**
+	 * @throws SystemException 
+	 */
+	public List<InvitationOrganisation> getInvitationOrganisationByStatus() throws SystemException {
+		DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(Invitation.class, "subQuery", PortalClassLoaderUtil.getClassLoader())
+				.setProjection(ProjectionFactoryUtil.property("subQuery.invitationId"))
+				.add(PropertyFactoryUtil.forName("subQuery.invitationId").eqProperty("answerdQuery.invitationId"))
+				.add(PropertyFactoryUtil.forName("subQuery.invitationsend").isNotNull());
+		
+		DynamicQuery answerdQuery = DynamicQueryFactoryUtil.forClass(Invitation.class, "answerdQuery", PortalClassLoaderUtil.getClassLoader())
+				.add(PropertyFactoryUtil.forName("subQuery.invitationId").eq(subQuery));
+		
+		List<InvitationOrganisation> invitationorganisation = InvitationOrganisationLocalServiceUtil.dynamicQuery(answerdQuery);
+		return invitationorganisation;
 	}
 }

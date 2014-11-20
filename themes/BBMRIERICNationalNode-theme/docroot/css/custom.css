@@ -89,7 +89,7 @@ div.portlet-body {
 	list-style-type: none;
 	margin: auto;
 	padding-left: 20px;
-	padding-right: 5px;
+	padding-right: 0;
 	line-height: 20px;
 }
 /* submenu */

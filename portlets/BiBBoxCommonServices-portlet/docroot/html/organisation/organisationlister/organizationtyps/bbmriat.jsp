@@ -62,7 +62,7 @@ for(Organization organization : organizations) {
 	 	
  	tableandcontent += "<table class=\"rdc_coreinformation_organisation-table-images\">";
   	tableandcontent += "<tr>";
-  	tableandcontent += "<td rowspan=\"4\" width=\"80px\"><a href=\"" + orgPath + "\"><img alt=\"logo\" src=\"" + imgPath + "\" width=\"60px\" /></a></td>";
+  	tableandcontent += "<td rowspan=\"3\" width=\"80px\"><a href=\"" + orgPath + "\"><img alt=\"logo\" src=\"" + imgPath + "\" width=\"70px\" style=\"width: 70px;\" /></a></td>";
   	tableandcontent += "<td><a href=\"" + orgPath + "\" style=\"font-weight: bold;\">" + organization.getName() + "</a>";
   	if(permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_organization)) {
   		tableandcontent += "<span style=\"float:right;\"><a id=\"deleteOrganization\" class=\"icon-remove\" style=\"color: red;\"";

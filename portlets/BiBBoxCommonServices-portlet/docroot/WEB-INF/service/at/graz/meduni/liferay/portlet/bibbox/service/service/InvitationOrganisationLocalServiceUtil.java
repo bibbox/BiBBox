@@ -329,6 +329,14 @@ public class InvitationOrganisationLocalServiceUtil {
 		return getService().getInvitationRespons(invitationId);
 	}
 
+	/**
+	* @throws SystemException
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getInvitationOrganisationByStatus();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

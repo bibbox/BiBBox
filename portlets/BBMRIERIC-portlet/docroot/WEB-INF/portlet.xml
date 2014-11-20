@@ -416,7 +416,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>user-organisation</portlet-name>
-		<display-name>User Organisation</display-name>
+        <display-name>Send emails to User and Organizations</display-name>
 		<portlet-class>
 			at.meduni.liferay.portlet.bbmrieric.admin.UserOrganisationPortlet
 		</portlet-class>

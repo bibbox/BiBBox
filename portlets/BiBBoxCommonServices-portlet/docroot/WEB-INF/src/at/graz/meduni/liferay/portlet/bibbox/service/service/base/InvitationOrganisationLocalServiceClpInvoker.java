@@ -137,6 +137,10 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 		_methodName57 = "getInvitationRespons";
 
 		_methodParameterTypes57 = new String[] { "long" };
+
+		_methodName58 = "getInvitationOrganisationByStatus";
+
+		_methodParameterTypes58 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -271,6 +275,11 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 			return InvitationOrganisationLocalServiceUtil.getInvitationRespons(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisationByStatus();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -322,4 +331,6 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes56;
 	private String _methodName57;
 	private String[] _methodParameterTypes57;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
 }

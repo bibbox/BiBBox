@@ -139,6 +139,10 @@ public class InvitationOrganisationLocalServiceClp
 		_methodName24 = "getInvitationRespons";
 
 		_methodParameterTypes24 = new String[] { "long" };
+
+		_methodName25 = "getInvitationOrganisationByStatus";
+
+		_methodParameterTypes25 = new String[] {  };
 	}
 
 	@Override
@@ -873,6 +877,34 @@ public class InvitationOrganisationLocalServiceClp
 		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -922,4 +954,6 @@ public class InvitationOrganisationLocalServiceClp
 	private String[] _methodParameterTypes23;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
 }
