@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.bcnet.portlet.biobank.model.BiobankAtrributeListsMaster">
+		<field name="biobankAttributeListsMasterId" type="long" />
+		<field name="attributeListName" type="String" />
+		<field name="attributeListValue" type="String" />
+	</model>
+	<model name="com.bcnet.portlet.biobank.model.BiobankAttributeLists">
+		<field name="biobankAttributeListsId" type="long" />
+		<field name="biobankDbId" type="long" />
+		<field name="attributeListName" type="String" />
+		<field name="attributeListValue" type="String" />
+	</model>
+	<model name="com.bcnet.portlet.biobank.model.BiobankContact">
+		<field name="biobankDbId" type="long" />
+		<field name="contactId" type="long" />
+	</model>
+	<model name="com.bcnet.portlet.biobank.model.BiobankGeneralInformation">
+		<field name="biobankDbId" type="long" />
+		<field name="biobankId" type="String" />
+		<field name="acronym" type="String" />
+		<field name="url" type="String" />
+		<field name="juristicPersonId" type="long" />
+		<field name="countryCode" type="String" />
+		<field name="description" type="String" />
+		<field name="backup" type="boolean" />
+		<field name="trainingCourses" type="boolean" />
+	</model>
+	<model name="com.bcnet.portlet.biobank.model.Contact">
+		<field name="contactId" type="long" />
+		<field name="firstName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="phone" type="String" />
+		<field name="email" type="String" />
+		<field name="address" type="String" />
+		<field name="zip" type="String" />
+		<field name="city" type="String" />
+		<field name="countryCode" type="String" />
+		<field name="juristicPersonId" type="long" />
+		<field name="department" type="String" />
+		<field name="orcId" type="String" />
+	</model>
+	<model name="com.bcnet.portlet.biobank.model.Country">
+		<field name="countryCode" type="String" />
+		<field name="name" type="String" />
+	</model>
+	<model name="com.bcnet.portlet.biobank.model.JuristicPerson">
+		<field name="juristicPersonId" type="long" />
+		<field name="name" type="String" />
+		<field name="url" type="String" />
+		<field name="address" type="String" />
+	</model>
+</model-hints>

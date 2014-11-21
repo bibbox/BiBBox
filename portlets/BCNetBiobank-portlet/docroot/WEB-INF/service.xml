@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.bcnet.portlet.biobank">
+	<author>suyama</author>
+	<namespace>bcnetbiobank</namespace>
+
+	<entity name="BiobankAtrributeListsMaster" local-service="true" remote-service="true" table="biobankattributelistsmaster">
+		<column name="biobankAttributeListsMasterId" type="long" primary="true" />
+		<column name="attributeListName" type="String" />
+		<column name="attributeListValue" type="String" />
+		<finder name="attribute" return-type="Collection">
+			<finder-column name="attributeListName" />
+		</finder>
+	</entity>
+	
+	<entity name="JuristicPerson" local-service="true" remote-service="true" table="juristicperson">
+    	<column name="juristicPersonId" type="long" primary="true"></column>
+        <column name="name" type="String"></column>
+        <column name="url" type="String"></column>
+        <column name="address" type="String"></column>
+   </entity>
+   
+   <entity name="Contact" local-service="true" remote-service="true" table="contact">
+    	<column name="contactId" type="long" primary="true" />
+    	<column name="firstName" type="String" />
+        <column name="lastName" type="String"></column>
+        <column name="phone" type="String"></column>
+        <column name="email" type="String"></column>
+        <column name="address" type="String"></column>
+        <column name="zip" type="String"></column>
+        <column name="city" type="String"></column>
+        <column name="countryCode" type="String"></column>
+        <column name="juristicPersonId" type="long"></column>
+        <column name="department" type="String"></column>
+        <column name="orcId" type="String"></column>
+    </entity>
+    
+    <entity name="Country" local-service="true" remote-service="true" table="country">
+        <column name="countryCode" type="String" primary="true"></column>
+        <column name="name" type="String"></column>
+    </entity>
+    
+   <!--  <entity name="Biobank" local-service="true" remote-service="true" table="biobank">
+		<column name="biobankDbId" type="long" primary="true" />
+		<column name="biobankId" type="String"/>
+		<column name="acronym" type="String" />
+		<column name="name" type="String" />
+		<column name="url" type="String" />
+		<column name="juristicPersonId" type="long" />
+        <column name="countryCode" type="String"></column>
+        <column name="description" type="String"></column>
+        <column name="backup" type="boolean"></column>
+        <column name="trainingCourses" type="boolean"></column>
+	</entity> -->
+	
+	<entity name="BiobankGeneralInformation" local-service="true" remote-service="true" table="biobank">
+		<column name="biobankDbId" type="long" primary="true" />
+		<column name="biobankId" type="String"/>
+		<column name="acronym" type="String" />
+		<column name="url" type="String" />
+		<column name="juristicPersonId" type="long" />
+        <column name="countryCode" type="String"></column>
+        <column name="description" type="String"></column>
+        <column name="backup" type="boolean"></column>
+        <column name="trainingCourses" type="boolean"></column>
+	</entity>
+	
+	<entity name="BiobankAttributeLists" local-service="true" remote-service="true" table="biobankattributelists">
+		<column name="biobankAttributeListsId" type="long" primary="true" />
+		<column name="biobankDbId" type="long" />
+		<column name="attributeListName" type="String" />
+		<column name="attributeListValue" type="String" />
+		<finder name="biobankDbId" return-type="Collection">
+			<finder-column name="biobankDbId" />
+		</finder>
+		<finder name="biobankDbId_attributeListName" return-type="Collection">
+			<finder-column name="biobankDbId" />
+			<finder-column name="attributeListName" />
+		</finder>
+		<finder name="biobankDbId_attributeListName_attributeListValue" return-type="BiobankAttributeLists">
+			<finder-column name="biobankDbId" />
+			<finder-column name="attributeListName" />
+			<finder-column name="attributeListValue" />
+		</finder>
+	</entity>
+	
+	<entity name="BiobankContact" local-service="true" remote-service="true" table="biobankcontact">
+		<column name="biobankDbId" type="long" primary="true" />
+		<column name="contactId" type="long" primary="true" />
+	</entity>
+	
+</service-builder>

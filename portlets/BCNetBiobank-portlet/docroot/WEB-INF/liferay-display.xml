@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.2.0//EN" "http://www.liferay.com/dtd/liferay-display_6_2_0.dtd">
+
+<display>
+	<category name="BCNet Biobank">
+		<portlet id="biobank-atrribute-lists-master"></portlet>
+		<portlet id="juristic-person"></portlet>
+		<portlet id="contact"></portlet>
+		<portlet id="biobank"></portlet>
+		<portlet id="biobank-attribute-lists"></portlet>
+		<portlet id="biobank-search"></portlet>
+		<portlet id="main-navigation-menu"></portlet>
+		<portlet id="biobank-general-information"></portlet>
+	</category>
+</display>

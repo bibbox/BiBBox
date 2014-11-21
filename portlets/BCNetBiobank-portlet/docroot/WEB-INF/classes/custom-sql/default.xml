@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findByIdAcronymNameCountry">
+	<![CDATA[
+		SELECT * 
+			FROM biobank
+			WHERE 
+				(biobank.biobankId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(biobank.acronym LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				
+				(biobank.countryCode = ? OR ? = '')
+    ]]>
+	</sql>
+	
+	
+	<sql id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.countByIdAcronymNameCountry">
+	<![CDATA[
+		SELECT COUNT(*) from 
+		(
+		SELECT * 
+			FROM biobank
+			WHERE 
+				(biobank.biobankId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(biobank.acronym LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				
+				(biobank.countryCode = ? OR ? = '')
+		) dummy;
+	    ]]>
+	</sql>
+	
+	
+	<sql id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findBiobanksByKeywordsCountry">
+	<![CDATA[
+		SELECT biobank.*, organization_.name, biobankattributelists.* FROM 
+			biobank 
+				INNER JOIN
+			organization_
+				ON biobank.biobankDbId = organization_.organizationId
+				LEFT JOIN
+			biobankattributelists
+				ON biobank.biobankDbId=biobankattributelists.biobankDbId
+			WHERE
+				((organization_.name LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(biobank.biobankId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(biobank.acronym LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(biobankattributelists.attributeListName LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(biobankattributelists.attributeListValue LIKE ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				(biobank.countryCode = ? OR ? = '')
+    ]]>
+	</sql>
+</custom-sql>

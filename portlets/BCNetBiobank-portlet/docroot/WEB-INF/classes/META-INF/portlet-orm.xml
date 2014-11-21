@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.BiobankAtrributeListsMasterModelImpl">
+		<attributes>
+			<id name="biobankAttributeListsMasterId" />
+			<basic name="attributeListName" />
+			<basic name="attributeListValue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsModelImpl">
+		<attributes>
+			<id name="biobankAttributeListsId" />
+			<basic name="biobankDbId" />
+			<basic name="attributeListName" />
+			<basic name="attributeListValue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.BiobankContactModelImpl">
+		<id-class class="com.bcnet.portlet.biobank.service.persistence.BiobankContactPK" />
+		<attributes>
+			<id name="biobankDbId" />
+			<id name="contactId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationModelImpl">
+		<attributes>
+			<id name="biobankDbId" />
+			<basic name="biobankId" />
+			<basic name="acronym" />
+			<basic name="url" />
+			<basic name="juristicPersonId" />
+			<basic name="countryCode" />
+			<basic name="description" />
+			<basic name="backup" />
+			<basic name="trainingCourses" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.ContactModelImpl">
+		<attributes>
+			<id name="contactId" />
+			<basic name="firstName" />
+			<basic name="lastName" />
+			<basic name="phone" />
+			<basic name="email" />
+			<basic name="address" />
+			<basic name="zip" />
+			<basic name="city" />
+			<basic name="countryCode" />
+			<basic name="juristicPersonId" />
+			<basic name="department" />
+			<basic name="orcId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.CountryModelImpl">
+		<attributes>
+			<id name="countryCode" />
+			<basic name="name" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.JuristicPersonModelImpl">
+		<attributes>
+			<id name="juristicPersonId" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="address" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankAtrributeListsMasterImpl" name="BiobankAtrributeListsMaster">
+		<table name="biobankattributelistsmaster" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl" name="BiobankAttributeLists">
+		<table name="biobankattributelists" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankContactImpl" name="BiobankContact">
+		<table name="biobankcontact" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl" name="BiobankGeneralInformation">
+		<table name="biobank" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.ContactImpl" name="Contact">
+		<table name="contact" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.CountryImpl" name="Country">
+		<table name="country" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.JuristicPersonImpl" name="JuristicPerson">
+		<table name="juristicperson" />
+		<attributes />
+	</entity>
+</entity-mappings>

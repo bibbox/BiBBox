@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterLocalService" class="com.bcnet.portlet.biobank.service.impl.BiobankAtrributeListsMasterLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterService" class="com.bcnet.portlet.biobank.service.impl.BiobankAtrributeListsMasterServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.BiobankAtrributeListsMasterPersistence" class="com.bcnet.portlet.biobank.service.persistence.BiobankAtrributeListsMasterPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalService" class="com.bcnet.portlet.biobank.service.impl.BiobankAttributeListsLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.BiobankAttributeListsService" class="com.bcnet.portlet.biobank.service.impl.BiobankAttributeListsServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.BiobankAttributeListsPersistence" class="com.bcnet.portlet.biobank.service.persistence.BiobankAttributeListsPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.BiobankContactLocalService" class="com.bcnet.portlet.biobank.service.impl.BiobankContactLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.BiobankContactService" class="com.bcnet.portlet.biobank.service.impl.BiobankContactServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.BiobankContactPersistence" class="com.bcnet.portlet.biobank.service.persistence.BiobankContactPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalService" class="com.bcnet.portlet.biobank.service.impl.BiobankGeneralInformationLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.BiobankGeneralInformationService" class="com.bcnet.portlet.biobank.service.impl.BiobankGeneralInformationServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationPersistence" class="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder" class="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinderImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.ContactLocalService" class="com.bcnet.portlet.biobank.service.impl.ContactLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.ContactService" class="com.bcnet.portlet.biobank.service.impl.ContactServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.ContactPersistence" class="com.bcnet.portlet.biobank.service.persistence.ContactPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.CountryLocalService" class="com.bcnet.portlet.biobank.service.impl.CountryLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.CountryService" class="com.bcnet.portlet.biobank.service.impl.CountryServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.CountryPersistence" class="com.bcnet.portlet.biobank.service.persistence.CountryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.JuristicPersonLocalService" class="com.bcnet.portlet.biobank.service.impl.JuristicPersonLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.JuristicPersonService" class="com.bcnet.portlet.biobank.service.impl.JuristicPersonServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence" class="com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistenceImpl" parent="basePersistence" />
+</beans>

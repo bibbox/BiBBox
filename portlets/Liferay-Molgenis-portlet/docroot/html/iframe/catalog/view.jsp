@@ -29,7 +29,8 @@ This is the <b>Molgenis I Fram Catalog</b> portlet in View mode.
 		        		//var reqpage = new XMLHttpRequest();
 		        		if ('withCredentials' in req) {
 		        			req.open('GET', 'http://localhost:8080/plugin/dataexplorer', true);
-		        			req.setRequestHeader("Content-Type", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+		        			req.setRequestHeader("Content-Type", "text/html,application/xhtml+xml,application/xml,text/plain;q=0.9,image/webp,*/*;q=0.8");
+		        			req.setRequestHeader("x-molgenis-token", token);
 		        		    // Just like regular ol' XHR
 		        		    req.onreadystatechange = function() {
 		        		        if (req.readyState === 4) {

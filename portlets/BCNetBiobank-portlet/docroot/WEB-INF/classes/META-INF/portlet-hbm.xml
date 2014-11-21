@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.bcnet.portlet.biobank.model.BiobankAtrributeListsMaster" />
+	<import class="com.bcnet.portlet.biobank.model.BiobankAttributeLists" />
+	<import class="com.bcnet.portlet.biobank.model.BiobankContact" />
+	<import class="com.bcnet.portlet.biobank.model.BiobankGeneralInformation" />
+	<import class="com.bcnet.portlet.biobank.model.Contact" />
+	<import class="com.bcnet.portlet.biobank.model.Country" />
+	<import class="com.bcnet.portlet.biobank.model.JuristicPerson" />
+	<class name="com.bcnet.portlet.biobank.model.impl.BiobankAtrributeListsMasterImpl" table="biobankattributelistsmaster">
+		<cache usage="read-write" />
+		<id name="biobankAttributeListsMasterId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="attributeListName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="attributeListValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl" table="biobankattributelists">
+		<cache usage="read-write" />
+		<id name="biobankAttributeListsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="biobankDbId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="attributeListName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="attributeListValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.BiobankContactImpl" table="biobankcontact">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.bcnet.portlet.biobank.service.persistence.BiobankContactPK">
+			<key-property name="biobankDbId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="contactId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl" table="biobank">
+		<cache usage="read-write" />
+		<id name="biobankDbId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="biobankId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="acronym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="juristicPersonId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="countryCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="backup" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="trainingCourses" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.ContactImpl" table="contact">
+		<cache usage="read-write" />
+		<id name="contactId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="firstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="address" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="countryCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="juristicPersonId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="department" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="orcId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.CountryImpl" table="country">
+		<cache usage="read-write" />
+		<id name="countryCode" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.JuristicPersonImpl" table="juristicperson">
+		<cache usage="read-write" />
+		<id name="juristicPersonId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="address" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>
