@@ -118,13 +118,13 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 
 		_methodParameterTypes52 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName53 = "getNumberOfAssessmentsForOrganization";
-
-		_methodParameterTypes53 = new String[] { "long" };
-
-		_methodName54 = "getAssessmentsForOrganization";
+		_methodName54 = "getNumberOfAssessmentsForOrganization";
 
 		_methodParameterTypes54 = new String[] { "long" };
+
+		_methodName55 = "getAssessmentsForOrganization";
+
+		_methodParameterTypes55 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -233,13 +233,13 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 			return BiobankPanelAssessmentLocalServiceUtil.biobankPanelAssessmentFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
 			return BiobankPanelAssessmentLocalServiceUtil.getNumberOfAssessmentsForOrganization(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName54.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
 			return BiobankPanelAssessmentLocalServiceUtil.getAssessmentsForOrganization(((Long)arguments[0]).longValue());
 		}
 
@@ -284,8 +284,8 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 	private String[] _methodParameterTypes47;
 	private String _methodName52;
 	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
 	private String _methodName54;
 	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
 }

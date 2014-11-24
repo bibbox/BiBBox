@@ -12,4 +12,9 @@
         <generated-parameter name="mvcPath">/html/user/invitation/view_organisations.jsp</generated-parameter>
         <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
     </route>
+    <route>
+        <pattern>/biobank/{biobankId:\d+}</pattern>
+        <generated-parameter name="mvcPath">/html/user/invitation/invitationutilorganizationstatuslist/biobankprintpage.jsp</generated-parameter>
+        <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
+    </route>
 </routes>

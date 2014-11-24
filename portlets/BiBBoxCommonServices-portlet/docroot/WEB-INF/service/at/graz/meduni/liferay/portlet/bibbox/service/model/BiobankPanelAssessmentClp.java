@@ -78,6 +78,7 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 		attributes.put("biobankpanelassessmentId", getBiobankpanelassessmentId());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("userId", getUserId());
+		attributes.put("reviewer", getReviewer());
 		attributes.put("dateofassessment", getDateofassessment());
 		attributes.put("background1_1", getBackground1_1());
 		attributes.put("background1_1_comments", getBackground1_1_comments());
@@ -118,6 +119,12 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 
 		if (userId != null) {
 			setUserId(userId);
+		}
+
+		String reviewer = (String)attributes.get("reviewer");
+
+		if (reviewer != null) {
+			setReviewer(reviewer);
 		}
 
 		Date dateofassessment = (Date)attributes.get("dateofassessment");
@@ -298,6 +305,29 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	@Override
+	public String getReviewer() {
+		return _reviewer;
+	}
+
+	@Override
+	public void setReviewer(String reviewer) {
+		_reviewer = reviewer;
+
+		if (_biobankPanelAssessmentRemoteModel != null) {
+			try {
+				Class<?> clazz = _biobankPanelAssessmentRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setReviewer", String.class);
+
+				method.invoke(_biobankPanelAssessmentRemoteModel, reviewer);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
 	}
 
 	@Override
@@ -763,6 +793,7 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 		clone.setBiobankpanelassessmentId(getBiobankpanelassessmentId());
 		clone.setOrganizationId(getOrganizationId());
 		clone.setUserId(getUserId());
+		clone.setReviewer(getReviewer());
 		clone.setDateofassessment(getDateofassessment());
 		clone.setBackground1_1(getBackground1_1());
 		clone.setBackground1_1_comments(getBackground1_1_comments());
@@ -826,7 +857,7 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{biobankpanelassessmentId=");
 		sb.append(getBiobankpanelassessmentId());
@@ -834,6 +865,8 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 		sb.append(getOrganizationId());
 		sb.append(", userId=");
 		sb.append(getUserId());
+		sb.append(", reviewer=");
+		sb.append(getReviewer());
 		sb.append(", dateofassessment=");
 		sb.append(getDateofassessment());
 		sb.append(", background1_1=");
@@ -871,7 +904,7 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -889,6 +922,10 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
 		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>reviewer</column-name><column-value><![CDATA[");
+		sb.append(getReviewer());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>dateofassessment</column-name><column-value><![CDATA[");
@@ -960,6 +997,7 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 	private long _organizationId;
 	private long _userId;
 	private String _userUuid;
+	private String _reviewer;
 	private Date _dateofassessment;
 	private String _background1_1;
 	private String _background1_1_comments;

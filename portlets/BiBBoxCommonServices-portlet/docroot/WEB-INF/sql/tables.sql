@@ -2,6 +2,7 @@ create table bibboxcs.biobankpanelassessment (
 	biobankpanelassessmentId LONG not null primary key,
 	organizationId LONG,
 	userId LONG,
+	reviewer VARCHAR(75) null,
 	dateofassessment DATE null,
 	background1_1 VARCHAR(75) null,
 	background1_1_comments TEXT null,

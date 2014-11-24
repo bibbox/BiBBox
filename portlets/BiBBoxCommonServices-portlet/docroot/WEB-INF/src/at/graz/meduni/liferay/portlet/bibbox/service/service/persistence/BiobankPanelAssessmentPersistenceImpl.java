@@ -867,6 +867,7 @@ public class BiobankPanelAssessmentPersistenceImpl extends BasePersistenceImpl<B
 		biobankPanelAssessmentImpl.setBiobankpanelassessmentId(biobankPanelAssessment.getBiobankpanelassessmentId());
 		biobankPanelAssessmentImpl.setOrganizationId(biobankPanelAssessment.getOrganizationId());
 		biobankPanelAssessmentImpl.setUserId(biobankPanelAssessment.getUserId());
+		biobankPanelAssessmentImpl.setReviewer(biobankPanelAssessment.getReviewer());
 		biobankPanelAssessmentImpl.setDateofassessment(biobankPanelAssessment.getDateofassessment());
 		biobankPanelAssessmentImpl.setBackground1_1(biobankPanelAssessment.getBackground1_1());
 		biobankPanelAssessmentImpl.setBackground1_1_comments(biobankPanelAssessment.getBackground1_1_comments());

@@ -62,6 +62,7 @@
 		<column name="biobankpanelassessmentId" primary="true" type="long"></column>
 		<column name="organizationId" type="long"></column>
 		<column name="userId" type="long"></column>
+		<column name="reviewer" type="String"></column>
 		<column name="dateofassessment" type="Date"></column>
 		<column name="background1_1" type="String"></column>
 		<column name="background1_1_comments" type="String"></column>

@@ -40,6 +40,8 @@ if(invitationorganisations.size() > 0) {
 				<td><%= BiobankPanelAssessmentLocalServiceUtil.getNumberOfAssessmentsForOrganization(organization.getOrganizationId()) %></td>
 				<td>
 					<liferay-ui:icon-menu>
+						<% String biobankPrintURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/invitation/biobank/" + organization.getOrganizationId(); %>
+						<liferay-ui:icon image="edit" message="Print Biobank Details" url="<%=biobankPrintURL.toString() %>" target="blank_" />
 						<portlet:renderURL var="CreateAssessmentURL">
 							<portlet:param name="mvcPath" value="/html/user/invitation/invitationutilorganizationstatuslist/createbiobankpanelassessment.jsp" />
 							<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>"/>

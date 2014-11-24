@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -56,12 +57,11 @@ public class BiobankPanelAssessmentLocalServiceImpl
 	 */
 	public BiobankPanelAssessment biobankPanelAssessmentFromRequest(ActionRequest request) throws SystemException {
 		BiobankPanelAssessmentImpl biobankpanelassessment = new BiobankPanelAssessmentImpl();
-		biobankpanelassessment.setBiobankpanelassessmentId(CounterLocalServiceUtil.increment(BiobankPanelAssessment.class.getName()));
+		biobankpanelassessment.setBiobankpanelassessmentId(ParamUtil.getLong(request, "assessmnetId"));
 		biobankpanelassessment.setOrganizationId(ParamUtil.getLong(request, "organizationId"));
 		biobankpanelassessment.setUserId(ParamUtil.getLong(request, "userId"));
-		// DateFormat
-		//DateFormat dateformat = new SimpleDateFormat("dd.MM.yyyy");
-		//biobankpanelassessment.setDateofassessment(ParamUtil.getDate(request, "dateofassessment", dateformat));
+		biobankpanelassessment.setReviewer(ParamUtil.getString(request, "reviewer"));
+		biobankpanelassessment.setDateofassessment(getDate(request, "dateofassessment"));
 		biobankpanelassessment.setBackground1_1(ParamUtil.getString(request, "background1_1"));
 		biobankpanelassessment.setBackground1_1_comments(ParamUtil.getString(request, "background1_1_comments"));
 		biobankpanelassessment.setElsi1_2(ParamUtil.getString(request, "elsi1_2"));
@@ -77,6 +77,17 @@ public class BiobankPanelAssessmentLocalServiceImpl
 		biobankpanelassessment.setNeedadditionalinformation3_3(ParamUtil.getString(request, "needadditionalinformation3_3"));
 		biobankpanelassessment.setFinalrecommendation_4(ParamUtil.getString(request, "finalrecommendation_4"));
 		return biobankpanelassessment;
+	}
+	
+	/**
+	 * Convenience method to get a date from the request
+	 *
+	 */
+	private static Date getDate(PortletRequest request, String param) {
+		int day = ParamUtil.getInteger(request, param + "Day");
+		int month = ParamUtil.getInteger(request, param + "Month");
+		int year = ParamUtil.getInteger(request, param + "Year");
+		return PortalUtil.getDate(month, day, year);
 	}
 	
 	/**

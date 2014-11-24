@@ -5,6 +5,7 @@
 		<field name="biobankpanelassessmentId" type="long" />
 		<field name="organizationId" type="long" />
 		<field name="userId" type="long" />
+		<field name="reviewer" type="String" />
 		<field name="dateofassessment" type="Date" />
 		<field name="background1_1" type="String" />
 		<field name="background1_1_comments" type="String">

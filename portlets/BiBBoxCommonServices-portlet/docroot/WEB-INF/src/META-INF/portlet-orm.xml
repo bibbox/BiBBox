@@ -12,6 +12,7 @@
 			<id name="biobankpanelassessmentId" />
 			<basic name="organizationId" />
 			<basic name="userId" />
+			<basic name="reviewer" />
 			<basic name="dateofassessment">
 				<temporal>TIMESTAMP</temporal>
 			</basic>

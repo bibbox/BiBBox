@@ -118,6 +118,21 @@ public interface BiobankPanelAssessmentModel extends BaseModel<BiobankPanelAsses
 	public void setUserUuid(String userUuid);
 
 	/**
+	 * Returns the reviewer of this biobank panel assessment.
+	 *
+	 * @return the reviewer of this biobank panel assessment
+	 */
+	@AutoEscape
+	public String getReviewer();
+
+	/**
+	 * Sets the reviewer of this biobank panel assessment.
+	 *
+	 * @param reviewer the reviewer of this biobank panel assessment
+	 */
+	public void setReviewer(String reviewer);
+
+	/**
 	 * Returns the dateofassessment of this biobank panel assessment.
 	 *
 	 * @return the dateofassessment of this biobank panel assessment

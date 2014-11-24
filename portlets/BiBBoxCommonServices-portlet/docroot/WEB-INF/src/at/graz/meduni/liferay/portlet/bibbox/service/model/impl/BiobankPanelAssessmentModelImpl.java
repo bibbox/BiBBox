@@ -69,6 +69,7 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 			{ "biobankpanelassessmentId", Types.BIGINT },
 			{ "organizationId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
+			{ "reviewer", Types.VARCHAR },
 			{ "dateofassessment", Types.TIMESTAMP },
 			{ "background1_1", Types.VARCHAR },
 			{ "background1_1_comments", Types.VARCHAR },
@@ -85,7 +86,7 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 			{ "needadditionalinformation3_3", Types.VARCHAR },
 			{ "finalrecommendation_4", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.biobankpanelassessment (biobankpanelassessmentId LONG not null primary key,organizationId LONG,userId LONG,dateofassessment DATE null,background1_1 VARCHAR(75) null,background1_1_comments TEXT null,elsi1_2 VARCHAR(75) null,quality1_3 VARCHAR(75) null,quality1_3_comments TEXT null,cataloguemeetpurposes2_1 VARCHAR(75) null,adequateitplatform2_2 VARCHAR(75) null,addedvaluecatalogue2_3 VARCHAR(75) null,associateddata2_4 VARCHAR(75) null,associateddata2_4_comments TEXT null,reasonstoaccept3_1 TEXT null,recommendation3_2 TEXT null,needadditionalinformation3_3 TEXT null,finalrecommendation_4 TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.biobankpanelassessment (biobankpanelassessmentId LONG not null primary key,organizationId LONG,userId LONG,reviewer VARCHAR(75) null,dateofassessment DATE null,background1_1 VARCHAR(75) null,background1_1_comments TEXT null,elsi1_2 VARCHAR(75) null,quality1_3 VARCHAR(75) null,quality1_3_comments TEXT null,cataloguemeetpurposes2_1 VARCHAR(75) null,adequateitplatform2_2 VARCHAR(75) null,addedvaluecatalogue2_3 VARCHAR(75) null,associateddata2_4 VARCHAR(75) null,associateddata2_4_comments TEXT null,reasonstoaccept3_1 TEXT null,recommendation3_2 TEXT null,needadditionalinformation3_3 TEXT null,finalrecommendation_4 TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.biobankpanelassessment";
 	public static final String ORDER_BY_JPQL = " ORDER BY biobankPanelAssessment.biobankpanelassessmentId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.biobankpanelassessment.biobankpanelassessmentId ASC";
@@ -121,6 +122,7 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 		model.setBiobankpanelassessmentId(soapModel.getBiobankpanelassessmentId());
 		model.setOrganizationId(soapModel.getOrganizationId());
 		model.setUserId(soapModel.getUserId());
+		model.setReviewer(soapModel.getReviewer());
 		model.setDateofassessment(soapModel.getDateofassessment());
 		model.setBackground1_1(soapModel.getBackground1_1());
 		model.setBackground1_1_comments(soapModel.getBackground1_1_comments());
@@ -204,6 +206,7 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 		attributes.put("biobankpanelassessmentId", getBiobankpanelassessmentId());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("userId", getUserId());
+		attributes.put("reviewer", getReviewer());
 		attributes.put("dateofassessment", getDateofassessment());
 		attributes.put("background1_1", getBackground1_1());
 		attributes.put("background1_1_comments", getBackground1_1_comments());
@@ -244,6 +247,12 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 
 		if (userId != null) {
 			setUserId(userId);
+		}
+
+		String reviewer = (String)attributes.get("reviewer");
+
+		if (reviewer != null) {
+			setReviewer(reviewer);
 		}
 
 		Date dateofassessment = (Date)attributes.get("dateofassessment");
@@ -398,6 +407,22 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	@JSON
+	@Override
+	public String getReviewer() {
+		if (_reviewer == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _reviewer;
+		}
+	}
+
+	@Override
+	public void setReviewer(String reviewer) {
+		_reviewer = reviewer;
 	}
 
 	@JSON
@@ -670,6 +695,7 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 		biobankPanelAssessmentImpl.setBiobankpanelassessmentId(getBiobankpanelassessmentId());
 		biobankPanelAssessmentImpl.setOrganizationId(getOrganizationId());
 		biobankPanelAssessmentImpl.setUserId(getUserId());
+		biobankPanelAssessmentImpl.setReviewer(getReviewer());
 		biobankPanelAssessmentImpl.setDateofassessment(getDateofassessment());
 		biobankPanelAssessmentImpl.setBackground1_1(getBackground1_1());
 		biobankPanelAssessmentImpl.setBackground1_1_comments(getBackground1_1_comments());
@@ -753,6 +779,14 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 		biobankPanelAssessmentCacheModel.organizationId = getOrganizationId();
 
 		biobankPanelAssessmentCacheModel.userId = getUserId();
+
+		biobankPanelAssessmentCacheModel.reviewer = getReviewer();
+
+		String reviewer = biobankPanelAssessmentCacheModel.reviewer;
+
+		if ((reviewer != null) && (reviewer.length() == 0)) {
+			biobankPanelAssessmentCacheModel.reviewer = null;
+		}
 
 		Date dateofassessment = getDateofassessment();
 
@@ -888,7 +922,7 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{biobankpanelassessmentId=");
 		sb.append(getBiobankpanelassessmentId());
@@ -896,6 +930,8 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 		sb.append(getOrganizationId());
 		sb.append(", userId=");
 		sb.append(getUserId());
+		sb.append(", reviewer=");
+		sb.append(getReviewer());
 		sb.append(", dateofassessment=");
 		sb.append(getDateofassessment());
 		sb.append(", background1_1=");
@@ -933,7 +969,7 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -951,6 +987,10 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
 		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>reviewer</column-name><column-value><![CDATA[");
+		sb.append(getReviewer());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>dateofassessment</column-name><column-value><![CDATA[");
@@ -1028,6 +1068,7 @@ public class BiobankPanelAssessmentModelImpl extends BaseModelImpl<BiobankPanelA
 	private boolean _setOriginalOrganizationId;
 	private long _userId;
 	private String _userUuid;
+	private String _reviewer;
 	private Date _dateofassessment;
 	private String _background1_1;
 	private String _background1_1_comments;

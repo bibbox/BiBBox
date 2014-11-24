@@ -45,49 +45,61 @@ public class BiobankPanelAssessmentImpl extends BiobankPanelAssessmentBaseImpl {
 			return_value += "-";
 		}
 		// 1.2
-		if(this.getElsi1_2().equalsIgnoreCase("Appropriate")) {
+		if(this.getElsi1_2().equalsIgnoreCase("Yes")) {
 			return_value += "<font style=\"color: green;\">" + this.getElsi1_2().substring(0, 1) + "</font>";
-		} else if(this.getElsi1_2().equalsIgnoreCase("Inadequate")) {
+		} else if(this.getElsi1_2().equalsIgnoreCase("No")) {
+			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getElsi1_2().substring(0, 1) + "</font>";
+		} else if(this.getElsi1_2().equalsIgnoreCase("Unclear")) {
 			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getElsi1_2().substring(0, 1) + "</font>";
 		} else {
 			return_value += "-";
 		}
 		// 1.3
-		if(this.getQuality1_3().equalsIgnoreCase("Appropriate")) {
+		if(this.getQuality1_3().equalsIgnoreCase("Yes")) {
 			return_value += "<font style=\"color: green;\">" + this.getQuality1_3().substring(0, 1) + "</font>";
-		} else if(this.getQuality1_3().equalsIgnoreCase("Inadequate")) {
+		} else if(this.getQuality1_3().equalsIgnoreCase("No")) {
+			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getQuality1_3().substring(0, 1) + "</font>";
+		} else if(this.getQuality1_3().equalsIgnoreCase("Unclear")) {
 			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getQuality1_3().substring(0, 1) + "</font>";
 		} else {
 			return_value += "-";
 		}
 		// 2.1
-		if(this.getCataloguemeetpurposes2_1().equalsIgnoreCase("Appropriate")) {
+		if(this.getCataloguemeetpurposes2_1().equalsIgnoreCase("Yes")) {
 			return_value += "<font style=\"color: green;\">" + this.getCataloguemeetpurposes2_1().substring(0, 1) + "</font>";
-		} else if(this.getCataloguemeetpurposes2_1().equalsIgnoreCase("Inadequate")) {
+		} else if(this.getCataloguemeetpurposes2_1().equalsIgnoreCase("No")) {
+			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getCataloguemeetpurposes2_1().substring(0, 1) + "</font>";
+		} else if(this.getCataloguemeetpurposes2_1().equalsIgnoreCase("Unclear")) {
 			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getCataloguemeetpurposes2_1().substring(0, 1) + "</font>";
 		} else {
 			return_value += "-";
 		}
 		// 2.2
-		if(this.getAdequateitplatform2_2().equalsIgnoreCase("Appropriate")) {
+		if(this.getAdequateitplatform2_2().equalsIgnoreCase("Yes")) {
 			return_value += "<font style=\"color: green;\">" + this.getAdequateitplatform2_2().substring(0, 1) + "</font>";
-		} else if(this.getAdequateitplatform2_2().equalsIgnoreCase("Inadequate")) {
+		} else if(this.getAdequateitplatform2_2().equalsIgnoreCase("No")) {
+			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getAdequateitplatform2_2().substring(0, 1) + "</font>";
+		} else if(this.getAdequateitplatform2_2().equalsIgnoreCase("Unclear")) {
 			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getAdequateitplatform2_2().substring(0, 1) + "</font>";
 		} else {
 			return_value += "-";
 		}
 		// 2.3
-		if(this.getAddedvaluecatalogue2_3().equalsIgnoreCase("Appropriate")) {
+		if(this.getAddedvaluecatalogue2_3().equalsIgnoreCase("Yes")) {
 			return_value += "<font style=\"color: green;\">" + this.getAddedvaluecatalogue2_3().substring(0, 1) + "</font>";
-		} else if(this.getAddedvaluecatalogue2_3().equalsIgnoreCase("Inadequate")) {
+		} else if(this.getAddedvaluecatalogue2_3().equalsIgnoreCase("No")) {
+			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getAddedvaluecatalogue2_3().substring(0, 1) + "</font>";
+		} else if(this.getAddedvaluecatalogue2_3().equalsIgnoreCase("Unclear")) {
 			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getAddedvaluecatalogue2_3().substring(0, 1) + "</font>";
 		} else {
 			return_value += "-";
 		}
 		// 2.4
-		if(this.getAssociateddata2_4().equalsIgnoreCase("Appropriate")) {
+		if(this.getAssociateddata2_4().equalsIgnoreCase("Yes")) {
 			return_value += "<font style=\"color: green;\">" + this.getAssociateddata2_4().substring(0, 1) + "</font>";
-		} else if(this.getAssociateddata2_4().equalsIgnoreCase("Inadequate")) {
+		} else if(this.getAssociateddata2_4().equalsIgnoreCase("No")) {
+			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getAssociateddata2_4().substring(0, 1) + "</font>";
+		} else if(this.getAssociateddata2_4().equalsIgnoreCase("Unclear")) {
 			return_value += "<font style=\"color: red;font-weight: bold;\">" + this.getAssociateddata2_4().substring(0, 1) + "</font>";
 		} else {
 			return_value += "-";

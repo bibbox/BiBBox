@@ -15,11 +15,21 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class InvitationUtilOrganizationStatusList extends MVCPortlet {
 	/**
-	 * Delete an Organization from the Invitation
+	 * Add Assessment
 	 */
 	public void createAssessment(ActionRequest request, ActionResponse response) throws Exception {
 		BiobankPanelAssessment biobankpanelassessment = BiobankPanelAssessmentLocalServiceUtil.biobankPanelAssessmentFromRequest(request);
 		BiobankPanelAssessmentLocalServiceUtil.addBiobankPanelAssessment(biobankpanelassessment);
+		sendRedirect(request, response);
+	}
+	
+	/**
+	 * Update Assessment
+	 */
+	public void updateAssessment(ActionRequest request, ActionResponse response) throws Exception {
+		BiobankPanelAssessment biobankpanelassessment = BiobankPanelAssessmentLocalServiceUtil.biobankPanelAssessmentFromRequest(request);
+		BiobankPanelAssessmentLocalServiceUtil.updateBiobankPanelAssessment(biobankpanelassessment);
+		sendRedirect(request, response);
 	}
 
 }

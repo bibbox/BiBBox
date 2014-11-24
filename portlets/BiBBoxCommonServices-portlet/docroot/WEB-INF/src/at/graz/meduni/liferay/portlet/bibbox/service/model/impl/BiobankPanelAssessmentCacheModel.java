@@ -38,7 +38,7 @@ public class BiobankPanelAssessmentCacheModel implements CacheModel<BiobankPanel
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{biobankpanelassessmentId=");
 		sb.append(biobankpanelassessmentId);
@@ -46,6 +46,8 @@ public class BiobankPanelAssessmentCacheModel implements CacheModel<BiobankPanel
 		sb.append(organizationId);
 		sb.append(", userId=");
 		sb.append(userId);
+		sb.append(", reviewer=");
+		sb.append(reviewer);
 		sb.append(", dateofassessment=");
 		sb.append(dateofassessment);
 		sb.append(", background1_1=");
@@ -88,6 +90,13 @@ public class BiobankPanelAssessmentCacheModel implements CacheModel<BiobankPanel
 		biobankPanelAssessmentImpl.setBiobankpanelassessmentId(biobankpanelassessmentId);
 		biobankPanelAssessmentImpl.setOrganizationId(organizationId);
 		biobankPanelAssessmentImpl.setUserId(userId);
+
+		if (reviewer == null) {
+			biobankPanelAssessmentImpl.setReviewer(StringPool.BLANK);
+		}
+		else {
+			biobankPanelAssessmentImpl.setReviewer(reviewer);
+		}
 
 		if (dateofassessment == Long.MIN_VALUE) {
 			biobankPanelAssessmentImpl.setDateofassessment(null);
@@ -205,6 +214,7 @@ public class BiobankPanelAssessmentCacheModel implements CacheModel<BiobankPanel
 		biobankpanelassessmentId = objectInput.readLong();
 		organizationId = objectInput.readLong();
 		userId = objectInput.readLong();
+		reviewer = objectInput.readUTF();
 		dateofassessment = objectInput.readLong();
 		background1_1 = objectInput.readUTF();
 		background1_1_comments = objectInput.readUTF();
@@ -228,6 +238,14 @@ public class BiobankPanelAssessmentCacheModel implements CacheModel<BiobankPanel
 		objectOutput.writeLong(biobankpanelassessmentId);
 		objectOutput.writeLong(organizationId);
 		objectOutput.writeLong(userId);
+
+		if (reviewer == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(reviewer);
+		}
+
 		objectOutput.writeLong(dateofassessment);
 
 		if (background1_1 == null) {
@@ -332,6 +350,7 @@ public class BiobankPanelAssessmentCacheModel implements CacheModel<BiobankPanel
 	public long biobankpanelassessmentId;
 	public long organizationId;
 	public long userId;
+	public String reviewer;
 	public long dateofassessment;
 	public String background1_1;
 	public String background1_1_comments;

@@ -54,6 +54,7 @@ public class BiobankPanelAssessmentWrapper implements BiobankPanelAssessment,
 		attributes.put("biobankpanelassessmentId", getBiobankpanelassessmentId());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("userId", getUserId());
+		attributes.put("reviewer", getReviewer());
 		attributes.put("dateofassessment", getDateofassessment());
 		attributes.put("background1_1", getBackground1_1());
 		attributes.put("background1_1_comments", getBackground1_1_comments());
@@ -94,6 +95,12 @@ public class BiobankPanelAssessmentWrapper implements BiobankPanelAssessment,
 
 		if (userId != null) {
 			setUserId(userId);
+		}
+
+		String reviewer = (String)attributes.get("reviewer");
+
+		if (reviewer != null) {
+			setReviewer(reviewer);
 		}
 
 		Date dateofassessment = (Date)attributes.get("dateofassessment");
@@ -295,6 +302,26 @@ public class BiobankPanelAssessmentWrapper implements BiobankPanelAssessment,
 	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_biobankPanelAssessment.setUserUuid(userUuid);
+	}
+
+	/**
+	* Returns the reviewer of this biobank panel assessment.
+	*
+	* @return the reviewer of this biobank panel assessment
+	*/
+	@Override
+	public java.lang.String getReviewer() {
+		return _biobankPanelAssessment.getReviewer();
+	}
+
+	/**
+	* Sets the reviewer of this biobank panel assessment.
+	*
+	* @param reviewer the reviewer of this biobank panel assessment
+	*/
+	@Override
+	public void setReviewer(java.lang.String reviewer) {
+		_biobankPanelAssessment.setReviewer(reviewer);
 	}
 
 	/**

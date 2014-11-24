@@ -35,6 +35,7 @@ public class BiobankPanelAssessmentSoap implements Serializable {
 		soapModel.setBiobankpanelassessmentId(model.getBiobankpanelassessmentId());
 		soapModel.setOrganizationId(model.getOrganizationId());
 		soapModel.setUserId(model.getUserId());
+		soapModel.setReviewer(model.getReviewer());
 		soapModel.setDateofassessment(model.getDateofassessment());
 		soapModel.setBackground1_1(model.getBackground1_1());
 		soapModel.setBackground1_1_comments(model.getBackground1_1_comments());
@@ -127,6 +128,14 @@ public class BiobankPanelAssessmentSoap implements Serializable {
 
 	public void setUserId(long userId) {
 		_userId = userId;
+	}
+
+	public String getReviewer() {
+		return _reviewer;
+	}
+
+	public void setReviewer(String reviewer) {
+		_reviewer = reviewer;
 	}
 
 	public Date getDateofassessment() {
@@ -253,6 +262,7 @@ public class BiobankPanelAssessmentSoap implements Serializable {
 	private long _biobankpanelassessmentId;
 	private long _organizationId;
 	private long _userId;
+	private String _reviewer;
 	private Date _dateofassessment;
 	private String _background1_1;
 	private String _background1_1_comments;

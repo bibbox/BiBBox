@@ -12,6 +12,7 @@
 		</id>
 		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="reviewer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dateofassessment" type="org.hibernate.type.TimestampType" />
 		<property name="background1_1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="background1_1_comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
