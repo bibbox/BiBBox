@@ -63,7 +63,7 @@ if(assessmnetId != 0) {
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 		<aui:input type="hidden" name="organizationId" value="<%= String.valueOf(organizationId) %>" />
-		<aui:input type="hidden" name="assessmnetId" value="<%= assessmnetId == 0 ? "" : assessmnetId %>" />
+		<aui:input type="hidden" name="assessmnetId" value='<%= assessmnetId == 0 ? "" : assessmnetId %>' />
 		<aui:layout>
 			<aui:column columnWidth="100" first="true">
 				<aui:input name="reviewer" value="<%= reviewer %>" />

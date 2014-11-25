@@ -25,6 +25,7 @@ import javax.portlet.PortletRequest;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.util.PortalUtil;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl;

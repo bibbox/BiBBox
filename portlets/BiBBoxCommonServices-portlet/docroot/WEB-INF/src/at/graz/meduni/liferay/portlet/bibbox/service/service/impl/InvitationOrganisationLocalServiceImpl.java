@@ -115,13 +115,13 @@ public class InvitationOrganisationLocalServiceImpl
 	 * @throws SystemException 
 	 */
 	public List<InvitationOrganisation> getInvitationOrganisationByStatus() throws SystemException {
-		DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(Invitation.class, "subQuery", PortalClassLoaderUtil.getClassLoader())
+		/*DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(Invitation.class, "subQuery", PortalClassLoaderUtil.getClassLoader())
 				.setProjection(ProjectionFactoryUtil.property("subQuery.invitationId"))
 				.add(PropertyFactoryUtil.forName("subQuery.invitationId").eqProperty("answerdQuery.invitationId"))
 				.add(PropertyFactoryUtil.forName("subQuery.invitationsend").isNotNull());
 		
-		DynamicQuery answerdQuery = DynamicQueryFactoryUtil.forClass(Invitation.class, "answerdQuery", PortalClassLoaderUtil.getClassLoader())
-				.add(PropertyFactoryUtil.forName("subQuery.invitationId").eq(subQuery));
+		DynamicQuery answerdQuery = DynamicQueryFactoryUtil.forClass(InvitationOrganisation.class, "answerdQuery", PortalClassLoaderUtil.getClassLoader())
+				.add(PropertyFactoryUtil.forName("subQuery.invitationId").eq(subQuery));*/
 		
 		List<InvitationOrganisation> invitationorganisation = InvitationOrganisationLocalServiceUtil.dynamicQuery(answerdQuery);
 		return invitationorganisation;
