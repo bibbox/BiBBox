@@ -140,7 +140,7 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 
 		_methodName58 = "getInvitationOrganisationByStatus";
 
-		_methodParameterTypes58 = new String[] {  };
+		_methodParameterTypes58 = new String[] { "boolean" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -277,7 +277,7 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 
 		if (_methodName58.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisationByStatus();
+			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisationByStatus(((Boolean)arguments[0]).booleanValue());
 		}
 
 		throw new UnsupportedOperationException();

@@ -298,6 +298,7 @@ public interface InvitationOrganisationLocalService extends BaseLocalService,
 	* @throws SystemException
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus()
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus(
+		boolean rejacted)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

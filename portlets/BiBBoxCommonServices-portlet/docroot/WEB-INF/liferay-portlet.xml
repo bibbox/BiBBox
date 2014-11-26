@@ -132,12 +132,25 @@
 			invitation-util-registry-invitations
 		</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.user.config.InvitationUtilRegistryInvitationsConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>
 			invitation-util-registry-invitations-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>orpahnet-disease-matrix-linker</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.disease.config.OrphanetDiseaseMatrixLinkerConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			orpahnet-disease-matrix-linker-portlet
 		</css-class-wrapper>
 	</portlet>
 	<role-mapper>

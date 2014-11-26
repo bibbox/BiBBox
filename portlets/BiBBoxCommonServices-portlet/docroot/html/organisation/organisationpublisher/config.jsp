@@ -13,6 +13,7 @@ long optionsWhereToCreateOrganisation_cfg = GetterUtil.getLong(portletPreference
 String optionsOrganizationType_cfg = GetterUtil.getString(portletPreferences.getValue("optionsOrganizationType", ""));
 String optionsSelectUser_cfg = GetterUtil.getString(portletPreferences.getValue("optionsSelectUser", "no"));
 long optionsRoleForUser_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsRoleForUser", "0"));
+boolean optionsCreateUserForm_cfg = GetterUtil.getBoolean(portletPreferences.getValue("optionsCreateUserForm", "false"));
 
 int[] role_type = {RoleConstants.TYPE_ORGANIZATION};
 List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), role_type);
@@ -58,7 +59,7 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 				<aui:input name="preferences--optionsOrganizationType--" label="Set OrganisationType" type="text" value ="<%= optionsOrganizationType_cfg %>" />
 			</aui:column>
 			<!-- Select Site Template for creation -->
-			<aui:column columnWidth="25" first="true">
+			<aui:column columnWidth="100" first="true">
 				<%
 				List<LayoutSetPrototype> site_templates = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 				%>
@@ -70,14 +71,15 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 				</aui:select>
 			</aui:column>
 			<!-- Select User Selection -->
-			<aui:column columnWidth="25">
+			<aui:column columnWidth="25"  first="true">
 				<aui:select lable="Select User for Organisation" name="preferences--optionsSelectUser--">
 					<aui:option value="no" selected='<%= "no".equals(optionsSelectUser_cfg) %>'>Do not create User</aui:option>
 					<aui:option value="selectfromorganisation" selected='<%= "selectfromorganisation".equals(optionsSelectUser_cfg) %>'>Select User from Organization Users</aui:option>
+					<aui:option value="selectfromliferay" selected='<%= "selectfromliferay".equals(optionsSelectUser_cfg) %>'>Select User from Liferay Users</aui:option>
 				</aui:select>
 			</aui:column>
 			<!-- Select Role for User -->
-			<aui:column columnWidth="50" last="true">
+			<aui:column columnWidth="25">
 				<aui:select lable="Select Role for User" name="preferences--optionsRoleForUser--">
 					<%
 					for(Role role : roles) {
@@ -88,6 +90,9 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 					}
 					%>
 				</aui:select>
+			</aui:column>
+			<aui:column columnWidth="50" last="true">
+				<aui:input name="preferences--optionsCreateUserForm--" label="Add Create User Form" type="checkbox" value ="<%= optionsCreateUserForm_cfg %>" />
 			</aui:column>
 		</aui:layout>
 		<!-- DDL selection -->

@@ -12,6 +12,7 @@ long optionsWhereToCreateOrganisation_option = GetterUtil.getLong(portletPrefere
 String optionsOrganizationType_option = GetterUtil.getString(portletPreferences.getValue("optionsOrganizationType", ""));
 String optionsSelectUser_option = GetterUtil.getString(portletPreferences.getValue("optionsSelectUser", "no"));
 long optionsRoleForUser_option = GetterUtil.getLong(portletPreferences.getValue("optionsRoleForUser", "0"));
+boolean optionsCreateUserForm_cfg = GetterUtil.getBoolean(portletPreferences.getValue("optionsCreateUserForm", "false"));
 
 Organization organization = null;
 
@@ -113,8 +114,24 @@ Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_
 				<%
 			}
 			%>
-			<aui:column columnWidth="100" first="true">
-			</aui:column>
+			<%
+			if(optionsCreateUserForm_cfg) {
+				%>
+				<aui:column columnWidth="50" first="true">
+					<aui:input name="bibbox_cs_firstname" type="text" />
+				</aui:column>
+				<aui:column columnWidth="50" last="true">
+					<aui:input name="bibbox_cs_lastname" type="text" />
+				</aui:column>
+				<aui:column columnWidth="50" first="true">
+					<aui:input name="bibbox_cs_middlename" type="text" />
+				</aui:column>
+				<aui:column columnWidth="50" last="true">
+					<aui:input name="bibbox_cs_email" type="text" />
+				</aui:column>
+				<%
+			}
+			%>
 		</aui:layout>
 		<!-- DDL Information -->
 		<div>				

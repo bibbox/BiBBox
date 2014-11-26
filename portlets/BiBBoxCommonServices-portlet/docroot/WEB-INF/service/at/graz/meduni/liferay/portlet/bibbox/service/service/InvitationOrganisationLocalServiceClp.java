@@ -142,7 +142,7 @@ public class InvitationOrganisationLocalServiceClp
 
 		_methodName25 = "getInvitationOrganisationByStatus";
 
-		_methodParameterTypes25 = new String[] {  };
+		_methodParameterTypes25 = new String[] { "boolean" };
 	}
 
 	@Override
@@ -878,13 +878,14 @@ public class InvitationOrganisationLocalServiceClp
 	}
 
 	@Override
-	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus()
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus(
+		boolean rejacted)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName25,
-					_methodParameterTypes25, new Object[] {  });
+					_methodParameterTypes25, new Object[] { rejacted });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

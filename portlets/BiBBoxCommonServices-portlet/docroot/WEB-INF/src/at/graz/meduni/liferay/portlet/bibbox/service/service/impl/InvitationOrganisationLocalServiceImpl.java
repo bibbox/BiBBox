@@ -16,10 +16,13 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
 import java.util.List;
 
+import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
@@ -114,7 +117,7 @@ public class InvitationOrganisationLocalServiceImpl
 	/**
 	 * @throws SystemException 
 	 */
-	public List<InvitationOrganisation> getInvitationOrganisationByStatus() throws SystemException {
+	public List<InvitationOrganisation> getInvitationOrganisationByStatus(boolean rejacted) throws SystemException {
 		/*DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(Invitation.class, "subQuery", PortalClassLoaderUtil.getClassLoader())
 				.setProjection(ProjectionFactoryUtil.property("subQuery.invitationId"))
 				.add(PropertyFactoryUtil.forName("subQuery.invitationId").eqProperty("answerdQuery.invitationId"))
@@ -123,7 +126,21 @@ public class InvitationOrganisationLocalServiceImpl
 		DynamicQuery answerdQuery = DynamicQueryFactoryUtil.forClass(InvitationOrganisation.class, "answerdQuery", PortalClassLoaderUtil.getClassLoader())
 				.add(PropertyFactoryUtil.forName("subQuery.invitationId").eq(subQuery));*/
 		
-		List<InvitationOrganisation> invitationorganisation = InvitationOrganisationLocalServiceUtil.dynamicQuery(answerdQuery);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(InvitationOrganisation.class);
+		Criterion criterion = null;
+		if(rejacted) {
+			criterion = RestrictionsFactoryUtil.isNotNull("reactdate");
+			dynamicQuery.addOrder(OrderFactoryUtil.desc("reactdate"));
+		} else {
+			criterion = RestrictionsFactoryUtil.isNull("reactdate");
+		}
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("invitationOrganisationId"));
+		
+		//dynamicQuery.setProjection(ProjectionFactoryUtil.groupProperty("organisationId"));
+		
+		dynamicQuery.add(criterion);
+		
+		List<InvitationOrganisation> invitationorganisation = InvitationOrganisationLocalServiceUtil.dynamicQuery(dynamicQuery);
 		return invitationorganisation;
 	}
 }
