@@ -21,4 +21,7 @@
 	<category name="Bibbox Disease">
 		<portlet id="orpahnet-disease-matrix-linker"></portlet>
 	</category>
+	<category name="BiBBox Linked Open Date">
+		<portlet id="linked-open-date-publisher"></portlet>
+	</category>
 </display>

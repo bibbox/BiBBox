@@ -153,6 +153,22 @@
 			orpahnet-disease-matrix-linker-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>linked-open-date-publisher</portlet-name>
+		<icon>/icon.png</icon>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+	    <friendly-url-mapping>web-of-rdconnect</friendly-url-mapping>
+	    <friendly-url-routes>at/graz/meduni/liferay/portlet/bibbox/linkedopendata/lod-friendly-url-routes.xml</friendly-url-routes>
+		<render-weight>0</render-weight>
+		<ajaxable>true</ajaxable>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			linked-open-date-publisher-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

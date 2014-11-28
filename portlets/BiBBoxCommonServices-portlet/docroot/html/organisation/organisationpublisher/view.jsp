@@ -96,43 +96,73 @@ Create new <b><%= organisationName_option %></b> for <%= parentOrganisationName_
 			</aui:column>
 			<aui:input name="bibbox_cs_selectuser" type="hidden" value ="<%= optionsSelectUser_option %>" />
 			<aui:input name="bibbox_cs_selectuserrole" type="hidden" value ="<%= optionsRoleForUser_option %>" />
+		</aui:layout>
+		
 			<%
 			if(!optionsSelectUser_option.equals("no")) {
 				%>
-				<aui:column columnWidth="100" first="true">
-					<aui:select label="Select Editor for new Organization" name="bibbox_cs_userfororganization" >
-					<%
-					List<User> users = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
-					for(User user_om : users) {
-						%>
-						<aui:option value="<%= user_om.getUserId() %>" ><%= user_om.getFullName() %></aui:option>
+				<aui:layout cssClass="bibbox_cs_organisationname">
+					<aui:column columnWidth="100" first="true">
+						<aui:select label="Select Editor for new Organization" name="bibbox_cs_userfororganization" >
 						<%
-					}
-					%>
-					</aui:select>
-				</aui:column>
+						List<User> users = null;
+						if(optionsSelectUser_option.equals("selectfromorganisation")) {
+							users = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+						} else {
+							users = UserLocalServiceUtil.getUsers(-1, -1);
+						}
+						for(User user_om : users) {
+							%>
+							<aui:option value="<%= user_om.getUserId() %>" ><%= user_om.getFullName() %></aui:option>
+							<%
+						}
+						%>
+						</aui:select>
+					</aui:column>
+				</aui:layout>
 				<%
 			}
 			%>
 			<%
 			if(optionsCreateUserForm_cfg) {
 				%>
-				<aui:column columnWidth="50" first="true">
-					<aui:input name="bibbox_cs_firstname" type="text" />
-				</aui:column>
-				<aui:column columnWidth="50" last="true">
-					<aui:input name="bibbox_cs_lastname" type="text" />
-				</aui:column>
-				<aui:column columnWidth="50" first="true">
-					<aui:input name="bibbox_cs_middlename" type="text" />
-				</aui:column>
-				<aui:column columnWidth="50" last="true">
-					<aui:input name="bibbox_cs_email" type="text" />
-				</aui:column>
+				<hr />
+				Add new User:
+				<aui:layout>
+					<aui:column columnWidth="50" first="true">
+						<aui:input name="bibbox_cs_firstname" type="text" />
+					</aui:column>
+					<aui:column columnWidth="50" last="true">
+						<aui:input name="bibbox_cs_lastname" type="text" />
+					</aui:column>
+					<aui:column columnWidth="50" first="true">
+						<aui:input name="bibbox_cs_middlename" type="text" />
+					</aui:column>
+					<aui:column columnWidth="50" last="true">
+						<aui:input name="bibbox_cs_email" type="text" />
+					</aui:column>
+					<aui:column columnWidth="50" first="true">
+						<aui:select name="bibbox_cs_position" label="Position" value ="" multiple="true" cssClass="bibbox_cs_position_selection">
+							<aui:option value=""></aui:option>
+							<aui:option value="Coordinator/Principal Investigator"  >Coordinator/Principal Investigator</aui:option>
+							<aui:option value="Data Provider/Contributor" >Data Provider/Contributor</aui:option>
+							<aui:option value="Database Manager" >Database Manager</aui:option>
+							<aui:option value="Curator" >Curator</aui:option>
+							<aui:option value="Data Analyst" >Data Analyst</aui:option>
+							<aui:option value="IT Expert" >IT Expert</aui:option>
+							<aui:option value="Biostatistics Expert" >Biostatistics Expert</aui:option>
+							<aui:option value="Scientific Expert" >Scientific Expert</aui:option>
+							<aui:option value="Legal Expert" >Legal Expert</aui:option>
+							<aui:option value="Ethical Expert" >Ethical Expert</aui:option>
+							<aui:option value="Patient Representative">Patient Representative</aui:option>
+							<aui:option value="Management" >Management</aui:option>
+							<aui:option value="Other" >Other</aui:option>
+						</aui:select>
+					</aui:column>
+				</aui:layout>
 				<%
 			}
 			%>
-		</aui:layout>
 		<!-- DDL Information -->
 		<div>				
 			<%

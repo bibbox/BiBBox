@@ -29,6 +29,7 @@ import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
@@ -83,13 +84,61 @@ public class OrganisationPublisher extends MVCPortlet {
 		// Create DDLs
 		createDDLs(ddlgeneration, organization.getGroupId(), themeDisplay.getUserId(), serviceContext, request);
 		
-		// Add user to the Organization
-		long[] userroleid_array = {ParamUtil.getLong(request, "bibbox_cs_selectuserrole")};
-		if(!ParamUtil.getString(request, "bibbox_cs_selectuser").equals("no")) {
-			long userid = ParamUtil.getLong(request, "bibbox_cs_userfororganization");
-			OrganizationLocalServiceUtil.addUserOrganization(userid, organization.getOrganizationId());
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userid, organization.getGroup().getGroupId(), userroleid_array);
+		if(ParamUtil.getString(request, "bibbox_cs_email") != null) {
+			createUser(request, serviceContext, organization, company);
+		} else {	
+			// Add user to the Organization
+			long[] userroleid_array = {ParamUtil.getLong(request, "bibbox_cs_selectuserrole")};
+			if(!ParamUtil.getString(request, "bibbox_cs_selectuser").equals("no")) {
+				long userid = ParamUtil.getLong(request, "bibbox_cs_userfororganization");
+				OrganizationLocalServiceUtil.addUserOrganization(userid, organization.getOrganizationId());
+				UserGroupRoleLocalServiceUtil.addUserGroupRoles(userid, organization.getGroup().getGroupId(), userroleid_array);
+			}
 		}
+	}
+	
+	/**
+	 * Create user account
+	 */
+	private User createUser(ActionRequest request, ServiceContext serviceContext, Organization organization, Company company) throws PortalException, SystemException {
+		boolean autoPassword = true;
+		String password1 = "";
+		boolean autoScreenName = true;
+		String screenName = "";
+		long facebookId = 0;
+		String openId = "";
+		String firstName = ParamUtil.getString(request, "bibbox_cs_firstname");
+		String middleName = ParamUtil.getString(request, "bibbox_cs_middlename");
+		String lastName = ParamUtil.getString(request, "bibbox_cs_lastname");
+		String mail = ParamUtil.getString(request, "bibbox_cs_email");
+		int prefixId = 0;
+		int suffixId = 0;
+		int birthdayMonth = 1;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = "";
+		long[] groupIds = new long[0];
+		long[] organizationIds = {organization.getOrganizationId()};
+		long[] roleIds = new long[0];
+		long[] userGroupIds = new long[0];
+		boolean male = false;
+		boolean sendEmail = false;
+		User user = UserLocalServiceUtil.addUser(company.getDefaultUser().getUserId(), company.getCompanyId(), autoPassword, password1, password1, 
+				autoScreenName, screenName, mail, facebookId, openId, default_locale_, firstName, middleName, lastName, 
+				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+		user.setPasswordReset(false);
+		String position = "";
+		for(String tmppos : ParamUtil.getParameterValues(request, "bibbox_cs_position")) {
+			if(position.length() != 0) {
+				position += ", ";
+			}
+			position += tmppos;
+		}
+		user.getExpandoBridge().setAttribute("Role within the organisation", organization.getOrganizationId() + "_" + position + ";");
+		UserLocalServiceUtil.updateUser(user);
+		long[] userroleid_array = {ParamUtil.getLong(request, "bibbox_cs_selectuserrole")};
+		UserGroupRoleLocalServiceUtil.addUserGroupRoles(user.getUserId(), organization.getGroup().getGroupId(), userroleid_array);
+		return user;
 	}
 	
 	/**
