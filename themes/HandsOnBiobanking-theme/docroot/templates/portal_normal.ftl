@@ -51,7 +51,7 @@ ${theme.include(body_top_include)}
 			<div class="bbmri_eric_header-logo-flaot">
 				<div class="bbmri_eric_header-logo-white">
 					<span style="font-size: 40px;font-weight: bold;line-height: 45px;">HandsOn: Biobanks 2015</span><br />
-					<span style="font-size: 20px;line-height: 25px;">Clinical Biobanks</span>
+					<span style="font-size: 20px;line-height: 25px;">The EXPOnential relevance of Biobanking</span>
 				</div>
 				<div class="bbmri_eric_header-logo-orange">
 					<span style="font-size: 20px;color: #FFFFFF;line-height: 25px;">29-31 July + EXPO + Milan, Italy</span>

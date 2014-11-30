@@ -106,6 +106,7 @@
                   </li>
                <#else>
                   <#if first>
+                  	<li style="height: 10px;padding-left: 5px;">&nbsp;</li>
                      <#assign first = false />
                   </#if>
                   <#list nav_child.getChildren() as nav_child_child>
