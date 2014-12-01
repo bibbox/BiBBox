@@ -28,7 +28,7 @@ ${theme.include(body_top_include)}
 	<div class="rdconnect-header-container-top">
 		<div class="rdconnect-header-container-inner">
 			<div class="rdconnect-header-container-top-rdlogo">
-				<a href="/home">
+				<a href="/">
 						<img alt="BBMRIAT-IDCard-Logo" height="27px" width="168px" src="/BBMRIATIDCard-theme/images/bbmriat.png" />
 				</a>
 			</div>
