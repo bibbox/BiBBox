@@ -24,7 +24,7 @@
 		        		
 		        		//var reqpage = new XMLHttpRequest();
 		        		if ('withCredentials' in req) {
-		        			req.open('GET', 'http://localhost:8080/plugin/dataexplorer', true);
+		        			req.open('Get', 'http://localhost:8080/plugin/dataexplorer', true);
 		        			req.setRequestHeader("Content-Type", "text/html,application/xhtml+xml,application/xml,text/plain;q=0.9,image/webp,*/*;q=0.8");
 		        			req.setRequestHeader("x-molgenis-token", token);
 		        		    // Just like regular ol' XHR
@@ -33,13 +33,15 @@
 		        		            if (req.status >= 200 && req.status < 400) {		        		    
 		        		            	var A = AUI();
 		        		            	var molgenisiframe = document.getElementById('molgenis-iframe');
-		        		            	molgenisiframe.contentDocument.write(req.responseText);
+		        		            	if(molgenisiframe.contentDocument != null) {
+		        		            		molgenisiframe.contentDocument.write("<scr" + "ipt>" + req.responseText + "</scr" + "ipt>");
+		        		            	}
 		        		            } else {
 		        		                // Handle error case
 		        		            }
 		        		        }
 		        		    };
-		        		    req.send(JSON.stringify({'x-molgenis-token':token}));
+		        		    req.send();
 		        		}	
 		            } else {
 		                // Handle error case
