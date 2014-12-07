@@ -144,6 +144,9 @@ body.custom-background {
 .aui .bbmri-eric-co-chair a, .aui .bbmri-eric-co-chair a:hover {
    color: #ED660A;
 }
+.aui .bbmri-eric-admin a, .aui .bbmri-eric-admin a:hover {
+   font-style:italic;
+}
 .aui .bbmri-eric-initials a, .aui .bbmri-eric-initials a:hover {
 	text-transform:uppercase;
 }

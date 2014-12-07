@@ -31,10 +31,6 @@ String user_role = "";
 String cssclass = "";
 List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), themeDisplay.getSiteGroupId());
 for (UserGroupRole ugr : usergrouprolles) {
-	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC WG Member") && !user_role.contains("Chair")) {
-		user_role =  "Member";
-		cssclass = "";
-	}
 	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Chair")) {
 		user_role =  "Chair";
 		cssclass = "bbmri-eric-chair";
@@ -44,7 +40,18 @@ for (UserGroupRole ugr : usergrouprolles) {
 		cssclass = "bbmri-eric-co-chair";
 	}
 }
-
+com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
+if (currentGroup.isOrganization()) {
+	if(user_role.equalsIgnoreCase("")) {
+		if(UserLocalServiceUtil.hasOrganizationUser(currentGroup.getClassPK(), user2.getUserId())) {
+			user_role =  "Member";
+			cssclass = "";
+		} else {
+			user_role =  "Admin";
+			cssclass = "bbmri-eric-admin";
+		}
+	}
+}
 %>
 
 <liferay-ui:search-container-column-text
@@ -53,6 +60,13 @@ for (UserGroupRole ugr : usergrouprolles) {
 	orderable="<%= false %>"
 	value="<%= user_role %>"
 	cssClass="<%= cssclass %>"
+/>
+
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="job-title"
+	orderable="<%= true %>"
+	value="<%= user2.getJobTitle() %>"
 />
 
 <liferay-ui:search-container-column-text
