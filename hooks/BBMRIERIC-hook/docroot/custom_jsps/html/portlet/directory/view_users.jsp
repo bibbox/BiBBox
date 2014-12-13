@@ -137,9 +137,54 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 			<portlet:param name="cmd" value="xyz" />
 		</liferay-portlet:renderURL>
-      <% if(!user2.getMiddleName().equals("$$$")) { %>
-		<%@ include file="/html/portlet/directory/user/search_columns.jspf" %>
-		<% } %>
+      <% 
+      if(!user2.getMiddleName().equals("$$$")) { 
+    	  String user_role = "";
+    	  String cssclass = "";
+    	  List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), themeDisplay.getSiteGroupId());
+    	  for (UserGroupRole ugr : usergrouprolles) {
+    	  	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Chair")) {
+    	  		user_role =  "Chair";
+    	  		cssclass = "bbmri-eric-chair";
+    	  	}
+    	  	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Co-Chair") && !user_role.contains("Chair")) {
+    	  		user_role =  "Vice-Chair";
+    	  		cssclass = "bbmri-eric-co-chair";
+    	  	}
+    	  	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Proxy") && !user_role.contains("Chair") && !user_role.contains("Vice-Chair")) {
+    	  		user_role =  "Proxy";
+    	  		cssclass = "";
+    	  	}
+    	  	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Admin") && !user_role.contains("Chair") && !user_role.contains("Vice-Chair") && !user_role.contains("Proxy")) {
+    	  		user_role =  "Admin";
+    	  		cssclass = "bbmri-eric-admin";
+    	  	}
+    	  	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC WG Member") && !user_role.contains("Chair") && !user_role.contains("Vice-Chair")) {
+    	  		user_role =  "Member";
+    	  		cssclass = "";
+    	  	}
+    	  }
+    	  com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
+    	  if (currentGroup.isOrganization()) {
+    	  	if(user_role.equalsIgnoreCase("")) {
+    	  		if(UserLocalServiceUtil.hasOrganizationUser(currentGroup.getClassPK(), user2.getUserId())) {
+    	  			user_role =  "Member";
+    	  			cssclass = "";
+    	  		} else {
+    	  			user_role =  "Admin";
+    	  			cssclass = "bbmri-eric-admin";
+    	  		}
+    	  	}
+    	  }
+    	  
+    	  if(!user_role.equalsIgnoreCase("")) {
+      
+      		%>
+				<%@ include file="/html/portlet/directory/user/search_columns.jspf" %>
+				<% 
+      		}
+      	} 
+		%>
 	</liferay-ui:search-container-row>
 
 	<c:if test="<%= (organization != null) || (userGroup != null) %>">

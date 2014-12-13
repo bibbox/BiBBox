@@ -90,6 +90,13 @@ hSERN
 <div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div>
 </a>
 </div>
+<!-- HandsOn Conference -->
+<div style="margin-top:10px;text-align: right;">
+<a href="http://handsonbiobanks.org/" target="_blank" style="text-align: right;color: #184B8A;font-weight:bold;font-size:15px;">
+HandsOn Conference 
+<div class="bbmri-eric-text-square-orange" style="float:right;margin-left:10px;margin-top:5px;"></div>
+</a>
+</div>
 
 
 <hr style="background-color:#FFFFFF; border-width:0; color:#FFFFFF; height:1px; lineheight:0; display: inline-block; text-align: left; width:100%;margin-bottom: 5px;margin-top: 10px;">

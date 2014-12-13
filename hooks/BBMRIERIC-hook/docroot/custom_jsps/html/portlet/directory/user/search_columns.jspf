@@ -27,7 +27,7 @@
 </span>
 
 <%
-String user_role = "";
+/*String user_role = "";
 String cssclass = "";
 List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), themeDisplay.getSiteGroupId());
 for (UserGroupRole ugr : usergrouprolles) {
@@ -38,6 +38,18 @@ for (UserGroupRole ugr : usergrouprolles) {
 	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Co-Chair") && !user_role.contains("Chair")) {
 		user_role =  "Vice-Chair";
 		cssclass = "bbmri-eric-co-chair";
+	}
+	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Proxy") && !user_role.contains("Chair") && !user_role.contains("Vice-Chair")) {
+		user_role =  "Proxy";
+		cssclass = "";
+	}
+	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC Site Admin") && !user_role.contains("Chair") && !user_role.contains("Vice-Chair") && !user_role.contains("Proxy")) {
+		user_role =  "Admin";
+		cssclass = "bbmri-eric-admin";
+	}
+	if(ugr.getRole().getName().equalsIgnoreCase("BBMRI-ERIC WG Member") && !user_role.contains("Chair") && !user_role.contains("Vice-Chair")) {
+		user_role =  "Member";
+		cssclass = "";
 	}
 }
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
@@ -51,7 +63,7 @@ if (currentGroup.isOrganization()) {
 			cssclass = "bbmri-eric-admin";
 		}
 	}
-}
+}*/
 %>
 
 <liferay-ui:search-container-column-text
