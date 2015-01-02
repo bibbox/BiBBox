@@ -73,14 +73,7 @@ if (currentGroup.isOrganization()) {
 	value="<%= user_role %>"
 	cssClass="<%= cssclass %>"
 />
-
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="job-title"
-	orderable="<%= true %>"
-	value="<%= user2.getJobTitle() %>"
-/>
-
+ 
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
 	name="organizations"

@@ -25,7 +25,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
 }
 %>
-
+<!-- 	deltaConfigurable="false" -->
 <c:if test="<%= Validator.isNotNull(viewUsersRedirect) %>">
 	<aui:input name="viewUsersRedirect" type="hidden" value="<%= viewUsersRedirect %>" />
 </c:if>
@@ -33,6 +33,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 <liferay-ui:search-container
 	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 	var="userSearchContainer"
+	delta="50"
 >
 	<aui:input disabled="<%= true %>" name="usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
@@ -138,7 +139,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 			<portlet:param name="cmd" value="xyz" />
 		</liferay-portlet:renderURL>
       <% 
-      if(!user2.getMiddleName().equals("$$$")) { 
+      //if(!user2.getMiddleName().equals("$$$")) { 
     	  String user_role = "";
     	  String cssclass = "";
     	  List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), themeDisplay.getSiteGroupId());
@@ -177,13 +178,13 @@ if (Validator.isNotNull(viewUsersRedirect)) {
     	  	}
     	  }
     	  
-    	  if(!user_role.equalsIgnoreCase("")) {
+    	  //if(!user_role.equalsIgnoreCase("")) {
       
       		%>
 				<%@ include file="/html/portlet/directory/user/search_columns.jspf" %>
 				<% 
-      		}
-      	} 
+      		//}
+      	//} 
 		%>
 	</liferay-ui:search-container-row>
 
