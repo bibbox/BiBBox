@@ -15,45 +15,27 @@ for(Organization organization : organizations) {
 	organizationId = organization.getOrganizationId();
 	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
 	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+	// Core Functions
+	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+	if(organizationtype.equalsIgnoreCase("Biobank")) {
+		if(organization.getLogoId() == 0) {
+			imgPath = request.getContextPath() + "/images/Biobank.png";
+		}
+		orgPath = orgPath + "/bb_home";	
+	} else {
+		if(organization.getLogoId() == 0) {
+			imgPath = request.getContextPath() + "/images/Registry.png";
+		}
+		orgPath = orgPath + "/reg_home";
+	}
+	// Modification Date
 	List<DDLRecordSet> recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
 	for(DDLRecordSet recordset : recordlist) {
 		String recordsetname = String.valueOf(recordset.getNameCurrentValue());
-		// Core
-		if(recordsetname.equals("core")) {
-			List<DDLRecord> records = recordset.getRecords();
-  			for(DDLRecord record : records) {
-  				if (modifieddate.before(record.getModifiedDate())) {
-  					modifieddate = record.getModifiedDate();
-  				}
-  				if(record.getFieldValue("countryCode") != null) {
-  					country = record.getFieldValue("countryCode").toString();
-  				}
-	  			if(record.getFieldValue("Radio2493") != null) {
-		  			String type = record.getFieldValue("Radio2493").toString();
-		  			if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
-		  				if(organization.getLogoId() == 0) {
-		  					imgPath = request.getContextPath() + "/images/Biobank.png";
-		  				}
-		  				orgPath = orgPath + "/bb_home";	
-		  			} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
-		  				if(organization.getLogoId() == 0) {
-		  					imgPath = request.getContextPath() + "/images/Registry.png";
-		  				}
-		  				orgPath = orgPath + "/home";
-		  			} else {
-		  				if(organization.getLogoId() == 0) {
-		  					imgPath = request.getContextPath() + "/images/Registry.png";
-		  				}
-		  				orgPath = orgPath + "/home";
-		  			}
-	  			}
-  			}
-		} else {
-	  		List<DDLRecord> records = recordset.getRecords();
-				for(DDLRecord record : records) {
-  				if (modifieddate.before(record.getModifiedDate())) {
-  					modifieddate = record.getModifiedDate();
-	  			}
+		List<DDLRecord> records = recordset.getRecords();
+			for(DDLRecord record : records) {
+  			if (modifieddate.before(record.getModifiedDate())) {
+  				modifieddate = record.getModifiedDate();
 	  		}
 	  	}
 	}

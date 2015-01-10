@@ -47,3 +47,16 @@ create table bibboxcs.invitation_organisation (
 	status LONG,
 	statusdate DATE null
 );
+
+create table rdconnect.diseasematrix (
+	diseasematrixId LONG not null primary key,
+	organizationId LONG,
+	diseasename TEXT null,
+	patientcount TEXT null,
+	gene TEXT null,
+	orphanumber TEXT null,
+	icd10 TEXT null,
+	omim TEXT null,
+	synonym TEXT null,
+	modifieddate DATE null
+);

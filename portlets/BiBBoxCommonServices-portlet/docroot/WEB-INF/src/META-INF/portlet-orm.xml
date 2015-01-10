@@ -36,6 +36,25 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixModelImpl">
+		<attributes>
+			<id name="diseasematrixId" />
+			<basic name="organizationId" />
+			<basic name="diseasename" />
+			<basic name="patientcount" />
+			<basic name="gene" />
+			<basic name="orphanumber" />
+			<basic name="icd10" />
+			<basic name="omim" />
+			<basic name="synonym" />
+			<basic name="modifieddate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationModelImpl">
 		<attributes>
 			<id name="invitationId" />
@@ -89,6 +108,10 @@
 	</mapped-superclass>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" name="BiobankPanelAssessment">
 		<table name="bibboxcs.biobankpanelassessment" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixImpl" name="DiseaseMatrix">
+		<table name="rdconnect.diseasematrix" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" name="Invitation">

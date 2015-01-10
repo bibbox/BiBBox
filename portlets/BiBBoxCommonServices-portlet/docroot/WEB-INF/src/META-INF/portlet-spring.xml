@@ -4,6 +4,8 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.BiobankPanelAssessmentLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.BiobankPanelAssessmentServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.BiobankPanelAssessmentPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.BiobankPanelAssessmentPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.DiseaseMatrixLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistenceImpl" parent="basePersistence" />

@@ -82,4 +82,19 @@
 			<finder-column name="organizationId"></finder-column>
 		</finder>
 	</entity>
+	<entity name="DiseaseMatrix" local-service="true" remote-service="false" table="rdconnect.diseasematrix">
+		<column name="diseasematrixId" primary="true" type="long"></column>
+		<column name="organizationId" type="long"></column>
+		<column name="diseasename" type="String"></column>
+		<column name="patientcount" type="String"></column>
+		<column name="gene" type="String"></column>
+		<column name="orphanumber" type="String"></column>
+		<column name="icd10" type="String"></column>
+		<column name="omim" type="String"></column>
+		<column name="synonym" type="String"></column>
+		<column name="modifieddate" type="Date"></column>
+		<finder return-type="Collection" name="OrganizationFinder">
+			<finder-column name="organizationId"></finder-column>
+		</finder>
+	</entity>
 </service-builder>

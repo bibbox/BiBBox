@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" table="bibboxcs.biobankpanelassessment">
@@ -28,6 +29,21 @@
 		<property name="recommendation3_2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="needadditionalinformation3_3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="finalrecommendation_4" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixImpl" table="rdconnect.diseasematrix">
+		<cache usage="read-write" />
+		<id name="diseasematrixId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="diseasename" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="patientcount" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gene" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="orphanumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="icd10" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="omim" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="synonym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="modifieddate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" table="bibboxcs.invitation">
 		<cache usage="read-write" />

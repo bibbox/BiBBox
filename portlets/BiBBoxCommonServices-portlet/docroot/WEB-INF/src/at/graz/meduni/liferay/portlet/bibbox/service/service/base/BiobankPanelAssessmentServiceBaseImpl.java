@@ -17,6 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.base;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentService;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.BiobankPanelAssessmentPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence;
 
@@ -106,6 +107,44 @@ public abstract class BiobankPanelAssessmentServiceBaseImpl
 	public void setBiobankPanelAssessmentPersistence(
 		BiobankPanelAssessmentPersistence biobankPanelAssessmentPersistence) {
 		this.biobankPanelAssessmentPersistence = biobankPanelAssessmentPersistence;
+	}
+
+	/**
+	 * Returns the disease matrix local service.
+	 *
+	 * @return the disease matrix local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService getDiseaseMatrixLocalService() {
+		return diseaseMatrixLocalService;
+	}
+
+	/**
+	 * Sets the disease matrix local service.
+	 *
+	 * @param diseaseMatrixLocalService the disease matrix local service
+	 */
+	public void setDiseaseMatrixLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService diseaseMatrixLocalService) {
+		this.diseaseMatrixLocalService = diseaseMatrixLocalService;
+	}
+
+	/**
+	 * Returns the disease matrix persistence.
+	 *
+	 * @return the disease matrix persistence
+	 */
+	public DiseaseMatrixPersistence getDiseaseMatrixPersistence() {
+		return diseaseMatrixPersistence;
+	}
+
+	/**
+	 * Sets the disease matrix persistence.
+	 *
+	 * @param diseaseMatrixPersistence the disease matrix persistence
+	 */
+	public void setDiseaseMatrixPersistence(
+		DiseaseMatrixPersistence diseaseMatrixPersistence) {
+		this.diseaseMatrixPersistence = diseaseMatrixPersistence;
 	}
 
 	/**
@@ -399,6 +438,10 @@ public abstract class BiobankPanelAssessmentServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentService biobankPanelAssessmentService;
 	@BeanReference(type = BiobankPanelAssessmentPersistence.class)
 	protected BiobankPanelAssessmentPersistence biobankPanelAssessmentPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService diseaseMatrixLocalService;
+	@BeanReference(type = DiseaseMatrixPersistence.class)
+	protected DiseaseMatrixPersistence diseaseMatrixPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService invitationLocalService;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService.class)
