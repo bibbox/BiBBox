@@ -18,6 +18,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisatio
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.BiobankPanelAssessmentPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.GeneralInformationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence;
 
@@ -145,6 +146,44 @@ public abstract class InvitationOrganisationServiceBaseImpl
 	public void setDiseaseMatrixPersistence(
 		DiseaseMatrixPersistence diseaseMatrixPersistence) {
 		this.diseaseMatrixPersistence = diseaseMatrixPersistence;
+	}
+
+	/**
+	 * Returns the general information local service.
+	 *
+	 * @return the general information local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalService getGeneralInformationLocalService() {
+		return generalInformationLocalService;
+	}
+
+	/**
+	 * Sets the general information local service.
+	 *
+	 * @param generalInformationLocalService the general information local service
+	 */
+	public void setGeneralInformationLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalService generalInformationLocalService) {
+		this.generalInformationLocalService = generalInformationLocalService;
+	}
+
+	/**
+	 * Returns the general information persistence.
+	 *
+	 * @return the general information persistence
+	 */
+	public GeneralInformationPersistence getGeneralInformationPersistence() {
+		return generalInformationPersistence;
+	}
+
+	/**
+	 * Sets the general information persistence.
+	 *
+	 * @param generalInformationPersistence the general information persistence
+	 */
+	public void setGeneralInformationPersistence(
+		GeneralInformationPersistence generalInformationPersistence) {
+		this.generalInformationPersistence = generalInformationPersistence;
 	}
 
 	/**
@@ -442,6 +481,10 @@ public abstract class InvitationOrganisationServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService diseaseMatrixLocalService;
 	@BeanReference(type = DiseaseMatrixPersistence.class)
 	protected DiseaseMatrixPersistence diseaseMatrixPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalService generalInformationLocalService;
+	@BeanReference(type = GeneralInformationPersistence.class)
+	protected GeneralInformationPersistence generalInformationPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService invitationLocalService;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService.class)

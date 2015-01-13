@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.rdconnect.update.model.AccessibilityUpdate">
+		<field name="coreid" type="long" />
+		<field name="organizationid" type="long" />
+		<field name="fieldname" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="value" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+	</model>
+	<model name="at.rdconnect.update.model.AddressUpdate">
+		<field name="addressid" type="long" />
+		<field name="street1" type="String" />
+		<field name="street2" type="String" />
+		<field name="street3" type="String" />
+		<field name="city" type="String" />
+		<field name="zip" type="String" />
+		<field name="regionid" type="long" />
+		<field name="contryid" type="long" />
+		<field name="typeid" type="long" />
+		<field name="mailing" type="boolean" />
+		<field name="primary_ad" type="boolean" />
+		<field name="organizationid" type="long" />
+	</model>
+	<model name="at.rdconnect.update.model.CoreUpdate">
+		<field name="coreid" type="long" />
+		<field name="organizationid" type="long" />
+		<field name="fieldname" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="value" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+	</model>
+	<model name="at.rdconnect.update.model.QualityUpdate">
+		<field name="coreid" type="long" />
+		<field name="organizationid" type="long" />
+		<field name="fieldname" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="value" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+	</model>
+</model-hints>

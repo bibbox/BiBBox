@@ -88,6 +88,22 @@
 			<guest-unsupported />
 		</permissions>
 	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>general-information</portlet-name>
+		<permissions>
+			<supports>
+				<action-key>EDIT_GENERALINFORMATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<site-member-defaults>
+				<action-key>VIEW</action-key>
+			</site-member-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported />
+		</permissions>
+	</portlet-resource>
 	<model-resource>
 		<model-name>at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation</model-name>
 		<portlet-ref>

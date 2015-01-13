@@ -72,6 +72,8 @@
 <%@ page import="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate"%>
 <%@ page import="at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil"%>
 
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil"%>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 

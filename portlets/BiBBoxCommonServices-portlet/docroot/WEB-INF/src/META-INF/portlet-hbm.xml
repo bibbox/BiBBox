@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" table="bibboxcs.biobankpanelassessment">
@@ -43,6 +44,32 @@
 		<property name="icd10" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="omim" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="synonym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="modifieddate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.GeneralInformationImpl" table="rdconnect.generalgnformation">
+		<cache usage="read-write" />
+		<id name="generalinformationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="acronym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hosteinstitue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="typeofhosteinstitue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sourceoffunding" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="targetpopulation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="yearofestablishment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="howmanyrdsareintheregistrybiobank" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="percentageofrarediseasesinyourregistrybiobank" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ontologies" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biomaterialcollected" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biomaterialprepared" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="origionofcollection" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="useofcollection" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="associateddataavailable" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imagingavailable" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="theregistrybiobanksislistedinotherinventoriesnetworks" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="modifieddate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" table="bibboxcs.invitation">

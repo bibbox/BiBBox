@@ -26,5 +26,6 @@
 	</category>
 	<category name="BiBBox RD-Connect">
 		<portlet id="disease-matrix"></portlet>
+		<portlet id="general-information"></portlet>
 	</category>
 </display>

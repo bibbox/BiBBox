@@ -62,6 +62,65 @@
 		</field>
 		<field name="modifieddate" type="Date" />
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation">
+		<field name="generalinformationId" type="long" />
+		<field name="organizationId" type="long" />
+		<field name="acronym" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="description" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="hosteinstitue" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="typeofhosteinstitue" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="sourceoffunding" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="country" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="targetpopulation" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="yearofestablishment" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="howmanyrdsareintheregistrybiobank" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="percentageofrarediseasesinyourregistrybiobank" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="ontologies" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biomaterialcollected" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biomaterialprepared" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="origionofcollection" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="useofcollection" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="associateddataavailable" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="imagingavailable" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="theregistrybiobanksislistedinotherinventoriesnetworks" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="modifieddate" type="Date" />
+	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation">
 		<field name="invitationId" type="long" />
 		<field name="name" type="String" />

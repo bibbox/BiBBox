@@ -11,3 +11,5 @@ create index IX_C91A0641 on bibboxcs.invitation_organisation (organisationId);
 create index IX_B7B5515E on bibboxcs.invitation_organisation (status);
 
 create index IX_89618AEF on rdconnect.diseasematrix (organizationId);
+
+create index IX_EB153260 on rdconnect.generalgnformation (organizationId);

@@ -55,6 +55,36 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.GeneralInformationModelImpl">
+		<attributes>
+			<id name="generalinformationId" />
+			<basic name="organizationId" />
+			<basic name="acronym" />
+			<basic name="description" />
+			<basic name="hosteinstitue" />
+			<basic name="typeofhosteinstitue" />
+			<basic name="sourceoffunding" />
+			<basic name="country" />
+			<basic name="targetpopulation" />
+			<basic name="yearofestablishment" />
+			<basic name="howmanyrdsareintheregistrybiobank" />
+			<basic name="percentageofrarediseasesinyourregistrybiobank" />
+			<basic name="ontologies" />
+			<basic name="biomaterialcollected" />
+			<basic name="biomaterialprepared" />
+			<basic name="origionofcollection" />
+			<basic name="useofcollection" />
+			<basic name="associateddataavailable" />
+			<basic name="imagingavailable" />
+			<basic name="theregistrybiobanksislistedinotherinventoriesnetworks" />
+			<basic name="modifieddate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationModelImpl">
 		<attributes>
 			<id name="invitationId" />
@@ -112,6 +142,10 @@
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixImpl" name="DiseaseMatrix">
 		<table name="rdconnect.diseasematrix" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.GeneralInformationImpl" name="GeneralInformation">
+		<table name="rdconnect.generalgnformation" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" name="Invitation">

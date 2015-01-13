@@ -97,4 +97,30 @@
 			<finder-column name="organizationId"></finder-column>
 		</finder>
 	</entity>
+	<entity name="GeneralInformation" local-service="true" remote-service="false" table="rdconnect.generalgnformation">
+		<column name="generalinformationId" primary="true" type="long"></column>
+		<column name="organizationId" type="long"></column>
+		<column name="acronym" type="String"></column>
+		<column name="description" type="String"></column>
+		<column name="hosteinstitue" type="String"></column>
+		<column name="typeofhosteinstitue" type="String"></column>
+		<column name="sourceoffunding" type="String"></column>
+		<column name="country" type="String"></column>
+		<column name="targetpopulation" type="String"></column>
+		<column name="yearofestablishment" type="String"></column>
+		<column name="howmanyrdsareintheregistrybiobank" type="String"></column>
+		<column name="percentageofrarediseasesinyourregistrybiobank" type="String"></column>
+		<column name="ontologies" type="String"></column>
+		<column name="biomaterialcollected" type="String"></column>
+		<column name="biomaterialprepared" type="String"></column>
+		<column name="origionofcollection" type="String"></column>
+		<column name="useofcollection" type="String"></column>
+		<column name="associateddataavailable" type="String"></column>
+		<column name="imagingavailable" type="String"></column>
+		<column name="theregistrybiobanksislistedinotherinventoriesnetworks" type="String"></column>
+		<column name="modifieddate" type="Date"></column>
+		<finder return-type="GeneralInformation" name="OrganizationFinder">
+			<finder-column name="organizationId"></finder-column>
+		</finder>
+	</entity>
 </service-builder>

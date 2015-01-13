@@ -9,7 +9,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
-String actionId_manage_maincontact = "ADD_DISEASEMATRIX";
+String actionId_add_diseasematrix = "ADD_DISEASEMATRIX";
 
 long organizationId = 0;
 Organization organization = null;
@@ -21,11 +21,11 @@ if (currentGroup.isOrganization()) {
 	SimpleDateFormat simpledateformat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 	%>
 	<c:choose>
-		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_manage_maincontact) %>">
+		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">
 			<aui:button-row>
 			<portlet:renderURL var="addDiseaseMatrixURL">
 				<portlet:param name="mvcPath" value="/html/rdconnect/diseasematrix/diseasematrix_edit.jsp" />
-				<portlet:param name="organizationId" value="<%= organizationId %>" />
+				<portlet:param name="organizationId" value="<%= Long.toString(organizationId) %>" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
 			</portlet:renderURL>
 				<aui:button value="add-diseasematrix" onClick="<%= addDiseaseMatrixURL.toString() %>"/>
@@ -76,6 +76,14 @@ if (currentGroup.isOrganization()) {
 				name="modifieddate"
 				value="<%= simpledateformat.format(diseasematrix.getModifieddate()) %>"
 			/>
+			<c:choose>
+				<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">
+					<liferay-ui:search-container-column-jsp
+						align="right"
+						path="/html/rdconnect/diseasematrix/diseasematrix_actions.jsp"
+					/>
+				</c:when>
+			</c:choose>
 		</liferay-ui:search-container-row>
 	
 		<liferay-ui:search-iterator />

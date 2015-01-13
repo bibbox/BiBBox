@@ -5,6 +5,7 @@ import javax.portlet.ActionResponse;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -24,7 +25,6 @@ public class DiseaseMatrix extends MVCPortlet {
 		sendRedirect(request, response);
 	}
 
-	
 	/**
 	 * Updates the database record of an existing DiseaseMatrix.
 	 *
@@ -36,5 +36,16 @@ public class DiseaseMatrix extends MVCPortlet {
 		DiseaseMatrixLocalServiceUtil.updateDiseaseMatrix(diseasematrix);
 		sendRedirect(request, response);
 	}
+	
+	/**
+	 * Deletes a DiseaseMatrix from the database.
+	 *
+	 */
+	public void deletePatient(ActionRequest request, ActionResponse response)
+		throws Exception {
 
+		long diseasematrixId = ParamUtil.getLong(request, "diseasematrixId");
+		DiseaseMatrixLocalServiceUtil.deleteDiseaseMatrix(diseasematrixId);
+		sendRedirect(request, response);
+	}
 }
