@@ -18,6 +18,7 @@ import at.meduni.liferay.portlet.rdconnect.model.AQRRatingClp;
 import at.meduni.liferay.portlet.rdconnect.model.CandidateClp;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidateClp;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidateClp;
+import at.meduni.liferay.portlet.rdconnect.model.SearchIndexClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -122,6 +123,10 @@ public class ClpSerializer {
 			return translateInputMasterCandidateLinkCandidate(oldModel);
 		}
 
+		if (oldModelClassName.equals(SearchIndexClp.class.getName())) {
+			return translateInputSearchIndex(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -178,6 +183,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputSearchIndex(BaseModel<?> oldModel) {
+		SearchIndexClp oldClpModel = (SearchIndexClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getSearchIndexRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInput(Object obj) {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
@@ -213,6 +228,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl")) {
 			return translateOutputMasterCandidateLinkCandidate(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.rdconnect.model.impl.SearchIndexImpl")) {
+			return translateOutputSearchIndex(oldModel);
 		}
 
 		return oldModel;
@@ -315,6 +335,11 @@ public class ClpSerializer {
 			return new at.meduni.liferay.portlet.rdconnect.NoSuchMasterCandidateLinkCandidateException();
 		}
 
+		if (className.equals(
+					"at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException")) {
+			return new at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException();
+		}
+
 		return throwable;
 	}
 
@@ -355,6 +380,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setMasterCandidateLinkCandidateRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputSearchIndex(BaseModel<?> oldModel) {
+		SearchIndexClp newModel = new SearchIndexClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSearchIndexRemoteModel(oldModel);
 
 		return newModel;
 	}

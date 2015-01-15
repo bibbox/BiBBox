@@ -82,10 +82,11 @@ PortletPreferences prefs = renderRequest.getPreferences();
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
+<%= themeDisplay.getCompanyId() %>
 
 This is the <b>Update Rd Connect</b> portlet in View mode.
 
-<div style="border-style: solid;border-width: 3px;border-color: #3300FF;background-color: #CCFFCC;"> 
+<!-- <div style="border-style: solid;border-width: 3px;border-color: #3300FF;background-color: #CCFFCC;"> 
 
 	Update Address:
 
@@ -143,6 +144,23 @@ This is the <b>Update Rd Connect</b> portlet in View mode.
 	<portlet:actionURL name="updateRDCQuality" var="updateRDCQualityURL" windowState="normal" />
 
 	<aui:form action="<%= updateRDCQualityURL %>" method="POST" name="fm">
+		<aui:fieldset>
+			<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
+		</aui:fieldset>
+		<aui:button-row>
+			<aui:button type="submit" />
+			<aui:button type="cancel"  onClick="<%= redirect %>" />
+		</aui:button-row>
+	</aui:form>
+</div> -->
+
+<div style="border-style: solid;border-width: 3px;border-color: #3300FF;background-color: #CCFFCC;"> 
+
+	Update Phone:
+
+	<portlet:actionURL name="updateRDCPhone" var="updateRDCPhoneURL" windowState="normal" />
+
+	<aui:form action="<%= updateRDCPhoneURL %>" method="POST" name="fm">
 		<aui:fieldset>
 			<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 		</aui:fieldset>

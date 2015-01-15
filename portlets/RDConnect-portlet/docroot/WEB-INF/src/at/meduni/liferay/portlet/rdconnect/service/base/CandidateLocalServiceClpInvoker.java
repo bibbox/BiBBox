@@ -106,63 +106,63 @@ public class CandidateLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.rdconnect.model.Candidate"
 			};
 
-		_methodName44 = "getBeanIdentifier";
+		_methodName48 = "getBeanIdentifier";
 
-		_methodParameterTypes44 = new String[] {  };
+		_methodParameterTypes48 = new String[] {  };
 
-		_methodName45 = "setBeanIdentifier";
+		_methodName49 = "setBeanIdentifier";
 
-		_methodParameterTypes45 = new String[] { "java.lang.String" };
+		_methodParameterTypes49 = new String[] { "java.lang.String" };
 
-		_methodName50 = "updateCandidate";
+		_methodName54 = "updateCandidate";
 
-		_methodParameterTypes50 = new String[] {
+		_methodParameterTypes54 = new String[] {
 				"long", "java.lang.String", "long"
 			};
 
-		_methodName51 = "getTestString";
+		_methodName55 = "getTestString";
 
-		_methodParameterTypes51 = new String[] { "java.lang.String" };
+		_methodParameterTypes55 = new String[] { "java.lang.String" };
 
-		_methodName52 = "addCandidate";
+		_methodName56 = "addCandidate";
 
-		_methodParameterTypes52 = new String[] {
+		_methodParameterTypes56 = new String[] {
 				"at.meduni.liferay.portlet.rdconnect.model.Candidate"
 			};
 
-		_methodName53 = "getAllCandidates";
+		_methodName57 = "getAllCandidates";
 
-		_methodParameterTypes53 = new String[] {  };
+		_methodParameterTypes57 = new String[] {  };
 
-		_methodName54 = "getFilterdCandidates";
+		_methodName58 = "getFilterdCandidates";
 
-		_methodParameterTypes54 = new String[] {
+		_methodParameterTypes58 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName55 = "getFilterdCandidates";
+		_methodName59 = "getFilterdCandidates";
 
-		_methodParameterTypes55 = new String[] {
+		_methodParameterTypes59 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName56 = "getSource";
+		_methodName60 = "getSource";
 
-		_methodParameterTypes56 = new String[] {  };
+		_methodParameterTypes60 = new String[] {  };
 
-		_methodName57 = "getTypesOfCandidates";
+		_methodName61 = "getTypesOfCandidates";
 
-		_methodParameterTypes57 = new String[] {  };
+		_methodParameterTypes61 = new String[] {  };
 
-		_methodName58 = "getTypesOfCandidatesNewEntry";
+		_methodName62 = "getTypesOfCandidatesNewEntry";
 
-		_methodParameterTypes58 = new String[] {  };
+		_methodParameterTypes62 = new String[] {  };
 
-		_methodName59 = "getCountryNames";
+		_methodName63 = "getCountryNames";
 
-		_methodParameterTypes59 = new String[] {  };
+		_methodParameterTypes63 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -254,72 +254,72 @@ public class CandidateLocalServiceClpInvoker {
 			return CandidateLocalServiceUtil.updateCandidate((at.meduni.liferay.portlet.rdconnect.model.Candidate)arguments[0]);
 		}
 
-		if (_methodName44.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
 			return CandidateLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
 			CandidateLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
 			CandidateLocalServiceUtil.updateCandidate(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], ((Long)arguments[2]).longValue());
 
 			return null;
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
 			return CandidateLocalServiceUtil.getTestString((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return CandidateLocalServiceUtil.addCandidate((at.meduni.liferay.portlet.rdconnect.model.Candidate)arguments[0]);
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			return CandidateLocalServiceUtil.getAllCandidates();
 		}
 
-		if (_methodName54.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return CandidateLocalServiceUtil.getFilterdCandidates((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4]);
 		}
 
-		if (_methodName55.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
 			return CandidateLocalServiceUtil.getFilterdCandidates((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3]);
 		}
 
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return CandidateLocalServiceUtil.getSource();
 		}
 
-		if (_methodName57.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			return CandidateLocalServiceUtil.getTypesOfCandidates();
 		}
 
-		if (_methodName58.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
 			return CandidateLocalServiceUtil.getTypesOfCandidatesNewEntry();
 		}
 
-		if (_methodName59.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			return CandidateLocalServiceUtil.getCountryNames();
 		}
 
@@ -358,18 +358,10 @@ public class CandidateLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName44;
-	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
-	private String _methodName51;
-	private String[] _methodParameterTypes51;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
+	private String _methodName48;
+	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
 	private String _methodName54;
 	private String[] _methodParameterTypes54;
 	private String _methodName55;
@@ -382,4 +374,12 @@ public class CandidateLocalServiceClpInvoker {
 	private String[] _methodParameterTypes58;
 	private String _methodName59;
 	private String[] _methodParameterTypes59;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }

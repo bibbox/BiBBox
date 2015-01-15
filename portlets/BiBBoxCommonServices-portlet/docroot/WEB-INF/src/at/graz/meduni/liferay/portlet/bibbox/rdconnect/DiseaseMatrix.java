@@ -41,7 +41,7 @@ public class DiseaseMatrix extends MVCPortlet {
 	 * Deletes a DiseaseMatrix from the database.
 	 *
 	 */
-	public void deletePatient(ActionRequest request, ActionResponse response)
+	public void deleteDiseaseMatrix(ActionRequest request, ActionResponse response)
 		throws Exception {
 
 		long diseasematrixId = ParamUtil.getLong(request, "diseasematrixId");

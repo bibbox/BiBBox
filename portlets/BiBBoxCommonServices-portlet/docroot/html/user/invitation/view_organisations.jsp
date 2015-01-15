@@ -59,7 +59,13 @@ user/edit_invitation
 	List<InvitationOrganisation> invitationorganisations = InvitationOrganisationLocalServiceUtil.getOrganisationByInvitation(invitationId);
 	
 	for(InvitationOrganisation invitationorganisation : invitationorganisations) {
-		Organization organization = OrganizationLocalServiceUtil.getOrganization(invitationorganisation.getOrganisationId());
+		Organization organization = null;
+		try {
+			organization = OrganizationLocalServiceUtil.getOrganization(invitationorganisation.getOrganisationId());
+		} catch(Exception e) {
+			continue;
+		}
+		
 		if (!optionsTypeFilter_option.equals("")) {
 			if (!organization.getExpandoBridge().getAttribute("Organization Type").equals(optionsTypeFilter_option)) {
 				continue;
@@ -79,7 +85,7 @@ user/edit_invitation
 		// Type
 		String css_class_deleted = "";
 		String organization_deleted = "";
-		if(organization.getParentOrganizationId() != 0) {
+		if(organization.getParentOrganizationId() == 27920) {
 			css_class_deleted = "bibbox-cs-datatable-organization-deleted";
 			organization_deleted = " [deleted]";
 		}

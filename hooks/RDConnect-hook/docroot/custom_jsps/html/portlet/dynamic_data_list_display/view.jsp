@@ -47,6 +47,8 @@ if (currentGroup.isOrganization()) {
 			portaleditorrole = true;
 		if(role.getName().equalsIgnoreCase("Administrator"))
 			portaleditorrole = true;
+		if(role.getName().equalsIgnoreCase("RD-Connect CURATOR"))
+			portaleditorrole = true;
 	}
 	//Biobank, Registry Owner
 	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
@@ -60,6 +62,7 @@ if (currentGroup.isOrganization()) {
 		if(ugr.getRole().getName().equalsIgnoreCase("BB-REG-OWNER"))
 			biobankregistryownerrole = true;
 	}
+	
 	if(biobankregistryownerrole || portaleditorrole) {
 	
 		if(rdcstructure.length() != 0 && rdcedirecordlink && !spreadsheet && DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE)) {

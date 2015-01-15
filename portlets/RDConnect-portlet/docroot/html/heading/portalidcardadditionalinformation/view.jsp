@@ -319,6 +319,8 @@ if (currentGroup.isOrganization()) {
     		portaleditorrole = true;
     	if(role.getName().equalsIgnoreCase("Administrator"))
     		portaleditorrole = true;
+    	if(role.getName().equalsIgnoreCase("RD-Connect CURATOR"))
+    		portaleditorrole = true;
     }
     //Biobank, Registry Owner
     for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {

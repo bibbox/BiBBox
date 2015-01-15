@@ -28,14 +28,8 @@ ${theme.include(body_top_include)}
 	<div class="rdconnect-header-container-top">
 		<div class="rdconnect-header-container-inner">
 			<div class="rdconnect-header-container-top-rdlogo">
-				<a href="http://rd-connect.bibbox.org/home">
-					<#if user_id == 105078>
-						<img alt="BBMRI-AT-IDCard-Logo" height="50px" width="180px" src="/RDConnectHub-theme/images/BBMRIatTmpLogo.png" />
-					<#elseif user_id == 105092>
-						<img alt="BBMRI-AT-IDCard-Logo" height="50px" width="180px" src="/RDConnectHub-theme/images/BBMRIatTmpLogo.png" />
-					<#else>
-						<img alt="RD-Connect-IDCard-Logo" height="27px" width="168px" src="/RDConnectHub-theme/images/rd_connect.png" />
-					</#if>
+				<a href="/welcome">
+					<img alt="RD-Connect-IDCard-Logo" height="27px" width="168px" src="/RDConnectHub-theme/images/rd_connect.png" />
 				</a>
 			</div>
 			<div class="rdconnect-header-container-top-menue">

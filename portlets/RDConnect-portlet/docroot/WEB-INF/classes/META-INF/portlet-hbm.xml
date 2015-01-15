@@ -6,6 +6,7 @@
 	<import class="at.meduni.liferay.portlet.rdconnect.model.Candidate" />
 	<import class="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate" />
 	<import class="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate" />
+	<import class="at.meduni.liferay.portlet.rdconnect.model.SearchIndex" />
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.AQRRatingImpl" table="rdconnect.aqr_rating">
 		<cache usage="read-write" />
 		<id name="aqrId" type="long">
@@ -82,5 +83,16 @@
 		</id>
 		<property name="candidateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="masterCandidateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.SearchIndexImpl" table="rdconnect.searchindex_rdconnect">
+		<cache usage="read-write" />
+		<id name="searchid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organisationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="locationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

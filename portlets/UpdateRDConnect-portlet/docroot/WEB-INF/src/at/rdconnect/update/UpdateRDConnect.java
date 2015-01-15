@@ -229,6 +229,15 @@ public class UpdateRDConnect extends MVCPortlet {
 			// create core | ID 28331
 			try {
 				
+				List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+			  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+			  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+			  		
+			  		if(rdc_rsname.equals("reg_accessibility")) { 
+			  			DDLRecordSetLocalServiceUtil.deleteDDLRecordSet(rdc_rs);
+			  		}
+			  	}
+				
 				DDLRecordSet recordSet = createRecordSet(request, organization, "reg_accessibility", 22594, serviceContext);
 				// -------
 				
@@ -298,6 +307,15 @@ public class UpdateRDConnect extends MVCPortlet {
 			long groupId = organization.getGroupId();
 			// create core | ID 28331
 			try {
+				
+				List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+			  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+			  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+			  		
+			  		if(rdc_rsname.equals("reg_quality")) { 
+			  			DDLRecordSetLocalServiceUtil.deleteDDLRecordSet(rdc_rs);
+			  		}
+			  	}
 				
 				DDLRecordSet recordSet = createRecordSet(request, organization, "reg_quality", 23725, serviceContext);
 				// -------

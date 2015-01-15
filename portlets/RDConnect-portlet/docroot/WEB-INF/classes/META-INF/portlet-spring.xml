@@ -9,4 +9,6 @@
 	<bean id="at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidatePersistence" class="at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidatePersistenceImpl" parent="basePersistence" />
 	<bean id="at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService" class="at.meduni.liferay.portlet.rdconnect.service.impl.MasterCandidateLinkCandidateLocalServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidateLinkCandidatePersistence" class="at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidateLinkCandidatePersistenceImpl" parent="basePersistence" />
+	<bean id="at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalService" class="at.meduni.liferay.portlet.rdconnect.service.impl.SearchIndexLocalServiceImpl" />
+	<bean id="at.meduni.liferay.portlet.rdconnect.service.persistence.SearchIndexPersistence" class="at.meduni.liferay.portlet.rdconnect.service.persistence.SearchIndexPersistenceImpl" parent="basePersistence" />
 </beans>
