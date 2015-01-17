@@ -124,14 +124,15 @@ public class MasterPublish extends MVCPortlet {
 	final String alphabet_ = "abcdefghijklmopqrstuvwxyz";
     final int N_ = alphabet_.length();
     Random random_ = new Random();
-    long ORGANISATION_ADMIN_ROLL = 22956; // local 10166 Server 22956
-    long ADMIN_ROLL = 22951;
-    long BIOBANK_REG_EDITOR = 32822;
-    long BIOBANK_REG_MEMBER = 32821;
-    long BIOBANK_REG_OWNER = 32823;
-    long BiobanK_REG_MAINCONTACT = 71378;
+    //long ORGANISATION_ADMIN_ROLL = 22956; // local 10166 Server 22956
+    //long ADMIN_ROLL = 22951;
+    long BIOBANK_REG_EDITOR = 13322;
+    //long BIOBANK_REG_MEMBER = 32821;
+    long BIOBANK_REG_OWNER = 13321;
+    long BiobanK_REG_MAINCONTACT = 13320;
     
-    long BIOBANK_ASSESSMENT_ORGANIZATION = 235712;
+    long BIOBANK_ASSESSMENT_ORGANIZATION = 26616;
+    long CATALOGUE_ORGANIZATION = 10709;
     // Web page
     int PUBLICWEBSITETYPEID = 12020; // Public: 12020
     int INTRANETWEBSITETYPEID = 12019; // Public: 12020
@@ -159,7 +160,7 @@ public class MasterPublish extends MVCPortlet {
 			MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
 			// Create Users
 			createUsersFromMaster(organization, company, master.getMail(), master.getContactperson(), master.getHead());
-			// Create DDL Elements
+			// Create DDL Elements (TODO FROM HERE)
 			createDDLs(request, organization, master);
 			// Create Organisation Pages
 			createPages(organization);
@@ -359,6 +360,8 @@ public class MasterPublish extends MVCPortlet {
 	        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 	        if(master.getCandidatetype().equalsIgnoreCase("biobank")) {
 	        	parentOrganizationId = BIOBANK_ASSESSMENT_ORGANIZATION;
+	        } else {
+	        	parentOrganizationId = CATALOGUE_ORGANIZATION;
 	        }
 	        String name = master.getName();
 	        if(name.length() > 100) {

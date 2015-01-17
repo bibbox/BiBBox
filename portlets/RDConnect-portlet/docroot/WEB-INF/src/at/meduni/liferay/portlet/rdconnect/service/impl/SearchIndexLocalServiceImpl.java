@@ -62,6 +62,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil} to access the search index local service.
 	 */
 	public String getSearchIndexByKeyword(String keyword, ThemeDisplay themeDisplay, String contextpath) {
+		keyword = keyword.trim();
 		String searchresultstring = "";
 		try {
 			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
@@ -93,7 +94,8 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 						for(String key : hits.keySet()) {
 							searchresultstring += hits.get(key) + "</td></tr>";
 						}
-						searchresultstring += "</table>";
+						searchresultstring += "<tr><td class=\"rdc_coreinformation_organisation-table-images-bottomborder\">&nbsp;</td><td class=\"rdc_coreinformation_organisation-table-images-bottomborder\">&nbsp;</td></tr>";
+						searchresultstring += "</table><br />";
 					}
 					
 					// Reset all variables
@@ -214,11 +216,18 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	private String highlightResult(String text, String keyword) {
 		if(text.toLowerCase().contains(keyword.toLowerCase())) {
 			int beginindex = text.toLowerCase().indexOf(keyword.toLowerCase());
+			int endindex = beginindex + keyword.length();
+			int counter = 0;
 			while (beginindex >= 0) {
-				beginindex = text.toLowerCase().indexOf(keyword.toLowerCase());
-				int endindex = beginindex + keyword.length();
+				if(counter > 15) {
+					return text;
+				}
+				System.out.println("Hit" + beginindex);
+				endindex = beginindex + keyword.length();
 				text = text.substring(0, beginindex) + "<span style=\"background-color: yellow;\">" + text.substring(beginindex, endindex) + "</span>" + text.substring(endindex);
-				beginindex = text.indexOf(keyword, beginindex + 1);
+				System.out.println(text + " " + endindex);
+				beginindex = text.indexOf(keyword, endindex+46);
+				counter++;
 			}
 		}
 		return text;

@@ -61,7 +61,7 @@ public class RDConnectSearchSchedule implements MessageListener {
 			List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(Long.parseLong("10154"), Long.parseLong("10709"));
 			System.out.println("Indexing n: " + organizations.size() + " Organizations");
 			for(Organization organization : organizations) {
-				System.out.print(organization.getName());
+				//System.out.print(organization.getName());
 				HashSet<RDConnectSearchIndexObject> organizationindex = new HashSet<RDConnectSearchIndexObject>();
 				organizationindex.addAll(getIndexFromOrganization(organization.getOrganizationId(), organization, statement_organizationtype));
 				organizationindex.addAll(getIndexFromDisease(organization.getOrganizationId()));
