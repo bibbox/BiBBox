@@ -9,5 +9,6 @@
 	<category name="category.sample">
 		<portlet id="web-gl-l01"></portlet>
 		<portlet id="bc-net-main-menu"></portlet>
+		<portlet id="test-ddl-display"></portlet>
 	</category>
 </display>

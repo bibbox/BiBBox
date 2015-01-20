@@ -23,7 +23,8 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 
 <% 
-long BIOBANK_ASSESSMENT_ORGANIZATION = 235712;
+long BIOBANK_ASSESSMENT_ORGANIZATION = 26616;
+long CATALOG_ORGANIZATIONID = 10709;
 long organizationId = 0;
 long recordId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
@@ -47,78 +48,60 @@ if (currentGroup.isOrganization()) {
   	
   	java.util.Date modifieddate = organization.getModifiedDate();
   	
+ 	// Core Functions
+ 	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+ 	if(organizationtype.equalsIgnoreCase("Biobank")) {
+ 		if(organization.getLogoId() == 0) {
+ 			imgPath = request.getContextPath() + "/images/Biobank.png";
+ 		}
+ 		orgPath = orgPath + "/bb_home";	
+ 		organisationtype = "Biobank";
+ 	} else {
+ 		if(organization.getLogoId() == 0) {
+ 			imgPath = request.getContextPath() + "/images/Registry.png";
+ 		}
+ 		orgPath = orgPath + "/reg_home";
+ 		organisationtype = "Registry";
+ 	}
+  	
   	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
   	for(DDLRecordSet rdc_rs : rdc_recordlist) {
   		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
   		
-  		if(rdc_rsname.equals("core")) {  		
+  		 if(rdc_rsname.equals("core")) {
   			List<DDLRecord> records = rdc_rs.getRecords();
-  			for(DDLRecord record : records) {
-  				recordId = record.getPrimaryKey();
+  			for(DDLRecord record : records) { 
+  				 recordId = record.getPrimaryKey();
   				if (modifieddate.before(record.getModifiedDate())) {
-  					modifieddate = record.getModifiedDate();
+  				modifieddate = record.getModifiedDate();
   				}
   				recordid = record.getRecordId();
-  				if(record.getFieldValue("Radio2493") != null) {
-	  				String type = record.getFieldValue("Radio2493").toString();
-	  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
-	  					organisationtype = "Biobank";
-	  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
-		  					orgPath = orgPath + "/at_home";
-		  				} else {
-	  						orgPath = orgPath + "/bb_home";
-		  				}
-	  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
-	  					organisationtype = "Registry";
-	  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
-		  					orgPath = orgPath + "/at_home";
-		  				} else {
-	  						orgPath = orgPath + "/home";
-		  				}
-	  				} else {
-	  					organisationtype = "Registry/Biobank";
-	  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
-		  					orgPath = orgPath + "/at_home";
-		  				} else {
-	  						orgPath = orgPath + "/regbb_home";
-		  				}
-	  				}
-  				}
-  				if(organization.getLogoId() == 0) {
-  					if(record.getFieldValue("Radio2493") != null) {
-		  				String type = record.getFieldValue("Radio2493").toString();
-		  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
-		  					imgPath = request.getContextPath() + "/images/Biobank.png";
-		  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
-		  					imgPath = request.getContextPath() + "/images/Registry.png";
-		  				} else {
-		  					imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
-		  				}
-	  				}
-  				}
-  				if(record.getFieldValue("Description") != null) {
+  				 if(record.getFieldValue("Description") != null) {
   					shortdiscription = record.getFieldValue("Description").toString();
   					shortdiscription = shortdiscription.replaceAll("<.*?>", "");
-  				}
+  				} 
   			}
-  		} else {
-  			List<DDLRecord> records = rdc_rs.getRecords();
-  			for(DDLRecord record : records) {
-  				if (modifieddate.before(record.getModifiedDate())) {
-  					modifieddate = record.getModifiedDate();
-  				}
-  			}
-  		}
+  		 } else {
+  		
+	  		List<DDLRecord> records = rdc_rs.getRecords();
+	  		for(DDLRecord record : records) {
+	  			if (modifieddate.before(record.getModifiedDate())) {
+	  				modifieddate = record.getModifiedDate();
+	  			}
+	  		}
+  		 }
   	}
+  	
+  	diseasecount = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixsCount(organizationId);
   	
   	for(DDLRecordSet rdc_rs : rdc_recordlist) {	
   		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
-  		if(rdc_rsname.equals("Disease Matrix")) {  		
+  		/*if(rdc_rsname.equals("Disease Matrix")) {  		
   			diseasecount = rdc_rs.getRecords().size();
-  		}
+  		}*/
   		
-  	// All
-  		if(rdc_rsname.equals("core")) { 
+  	// Registry
+  		if(rdc_rsname.equals("core") && organisationtype.equalsIgnoreCase("Registry")) { 
   			int all = 0;
   			int counted = 0;
   			List<DDLRecord> records = rdc_rs.getRecords();
@@ -131,7 +114,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -146,8 +129,8 @@ if (currentGroup.isOrganization()) {
   			}
   		}
   		
-  		// Registry
-  		if(rdc_rsname.equals("Accessibility") && organisationtype.equalsIgnoreCase("Registry")) { 
+  		
+  		if(rdc_rsname.equals("reg_accessibility") && organisationtype.equalsIgnoreCase("Registry")) { 
   			int all = 0;
   			int counted = 0;
   			List<DDLRecord> records = rdc_rs.getRecords();
@@ -160,7 +143,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -175,7 +158,7 @@ if (currentGroup.isOrganization()) {
   			}
   		}
   		
-  		if(rdc_rsname.equals("Quality Indicators") && organisationtype.equalsIgnoreCase("Registry")) { 
+  		if(rdc_rsname.equals("reg_quality") && organisationtype.equalsIgnoreCase("Registry")) { 
   			int all = 0;
   			int counted = 0;
   			List<DDLRecord> records = rdc_rs.getRecords();
@@ -188,7 +171,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -204,7 +187,7 @@ if (currentGroup.isOrganization()) {
   		}
   		
   		// Biobank
-  		if(rdc_rsname.equals("Accessibility Biobank") && organisationtype.equalsIgnoreCase("Biobank")) { 
+  		if(rdc_rsname.equals("bb_core") && organisationtype.equalsIgnoreCase("Biobank")) { 
   			int all = 0;
   			int counted = 0;
   			List<DDLRecord> records = rdc_rs.getRecords();
@@ -217,7 +200,34 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  							counted++;
+		  						}
+		  					}
+	  					}
+	  				}
+  				}
+  			}
+  			if(counted >= (all/2)) {
+  				corecount = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				corecount = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
+  		}
+  		if(rdc_rsname.equals("bb_accessibility") && organisationtype.equalsIgnoreCase("Biobank")) { 
+  			int all = 0;
+  			int counted = 0;
+  			List<DDLRecord> records = rdc_rs.getRecords();
+  			for(DDLRecord record : records) {
+  				long ddmstructureid = rdc_rs.getDDMStructureId();
+  				DDMStructure dms = DDMStructureLocalServiceUtil.fetchStructure(ddmstructureid);
+  				if(dms != null) {
+	  				Set<String> fieldnames = dms.getFieldNames();
+	  				for(String s : fieldnames) {
+	  					if(!dms.isFieldPrivate(s)) {
+	  						all++;
+		  					if(record.getFieldValue(s) != null) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -232,7 +242,7 @@ if (currentGroup.isOrganization()) {
   			}
   		}
   		
-  		if(rdc_rsname.equals("Quality Indicators Biobank") && organisationtype.equalsIgnoreCase("Biobank")) { 
+  		if(rdc_rsname.equals("bb_quality") && organisationtype.equalsIgnoreCase("Biobank")) { 
   			int all = 0;
   			int counted = 0;
   			List<DDLRecord> records = rdc_rs.getRecords();
@@ -245,63 +255,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]")) {
-		  							counted++;
-		  						}
-		  					}
-	  					}
-	  				}
-  				}
-  			}
-  			if(counted >= (all/2)) {
-  				quality = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
-  			} else {
-  				quality = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
-  			}
-  		}
-  		// Registry/Biobank
-  		if(rdc_rsname.equals("Accessibility Registry and Biobank") && organisationtype.equalsIgnoreCase("Registry/Biobank")) { 
-  			int all = 0;
-  			int counted = 0;
-  			List<DDLRecord> records = rdc_rs.getRecords();
-  			for(DDLRecord record : records) {
-  				long ddmstructureid = rdc_rs.getDDMStructureId();
-  				DDMStructure dms = DDMStructureLocalServiceUtil.fetchStructure(ddmstructureid);
-  				if(dms != null) {
-	  				Set<String> fieldnames = dms.getFieldNames();
-	  				for(String s : fieldnames) {
-	  					if(!dms.isFieldPrivate(s)) {
-	  						all++;
-		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]")) {
-		  							counted++;
-		  						}
-		  					}
-	  					}
-	  				}
-  				}
-  			}
-  			if(counted >= (all/2)) {
-  				accessibility = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
-  			} else {
-  				accessibility = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
-  			}
-  		}
-  		
-  		if(rdc_rsname.equals("Quality Indicators Registry and Biobank") && organisationtype.equalsIgnoreCase("Registry/Biobank")) { 
-  			int all = 0;
-  			int counted = 0;
-  			List<DDLRecord> records = rdc_rs.getRecords();
-  			for(DDLRecord record : records) {
-  				long ddmstructureid = rdc_rs.getDDMStructureId();
-  				DDMStructure dms = DDMStructureLocalServiceUtil.fetchStructure(ddmstructureid);
-  				if(dms != null) {
-	  				Set<String> fieldnames = dms.getFieldNames();
-	  				for(String s : fieldnames) {
-	  					if(!dms.isFieldPrivate(s)) {
-	  						all++;
-		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -326,6 +280,8 @@ if (currentGroup.isOrganization()) {
     	if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
     		portaleditorrole = true;
     	if(role.getName().equalsIgnoreCase("Administrator"))
+    		portaleditorrole = true;
+    	if(role.getName().equalsIgnoreCase("RD-Connect CURATOR"))
     		portaleditorrole = true;
     }
     //Biobank, Registry Owner
@@ -386,7 +342,7 @@ if (currentGroup.isOrganization()) {
 	<!-- bottom -->
 	<div class="rdc_idcard_idcardbodybottom">
 		<%
-		if(organization.getParentOrganizationId() != 0) {
+		if(organization.getParentOrganizationId() != CATALOG_ORGANIZATIONID && organization.getParentOrganizationId() != 15401) {
 			shortdiscription = "<p style=\"color: red;text-align: center;font-size:20px;\">Organization was deleted</p>";
 			if(organization.getParentOrganizationId() == BIOBANK_ASSESSMENT_ORGANIZATION) {
 				shortdiscription = "<p style=\"color: red;text-align: center;font-size:20px;\">Biobank in Assessment</p>";
@@ -408,16 +364,14 @@ if (currentGroup.isOrganization()) {
 					continue;
 				}
 				if(organisationtype.equalsIgnoreCase("Registry") && (!l.getNameCurrentValue().startsWith("bb_") && !l.getNameCurrentValue().startsWith("regbb_") && !l.getNameCurrentValue().startsWith("at_"))) {
-					pages_display.put(l.getNameCurrentValue(), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
+					pages_display.put(l.getNameCurrentValue().replaceAll("reg_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
 				}
 				if(organisationtype.equalsIgnoreCase("Biobank") && l.getNameCurrentValue().startsWith("bb_")) {
 					pages_display.put(l.getNameCurrentValue().replaceAll("bb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
 				}
 				if(organisationtype.equalsIgnoreCase("Registry/Biobank") && l.getNameCurrentValue().startsWith("regbb_")) {
 					pages_display.put(l.getNameCurrentValue().replaceAll("regbb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
-				} /* else {
-					pages_display.put(l.getNameCurrentValue().replaceAll("regbb_", ""), themeDisplay.getURLPortal() + "/web" + themeDisplay.getSiteGroup().getFriendlyURL() + l.getFriendlyURL());
-				}*/
+				} 
 			}
 			
 			if(pages_display.size() != 0) {
@@ -446,7 +400,7 @@ if (currentGroup.isOrganization()) {
 				if(l.equalsIgnoreCase("Disease Matrix") || l.equalsIgnoreCase("Disease") || l.equalsIgnoreCase("Diseases")) {
 					pageinformation = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates\">[" + diseasecount + "]</span>";
 				}
-				if(l.equalsIgnoreCase("Quality")) {
+				if(l.equalsIgnoreCase("Quality") || l.equalsIgnoreCase("Standards")) {
 					pageinformation = quality;
 					l="Standards";
 				}

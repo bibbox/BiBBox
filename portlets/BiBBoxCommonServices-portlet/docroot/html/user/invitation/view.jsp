@@ -36,8 +36,8 @@ String optionsInvitationTypeFilter_cfg = GetterUtil.getString(portletPreferences
 
 <liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "10")) %>' emptyResultsMessage="invitation-empty-results-message">
 	<liferay-ui:search-container-results
-		results="<%= InvitationLocalServiceUtil.getInvitations(searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= InvitationLocalServiceUtil.getInvitationsCount() %>"
+		results="<%= InvitationLocalServiceUtil.getMyFilteredInvitations(optionsInvitationTypeFilter_cfg) %>"
+		total="<%= InvitationLocalServiceUtil.getMyFilteredInvitationsCount(optionsInvitationTypeFilter_cfg) %>"
 	/>
 	
 	<liferay-ui:search-container-row

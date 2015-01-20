@@ -246,6 +246,15 @@ public class Invitation extends MVCPortlet {
 		String organisationlink = organization.getGroup().getFriendlyURL();
 		String orgPath = "";
 		try {
+			// Core Functions
+			String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+			if(organizationtype.equalsIgnoreCase("Biobank")) {
+				orgPath = orgPath + "/bb_home";	
+			} else {
+				orgPath = orgPath + "/reg_home";
+			}
+			
+			/*
 			List<DDLRecordSet> recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
 			for(DDLRecordSet recordset : recordlist) {
 				String recordsetname = String.valueOf(recordset.getNameCurrentValue());
@@ -264,12 +273,9 @@ public class Invitation extends MVCPortlet {
 		  				}
 		  			}
 				}
-			}
+			}*/
 			organisationlink += orgPath;
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (PortalException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

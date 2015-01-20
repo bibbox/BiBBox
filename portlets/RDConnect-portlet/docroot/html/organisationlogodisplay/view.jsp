@@ -16,40 +16,27 @@ for(Organization organization : organisations) {
 	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
 	
 	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
-	
-	
-	
-  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
-  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
-  		
-  		if(rdc_rsname.equals("core")) {  		
-  			List<DDLRecord> records = rdc_rs.getRecords();
-  			for(DDLRecord record : records) {
-  				if(record.getFieldValue("Radio2493") != null) {
-	  				String type = record.getFieldValue("Radio2493").toString();
-	  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
-	  					if(organization.getLogoId() == 0) {
-	  						imgPath = request.getContextPath() + "/images/Biobank.png";
-	  					}
-	  					orgPath = orgPath + "/bb_home";
-	  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
-	  					if(organization.getLogoId() == 0) {
-	  						imgPath = request.getContextPath() + "/images/Registry.png";
-	  					}
-	  					orgPath = orgPath + "/home";
-	  				} else {
-	  					if(organization.getLogoId() == 0) {
-	  						imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
-	  					}
-	  					orgPath = orgPath + "/regbb_home";
-	  				}
-  				}
-  			}
+  	
+ 	// Core Functions
+ 	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+ 	if(organizationtype.equalsIgnoreCase("Biobank")) {
+ 		if(organization.getLogoId() == 0) {
+ 			imgPath = request.getContextPath() + "/images/Biobank.png";
+ 		}
+ 		orgPath = orgPath + "/bb_home";	
+ 	} else {
+ 		if(organization.getLogoId() == 0) {
+ 			imgPath = request.getContextPath() + "/images/Registry.png";
+ 		}
+ 		orgPath = orgPath + "/reg_home";
+ 	}
+ 	 if (organization.getName().equalsIgnoreCase("RD-Connect Curator Portal")){
+  		if(organization.getLogoId() == 0) {
+  			imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
   		}
-	}
-  	if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
-		orgPath = orgPath + "/at_home";
-	}
+  		orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+  	}
+  	
 %>
 	<p><aui:a href="<%= orgPath %>"><img alt="logo" src="<%= imgPath %>" width="120px" /><br><%= organization.getName() %></aui:a></p>
 	

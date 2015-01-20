@@ -15,6 +15,8 @@
 package at.graz.meduni.liferay.portlet.bibbox.service.service;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessmentClp;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixClp;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisationClp;
 
@@ -108,6 +110,14 @@ public class ClpSerializer {
 			return translateInputBiobankPanelAssessment(oldModel);
 		}
 
+		if (oldModelClassName.equals(DiseaseMatrixClp.class.getName())) {
+			return translateInputDiseaseMatrix(oldModel);
+		}
+
+		if (oldModelClassName.equals(GeneralInformationClp.class.getName())) {
+			return translateInputGeneralInformation(oldModel);
+		}
+
 		if (oldModelClassName.equals(InvitationClp.class.getName())) {
 			return translateInputInvitation(oldModel);
 		}
@@ -136,6 +146,26 @@ public class ClpSerializer {
 		BiobankPanelAssessmentClp oldClpModel = (BiobankPanelAssessmentClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getBiobankPanelAssessmentRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputDiseaseMatrix(BaseModel<?> oldModel) {
+		DiseaseMatrixClp oldClpModel = (DiseaseMatrixClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getDiseaseMatrixRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputGeneralInformation(BaseModel<?> oldModel) {
+		GeneralInformationClp oldClpModel = (GeneralInformationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getGeneralInformationRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -183,6 +213,16 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl")) {
 			return translateOutputBiobankPanelAssessment(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixImpl")) {
+			return translateOutputDiseaseMatrix(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.GeneralInformationImpl")) {
+			return translateOutputGeneralInformation(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -281,6 +321,16 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchGeneralInformationException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchGeneralInformationException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException();
 		}
@@ -300,6 +350,27 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setBiobankPanelAssessmentRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputDiseaseMatrix(BaseModel<?> oldModel) {
+		DiseaseMatrixClp newModel = new DiseaseMatrixClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setDiseaseMatrixRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputGeneralInformation(
+		BaseModel<?> oldModel) {
+		GeneralInformationClp newModel = new GeneralInformationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setGeneralInformationRemoteModel(oldModel);
 
 		return newModel;
 	}

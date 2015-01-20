@@ -2,6 +2,18 @@
     <wb-module deploy-name="RDConnect-portlet">
         <wb-resource deploy-path="/" source-path="/docroot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/docroot/WEB-INF/src"/>
+        <dependent-module archiveName="BiBBoxCommonServices-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/BiBBoxCommonServices-portlet/docroot/WEB-INF/lib/BiBBoxCommonServices-portlet-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="BiBBoxCommonServices-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/BiBBoxCommonServices-portlet/docroot/WEB-INF/lib/BiBBoxCommonServices-portlet-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="BiBBoxCommonServices-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/BiBBoxCommonServices-portlet/docroot/WEB-INF/lib/BiBBoxCommonServices-portlet-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="BiBBoxCommonServices-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/BiBBoxCommonServices-portlet/docroot/WEB-INF/lib/BiBBoxCommonServices-portlet-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="RDConnect-portlet"/>
         <property name="java-output-path" value="/RDConnect-portlet/docroot/WEB-INF/classes"/>
     </wb-module>

@@ -35,7 +35,12 @@
 	</aui:button-row>
 </aui:form>
 
+Search for: <%= keywords %>
+<%
+	String textresult = SearchIndexLocalServiceUtil.getSearchIndexByKeyword(keywords, themeDisplay, request.getContextPath());
 
+%>
+<%= textresult %>
 <%
 	keywords = keywords.toLowerCase();
 	long organizationId = 0;

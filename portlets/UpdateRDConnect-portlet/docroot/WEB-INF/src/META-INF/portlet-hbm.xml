@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.rdconnect.update.model.AccessibilityUpdate" />
+	<import class="at.rdconnect.update.model.AddressUpdate" />
+	<import class="at.rdconnect.update.model.CoreUpdate" />
+	<import class="at.rdconnect.update.model.QualityUpdate" />
+	<class name="at.rdconnect.update.model.impl.AccessibilityUpdateImpl" table="rdconnect.u_accessibility">
+		<cache usage="read-write" />
+		<id name="coreid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organizationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fieldname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.rdconnect.update.model.impl.AddressUpdateImpl" table="rdconnect.u_address">
+		<cache usage="read-write" />
+		<id name="addressid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="street1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="street2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="street3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="regionid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="contryid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="typeid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="mailing" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="primary_ad" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="organizationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="at.rdconnect.update.model.impl.CoreUpdateImpl" table="rdconnect.u_core">
+		<cache usage="read-write" />
+		<id name="coreid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organizationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fieldname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.rdconnect.update.model.impl.QualityUpdateImpl" table="rdconnect.u_quality">
+		<cache usage="read-write" />
+		<id name="coreid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organizationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fieldname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

@@ -47,3 +47,40 @@ create table bibboxcs.invitation_organisation (
 	status LONG,
 	statusdate DATE null
 );
+
+create table rdconnect.diseasematrix (
+	diseasematrixId LONG not null primary key,
+	organizationId LONG,
+	diseasename TEXT null,
+	patientcount TEXT null,
+	gene TEXT null,
+	orphanumber TEXT null,
+	icd10 TEXT null,
+	omim TEXT null,
+	synonym TEXT null,
+	modifieddate DATE null
+);
+
+create table rdconnect.generalgnformation (
+	generalinformationId LONG not null primary key,
+	organizationId LONG,
+	acronym TEXT null,
+	description TEXT null,
+	hosteinstitue TEXT null,
+	typeofhosteinstitue TEXT null,
+	sourceoffunding TEXT null,
+	country TEXT null,
+	targetpopulation TEXT null,
+	yearofestablishment TEXT null,
+	howmanyrdsareintheregistrybiobank TEXT null,
+	percentageofrarediseasesinyourregistrybiobank TEXT null,
+	ontologies TEXT null,
+	biomaterialcollected TEXT null,
+	biomaterialprepared TEXT null,
+	origionofcollection TEXT null,
+	useofcollection TEXT null,
+	associateddataavailable TEXT null,
+	imagingavailable TEXT null,
+	theregistrybiobanksislistedinotherinventoriesnetworks TEXT null,
+	modifieddate DATE null
+);

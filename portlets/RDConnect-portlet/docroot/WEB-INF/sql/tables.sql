@@ -66,3 +66,12 @@ create table rdconnect.master_candidate_link_candidate (
 	candidateId LONG,
 	masterCandidateId LONG
 );
+
+create table rdconnect.searchindex_rdconnect (
+	searchid LONG not null primary key,
+	organisationid LONG,
+	locationid LONG,
+	location TEXT null,
+	key_ TEXT null,
+	value TEXT null
+);

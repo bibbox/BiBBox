@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.graz.meduni.liferay.portlet.bibbox">
+	<author>reihsr</author>
+	<namespace>bibboxcs</namespace>
+
+	<entity name="DDLScopeConfig" local-service="true" remote-service="true" table="bibboxcs.ddlscopeconfig">
+		<column name="ddlscopeconfigId" primary="true" type="long"></column>
+		<column name="ddlscopename" type="String"></column>
+		<column name="structureId" type="long"></column>
+		<column name="ddlname" type="String"></column>
+        <order by="desc">
+            <order-column name="structureId"></order-column>
+        </order>
+        <finder return-type="Collection" name="ddlfinder">
+			<finder-column name="structureId"></finder-column>
+			<finder-column name="ddlname"></finder-column>
+		</finder>
+	</entity>
+	<entity name="DDLConfigOptions" local-service="true" remote-service="true" table="bibboxcs.ddlconfigoptions">
+		<column name="ddlconfigoptionId" primary="true" type="long"></column>
+		<column name="ddlscopeconfigId" type="long"></column>
+		<column name="ddlfieldname" type="String"></column>
+        <order by="desc">
+            <order-column name="ddlscopeconfigId"></order-column>
+        </order>
+	</entity>
+</service-builder>

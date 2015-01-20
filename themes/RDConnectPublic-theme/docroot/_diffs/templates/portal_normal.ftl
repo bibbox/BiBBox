@@ -10,6 +10,12 @@
 	<meta name="GOOGLEBOT" content="NOINDEX, NOFOLLOW">
 	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+	
+	<#if is_signed_in>
+		<#if !isadmin>
+			<meta http-equiv="refresh" content="0; url=/web/guest/home" />
+		</#if>
+	</#if>
 
 	${theme.include(top_head_include)}
 	
@@ -35,10 +41,10 @@ ${theme.include(body_top_include)}
 		</#if>
 		<#if the_title != "Welcome">
 			<div id="logoleft">
-				<a class="" href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo" height="81px" width="287px" src="/RDConnectPublic-theme/images/rdconnectlogoidcard.png"  /></a>
+				<a class="" href="/welcome"><img alt="RD-Connect-IDCard-Logo" height="81px" width="316px" src="/RDConnectPublic-theme/images/RD-Connectlogo.png"  /></a>
 			</div>
 			<div id="logocenter">
-				<a href="http://rd-connect.bibbox.org/home"><img alt="RD-Connect-IDCard-Logo-center" height="123px" width="184px" src="/RDConnectPublic-theme/images/centerlogo.png"  /></a>
+				<a href="/welcome"><img alt="RD-Connect-IDCard-Logo-center" height="123px" width="184px" src="/RDConnectPublic-theme/images/centerlogo.png"  /></a>
 			</div>
 		</#if>	
 	</div>

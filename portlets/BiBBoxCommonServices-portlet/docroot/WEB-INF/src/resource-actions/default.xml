@@ -72,16 +72,11 @@
 			<guest-unsupported />
 		</permissions>
 	</portlet-resource>
-	<model-resource>
-		<model-name>at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation</model-name>
-		<portlet-ref>
-			<portlet-name>invitation</portlet-name>
-		</portlet-ref>
+	<portlet-resource>
+		<portlet-name>diseasematrix</portlet-name>
 		<permissions>
 			<supports>
-				<action-key>DELETE</action-key>
-				<action-key>PERMISSIONS</action-key>
-				<action-key>UPDATE</action-key>
+				<action-key>ADD_DISEASEMATRIX</action-key>
 				<action-key>VIEW</action-key>
 			</supports>
 			<site-member-defaults>
@@ -90,14 +85,23 @@
 			<guest-defaults>
 				<action-key>VIEW</action-key>
 			</guest-defaults>
-			<guest-unsupported>
-				<action-key>UPDATE</action-key>
-			</guest-unsupported>
-			<owner-defaults>
-				<action-key>DELETE</action-key>
-				<action-key>UPDATE</action-key>
-				<action-key>VIEW</action-key>
-			</owner-defaults>
+			<guest-unsupported />
 		</permissions>
-	</model-resource>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>general-information</portlet-name>
+		<permissions>
+			<supports>
+				<action-key>EDIT_GENERALINFORMATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<site-member-defaults>
+				<action-key>VIEW</action-key>
+			</site-member-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
+			<guest-unsupported />
+		</permissions>
+	</portlet-resource>
 </resource-action-mapping>

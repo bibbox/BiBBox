@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.rdconnect.update">
+	<author>reihsr</author>
+	<namespace>rdcupdate</namespace>
+
+	<entity name="AddressUpdate" local-service="true" remote-service="true" table="rdconnect.u_address">
+
+		<!-- PK fields -->
+
+		<column name="addressid" type="long" primary="true" />
+
+		<column name="street1" type="String" />
+		<column name="street2" type="String" />
+		<column name="street3" type="String" />
+		<column name="city" type="String" />
+		<column name="zip" type="String" />
+		<column name="regionid" type="long" />
+		<column name="contryid" type="long" />
+		<column name="typeid" type="long" />
+		<column name="mailing" type="boolean" />
+		<column name="primary_ad" type="boolean" />
+		<column name="organizationid" type="long" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="organizationid" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="OrganizationId" return-type="Collection">
+			<finder-column name="organizationid" />
+		</finder>
+	</entity>
+	<entity name="CoreUpdate" local-service="true" remote-service="true" table="rdconnect.u_core">
+		<column name="coreid" type="long" primary="true" />
+
+		<column name="organizationid" type="long" />
+		<column name="fieldname" type="String" />
+		<column name="value" type="String" />
+		<order by="asc">
+			<order-column name="organizationid" />
+		</order>
+		<finder name="OrganizationId" return-type="Collection">
+			<finder-column name="organizationid" />
+		</finder>
+	</entity>
+	<entity name="AccessibilityUpdate" local-service="true" remote-service="true" table="rdconnect.u_accessibility">
+		<column name="coreid" type="long" primary="true" />
+
+		<column name="organizationid" type="long" />
+		<column name="fieldname" type="String" />
+		<column name="value" type="String" />
+		<order by="asc">
+			<order-column name="organizationid" />
+		</order>
+		<finder name="OrganizationId" return-type="Collection">
+			<finder-column name="organizationid" />
+		</finder>
+	</entity>
+	<entity name="QualityUpdate" local-service="true" remote-service="true" table="rdconnect.u_quality">
+		<column name="coreid" type="long" primary="true" />
+
+		<column name="organizationid" type="long" />
+		<column name="fieldname" type="String" />
+		<column name="value" type="String" />
+		<order by="asc">
+			<order-column name="organizationid" />
+		</order>
+		<finder name="OrganizationId" return-type="Collection">
+			<finder-column name="organizationid" />
+		</finder>
+	</entity>
+</service-builder>

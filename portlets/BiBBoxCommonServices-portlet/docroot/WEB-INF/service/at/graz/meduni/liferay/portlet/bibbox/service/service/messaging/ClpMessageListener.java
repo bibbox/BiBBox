@@ -17,6 +17,8 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.messaging;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationServiceUtil;
@@ -43,6 +45,10 @@ public class ClpMessageListener extends BaseMessageListener {
 			BiobankPanelAssessmentLocalServiceUtil.clearService();
 
 			BiobankPanelAssessmentServiceUtil.clearService();
+			DiseaseMatrixLocalServiceUtil.clearService();
+
+			GeneralInformationLocalServiceUtil.clearService();
+
 			InvitationLocalServiceUtil.clearService();
 
 			InvitationServiceUtil.clearService();

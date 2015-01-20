@@ -24,4 +24,8 @@
 	<category name="BiBBox Linked Open Date">
 		<portlet id="linked-open-date-publisher"></portlet>
 	</category>
+	<category name="BiBBox RD-Connect">
+		<portlet id="disease-matrix"></portlet>
+		<portlet id="general-information"></portlet>
+	</category>
 </display>

@@ -19,6 +19,7 @@ import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.ClpSerializer;
 import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
+import at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -45,6 +46,8 @@ public class ClpMessageListener extends BaseMessageListener {
 			MasterCandidateLocalServiceUtil.clearService();
 
 			MasterCandidateLinkCandidateLocalServiceUtil.clearService();
+
+			SearchIndexLocalServiceUtil.clearService();
 		}
 	}
 }

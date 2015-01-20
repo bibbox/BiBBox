@@ -20,6 +20,7 @@ import at.meduni.liferay.portlet.rdconnect.service.persistence.AQRRatingPersiste
 import at.meduni.liferay.portlet.rdconnect.service.persistence.CandidatePersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidateLinkCandidatePersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidatePersistence;
+import at.meduni.liferay.portlet.rdconnect.service.persistence.SearchIndexPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -441,6 +442,44 @@ public abstract class MasterCandidateLinkCandidateLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the search index local service.
+	 *
+	 * @return the search index local service
+	 */
+	public at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalService getSearchIndexLocalService() {
+		return searchIndexLocalService;
+	}
+
+	/**
+	 * Sets the search index local service.
+	 *
+	 * @param searchIndexLocalService the search index local service
+	 */
+	public void setSearchIndexLocalService(
+		at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalService searchIndexLocalService) {
+		this.searchIndexLocalService = searchIndexLocalService;
+	}
+
+	/**
+	 * Returns the search index persistence.
+	 *
+	 * @return the search index persistence
+	 */
+	public SearchIndexPersistence getSearchIndexPersistence() {
+		return searchIndexPersistence;
+	}
+
+	/**
+	 * Sets the search index persistence.
+	 *
+	 * @param searchIndexPersistence the search index persistence
+	 */
+	public void setSearchIndexPersistence(
+		SearchIndexPersistence searchIndexPersistence) {
+		this.searchIndexPersistence = searchIndexPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -632,6 +671,10 @@ public abstract class MasterCandidateLinkCandidateLocalServiceBaseImpl
 	protected at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService masterCandidateLinkCandidateLocalService;
 	@BeanReference(type = MasterCandidateLinkCandidatePersistence.class)
 	protected MasterCandidateLinkCandidatePersistence masterCandidateLinkCandidatePersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalService.class)
+	protected at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalService searchIndexLocalService;
+	@BeanReference(type = SearchIndexPersistence.class)
+	protected SearchIndexPersistence searchIndexPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

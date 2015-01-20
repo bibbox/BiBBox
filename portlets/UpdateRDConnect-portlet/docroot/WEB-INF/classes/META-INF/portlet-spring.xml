@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="at.rdconnect.update.service.AccessibilityUpdateLocalService" class="at.rdconnect.update.service.impl.AccessibilityUpdateLocalServiceImpl" />
+	<bean id="at.rdconnect.update.service.AccessibilityUpdateService" class="at.rdconnect.update.service.impl.AccessibilityUpdateServiceImpl" />
+	<bean id="at.rdconnect.update.service.persistence.AccessibilityUpdatePersistence" class="at.rdconnect.update.service.persistence.AccessibilityUpdatePersistenceImpl" parent="basePersistence" />
+	<bean id="at.rdconnect.update.service.AddressUpdateLocalService" class="at.rdconnect.update.service.impl.AddressUpdateLocalServiceImpl" />
+	<bean id="at.rdconnect.update.service.AddressUpdateService" class="at.rdconnect.update.service.impl.AddressUpdateServiceImpl" />
+	<bean id="at.rdconnect.update.service.persistence.AddressUpdatePersistence" class="at.rdconnect.update.service.persistence.AddressUpdatePersistenceImpl" parent="basePersistence" />
+	<bean id="at.rdconnect.update.service.CoreUpdateLocalService" class="at.rdconnect.update.service.impl.CoreUpdateLocalServiceImpl" />
+	<bean id="at.rdconnect.update.service.CoreUpdateService" class="at.rdconnect.update.service.impl.CoreUpdateServiceImpl" />
+	<bean id="at.rdconnect.update.service.persistence.CoreUpdatePersistence" class="at.rdconnect.update.service.persistence.CoreUpdatePersistenceImpl" parent="basePersistence" />
+	<bean id="at.rdconnect.update.service.QualityUpdateLocalService" class="at.rdconnect.update.service.impl.QualityUpdateLocalServiceImpl" />
+	<bean id="at.rdconnect.update.service.QualityUpdateService" class="at.rdconnect.update.service.impl.QualityUpdateServiceImpl" />
+	<bean id="at.rdconnect.update.service.persistence.QualityUpdatePersistence" class="at.rdconnect.update.service.persistence.QualityUpdatePersistenceImpl" parent="basePersistence" />
+</beans>
