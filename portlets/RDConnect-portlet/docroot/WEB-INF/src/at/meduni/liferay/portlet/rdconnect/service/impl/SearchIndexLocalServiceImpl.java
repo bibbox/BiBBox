@@ -214,18 +214,22 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	}
 	
 	private String highlightResult(String text, String keyword) {
+		if(keyword.equalsIgnoreCase("")) {
+			return text;
+		}
 		if(text.toLowerCase().contains(keyword.toLowerCase())) {
 			int beginindex = text.toLowerCase().indexOf(keyword.toLowerCase());
 			int endindex = beginindex + keyword.length();
 			int counter = 0;
 			while (beginindex >= 0) {
 				if(counter > 15) {
+					System.out.println("!!!!!!!Problem with Search keyword: '" + keyword + "'");
 					return text;
 				}
-				System.out.println("Hit" + beginindex);
+				//System.out.println("Hit" + beginindex);
 				endindex = beginindex + keyword.length();
 				text = text.substring(0, beginindex) + "<span style=\"background-color: yellow;\">" + text.substring(beginindex, endindex) + "</span>" + text.substring(endindex);
-				System.out.println(text + " " + endindex);
+				//System.out.println(text + " " + endindex);
 				beginindex = text.indexOf(keyword, endindex+46);
 				counter++;
 			}

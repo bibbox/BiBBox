@@ -19,12 +19,12 @@ String redirect2 = (String)request.getAttribute("proveofconcept");
 	<liferay-ui:icon image="edit" url="<%=editURL.toString() %>" />
 
 
-	<!--<portlet:actionURL name="publishCandidate" var="publishCandidateURL">
+	<portlet:actionURL name="publishCandidate" var="publishCandidateURL">
 		<portlet:param name="masterId" value="<%= String.valueOf(masterId) %>" />
 		<portlet:param name="redirect" value="<%= redirect2 %>"/>
 	</portlet:actionURL>
 	
-	<liferay-ui:icon image="publish" url="<%=publishCandidateURL.toString() %>" />-->
+	<liferay-ui:icon image="publish" url="<%=publishCandidateURL.toString() %>" />
 	
 	<portlet:actionURL name="unpublishCandidate" var="unpublishCandidateURL">
 		<portlet:param name="masterId" value="<%= String.valueOf(masterId) %>" />

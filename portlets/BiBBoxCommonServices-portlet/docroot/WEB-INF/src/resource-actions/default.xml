@@ -104,32 +104,4 @@
 			<guest-unsupported />
 		</permissions>
 	</portlet-resource>
-	<model-resource>
-		<model-name>at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation</model-name>
-		<portlet-ref>
-			<portlet-name>invitation</portlet-name>
-		</portlet-ref>
-		<permissions>
-			<supports>
-				<action-key>DELETE</action-key>
-				<action-key>PERMISSIONS</action-key>
-				<action-key>UPDATE</action-key>
-				<action-key>VIEW</action-key>
-			</supports>
-			<site-member-defaults>
-				<action-key>VIEW</action-key>
-			</site-member-defaults>
-			<guest-defaults>
-				<action-key>VIEW</action-key>
-			</guest-defaults>
-			<guest-unsupported>
-				<action-key>UPDATE</action-key>
-			</guest-unsupported>
-			<owner-defaults>
-				<action-key>DELETE</action-key>
-				<action-key>UPDATE</action-key>
-				<action-key>VIEW</action-key>
-			</owner-defaults>
-		</permissions>
-	</model-resource>
 </resource-action-mapping>

@@ -100,8 +100,8 @@ if (currentGroup.isOrganization()) {
   			diseasecount = rdc_rs.getRecords().size();
   		}*/
   		
-  	// All
-  		if(rdc_rsname.equals("core")) { 
+  	// Registry
+  		if(rdc_rsname.equals("core") && organisationtype.equalsIgnoreCase("Registry")) { 
   			int all = 0;
   			int counted = 0;
   			List<DDLRecord> records = rdc_rs.getRecords();
@@ -129,7 +129,7 @@ if (currentGroup.isOrganization()) {
   			}
   		}
   		
-  		// Registry
+  		
   		if(rdc_rsname.equals("reg_accessibility") && organisationtype.equalsIgnoreCase("Registry")) { 
   			int all = 0;
   			int counted = 0;
@@ -187,7 +187,34 @@ if (currentGroup.isOrganization()) {
   		}
   		
   		// Biobank
-  		if(rdc_rsname.equals("Accessibility Biobank") && organisationtype.equalsIgnoreCase("Biobank")) { 
+  		if(rdc_rsname.equals("bb_core") && organisationtype.equalsIgnoreCase("Biobank")) { 
+  			int all = 0;
+  			int counted = 0;
+  			List<DDLRecord> records = rdc_rs.getRecords();
+  			for(DDLRecord record : records) {
+  				long ddmstructureid = rdc_rs.getDDMStructureId();
+  				DDMStructure dms = DDMStructureLocalServiceUtil.fetchStructure(ddmstructureid);
+  				if(dms != null) {
+	  				Set<String> fieldnames = dms.getFieldNames();
+	  				for(String s : fieldnames) {
+	  					if(!dms.isFieldPrivate(s)) {
+	  						all++;
+		  					if(record.getFieldValue(s) != null) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  							counted++;
+		  						}
+		  					}
+	  					}
+	  				}
+  				}
+  			}
+  			if(counted >= (all/2)) {
+  				corecount = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation\">[" + counted + "]</span>";
+  			} else {
+  				corecount = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-gray\">[" + counted + "]</span>";
+  			}
+  		}
+  		if(rdc_rsname.equals("bb_accessibility") && organisationtype.equalsIgnoreCase("Biobank")) { 
   			int all = 0;
   			int counted = 0;
   			List<DDLRecord> records = rdc_rs.getRecords();
@@ -215,7 +242,7 @@ if (currentGroup.isOrganization()) {
   			}
   		}
   		
-  		if(rdc_rsname.equals("Quality Indicators Biobank") && organisationtype.equalsIgnoreCase("Biobank")) { 
+  		if(rdc_rsname.equals("bb_quality") && organisationtype.equalsIgnoreCase("Biobank")) { 
   			int all = 0;
   			int counted = 0;
   			List<DDLRecord> records = rdc_rs.getRecords();
