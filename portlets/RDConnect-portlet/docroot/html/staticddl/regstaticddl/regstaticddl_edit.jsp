@@ -13,7 +13,21 @@ String actionId_add_diseasematrix = "EDIT_CORE";
 
 if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix)) {
 	long recordId = ParamUtil.getLong(request, "recordId");
+	long recordSetId = ParamUtil.getLong(request, "recordSetId");
 	DDLRecord ddlrecord = DDLRecordLocalServiceUtil.getRecord(recordId);
+	
+	// Get all options for fields
+	Map<String, Map<String, String>> fieldmap = null;
+	fieldmap = DDLRecordSetLocalServiceUtil.getDDLRecordSet(recordSetId).getDDMStructure().getTransientFieldsMap(themeDisplay.getLocale().toString());
+	
+	HashMap<String, LinkedHashMap<String, String>> field_options = new HashMap<String, LinkedHashMap<String, String>>();
+  	for(String key_options : fieldmap.keySet()) {
+  		String ddlfield = fieldmap.get(key_options).get("_parentName_");
+  		if(!field_options.containsKey(ddlfield)) {
+  			field_options.put(ddlfield, new LinkedHashMap<String, String>());
+  		}
+  		field_options.get(ddlfield).put(fieldmap.get(key_options).get("value"), fieldmap.get(key_options).get("label"));
+  	}
 	
 	String host_institute = ddlrecord.getFieldValue("Host_institution_is_a").toString();
 	String displayclass = "";
@@ -26,7 +40,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			<aui:input type="text" name="acronym" label="Acronym" value='<%= ddlrecord.getFieldValue("acronym") %>' />
 			<aui:input type="textarea" name="Description" label="Description" value='<%= ddlrecord.getFieldValue("Description") %>' />
 			<aui:input type="text" name="Hoste_institute" label="Hoste institute" value='<%= ddlrecord.getFieldValue("Hoste_institute") %>' />
-			<aui:select name="Host_institution_is_a" label="Type of host institution" >
+			<aui:select name="Host_institution_is_a2" label="Type of host institution" >
 				<aui:option selected='<%= host_institute.contains("Regional Authority") %>' value="Regional Authority"><liferay-ui:message key="Regional Authority" /></aui:option>
 				<aui:option selected='<%= host_institute.contains("National Authority") %>' value="National Authority"><liferay-ui:message key="National Authority" /></aui:option>
 				<aui:option selected='<%= host_institute.contains("University/Research Institute") %>' value="University/Research Institute"><liferay-ui:message key="University/Research Institute" /></aui:option>
@@ -38,6 +52,15 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 				<aui:option selected='<%= host_institute.contains("No specific funds") %>' value="No specific funds"><liferay-ui:message key="No specific funds" /></aui:option>
 				<aui:option selected='<%= host_institute.contains("Other - please specify") %>' value="Other - please specify"><liferay-ui:message key="Other - please specify" /></aui:option>
 				<aui:option selected='<%= host_institute.contains("not specified") %>' value="not specified"><liferay-ui:message key="not specified" /></aui:option>
+			</aui:select>
+			<aui:select name="Host_institution_is_a" label="Type of host institution" >
+				<% 
+				for(String option : field_options.get("Host_institution_is_a").keySet()) {
+					%>
+					<aui:option selected='<%= host_institute.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Host_institution_is_a").get(option) %>' /></aui:option>
+					<%
+				}
+				%>
 			</aui:select>
 			<%
 			displayclass = "notdisplayInput";
@@ -125,11 +148,12 @@ AUI().use('aui-base', function(A){
 	A.one("#<portlet:namespace/>Host_institution_is_a").on('change',function(){
 		var inputObject=A.one("#<portlet:namespace/>Host_institution_is_a");
 		if(inputObject.get('value') == "Other - please specify") {
-			A.one("#Additional_Associated_data_available_display").removeClass('notdisplayInput');
+			A.one("#Type_of_host_institution_display").removeClass('notdisplayInput');
 			//alert(inputObject.get('value'));
 		} else {
-			A.one("#Additional_Associated_data_available_display").addClass('notdisplayInput');
 			//alert("Hide");
+			A.one("#Type_of_host_institution_display").addClass('notdisplayInput');
+			
 		}
 	});
 });

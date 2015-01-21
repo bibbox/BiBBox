@@ -23,18 +23,29 @@ if (currentGroup.isOrganization()) {
   	organizationId = themeDisplay.getSiteGroupId();
   	
   	DDLRecord core_record = null;
+  	long recordSetId = 0;
+  	
   	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organizationId);
   	for(DDLRecordSet rdc_rs : rdc_recordlist) {
-  		
-  		
   		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
   		if(rdc_rsname.equalsIgnoreCase(ddlname)) {
+  			recordSetId = rdc_rs.getRecordSetId();
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) {
   				core_record = record;
   			}
   		}
   	}
+  	
+  	/*
+  	HashMap<String, LinkedHashMap<String, String>> field_options = new HashMap<String, LinkedHashMap<String, String>>();
+  	for(String key_options : fieldmap.keySet()) {
+  		String ddlfield = fieldmap.get(key_options).get("_parentName_");
+  		if(!field_options.containsKey(ddlfield)) {
+  			field_options.put(ddlfield, new LinkedHashMap<String, String>());
+  		}
+  		field_options.get(ddlfield).put(fieldmap.get(key_options).get("value"), fieldmap.get(key_options).get("label"));
+  	}*/
 	%>
 	
 	<c:choose>
@@ -43,6 +54,7 @@ if (currentGroup.isOrganization()) {
 			<portlet:renderURL var="addDiseaseMatrixURL">
 				<portlet:param name="mvcPath" value="/html/staticddl/regstaticddl/regstaticddl_edit.jsp" />
 				<portlet:param name="recordId" value="<%= Long.toString(core_record.getRecordId()) %>" />
+				<portlet:param name="recordSetId" value="<%= Long.toString(recordSetId) %>" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
 			</portlet:renderURL>
 				<aui:button value="add-diseasematrix" onClick="<%= addDiseaseMatrixURL.toString() %>"/>
