@@ -316,6 +316,15 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>ngs-file-to-ddl-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>reg-static-ddl</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>reg-static-ddl-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

@@ -53,4 +53,7 @@
 	<category name="kdssmp">
 		<portlet id="ngs-file-to-ddl"></portlet>
 	</category>
+	<category name="RDConnect Static DDL">
+		<portlet id="reg-static-ddl"></portlet>
+	</category>
 </display>

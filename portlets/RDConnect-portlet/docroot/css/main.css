@@ -10,3 +10,6 @@
 .rdc-people-dispaly {
 	margin-bottom: 20px;
 }
+.aui .notdisplayInput {
+	display: none;
+}

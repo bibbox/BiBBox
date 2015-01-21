@@ -25,3 +25,4 @@ for(DDLRecordSet rdc_rs : rdc_recordlist) {
 	}
 }
 %>
+<hr>
