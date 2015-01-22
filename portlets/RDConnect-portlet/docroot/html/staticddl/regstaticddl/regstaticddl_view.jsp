@@ -14,18 +14,19 @@ String actionId_add_diseasematrix = "EDIT_CORE";
 String ddlname = "reg_core";
 
 long organizationId = 0;
-/*Organization organization = null;
+Organization organization = null;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 if (currentGroup.isOrganization()) {
   	// the group is an Organization
-  	organizationId = currentGroup.getClassPK();*/
+  	organizationId = currentGroup.getClassPK();
+  	Organization organizations = OrganizationLocalServiceUtil.getOrganization(organizationId);
   	// Test Code
-  	organizationId = themeDisplay.getSiteGroupId();
+  	//organizationId = themeDisplay.getSiteGroupId();
   	
   	DDLRecord core_record = null;
   	long recordSetId = 0;
   	
-  	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organizationId);
+  	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organizations.getGroupId());
   	for(DDLRecordSet rdc_rs : rdc_recordlist) {
   		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
   		if(rdc_rsname.equalsIgnoreCase(ddlname)) {
@@ -36,16 +37,20 @@ if (currentGroup.isOrganization()) {
   			}
   		}
   	}
+  	Map<String, Map<String, String>> fieldmap = null;
+	fieldmap = DDLRecordSetLocalServiceUtil.getDDLRecordSet(recordSetId).getDDMStructure().getFieldsMap();
   	
-  	/*
   	HashMap<String, LinkedHashMap<String, String>> field_options = new HashMap<String, LinkedHashMap<String, String>>();
   	for(String key_options : fieldmap.keySet()) {
-  		String ddlfield = fieldmap.get(key_options).get("_parentName_");
-  		if(!field_options.containsKey(ddlfield)) {
-  			field_options.put(ddlfield, new LinkedHashMap<String, String>());
+  		%>
+  		<%= key_options %><br />
+  		<%
+  		for(String key_options2 : fieldmap.get(key_options).keySet()) {
+  			%>
+  	  		&nbsp;&nbsp;&nbsp;-&nbsp;<%= key_options2 %> - <%= fieldmap.get(key_options).get(key_options2) %><br />
+  	  		<%
   		}
-  		field_options.get(ddlfield).put(fieldmap.get(key_options).get("value"), fieldmap.get(key_options).get("label"));
-  	}*/
+  	}
 	%>
 	
 	<c:choose>
@@ -55,6 +60,7 @@ if (currentGroup.isOrganization()) {
 				<portlet:param name="mvcPath" value="/html/staticddl/regstaticddl/regstaticddl_edit.jsp" />
 				<portlet:param name="recordId" value="<%= Long.toString(core_record.getRecordId()) %>" />
 				<portlet:param name="recordSetId" value="<%= Long.toString(recordSetId) %>" />
+				<portlet:param name="organizationId" value="<%= Long.toString(organizationId) %>" />
 				<portlet:param name="redirect" value="<%= redirect %>" />
 			</portlet:renderURL>
 				<aui:button value="add-diseasematrix" onClick="<%= addDiseaseMatrixURL.toString() %>"/>
@@ -102,6 +108,6 @@ if (currentGroup.isOrganization()) {
 	<%= core_record.getFieldValue("Description") %> <br />
 	
 	<%
-//}
+}
 %>
 	
