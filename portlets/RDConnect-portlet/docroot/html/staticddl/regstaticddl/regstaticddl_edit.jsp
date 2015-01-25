@@ -4,7 +4,7 @@
 <liferay-theme:defineObjects />
 
 <%
-String redirect = PortalUtil.getCurrentURL(renderRequest);	
+String redirect = ParamUtil.getString(request, "redirect");;	
 // Parameters for permission Checking
 long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
@@ -41,7 +41,12 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			<aui:input type="hidden" name="recordSetId" value='<%=String.valueOf(recordSetId) %>'/>
 			<aui:input type="hidden" name="organizationId" value='<%=String.valueOf(organizationId) %>'/>
 			<aui:input type="text" name="acronym" label="Acronym" value='<%= ddlrecord.getFieldValue("acronym") %>' />
-			<aui:input type="textarea" name="Description" label="Description" value='<%= ddlrecord.getFieldValue("Description") %>' />
+			<aui:field-wrapper label="Description">
+			    <liferay-ui:input-editor name="Description" toolbarSet="liferay-article" initMethod="initEditor" width="200" />
+			    <script type="text/javascript">
+			        function <portlet:namespace />initEditor() { return "<%= UnicodeFormatter.toString(ddlrecord.getFieldValue("Description").toString()) %>"; }
+			    </script>
+			</aui:field-wrapper>
 			<aui:input type="text" name="Hoste_institute" label="Hoste institute" value='<%= ddlrecord.getFieldValue("Hoste_institute") %>' />
 			<aui:select name="Host_institution_is_a" label="Type of host institution" >
 				<% 
@@ -127,6 +132,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 				%>
 			</aui:select>
 			<aui:input type="text" name="Additional_networks_inventories" label="Additional networks/inventories" value='<%= ddlrecord.getFieldValue("Additional_networks_inventories") %>' />
+		
 		</aui:fieldset>
 		<aui:button-row>
 			<aui:button type="submit" />
