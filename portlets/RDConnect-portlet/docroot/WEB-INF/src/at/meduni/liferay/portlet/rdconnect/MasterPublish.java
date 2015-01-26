@@ -153,7 +153,7 @@ public class MasterPublish extends MVCPortlet {
 			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 			// Create Organisation
 			Organization organization = createOrganisation(company, master);
-			organization.getExpandoBridge().setAttribute("Organization Type", master.getCandidatetype());
+			
 			
 			// Update Master
 			master.setOrganisationid(organization.getOrganizationId());
@@ -169,6 +169,8 @@ public class MasterPublish extends MVCPortlet {
 			addOrganisationDetails(organization, master, themeDisplay.getUserId());
 			
 			OrganizationLocalServiceUtil.rebuildTree(company.getCompanyId());
+			
+			organization.getExpandoBridge().setAttribute("Organization Type", master.getCandidatetype());
 		} catch(Exception e) {
 			System.out.println("RDC Exception in MasterPublish:publishToGate");
 			e.printStackTrace();

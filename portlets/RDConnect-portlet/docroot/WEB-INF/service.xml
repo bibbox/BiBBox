@@ -91,6 +91,7 @@
 		<column name="accepted" type="boolean"></column>
 		<column name="state" type="String" />
 		<column name="diseasescodesauto" type="String" />
+		<column name="source" type="String" />
 
 		<!-- Order -->
 		<order by="asc">

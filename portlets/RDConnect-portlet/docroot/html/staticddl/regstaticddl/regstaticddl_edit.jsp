@@ -44,7 +44,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			<aui:field-wrapper label="Description">
 			    <liferay-ui:input-editor name="Description" toolbarSet="liferay-article" initMethod="initEditor" width="200" />
 			    <script type="text/javascript">
-			        function <portlet:namespace />initEditor() { return "<%= UnicodeFormatter.toString(ddlrecord.getFieldValue("Description").toString()) %>"; }
+			        function <portlet:namespace />initEditor() { return "<%= UnicodeFormatter.toString(ddlrecord.getFieldValue("Description").toString().replaceAll("\"\\]|\\[\"", "")) %>"; }
 			    </script>
 			</aui:field-wrapper>
 			<aui:input type="text" name="Hoste_institute" label="Hoste institute" value='<%= ddlrecord.getFieldValue("Hoste_institute") %>' />
@@ -74,7 +74,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 				<% 
 				for(String option : field_options.get("Target_population_of_the_registry").keySet()) {
 					%>
-					<aui:option selected='<%= host_institute.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Target_population_of_the_registry").get(option) %>' /></aui:option>
+					<aui:option selected='<%= target_population_of_the_registry.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Target_population_of_the_registry").get(option) %>' /></aui:option>
 					<%
 				}
 				%>
@@ -87,7 +87,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 				<% 
 				for(String option : field_options.get("Ontologies").keySet()) {
 					%>
-					<aui:option selected='<%= host_institute.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Ontologies").get(option) %>' /></aui:option>
+					<aui:option selected='<%= ontologies.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Ontologies").get(option) %>' /></aui:option>
 					<%
 				}
 				%>
@@ -100,7 +100,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 				<% 
 				for(String option : field_options.get("Associated_data_available").keySet()) {
 					%>
-					<aui:option selected='<%= host_institute.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Associated_data_available").get(option) %>' /></aui:option>
+					<aui:option selected='<%= associated_data_available.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Associated_data_available").get(option) %>' /></aui:option>
 					<%
 				}
 				%>
@@ -113,7 +113,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 				<% 
 				for(String option : field_options.get("Imaging_available").keySet()) {
 					%>
-					<aui:option selected='<%= host_institute.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Imaging_available").get(option) %>' /></aui:option>
+					<aui:option selected='<%= imaging_available.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Imaging_available").get(option) %>' /></aui:option>
 					<%
 				}
 				%>
@@ -126,7 +126,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 				<% 
 				for(String option : field_options.get("The_registry_biobanks_is_listed_in_other_inventories_networks").keySet()) {
 					%>
-					<aui:option selected='<%= host_institute.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("The_registry_biobanks_is_listed_in_other_inventories_networks").get(option) %>' /></aui:option>
+					<aui:option selected='<%= the_registry_biobanks_is_listed_in_other_inventories_networks.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("The_registry_biobanks_is_listed_in_other_inventories_networks").get(option) %>' /></aui:option>
 					<%
 				}
 				%>

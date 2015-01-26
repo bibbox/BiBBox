@@ -142,6 +142,8 @@ for(Role role : themeDisplay.getUser().getRoles()) {
 		portaleditorrole = true;
 	if(role.getName().equalsIgnoreCase("Administrator"))
 		portaleditorrole = true;
+	if(role.getName().equalsIgnoreCase("RD-Connect CURATOR"))
+		portaleditorrole = true;
 }
 
 %>

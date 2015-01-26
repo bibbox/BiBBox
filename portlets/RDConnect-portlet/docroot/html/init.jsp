@@ -57,6 +57,7 @@
 <%@ page import="com.liferay.portlet.dynamicdatamapping.storage.Fields" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.storage.Field" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil" %>

@@ -55,5 +55,6 @@
 	</category>
 	<category name="RDConnect Static DDL">
 		<portlet id="reg-static-ddl"></portlet>
+		<portlet id="dynamic-ddl-display"></portlet>
 	</category>
 </display>

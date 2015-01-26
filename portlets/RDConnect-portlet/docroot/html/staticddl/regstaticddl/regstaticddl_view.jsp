@@ -78,7 +78,7 @@ if (currentGroup.isOrganization()) {
 		<%
 		String ontologies = "";
 		if(!core_record.getFieldValue("Ontologies").toString().contains("not specified")) {
-			ontologies = core_record.getFieldValue("Ontologies").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ", ");
+			ontologies = core_record.getFieldValue("Ontologies").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ",<br>");
 			if(!core_record.getFieldValue("Additional_Ontologies").toString().equalsIgnoreCase("")) {
 				ontologies += "<br />  Additional Ontologies: " + core_record.getFieldValue("Additional_Ontologies");
 			}
@@ -86,7 +86,7 @@ if (currentGroup.isOrganization()) {
 		
 		String images_available = "";
 		if(!core_record.getFieldValue("Imaging_available").toString().contains("not specified")) {
-			images_available = core_record.getFieldValue("Imaging_available").toString().replaceAll("\"\\]|\\[\"|\\[|\\]", "").replaceAll("\",\"", ", ");
+			images_available = core_record.getFieldValue("Imaging_available").toString().replaceAll("\"\\]|\\[\"|\\[|\\]", "").replaceAll("\",\"", ",<br>");
 			if(!core_record.getFieldValue("Additional_Imaging_available").toString().equalsIgnoreCase("")) {
 				images_available += "<br />  Additional Imaging Data available: " + core_record.getFieldValue("Additional_Imaging_available");
 			}
@@ -97,7 +97,7 @@ if (currentGroup.isOrganization()) {
 			year_of_establishment = core_record.getFieldValue("year_of_establishment").toString();
 		}
 		
-		String host_institution_is_a = core_record.getFieldValue("Host_institution_is_a").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ", ");
+		String host_institution_is_a = core_record.getFieldValue("Host_institution_is_a").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ",<br>");
 		if(host_institution_is_a.contains("not specified")) {
 			host_institution_is_a  = "";
 		}
@@ -105,13 +105,13 @@ if (currentGroup.isOrganization()) {
 		
 		<h4><%= organization.getName() %> - (<%= core_record.getFieldValue("acronym") %>)</h4>
 		
-		Type of Host Institution: <%= host_institution_is_a %> <br />
-		Source of funding: <%= core_record.getFieldValue("Text5085").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ", ") %> <br />
-		Target population: <%= core_record.getFieldValue("Target_population_of_the_registry").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ", ") %> <br />
-		Year of establishment: <%= year_of_establishment %> <br />
-		Ontologies used: <%= ontologies %> <br />
-		Imaging available: <%= images_available %> <br />
-		Also listed in: <%= core_record.getFieldValue("Additional_networks_inventories").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ", ") %> <br />
+		Type of Host Institution: <strong><%= host_institution_is_a %> </strong><br />
+		Source of funding: <strong><%= core_record.getFieldValue("Text5085").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ", ") %></strong> <br />
+		Target population: <strong><%= core_record.getFieldValue("Target_population_of_the_registry").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ", ") %> </strong><br />
+		Year of establishment: <strong><%= year_of_establishment %> <br /></strong>
+		Ontologies used: <strong><%= ontologies %> </strong><br />
+		Imaging available: <strong><%= images_available %> </strong><br />
+		Also listed in: <strong><%= core_record.getFieldValue("Additional_networks_inventories").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ",<br>") %> </strong><br />
 		<%= core_record.getFieldValue("Description").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ", ") %> <br />
 		
 		<%
