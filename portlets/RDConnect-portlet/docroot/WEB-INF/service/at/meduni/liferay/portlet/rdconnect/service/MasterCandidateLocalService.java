@@ -257,6 +257,6 @@ public interface MasterCandidateLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> getFilterdCandidates(
 		java.lang.String searchstring, java.lang.String country,
-		java.lang.String type, java.lang.String state)
+		java.lang.String type, java.lang.String state, java.lang.String source)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

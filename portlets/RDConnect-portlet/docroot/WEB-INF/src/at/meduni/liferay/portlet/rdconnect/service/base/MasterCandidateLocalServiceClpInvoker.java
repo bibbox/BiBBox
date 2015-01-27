@@ -122,7 +122,7 @@ public class MasterCandidateLocalServiceClpInvoker {
 
 		_methodParameterTypes55 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String"
+				"java.lang.String", "java.lang.String"
 			};
 	}
 
@@ -236,7 +236,7 @@ public class MasterCandidateLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
 			return MasterCandidateLocalServiceUtil.getFilterdCandidates((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3]);
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4]);
 		}
 
 		throw new UnsupportedOperationException();

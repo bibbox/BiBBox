@@ -25,6 +25,11 @@ if(candidatetype.equalsIgnoreCase("")) {
 	candidatetype = "all";
 }
 
+String source = ParamUtil.getString(request, "source");
+if(source.equalsIgnoreCase("")) {
+	source = "all";
+}
+
 String name = ParamUtil.getString(request, "name");
 if(name.equalsIgnoreCase("")) {
 	if(name2.equalsIgnoreCase("")) {
@@ -41,6 +46,7 @@ if(state.equalsIgnoreCase("")) {
 
 String[] countrylist = CandidateLocalServiceUtil.getCountryNames();
 String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
+String[] sources = CandidateLocalServiceUtil.getSource();
 %>
 <div class="rdc-filter-form">
 <portlet:actionURL name='filterCandidates' var="filterCandidatesURL" />
@@ -62,6 +68,15 @@ String[] types = CandidateLocalServiceUtil.getTypesOfCandidates();
 <aui:select name="candidatetype" label="Type:" cssClass="rdc-filter-input" >
 	<% for (String string : types) { %>
 	<aui:option value="<%= string %>" selected="<%= candidatetype.equalsIgnoreCase(string) ? true : false %>">
+		<%= string %>
+	</aui:option>
+	<% } %>
+</aui:select>
+</div>
+<div style="float:left;">
+<aui:select name="source" label="Source:" cssClass="rdc-filter-input" >
+	<% for (String string : sources) { %>
+	<aui:option value="<%= string %>" selected="<%= source.equalsIgnoreCase(string) ? true : false %>">
 		<%= string %>
 	</aui:option>
 	<% } %>
@@ -121,7 +136,7 @@ AT Hook
 if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
 	country = "Austria";
 }
-List<MasterCandidate> tempResults = MasterCandidateLocalServiceUtil.getFilterdCandidates(name, country, candidatetype, state);
+List<MasterCandidate> tempResults = MasterCandidateLocalServiceUtil.getFilterdCandidates(name, country, candidatetype, state, source);
 //results = CandidateLocalServiceUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
 //List<Candidate> tempResults = ActionUtil.getProducts(renderRequest);
 results = ListUtil.subList(tempResults, searchContainer.getStart(), searchContainer.getEnd());
@@ -165,6 +180,11 @@ for(Role role : themeDisplay.getUser().getRoles()) {
 	align="right" 
 	path="/html/candidate/mastertable/candidatemastertable_types.jsp"
 	cssClass="candidate-table-namecontainer"
+/>
+<liferay-ui:search-container-column-text
+name="source"
+property="source"
+cssClass="candidate-table-source"
 />
 
 <%

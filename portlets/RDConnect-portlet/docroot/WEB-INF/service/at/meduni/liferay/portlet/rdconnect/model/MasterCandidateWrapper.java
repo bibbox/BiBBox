@@ -71,6 +71,7 @@ public class MasterCandidateWrapper implements MasterCandidate,
 		attributes.put("accepted", getAccepted());
 		attributes.put("state", getState());
 		attributes.put("diseasescodesauto", getDiseasescodesauto());
+		attributes.put("source", getSource());
 
 		return attributes;
 	}
@@ -201,6 +202,12 @@ public class MasterCandidateWrapper implements MasterCandidate,
 
 		if (diseasescodesauto != null) {
 			setDiseasescodesauto(diseasescodesauto);
+		}
+
+		String source = (String)attributes.get("source");
+
+		if (source != null) {
+			setSource(source);
 		}
 	}
 
@@ -652,6 +659,26 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	@Override
 	public void setDiseasescodesauto(java.lang.String diseasescodesauto) {
 		_masterCandidate.setDiseasescodesauto(diseasescodesauto);
+	}
+
+	/**
+	* Returns the source of this master candidate.
+	*
+	* @return the source of this master candidate
+	*/
+	@Override
+	public java.lang.String getSource() {
+		return _masterCandidate.getSource();
+	}
+
+	/**
+	* Sets the source of this master candidate.
+	*
+	* @param source the source of this master candidate
+	*/
+	@Override
+	public void setSource(java.lang.String source) {
+		_masterCandidate.setSource(source);
 	}
 
 	@Override

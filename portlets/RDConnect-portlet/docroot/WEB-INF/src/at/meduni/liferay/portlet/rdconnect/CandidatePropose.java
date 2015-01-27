@@ -109,6 +109,7 @@ public class CandidatePropose extends MVCPortlet {
 		candidate.setAddress(ParamUtil.getString(request, "address"));
 		candidate.setMail(ParamUtil.getString(request, "mail"));
 		candidate.setHead(ParamUtil.getString(request, "head"));
+		candidate.setSource(ParamUtil.getString(request, "source"));
 		candidate.setState("0");
 		return candidate;
 	}

@@ -91,6 +91,7 @@
 				<column name="STATE_" />
 			</basic>
 			<basic name="diseasescodesauto" />
+			<basic name="source" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

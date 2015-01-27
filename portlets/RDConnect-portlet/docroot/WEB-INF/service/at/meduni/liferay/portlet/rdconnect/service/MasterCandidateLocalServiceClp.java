@@ -124,7 +124,7 @@ public class MasterCandidateLocalServiceClp
 
 		_methodParameterTypes20 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String"
+				"java.lang.String", "java.lang.String"
 			};
 	}
 
@@ -710,7 +710,7 @@ public class MasterCandidateLocalServiceClp
 	@Override
 	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> getFilterdCandidates(
 		java.lang.String searchstring, java.lang.String country,
-		java.lang.String type, java.lang.String state)
+		java.lang.String type, java.lang.String state, java.lang.String source)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -724,7 +724,9 @@ public class MasterCandidateLocalServiceClp
 						
 					ClpSerializer.translateInput(type),
 						
-					ClpSerializer.translateInput(state)
+					ClpSerializer.translateInput(state),
+						
+					ClpSerializer.translateInput(source)
 					});
 		}
 		catch (Throwable t) {

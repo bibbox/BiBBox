@@ -2122,6 +2122,7 @@ public class MasterCandidatePersistenceImpl extends BasePersistenceImpl<MasterCa
 		masterCandidateImpl.setAccepted(masterCandidate.isAccepted());
 		masterCandidateImpl.setState(masterCandidate.getState());
 		masterCandidateImpl.setDiseasescodesauto(masterCandidate.getDiseasescodesauto());
+		masterCandidateImpl.setSource(masterCandidate.getSource());
 
 		return masterCandidateImpl;
 	}

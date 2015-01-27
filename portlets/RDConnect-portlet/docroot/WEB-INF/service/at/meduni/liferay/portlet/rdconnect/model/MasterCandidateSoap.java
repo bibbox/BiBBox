@@ -51,6 +51,7 @@ public class MasterCandidateSoap implements Serializable {
 		soapModel.setAccepted(model.getAccepted());
 		soapModel.setState(model.getState());
 		soapModel.setDiseasescodesauto(model.getDiseasescodesauto());
+		soapModel.setSource(model.getSource());
 
 		return soapModel;
 	}
@@ -277,6 +278,14 @@ public class MasterCandidateSoap implements Serializable {
 		_diseasescodesauto = diseasescodesauto;
 	}
 
+	public String getSource() {
+		return _source;
+	}
+
+	public void setSource(String source) {
+		_source = source;
+	}
+
 	private long _masterCandidateId;
 	private String _name;
 	private String _url;
@@ -298,4 +307,5 @@ public class MasterCandidateSoap implements Serializable {
 	private boolean _accepted;
 	private String _state;
 	private String _diseasescodesauto;
+	private String _source;
 }

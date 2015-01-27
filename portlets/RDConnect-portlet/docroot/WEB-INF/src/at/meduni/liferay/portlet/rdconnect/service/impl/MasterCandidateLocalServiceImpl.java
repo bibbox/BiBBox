@@ -57,7 +57,7 @@ public class MasterCandidateLocalServiceImpl
 		return masterCandidatePersistence.findByOrganisationId(organisationId);
 	}
 	
-	public List<MasterCandidate> getFilterdCandidates(String searchstring, String country, String type, String state) throws SystemException {
+	public List<MasterCandidate> getFilterdCandidates(String searchstring, String country, String type, String state, String source) throws SystemException {
 		if(country.equals("all")) {
 			country = "";
 		}
@@ -69,6 +69,9 @@ public class MasterCandidateLocalServiceImpl
 		}
 		if(state.equals("all")) {
 			state = "";
+		}
+		if(source.equals("all")) {
+			source = "";
 		}
 		
 		List<MasterCandidate> mastercandidate = null;
@@ -95,9 +98,11 @@ public class MasterCandidateLocalServiceImpl
 				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("address", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
 				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("mail", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
 				criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.ilike("head", StringPool.PERCENT + searchstringsplit + StringPool.PERCENT));
+				
 				try {
 					long searchlong = Long.valueOf(searchstringsplit);
 					criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.eq("masterCandidateId", searchlong));
+					criterion_stringsearch = RestrictionsFactoryUtil.or(criterion_stringsearch, RestrictionsFactoryUtil.eq("organisationid", searchlong));
 				} catch (Exception e) {
 					
 				}
@@ -114,6 +119,7 @@ public class MasterCandidateLocalServiceImpl
 			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("state", StringPool.PERCENT + state + StringPool.PERCENT));
 			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE 'x'"));
 			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.sqlRestriction("state_ NOT ILIKE '0'"));
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("source", StringPool.PERCENT + source + StringPool.PERCENT));
 					
 			dynamicQuery.add(criterion);
 			

@@ -374,6 +374,21 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	 */
 	public void setDiseasescodesauto(String diseasescodesauto);
 
+	/**
+	 * Returns the source of this master candidate.
+	 *
+	 * @return the source of this master candidate
+	 */
+	@AutoEscape
+	public String getSource();
+
+	/**
+	 * Sets the source of this master candidate.
+	 *
+	 * @param source the source of this master candidate
+	 */
+	public void setSource(String source);
+
 	@Override
 	public boolean isNew();
 
