@@ -181,10 +181,10 @@ for(Role role : themeDisplay.getUser().getRoles()) {
 	path="/html/candidate/mastertable/candidatemastertable_types.jsp"
 	cssClass="candidate-table-namecontainer"
 />
-<liferay-ui:search-container-column-text
-name="source"
-property="source"
-cssClass="candidate-table-source"
+<liferay-ui:search-container-column-jsp
+align="right" 
+path="/html/candidate/mastertable/editsub.jsp"
+cssClass="candidate-table-editsub"
 />
 
 <%
@@ -206,7 +206,9 @@ searchContainer.setIteratorURL(portletURL);    %>
     <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 </liferay-ui:search-container>
 
-<aui:script use="node">
+<portlet:actionURL name='updateCandidateTableData' var="updateCandidateTableDataURL" />
+
+<aui:script use="node,aui-io-request,event-valuechange,valuechange">
 	AUI().use('node', function(A){
 		var nodeObject = A.all('#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-2');
 		nodeObject.setHTML('Information');
@@ -215,5 +217,23 @@ searchContainer.setIteratorURL(portletURL);    %>
 		var nodeObject = A.all('#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-4');
 		nodeObject.setHTML('Type');
 	});
-	
+	AUI().use('aui-io-request', 'event-valuechange', 'node', function(A){
+		var nodeObject = A.all('#state');
+		nodeObject.on('click', function(event){
+			var url = '<%= updateCandidateTableDataURL.toString() %>';
+			A.io.request(url,{
+				//this is the data that you are sending to the action method
+				data: {
+					
+				   <portlet:namespace />candidateid: event.target.get('parentNode').get('parentNode').one('#candidateid').get('value'),
+				   <portlet:namespace />state: event.target.get('parentNode').get('parentNode').one('#state').get('value'),
+				},
+				dataType: 'json',
+				on: {
+				  failure: function() { alert('failure'); },
+				  success: function(event, id, obj) { "success" }
+				}
+			});
+		});
+	});
 </aui:script>

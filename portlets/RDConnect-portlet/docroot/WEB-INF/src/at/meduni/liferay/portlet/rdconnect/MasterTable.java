@@ -22,6 +22,34 @@ public class MasterTable extends MVCPortlet {
 		System.out.println("filter");
 		response.setRenderParameter("action-status", "filter");
 	}
+	
+	public void updateCandidateTableData(ActionRequest request, ActionResponse response) throws Exception {		
+		long candidateid = 0;
+		String state = "0";
+		long masterid = 0;
+		
+		candidateid = ParamUtil.getLong(request, "candidateid");
+		masterid = ParamUtil.getLong(request, "candidateid");
+		state = ParamUtil.getString(request, "state");
+		
+		System.out.println("State b if: " + state);
+		
+		if(!state.equalsIgnoreCase("x") &&  !state.equalsIgnoreCase("0") &&
+				!state.equalsIgnoreCase("1") && !state.equalsIgnoreCase("2") &&
+				!state.equalsIgnoreCase("3") && !state.equalsIgnoreCase("4") &&
+				!state.equalsIgnoreCase("5") && !state.equalsIgnoreCase("P")) {
+			System.out.println("if");
+			state = "0";
+		}
+		
+		if(candidateid != 0) {
+			System.out.println("CandidateID: " + candidateid + " MasterID: " + masterid + " State: " + state);
+			CandidateLocalServiceUtil.updateCandidate(candidateid, state.toUpperCase());
+			MasterCandidate master = MasterCandidateLocalServiceUtil.getMasterCandidate(candidateid);
+			master.setState(state.toUpperCase());
+			MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
+		}
+	}
 
 	public void updateMasterCandidate(ActionRequest request, ActionResponse response) throws Exception {
 		long mastercandidateid = ParamUtil.getLong(request, "masterCandidateId");

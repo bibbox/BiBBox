@@ -78,6 +78,23 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		}	
 	}
 	
+	public void updateCandidate(long candidateId, String state) {
+		try {
+			Candidate candidate = CandidateLocalServiceUtil.getCandidate(candidateId);
+			candidate.setState(state);
+			CandidateLocalServiceUtil.updateCandidate(candidate);
+		} catch (NoSuchCandidateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
 	public String getTestString(String candidateId) {
 		/*Candidate candidate;
 		try {

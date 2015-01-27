@@ -280,6 +280,10 @@ public class CandidateLocalServiceUtil {
 		getService().updateCandidate(candidateId, state, masterId);
 	}
 
+	public static void updateCandidate(long candidateId, java.lang.String state) {
+		getService().updateCandidate(candidateId, state);
+	}
+
 	public static java.lang.String getTestString(java.lang.String candidateId) {
 		return getService().getTestString(candidateId);
 	}

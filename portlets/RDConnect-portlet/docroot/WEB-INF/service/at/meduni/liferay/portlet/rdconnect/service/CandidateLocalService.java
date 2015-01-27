@@ -252,6 +252,8 @@ public interface CandidateLocalService extends BaseLocalService,
 	public void updateCandidate(long candidateId, java.lang.String state,
 		long masterId);
 
+	public void updateCandidate(long candidateId, java.lang.String state);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getTestString(java.lang.String candidateId);
 

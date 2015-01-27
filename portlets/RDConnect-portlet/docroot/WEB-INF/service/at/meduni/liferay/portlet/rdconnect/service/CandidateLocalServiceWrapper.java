@@ -293,6 +293,11 @@ public class CandidateLocalServiceWrapper implements CandidateLocalService,
 	}
 
 	@Override
+	public void updateCandidate(long candidateId, java.lang.String state) {
+		_candidateLocalService.updateCandidate(candidateId, state);
+	}
+
+	@Override
 	public java.lang.String getTestString(java.lang.String candidateId) {
 		return _candidateLocalService.getTestString(candidateId);
 	}
