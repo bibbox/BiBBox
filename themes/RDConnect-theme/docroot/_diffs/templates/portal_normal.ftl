@@ -28,7 +28,7 @@ ${theme.include(body_top_include)}
 <div class="rdconnect-header-container-top">
 	<div class="rdconnect-header-container-inner">
 		<div class="rdconnect-header-container-top-rdlogo">
-			<a href="http://rd-connect.bibbox.org/home">
+			<a href="/home">
 				<img alt="RD-Connect-IDCard-Logo" height="27px" width="168px" src="/RDConnect-theme/images/rd_connect.png" />
 			</a>
 		</div>

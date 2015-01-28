@@ -9,9 +9,9 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
-String actionId_add_diseasematrix = "EDIT_CORE";
+String actionId_add_diseasematrix = "EDIT_DDL";
 
-String ddlname = "core";
+String ddlname = GetterUtil.getString(portletPreferences.getValue("optionsDDLName", ""));
 
 long organizationId = 0;
 Organization organization = null;
@@ -45,7 +45,7 @@ if (currentGroup.isOrganization()) {
 		<c:choose>
 			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">		
 				<portlet:renderURL var="EditDDLCoreURL">
-					<portlet:param name="mvcPath" value="/html/staticddl/regstaticddl/regstaticddl_edit.jsp" />
+					<portlet:param name="mvcPath" value="/html/staticddl/dynamicddldisplay/dynamicddldisplay_edit.jsp" />
 					<portlet:param name="recordId" value="<%= Long.toString(ddl_record.getRecordId()) %>" />
 					<portlet:param name="recordSetId" value="<%= Long.toString(recordSetId) %>" />
 					<portlet:param name="organizationId" value="<%= Long.toString(organizationId) %>" />
@@ -59,6 +59,7 @@ if (currentGroup.isOrganization()) {
 			</c:when>
 		</c:choose>
 		
+		<table>
 		<%
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 		Fields fields = ddl_record.getFields();//DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
@@ -68,12 +69,27 @@ if (currentGroup.isOrganization()) {
 			if(fieldname.equalsIgnoreCase("_fieldsDisplay")) {
 				continue;
 			}
-			// Add if clause here for spliting depending on Fieldtype
-			
+			// Label td
 			%>
+			<tr><td>
 			<%= fieldmap.get(fieldname).get("label") %>
+			</td>
 			<%
+			// Add if clause here for spliting depending on Fieldtype
+			String fieldvalue = "";
+			if(ddl_record.getFieldValue(fieldname) != null) {
+				fieldvalue = ddl_record.getFieldValue(fieldname).toString().replaceAll("\"\\]|\\[\"|\\[|\\]", "").replaceAll("\",\"", ",<br>");
+			}
+			%>
+			<td>
+			<strong><%=fieldvalue %></strong>
+			</td>
+			<%
+			
 		}
+		%>
+		</table>
+		<%
   	}
 }
 	%>
