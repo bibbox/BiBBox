@@ -184,6 +184,9 @@ List<Organization> parentOrganizations = new ArrayList<Organization>();
 if (parentOrganization != null) {
 	parentOrganizations.add(parentOrganization);
 }
+
+//RD-Connect Added for removing the parent Organization select for non admins
+if(permissionChecker.isOmniadmin()) {
 %>
 
 <h3><liferay-ui:message key="parent-organization" /></h3>
@@ -243,6 +246,12 @@ if (parentOrganization != null) {
 	method="get"
 	url="javascript:;"
 />
+
+
+<%
+// RD-Connect Added for removing the parent Organization select for non admins
+}
+%>
 
 <aui:script use="liferay-dynamic-select,liferay-search-container">
 	new Liferay.DynamicSelect(
