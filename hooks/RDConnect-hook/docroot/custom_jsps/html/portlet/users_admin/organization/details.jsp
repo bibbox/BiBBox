@@ -187,6 +187,14 @@ if (parentOrganization != null) {
 
 //RD-Connect Added for removing the parent Organization select for non admins
 if(permissionChecker.isOmniadmin()) {
+	%>
+	<div>
+	<%
+} else {
+	%>
+	<div style="display:none;">
+	<%
+}
 %>
 
 <h3><liferay-ui:message key="parent-organization" /></h3>
@@ -247,11 +255,7 @@ if(permissionChecker.isOmniadmin()) {
 	url="javascript:;"
 />
 
-
-<%
-// RD-Connect Added for removing the parent Organization select for non admins
-}
-%>
+</div>
 
 <aui:script use="liferay-dynamic-select,liferay-search-container">
 	new Liferay.DynamicSelect(
