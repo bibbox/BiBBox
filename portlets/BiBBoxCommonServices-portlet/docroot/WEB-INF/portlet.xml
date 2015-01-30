@@ -562,6 +562,10 @@
 			at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrix
 		</portlet-class>
 		<init-param>
+         	<name>copy-request-parameters</name>
+         	<value>true</value> 
+      	</init-param>
+		<init-param>
 			<name>view-template</name>
 			<value>/html/rdconnect/diseasematrix/diseasematrix_view.jsp</value>
 		</init-param>
