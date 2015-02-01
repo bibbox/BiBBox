@@ -33,34 +33,42 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class CandidatePropose
  */
 public class CandidatePropose extends MVCPortlet {
-	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
+	/*public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
 		try {
 			com.liferay.portal.kernel.captcha.CaptchaUtil.serveImage(resourceRequest, resourceResponse);
 		} catch (Exception e) {
 			//log.error(e);
 		}
-	}
+	}*/
 	
 	public void addCandidate(ActionRequest request, ActionResponse response) throws Exception {		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		boolean recaptcher = false;
-		if(themeDisplay.isSignedIn()) {
+		boolean recaptcher = true;
+		/*if(themeDisplay.isSignedIn()) {
 			recaptcher = true;
 		} else {
-			ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-		    reCaptcha.setPrivateKey("6LdHqekSAAAAAD23pmQUF_9scOyhkYwJg2ldL3FK");//"<font color=red>your_private_key</font>");
-		    String challenge = request.getParameter("recaptcha_challenge_field");
-		    String uresponse = request.getParameter("recaptcha_response_field");
-		    
-		    ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer("", challenge, uresponse);
-		    
-		    if (reCaptchaResponse.isValid()) {
-		    	recaptcher = true;
-		    } else {
-		    	recaptcher = false;
-		    	SessionErrors.add(request, "recaptcha-required");
-		    }
-		}
+			try {
+				ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+			    reCaptcha.setPrivateKey("6LdHqekSAAAAAD23pmQUF_9scOyhkYwJg2ldL3FK");
+			    reCaptcha.setPublicKey("6LdHqekSAAAAAEDf5-psWTX5m90DLpkdq5mP2VSJ");
+			    String challenge = request.getParameter("recaptcha_challenge_field");
+			    String uresponse = request.getParameter("recaptcha_response_field");
+			    
+			    
+			    ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer("", challenge, uresponse);
+			
+			    if (reCaptchaResponse.isValid()) {
+			    	recaptcher = true;
+			    } else {
+			    	recaptcher = false;
+			    	SessionErrors.add(request, "recaptcha-required");
+			    }
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+				SessionErrors.add(request, "recaptcha-required");
+			}
+		}*/
 
 		Candidate candidate = candidateFromRequest(request);
 		//MasterCandidate mastercandidate = masterCandidateFromRequest(request);
@@ -78,9 +86,10 @@ public class CandidatePropose extends MVCPortlet {
 				SessionErrors.add(request, e);
 			}
 			response.setRenderParameter("success", "false");
+			//sendRedirect(request, response);
 		}
 		
-		//sendRedirect(request, response);
+		
 	}
 	
 	private String getCaptchaValueFromSession(PortletSession session) {

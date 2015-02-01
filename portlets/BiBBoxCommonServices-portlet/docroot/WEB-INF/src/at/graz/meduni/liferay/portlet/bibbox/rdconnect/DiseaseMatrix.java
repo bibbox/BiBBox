@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixImpl;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -208,6 +211,10 @@ public class DiseaseMatrix extends MVCPortlet {
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 
 		List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> diseasematrixlist = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organizationId, -1, -1);
+		HashSet<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> deletelist = new HashSet<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix>();
+		for(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrixlistentry : diseasematrixlist) {
+			deletelist.add(diseasematrixlistentry);
+		}
 		// Read xls entrys
 		// Get the workbook instance for XLS file
 		HSSFWorkbook workbook = new HSSFWorkbook(file);
@@ -235,149 +242,90 @@ public class DiseaseMatrix extends MVCPortlet {
 				long record_id = 0;
 				if (cell_id == null) {
 					System.out.println("Cellid is null");
-					/*fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
-					DDLRecord record = DDLRecordLocalServiceUtil.addRecord(serviceContext.getUserId(), serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
-							DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-					record_id = record.getRecordId();
-					System.out.println("0. Create Record with id:" + record.getRecordId());*/
+					DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
+					diseasematrix_new.setDiseasematrixId(0);
+					diseasematrix_new.setOrganizationId(organizationId);
+					diseasematrix_new.setDiseasename(stringFromCell(row.getCell(1)));
+					diseasematrix_new.setPatientcount(stringFromCell(row.getCell(2)));
+					diseasematrix_new.setGene(stringFromCell(row.getCell(3)));
+					diseasematrix_new.setIcd10(stringFromCell(row.getCell(4)));
+					diseasematrix_new.setOmim(stringFromCell(row.getCell(5)));
+					diseasematrix_new.setSynonym(stringFromCell(row.getCell(6)));
+					diseasematrix_new.setModifieddate(new Date());
+					DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
 				} else if (cell_id.getCellType() != Cell.CELL_TYPE_NUMERIC) {
 					System.out.println("Cellid is not a number");
-					/*fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
-					DDLRecord record = DDLRecordLocalServiceUtil.addRecord(serviceContext.getUserId(), serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
-							DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-					record_id = record.getRecordId();
-					System.out.println("1. Create Record with id:" + record.getRecordId());*/
+					DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
+					diseasematrix_new.setDiseasematrixId(0);
+					diseasematrix_new.setOrganizationId(organizationId);
+					diseasematrix_new.setDiseasename(stringFromCell(row.getCell(1)));
+					diseasematrix_new.setPatientcount(stringFromCell(row.getCell(2)));
+					diseasematrix_new.setGene(stringFromCell(row.getCell(3)));
+					diseasematrix_new.setIcd10(stringFromCell(row.getCell(4)));
+					diseasematrix_new.setOmim(stringFromCell(row.getCell(5)));
+					diseasematrix_new.setSynonym(stringFromCell(row.getCell(6)));
+					diseasematrix_new.setModifieddate(new Date());
+					DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
 				} else {
 					System.out.println("Cellid is a number: " + cell_id.getNumericCellValue());
-					/*long record_id_in_table = (long) cell_id.getNumericCellValue();
-					if (record_id_list.contains(record_id_in_table)) {
-						record_id_list.remove(record_id_in_table);
-						fields = DDLRecordLocalServiceUtil.getRecord(record_id_in_table).getFields();
-						record_id = record_id_in_table;
-						System.out.println("3. Record exists with id:" + record_id);
+					long diseasematrix_in_table = (long) cell_id.getNumericCellValue();
+					at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(diseasematrix_in_table);
+					deletelist.remove(diseasematrix);
+					if(diseasematrix.getOrganizationId() == organizationId) {
+						if(!diseasematrix.getDiseasename().equals(stringFromCell(row.getCell(1))) ||
+								!diseasematrix.getPatientcount().equals(stringFromCell(row.getCell(2))) ||
+								!diseasematrix.getGene().equals(stringFromCell(row.getCell(3))) ||
+								!diseasematrix.getIcd10().equals(stringFromCell(row.getCell(4))) ||
+								!diseasematrix.getOmim().equals(stringFromCell(row.getCell(5))) ||
+								!diseasematrix.getSynonym().equals(stringFromCell(row.getCell(6)))) {
+							System.out.println("Update for existing entry");
+							diseasematrix.setDiseasename(stringFromCell(row.getCell(1)));
+							diseasematrix.setPatientcount(stringFromCell(row.getCell(2)));
+							diseasematrix.setGene(stringFromCell(row.getCell(3)));
+							diseasematrix.setIcd10(stringFromCell(row.getCell(4)));
+							diseasematrix.setOmim(stringFromCell(row.getCell(5)));
+							diseasematrix.setSynonym(stringFromCell(row.getCell(6)));
+							diseasematrix.setModifieddate(new Date());
+							DiseaseMatrixLocalServiceUtil.updateDiseaseMatrix(diseasematrix);
+						}						
 					} else {
-						fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
-						DDLRecord record = DDLRecordLocalServiceUtil.addRecord(serviceContext.getUserId(), serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
-								DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-						record_id = record.getRecordId();
-						System.out.println("2. Create Record with id:" + record.getRecordId());
-					}*/
+						System.out.println("Not Matching IDs for Organization");
+						DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
+						diseasematrix_new.setDiseasematrixId(0);
+						diseasematrix_new.setOrganizationId(organizationId);
+						diseasematrix_new.setDiseasename(stringFromCell(row.getCell(1)));
+						diseasematrix_new.setPatientcount(stringFromCell(row.getCell(2)));
+						diseasematrix_new.setGene(stringFromCell(row.getCell(3)));
+						diseasematrix_new.setIcd10(stringFromCell(row.getCell(4)));
+						diseasematrix_new.setOmim(stringFromCell(row.getCell(5)));
+						diseasematrix_new.setSynonym(stringFromCell(row.getCell(6)));
+						diseasematrix_new.setModifieddate(new Date());
+						DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
+					}
 				}
 			}
 		}
-
-		/*
-		List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
-		List<Long> record_id_list = new ArrayList<Long>();
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		Group group = organization.getGroup();
-		serviceContext.setScopeGroupId(group.getGroupId());
-		serviceContext.setUserId(organization.getUserId());
-
-		for (DDLRecordSet rdc_rs : rdc_recordlist) {
-			String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
-			if (rdc_rsname.equals("Disease Matrix")) {
-				// ------
-				// Get all Record Ids
-				List<DDLRecord> records = rdc_rs.getRecords();
-				for (DDLRecord record : records) {
-					record_id_list.add(record.getRecordId());
-				}
-				// ------
-				// Read xls entrys
-				// Get the workbook instance for XLS file
-				HSSFWorkbook workbook = new HSSFWorkbook(file);
-				// Get first sheet from the workbook
-				HSSFSheet sheet = workbook.getSheet("Disease Matrix");
-				// Get iterator to all the rows in current sheet
-				Iterator<Row> rowIterator = sheet.iterator();
-				boolean header = true;
-				Map<Integer, String> headers = new HashMap<Integer, String>();
-				while (rowIterator.hasNext()) {
-					Row row = rowIterator.next();
-					int cellcounter = 0;
-					if (header) {
-						Iterator<Cell> cellIterator = row.cellIterator();
-						while (cellIterator.hasNext()) {
-							Cell cell = cellIterator.next();
-							headers.put(cellcounter, cell.getStringCellValue());
-							System.out.println("Header: " + cellcounter + ":" + cell.getStringCellValue());
-							cellcounter++;
-						}
-						header = false;
-						continue;
-					}
-					// Create Fields or Load Fields
-					System.out.println("Create Fields or Load Fields");
-					Cell cell_id = row.getCell(0);
-					Fields fields;
-					long record_id = 0;
-					if (cell_id == null) {
-						fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
-						DDLRecord record = DDLRecordLocalServiceUtil.addRecord(serviceContext.getUserId(), serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
-								DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-						record_id = record.getRecordId();
-						System.out.println("0. Create Record with id:" + record.getRecordId());
-					} else if (cell_id.getCellType() != Cell.CELL_TYPE_NUMERIC) {
-						fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
-						DDLRecord record = DDLRecordLocalServiceUtil.addRecord(serviceContext.getUserId(), serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
-								DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-						record_id = record.getRecordId();
-						System.out.println("1. Create Record with id:" + record.getRecordId());
-					} else {
-						long record_id_in_table = (long) cell_id.getNumericCellValue();
-						if (record_id_list.contains(record_id_in_table)) {
-							record_id_list.remove(record_id_in_table);
-							fields = DDLRecordLocalServiceUtil.getRecord(record_id_in_table).getFields();
-							record_id = record_id_in_table;
-							System.out.println("3. Record exists with id:" + record_id);
-						} else {
-							fields = DDMUtil.getFields(rdc_rs.getDDMStructureId(), serviceContext);
-							DDLRecord record = DDLRecordLocalServiceUtil.addRecord(serviceContext.getUserId(), serviceContext.getScopeGroupId(), rdc_rs.getRecordSetId(),
-									DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-							record_id = record.getRecordId();
-							System.out.println("2. Create Record with id:" + record.getRecordId());
-						}
-					}
-					// For each row, iterate through each columns
-					System.out.println("For each row, iterate through each columns");
-					for (cellcounter = 1; cellcounter < headers.size(); cellcounter++) {
-
-						Field tmp_field = null;
-						Cell cell = row.getCell(cellcounter);
-						if (cell == null) {
-							continue;
-						}
-						switch (cell.getCellType()) {
-						case Cell.CELL_TYPE_NUMERIC:
-							tmp_field = new Field(headers.get(cellcounter), (long) cell.getNumericCellValue());
-							System.out.println("Fieldname: " + headers.get(cellcounter) + ", Value: " + cell.getNumericCellValue());
-							break;
-						case Cell.CELL_TYPE_STRING:
-							tmp_field = new Field(headers.get(cellcounter), cell.getStringCellValue());
-							System.out.println("Fieldname: " + headers.get(cellcounter) + ", Value: " + cell.getStringCellValue());
-							break;
-						default:
-							tmp_field = new Field(headers.get(cellcounter), cell.getStringCellValue());
-							System.out.println("Fieldname: " + headers.get(cellcounter) + ", Value: " + cell.getStringCellValue());
-							break;
-						}
-						fields.put(tmp_field);
-					}
-					DDLRecordLocalServiceUtil.updateRecord(serviceContext.getUserId(), record_id, true, DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, false, serviceContext);
-				}
-				file.close();
-				// Delete Records
-				System.out.println("Delete Records");
-				for (long record_id_remove : record_id_list) {
-					DDLRecordLocalServiceUtil.deleteRecord(record_id_remove);
-				}
-			}
-		}*/
-
+		for(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrixlistentry : deletelist) {
+			DiseaseMatrixLocalServiceUtil.deleteDiseaseMatrix(diseasematrixlistentry);
+		}
+	}
+	
+	private String stringFromCell(Cell cell) {
+		if(cell == null) {
+			return "";
+		}
+		String returnvalue = "";
+		switch (cell.getCellType()) {
+			case Cell.CELL_TYPE_NUMERIC:
+				returnvalue = String.valueOf((long) cell.getNumericCellValue());
+				break;
+			case Cell.CELL_TYPE_STRING:
+				returnvalue = cell.getStringCellValue();
+				break;
+			default:
+				returnvalue = cell.getStringCellValue();
+				break;
+		}
+		return returnvalue;
 	}
 }

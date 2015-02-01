@@ -116,9 +116,7 @@
 			<aui:column columnWidth="50" last="true">	
 				<liferay-ui:error key="recaptcha-required" message="recaptcha-required" />
 				<% if(!themeDisplay.isSignedIn()) { %>
-				<portlet:resourceURL var="captchaURL"/>
-				<liferay-ui:captcha url="<%= captchaURL %>" />
-				<aui:input type="hidden" name="validated" value="false" />
+				<aui:input type="hidden" name="validated" value="true" />
 				<% } else { %>
 				<aui:input type="hidden" name="validated" value="true" />
 				<% } %>
@@ -129,8 +127,8 @@
 
 	
 	<aui:button-row cssClass="proposebuttonrow">
-		<img class="proposerequired" src="<%= request.getContextPath()%>/images/required.png" /> <span class="proposerequired">required field</span>
-		<aui:button type="submit" first="true" />
+		<span class="proposerequired"><img class="proposerequired" src="<%= request.getContextPath()%>/images/required.png" /> required field</span>
+		<aui:button type="submit" value="Propose" first="true" />
 
 		<aui:button type="cancel"  onClick="<%= redirect %>" last="true" />
 	</aui:button-row>
