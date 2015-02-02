@@ -275,12 +275,31 @@ public class SearchIndexLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Search index for normal Search
+	*/
 	public static java.lang.String getSearchIndexByKeyword(
 		java.lang.String keyword,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String contextpath) {
 		return getService()
 				   .getSearchIndexByKeyword(keyword, themeDisplay, contextpath);
+	}
+
+	/**
+	* Search for Reporting system for general user
+	*
+	* @param keyword
+	* @param type
+	* @return
+	*/
+	public static java.lang.String getSearchIndexByKeyword(
+		java.lang.String keyword, java.lang.String type,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String contextpath) {
+		return getService()
+				   .getSearchIndexByKeyword(keyword, type, themeDisplay,
+			contextpath);
 	}
 
 	public static void clearService() {

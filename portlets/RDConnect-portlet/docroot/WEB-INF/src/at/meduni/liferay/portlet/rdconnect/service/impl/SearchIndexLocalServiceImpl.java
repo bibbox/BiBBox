@@ -61,6 +61,9 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil} to access the search index local service.
 	 */
+	/**
+	 * Search index for normal Search
+	 */
 	public String getSearchIndexByKeyword(String keyword, ThemeDisplay themeDisplay, String contextpath) {
 		keyword = keyword.trim();
 		String searchresultstring = "";
@@ -213,6 +216,13 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 		return searchresultstring;
 	}
 	
+	/**
+	 * Search Higlight
+	 * 
+	 * @param text
+	 * @param keyword
+	 * @return
+	 */
 	private String highlightResult(String text, String keyword) {
 		if(keyword.equalsIgnoreCase("")) {
 			return text;
@@ -235,5 +245,69 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			}
 		}
 		return text;
+	}
+	
+	/**
+	 * Search for Reporting system for general user
+	 * 
+	 * @param keyword
+	 * @param type
+	 * @return
+	 */
+	public String getSearchIndexByKeyword(String keyword, String type, ThemeDisplay themeDisplay, String contextpath) {
+		keyword = keyword.trim();
+		String searchresultstring = "";
+		try {
+			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+			Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + keyword + StringPool.PERCENT);
+			dynamicQuery.add(criterion);
+			Order order_organisationid = OrderFactoryUtil.asc("organisationid");
+			Order order_location = OrderFactoryUtil.asc("location");
+			Order order_locationid = OrderFactoryUtil.asc("locationid");
+			dynamicQuery.addOrder(order_organisationid);
+			dynamicQuery.addOrder(order_location);
+			dynamicQuery.addOrder(order_locationid);
+			List<SearchIndex> serachresults = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+			// Format the result
+			long oldorganizationid = 0;
+			Organization organization = null;
+			int regcount = 0;
+			int bbcount = 0;
+			SearchIndex oldsearchindex = null;
+			String organizationline = "";
+			String maincontactline = "";
+			String organizationurl = "";
+			HashMap<String, String> hits = null;
+			boolean first = true;
+			for(SearchIndex serachresult : serachresults) {
+				if(oldorganizationid == 0 || oldorganizationid != serachresult.getOrganisationid()) {
+					if(!first) {
+						searchresultstring += ",";
+					}
+					first = false;
+					organization = OrganizationLocalServiceUtil.getOrganization(serachresult.getOrganisationid());
+					List<DiseaseMatrix> diseasematrixes = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organization.getOrganizationId(), -1, -1);
+					long diseascount = 0;
+					for(DiseaseMatrix diseasematrix : diseasematrixes) {
+						try {
+							diseascount += Long.parseLong(diseasematrix.getPatientcount());
+						} catch(Exception ex) {
+							
+						}
+					}
+					searchresultstring += "{Name: '" + organization.getName().replaceAll("'", "&lsquo;") + "', "
+							+ "Type: '" + organization.getExpandoBridge().getAttribute("Organization Type").toString() + "',"
+							+ "'Number of Cases': " + diseascount + "}";
+					// New Hit
+					oldorganizationid = serachresult.getOrganisationid();
+				}			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(searchresultstring.length() == 0) {
+			searchresultstring = "No Results for the query.";
+		}
+		return searchresultstring;
 	}
 }

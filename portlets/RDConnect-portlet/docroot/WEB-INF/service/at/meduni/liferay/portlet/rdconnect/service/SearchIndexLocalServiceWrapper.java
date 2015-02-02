@@ -287,11 +287,30 @@ public class SearchIndexLocalServiceWrapper implements SearchIndexLocalService,
 			arguments);
 	}
 
+	/**
+	* Search index for normal Search
+	*/
 	@Override
 	public java.lang.String getSearchIndexByKeyword(java.lang.String keyword,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String contextpath) {
 		return _searchIndexLocalService.getSearchIndexByKeyword(keyword,
+			themeDisplay, contextpath);
+	}
+
+	/**
+	* Search for Reporting system for general user
+	*
+	* @param keyword
+	* @param type
+	* @return
+	*/
+	@Override
+	public java.lang.String getSearchIndexByKeyword(java.lang.String keyword,
+		java.lang.String type,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String contextpath) {
+		return _searchIndexLocalService.getSearchIndexByKeyword(keyword, type,
 			themeDisplay, contextpath);
 	}
 

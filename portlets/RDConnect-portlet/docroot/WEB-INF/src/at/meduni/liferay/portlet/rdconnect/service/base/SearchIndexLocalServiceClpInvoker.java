@@ -120,6 +120,13 @@ public class SearchIndexLocalServiceClpInvoker {
 				"java.lang.String", "com.liferay.portal.theme.ThemeDisplay",
 				"java.lang.String"
 			};
+
+		_methodName56 = "getSearchIndexByKeyword";
+
+		_methodParameterTypes56 = new String[] {
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.theme.ThemeDisplay", "java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -230,6 +237,14 @@ public class SearchIndexLocalServiceClpInvoker {
 				(java.lang.String)arguments[2]);
 		}
 
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getSearchIndexByKeyword((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1],
+				(com.liferay.portal.theme.ThemeDisplay)arguments[2],
+				(java.lang.String)arguments[3]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -271,4 +286,6 @@ public class SearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes49;
 	private String _methodName54;
 	private String[] _methodParameterTypes54;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
 }

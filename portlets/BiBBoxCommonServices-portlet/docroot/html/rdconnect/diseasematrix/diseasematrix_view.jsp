@@ -48,11 +48,16 @@ if (currentGroup.isOrganization()) {
 						</aui:button-row>
 					</div>
 				</aui:form>
-				<!-- Download XML -->
-				<portlet:resourceURL var="fileDownloadURL" id="fileDownload" />
+				<!-- Download XLS -->
+				<portlet:resourceURL var="fileDownloadXLSURL" id="fileDownload" />
 				<a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xls" />
 				<portlet:param name="RDCOrganisationId" value="<%= String.valueOf(organizationId) %>" />
-				</portlet:resourceURL>">Download Disease Matrix as XLS File</a>
+				</portlet:resourceURL>">Download Disease Matrix as XLS File</a> <br />
+				<!-- Download XLSX -->
+				<portlet:resourceURL var="fileDownloadXLSXURL" id="fileDownload" />
+				<a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xlsx" />
+				<portlet:param name="RDCOrganisationId" value="<%= String.valueOf(organizationId) %>" />
+				</portlet:resourceURL>">Download Disease Matrix as XLSX File</a>
 			</div>
 			<br><br>
 		</c:when>

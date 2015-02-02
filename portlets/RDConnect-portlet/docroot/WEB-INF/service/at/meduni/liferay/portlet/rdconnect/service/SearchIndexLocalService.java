@@ -249,8 +249,24 @@ public interface SearchIndexLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	/**
+	* Search index for normal Search
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getSearchIndexByKeyword(java.lang.String keyword,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		java.lang.String contextpath);
+
+	/**
+	* Search for Reporting system for general user
+	*
+	* @param keyword
+	* @param type
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getSearchIndexByKeyword(java.lang.String keyword,
+		java.lang.String type,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String contextpath);
 }
