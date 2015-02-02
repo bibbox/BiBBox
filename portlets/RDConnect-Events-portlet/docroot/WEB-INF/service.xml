@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder
+	package-path="at.graz.meduni.liferay.portlet.bibbox.rdconnect.service">
+	<author>reihsr</author>
+	<namespace>bibbox_rdconnect</namespace>
+
+	<entity name="RDConnectEvent" local-service="true" remote-service="false" table="rdconnect.event">
+		<column name="eventId" type="long" primary="true" />
+		<column name="eventdate" type="Date"></column>
+		<column name="organizationId" type="long" />
+		<column name="userId" type="long" />
+		<column name="shorttext" type="String" />
+		<column name="longtext" type="String" />
+		<column name="link" type="String" />
+		<column name="restricted" type="String" />
+		<order by="asc">
+			<order-column name="eventdate" />
+		</order>
+		<finder name="Restricted" return-type="Collection">
+			<finder-column name="restricted" />
+		</finder>
+		<finder name="Eventdate" return-type="Collection">
+			<finder-column name="eventdate" />
+		</finder>
+	</entity>
+</service-builder>

@@ -81,4 +81,18 @@
 .aui .bibbox-cs-datatable-organization-deleted {
 	background-color: #ff8585;
 }
-
+.rdcbuttonrowadddiseae {
+	width: 120px;
+	float:left;
+	margin-right: 50px;
+}
+.rdcbuttonrowuploadexcel {
+	width: 275px;
+	float:left;
+}
+.aui .rdcdiseases form {
+	margin: 0 0 0 30px;
+}
+.aui .button-holder {
+	margin: 0;
+}

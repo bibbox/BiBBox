@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent">
+		<field name="eventId" type="long" />
+		<field name="eventdate" type="Date" />
+		<field name="organizationId" type="long" />
+		<field name="userId" type="long" />
+		<field name="shorttext" type="String" />
+		<field name="longtext" type="String" />
+		<field name="link" type="String" />
+		<field name="restricted" type="String" />
+	</model>
+</model-hints>

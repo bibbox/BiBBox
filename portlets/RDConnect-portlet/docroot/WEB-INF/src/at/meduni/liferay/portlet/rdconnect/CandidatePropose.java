@@ -2,6 +2,7 @@ package at.meduni.liferay.portlet.rdconnect;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -28,6 +29,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+
+import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil;
 
 /**
  * Portlet implementation class CandidatePropose
@@ -78,6 +81,7 @@ public class CandidatePropose extends MVCPortlet {
 			CandidateLocalServiceUtil.addCandidate(candidate);
 			//MasterCandidateLocalServiceUtil.addMasterCandidate(mastercandidate);
 			SessionMessages.add(request, "candidate-saved-successfully");
+			addEventEntry(new Date(), 0, themeDisplay.getUserId(), "Proposed", "Proposed", "", "RD-Curators");
 			//response.setRenderParameter("success", "true");
 			sendRedirect(request, response);
 		} else {
@@ -91,7 +95,7 @@ public class CandidatePropose extends MVCPortlet {
 		
 		
 	}
-	
+
 	private String getCaptchaValueFromSession(PortletSession session) {
         Enumeration<String> atNames = session.getAttributeNames();
         System.out.println("--------");
@@ -176,6 +180,16 @@ public class CandidatePropose extends MVCPortlet {
 			valid = false;
 		}
 		return valid;
+	}
+	
+	/**
+	 * RD-Connect Event System add event entry
+	 */
+	private void addEventEntry(Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted) {
+		//RDConnectEventLocalServiceUtil
+		//RDConnectEventLocalServiceUtil.
+		//RDConnectEvent rdconnectevent = 
+		RDConnectEventLocalServiceUtil.createEvent(eventdate, organizationId, userId, shorttext, longtext, link, restricted);
 	}
 
 }

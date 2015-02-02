@@ -22,9 +22,9 @@ if (currentGroup.isOrganization()) {
 	%>
 	<c:choose>
 		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">
-			<div style="width: 800px;flaot:left;">
+			<div style="width: 100%;float:left;" class="rdcdiseases">
 				<!-- Add Desease -->
-				<aui:button-row>
+				<aui:button-row cssClass="rdcbuttonrowadddiseae">
 					<portlet:renderURL var="addDiseaseMatrixURL">
 						<portlet:param name="mvcPath" value="/html/rdconnect/diseasematrix/diseasematrix_edit.jsp" />
 						<portlet:param name="organizationId" value="<%= Long.toString(organizationId) %>" />
@@ -35,14 +35,14 @@ if (currentGroup.isOrganization()) {
 				<!-- Upload XML -->
 				<portlet:actionURL name='<%="uploadFile"%>' var="uploadFileURL" windowState="normal" />
 				<aui:form action="<%=uploadFileURL%>" enctype="multipart/form-data"
-					method="post" name="fm">
-					<div style="width: 200px;flaot:left;">
+					method="post" name="fm" cssClass="rdcbuttonrowuploadexcel">
+					<div style="width: 200px;float:left;">
 						<aui:fieldset>
 							<aui:input type="hidden" name="rdc_organisation" value="<%= organizationId %>" />
 							<input type="file" name="fileupload" id="fileupload" size="60" />
 						</aui:fieldset>
 					</div>
-					<div style="width: 200px;flaot:left;">
+					<div style="width: 75px;float:left;">
 						<aui:button-row>
 							<aui:button name="saveButton" type="submit" value="save" />
 						</aui:button-row>
@@ -54,6 +54,7 @@ if (currentGroup.isOrganization()) {
 				<portlet:param name="RDCOrganisationId" value="<%= String.valueOf(organizationId) %>" />
 				</portlet:resourceURL>">Download Disease Matrix as XLS File</a>
 			</div>
+			<br><br>
 		</c:when>
 	</c:choose>
 	
