@@ -37,8 +37,17 @@
 
 Search for: <%= keywords %>
 <%
-	String textresult = SearchIndexLocalServiceUtil.getSearchIndexByKeyword(keywords, themeDisplay, request.getContextPath());
-
+	if(keywords.equalsIgnoreCase("")) {
+		%>
+		<h4>No search key specified.</h4>
+		<br />
+		<%
+	} else {
+		String textresult = SearchIndexLocalServiceUtil.getSearchIndexByKeyword(keywords, themeDisplay, request.getContextPath());
+		%>
+		<%= textresult %>
+		<br />
+		<%
+	}
 %>
-<%= textresult %>
-<br />
+

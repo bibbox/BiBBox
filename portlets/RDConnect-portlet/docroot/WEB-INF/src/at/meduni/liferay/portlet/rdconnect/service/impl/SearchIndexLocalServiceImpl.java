@@ -33,6 +33,9 @@ import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
@@ -256,10 +259,16 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	 */
 	public String getSearchIndexByKeyword(String keyword, String type, ThemeDisplay themeDisplay, String contextpath) {
 		keyword = keyword.trim();
+		type = type.trim();
 		String searchresultstring = "";
 		try {
 			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
 			Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + keyword + StringPool.PERCENT);
+			if(!type.equalsIgnoreCase("all")) {
+				Criterion criterion_type = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + type + StringPool.PERCENT);
+				criterion_type = RestrictionsFactoryUtil.and(criterion_type, RestrictionsFactoryUtil.ilike("key", StringPool.PERCENT + "Type" + StringPool.PERCENT));
+				criterion = RestrictionsFactoryUtil.and(criterion, criterion_type);
+			}
 			dynamicQuery.add(criterion);
 			Order order_organisationid = OrderFactoryUtil.asc("organisationid");
 			Order order_location = OrderFactoryUtil.asc("location");
@@ -286,6 +295,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 					}
 					first = false;
 					organization = OrganizationLocalServiceUtil.getOrganization(serachresult.getOrganisationid());
+					// Disease Matrix
 					List<DiseaseMatrix> diseasematrixes = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organization.getOrganizationId(), -1, -1);
 					long diseascount = 0;
 					for(DiseaseMatrix diseasematrix : diseasematrixes) {
@@ -295,9 +305,28 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 							
 						}
 					}
+					// Data Access Committee
+					String dataaccess = "not specified";
+					List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+				  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+				  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+				  		 if(rdc_rsname.equals("reg_accessibility")) {
+				  			List<DDLRecord> records = rdc_rs.getRecords();
+				  			for(DDLRecord record : records) { 
+				  				try {
+				  					dataaccess = record.getFieldValue("Has_the_registry_a_Data_Access_Committee_").toString().replaceAll("\"\\]|\\[\"", "");
+				  				} catch (Exception ex) {
+				  					
+				  				}
+				  			}
+				  		 }
+				  	}
 					searchresultstring += "{Name: '" + organization.getName().replaceAll("'", "&lsquo;") + "', "
 							+ "Type: '" + organization.getExpandoBridge().getAttribute("Organization Type").toString() + "',"
-							+ "'Number of Cases': " + diseascount + "}";
+							+ "'Number of Cases': " + diseascount + ","
+							+ "'Data Access Committe': '" + dataaccess + "',"
+							+ "'Request data':  'http://rd-connect.eu', "
+							+ "'Nuber of access': 0}";
 					// New Hit
 					oldorganizationid = serachresult.getOrganisationid();
 				}			

@@ -29,19 +29,29 @@
 
 <portlet:actionURL name='filterList' var="filterListURL" />
 <aui:form action="<%= filterListURL.toString() %>" method="POST" name="fm">
-	<aui:fieldset>
-		<input style="width: 420px;" type="text" placeholder="search by: Disease Name, Gene, ORPHACODE,  ICD10, OMIM ..." value="<%= keywords %>" name="SEARCH" size="60">
-		<aui:select name="candidatetype" label="Type:" cssClass="rdc-filter-input" >
-			<% for (String string : types) { %>
-			<aui:option value="<%= string %>" selected="<%= candidatetype.equalsIgnoreCase(string) ? true : false %>">
-				<%= string %>
-			</aui:option>
-			<% } %>
-		</aui:select>
-	</aui:fieldset>
-	<aui:button-row cssClass="searchFiledFloat">
-		<aui:button type="submit" value="Filter" />
-	</aui:button-row>
+	<aui:layout>
+		<aui:fieldset>
+		 
+			<aui:column columnWidth="50" first="true">
+				<input style="width: 420px;" type="text" placeholder="search by: Disease Name, Gene, ORPHACODE,  ICD10, OMIM ..." value="<%= keywords %>" name="SEARCH" size="60">
+			</aui:column>
+			<aui:column columnWidth="35">
+				<aui:select inlineLabel="left" name="candidatetype" label="Type:" cssClass="rdc-filter-input"  >
+					<% for (String string : types) { %>
+					<aui:option value="<%= string %>" selected="<%= candidatetype.equalsIgnoreCase(string) ? true : false %>">
+						<%= string %>
+					</aui:option>
+					<% } %>
+				</aui:select>
+			</aui:column>
+			<aui:column columnWidth="15" last="true">
+				<aui:button-row cssClass="searchFiledFloat">
+					<aui:button type="submit" value="Filter" />
+				</aui:button-row>
+			</aui:column>
+		</aui:fieldset>
+		
+	</aui:layout>
 </aui:form>
 
 <%
@@ -50,9 +60,10 @@
 
 <div id="myDataTable"></div>
 
-
-
 <br />
+<% if(textresult.equalsIgnoreCase("No Results for the query.")) { %>
+<h4><%= textresult %></h4>
+<% } else { %>
 <aui:script use="node,aui-datatable,aui-datatype,datatable-sort">
 AUI().use(
   'aui-datatable',
@@ -72,21 +83,26 @@ AUI().use(
     	{
     		key: 'Number of Cases',
     		sortable: true
+    	},
+    	{
+    		key: 'Data Access Committe',
+    		sortable: true
+    	},
+    	{
+    		key: 'Request data',
+    		sortable: true,
+    		allowHTML: true,
+    		formatter: '<a href="{value}">{value}</a>'
+    	},
+    	{
+    		key: 'Nuber of access',
+    		sortable: true
     	}
     ];
 	var dataTable = new Y.DataTable(
       {
         columns: nestedCols,
         data: remoteData,
-        editEvent: 'dblclick',
-        plugins: [
-          {
-            cfg: {
-              highlightRange: false
-            },
-            fn: Y.Plugin.DataTableHighlight
-          }
-        ]
       }
     ).render('#myDataTable');
 
@@ -94,3 +110,4 @@ AUI().use(
   }
 );
 </aui:script>
+<% } %>

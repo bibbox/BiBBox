@@ -47,12 +47,18 @@ user/invitation
 	// set Variables
 	String acronym = "";
 	String year_of_esteblishment = "";
+	String source_of_funding = "";
+	String hoste_institute = "";
+	String type_of_host_institution = "";
+	String target_population = "";
+	String listed_networks = "";
+	String listed_networks2 = "";
 	// retreve Variables
 	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
   	for(DDLRecordSet rdc_rs : rdc_recordlist) {
   		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
   		
-  		if(rdc_rsname.equals("core")) {
+  		if(rdc_rsname.equals("bb_core")) {
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) {
   				if(record.getFieldValue("acronym") != null) {
@@ -61,8 +67,29 @@ user/invitation
   				if(record.getFieldValue("year_of_establishment") != null) {
   					year_of_esteblishment = record.getFieldValue("year_of_establishment").toString();
   				}
+  				if(record.getFieldValue("Text5085") != null) {
+  					source_of_funding = record.getFieldValue("Text5085").toString();
+  				}
+  				if(record.getFieldValue("Hoste_institute") != null) {
+  					hoste_institute = record.getFieldValue("Hoste_institute").toString();
+  				}
+  				if(record.getFieldValue("Host_institution_is_a") != null) {
+  					type_of_host_institution = record.getFieldValue("Host_institution_is_a").toString();
+  				}
+  				if(record.getFieldValue("countryCode") != null) {
+  					target_population = record.getFieldValue("countryCode").toString();
+  				}
+  				if(record.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks") != null) {
+  					listed_networks = record.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks").toString();
+  				}
+  				if(record.getFieldValue("Additional_networks_inventories") != null) {
+  					listed_networks2 = record.getFieldValue("Additional_networks_inventories").toString();
+  				}
   			}
   		}
+  	}
+  	if(!listed_networks2.equalsIgnoreCase("")) {
+  		listed_networks += "<br>" + listed_networks2;
   	}
 
 %>
@@ -98,20 +125,51 @@ user/invitation
 		</td></tr>
 	</table>
 	<h6>1.2 Main Contact (Head of Biobank)</h6>
-	<table>
+	<table border="1">
 		<tr><td>First Name</td><td><%= maincontact.getFirstName() %></td><td>Middle Name</td><td><%= maincontact.getMiddleName() %></td></tr>
 		<tr><td>Last Name</td><td><%= maincontact.getLastName() %></td><td>Title</td><td><%= "" %></td></tr>
-		<tr><td>E-Mail</td><td colspan="3"></td></tr>
-		<tr><td>Gender</td><td colspan="3"></td></tr>
-		<tr><td>Position</td><td colspan="3"></td></tr>
+		<tr><td>E-Mail</td><td colspan="3"><%= maincontact.getEmailAddress() %></td></tr>
+		<%
+		String gender = "";
+		if(maincontact.getFemale()) {
+			gender = "Female";
+		}
+		if(maincontact.getMale()) {
+			gender = "Male";
+		}
+		%>
+		<tr><td>Gender</td><td colspan="3"><%= gender %></td></tr>
+		<%
+		String role = "";
+		if(maincontact.getExpandoBridge() != null) {
+			if(maincontact.getExpandoBridge().getAttribute("Role within the organisation") != null) {
+				String user_roles_string = maincontact.getExpandoBridge().getAttribute("Role within the organisation").toString();
+				String[] user_roles = user_roles_string.split(";");
+				for(String user_role : user_roles) {
+					String[] our = user_role.split("_");
+					if(our.length == 0 || our[0].length() == 0) {
+						continue;
+					}
+					long orgid = Long.parseLong(our[0]);
+					if(orgid == biobankId) {
+						if(our.length == 1) {
+							role = "";
+						} else {
+							role = our[1];
+						}
+					}
+				}
+			}
+		}
+		%>
+		<tr><td>Position</td><td colspan="3"><%= role %></td></tr>
 		<tr><td colspan="4"></td></tr>
-		<tr><td>Source of funding</td><td colspan="3"></td></tr>
-		<tr><td>Host institute</td><td colspan="3"></td></tr>
-		<tr><td>Type of host institute</td><td colspan="3"></td></tr>
-		<tr><td>Type of host institute</td><td colspan="3"></td></tr>
+		<tr><td>Source of funding</td><%= source_of_funding %><td colspan="3"></td></tr>
+		<tr><td>Host institute</td><%= hoste_institute %><td colspan="3"></td></tr>
+		<tr><td>Type of host institute</td><%= type_of_host_institution %><td colspan="3"></td></tr>
 		<tr><td>How many rare diseases are in your biobank?</td><td colspan="3"></td></tr>
-		<tr><td>Target population</td><td colspan="3"></td></tr>
-		<tr><td>Your biobank is listed in other inventories/networks (please select all that apply):</td><td colspan="3"></td></tr>
+		<tr><td>Target population</td><%= target_population %><td colspan="3"></td></tr>
+		<tr><td>Your biobank is listed in other inventories/networks (please select all that apply):</td><%= listed_networks %><td colspan="3"></td></tr>
 	</table>
 	<h5>2 COLLECTIONS OF DISEASES</h3>
 	<hr>
