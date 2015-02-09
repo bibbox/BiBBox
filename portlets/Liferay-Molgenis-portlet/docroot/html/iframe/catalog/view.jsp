@@ -2,7 +2,7 @@
 
 <portlet:defineObjects />
 
-<iframe id="molgenis-iframe" src="#" style="width:100%;height:600px;border-width: 0;"></iframe>
+<iframe id="molgenis-iframe" src="JavaScript:''" style="width:100%;height:600px;border-width: 0;"></iframe>
 
 <script  type="text/javascript">
 	window.onload = function() {
@@ -33,9 +33,28 @@
 		        		            if (req.status >= 200 && req.status < 400) {		        		    
 		        		            	var A = AUI();
 		        		            	var molgenisiframe = document.getElementById('molgenis-iframe');
-		        		            	if(molgenisiframe.contentDocument != null) {
-		        		            		molgenisiframe.contentDocument.write("<scr" + "ipt>" + req.responseText + "</scr" + "ipt>");
+
+		        		            	var iframedoc = molgenisiframe.document;
+		        		            	if (molgenisiframe.contentDocument) {
+		        		            		iframedoc = molgenisiframe.contentDocument;
+		        		            	} else if (molgenisiframe.contentWindow) {
+		        		            		iframedoc = molgenisiframe.contentWindow.document;
 		        		            	}
+		        		            	if (iframedoc) {
+			        		            	// Put the content in the iframe
+			        		            	iframedoc.open();
+			        		            	iframedoc.writeln(req.responseText);
+			        		            	iframedoc.close();
+		        		            	} else {
+			        		            	//just in case of browsers that don't support the above 3 properties.
+			        		            	//fortunately we don't come across such case so far.
+			        		            	alert('Cannot inject dynamic contents into iframe.');
+		        		            	}
+		        		            											
+		        		            	//if(molgenisiframe.contentDocument != null) {
+		        		            		//molgenisiframe.contentDocument.write("<scr" + "ipt>" + req.responseText + "</scr" + "ipt>");
+		        		            		//molgenisiframe.contentDocument.write(req.responseText);
+		        		            	//}
 		        		            } else {
 		        		                // Handle error case
 		        		            }

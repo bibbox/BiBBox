@@ -113,7 +113,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	}
 	
 	public Candidate addCandidate(Candidate newCandidate) throws SystemException {
-		Candidate candidate = candidatePersistence.create((int) counterLocalService.increment(CandidateImpl.class.getName()) + 15000);
+		Candidate candidate = candidatePersistence.create((int) counterLocalService.increment(CandidateImpl.class.getName()) + 25000);
 		candidate.setName(newCandidate.getName());
 		candidate.setSource(newCandidate.getSource());
 		candidate.setUrl(newCandidate.getUrl());
@@ -131,6 +131,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		candidate.setMail(newCandidate.getMail());
 		candidate.setHead(newCandidate.getHead());
 		candidate.setState(newCandidate.getState());
+		candidate.setCandidatesubtype(newCandidate.getCandidatesubtype());
 		
 		MasterCandidate mcandidate = masterCandidatePersistence.create(candidate.getPrimaryKey());
 		mcandidate.setName(newCandidate.getName());
@@ -146,6 +147,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		mcandidate.setMail(newCandidate.getMail());
 		mcandidate.setHead(newCandidate.getHead());
 		mcandidate.setState(newCandidate.getState());
+		mcandidate.setCandidatesubtype(newCandidate.getCandidatesubtype());
 		masterCandidatePersistence.update(mcandidate);
 
 		return candidatePersistence.update(candidate);
@@ -186,6 +188,13 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 		criterion_diseases = RestrictionsFactoryUtil.or(criterion_diseases, RestrictionsFactoryUtil.ilike("diseasescodes", StringPool.PERCENT + name + StringPool.PERCENT));
 		criterion_diseases = RestrictionsFactoryUtil.or(criterion_diseases, RestrictionsFactoryUtil.ilike("name", StringPool.PERCENT + name + StringPool.PERCENT));
 		criterion_diseases = RestrictionsFactoryUtil.or(criterion_diseases, RestrictionsFactoryUtil.ilike("candidatesubtype", StringPool.PERCENT + name + StringPool.PERCENT));
+		
+		try {
+			long searchlong = Long.valueOf(name);
+			criterion_diseases = RestrictionsFactoryUtil.or(criterion_diseases, RestrictionsFactoryUtil.eq("candidateId", searchlong));
+		} catch (Exception e) {
+			
+		}
 		
 		criterion = RestrictionsFactoryUtil.ilike("source", StringPool.PERCENT + source + StringPool.PERCENT);
 		criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("country", StringPool.PERCENT + country + StringPool.PERCENT));
@@ -243,7 +252,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	}
 	
 	public String[] getSource() {
-		String[] array = new String[] { "all", "orpha.net", "bbmri.eu", "rd-neuromics.eu", "ee", "eurobiobank.org", "online propose",
+		String[] array = new String[] { "all", "orpha.net", "bbmri.eu", "rd-neuromics.eu", "ee", "eurobiobank.org", 
 				"CORDIS", "ECSF website", "EPIRARE", "EUROCAT website", "EURORDIS", "HQIP", "MM", "ONLINE PROPOSED", "Severe Chronic Neutropenia Registry - SCNIR",
 				"SPANISH NETWORK", "SPANISH REGISTRIES", "Telethon", "TREAT NMD"};
 		return array;

@@ -69,7 +69,7 @@ if (currentGroup.isOrganization()) {
 				</portlet:renderURL>
 				<div style="position: relative;width: 100%;">
 					<div style="width:30px;height: 30px;position:absolute;right:25px;top: -55px;z-index: 400;">
-						<aui:a href="<%= EditDDLCoreURL.toString() %>"><img src='<%= request.getContextPath() + "/images/edit_green.png" %>' style="width:20px;height: 20px;" /></aui:a>
+						<aui:a href="<%= EditDDLCoreURL.toString() %>"><img src='<%= request.getContextPath() + "/images/editorange.png" %>' style="width:18px;height: 18px;" /></aui:a>
 					</div>
 				</div>
 			</c:when>

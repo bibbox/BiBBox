@@ -19,7 +19,7 @@
 
 <%
 DDLRecordSet recordSet = null;
-String editimgpath = "/images/edit.png";
+String editimgpath = "/images/editorange.png";
 			
 try {
 	if (Validator.isNotNull(recordSetId)) {
@@ -77,8 +77,10 @@ if (currentGroup.isOrganization()) {
 					<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
 				</portlet:renderURL>
 				
-				<div style="position: relative;left:550px;width: 15px;">
-					<aui:a href="<%= editRecordURL %>"><img style="width: 10px;height: 10px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+				<div style="position: relative;width: 100%;">
+					<div style="width:30px;height: 30px;position:absolute;right:25px;top: -55px;z-index: 400;">
+						<aui:a href="<%= editRecordURL %>"><img style="width: 18px;height: 18px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+					</div>
 				</div>
 		<%
 				//break;

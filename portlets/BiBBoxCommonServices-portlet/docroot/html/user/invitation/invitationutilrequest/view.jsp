@@ -25,18 +25,26 @@ if (currentGroup.isOrganization()) {
 <%
 List<InvitationOrganisation> invitationorganisations = InvitationOrganisationLocalServiceUtil.getInvitationsByOrganisation(organizationId);
 if(invitationorganisations.size() != 0) {
-	%>
-	<portlet:actionURL name='sendRequest' var="sendRequestURL" windowState="normal" />
-	
-	<aui:form action="<%= sendRequestURL %>" method="POST" name="fm">
-		<aui:fieldset>
-			<aui:input type="hidden" name="status" value="<%= optionsRequestStatusId_cfg %>" />
-			<aui:input type="hidden" name="organizationId" value="<%= organizationId %>" />
-		</aui:fieldset>
-		<aui:button-row>
-			<aui:button type="submit" value="<%= InvitationLocalServiceUtil.getStatusFromLong(Long.parseLong(optionsRequestStatusId_cfg)) %>" ></aui:button>
-		</aui:button-row>
-	</aui:form>
-	<%
+	boolean already_requested = false;
+	for(InvitationOrganisation invitationorganisation : invitationorganisations) {
+		if(invitationorganisation.getStatus() >= Long.parseLong(optionsRequestStatusId_cfg)) {
+			already_requested = true;
+		}
+	}
+	if(!already_requested) {
+		%>
+		<portlet:actionURL name='sendRequest' var="sendRequestURL" windowState="normal" />
+		
+		<aui:form action="<%= sendRequestURL %>" method="POST" name="fm">
+			<aui:fieldset>
+				<aui:input type="hidden" name="status" value="<%= optionsRequestStatusId_cfg %>" />
+				<aui:input type="hidden" name="organizationId" value="<%= organizationId %>" />
+			</aui:fieldset>
+			<aui:button-row>
+				<aui:button type="submit" value="<%= InvitationLocalServiceUtil.getStatusFromLong(Long.parseLong(optionsRequestStatusId_cfg)) %>" ></aui:button>
+			</aui:button-row>
+		</aui:form>
+		<%
+	}
 }
 %>

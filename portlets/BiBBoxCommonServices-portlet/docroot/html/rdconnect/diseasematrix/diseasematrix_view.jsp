@@ -123,6 +123,69 @@ if (currentGroup.isOrganization()) {
 } else {
 	%>
 	This portlet is only available for the use in Organizations.
+	
+	<i id="refreschorganizationlist" class="icon-refresh"></i>
+				<div id="organisationlist" >
+
+<aui:script use="aui-base,aui-io-request,click,jsonp,jsonp-url">
+AUI().ready(
+	'jsonp', 
+	'jsonp-url',
+	'aui-base',
+	'aui-io-request',
+	'click',
+	function(A) {
+		A.all('#refreschorganizationlist').each(function() {
+			this.on('click', function(event){
+				/*var isDebug = true;
+				var querypart = "query=" + escape('PREFIX coeus: <http://bioinformatics.ua.pt/coeus/> PREFIX diseasecard: <http://bioinformatics.ua.pt/diseasecard/resource/> SELECT ?item {?item coeus:hasConcept diseasecard:concept_OMIM }');
+				var endpoint = 'http://bioinformatics.ua.pt/diseasecard/sparql';
+    
+				// Get our HTTP request object.
+				var xmlhttp = null;
+				if(window.XMLHttpRequest) {
+					xmlhttp = new XMLHttpRequest();
+				} else if(window.ActiveXObject) {
+					// Code for older versions of IE, like IE6 and before.
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				} else {
+					alert('Perhaps your browser does not support XMLHttpRequests?');
+				}
+    
+				// Set up a POST with JSON result format.
+				xmlhttp.open('POST', endpoint, true); // GET can have caching probs, so POST
+				xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+				xmlhttp.setRequestHeader("Accept", "application/sparql-results+json");
+    
+				// Set up callback to get the response asynchronously.
+				xmlhttp.onreadystatechange = function() {
+					if(xmlhttp.readyState == 4) {
+						if(xmlhttp.status == 200) {
+							// Do something with the results
+							if(isDebug) alert(xmlhttp.responseText);
+						} else {
+							// Some kind of error occurred.
+							alert("Sparql query error: " + xmlhttp.status + " "
+							+ xmlhttp.responseText);
+						}
+					}
+				};
+				// Send the query to the endpoint.
+				xmlhttp.send(querypart);*/
+
+				var url = 'http://bioinformatics.ua.pt/diseasecard/sparql?query=SELECT+%3Fpredicate+%3Fobject+%7B%3Chttp%3A%2F%2Fbioinformatics.ua.pt%2Fdiseasecard%2Fresource%2Fomim_114480%3E+%3Fpredicate+%3Fobject%7D&output=json&force-accept=text%2Fplain&stylesheet=.%2Fapi%2Ftranslate';
+				function handleJSONP(response) {
+					alert(response['results']['bindings']['0']);
+				    A.one('#organisationlist').setHTML(response.get('responseData'));
+				}
+				
+    			A.jsonp(url, handleJSONP);       
+			});           
+		});
+	}
+);
+</aui:script>
 	<%
 }
 %>
+

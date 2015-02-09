@@ -47,32 +47,7 @@ public class CandidatePropose extends MVCPortlet {
 	public void addCandidate(ActionRequest request, ActionResponse response) throws Exception {		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		boolean recaptcher = true;
-		/*if(themeDisplay.isSignedIn()) {
-			recaptcher = true;
-		} else {
-			try {
-				ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-			    reCaptcha.setPrivateKey("6LdHqekSAAAAAD23pmQUF_9scOyhkYwJg2ldL3FK");
-			    reCaptcha.setPublicKey("6LdHqekSAAAAAEDf5-psWTX5m90DLpkdq5mP2VSJ");
-			    String challenge = request.getParameter("recaptcha_challenge_field");
-			    String uresponse = request.getParameter("recaptcha_response_field");
-			    
-			    
-			    ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer("", challenge, uresponse);
-			
-			    if (reCaptchaResponse.isValid()) {
-			    	recaptcher = true;
-			    } else {
-			    	recaptcher = false;
-			    	SessionErrors.add(request, "recaptcha-required");
-			    }
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println(e.getMessage());
-				SessionErrors.add(request, "recaptcha-required");
-			}
-		}*/
-
+		
 		Candidate candidate = candidateFromRequest(request);
 		//MasterCandidate mastercandidate = masterCandidateFromRequest(request);
 		ArrayList<String> errors = new ArrayList<String>();
@@ -109,23 +84,6 @@ public class CandidatePropose extends MVCPortlet {
         System.out.println("--------");
         return null;
     }
-	private MasterCandidate masterCandidateFromRequest(PortletRequest request) {
-		MasterCandidateImpl candidate = new MasterCandidateImpl();
-		candidate.setName(ParamUtil.getString(request, "name"));
-		candidate.setUrl(ParamUtil.getString(request, "url"));
-		candidate.setContactperson(ParamUtil.getString(request, "contactperson"));
-		candidate.setCandidatetype(ParamUtil.getString(request, "candidatetype"));
-		candidate.setCountry(ParamUtil.getString(request, "country"));
-		candidate.setDiseasescodes(ParamUtil.getString(request, "diseasescodes"));
-		candidate.setDiseasesfreetext(ParamUtil.getString(request, "diseasesfreetext"));
-		candidate.setComment(ParamUtil.getString(request, "comment"));
-		candidate.setAddress(ParamUtil.getString(request, "address"));
-		candidate.setMail(ParamUtil.getString(request, "mail"));
-		candidate.setHead(ParamUtil.getString(request, "head"));
-		candidate.setSource(ParamUtil.getString(request, "source"));
-		candidate.setState("0");
-		return candidate;
-	}
 	
 	private Candidate candidateFromRequest(PortletRequest request) {
 		CandidateImpl candidate = new CandidateImpl();
@@ -145,6 +103,7 @@ public class CandidatePropose extends MVCPortlet {
 		candidate.setSubmittername(ParamUtil.getString(request, "submittername"));
 		candidate.setSubmitteremail(ParamUtil.getString(request, "submitteremail"));
 		candidate.setValidated(ParamUtil.getBoolean(request, "validated"));
+		candidate.setCandidatesubtype(ParamUtil.getString(request, "candidatesubtype"));
 		candidate.setState("0");
 		return candidate;
 	}

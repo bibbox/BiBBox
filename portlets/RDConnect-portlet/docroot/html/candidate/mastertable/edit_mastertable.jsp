@@ -95,9 +95,9 @@
 			<aui:input type="hidden" name="state" value="P" />
 		<% } else { %>
 			<aui:select name="state" cssClass="propose" label="Data checked">
-				<aui:option value="X" selected='<%= master.getState().equalsIgnoreCase("X") ? true : false %>' >rejected</aui:option>
+				<aui:option value="X" selected='<%= master.getState().equalsIgnoreCase("X") ? true : false %>' >deleted</aui:option>
 				<aui:option value="0" selected='<%= master.getState().equalsIgnoreCase("0") ? true : false %>' >not decided</aui:option>
-				<aui:option value="1" selected='<%= master.getState().equalsIgnoreCase("1") ? true : false %>' >data checked</aui:option>
+				<aui:option value="1" selected='<%= master.getState().equalsIgnoreCase("1") ? true : false %>' >accepted</aui:option>
 			</aui:select>
 		<% } %>
 	</aui:column>
@@ -105,36 +105,8 @@
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button type="submit" onClick='<%= renderResponse.getNamespace() + "saveDataMasterTable();" %>' />
+		<aui:button type="submit" />
 
 		<aui:button type="cancel"  onClick="<%= redirect %>" />
 	</aui:button-row>
 </aui:form>
-
-<aui:script>
-	function <portlet:namespace />saveDataMasterTable() {
-		document.<portlet:namespace />fm.<portlet:namespace />diseasescodesauto.value = 'xyz';
-	}
-</aui:script>
-
-<aui:script use="aui-datatable,aui-datatype,datatable-sort,aui-toggler,event, node">
-AUI().use(
-  'aui-toggler',
-  function(Y) {
-    new Y.TogglerDelegate(
-      {
-        animated: true,
-        closeAllOnExpand: true,
-        container: '#DiseasTableToggler',
-        content: '.content',
-        expanded: false,
-        header: '.header',
-        transition: {
-          duration: 0.2,
-          easing: 'cubic-bezier(0, 0.1, 0, 1)'
-        }
-      }
-    );
-  }
-);
-</aui:script>
