@@ -1651,5 +1651,11 @@ div.portlet-body {
 .aui .button-holder {
 	margin: 0;
 }
+.portlet-topper-toolbar {
+	display: none;
+}
+.portlet-borderless-bar {
+	display: none;
+}
 
 @import url(signin.css);
