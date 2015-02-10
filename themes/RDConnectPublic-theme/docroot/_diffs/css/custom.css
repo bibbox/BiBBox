@@ -762,3 +762,9 @@ body {
 		}
 	}
 }
+.portlet-topper-toolbar {
+	display: none;
+}
+.portlet-borderless-bar {
+	display: none;
+}
