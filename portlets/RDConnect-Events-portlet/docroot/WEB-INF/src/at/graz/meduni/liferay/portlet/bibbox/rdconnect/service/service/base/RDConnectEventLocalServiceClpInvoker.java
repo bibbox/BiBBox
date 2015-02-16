@@ -117,8 +117,9 @@ public class RDConnectEventLocalServiceClpInvoker {
 		_methodName38 = "createEvent";
 
 		_methodParameterTypes38 = new String[] {
-				"java.util.Date", "long", "long", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String"
+				"java.lang.String", "java.util.Date", "long", "long",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String"
 			};
 	}
 
@@ -225,11 +226,11 @@ public class RDConnectEventLocalServiceClpInvoker {
 
 		if (_methodName38.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
-			RDConnectEventLocalServiceUtil.createEvent((java.util.Date)arguments[0],
-				((Long)arguments[1]).longValue(),
-				((Long)arguments[2]).longValue(),
-				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
-				(java.lang.String)arguments[5], (java.lang.String)arguments[6]);
+			RDConnectEventLocalServiceUtil.createEvent((java.lang.String)arguments[0],
+				(java.util.Date)arguments[1], ((Long)arguments[2]).longValue(),
+				((Long)arguments[3]).longValue(),
+				(java.lang.String)arguments[4], (java.lang.String)arguments[5],
+				(java.lang.String)arguments[6], (java.lang.String)arguments[7]);
 
 			return null;
 		}

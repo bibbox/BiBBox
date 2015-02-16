@@ -249,7 +249,8 @@ public interface RDConnectEventLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public void createEvent(java.util.Date eventdate, long organizationId,
-		long userId, java.lang.String shorttext, java.lang.String longtext,
+	public void createEvent(java.lang.String eventtype,
+		java.util.Date eventdate, long organizationId, long userId,
+		java.lang.String shorttext, java.lang.String longtext,
 		java.lang.String link, java.lang.String restricted);
 }

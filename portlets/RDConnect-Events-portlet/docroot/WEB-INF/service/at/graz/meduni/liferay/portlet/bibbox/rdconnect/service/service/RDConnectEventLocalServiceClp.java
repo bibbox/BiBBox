@@ -118,8 +118,9 @@ public class RDConnectEventLocalServiceClp implements RDConnectEventLocalService
 		_methodName19 = "createEvent";
 
 		_methodParameterTypes19 = new String[] {
-				"java.util.Date", "long", "long", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String"
+				"java.lang.String", "java.util.Date", "long", "long",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String"
 			};
 	}
 
@@ -674,14 +675,17 @@ public class RDConnectEventLocalServiceClp implements RDConnectEventLocalService
 	}
 
 	@Override
-	public void createEvent(java.util.Date eventdate, long organizationId,
-		long userId, java.lang.String shorttext, java.lang.String longtext,
+	public void createEvent(java.lang.String eventtype,
+		java.util.Date eventdate, long organizationId, long userId,
+		java.lang.String shorttext, java.lang.String longtext,
 		java.lang.String link, java.lang.String restricted) {
 		try {
 			_invokableLocalService.invokeMethod(_methodName19,
 				_methodParameterTypes19,
 				new Object[] {
-					ClpSerializer.translateInput(eventdate),
+					ClpSerializer.translateInput(eventtype),
+					
+				ClpSerializer.translateInput(eventdate),
 					
 				organizationId,
 					

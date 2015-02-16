@@ -64,6 +64,7 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "eventId", Types.BIGINT },
 			{ "eventdate", Types.TIMESTAMP },
+			{ "eventtype", Types.VARCHAR },
 			{ "organizationId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "shorttext", Types.VARCHAR },
@@ -71,7 +72,7 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 			{ "link", Types.VARCHAR },
 			{ "restricted", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.event (eventId LONG not null primary key,eventdate DATE null,organizationId LONG,userId LONG,shorttext VARCHAR(75) null,longtext_ VARCHAR(75) null,link VARCHAR(75) null,restricted VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.event (eventId LONG not null primary key,eventdate DATE null,eventtype VARCHAR(75) null,organizationId LONG,userId LONG,shorttext VARCHAR(75) null,longtext_ VARCHAR(75) null,link VARCHAR(75) null,restricted VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.event";
 	public static final String ORDER_BY_JPQL = " ORDER BY rdConnectEvent.eventdate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.event.eventdate ASC";
@@ -131,6 +132,7 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 
 		attributes.put("eventId", getEventId());
 		attributes.put("eventdate", getEventdate());
+		attributes.put("eventtype", getEventtype());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("userId", getUserId());
 		attributes.put("shorttext", getShorttext());
@@ -153,6 +155,12 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 
 		if (eventdate != null) {
 			setEventdate(eventdate);
+		}
+
+		String eventtype = (String)attributes.get("eventtype");
+
+		if (eventtype != null) {
+			setEventtype(eventtype);
 		}
 
 		Long organizationId = (Long)attributes.get("organizationId");
@@ -220,6 +228,21 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 
 	public Date getOriginalEventdate() {
 		return _originalEventdate;
+	}
+
+	@Override
+	public String getEventtype() {
+		if (_eventtype == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _eventtype;
+		}
+	}
+
+	@Override
+	public void setEventtype(String eventtype) {
+		_eventtype = eventtype;
 	}
 
 	@Override
@@ -355,6 +378,7 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 
 		rdConnectEventImpl.setEventId(getEventId());
 		rdConnectEventImpl.setEventdate(getEventdate());
+		rdConnectEventImpl.setEventtype(getEventtype());
 		rdConnectEventImpl.setOrganizationId(getOrganizationId());
 		rdConnectEventImpl.setUserId(getUserId());
 		rdConnectEventImpl.setShorttext(getShorttext());
@@ -433,6 +457,14 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 			rdConnectEventCacheModel.eventdate = Long.MIN_VALUE;
 		}
 
+		rdConnectEventCacheModel.eventtype = getEventtype();
+
+		String eventtype = rdConnectEventCacheModel.eventtype;
+
+		if ((eventtype != null) && (eventtype.length() == 0)) {
+			rdConnectEventCacheModel.eventtype = null;
+		}
+
 		rdConnectEventCacheModel.organizationId = getOrganizationId();
 
 		rdConnectEventCacheModel.userId = getUserId();
@@ -474,12 +506,14 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
 		sb.append(", eventdate=");
 		sb.append(getEventdate());
+		sb.append(", eventtype=");
+		sb.append(getEventtype());
 		sb.append(", organizationId=");
 		sb.append(getOrganizationId());
 		sb.append(", userId=");
@@ -499,7 +533,7 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -513,6 +547,10 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 		sb.append(
 			"<column><column-name>eventdate</column-name><column-value><![CDATA[");
 		sb.append(getEventdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>eventtype</column-name><column-value><![CDATA[");
+		sb.append(getEventtype());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
@@ -551,6 +589,7 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 	private long _eventId;
 	private Date _eventdate;
 	private Date _originalEventdate;
+	private String _eventtype;
 	private long _organizationId;
 	private long _userId;
 	private String _userUuid;

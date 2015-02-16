@@ -89,6 +89,21 @@ public interface RDConnectEventModel extends BaseModel<RDConnectEvent> {
 	public void setEventdate(Date eventdate);
 
 	/**
+	 * Returns the eventtype of this r d connect event.
+	 *
+	 * @return the eventtype of this r d connect event
+	 */
+	@AutoEscape
+	public String getEventtype();
+
+	/**
+	 * Sets the eventtype of this r d connect event.
+	 *
+	 * @param eventtype the eventtype of this r d connect event
+	 */
+	public void setEventtype(String eventtype);
+
+	/**
 	 * Returns the organization ID of this r d connect event.
 	 *
 	 * @return the organization ID of this r d connect event

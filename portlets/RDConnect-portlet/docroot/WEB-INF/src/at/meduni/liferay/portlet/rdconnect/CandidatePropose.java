@@ -145,10 +145,7 @@ public class CandidatePropose extends MVCPortlet {
 	 * RD-Connect Event System add event entry
 	 */
 	private void addEventEntry(Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted) {
-		//RDConnectEventLocalServiceUtil
-		//RDConnectEventLocalServiceUtil.
-		//RDConnectEvent rdconnectevent = 
-		//RDConnectEventLocalServiceUtil.createEvent(eventdate, organizationId, userId, shorttext, longtext, link, restricted);
+		RDConnectEventLocalServiceUtil.createEvent("Candidate Propose", eventdate, organizationId, userId, shorttext, longtext, link, restricted);
 	}
 
 }

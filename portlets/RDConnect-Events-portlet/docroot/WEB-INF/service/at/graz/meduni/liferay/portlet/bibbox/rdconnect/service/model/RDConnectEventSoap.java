@@ -32,6 +32,7 @@ public class RDConnectEventSoap implements Serializable {
 
 		soapModel.setEventId(model.getEventId());
 		soapModel.setEventdate(model.getEventdate());
+		soapModel.setEventtype(model.getEventtype());
 		soapModel.setOrganizationId(model.getOrganizationId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setShorttext(model.getShorttext());
@@ -106,6 +107,14 @@ public class RDConnectEventSoap implements Serializable {
 		_eventdate = eventdate;
 	}
 
+	public String getEventtype() {
+		return _eventtype;
+	}
+
+	public void setEventtype(String eventtype) {
+		_eventtype = eventtype;
+	}
+
 	public long getOrganizationId() {
 		return _organizationId;
 	}
@@ -156,6 +165,7 @@ public class RDConnectEventSoap implements Serializable {
 
 	private long _eventId;
 	private Date _eventdate;
+	private String _eventtype;
 	private long _organizationId;
 	private long _userId;
 	private String _shorttext;

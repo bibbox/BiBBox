@@ -4,6 +4,7 @@
 	<model name="at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent">
 		<field name="eventId" type="long" />
 		<field name="eventdate" type="Date" />
+		<field name="eventtype" type="String" />
 		<field name="organizationId" type="long" />
 		<field name="userId" type="long" />
 		<field name="shorttext" type="String" />

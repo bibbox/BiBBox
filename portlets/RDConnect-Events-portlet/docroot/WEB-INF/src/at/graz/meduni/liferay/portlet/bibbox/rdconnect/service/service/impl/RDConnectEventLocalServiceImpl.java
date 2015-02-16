@@ -43,7 +43,7 @@ public class RDConnectEventLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil} to access the r d connect event local service.
 	 */
-	public void createEvent(Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted) {
+	public void createEvent(String eventtype, Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted) {
 		RDConnectEventImpl rdconnectevent = new RDConnectEventImpl();
 		rdconnectevent.setEventdate(eventdate);
 		rdconnectevent.setOrganizationId(organizationId);
@@ -52,6 +52,7 @@ public class RDConnectEventLocalServiceImpl
 		rdconnectevent.setLongtext(longtext);
 		rdconnectevent.setLink(link);
 		rdconnectevent.setRestricted(restricted);
+		rdconnectevent.setEventtype(eventtype);
 		try {
 			RDConnectEventLocalServiceUtil.addRDConnectEvent(rdconnectevent);
 		} catch (SystemException e) {

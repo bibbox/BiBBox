@@ -289,11 +289,12 @@ public class RDConnectEventLocalServiceWrapper
 	}
 
 	@Override
-	public void createEvent(java.util.Date eventdate, long organizationId,
-		long userId, java.lang.String shorttext, java.lang.String longtext,
+	public void createEvent(java.lang.String eventtype,
+		java.util.Date eventdate, long organizationId, long userId,
+		java.lang.String shorttext, java.lang.String longtext,
 		java.lang.String link, java.lang.String restricted) {
-		_rdConnectEventLocalService.createEvent(eventdate, organizationId,
-			userId, shorttext, longtext, link, restricted);
+		_rdConnectEventLocalService.createEvent(eventtype, eventdate,
+			organizationId, userId, shorttext, longtext, link, restricted);
 	}
 
 	/**

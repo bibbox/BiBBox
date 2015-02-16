@@ -8,6 +8,7 @@
 	<entity name="RDConnectEvent" local-service="true" remote-service="false" table="rdconnect.event">
 		<column name="eventId" type="long" primary="true" />
 		<column name="eventdate" type="Date"></column>
+		<column name="eventtype" type="String"></column>
 		<column name="organizationId" type="long" />
 		<column name="userId" type="long" />
 		<column name="shorttext" type="String" />
