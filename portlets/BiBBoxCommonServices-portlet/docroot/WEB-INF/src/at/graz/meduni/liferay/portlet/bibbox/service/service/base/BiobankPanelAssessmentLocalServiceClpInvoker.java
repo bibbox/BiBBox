@@ -125,6 +125,12 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 		_methodName63 = "getAssessmentsForOrganization";
 
 		_methodParameterTypes63 = new String[] { "long" };
+
+		_methodName64 = "addBiobankPanelAssessment";
+
+		_methodParameterTypes64 = new String[] {
+				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -243,6 +249,11 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 			return BiobankPanelAssessmentLocalServiceUtil.getAssessmentsForOrganization(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return BiobankPanelAssessmentLocalServiceUtil.addBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -288,4 +299,6 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 	private String[] _methodParameterTypes62;
 	private String _methodName63;
 	private String[] _methodParameterTypes63;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
 }

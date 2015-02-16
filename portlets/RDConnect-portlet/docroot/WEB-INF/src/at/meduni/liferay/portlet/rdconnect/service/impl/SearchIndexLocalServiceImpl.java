@@ -321,7 +321,15 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 				  			}
 				  		 }
 				  	}
+				  	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+				  	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+					if(organizationtype.equalsIgnoreCase("Biobank")) {
+						orgPath = orgPath + "/bb_home";	
+					} else {
+						orgPath = orgPath + "/reg_home";
+					} 
 					searchresultstring += "{Name: '" + organization.getName().replaceAll("'", "&lsquo;") + "', "
+							+ "OrganizationLink: '" + orgPath + "',"
 							+ "Type: '" + organization.getExpandoBridge().getAttribute("Organization Type").toString() + "',"
 							+ "'Number of Cases': " + diseascount + ","
 							+ "'Data Access Committe': '" + dataaccess + "',"

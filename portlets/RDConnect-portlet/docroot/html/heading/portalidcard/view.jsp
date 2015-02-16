@@ -114,7 +114,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -143,7 +143,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -171,7 +171,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -200,7 +200,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -227,7 +227,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -255,7 +255,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}

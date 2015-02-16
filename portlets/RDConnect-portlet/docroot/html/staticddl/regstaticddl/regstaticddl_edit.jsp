@@ -96,7 +96,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			<%
 			String associated_data_available = ddlrecord.getFieldValue("Associated_data_available").toString();
 			%>
-			<aui:select name="Associated_data_available" label="Associated data available" multiple="true" showEmptyOption="true">
+			<aui:select name="Associated_data_available" label="Associated data available" multiple="true" >
 				<% 
 				for(String option : field_options.get("Associated_data_available").keySet()) {
 					%>
@@ -109,7 +109,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			<%
 			String imaging_available = ddlrecord.getFieldValue("Imaging_available").toString();
 			%>
-			<aui:select name="Imaging_available" label="Imaging available" multiple="true"  showEmptyOption="true">
+			<aui:select name="Imaging_available" label="Imaging available" multiple="true" >
 				<% 
 				for(String option : field_options.get("Imaging_available").keySet()) {
 					%>
@@ -122,7 +122,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			<%
 			String the_registry_biobanks_is_listed_in_other_inventories_networks = ddlrecord.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks").toString();
 			%>
-			<aui:select name="The_registry_biobanks_is_listed_in_other_inventories_networks" label="The registry is listed in other inventories/networks" multiple="true"  showEmptyOption="true">
+			<aui:select name="The_registry_biobanks_is_listed_in_other_inventories_networks" label="The registry is listed in other inventories/networks" multiple="true"  >
 				<% 
 				for(String option : field_options.get("The_registry_biobanks_is_listed_in_other_inventories_networks").keySet()) {
 					%>

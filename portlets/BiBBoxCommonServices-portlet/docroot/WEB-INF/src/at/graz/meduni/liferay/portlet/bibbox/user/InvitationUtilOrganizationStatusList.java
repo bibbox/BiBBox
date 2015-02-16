@@ -5,9 +5,7 @@ import javax.portlet.ActionResponse;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalServiceUtil;
-import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil;
 
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
