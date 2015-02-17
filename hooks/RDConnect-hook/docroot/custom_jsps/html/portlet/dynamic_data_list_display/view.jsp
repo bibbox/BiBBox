@@ -19,7 +19,6 @@
 
 <%
 DDLRecordSet recordSet = null;
-String editimgpath = "/images/editorange.png";
 			
 try {
 	if (Validator.isNotNull(recordSetId)) {
@@ -33,7 +32,7 @@ try {
 <!-- RDC Edit Link -->
 <!-- Edit Record -->
 <% 
-
+String editimgpath = "/images/editorange.png";
 long organizationId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 if (currentGroup.isOrganization()) {
@@ -78,8 +77,8 @@ if (currentGroup.isOrganization()) {
 				</portlet:renderURL>
 				
 				<div style="position: relative;width: 100%;">
-					<div style="width:30px;height: 30px;position:absolute;right:25px;top: -55px;z-index: 400;">
-						<aui:a href="<%= editRecordURL %>"><img style="width: 18px;height: 18px;" alt="logo" src="<%= editimgpath %>" width="10px" height="10px" /></aui:a>
+					<div style="width:30px;height: 30px;position:absolute;right:25px;top: -40px;z-index: 400;">
+						<aui:a href="<%= editRecordURL %>"><img style="width: 15px;height: 15px;" alt="logo" src="<%= editimgpath %>" width="15px" height="15px" /></aui:a>
 					</div>
 				</div>
 		<%
