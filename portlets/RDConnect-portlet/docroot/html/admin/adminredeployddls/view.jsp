@@ -16,7 +16,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
   <ul class="nav nav-tabs">
     <li class="active"><a href="#tab-1">Rename DDls</a></li>
     <li><a href="#tab-2">Add DDls to all Organisations</a></li>
-    <li><a href="#tab-3">Tab #3</a></li>
+    <li><a href="#tab-3">Add Folder</a></li>
   </ul>
 
 <!-- --------------------------------------------------------------------------------- --> 
@@ -51,7 +51,16 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
     </div>
 <!-- --------------------------------------------------------------------------------- -->
     <div id="tab-3" class="tab-pane">
-      <p>Aliquid ipsum asperiores alias temporibus autem impedit soluta ut id iure explicabo veritatis consectetur debitis eaque recusandae odit quas nobis maxime saepe. Incidunt amet obcaecati. Ducimus soluta unde repellat laboriosam fuga modi rem itaque!</p>
+      <portlet:actionURL name='<%= "addFolders" %>' var="addFoldersURL" windowState="normal" />
+		<aui:form action="<%= addFoldersURL %>" method="POST" name="fm">
+			<aui:fieldset>
+				<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
+				<aui:input type="text" name="foldername" value="" />
+			</aui:fieldset>
+			<aui:button-row>
+				<aui:button type="submit"/>
+			</aui:button-row>
+		</aui:form>
     </div>
   </div>
 <!-- --------------------------------------------------------------------------------- --> 

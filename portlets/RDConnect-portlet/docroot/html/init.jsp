@@ -81,6 +81,10 @@
 
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil"%>
 
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"%>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil"%>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder"%>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 

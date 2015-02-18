@@ -78,7 +78,7 @@ if (currentGroup.isOrganization()) {
   				recordid = record.getRecordId();
   				 if(record.getFieldValue("Description") != null) {
   					shortdiscription = record.getFieldValue("Description").toString();
-  					shortdiscription = shortdiscription.replaceAll("<.*?>", "");
+  					shortdiscription = shortdiscription.replaceAll("<.*?>", "").replaceAll("\"\\]|\\[\"", "");
   				} 
   			}
   		 } else {
@@ -270,8 +270,15 @@ if (currentGroup.isOrganization()) {
   			}
   		}
   	} 
-%>
-<%
+  	// Count Documents
+  	int filecount = 0;
+  	try {
+	  	PortalIDCard idcard = new PortalIDCard();
+	  	filecount = idcard.getFilecount(themeDisplay.getScopeGroupId());
+  	} catch (Exception ex) {
+  		ex.printStackTrace();
+  	}
+
 // Edit link
 	boolean portaleditorrole = false;
     boolean biobankregistryownerrole = false;
@@ -406,6 +413,9 @@ if (currentGroup.isOrganization()) {
 				}
 				if(l.equalsIgnoreCase("Accessibility")) {
 					pageinformation = accessibility;
+				}
+				if(l.equalsIgnoreCase("Documents")) {
+					pageinformation = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates\">[" + filecount + "]</span>";
 				}
 				
 				String items = "";

@@ -30,7 +30,10 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
   		field_options.get(ddlfield).put(fieldmap.get(key_options).get("value"), fieldmap.get(key_options).get("label"));
   	}
 	
-	String host_institute = ddlrecord.getFieldValue("Host_institution_is_a").toString();
+  	String host_institute = "";
+  	if(ddlrecord.getFieldValue("Host_institution_is_a") != null) {
+		host_institute = ddlrecord.getFieldValue("Host_institution_is_a").toString();
+  	}
 	String displayclass = "";
 	%>
 	<portlet:actionURL name="updateCoreDDL" var="updateCoreDDLURL" windowState="normal" />
@@ -47,7 +50,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			        function <portlet:namespace />initEditor() { return "<%= UnicodeFormatter.toString(ddlrecord.getFieldValue("Description").toString().replaceAll("\"\\]|\\[\"", "")) %>"; }
 			    </script>
 			</aui:field-wrapper>
-			<aui:input type="text" name="Hoste_institute" label="Hoste institute" value='<%= ddlrecord.getFieldValue("Hoste_institute") %>' />
+			<!-- Host Institute -->
 			<aui:select name="Host_institution_is_a" label="Type of host institution" >
 				<% 
 				for(String option : field_options.get("Host_institution_is_a").keySet()) {
@@ -66,9 +69,57 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			<div id="Type_of_host_institution_display" class="<%= displayclass %>">
 				<aui:input type="text" name="Type_of_host_institution" label="Other specific host institution type" value='<%= ddlrecord.getFieldValue("Type_of_host_institution") %>' />
 			</div>
-			<aui:input type="text" name="Text5085" label="Source of funding" value='<%= ddlrecord.getFieldValue("Text5085") %>' />
+			<!-- Source of Funding -->
 			<%
-			String target_population_of_the_registry = ddlrecord.getFieldValue("Target_population_of_the_registry").toString();
+			String source_of_funding = "";
+			if(ddlrecord.getFieldValue("Source_of_funding") != null) {
+				source_of_funding = ddlrecord.getFieldValue("Source_of_funding").toString();
+		  	}
+			%>
+			<aui:select name="Source_of_funding" label='Source of funding' >
+				<% 
+				for(String option : field_options.get("Source_of_funding").keySet()) {
+					%>
+					<aui:option selected='<%= source_of_funding.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= field_options.get("Source_of_funding").get(option) %>' /></aui:option>
+					<%
+				}
+				%>
+			</aui:select>
+			<%
+			displayclass = "notdisplayInput";
+			if(source_of_funding.contains("Other - please specify")) {
+				displayclass = "notdisplayInput";
+			}
+			%>
+			<div id="Source_of_funding_display" class="<%= displayclass %>">
+				<aui:input type="text" name="Text5085" label='Other specific source of funding' value='<%= ddlrecord.getFieldValue("Text5085") %>' />
+			</div>
+			<!-- Target Country -->
+			<%
+			String[] countrylist = CandidateLocalServiceUtil.getCountryNames();
+			String targetcountry = "";
+			if(ddlrecord.getFieldValue("countryCode") != null) {
+				targetcountry = ddlrecord.getFieldValue("countryCode").toString();
+			}
+			%>
+			<aui:select name="countryCode" label="Target Country" >
+				<% 
+				for(String option : countrylist) {
+					if(option.equalsIgnoreCase("all")) {
+						option = "International";
+					}
+					%>
+					<aui:option selected='<%= targetcountry.contains(option) %>' value="<%= option %>"><liferay-ui:message key='<%= option %>' /></aui:option>
+					<%
+				}
+				%>
+			</aui:select>
+			<!-- Target Population -->
+			<%
+			String target_population_of_the_registry = "";
+			if(ddlrecord.getFieldValue("Target_population_of_the_registry") != null) {
+				target_population_of_the_registry = ddlrecord.getFieldValue("Target_population_of_the_registry").toString();
+			}
 			%>
 			<aui:select name="Target_population_of_the_registry" label="Target population of the registry" >
 				<% 
@@ -81,7 +132,10 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			</aui:select>
 			<aui:input type="text" name="year_of_establishment" label="Year of establishment" value='<%= ddlrecord.getFieldValue("year_of_establishment") %>' />
 			<%
-			String ontologies = ddlrecord.getFieldValue("Ontologies").toString();
+			String ontologies = "";
+			if(ddlrecord.getFieldValue("Ontologies") != null) {
+				ontologies = ddlrecord.getFieldValue("Ontologies").toString();
+			}
 			%>
 			<aui:select name="Ontologies" label="Ontologies" >
 				<% 
@@ -94,7 +148,10 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			</aui:select>
 			<aui:input type="text" name="Additional_Ontologies" label="Additional Ontologies" value='<%= ddlrecord.getFieldValue("Additional_Ontologies") %>' />
 			<%
-			String associated_data_available = ddlrecord.getFieldValue("Associated_data_available").toString();
+			String associated_data_available = "";
+			if(ddlrecord.getFieldValue("Associated_data_available") != null) {
+				associated_data_available = ddlrecord.getFieldValue("Associated_data_available").toString();
+			}
 			%>
 			<aui:select name="Associated_data_available" label="Associated data available" multiple="true" >
 				<% 
@@ -107,7 +164,10 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			</aui:select>
 			<aui:input type="text" name="Additional_Associated_data_available" label="Additional Associated data available" value='<%= ddlrecord.getFieldValue("Additional_Associated_data_available") %>' />
 			<%
-			String imaging_available = ddlrecord.getFieldValue("Imaging_available").toString();
+			String imaging_available = "";
+			if(ddlrecord.getFieldValue("Imaging_available") != null) {
+				imaging_available = ddlrecord.getFieldValue("Imaging_available").toString();
+			}
 			%>
 			<aui:select name="Imaging_available" label="Imaging available" multiple="true" >
 				<% 
@@ -120,7 +180,10 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			</aui:select>
 			<aui:input type="text" name="Additional_Imaging_available" label="Additional Imaging available" value='<%= ddlrecord.getFieldValue("Additional_Imaging_available") %>' />
 			<%
-			String the_registry_biobanks_is_listed_in_other_inventories_networks = ddlrecord.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks").toString();
+			String the_registry_biobanks_is_listed_in_other_inventories_networks = "";
+			if(ddlrecord.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks") != null) {
+				the_registry_biobanks_is_listed_in_other_inventories_networks = ddlrecord.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks").toString();
+			}
 			%>
 			<aui:select name="The_registry_biobanks_is_listed_in_other_inventories_networks" label="The registry is listed in other inventories/networks" multiple="true"  >
 				<% 
@@ -153,6 +216,21 @@ AUI().use('aui-base', function(A){
 		} else {
 			//alert("Hide");
 			A.one("#Type_of_host_institution_display").addClass('notdisplayInput');
+			
+		}
+	});
+});
+</aui:script>
+<aui:script use="node,change">
+AUI().use('aui-base', function(A){
+	A.one("#<portlet:namespace/>Source_of_funding").on('change',function(){
+		var inputObject=A.one("#<portlet:namespace/>Source_of_funding");
+		if(inputObject.get('value') == "Other - please specify") {
+			A.one("#Source_of_funding_display").removeClass('notdisplayInput');
+			//alert(inputObject.get('value'));
+		} else {
+			//alert("Hide");
+			A.one("#Source_of_funding_display").addClass('notdisplayInput');
 			
 		}
 	});

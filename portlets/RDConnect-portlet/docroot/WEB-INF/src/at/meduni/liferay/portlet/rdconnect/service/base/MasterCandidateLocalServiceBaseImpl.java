@@ -20,6 +20,7 @@ import at.meduni.liferay.portlet.rdconnect.service.persistence.AQRRatingPersiste
 import at.meduni.liferay.portlet.rdconnect.service.persistence.CandidatePersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidateLinkCandidatePersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidatePersistence;
+import at.meduni.liferay.portlet.rdconnect.service.persistence.RDCRecommenderPersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.SearchIndexPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -437,6 +438,44 @@ public abstract class MasterCandidateLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the r d c recommender local service.
+	 *
+	 * @return the r d c recommender local service
+	 */
+	public at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalService getRDCRecommenderLocalService() {
+		return rdcRecommenderLocalService;
+	}
+
+	/**
+	 * Sets the r d c recommender local service.
+	 *
+	 * @param rdcRecommenderLocalService the r d c recommender local service
+	 */
+	public void setRDCRecommenderLocalService(
+		at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalService rdcRecommenderLocalService) {
+		this.rdcRecommenderLocalService = rdcRecommenderLocalService;
+	}
+
+	/**
+	 * Returns the r d c recommender persistence.
+	 *
+	 * @return the r d c recommender persistence
+	 */
+	public RDCRecommenderPersistence getRDCRecommenderPersistence() {
+		return rdcRecommenderPersistence;
+	}
+
+	/**
+	 * Sets the r d c recommender persistence.
+	 *
+	 * @param rdcRecommenderPersistence the r d c recommender persistence
+	 */
+	public void setRDCRecommenderPersistence(
+		RDCRecommenderPersistence rdcRecommenderPersistence) {
+		this.rdcRecommenderPersistence = rdcRecommenderPersistence;
+	}
+
+	/**
 	 * Returns the search index local service.
 	 *
 	 * @return the search index local service
@@ -666,6 +705,10 @@ public abstract class MasterCandidateLocalServiceBaseImpl
 	protected at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService masterCandidateLinkCandidateLocalService;
 	@BeanReference(type = MasterCandidateLinkCandidatePersistence.class)
 	protected MasterCandidateLinkCandidatePersistence masterCandidateLinkCandidatePersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalService.class)
+	protected at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalService rdcRecommenderLocalService;
+	@BeanReference(type = RDCRecommenderPersistence.class)
+	protected RDCRecommenderPersistence rdcRecommenderPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalService.class)
 	protected at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalService searchIndexLocalService;
 	@BeanReference(type = SearchIndexPersistence.class)

@@ -18,6 +18,7 @@ import at.meduni.liferay.portlet.rdconnect.model.AQRRatingClp;
 import at.meduni.liferay.portlet.rdconnect.model.CandidateClp;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidateClp;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidateClp;
+import at.meduni.liferay.portlet.rdconnect.model.RDCRecommenderClp;
 import at.meduni.liferay.portlet.rdconnect.model.SearchIndexClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -123,6 +124,10 @@ public class ClpSerializer {
 			return translateInputMasterCandidateLinkCandidate(oldModel);
 		}
 
+		if (oldModelClassName.equals(RDCRecommenderClp.class.getName())) {
+			return translateInputRDCRecommender(oldModel);
+		}
+
 		if (oldModelClassName.equals(SearchIndexClp.class.getName())) {
 			return translateInputSearchIndex(oldModel);
 		}
@@ -183,6 +188,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputRDCRecommender(BaseModel<?> oldModel) {
+		RDCRecommenderClp oldClpModel = (RDCRecommenderClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getRDCRecommenderRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputSearchIndex(BaseModel<?> oldModel) {
 		SearchIndexClp oldClpModel = (SearchIndexClp)oldModel;
 
@@ -228,6 +243,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl")) {
 			return translateOutputMasterCandidateLinkCandidate(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.rdconnect.model.impl.RDCRecommenderImpl")) {
+			return translateOutputRDCRecommender(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -336,6 +356,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.meduni.liferay.portlet.rdconnect.NoSuchRDCRecommenderException")) {
+			return new at.meduni.liferay.portlet.rdconnect.NoSuchRDCRecommenderException();
+		}
+
+		if (className.equals(
 					"at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException")) {
 			return new at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException();
 		}
@@ -380,6 +405,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setMasterCandidateLinkCandidateRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputRDCRecommender(BaseModel<?> oldModel) {
+		RDCRecommenderClp newModel = new RDCRecommenderClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setRDCRecommenderRemoteModel(oldModel);
 
 		return newModel;
 	}

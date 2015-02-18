@@ -147,4 +147,16 @@
 			<finder-column name="value" />
 		</finder>
 	</entity>
+	<entity name="RDCRecommender" local-service="true" remote-service="false" table="rdconnect.rdcrecommender">
+		<!-- PK fields -->
+		<column name="rdcrecommenderid" type="long" primary="true" />
+		<!-- Other fields -->
+		<column name="organisationId" type="long" />
+		<column name="recommendedorganisationId" type="long" />
+		<column name="recommendervalue" type="long" />
+		<finder name="Recommendation" return-type="RDCRecommender">
+			<finder-column name="organisationId" />
+			<finder-column name="recommendedorganisationId" />
+		</finder>
+	</entity>
 </service-builder>

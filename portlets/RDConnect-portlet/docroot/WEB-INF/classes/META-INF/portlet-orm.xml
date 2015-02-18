@@ -107,6 +107,17 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.RDCRecommenderModelImpl">
+		<attributes>
+			<id name="rdcrecommenderid" />
+			<basic name="organisationId" />
+			<basic name="recommendedorganisationId" />
+			<basic name="recommendervalue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.SearchIndexModelImpl">
 		<attributes>
 			<id name="searchid" />
@@ -136,6 +147,10 @@
 	</entity>
 	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl" name="MasterCandidateLinkCandidate">
 		<table name="rdconnect.master_candidate_link_candidate" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.RDCRecommenderImpl" name="RDCRecommender">
+		<table name="rdconnect.rdcrecommender" />
 		<attributes />
 	</entity>
 	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.SearchIndexImpl" name="SearchIndex">

@@ -29,7 +29,6 @@ public class RDConnectSearchSchedule implements MessageListener {
 
 	@Override
 	public void receive(Message message) throws MessageListenerException {
-		// TODO Auto-generated method stub
 		System.out.println("----------------------");
 		System.out.println("RDConnectSearchSchedule Start");
 		System.out.println(new Date().toString());

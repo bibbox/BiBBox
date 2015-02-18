@@ -127,7 +127,7 @@ if(organizationId != 0) {
 			<aui:input name="bibbox_cs_lastname" label="Last Name" type="text" value ="<%= lastname %>"/>
 			
 			
-			<aui:select name="bibbox_cs_position" label="Position" value ="" multiple="true" cssClass="bibbox_cs_position_selection">
+			<aui:select name="bibbox_cs_position" label="Role within the Organization" value ="" multiple="true" cssClass="bibbox_cs_position_selection">
 				<aui:option value=""></aui:option>
 				<aui:option value="Coordinator/Principal Investigator" selected='<%= position.contains("Coordinator/Principal Investigator") ? true : false %>' >Coordinator/Principal Investigator</aui:option>
 				<aui:option value="Data Provider/Contributor" selected='<%= position.contains("Data Provider/Contributor") ? true : false %>' >Data Provider/Contributor</aui:option>
