@@ -92,14 +92,18 @@ public class PortalIDCard extends MVCPortlet {
 		List<RDCOrganizationUserAccess> serachresults = RDCOrganizationUserAccessLocalServiceUtil.dynamicQuery(dynamicQuery);
 		if(serachresults != null) {
 			if(serachresults.size() != 0) {
-				System.out.println("Somthing found");
+				for(RDCOrganizationUserAccess serachresult : serachresults) {
+					serachresult.setLastaccess(new Date());
+					RDCOrganizationUserAccessLocalServiceUtil.updateRDCOrganizationUserAccess(serachresult);
+				}
+				//System.out.println("Somthing found");
 			} else {
 				try {
 					RDCOrganizationUserAccessLocalServiceUtil.addRDCOrganizationUserAccess(organizationid, userid, ipaddress);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				System.out.println("Search 0");
+				//System.out.println("Search 0");
 			}
 		} else {
 			System.out.println("Search Null");

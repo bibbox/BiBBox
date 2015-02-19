@@ -23,7 +23,10 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -263,14 +266,26 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 		type = type.trim();
 		String searchresultstring = "";
 		try {
-			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
-			Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + keyword + StringPool.PERCENT);
-			if(!type.equalsIgnoreCase("all")) {
-				Criterion criterion_type = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + type + StringPool.PERCENT);
-				criterion_type = RestrictionsFactoryUtil.and(criterion_type, RestrictionsFactoryUtil.ilike("key", StringPool.PERCENT + "Type" + StringPool.PERCENT));
-				criterion = RestrictionsFactoryUtil.and(criterion, criterion_type);
+			DynamicQuery dynamicQuery = null;
+			if(type.equalsIgnoreCase("all")) {
+				dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+				Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + keyword + StringPool.PERCENT);
+				//if(!type.equalsIgnoreCase("all")) {
+					//Criterion criterion_type = RestrictionsFactoryUtil.ilike("value", type);
+					//criterion_type = RestrictionsFactoryUtil.and(criterion_type, RestrictionsFactoryUtil.ilike("key", StringPool.PERCENT + "Type" + StringPool.PERCENT));
+					//criterion = RestrictionsFactoryUtil.and(criterion, criterion_type);
+				
+				dynamicQuery.add(criterion);
+			} else {
+				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class)
+						.add(PropertyFactoryUtil.forName("value").eq(type));
+				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
+
+				dynamicQuery  = DynamicQueryFactoryUtil.forClass(SearchIndex.class)
+						.add(PropertyFactoryUtil.forName("value").like(StringPool.PERCENT + keyword + StringPool.PERCENT))
+						.add(PropertyFactoryUtil.forName("organisationid").in(subQuery));
 			}
-			dynamicQuery.add(criterion);
+			
 			Order order_organisationid = OrderFactoryUtil.asc("organisationid");
 			Order order_location = OrderFactoryUtil.asc("location");
 			Order order_locationid = OrderFactoryUtil.asc("locationid");
