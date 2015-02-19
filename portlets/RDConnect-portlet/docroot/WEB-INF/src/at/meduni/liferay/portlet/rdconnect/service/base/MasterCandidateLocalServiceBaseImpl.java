@@ -20,6 +20,7 @@ import at.meduni.liferay.portlet.rdconnect.service.persistence.AQRRatingPersiste
 import at.meduni.liferay.portlet.rdconnect.service.persistence.CandidatePersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidateLinkCandidatePersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.MasterCandidatePersistence;
+import at.meduni.liferay.portlet.rdconnect.service.persistence.RDCOrganizationUserAccessPersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.RDCRecommenderPersistence;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.SearchIndexPersistence;
 
@@ -438,6 +439,44 @@ public abstract class MasterCandidateLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the r d c organization user access local service.
+	 *
+	 * @return the r d c organization user access local service
+	 */
+	public at.meduni.liferay.portlet.rdconnect.service.RDCOrganizationUserAccessLocalService getRDCOrganizationUserAccessLocalService() {
+		return rdcOrganizationUserAccessLocalService;
+	}
+
+	/**
+	 * Sets the r d c organization user access local service.
+	 *
+	 * @param rdcOrganizationUserAccessLocalService the r d c organization user access local service
+	 */
+	public void setRDCOrganizationUserAccessLocalService(
+		at.meduni.liferay.portlet.rdconnect.service.RDCOrganizationUserAccessLocalService rdcOrganizationUserAccessLocalService) {
+		this.rdcOrganizationUserAccessLocalService = rdcOrganizationUserAccessLocalService;
+	}
+
+	/**
+	 * Returns the r d c organization user access persistence.
+	 *
+	 * @return the r d c organization user access persistence
+	 */
+	public RDCOrganizationUserAccessPersistence getRDCOrganizationUserAccessPersistence() {
+		return rdcOrganizationUserAccessPersistence;
+	}
+
+	/**
+	 * Sets the r d c organization user access persistence.
+	 *
+	 * @param rdcOrganizationUserAccessPersistence the r d c organization user access persistence
+	 */
+	public void setRDCOrganizationUserAccessPersistence(
+		RDCOrganizationUserAccessPersistence rdcOrganizationUserAccessPersistence) {
+		this.rdcOrganizationUserAccessPersistence = rdcOrganizationUserAccessPersistence;
+	}
+
+	/**
 	 * Returns the r d c recommender local service.
 	 *
 	 * @return the r d c recommender local service
@@ -705,6 +744,10 @@ public abstract class MasterCandidateLocalServiceBaseImpl
 	protected at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLinkCandidateLocalService masterCandidateLinkCandidateLocalService;
 	@BeanReference(type = MasterCandidateLinkCandidatePersistence.class)
 	protected MasterCandidateLinkCandidatePersistence masterCandidateLinkCandidatePersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.RDCOrganizationUserAccessLocalService.class)
+	protected at.meduni.liferay.portlet.rdconnect.service.RDCOrganizationUserAccessLocalService rdcOrganizationUserAccessLocalService;
+	@BeanReference(type = RDCOrganizationUserAccessPersistence.class)
+	protected RDCOrganizationUserAccessPersistence rdcOrganizationUserAccessPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalService.class)
 	protected at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalService rdcRecommenderLocalService;
 	@BeanReference(type = RDCRecommenderPersistence.class)

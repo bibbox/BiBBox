@@ -103,14 +103,14 @@ public interface RDCRecommenderModel extends BaseModel<RDCRecommender> {
 	 *
 	 * @return the recommendervalue of this r d c recommender
 	 */
-	public long getRecommendervalue();
+	public double getRecommendervalue();
 
 	/**
 	 * Sets the recommendervalue of this r d c recommender.
 	 *
 	 * @param recommendervalue the recommendervalue of this r d c recommender
 	 */
-	public void setRecommendervalue(long recommendervalue);
+	public void setRecommendervalue(double recommendervalue);
 
 	@Override
 	public boolean isNew();

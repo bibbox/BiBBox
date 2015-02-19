@@ -69,7 +69,7 @@ public class RDCRecommenderCacheModel implements CacheModel<RDCRecommender>,
 		rdcrecommenderid = objectInput.readLong();
 		organisationId = objectInput.readLong();
 		recommendedorganisationId = objectInput.readLong();
-		recommendervalue = objectInput.readLong();
+		recommendervalue = objectInput.readDouble();
 	}
 
 	@Override
@@ -78,11 +78,11 @@ public class RDCRecommenderCacheModel implements CacheModel<RDCRecommender>,
 		objectOutput.writeLong(rdcrecommenderid);
 		objectOutput.writeLong(organisationId);
 		objectOutput.writeLong(recommendedorganisationId);
-		objectOutput.writeLong(recommendervalue);
+		objectOutput.writeDouble(recommendervalue);
 	}
 
 	public long rdcrecommenderid;
 	public long organisationId;
 	public long recommendedorganisationId;
-	public long recommendervalue;
+	public double recommendervalue;
 }

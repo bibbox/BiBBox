@@ -79,7 +79,7 @@ public class RDCRecommenderWrapper implements RDCRecommender,
 			setRecommendedorganisationId(recommendedorganisationId);
 		}
 
-		Long recommendervalue = (Long)attributes.get("recommendervalue");
+		Double recommendervalue = (Double)attributes.get("recommendervalue");
 
 		if (recommendervalue != null) {
 			setRecommendervalue(recommendervalue);
@@ -172,7 +172,7 @@ public class RDCRecommenderWrapper implements RDCRecommender,
 	* @return the recommendervalue of this r d c recommender
 	*/
 	@Override
-	public long getRecommendervalue() {
+	public double getRecommendervalue() {
 		return _rdcRecommender.getRecommendervalue();
 	}
 
@@ -182,7 +182,7 @@ public class RDCRecommenderWrapper implements RDCRecommender,
 	* @param recommendervalue the recommendervalue of this r d c recommender
 	*/
 	@Override
-	public void setRecommendervalue(long recommendervalue) {
+	public void setRecommendervalue(double recommendervalue) {
 		_rdcRecommender.setRecommendervalue(recommendervalue);
 	}
 

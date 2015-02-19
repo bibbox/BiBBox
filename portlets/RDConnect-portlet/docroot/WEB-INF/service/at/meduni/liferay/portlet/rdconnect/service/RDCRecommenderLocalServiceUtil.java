@@ -275,6 +275,21 @@ public class RDCRecommenderLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static at.meduni.liferay.portlet.rdconnect.model.RDCRecommender getRDCRecommender(
+		long organizationId, long organizationrecommandedId) {
+		return getService()
+				   .getRDCRecommender(organizationId, organizationrecommandedId);
+	}
+
+	public static at.meduni.liferay.portlet.rdconnect.model.RDCRecommender addRDCRecommender(
+		long organizationId, long organizationrecommandedId,
+		double recommendervalue)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addRDCRecommender(organizationId,
+			organizationrecommandedId, recommendervalue);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

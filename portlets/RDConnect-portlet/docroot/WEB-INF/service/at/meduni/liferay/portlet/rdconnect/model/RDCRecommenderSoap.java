@@ -109,16 +109,16 @@ public class RDCRecommenderSoap implements Serializable {
 		_recommendedorganisationId = recommendedorganisationId;
 	}
 
-	public long getRecommendervalue() {
+	public double getRecommendervalue() {
 		return _recommendervalue;
 	}
 
-	public void setRecommendervalue(long recommendervalue) {
+	public void setRecommendervalue(double recommendervalue) {
 		_recommendervalue = recommendervalue;
 	}
 
 	private long _rdcrecommenderid;
 	private long _organisationId;
 	private long _recommendedorganisationId;
-	private long _recommendervalue;
+	private double _recommendervalue;
 }

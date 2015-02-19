@@ -512,3 +512,25 @@ editcoreddlURL.setParameter("formDDMTemplateId", "0");
                }
             );
 </aui:script>
+
+<portlet:actionURL name='countUserOrgaization' var="countUserOrgaizationURL" />
+
+<aui:script use="aui-io-request, event, node, aui-popover, valuechange, event-hover, aui-tooltip, event-valuechange, click">
+	AUI().ready('aui-io-request', 'event-valuechange', 'node', function(A){
+			var url = '<%= countUserOrgaizationURL.toString() %>';
+			A.io.request(url,{
+				//this is the data that you are sending to the action method
+				data: {
+					
+				   <portlet:namespace />userid: <%= themeDisplay.getUserId() %>,
+				   <portlet:namespace />ipaddress: '<%= PortalUtil.getHttpServletRequest(renderRequest).getRemoteAddr() %>',
+				   <portlet:namespace />organizationid: <%= organizationId %>,
+				},
+				dataType: 'json',
+				on: {
+				  failure: function() { alert('failure'); },
+				  success: function(event, id, obj) { "success" }
+				}
+			});
+	});
+</aui:script>

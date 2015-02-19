@@ -100,7 +100,7 @@ AUI().use(
     		formatter: '<a href="{value}">{value}</a>'
     	},
     	{
-    		key: 'Nuber of access',
+    		key: 'Number of access',
     		sortable: true
     	}
     ];

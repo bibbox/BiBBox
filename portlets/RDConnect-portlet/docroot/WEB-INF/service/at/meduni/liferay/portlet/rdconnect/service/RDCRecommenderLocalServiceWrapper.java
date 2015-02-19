@@ -288,6 +288,22 @@ public class RDCRecommenderLocalServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender getRDCRecommender(
+		long organizationId, long organizationrecommandedId) {
+		return _rdcRecommenderLocalService.getRDCRecommender(organizationId,
+			organizationrecommandedId);
+	}
+
+	@Override
+	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender addRDCRecommender(
+		long organizationId, long organizationrecommandedId,
+		double recommendervalue)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _rdcRecommenderLocalService.addRDCRecommender(organizationId,
+			organizationrecommandedId, recommendervalue);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

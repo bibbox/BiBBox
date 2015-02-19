@@ -153,10 +153,22 @@
 		<!-- Other fields -->
 		<column name="organisationId" type="long" />
 		<column name="recommendedorganisationId" type="long" />
-		<column name="recommendervalue" type="long" />
+		<column name="recommendervalue" type="double" />
 		<finder name="Recommendation" return-type="RDCRecommender">
 			<finder-column name="organisationId" />
 			<finder-column name="recommendedorganisationId" />
+		</finder>
+	</entity>
+	<entity name="RDCOrganizationUserAccess" local-service="true" remote-service="false" table="rdconnect.rdcorganizationuseraccess">
+		<!-- PK fields -->
+		<column name="rdcorganizationuseraccessId" type="long" primary="true" />
+		<!-- Other fields -->
+		<column name="organisationId" type="long" />
+		<column name="userId" type="long" />
+		<column name="ipaddress" type="long" />
+		<column name="lastaccess" type="Date" />
+		<finder name="OrganizationId" return-type="Collection">
+			<finder-column name="organisationId" />
 		</finder>
 	</entity>
 </service-builder>

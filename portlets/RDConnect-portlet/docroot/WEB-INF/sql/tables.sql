@@ -68,11 +68,19 @@ create table rdconnect.master_candidate_link_candidate (
 	masterCandidateId LONG
 );
 
+create table rdconnect.rdcorganizationuseraccess (
+	rdcorganizationuseraccessId LONG not null primary key,
+	organisationId LONG,
+	userId LONG,
+	ipaddress LONG,
+	lastaccess DATE null
+);
+
 create table rdconnect.rdcrecommender (
 	rdcrecommenderid LONG not null primary key,
 	organisationId LONG,
 	recommendedorganisationId LONG,
-	recommendervalue LONG
+	recommendervalue DOUBLE
 );
 
 create table rdconnect.searchindex_rdconnect (

@@ -106,13 +106,13 @@ public class AQRRatingLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.rdconnect.model.AQRRating"
 			};
 
-		_methodName52 = "getBeanIdentifier";
+		_methodName56 = "getBeanIdentifier";
 
-		_methodParameterTypes52 = new String[] {  };
+		_methodParameterTypes56 = new String[] {  };
 
-		_methodName53 = "setBeanIdentifier";
+		_methodName57 = "setBeanIdentifier";
 
-		_methodParameterTypes53 = new String[] { "java.lang.String" };
+		_methodParameterTypes57 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -204,13 +204,13 @@ public class AQRRatingLocalServiceClpInvoker {
 			return AQRRatingLocalServiceUtil.updateAQRRating((at.meduni.liferay.portlet.rdconnect.model.AQRRating)arguments[0]);
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return AQRRatingLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			AQRRatingLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -251,8 +251,8 @@ public class AQRRatingLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
 }

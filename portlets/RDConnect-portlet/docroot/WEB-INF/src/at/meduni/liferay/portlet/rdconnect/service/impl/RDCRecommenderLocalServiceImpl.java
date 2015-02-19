@@ -14,7 +14,13 @@
 
 package at.meduni.liferay.portlet.rdconnect.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import at.meduni.liferay.portlet.rdconnect.model.RDCRecommender;
+import at.meduni.liferay.portlet.rdconnect.model.impl.RDCRecommenderImpl;
 import at.meduni.liferay.portlet.rdconnect.service.base.RDCRecommenderLocalServiceBaseImpl;
+import at.meduni.liferay.portlet.rdconnect.service.persistence.RDCRecommenderPersistence;
 
 /**
  * The implementation of the r d c recommender local service.
@@ -37,4 +43,22 @@ public class RDCRecommenderLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalServiceUtil} to access the r d c recommender local service.
 	 */
+	public RDCRecommender getRDCRecommender(long organizationId, long organizationrecommandedId) {
+		try {
+			return rdcRecommenderPersistence.findByRecommendation(organizationId, organizationrecommandedId);
+		} catch (Exception ex) {
+			//ex.printStackTrace();
+		}
+		return null;
+	}
+	
+	public RDCRecommender addRDCRecommender(long organizationId, long organizationrecommandedId, double recommendervalue) throws SystemException {
+		long rdcrecommenderId = CounterLocalServiceUtil.increment(RDCRecommender.class.getName());
+		RDCRecommenderImpl rdcrecommender = new RDCRecommenderImpl();
+		rdcrecommender.setRdcrecommenderid(rdcrecommenderId);
+		rdcrecommender.setOrganisationId(organizationId);
+		rdcrecommender.setRecommendedorganisationId(organizationrecommandedId);
+		rdcrecommender.setRecommendervalue(recommendervalue);
+		return super.addRDCRecommender(rdcrecommender);
+	}
 }

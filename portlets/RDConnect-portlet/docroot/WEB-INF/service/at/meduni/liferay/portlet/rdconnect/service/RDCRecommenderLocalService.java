@@ -248,4 +248,13 @@ public interface RDCRecommenderLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender getRDCRecommender(
+		long organizationId, long organizationrecommandedId);
+
+	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender addRDCRecommender(
+		long organizationId, long organizationrecommandedId,
+		double recommendervalue)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -106,13 +106,21 @@ public class RDCRecommenderLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.rdconnect.model.RDCRecommender"
 			};
 
-		_methodName52 = "getBeanIdentifier";
+		_methodName56 = "getBeanIdentifier";
 
-		_methodParameterTypes52 = new String[] {  };
+		_methodParameterTypes56 = new String[] {  };
 
-		_methodName53 = "setBeanIdentifier";
+		_methodName57 = "setBeanIdentifier";
 
-		_methodParameterTypes53 = new String[] { "java.lang.String" };
+		_methodParameterTypes57 = new String[] { "java.lang.String" };
+
+		_methodName62 = "getRDCRecommender";
+
+		_methodParameterTypes62 = new String[] { "long", "long" };
+
+		_methodName63 = "addRDCRecommender";
+
+		_methodParameterTypes63 = new String[] { "long", "long", "double" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -204,16 +212,29 @@ public class RDCRecommenderLocalServiceClpInvoker {
 			return RDCRecommenderLocalServiceUtil.updateRDCRecommender((at.meduni.liferay.portlet.rdconnect.model.RDCRecommender)arguments[0]);
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return RDCRecommenderLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			RDCRecommenderLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
+		}
+
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+			return RDCRecommenderLocalServiceUtil.getRDCRecommender(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return RDCRecommenderLocalServiceUtil.addRDCRecommender(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Double)arguments[2]).doubleValue());
 		}
 
 		throw new UnsupportedOperationException();
@@ -251,8 +272,12 @@ public class RDCRecommenderLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }

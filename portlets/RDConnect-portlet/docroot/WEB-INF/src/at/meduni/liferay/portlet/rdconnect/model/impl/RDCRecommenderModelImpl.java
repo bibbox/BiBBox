@@ -60,9 +60,9 @@ public class RDCRecommenderModelImpl extends BaseModelImpl<RDCRecommender>
 			{ "rdcrecommenderid", Types.BIGINT },
 			{ "organisationId", Types.BIGINT },
 			{ "recommendedorganisationId", Types.BIGINT },
-			{ "recommendervalue", Types.BIGINT }
+			{ "recommendervalue", Types.DOUBLE }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.rdcrecommender (rdcrecommenderid LONG not null primary key,organisationId LONG,recommendedorganisationId LONG,recommendervalue LONG)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.rdcrecommender (rdcrecommenderid LONG not null primary key,organisationId LONG,recommendedorganisationId LONG,recommendervalue DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.rdcrecommender";
 	public static final String ORDER_BY_JPQL = " ORDER BY rdcRecommender.rdcrecommenderid ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.rdcrecommender.rdcrecommenderid ASC";
@@ -151,7 +151,7 @@ public class RDCRecommenderModelImpl extends BaseModelImpl<RDCRecommender>
 			setRecommendedorganisationId(recommendedorganisationId);
 		}
 
-		Long recommendervalue = (Long)attributes.get("recommendervalue");
+		Double recommendervalue = (Double)attributes.get("recommendervalue");
 
 		if (recommendervalue != null) {
 			setRecommendervalue(recommendervalue);
@@ -213,12 +213,12 @@ public class RDCRecommenderModelImpl extends BaseModelImpl<RDCRecommender>
 	}
 
 	@Override
-	public long getRecommendervalue() {
+	public double getRecommendervalue() {
 		return _recommendervalue;
 	}
 
 	@Override
-	public void setRecommendervalue(long recommendervalue) {
+	public void setRecommendervalue(double recommendervalue) {
 		_recommendervalue = recommendervalue;
 	}
 
@@ -393,7 +393,7 @@ public class RDCRecommenderModelImpl extends BaseModelImpl<RDCRecommender>
 	private long _recommendedorganisationId;
 	private long _originalRecommendedorganisationId;
 	private boolean _setOriginalRecommendedorganisationId;
-	private long _recommendervalue;
+	private double _recommendervalue;
 	private long _columnBitmask;
 	private RDCRecommender _escapedModel;
 }

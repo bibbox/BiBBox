@@ -41,6 +41,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.model.SearchIndex;
 import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
+import at.meduni.liferay.portlet.rdconnect.service.RDCOrganizationUserAccessLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.base.SearchIndexLocalServiceBaseImpl;
 
@@ -323,6 +324,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 				  	}
 				  	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
 				  	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+				  	int numberofacces = RDCOrganizationUserAccessLocalServiceUtil.countRDCOrganizationUserAccess(organization.getOrganizationId());
 					if(organizationtype.equalsIgnoreCase("Biobank")) {
 						orgPath = orgPath + "/bb_home";	
 					} else {
@@ -334,7 +336,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 							+ "'Number of Cases': " + diseascount + ","
 							+ "'Data Access Committe': '" + dataaccess + "',"
 							+ "'Request data':  'http://rd-connect.eu', "
-							+ "'Nuber of access': 0}";
+							+ "'Number of access': " + numberofacces + "}";
 					// New Hit
 					oldorganizationid = serachresult.getOrganisationid();
 				}			

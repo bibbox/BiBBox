@@ -103,7 +103,7 @@ public class RDCRecommenderClp extends BaseModelImpl<RDCRecommender>
 			setRecommendedorganisationId(recommendedorganisationId);
 		}
 
-		Long recommendervalue = (Long)attributes.get("recommendervalue");
+		Double recommendervalue = (Double)attributes.get("recommendervalue");
 
 		if (recommendervalue != null) {
 			setRecommendervalue(recommendervalue);
@@ -183,12 +183,12 @@ public class RDCRecommenderClp extends BaseModelImpl<RDCRecommender>
 	}
 
 	@Override
-	public long getRecommendervalue() {
+	public double getRecommendervalue() {
 		return _recommendervalue;
 	}
 
 	@Override
-	public void setRecommendervalue(long recommendervalue) {
+	public void setRecommendervalue(double recommendervalue) {
 		_recommendervalue = recommendervalue;
 
 		if (_rdcRecommenderRemoteModel != null) {
@@ -196,7 +196,7 @@ public class RDCRecommenderClp extends BaseModelImpl<RDCRecommender>
 				Class<?> clazz = _rdcRecommenderRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setRecommendervalue",
-						long.class);
+						double.class);
 
 				method.invoke(_rdcRecommenderRemoteModel, recommendervalue);
 			}
@@ -377,6 +377,6 @@ public class RDCRecommenderClp extends BaseModelImpl<RDCRecommender>
 	private long _rdcrecommenderid;
 	private long _organisationId;
 	private long _recommendedorganisationId;
-	private long _recommendervalue;
+	private double _recommendervalue;
 	private BaseModel<?> _rdcRecommenderRemoteModel;
 }

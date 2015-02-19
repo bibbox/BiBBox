@@ -107,6 +107,21 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.RDCOrganizationUserAccessModelImpl">
+		<attributes>
+			<id name="rdcorganizationuseraccessId" />
+			<basic name="organisationId" />
+			<basic name="userId" />
+			<basic name="ipaddress" />
+			<basic name="lastaccess">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.meduni.liferay.portlet.rdconnect.model.impl.RDCRecommenderModelImpl">
 		<attributes>
 			<id name="rdcrecommenderid" />
@@ -147,6 +162,10 @@
 	</entity>
 	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateLinkCandidateImpl" name="MasterCandidateLinkCandidate">
 		<table name="rdconnect.master_candidate_link_candidate" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.RDCOrganizationUserAccessImpl" name="RDCOrganizationUserAccess">
+		<table name="rdconnect.rdcorganizationuseraccess" />
 		<attributes />
 	</entity>
 	<entity class="at.meduni.liferay.portlet.rdconnect.model.impl.RDCRecommenderImpl" name="RDCRecommender">
