@@ -15,9 +15,11 @@
 package at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import com.liferay.portal.kernel.exception.SystemException;
 
+import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent;
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.impl.RDConnectEventImpl;
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.base.RDConnectEventLocalServiceBaseImpl;
@@ -43,6 +45,9 @@ public class RDConnectEventLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil} to access the r d connect event local service.
 	 */
+	/**
+	 * 
+	 */
 	public void createEvent(String eventtype, Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted) {
 		RDConnectEventImpl rdconnectevent = new RDConnectEventImpl();
 		rdconnectevent.setEventdate(eventdate);
@@ -59,5 +64,9 @@ public class RDConnectEventLocalServiceImpl
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public List<RDConnectEvent> getEvents() throws SystemException {
+		return rdConnectEventPersistence.findAll();
 	}
 }

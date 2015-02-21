@@ -3,3 +3,7 @@
 <portlet:defineObjects />
 
 This is the <b>Event Feed</b> portlet in View mode.
+
+<%
+
+%>

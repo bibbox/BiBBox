@@ -78,6 +78,7 @@
 			<supports>
 				<action-key>ADD_DISEASEMATRIX</action-key>
 				<action-key>VIEW</action-key>
+				<action-key>VIEW_DONORS_COUNT</action-key>
 			</supports>
 			<site-member-defaults>
 				<action-key>VIEW</action-key>

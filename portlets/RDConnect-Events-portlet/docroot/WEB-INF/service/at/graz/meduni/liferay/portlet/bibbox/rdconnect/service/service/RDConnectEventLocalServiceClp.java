@@ -122,6 +122,10 @@ public class RDConnectEventLocalServiceClp implements RDConnectEventLocalService
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
+
+		_methodName20 = "getEvents";
+
+		_methodParameterTypes20 = new String[] {  };
 	}
 
 	@Override
@@ -713,6 +717,34 @@ public class RDConnectEventLocalServiceClp implements RDConnectEventLocalService
 		}
 	}
 
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent> getEvents()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -752,4 +784,6 @@ public class RDConnectEventLocalServiceClp implements RDConnectEventLocalService
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

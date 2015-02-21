@@ -121,6 +121,10 @@ public class RDConnectEventLocalServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
+
+		_methodName39 = "getEvents";
+
+		_methodParameterTypes39 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -235,6 +239,11 @@ public class RDConnectEventLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName39.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
+			return RDConnectEventLocalServiceUtil.getEvents();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -276,4 +285,6 @@ public class RDConnectEventLocalServiceClpInvoker {
 	private String[] _methodParameterTypes33;
 	private String _methodName38;
 	private String[] _methodParameterTypes38;
+	private String _methodName39;
+	private String[] _methodParameterTypes39;
 }
