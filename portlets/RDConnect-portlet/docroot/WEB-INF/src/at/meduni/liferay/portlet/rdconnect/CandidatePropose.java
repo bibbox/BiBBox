@@ -56,7 +56,9 @@ public class CandidatePropose extends MVCPortlet {
 			CandidateLocalServiceUtil.addCandidate(candidate);
 			//MasterCandidateLocalServiceUtil.addMasterCandidate(mastercandidate);
 			SessionMessages.add(request, "candidate-saved-successfully");
-			addEventEntry(new Date(), 0, themeDisplay.getUserId(), "Proposed", "Proposed", "", "RD-Curators");
+			String shortdiscription = candidate.getSubmittername() + " proposed the " + candidate.getCandidatetype() + " " + candidate.getName() + " for " + candidate.getCountry() + ".";
+			String longdiscription = candidate.getSubmittername() + " proposed the " + candidate.getCandidatetype() + " " + candidate.getName() + " for " + candidate.getCountry() + ".";;
+			addEventEntry(new Date(), 0, themeDisplay.getUserId(), shortdiscription, longdiscription, "", "RD-Connect CURATOR");
 			//response.setRenderParameter("success", "true");
 			sendRedirect(request, response);
 		} else {

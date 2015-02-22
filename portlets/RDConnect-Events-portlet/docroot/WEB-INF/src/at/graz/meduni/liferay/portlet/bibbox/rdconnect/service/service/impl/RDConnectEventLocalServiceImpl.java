@@ -17,6 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent;
@@ -59,6 +60,7 @@ public class RDConnectEventLocalServiceImpl
 		rdconnectevent.setRestricted(restricted);
 		rdconnectevent.setEventtype(eventtype);
 		try {
+			rdconnectevent.setEventId(CounterLocalServiceUtil.increment(RDConnectEvent.class.getName()));
 			RDConnectEventLocalServiceUtil.addRDConnectEvent(rdconnectevent);
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
