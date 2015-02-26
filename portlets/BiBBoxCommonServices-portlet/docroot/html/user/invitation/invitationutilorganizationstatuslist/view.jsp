@@ -13,6 +13,8 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 
 long optionsRequestStatusId_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsRequestStatusId", "0"));
+long optionsPublishToId_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsPublishToId", "0"));
+long optionsSetRequestStatusId_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsSetRequestStatusId", "0"));
 List<InvitationOrganisation> invitationorganisations = InvitationOrganisationLocalServiceUtil.getInvitationsByStatus(optionsRequestStatusId_cfg);
 if(invitationorganisations.size() > 0) {
 	%>
@@ -54,6 +56,15 @@ if(invitationorganisations.size() > 0) {
 							<portlet:param name="redirect" value="<%= redirect %>"/>
 						</portlet:renderURL>
 						<liferay-ui:icon image="edit" message="List Assessments" url="<%=ListAssessmentsURL.toString() %>" />
+						<portlet:actionURL name="publishBiobank" var="publishBiobankURL">
+							<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
+							<portlet:param name="invitationorganisationId" value="<%= String.valueOf(invitationorganisation.getInvitationOrganisationId()) %>" />
+							<portlet:param name="invitationId" value="<%= String.valueOf(invitationorganisation.getInvitationId()) %>" />
+							<portlet:param name="movetoId" value="<%= String.valueOf(optionsPublishToId_cfg) %>" />
+							<portlet:param name="setstatusId" value="<%= String.valueOf(optionsSetRequestStatusId_cfg) %>" />
+							<portlet:param name="redirect" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"/>
+						</portlet:actionURL>
+						<liferay-ui:icon image="edit" message="Publish Biobank" url="<%=publishBiobankURL.toString() %>" />
 					</liferay-ui:icon-menu>
 				</td>
 				</tr>

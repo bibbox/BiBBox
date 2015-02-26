@@ -57,7 +57,12 @@ public class CandidatePropose extends MVCPortlet {
 			//MasterCandidateLocalServiceUtil.addMasterCandidate(mastercandidate);
 			SessionMessages.add(request, "candidate-saved-successfully");
 			String shortdiscription = candidate.getSubmittername() + " proposed the " + candidate.getCandidatetype() + " " + candidate.getName() + " for " + candidate.getCountry() + ".";
-			String longdiscription = candidate.getSubmittername() + " proposed the " + candidate.getCandidatetype() + " " + candidate.getName() + " for " + candidate.getCountry() + ".";;
+			String longdiscription = candidate.getSubmittername() + " proposed the " + candidate.getCandidatetype() + " " + candidate.getName() + " for " + candidate.getCountry() + "."
+					+ "<br>" + candidate.getName() + " (" + candidate.getCandidatesubtype() + ")"
+					+ "<br>" + candidate.getCandidatetype()
+					+ "<br>Contact: <a href=\"" + candidate.getMail() + "\">" + candidate.getContactperson() + "</a>"
+					+ "<br>Address: " + candidate.getAddress()
+					+ "<br>URL: <a href=\"" + candidate.getUrl() + "\">" + candidate.getUrl() + "</a>";
 			addEventEntry(new Date(), 0, themeDisplay.getUserId(), shortdiscription, longdiscription, "", "RD-Connect CURATOR");
 			//response.setRenderParameter("success", "true");
 			sendRedirect(request, response);

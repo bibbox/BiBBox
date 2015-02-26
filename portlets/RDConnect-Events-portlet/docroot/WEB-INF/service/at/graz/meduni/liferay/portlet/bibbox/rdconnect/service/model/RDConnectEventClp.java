@@ -453,6 +453,8 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 		value = DateUtil.compareTo(getEventdate(), rdConnectEvent.getEventdate());
 
+		value = value * -1;
+
 		if (value != 0) {
 			return value;
 		}

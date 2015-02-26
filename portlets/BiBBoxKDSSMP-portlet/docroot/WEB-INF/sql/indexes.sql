@@ -1,0 +1,1 @@
+create index IX_C8EC52FB on kdssmp.patientnamegenerator (name, type_);

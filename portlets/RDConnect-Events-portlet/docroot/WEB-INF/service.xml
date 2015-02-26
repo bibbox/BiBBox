@@ -15,7 +15,7 @@
 		<column name="longtext" type="String" />
 		<column name="link" type="String" />
 		<column name="restricted" type="String" />
-		<order by="asc">
+		<order by="desc">
 			<order-column name="eventdate" />
 		</order>
 		<finder name="Restricted" return-type="Collection">

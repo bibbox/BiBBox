@@ -3,4 +3,8 @@
 
 <display>
 	
+	<category name="kDSSMP">
+		<portlet id="create-patient"></portlet>
+		<portlet id="patient"></portlet>
+	</category>
 </display>

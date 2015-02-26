@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator">
+		<field name="patientnamegeneratorId" type="long" />
+		<field name="name" type="String" />
+		<field name="type" type="String" />
+	</model>
+</model-hints>

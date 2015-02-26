@@ -74,8 +74,8 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 		};
 	public static final String TABLE_SQL_CREATE = "create table rdconnect.event (eventId LONG not null primary key,eventdate DATE null,eventtype TEXT null,organizationId LONG,userId LONG,shorttext TEXT null,longtext_ TEXT null,link TEXT null,restricted TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.event";
-	public static final String ORDER_BY_JPQL = " ORDER BY rdConnectEvent.eventdate ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.event.eventdate ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY rdConnectEvent.eventdate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.event.eventdate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -396,6 +396,8 @@ public class RDConnectEventModelImpl extends BaseModelImpl<RDConnectEvent>
 		int value = 0;
 
 		value = DateUtil.compareTo(getEventdate(), rdConnectEvent.getEventdate());
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

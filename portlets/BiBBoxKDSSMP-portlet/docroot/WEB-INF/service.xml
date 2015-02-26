@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder
+	package-path="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service">
+	<author>reihsr</author>
+	<namespace>bibbox_kdssmp</namespace>
+
+	<entity name="patientnamegenerator" local-service="true" remote-service="false"  table="kdssmp.patientnamegenerator" >
+
+		<!-- PK fields -->
+
+		<column name="patientnamegeneratorId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="name" type="String" />
+
+		<!-- Audit fields -->
+
+		<column name="type" type="String" />
+
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Names" return-type="Collection">
+			<finder-column name="name" />
+			<finder-column name="type" />
+		</finder>
+	</entity>
+</service-builder>
