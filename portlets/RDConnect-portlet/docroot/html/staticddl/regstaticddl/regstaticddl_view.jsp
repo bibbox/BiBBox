@@ -134,6 +134,9 @@ if (currentGroup.isOrganization()) {
 		String  acronym = "";
 		if(core_record.getFieldValue("acronym") != null) {
 			acronym = core_record.getFieldValue("acronym").toString();
+			if(!acronym.equalsIgnoreCase("")) {
+				acronym = " - (" + acronym + ")";
+			}
 		}
 		
 		String target_population = "";
@@ -158,7 +161,7 @@ if (currentGroup.isOrganization()) {
 		}
 		%>
 		
-		<h4><%= organization.getName() %> - (<%= acronym %>)</h4>
+		<h4><%= organization.getName() %><%= acronym %></h4>
 		
 		<table>
 		<tr><td style="vertical-align: top;">Type of Host Institution: </td><td><strong><%= host_institution_is_a %> </strong></td></tr>

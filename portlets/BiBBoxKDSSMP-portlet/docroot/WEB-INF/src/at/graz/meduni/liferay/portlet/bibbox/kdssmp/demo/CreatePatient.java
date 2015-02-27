@@ -102,7 +102,8 @@ public class CreatePatient extends MVCPortlet {
 			}
 			// Set Organization Type
 			organization.getExpandoBridge().setAttribute("Organization Type", organizationtype);
-			organization.getExpandoBridge().setAttribute("dateofbirth", dateofbirth);
+			organization.getExpandoBridge().setAttribute("dateofbirth", dateFormat.format(dateofbirth));
+			organization.getExpandoBridge().setAttribute("aznummer", ParamUtil.getString(request, "bibbox_cs_organisationname"));
 			organization.getExpandoBridge().setAttribute("firstname", patientnamegenerator_vorname.getName());
 			organization.getExpandoBridge().setAttribute("lastname", patientnamegenerator_nachname.getName());
 			if(patientnamegenerator_vorname.getType().equalsIgnoreCase("Jungennamen")) {

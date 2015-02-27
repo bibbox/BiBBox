@@ -178,7 +178,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 							DiseaseMatrix diseasematrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(serachresult.getLocationid());
 							hits.put(serachresult.getLocation() + serachresult.getLocationid(), "<tr><td>" + serachresult.getLocation() + "</td><td>" + 
 									highlightResult(diseasematrix.getDiseasename(), keyword) + ": Number of Patients, Donors " + highlightResult(diseasematrix.getPatientcount(), keyword) + "<br />" +
-									"&nbsp;&nbsp;&nbsp;&nbsp;" + highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
+									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
 						} else {
 							hits.put(serachresult.getLocation() + serachresult.getLocationid(), "<tr><td>" + serachresult.getLocation() + "</td><td>" + 
 									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
@@ -196,7 +196,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 							DiseaseMatrix diseasematrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(serachresult.getLocationid());
 							hits.put(serachresult.getLocation() + serachresult.getLocationid(), "<tr><td>" + serachresult.getLocation() + "</td><td>" + 
 									highlightResult(diseasematrix.getDiseasename(), keyword) + ": Number of Patients, Donors " + highlightResult(diseasematrix.getPatientcount(), keyword) + "<br />" +
-									"&nbsp;&nbsp;&nbsp;&nbsp;" + highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
+									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
 						} else {
 							hits.put(serachresult.getLocation() + serachresult.getLocationid(), "<tr><td>" + serachresult.getLocation() + "</td><td>" + 
 									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
