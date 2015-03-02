@@ -25,6 +25,9 @@
 	<portlet>
 		<portlet-name>event-list</portlet-name>
 		<icon>/icon.png</icon>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+	    <friendly-url-mapping>event</friendly-url-mapping>
+	    <friendly-url-routes>at/graz/meduni/liferay/portlet/bibbox/kdssmp/demo/event-friendly-url-routes.xml</friendly-url-routes>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js

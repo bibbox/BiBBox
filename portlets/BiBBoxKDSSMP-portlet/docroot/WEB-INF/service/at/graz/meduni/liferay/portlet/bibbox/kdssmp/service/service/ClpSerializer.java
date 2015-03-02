@@ -14,6 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service;
 
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventDataClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegeneratorClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -102,6 +103,10 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(EventDataClp.class.getName())) {
+			return translateInputEventData(oldModel);
+		}
+
 		if (oldModelClassName.equals(patientnamegeneratorClp.class.getName())) {
 			return translateInputpatientnamegenerator(oldModel);
 		}
@@ -119,6 +124,16 @@ public class ClpSerializer {
 		}
 
 		return newList;
+	}
+
+	public static Object translateInputEventData(BaseModel<?> oldModel) {
+		EventDataClp oldClpModel = (EventDataClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getEventDataRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
 	}
 
 	public static Object translateInputpatientnamegenerator(
@@ -148,6 +163,11 @@ public class ClpSerializer {
 		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataImpl")) {
+			return translateOutputEventData(oldModel);
+		}
 
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorImpl")) {
@@ -235,11 +255,26 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchpatientnamegeneratorException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchpatientnamegeneratorException();
 		}
 
 		return throwable;
+	}
+
+	public static Object translateOutputEventData(BaseModel<?> oldModel) {
+		EventDataClp newModel = new EventDataClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setEventDataRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputpatientnamegenerator(

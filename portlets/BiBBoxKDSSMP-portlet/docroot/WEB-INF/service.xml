@@ -6,31 +6,37 @@
 	<namespace>bibbox_kdssmp</namespace>
 
 	<entity name="patientnamegenerator" local-service="true" remote-service="false"  table="kdssmp.patientnamegenerator" >
-
 		<!-- PK fields -->
-
 		<column name="patientnamegeneratorId" type="long" primary="true" />
-
 		<!-- Group instance -->
-
 		<column name="name" type="String" />
-
 		<!-- Audit fields -->
-
 		<column name="type" type="String" />
-
-
 		<!-- Order -->
-
 		<order by="asc">
 			<order-column name="name" />
 		</order>
-
 		<!-- Finder methods -->
-
 		<finder name="Names" return-type="Collection">
 			<finder-column name="name" />
 			<finder-column name="type" />
+		</finder>
+	</entity>
+	<entity name="EventData" local-service="true" remote-service="false"  table="kdssmp.eventdata" >
+		<!-- PK fields -->
+		<column name="eventdataId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="eventlayoutId" type="long" />
+		<!-- Audit fields -->
+		<column name="ontology" type="String" />
+		<column name="value" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="eventlayoutId" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="EventLayout" return-type="Collection">
+			<finder-column name="eventlayoutId" />
 		</finder>
 	</entity>
 </service-builder>

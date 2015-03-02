@@ -223,7 +223,8 @@ public class patientnamegeneratorWrapper implements patientnamegenerator,
 	}
 
 	@Override
-	public int compareTo(patientnamegenerator patientnamegenerator) {
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator patientnamegenerator) {
 		return _patientnamegenerator.compareTo(patientnamegenerator);
 	}
 
@@ -233,17 +234,17 @@ public class patientnamegeneratorWrapper implements patientnamegenerator,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<patientnamegenerator> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator> toCacheModel() {
 		return _patientnamegenerator.toCacheModel();
 	}
 
 	@Override
-	public patientnamegenerator toEscapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator toEscapedModel() {
 		return new patientnamegeneratorWrapper(_patientnamegenerator.toEscapedModel());
 	}
 
 	@Override
-	public patientnamegenerator toUnescapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator toUnescapedModel() {
 		return new patientnamegeneratorWrapper(_patientnamegenerator.toUnescapedModel());
 	}
 

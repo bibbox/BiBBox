@@ -58,4 +58,7 @@
 		<portlet id="reg-static-ddl"></portlet>
 		<portlet id="dynamic-ddl-display"></portlet>
 	</category>
+	<category name="RDConnect Statistiks">
+		<portlet id="user-statistik"></portlet>
+	</category>
 </display>

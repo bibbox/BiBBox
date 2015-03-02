@@ -2,7 +2,17 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator" />
+	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataImpl" table="kdssmp.eventdata">
+		<cache usage="read-write" />
+		<id name="eventdataId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="eventlayoutId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ontology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorImpl" table="kdssmp.patientnamegenerator">
 		<cache usage="read-write" />
 		<id name="patientnamegeneratorId" type="long">

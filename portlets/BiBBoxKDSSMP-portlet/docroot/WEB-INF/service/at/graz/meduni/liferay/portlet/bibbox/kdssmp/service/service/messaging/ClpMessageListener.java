@@ -15,6 +15,7 @@
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.messaging;
 
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.ClpSerializer;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -35,6 +36,8 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			EventDataLocalServiceUtil.clearService();
+
 			patientnamegeneratorLocalServiceUtil.clearService();
 		}
 	}
