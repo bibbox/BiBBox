@@ -14,6 +14,11 @@
 
 package at.meduni.liferay.portlet.rdconnect.service.impl;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +32,7 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -363,5 +369,63 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			searchresultstring = "No Results for the query.";
 		}
 		return searchresultstring;
+	}
+	
+	/**
+	 * Create User Statistics
+	 * @return
+	 */
+	public String getUserStatistiks() {
+		String date = "";
+		String count = "";
+		try {
+			Connection connection = connectDatabase();
+			String sql_grouped = "SELECT DATE(lastaccess), COUNT(*) FROM rdconnect.rdcorganizationuseraccess GROUP BY DATE(lastaccess) ORDER BY DATE(lastaccess);";
+			Statement statement = connection.createStatement();
+			ResultSet resultset = statement.executeQuery(sql_grouped);
+			String prefix = "";
+			while(resultset.next()) {
+				String date_convert = resultset.getString("date");
+				date += prefix + "\"" + date_convert + "\"";
+				count += prefix + resultset.getString("count");
+				prefix = ",";
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		String return_value = date + "§§split§§" + count;
+		return return_value;
+	}
+	
+	/**
+	 * Connect to the liferay Database
+	 * @return sql Connection
+	 */
+	private Connection connectDatabase() {
+
+		try { 
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
+			e.printStackTrace();
+			return null;
+		}
+ 
+		System.out.println("PostgreSQL JDBC Driver Registered!");
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(PropsUtil.get("jdbc.default.url"), PropsUtil.get("jdbc.default.username"),PropsUtil.get("jdbc.default.password"));
+		} catch (SQLException e) {
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return null;
+		}
+ 
+		if (connection != null) {
+			System.out.println("Connected to database");
+		} else {
+			System.out.println("Failed to make connection!");
+		}
+		return connection;
 	}
 }

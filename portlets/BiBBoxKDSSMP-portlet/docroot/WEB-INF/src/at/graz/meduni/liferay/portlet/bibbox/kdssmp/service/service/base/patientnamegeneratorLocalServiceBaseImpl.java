@@ -17,6 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.base;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalService;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.EventDataPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.EventPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.patientnamegeneratorPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -283,6 +284,43 @@ public abstract class patientnamegeneratorLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the event local service.
+	 *
+	 * @return the event local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalService getEventLocalService() {
+		return eventLocalService;
+	}
+
+	/**
+	 * Sets the event local service.
+	 *
+	 * @param eventLocalService the event local service
+	 */
+	public void setEventLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalService eventLocalService) {
+		this.eventLocalService = eventLocalService;
+	}
+
+	/**
+	 * Returns the event persistence.
+	 *
+	 * @return the event persistence
+	 */
+	public EventPersistence getEventPersistence() {
+		return eventPersistence;
+	}
+
+	/**
+	 * Sets the event persistence.
+	 *
+	 * @param eventPersistence the event persistence
+	 */
+	public void setEventPersistence(EventPersistence eventPersistence) {
+		this.eventPersistence = eventPersistence;
+	}
+
+	/**
 	 * Returns the event data local service.
 	 *
 	 * @return the event data local service
@@ -534,6 +572,10 @@ public abstract class patientnamegeneratorLocalServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalService eventLocalService;
+	@BeanReference(type = EventPersistence.class)
+	protected EventPersistence eventPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalService eventDataLocalService;
 	@BeanReference(type = EventDataPersistence.class)

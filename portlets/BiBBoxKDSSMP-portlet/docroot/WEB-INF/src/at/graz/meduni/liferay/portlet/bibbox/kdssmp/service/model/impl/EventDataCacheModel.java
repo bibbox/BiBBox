@@ -36,12 +36,14 @@ public class EventDataCacheModel implements CacheModel<EventData>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{eventdataId=");
 		sb.append(eventdataId);
 		sb.append(", eventlayoutId=");
 		sb.append(eventlayoutId);
+		sb.append(", patientId=");
+		sb.append(patientId);
 		sb.append(", ontology=");
 		sb.append(ontology);
 		sb.append(", value=");
@@ -57,6 +59,7 @@ public class EventDataCacheModel implements CacheModel<EventData>,
 
 		eventDataImpl.setEventdataId(eventdataId);
 		eventDataImpl.setEventlayoutId(eventlayoutId);
+		eventDataImpl.setPatientId(patientId);
 
 		if (ontology == null) {
 			eventDataImpl.setOntology(StringPool.BLANK);
@@ -81,6 +84,7 @@ public class EventDataCacheModel implements CacheModel<EventData>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		eventdataId = objectInput.readLong();
 		eventlayoutId = objectInput.readLong();
+		patientId = objectInput.readLong();
 		ontology = objectInput.readUTF();
 		value = objectInput.readUTF();
 	}
@@ -90,6 +94,7 @@ public class EventDataCacheModel implements CacheModel<EventData>,
 		throws IOException {
 		objectOutput.writeLong(eventdataId);
 		objectOutput.writeLong(eventlayoutId);
+		objectOutput.writeLong(patientId);
 
 		if (ontology == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -108,6 +113,7 @@ public class EventDataCacheModel implements CacheModel<EventData>,
 
 	public long eventdataId;
 	public long eventlayoutId;
+	public long patientId;
 	public String ontology;
 	public String value;
 }

@@ -14,6 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service;
 
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventDataClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegeneratorClp;
 
@@ -103,6 +104,10 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(EventClp.class.getName())) {
+			return translateInputEvent(oldModel);
+		}
+
 		if (oldModelClassName.equals(EventDataClp.class.getName())) {
 			return translateInputEventData(oldModel);
 		}
@@ -124,6 +129,16 @@ public class ClpSerializer {
 		}
 
 		return newList;
+	}
+
+	public static Object translateInputEvent(BaseModel<?> oldModel) {
+		EventClp oldClpModel = (EventClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getEventRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
 	}
 
 	public static Object translateInputEventData(BaseModel<?> oldModel) {
@@ -163,6 +178,11 @@ public class ClpSerializer {
 		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventImpl")) {
+			return translateOutputEvent(oldModel);
+		}
 
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataImpl")) {
@@ -255,6 +275,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException();
 		}
@@ -265,6 +290,16 @@ public class ClpSerializer {
 		}
 
 		return throwable;
+	}
+
+	public static Object translateOutputEvent(BaseModel<?> oldModel) {
+		EventClp newModel = new EventClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setEventRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputEventData(BaseModel<?> oldModel) {

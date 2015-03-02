@@ -50,6 +50,7 @@ public class EventDataWrapper implements EventData, ModelWrapper<EventData> {
 
 		attributes.put("eventdataId", getEventdataId());
 		attributes.put("eventlayoutId", getEventlayoutId());
+		attributes.put("patientId", getPatientId());
 		attributes.put("ontology", getOntology());
 		attributes.put("value", getValue());
 
@@ -68,6 +69,12 @@ public class EventDataWrapper implements EventData, ModelWrapper<EventData> {
 
 		if (eventlayoutId != null) {
 			setEventlayoutId(eventlayoutId);
+		}
+
+		Long patientId = (Long)attributes.get("patientId");
+
+		if (patientId != null) {
+			setPatientId(patientId);
 		}
 
 		String ontology = (String)attributes.get("ontology");
@@ -141,6 +148,26 @@ public class EventDataWrapper implements EventData, ModelWrapper<EventData> {
 	@Override
 	public void setEventlayoutId(long eventlayoutId) {
 		_eventData.setEventlayoutId(eventlayoutId);
+	}
+
+	/**
+	* Returns the patient ID of this event data.
+	*
+	* @return the patient ID of this event data
+	*/
+	@Override
+	public long getPatientId() {
+		return _eventData.getPatientId();
+	}
+
+	/**
+	* Sets the patient ID of this event data.
+	*
+	* @param patientId the patient ID of this event data
+	*/
+	@Override
+	public void setPatientId(long patientId) {
+		_eventData.setPatientId(patientId);
 	}
 
 	/**
@@ -247,7 +274,8 @@ public class EventDataWrapper implements EventData, ModelWrapper<EventData> {
 	}
 
 	@Override
-	public int compareTo(EventData eventData) {
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData eventData) {
 		return _eventData.compareTo(eventData);
 	}
 
@@ -257,17 +285,17 @@ public class EventDataWrapper implements EventData, ModelWrapper<EventData> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<EventData> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> toCacheModel() {
 		return _eventData.toCacheModel();
 	}
 
 	@Override
-	public EventData toEscapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData toEscapedModel() {
 		return new EventDataWrapper(_eventData.toEscapedModel());
 	}
 
 	@Override
-	public EventData toUnescapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData toUnescapedModel() {
 		return new EventDataWrapper(_eventData.toUnescapedModel());
 	}
 

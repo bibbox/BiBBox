@@ -1,9 +1,16 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event">
+		<field name="eventId" type="long" />
+		<field name="patientId" type="long" />
+		<field name="eventdate" type="Date" />
+		<field name="eventtype" type="String" />
+	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData">
 		<field name="eventdataId" type="long" />
 		<field name="eventlayoutId" type="long" />
+		<field name="patientId" type="long" />
 		<field name="ontology" type="String" />
 		<field name="value" type="String" />
 	</model>

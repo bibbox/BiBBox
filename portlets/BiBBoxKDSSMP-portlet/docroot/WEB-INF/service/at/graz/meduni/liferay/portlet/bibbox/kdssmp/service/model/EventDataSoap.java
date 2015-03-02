@@ -31,6 +31,7 @@ public class EventDataSoap implements Serializable {
 
 		soapModel.setEventdataId(model.getEventdataId());
 		soapModel.setEventlayoutId(model.getEventlayoutId());
+		soapModel.setPatientId(model.getPatientId());
 		soapModel.setOntology(model.getOntology());
 		soapModel.setValue(model.getValue());
 
@@ -101,6 +102,14 @@ public class EventDataSoap implements Serializable {
 		_eventlayoutId = eventlayoutId;
 	}
 
+	public long getPatientId() {
+		return _patientId;
+	}
+
+	public void setPatientId(long patientId) {
+		_patientId = patientId;
+	}
+
 	public String getOntology() {
 		return _ontology;
 	}
@@ -119,6 +128,7 @@ public class EventDataSoap implements Serializable {
 
 	private long _eventdataId;
 	private long _eventlayoutId;
+	private long _patientId;
 	private String _ontology;
 	private String _value;
 }

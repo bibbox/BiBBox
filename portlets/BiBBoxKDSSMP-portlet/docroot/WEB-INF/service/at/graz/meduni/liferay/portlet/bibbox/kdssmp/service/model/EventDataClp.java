@@ -74,6 +74,7 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 
 		attributes.put("eventdataId", getEventdataId());
 		attributes.put("eventlayoutId", getEventlayoutId());
+		attributes.put("patientId", getPatientId());
 		attributes.put("ontology", getOntology());
 		attributes.put("value", getValue());
 
@@ -92,6 +93,12 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 
 		if (eventlayoutId != null) {
 			setEventlayoutId(eventlayoutId);
+		}
+
+		Long patientId = (Long)attributes.get("patientId");
+
+		if (patientId != null) {
+			setPatientId(patientId);
 		}
 
 		String ontology = (String)attributes.get("ontology");
@@ -146,6 +153,29 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 				Method method = clazz.getMethod("setEventlayoutId", long.class);
 
 				method.invoke(_eventDataRemoteModel, eventlayoutId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getPatientId() {
+		return _patientId;
+	}
+
+	@Override
+	public void setPatientId(long patientId) {
+		_patientId = patientId;
+
+		if (_eventDataRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventDataRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPatientId", long.class);
+
+				method.invoke(_eventDataRemoteModel, patientId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -270,6 +300,7 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 
 		clone.setEventdataId(getEventdataId());
 		clone.setEventlayoutId(getEventlayoutId());
+		clone.setPatientId(getPatientId());
 		clone.setOntology(getOntology());
 		clone.setValue(getValue());
 
@@ -326,12 +357,14 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{eventdataId=");
 		sb.append(getEventdataId());
 		sb.append(", eventlayoutId=");
 		sb.append(getEventlayoutId());
+		sb.append(", patientId=");
+		sb.append(getPatientId());
 		sb.append(", ontology=");
 		sb.append(getOntology());
 		sb.append(", value=");
@@ -343,7 +376,7 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -357,6 +390,10 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 		sb.append(
 			"<column><column-name>eventlayoutId</column-name><column-value><![CDATA[");
 		sb.append(getEventlayoutId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>patientId</column-name><column-value><![CDATA[");
+		sb.append(getPatientId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ontology</column-name><column-value><![CDATA[");
@@ -374,6 +411,7 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 
 	private long _eventdataId;
 	private long _eventlayoutId;
+	private long _patientId;
 	private String _ontology;
 	private String _value;
 	private BaseModel<?> _eventDataRemoteModel;

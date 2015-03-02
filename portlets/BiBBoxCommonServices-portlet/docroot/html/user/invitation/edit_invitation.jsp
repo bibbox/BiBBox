@@ -30,10 +30,16 @@ boolean createinvitation = false;
 String tmpTitle = "new-invatiation";
 Invitation invitation = null;
 long invitationId = ParamUtil.getLong(request, "invitationId");
+boolean alredysend = false;
 if(invitationId > 0) {
 	invitation = InvitationLocalServiceUtil.getInvitation(invitationId);
 	createinvitation = false;
 	tmpTitle = invitation.getName();
+	if(invitation.getStatus() == InvitationLocalServiceUtil.getStatusFromString("send")) {
+		actionId_add_invitation = "X";
+		actionId_edit_invitation = "X";
+		alredysend = true;
+	}
 } else {
 	invitation = InvitationLocalServiceUtil.createInvitation(CounterLocalServiceUtil.increment(Invitation.class.getName()));
 	invitation.setBody(optionsDefaultBodyText_option);
@@ -80,7 +86,9 @@ invitationId = invitation.getInvitationId();
 				<aui:input name="name" value='<%= invitation.getName() %>'></aui:input>
 			</aui:column>
 			<aui:column columnWidth="25" last="true">
-				<button id="addorganisations" type="button">Add Organisation</button>/Clear List
+				<% if(!alredysend) { %>
+					<button id="addorganisations" type="button">Add Organisation</button>/Clear List
+				<% } %>
 			</aui:column>
 			<!-- OrganisationList -->
 			<aui:column columnWidth="100" first="true">

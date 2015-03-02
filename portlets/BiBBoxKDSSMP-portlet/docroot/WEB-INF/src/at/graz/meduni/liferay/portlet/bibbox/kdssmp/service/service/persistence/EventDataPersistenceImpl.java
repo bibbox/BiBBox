@@ -843,6 +843,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		eventDataImpl.setEventdataId(eventData.getEventdataId());
 		eventDataImpl.setEventlayoutId(eventData.getEventlayoutId());
+		eventDataImpl.setPatientId(eventData.getPatientId());
 		eventDataImpl.setOntology(eventData.getOntology());
 		eventDataImpl.setValue(eventData.getValue());
 

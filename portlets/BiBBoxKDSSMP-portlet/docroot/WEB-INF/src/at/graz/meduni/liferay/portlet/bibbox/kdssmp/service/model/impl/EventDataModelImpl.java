@@ -60,10 +60,11 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "eventdataId", Types.BIGINT },
 			{ "eventlayoutId", Types.BIGINT },
+			{ "patientId", Types.BIGINT },
 			{ "ontology", Types.VARCHAR },
 			{ "value", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table kdssmp.eventdata (eventdataId LONG not null primary key,eventlayoutId LONG,ontology VARCHAR(75) null,value VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table kdssmp.eventdata (eventdataId LONG not null primary key,eventlayoutId LONG,patientId LONG,ontology VARCHAR(75) null,value VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.eventdata";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventData.eventlayoutId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.eventdata.eventlayoutId ASC";
@@ -122,6 +123,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 		attributes.put("eventdataId", getEventdataId());
 		attributes.put("eventlayoutId", getEventlayoutId());
+		attributes.put("patientId", getPatientId());
 		attributes.put("ontology", getOntology());
 		attributes.put("value", getValue());
 
@@ -140,6 +142,12 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 		if (eventlayoutId != null) {
 			setEventlayoutId(eventlayoutId);
+		}
+
+		Long patientId = (Long)attributes.get("patientId");
+
+		if (patientId != null) {
+			setPatientId(patientId);
 		}
 
 		String ontology = (String)attributes.get("ontology");
@@ -185,6 +193,16 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 	public long getOriginalEventlayoutId() {
 		return _originalEventlayoutId;
+	}
+
+	@Override
+	public long getPatientId() {
+		return _patientId;
+	}
+
+	@Override
+	public void setPatientId(long patientId) {
+		_patientId = patientId;
 	}
 
 	@Override
@@ -250,6 +268,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 		eventDataImpl.setEventdataId(getEventdataId());
 		eventDataImpl.setEventlayoutId(getEventlayoutId());
+		eventDataImpl.setPatientId(getPatientId());
 		eventDataImpl.setOntology(getOntology());
 		eventDataImpl.setValue(getValue());
 
@@ -325,6 +344,8 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 		eventDataCacheModel.eventlayoutId = getEventlayoutId();
 
+		eventDataCacheModel.patientId = getPatientId();
+
 		eventDataCacheModel.ontology = getOntology();
 
 		String ontology = eventDataCacheModel.ontology;
@@ -346,12 +367,14 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{eventdataId=");
 		sb.append(getEventdataId());
 		sb.append(", eventlayoutId=");
 		sb.append(getEventlayoutId());
+		sb.append(", patientId=");
+		sb.append(getPatientId());
 		sb.append(", ontology=");
 		sb.append(getOntology());
 		sb.append(", value=");
@@ -363,7 +386,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -377,6 +400,10 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 		sb.append(
 			"<column><column-name>eventlayoutId</column-name><column-value><![CDATA[");
 		sb.append(getEventlayoutId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>patientId</column-name><column-value><![CDATA[");
+		sb.append(getPatientId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ontology</column-name><column-value><![CDATA[");
@@ -400,6 +427,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 	private long _eventlayoutId;
 	private long _originalEventlayoutId;
 	private boolean _setOriginalEventlayoutId;
+	private long _patientId;
 	private String _ontology;
 	private String _value;
 	private long _columnBitmask;

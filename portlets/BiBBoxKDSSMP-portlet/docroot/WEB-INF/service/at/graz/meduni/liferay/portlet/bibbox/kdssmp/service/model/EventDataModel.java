@@ -86,6 +86,20 @@ public interface EventDataModel extends BaseModel<EventData> {
 	public void setEventlayoutId(long eventlayoutId);
 
 	/**
+	 * Returns the patient ID of this event data.
+	 *
+	 * @return the patient ID of this event data
+	 */
+	public long getPatientId();
+
+	/**
+	 * Sets the patient ID of this event data.
+	 *
+	 * @param patientId the patient ID of this event data
+	 */
+	public void setPatientId(long patientId);
+
+	/**
 	 * Returns the ontology of this event data.
 	 *
 	 * @return the ontology of this event data

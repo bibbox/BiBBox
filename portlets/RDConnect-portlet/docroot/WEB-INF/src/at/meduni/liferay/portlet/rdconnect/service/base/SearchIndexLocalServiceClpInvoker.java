@@ -127,6 +127,10 @@ public class SearchIndexLocalServiceClpInvoker {
 				"java.lang.String", "java.lang.String",
 				"com.liferay.portal.theme.ThemeDisplay", "java.lang.String"
 			};
+
+		_methodName65 = "getUserStatistiks";
+
+		_methodParameterTypes65 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -245,6 +249,11 @@ public class SearchIndexLocalServiceClpInvoker {
 				(java.lang.String)arguments[3]);
 		}
 
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getUserStatistiks();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -288,4 +297,6 @@ public class SearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes62;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
 }

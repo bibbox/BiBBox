@@ -269,4 +269,12 @@ public interface SearchIndexLocalService extends BaseLocalService,
 		java.lang.String type,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String contextpath);
+
+	/**
+	* Create User Statistics
+	*
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getUserStatistiks();
 }
