@@ -305,6 +305,18 @@ public class RDCRecommenderLocalServiceWrapper
 	}
 
 	/**
+	* Returns a number of Recommandations for a user
+	*
+	* @param userId
+	* @return
+	*/
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.RDCRecommender> getReconnandationsForUser(
+		long userId) {
+		return _rdcRecommenderLocalService.getReconnandationsForUser(userId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public RDCRecommenderLocalService getWrappedRDCRecommenderLocalService() {

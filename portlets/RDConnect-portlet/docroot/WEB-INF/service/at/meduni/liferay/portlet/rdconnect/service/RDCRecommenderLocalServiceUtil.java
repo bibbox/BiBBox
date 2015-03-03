@@ -290,6 +290,17 @@ public class RDCRecommenderLocalServiceUtil {
 			organizationrecommandedId, recommendervalue);
 	}
 
+	/**
+	* Returns a number of Recommandations for a user
+	*
+	* @param userId
+	* @return
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.RDCRecommender> getReconnandationsForUser(
+		long userId) {
+		return getService().getReconnandationsForUser(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

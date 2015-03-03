@@ -14,6 +14,12 @@
 		<field name="ontology" type="String" />
 		<field name="value" type="String" />
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration">
+		<field name="configurationId" type="long" />
+		<field name="scope" type="String" />
+		<field name="optionkey" type="String" />
+		<field name="optionvalue" type="String" />
+	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator">
 		<field name="patientnamegeneratorId" type="long" />
 		<field name="name" type="String" />

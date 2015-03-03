@@ -14,6 +14,12 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil;
+
 /**
  * The extended model implementation for the Event service. Represents a row in the &quot;kdssmp.event&quot; database table, with each column mapped to a property of this class.
  *
@@ -29,6 +35,24 @@ public class EventImpl extends EventBaseImpl {
 	 *
 	 * Never reference this class directly. All methods that expect a event model instance should use the {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event} interface instead.
 	 */
-	public EventImpl() {
+	public EventImpl() { 
+	}
+	
+	public String getEventGroup() {
+		String return_calue = "";
+		KdssmpConfiguration config = null;
+		try {
+			config = KdssmpConfigurationLocalServiceUtil.getConfigurationOption("EventGroup", this.getEventtype());
+		} catch (NoSuchKdssmpConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(config != null) {
+			return_calue = config.getOptionvalue();
+		}
+		return return_calue;
 	}
 }

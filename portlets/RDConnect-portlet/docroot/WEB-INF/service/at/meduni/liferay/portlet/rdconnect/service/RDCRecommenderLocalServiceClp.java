@@ -122,6 +122,10 @@ public class RDCRecommenderLocalServiceClp implements RDCRecommenderLocalService
 		_methodName20 = "addRDCRecommender";
 
 		_methodParameterTypes20 = new String[] { "long", "long", "double" };
+
+		_methodName21 = "getReconnandationsForUser";
+
+		_methodParameterTypes21 = new String[] { "long" };
 	}
 
 	@Override
@@ -736,6 +740,30 @@ public class RDCRecommenderLocalServiceClp implements RDCRecommenderLocalService
 		return (at.meduni.liferay.portlet.rdconnect.model.RDCRecommender)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.RDCRecommender> getReconnandationsForUser(
+		long userId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] { userId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.meduni.liferay.portlet.rdconnect.model.RDCRecommender>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -777,4 +805,6 @@ public class RDCRecommenderLocalServiceClp implements RDCRecommenderLocalService
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

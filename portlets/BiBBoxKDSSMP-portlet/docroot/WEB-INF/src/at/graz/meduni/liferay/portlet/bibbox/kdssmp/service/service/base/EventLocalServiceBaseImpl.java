@@ -18,6 +18,7 @@ import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalService;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.EventDataPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.EventPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.patientnamegeneratorPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -349,6 +350,44 @@ public abstract class EventLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the kdssmp configuration local service.
+	 *
+	 * @return the kdssmp configuration local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalService getKdssmpConfigurationLocalService() {
+		return kdssmpConfigurationLocalService;
+	}
+
+	/**
+	 * Sets the kdssmp configuration local service.
+	 *
+	 * @param kdssmpConfigurationLocalService the kdssmp configuration local service
+	 */
+	public void setKdssmpConfigurationLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalService kdssmpConfigurationLocalService) {
+		this.kdssmpConfigurationLocalService = kdssmpConfigurationLocalService;
+	}
+
+	/**
+	 * Returns the kdssmp configuration persistence.
+	 *
+	 * @return the kdssmp configuration persistence
+	 */
+	public KdssmpConfigurationPersistence getKdssmpConfigurationPersistence() {
+		return kdssmpConfigurationPersistence;
+	}
+
+	/**
+	 * Sets the kdssmp configuration persistence.
+	 *
+	 * @param kdssmpConfigurationPersistence the kdssmp configuration persistence
+	 */
+	public void setKdssmpConfigurationPersistence(
+		KdssmpConfigurationPersistence kdssmpConfigurationPersistence) {
+		this.kdssmpConfigurationPersistence = kdssmpConfigurationPersistence;
+	}
+
+	/**
 	 * Returns the patientnamegenerator local service.
 	 *
 	 * @return the patientnamegenerator local service
@@ -570,6 +609,10 @@ public abstract class EventLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalService eventDataLocalService;
 	@BeanReference(type = EventDataPersistence.class)
 	protected EventDataPersistence eventDataPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalService kdssmpConfigurationLocalService;
+	@BeanReference(type = KdssmpConfigurationPersistence.class)
+	protected KdssmpConfigurationPersistence kdssmpConfigurationPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalService patientnamegeneratorLocalService;
 	@BeanReference(type = patientnamegeneratorPersistence.class)

@@ -284,6 +284,21 @@ public class EventLocalServiceWrapper implements EventLocalService,
 		return _eventLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event createNewEvent(
+		long layoutId, long patientId, java.util.Date eventdate,
+		java.lang.String eventtype) {
+		return _eventLocalService.createNewEvent(layoutId, patientId,
+			eventdate, eventtype);
+	}
+
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event> getEventsForPatient(
+		long patientId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _eventLocalService.getEventsForPatient(patientId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

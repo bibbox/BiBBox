@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -35,6 +36,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
@@ -80,6 +82,493 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(EventModelImpl.ENTITY_CACHE_ENABLED,
 			EventModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PATIENT = new FinderPath(EventModelImpl.ENTITY_CACHE_ENABLED,
+			EventModelImpl.FINDER_CACHE_ENABLED, EventImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByPatient",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PATIENT =
+		new FinderPath(EventModelImpl.ENTITY_CACHE_ENABLED,
+			EventModelImpl.FINDER_CACHE_ENABLED, EventImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByPatient",
+			new String[] { Long.class.getName() },
+			EventModelImpl.PATIENTID_COLUMN_BITMASK |
+			EventModelImpl.EVENTDATE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_PATIENT = new FinderPath(EventModelImpl.ENTITY_CACHE_ENABLED,
+			EventModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPatient",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the events where patientId = &#63;.
+	 *
+	 * @param patientId the patient ID
+	 * @return the matching events
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Event> findByPatient(long patientId) throws SystemException {
+		return findByPatient(patientId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the events where patientId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param patientId the patient ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @return the range of matching events
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Event> findByPatient(long patientId, int start, int end)
+		throws SystemException {
+		return findByPatient(patientId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the events where patientId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param patientId the patient ID
+	 * @param start the lower bound of the range of events
+	 * @param end the upper bound of the range of events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching events
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Event> findByPatient(long patientId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PATIENT;
+			finderArgs = new Object[] { patientId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PATIENT;
+			finderArgs = new Object[] { patientId, start, end, orderByComparator };
+		}
+
+		List<Event> list = (List<Event>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Event event : list) {
+				if ((patientId != event.getPatientId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_EVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_PATIENT_PATIENTID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(EventModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(patientId);
+
+				if (!pagination) {
+					list = (List<Event>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Event>(list);
+				}
+				else {
+					list = (List<Event>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first event in the ordered set where patientId = &#63;.
+	 *
+	 * @param patientId the patient ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching event
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException if a matching event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event findByPatient_First(long patientId,
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		Event event = fetchByPatient_First(patientId, orderByComparator);
+
+		if (event != null) {
+			return event;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("patientId=");
+		msg.append(patientId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEventException(msg.toString());
+	}
+
+	/**
+	 * Returns the first event in the ordered set where patientId = &#63;.
+	 *
+	 * @param patientId the patient ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching event, or <code>null</code> if a matching event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event fetchByPatient_First(long patientId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Event> list = findByPatient(patientId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last event in the ordered set where patientId = &#63;.
+	 *
+	 * @param patientId the patient ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching event
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException if a matching event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event findByPatient_Last(long patientId,
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		Event event = fetchByPatient_Last(patientId, orderByComparator);
+
+		if (event != null) {
+			return event;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("patientId=");
+		msg.append(patientId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchEventException(msg.toString());
+	}
+
+	/**
+	 * Returns the last event in the ordered set where patientId = &#63;.
+	 *
+	 * @param patientId the patient ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching event, or <code>null</code> if a matching event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event fetchByPatient_Last(long patientId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByPatient(patientId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Event> list = findByPatient(patientId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the events before and after the current event in the ordered set where patientId = &#63;.
+	 *
+	 * @param eventId the primary key of the current event
+	 * @param patientId the patient ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next event
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException if a event with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event[] findByPatient_PrevAndNext(long eventId, long patientId,
+		OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		Event event = findByPrimaryKey(eventId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Event[] array = new EventImpl[3];
+
+			array[0] = getByPatient_PrevAndNext(session, event, patientId,
+					orderByComparator, true);
+
+			array[1] = event;
+
+			array[2] = getByPatient_PrevAndNext(session, event, patientId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Event getByPatient_PrevAndNext(Session session, Event event,
+		long patientId, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_EVENT_WHERE);
+
+		query.append(_FINDER_COLUMN_PATIENT_PATIENTID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(EventModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(patientId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(event);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Event> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the events where patientId = &#63; from the database.
+	 *
+	 * @param patientId the patient ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByPatient(long patientId) throws SystemException {
+		for (Event event : findByPatient(patientId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(event);
+		}
+	}
+
+	/**
+	 * Returns the number of events where patientId = &#63;.
+	 *
+	 * @param patientId the patient ID
+	 * @return the number of matching events
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByPatient(long patientId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_PATIENT;
+
+		Object[] finderArgs = new Object[] { patientId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_EVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_PATIENT_PATIENTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(patientId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_PATIENT_PATIENTID_2 = "event.patientId = ?";
 
 	public EventPersistenceImpl() {
 		setModelClass(Event.class);
@@ -273,6 +762,8 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 
 		boolean isNew = event.isNew();
 
+		EventModelImpl eventModelImpl = (EventModelImpl)event;
+
 		Session session = null;
 
 		try {
@@ -296,8 +787,27 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !EventModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+
+		else {
+			if ((eventModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PATIENT.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						eventModelImpl.getOriginalPatientId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PATIENT, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PATIENT,
+					args);
+
+				args = new Object[] { eventModelImpl.getPatientId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PATIENT, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PATIENT,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(EventModelImpl.ENTITY_CACHE_ENABLED,
@@ -627,9 +1137,12 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 	}
 
 	private static final String _SQL_SELECT_EVENT = "SELECT event FROM Event event";
+	private static final String _SQL_SELECT_EVENT_WHERE = "SELECT event FROM Event event WHERE ";
 	private static final String _SQL_COUNT_EVENT = "SELECT COUNT(event) FROM Event event";
+	private static final String _SQL_COUNT_EVENT_WHERE = "SELECT COUNT(event) FROM Event event WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "event.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Event exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Event exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(EventPersistenceImpl.class);

@@ -18,6 +18,7 @@ import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventModel;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -65,8 +66,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		};
 	public static final String TABLE_SQL_CREATE = "create table kdssmp.event (eventId LONG not null primary key,patientId LONG,eventdate DATE null,eventtype VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.event";
-	public static final String ORDER_BY_JPQL = " ORDER BY event.eventId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.event.eventId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY event.patientId ASC, event.eventdate ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.event.patientId ASC, kdssmp.event.eventdate ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -76,7 +77,11 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event"),
+			true);
+	public static long PATIENTID_COLUMN_BITMASK = 1L;
+	public static long EVENTDATE_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event"));
 
@@ -169,7 +174,19 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public void setPatientId(long patientId) {
+		_columnBitmask = -1L;
+
+		if (!_setOriginalPatientId) {
+			_setOriginalPatientId = true;
+
+			_originalPatientId = _patientId;
+		}
+
 		_patientId = patientId;
+	}
+
+	public long getOriginalPatientId() {
+		return _originalPatientId;
 	}
 
 	@Override
@@ -179,6 +196,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public void setEventdate(Date eventdate) {
+		_columnBitmask = -1L;
+
 		_eventdate = eventdate;
 	}
 
@@ -195,6 +214,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	@Override
 	public void setEventtype(String eventtype) {
 		_eventtype = eventtype;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -236,17 +259,29 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public int compareTo(Event event) {
-		long primaryKey = event.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getPatientId() < event.getPatientId()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getPatientId() > event.getPatientId()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = DateUtil.compareTo(getEventdate(), event.getEventdate());
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override
@@ -278,6 +313,13 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public void resetOriginalValues() {
+		EventModelImpl eventModelImpl = this;
+
+		eventModelImpl._originalPatientId = eventModelImpl._patientId;
+
+		eventModelImpl._setOriginalPatientId = false;
+
+		eventModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -360,7 +402,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Event.class };
 	private long _eventId;
 	private long _patientId;
+	private long _originalPatientId;
+	private boolean _setOriginalPatientId;
 	private Date _eventdate;
 	private String _eventtype;
+	private long _columnBitmask;
 	private Event _escapedModel;
 }

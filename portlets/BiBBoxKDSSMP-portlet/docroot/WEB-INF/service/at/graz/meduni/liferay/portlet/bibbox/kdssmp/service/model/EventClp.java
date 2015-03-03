@@ -19,6 +19,7 @@ import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalSe
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -200,6 +201,25 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		}
 	}
 
+	@Override
+	public java.lang.String getEventGroup() {
+		try {
+			String methodName = "getEventGroup";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getEventRemoteModel() {
 		return _eventRemoteModel;
 	}
@@ -279,17 +299,29 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 	@Override
 	public int compareTo(Event event) {
-		long primaryKey = event.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getPatientId() < event.getPatientId()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getPatientId() > event.getPatientId()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = DateUtil.compareTo(getEventdate(), event.getEventdate());
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override

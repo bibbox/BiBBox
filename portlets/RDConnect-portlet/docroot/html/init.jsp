@@ -78,6 +78,8 @@
 <%@ page import="at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil"%>
 <%@ page import="at.meduni.liferay.portlet.rdconnect.model.SearchIndex"%>
 <%@ page import="at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil"%>
+<%@ page import="at.meduni.liferay.portlet.rdconnect.model.RDCRecommender"%>
+<%@ page import="at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalServiceUtil"%>
 
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil"%>
 

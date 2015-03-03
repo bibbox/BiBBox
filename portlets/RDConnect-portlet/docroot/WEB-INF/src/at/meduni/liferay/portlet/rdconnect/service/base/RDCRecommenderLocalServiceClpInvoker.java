@@ -121,6 +121,10 @@ public class RDCRecommenderLocalServiceClpInvoker {
 		_methodName63 = "addRDCRecommender";
 
 		_methodParameterTypes63 = new String[] { "long", "long", "double" };
+
+		_methodName64 = "getReconnandationsForUser";
+
+		_methodParameterTypes64 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -237,6 +241,11 @@ public class RDCRecommenderLocalServiceClpInvoker {
 				((Double)arguments[2]).doubleValue());
 		}
 
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return RDCRecommenderLocalServiceUtil.getReconnandationsForUser(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -280,4 +289,6 @@ public class RDCRecommenderLocalServiceClpInvoker {
 	private String[] _methodParameterTypes62;
 	private String _methodName63;
 	private String[] _methodParameterTypes63;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
 }

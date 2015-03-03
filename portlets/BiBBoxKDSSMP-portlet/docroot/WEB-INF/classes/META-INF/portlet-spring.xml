@@ -5,6 +5,8 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.EventPersistence" class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.EventPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalService" class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl.EventDataLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.EventDataPersistence" class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.EventDataPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl.KdssmpConfigurationLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpConfigurationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpConfigurationPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalService" class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl.patientnamegeneratorLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.patientnamegeneratorPersistence" class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.patientnamegeneratorPersistenceImpl" parent="basePersistence" />
 </beans>

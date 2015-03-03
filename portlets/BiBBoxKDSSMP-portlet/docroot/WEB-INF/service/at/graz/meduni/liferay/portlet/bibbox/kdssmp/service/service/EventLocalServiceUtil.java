@@ -275,6 +275,19 @@ public class EventLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event createNewEvent(
+		long layoutId, long patientId, java.util.Date eventdate,
+		java.lang.String eventtype) {
+		return getService()
+				   .createNewEvent(layoutId, patientId, eventdate, eventtype);
+	}
+
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event> getEventsForPatient(
+		long patientId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEventsForPatient(patientId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -113,6 +113,16 @@ public class EventLocalServiceClp implements EventLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "createNewEvent";
+
+		_methodParameterTypes19 = new String[] {
+				"long", "long", "java.util.Date", "java.lang.String"
+			};
+
+		_methodName20 = "getEventsForPatient";
+
+		_methodParameterTypes20 = new String[] { "long" };
 	}
 
 	@Override
@@ -665,6 +675,69 @@ public class EventLocalServiceClp implements EventLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event createNewEvent(
+		long layoutId, long patientId, java.util.Date eventdate,
+		java.lang.String eventtype) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						layoutId,
+						
+					patientId,
+						
+					ClpSerializer.translateInput(eventdate),
+						
+					ClpSerializer.translateInput(eventtype)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event> getEventsForPatient(
+		long patientId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] { patientId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -702,4 +775,8 @@ public class EventLocalServiceClp implements EventLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

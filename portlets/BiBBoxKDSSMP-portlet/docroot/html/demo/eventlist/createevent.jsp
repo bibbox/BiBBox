@@ -2,18 +2,31 @@
 
 <portlet:defineObjects />
 
-CreateEvent
+<%
+long organizationId = 0;
+com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
+if (currentGroup.isOrganization()) {
+	organizationId = currentGroup.getClassPK();
+}
+%>
+
+<style>
+	.yui3-skin-sam .yui3-calendarnav-prevmonth span, .yui3-skin-sam .yui3-calendarnav-nextmonth span {
+	    display: inline;
+	}
+</style>
 
 <portlet:actionURL name='createEvent' var="createEventURL" windowState="normal" />
 
 <aui:form action="<%= createEventURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:layout>
+			<aui:input type="hidden" name="patientId" value="<%= String.valueOf(organizationId) %>" />
 			<aui:column columnWidth="50" first="true">
-				<aui:input name="date" ></aui:input>
+				<input class="form-control" name="kdssmpdate" type="text" placeholder="dd-mm-yyyy" value="">
 			</aui:column>
 			<aui:column columnWidth="50" last="true">
-				<aui:select label="Event" name="event" >
+				<aui:select label="Event" name="eventType" >
 					<aui:option value="Primärdiagnose">Primärdiagnose</aui:option>
 					<aui:option value="Histologie">Histologie</aui:option>
 					<aui:option value="Radiologie">Radiologie</aui:option>
@@ -28,6 +41,7 @@ CreateEvent
 					</optgroup>
 				</aui:select>
 			</aui:column>
+			
 		</aui:layout>
 		<aui:button-row>
 			<aui:button type="submit" />
@@ -36,4 +50,42 @@ CreateEvent
 	</aui:fieldset>
 </aui:form>
 
-
+<aui:script use="aui-io-request, event, node, aui-popover, valuechange, event-hover, aui-tooltip, event-valuechange, click">
+AUI().use(
+  'aui-datepicker',
+  function(Y) {
+    var datepicker = new Y.DatePicker(
+      {
+        trigger: 'input',
+        mask: '%d-%m-%Y',
+        popover: {
+          toolbars: {
+            header: [[
+              {
+                icon:'icon-trash',
+                label: 'Clear',
+                on: {
+                  click: function() {
+                    datepicker.clearSelection();
+                  }
+                }
+              },
+              {
+                icon:'icon-globe',
+                label: 'Today',
+                on: {
+                  click: function() {
+                    datepicker.clearSelection();
+                    datepicker.selectDates(new Date());
+                  }
+                }
+              }
+            ]]
+          },
+          zIndex: 1
+        }
+      }
+    );
+  }
+);
+</aui:script>

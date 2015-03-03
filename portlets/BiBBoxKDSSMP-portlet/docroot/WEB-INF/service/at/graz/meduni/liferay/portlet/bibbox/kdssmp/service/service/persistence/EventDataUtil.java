@@ -277,6 +277,168 @@ public class EventDataUtil {
 	}
 
 	/**
+	* Returns all the event datas where patientId = &#63;.
+	*
+	* @param patientId the patient ID
+	* @return the matching event datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByPatient(
+		long patientId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByPatient(patientId);
+	}
+
+	/**
+	* Returns a range of all the event datas where patientId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param patientId the patient ID
+	* @param start the lower bound of the range of event datas
+	* @param end the upper bound of the range of event datas (not inclusive)
+	* @return the range of matching event datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByPatient(
+		long patientId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByPatient(patientId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the event datas where patientId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param patientId the patient ID
+	* @param start the lower bound of the range of event datas
+	* @param end the upper bound of the range of event datas (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching event datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByPatient(
+		long patientId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByPatient(patientId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first event data in the ordered set where patientId = &#63;.
+	*
+	* @param patientId the patient ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching event data
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData findByPatient_First(
+		long patientId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByPatient_First(patientId, orderByComparator);
+	}
+
+	/**
+	* Returns the first event data in the ordered set where patientId = &#63;.
+	*
+	* @param patientId the patient ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching event data, or <code>null</code> if a matching event data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByPatient_First(
+		long patientId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByPatient_First(patientId, orderByComparator);
+	}
+
+	/**
+	* Returns the last event data in the ordered set where patientId = &#63;.
+	*
+	* @param patientId the patient ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching event data
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData findByPatient_Last(
+		long patientId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByPatient_Last(patientId, orderByComparator);
+	}
+
+	/**
+	* Returns the last event data in the ordered set where patientId = &#63;.
+	*
+	* @param patientId the patient ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching event data, or <code>null</code> if a matching event data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByPatient_Last(
+		long patientId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByPatient_Last(patientId, orderByComparator);
+	}
+
+	/**
+	* Returns the event datas before and after the current event data in the ordered set where patientId = &#63;.
+	*
+	* @param eventdataId the primary key of the current event data
+	* @param patientId the patient ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next event data
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a event data with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData[] findByPatient_PrevAndNext(
+		long eventdataId, long patientId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByPatient_PrevAndNext(eventdataId, patientId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the event datas where patientId = &#63; from the database.
+	*
+	* @param patientId the patient ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByPatient(long patientId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByPatient(patientId);
+	}
+
+	/**
+	* Returns the number of event datas where patientId = &#63;.
+	*
+	* @param patientId the patient ID
+	* @return the number of matching event datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByPatient(long patientId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByPatient(patientId);
+	}
+
+	/**
 	* Caches the event data in the entity cache if it is enabled.
 	*
 	* @param eventData the event data

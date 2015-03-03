@@ -61,4 +61,17 @@
 			<finder-column name="patientId" />
 		</finder>
 	</entity>
+	<entity name="KdssmpConfiguration" local-service="true" remote-service="false"  table="kdssmp.configuration" >
+		<!-- PK fields -->
+		<column name="configurationId" type="long" primary="true" />
+		<!-- Fields -->
+		<column name="scope" type="String" />
+		<column name="optionkey" type="String" />
+		<column name="optionvalue" type="String" />
+		<!-- Finder methods -->
+		<finder name="optionfinder" return-type="KdssmpConfiguration">
+			<finder-column name="scope" />
+			<finder-column name="optionkey" />
+		</finder>
+	</entity>
 </service-builder>

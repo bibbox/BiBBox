@@ -14,6 +14,14 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl;
 
+import java.util.Date;
+import java.util.List;
+
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventImpl;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.base.EventLocalServiceBaseImpl;
 
 /**
@@ -36,4 +44,21 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalServiceUtil} to access the event local service.
 	 */
+	public Event createNewEvent(long layoutId, long patientId, Date eventdate, String eventtype) {
+		EventImpl event = null;
+		try {
+			event = new EventImpl();
+			event.setEventId(layoutId);
+			event.setPatientId(patientId);
+			event.setEventdate(eventdate);
+			event.setEventtype(eventtype);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return event;
+	}
+	
+	public List<Event> getEventsForPatient(long patientId) throws SystemException {
+		return eventPersistence.findByPatient(patientId);
+	}
 }

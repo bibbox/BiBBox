@@ -31,4 +31,5 @@ public interface Event extends EventModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getEventGroup();
 }

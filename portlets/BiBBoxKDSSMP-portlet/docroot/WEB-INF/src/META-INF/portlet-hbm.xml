@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventImpl" table="kdssmp.event">
 		<cache usage="read-write" />
@@ -23,6 +24,15 @@
 		<property name="patientId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="ontology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationImpl" table="kdssmp.configuration">
+		<cache usage="read-write" />
+		<id name="configurationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="scope" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="optionkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="optionvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorImpl" table="kdssmp.patientnamegenerator">
 		<cache usage="read-write" />

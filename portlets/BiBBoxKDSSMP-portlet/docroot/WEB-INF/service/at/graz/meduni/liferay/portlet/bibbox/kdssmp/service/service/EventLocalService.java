@@ -248,4 +248,13 @@ public interface EventLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event createNewEvent(
+		long layoutId, long patientId, java.util.Date eventdate,
+		java.lang.String eventtype);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event> getEventsForPatient(
+		long patientId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

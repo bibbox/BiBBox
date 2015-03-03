@@ -257,4 +257,14 @@ public interface RDCRecommenderLocalService extends BaseLocalService,
 		long organizationId, long organizationrecommandedId,
 		double recommendervalue)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a number of Recommandations for a user
+	*
+	* @param userId
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.RDCRecommender> getReconnandationsForUser(
+		long userId);
 }

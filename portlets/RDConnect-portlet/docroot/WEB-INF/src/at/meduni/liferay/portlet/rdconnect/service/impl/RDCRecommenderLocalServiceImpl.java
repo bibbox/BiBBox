@@ -14,11 +14,22 @@
 
 package at.meduni.liferay.portlet.rdconnect.service.impl;
 
+import java.util.List;
+
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Order;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 import at.meduni.liferay.portlet.rdconnect.model.RDCRecommender;
 import at.meduni.liferay.portlet.rdconnect.model.impl.RDCRecommenderImpl;
+import at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.base.RDCRecommenderLocalServiceBaseImpl;
 import at.meduni.liferay.portlet.rdconnect.service.persistence.RDCRecommenderPersistence;
 
@@ -60,5 +71,41 @@ public class RDCRecommenderLocalServiceImpl
 		rdcrecommender.setRecommendedorganisationId(organizationrecommandedId);
 		rdcrecommender.setRecommendervalue(recommendervalue);
 		return super.addRDCRecommender(rdcrecommender);
+	}
+	
+	/**
+	 * Returns a number of Recommandations for a user
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<RDCRecommender> getReconnandationsForUser(long userId) {
+		try {
+			List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(userId);
+			System.out.println("Number of Organizations for user: " + organizations.size());
+			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RDCRecommender.class);
+			Criterion criterion = null;
+			for(Organization organization : organizations) {
+				if(criterion == null) {
+					criterion = RestrictionsFactoryUtil.eq("organisationId", organization.getOrganizationId());
+					//criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("recommendedorganisationId", organization.getOrganizationId()));
+				} else {
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.eq("organisationId", organization.getOrganizationId()));
+					//criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("recommendedorganisationId", organization.getOrganizationId()));
+				}
+			}
+			if(criterion != null) {
+				return null;
+			}
+			dynamicQuery.add(criterion);
+			Order recommendervalueOrder = OrderFactoryUtil.desc("recommendervalue");
+			dynamicQuery.addOrder(recommendervalueOrder);
+			List<RDCRecommender> rdcrecommenders = RDCRecommenderLocalServiceUtil.dynamicQuery(dynamicQuery);
+			return rdcrecommenders;
+		} catch(Exception ex) {
+			System.out.println("ERROR: RDCRecommenderLocalServiceImpl::getReconnandationsForUser");
+			ex.printStackTrace();
+		}
+		return null;
 	}
 }

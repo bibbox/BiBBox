@@ -6,26 +6,44 @@
 
 <style>
 	.event-container {
-		width: 253px;
-		height: 85px;
+		width: 353px;
+		height: 100px;
 		border: 1px solid black;
-		margin: 0 0 5px 0;
+		margin: 20px 0 0 0;
 	   	border-radius: 15px;
 	}
 	.event {
-	   	width: 100px;
-	   	height: 85px; 
+	   	width: 110px;
+	   	height: 100px; 
 	   	border: 1px solid black;
 	   	border-radius: 15px;
 	   	text-align: center;
 	   	float: left;
-	   	margin: -1px 0 0 -1px;
+	   	margin: -1px 0 0 -1px;	
+	   	position: relative;
+	   	top: -42px;
 	}
 	.event-text {
-	   	width: 150px;
-	   	height: 85px; 
+	   	width: 240px;
+	   	height: 100px; 
 	   	text-align: center;
 	   	float: left;
+	   	position: relative;
+	   	top: -42px;
+	}
+	.event-date {
+		position: relative;
+		width: 70px;
+	   	height: 40px;
+	   	border: 1px solid black;
+	   	background-color: #A8A8A8;
+		color: #FFFFFF;
+		top: -14px;
+		right: -39px;
+		font-size: 10px;
+		line-height: 12px;
+		text-align: center;
+		border-radius: 5px;
 	}
 	
 	.patient {
@@ -44,11 +62,24 @@
 		background-color: #00A257;
 		color: #FFFFFF;
 	}
+	.histologie {
+		background-color: #580000;
+		color: #FFFFFF;
+	}
+	.probexxcession {
+		background-color: #006666;
+		color: #FFFFFF;
+	}
+	.teilextraktion {
+		background-color: #333399;
+		color: #FFFFFF;
+	}
 </style>
 
 <%
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 String portletResource = ParamUtil.getString(request, "portletResource");
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 if (currentGroup.isOrganization()) {
@@ -56,30 +87,33 @@ if (currentGroup.isOrganization()) {
   	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 %>
 
-<portlet:actionURL name='<%= "createNewEvent" %>' var="createNewEventURL" windowState="normal" />
-<aui:form action="<%= createNewEventURL %>" method="POST" name="fm">
-	<aui:fieldset>
-		<!-- hidden elements direct from config -->
-		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
-	</aui:fieldset>
-	<aui:button-row cssClass="proposebuttonrow">
-		<aui:button type="submit" value="ABC" />
-	</aui:button-row>
-</aui:form>
-
 <button id="addorganisations" type="button">Add Event</button>
 <br>
 <%
-List<Layout> pagelayouts = themeDisplay.getLayouts();
-for(Layout l : pagelayouts) {
+
+List<Event> events = EventLocalServiceUtil.getEventsForPatient(organizationId);
+
+for(Event event : events) {
+	Layout l = LayoutLocalServiceUtil.getLayout(themeDisplay.getScopeGroupId(), false, event.getEventId());
 	LayoutTypePortlet ltp = (LayoutTypePortlet) l.getLayoutType();
-	String pagetype = l.getExpandoBridge().getAttribute("pageType").toString();
+	String pagetype = event.getEventtype().toLowerCase().replaceAll(" ", "");
+	String typeicon = "";
+	if(event.getEventGroup().equalsIgnoreCase("Act")) {
+		typeicon = request.getContextPath() + "/images/act.png";
+	} else {
+		typeicon = request.getContextPath() + "/images/observation.png";
+	}
 	%>
-	<div class="event-container">
-		<div class="event <%= pagetype.toLowerCase().replaceAll(" ", "") %>"><%= l.getName() %><br> 
-		<%= pagetype %><br></div>
+	<div class="event-container" style="background-color: yellow; ">
+		<div class="event-date"><%= dateFormat.format(event.getEventdate()) %></div>
+		<div class="event <%= pagetype.toLowerCase().replaceAll(" ", "") %>">
+		<img style="width: 21px; height: 20px;float: left;margin: 5px;" id='typeicon' src="<%= typeicon %>" />
+		<%= pagetype %><br>
+		
+		</div>
 		<div class="event-text"><%= l.getName() %></div>
 	</div>
+	<br>
 	<%
 }
 %>

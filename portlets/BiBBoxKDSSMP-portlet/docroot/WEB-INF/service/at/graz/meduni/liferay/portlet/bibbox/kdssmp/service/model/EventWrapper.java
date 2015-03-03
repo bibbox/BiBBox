@@ -248,7 +248,8 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	}
 
 	@Override
-	public int compareTo(Event event) {
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event event) {
 		return _event.compareTo(event);
 	}
 
@@ -258,17 +259,17 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<Event> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event> toCacheModel() {
 		return _event.toCacheModel();
 	}
 
 	@Override
-	public Event toEscapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event toEscapedModel() {
 		return new EventWrapper(_event.toEscapedModel());
 	}
 
 	@Override
-	public Event toUnescapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event toUnescapedModel() {
 		return new EventWrapper(_event.toUnescapedModel());
 	}
 
@@ -286,6 +287,11 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_event.persist();
+	}
+
+	@Override
+	public java.lang.String getEventGroup() {
+		return _event.getEventGroup();
 	}
 
 	@Override

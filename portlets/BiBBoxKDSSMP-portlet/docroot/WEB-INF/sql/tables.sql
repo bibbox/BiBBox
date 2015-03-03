@@ -1,3 +1,10 @@
+create table kdssmp.configuration (
+	configurationId LONG not null primary key,
+	scope VARCHAR(75) null,
+	optionkey VARCHAR(75) null,
+	optionvalue VARCHAR(75) null
+);
+
 create table kdssmp.event (
 	eventId LONG not null primary key,
 	patientId LONG,

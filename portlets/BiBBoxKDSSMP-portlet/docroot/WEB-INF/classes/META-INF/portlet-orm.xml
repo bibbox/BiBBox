@@ -32,6 +32,17 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationModelImpl">
+		<attributes>
+			<id name="configurationId" />
+			<basic name="scope" />
+			<basic name="optionkey" />
+			<basic name="optionvalue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorModelImpl">
 		<attributes>
 			<id name="patientnamegeneratorId" />
@@ -50,6 +61,10 @@
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataImpl" name="EventData">
 		<table name="kdssmp.eventdata" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationImpl" name="KdssmpConfiguration">
+		<table name="kdssmp.configuration" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorImpl" name="patientnamegenerator">
