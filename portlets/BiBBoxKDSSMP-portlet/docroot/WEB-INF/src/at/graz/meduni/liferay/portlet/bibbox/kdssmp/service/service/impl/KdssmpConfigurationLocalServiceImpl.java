@@ -14,6 +14,8 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl;
 
+import java.util.List;
+
 import com.liferay.portal.kernel.exception.SystemException;
 
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException;
@@ -43,5 +45,9 @@ public class KdssmpConfigurationLocalServiceImpl
 	 */
 	public KdssmpConfiguration getConfigurationOption(String scope, String key) throws NoSuchKdssmpConfigurationException, SystemException {
 		return kdssmpConfigurationPersistence.findByoptionfinder(scope, key);
+	}
+	
+	public List<KdssmpConfiguration> getConfigurationOptions(String scope) throws NoSuchKdssmpConfigurationException, SystemException {
+		return kdssmpConfigurationPersistence.findByoptionsfinder(scope);
 	}
 }

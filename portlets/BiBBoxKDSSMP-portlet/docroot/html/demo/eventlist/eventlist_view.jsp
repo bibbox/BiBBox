@@ -22,6 +22,7 @@
 	   	margin: -1px 0 0 -1px;	
 	   	position: relative;
 	   	top: -42px;
+	   	color: #FFFFFF;
 	}
 	.event-text {
 	   	width: 240px;
@@ -46,34 +47,16 @@
 		border-radius: 5px;
 	}
 	
-	.patient {
-		background-color: #A39082;
-		color: #FFFFFF;
+	<%
+	List<KdssmpConfiguration> options = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("CSSConfig");
+	for(KdssmpConfiguration option : options) {
+		%>
+		<%= "." + option.getOptionkey().toLowerCase().replaceAll(" ", "") + "{" %> 
+		<%= option.getOptionvalue() %>
+		<%= "}" %>
+		<%
 	}
-	.primärdiagnose {
-		background-color: #A1D750;
-		color: #FFFFFF;
-	}
-	.probeexcession {
-		background-color: blue;
-		color: #FFFFFF;
-	} 
-	.biopsie {
-		background-color: #00A257;
-		color: #FFFFFF;
-	}
-	.histologie {
-		background-color: #580000;
-		color: #FFFFFF;
-	}
-	.probexxcession {
-		background-color: #006666;
-		color: #FFFFFF;
-	}
-	.teilextraktion {
-		background-color: #333399;
-		color: #FFFFFF;
-	}
+	%>
 </style>
 
 <%

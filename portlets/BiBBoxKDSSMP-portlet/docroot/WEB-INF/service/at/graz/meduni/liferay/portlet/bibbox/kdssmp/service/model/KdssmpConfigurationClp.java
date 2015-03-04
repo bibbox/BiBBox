@@ -281,17 +281,15 @@ public class KdssmpConfigurationClp extends BaseModelImpl<KdssmpConfiguration>
 
 	@Override
 	public int compareTo(KdssmpConfiguration kdssmpConfiguration) {
-		long primaryKey = kdssmpConfiguration.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = getOptionkey().compareTo(kdssmpConfiguration.getOptionkey());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override

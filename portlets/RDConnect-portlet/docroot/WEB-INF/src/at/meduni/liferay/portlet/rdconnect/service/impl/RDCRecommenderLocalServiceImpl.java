@@ -82,7 +82,7 @@ public class RDCRecommenderLocalServiceImpl
 	public List<RDCRecommender> getReconnandationsForUser(long userId) {
 		try {
 			List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(userId);
-			System.out.println("Number of Organizations for user: " + organizations.size());
+			//System.out.println("Number of Organizations for user: " + organizations.size());
 			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RDCRecommender.class);
 			Criterion criterion = null;
 			for(Organization organization : organizations) {
@@ -94,9 +94,10 @@ public class RDCRecommenderLocalServiceImpl
 					//criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("recommendedorganisationId", organization.getOrganizationId()));
 				}
 			}
-			if(criterion != null) {
+			if(criterion == null) {
 				return null;
 			}
+			//System.out.println("Criterion" + criterion.toString());
 			dynamicQuery.add(criterion);
 			Order recommendervalueOrder = OrderFactoryUtil.desc("recommendervalue");
 			dynamicQuery.addOrder(recommendervalueOrder);

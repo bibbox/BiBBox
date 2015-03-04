@@ -119,6 +119,10 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 		_methodParameterTypes50 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
+
+		_methodName51 = "getConfigurationOptions";
+
+		_methodParameterTypes51 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -228,6 +232,11 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 				(java.lang.String)arguments[1]);
 		}
 
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+			return KdssmpConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -269,4 +278,6 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes45;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
 }

@@ -68,10 +68,17 @@
 		<column name="scope" type="String" />
 		<column name="optionkey" type="String" />
 		<column name="optionvalue" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="optionkey" />
+		</order>
 		<!-- Finder methods -->
 		<finder name="optionfinder" return-type="KdssmpConfiguration">
 			<finder-column name="scope" />
 			<finder-column name="optionkey" />
+		</finder>
+		<finder name="optionsfinder" return-type="Collection">
+			<finder-column name="scope" />
 		</finder>
 	</entity>
 </service-builder>

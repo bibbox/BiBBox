@@ -282,6 +282,13 @@ public class KdssmpConfigurationLocalServiceUtil {
 		return getService().getConfigurationOption(scope, key);
 	}
 
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration> getConfigurationOptions(
+		java.lang.String scope)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getConfigurationOptions(scope);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

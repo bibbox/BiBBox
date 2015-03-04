@@ -65,8 +65,8 @@ public class KdssmpConfigurationModelImpl extends BaseModelImpl<KdssmpConfigurat
 		};
 	public static final String TABLE_SQL_CREATE = "create table kdssmp.configuration (configurationId LONG not null primary key,scope VARCHAR(75) null,optionkey VARCHAR(75) null,optionvalue VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.configuration";
-	public static final String ORDER_BY_JPQL = " ORDER BY kdssmpConfiguration.configurationId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.configuration.configurationId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY kdssmpConfiguration.optionkey ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.configuration.optionkey ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -81,7 +81,6 @@ public class KdssmpConfigurationModelImpl extends BaseModelImpl<KdssmpConfigurat
 			true);
 	public static long OPTIONKEY_COLUMN_BITMASK = 1L;
 	public static long SCOPE_COLUMN_BITMASK = 2L;
-	public static long CONFIGURATIONID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration"));
 
@@ -204,7 +203,7 @@ public class KdssmpConfigurationModelImpl extends BaseModelImpl<KdssmpConfigurat
 
 	@Override
 	public void setOptionkey(String optionkey) {
-		_columnBitmask |= OPTIONKEY_COLUMN_BITMASK;
+		_columnBitmask = -1L;
 
 		if (_originalOptionkey == null) {
 			_originalOptionkey = _optionkey;
@@ -275,17 +274,15 @@ public class KdssmpConfigurationModelImpl extends BaseModelImpl<KdssmpConfigurat
 
 	@Override
 	public int compareTo(KdssmpConfiguration kdssmpConfiguration) {
-		long primaryKey = kdssmpConfiguration.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = getOptionkey().compareTo(kdssmpConfiguration.getOptionkey());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override

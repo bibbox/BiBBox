@@ -107,6 +107,9 @@
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event" %>
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalServiceUtil" %>
 
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration" %>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil" %>
+
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
