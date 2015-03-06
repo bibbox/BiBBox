@@ -8,6 +8,8 @@ com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup
 if (currentGroup.isOrganization()) {
 	organizationId = currentGroup.getClassPK();
 }
+String eventtype = ParamUtil.getString(request, "eventtype");
+String eventdisplay = KdssmpConfigurationLocalServiceUtil.getConfigurationOption("Display", eventtype).getOptionvalue();
 %>
 
 <style>
@@ -22,26 +24,30 @@ if (currentGroup.isOrganization()) {
 	<aui:fieldset>
 		<aui:layout>
 			<aui:input type="hidden" name="patientId" value="<%= String.valueOf(organizationId) %>" />
-			<aui:column columnWidth="50" first="true">
+			<aui:input type="hidden" name="eventType" value="<%= eventdisplay %>" />
+			<aui:column columnWidth="100" first="true">
+				<label for="kdssmpdate"><%= "Date of " + eventdisplay %></label>
 				<input class="form-control" name="kdssmpdate" type="text" placeholder="dd-mm-yyyy" value="">
 			</aui:column>
-			<aui:column columnWidth="50" last="true">
-				<aui:select label="Event" name="eventType" >
-					<aui:option value="Primärdiagnose">Primärdiagnose</aui:option>
-					<aui:option value="Histologie">Histologie</aui:option>
-					<aui:option value="Radiologie">Radiologie</aui:option>
-					<optgroup label="Pathology">
-						<aui:option value="OP Präperat">OP Präperat</aui:option>
-						<aui:option value="Schnellschnitt">Schnellschnitt</aui:option>
-						<aui:option value="Biopsie">Biopsie</aui:option>
-						<aui:option value="Probe Excession">Probe Excession</aui:option>
-						<aui:option value="Nadelbiopsie">Nadelbiopsie</aui:option>
-						<aui:option value="Teilextraktion">Teilextraktion</aui:option>
-						<aui:option value="Todesbefund">Todesbefund</aui:option>
-					</optgroup>
-				</aui:select>
-			</aui:column>
-			
+			<!-- Dynamic loading Elements -->
+			<%
+			List<KdssmpConfiguration> parameters = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", eventtype);
+			for(KdssmpConfiguration parameter : parameters) {
+				KdssmpParameterConfiguration parameterconfig = KdssmpParameterConfigurationLocalServiceUtil.getKdssmpParameterConfiguration(Long.parseLong(parameter.getOptionvalue()));
+				String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
+				if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
+					%><%@ include file="/html/demo/dynamicevent/dynamicelements/html.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
+					%><%@ include file="/html/demo/dynamicevent/dynamicelements/text.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
+					%><%@ include file="/html/demo/dynamicevent/dynamicelements/textbox.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
+					%><%@ include file="/html/demo/dynamicevent/dynamicelements/select.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
+					%><%@ include file="/html/demo/dynamicevent/dynamicelements/multiselect.jspf" %><%
+				}
+			}
+			%>
 		</aui:layout>
 		<aui:button-row>
 			<aui:button type="submit" />

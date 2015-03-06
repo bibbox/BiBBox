@@ -77,8 +77,37 @@
 			<finder-column name="scope" />
 			<finder-column name="optionkey" />
 		</finder>
+		<finder name="optionsfinderkey" return-type="Collection">
+			<finder-column name="scope" />
+			<finder-column name="optionkey" />
+		</finder>
 		<finder name="optionsfinder" return-type="Collection">
 			<finder-column name="scope" />
+		</finder>
+	</entity>
+	<entity name="KdssmpParameterConfiguration" local-service="true" remote-service="false"  table="kdssmp.parameterconfiguration" >
+		<!-- PK fields -->
+		<column name="parameterconfigurationId" type="long" primary="true" />
+		<!-- Fields -->
+		<column name="displayname" type="String" />
+		<column name="datatype" type="String" />
+		<column name="valuerange" type="String" />
+		<column name="displayoptions" type="String" />
+		<column name="visible" type="String" />
+		<column name="computed" type="String" />
+		<column name="confirmationscript" type="String" />
+	</entity>
+	<entity name="KdssmpParameterOptions" local-service="true" remote-service="false"  table="kdssmp.parameteroptions" >
+		<!-- PK fields -->
+		<column name="parameteroptionsId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="parameterconfigurationId" type="long" />
+		<!-- Fields -->
+		<column name="option" type="String" />
+		<column name="value" type="String" />
+		<!-- Finder methods -->
+		<finder name="Options" return-type="Collection">
+			<finder-column name="parameterconfigurationId" />
 		</finder>
 	</entity>
 </service-builder>

@@ -17,6 +17,8 @@ package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventDataClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfigurationClp;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfigurationClp;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterOptionsClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegeneratorClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -117,6 +119,15 @@ public class ClpSerializer {
 			return translateInputKdssmpConfiguration(oldModel);
 		}
 
+		if (oldModelClassName.equals(
+					KdssmpParameterConfigurationClp.class.getName())) {
+			return translateInputKdssmpParameterConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(KdssmpParameterOptionsClp.class.getName())) {
+			return translateInputKdssmpParameterOptions(oldModel);
+		}
+
 		if (oldModelClassName.equals(patientnamegeneratorClp.class.getName())) {
 			return translateInputpatientnamegenerator(oldModel);
 		}
@@ -167,6 +178,28 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputKdssmpParameterConfiguration(
+		BaseModel<?> oldModel) {
+		KdssmpParameterConfigurationClp oldClpModel = (KdssmpParameterConfigurationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getKdssmpParameterConfigurationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputKdssmpParameterOptions(
+		BaseModel<?> oldModel) {
+		KdssmpParameterOptionsClp oldClpModel = (KdssmpParameterOptionsClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getKdssmpParameterOptionsRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputpatientnamegenerator(
 		BaseModel<?> oldModel) {
 		patientnamegeneratorClp oldClpModel = (patientnamegeneratorClp)oldModel;
@@ -208,6 +241,16 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationImpl")) {
 			return translateOutputKdssmpConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterConfigurationImpl")) {
+			return translateOutputKdssmpParameterConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterOptionsImpl")) {
+			return translateOutputKdssmpParameterOptions(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -311,6 +354,16 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpParameterConfigurationException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpParameterConfigurationException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpParameterOptionsException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpParameterOptionsException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchpatientnamegeneratorException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchpatientnamegeneratorException();
 		}
@@ -345,6 +398,28 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setKdssmpConfigurationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputKdssmpParameterConfiguration(
+		BaseModel<?> oldModel) {
+		KdssmpParameterConfigurationClp newModel = new KdssmpParameterConfigurationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setKdssmpParameterConfigurationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputKdssmpParameterOptions(
+		BaseModel<?> oldModel) {
+		KdssmpParameterOptionsClp newModel = new KdssmpParameterOptionsClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setKdssmpParameterOptionsRemoteModel(oldModel);
 
 		return newModel;
 	}

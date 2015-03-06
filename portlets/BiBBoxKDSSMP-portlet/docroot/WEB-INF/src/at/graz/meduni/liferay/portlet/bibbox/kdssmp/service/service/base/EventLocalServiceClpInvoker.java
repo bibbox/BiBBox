@@ -106,23 +106,23 @@ public class EventLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event"
 			};
 
-		_methodName44 = "getBeanIdentifier";
+		_methodName52 = "getBeanIdentifier";
 
-		_methodParameterTypes44 = new String[] {  };
+		_methodParameterTypes52 = new String[] {  };
 
-		_methodName45 = "setBeanIdentifier";
+		_methodName53 = "setBeanIdentifier";
 
-		_methodParameterTypes45 = new String[] { "java.lang.String" };
+		_methodParameterTypes53 = new String[] { "java.lang.String" };
 
-		_methodName50 = "createNewEvent";
+		_methodName58 = "createNewEvent";
 
-		_methodParameterTypes50 = new String[] {
+		_methodParameterTypes58 = new String[] {
 				"long", "long", "java.util.Date", "java.lang.String"
 			};
 
-		_methodName51 = "getEventsForPatient";
+		_methodName59 = "getEventsForPatient";
 
-		_methodParameterTypes51 = new String[] { "long" };
+		_methodParameterTypes59 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -214,27 +214,27 @@ public class EventLocalServiceClpInvoker {
 			return EventLocalServiceUtil.updateEvent((at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event)arguments[0]);
 		}
 
-		if (_methodName44.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
 			return EventLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
 			EventLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return EventLocalServiceUtil.createNewEvent(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(), (java.util.Date)arguments[2],
 				(java.lang.String)arguments[3]);
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
 			return EventLocalServiceUtil.getEventsForPatient(((Long)arguments[0]).longValue());
 		}
 
@@ -273,12 +273,12 @@ public class EventLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName44;
-	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
-	private String _methodName51;
-	private String[] _methodParameterTypes51;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
 }

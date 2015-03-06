@@ -4,7 +4,12 @@
 <routes>
     <route>
         <pattern>/createevent/{patientId:\d+}</pattern>
-        <generated-parameter name="mvcPath">/html/demo/eventlist/createevent.jsp</generated-parameter>
+        <generated-parameter name="mvcPath">/html/demo/dynamicevent/createevent.jsp</generated-parameter>
+        <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
+    </route>
+    <route>
+        <pattern>/createevent/{patientId:\d+}/{eventtype:\w+}</pattern>
+        <generated-parameter name="mvcPath">/html/demo/dynamicevent/createevent.jsp</generated-parameter>
         <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
     </route>
 </routes>

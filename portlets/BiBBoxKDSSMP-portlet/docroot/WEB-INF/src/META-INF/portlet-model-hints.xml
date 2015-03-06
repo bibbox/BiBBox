@@ -20,6 +20,22 @@
 		<field name="optionkey" type="String" />
 		<field name="optionvalue" type="String" />
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfiguration">
+		<field name="parameterconfigurationId" type="long" />
+		<field name="displayname" type="String" />
+		<field name="datatype" type="String" />
+		<field name="valuerange" type="String" />
+		<field name="displayoptions" type="String" />
+		<field name="visible" type="String" />
+		<field name="computed" type="String" />
+		<field name="confirmationscript" type="String" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterOptions">
+		<field name="parameteroptionsId" type="long" />
+		<field name="parameterconfigurationId" type="long" />
+		<field name="option" type="String" />
+		<field name="value" type="String" />
+	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator">
 		<field name="patientnamegeneratorId" type="long" />
 		<field name="name" type="String" />

@@ -43,6 +43,34 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterConfigurationModelImpl">
+		<attributes>
+			<id name="parameterconfigurationId" />
+			<basic name="displayname" />
+			<basic name="datatype" />
+			<basic name="valuerange" />
+			<basic name="displayoptions" />
+			<basic name="visible" />
+			<basic name="computed" />
+			<basic name="confirmationscript" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterOptionsModelImpl">
+		<attributes>
+			<id name="parameteroptionsId" />
+			<basic name="parameterconfigurationId" />
+			<basic name="option">
+				<column name="OPTION_" />
+			</basic>
+			<basic name="value" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorModelImpl">
 		<attributes>
 			<id name="patientnamegeneratorId" />
@@ -65,6 +93,14 @@
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationImpl" name="KdssmpConfiguration">
 		<table name="kdssmp.configuration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterConfigurationImpl" name="KdssmpParameterConfiguration">
+		<table name="kdssmp.parameterconfiguration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterOptionsImpl" name="KdssmpParameterOptions">
+		<table name="kdssmp.parameteroptions" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorImpl" name="patientnamegenerator">

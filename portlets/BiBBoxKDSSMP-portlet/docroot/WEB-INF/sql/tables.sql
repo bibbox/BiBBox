@@ -1,3 +1,20 @@
+create table kdssmp.arameterconfiguration (
+	parameterconfigurationId LONG not null primary key,
+	displayname VARCHAR(75) null,
+	datatype VARCHAR(75) null,
+	valuerange VARCHAR(75) null,
+	displayoptions VARCHAR(75) null,
+	visible VARCHAR(75) null,
+	computed VARCHAR(75) null,
+	confirmationscript VARCHAR(75) null
+);
+
+create table kdssmp.arameteroptions (
+	parameteroptionsId LONG not null primary key,
+	option_ VARCHAR(75) null,
+	value VARCHAR(75) null
+);
+
 create table kdssmp.configuration (
 	configurationId LONG not null primary key,
 	scope VARCHAR(75) null,
@@ -17,6 +34,24 @@ create table kdssmp.eventdata (
 	eventlayoutId LONG,
 	patientId LONG,
 	ontology VARCHAR(75) null,
+	value VARCHAR(75) null
+);
+
+create table kdssmp.parameterconfiguration (
+	parameterconfigurationId LONG not null primary key,
+	displayname VARCHAR(75) null,
+	datatype VARCHAR(75) null,
+	valuerange VARCHAR(75) null,
+	displayoptions VARCHAR(75) null,
+	visible VARCHAR(75) null,
+	computed VARCHAR(75) null,
+	confirmationscript VARCHAR(75) null
+);
+
+create table kdssmp.parameteroptions (
+	parameteroptionsId LONG not null primary key,
+	parameterconfigurationId LONG,
+	option_ VARCHAR(75) null,
 	value VARCHAR(75) null
 );
 

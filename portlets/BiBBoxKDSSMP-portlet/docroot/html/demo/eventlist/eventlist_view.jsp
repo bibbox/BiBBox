@@ -70,7 +70,6 @@ if (currentGroup.isOrganization()) {
   	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 %>
 
-<button id="addorganisations" type="button">Add Event</button>
 <br>
 <%
 
@@ -101,38 +100,8 @@ for(Event event : events) {
 }
 %>
 <br>
-<% 
-String addOrganizationURL = themeDisplay.getURLCurrent().split("[?]")[0];
-if(addOrganizationURL.matches("/web/" + organizationId)) {
-	addOrganizationURL += "/patient";
-}
-if(addOrganizationURL.matches("/web/" + organizationId + "/")) {
-	addOrganizationURL += "patient";
-}
-addOrganizationURL = addOrganizationURL + "/-/event/createevent/" + organizationId;
-%>
-<%= addOrganizationURL %>
-<!-- Popup for adding Organiaztions to the list -->
-<aui:script use="aui-base">
-            A.all('#addorganisations').on(
-               'click',
-               function(event) {
-                  Liferay.Util.selectEntity(
-                     {
-                        dialog: {
-                           cache: false,
-                           constrain: true,
-                           modal: true,
-                           width: 1000,
-                        },
-                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addorganisation',
-                        title: '<%= "Create Event for Patient " + organization.getName() %>',
-                        uri: '<%= addOrganizationURL %>'
-                     }
-                  );
-               }
-            );
-</aui:script>
+
+
 
 <% } else { %>
 	<div>The portet is not able to work in this page.</div>

@@ -43,10 +43,32 @@ public class KdssmpConfigurationLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil} to access the kdssmp configuration local service.
 	 */
+	/**
+	 * 
+	 */
 	public KdssmpConfiguration getConfigurationOption(String scope, String key) throws NoSuchKdssmpConfigurationException, SystemException {
 		return kdssmpConfigurationPersistence.findByoptionfinder(scope, key);
 	}
 	
+	/**
+	 * 
+	 * @param scope
+	 * @param key
+	 * @return
+	 * @throws NoSuchKdssmpConfigurationException
+	 * @throws SystemException
+	 */
+	public List<KdssmpConfiguration> getConfigurationOptions(String scope, String key) throws NoSuchKdssmpConfigurationException, SystemException {
+		return kdssmpConfigurationPersistence.findByoptionsfinderkey(scope, key);
+	}
+	
+	/**
+	 * 
+	 * @param scope
+	 * @return
+	 * @throws NoSuchKdssmpConfigurationException
+	 * @throws SystemException
+	 */
 	public List<KdssmpConfiguration> getConfigurationOptions(String scope) throws NoSuchKdssmpConfigurationException, SystemException {
 		return kdssmpConfigurationPersistence.findByoptionsfinder(scope);
 	}

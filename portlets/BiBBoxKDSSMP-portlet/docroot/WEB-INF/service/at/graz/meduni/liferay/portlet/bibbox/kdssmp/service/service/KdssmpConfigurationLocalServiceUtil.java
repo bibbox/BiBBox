@@ -282,6 +282,26 @@ public class KdssmpConfigurationLocalServiceUtil {
 		return getService().getConfigurationOption(scope, key);
 	}
 
+	/**
+	* @param scope
+	* @param key
+	* @return
+	* @throws NoSuchKdssmpConfigurationException
+	* @throws SystemException
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration> getConfigurationOptions(
+		java.lang.String scope, java.lang.String key)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getConfigurationOptions(scope, key);
+	}
+
+	/**
+	* @param scope
+	* @return
+	* @throws NoSuchKdssmpConfigurationException
+	* @throws SystemException
+	*/
 	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration> getConfigurationOptions(
 		java.lang.String scope)
 		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,

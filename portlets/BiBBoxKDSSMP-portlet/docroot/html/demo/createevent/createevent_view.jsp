@@ -18,13 +18,22 @@
 </style>
 
 <%
+String portletResource = ParamUtil.getString(request, "portletResource");
+long organizationId = 0;
+Organization organization = null;
+com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
+if (currentGroup.isOrganization()) {
+	organizationId = currentGroup.getClassPK();
+  	organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+}
+
 HashMap<String, String> eventcreation = new HashMap<String, String>();
 List<KdssmpConfiguration> event_options = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("EventGroup");
 for(KdssmpConfiguration event_option : event_options) {
 	if(eventcreation.containsKey(event_option.getOptionvalue())) {
-		eventcreation.put(event_option.getOptionvalue(), eventcreation.get(event_option.getOptionvalue()) + "<br>" + "&nbsp<i id=\"addorganisations\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + event_option.getOptionkey() + "</i>");
+		eventcreation.put(event_option.getOptionvalue(), eventcreation.get(event_option.getOptionvalue()) + "<br>" + "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + event_option.getOptionkey().toLowerCase().replaceAll(" ", "").replaceAll("ä", "a") + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + event_option.getOptionkey() + "</i>");
 	} else {
-		eventcreation.put(event_option.getOptionvalue(), "&nbsp<i id=\"addorganisations\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + event_option.getOptionkey() + "</i>");
+		eventcreation.put(event_option.getOptionvalue(), "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + event_option.getOptionkey().toLowerCase().replaceAll(" ", "").replaceAll("ä", "a") + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + event_option.getOptionkey() + "</i>");
 	}
 }
 for(String key : eventcreation.keySet()) {
@@ -38,3 +47,35 @@ for(String key : eventcreation.keySet()) {
 	<%
 }
 %>
+<% 
+String addOrganizationURL = themeDisplay.getURLCurrent().split("[?]")[0];
+if(addOrganizationURL.matches("/web/" + organizationId)) {
+	addOrganizationURL += "/patient";
+}
+if(addOrganizationURL.matches("/web/" + organizationId + "/")) {
+	addOrganizationURL += "patient";
+}
+addOrganizationURL = addOrganizationURL + "/-/event/createevent/" + organizationId;
+%>
+<!-- Popup for adding Organiaztions to the list -->
+<aui:script use="aui-base">
+            A.all('#kdssmpcreateevent').on(
+               'click',
+               function(event) {
+               	  var tag = event.target.getAttribute('tag');
+                  Liferay.Util.selectEntity(
+                     {
+                        dialog: {
+                           cache: false,
+                           constrain: true,
+                           modal: true,
+                           width: 1000
+                        },
+                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addorganisation' + '/' + tag,
+                        title: '<%= "Create " %> ' + tag + ' <%= " for Patient " + organization.getName() %>',
+                        uri: '<%= addOrganizationURL %>' + '/' + tag
+                     }
+                  );
+               }
+            );
+</aui:script>

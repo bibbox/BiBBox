@@ -109,6 +109,12 @@
 
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration" %>
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil" %>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfiguration" %>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpParameterConfigurationLocalServiceUtil" %>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterOptions" %>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpParameterOptionsLocalServiceUtil" %>
+
+
 
 
 <liferay-theme:defineObjects />

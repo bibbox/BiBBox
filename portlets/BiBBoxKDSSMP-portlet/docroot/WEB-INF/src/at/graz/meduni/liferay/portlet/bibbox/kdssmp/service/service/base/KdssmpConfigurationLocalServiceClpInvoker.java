@@ -106,23 +106,29 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration"
 			};
 
-		_methodName44 = "getBeanIdentifier";
+		_methodName52 = "getBeanIdentifier";
 
-		_methodParameterTypes44 = new String[] {  };
+		_methodParameterTypes52 = new String[] {  };
 
-		_methodName45 = "setBeanIdentifier";
+		_methodName53 = "setBeanIdentifier";
 
-		_methodParameterTypes45 = new String[] { "java.lang.String" };
+		_methodParameterTypes53 = new String[] { "java.lang.String" };
 
-		_methodName50 = "getConfigurationOption";
+		_methodName58 = "getConfigurationOption";
 
-		_methodParameterTypes50 = new String[] {
+		_methodParameterTypes58 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName51 = "getConfigurationOptions";
+		_methodName59 = "getConfigurationOptions";
 
-		_methodParameterTypes51 = new String[] { "java.lang.String" };
+		_methodParameterTypes59 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName60 = "getConfigurationOptions";
+
+		_methodParameterTypes60 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -214,26 +220,32 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 			return KdssmpConfigurationLocalServiceUtil.updateKdssmpConfiguration((at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration)arguments[0]);
 		}
 
-		if (_methodName44.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
 			return KdssmpConfigurationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
 			KdssmpConfigurationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return KdssmpConfigurationLocalServiceUtil.getConfigurationOption((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+			return KdssmpConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return KdssmpConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0]);
 		}
 
@@ -272,12 +284,14 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName44;
-	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
-	private String _methodName51;
-	private String[] _methodParameterTypes51;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
 }

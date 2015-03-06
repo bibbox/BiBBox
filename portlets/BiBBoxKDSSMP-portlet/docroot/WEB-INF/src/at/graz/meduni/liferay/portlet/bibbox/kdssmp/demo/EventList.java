@@ -8,7 +8,11 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpParameterConfigurationLocalServiceUtil;
 
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -28,6 +32,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -85,12 +90,60 @@ public class EventList extends MVCPortlet {
 			Event event = EventLocalServiceUtil.createNewEvent(layout.getLayoutId(), patientId ,eventdate, eventtype);
 			EventLocalServiceUtil.addEvent(event);
 
+			// Read Data from request
+			addEventDate(request);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
 	}
 
+	/**
+	 * 
+	 * @param request
+	 */
+	private void addEventDate(ActionRequest request) {
+		try {
+			String eventtype = ParamUtil.getString(request, "eventType");
+			long patientId = ParamUtil.getLong(request, "patientId");
+			List<KdssmpConfiguration> parameters = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", eventtype);
+			for(KdssmpConfiguration parameter : parameters) {
+				KdssmpParameterConfiguration parameterconfig = KdssmpParameterConfigurationLocalServiceUtil.getKdssmpParameterConfiguration(Long.parseLong(parameter.getOptionvalue()));
+				String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
+				String value = "";
+				if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
+					value = ParamUtil.getString(request, id);
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
+					value = ParamUtil.getString(request, id);
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
+					value = ParamUtil.getString(request, id);
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
+					value = ParamUtil.getString(request, id);
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
+					String[] items = ParamUtil.getParameterValues(request, id);
+					boolean first = true;
+					for(String item : items){
+						if(!first) {
+							value += ";";
+						} else {
+							first = false;
+						}
+						value += "\"" + item + "\"";
+					}
+				}
+			}
+		} catch(Exception ex) {
+			System.err.println("ERROR: EventList::addEventDate(ActionRequest request)");
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @param layout
+	 * @param portletId
+	 * @throws Exception
+	 */
 	protected void addResources(Layout layout, String portletId) throws Exception {
 		String rootPortletId = PortletConstants.getRootPortletId(portletId);
 		String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(layout.getPlid(), portletId);

@@ -188,6 +188,190 @@ public class KdssmpConfigurationUtil {
 	}
 
 	/**
+	* Returns all the kdssmp configurations where scope = &#63; and optionkey = &#63;.
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @return the matching kdssmp configurations
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration> findByoptionsfinderkey(
+		java.lang.String scope, java.lang.String optionkey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByoptionsfinderkey(scope, optionkey);
+	}
+
+	/**
+	* Returns a range of all the kdssmp configurations where scope = &#63; and optionkey = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @param start the lower bound of the range of kdssmp configurations
+	* @param end the upper bound of the range of kdssmp configurations (not inclusive)
+	* @return the range of matching kdssmp configurations
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration> findByoptionsfinderkey(
+		java.lang.String scope, java.lang.String optionkey, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByoptionsfinderkey(scope, optionkey, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the kdssmp configurations where scope = &#63; and optionkey = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @param start the lower bound of the range of kdssmp configurations
+	* @param end the upper bound of the range of kdssmp configurations (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching kdssmp configurations
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration> findByoptionsfinderkey(
+		java.lang.String scope, java.lang.String optionkey, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByoptionsfinderkey(scope, optionkey, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first kdssmp configuration in the ordered set where scope = &#63; and optionkey = &#63;.
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching kdssmp configuration
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException if a matching kdssmp configuration could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration findByoptionsfinderkey_First(
+		java.lang.String scope, java.lang.String optionkey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByoptionsfinderkey_First(scope, optionkey,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first kdssmp configuration in the ordered set where scope = &#63; and optionkey = &#63;.
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching kdssmp configuration, or <code>null</code> if a matching kdssmp configuration could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration fetchByoptionsfinderkey_First(
+		java.lang.String scope, java.lang.String optionkey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByoptionsfinderkey_First(scope, optionkey,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last kdssmp configuration in the ordered set where scope = &#63; and optionkey = &#63;.
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching kdssmp configuration
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException if a matching kdssmp configuration could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration findByoptionsfinderkey_Last(
+		java.lang.String scope, java.lang.String optionkey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByoptionsfinderkey_Last(scope, optionkey,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last kdssmp configuration in the ordered set where scope = &#63; and optionkey = &#63;.
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching kdssmp configuration, or <code>null</code> if a matching kdssmp configuration could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration fetchByoptionsfinderkey_Last(
+		java.lang.String scope, java.lang.String optionkey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByoptionsfinderkey_Last(scope, optionkey,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the kdssmp configurations before and after the current kdssmp configuration in the ordered set where scope = &#63; and optionkey = &#63;.
+	*
+	* @param configurationId the primary key of the current kdssmp configuration
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next kdssmp configuration
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException if a kdssmp configuration with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration[] findByoptionsfinderkey_PrevAndNext(
+		long configurationId, java.lang.String scope,
+		java.lang.String optionkey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByoptionsfinderkey_PrevAndNext(configurationId, scope,
+			optionkey, orderByComparator);
+	}
+
+	/**
+	* Removes all the kdssmp configurations where scope = &#63; and optionkey = &#63; from the database.
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByoptionsfinderkey(java.lang.String scope,
+		java.lang.String optionkey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByoptionsfinderkey(scope, optionkey);
+	}
+
+	/**
+	* Returns the number of kdssmp configurations where scope = &#63; and optionkey = &#63;.
+	*
+	* @param scope the scope
+	* @param optionkey the optionkey
+	* @return the number of matching kdssmp configurations
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByoptionsfinderkey(java.lang.String scope,
+		java.lang.String optionkey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByoptionsfinderkey(scope, optionkey);
+	}
+
+	/**
 	* Returns all the kdssmp configurations where scope = &#63;.
 	*
 	* @param scope the scope
