@@ -61,5 +61,6 @@
 	</category>
 	<category name="RDConnect Statistiks">
 		<portlet id="user-statistik"></portlet>
+		<portlet id="invitation-statistics"></portlet>
 	</category>
 </display>

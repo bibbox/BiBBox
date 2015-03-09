@@ -14,6 +14,11 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
+
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataImpl;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.base.EventDataLocalServiceBaseImpl;
 
 /**
@@ -36,4 +41,21 @@ public class EventDataLocalServiceImpl extends EventDataLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalServiceUtil} to access the event data local service.
 	 */
+	public EventData createNewEventData(long eventId, long patientId, String key, String value) {
+		EventDataImpl eventdata = null;
+		try {
+			eventdata = new EventDataImpl();
+			eventdata.setEventdataId(CounterLocalServiceUtil.increment(EventData.class.getName()));
+			eventdata.setEventlayoutId(eventId);
+			eventdata.setPatientId(patientId);
+			eventdata.setOntology(key);
+			eventdata.setValue(value);
+			
+			return EventDataLocalServiceUtil.addEventData(eventdata);
+		} catch(Exception ex) {
+			System.err.println("ERROR: EventDataLocalServiceImpl::createNewEventData()");
+			ex.printStackTrace();
+		}
+		return null;
+	}
 }

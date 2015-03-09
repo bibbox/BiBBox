@@ -11,8 +11,12 @@
 		<field name="eventdataId" type="long" />
 		<field name="eventlayoutId" type="long" />
 		<field name="patientId" type="long" />
-		<field name="ontology" type="String" />
-		<field name="value" type="String" />
+		<field name="ontology" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="value" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration">
 		<field name="configurationId" type="long" />

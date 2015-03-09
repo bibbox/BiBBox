@@ -359,6 +359,30 @@ public class InvitationOrganisationLocalServiceWrapper
 	}
 
 	/**
+	* @return
+	*/
+	@Override
+	public java.lang.String getInvitationStatisticsInvitationsSend() {
+		return _invitationOrganisationLocalService.getInvitationStatisticsInvitationsSend();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public java.lang.String getInvitationStatisticsReacted() {
+		return _invitationOrganisationLocalService.getInvitationStatisticsReacted();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public java.lang.String getInvitationStatisticsRejected() {
+		return _invitationOrganisationLocalService.getInvitationStatisticsRejected();
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public InvitationOrganisationLocalService getWrappedInvitationOrganisationLocalService() {

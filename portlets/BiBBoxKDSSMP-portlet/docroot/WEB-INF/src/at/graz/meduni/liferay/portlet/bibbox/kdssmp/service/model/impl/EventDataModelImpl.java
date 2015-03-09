@@ -64,7 +64,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 			{ "ontology", Types.VARCHAR },
 			{ "value", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table kdssmp.eventdata (eventdataId LONG not null primary key,eventlayoutId LONG,patientId LONG,ontology VARCHAR(75) null,value VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table kdssmp.eventdata (eventdataId LONG not null primary key,eventlayoutId LONG,patientId LONG,ontology TEXT null,value TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.eventdata";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventData.eventlayoutId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.eventdata.eventlayoutId ASC";

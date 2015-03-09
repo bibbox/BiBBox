@@ -286,6 +286,14 @@ public class EventDataLocalServiceWrapper implements EventDataLocalService,
 			arguments);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData createNewEventData(
+		long eventId, long patientId, java.lang.String key,
+		java.lang.String value) {
+		return _eventDataLocalService.createNewEventData(eventId, patientId,
+			key, value);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -16,7 +16,7 @@
 <script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide.config.js" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="http://www.highcharts.com/media/com_demo/highslide.css" />
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="container_user" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <portlet:resourceURL var="checkEmailForUserURL"></portlet:resourceURL>
 
@@ -29,7 +29,7 @@ String values = valuesting[1];
 <script type="text/javascript">
 $(function () {
 
-        $('#container').highcharts({
+        $('#container_user').highcharts({
 
             title: {
                 text: 'Daily visits for http://catalogue.rd-connect.eu'

@@ -93,13 +93,15 @@ for(Event event : events) {
 		<%= pagetype %><br>
 		
 		</div>
-		<div class="event-text"><%= l.getName() %></div>
+		<div class="event-text"><%= l.getName() %> - <%= l.getLayoutPrototypeUuid() %></div>
 	</div>
 	<br>
 	<%
 }
 %>
 <br>
+
+this: layout = <%= themeDisplay.getLayout().getLayoutPrototypeUuid() %>
 
 
 

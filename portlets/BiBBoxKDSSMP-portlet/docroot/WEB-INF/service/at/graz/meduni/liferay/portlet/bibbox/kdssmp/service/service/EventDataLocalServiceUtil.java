@@ -275,6 +275,12 @@ public class EventDataLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData createNewEventData(
+		long eventId, long patientId, java.lang.String key,
+		java.lang.String value) {
+		return getService().createNewEventData(eventId, patientId, key, value);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

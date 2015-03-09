@@ -219,7 +219,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			}
 			searchresultstring += "</table>";
 			// Add the number of Results
-			searchresultstring = "<h4>Search returned " + serachresults.size() + " hits (Registries:" + regcount + " /Biobaks:" + bbcount + ")</h4><br /><br />" + searchresultstring;
+			searchresultstring = "<h4>Search returned " + serachresults.size() + " hits (Registries:" + regcount + " /Biobanks:" + bbcount + ")</h4><br /><br />" + searchresultstring;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

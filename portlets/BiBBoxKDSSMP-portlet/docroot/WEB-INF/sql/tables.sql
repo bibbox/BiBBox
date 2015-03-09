@@ -33,8 +33,8 @@ create table kdssmp.eventdata (
 	eventdataId LONG not null primary key,
 	eventlayoutId LONG,
 	patientId LONG,
-	ontology VARCHAR(75) null,
-	value VARCHAR(75) null
+	ontology TEXT null,
+	value TEXT null
 );
 
 create table kdssmp.parameterconfiguration (

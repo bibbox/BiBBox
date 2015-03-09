@@ -82,6 +82,8 @@
 <%@ page import="at.meduni.liferay.portlet.rdconnect.service.RDCRecommenderLocalServiceUtil"%>
 
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil"%>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil"%>
+
 
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"%>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil"%>

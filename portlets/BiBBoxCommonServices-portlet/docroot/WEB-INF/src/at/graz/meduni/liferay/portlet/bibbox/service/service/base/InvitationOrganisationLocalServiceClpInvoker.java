@@ -141,6 +141,18 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 		_methodName66 = "getInvitationOrganisationByStatus";
 
 		_methodParameterTypes66 = new String[] { "boolean" };
+
+		_methodName67 = "getInvitationStatisticsInvitationsSend";
+
+		_methodParameterTypes67 = new String[] {  };
+
+		_methodName68 = "getInvitationStatisticsReacted";
+
+		_methodParameterTypes68 = new String[] {  };
+
+		_methodName69 = "getInvitationStatisticsRejected";
+
+		_methodParameterTypes69 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -280,6 +292,21 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisationByStatus(((Boolean)arguments[0]).booleanValue());
 		}
 
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+			return InvitationOrganisationLocalServiceUtil.getInvitationStatisticsInvitationsSend();
+		}
+
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+			return InvitationOrganisationLocalServiceUtil.getInvitationStatisticsReacted();
+		}
+
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+			return InvitationOrganisationLocalServiceUtil.getInvitationStatisticsRejected();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -333,4 +360,10 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes65;
 	private String _methodName66;
 	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
 }
