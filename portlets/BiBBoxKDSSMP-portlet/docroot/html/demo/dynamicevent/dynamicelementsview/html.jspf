@@ -1,0 +1,5 @@
+<%
+EventData data = EventDataLocalServiceUtil.getEventDataByOntology(event_layout.getLayoutId(), String.valueOf(parameterconfig.getParameterconfigurationId()));
+%>
+
+#<%= data.getValue() %>#

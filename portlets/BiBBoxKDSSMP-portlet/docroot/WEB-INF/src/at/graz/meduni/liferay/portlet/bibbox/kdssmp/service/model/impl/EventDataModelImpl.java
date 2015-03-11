@@ -81,7 +81,8 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData"),
 			true);
 	public static long EVENTLAYOUTID_COLUMN_BITMASK = 1L;
-	public static long PATIENTID_COLUMN_BITMASK = 2L;
+	public static long ONTOLOGY_COLUMN_BITMASK = 2L;
+	public static long PATIENTID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData"));
 
@@ -230,7 +231,17 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 	@Override
 	public void setOntology(String ontology) {
+		_columnBitmask |= ONTOLOGY_COLUMN_BITMASK;
+
+		if (_originalOntology == null) {
+			_originalOntology = _ontology;
+		}
+
 		_ontology = ontology;
+	}
+
+	public String getOriginalOntology() {
+		return GetterUtil.getString(_originalOntology);
 	}
 
 	@Override
@@ -350,6 +361,8 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 		eventDataModelImpl._setOriginalPatientId = false;
 
+		eventDataModelImpl._originalOntology = eventDataModelImpl._ontology;
+
 		eventDataModelImpl._columnBitmask = 0;
 	}
 
@@ -448,6 +461,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 	private long _originalPatientId;
 	private boolean _setOriginalPatientId;
 	private String _ontology;
+	private String _originalOntology;
 	private String _value;
 	private long _columnBitmask;
 	private EventData _escapedModel;

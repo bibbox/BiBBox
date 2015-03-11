@@ -391,6 +391,316 @@ public class KdssmpConfigurationPersistenceImpl extends BasePersistenceImpl<Kdss
 	private static final String _FINDER_COLUMN_OPTIONFINDER_OPTIONKEY_1 = "kdssmpConfiguration.optionkey IS NULL";
 	private static final String _FINDER_COLUMN_OPTIONFINDER_OPTIONKEY_2 = "kdssmpConfiguration.optionkey = ?";
 	private static final String _FINDER_COLUMN_OPTIONFINDER_OPTIONKEY_3 = "(kdssmpConfiguration.optionkey IS NULL OR kdssmpConfiguration.optionkey = '')";
+	public static final FinderPath FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE = new FinderPath(KdssmpConfigurationModelImpl.ENTITY_CACHE_ENABLED,
+			KdssmpConfigurationModelImpl.FINDER_CACHE_ENABLED,
+			KdssmpConfigurationImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByoptionsfindervalue",
+			new String[] { String.class.getName(), String.class.getName() },
+			KdssmpConfigurationModelImpl.SCOPE_COLUMN_BITMASK |
+			KdssmpConfigurationModelImpl.OPTIONVALUE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_OPTIONSFINDERVALUE = new FinderPath(KdssmpConfigurationModelImpl.ENTITY_CACHE_ENABLED,
+			KdssmpConfigurationModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByoptionsfindervalue",
+			new String[] { String.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the kdssmp configuration where scope = &#63; and optionvalue = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException} if it could not be found.
+	 *
+	 * @param scope the scope
+	 * @param optionvalue the optionvalue
+	 * @return the matching kdssmp configuration
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException if a matching kdssmp configuration could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public KdssmpConfiguration findByoptionsfindervalue(String scope,
+		String optionvalue)
+		throws NoSuchKdssmpConfigurationException, SystemException {
+		KdssmpConfiguration kdssmpConfiguration = fetchByoptionsfindervalue(scope,
+				optionvalue);
+
+		if (kdssmpConfiguration == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("scope=");
+			msg.append(scope);
+
+			msg.append(", optionvalue=");
+			msg.append(optionvalue);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchKdssmpConfigurationException(msg.toString());
+		}
+
+		return kdssmpConfiguration;
+	}
+
+	/**
+	 * Returns the kdssmp configuration where scope = &#63; and optionvalue = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param scope the scope
+	 * @param optionvalue the optionvalue
+	 * @return the matching kdssmp configuration, or <code>null</code> if a matching kdssmp configuration could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public KdssmpConfiguration fetchByoptionsfindervalue(String scope,
+		String optionvalue) throws SystemException {
+		return fetchByoptionsfindervalue(scope, optionvalue, true);
+	}
+
+	/**
+	 * Returns the kdssmp configuration where scope = &#63; and optionvalue = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param scope the scope
+	 * @param optionvalue the optionvalue
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching kdssmp configuration, or <code>null</code> if a matching kdssmp configuration could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public KdssmpConfiguration fetchByoptionsfindervalue(String scope,
+		String optionvalue, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { scope, optionvalue };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
+					finderArgs, this);
+		}
+
+		if (result instanceof KdssmpConfiguration) {
+			KdssmpConfiguration kdssmpConfiguration = (KdssmpConfiguration)result;
+
+			if (!Validator.equals(scope, kdssmpConfiguration.getScope()) ||
+					!Validator.equals(optionvalue,
+						kdssmpConfiguration.getOptionvalue())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_KDSSMPCONFIGURATION_WHERE);
+
+			boolean bindScope = false;
+
+			if (scope == null) {
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_1);
+			}
+			else if (scope.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_3);
+			}
+			else {
+				bindScope = true;
+
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_2);
+			}
+
+			boolean bindOptionvalue = false;
+
+			if (optionvalue == null) {
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_1);
+			}
+			else if (optionvalue.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_3);
+			}
+			else {
+				bindOptionvalue = true;
+
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindScope) {
+					qPos.add(scope);
+				}
+
+				if (bindOptionvalue) {
+					qPos.add(optionvalue);
+				}
+
+				List<KdssmpConfiguration> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"KdssmpConfigurationPersistenceImpl.fetchByoptionsfindervalue(String, String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					KdssmpConfiguration kdssmpConfiguration = list.get(0);
+
+					result = kdssmpConfiguration;
+
+					cacheResult(kdssmpConfiguration);
+
+					if ((kdssmpConfiguration.getScope() == null) ||
+							!kdssmpConfiguration.getScope().equals(scope) ||
+							(kdssmpConfiguration.getOptionvalue() == null) ||
+							!kdssmpConfiguration.getOptionvalue()
+													.equals(optionvalue)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
+							finderArgs, kdssmpConfiguration);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (KdssmpConfiguration)result;
+		}
+	}
+
+	/**
+	 * Removes the kdssmp configuration where scope = &#63; and optionvalue = &#63; from the database.
+	 *
+	 * @param scope the scope
+	 * @param optionvalue the optionvalue
+	 * @return the kdssmp configuration that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public KdssmpConfiguration removeByoptionsfindervalue(String scope,
+		String optionvalue)
+		throws NoSuchKdssmpConfigurationException, SystemException {
+		KdssmpConfiguration kdssmpConfiguration = findByoptionsfindervalue(scope,
+				optionvalue);
+
+		return remove(kdssmpConfiguration);
+	}
+
+	/**
+	 * Returns the number of kdssmp configurations where scope = &#63; and optionvalue = &#63;.
+	 *
+	 * @param scope the scope
+	 * @param optionvalue the optionvalue
+	 * @return the number of matching kdssmp configurations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByoptionsfindervalue(String scope, String optionvalue)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_OPTIONSFINDERVALUE;
+
+		Object[] finderArgs = new Object[] { scope, optionvalue };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_KDSSMPCONFIGURATION_WHERE);
+
+			boolean bindScope = false;
+
+			if (scope == null) {
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_1);
+			}
+			else if (scope.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_3);
+			}
+			else {
+				bindScope = true;
+
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_2);
+			}
+
+			boolean bindOptionvalue = false;
+
+			if (optionvalue == null) {
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_1);
+			}
+			else if (optionvalue.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_3);
+			}
+			else {
+				bindOptionvalue = true;
+
+				query.append(_FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindScope) {
+					qPos.add(scope);
+				}
+
+				if (bindOptionvalue) {
+					qPos.add(optionvalue);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_1 = "kdssmpConfiguration.scope IS NULL AND ";
+	private static final String _FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_2 = "kdssmpConfiguration.scope = ? AND ";
+	private static final String _FINDER_COLUMN_OPTIONSFINDERVALUE_SCOPE_3 = "(kdssmpConfiguration.scope IS NULL OR kdssmpConfiguration.scope = '') AND ";
+	private static final String _FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_1 = "kdssmpConfiguration.optionvalue IS NULL";
+	private static final String _FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_2 = "kdssmpConfiguration.optionvalue = ?";
+	private static final String _FINDER_COLUMN_OPTIONSFINDERVALUE_OPTIONVALUE_3 = "(kdssmpConfiguration.optionvalue IS NULL OR kdssmpConfiguration.optionvalue = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_OPTIONSFINDERKEY =
 		new FinderPath(KdssmpConfigurationModelImpl.ENTITY_CACHE_ENABLED,
 			KdssmpConfigurationModelImpl.FINDER_CACHE_ENABLED,
@@ -1581,6 +1891,12 @@ public class KdssmpConfigurationPersistenceImpl extends BasePersistenceImpl<Kdss
 				kdssmpConfiguration.getOptionkey()
 			}, kdssmpConfiguration);
 
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
+			new Object[] {
+				kdssmpConfiguration.getScope(),
+				kdssmpConfiguration.getOptionvalue()
+			}, kdssmpConfiguration);
+
 		kdssmpConfiguration.resetOriginalValues();
 	}
 
@@ -1668,6 +1984,16 @@ public class KdssmpConfigurationPersistenceImpl extends BasePersistenceImpl<Kdss
 				Long.valueOf(1));
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPTIONFINDER, args,
 				kdssmpConfiguration);
+
+			args = new Object[] {
+					kdssmpConfiguration.getScope(),
+					kdssmpConfiguration.getOptionvalue()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_OPTIONSFINDERVALUE,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
+				args, kdssmpConfiguration);
 		}
 		else {
 			KdssmpConfigurationModelImpl kdssmpConfigurationModelImpl = (KdssmpConfigurationModelImpl)kdssmpConfiguration;
@@ -1682,6 +2008,19 @@ public class KdssmpConfigurationPersistenceImpl extends BasePersistenceImpl<Kdss
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_OPTIONFINDER,
 					args, Long.valueOf(1));
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPTIONFINDER,
+					args, kdssmpConfiguration);
+			}
+
+			if ((kdssmpConfigurationModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						kdssmpConfiguration.getScope(),
+						kdssmpConfiguration.getOptionvalue()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_OPTIONSFINDERVALUE,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
 					args, kdssmpConfiguration);
 			}
 		}
@@ -1708,6 +2047,29 @@ public class KdssmpConfigurationPersistenceImpl extends BasePersistenceImpl<Kdss
 
 			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_OPTIONFINDER, args);
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_OPTIONFINDER, args);
+		}
+
+		args = new Object[] {
+				kdssmpConfiguration.getScope(),
+				kdssmpConfiguration.getOptionvalue()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_OPTIONSFINDERVALUE,
+			args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
+			args);
+
+		if ((kdssmpConfigurationModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					kdssmpConfigurationModelImpl.getOriginalScope(),
+					kdssmpConfigurationModelImpl.getOriginalOptionvalue()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_OPTIONSFINDERVALUE,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_OPTIONSFINDERVALUE,
+				args);
 		}
 	}
 

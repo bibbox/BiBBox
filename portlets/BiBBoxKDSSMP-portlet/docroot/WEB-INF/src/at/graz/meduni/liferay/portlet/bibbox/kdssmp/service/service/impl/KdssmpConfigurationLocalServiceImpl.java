@@ -45,9 +45,26 @@ public class KdssmpConfigurationLocalServiceImpl
 	 */
 	/**
 	 * 
+	 * @param scope
+	 * @param key
+	 * @return
+	 * @throws NoSuchKdssmpConfigurationException
+	 * @throws SystemException 
 	 */
 	public KdssmpConfiguration getConfigurationOption(String scope, String key) throws NoSuchKdssmpConfigurationException, SystemException {
 		return kdssmpConfigurationPersistence.findByoptionfinder(scope, key);
+	}
+	
+	/**
+	 * 
+	 * @param scope
+	 * @param value
+	 * @return
+	 * @throws NoSuchKdssmpConfigurationException
+	 * @throws SystemException
+	 */
+	public KdssmpConfiguration getConfigurationOptionValue(String scope, String value) throws NoSuchKdssmpConfigurationException, SystemException {
+		return kdssmpConfigurationPersistence.findByoptionsfindervalue(scope, value);
 	}
 	
 	/**

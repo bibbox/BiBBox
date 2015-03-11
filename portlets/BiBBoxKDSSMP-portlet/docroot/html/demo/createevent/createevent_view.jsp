@@ -63,6 +63,14 @@ addOrganizationURL = addOrganizationURL + "/-/event/createevent/" + organization
                'click',
                function(event) {
                	  var tag = event.target.getAttribute('tag');
+               	  
+               	  var text = "";
+				  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+				
+				  for( var i=0; i < 5; i++ ) {
+				  	text += possible.charAt(Math.floor(Math.random() * possible.length));
+				  }
+               	  
                   Liferay.Util.selectEntity(
                      {
                         dialog: {
@@ -71,7 +79,7 @@ addOrganizationURL = addOrganizationURL + "/-/event/createevent/" + organization
                            modal: true,
                            width: 1000
                         },
-                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addorganisation' + '/' + tag,
+                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addorganisation' + text + tag,
                         title: '<%= "Create " %> ' + tag + ' <%= " for Patient " + organization.getName() %>',
                         uri: '<%= addOrganizationURL %>' + '/' + tag
                      }

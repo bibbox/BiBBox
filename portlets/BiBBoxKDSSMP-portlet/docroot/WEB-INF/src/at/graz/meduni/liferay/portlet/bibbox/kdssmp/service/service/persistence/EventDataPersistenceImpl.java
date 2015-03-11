@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -1068,6 +1069,276 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	private static final String _FINDER_COLUMN_PATIENT_PATIENTID_2 = "eventData.patientId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_DATABYONTOLOGY = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
+			EventDataModelImpl.FINDER_CACHE_ENABLED, EventDataImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByDataByOntology",
+			new String[] { Long.class.getName(), String.class.getName() },
+			EventDataModelImpl.EVENTLAYOUTID_COLUMN_BITMASK |
+			EventDataModelImpl.ONTOLOGY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_DATABYONTOLOGY = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
+			EventDataModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByDataByOntology",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the event data where eventlayoutId = &#63; and ontology = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException} if it could not be found.
+	 *
+	 * @param eventlayoutId the eventlayout ID
+	 * @param ontology the ontology
+	 * @return the matching event data
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public EventData findByDataByOntology(long eventlayoutId, String ontology)
+		throws NoSuchEventDataException, SystemException {
+		EventData eventData = fetchByDataByOntology(eventlayoutId, ontology);
+
+		if (eventData == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("eventlayoutId=");
+			msg.append(eventlayoutId);
+
+			msg.append(", ontology=");
+			msg.append(ontology);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEventDataException(msg.toString());
+		}
+
+		return eventData;
+	}
+
+	/**
+	 * Returns the event data where eventlayoutId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param eventlayoutId the eventlayout ID
+	 * @param ontology the ontology
+	 * @return the matching event data, or <code>null</code> if a matching event data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public EventData fetchByDataByOntology(long eventlayoutId, String ontology)
+		throws SystemException {
+		return fetchByDataByOntology(eventlayoutId, ontology, true);
+	}
+
+	/**
+	 * Returns the event data where eventlayoutId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param eventlayoutId the eventlayout ID
+	 * @param ontology the ontology
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching event data, or <code>null</code> if a matching event data could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public EventData fetchByDataByOntology(long eventlayoutId, String ontology,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { eventlayoutId, ontology };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
+					finderArgs, this);
+		}
+
+		if (result instanceof EventData) {
+			EventData eventData = (EventData)result;
+
+			if ((eventlayoutId != eventData.getEventlayoutId()) ||
+					!Validator.equals(ontology, eventData.getOntology())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_EVENTDATA_WHERE);
+
+			query.append(_FINDER_COLUMN_DATABYONTOLOGY_EVENTLAYOUTID_2);
+
+			boolean bindOntology = false;
+
+			if (ontology == null) {
+				query.append(_FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_1);
+			}
+			else if (ontology.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_3);
+			}
+			else {
+				bindOntology = true;
+
+				query.append(_FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(eventlayoutId);
+
+				if (bindOntology) {
+					qPos.add(ontology);
+				}
+
+				List<EventData> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"EventDataPersistenceImpl.fetchByDataByOntology(long, String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					EventData eventData = list.get(0);
+
+					result = eventData;
+
+					cacheResult(eventData);
+
+					if ((eventData.getEventlayoutId() != eventlayoutId) ||
+							(eventData.getOntology() == null) ||
+							!eventData.getOntology().equals(ontology)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
+							finderArgs, eventData);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (EventData)result;
+		}
+	}
+
+	/**
+	 * Removes the event data where eventlayoutId = &#63; and ontology = &#63; from the database.
+	 *
+	 * @param eventlayoutId the eventlayout ID
+	 * @param ontology the ontology
+	 * @return the event data that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public EventData removeByDataByOntology(long eventlayoutId, String ontology)
+		throws NoSuchEventDataException, SystemException {
+		EventData eventData = findByDataByOntology(eventlayoutId, ontology);
+
+		return remove(eventData);
+	}
+
+	/**
+	 * Returns the number of event datas where eventlayoutId = &#63; and ontology = &#63;.
+	 *
+	 * @param eventlayoutId the eventlayout ID
+	 * @param ontology the ontology
+	 * @return the number of matching event datas
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByDataByOntology(long eventlayoutId, String ontology)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_DATABYONTOLOGY;
+
+		Object[] finderArgs = new Object[] { eventlayoutId, ontology };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_EVENTDATA_WHERE);
+
+			query.append(_FINDER_COLUMN_DATABYONTOLOGY_EVENTLAYOUTID_2);
+
+			boolean bindOntology = false;
+
+			if (ontology == null) {
+				query.append(_FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_1);
+			}
+			else if (ontology.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_3);
+			}
+			else {
+				bindOntology = true;
+
+				query.append(_FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(eventlayoutId);
+
+				if (bindOntology) {
+					qPos.add(ontology);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_DATABYONTOLOGY_EVENTLAYOUTID_2 = "eventData.eventlayoutId = ? AND ";
+	private static final String _FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_1 = "eventData.ontology IS NULL";
+	private static final String _FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_2 = "eventData.ontology = ?";
+	private static final String _FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_3 = "(eventData.ontology IS NULL OR eventData.ontology = '')";
 
 	public EventDataPersistenceImpl() {
 		setModelClass(EventData.class);
@@ -1082,6 +1353,10 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	public void cacheResult(EventData eventData) {
 		EntityCacheUtil.putResult(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataImpl.class, eventData.getPrimaryKey(), eventData);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
+			new Object[] { eventData.getEventlayoutId(), eventData.getOntology() },
+			eventData);
 
 		eventData.resetOriginalValues();
 	}
@@ -1139,6 +1414,8 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(eventData);
 	}
 
 	@Override
@@ -1149,6 +1426,60 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		for (EventData eventData : eventDatas) {
 			EntityCacheUtil.removeResult(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 				EventDataImpl.class, eventData.getPrimaryKey());
+
+			clearUniqueFindersCache(eventData);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(EventData eventData) {
+		if (eventData.isNew()) {
+			Object[] args = new Object[] {
+					eventData.getEventlayoutId(), eventData.getOntology()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DATABYONTOLOGY,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
+				args, eventData);
+		}
+		else {
+			EventDataModelImpl eventDataModelImpl = (EventDataModelImpl)eventData;
+
+			if ((eventDataModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_DATABYONTOLOGY.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						eventData.getEventlayoutId(), eventData.getOntology()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DATABYONTOLOGY,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
+					args, eventData);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(EventData eventData) {
+		EventDataModelImpl eventDataModelImpl = (EventDataModelImpl)eventData;
+
+		Object[] args = new Object[] {
+				eventData.getEventlayoutId(), eventData.getOntology()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DATABYONTOLOGY, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY, args);
+
+		if ((eventDataModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_DATABYONTOLOGY.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					eventDataModelImpl.getOriginalEventlayoutId(),
+					eventDataModelImpl.getOriginalOntology()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DATABYONTOLOGY,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
+				args);
 		}
 	}
 
@@ -1333,6 +1664,9 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		EntityCacheUtil.putResult(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataImpl.class, eventData.getPrimaryKey(), eventData);
+
+		clearUniqueFindersCache(eventData);
+		cacheUniqueFindersCache(eventData);
 
 		return eventData;
 	}

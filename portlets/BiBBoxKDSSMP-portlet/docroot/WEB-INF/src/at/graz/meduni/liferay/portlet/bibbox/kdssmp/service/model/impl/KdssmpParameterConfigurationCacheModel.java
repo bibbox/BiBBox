@@ -36,7 +36,7 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{parameterconfigurationId=");
 		sb.append(parameterconfigurationId);
@@ -54,6 +54,8 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 		sb.append(computed);
 		sb.append(", confirmationscript=");
 		sb.append(confirmationscript);
+		sb.append(", grouping=");
+		sb.append(grouping);
 		sb.append("}");
 
 		return sb.toString();
@@ -93,25 +95,21 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 			kdssmpParameterConfigurationImpl.setDisplayoptions(displayoptions);
 		}
 
-		if (visible == null) {
-			kdssmpParameterConfigurationImpl.setVisible(StringPool.BLANK);
-		}
-		else {
-			kdssmpParameterConfigurationImpl.setVisible(visible);
-		}
-
-		if (computed == null) {
-			kdssmpParameterConfigurationImpl.setComputed(StringPool.BLANK);
-		}
-		else {
-			kdssmpParameterConfigurationImpl.setComputed(computed);
-		}
+		kdssmpParameterConfigurationImpl.setVisible(visible);
+		kdssmpParameterConfigurationImpl.setComputed(computed);
 
 		if (confirmationscript == null) {
 			kdssmpParameterConfigurationImpl.setConfirmationscript(StringPool.BLANK);
 		}
 		else {
 			kdssmpParameterConfigurationImpl.setConfirmationscript(confirmationscript);
+		}
+
+		if (grouping == null) {
+			kdssmpParameterConfigurationImpl.setGrouping(StringPool.BLANK);
+		}
+		else {
+			kdssmpParameterConfigurationImpl.setGrouping(grouping);
 		}
 
 		kdssmpParameterConfigurationImpl.resetOriginalValues();
@@ -126,9 +124,10 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 		datatype = objectInput.readUTF();
 		valuerange = objectInput.readUTF();
 		displayoptions = objectInput.readUTF();
-		visible = objectInput.readUTF();
-		computed = objectInput.readUTF();
+		visible = objectInput.readBoolean();
+		computed = objectInput.readBoolean();
 		confirmationscript = objectInput.readUTF();
+		grouping = objectInput.readUTF();
 	}
 
 	@Override
@@ -164,25 +163,21 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 			objectOutput.writeUTF(displayoptions);
 		}
 
-		if (visible == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(visible);
-		}
-
-		if (computed == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(computed);
-		}
+		objectOutput.writeBoolean(visible);
+		objectOutput.writeBoolean(computed);
 
 		if (confirmationscript == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
 			objectOutput.writeUTF(confirmationscript);
+		}
+
+		if (grouping == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(grouping);
 		}
 	}
 
@@ -191,7 +186,8 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 	public String datatype;
 	public String valuerange;
 	public String displayoptions;
-	public String visible;
-	public String computed;
+	public boolean visible;
+	public boolean computed;
 	public String confirmationscript;
+	public String grouping;
 }

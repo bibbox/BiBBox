@@ -314,6 +314,70 @@ public interface EventDataPersistence extends BasePersistence<EventData> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the event data where eventlayoutId = &#63; and ontology = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException} if it could not be found.
+	*
+	* @param eventlayoutId the eventlayout ID
+	* @param ontology the ontology
+	* @return the matching event data
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData findByDataByOntology(
+		long eventlayoutId, java.lang.String ontology)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the event data where eventlayoutId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param eventlayoutId the eventlayout ID
+	* @param ontology the ontology
+	* @return the matching event data, or <code>null</code> if a matching event data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByDataByOntology(
+		long eventlayoutId, java.lang.String ontology)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the event data where eventlayoutId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param eventlayoutId the eventlayout ID
+	* @param ontology the ontology
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching event data, or <code>null</code> if a matching event data could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByDataByOntology(
+		long eventlayoutId, java.lang.String ontology, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the event data where eventlayoutId = &#63; and ontology = &#63; from the database.
+	*
+	* @param eventlayoutId the eventlayout ID
+	* @param ontology the ontology
+	* @return the event data that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData removeByDataByOntology(
+		long eventlayoutId, java.lang.String ontology)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of event datas where eventlayoutId = &#63; and ontology = &#63;.
+	*
+	* @param eventlayoutId the eventlayout ID
+	* @param ontology the ontology
+	* @return the number of matching event datas
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByDataByOntology(long eventlayoutId,
+		java.lang.String ontology)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the event data in the entity cache if it is enabled.
 	*
 	* @param eventData the event data

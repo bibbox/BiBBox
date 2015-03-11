@@ -43,9 +43,10 @@ create table kdssmp.parameterconfiguration (
 	datatype VARCHAR(75) null,
 	valuerange VARCHAR(75) null,
 	displayoptions VARCHAR(75) null,
-	visible VARCHAR(75) null,
-	computed VARCHAR(75) null,
-	confirmationscript VARCHAR(75) null
+	visible BOOLEAN,
+	computed BOOLEAN,
+	confirmationscript VARCHAR(75) null,
+	grouping TEXT null
 );
 
 create table kdssmp.parameteroptions (

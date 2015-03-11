@@ -249,9 +249,29 @@ public interface KdssmpConfigurationLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	/**
+	* @param scope
+	* @param key
+	* @return
+	* @throws NoSuchKdssmpConfigurationException
+	* @throws SystemException
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration getConfigurationOption(
 		java.lang.String scope, java.lang.String key)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @param scope
+	* @param value
+	* @return
+	* @throws NoSuchKdssmpConfigurationException
+	* @throws SystemException
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration getConfigurationOptionValue(
+		java.lang.String scope, java.lang.String value)
 		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
 			com.liferay.portal.kernel.exception.SystemException;
 

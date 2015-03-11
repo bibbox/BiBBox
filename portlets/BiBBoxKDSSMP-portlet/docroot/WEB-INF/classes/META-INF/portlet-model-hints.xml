@@ -30,9 +30,12 @@
 		<field name="datatype" type="String" />
 		<field name="valuerange" type="String" />
 		<field name="displayoptions" type="String" />
-		<field name="visible" type="String" />
-		<field name="computed" type="String" />
+		<field name="visible" type="boolean" />
+		<field name="computed" type="boolean" />
 		<field name="confirmationscript" type="String" />
+		<field name="grouping" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterOptions">
 		<field name="parameteroptionsId" type="long" />

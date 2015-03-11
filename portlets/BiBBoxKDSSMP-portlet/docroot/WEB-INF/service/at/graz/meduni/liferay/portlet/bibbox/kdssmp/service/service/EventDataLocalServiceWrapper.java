@@ -294,6 +294,13 @@ public class EventDataLocalServiceWrapper implements EventDataLocalService,
 			key, value);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData getEventDataByOntology(
+		long eventlayoutId, java.lang.String ontology) {
+		return _eventDataLocalService.getEventDataByOntology(eventlayoutId,
+			ontology);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

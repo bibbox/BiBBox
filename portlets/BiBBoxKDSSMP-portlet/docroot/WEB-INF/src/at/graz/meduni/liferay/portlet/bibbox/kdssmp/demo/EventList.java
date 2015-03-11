@@ -3,6 +3,7 @@ package at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -61,7 +62,10 @@ public class EventList extends MVCPortlet {
 			String description = null;
 			String type = LayoutConstants.TYPE_PORTLET;
 			boolean hidden = false;
-			String friendlyURL = "/" + dateFormat.format(eventdate) + eventtype.toLowerCase().replaceAll(" ", "").replaceAll("ä", "a") + patientId;
+			Random r = new Random();
+			char c = (char)(r.nextInt(26) + 'a');
+			char d = (char)(r.nextInt(26) + 'a');
+			String friendlyURL = "/" + c + d + dateFormat.format(eventdate) + eventtype.toLowerCase().replaceAll(" ", "").replaceAll("ä", "a") + patientId;
 			ServiceContext serviceContext = new ServiceContext();
 			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
@@ -69,15 +73,14 @@ public class EventList extends MVCPortlet {
 			serviceContext.setScopeGroupId(group.getGroupId());
 			serviceContext.setUserId(themeDisplay.getUserId());
 
-			
-			
 			Layout layout = LayoutLocalServiceUtil.addLayout(userId, groupId, privateLayout, parentLayoutId, name, title, description, type, hidden, friendlyURL, serviceContext);
 
-			layout.getLayoutPrototypeUuid();
-			
+			KdssmpConfiguration eventtype_display = KdssmpConfigurationLocalServiceUtil.getConfigurationOptionValue("Display", eventtype);
+			KdssmpConfiguration eventlayoutprototype = KdssmpConfigurationLocalServiceUtil.getConfigurationOption("layoutprototype", eventtype_display.getOptionkey());
+			System.out.println(eventlayoutprototype.getOptionvalue());
 			List<LayoutPrototype> layoutprototypes = LayoutPrototypeLocalServiceUtil.getLayoutPrototypes(-1, -1);
 			for(LayoutPrototype layoutprototype : layoutprototypes) {
-				if (HtmlUtil.escape(layoutprototype.getName()).contains("kDSSMP-Patient")) {
+				if (HtmlUtil.escape(layoutprototype.getName()).contains(eventlayoutprototype.getOptionvalue())) {
 					System.out.println(layoutprototype.getName() + " - " + layoutprototype.getUuid());
 					layout.setLayoutPrototypeUuid(layoutprototype.getUuid());
 					layout.setLayoutPrototypeLinkEnabled(true);

@@ -8,5 +8,6 @@
 		<portlet id="patient"></portlet>
 		<portlet id="event-list"></portlet>
 		<portlet id="create-event"></portlet>
+		<portlet id="display-event-parameter"></portlet>
 	</category>
 </display>

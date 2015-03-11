@@ -81,6 +81,7 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 		attributes.put("visible", getVisible());
 		attributes.put("computed", getComputed());
 		attributes.put("confirmationscript", getConfirmationscript());
+		attributes.put("grouping", getGrouping());
 
 		return attributes;
 	}
@@ -118,13 +119,13 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 			setDisplayoptions(displayoptions);
 		}
 
-		String visible = (String)attributes.get("visible");
+		Boolean visible = (Boolean)attributes.get("visible");
 
 		if (visible != null) {
 			setVisible(visible);
 		}
 
-		String computed = (String)attributes.get("computed");
+		Boolean computed = (Boolean)attributes.get("computed");
 
 		if (computed != null) {
 			setComputed(computed);
@@ -134,6 +135,12 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 
 		if (confirmationscript != null) {
 			setConfirmationscript(confirmationscript);
+		}
+
+		String grouping = (String)attributes.get("grouping");
+
+		if (grouping != null) {
+			setGrouping(grouping);
 		}
 	}
 
@@ -259,19 +266,24 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 	}
 
 	@Override
-	public String getVisible() {
+	public boolean getVisible() {
 		return _visible;
 	}
 
 	@Override
-	public void setVisible(String visible) {
+	public boolean isVisible() {
+		return _visible;
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
 		_visible = visible;
 
 		if (_kdssmpParameterConfigurationRemoteModel != null) {
 			try {
 				Class<?> clazz = _kdssmpParameterConfigurationRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVisible", String.class);
+				Method method = clazz.getMethod("setVisible", boolean.class);
 
 				method.invoke(_kdssmpParameterConfigurationRemoteModel, visible);
 			}
@@ -282,19 +294,24 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 	}
 
 	@Override
-	public String getComputed() {
+	public boolean getComputed() {
 		return _computed;
 	}
 
 	@Override
-	public void setComputed(String computed) {
+	public boolean isComputed() {
+		return _computed;
+	}
+
+	@Override
+	public void setComputed(boolean computed) {
 		_computed = computed;
 
 		if (_kdssmpParameterConfigurationRemoteModel != null) {
 			try {
 				Class<?> clazz = _kdssmpParameterConfigurationRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setComputed", String.class);
+				Method method = clazz.getMethod("setComputed", boolean.class);
 
 				method.invoke(_kdssmpParameterConfigurationRemoteModel, computed);
 			}
@@ -322,6 +339,29 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 
 				method.invoke(_kdssmpParameterConfigurationRemoteModel,
 					confirmationscript);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getGrouping() {
+		return _grouping;
+	}
+
+	@Override
+	public void setGrouping(String grouping) {
+		_grouping = grouping;
+
+		if (_kdssmpParameterConfigurationRemoteModel != null) {
+			try {
+				Class<?> clazz = _kdssmpParameterConfigurationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGrouping", String.class);
+
+				method.invoke(_kdssmpParameterConfigurationRemoteModel, grouping);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -427,6 +467,7 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 		clone.setVisible(getVisible());
 		clone.setComputed(getComputed());
 		clone.setConfirmationscript(getConfirmationscript());
+		clone.setGrouping(getGrouping());
 
 		return clone;
 	}
@@ -476,7 +517,7 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{parameterconfigurationId=");
 		sb.append(getParameterconfigurationId());
@@ -494,6 +535,8 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 		sb.append(getComputed());
 		sb.append(", confirmationscript=");
 		sb.append(getConfirmationscript());
+		sb.append(", grouping=");
+		sb.append(getGrouping());
 		sb.append("}");
 
 		return sb.toString();
@@ -501,7 +544,7 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -540,6 +583,10 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 			"<column><column-name>confirmationscript</column-name><column-value><![CDATA[");
 		sb.append(getConfirmationscript());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>grouping</column-name><column-value><![CDATA[");
+		sb.append(getGrouping());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -551,8 +598,9 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 	private String _datatype;
 	private String _valuerange;
 	private String _displayoptions;
-	private String _visible;
-	private String _computed;
+	private boolean _visible;
+	private boolean _computed;
 	private String _confirmationscript;
+	private String _grouping;
 	private BaseModel<?> _kdssmpParameterConfigurationRemoteModel;
 }

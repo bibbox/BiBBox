@@ -103,6 +103,71 @@ public interface KdssmpConfigurationPersistence extends BasePersistence<KdssmpCo
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the kdssmp configuration where scope = &#63; and optionvalue = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException} if it could not be found.
+	*
+	* @param scope the scope
+	* @param optionvalue the optionvalue
+	* @return the matching kdssmp configuration
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException if a matching kdssmp configuration could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration findByoptionsfindervalue(
+		java.lang.String scope, java.lang.String optionvalue)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the kdssmp configuration where scope = &#63; and optionvalue = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param scope the scope
+	* @param optionvalue the optionvalue
+	* @return the matching kdssmp configuration, or <code>null</code> if a matching kdssmp configuration could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration fetchByoptionsfindervalue(
+		java.lang.String scope, java.lang.String optionvalue)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the kdssmp configuration where scope = &#63; and optionvalue = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param scope the scope
+	* @param optionvalue the optionvalue
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching kdssmp configuration, or <code>null</code> if a matching kdssmp configuration could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration fetchByoptionsfindervalue(
+		java.lang.String scope, java.lang.String optionvalue,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the kdssmp configuration where scope = &#63; and optionvalue = &#63; from the database.
+	*
+	* @param scope the scope
+	* @param optionvalue the optionvalue
+	* @return the kdssmp configuration that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration removeByoptionsfindervalue(
+		java.lang.String scope, java.lang.String optionvalue)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of kdssmp configurations where scope = &#63; and optionvalue = &#63;.
+	*
+	* @param scope the scope
+	* @param optionvalue the optionvalue
+	* @return the number of matching kdssmp configurations
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByoptionsfindervalue(java.lang.String scope,
+		java.lang.String optionvalue)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the kdssmp configurations where scope = &#63; and optionkey = &#63;.
 	*
 	* @param scope the scope

@@ -35,16 +35,20 @@ String eventdisplay = KdssmpConfigurationLocalServiceUtil.getConfigurationOption
 			for(KdssmpConfiguration parameter : parameters) {
 				KdssmpParameterConfiguration parameterconfig = KdssmpParameterConfigurationLocalServiceUtil.getKdssmpParameterConfiguration(Long.parseLong(parameter.getOptionvalue()));
 				String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
-				if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
-					%><%@ include file="/html/demo/dynamicevent/dynamicelements/html.jspf" %><%
-				} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
-					%><%@ include file="/html/demo/dynamicevent/dynamicelements/text.jspf" %><%
-				} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
-					%><%@ include file="/html/demo/dynamicevent/dynamicelements/textbox.jspf" %><%
-				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
-					%><%@ include file="/html/demo/dynamicevent/dynamicelements/select.jspf" %><%
-				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
-					%><%@ include file="/html/demo/dynamicevent/dynamicelements/multiselect.jspf" %><%
+				if(parameterconfig.getGrouping().equalsIgnoreCase("")) {
+					if(!parameterconfig.getComputed()) {
+						if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
+							%><%@ include file="/html/demo/dynamicevent/dynamicelements/html.jspf" %><%
+						} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
+							%><%@ include file="/html/demo/dynamicevent/dynamicelements/text.jspf" %><%
+						} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
+							%><%@ include file="/html/demo/dynamicevent/dynamicelements/textbox.jspf" %><%
+						} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
+							%><%@ include file="/html/demo/dynamicevent/dynamicelements/select.jspf" %><%
+						} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
+							%><%@ include file="/html/demo/dynamicevent/dynamicelements/multiselect.jspf" %><%
+						}
+					}
 				}
 			}
 			%>

@@ -341,9 +341,10 @@ public class KdssmpParameterConfigurationPersistenceImpl
 		kdssmpParameterConfigurationImpl.setDatatype(kdssmpParameterConfiguration.getDatatype());
 		kdssmpParameterConfigurationImpl.setValuerange(kdssmpParameterConfiguration.getValuerange());
 		kdssmpParameterConfigurationImpl.setDisplayoptions(kdssmpParameterConfiguration.getDisplayoptions());
-		kdssmpParameterConfigurationImpl.setVisible(kdssmpParameterConfiguration.getVisible());
-		kdssmpParameterConfigurationImpl.setComputed(kdssmpParameterConfiguration.getComputed());
+		kdssmpParameterConfigurationImpl.setVisible(kdssmpParameterConfiguration.isVisible());
+		kdssmpParameterConfigurationImpl.setComputed(kdssmpParameterConfiguration.isComputed());
 		kdssmpParameterConfigurationImpl.setConfirmationscript(kdssmpParameterConfiguration.getConfirmationscript());
+		kdssmpParameterConfigurationImpl.setGrouping(kdssmpParameterConfiguration.getGrouping());
 
 		return kdssmpParameterConfigurationImpl;
 	}

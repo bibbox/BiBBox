@@ -119,6 +119,10 @@ public class EventDataLocalServiceClp implements EventDataLocalService {
 		_methodParameterTypes19 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String"
 			};
+
+		_methodName20 = "getEventDataByOntology";
+
+		_methodParameterTypes20 = new String[] { "long", "java.lang.String" };
 	}
 
 	@Override
@@ -705,6 +709,35 @@ public class EventDataLocalServiceClp implements EventDataLocalService {
 		return (at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData getEventDataByOntology(
+		long eventlayoutId, java.lang.String ontology) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						eventlayoutId,
+						
+					ClpSerializer.translateInput(ontology)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -744,4 +777,6 @@ public class EventDataLocalServiceClp implements EventDataLocalService {
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

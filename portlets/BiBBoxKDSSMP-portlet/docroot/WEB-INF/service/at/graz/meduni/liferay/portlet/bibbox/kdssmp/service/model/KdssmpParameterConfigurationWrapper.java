@@ -59,6 +59,7 @@ public class KdssmpParameterConfigurationWrapper
 		attributes.put("visible", getVisible());
 		attributes.put("computed", getComputed());
 		attributes.put("confirmationscript", getConfirmationscript());
+		attributes.put("grouping", getGrouping());
 
 		return attributes;
 	}
@@ -96,13 +97,13 @@ public class KdssmpParameterConfigurationWrapper
 			setDisplayoptions(displayoptions);
 		}
 
-		String visible = (String)attributes.get("visible");
+		Boolean visible = (Boolean)attributes.get("visible");
 
 		if (visible != null) {
 			setVisible(visible);
 		}
 
-		String computed = (String)attributes.get("computed");
+		Boolean computed = (Boolean)attributes.get("computed");
 
 		if (computed != null) {
 			setComputed(computed);
@@ -112,6 +113,12 @@ public class KdssmpParameterConfigurationWrapper
 
 		if (confirmationscript != null) {
 			setConfirmationscript(confirmationscript);
+		}
+
+		String grouping = (String)attributes.get("grouping");
+
+		if (grouping != null) {
+			setGrouping(grouping);
 		}
 	}
 
@@ -241,17 +248,27 @@ public class KdssmpParameterConfigurationWrapper
 	* @return the visible of this kdssmp parameter configuration
 	*/
 	@Override
-	public java.lang.String getVisible() {
+	public boolean getVisible() {
 		return _kdssmpParameterConfiguration.getVisible();
 	}
 
 	/**
-	* Sets the visible of this kdssmp parameter configuration.
+	* Returns <code>true</code> if this kdssmp parameter configuration is visible.
+	*
+	* @return <code>true</code> if this kdssmp parameter configuration is visible; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isVisible() {
+		return _kdssmpParameterConfiguration.isVisible();
+	}
+
+	/**
+	* Sets whether this kdssmp parameter configuration is visible.
 	*
 	* @param visible the visible of this kdssmp parameter configuration
 	*/
 	@Override
-	public void setVisible(java.lang.String visible) {
+	public void setVisible(boolean visible) {
 		_kdssmpParameterConfiguration.setVisible(visible);
 	}
 
@@ -261,17 +278,27 @@ public class KdssmpParameterConfigurationWrapper
 	* @return the computed of this kdssmp parameter configuration
 	*/
 	@Override
-	public java.lang.String getComputed() {
+	public boolean getComputed() {
 		return _kdssmpParameterConfiguration.getComputed();
 	}
 
 	/**
-	* Sets the computed of this kdssmp parameter configuration.
+	* Returns <code>true</code> if this kdssmp parameter configuration is computed.
+	*
+	* @return <code>true</code> if this kdssmp parameter configuration is computed; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isComputed() {
+		return _kdssmpParameterConfiguration.isComputed();
+	}
+
+	/**
+	* Sets whether this kdssmp parameter configuration is computed.
 	*
 	* @param computed the computed of this kdssmp parameter configuration
 	*/
 	@Override
-	public void setComputed(java.lang.String computed) {
+	public void setComputed(boolean computed) {
 		_kdssmpParameterConfiguration.setComputed(computed);
 	}
 
@@ -293,6 +320,26 @@ public class KdssmpParameterConfigurationWrapper
 	@Override
 	public void setConfirmationscript(java.lang.String confirmationscript) {
 		_kdssmpParameterConfiguration.setConfirmationscript(confirmationscript);
+	}
+
+	/**
+	* Returns the grouping of this kdssmp parameter configuration.
+	*
+	* @return the grouping of this kdssmp parameter configuration
+	*/
+	@Override
+	public java.lang.String getGrouping() {
+		return _kdssmpParameterConfiguration.getGrouping();
+	}
+
+	/**
+	* Sets the grouping of this kdssmp parameter configuration.
+	*
+	* @param grouping the grouping of this kdssmp parameter configuration
+	*/
+	@Override
+	public void setGrouping(java.lang.String grouping) {
+		_kdssmpParameterConfiguration.setGrouping(grouping);
 	}
 
 	@Override

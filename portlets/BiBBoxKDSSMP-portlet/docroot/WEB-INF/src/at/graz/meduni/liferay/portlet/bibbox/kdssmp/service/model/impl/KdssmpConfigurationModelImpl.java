@@ -80,7 +80,8 @@ public class KdssmpConfigurationModelImpl extends BaseModelImpl<KdssmpConfigurat
 				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration"),
 			true);
 	public static long OPTIONKEY_COLUMN_BITMASK = 1L;
-	public static long SCOPE_COLUMN_BITMASK = 2L;
+	public static long OPTIONVALUE_COLUMN_BITMASK = 2L;
+	public static long SCOPE_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration"));
 
@@ -228,7 +229,17 @@ public class KdssmpConfigurationModelImpl extends BaseModelImpl<KdssmpConfigurat
 
 	@Override
 	public void setOptionvalue(String optionvalue) {
+		_columnBitmask |= OPTIONVALUE_COLUMN_BITMASK;
+
+		if (_originalOptionvalue == null) {
+			_originalOptionvalue = _optionvalue;
+		}
+
 		_optionvalue = optionvalue;
+	}
+
+	public String getOriginalOptionvalue() {
+		return GetterUtil.getString(_originalOptionvalue);
 	}
 
 	public long getColumnBitmask() {
@@ -319,6 +330,8 @@ public class KdssmpConfigurationModelImpl extends BaseModelImpl<KdssmpConfigurat
 		kdssmpConfigurationModelImpl._originalScope = kdssmpConfigurationModelImpl._scope;
 
 		kdssmpConfigurationModelImpl._originalOptionkey = kdssmpConfigurationModelImpl._optionkey;
+
+		kdssmpConfigurationModelImpl._originalOptionvalue = kdssmpConfigurationModelImpl._optionvalue;
 
 		kdssmpConfigurationModelImpl._columnBitmask = 0;
 	}
@@ -414,6 +427,7 @@ public class KdssmpConfigurationModelImpl extends BaseModelImpl<KdssmpConfigurat
 	private String _optionkey;
 	private String _originalOptionkey;
 	private String _optionvalue;
+	private String _originalOptionvalue;
 	private long _columnBitmask;
 	private KdssmpConfiguration _escapedModel;
 }

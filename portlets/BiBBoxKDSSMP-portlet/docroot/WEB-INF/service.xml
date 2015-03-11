@@ -42,6 +42,10 @@
 		<finder name="Patient" return-type="Collection">
 			<finder-column name="patientId" />
 		</finder>
+		<finder name="DataByOntology" return-type="EventData">
+			<finder-column name="eventlayoutId" />
+			<finder-column name="ontology" />
+		</finder>
 	</entity>
 	<entity name="Event" local-service="true" remote-service="false"  table="kdssmp.event" >
 		<!-- PK fields -->
@@ -77,6 +81,10 @@
 			<finder-column name="scope" />
 			<finder-column name="optionkey" />
 		</finder>
+		<finder name="optionsfindervalue" return-type="KdssmpConfiguration">
+			<finder-column name="scope" />
+			<finder-column name="optionvalue" />
+		</finder>
 		<finder name="optionsfinderkey" return-type="Collection">
 			<finder-column name="scope" />
 			<finder-column name="optionkey" />
@@ -93,9 +101,10 @@
 		<column name="datatype" type="String" />
 		<column name="valuerange" type="String" />
 		<column name="displayoptions" type="String" />
-		<column name="visible" type="String" />
-		<column name="computed" type="String" />
+		<column name="visible" type="boolean" />
+		<column name="computed" type="boolean" />
 		<column name="confirmationscript" type="String" />
+		<column name="grouping" type="String" />
 	</entity>
 	<entity name="KdssmpParameterOptions" local-service="true" remote-service="false"  table="kdssmp.parameteroptions" >
 		<!-- PK fields -->

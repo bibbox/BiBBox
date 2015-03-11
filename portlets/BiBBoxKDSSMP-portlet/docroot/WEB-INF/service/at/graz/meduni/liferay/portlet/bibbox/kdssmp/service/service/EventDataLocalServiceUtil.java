@@ -281,6 +281,11 @@ public class EventDataLocalServiceUtil {
 		return getService().createNewEventData(eventId, patientId, key, value);
 	}
 
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData getEventDataByOntology(
+		long eventlayoutId, java.lang.String ontology) {
+		return getService().getEventDataByOntology(eventlayoutId, ontology);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

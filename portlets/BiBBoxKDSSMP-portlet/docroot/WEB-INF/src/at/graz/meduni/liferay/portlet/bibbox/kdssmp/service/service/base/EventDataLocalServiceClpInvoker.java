@@ -119,6 +119,10 @@ public class EventDataLocalServiceClpInvoker {
 		_methodParameterTypes58 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String"
 			};
+
+		_methodName59 = "getEventDataByOntology";
+
+		_methodParameterTypes59 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -229,6 +233,12 @@ public class EventDataLocalServiceClpInvoker {
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3]);
 		}
 
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+			return EventDataLocalServiceUtil.getEventDataByOntology(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -270,4 +280,6 @@ public class EventDataLocalServiceClpInvoker {
 	private String[] _methodParameterTypes53;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
 }

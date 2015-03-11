@@ -15,7 +15,9 @@
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataImpl;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalServiceUtil;
@@ -55,6 +57,19 @@ public class EventDataLocalServiceImpl extends EventDataLocalServiceBaseImpl {
 		} catch(Exception ex) {
 			System.err.println("ERROR: EventDataLocalServiceImpl::createNewEventData()");
 			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+	public EventData getEventDataByOntology(long eventlayoutId, String ontology) {
+		try {
+			return eventDataPersistence.findByDataByOntology(eventlayoutId, ontology);
+		} catch (NoSuchEventDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}

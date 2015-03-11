@@ -63,11 +63,12 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 			{ "datatype", Types.VARCHAR },
 			{ "valuerange", Types.VARCHAR },
 			{ "displayoptions", Types.VARCHAR },
-			{ "visible", Types.VARCHAR },
-			{ "computed", Types.VARCHAR },
-			{ "confirmationscript", Types.VARCHAR }
+			{ "visible", Types.BOOLEAN },
+			{ "computed", Types.BOOLEAN },
+			{ "confirmationscript", Types.VARCHAR },
+			{ "grouping", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table kdssmp.parameterconfiguration (parameterconfigurationId LONG not null primary key,displayname VARCHAR(75) null,datatype VARCHAR(75) null,valuerange VARCHAR(75) null,displayoptions VARCHAR(75) null,visible VARCHAR(75) null,computed VARCHAR(75) null,confirmationscript VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table kdssmp.parameterconfiguration (parameterconfigurationId LONG not null primary key,displayname VARCHAR(75) null,datatype VARCHAR(75) null,valuerange VARCHAR(75) null,displayoptions VARCHAR(75) null,visible BOOLEAN,computed BOOLEAN,confirmationscript VARCHAR(75) null,grouping TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.parameterconfiguration";
 	public static final String ORDER_BY_JPQL = " ORDER BY kdssmpParameterConfiguration.parameterconfigurationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.parameterconfiguration.parameterconfigurationId ASC";
@@ -129,6 +130,7 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 		attributes.put("visible", getVisible());
 		attributes.put("computed", getComputed());
 		attributes.put("confirmationscript", getConfirmationscript());
+		attributes.put("grouping", getGrouping());
 
 		return attributes;
 	}
@@ -166,13 +168,13 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 			setDisplayoptions(displayoptions);
 		}
 
-		String visible = (String)attributes.get("visible");
+		Boolean visible = (Boolean)attributes.get("visible");
 
 		if (visible != null) {
 			setVisible(visible);
 		}
 
-		String computed = (String)attributes.get("computed");
+		Boolean computed = (Boolean)attributes.get("computed");
 
 		if (computed != null) {
 			setComputed(computed);
@@ -182,6 +184,12 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 
 		if (confirmationscript != null) {
 			setConfirmationscript(confirmationscript);
+		}
+
+		String grouping = (String)attributes.get("grouping");
+
+		if (grouping != null) {
+			setGrouping(grouping);
 		}
 	}
 
@@ -256,32 +264,32 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 	}
 
 	@Override
-	public String getVisible() {
-		if (_visible == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _visible;
-		}
+	public boolean getVisible() {
+		return _visible;
 	}
 
 	@Override
-	public void setVisible(String visible) {
+	public boolean isVisible() {
+		return _visible;
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
 		_visible = visible;
 	}
 
 	@Override
-	public String getComputed() {
-		if (_computed == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _computed;
-		}
+	public boolean getComputed() {
+		return _computed;
 	}
 
 	@Override
-	public void setComputed(String computed) {
+	public boolean isComputed() {
+		return _computed;
+	}
+
+	@Override
+	public void setComputed(boolean computed) {
 		_computed = computed;
 	}
 
@@ -298,6 +306,21 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 	@Override
 	public void setConfirmationscript(String confirmationscript) {
 		_confirmationscript = confirmationscript;
+	}
+
+	@Override
+	public String getGrouping() {
+		if (_grouping == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _grouping;
+		}
+	}
+
+	@Override
+	public void setGrouping(String grouping) {
+		_grouping = grouping;
 	}
 
 	@Override
@@ -335,6 +358,7 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 		kdssmpParameterConfigurationImpl.setVisible(getVisible());
 		kdssmpParameterConfigurationImpl.setComputed(getComputed());
 		kdssmpParameterConfigurationImpl.setConfirmationscript(getConfirmationscript());
+		kdssmpParameterConfigurationImpl.setGrouping(getGrouping());
 
 		kdssmpParameterConfigurationImpl.resetOriginalValues();
 
@@ -429,19 +453,7 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 
 		kdssmpParameterConfigurationCacheModel.visible = getVisible();
 
-		String visible = kdssmpParameterConfigurationCacheModel.visible;
-
-		if ((visible != null) && (visible.length() == 0)) {
-			kdssmpParameterConfigurationCacheModel.visible = null;
-		}
-
 		kdssmpParameterConfigurationCacheModel.computed = getComputed();
-
-		String computed = kdssmpParameterConfigurationCacheModel.computed;
-
-		if ((computed != null) && (computed.length() == 0)) {
-			kdssmpParameterConfigurationCacheModel.computed = null;
-		}
 
 		kdssmpParameterConfigurationCacheModel.confirmationscript = getConfirmationscript();
 
@@ -451,12 +463,20 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 			kdssmpParameterConfigurationCacheModel.confirmationscript = null;
 		}
 
+		kdssmpParameterConfigurationCacheModel.grouping = getGrouping();
+
+		String grouping = kdssmpParameterConfigurationCacheModel.grouping;
+
+		if ((grouping != null) && (grouping.length() == 0)) {
+			kdssmpParameterConfigurationCacheModel.grouping = null;
+		}
+
 		return kdssmpParameterConfigurationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{parameterconfigurationId=");
 		sb.append(getParameterconfigurationId());
@@ -474,6 +494,8 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 		sb.append(getComputed());
 		sb.append(", confirmationscript=");
 		sb.append(getConfirmationscript());
+		sb.append(", grouping=");
+		sb.append(getGrouping());
 		sb.append("}");
 
 		return sb.toString();
@@ -481,7 +503,7 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -520,6 +542,10 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 			"<column><column-name>confirmationscript</column-name><column-value><![CDATA[");
 		sb.append(getConfirmationscript());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>grouping</column-name><column-value><![CDATA[");
+		sb.append(getGrouping());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -535,8 +561,9 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 	private String _datatype;
 	private String _valuerange;
 	private String _displayoptions;
-	private String _visible;
-	private String _computed;
+	private boolean _visible;
+	private boolean _computed;
 	private String _confirmationscript;
+	private String _grouping;
 	private KdssmpParameterConfiguration _escapedModel;
 }

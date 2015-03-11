@@ -252,4 +252,8 @@ public interface EventDataLocalService extends BaseLocalService,
 	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData createNewEventData(
 		long eventId, long patientId, java.lang.String key,
 		java.lang.String value);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData getEventDataByOntology(
+		long eventlayoutId, java.lang.String ontology);
 }

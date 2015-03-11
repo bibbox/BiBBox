@@ -86,6 +86,7 @@ for(Event event : events) {
 		typeicon = request.getContextPath() + "/images/observation.png";
 	}
 	%>
+	<aui:a href='<%= "/web" + organization.getGroup().getFriendlyURL() + l.getFriendlyURL() %>'>
 	<div class="event-container" style="background-color: yellow; ">
 		<div class="event-date"><%= dateFormat.format(event.getEventdate()) %></div>
 		<div class="event <%= pagetype.toLowerCase().replaceAll(" ", "") %>">
@@ -95,6 +96,7 @@ for(Event event : events) {
 		</div>
 		<div class="event-text"><%= l.getName() %> - <%= l.getLayoutPrototypeUuid() %></div>
 	</div>
+	</aui:a>
 	<br>
 	<%
 }

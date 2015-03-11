@@ -38,6 +38,7 @@ public class KdssmpParameterConfigurationSoap implements Serializable {
 		soapModel.setVisible(model.getVisible());
 		soapModel.setComputed(model.getComputed());
 		soapModel.setConfirmationscript(model.getConfirmationscript());
+		soapModel.setGrouping(model.getGrouping());
 
 		return soapModel;
 	}
@@ -133,19 +134,27 @@ public class KdssmpParameterConfigurationSoap implements Serializable {
 		_displayoptions = displayoptions;
 	}
 
-	public String getVisible() {
+	public boolean getVisible() {
 		return _visible;
 	}
 
-	public void setVisible(String visible) {
+	public boolean isVisible() {
+		return _visible;
+	}
+
+	public void setVisible(boolean visible) {
 		_visible = visible;
 	}
 
-	public String getComputed() {
+	public boolean getComputed() {
 		return _computed;
 	}
 
-	public void setComputed(String computed) {
+	public boolean isComputed() {
+		return _computed;
+	}
+
+	public void setComputed(boolean computed) {
 		_computed = computed;
 	}
 
@@ -157,12 +166,21 @@ public class KdssmpParameterConfigurationSoap implements Serializable {
 		_confirmationscript = confirmationscript;
 	}
 
+	public String getGrouping() {
+		return _grouping;
+	}
+
+	public void setGrouping(String grouping) {
+		_grouping = grouping;
+	}
+
 	private long _parameterconfigurationId;
 	private String _displayname;
 	private String _datatype;
 	private String _valuerange;
 	private String _displayoptions;
-	private String _visible;
-	private String _computed;
+	private boolean _visible;
+	private boolean _computed;
 	private String _confirmationscript;
+	private String _grouping;
 }

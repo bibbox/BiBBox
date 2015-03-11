@@ -136,30 +136,42 @@ public interface KdssmpParameterConfigurationModel extends BaseModel<KdssmpParam
 	 *
 	 * @return the visible of this kdssmp parameter configuration
 	 */
-	@AutoEscape
-	public String getVisible();
+	public boolean getVisible();
 
 	/**
-	 * Sets the visible of this kdssmp parameter configuration.
+	 * Returns <code>true</code> if this kdssmp parameter configuration is visible.
+	 *
+	 * @return <code>true</code> if this kdssmp parameter configuration is visible; <code>false</code> otherwise
+	 */
+	public boolean isVisible();
+
+	/**
+	 * Sets whether this kdssmp parameter configuration is visible.
 	 *
 	 * @param visible the visible of this kdssmp parameter configuration
 	 */
-	public void setVisible(String visible);
+	public void setVisible(boolean visible);
 
 	/**
 	 * Returns the computed of this kdssmp parameter configuration.
 	 *
 	 * @return the computed of this kdssmp parameter configuration
 	 */
-	@AutoEscape
-	public String getComputed();
+	public boolean getComputed();
 
 	/**
-	 * Sets the computed of this kdssmp parameter configuration.
+	 * Returns <code>true</code> if this kdssmp parameter configuration is computed.
+	 *
+	 * @return <code>true</code> if this kdssmp parameter configuration is computed; <code>false</code> otherwise
+	 */
+	public boolean isComputed();
+
+	/**
+	 * Sets whether this kdssmp parameter configuration is computed.
 	 *
 	 * @param computed the computed of this kdssmp parameter configuration
 	 */
-	public void setComputed(String computed);
+	public void setComputed(boolean computed);
 
 	/**
 	 * Returns the confirmationscript of this kdssmp parameter configuration.
@@ -175,6 +187,21 @@ public interface KdssmpParameterConfigurationModel extends BaseModel<KdssmpParam
 	 * @param confirmationscript the confirmationscript of this kdssmp parameter configuration
 	 */
 	public void setConfirmationscript(String confirmationscript);
+
+	/**
+	 * Returns the grouping of this kdssmp parameter configuration.
+	 *
+	 * @return the grouping of this kdssmp parameter configuration
+	 */
+	@AutoEscape
+	public String getGrouping();
+
+	/**
+	 * Sets the grouping of this kdssmp parameter configuration.
+	 *
+	 * @param grouping the grouping of this kdssmp parameter configuration
+	 */
+	public void setGrouping(String grouping);
 
 	@Override
 	public boolean isNew();
