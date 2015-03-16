@@ -119,4 +119,10 @@
 			<finder-column name="parameterconfigurationId" />
 		</finder>
 	</entity>
+	<entity name="KdssmpRules" local-service="true" remote-service="false"  table="kdssmp.rules" >
+		<!-- PK fields -->
+		<column name="ruleId" type="long" primary="true" />
+		<!-- Fields -->
+		<column name="rule" type="String" />
+	</entity>
 </service-builder>

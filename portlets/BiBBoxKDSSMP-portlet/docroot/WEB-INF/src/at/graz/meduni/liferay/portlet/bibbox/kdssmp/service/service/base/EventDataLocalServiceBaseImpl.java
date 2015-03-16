@@ -21,6 +21,7 @@ import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpParameterConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpParameterOptionsPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpRulesPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.patientnamegeneratorPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -473,6 +474,44 @@ public abstract class EventDataLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the kdssmp rules local service.
+	 *
+	 * @return the kdssmp rules local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpRulesLocalService getKdssmpRulesLocalService() {
+		return kdssmpRulesLocalService;
+	}
+
+	/**
+	 * Sets the kdssmp rules local service.
+	 *
+	 * @param kdssmpRulesLocalService the kdssmp rules local service
+	 */
+	public void setKdssmpRulesLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpRulesLocalService kdssmpRulesLocalService) {
+		this.kdssmpRulesLocalService = kdssmpRulesLocalService;
+	}
+
+	/**
+	 * Returns the kdssmp rules persistence.
+	 *
+	 * @return the kdssmp rules persistence
+	 */
+	public KdssmpRulesPersistence getKdssmpRulesPersistence() {
+		return kdssmpRulesPersistence;
+	}
+
+	/**
+	 * Sets the kdssmp rules persistence.
+	 *
+	 * @param kdssmpRulesPersistence the kdssmp rules persistence
+	 */
+	public void setKdssmpRulesPersistence(
+		KdssmpRulesPersistence kdssmpRulesPersistence) {
+		this.kdssmpRulesPersistence = kdssmpRulesPersistence;
+	}
+
+	/**
 	 * Returns the patientnamegenerator local service.
 	 *
 	 * @return the patientnamegenerator local service
@@ -706,6 +745,10 @@ public abstract class EventDataLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpParameterOptionsLocalService kdssmpParameterOptionsLocalService;
 	@BeanReference(type = KdssmpParameterOptionsPersistence.class)
 	protected KdssmpParameterOptionsPersistence kdssmpParameterOptionsPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpRulesLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpRulesLocalService kdssmpRulesLocalService;
+	@BeanReference(type = KdssmpRulesPersistence.class)
+	protected KdssmpRulesPersistence kdssmpRulesPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalService patientnamegeneratorLocalService;
 	@BeanReference(type = patientnamegeneratorPersistence.class)

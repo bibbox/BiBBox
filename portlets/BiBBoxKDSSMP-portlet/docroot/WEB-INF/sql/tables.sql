@@ -45,7 +45,7 @@ create table kdssmp.parameterconfiguration (
 	displayoptions VARCHAR(75) null,
 	visible BOOLEAN,
 	computed BOOLEAN,
-	confirmationscript VARCHAR(75) null,
+	confirmationscript TEXT null,
 	grouping TEXT null
 );
 
@@ -60,4 +60,9 @@ create table kdssmp.patientnamegenerator (
 	patientnamegeneratorId LONG not null primary key,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null
+);
+
+create table kdssmp.rules (
+	ruleId LONG not null primary key,
+	rule VARCHAR(75) null
 );

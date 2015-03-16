@@ -68,7 +68,7 @@ public class KdssmpParameterConfigurationModelImpl extends BaseModelImpl<KdssmpP
 			{ "confirmationscript", Types.VARCHAR },
 			{ "grouping", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table kdssmp.parameterconfiguration (parameterconfigurationId LONG not null primary key,displayname VARCHAR(75) null,datatype VARCHAR(75) null,valuerange VARCHAR(75) null,displayoptions VARCHAR(75) null,visible BOOLEAN,computed BOOLEAN,confirmationscript VARCHAR(75) null,grouping TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table kdssmp.parameterconfiguration (parameterconfigurationId LONG not null primary key,displayname VARCHAR(75) null,datatype VARCHAR(75) null,valuerange VARCHAR(75) null,displayoptions VARCHAR(75) null,visible BOOLEAN,computed BOOLEAN,confirmationscript TEXT null,grouping TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.parameterconfiguration";
 	public static final String ORDER_BY_JPQL = " ORDER BY kdssmpParameterConfiguration.parameterconfigurationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.parameterconfiguration.parameterconfigurationId ASC";

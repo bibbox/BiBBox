@@ -11,6 +11,7 @@ user/edit_invitation
 
 <%
 	// Parameters for permission Checking
+	String tabledata = "";
 	long groupId = scopeGroupId;
 	String name = portletDisplay.getRootPortletId();
 	String primKey = portletDisplay.getResourcePK();
@@ -38,23 +39,11 @@ user/edit_invitation
 	<portlet:actionURL name='updateOrganisationForInvitation' var="updateOrganisationForInvitationURL" windowState="normal" />
 	<aui:form action="<%= updateOrganisationForInvitationURL %>" method="POST" name="fm">
 		<aui:fieldset>
-			<table class="bibboc-cs-datatable-table">
-			<thead class="bibboc-cs-datatable-columns">
-				<tr>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-first-header bibboc-cs-datatable-col-name"></th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">ID</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Name</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Type</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Days since last modified</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Main Contact</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Main Contact last login</th>
-					<th class="bibboc-cs-datatable-header bibboc-cs-datatable-col-name">Last Contacted</th>
-				</tr>
-			</thead>
 			<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 			<aui:input type="hidden" name="bibbox_cs_invitationId" value="<%= invitationId %>" />
 	<%
 
+	
 	
 	long counter = 0;
 	List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(themeDisplay.getCompanyId(), optionsParentOrganisation_option);
@@ -74,6 +63,16 @@ user/edit_invitation
 		if(InvitationOrganisationLocalServiceUtil.getInvitationOrganisation(invitationId, organization.getOrganizationId()) != null) {
 			checked = "checked=\"true\"";
 		}
+		
+		//------
+		if(!tabledata.equalsIgnoreCase("")) {
+			tabledata += ",";
+		}
+		tabledata += "{SelectionInput: '<input " + checked + " type=\"checkbox\" name=\"_invitation_WAR_BiBBoxCommonServicesportlet_bibbox_cs_organisations_" + counter + "\" ><input type=\"hidden\" name=\"_invitation_WAR_BiBBoxCommonServicesportlet_bibbox_cs_organisationsid_" + counter + "\"  value=\"" + organization.getOrganizationId() + "\">',";
+		tabledata += "OrganizationId: " + organization.getOrganizationId() + ",";
+		tabledata += "Name: '" + organization.getName().replaceAll("'", "&lsquo;") + "',";
+		
+		
 		String tablerow = "<tr class=\"" + rowcss + "\"><td class=\"" + rowcss + "\"><input " + checked + " type=\"checkbox\" name=\"_invitation_WAR_BiBBoxCommonServicesportlet_bibbox_cs_organisations_" + counter + "\" ><input type=\"hidden\" name=\"_invitation_WAR_BiBBoxCommonServicesportlet_bibbox_cs_organisationsid_" + counter + "\"  value=\"" + organization.getOrganizationId() + "\"></td><td>" + organization.getOrganizationId() + "</td><td class=\"" + rowcss + "\">" + organization.getName() + "</td>";
 		List<DDLRecordSet> ddlrecordsets = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
 		for(DDLRecordSet ddlrecordset : ddlrecordsets) {
@@ -116,13 +115,21 @@ user/edit_invitation
 		
 		tablerow += "<td class=\"" + rowcss + "\">" + type + "</td>";
 		tablerow += "<td class=\"" + rowcss + "\">" + ((now.getTime() - modifieddate.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(modifieddate) + ")</td>";
+		// New Table
+		tabledata += "'Days since last modified': '" + ((now.getTime() - modifieddate.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(modifieddate) + ")',";
 		if(maincontact != null) {
 			tablerow += "<td class=\"" + rowcss + "\">" + maincontact.getFullName() + "</td>";
+			// New Table
+			tabledata += "'Main Contact': '" + maincontact.getFullName().replaceAll("'", "&lsquo;") + "',";
 			java.util.Date lastlogin = maincontact.getLastLoginDate();
 			if(lastlogin != null) {
 				tablerow += "<td class=\"" + rowcss + "\">" + ((now.getTime() - lastlogin.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(lastlogin) + ")</td>";
+				// New Table
+				tabledata += "'Main Contact last login': '" + ((now.getTime() - lastlogin.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(lastlogin) + ")',";
 			} else {
 				tablerow += "<td class=\"" + rowcss + "\">Never</td>";
+				// New Table
+				tabledata += "'Main Contact last login': 'Never',";
 			}
 			
 		} else {
@@ -160,23 +167,22 @@ user/edit_invitation
 		}
 		tablerow += "<td class=\"" + rowcss + "\">" + lastcontacted + "</td>";
 		tablerow += "</tr>";
+		// New Table
+		tabledata += "'Last Contacted': '" + lastcontacted + "'}";
 
-		if(sortetdata.containsKey(modifieddate)) {
+		/*if(sortetdata.containsKey(modifieddate)) {
 			String tmp = sortetdata.get(modifieddate);
 			sortetdata.put(modifieddate, tmp + tablerow);
 		} else {
 			sortetdata.put(modifieddate, tablerow);
-		}
+		}*/
 		counter++;
 	}
 %>
 <aui:input type="hidden" name="bibbox_cs_counter" value="<%= counter %>" />
-<%
-for(java.util.Date date : sortetdata.keySet()) {
-	%><%= sortetdata.get(date) %><%	
-}
-%>
-</table>
+
+<div id="myOrganizationTable"></div>
+
 </aui:fieldset>
 <aui:button-row>
 		<aui:button type="submit" />
@@ -187,4 +193,53 @@ for(java.util.Date date : sortetdata.keySet()) {
 	AUI().use('aui-base', function(A){
          Liferay.Util.getOpener().refreshOrganizationListPortlet();
    });
+</aui:script>
+<aui:script use="node,aui-datatable,aui-datatype,datatable-sort">
+AUI().use(
+  'aui-datatable',
+  'aui-datatype',
+  'datatable-sort',
+  function(Y) {
+    var remoteData = [<%= tabledata %>];
+    var nestedCols = [ 
+    	{
+    		key: 'SelectionInput',
+    		sortable: true,
+    		allowHTML: true,
+    	},
+    	{
+    		key: 'OrganizationId',
+    		sortable: true
+    	},
+    	{
+    		key: 'Name',
+    		sortable: true
+    	},
+    	{
+    		key: 'Days since last modified',
+    		sortable: true
+    	},
+    	{
+    		key: 'Main Contact',
+    		sortable: true
+    	},
+    	{
+    		key: 'Main Contact last login',
+    		sortable: true
+    	},
+    	{
+    		key: 'Last Contacted',
+    		sortable: true
+    	}
+    ];
+	var dataTable = new Y.DataTable(
+      {
+        columns: nestedCols,
+        data: remoteData,
+      }
+    ).render('#myOrganizationTable');
+
+    dataTable.get('boundingBox').unselectable();
+  }
+);
 </aui:script>

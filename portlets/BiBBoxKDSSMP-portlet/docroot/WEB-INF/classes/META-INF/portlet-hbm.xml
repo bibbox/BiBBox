@@ -7,6 +7,7 @@
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterOptions" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRules" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventImpl" table="kdssmp.event">
 		<cache usage="read-write" />
@@ -58,6 +59,13 @@
 		<property name="parameterconfigurationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="option" type="com.liferay.portal.dao.orm.hibernate.StringType" column="option_" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpRulesImpl" table="kdssmp.rules">
+		<cache usage="read-write" />
+		<id name="ruleId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="rule" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorImpl" table="kdssmp.patientnamegenerator">
 		<cache usage="read-write" />

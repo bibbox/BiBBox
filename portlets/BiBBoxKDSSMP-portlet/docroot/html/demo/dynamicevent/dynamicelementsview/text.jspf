@@ -1,3 +1,13 @@
+<%
+EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(event_layout.getLayoutId(), String.valueOf(parameterconfig.getParameterconfigurationId()));
+String data = "not specified";
+if(eventdata != null) {
+	data = eventdata.getValue();
+	%>
+	#<%= eventdata.getValue() %>#
+	<%
+}
+%>
 <aui:column columnWidth="100" first="true">
-	<aui:input name="<%= id %>" lable="<%= parameterconfig.getDisplayname() %>" type="text" />
+	<aui:input cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>" type="text" />
 </aui:column>

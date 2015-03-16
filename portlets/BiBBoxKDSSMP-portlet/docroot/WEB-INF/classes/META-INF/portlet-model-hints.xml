@@ -32,7 +32,9 @@
 		<field name="displayoptions" type="String" />
 		<field name="visible" type="boolean" />
 		<field name="computed" type="boolean" />
-		<field name="confirmationscript" type="String" />
+		<field name="confirmationscript" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 		<field name="grouping" type="String">
 			<hint name="max-length">10000</hint>
 		</field>
@@ -42,6 +44,10 @@
 		<field name="parameterconfigurationId" type="long" />
 		<field name="option" type="String" />
 		<field name="value" type="String" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRules">
+		<field name="ruleId" type="long" />
+		<field name="rule" type="String" />
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator">
 		<field name="patientnamegeneratorId" type="long" />

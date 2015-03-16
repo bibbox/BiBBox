@@ -66,7 +66,8 @@ public class EventDataLocalServiceImpl extends EventDataLocalServiceBaseImpl {
 			return eventDataPersistence.findByDataByOntology(eventlayoutId, ontology);
 		} catch (NoSuchEventDataException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("No Data for event found.");
+			//e.printStackTrace();
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
