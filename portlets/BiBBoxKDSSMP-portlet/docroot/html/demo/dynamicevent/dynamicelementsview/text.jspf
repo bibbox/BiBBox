@@ -11,3 +11,11 @@ if(eventdata != null) {
 <aui:column columnWidth="100" first="true">
 	<aui:input cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>" type="text" />
 </aui:column>
+
+<aui:script>
+AUI().use('aui-base', 'datastore', function(A){
+	A.all('.<%= id %>').on('change',function(event){
+		A.DatakDSSMPStore.kDSSMPStore(event.target);
+	});
+});
+</aui:script>

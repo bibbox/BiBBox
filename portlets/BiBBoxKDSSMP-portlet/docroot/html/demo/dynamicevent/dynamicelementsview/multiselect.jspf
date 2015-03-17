@@ -11,10 +11,18 @@ if(eventdata != null) {
 		List<KdssmpParameterOptions> options = KdssmpParameterOptionsLocalServiceUtil.getOptions(parameterconfig.getParameterconfigurationId());
 		for(KdssmpParameterOptions option : options) {
 			%>
-			<aui:option cssClass='<%= "ms_" + id + "_" + option.getValue() %>' selected="<%= data.contains(option.getValue()) %>" value="<%= option.getValue() %>"><liferay-ui:message key='<%= option.getOption() %>' /></aui:option>
+			<aui:option cssClass='<%= "ms_" + id + "_" + option.getValue() %>' selected='<%= data.contains(option.getValue() + ";") %>' value="<%= option.getValue() %>"><liferay-ui:message key='<%= option.getOption() %>' /></aui:option>
 			<%
 		}
 		%>
 		<aui:option cssClass='<%= id + "_" + "notspecified" %>' selected='<%= data.contains("not specified") %>' value="not specified"><liferay-ui:message key='Not Specified' /></aui:option>
 	</aui:select>
 </div>
+
+<aui:script>
+AUI().use('aui-base', 'datastore', function(A){
+	A.all('.<%= "ms_" + id %>').on('change',function(event){
+		A.DatakDSSMPStore.kDSSMPStore(event.target);
+	});
+});
+</aui:script>

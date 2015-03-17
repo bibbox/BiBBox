@@ -21,3 +21,11 @@ if(eventdata != null) {
 	<%= parameterconfig.getConfirmationscript() %>
 </aui:script>
 
+<aui:script>
+AUI().use('aui-base', 'datastore', function(A){
+	A.all('.<%= id %>').on('change',function(event){
+		A.DatakDSSMPStore.kDSSMPStore(event.target);
+	});
+});
+</aui:script>
+

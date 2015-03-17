@@ -9,5 +9,6 @@
 		<portlet id="event-list"></portlet>
 		<portlet id="create-event"></portlet>
 		<portlet id="display-event-parameter"></portlet>
+		<portlet id="informed-consent"></portlet>
 	</category>
 </display>

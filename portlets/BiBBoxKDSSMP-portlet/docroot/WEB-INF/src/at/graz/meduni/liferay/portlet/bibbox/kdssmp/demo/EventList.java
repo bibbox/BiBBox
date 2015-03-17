@@ -43,6 +43,12 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class EventList
  */
 public class EventList extends MVCPortlet {
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
 	public void createEvent(ActionRequest request, ActionResponse response) throws Exception {
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
