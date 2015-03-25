@@ -1,0 +1,1 @@
+create index IX_919F54B on rdconnect.idcardapilog (userId);

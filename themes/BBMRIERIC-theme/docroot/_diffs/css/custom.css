@@ -124,11 +124,11 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 .bbmri_eric_header-submainmenu-floating {
 	float: left;
-	width: 725px;
+	width: 1000px;
 }
 .bbmri_eric_header-submainmenu-floating ul {
    float: left;
-   margin: 10px 0 10px 15px;
+   margin: 10px 0 10px 0;
 }
 .bbmri_eric_header-submainmenu-floating ul ul {
    float: left;

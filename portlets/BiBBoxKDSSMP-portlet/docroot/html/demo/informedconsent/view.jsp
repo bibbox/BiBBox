@@ -3,17 +3,32 @@
 <portlet:defineObjects />
 
 <%
-long az = 0;
-%>
+com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
+if (currentGroup.isOrganization()) {
+	long organizationId = currentGroup.getClassPK();
+  	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+  	String az = organization.getExpandoBridge().getAttribute("aznummer").toString();
+  	String male = organization.getExpandoBridge().getAttribute("male").toString();
+  	String date_ = organization.getExpandoBridge().getAttribute("dateofbirth").toString();
+  	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+  	Date dateofbirth = dateFormat.parse(date_);
+  	Date now = new Date();
+  	long calc = now.getTime() - dateofbirth.getTime();
+  	long MILLS_IN_YEAR = 1000L * 60 * 60 * 24 * 365;
+  	long age = calc/MILLS_IN_YEAR;
+  	String name = organization.getExpandoBridge().getAttribute("firstname").toString() + " " + organization.getExpandoBridge().getAttribute("lastname").toString() + " (" + organization.getExpandoBridge().getAttribute("dateofbirth").toString() + ")";
+  	
+	%>
 
 <table>
 <tr><td>Kontakt: <%= themeDisplay.getUser().getFullName() %></td><td>Serviceunterlage</td></tr>
 <tr><td>Letzte Änderung:</td><td>FB<%= az %></td></tr>
 </table>
 <br>
+<div style="margin: auto;width: 100%;text-align: center;">
 <h1>PatientInneninformation/Einverständniserklärung</h1><br>
 <h3>für die Diagnostik und Forschungsvorhaben der Medizinischen Universität Graz</h3><br><br>
-
+</div>
 <b>Bereitstellung von Gewebsproben, Blutproben und anderen Körperflüssigkeiten zu Forschungszwecken und zur Entwicklung neuer Diagnoseverfahren, Vorbeugemaßnahmen und Behandlungen </b><br><br>
 
 Sehr geehrte Patientin! Sehr geehrter Patient!<br> <br>
@@ -66,4 +81,44 @@ Ihre Einwilligung dazu ist völlig freiwillig und hat keinen Einfluss auf die für
 
 <h2>Einverständniserklärung</h2>
 
+Ich, <b><%= organization.getExpandoBridge().getAttribute("firstname").toString() + " " + organization.getExpandoBridge().getAttribute("lastname").toString() %></b> geboren am  
+<b><%= dateFormat.format(dateofbirth) %></b> habe die mir zur Kenntnis gebrachte PatientInneninformation zum Forschungsvorhaben: &quot;Bereitstellung von Gewebsproben, Blutproben und anderen Körperflüssigkeiten zu Forschungszwecken und zur Entwicklung neuer Diagnoseverfahren, Vorbeugemaßnahmen und Behandlungen&quot;, bestehend aus 3 Seiten, gelesen und verstanden. <br>
 
+Ich wurde im Rahmen eines diesbezüglichen Aufklärungsgespräches von Herrn/Frau (Dr. med.) <%= themeDisplay.getUser().getFullName() %> führlich und verständlich über Wesen, Bedeutung und Tragweite des Forschungsvorhabens informiert. Alle meine Fragen wurden ausreichend beantwortet und ich hatte ausreichend Zeit, mich zu entscheiden. Zur Zeit habe ich keine weiteren Fragen mehr.<br>
+
+Mit meiner Unterschrift erkläre ich zu den angeführten Punkten Folgendes:<br>
+<br>
+<div style="border: 1px solid;padding:10px;">
+Ich willige ein, dass ich die <b>nicht mehr für meine medizinische Behandlung benötigten Proben</b> der Medizinischen Universität Graz für das vorliegende Forschungsvorhaben überlasse.<br>
+Ich erkläre mich bereit, dass <b>im Rahmen von routinemäßig vorgesehenen Blutabnahmen maximal 20 ml Blut zusätzlich</b> abgenommen werden können.<br>
+</div><br>
+Weiters erlaube ich der Medizinischen Universität Graz die Verwendung der für mich erstellten Befunde und der gesammelten Angaben über meine Krankheitssymptome und Lebensumstände für das vorliegende Forschungsvorhaben. Dies inkludiert neben den Daten, die am LKH/Univ. Klinikum vorhanden sind, auch medizinische Daten weiterer Institutionen (Haus-, Facharzt und andere Krankenhäuser), die zu diagnostischen oder therapeutischen Zwecken erhoben wurden.<br>
+<br><div style="border: 1px solid;padding:10px;">
+Ich bevollmächtige diesbezüglich die Medizinische Universität Graz, diese Daten direkt bei den genannten Institutionen anzufordern.
+</div><br>
+Beim Umgang mit den Proben und/oder Daten werden die Bestimmungen des Datenschutzgesetzes und des Gentechnikgesetzes beachtet. Bei allfälliger Weitergabe der Proben und/oder Daten sowie bei etwaigen Veröffentlichungen der Daten dieses Forschungsvorhabens werde ich nicht namentlich genannt.<br>
+Eine Kopie dieser PatientInneninformation und Einverständniserklärung habe ich erhalten. Das Original verbleibt bei der Medizinischen Universität Graz.<br>
+Meine Teilnahme an diesem Forschungsvorhaben ist freiwillig. Ich kann diese meine Einwilligung jederzeit an der Medizinischen Universität Graz ohne Angabe von Gründen widerrufen, ohne dass dadurch ein Nachteil für meine medizinische Betreuung entsteht.<br>
+<br><div style="border: 1px solid;padding:10px;">
+Ich wünsche über für mich persönlich oder meine direkten Nachkommen bedeutsame medizinische Forschungsergebnisse informiert zu werden. 
+</div>
+<br><br><br><br>
+<div style="margin: auto;width: 100%;text-align: center;">
+.....................................................................................<br>
+(Datum und Unterschrift der /des Patienten/in)
+</div>
+<br>
+<div style="margin: auto;width: 100%;text-align: center;">
+Ich habe Herrn /Frau <b><%= organization.getExpandoBridge().getAttribute("firstname").toString() + " " + organization.getExpandoBridge().getAttribute("lastname").toString() %></b> vor der Unterzeichnung dieser Erklärung ausführlich beraten und bestätige, keinen Druck ausgeübt zu haben. 
+</div>
+<br><br><br>
+<div style="margin: auto;width: 100%;text-align: center;">
+.....................................................................................<br>
+(Datum, Name und Unterschrift der/des verantwortlichen Ärztin/Arztes) 
+</div>
+<div style="margin: auto;width: 100%;text-align: center;">
+Vielen Dank für ihre Teilnahme!
+</div>
+<%
+}
+%>
