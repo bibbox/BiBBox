@@ -385,7 +385,7 @@ if (currentGroup.isOrganization()) {
 		</div>
 	</div>
 	<div class="rdc_idcard_idcaibody-contactinformation">
-		<span class="rdc_idcard_idcaibody-headlines">Address</span><br>
+		<span class="rdc_idcard_idcaibody-headlines">Host institution</span><br>
 	
 		<%
 		String phone = "";

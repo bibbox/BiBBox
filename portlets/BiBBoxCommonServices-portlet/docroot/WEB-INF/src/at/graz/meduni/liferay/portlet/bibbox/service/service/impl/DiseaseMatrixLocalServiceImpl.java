@@ -49,7 +49,13 @@ public class DiseaseMatrixLocalServiceImpl
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil} to access the disease matrix local service.
 	 */
 	public List<DiseaseMatrix> getDiseaseMatrixs(long organizationID, int begin, int end) throws SystemException {
-		return diseaseMatrixPersistence.findByOrganizationFinder(organizationID, begin, end);
+		try {
+			return diseaseMatrixPersistence.findByOrganizationFinder(organizationID, begin, end);
+		} catch (Exception ex) {
+			System.out.println("-----> getDiseaseMatrixs(long organizationID, int begin, int end)");
+			ex.printStackTrace();
+		}
+		return null;
 	}
 	
 	public int getDiseaseMatrixsCount(long organizationID) throws SystemException {

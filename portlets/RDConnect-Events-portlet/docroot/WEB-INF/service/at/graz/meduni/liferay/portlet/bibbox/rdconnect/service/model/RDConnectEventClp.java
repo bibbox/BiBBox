@@ -78,6 +78,7 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 		attributes.put("eventId", getEventId());
 		attributes.put("eventdate", getEventdate());
+		attributes.put("eventtype", getEventtype());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("userId", getUserId());
 		attributes.put("shorttext", getShorttext());
@@ -100,6 +101,12 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 		if (eventdate != null) {
 			setEventdate(eventdate);
+		}
+
+		String eventtype = (String)attributes.get("eventtype");
+
+		if (eventtype != null) {
+			setEventtype(eventtype);
 		}
 
 		Long organizationId = (Long)attributes.get("organizationId");
@@ -178,6 +185,29 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 				Method method = clazz.getMethod("setEventdate", Date.class);
 
 				method.invoke(_rdConnectEventRemoteModel, eventdate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getEventtype() {
+		return _eventtype;
+	}
+
+	@Override
+	public void setEventtype(String eventtype) {
+		_eventtype = eventtype;
+
+		if (_rdConnectEventRemoteModel != null) {
+			try {
+				Class<?> clazz = _rdConnectEventRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEventtype", String.class);
+
+				method.invoke(_rdConnectEventRemoteModel, eventtype);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -406,6 +436,7 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 		clone.setEventId(getEventId());
 		clone.setEventdate(getEventdate());
+		clone.setEventtype(getEventtype());
 		clone.setOrganizationId(getOrganizationId());
 		clone.setUserId(getUserId());
 		clone.setShorttext(getShorttext());
@@ -421,6 +452,8 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 		int value = 0;
 
 		value = DateUtil.compareTo(getEventdate(), rdConnectEvent.getEventdate());
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;
@@ -458,12 +491,14 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
 		sb.append(", eventdate=");
 		sb.append(getEventdate());
+		sb.append(", eventtype=");
+		sb.append(getEventtype());
 		sb.append(", organizationId=");
 		sb.append(getOrganizationId());
 		sb.append(", userId=");
@@ -483,7 +518,7 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -497,6 +532,10 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 		sb.append(
 			"<column><column-name>eventdate</column-name><column-value><![CDATA[");
 		sb.append(getEventdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>eventtype</column-name><column-value><![CDATA[");
+		sb.append(getEventtype());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
@@ -530,6 +569,7 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 	private long _eventId;
 	private Date _eventdate;
+	private String _eventtype;
 	private long _organizationId;
 	private long _userId;
 	private String _userUuid;

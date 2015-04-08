@@ -66,9 +66,6 @@ ${theme.include(body_top_include)}
 	<div class="bbmri_eric_header-submenucontainer">
 		<div class="bbmri_eric_header-submainmenu">
 			<div class="bbmri_eric_header-submainmenu-position">
-			   <div class="bbmri_eric_header-submainmenu-floating-runing-text">
-               
-			   </div>
 				<div class="bbmri_eric_header-submainmenu-floating">
 					<#if has_navigation || is_signed_in>
 						<#include "${full_templates_path}/navigation_sub.ftl" />
@@ -114,11 +111,11 @@ ${theme.include(body_top_include)}
 </div>
 <div class="bbmrieric-footer-container">
 	<div class="bbmrieric-footer">
-		<div class="bbmrieric-footer-twitter"  style="visibility: hidden;">
+		<div class="bbmrieric-footer-twitter"  >
 			<a href="https://twitter.com/BBMRIERIC" target="_blank"><img id="bbmrieric-footer-twitter-slide"  src="/BBMRIERIC-theme/images/twitter.png" /></a>
 		</div>
-		<div class="bbmrieric-footer-linkedin"  style="visibility: hidden;">
-			<a href="http://www.linkedin.com/company/bbmri-eric" target="_blank"><img id="bbmrieric-footer-linkedin-slide"  src="/BBMRIERIC-theme/images/linkedin.png" /></a>
+		<div class="bbmrieric-footer-linkedin"  >
+			<a href="https://www.linkedin.com/company/bbmri-eric" target="_blank"><img id="bbmrieric-footer-linkedin-slide"  src="/BBMRIERIC-theme/images/linkedin.png" /></a>
 		</div>
 		
 		<div class="bbmrieric-footer-menue">

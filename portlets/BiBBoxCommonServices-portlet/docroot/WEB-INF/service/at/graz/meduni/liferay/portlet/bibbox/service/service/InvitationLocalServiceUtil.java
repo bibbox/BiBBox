@@ -308,6 +308,7 @@ public class InvitationLocalServiceUtil {
 	*  5 ... Simulated
 	* 10 ... Send
 	* 20 ... Request Panel Assessment
+	* 30 ... Biobank Published
 	*/
 	public static long getStatusFromString(java.lang.String string_status) {
 		return getService().getStatusFromString(string_status);

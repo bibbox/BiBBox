@@ -1,0 +1,17 @@
+<%
+String data = "";
+if(parameterconfig.getDisplayname().equalsIgnoreCase("Age")) {
+	String date_ = organization.getExpandoBridge().getAttribute("dateofbirth").toString();
+  	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+  	Date dateofbirth = dateFormat.parse(date_);
+  	Date now = event.getEventdate();
+  	long calc = now.getTime() - dateofbirth.getTime();
+  	long MILLS_IN_YEAR = 1000L * 60 * 60 * 24 * 365;
+  	long age = calc/MILLS_IN_YEAR;
+  	data = String.valueOf(age);
+}
+
+%>
+<aui:column columnWidth="100" first="true">
+	<aui:input disabled="true" cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>" type="text" value="<%= data %>" />
+</aui:column>

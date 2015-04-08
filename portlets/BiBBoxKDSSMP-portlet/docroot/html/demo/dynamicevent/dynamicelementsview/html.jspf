@@ -1,0 +1,26 @@
+<%
+EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(event_layout.getLayoutId(), String.valueOf(parameterconfig.getParameterconfigurationId()));
+String data = "";
+if(eventdata != null) {
+	data = eventdata.getValue();
+	%>
+	#<%= eventdata.getValue() %>#
+	<%
+}
+%>
+<aui:column columnWidth="100" first="true">
+	<aui:field-wrapper label="<%= parameterconfig.getDisplayname() %>">
+		<liferay-ui:input-editor cssClass="<%= id %>" name="<%= id %>" toolbarSet="liferay-article" initMethod="initEditor" width="100%" />
+		<script type="text/javascript">
+			function <portlet:namespace />initEditor() { return '<%= data %>''; }
+		</script>
+	</aui:field-wrapper>
+</aui:column>
+
+<aui:script>
+AUI().use('aui-base', 'datastore', function(A){
+	A.all('.<%= id %>').on('change',function(event){
+		A.DatakDSSMPStore.kDSSMPStore(event.target);
+	});
+});
+</aui:script>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.graz.meduni.liferay.api">
+	<author>reihsr</author>
+	<namespace>idcardapi</namespace>
+
+	<entity name="rdconnect" local-service="true" remote-service="true"  table="rdconnect.idcardapilog">
+
+		<!-- PK fields -->
+		<column name="idcardapilogId" type="long" primary="true" />
+
+		<!-- Group instance -->
+		<column name="userId" type="long" />
+
+		<!-- Audit fields -->
+		<column name="ipaddress" type="String" />
+		<column name="accessDate" type="Date" />
+
+		<!-- Other fields -->
+		<column name="requestparameter" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="accessDate" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+	</entity>
+</service-builder>

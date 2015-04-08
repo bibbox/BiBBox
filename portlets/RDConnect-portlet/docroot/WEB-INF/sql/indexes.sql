@@ -9,4 +9,8 @@ create index IX_F1E13E24 on rdconnect.master_candidate (country);
 create index IX_4A7B236A on rdconnect.master_candidate (country, name, candidatetype);
 create index IX_8F6D9D0B on rdconnect.master_candidate (organisationid);
 
+create index IX_1C65726C on rdconnect.rdcorganizationuseraccess (organisationId);
+
+create index IX_278FD8A3 on rdconnect.rdcrecommender (organisationId, recommendedorganisationId);
+
 create index IX_35DEDE4E on rdconnect.searchindex_rdconnect (value);

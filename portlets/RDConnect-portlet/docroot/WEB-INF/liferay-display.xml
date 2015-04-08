@@ -19,6 +19,7 @@
 		<portlet id="rdcddl-display"></portlet>
 		<portlet id="file-to-ddl-to-file"></portlet>
 		<portlet id="general-user-reporting-system"></portlet>
+		<portlet id="recommendation-organizations"></portlet>
 	</category>
 	<category name="Meduni Test">
 		<portlet id="ddl-reader"></portlet>
@@ -57,5 +58,9 @@
 	<category name="RDConnect Static DDL">
 		<portlet id="reg-static-ddl"></portlet>
 		<portlet id="dynamic-ddl-display"></portlet>
+	</category>
+	<category name="RDConnect Statistiks">
+		<portlet id="user-statistik"></portlet>
+		<portlet id="invitation-statistics"></portlet>
 	</category>
 </display>

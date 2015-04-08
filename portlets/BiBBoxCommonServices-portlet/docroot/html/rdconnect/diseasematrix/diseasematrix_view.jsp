@@ -10,6 +10,7 @@ long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 String actionId_add_diseasematrix = "ADD_DISEASEMATRIX";
+String actionId_view_patientcount = "VIEW_DONORS_COUNT";
 
 long organizationId = 0;
 Organization organization = null;
@@ -78,10 +79,14 @@ if (currentGroup.isOrganization()) {
 				name="diseasename"
 				value="<%= diseasematrix.getDiseasename() %>"
 			/>
-			<liferay-ui:search-container-column-text
-				name="patientcount"
-				value="<%= diseasematrix.getPatientcount() %>"
-			/>
+			<c:choose>
+				<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_view_patientcount) %>">
+					<liferay-ui:search-container-column-text
+						name="patientcount"
+						value="<%= diseasematrix.getPatientcount() %>"
+					/>
+				</c:when>
+			</c:choose>
 			<liferay-ui:search-container-column-text
 				name="gene"
 				value="<%= diseasematrix.getGene() %>"

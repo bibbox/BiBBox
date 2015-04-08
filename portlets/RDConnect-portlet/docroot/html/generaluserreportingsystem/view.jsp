@@ -56,6 +56,7 @@
 
 <%
 	String textresult = SearchIndexLocalServiceUtil.getSearchIndexByKeyword(keywords, candidatetype, themeDisplay, request.getContextPath());
+//textresult = "{Name: 'Test', OrganizationLink: '/home', Type: 'Biobank', 'Number of Cases': 5, 'Data Access Committe': 'no', 'Request data':  'http://rd-connect.eu', 'Nuber of access': 0}";
 %>
 
 <div id="myDataTable"></div>
@@ -74,7 +75,11 @@ AUI().use(
     var nestedCols = [ 
     	{
     		key: 'Name',
-    		sortable: true
+    		sortable: true,
+    		allowHTML: true,
+    		formatter: function (o) {
+    			return '<a href="' + o.data.OrganizationLink + '">' + o.data.Name + '</a>';
+    		}
     	},
     	{
     		key: 'Type',
@@ -95,7 +100,7 @@ AUI().use(
     		formatter: '<a href="{value}">{value}</a>'
     	},
     	{
-    		key: 'Nuber of access',
+    		key: 'Number of access',
     		sortable: true
     	}
     ];

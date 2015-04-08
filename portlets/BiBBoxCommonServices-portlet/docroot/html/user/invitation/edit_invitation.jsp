@@ -30,10 +30,16 @@ boolean createinvitation = false;
 String tmpTitle = "new-invatiation";
 Invitation invitation = null;
 long invitationId = ParamUtil.getLong(request, "invitationId");
+boolean alredysend = false;
 if(invitationId > 0) {
 	invitation = InvitationLocalServiceUtil.getInvitation(invitationId);
 	createinvitation = false;
 	tmpTitle = invitation.getName();
+	if(invitation.getStatus() == InvitationLocalServiceUtil.getStatusFromString("send")) {
+		actionId_add_invitation = "X";
+		actionId_edit_invitation = "X";
+		alredysend = true;
+	}
 } else {
 	invitation = InvitationLocalServiceUtil.createInvitation(CounterLocalServiceUtil.increment(Invitation.class.getName()));
 	invitation.setBody(optionsDefaultBodyText_option);
@@ -80,7 +86,9 @@ invitationId = invitation.getInvitationId();
 				<aui:input name="name" value='<%= invitation.getName() %>'></aui:input>
 			</aui:column>
 			<aui:column columnWidth="25" last="true">
-				<button id="addorganisations" type="button">Add Organisation</button>/Clear List
+				<% if(!alredysend) { %>
+					<button id="addorganisations" type="button">Add Organisation</button>/Clear List
+				<% } %>
 			</aui:column>
 			<!-- OrganisationList -->
 			<aui:column columnWidth="100" first="true">
@@ -132,6 +140,7 @@ String addOrganizationListURL = themeDisplay.getURLCurrent().split("[?]")[0] + "
 
 <portlet:actionURL name='deleteOrganizationFromInvitation' var="deleteOrganizationFromInvitationURL" />
 
+<!-- Popup for adding Organiaztions to the list -->
 <aui:script use="aui-base">
             A.all('#addorganisations').on(
                'click',
@@ -152,27 +161,9 @@ String addOrganizationListURL = themeDisplay.getURLCurrent().split("[?]")[0] + "
                }
             );
 </aui:script>
+<!-- Load Organization List when loading the page -->
 <aui:script use="aui-base,aui-io-request">
 	AUI().use('aui-base', function(A){
-         var contentNode = A.one('#organisationlist');
-      
-         if(contentNode) {
-            contentNode.empty();
-           contentNode.html('<div class="loading-animation"></div>');
-           
-           contentNode.load('<%= addOrganizationListURL %>');
-           
-         }
-   });
-</aui:script>
-<aui:script use="aui-base,aui-io-request,click">
-AUI().ready(
-  'aui-base',
-  'aui-io-request',
-  'click',
-  function(A) {
-    A.all('#refreschorganizationlist').each(function() {
-      this.on('click', function(event){
          var url = '<%= addOrganizationListURL %>';
          A.io.request(url,{
          on: {
@@ -222,11 +213,111 @@ AUI().ready(
                }
             }
          });
+   });
+</aui:script>
+<!-- Load Organization List when clicking the refresh icon -->
+<aui:script use="aui-base,aui-io-request,click">
+AUI().ready(
+  'aui-base',
+  'aui-io-request',
+  'click',
+  function(A) {
+    A.all('#refreschorganizationlist').each(function() {
+      this.on('click', function(event){
+         var url = '<%= addOrganizationListURL %>';
+         A.io.request(url,{
+         on: {
+              failure: function() { alert('Unable to Load Data'); },
+              success: function() { 
+               A.one('#organisationlist').setHTML(this.get('responseData'));
+               // Delete Script
+               AUI().use(
+              'aui-base',
+			  'aui-io-request',
+			  'click',
+			  function(A) {
+	               A.all('#deleteOragnizationFromInvitation').on(
+					'click',
+					function(event) {
+						var confirmation_to_delete_user = confirm("Are you sure you want to delete the Organization from the list?");
+						if (confirmation_to_delete_user == true) {
+							var url = '<%= deleteOrganizationFromInvitationURL.toString() %>';
+							A.io.request(url,{
+								//this is the data that you are sending to the action method
+								data: {
+								   <portlet:namespace />bibbox_cs_organisationid: event.currentTarget.getAttribute('organisationid'),
+								   <portlet:namespace />bibbox_cs_invitationid: event.currentTarget.getAttribute('invitationid'),
+								},
+								dataType: 'json',
+								on: {
+								  failure: function() { alert('There is a problem with the server connection.'); },
+								  success: function() { 
+										var url = '<%= addOrganizationListURL %>';
+								         A.io.request(url,{
+								         on: {
+								              failure: function() { alert('Unable to Load Data'); },
+								              success: function() { 
+								               		A.one('#organisationlist').setHTML(this.get('responseData'));
+								               		// Delete Script
+									               AUI().use(
+									              'aui-base',
+												  'aui-io-request',
+												  'click',
+												  function(A) {
+										               A.all('#deleteOragnizationFromInvitation').on(
+														'click',
+														function(event) {
+															var confirmation_to_delete_user = confirm("Are you sure you want to delete the Organization from the list?");
+															if (confirmation_to_delete_user == true) {
+																var url = '<%= deleteOrganizationFromInvitationURL.toString() %>';
+																A.io.request(url,{
+																	//this is the data that you are sending to the action method
+																	data: {
+																	   <portlet:namespace />bibbox_cs_organisationid: event.currentTarget.getAttribute('organisationid'),
+																	   <portlet:namespace />bibbox_cs_invitationid: event.currentTarget.getAttribute('invitationid'),
+																	},
+																	dataType: 'json',
+																	on: {
+																	  failure: function() { alert('There is a problem with the server connection.'); },
+																	  success: function() { 
+																			var url = '<%= addOrganizationListURL %>';
+																	         A.io.request(url,{
+																	         on: {
+																	              failure: function() { alert('Unable to Load Data'); },
+																	              success: function() { 
+																	               A.one('#organisationlist').setHTML(this.get('responseData'));
+																	               }
+																	            }
+																	         });
+																	  }
+																	}
+																});
+															    
+															} 	 
+															return false;
+														}
+													);});
+									               //Delete Script
+								               }
+								            }
+								         });
+								  }
+								}
+							});
+						    
+						} 	 
+						return false;
+					}
+				);});
+               //Delete Script
+               }
+            }
+         });
      });
  });
 });
 </aui:script>
-
+<!-- Load Organization List when Changes in popup -->
 <script>
 Liferay.provide(window, 'refreshOrganizationListPortlet', function() {
         var A = AUI();
@@ -264,6 +355,46 @@ Liferay.provide(window, 'refreshOrganizationListPortlet', function() {
 									              failure: function() { alert('Unable to Load Data'); },
 									              success: function() { 
 									               A.one('#organisationlist').setHTML(this.get('responseData'));
+									            // Delete Script
+									               AUI().use(
+									              'aui-base',
+												  'aui-io-request',
+												  'click',
+												  function(A) {
+										               A.all('#deleteOragnizationFromInvitation').on(
+														'click',
+														function(event) {
+															var confirmation_to_delete_user = confirm("Are you sure you want to delete the Organization from the list?");
+															if (confirmation_to_delete_user == true) {
+																var url = '<%= deleteOrganizationFromInvitationURL.toString() %>';
+																A.io.request(url,{
+																	//this is the data that you are sending to the action method
+																	data: {
+																	   <portlet:namespace />bibbox_cs_organisationid: event.currentTarget.getAttribute('organisationid'),
+																	   <portlet:namespace />bibbox_cs_invitationid: event.currentTarget.getAttribute('invitationid'),
+																	},
+																	dataType: 'json',
+																	on: {
+																	  failure: function() { alert('There is a problem with the server connection.'); },
+																	  success: function() { 
+																			var url = '<%= addOrganizationListURL %>';
+																	         A.io.request(url,{
+																	         on: {
+																	              failure: function() { alert('Unable to Load Data'); },
+																	              success: function() { 
+																	               A.one('#organisationlist').setHTML(this.get('responseData'));
+																	               }
+																	            }
+																	         });
+																	  }
+																	}
+																});
+															    
+															} 	 
+															return false;
+														}
+													);});
+									               //Delete Script
 									               }
 									            }
 									         });

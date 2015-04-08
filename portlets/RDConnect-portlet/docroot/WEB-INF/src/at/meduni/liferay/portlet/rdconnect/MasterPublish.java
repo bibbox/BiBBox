@@ -11,6 +11,7 @@ import java.net.URLEncoder;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.regex.Pattern;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
@@ -148,11 +150,12 @@ public class MasterPublish extends MVCPortlet {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		default_locale_ = themeDisplay.getLocale();
 		long companyId = themeDisplay.getCompanyId();
+		Organization organization = null;
 		
 		try {
 			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 			// Create Organisation
-			Organization organization = createOrganisation(company, master);
+			organization = createOrganisation(company, master);
 			
 			
 			// Update Master
@@ -175,6 +178,49 @@ public class MasterPublish extends MVCPortlet {
 			System.out.println("RDC Exception in MasterPublish:publishToGate");
 			e.printStackTrace();
 		}	
+		
+		try {
+			String shorttext = "";
+			String longtext = "";
+			String link = "";
+			String restricted = "";
+			String eventtitle = "";
+			
+			String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+			
+			if(master.getCandidatetype().equalsIgnoreCase("Biobank")) {
+				eventtitle = "New Biobank Published: " + organization.getName();
+				restricted = "RD-Connect CURATOR";
+				link = link + "/bb_home";
+				shorttext = "Biobank "+ organization.getName() + " from " + master.getCountry() + " was published an is now in the list redy for the pannel assessment invitation.";
+				longtext = "";
+			} else {
+				eventtitle = "New Registry Published: " + organization.getName();
+				restricted = "";
+				link = link + "/reg_home";
+				shorttext = "Registry "+ organization.getName() + " from " + master.getCountry() + " was published an is now listed in the catalouge.";
+				longtext = "";
+			}
+			addEventEntry(new Date(), organization.getOrganizationId(), themeDisplay.getUserId(), shorttext, longtext, link, restricted, eventtitle);
+		} catch(Exception e) {
+			System.out.println("RDC Exception in MasterPublish:publishToGate -> Add Event");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Add event entry
+	 * 
+	 * @param eventdate
+	 * @param organizationId
+	 * @param userId
+	 * @param shorttext
+	 * @param longtext
+	 * @param link
+	 * @param restricted
+	 */
+	private void addEventEntry(Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted, String eventtitle) {
+		RDConnectEventLocalServiceUtil.createEvent(eventtitle, eventdate, organizationId, userId, shorttext, longtext, link, restricted);
 	}
 	
 	private void addOrganisationDetails(Organization organization, MasterCandidate master, long userid) {

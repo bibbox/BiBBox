@@ -4,11 +4,22 @@
 	<model name="at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent">
 		<field name="eventId" type="long" />
 		<field name="eventdate" type="Date" />
+		<field name="eventtype" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 		<field name="organizationId" type="long" />
 		<field name="userId" type="long" />
-		<field name="shorttext" type="String" />
-		<field name="longtext" type="String" />
-		<field name="link" type="String" />
-		<field name="restricted" type="String" />
+		<field name="shorttext" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="longtext" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="link" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="restricted" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 	</model>
 </model-hints>

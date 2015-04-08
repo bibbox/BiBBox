@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventModelImpl">
+		<attributes>
+			<id name="eventId" />
+			<basic name="patientId" />
+			<basic name="eventdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="eventtype" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataModelImpl">
+		<attributes>
+			<id name="eventdataId" />
+			<basic name="eventlayoutId" />
+			<basic name="patientId" />
+			<basic name="ontology" />
+			<basic name="value" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationModelImpl">
+		<attributes>
+			<id name="configurationId" />
+			<basic name="scope" />
+			<basic name="optionkey" />
+			<basic name="optionvalue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterConfigurationModelImpl">
+		<attributes>
+			<id name="parameterconfigurationId" />
+			<basic name="displayname" />
+			<basic name="datatype" />
+			<basic name="valuerange" />
+			<basic name="displayoptions" />
+			<basic name="visible" />
+			<basic name="computed" />
+			<basic name="confirmationscript" />
+			<basic name="grouping" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterOptionsModelImpl">
+		<attributes>
+			<id name="parameteroptionsId" />
+			<basic name="parameterconfigurationId" />
+			<basic name="option">
+				<column name="OPTION_" />
+			</basic>
+			<basic name="value" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpRulesModelImpl">
+		<attributes>
+			<id name="ruleId" />
+			<basic name="rule" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorModelImpl">
+		<attributes>
+			<id name="patientnamegeneratorId" />
+			<basic name="name" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventImpl" name="Event">
+		<table name="kdssmp.event" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataImpl" name="EventData">
+		<table name="kdssmp.eventdata" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationImpl" name="KdssmpConfiguration">
+		<table name="kdssmp.configuration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterConfigurationImpl" name="KdssmpParameterConfiguration">
+		<table name="kdssmp.parameterconfiguration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterOptionsImpl" name="KdssmpParameterOptions">
+		<table name="kdssmp.parameteroptions" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpRulesImpl" name="KdssmpRules">
+		<table name="kdssmp.rules" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.patientnamegeneratorImpl" name="patientnamegenerator">
+		<table name="kdssmp.patientnamegenerator" />
+		<attributes />
+	</entity>
+</entity-mappings>

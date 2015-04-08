@@ -10,7 +10,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/event/eventfeed/view.jsp</value>
+			<value>/html/event/eventfeed/eventfeed_view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>config-template</name>

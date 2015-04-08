@@ -1,0 +1,8 @@
+<aui:column columnWidth="100" first="true">
+	<aui:field-wrapper label="<%= parameterconfig.getDisplayname() %>">
+		<liferay-ui:input-editor name="<%= id %>" toolbarSet="liferay-article" initMethod="initEditor" width="100%" />
+		<script type="text/javascript">
+			function <portlet:namespace />initEditor() { return '<%= "" %>''; }
+		</script>
+	</aui:field-wrapper>
+</aui:column>

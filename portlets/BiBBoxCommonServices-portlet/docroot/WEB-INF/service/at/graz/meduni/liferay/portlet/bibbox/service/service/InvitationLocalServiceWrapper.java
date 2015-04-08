@@ -323,6 +323,7 @@ public class InvitationLocalServiceWrapper implements InvitationLocalService,
 	*  5 ... Simulated
 	* 10 ... Send
 	* 20 ... Request Panel Assessment
+	* 30 ... Biobank Published
 	*/
 	@Override
 	public long getStatusFromString(java.lang.String string_status) {

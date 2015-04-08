@@ -9,6 +9,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="eventdate" type="org.hibernate.type.TimestampType" />
+		<property name="eventtype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="shorttext" type="com.liferay.portal.dao.orm.hibernate.StringType" />

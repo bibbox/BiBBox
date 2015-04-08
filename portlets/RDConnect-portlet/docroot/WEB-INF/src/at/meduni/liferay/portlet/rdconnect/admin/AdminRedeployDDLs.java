@@ -8,6 +8,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -17,6 +18,8 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
@@ -32,6 +35,51 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class AdminRedeployDDLs
  */
 public class AdminRedeployDDLs extends MVCPortlet {
+	public void addFolders(ActionRequest request, ActionResponse response) throws Exception {
+		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+			String foldername = ParamUtil.getString(request, "foldername");
+			System.out.println("Add Folder: " + foldername);
+			runAddFolder(foldername, themeDisplay);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		sendRedirect(request, response);
+	}
+	
+	private void runAddFolder(String foldername, ThemeDisplay themeDisplay) {
+		try {
+			List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(themeDisplay.getCompanyId(), 10709);
+			for(Organization organization : organizations) {
+				ServiceContext serviceContext = new ServiceContext();
+
+		        serviceContext.setAddGroupPermissions(true);
+		        serviceContext.setAddGuestPermissions(true);
+		        Group group = organization.getGroup();
+		        serviceContext.setScopeGroupId(group.getGroupId());
+		        
+		        serviceContext.setUserId(organization.getUserId());
+				try {
+					DLFolder folder = DLFolderLocalServiceUtil.getFolder(organization.getGroupId(), 0, foldername);
+					if(folder != null) {
+						System.out.println("Folder " + foldername + " found in Organization " + organization.getGroup().getGroupId() + " " + folder.getRepositoryId() + " " + folder.getMountPoint());
+					}
+				} catch (PortalException e) {
+					// Add Folder
+					try {
+						DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), organization.getGroupId(), organization.getGroupId(), false, 0, foldername, "", false, serviceContext);
+					} catch (PortalException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void renameDDLS(ActionRequest request, ActionResponse response) throws Exception {
 		try {
 			String name = ParamUtil.getString(request, "ddlname");

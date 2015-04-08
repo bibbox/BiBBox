@@ -106,27 +106,31 @@ public class SearchIndexLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.rdconnect.model.SearchIndex"
 			};
 
-		_methodName48 = "getBeanIdentifier";
+		_methodName56 = "getBeanIdentifier";
 
-		_methodParameterTypes48 = new String[] {  };
+		_methodParameterTypes56 = new String[] {  };
 
-		_methodName49 = "setBeanIdentifier";
+		_methodName57 = "setBeanIdentifier";
 
-		_methodParameterTypes49 = new String[] { "java.lang.String" };
+		_methodParameterTypes57 = new String[] { "java.lang.String" };
 
-		_methodName54 = "getSearchIndexByKeyword";
+		_methodName62 = "getSearchIndexByKeyword";
 
-		_methodParameterTypes54 = new String[] {
+		_methodParameterTypes62 = new String[] {
 				"java.lang.String", "com.liferay.portal.theme.ThemeDisplay",
 				"java.lang.String"
 			};
 
-		_methodName56 = "getSearchIndexByKeyword";
+		_methodName64 = "getSearchIndexByKeyword";
 
-		_methodParameterTypes56 = new String[] {
+		_methodParameterTypes64 = new String[] {
 				"java.lang.String", "java.lang.String",
 				"com.liferay.portal.theme.ThemeDisplay", "java.lang.String"
 			};
+
+		_methodName65 = "getUserStatistiks";
+
+		_methodParameterTypes65 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -218,31 +222,36 @@ public class SearchIndexLocalServiceClpInvoker {
 			return SearchIndexLocalServiceUtil.updateSearchIndex((at.meduni.liferay.portlet.rdconnect.model.SearchIndex)arguments[0]);
 		}
 
-		if (_methodName48.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName49.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			SearchIndexLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName54.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getSearchIndexByKeyword((java.lang.String)arguments[0],
 				(com.liferay.portal.theme.ThemeDisplay)arguments[1],
 				(java.lang.String)arguments[2]);
 		}
 
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getSearchIndexByKeyword((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1],
 				(com.liferay.portal.theme.ThemeDisplay)arguments[2],
 				(java.lang.String)arguments[3]);
+		}
+
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getUserStatistiks();
 		}
 
 		throw new UnsupportedOperationException();
@@ -280,12 +289,14 @@ public class SearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName48;
-	private String[] _methodParameterTypes48;
-	private String _methodName49;
-	private String[] _methodParameterTypes49;
-	private String _methodName54;
-	private String[] _methodParameterTypes54;
 	private String _methodName56;
 	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
 }

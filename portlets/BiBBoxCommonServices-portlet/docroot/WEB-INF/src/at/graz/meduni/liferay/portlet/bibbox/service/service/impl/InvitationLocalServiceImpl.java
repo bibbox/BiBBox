@@ -92,6 +92,7 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 	 *  5 ... Simulated
 	 * 10 ... Send
 	 * 20 ... Request Panel Assessment
+	 * 30 ... Biobank Published
 	 */
 	public long getStatusFromString(String string_status) {
 		long status = 0;
@@ -106,6 +107,9 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 		}
 		if(string_status.equalsIgnoreCase("Request Panel Assessment")) {
 			return 20;
+		}
+		if(string_status.equalsIgnoreCase("Biobank Published")) {
+			return 30;
 		}
 		return 0;
 	}
@@ -122,6 +126,9 @@ public class InvitationLocalServiceImpl extends InvitationLocalServiceBaseImpl {
 		}
 		if(status == 20) {
 			return "Request Panel Assessment";
+		}
+		if(status == 30) {
+			return "Biobank Published";
 		}
 		return "";
 	}

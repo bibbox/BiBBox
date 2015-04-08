@@ -14,6 +14,11 @@
 
 package at.meduni.liferay.portlet.rdconnect.service.impl;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -23,7 +28,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -41,6 +50,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.model.SearchIndex;
 import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
+import at.meduni.liferay.portlet.rdconnect.service.RDCOrganizationUserAccessLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.service.base.SearchIndexLocalServiceBaseImpl;
 
@@ -174,7 +184,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 							DiseaseMatrix diseasematrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(serachresult.getLocationid());
 							hits.put(serachresult.getLocation() + serachresult.getLocationid(), "<tr><td>" + serachresult.getLocation() + "</td><td>" + 
 									highlightResult(diseasematrix.getDiseasename(), keyword) + ": Number of Patients, Donors " + highlightResult(diseasematrix.getPatientcount(), keyword) + "<br />" +
-									"&nbsp;&nbsp;&nbsp;&nbsp;" + highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
+									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
 						} else {
 							hits.put(serachresult.getLocation() + serachresult.getLocationid(), "<tr><td>" + serachresult.getLocation() + "</td><td>" + 
 									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
@@ -192,7 +202,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 							DiseaseMatrix diseasematrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(serachresult.getLocationid());
 							hits.put(serachresult.getLocation() + serachresult.getLocationid(), "<tr><td>" + serachresult.getLocation() + "</td><td>" + 
 									highlightResult(diseasematrix.getDiseasename(), keyword) + ": Number of Patients, Donors " + highlightResult(diseasematrix.getPatientcount(), keyword) + "<br />" +
-									"&nbsp;&nbsp;&nbsp;&nbsp;" + highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
+									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
 						} else {
 							hits.put(serachresult.getLocation() + serachresult.getLocationid(), "<tr><td>" + serachresult.getLocation() + "</td><td>" + 
 									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
@@ -209,7 +219,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			}
 			searchresultstring += "</table>";
 			// Add the number of Results
-			searchresultstring = "<h4>Search returned " + serachresults.size() + " hits (Registries:" + regcount + " /Biobaks:" + bbcount + ")</h4><br /><br />" + searchresultstring;
+			searchresultstring = "<h4>Search returned " + serachresults.size() + " hits (Registries:" + regcount + " /Biobanks:" + bbcount + ")</h4><br /><br />" + searchresultstring;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -262,14 +272,26 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 		type = type.trim();
 		String searchresultstring = "";
 		try {
-			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
-			Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + keyword + StringPool.PERCENT);
-			if(!type.equalsIgnoreCase("all")) {
-				Criterion criterion_type = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + type + StringPool.PERCENT);
-				criterion_type = RestrictionsFactoryUtil.and(criterion_type, RestrictionsFactoryUtil.ilike("key", StringPool.PERCENT + "Type" + StringPool.PERCENT));
-				criterion = RestrictionsFactoryUtil.and(criterion, criterion_type);
+			DynamicQuery dynamicQuery = null;
+			if(type.equalsIgnoreCase("all")) {
+				dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+				Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + keyword + StringPool.PERCENT);
+				//if(!type.equalsIgnoreCase("all")) {
+					//Criterion criterion_type = RestrictionsFactoryUtil.ilike("value", type);
+					//criterion_type = RestrictionsFactoryUtil.and(criterion_type, RestrictionsFactoryUtil.ilike("key", StringPool.PERCENT + "Type" + StringPool.PERCENT));
+					//criterion = RestrictionsFactoryUtil.and(criterion, criterion_type);
+				
+				dynamicQuery.add(criterion);
+			} else {
+				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class)
+						.add(PropertyFactoryUtil.forName("value").eq(type));
+				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
+
+				dynamicQuery  = DynamicQueryFactoryUtil.forClass(SearchIndex.class)
+						.add(PropertyFactoryUtil.forName("value").like(StringPool.PERCENT + keyword + StringPool.PERCENT))
+						.add(PropertyFactoryUtil.forName("organisationid").in(subQuery));
 			}
-			dynamicQuery.add(criterion);
+			
 			Order order_organisationid = OrderFactoryUtil.asc("organisationid");
 			Order order_location = OrderFactoryUtil.asc("location");
 			Order order_locationid = OrderFactoryUtil.asc("locationid");
@@ -321,12 +343,21 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 				  			}
 				  		 }
 				  	}
+				  	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+				  	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+				  	int numberofacces = RDCOrganizationUserAccessLocalServiceUtil.countRDCOrganizationUserAccess(organization.getOrganizationId());
+					if(organizationtype.equalsIgnoreCase("Biobank")) {
+						orgPath = orgPath + "/bb_home";	
+					} else {
+						orgPath = orgPath + "/reg_home";
+					} 
 					searchresultstring += "{Name: '" + organization.getName().replaceAll("'", "&lsquo;") + "', "
+							+ "OrganizationLink: '" + orgPath + "',"
 							+ "Type: '" + organization.getExpandoBridge().getAttribute("Organization Type").toString() + "',"
 							+ "'Number of Cases': " + diseascount + ","
 							+ "'Data Access Committe': '" + dataaccess + "',"
 							+ "'Request data':  'http://rd-connect.eu', "
-							+ "'Nuber of access': 0}";
+							+ "'Number of access': " + numberofacces + "}";
 					// New Hit
 					oldorganizationid = serachresult.getOrganisationid();
 				}			
@@ -338,5 +369,63 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			searchresultstring = "No Results for the query.";
 		}
 		return searchresultstring;
+	}
+	
+	/**
+	 * Create User Statistics
+	 * @return
+	 */
+	public String getUserStatistiks() {
+		String date = "";
+		String count = "";
+		try {
+			Connection connection = connectDatabase();
+			String sql_grouped = "SELECT DATE(lastaccess), COUNT(*) FROM rdconnect.rdcorganizationuseraccess GROUP BY DATE(lastaccess) ORDER BY DATE(lastaccess);";
+			Statement statement = connection.createStatement();
+			ResultSet resultset = statement.executeQuery(sql_grouped);
+			String prefix = "";
+			while(resultset.next()) {
+				String date_convert = resultset.getString("date");
+				date += prefix + "\"" + date_convert + "\"";
+				count += prefix + resultset.getString("count");
+				prefix = ",";
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		String return_value = date + "§§split§§" + count;
+		return return_value;
+	}
+	
+	/**
+	 * Connect to the liferay Database
+	 * @return sql Connection
+	 */
+	private Connection connectDatabase() {
+
+		try { 
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
+			e.printStackTrace();
+			return null;
+		}
+ 
+		System.out.println("PostgreSQL JDBC Driver Registered!");
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(PropsUtil.get("jdbc.default.url"), PropsUtil.get("jdbc.default.username"),PropsUtil.get("jdbc.default.password"));
+		} catch (SQLException e) {
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return null;
+		}
+ 
+		if (connection != null) {
+			System.out.println("Connected to database");
+		} else {
+			System.out.println("Failed to make connection!");
+		}
+		return connection;
 	}
 }

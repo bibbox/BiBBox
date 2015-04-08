@@ -1,0 +1,31 @@
+<%
+EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(event_layout.getLayoutId(), String.valueOf(parameterconfig.getParameterconfigurationId()));
+String data = "not specified";
+if(eventdata != null) {
+	data = eventdata.getValue();
+}
+%>
+	<aui:select cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>" >
+		<%
+		List<KdssmpParameterOptions> options = KdssmpParameterOptionsLocalServiceUtil.getOptions(parameterconfig.getParameterconfigurationId());
+		for(KdssmpParameterOptions option : options) {
+			%>
+			<aui:option cssClass='<%= id + "_" + option.getValue() %>' selected="<%= data.equalsIgnoreCase(option.getValue()) %>" value="<%= option.getValue() %>"><liferay-ui:message key='<%= option.getOption() %>' /></aui:option>
+			<%
+		}
+		%>
+		<aui:option cssClass='<%= id + "_" + "notspecified" %>' selected='<%= data.equalsIgnoreCase("not specified") %>' value="not specified"><liferay-ui:message key='Not Specified' /></aui:option>
+	</aui:select>
+
+<aui:script>
+	<%= parameterconfig.getConfirmationscript() %>
+</aui:script>
+
+<aui:script>
+AUI().use('aui-base', 'datastore', function(A){
+	A.all('.<%= id %>').on('change',function(event){
+		A.DatakDSSMPStore.kDSSMPStore(event.target);
+	});
+});
+</aui:script>
+

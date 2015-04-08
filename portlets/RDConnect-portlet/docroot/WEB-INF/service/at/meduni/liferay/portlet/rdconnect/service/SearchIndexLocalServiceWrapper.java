@@ -315,6 +315,16 @@ public class SearchIndexLocalServiceWrapper implements SearchIndexLocalService,
 	}
 
 	/**
+	* Create User Statistics
+	*
+	* @return
+	*/
+	@Override
+	public java.lang.String getUserStatistiks() {
+		return _searchIndexLocalService.getUserStatistiks();
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public SearchIndexLocalService getWrappedSearchIndexLocalService() {

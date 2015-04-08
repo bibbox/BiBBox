@@ -338,6 +338,27 @@ public class InvitationOrganisationLocalServiceUtil {
 		return getService().getInvitationOrganisationByStatus(rejacted);
 	}
 
+	/**
+	* @return
+	*/
+	public static java.lang.String getInvitationStatisticsInvitationsSend() {
+		return getService().getInvitationStatisticsInvitationsSend();
+	}
+
+	/**
+	* @return
+	*/
+	public static java.lang.String getInvitationStatisticsReacted() {
+		return getService().getInvitationStatisticsReacted();
+	}
+
+	/**
+	* @return
+	*/
+	public static java.lang.String getInvitationStatisticsRejected() {
+		return getService().getInvitationStatisticsRejected();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

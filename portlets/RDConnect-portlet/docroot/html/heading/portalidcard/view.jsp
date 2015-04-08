@@ -78,7 +78,7 @@ if (currentGroup.isOrganization()) {
   				recordid = record.getRecordId();
   				 if(record.getFieldValue("Description") != null) {
   					shortdiscription = record.getFieldValue("Description").toString();
-  					shortdiscription = shortdiscription.replaceAll("<.*?>", "");
+  					shortdiscription = shortdiscription.replaceAll("<.*?>", "").replaceAll("\"\\]|\\[\"", "");
   				} 
   			}
   		 } else {
@@ -114,7 +114,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -143,7 +143,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -171,7 +171,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -200,7 +200,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -227,7 +227,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -255,7 +255,7 @@ if (currentGroup.isOrganization()) {
 	  					if(!dms.isFieldPrivate(s)) {
 	  						all++;
 		  					if(record.getFieldValue(s) != null) {
-		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified")) {
+		  						if(!record.getFieldValue(s).toString().equalsIgnoreCase("") && !record.getFieldValue(s).toString().equalsIgnoreCase("[]") && !record.getFieldValue(s).toString().contains("ot specified") && !record.getFieldValue(s).toString().contains("ot Specified")) {
 		  							counted++;
 		  						}
 		  					}
@@ -270,8 +270,15 @@ if (currentGroup.isOrganization()) {
   			}
   		}
   	} 
-%>
-<%
+  	// Count Documents
+  	int filecount = 0;
+  	try {
+	  	PortalIDCard idcard = new PortalIDCard();
+	  	filecount = idcard.getFilecount(themeDisplay.getScopeGroupId());
+  	} catch (Exception ex) {
+  		ex.printStackTrace();
+  	}
+
 // Edit link
 	boolean portaleditorrole = false;
     boolean biobankregistryownerrole = false;
@@ -407,6 +414,9 @@ if (currentGroup.isOrganization()) {
 				if(l.equalsIgnoreCase("Accessibility")) {
 					pageinformation = accessibility;
 				}
+				if(l.equalsIgnoreCase("Documents")) {
+					pageinformation = "<span class=\"rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates\">[" + filecount + "]</span>";
+				}
 				
 				String items = "";
 				if(!pageinformation.equalsIgnoreCase("")) {
@@ -501,4 +511,26 @@ editcoreddlURL.setParameter("formDDMTemplateId", "0");
                   );
                }
             );
+</aui:script>
+
+<portlet:actionURL name='countUserOrgaization' var="countUserOrgaizationURL" />
+
+<aui:script use="aui-io-request, event, node, aui-popover, valuechange, event-hover, aui-tooltip, event-valuechange, click">
+	AUI().ready('aui-io-request', 'event-valuechange', 'node', function(A){
+			var url = '<%= countUserOrgaizationURL.toString() %>';
+			A.io.request(url,{
+				//this is the data that you are sending to the action method
+				data: {
+					
+				   <portlet:namespace />userid: <%= themeDisplay.getUserId() %>,
+				   <portlet:namespace />ipaddress: '<%= PortalUtil.getHttpServletRequest(renderRequest).getRemoteAddr() %>',
+				   <portlet:namespace />organizationid: <%= organizationId %>,
+				},
+				dataType: 'json',
+				on: {
+				  failure: function() {  },
+				  success: function(event, id, obj) { "success" }
+				}
+			});
+	});
 </aui:script>
