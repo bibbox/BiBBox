@@ -1,3 +1,4 @@
+<%@ page import="java.math.BigInteger" %>
 <%@ include file="/html/init.jsp"%>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.services.service.LDAPlogLocalServiceUtil" %>
 <%@ page import="java.util.Hashtable" %>
@@ -6,6 +7,8 @@
 <%@ page import="javax.naming.NamingEnumeration" %>
 <%@ page import="javax.naming.NamingException" %>
 <%@ page import="javax.naming.directory.Attributes" %>
+<%@ page import="javax.naming.directory.Attribute" %>
+<%@ page import="java.util.Enumeration" %>
 <%@ page import="javax.naming.directory.BasicAttribute" %>
 <%@ page import="javax.naming.directory.BasicAttributes" %>
 <%@ page import="javax.naming.directory.DirContext" %>
@@ -42,10 +45,15 @@ try {
 	matchAttrs.put(new BasicAttribute("biobankID"));
 	matchAttrs.   SearchControls.SUBTREE_SCOPE*/
 	
-	String[] attrIDs = { "biobankID", "biobankName", "biobankCountry", "dn",
-			"diagnosisAvailable",
+	String[] attrIDs = {
 			"biobankID",
 			"biobankName",
+			"biobankCountry",
+			"biobankDescription",
+			"biobankURL",
+			"biobankAcronym",
+			"biobankSize",
+			"dn",
 			"biobankJuridicalPerson",
 			"biobankCountry",
 			"biobankContactFirstName",
@@ -71,7 +79,6 @@ try {
 			"biobankMaterialStoredFaeces",
 			"biobankMaterialStoredPathogen",
 			"biobankMaterialStoredOther",
-			"biobankSize",
 			"biobankSampleAccessFee",
 			"biobankSampleAccessJointProjects",
 			"biobankSampleAccessDescription",
@@ -88,6 +95,7 @@ try {
 			"biobankAvailableGenealogicalRecords",
 			"biobankAvailablePhysioBiochemMeasurements",
 			"biobankAvailableOther",
+			"diagnosisAvailable",
 			"biobankITSupportAvailable",
 			"biobankITStaffSize" };
 
@@ -103,6 +111,20 @@ try {
 	while (answer.hasMore()) {
 		SearchResult sr = (SearchResult) answer.next();
 		Attributes attrs = sr.getAttributes();
+		for (NamingEnumeration<?> vals = attrs.getAll(); vals.hasMoreElements();) {
+			Attribute a = (Attribute) vals.nextElement();
+			for(int i = 0; i < a.size(); i++) {
+				String v = a.get(i).toString();
+				String vnew = v.replaceAll("'", "\\\\'");
+				if (a.isOrdered()) {
+					a.set(i, v);					
+				}
+				else {
+					a.remove(v);
+					a.add(vnew);
+				}
+			}
+		}
 		if(attrs.get("biobankCountry") == null) {
 			continue;
 		}
@@ -121,55 +143,36 @@ try {
 		%>
 		{
 		leaf: true,
-		label: '<%= attrs.get("biobankName").toString().replaceAll("biobankName: ", "") %>',
+		label: '<%= attrs.get("biobankID").toString().replaceAll("biobankID: ", "")%> (<%= attrs.get("biobankName").toString().replaceAll("biobankName: ", "") %>)',
 		children: [
-			{label: '<%= attrs.get("biobankID") %>', leaf: true},
-			{label: '<%= attrs.get("diagnosisAvailable") %>', leaf: true},
-			{label: '<%= attrs.get("biobankName") %>', leaf: true},
-			{label: '<%= attrs.get("biobankJuridicalPerson") %>', leaf: true},
-			{label: '<%= attrs.get("biobankCountry") %>', leaf: true},
-			{label: '<%= attrs.get("biobankContactFirstName") %>', leaf: true},
-			{label: '<%= attrs.get("biobankContactLastName") %>', leaf: true},
-			{label: '<%= attrs.get("biobankContactPhone") %>', leaf: true},
-			{label: '<%= attrs.get("biobankContactEmail") %>', leaf: true},
-			{label: '<%= attrs.get("biobankContactAddress") %>', leaf: true},
-			{label: '<%= attrs.get("biobankContactZIP") %>', leaf: true},
-			{label: '<%= attrs.get("biobankContactCity") %>', leaf: true},
-			{label: '<%= attrs.get("biobankContactCountry") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredDNA") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredcDNAmRNA") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredmicroRNA") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredWholeBlood") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredPBC") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredPlasma") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredSerum") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredTissueCryo") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredTissueParaffin") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredCellLines") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredUrine") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredSaliva") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredFaeces") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredPathogen") %>', leaf: true},
-			{label: '<%= attrs.get("biobankMaterialStoredOther") %>', leaf: true},
-			{label: '<%= attrs.get("biobankSize") %>', leaf: true},
-			{label: '<%= attrs.get("biobankSampleAccessFee") %>', leaf: true},
-			{label: '<%= attrs.get("biobankSampleAccessJointProjects") %>', leaf: true},
-			{label: '<%= attrs.get("biobankSampleAccessDescription") %>', leaf: true},
-			{label: '<%= attrs.get("biobankDataAccessFee") %>', leaf: true},
-			{label: '<%= attrs.get("biobankDataAccessJointProjects") %>', leaf: true},
-			{label: '<%= attrs.get("biobankDataAccessDescription") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableMaleSamplesData") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableFemaleSamplesData") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableBiologicalSamples") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableSurveyData") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableImagingData") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableMedicalRecords") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableNationalRegistries") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableGenealogicalRecords") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailablePhysioBiochemMeasurements") %>', leaf: true},
-			{label: '<%= attrs.get("biobankAvailableOther") %>', leaf: true},
-			{label: '<%= attrs.get("biobankITSupportAvailable") %>', leaf: true},
-			{label: '<%= attrs.get("biobankITStaffSize") %>', leaf: true},
+		           <%
+		     for (String k : attrIDs) {
+		    	 if (attrs.get(k) != null) {
+		    		 if (k.equals("biobankSize")) {
+		    			 try {
+		    				 String bbsize = attrs.get(k).get().toString();
+			    			 //BigInteger bbsizeval = BigInteger("10").pow(Integer(bbsize)); 
+			    			 //bbsize = "more than " + bbsizeval + " samples";
+			    			 bbsize = "more than 10^" + bbsize + " samples";
+				    		 %>
+				 			{label: '<%= k %>: <%= bbsize%>', leaf: true},		    		 
+				    		 <%		    			 		    				 
+		    			 }
+		    			 catch (Exception e) {
+				    		 %>
+					 			{label: '<%= k %>: unknown', leaf: true},		    		 
+					    	<%		    			 		    				 		    				 
+		    			 }
+		    		 }
+		    		 else {
+			    		 %>
+			 			{label: '<%= attrs.get(k) %>', leaf: true},		    		 
+			    		 <%
+		    			 
+		    		 }
+	    		 }
+		     }      
+		           %>
 		]
 		},
 		<%
