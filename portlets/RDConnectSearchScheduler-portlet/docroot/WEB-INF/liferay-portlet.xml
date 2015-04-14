@@ -23,6 +23,26 @@
 			create-search-database-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>create-recommander-database</portlet-name>
+		<icon>/icon.png</icon>
+		<scheduler-entry>
+			<scheduler-event-listener-class>at.graz.meduni.liferay.portlet.rdconnect.RDConnectRecommanderSchedule</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<simple-trigger-value>15</simple-trigger-value>
+					<time-unit>minute</time-unit>
+				</simple>
+			</trigger>
+		</scheduler-entry>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			create-recommander-database-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

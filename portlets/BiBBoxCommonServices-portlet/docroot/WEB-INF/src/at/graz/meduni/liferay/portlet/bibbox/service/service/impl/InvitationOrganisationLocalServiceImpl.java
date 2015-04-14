@@ -14,6 +14,11 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import com.liferay.portal.kernel.dao.orm.Criterion;
@@ -25,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation;
@@ -142,5 +148,109 @@ public class InvitationOrganisationLocalServiceImpl
 		
 		List<InvitationOrganisation> invitationorganisation = InvitationOrganisationLocalServiceUtil.dynamicQuery(dynamicQuery);
 		return invitationorganisation;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getInvitationStatisticsInvitationsSend() {
+		String date = "";
+		int count = 0;
+		try {
+			Connection connection = connectDatabase();
+			String sql_grouped = "SELECT EXTRACT(YEAR FROM  DATE(inv.invitationsend)) date_year, EXTRACT(MONTH FROM  DATE(inv.invitationsend)) date_month, EXTRACT(DAY FROM  DATE(inv.invitationsend)) date_day, COUNT(*) FROM bibboxcs.invitation inv JOIN bibboxcs.invitation_organisation invor ON inv.invitationid = invor.invitationid WHERE inv.status >= 10 GROUP BY DATE(inv.invitationsend) ORDER BY DATE(inv.invitationsend);";
+			Statement statement = connection.createStatement();
+			ResultSet resultset = statement.executeQuery(sql_grouped);
+			String prefix = "";
+			while(resultset.next()) {
+				count += resultset.getInt("count");
+				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + (Integer.parseInt(resultset.getString("date_month")) -1) + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
+				prefix = ",";
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return date;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getInvitationStatisticsReacted() {
+		String date = "";
+		int count = 0;
+		try {
+			Connection connection = connectDatabase();
+			String sql_grouped = "SELECT EXTRACT(YEAR FROM  DATE(reactdate)) date_year, EXTRACT(MONTH FROM  DATE(reactdate)) date_month, EXTRACT(DAY FROM  DATE(reactdate)) date_day, COUNT(*) FROM bibboxcs.invitation_organisation WHERE reactdate IS NOT NULL GROUP BY DATE(reactdate) ORDER BY DATE(reactdate);";
+			Statement statement = connection.createStatement();
+			ResultSet resultset = statement.executeQuery(sql_grouped);
+			String prefix = "";
+			while(resultset.next()) {
+				count += resultset.getInt("count");
+				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + (Integer.parseInt(resultset.getString("date_month")) -1) + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
+				prefix = ",";
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return date;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getInvitationStatisticsRejected() {
+		String date = "";
+		int count = 0;
+		try {
+			Connection connection = connectDatabase();
+			String sql_grouped = "SELECT EXTRACT(YEAR FROM  DATE(rejectdate)) date_year, EXTRACT(MONTH FROM  DATE(rejectdate)) date_month, EXTRACT(DAY FROM  DATE(rejectdate)) date_day, COUNT(*) FROM bibboxcs.invitation_organisation WHERE rejectdate IS NOT NULL GROUP BY DATE(rejectdate) ORDER BY DATE(rejectdate);";
+			Statement statement = connection.createStatement();
+			ResultSet resultset = statement.executeQuery(sql_grouped);
+			String prefix = "";
+			while(resultset.next()) {
+				count += resultset.getInt("count");
+				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + (Integer.parseInt(resultset.getString("date_month")) -1) + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
+				prefix = ",";
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return date;
+	}
+	
+	/**
+	 * Connect to the liferay Database
+	 * @return sql Connection
+	 */
+	private Connection connectDatabase() {
+
+		try { 
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Where is your PostgreSQL JDBC Driver? " + "Include in your library path!");
+			e.printStackTrace();
+			return null;
+		}
+ 
+		System.out.println("PostgreSQL JDBC Driver Registered!");
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection(PropsUtil.get("jdbc.default.url"), PropsUtil.get("jdbc.default.username"),PropsUtil.get("jdbc.default.password"));
+		} catch (SQLException e) {
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return null;
+		}
+ 
+		if (connection != null) {
+			System.out.println("Connected to database");
+		} else {
+			System.out.println("Failed to make connection!");
+		}
+		return connection;
 	}
 }

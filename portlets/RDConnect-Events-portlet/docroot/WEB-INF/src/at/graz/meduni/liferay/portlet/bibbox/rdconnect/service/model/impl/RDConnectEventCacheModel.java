@@ -38,12 +38,14 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{eventId=");
 		sb.append(eventId);
 		sb.append(", eventdate=");
 		sb.append(eventdate);
+		sb.append(", eventtype=");
+		sb.append(eventtype);
 		sb.append(", organizationId=");
 		sb.append(organizationId);
 		sb.append(", userId=");
@@ -72,6 +74,13 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 		}
 		else {
 			rdConnectEventImpl.setEventdate(new Date(eventdate));
+		}
+
+		if (eventtype == null) {
+			rdConnectEventImpl.setEventtype(StringPool.BLANK);
+		}
+		else {
+			rdConnectEventImpl.setEventtype(eventtype);
 		}
 
 		rdConnectEventImpl.setOrganizationId(organizationId);
@@ -114,6 +123,7 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		eventId = objectInput.readLong();
 		eventdate = objectInput.readLong();
+		eventtype = objectInput.readUTF();
 		organizationId = objectInput.readLong();
 		userId = objectInput.readLong();
 		shorttext = objectInput.readUTF();
@@ -127,6 +137,14 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 		throws IOException {
 		objectOutput.writeLong(eventId);
 		objectOutput.writeLong(eventdate);
+
+		if (eventtype == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(eventtype);
+		}
+
 		objectOutput.writeLong(organizationId);
 		objectOutput.writeLong(userId);
 
@@ -161,6 +179,7 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 
 	public long eventId;
 	public long eventdate;
+	public String eventtype;
 	public long organizationId;
 	public long userId;
 	public String shorttext;

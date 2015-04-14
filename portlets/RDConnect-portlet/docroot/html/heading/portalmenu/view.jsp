@@ -9,6 +9,7 @@
 <portlet:defineObjects />
 
 <%
+   String redirect = PortalUtil.getCurrentURL(renderRequest);
    String keywords = "";
    HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
    httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
@@ -32,56 +33,27 @@ if(themeDisplay.isSignedIn()) {
 long organizationId = 0;
 long userId = themeDisplay.getUserId();
 List<Organization> organisations = OrganizationLocalServiceUtil.getUserOrganizations(userId);
-for(Organization o : organisations) {
-	organizationId = o.getOrganizationId();
-	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+o.getLogoId();
-	String orgPath = themeDisplay.getURLPortal()+"/web"+o.getGroup().getFriendlyURL();
+for(Organization organization : organisations) {
+	organizationId = organization.getOrganizationId();
+	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
+	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
 	
-	
-		List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(o.getGroupId());
-	  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
-	  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
-	  		
-	  		if(rdc_rsname.equals("core")) {  		
-	  			List<DDLRecord> records = rdc_rs.getRecords();
-	  			for(DDLRecord record : records) {
-	  				if(record.getFieldValue("Radio2493") != null) {
-		  				String type = record.getFieldValue("Radio2493").toString();
-		  				if(type.equalsIgnoreCase("[bb]") || type.equalsIgnoreCase("[\"bb\"]")) {
-		  					if(o.getLogoId() == 0) {
-		  						imgPath = request.getContextPath() + "/images/Biobank.png";
-		  					}
-		  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
-			  					orgPath = orgPath + "/at_home";
-			  				} else {
-		  						orgPath = orgPath + "/bb_home";
-			  				}
-		  				} else if(type.equalsIgnoreCase("[reg]") || type.equalsIgnoreCase("[\"reg\"]")) {
-		  					if(o.getLogoId() == 0) {
-		  						imgPath = request.getContextPath() + "/images/Registry.png";
-		  					}
-		  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
-			  					orgPath = orgPath + "/at_home";
-			  				} else {
-		  						orgPath = orgPath + "/home";
-			  				}
-		  				} else {
-		  					if(o.getLogoId() == 0) {
-		  						imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
-		  					}
-		  					if(themeDisplay.getUserId() == 105078 || themeDisplay.getUserId() == 105092) {
-			  					orgPath = orgPath + "/at_home";
-			  				} else {
-		  						orgPath = orgPath + "/regbb_home";
-			  				}
-		  				}
-	  				}
-	  			}
-	  		}
-	  	} 
+	// Core Functions
+		String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+		if(organizationtype.equalsIgnoreCase("Biobank")) {
+			if(organization.getLogoId() == 0) {
+				imgPath = request.getContextPath() + "/images/Biobank.png";
+			}
+			orgPath = orgPath + "/bb_home";	
+		} else {
+			if(organization.getLogoId() == 0) {
+				imgPath = request.getContextPath() + "/images/Registry.png";
+			}
+			orgPath = orgPath + "/reg_home";
+		} 
 	
 	%>
-	<li><aui:a href="<%= orgPath %>"><img class="rdc-portalmenu-div-container-logo" alt="logo" height="40px" width="40px" src="<%= imgPath %>" /><%= o.getName() %></aui:a></li>
+	<li><aui:a href="<%= orgPath %>"><img class="rdc-portalmenu-div-container-logo" alt="logo" height="40px" width="40px" src="<%= imgPath %>" /><%= organization.getName() %></aui:a></li>
 	<%
 }
 
@@ -130,6 +102,7 @@ editmyusersURL.setParameter("p_p_state", "maximized");
 editmyusersURL.setParameter("struts_action", "/login/create_account");
 editmyusersURL.setParameter("saveLastPath", "false");
 editmyusersURL.setParameter("p_p_lifecycle", "0");
+editmyusersURL.setParameter("redirect", redirect);
 String register = "/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account";
 %>
 <li class="sign-in"><aui:a href="<%= themeDisplay.getURLSignIn() %>">Sign In</aui:a></li>

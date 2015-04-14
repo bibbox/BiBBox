@@ -217,6 +217,10 @@ searchContainer.setIteratorURL(portletURL);    %>
 		var nodeObject = A.all('#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-4');
 		nodeObject.setHTML('Type');
 	});
+	AUI().use('node', function(A){
+		var nodeObject = A.all('#_mastertable_WAR_RDConnectportlet_masterCandidatesSearchContainer_col-5');
+		nodeObject.setHTML('State');
+	});
 	AUI().use('aui-io-request', 'event-valuechange', 'node', function(A){
 		var nodeObject = A.all('#state');
 		nodeObject.on('click', function(event){

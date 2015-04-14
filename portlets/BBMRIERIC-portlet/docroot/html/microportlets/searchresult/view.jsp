@@ -67,17 +67,7 @@ HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest)
 httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
 keywords = httpRequest.getParameter("SEARCH");
 searchContext.setKeywords(keywords);
-/*Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
-assetEntriesFacet.setStatic(true);
-searchContext.addFacet(assetEntriesFacet);
 
-Facet scopeFacet = new ScopeFacet(searchContext);
-scopeFacet.setStatic(true);
-searchContext.addFacet(scopeFacet);*/
-
-//Facet simpleFacet = new SimpleFacet(searchContext);
-//simpleFacet.setStatic(true);
-//searchContext.addFacet(simpleFacet);
 String searchConfiguration = "{\"facets\": ["+
 		"{"+
 		"    \"displayStyle\": \"scopes\","+
@@ -200,7 +190,6 @@ for (FacetConfiguration facetConfiguration : facetConfigurations) {
 	searchContext.addFacet(facet);
 }
 
-//Indexer indexer = IndexerRegistryUtil.getIndexer(DDLRecord.class);
 Indexer indexer = FacetedSearcher.getInstance();
 
 Hits hits = indexer.search(searchContext);
@@ -212,32 +201,13 @@ Document[] docs2 = hits.getDocs();
 
 Map<String, Facet> facets = searchContext.getFacets();
 List<Facet> facetsList = ListUtil.fromCollection(facets.values());
-// Exception!!!!!
-//facetsList = ListUtil.sort(facetsList, new PropertyComparator("facetConfiguration.weight", false, false));
-
-/*for (Facet facet : facetsList) {
-	if (facet.isStatic()) {
-		continue;
-	}
-
-	FacetConfiguration facetConfiguration = facet.getFacetConfiguration();
-	request.setAttribute("search.jsp-facet", facet);
-	FacetCollector facetCollector = facet.getFacetCollector();
-	List<TermCollector> termCollectors = facetCollector.getTermCollectors();
-
-
-%>
-	<liferay-util:include page='<%= "/html/portlet/search/facets/" + facetConfiguration.getDisplayStyle() + ".jsp" %>' />
-
-<%
-}*/	
-
 
 boolean displayResultsInDocumentForm = true;
 boolean displayMainQuery = false;
 
 for(Document d : docs2) {
 	String title = d.get(locale, Field.TITLE);
+	String target = "_self";
 	Map<String, Field> fieldmap = d.getFields();
 	Field f = fieldmap.get("classTypeId");
 	String class_type_id = "";
@@ -249,12 +219,6 @@ for(Document d : docs2) {
 	if(f_class != null) {
 		class_type = f_class.getValue();
 	}
-	/*if(class_type.equalsIgnoreCase("com.liferay.portlet.journal.model.JournalArticle")) {
-		%>
-		<%= class_type %> == com.liferay.portlet.journal.model.JournalArticle<br>
-		<%
-		continue;
-	}*/
 	String content = "";
 	Field f_content = fieldmap.get("content");
 	if(f_content != null) {
@@ -269,64 +233,85 @@ for(Document d : docs2) {
 	String href = "";
 	String image_url = "";
 	int hitsize = 0;
-	if(class_type_id.equalsIgnoreCase("")) {
-		class_type_id = "Articel";
-		String articleid = "";
-		image_url = request.getContextPath() + "/images/article.png";
-		Field f_articleid = fieldmap.get("articleId");
-		if(f_articleid != null) {
-			articleid = f_articleid.getValue();
+	
+	if(false) {
+	%><br>---------<br>Hit:<br>
+	class_type_id<%=class_type_id%><br>
+	class_type<%=class_type%><br>
+	title<%=title%><br>
+	<%
+	if(class_type.equalsIgnoreCase("com.liferay.portlet.documentlibrary.model.DLFileEntry")) {
+		%>A File<%
+	} else {
+		%>Not a File<%
+	}
+	}
+	
+	if(class_type_id.equalsIgnoreCase("0")) {
+		if(class_type.equalsIgnoreCase("com.liferay.portlet.documentlibrary.model.DLFileEntry")) {
+			image_url = request.getContextPath() + "/images/Document-Blank-icon.png";
+			href = assetRenderer.getURLDownload(themeDisplay);
+			target = "_blank";
+			content = "<a href=\"" + href + "\" target=\"" + target + "\"><img src=\"" + assetRenderer.getThumbnailPath(renderRequest) + "\" height=\"50px\" /></a>";
 		}
-		
-		List<Long> hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(themeDisplay.getSiteGroupId(), false, articleid); 
-		hitsize = hitLayoutIds.size();
-		if (hitsize > 0) {
-			Long hitLayoutId = hitLayoutIds.get(0);
-			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
-			layout.getGroupId(), layout.isPrivateLayout(),
-			hitLayoutId.longValue());
-			href = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
-		} else {
-			%>----><%
-			String redirect = themeDisplay.getURLCurrent();
-			href = redirect.split("\\?")[0];
+	} else if(class_type_id.equalsIgnoreCase("")) {
+			class_type_id = "Articel";
+			String articleid = "";
+			image_url = request.getContextPath() + "/images/article.png";
+			Field f_articleid = fieldmap.get("articleId");
+			if(f_articleid != null) {
+				articleid = f_articleid.getValue();
+			}
 			
-			Layout search_layout = LayoutLocalServiceUtil.getFriendlyURLLayout(themeDisplay.getLayout().getGroupId(), false, "/search");
-			%><%= search_layout.getPlid() %><%
-			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
-			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
-			LiferayPortletURL editmyusersURL = PortletURLFactoryUtil.create(request, "101", search_layout.getPlid(), "RENDER_PHASE");
-			editmyusersURL.setWindowState(WindowState.MAXIMIZED);
-			editmyusersURL.setParameter("redirect", currentURL);
-			editmyusersURL.setParameter("struts_action", "/asset_publisher/view_content");
-			editmyusersURL.setParameter("assetEntryId", "47103");
-			editmyusersURL.setParameter("type", "content");
-			editmyusersURL.setParameter("urlTitle", "the-second-lpc-forum-meeting");
-			String portletResource = ParamUtil.getString(request, "portletResource");
-			
-			PortletURL myRenderURL=renderResponse.createRenderURL();
-			myRenderURL.setWindowState(WindowState.MAXIMIZED);
-			myRenderURL.setParameter("redirect", currentURL);
-			myRenderURL.setParameter("struts_action", "/asset_publisher/view_content");
-			myRenderURL.setParameter("assetEntryId", "47103");
-			myRenderURL.setParameter("type", "content");
-			myRenderURL.setParameter("urlTitle", "the-second-lpc-forum-meeting");
-			
-
-			/*LiferayPortletURL editsitemembershipURL = PortletURLFactoryUtil.create(request, "174", controlPanelPlid, "RENDER_PHASE");
-			editsitemembershipURL.setDoAsGroupId(themeDisplay.getSiteGroupId());
-			editsitemembershipURL.setControlPanelCategory("current_site.users");
-			editsitemembershipURL.setParameter("redirect", currentURL);
-			editsitemembershipURL.setWindowState(WindowState.MAXIMIZED);*/
-			
-			href = myRenderURL.toString();
-			
-			/*href = href.replaceAll("group", "web");
-			href = href.replaceAll("control_panel", "guest");
-			href = href.replaceAll("manage", "search");*/
-			continue;
-			
-		}
+			List<Long> hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(themeDisplay.getSiteGroupId(), false, articleid); 
+			hitsize = hitLayoutIds.size();
+			if (hitsize > 0) {
+				Long hitLayoutId = hitLayoutIds.get(0);
+				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+				layout.getGroupId(), layout.isPrivateLayout(),
+				hitLayoutId.longValue());
+				href = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+			} else {
+				
+				String redirect = themeDisplay.getURLCurrent();
+				href = redirect.split("\\?")[0];
+				
+				Layout search_layout = LayoutLocalServiceUtil.getFriendlyURLLayout(themeDisplay.getLayout().getGroupId(), false, "/search");
+				
+				Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), "Control Panel");
+				long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
+				LiferayPortletURL editmyusersURL = PortletURLFactoryUtil.create(request, "101", search_layout.getPlid(), "RENDER_PHASE");
+				editmyusersURL.setWindowState(WindowState.MAXIMIZED);
+				editmyusersURL.setParameter("redirect", currentURL);
+				editmyusersURL.setParameter("struts_action", "/asset_publisher/view_content");
+				editmyusersURL.setParameter("assetEntryId", "47103");
+				editmyusersURL.setParameter("type", "content");
+				editmyusersURL.setParameter("urlTitle", "the-second-lpc-forum-meeting");
+				String portletResource = ParamUtil.getString(request, "portletResource");
+				
+				PortletURL myRenderURL=renderResponse.createRenderURL();
+				myRenderURL.setWindowState(WindowState.MAXIMIZED);
+				myRenderURL.setParameter("redirect", currentURL);
+				myRenderURL.setParameter("struts_action", "/asset_publisher/view_content");
+				myRenderURL.setParameter("assetEntryId", "47103");
+				myRenderURL.setParameter("type", "content");
+				myRenderURL.setParameter("urlTitle", "the-second-lpc-forum-meeting");
+				
+	
+				/*LiferayPortletURL editsitemembershipURL = PortletURLFactoryUtil.create(request, "174", controlPanelPlid, "RENDER_PHASE");
+				editsitemembershipURL.setDoAsGroupId(themeDisplay.getSiteGroupId());
+				editsitemembershipURL.setControlPanelCategory("current_site.users");
+				editsitemembershipURL.setParameter("redirect", currentURL);
+				editsitemembershipURL.setWindowState(WindowState.MAXIMIZED);*/
+				
+				//href = myRenderURL.toString();
+				
+				/*href = href.replaceAll("group", "web");
+				href = href.replaceAll("control_panel", "guest");
+				href = href.replaceAll("manage", "search");*/
+				//continue;
+				href = "about/-/asset_publisher/ZJa3Watm6LHZ/content/" + assetRenderer.getUrlTitle();
+			}
 	} else if(class_type_id.equalsIgnoreCase("10822")) {
 		class_type_id = "News";
 		image_url = request.getContextPath() + "/images/news.png";
@@ -339,10 +324,10 @@ for(Document d : docs2) {
 %>
 	<div class="bbmri-eric-search-container">
 	  <div class="bbmri-eric-search-images">
-	     <a href="<%= href %>"><img src="<%= image_url %>" height="30px" width="31px" /></a>
+	     <a href="<%= href %>" target="<%= target %>"><img src="<%= image_url %>" height="30px" width="31px" /></a>
 	  </div>
 	  <div class="bbmri-eric-search-result">
-		<a href="<%= href %>"><h3><%= title %></h3></a>
+		<a href="<%= href %>" target="<%= target %>"><h3><%= title %></h3></a>
 		<%= content %>
 		</div>
 	</div>

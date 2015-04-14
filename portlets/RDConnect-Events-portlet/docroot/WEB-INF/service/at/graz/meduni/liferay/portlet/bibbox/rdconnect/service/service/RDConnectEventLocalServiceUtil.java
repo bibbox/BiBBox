@@ -275,13 +275,18 @@ public class RDConnectEventLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static void createEvent(java.util.Date eventdate,
-		long organizationId, long userId, java.lang.String shorttext,
-		java.lang.String longtext, java.lang.String link,
-		java.lang.String restricted) {
+	public static void createEvent(java.lang.String eventtype,
+		java.util.Date eventdate, long organizationId, long userId,
+		java.lang.String shorttext, java.lang.String longtext,
+		java.lang.String link, java.lang.String restricted) {
 		getService()
-			.createEvent(eventdate, organizationId, userId, shorttext,
-			longtext, link, restricted);
+			.createEvent(eventtype, eventdate, organizationId, userId,
+			shorttext, longtext, link, restricted);
+	}
+
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent> getEvents()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEvents();
 	}
 
 	public static void clearService() {

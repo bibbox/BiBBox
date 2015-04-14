@@ -1,0 +1,3 @@
+<aui:column columnWidth="100" first="true">
+	<aui:input name="<%= id %>" lable="<%= parameterconfig.getDisplayname() %>" type="text" />
+</aui:column>

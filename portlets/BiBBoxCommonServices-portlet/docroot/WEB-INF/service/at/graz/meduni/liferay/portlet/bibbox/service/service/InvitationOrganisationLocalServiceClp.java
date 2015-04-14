@@ -143,6 +143,18 @@ public class InvitationOrganisationLocalServiceClp
 		_methodName25 = "getInvitationOrganisationByStatus";
 
 		_methodParameterTypes25 = new String[] { "boolean" };
+
+		_methodName26 = "getInvitationStatisticsInvitationsSend";
+
+		_methodParameterTypes26 = new String[] {  };
+
+		_methodName27 = "getInvitationStatisticsReacted";
+
+		_methodParameterTypes27 = new String[] {  };
+
+		_methodName28 = "getInvitationStatisticsRejected";
+
+		_methodParameterTypes28 = new String[] {  };
 	}
 
 	@Override
@@ -906,6 +918,75 @@ public class InvitationOrganisationLocalServiceClp
 		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.lang.String getInvitationStatisticsInvitationsSend() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.lang.String getInvitationStatisticsReacted() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName27,
+					_methodParameterTypes27, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.lang.String getInvitationStatisticsRejected() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName28,
+					_methodParameterTypes28, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -957,4 +1038,10 @@ public class InvitationOrganisationLocalServiceClp
 	private String[] _methodParameterTypes24;
 	private String _methodName25;
 	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
 }

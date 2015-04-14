@@ -301,4 +301,22 @@ public interface InvitationOrganisationLocalService extends BaseLocalService,
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation> getInvitationOrganisationByStatus(
 		boolean rejacted)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getInvitationStatisticsInvitationsSend();
+
+	/**
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getInvitationStatisticsReacted();
+
+	/**
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getInvitationStatisticsRejected();
 }

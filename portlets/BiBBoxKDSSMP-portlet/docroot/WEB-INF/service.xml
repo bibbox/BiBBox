@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder
+	package-path="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service">
+	<author>reihsr</author>
+	<namespace>bibbox_kdssmp</namespace>
+
+	<entity name="patientnamegenerator" local-service="true" remote-service="false"  table="kdssmp.patientnamegenerator" >
+		<!-- PK fields -->
+		<column name="patientnamegeneratorId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="name" type="String" />
+		<!-- Audit fields -->
+		<column name="type" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="Names" return-type="Collection">
+			<finder-column name="name" />
+			<finder-column name="type" />
+		</finder>
+	</entity>
+	<entity name="EventData" local-service="true" remote-service="false"  table="kdssmp.eventdata" >
+		<!-- PK fields -->
+		<column name="eventdataId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="eventlayoutId" type="long" />
+		<column name="patientId" type="long" />
+		<!-- Audit fields -->
+		<column name="ontology" type="String" />
+		<column name="value" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="eventlayoutId" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="EventLayout" return-type="Collection">
+			<finder-column name="eventlayoutId" />
+		</finder>
+		<finder name="Patient" return-type="Collection">
+			<finder-column name="patientId" />
+		</finder>
+		<finder name="DataByOntology" return-type="EventData">
+			<finder-column name="eventlayoutId" />
+			<finder-column name="ontology" />
+		</finder>
+	</entity>
+	<entity name="Event" local-service="true" remote-service="false"  table="kdssmp.event" >
+		<!-- PK fields -->
+		<column name="eventId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="patientId" type="long" />
+		<!-- Audit fields -->
+		<column name="eventdate" type="Date" />
+		<column name="eventtype" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="patientId" />
+			<order-column name="eventdate" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="Patient" return-type="Collection">
+			<finder-column name="patientId" />
+		</finder>
+	</entity>
+	<entity name="KdssmpConfiguration" local-service="true" remote-service="false"  table="kdssmp.configuration" >
+		<!-- PK fields -->
+		<column name="configurationId" type="long" primary="true" />
+		<!-- Fields -->
+		<column name="scope" type="String" />
+		<column name="optionkey" type="String" />
+		<column name="optionvalue" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="optionkey" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="optionfinder" return-type="KdssmpConfiguration">
+			<finder-column name="scope" />
+			<finder-column name="optionkey" />
+		</finder>
+		<finder name="optionsfindervalue" return-type="KdssmpConfiguration">
+			<finder-column name="scope" />
+			<finder-column name="optionvalue" />
+		</finder>
+		<finder name="optionsfinderkey" return-type="Collection">
+			<finder-column name="scope" />
+			<finder-column name="optionkey" />
+		</finder>
+		<finder name="optionsfinder" return-type="Collection">
+			<finder-column name="scope" />
+		</finder>
+	</entity>
+	<entity name="KdssmpParameterConfiguration" local-service="true" remote-service="false"  table="kdssmp.parameterconfiguration" >
+		<!-- PK fields -->
+		<column name="parameterconfigurationId" type="long" primary="true" />
+		<!-- Fields -->
+		<column name="displayname" type="String" />
+		<column name="datatype" type="String" />
+		<column name="valuerange" type="String" />
+		<column name="displayoptions" type="String" />
+		<column name="visible" type="boolean" />
+		<column name="computed" type="boolean" />
+		<column name="confirmationscript" type="String" />
+		<column name="grouping" type="String" />
+	</entity>
+	<entity name="KdssmpParameterOptions" local-service="true" remote-service="false"  table="kdssmp.parameteroptions" >
+		<!-- PK fields -->
+		<column name="parameteroptionsId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="parameterconfigurationId" type="long" />
+		<!-- Fields -->
+		<column name="option" type="String" />
+		<column name="value" type="String" />
+		<!-- Finder methods -->
+		<finder name="Options" return-type="Collection">
+			<finder-column name="parameterconfigurationId" />
+		</finder>
+	</entity>
+	<entity name="KdssmpRules" local-service="true" remote-service="false"  table="kdssmp.rules" >
+		<!-- PK fields -->
+		<column name="ruleId" type="long" primary="true" />
+		<!-- Fields -->
+		<column name="rule" type="String" />
+	</entity>
+</service-builder>

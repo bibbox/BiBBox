@@ -10,7 +10,7 @@ user/invitation
 
 <%
 long organizationId = ParamUtil.getLong(request, "organizationId");
-String redirect = PortalUtil.getCurrentURL(renderRequest);
+String redirect = ParamUtil.getString(request, "redirect");
 
 Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 String tmpTitle = "Panel Assessment for " + organization.getName();
@@ -20,6 +20,10 @@ String tmpTitle = "Panel Assessment for " + organization.getName();
 	backURL="<%= redirect %>"
 	title='<%=tmpTitle %>'
 />
+
+<%
+redirect = PortalUtil.getCurrentURL(renderRequest);
+%>
 
 <liferay-ui:icon-menu>
 	<portlet:renderURL var="CreateAssessmentURL">

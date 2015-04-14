@@ -1,5 +1,27 @@
 <!--<nav class="${nav_css_class}" id="navigation" role="navigation">-->
 	<ul aria-label="<@liferay.language key="site-pages" />" role="menubar" style="margin-right: 40px;">
+		<#if site_name?matches("Intranet")>
+		<#else>
+			<li role="presentation">
+				<a href="/web/home/media-center" role="menuitem">
+					<div style="float: left;">
+					<div class="bbmri-eric-square-blue"></div>
+					<div style="float: left;">Download Centre</div>
+					</div>
+				</a>
+			</li>
+			<li role="presentation">
+				<a href="/web/home/internal-meetings" role="menuitem">
+					<div style="float: left;">
+					<div class="bbmri-eric-square-blue"></div>
+					<div style="float: left;">Internal and Public Meetings</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<div style="float: left;">|</div>
+			</li>
+		</#if>
 		<#list nav_items as nav_item>
 			<#assign nav_item_attr_has_popup = "" />
 			<#assign nav_item_attr_selected = "" />

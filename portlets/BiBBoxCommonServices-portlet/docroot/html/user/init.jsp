@@ -43,3 +43,7 @@
 <!-- Website -->
 <%@ page import="com.liferay.portal.service.WebsiteLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.model.Website" %>
+
+<!-- DiseaseMatrix -->
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix"%>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil"%>

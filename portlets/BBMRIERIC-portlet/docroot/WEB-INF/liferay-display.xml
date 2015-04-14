@@ -17,5 +17,6 @@
 		<portlet id="bbmrieric-committees-area"></portlet>
 		<portlet id="edit-folder"></portlet>
 		<portlet id="file-toddl-to-file"></portlet>
+		<portlet id="ldap-browser"></portlet>
 	</category>
 </display>

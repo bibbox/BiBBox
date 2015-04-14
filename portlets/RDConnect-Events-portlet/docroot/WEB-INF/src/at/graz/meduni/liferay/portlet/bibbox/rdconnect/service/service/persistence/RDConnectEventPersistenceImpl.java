@@ -1441,6 +1441,7 @@ public class RDConnectEventPersistenceImpl extends BasePersistenceImpl<RDConnect
 
 		rdConnectEventImpl.setEventId(rdConnectEvent.getEventId());
 		rdConnectEventImpl.setEventdate(rdConnectEvent.getEventdate());
+		rdConnectEventImpl.setEventtype(rdConnectEvent.getEventtype());
 		rdConnectEventImpl.setOrganizationId(rdConnectEvent.getOrganizationId());
 		rdConnectEventImpl.setUserId(rdConnectEvent.getUserId());
 		rdConnectEventImpl.setShorttext(rdConnectEvent.getShorttext());

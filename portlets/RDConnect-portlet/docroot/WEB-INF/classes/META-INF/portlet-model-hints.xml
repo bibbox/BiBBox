@@ -113,6 +113,19 @@
 		<field name="candidateId" type="long" />
 		<field name="masterCandidateId" type="long" />
 	</model>
+	<model name="at.meduni.liferay.portlet.rdconnect.model.RDCOrganizationUserAccess">
+		<field name="rdcorganizationuseraccessId" type="long" />
+		<field name="organisationId" type="long" />
+		<field name="userId" type="long" />
+		<field name="ipaddress" type="long" />
+		<field name="lastaccess" type="Date" />
+	</model>
+	<model name="at.meduni.liferay.portlet.rdconnect.model.RDCRecommender">
+		<field name="rdcrecommenderid" type="long" />
+		<field name="organisationId" type="long" />
+		<field name="recommendedorganisationId" type="long" />
+		<field name="recommendervalue" type="double" />
+	</model>
 	<model name="at.meduni.liferay.portlet.rdconnect.model.SearchIndex">
 		<field name="searchid" type="long" />
 		<field name="organisationid" type="long" />

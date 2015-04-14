@@ -13,6 +13,7 @@
 			<basic name="eventdate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="eventtype" />
 			<basic name="organizationId" />
 			<basic name="userId" />
 			<basic name="shorttext" />

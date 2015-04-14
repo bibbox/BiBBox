@@ -6,6 +6,8 @@
 	<import class="at.meduni.liferay.portlet.rdconnect.model.Candidate" />
 	<import class="at.meduni.liferay.portlet.rdconnect.model.MasterCandidate" />
 	<import class="at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate" />
+	<import class="at.meduni.liferay.portlet.rdconnect.model.RDCOrganizationUserAccess" />
+	<import class="at.meduni.liferay.portlet.rdconnect.model.RDCRecommender" />
 	<import class="at.meduni.liferay.portlet.rdconnect.model.SearchIndex" />
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.AQRRatingImpl" table="rdconnect.aqr_rating">
 		<cache usage="read-write" />
@@ -84,6 +86,25 @@
 		</id>
 		<property name="candidateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="masterCandidateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.RDCOrganizationUserAccessImpl" table="rdconnect.rdcorganizationuseraccess">
+		<cache usage="read-write" />
+		<id name="rdcorganizationuseraccessId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organisationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ipaddress" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lastaccess" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.RDCRecommenderImpl" table="rdconnect.rdcrecommender">
+		<cache usage="read-write" />
+		<id name="rdcrecommenderid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organisationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="recommendedorganisationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="recommendervalue" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 	<class name="at.meduni.liferay.portlet.rdconnect.model.impl.SearchIndexImpl" table="rdconnect.searchindex_rdconnect">
 		<cache usage="read-write" />

@@ -302,6 +302,15 @@ public class SearchIndexLocalServiceUtil {
 			contextpath);
 	}
 
+	/**
+	* Create User Statistics
+	*
+	* @return
+	*/
+	public static java.lang.String getUserStatistiks() {
+		return getService().getUserStatistiks();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

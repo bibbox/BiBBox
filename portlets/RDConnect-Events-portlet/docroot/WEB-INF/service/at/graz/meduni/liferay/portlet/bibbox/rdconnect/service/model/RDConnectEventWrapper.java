@@ -52,6 +52,7 @@ public class RDConnectEventWrapper implements RDConnectEvent,
 
 		attributes.put("eventId", getEventId());
 		attributes.put("eventdate", getEventdate());
+		attributes.put("eventtype", getEventtype());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("userId", getUserId());
 		attributes.put("shorttext", getShorttext());
@@ -74,6 +75,12 @@ public class RDConnectEventWrapper implements RDConnectEvent,
 
 		if (eventdate != null) {
 			setEventdate(eventdate);
+		}
+
+		String eventtype = (String)attributes.get("eventtype");
+
+		if (eventtype != null) {
+			setEventtype(eventtype);
 		}
 
 		Long organizationId = (Long)attributes.get("organizationId");
@@ -171,6 +178,26 @@ public class RDConnectEventWrapper implements RDConnectEvent,
 	@Override
 	public void setEventdate(java.util.Date eventdate) {
 		_rdConnectEvent.setEventdate(eventdate);
+	}
+
+	/**
+	* Returns the eventtype of this r d connect event.
+	*
+	* @return the eventtype of this r d connect event
+	*/
+	@Override
+	public java.lang.String getEventtype() {
+		return _rdConnectEvent.getEventtype();
+	}
+
+	/**
+	* Sets the eventtype of this r d connect event.
+	*
+	* @param eventtype the eventtype of this r d connect event
+	*/
+	@Override
+	public void setEventtype(java.lang.String eventtype) {
+		_rdConnectEvent.setEventtype(eventtype);
 	}
 
 	/**

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.BiobankPanelAssessmentLocalServiceBaseImpl;
 
@@ -119,5 +120,12 @@ public class BiobankPanelAssessmentLocalServiceImpl
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public BiobankPanelAssessment addBiobankPanelAssessment(BiobankPanelAssessment biobankpanelassessment) throws SystemException {
+		long biobankpanelassessmentId = CounterLocalServiceUtil.increment(BiobankPanelAssessment.class.getName());
+		
+		biobankpanelassessment.setBiobankpanelassessmentId(biobankpanelassessmentId);
+		return super.addBiobankPanelAssessment(biobankpanelassessment);
 	}
 }

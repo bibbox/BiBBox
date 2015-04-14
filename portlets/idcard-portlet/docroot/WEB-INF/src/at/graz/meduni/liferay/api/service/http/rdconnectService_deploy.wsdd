@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_idcardapi_rdconnectService" provider="java:RPC" style="rpc" use="encoded">
+		<typeMapping xmlns:ns="http://model.api.liferay.meduni.graz.at" qname="ns:rdconnectSoap" type="java:at.graz.meduni.liferay.api.model.RdconnectSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.api.liferay.meduni.graz.at" xmlns:rtns="http://model.api.liferay.meduni.graz.at" name="getRdconnect" qname="operNS:getRdconnect" returnQName="getRdconnectReturn" returnType="rtns:rdconnectSoap" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.api.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="regbbs" qname="operNS:regbbs" returnQName="regbbsReturn" returnType="rtns:string" soapAction=""> </operation>
+		<parameter name="allowedMethods" value="getRdconnect regbbs" />
+		<parameter name="className" value="at.graz.meduni.liferay.api.service.http.rdconnectServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.api.liferay.meduni.graz.at" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="rdconnectServiceSoap" />
+		<parameter name="wsdlServiceElement" value="rdconnectServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_idcardapi_rdconnectService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.api.liferay.meduni.graz.at" />
+	</service>
+</deployment>

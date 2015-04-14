@@ -278,6 +278,7 @@ public interface InvitationLocalService extends BaseLocalService,
 	*  5 ... Simulated
 	* 10 ... Send
 	* 20 ... Request Panel Assessment
+	* 30 ... Biobank Published
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getStatusFromString(java.lang.String string_status);

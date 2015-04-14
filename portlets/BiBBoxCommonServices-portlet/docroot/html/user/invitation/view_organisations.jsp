@@ -15,6 +15,7 @@ user/edit_invitation
 	String primKey = portletDisplay.getResourcePK();
 	String actionId_add_invitation = "ADD_INVITATION";
 	String actionId_edit_invitation = "EDIT_INVITATION";
+	boolean alredysend = false;
 
 	long optionsMainContactRole_option = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
 	String optionsTypeFilter_option = GetterUtil.getString(portletPreferences.getValue("optionsTypeFilter", ""));
@@ -32,21 +33,7 @@ user/edit_invitation
 	java.util.TreeMap<java.util.Date, String> sortetdata = new java.util.TreeMap<java.util.Date, String>();
 	java.util.Date now = new java.util.Date();
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	%>
-			<table class="bibbox-cs-datatable-table">
-			<thead class="bibbox-cs-datatable-columns">
-				<tr>
-					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-first-header bibbox-cs-datatable-col-name">Name</th>
-					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Type</th>
-					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Days since last modified</th>
-					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Main Contact</th>
-					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Main Contact last login</th>
-					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Last Contacted</th>
-					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Response</th>
-					<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Remove</th>
-				</tr>
-			</thead>
-	<%
+	
 
 	
 	long counter = 0;
@@ -54,9 +41,32 @@ user/edit_invitation
 	try {
 		invitation = InvitationLocalServiceUtil.getInvitation(invitationId);
 	} catch (Exception e) {
-		
+		e.printStackTrace();
+	}
+	if(invitation.getStatus() == InvitationLocalServiceUtil.getStatusFromString("send")) {
+		actionId_add_invitation = "X";
+		actionId_edit_invitation = "X";
+		alredysend = true;
 	}
 	List<InvitationOrganisation> invitationorganisations = InvitationOrganisationLocalServiceUtil.getOrganisationByInvitation(invitationId);
+	
+	%>
+	<table class="bibbox-cs-datatable-table">
+	<thead class="bibbox-cs-datatable-columns">
+		<tr>
+			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-first-header bibbox-cs-datatable-col-name">Name</th>
+			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Type</th>
+			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Days since last modified</th>
+			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Main Contact</th>
+			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Main Contact last login</th>
+			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Last Contacted</th>
+			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Response</th>
+			<% if(!alredysend) { %>
+			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Remove</th>
+			<% } %>
+		</tr>
+	</thead>
+<%
 	
 	for(InvitationOrganisation invitationorganisation : invitationorganisations) {
 		Organization organization = null;
@@ -191,7 +201,9 @@ user/edit_invitation
 		
 		tablerow += "<td class=\"" + rowcss + "\">" + response_msg + "</td>";
 		// Remove Organization from Invitation
-		tablerow += "<td class=\"" + rowcss + "\">" + "<a id=\"deleteOragnizationFromInvitation\" class=\"icon-remove\" style=\"color: red;\" organisationid=\"" + organization.getOrganizationId() + "\" invitationid=\"" + invitationId + "\" ></a>" + "</td>";
+		if(!alredysend) {
+			tablerow += "<td class=\"" + rowcss + "\">" + "<a id=\"deleteOragnizationFromInvitation\" class=\"icon-remove\" style=\"color: red;\" organisationid=\"" + organization.getOrganizationId() + "\" invitationid=\"" + invitationId + "\" ></a>" + "</td>";
+		}
 		tablerow += "</tr>";
 
 		if(sortetdata.containsKey(modifieddate)) {

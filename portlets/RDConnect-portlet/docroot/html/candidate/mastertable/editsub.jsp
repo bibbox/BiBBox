@@ -11,7 +11,7 @@ String state = candidate.getState();
 %>
 
 <input id="candidateid"  type="hidden" name="candidateid" value="<%= candidate.getMasterCandidateId() %>" />
-<br>S:<% if(state.equalsIgnoreCase("P")) { %> 
+<% if(state.equalsIgnoreCase("P")) { %> 
 published 
 <% } else { %>
 <select id="state" style="width: 120px;" type="text" name="state">

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.meduni.liferay.api.model.rdconnect">
+		<field name="idcardapilogId" type="long" />
+		<field name="userId" type="long" />
+		<field name="ipaddress" type="String" />
+		<field name="accessDate" type="Date" />
+		<field name="requestparameter" type="String" />
+	</model>
+</model-hints>
