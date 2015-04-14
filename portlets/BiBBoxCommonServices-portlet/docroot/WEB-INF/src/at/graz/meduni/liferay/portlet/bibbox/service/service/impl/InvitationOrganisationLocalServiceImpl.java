@@ -159,13 +159,13 @@ public class InvitationOrganisationLocalServiceImpl
 		int count = 0;
 		try {
 			Connection connection = connectDatabase();
-			String sql_grouped = "SELECT EXTRACT(YEAR FROM  DATE(inv.lastchanged)) date_year, EXTRACT(MONTH FROM  DATE(inv.lastchanged)) date_month, EXTRACT(DAY FROM  DATE(inv.lastchanged)) date_day, COUNT(*) FROM bibboxcs.invitation inv JOIN bibboxcs.invitation_organisation invor ON inv.invitationid = invor.invitationid WHERE inv.status >= 10 GROUP BY DATE(inv.lastchanged) ORDER BY DATE(inv.lastchanged);";
+			String sql_grouped = "SELECT EXTRACT(YEAR FROM  DATE(inv.invitationsend)) date_year, EXTRACT(MONTH FROM  DATE(inv.invitationsend)) date_month, EXTRACT(DAY FROM  DATE(inv.invitationsend)) date_day, COUNT(*) FROM bibboxcs.invitation inv JOIN bibboxcs.invitation_organisation invor ON inv.invitationid = invor.invitationid WHERE inv.status >= 10 GROUP BY DATE(inv.invitationsend) ORDER BY DATE(inv.invitationsend);";
 			Statement statement = connection.createStatement();
 			ResultSet resultset = statement.executeQuery(sql_grouped);
 			String prefix = "";
 			while(resultset.next()) {
 				count += resultset.getInt("count");
-				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + resultset.getString("date_month") + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
+				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + (Integer.parseInt(resultset.getString("date_month")) -1) + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
 				prefix = ",";
 			}
 		} catch (Exception ex) {
@@ -189,7 +189,7 @@ public class InvitationOrganisationLocalServiceImpl
 			String prefix = "";
 			while(resultset.next()) {
 				count += resultset.getInt("count");
-				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + resultset.getString("date_month") + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
+				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + (Integer.parseInt(resultset.getString("date_month")) -1) + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
 				prefix = ",";
 			}
 		} catch (Exception ex) {
@@ -213,7 +213,7 @@ public class InvitationOrganisationLocalServiceImpl
 			String prefix = "";
 			while(resultset.next()) {
 				count += resultset.getInt("count");
-				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + resultset.getString("date_month") + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
+				date += prefix + "[Date.UTC(" + resultset.getString("date_year") + ",  " + (Integer.parseInt(resultset.getString("date_month")) -1) + ",  " + resultset.getString("date_day") + "), " + count + "   ]";
 				prefix = ",";
 			}
 		} catch (Exception ex) {

@@ -206,7 +206,7 @@ user/invitation
   				scientificpublications += "<br>";
   			}
   		}
-  		if(rdc_rsname.equals("q_biobank_quality")) {
+  		if(rdc_rsname.equals("bb_quality")) {
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) {
   				if(record.getFieldValue("Accreditation_certification_program") != null) {
@@ -247,7 +247,7 @@ user/invitation
   				}
   			}
   		}
-  		if(rdc_rsname.equals("q_biobank_quality")) {
+  		if(rdc_rsname.equals("bb_accessibility")) {
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) {
   				if(record.getFieldValue("Restriction_for_use") != null) {
@@ -291,7 +291,7 @@ user/invitation
   				}
   			}
   		}
-  		if(rdc_rsname.equals("q_biobank_contribution")) {
+  		if(rdc_rsname.equals("bb_contribution")) {
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) {
   				if(record.getFieldValue("Is_your_entire_sample_collection_available_for_the_RD-Connect_Catalogue") != null) {
@@ -435,7 +435,7 @@ user/invitation
 	<table border="1" style="width:100%">
 		<tr><td style="width:25%">First Name</td><td style="width:25%"><%= maincontact.getFirstName() %></td><td style="width:25%">Middle Name</td><td style="width:25%"><%= maincontact.getMiddleName() %></td></tr>
 		<tr><td>Last Name</td><td><%= maincontact.getLastName() %></td><td>Title</td><td><%= "" %></td></tr>
-		<tr><td>E-Mail</td><td colspan="3"><%= maincontact.getEmailAddress() %></td></tr
+		<tr><td>E-Mail</td><td colspan="3"><%= maincontact.getEmailAddress() %></td></tr>
 		<tr><td>Gender</td><td colspan="3"><%= gender %></td></tr>
 		<tr><td>Position</td><td colspan="3"><%= role %></td></tr>
 		<tr><td colspan="4"></td></tr>

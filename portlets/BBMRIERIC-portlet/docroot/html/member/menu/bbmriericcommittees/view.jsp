@@ -65,7 +65,7 @@ if(adhoc && committees && wg) {
 	g2 = "committee";
 	g3 = "working group";
 	tg1 = "AD-HOC Groups";
-	tg2 = "COMMITTEES";
+	tg2 = "GOVERNANCE";
 	tg3 = "WORKING GROUPS";
 } else {
 	if(adhoc && committees && !wg) {
@@ -74,7 +74,7 @@ if(adhoc && committees && wg) {
 		g1 = "";
 		tg1 = "";
 		tg2 = "AD-HOC Groups";
-		tg3 = "COMMITTEES";
+		tg3 = "GOVERNANCE";
 	}
 	if(adhoc && !committees && wg) {
 		g2 = "ad-hoc working group";
@@ -89,7 +89,7 @@ if(adhoc && committees && wg) {
 		g2 = "committee";
 		g3 = "working group"; 
 		tg1 = "";
-		tg2 = "COMMITTEES";
+		tg2 = "GOVERNANCE";
 		tg3 = "WORKING GROUPS";
 	}
 	if(adhoc && !committees && !wg) {
@@ -114,7 +114,7 @@ if(adhoc && committees && wg) {
 	   g2 = "";   
 	   tg1 = "";
 	   tg2 = "";
-	   tg3 = "COMMITTEES";
+	   tg3 = "GOVERNANCE";
 	}
 }
 

@@ -36,9 +36,21 @@ public class rdconnectServiceClpInvoker {
 
 		_methodParameterTypes24 = new String[] {  };
 
-		_methodName25 = "regbbs";
+		_methodName25 = "regbb";
 
-		_methodParameterTypes25 = new String[] {  };
+		_methodParameterTypes25 = new String[] { "long" };
+
+		_methodName26 = "regbbs";
+
+		_methodParameterTypes26 = new String[] {  };
+
+		_methodName27 = "regs";
+
+		_methodParameterTypes27 = new String[] {  };
+
+		_methodName28 = "bbs";
+
+		_methodParameterTypes28 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -62,7 +74,22 @@ public class rdconnectServiceClpInvoker {
 
 		if (_methodName25.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
+			return rdconnectServiceUtil.regbb(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName26.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
 			return rdconnectServiceUtil.regbbs();
+		}
+
+		if (_methodName27.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
+			return rdconnectServiceUtil.regs();
+		}
+
+		if (_methodName28.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
+			return rdconnectServiceUtil.bbs();
 		}
 
 		throw new UnsupportedOperationException();
@@ -76,4 +103,10 @@ public class rdconnectServiceClpInvoker {
 	private String[] _methodParameterTypes24;
 	private String _methodName25;
 	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
 }

@@ -17,6 +17,7 @@
 		<portlet id="invitation-util-request"></portlet>
 		<portlet id="invitation-util-organization-status-list"></portlet>
 		<portlet id="invitation-util-registry-invitations"></portlet>
+		<portlet id="rd-connect-user-list"></portlet>
 	</category>
 	<category name="Bibbox Disease">
 		<portlet id="orpahnet-disease-matrix-linker"></portlet>
