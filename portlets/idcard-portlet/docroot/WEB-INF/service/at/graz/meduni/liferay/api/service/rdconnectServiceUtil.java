@@ -69,8 +69,27 @@ public class rdconnectServiceUtil {
 		return getService().getRdconnect();
 	}
 
-	public static com.liferay.portal.kernel.json.JSONObject regbbs() {
+	public static com.liferay.portal.kernel.json.JSONObject regbb(
+		long organizationId) {
+		return getService().regbb(organizationId);
+	}
+
+	public static com.liferay.portal.kernel.json.JSONArray regbbs() {
 		return getService().regbbs();
+	}
+
+	/**
+	* @return
+	*/
+	public static com.liferay.portal.kernel.json.JSONArray regs() {
+		return getService().regs();
+	}
+
+	/**
+	* @return
+	*/
+	public static com.liferay.portal.kernel.json.JSONArray bbs() {
+		return getService().bbs();
 	}
 
 	public static void clearService() {

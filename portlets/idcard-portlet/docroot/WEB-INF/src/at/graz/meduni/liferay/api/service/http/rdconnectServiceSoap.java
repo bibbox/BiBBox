@@ -76,9 +76,55 @@ public class rdconnectServiceSoap {
 		}
 	}
 
+	public static java.lang.String regbb(long organizationId)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = rdconnectServiceUtil.regbb(organizationId);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String regbbs() throws RemoteException {
 		try {
-			com.liferay.portal.kernel.json.JSONObject returnValue = rdconnectServiceUtil.regbbs();
+			com.liferay.portal.kernel.json.JSONArray returnValue = rdconnectServiceUtil.regbbs();
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @return
+	*/
+	public static java.lang.String regs() throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONArray returnValue = rdconnectServiceUtil.regs();
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @return
+	*/
+	public static java.lang.String bbs() throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONArray returnValue = rdconnectServiceUtil.bbs();
 
 			return returnValue.toString();
 		}

@@ -70,5 +70,17 @@ public interface rdconnectService extends BaseService, InvokableService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.kernel.json.JSONObject regbbs();
+	public com.liferay.portal.kernel.json.JSONObject regbb(long organizationId);
+
+	public com.liferay.portal.kernel.json.JSONArray regbbs();
+
+	/**
+	* @return
+	*/
+	public com.liferay.portal.kernel.json.JSONArray regs();
+
+	/**
+	* @return
+	*/
+	public com.liferay.portal.kernel.json.JSONArray bbs();
 }

@@ -63,4 +63,8 @@
 		<portlet id="user-statistik"></portlet>
 		<portlet id="invitation-statistics"></portlet>
 	</category>
+	<category name="RD-Connect Dashboard">
+		<portlet id="rd-connect-dashboard"></portlet>
+		<portlet id="userlist"></portlet>
+	</category>
 </display>

@@ -64,8 +64,29 @@ public class rdconnectServiceWrapper implements rdconnectService,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONObject regbbs() {
+	public com.liferay.portal.kernel.json.JSONObject regbb(long organizationId) {
+		return _rdconnectService.regbb(organizationId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONArray regbbs() {
 		return _rdconnectService.regbbs();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public com.liferay.portal.kernel.json.JSONArray regs() {
+		return _rdconnectService.regs();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public com.liferay.portal.kernel.json.JSONArray bbs() {
+		return _rdconnectService.bbs();
 	}
 
 	/**
