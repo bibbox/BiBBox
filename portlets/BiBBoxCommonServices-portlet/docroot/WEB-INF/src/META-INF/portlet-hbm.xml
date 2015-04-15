@@ -7,6 +7,7 @@
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Networks" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.BiobankPanelAssessmentImpl" table="bibboxcs.biobankpanelassessment">
 		<cache usage="read-write" />
 		<id name="biobankpanelassessmentId" type="long">
@@ -103,5 +104,15 @@
 		<property name="securitytoken" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusdate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.NetworksImpl" table="rdconnect.networks">
+		<cache usage="read-write" />
+		<id name="networkId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organizationnetworkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="relation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="yearofestablishment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

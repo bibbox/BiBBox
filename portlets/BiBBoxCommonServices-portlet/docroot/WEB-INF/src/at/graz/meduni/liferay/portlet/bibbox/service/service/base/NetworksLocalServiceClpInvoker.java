@@ -14,7 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.base;
 
-import at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author reihsr
  * @generated
  */
-public class BiobankPanelAssessmentLocalServiceClpInvoker {
-	public BiobankPanelAssessmentLocalServiceClpInvoker() {
-		_methodName0 = "addBiobankPanelAssessment";
+public class NetworksLocalServiceClpInvoker {
+	public NetworksLocalServiceClpInvoker() {
+		_methodName0 = "addNetworks";
 
 		_methodParameterTypes0 = new String[] {
-				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
+				"at.graz.meduni.liferay.portlet.bibbox.service.model.Networks"
 			};
 
-		_methodName1 = "createBiobankPanelAssessment";
+		_methodName1 = "createNetworks";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteBiobankPanelAssessment";
+		_methodName2 = "deleteNetworks";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteBiobankPanelAssessment";
+		_methodName3 = "deleteNetworks";
 
 		_methodParameterTypes3 = new String[] {
-				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
+				"at.graz.meduni.liferay.portlet.bibbox.service.model.Networks"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchBiobankPanelAssessment";
+		_methodName10 = "fetchNetworks";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getBiobankPanelAssessment";
+		_methodName11 = "getNetworks";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getBiobankPanelAssessments";
+		_methodName13 = "getNetworkses";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getBiobankPanelAssessmentsCount";
+		_methodName14 = "getNetworksesCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateBiobankPanelAssessment";
+		_methodName15 = "updateNetworks";
 
 		_methodParameterTypes15 = new String[] {
-				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
+				"at.graz.meduni.liferay.portlet.bibbox.service.model.Networks"
 			};
 
 		_methodName58 = "getBeanIdentifier";
@@ -113,68 +113,50 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 		_methodName59 = "setBeanIdentifier";
 
 		_methodParameterTypes59 = new String[] { "java.lang.String" };
-
-		_methodName64 = "biobankPanelAssessmentFromRequest";
-
-		_methodParameterTypes64 = new String[] { "javax.portlet.ActionRequest" };
-
-		_methodName66 = "getNumberOfAssessmentsForOrganization";
-
-		_methodParameterTypes66 = new String[] { "long" };
-
-		_methodName67 = "getAssessmentsForOrganization";
-
-		_methodParameterTypes67 = new String[] { "long" };
-
-		_methodName68 = "addBiobankPanelAssessment";
-
-		_methodParameterTypes68 = new String[] {
-				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
-			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.addBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
+			return NetworksLocalServiceUtil.addNetworks((at.graz.meduni.liferay.portlet.bibbox.service.model.Networks)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.createBiobankPanelAssessment(((Long)arguments[0]).longValue());
+			return NetworksLocalServiceUtil.createNetworks(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.deleteBiobankPanelAssessment(((Long)arguments[0]).longValue());
+			return NetworksLocalServiceUtil.deleteNetworks(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.deleteBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
+			return NetworksLocalServiceUtil.deleteNetworks((at.graz.meduni.liferay.portlet.bibbox.service.model.Networks)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.dynamicQuery();
+			return NetworksLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return NetworksLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return NetworksLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return NetworksLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -182,76 +164,56 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return NetworksLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return NetworksLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.fetchBiobankPanelAssessment(((Long)arguments[0]).longValue());
+			return NetworksLocalServiceUtil.fetchNetworks(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.getBiobankPanelAssessment(((Long)arguments[0]).longValue());
+			return NetworksLocalServiceUtil.getNetworks(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return NetworksLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.getBiobankPanelAssessments(((Integer)arguments[0]).intValue(),
+			return NetworksLocalServiceUtil.getNetworkses(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.getBiobankPanelAssessmentsCount();
+			return NetworksLocalServiceUtil.getNetworksesCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.updateBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
+			return NetworksLocalServiceUtil.updateNetworks((at.graz.meduni.liferay.portlet.bibbox.service.model.Networks)arguments[0]);
 		}
 
 		if (_methodName58.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.getBeanIdentifier();
+			return NetworksLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-			BiobankPanelAssessmentLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			NetworksLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
-		}
-
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.biobankPanelAssessmentFromRequest((javax.portlet.ActionRequest)arguments[0]);
-		}
-
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.getNumberOfAssessmentsForOrganization(((Long)arguments[0]).longValue());
-		}
-
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.getAssessmentsForOrganization(((Long)arguments[0]).longValue());
-		}
-
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
-			return BiobankPanelAssessmentLocalServiceUtil.addBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -293,12 +255,4 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 	private String[] _methodParameterTypes58;
 	private String _methodName59;
 	private String[] _methodParameterTypes59;
-	private String _methodName64;
-	private String[] _methodParameterTypes64;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
 }

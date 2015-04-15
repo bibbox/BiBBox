@@ -151,4 +151,11 @@
 		<field name="status" type="long" />
 		<field name="statusdate" type="Date" />
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.Networks">
+		<field name="networkId" type="long" />
+		<field name="organizationnetworkId" type="long" />
+		<field name="organizationId" type="long" />
+		<field name="relation" type="String" />
+		<field name="yearofestablishment" type="String" />
+	</model>
 </model-hints>

@@ -54,6 +54,10 @@ if(optionsTypeFilter_option.equals("RD-Connect")) {
 		<%@ include file="/html/organisation/organisationlister/organizationtyps/rdconnect.jsp" %>
 		<%
 	}
+} else if(optionsTypeFilter_option.equals("RD-Connect Networks")) {
+	%>
+	<%@ include file="/html/organisation/organisationlister/organizationtyps/rdconnect_networks.jspf" %>
+	<%
 } else if(optionsTypeFilter_option.equals("Collection")) {
 	%>
 	<%@ include file="/html/organisation/organisationlister/organizationtyps/collection.jsp" %>
@@ -62,7 +66,7 @@ if(optionsTypeFilter_option.equals("RD-Connect")) {
 	%>
 	<%@ include file="/html/organisation/organisationlister/organizationtyps/bbmriat.jsp" %>
 	<%
-} else {
+}  else {
 	%>
 	<%@ include file="/html/organisation/organisationlister/organizationtyps/default.jsp" %>
 	<%

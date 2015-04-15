@@ -21,6 +21,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.Disease
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.GeneralInformationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.NetworksPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -532,6 +533,43 @@ public abstract class DiseaseMatrixLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the networks local service.
+	 *
+	 * @return the networks local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalService getNetworksLocalService() {
+		return networksLocalService;
+	}
+
+	/**
+	 * Sets the networks local service.
+	 *
+	 * @param networksLocalService the networks local service
+	 */
+	public void setNetworksLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalService networksLocalService) {
+		this.networksLocalService = networksLocalService;
+	}
+
+	/**
+	 * Returns the networks persistence.
+	 *
+	 * @return the networks persistence
+	 */
+	public NetworksPersistence getNetworksPersistence() {
+		return networksPersistence;
+	}
+
+	/**
+	 * Sets the networks persistence.
+	 *
+	 * @param networksPersistence the networks persistence
+	 */
+	public void setNetworksPersistence(NetworksPersistence networksPersistence) {
+		this.networksPersistence = networksPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -733,6 +771,10 @@ public abstract class DiseaseMatrixLocalServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService invitationOrganisationService;
 	@BeanReference(type = InvitationOrganisationPersistence.class)
 	protected InvitationOrganisationPersistence invitationOrganisationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalService networksLocalService;
+	@BeanReference(type = NetworksPersistence.class)
+	protected NetworksPersistence networksPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

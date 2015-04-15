@@ -84,3 +84,11 @@ create table rdconnect.generalgnformation (
 	theregistrybiobanksislistedinotherinventoriesnetworks TEXT null,
 	modifieddate DATE null
 );
+
+create table rdconnect.networks (
+	networkId LONG not null primary key,
+	organizationnetworkId LONG,
+	organizationId LONG,
+	relation VARCHAR(75) null,
+	yearofestablishment VARCHAR(75) null
+);

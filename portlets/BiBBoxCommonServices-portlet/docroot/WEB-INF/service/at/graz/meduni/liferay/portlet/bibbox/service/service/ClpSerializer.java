@@ -19,6 +19,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisationClp;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.NetworksClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -126,6 +127,10 @@ public class ClpSerializer {
 			return translateInputInvitationOrganisation(oldModel);
 		}
 
+		if (oldModelClassName.equals(NetworksClp.class.getName())) {
+			return translateInputNetworks(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -193,6 +198,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputNetworks(BaseModel<?> oldModel) {
+		NetworksClp oldClpModel = (NetworksClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getNetworksRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInput(Object obj) {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
@@ -233,6 +248,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationOrganisationImpl")) {
 			return translateOutputInvitationOrganisation(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.NetworksImpl")) {
+			return translateOutputNetworks(oldModel);
 		}
 
 		return oldModel;
@@ -340,6 +360,11 @@ public class ClpSerializer {
 			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationOrganisationException();
 		}
 
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException();
+		}
+
 		return throwable;
 	}
 
@@ -392,6 +417,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setInvitationOrganisationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputNetworks(BaseModel<?> oldModel) {
+		NetworksClp newModel = new NetworksClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setNetworksRemoteModel(oldModel);
 
 		return newModel;
 	}

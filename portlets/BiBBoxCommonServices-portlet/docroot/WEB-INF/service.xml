@@ -123,4 +123,11 @@
 			<finder-column name="organizationId"></finder-column>
 		</finder>
 	</entity>
+	<entity name="Networks" local-service="true" remote-service="false" table="rdconnect.networks">
+		<column name="networkId" primary="true" type="long"></column>
+		<column name="organizationnetworkId" type="long"></column>
+		<column name="organizationId" type="long"></column>
+		<column name="relation" type="String"></column>
+		<column name="yearofestablishment" type="String"></column>
+	</entity>
 </service-builder>

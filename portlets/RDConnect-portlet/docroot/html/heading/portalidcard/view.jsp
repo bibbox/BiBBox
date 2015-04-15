@@ -279,7 +279,7 @@ if (currentGroup.isOrganization()) {
   		ex.printStackTrace();
   	}
 
-// Edit link
+	// Edit link
 	boolean portaleditorrole = false;
     boolean biobankregistryownerrole = false;
     boolean biobankregistryeditorrole = false;
