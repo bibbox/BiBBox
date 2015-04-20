@@ -3,17 +3,23 @@
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
 
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
 <liferay-ui:error key="file-upload-wrong-type" message="file-upload-wrong-type" />
 <liferay-ui:error key="no-correct-sheer-found" message="no-correct-sheer-found" />
 <%
 if(renderRequest.getAttribute("xls-header-not-defined-column_missing") != null) {
 	%>
-	<liferay-ui:message key='xls-header-not-defined' arguments='<%= renderRequest.getAttribute("xls-header-not-defined-column_missing") %>'/>
+	<div style="margin:10px; padding: 10px; background-color: #0066FF;opacity: 0.4;filter: alpha(opacity=40);color: #ffffff;" >
+		<i class="fa fa-exclamation-circle"></i>&nbsp&nbsp<liferay-ui:message key='xls-header-not-defined' arguments='<%= renderRequest.getAttribute("xls-header-not-defined-column_missing") %>'/>
+	</div>
 	<%
 }
 if(renderRequest.getAttribute("xls-row-import-errors") != null) {
 	%>
-	<liferay-ui:message key='xls-row-import-errors' arguments='<%= renderRequest.getAttribute("xls-row-import-errors") %>'/>
+	<div style="margin:10px; padding: 10px; background-color: #0066FF;opacity: 0.4;filter: alpha(opacity=40);color: #ffffff;" >
+		<i class="fa fa-exclamation-circle"></i>&nbsp&nbsp<liferay-ui:message key='xls-row-import-errors' arguments='<%= renderRequest.getAttribute("xls-row-import-errors") %>'/>
+	</div>
 	<%
 }
 %>

@@ -309,10 +309,28 @@ public class DiseaseMatrix extends MVCPortlet {
 		HSSFWorkbook workbook = new HSSFWorkbook(file);
 		// Get first sheet from the workbook
 		HSSFSheet sheet = workbook.getSheet("Disease Matrix");
+		if(sheet == null) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrix::readXLSXFile] No Sheet exists with the name Disease Matrix.");
+			if(workbook.getNumberOfSheets() == 1) {
+				sheet = workbook.getSheetAt(0);
+			} else {
+				for(int i = 0; i < workbook.getNumberOfSheets(); i++) {
+					if(workbook.getSheetName(i).contains("disease") || workbook.getSheetName(i).contains("Disease")) {
+						sheet = workbook.getSheetAt(i);
+					}
+				}
+				if(sheet == null) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrix::readXLSXFile] No possible Sheet found that could contain Disease Matrix.");
+					SessionErrors.add(request, "no-correct-sheer-found");
+					return;
+				}
+			}
+		}
 		// Get iterator to all the rows in current sheet
 		Iterator<Row> rowIterator = sheet.iterator();
 		boolean header = true;
-		Map<Integer, String> headers = new HashMap<Integer, String>();
+		int rowcount = 1;
+		String rowerrors = "";
 		int diseasematrixid_column = -1;
 		int diseasename_column = -1;
 		int numberofdoners_column = -1;
@@ -395,44 +413,16 @@ public class DiseaseMatrix extends MVCPortlet {
 				SessionMessages.add(request, "xls-header-not-defined");
 				header = false;
 			} else {
-				Cell cell_id = row.getCell(0);
-				Fields fields;
-				long record_id = 0;
-				if (cell_id == null) {
-					//System.out.println("Cellid is null");
-					DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
-					diseasematrix_new.setDiseasematrixId(0);
-					diseasematrix_new.setOrganizationId(organizationId);
-					diseasematrix_new.setDiseasename(stringFromCell(row.getCell(diseasename_column), true));
-					diseasematrix_new.setPatientcount(stringFromCell(row.getCell(numberofdoners_column)));
-					diseasematrix_new.setOrphanumber(stringFromCell(row.getCell(orphacode_column)));
-					diseasematrix_new.setGene(stringFromCell(row.getCell(gene_column)));
-					diseasematrix_new.setIcd10(stringFromCell(row.getCell(icd10_column)));
-					diseasematrix_new.setOmim(stringFromCell(row.getCell(omim_column)));
-					diseasematrix_new.setSynonym(stringFromCell(row.getCell(synonym_column), true));
-					diseasematrix_new.setModifieddate(new Date());
-					DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
-				} else if (cell_id.getCellType() != Cell.CELL_TYPE_NUMERIC) {
-					//System.out.println("Cellid is not a number");
-					DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
-					diseasematrix_new.setDiseasematrixId(0);
-					diseasematrix_new.setOrganizationId(organizationId);
-					diseasematrix_new.setDiseasename(stringFromCell(row.getCell(diseasename_column), true));
-					diseasematrix_new.setPatientcount(stringFromCell(row.getCell(numberofdoners_column)));
-					diseasematrix_new.setOrphanumber(stringFromCell(row.getCell(orphacode_column)));
-					diseasematrix_new.setGene(stringFromCell(row.getCell(gene_column)));
-					diseasematrix_new.setIcd10(stringFromCell(row.getCell(icd10_column)));
-					diseasematrix_new.setOmim(stringFromCell(row.getCell(omim_column)));
-					diseasematrix_new.setSynonym(stringFromCell(row.getCell(synonym_column), true));
-					diseasematrix_new.setModifieddate(new Date());
-					DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
-				} else {
-					//System.out.println("Cellid is a number: " + cell_id.getNumericCellValue());
-					at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrix = null;
-					long diseasematrix_in_table = (long) cell_id.getNumericCellValue();
-					try {
-						diseasematrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(diseasematrix_in_table);
-					} catch (Exception ex) {
+				rowcount ++;
+				try {
+					Cell cell_id = null;
+					if(diseasematrixid_column != -1) {
+						cell_id = row.getCell(diseasematrixid_column);
+					}
+					Fields fields;
+					long record_id = 0;
+					if (cell_id == null) {
+						//System.out.println("Cellid is null");
 						DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
 						diseasematrix_new.setDiseasematrixId(0);
 						diseasematrix_new.setOrganizationId(organizationId);
@@ -445,44 +435,89 @@ public class DiseaseMatrix extends MVCPortlet {
 						diseasematrix_new.setSynonym(stringFromCell(row.getCell(synonym_column), true));
 						diseasematrix_new.setModifieddate(new Date());
 						DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
-					}
-					deletelist.remove(diseasematrix);
-					if(diseasematrix.getOrganizationId() == organizationId) {
-						if(!diseasematrix.getDiseasename().equals(stringFromCell(row.getCell(diseasename_column), true)) ||
-								!diseasematrix.getPatientcount().equals(stringFromCell(row.getCell(numberofdoners_column))) ||
-								!diseasematrix.getOrphanumber().equals(stringFromCell(row.getCell(orphacode_column))) ||
-								!diseasematrix.getGene().equals(stringFromCell(row.getCell(gene_column))) ||
-								!diseasematrix.getIcd10().equals(stringFromCell(row.getCell(icd10_column))) ||
-								!diseasematrix.getOmim().equals(stringFromCell(row.getCell(omim_column))) ||
-								!diseasematrix.getSynonym().equals(stringFromCell(row.getCell(synonym_column), true))) {
-							//System.out.println("Update for existing entry");
-							diseasematrix.setDiseasename(stringFromCell(row.getCell(diseasename_column), true));
-							diseasematrix.setPatientcount(stringFromCell(row.getCell(numberofdoners_column)));
-							diseasematrix.setOrphanumber(stringFromCell(row.getCell(orphacode_column)));
-							diseasematrix.setGene(stringFromCell(row.getCell(gene_column)));
-							diseasematrix.setIcd10(stringFromCell(row.getCell(icd10_column)));
-							diseasematrix.setOmim(stringFromCell(row.getCell(omim_column)));
-							diseasematrix.setSynonym(stringFromCell(row.getCell(synonym_column), true));
-							diseasematrix.setModifieddate(new Date());
-							DiseaseMatrixLocalServiceUtil.updateDiseaseMatrix(diseasematrix);
-						}						
+					} else if (cell_id.getCellType() != Cell.CELL_TYPE_NUMERIC) {
+						//System.out.println("Cellid is not a number");
+						DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
+						diseasematrix_new.setDiseasematrixId(0);
+						diseasematrix_new.setOrganizationId(organizationId);
+						diseasematrix_new.setDiseasename(stringFromCell(row.getCell(diseasename_column), true));
+						diseasematrix_new.setPatientcount(stringFromCell(row.getCell(numberofdoners_column)));
+						diseasematrix_new.setOrphanumber(stringFromCell(row.getCell(orphacode_column)));
+						diseasematrix_new.setGene(stringFromCell(row.getCell(gene_column)));
+						diseasematrix_new.setIcd10(stringFromCell(row.getCell(icd10_column)));
+						diseasematrix_new.setOmim(stringFromCell(row.getCell(omim_column)));
+						diseasematrix_new.setSynonym(stringFromCell(row.getCell(synonym_column), true));
+						diseasematrix_new.setModifieddate(new Date());
+						DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
 					} else {
-						//System.out.println("Not Matching IDs for Organization");
-						DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
-						diseasematrix_new.setDiseasematrixId(0);
-						diseasematrix_new.setOrganizationId(organizationId);
-						diseasematrix_new.setDiseasename(stringFromCell(row.getCell(diseasename_column), true));
-						diseasematrix_new.setPatientcount(stringFromCell(row.getCell(numberofdoners_column)));
-						diseasematrix_new.setOrphanumber(stringFromCell(row.getCell(orphacode_column)));
-						diseasematrix_new.setGene(stringFromCell(row.getCell(gene_column)));
-						diseasematrix_new.setIcd10(stringFromCell(row.getCell(icd10_column)));
-						diseasematrix_new.setOmim(stringFromCell(row.getCell(omim_column)));
-						diseasematrix_new.setSynonym(stringFromCell(row.getCell(synonym_column), true));
-						diseasematrix_new.setModifieddate(new Date());
-						DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
+						//System.out.println("Cellid is a number: " + cell_id.getNumericCellValue());
+						at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrix = null;
+						long diseasematrix_in_table = (long) cell_id.getNumericCellValue();
+						try {
+							diseasematrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(diseasematrix_in_table);
+						} catch (Exception ex) {
+							DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
+							diseasematrix_new.setDiseasematrixId(0);
+							diseasematrix_new.setOrganizationId(organizationId);
+							diseasematrix_new.setDiseasename(stringFromCell(row.getCell(diseasename_column), true));
+							diseasematrix_new.setPatientcount(stringFromCell(row.getCell(numberofdoners_column)));
+							diseasematrix_new.setOrphanumber(stringFromCell(row.getCell(orphacode_column)));
+							diseasematrix_new.setGene(stringFromCell(row.getCell(gene_column)));
+							diseasematrix_new.setIcd10(stringFromCell(row.getCell(icd10_column)));
+							diseasematrix_new.setOmim(stringFromCell(row.getCell(omim_column)));
+							diseasematrix_new.setSynonym(stringFromCell(row.getCell(synonym_column), true));
+							diseasematrix_new.setModifieddate(new Date());
+							DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
+						}
+						deletelist.remove(diseasematrix);
+						if(diseasematrix.getOrganizationId() == organizationId) {
+							if(!diseasematrix.getDiseasename().equals(stringFromCell(row.getCell(diseasename_column), true)) ||
+									!diseasematrix.getPatientcount().equals(stringFromCell(row.getCell(numberofdoners_column))) ||
+									!diseasematrix.getOrphanumber().equals(stringFromCell(row.getCell(orphacode_column))) ||
+									!diseasematrix.getGene().equals(stringFromCell(row.getCell(gene_column))) ||
+									!diseasematrix.getIcd10().equals(stringFromCell(row.getCell(icd10_column))) ||
+									!diseasematrix.getOmim().equals(stringFromCell(row.getCell(omim_column))) ||
+									!diseasematrix.getSynonym().equals(stringFromCell(row.getCell(synonym_column), true))) {
+								//System.out.println("Update for existing entry");
+								diseasematrix.setDiseasename(stringFromCell(row.getCell(diseasename_column), true));
+								diseasematrix.setPatientcount(stringFromCell(row.getCell(numberofdoners_column)));
+								diseasematrix.setOrphanumber(stringFromCell(row.getCell(orphacode_column)));
+								diseasematrix.setGene(stringFromCell(row.getCell(gene_column)));
+								diseasematrix.setIcd10(stringFromCell(row.getCell(icd10_column)));
+								diseasematrix.setOmim(stringFromCell(row.getCell(omim_column)));
+								diseasematrix.setSynonym(stringFromCell(row.getCell(synonym_column), true));
+								diseasematrix.setModifieddate(new Date());
+								DiseaseMatrixLocalServiceUtil.updateDiseaseMatrix(diseasematrix);
+							}						
+						} else {
+							//System.out.println("Not Matching IDs for Organization");
+							DiseaseMatrixImpl diseasematrix_new = new DiseaseMatrixImpl();
+							diseasematrix_new.setDiseasematrixId(0);
+							diseasematrix_new.setOrganizationId(organizationId);
+							diseasematrix_new.setDiseasename(stringFromCell(row.getCell(diseasename_column), true));
+							diseasematrix_new.setPatientcount(stringFromCell(row.getCell(numberofdoners_column)));
+							diseasematrix_new.setOrphanumber(stringFromCell(row.getCell(orphacode_column)));
+							diseasematrix_new.setGene(stringFromCell(row.getCell(gene_column)));
+							diseasematrix_new.setIcd10(stringFromCell(row.getCell(icd10_column)));
+							diseasematrix_new.setOmim(stringFromCell(row.getCell(omim_column)));
+							diseasematrix_new.setSynonym(stringFromCell(row.getCell(synonym_column), true));
+							diseasematrix_new.setModifieddate(new Date());
+							DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix_new);
+						}
 					}
+				} catch (Exception ex) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrix::readXLSXFile] Problem adding row " + rowcount + " to the DiseaseMatrix .");
+					ex.printStackTrace();
+					if(!rowerrors.equalsIgnoreCase("")) {
+						rowerrors += ";";
+					}
+					rowerrors += rowcount;
 				}
 			}
+		}
+		if(!rowerrors.equalsIgnoreCase("")) {
+			request.setAttribute("xls-row-import-errors", rowerrors);
+			SessionMessages.add(request, "xls-row-import-errors");
 		}
 		for(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrixlistentry : deletelist) {
 			DiseaseMatrixLocalServiceUtil.deleteDiseaseMatrix(diseasematrixlistentry);
