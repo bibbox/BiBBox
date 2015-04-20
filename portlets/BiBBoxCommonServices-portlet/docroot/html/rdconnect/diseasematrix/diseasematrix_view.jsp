@@ -3,6 +3,21 @@
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
 
+<liferay-ui:error key="file-upload-wrong-type" message="file-upload-wrong-type" />
+<liferay-ui:error key="no-correct-sheer-found" message="no-correct-sheer-found" />
+<%
+if(renderRequest.getAttribute("xls-header-not-defined-column_missing") != null) {
+	%>
+	<liferay-ui:message key='xls-header-not-defined' arguments='<%= renderRequest.getAttribute("xls-header-not-defined-column_missing") %>'/>
+	<%
+}
+if(renderRequest.getAttribute("xls-row-import-errors") != null) {
+	%>
+	<liferay-ui:message key='xls-row-import-errors' arguments='<%= renderRequest.getAttribute("xls-row-import-errors") %>'/>
+	<%
+}
+%>
+
 <%
 String redirect = PortalUtil.getCurrentURL(renderRequest);	
 // Parameters for permission Checking
