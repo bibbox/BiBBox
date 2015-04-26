@@ -35,7 +35,7 @@ import java.io.ObjectOutput;
 public class NetworksCacheModel implements CacheModel<Networks>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{networkId=");
 		sb.append(networkId);
@@ -45,6 +45,8 @@ public class NetworksCacheModel implements CacheModel<Networks>, Externalizable 
 		sb.append(organizationId);
 		sb.append(", relation=");
 		sb.append(relation);
+		sb.append(", externalnetworkId=");
+		sb.append(externalnetworkId);
 		sb.append(", yearofestablishment=");
 		sb.append(yearofestablishment);
 		sb.append("}");
@@ -67,6 +69,13 @@ public class NetworksCacheModel implements CacheModel<Networks>, Externalizable 
 			networksImpl.setRelation(relation);
 		}
 
+		if (externalnetworkId == null) {
+			networksImpl.setExternalnetworkId(StringPool.BLANK);
+		}
+		else {
+			networksImpl.setExternalnetworkId(externalnetworkId);
+		}
+
 		if (yearofestablishment == null) {
 			networksImpl.setYearofestablishment(StringPool.BLANK);
 		}
@@ -85,6 +94,7 @@ public class NetworksCacheModel implements CacheModel<Networks>, Externalizable 
 		organizationnetworkId = objectInput.readLong();
 		organizationId = objectInput.readLong();
 		relation = objectInput.readUTF();
+		externalnetworkId = objectInput.readUTF();
 		yearofestablishment = objectInput.readUTF();
 	}
 
@@ -102,6 +112,13 @@ public class NetworksCacheModel implements CacheModel<Networks>, Externalizable 
 			objectOutput.writeUTF(relation);
 		}
 
+		if (externalnetworkId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(externalnetworkId);
+		}
+
 		if (yearofestablishment == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -114,5 +131,6 @@ public class NetworksCacheModel implements CacheModel<Networks>, Externalizable 
 	public long organizationnetworkId;
 	public long organizationId;
 	public String relation;
+	public String externalnetworkId;
 	public String yearofestablishment;
 }

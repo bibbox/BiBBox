@@ -113,6 +113,18 @@ public class NetworksLocalServiceClpInvoker {
 		_methodName59 = "setBeanIdentifier";
 
 		_methodParameterTypes59 = new String[] { "java.lang.String" };
+
+		_methodName64 = "getNetworkOrganizations";
+
+		_methodParameterTypes64 = new String[] { "long" };
+
+		_methodName65 = "isOrganizationInNetwork";
+
+		_methodParameterTypes65 = new String[] { "long", "long" };
+
+		_methodName66 = "getNetworkIdList";
+
+		_methodParameterTypes66 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +228,22 @@ public class NetworksLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return NetworksLocalServiceUtil.getNetworkOrganizations(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			return NetworksLocalServiceUtil.isOrganizationInNetwork(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+			return NetworksLocalServiceUtil.getNetworkIdList(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +283,10 @@ public class NetworksLocalServiceClpInvoker {
 	private String[] _methodParameterTypes58;
 	private String _methodName59;
 	private String[] _methodParameterTypes59;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
 }

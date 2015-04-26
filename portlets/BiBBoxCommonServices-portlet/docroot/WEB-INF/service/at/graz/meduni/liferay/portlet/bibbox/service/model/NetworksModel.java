@@ -115,6 +115,21 @@ public interface NetworksModel extends BaseModel<Networks> {
 	public void setRelation(String relation);
 
 	/**
+	 * Returns the externalnetwork ID of this networks.
+	 *
+	 * @return the externalnetwork ID of this networks
+	 */
+	@AutoEscape
+	public String getExternalnetworkId();
+
+	/**
+	 * Sets the externalnetwork ID of this networks.
+	 *
+	 * @param externalnetworkId the externalnetwork ID of this networks
+	 */
+	public void setExternalnetworkId(String externalnetworkId);
+
+	/**
 	 * Returns the yearofestablishment of this networks.
 	 *
 	 * @return the yearofestablishment of this networks

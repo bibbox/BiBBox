@@ -128,6 +128,14 @@
 		<column name="organizationnetworkId" type="long"></column>
 		<column name="organizationId" type="long"></column>
 		<column name="relation" type="String"></column>
+		<column name="externalnetworkId" type="String"></column>
 		<column name="yearofestablishment" type="String"></column>
+		<finder return-type="Collection" name="NetworkOrganizationsFinder">
+			<finder-column name="organizationnetworkId"></finder-column>
+		</finder>
+		<finder return-type="Networks" name="NetworkOrganizationFinder">
+			<finder-column name="organizationnetworkId"></finder-column>
+			<finder-column name="organizationId"></finder-column>
+		</finder>
 	</entity>
 </service-builder>

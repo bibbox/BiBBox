@@ -110,6 +110,268 @@ public class NetworksUtil {
 	}
 
 	/**
+	* Returns all the networkses where organizationnetworkId = &#63;.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @return the matching networkses
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> findByNetworkOrganizationsFinder(
+		long organizationnetworkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNetworkOrganizationsFinder(organizationnetworkId);
+	}
+
+	/**
+	* Returns a range of all the networkses where organizationnetworkId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.NetworksModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param start the lower bound of the range of networkses
+	* @param end the upper bound of the range of networkses (not inclusive)
+	* @return the range of matching networkses
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> findByNetworkOrganizationsFinder(
+		long organizationnetworkId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNetworkOrganizationsFinder(organizationnetworkId,
+			start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the networkses where organizationnetworkId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.NetworksModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param start the lower bound of the range of networkses
+	* @param end the upper bound of the range of networkses (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching networkses
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> findByNetworkOrganizationsFinder(
+		long organizationnetworkId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNetworkOrganizationsFinder(organizationnetworkId,
+			start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first networks in the ordered set where organizationnetworkId = &#63;.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching networks
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException if a matching networks could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks findByNetworkOrganizationsFinder_First(
+		long organizationnetworkId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNetworkOrganizationsFinder_First(organizationnetworkId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first networks in the ordered set where organizationnetworkId = &#63;.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching networks, or <code>null</code> if a matching networks could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks fetchByNetworkOrganizationsFinder_First(
+		long organizationnetworkId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByNetworkOrganizationsFinder_First(organizationnetworkId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last networks in the ordered set where organizationnetworkId = &#63;.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching networks
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException if a matching networks could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks findByNetworkOrganizationsFinder_Last(
+		long organizationnetworkId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNetworkOrganizationsFinder_Last(organizationnetworkId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last networks in the ordered set where organizationnetworkId = &#63;.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching networks, or <code>null</code> if a matching networks could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks fetchByNetworkOrganizationsFinder_Last(
+		long organizationnetworkId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByNetworkOrganizationsFinder_Last(organizationnetworkId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the networkses before and after the current networks in the ordered set where organizationnetworkId = &#63;.
+	*
+	* @param networkId the primary key of the current networks
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next networks
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException if a networks with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks[] findByNetworkOrganizationsFinder_PrevAndNext(
+		long networkId, long organizationnetworkId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNetworkOrganizationsFinder_PrevAndNext(networkId,
+			organizationnetworkId, orderByComparator);
+	}
+
+	/**
+	* Removes all the networkses where organizationnetworkId = &#63; from the database.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByNetworkOrganizationsFinder(
+		long organizationnetworkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence()
+			.removeByNetworkOrganizationsFinder(organizationnetworkId);
+	}
+
+	/**
+	* Returns the number of networkses where organizationnetworkId = &#63;.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @return the number of matching networkses
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByNetworkOrganizationsFinder(
+		long organizationnetworkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByNetworkOrganizationsFinder(organizationnetworkId);
+	}
+
+	/**
+	* Returns the networks where organizationnetworkId = &#63; and organizationId = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException} if it could not be found.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param organizationId the organization ID
+	* @return the matching networks
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException if a matching networks could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks findByNetworkOrganizationFinder(
+		long organizationnetworkId, long organizationId)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNetworkOrganizationFinder(organizationnetworkId,
+			organizationId);
+	}
+
+	/**
+	* Returns the networks where organizationnetworkId = &#63; and organizationId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param organizationId the organization ID
+	* @return the matching networks, or <code>null</code> if a matching networks could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks fetchByNetworkOrganizationFinder(
+		long organizationnetworkId, long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByNetworkOrganizationFinder(organizationnetworkId,
+			organizationId);
+	}
+
+	/**
+	* Returns the networks where organizationnetworkId = &#63; and organizationId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param organizationId the organization ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching networks, or <code>null</code> if a matching networks could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks fetchByNetworkOrganizationFinder(
+		long organizationnetworkId, long organizationId,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByNetworkOrganizationFinder(organizationnetworkId,
+			organizationId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the networks where organizationnetworkId = &#63; and organizationId = &#63; from the database.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param organizationId the organization ID
+	* @return the networks that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.Networks removeByNetworkOrganizationFinder(
+		long organizationnetworkId, long organizationId)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .removeByNetworkOrganizationFinder(organizationnetworkId,
+			organizationId);
+	}
+
+	/**
+	* Returns the number of networkses where organizationnetworkId = &#63; and organizationId = &#63;.
+	*
+	* @param organizationnetworkId the organizationnetwork ID
+	* @param organizationId the organization ID
+	* @return the number of matching networkses
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByNetworkOrganizationFinder(
+		long organizationnetworkId, long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByNetworkOrganizationFinder(organizationnetworkId,
+			organizationId);
+	}
+
+	/**
 	* Caches the networks in the entity cache if it is enabled.
 	*
 	* @param networks the networks

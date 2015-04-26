@@ -303,6 +303,13 @@ public class RDConnectEventLocalServiceWrapper
 		return _rdConnectEventLocalService.getEvents();
 	}
 
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent> getEventsByOrganizationIds(
+		java.util.List<java.lang.Long> idfilter)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _rdConnectEventLocalService.getEventsByOrganizationIds(idfilter);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

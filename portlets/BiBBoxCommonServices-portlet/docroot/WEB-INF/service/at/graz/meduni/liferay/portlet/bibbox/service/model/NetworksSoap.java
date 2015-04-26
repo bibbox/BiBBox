@@ -33,6 +33,7 @@ public class NetworksSoap implements Serializable {
 		soapModel.setOrganizationnetworkId(model.getOrganizationnetworkId());
 		soapModel.setOrganizationId(model.getOrganizationId());
 		soapModel.setRelation(model.getRelation());
+		soapModel.setExternalnetworkId(model.getExternalnetworkId());
 		soapModel.setYearofestablishment(model.getYearofestablishment());
 
 		return soapModel;
@@ -118,6 +119,14 @@ public class NetworksSoap implements Serializable {
 		_relation = relation;
 	}
 
+	public String getExternalnetworkId() {
+		return _externalnetworkId;
+	}
+
+	public void setExternalnetworkId(String externalnetworkId) {
+		_externalnetworkId = externalnetworkId;
+	}
+
 	public String getYearofestablishment() {
 		return _yearofestablishment;
 	}
@@ -130,5 +139,6 @@ public class NetworksSoap implements Serializable {
 	private long _organizationnetworkId;
 	private long _organizationId;
 	private String _relation;
+	private String _externalnetworkId;
 	private String _yearofestablishment;
 }

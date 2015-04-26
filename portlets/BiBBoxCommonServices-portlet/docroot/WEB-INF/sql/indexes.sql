@@ -13,3 +13,6 @@ create index IX_B7B5515E on bibboxcs.invitation_organisation (status);
 create index IX_89618AEF on rdconnect.diseasematrix (organizationId);
 
 create index IX_EB153260 on rdconnect.generalgnformation (organizationId);
+
+create index IX_7E1D5865 on rdconnect.networks (organizationnetworkId);
+create index IX_3A34F207 on rdconnect.networks (organizationnetworkId, organizationId);

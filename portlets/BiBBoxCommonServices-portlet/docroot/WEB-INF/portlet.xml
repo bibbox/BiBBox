@@ -676,4 +676,86 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>network-view-organizations</portlet-name>
+		<display-name>Network View Organizations</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.network.NetworkViewOrganizations
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/network/networkvieworganizations/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/network/networkvieworganizations/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Network View Organizations</title>
+			<short-title>Network View Organizations</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>network-event-feed</portlet-name>
+		<display-name>Network Event Feed</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.network.NetworkEventFeed
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/network/networkeventfeed/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/network/networkeventfeed/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Network Event Feed</title>
+			<short-title>Network Event Feed</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

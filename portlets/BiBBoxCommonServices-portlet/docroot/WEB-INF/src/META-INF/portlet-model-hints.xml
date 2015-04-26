@@ -156,6 +156,7 @@
 		<field name="organizationnetworkId" type="long" />
 		<field name="organizationId" type="long" />
 		<field name="relation" type="String" />
+		<field name="externalnetworkId" type="String" />
 		<field name="yearofestablishment" type="String" />
 	</model>
 </model-hints>

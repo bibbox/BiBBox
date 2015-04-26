@@ -248,4 +248,27 @@ public interface NetworksLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* @param organizationId
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> getNetworkOrganizations(
+		long organizationId);
+
+	/**
+	* @param organizationId
+	* @param networkId
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isOrganizationInNetwork(long organizationId, long networkId);
+
+	/**
+	* @param networkid
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<java.lang.Long> getNetworkIdList(long networkid);
 }

@@ -29,4 +29,8 @@
 		<portlet id="disease-matrix"></portlet>
 		<portlet id="general-information"></portlet>
 	</category>
+	<category name="BiBBox Network">
+		<portlet id="network-view-organizations"></portlet>
+		<portlet id="network-event-feed"></portlet>
+	</category>
 </display>

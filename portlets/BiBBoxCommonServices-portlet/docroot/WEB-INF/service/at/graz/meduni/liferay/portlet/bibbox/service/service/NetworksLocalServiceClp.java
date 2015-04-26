@@ -113,6 +113,18 @@ public class NetworksLocalServiceClp implements NetworksLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getNetworkOrganizations";
+
+		_methodParameterTypes19 = new String[] { "long" };
+
+		_methodName20 = "isOrganizationInNetwork";
+
+		_methodParameterTypes20 = new String[] { "long", "long" };
+
+		_methodName21 = "getNetworkIdList";
+
+		_methodParameterTypes21 = new String[] { "long" };
 	}
 
 	@Override
@@ -665,6 +677,77 @@ public class NetworksLocalServiceClp implements NetworksLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> getNetworkOrganizations(
+		long organizationId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] { organizationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public boolean isOrganizationInNetwork(long organizationId, long networkId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] { organizationId, networkId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
+	public java.util.List<java.lang.Long> getNetworkIdList(long networkid) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] { networkid });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<java.lang.Long>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -702,4 +785,10 @@ public class NetworksLocalServiceClp implements NetworksLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

@@ -287,6 +287,36 @@ public class NetworksLocalServiceWrapper implements NetworksLocalService,
 	}
 
 	/**
+	* @param organizationId
+	* @return
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> getNetworkOrganizations(
+		long organizationId) {
+		return _networksLocalService.getNetworkOrganizations(organizationId);
+	}
+
+	/**
+	* @param organizationId
+	* @param networkId
+	* @return
+	*/
+	@Override
+	public boolean isOrganizationInNetwork(long organizationId, long networkId) {
+		return _networksLocalService.isOrganizationInNetwork(organizationId,
+			networkId);
+	}
+
+	/**
+	* @param networkid
+	* @return
+	*/
+	@Override
+	public java.util.List<java.lang.Long> getNetworkIdList(long networkid) {
+		return _networksLocalService.getNetworkIdList(networkid);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public NetworksLocalService getWrappedNetworksLocalService() {

@@ -142,6 +142,7 @@
 			<basic name="organizationnetworkId" />
 			<basic name="organizationId" />
 			<basic name="relation" />
+			<basic name="externalnetworkId" />
 			<basic name="yearofestablishment" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

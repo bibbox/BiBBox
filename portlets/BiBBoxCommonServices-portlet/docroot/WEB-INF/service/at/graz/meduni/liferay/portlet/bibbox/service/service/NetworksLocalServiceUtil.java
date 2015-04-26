@@ -275,6 +275,34 @@ public class NetworksLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* @param organizationId
+	* @return
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> getNetworkOrganizations(
+		long organizationId) {
+		return getService().getNetworkOrganizations(organizationId);
+	}
+
+	/**
+	* @param organizationId
+	* @param networkId
+	* @return
+	*/
+	public static boolean isOrganizationInNetwork(long organizationId,
+		long networkId) {
+		return getService().isOrganizationInNetwork(organizationId, networkId);
+	}
+
+	/**
+	* @param networkid
+	* @return
+	*/
+	public static java.util.List<java.lang.Long> getNetworkIdList(
+		long networkid) {
+		return getService().getNetworkIdList(networkid);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

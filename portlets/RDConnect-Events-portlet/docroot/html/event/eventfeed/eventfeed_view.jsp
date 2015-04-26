@@ -1,4 +1,7 @@
 <%@include file="/html/init.jsp" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.regex.Matcher" %>
+<%@ page import="java.util.regex.Pattern" %>
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
@@ -296,11 +299,15 @@ map.put("Zimbabwe", "ZW");
 
 <%
 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
 
 String template = "<div style=\"margin: 5px 20px 10px 10px; width: 95%; background-color: #E2E3CE; border-radius: 3px;-webkit-box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.50);-moz-box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.50);box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.50);position: relative;\"><div class=\"rdc-event-container\"><div class=\"[$sliderclass$]\" id=\"rdc-event-slide\">[$slidertext$]</div></div><table style=\"margin: 8px 0 5px 0; background-color: #FFFFFF; float:left; width:100%;height: 35px;\"><tr><td style=\"width:80px;\">[$logoleft$]</td><td style=\"\">[$title$]</td><td style=\"width:60px;\">[$logoright$]</td></tr></table><div style=\"margin: 5px;\">[$shorttext$]<br><i class=\"fa fa-plus-square\"></i></div><div class=\"notdisplayText\" style=\"margin: 5px;\">[$longtext$]<br><i class=\"fa fa-minus-square-o\"></i></div></div>";
 
-List<RDConnectEvent> rdconnectevents = RDConnectEventLocalServiceUtil.getEvents();
+String optionsFilter_cfg = GetterUtil.getString(portletPreferences.getValue("optionsFilter", ""));
+List<RDConnectEvent> rdconnectevents = rdconnectevents = RDConnectEventLocalServiceUtil.getEvents();
 for(RDConnectEvent rdconnectevent : rdconnectevents) {
+	boolean error = false;
 	String event = template.replaceAll("\\[\\$slidertext\\$\\]", dateFormat.format(rdconnectevent.getEventdate()));
 	event = event.replaceAll("\\[\\$title\\$\\]", rdconnectevent.getEventtype());
 	event = event.replaceAll("\\[\\$shorttext\\$\\]", rdconnectevent.getShorttext());
@@ -321,43 +328,121 @@ for(RDConnectEvent rdconnectevent : rdconnectevents) {
 		event = event.replaceAll("\\[\\$sliderclass\\$\\]", "rdc-event-candidate-propose-slider");
 	}
 	// Add published Data
-	if(rdconnectevent.getEventtype().contains("New Biobank Published") || rdconnectevent.getEventtype().contains("New Registry Published")) {
-		Organization organization = OrganizationLocalServiceUtil.getOrganization(rdconnectevent.getOrganizationId());
-		// left organization logo
-		String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
-		String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
-	 	if(organizationtype.equalsIgnoreCase("Biobank")) {
-	 		if(organization.getLogoId() == 0) {
-	 			imgPath = request.getContextPath() + "/images/Biobank.png";
-	 		}
-	 	} else {
-	 		if(organization.getLogoId() == 0) {
-	 			imgPath = request.getContextPath() + "/images/Registry.png";
-	 		}
-	 	}
-	 	event = event.replaceAll("\\[\\$logoleft\\$\\]", "<img style=\"height: 35px;\" src=\"" + imgPath + "\" />");
-	 	// right country logo
-	 	String pattern = "(.+?)from (.+?) was(.*)";
-		String country = rdconnectevent.getShorttext().replaceAll(pattern, "$2");
-		if(map.containsKey(country)) { 
-			event = event.replaceAll("\\[\\$logoright\\$\\]", "<img style=\"height: 35px;\" id='countryflag' src=\"http://www.geonames.org/flags/x/" + map.get(country).toLowerCase() + ".gif\" />");
-		} else { 
-			String wordimage = request.getContextPath() + "/images/world.png";
-			event = event.replaceAll("\\[\\$logoright\\$\\]", "<img style=\"height: 35px;\" id='countryflag' src=\"" + wordimage + "\" />");
+	else if(rdconnectevent.getEventtype().contains("New Biobank Published") || rdconnectevent.getEventtype().contains("New Registry Published")) {
+		try {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(rdconnectevent.getOrganizationId());
+			// left organization logo
+			String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
+			String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+		 	if(organizationtype.equalsIgnoreCase("Biobank")) {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Biobank.png";
+		 		}
+		 	} else {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Registry.png";
+		 		}
+		 	}
+		 	event = event.replaceAll("\\[\\$logoleft\\$\\]", "<img style=\"height: 35px;\" src=\"" + imgPath + "\" />");
+		 	// right country logo
+		 	String pattern = "(.+?)from (.+?) was(.*)";
+			String country = rdconnectevent.getShorttext().replaceAll(pattern, "$2");
+			if(map.containsKey(country)) { 
+				event = event.replaceAll("\\[\\$logoright\\$\\]", "<img style=\"height: 35px;\" id='countryflag' src=\"http://www.geonames.org/flags/x/" + map.get(country).toLowerCase() + ".gif\" />");
+			} else { 
+				String wordimage = request.getContextPath() + "/images/world.png";
+				event = event.replaceAll("\\[\\$logoright\\$\\]", "<img style=\"height: 35px;\" id='countryflag' src=\"" + wordimage + "\" />");
+			}
+			// long discription
+			String longtext = "<b>" + organization.getName() + "</b><br>"
+						+ organizationtype + "<br>"
+						+ "--Maincontact--" + "<br>";
+			
+			event = event.replaceAll("\\[\\$longtext\\$\\]", longtext);
+			// Slider class
+			event = event.replaceAll("\\[\\$sliderclass\\$\\]", "rdc-event-publish-slider");
+		} catch (Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [RDConnect-Events-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.portlet.event.EventFeed::eventfeed_view.jsp] Error in EventFeed View for New Biobank Published/New Registry Published.");
+			e.printStackTrace();
+			error = true;
 		}
-		// long discription
-		String longtext = "<b>" + organization.getName() + "</b><br>"
-					+ organizationtype + "<br>"
-					+ "--Maincontact--" + "<br>";
-		
-		event = event.replaceAll("\\[\\$longtext\\$\\]", longtext);
-		// Slider class
-		event = event.replaceAll("\\[\\$sliderclass\\$\\]", "rdc-event-publish-slider");
+	} 
+	// Network Updated
+	else if (rdconnectevent.getEventtype().equalsIgnoreCase("Network Updated")) {
+		try {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(rdconnectevent.getOrganizationId());
+			// left organization logo
+			String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
+			String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+		 	if(organizationtype.equalsIgnoreCase("Biobank")) {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Biobank.png";
+		 		}
+		 	} else if (organizationtype.equalsIgnoreCase("Registry")) {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Registry.png";
+		 		}
+		 	} else if (organizationtype.equalsIgnoreCase("Network")) {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Network.png";
+		 		}
+		 	}
+		 	event = event.replaceAll("\\[\\$logoleft\\$\\]", "<img style=\"height: 35px;\" src=\"" + imgPath + "\" />");
+		 	
+		 	// right logo
+		 	String pattern = "\\[url organization (\\w*)\\]";
+		 	Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+		 	Matcher m = r.matcher(rdconnectevent.getShorttext());
+		 	long networkorganizationid = organization.getOrganizationId();
+		 	while (m.find( )) {
+		 		try {
+		 			long tmp = Long.parseLong(m.group(1));
+		 			if(tmp != organization.getOrganizationId()) {
+		 				networkorganizationid = tmp;			
+		 			}
+		 		} catch (Exception e) {
+		 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [RDConnect-Events-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.portlet.event.EventFeed::eventfeed_view.jsp] Error parsing organization ID.");
+					e.printStackTrace();
+		 		}
+		 	}
+		 	Organization organization_network = OrganizationLocalServiceUtil.getOrganization(networkorganizationid);
+		 	String wordimage = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization_network.getLogoId();
+			String organizationtypenetwork = organization_network.getExpandoBridge().getAttribute("Organization Type").toString();
+		 	if(organizationtypenetwork.equalsIgnoreCase("Biobank")) {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Biobank.png";
+		 		}
+		 	} else if (organizationtypenetwork.equalsIgnoreCase("Registry")) {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Registry.png";
+		 		}
+		 	} else if (organizationtypenetwork.equalsIgnoreCase("Network")) {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Network.png";
+		 		}
+		 	}
+			event = event.replaceAll("\\[\\$logoright\\$\\]", "<img style=\"height: 35px;\" id='countryflag' src=\"" + wordimage + "\" />");
+			
+			// long discription
+			String longtext = "<b>" + organization.getName() + "</b><br>"
+						+ organizationtype + "<br>"
+						+ "--Maincontact--" + "<br>";
+			
+			event = event.replaceAll("\\[\\$longtext\\$\\]", longtext);
+			// Slider class
+			event = event.replaceAll("\\[\\$sliderclass\\$\\]", "rdc-event-publish-slider");
+		} catch (Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [RDConnect-Events-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.portlet.event.EventFeed::eventfeed_view.jsp] Error in EventFeed View for Network Updated.");
+			e.printStackTrace();
+			error = true;
+		}
 	}
 	// Print event
-	%>
-	<%= event %>
-	<%
+	if(!error) {
+		%>
+		<%= event %>
+		<%
+	}
 }
 %>
 

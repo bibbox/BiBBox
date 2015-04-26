@@ -289,6 +289,12 @@ public class RDConnectEventLocalServiceUtil {
 		return getService().getEvents();
 	}
 
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent> getEventsByOrganizationIds(
+		java.util.List<java.lang.Long> idfilter)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEventsByOrganizationIds(idfilter);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

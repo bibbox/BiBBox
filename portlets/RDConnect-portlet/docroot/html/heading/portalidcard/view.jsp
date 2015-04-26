@@ -25,6 +25,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 <% 
 long BIOBANK_ASSESSMENT_ORGANIZATION = 26616;
 long CATALOG_ORGANIZATIONID = 10709;
+long NETWORK_ORGANIZATIONID = 70977;
 long organizationId = 0;
 long recordId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
@@ -349,7 +350,7 @@ if (currentGroup.isOrganization()) {
 	<!-- bottom -->
 	<div class="rdc_idcard_idcardbodybottom">
 		<%
-		if(organization.getParentOrganizationId() != CATALOG_ORGANIZATIONID && organization.getParentOrganizationId() != 15401) {
+		if(organization.getParentOrganizationId() != CATALOG_ORGANIZATIONID && organization.getParentOrganizationId() != 15401 && organization.getParentOrganizationId() != NETWORK_ORGANIZATIONID) {
 			shortdiscription = "<p style=\"color: red;text-align: center;font-size:20px;\">Organization was deleted</p>";
 			if(organization.getParentOrganizationId() == BIOBANK_ASSESSMENT_ORGANIZATION) {
 				shortdiscription = "<p style=\"color: red;text-align: center;font-size:20px;\">Biobank in Assessment</p>";

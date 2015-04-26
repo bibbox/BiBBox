@@ -90,5 +90,6 @@ create table rdconnect.networks (
 	organizationnetworkId LONG,
 	organizationId LONG,
 	relation VARCHAR(75) null,
+	externalnetworkId VARCHAR(75) null,
 	yearofestablishment VARCHAR(75) null
 );

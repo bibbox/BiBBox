@@ -52,6 +52,7 @@ public class NetworksWrapper implements Networks, ModelWrapper<Networks> {
 		attributes.put("organizationnetworkId", getOrganizationnetworkId());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("relation", getRelation());
+		attributes.put("externalnetworkId", getExternalnetworkId());
 		attributes.put("yearofestablishment", getYearofestablishment());
 
 		return attributes;
@@ -82,6 +83,12 @@ public class NetworksWrapper implements Networks, ModelWrapper<Networks> {
 
 		if (relation != null) {
 			setRelation(relation);
+		}
+
+		String externalnetworkId = (String)attributes.get("externalnetworkId");
+
+		if (externalnetworkId != null) {
+			setExternalnetworkId(externalnetworkId);
 		}
 
 		String yearofestablishment = (String)attributes.get(
@@ -190,6 +197,26 @@ public class NetworksWrapper implements Networks, ModelWrapper<Networks> {
 	@Override
 	public void setRelation(java.lang.String relation) {
 		_networks.setRelation(relation);
+	}
+
+	/**
+	* Returns the externalnetwork ID of this networks.
+	*
+	* @return the externalnetwork ID of this networks
+	*/
+	@Override
+	public java.lang.String getExternalnetworkId() {
+		return _networks.getExternalnetworkId();
+	}
+
+	/**
+	* Sets the externalnetwork ID of this networks.
+	*
+	* @param externalnetworkId the externalnetwork ID of this networks
+	*/
+	@Override
+	public void setExternalnetworkId(java.lang.String externalnetworkId) {
+		_networks.setExternalnetworkId(externalnetworkId);
 	}
 
 	/**

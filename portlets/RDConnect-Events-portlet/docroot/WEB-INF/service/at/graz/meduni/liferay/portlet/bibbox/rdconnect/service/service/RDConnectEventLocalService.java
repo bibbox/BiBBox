@@ -257,4 +257,9 @@ public interface RDConnectEventLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent> getEvents()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent> getEventsByOrganizationIds(
+		java.util.List<java.lang.Long> idfilter)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

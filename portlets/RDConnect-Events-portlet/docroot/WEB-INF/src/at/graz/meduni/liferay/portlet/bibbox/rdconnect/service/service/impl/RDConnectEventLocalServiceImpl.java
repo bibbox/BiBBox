@@ -18,7 +18,14 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Order;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent;
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.impl.RDConnectEventImpl;
@@ -68,7 +75,26 @@ public class RDConnectEventLocalServiceImpl
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public List<RDConnectEvent> getEvents() throws SystemException {
 		return rdConnectEventPersistence.findAll();
+	}
+	
+	/**
+	 * 
+	 */
+	public List<RDConnectEvent> getEventsByOrganizationIds(List<Long> idfilter) throws SystemException {
+		/*DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RDConnectEvent.class);
+		Criterion criterion = null;
+		criterion = RestrictionsFactoryUtil.in("organizationId", idfilter);
+		criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.in("organizationnetworkId", idfilter));
+		dynamicQuery.add(criterion);
+		Order order = OrderFactoryUtil.desc("networkId");
+		dynamicQuery.addOrder(order);
+		List<RDConnectEvent> event = RDConnectEventLocalServiceUtil.dynamicQuery(dynamicQuery);
+		return event;*/
+		return null;
 	}
 }

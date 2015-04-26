@@ -113,6 +113,7 @@
 		<property name="organizationnetworkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="relation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="externalnetworkId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="yearofestablishment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

@@ -76,6 +76,7 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 		attributes.put("organizationnetworkId", getOrganizationnetworkId());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("relation", getRelation());
+		attributes.put("externalnetworkId", getExternalnetworkId());
 		attributes.put("yearofestablishment", getYearofestablishment());
 
 		return attributes;
@@ -106,6 +107,12 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 
 		if (relation != null) {
 			setRelation(relation);
+		}
+
+		String externalnetworkId = (String)attributes.get("externalnetworkId");
+
+		if (externalnetworkId != null) {
+			setExternalnetworkId(externalnetworkId);
 		}
 
 		String yearofestablishment = (String)attributes.get(
@@ -210,6 +217,30 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 	}
 
 	@Override
+	public String getExternalnetworkId() {
+		return _externalnetworkId;
+	}
+
+	@Override
+	public void setExternalnetworkId(String externalnetworkId) {
+		_externalnetworkId = externalnetworkId;
+
+		if (_networksRemoteModel != null) {
+			try {
+				Class<?> clazz = _networksRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setExternalnetworkId",
+						String.class);
+
+				method.invoke(_networksRemoteModel, externalnetworkId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getYearofestablishment() {
 		return _yearofestablishment;
 	}
@@ -306,6 +337,7 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 		clone.setOrganizationnetworkId(getOrganizationnetworkId());
 		clone.setOrganizationId(getOrganizationId());
 		clone.setRelation(getRelation());
+		clone.setExternalnetworkId(getExternalnetworkId());
 		clone.setYearofestablishment(getYearofestablishment());
 
 		return clone;
@@ -355,7 +387,7 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{networkId=");
 		sb.append(getNetworkId());
@@ -365,6 +397,8 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 		sb.append(getOrganizationId());
 		sb.append(", relation=");
 		sb.append(getRelation());
+		sb.append(", externalnetworkId=");
+		sb.append(getExternalnetworkId());
 		sb.append(", yearofestablishment=");
 		sb.append(getYearofestablishment());
 		sb.append("}");
@@ -374,7 +408,7 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -398,6 +432,10 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 		sb.append(getRelation());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>externalnetworkId</column-name><column-value><![CDATA[");
+		sb.append(getExternalnetworkId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>yearofestablishment</column-name><column-value><![CDATA[");
 		sb.append(getYearofestablishment());
 		sb.append("]]></column-value></column>");
@@ -411,6 +449,7 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 	private long _organizationnetworkId;
 	private long _organizationId;
 	private String _relation;
+	private String _externalnetworkId;
 	private String _yearofestablishment;
 	private BaseModel<?> _networksRemoteModel;
 }

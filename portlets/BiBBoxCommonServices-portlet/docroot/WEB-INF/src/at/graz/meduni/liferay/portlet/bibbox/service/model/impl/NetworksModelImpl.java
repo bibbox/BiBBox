@@ -62,9 +62,10 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 			{ "organizationnetworkId", Types.BIGINT },
 			{ "organizationId", Types.BIGINT },
 			{ "relation", Types.VARCHAR },
+			{ "externalnetworkId", Types.VARCHAR },
 			{ "yearofestablishment", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.networks (networkId LONG not null primary key,organizationnetworkId LONG,organizationId LONG,relation VARCHAR(75) null,yearofestablishment VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.networks (networkId LONG not null primary key,organizationnetworkId LONG,organizationId LONG,relation VARCHAR(75) null,externalnetworkId VARCHAR(75) null,yearofestablishment VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.networks";
 	public static final String ORDER_BY_JPQL = " ORDER BY networks.networkId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.networks.networkId ASC";
@@ -77,7 +78,12 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.at.graz.meduni.liferay.portlet.bibbox.service.model.Networks"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.service.model.Networks"),
+			true);
+	public static long ORGANIZATIONID_COLUMN_BITMASK = 1L;
+	public static long ORGANIZATIONNETWORKID_COLUMN_BITMASK = 2L;
+	public static long NETWORKID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.meduni.liferay.portlet.bibbox.service.model.Networks"));
 
@@ -122,6 +128,7 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 		attributes.put("organizationnetworkId", getOrganizationnetworkId());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("relation", getRelation());
+		attributes.put("externalnetworkId", getExternalnetworkId());
 		attributes.put("yearofestablishment", getYearofestablishment());
 
 		return attributes;
@@ -154,6 +161,12 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 			setRelation(relation);
 		}
 
+		String externalnetworkId = (String)attributes.get("externalnetworkId");
+
+		if (externalnetworkId != null) {
+			setExternalnetworkId(externalnetworkId);
+		}
+
 		String yearofestablishment = (String)attributes.get(
 				"yearofestablishment");
 
@@ -179,7 +192,19 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 
 	@Override
 	public void setOrganizationnetworkId(long organizationnetworkId) {
+		_columnBitmask |= ORGANIZATIONNETWORKID_COLUMN_BITMASK;
+
+		if (!_setOriginalOrganizationnetworkId) {
+			_setOriginalOrganizationnetworkId = true;
+
+			_originalOrganizationnetworkId = _organizationnetworkId;
+		}
+
 		_organizationnetworkId = organizationnetworkId;
+	}
+
+	public long getOriginalOrganizationnetworkId() {
+		return _originalOrganizationnetworkId;
 	}
 
 	@Override
@@ -189,7 +214,19 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 
 	@Override
 	public void setOrganizationId(long organizationId) {
+		_columnBitmask |= ORGANIZATIONID_COLUMN_BITMASK;
+
+		if (!_setOriginalOrganizationId) {
+			_setOriginalOrganizationId = true;
+
+			_originalOrganizationId = _organizationId;
+		}
+
 		_organizationId = organizationId;
+	}
+
+	public long getOriginalOrganizationId() {
+		return _originalOrganizationId;
 	}
 
 	@Override
@@ -208,6 +245,21 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 	}
 
 	@Override
+	public String getExternalnetworkId() {
+		if (_externalnetworkId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _externalnetworkId;
+		}
+	}
+
+	@Override
+	public void setExternalnetworkId(String externalnetworkId) {
+		_externalnetworkId = externalnetworkId;
+	}
+
+	@Override
 	public String getYearofestablishment() {
 		if (_yearofestablishment == null) {
 			return StringPool.BLANK;
@@ -220,6 +272,10 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 	@Override
 	public void setYearofestablishment(String yearofestablishment) {
 		_yearofestablishment = yearofestablishment;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -253,6 +309,7 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 		networksImpl.setOrganizationnetworkId(getOrganizationnetworkId());
 		networksImpl.setOrganizationId(getOrganizationId());
 		networksImpl.setRelation(getRelation());
+		networksImpl.setExternalnetworkId(getExternalnetworkId());
 		networksImpl.setYearofestablishment(getYearofestablishment());
 
 		networksImpl.resetOriginalValues();
@@ -304,6 +361,17 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 
 	@Override
 	public void resetOriginalValues() {
+		NetworksModelImpl networksModelImpl = this;
+
+		networksModelImpl._originalOrganizationnetworkId = networksModelImpl._organizationnetworkId;
+
+		networksModelImpl._setOriginalOrganizationnetworkId = false;
+
+		networksModelImpl._originalOrganizationId = networksModelImpl._organizationId;
+
+		networksModelImpl._setOriginalOrganizationId = false;
+
+		networksModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -324,6 +392,14 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 			networksCacheModel.relation = null;
 		}
 
+		networksCacheModel.externalnetworkId = getExternalnetworkId();
+
+		String externalnetworkId = networksCacheModel.externalnetworkId;
+
+		if ((externalnetworkId != null) && (externalnetworkId.length() == 0)) {
+			networksCacheModel.externalnetworkId = null;
+		}
+
 		networksCacheModel.yearofestablishment = getYearofestablishment();
 
 		String yearofestablishment = networksCacheModel.yearofestablishment;
@@ -338,7 +414,7 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{networkId=");
 		sb.append(getNetworkId());
@@ -348,6 +424,8 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 		sb.append(getOrganizationId());
 		sb.append(", relation=");
 		sb.append(getRelation());
+		sb.append(", externalnetworkId=");
+		sb.append(getExternalnetworkId());
 		sb.append(", yearofestablishment=");
 		sb.append(getYearofestablishment());
 		sb.append("}");
@@ -357,7 +435,7 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -381,6 +459,10 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 		sb.append(getRelation());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>externalnetworkId</column-name><column-value><![CDATA[");
+		sb.append(getExternalnetworkId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>yearofestablishment</column-name><column-value><![CDATA[");
 		sb.append(getYearofestablishment());
 		sb.append("]]></column-value></column>");
@@ -396,8 +478,14 @@ public class NetworksModelImpl extends BaseModelImpl<Networks>
 		};
 	private long _networkId;
 	private long _organizationnetworkId;
+	private long _originalOrganizationnetworkId;
+	private boolean _setOriginalOrganizationnetworkId;
 	private long _organizationId;
+	private long _originalOrganizationId;
+	private boolean _setOriginalOrganizationId;
 	private String _relation;
+	private String _externalnetworkId;
 	private String _yearofestablishment;
+	private long _columnBitmask;
 	private Networks _escapedModel;
 }

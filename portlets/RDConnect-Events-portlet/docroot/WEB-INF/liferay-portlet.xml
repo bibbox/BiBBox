@@ -6,6 +6,7 @@
 	<portlet>
 		<portlet-name>event-feed</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.rdconnect.portlet.event.config.EventFeedConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
