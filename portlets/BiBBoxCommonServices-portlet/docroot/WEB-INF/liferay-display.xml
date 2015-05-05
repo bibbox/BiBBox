@@ -33,4 +33,7 @@
 		<portlet id="network-view-organizations"></portlet>
 		<portlet id="network-event-feed"></portlet>
 	</category>
+	<category name="BiBBox DDL">
+		<portlet id="dynamic-data-list-display-extended"></portlet>
+	</category>
 </display>

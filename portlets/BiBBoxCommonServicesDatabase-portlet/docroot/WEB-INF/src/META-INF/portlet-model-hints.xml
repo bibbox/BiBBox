@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration">
+		<field name="ddlconfigurationId" type="long" />
+		<field name="ddmstructureId" type="long" />
+		<field name="fieldname" type="String" />
+		<field name="group" type="String" />
+		<field name="display" type="boolean" />
+		<field name="viewscript" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="displaytip" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="viewtitlecss" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="viewvaluecss" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="columwidth" type="long" />
+		<field name="editscript" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="edittip" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
+</model-hints>

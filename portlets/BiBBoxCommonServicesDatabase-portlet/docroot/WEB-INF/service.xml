@@ -2,27 +2,32 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 <service-builder package-path="at.graz.meduni.liferay.portlet.bibbox">
 	<author>reihsr</author>
-	<namespace>bibboxcs</namespace>
+	<namespace>bibboxcsdb</namespace>
 
-	<entity name="DDLScopeConfig" local-service="true" remote-service="true" table="bibboxcs.ddlscopeconfig">
-		<column name="ddlscopeconfigId" primary="true" type="long"></column>
-		<column name="ddlscopename" type="String"></column>
-		<column name="structureId" type="long"></column>
-		<column name="ddlname" type="String"></column>
+	<entity name="DDLConfiguration" local-service="true" remote-service="true" table="bibboxcs.ddlconfiguration">
+		<!-- PK fields -->
+		<column name="ddlconfigurationId" primary="true" type="long"></column>
+		<!-- FK fields -->
+		<column name="ddmstructureId" type="long"></column>
+		<column name="fieldname" type="String"></column>
+		<!-- General Options -->
+		<column name="group" type="String"></column>
+		<column name="display" type="boolean"></column>
+		<!-- Display Options -->
+		<column name="viewscript" type="String"></column>
+		<column name="displaytip" type="String"></column>
+		<column name="viewtitlecss" type="String"></column>
+		<column name="viewvaluecss" type="String"></column>
+		<!-- Edit Options -->
+		<column name="columwidth" type="long"></column>
+		<column name="editscript" type="String"></column>
+		<column name="edittip" type="String"></column>
         <order by="desc">
-            <order-column name="structureId"></order-column>
+            <order-column name="ddlconfigurationId"></order-column>
         </order>
-        <finder return-type="Collection" name="ddlfinder">
-			<finder-column name="structureId"></finder-column>
-			<finder-column name="ddlname"></finder-column>
+        <finder name="FieldOptions" return-type="DDLConfiguration" >
+			<finder-column name="ddmstructureId" />
+			<finder-column name="fieldname" />
 		</finder>
-	</entity>
-	<entity name="DDLConfigOptions" local-service="true" remote-service="true" table="bibboxcs.ddlconfigoptions">
-		<column name="ddlconfigoptionId" primary="true" type="long"></column>
-		<column name="ddlscopeconfigId" type="long"></column>
-		<column name="ddlfieldname" type="String"></column>
-        <order by="desc">
-            <order-column name="ddlscopeconfigId"></order-column>
-        </order>
 	</entity>
 </service-builder>

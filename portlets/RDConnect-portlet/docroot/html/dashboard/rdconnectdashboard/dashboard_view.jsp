@@ -13,6 +13,9 @@
     height: 75px;
     width: 75px;
 }
+.aui .row {
+    margin-left: 0;
+}
 </style> 
 
 <%
@@ -48,4 +51,5 @@ for(Layout portlet_layout : portlet_layouts) {
 <%
 }
 %>
-</div>    
+</div>   
+</div> 

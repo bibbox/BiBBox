@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration" />
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.DDLConfigurationImpl" table="bibboxcs.ddlconfiguration">
+		<cache usage="read-write" />
+		<id name="ddlconfigurationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="ddmstructureId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fieldname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="group" type="com.liferay.portal.dao.orm.hibernate.StringType" column="group_" />
+		<property name="display" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="viewscript" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="displaytip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="viewtitlecss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="viewvaluecss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="columwidth" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="editscript" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="edittip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>
