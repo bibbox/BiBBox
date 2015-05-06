@@ -422,6 +422,8 @@
    text-align: right;
    padding-right: 0;
    color: #64666A;
+   font-size: 13px;
+   overflow: hidden;
 }
 .aui .bbmri-eric-member-area-top-menue-container-group5 ul:after {
    content: ""; 

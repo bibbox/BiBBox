@@ -135,7 +135,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 <div class="bbmri-eric-member-area-top-menue-container-group1">
    <ul>
       <% if(!g1.equalsIgnoreCase("")) { %>
-	      <li class="bbmri-eric-member-area-top-menue-container-group1-ul-li"><%= tg1 %><img style="margin-left: 2px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
+	      <li class="bbmri-eric-member-area-top-menue-container-group1-ul-li"><%= tg1 %><img style="margin-left: 1px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
 	         <ul>
 	            <%    
 	            for(Group group : groups) {
@@ -162,7 +162,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 <div class="bbmri-eric-member-area-top-menue-container-group2">
 	<ul>
 	  <% if(!g2.equalsIgnoreCase("")) { %>
-		<li class="bbmri-eric-member-area-top-menue-container-group2-ul-li"><%= tg2 %><img style="margin-left: 2px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
+		<li class="bbmri-eric-member-area-top-menue-container-group2-ul-li"><%= tg2 %><img style="margin-left: 1px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
 			<ul>
 				<% 
 					for(Group group : groups) {
@@ -199,7 +199,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 <div class="bbmri-eric-member-area-top-menue-container-group3">
    <ul>
       <% if(!g3.equalsIgnoreCase("")) { %>
-	      <li class="bbmri-eric-member-area-top-menue-container-group3-ul-li"><%= tg3 %><img style="margin-left: 2px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
+	      <li class="bbmri-eric-member-area-top-menue-container-group3-ul-li"><%= tg3 %><img style="margin-left: 1px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
 	         <ul>
 	            <% 
             
@@ -238,7 +238,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 <div class="bbmri-eric-member-area-top-menue-container-group4">
    <ul>
       <% if(!g4.equalsIgnoreCase("")) { %>
-	      <li class="bbmri-eric-member-area-top-menue-container-group4-ul-li"><%= tg4 %><img style="margin-left: 2px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
+	      <li class="bbmri-eric-member-area-top-menue-container-group4-ul-li"><%= tg4 %><img style="margin-left: 1px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
 	         <ul>
 	            <% 
             
@@ -276,7 +276,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 <div class="bbmri-eric-member-area-top-menue-container-group5">
    <ul>
       <% if(!g5.equalsIgnoreCase("")) { %>
-	      <li class="bbmri-eric-member-area-top-menue-container-group5-ul-li"><%= tg5 %><img style="margin-left: 2px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
+	      <li class="bbmri-eric-member-area-top-menue-container-group5-ul-li"><%= tg5 %><img style="margin-left: 1px;" src="<%=request.getContextPath()%>/images/arrow.png" height="5px" width="7px" />
 	         <ul>
 	            <% 
             
