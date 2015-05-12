@@ -4,7 +4,7 @@
 <liferay-theme:defineObjects />
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");;	
+String redirect = ParamUtil.getString(request, "redirect");	
 // Parameters for permission Checking
 long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();

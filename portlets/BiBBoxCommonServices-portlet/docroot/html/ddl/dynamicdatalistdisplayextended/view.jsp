@@ -71,9 +71,14 @@ boolean countFields_cfg = GetterUtil.getBoolean(portletPreferences.getValue("cou
 float countFieldsCutoff_cfg = GetterUtil.getFloat(portletPreferences.getValue("countFieldsCutoff", "0.8"));
 
 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-%>
 
-<%
+String redirect = PortalUtil.getCurrentURL(renderRequest);	
+//Parameters for permission Checking
+long groupId = scopeGroupId;
+String name = portletDisplay.getRootPortletId();
+String primKey = portletDisplay.getResourcePK();
+String actionId_add_diseasematrix = "EDIT_DDL_ENTRY";
+
 // Setup Organization
 long organizationId = 0;
 Organization organization = null;
@@ -94,6 +99,20 @@ for (DDLRecordSet recordset : recordsets) {
 		List<DDLRecord> records = recordset.getRecords();
 		for (DDLRecord record : records) {
 			%>
+			<c:choose>
+				<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">
+					<aui:button-row>
+						<portlet:renderURL var="editDDLEntryURL">
+							<portlet:param name="mvcPath" value="/html/ddl/dynamicdatalistdisplayextended/edit.jsp" />
+							<portlet:param name="recordsetId" value="<%= Long.toString(recordset.getRecordSetId()) %>" />
+							<portlet:param name="recordId" value="<%= Long.toString(record.getRecordId()) %>" />
+							<portlet:param name="redirect" value="<%= redirect %>" />
+						</portlet:renderURL>
+						<aui:button value="edit-ddl-entry" onClick="<%= editDDLEntryURL.toString() %>"/>
+					</aui:button-row>
+				</c:when>
+			</c:choose>
+			
 			<div style="clear: both;">
 			<div class="floatingddlcontainer clear">
 			<%
@@ -183,7 +202,7 @@ for (DDLRecordSet recordset : recordsets) {
 				} else {
 	 				if(field.getType().equalsIgnoreCase("text")) {
 						// Text
-						if(!field.getValue().toString().isEmpty()) {
+						if(field.getValue() != null && !field.getValue().toString().isEmpty()) {
 							counter_filled ++;
 						}
 						%>
@@ -214,20 +233,22 @@ for (DDLRecordSet recordset : recordsets) {
 					} else if(field.getType().equalsIgnoreCase("ddm-documentlibrary")) {
 						// Documents_and_Media
 						%>
-						<%= fieldtitle %> <%= field.getValue() %>
+						--<%= fieldtitle %> <%= field.getValue() %>
 						<%
 					} else if(field.getType().equalsIgnoreCase("ddm-text-html")) {
 						// HTML
+						String value = "";
 						if(!field.getValue().toString().isEmpty()) {
 							counter_filled ++;
+							value = field.getValue().toString().replaceAll("\\[\"", "").replaceAll("\"\\]", "");
 						}
 						%>
-						<div style="float: left;<%= titlecss %>"><%= fieldtitle %></div><div  style="float: left;<%= valuecss %>"><%= field.getValue() %></div>
+						<div style="float: left;<%= titlecss %>"><%= fieldtitle %></div><div  style="float: left;<%= valuecss %>"><%= value %></div>
 						<%
 					} else if(field.getType().equalsIgnoreCase("ddm-link-to-page")) {
 						// Link of to a page
 						%>
-						<%= fieldtitle %> <%= field.getValue() %>
+						--<%= fieldtitle %> <%= field.getValue() %>
 						<%
 					} else if(field.getType().equalsIgnoreCase("radio")) {
 						// Radio
@@ -268,7 +289,7 @@ for (DDLRecordSet recordset : recordsets) {
 					} else if(field.getType().equalsIgnoreCase("ddm-date")) {
 						// Date
 						String value = "";
-						if(field.getValue() != null) {
+						if(field != null && field.getValue() != null) {
 							counter_filled ++;
 							java.util.Date da = new java.util.Date(field.getValue().toString());
 							value = dateFormat.format(da);
