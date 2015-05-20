@@ -35,5 +35,6 @@
 	</category>
 	<category name="BiBBox DDL">
 		<portlet id="dynamic-data-list-display-extended"></portlet>
+		<portlet id="dynamic-data-list-config-extended"></portlet>
 	</category>
 </display>

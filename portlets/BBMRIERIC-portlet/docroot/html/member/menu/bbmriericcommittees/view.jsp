@@ -42,14 +42,14 @@ boolean project = false;
 List<String> groupsfornavigation = new ArrayList<String>();
 groupsfornavigation.add("PROJECTS");
 groupsfornavigation.add("GROUPS");
-groupsfornavigation.add("WORKING PARTIES");
-groupsfornavigation.add("WORKING GROUPS");
+groupsfornavigation.add("WP");
+groupsfornavigation.add("WG");
 groupsfornavigation.add("GOVERNANCE");
 
 HashMap<String, String> groupsfornavigationnaming = new HashMap<String, String>();
 groupsfornavigationnaming.put("GOVERNANCE", "committee");
-groupsfornavigationnaming.put("WORKING GROUPS", "working group");
-groupsfornavigationnaming.put("WORKING PARTIES", "working parties");
+groupsfornavigationnaming.put("WG", "working group");
+groupsfornavigationnaming.put("WP", "working parties");
 groupsfornavigationnaming.put("GROUPS", "ad-hoc working group");
 groupsfornavigationnaming.put("PROJECTS", "projects");
 
@@ -80,10 +80,10 @@ if(!committees) {
 	groupsfornavigation.remove(groupsfornavigation.indexOf("GOVERNANCE"));
 }
 if(!wg) {
-	groupsfornavigation.remove(groupsfornavigation.indexOf("WORKING GROUPS"));
+	groupsfornavigation.remove(groupsfornavigation.indexOf("WG"));
 }
 if(!wp) {
-	groupsfornavigation.remove(groupsfornavigation.indexOf("WORKING PARTIES"));
+	groupsfornavigation.remove(groupsfornavigation.indexOf("WP"));
 }
 if(!project) {
 	groupsfornavigation.remove(groupsfornavigation.indexOf("PROJECTS"));
@@ -143,7 +143,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 	               for(AssetTag tag : tags) {               
 		               if(tag.getName().equalsIgnoreCase(g1)) {	               
 		                  String url = themeDisplay.getURLPortal() + group.getPathFriendlyURL(false, themeDisplay) + group.getFriendlyURL();
-		                  String grouptitle = group.getDescriptiveName();
+		                  String grouptitle = group.getDescriptiveName().replaceAll("^WG ", "Working Group ").replaceAll("^WP ", "Working Party ");
 		                  %>
 		                  <li>
 		                    <aui:a href="<%= url %>"><%= grouptitle %></aui:a>
@@ -175,7 +175,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 			                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
 			                     
 			                     
-			                     String grouptitle = group.getDescriptiveName();
+			                     String grouptitle = group.getDescriptiveName().replaceAll("^WG ", "Working Group ").replaceAll("^WP ", "Working Party ");
 			                     /*if(state.equalsIgnoreCase("closed")) {
 			                       grouptitle = state + group.getDescriptiveName();
 			                     } else {
@@ -213,7 +213,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 		                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
 		                     
 		                     
-		                     String grouptitle = group.getDescriptiveName();
+		                     String grouptitle = group.getDescriptiveName().replaceAll("^WG ", "Working Group ").replaceAll("^WP ", "Working Party ");
 		                     /*if(state.equalsIgnoreCase("closed")) {
 		                       grouptitle = state + group.getDescriptiveName();
 		                     } else {
@@ -251,7 +251,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 		                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
 		                     
 		                     
-		                     String grouptitle = group.getDescriptiveName();
+		                     String grouptitle = group.getDescriptiveName().replaceAll("^WG ", "Working Group ").replaceAll("^WP ", "Working Party ");
 		                     /*if(state.equalsIgnoreCase("closed")) {
 		                       grouptitle = state + group.getDescriptiveName();
 		                     } else {
@@ -289,7 +289,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 		                     //String state = JSONFactoryUtil.deserialize(group.getExpandoBridge().getAttribute("state").toString()).toString();
 		                     
 		                     
-		                     String grouptitle = group.getDescriptiveName();
+		                     String grouptitle = group.getDescriptiveName().replaceAll("^WG ", "Working Group ").replaceAll("^WP ", "Working Party ");
 		                     /*if(state.equalsIgnoreCase("closed")) {
 		                       grouptitle = state + group.getDescriptiveName();
 		                     } else {

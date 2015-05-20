@@ -102,6 +102,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			String organizationurl = "";
 			HashMap<String, String> hits = null;
 			for(SearchIndex serachresult : serachresults) {
+				try {
 				if(oldorganizationid == 0 || oldorganizationid != serachresult.getOrganisationid()) {
 					if(hits != null) {
 						// Generate previous entry
@@ -208,6 +209,11 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 									highlightResult(serachresult.getKey(), keyword) + ": " + highlightResult(serachresult.getValue(), keyword));
 						}
 					}
+				}
+				} catch (Exception ex) {
+					//TODO add msg
+					System.err.println("TODO add msg");
+					ex.printStackTrace();
 				}
 			}
 			

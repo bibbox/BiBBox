@@ -35,6 +35,8 @@
 <!-- DDLs -->
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
 
 <!-- Website -->
 <%@ page import="com.liferay.portal.service.WebsiteLocalServiceUtil" %>

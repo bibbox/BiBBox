@@ -35,6 +35,10 @@
 		.rdc-event-publish-slider {
 			background-color: #6C846F;
 		}
+		
+		.rdc-event-organization-update {
+			background-color: #FF3333;
+		}
 
 		.rdc-event-container:hover #rdc-event-slide {
 	    	transition: 1s;
@@ -367,7 +371,7 @@ for(RDConnectEvent rdconnectevent : rdconnectevents) {
 			error = true;
 		}
 	} 
-	// Network Updated
+	// Network Updated !!!!!!!!!!!!!!Not OK
 	else if (rdconnectevent.getEventtype().equalsIgnoreCase("Network Updated")) {
 		try {
 			Organization organization = OrganizationLocalServiceUtil.getOrganization(rdconnectevent.getOrganizationId());
@@ -437,6 +441,35 @@ for(RDConnectEvent rdconnectevent : rdconnectevents) {
 			error = true;
 		}
 	}
+	// Add Organization Date Updated
+	else if(rdconnectevent.getEventtype().contains("Data Updated")) {
+		try {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(rdconnectevent.getOrganizationId());
+			// left organization logo
+			String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
+			String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+		 	if(organizationtype.equalsIgnoreCase("Biobank")) {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Biobank.png";
+		 		}
+		 	} else {
+		 		if(organization.getLogoId() == 0) {
+		 			imgPath = request.getContextPath() + "/images/Registry.png";
+		 		}
+		 	}
+		 	event = event.replaceAll("\\[\\$logoleft\\$\\]", "<img style=\"height: 35px;\" src=\"" + imgPath + "\" />");
+		 	// right country logo
+		 	String wordimage = request.getContextPath() + "/images/world.png";
+			event = event.replaceAll("\\[\\$logoright\\$\\]", "<img style=\"height: 35px;\" id='countryflag' src=\"" + wordimage + "\" />");
+			event = event.replaceAll("\\[\\$longtext\\$\\]", rdconnectevent.getLongtext());
+			// Slider class
+			event = event.replaceAll("\\[\\$sliderclass\\$\\]", "rdc-event-organization-update");
+		} catch (Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [RDConnect-Events-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.portlet.event.EventFeed::eventfeed_view.jsp] Error in EventFeed View for New Biobank Published/New Registry Published.");
+			e.printStackTrace();
+			error = true;
+		}
+	} 
 	// Print event
 	if(!error) {
 		%>

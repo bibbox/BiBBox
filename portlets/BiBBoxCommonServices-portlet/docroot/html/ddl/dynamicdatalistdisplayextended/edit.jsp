@@ -3,14 +3,20 @@
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
 
+<script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
+
 <style>
 .yui3-skin-sam .yui3-calendarnav-prevmonth span,.yui3-skin-sam .yui3-calendarnav-nextmonth span
 	{
 	display: inline;
 }
 
-.aui .notdisplayInput {
-	display: none;
+.aui .ddlnotdisplayInput {
+	visibility: hidden;
+}
+
+div[role=alert] {
+	color: red;
 }
 
 span.fieldnametip {
@@ -64,8 +70,55 @@ span:hover.fieldnametip span {
 	margin-left: -100px;
 	z-index: 999;
 }
-</style>
 
+.aui .custome-portlet-title {
+	font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.6;
+    margin: 0;
+    padding-right: 80px;
+}
+
+.aui .custome-portlet-title-text {
+    display: inline-block;
+    max-width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.aui .custome-portlet-tooltip-text {
+	font-size: 14px;
+	font-weight: normal;
+}
+</style>
+<%
+boolean headerenabled_cfg = GetterUtil.getBoolean(portletPreferences.getValue("headerenabled", "false"));
+String headertitle_cfg = GetterUtil.getString(portletPreferences.getValue("headertitle", ""));
+String headertooltip_cfg = GetterUtil.getString(portletPreferences.getValue("headertooltip", ""));
+//Parameters for permission Checking
+long groupId = scopeGroupId;
+String name = portletDisplay.getRootPortletId();
+String primKey = portletDisplay.getResourcePK();
+String actionId_add_diseasematrix = "EDIT_DDL_ENTRY";
+
+if(headerenabled_cfg) {
+%>
+
+	<header class="portlet-topper">
+		<h1 class="custome-portlet-title">
+			<span class="custome-portlet-title-text"><%= headertitle_cfg %></span>
+			<span class="fieldnametip custome-portlet-tooltip-text"><img src='<%= request.getContextPath() + "/images/icon_fragezeichen.png" %>' alt="?"><span><%= headertooltip_cfg %></span></span>
+		</h1>
+	</header>
+
+<%
+}
+%>
+<c:choose>
+	<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">
+<div class="portlet-content">
 <%
 	// Read data for edit
 long recordsetId = ParamUtil.getLong(request, "recordsetId");
@@ -112,6 +165,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			value='<%=String.valueOf(organizationId)%>' />
 		<aui:input type="hidden" name="scopegroupId"
 			value='<%=String.valueOf(scopegroupId)%>' />
+		
 		<aui:layout>
 
 			<%
@@ -151,30 +205,28 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 						boolean displayfiltershit = false;
 						if(!fieldconfiguration.getViewscript().equalsIgnoreCase("")) {
 							criterionjason += "{\"criterion\":[";
-						}
-						String seperate = "";
-						for(String displayfilter : displayfilters) {
-							String[] elments = displayfilter.split("§=§");
-							if(elments.length == 2) {
-								Field compare_field = record.getField(elments[0]);
-								if(!compare_field.getValue().toString().contains(elments[1])) {
-									displayfiltershit = true;
-								}
-								String type = fieldmap.get(fieldname).get("type");
-								if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("select")) {
-									if(fieldmap.get(fieldname).get("multiple").equalsIgnoreCase("true")) {
-										type += "multiple";
+							String seperate = "";
+							for(String displayfilter : displayfilters) {
+								String[] elments = displayfilter.split("§=§");
+								if(elments.length == 2) {
+									Field compare_field = record.getField(elments[0]);
+									if(compare_field != null && compare_field.getValue() != null && compare_field.getValue().toString().matches(".*" + elments[1] + ".*")) {
+										displayfiltershit = true;
 									}
+									String type = fieldmap.get(elments[0]).get("type");
+									if(fieldmap.get(elments[0]).get("type").equalsIgnoreCase("select")) {
+										if(fieldmap.get(elments[0]).get("multiple").equalsIgnoreCase("true")) {
+											type += "multiple";
+										}
+									}
+									criterionjason += seperate + "{ \"fieldname\":\"" + elments[0] + "\", \"fieldtype\":\"" + type + "\", \"fieldvalue\":\"" + elments[1] + "\" }";
+									seperate = ",";
 								}
-								criterionjason += seperate + "{ \"fieldname\":\"" + elments[0] + "\", \"fieldtype\":\"" + type + "\", \"fieldvalue\":\"" + elments[1] + "\" }";
-								seperate = ",";
 							}
-						}
-						if(!fieldconfiguration.getViewscript().equalsIgnoreCase("")) {
 							criterionjason += "]}";
-						}
-						if(displayfiltershit) {
-							startcssclass = "notdisplayInput";
+							if(!displayfiltershit) {
+								startcssclass = "ddlnotdisplayInput";
+							}
 						}
 					}
 					String fieldtitle = fieldmap.get(fieldname).get("label") + viewtip + ":";
@@ -210,14 +262,12 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 									value = field.getValue().toString().replaceAll("\\[\"", "").replaceAll("\"\\]", "");
 								}
 				%>
-				<aui:field-wrapper cssClass="<%=fieldname%>"
-					label="<%=fieldtitle%>">
-					<liferay-ui:input-editor cssClass="<%=fieldname%>"
-						toolbarSet="liferay-article" initMethod="initEditor" width="100%" />
+				<aui:field-wrapper cssClass="<%=fieldname%>" label="<%=fieldtitle%>">
+					<textarea name="<portlet:namespace /><%=fieldname%>"><%=value%></textarea>
+			        <script>
+			            CKEDITOR.replace( '<portlet:namespace /><%=fieldname%>' );
+			        </script>
 				</aui:field-wrapper>
-				<script type="text/javascript">
-							function <portlet:namespace />initEditor() { return '<%=value%>'; }
-						</script>
 				<%
 					} else if (fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-number")) {
 											// Number
@@ -226,8 +276,10 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 												value = field.getValue().toString();
 											}
 				%>
-				<aui:input cssClass='<%= fieldname + " form-control field-digits" %>' name="<%=fieldname%>"
-					label="<%=fieldtitle%>" value="<%=value%>" />
+				<aui:input cssClass='<%= fieldname %>' name="<%=fieldname%>"
+					label="<%=fieldtitle%>" value="<%=value%>" >
+					<aui:validator name="number"/>
+				</aui:input>
 				<%
 					} else if (fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-integer")) {
 											// Integer
@@ -237,7 +289,9 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 											}
 				%>
 				<aui:input cssClass="<%=fieldname%>" name="<%=fieldname%>"
-					label="<%=fieldtitle%>" value="<%=value%>" />
+					label="<%=fieldtitle%>" value="<%=value%>" >
+					<aui:validator name="digits"/>
+				</aui:input>
 				<%
 					} else if (fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-decimal")) {
 											// Decimal
@@ -247,7 +301,9 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 											}
 				%>
 				<aui:input cssClass="<%=fieldname%>" name="<%=fieldname%>"
-					label="<%=fieldtitle%>" value="<%=value%>" />
+					label="<%=fieldtitle%>" value="<%=value%>" >
+					<aui:validator name="number"/>
+				</aui:input>
 				<%
 					} else if (fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-date")) {
 											// Date
@@ -392,13 +448,14 @@ AUI.add('bibboxcs', function (A) {
 			var jsonData = JSON.parse(criterion);
 			var hide = false;
 			for (var i = 0; i < jsonData.criterion.length; i++) {
+			//alert(jsonData.criterion[i].fieldtype);
 				if(jsonData.criterion[i].fieldtype == "selectmultiple") {
 					if(A.bibboxcsEditScripts.MultiselectEditScript(jsonData.criterion[i].fieldname, jsonData.criterion[i].fieldvalue)) {
 						hide = true;
 					}
 					//alert("Multiselect: " + A.bibboxcsEditScripts.MultiselectEditScript(jsonData.criterion[i].fieldname, jsonData.criterion[i].fieldvalue));
 				} else {
-					if(A.bibboxcsEditScripts.MultiselectEditScript(jsonData.criterion[i].fieldname, jsonData.criterion[i].fieldvalue)) {
+					if(A.bibboxcsEditScripts.ValuesEditScript(jsonData.criterion[i].fieldname, jsonData.criterion[i].fieldvalue)) {
 						hide = true;
 					}
 					//alert("Other: " + A.bibboxcsEditScripts.ValuesEditScript(jsonData.criterion[i].fieldname, jsonData.criterion[i].fieldvalue));
@@ -411,35 +468,36 @@ AUI.add('bibboxcs', function (A) {
 			}
 		},
 		HideField: function(fieldname) {
-			A.all("." + fieldname).addClass('notdisplayInput');
+			A.all("." + fieldname).addClass('ddlnotdisplayInput');
 		},
 		UnhideField: function(fieldname) {
-			A.all("." + fieldname).removeClass('notdisplayInput');
+			A.all("." + fieldname).removeClass('ddlnotdisplayInput');
 		},
 		MultiselectEditScript: function (fieldname, fieldvalue){
  		   	var multiselect_values = '';
     		var multiselect=A.all("." + fieldname + " option:selected");
+    		var pattern = /fieldvalue/i;
     		multiselect.each(function (taskNode) {
  			   multiselect_values += taskNode.get('value') + ';';
  		   });
- 		   if(multiselect_values.indexOf(fieldvalue + ";") > -1) {
-				//alert(multiselect_values + " contains " + fieldvalue);
-				return true;
-			} else {
-				//alert(multiselect_values + " m!= " + fieldvalue);
-				return false;
-			}
+ 		   if(multiselect_values.search(fieldvalue) == -1) {
+ 		   		//alert(multiselect_values + " m!= " + fieldvalue);
+ 				return true;
+ 		   } else {
+ 		   		//alert(multiselect_values + " contains " + fieldvalue);
+ 		   		return false;
+ 		   }
 		},
 		ValuesEditScript: function (fieldname, fieldvalue){
 			var inputobject = "" + A.all("." + fieldname).get('value');
 			inputobject = inputobject.replace(/^,/i, "");
-			if(inputobject == fieldvalue) {
-				//alert(inputobject + " == " + fieldvalue);
-				return true;
-			} else {
-				//alert(inputobject + " != " + fieldvalue);
-				return false;
-			}
+			if(inputobject.search(fieldvalue) == -1) {
+ 		   		//alert(inputobject + " != " + fieldvalue);
+ 				return true;
+ 		   	} else {
+ 		   		//alert(inputobject + " == " + fieldvalue);
+ 		   		return false;
+ 		   	}
 		}
 	};
 });
@@ -494,3 +552,6 @@ AUI().use(
 	}
 	);
 </aui:script>
+</div>
+</c:when>
+</c:choose>

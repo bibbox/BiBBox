@@ -145,7 +145,7 @@
    top: 49px;
    left: 316px;
    z-index: 500;
-   width: 240px;
+   width: 300px;
    
    -webkit-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
@@ -218,7 +218,7 @@
    top: 49px;
    left: 448px;
    z-index: 500;
-   width: 240px;
+   width: 300px;
    
    -webkit-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
@@ -291,7 +291,7 @@
    top: 49px;
    left: 580px;
    z-index: 500;
-   width: 240px;
+   width: 300px;
    
    -webkit-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
@@ -364,7 +364,7 @@
    top: 49px;
    left: 712px;
    z-index: 500;
-   width: 240px;
+   width: 300px;
    
    -webkit-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
@@ -437,9 +437,9 @@
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 735px;
+   left: 720px;
    z-index: 500;
-   width: 240px;
+   width: 300px;
    
    -webkit-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
@@ -485,7 +485,7 @@
 }
 .bbmri-eric-member-area-top-menue-container-menu-user ul ul {
    display: none;
-   width: 240px;
+   width: 300px;
    background: #F4F6FB; 
    border-radius: 0px; 
    padding: 0;
@@ -504,7 +504,7 @@
    border-bottom: 1px solid #F4F6FB;
    position: relative;
    float: left;
-   width: 235px;
+   width: 295px;
    color: #64666A;
    padding-left: 5px;
    margin: 0;

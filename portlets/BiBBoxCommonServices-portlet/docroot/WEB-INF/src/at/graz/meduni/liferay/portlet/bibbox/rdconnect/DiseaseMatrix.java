@@ -298,6 +298,9 @@ public class DiseaseMatrix extends MVCPortlet {
 	 */
 	private void readXLSFile(InputStream file, long organizationId, ActionRequest request) throws IOException, PortalException, SystemException {
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+		// Update Modified date
+		organization.setModifiedDate(new Date());
+		OrganizationLocalServiceUtil.updateOrganization(organization);
 
 		List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> diseasematrixlist = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organizationId, -1, -1);
 		HashSet<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> deletelist = new HashSet<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix>();
@@ -535,7 +538,10 @@ public class DiseaseMatrix extends MVCPortlet {
 	 */
 	private void readXLSXFile(InputStream file, long organizationId, ActionRequest request) throws IOException, PortalException, SystemException {
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-
+		// Update Modified date
+		organization.setModifiedDate(new Date());
+		OrganizationLocalServiceUtil.updateOrganization(organization);
+		
 		List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> diseasematrixlist = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organizationId, -1, -1);
 		HashSet<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> deletelist = new HashSet<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix>();
 		for(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrixlistentry : diseasematrixlist) {

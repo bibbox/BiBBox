@@ -9,9 +9,13 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil;
+
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
@@ -53,13 +57,12 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 			DDLRecordSet recordset = DDLRecordSetLocalServiceUtil.getDDLRecordSet(recordsetId);
 			DDLRecord record = DDLRecordLocalServiceUtil.getDDLRecord(recordId);
 			Map<String, Map<String, String>> fieldmap = recordset.getDDMStructure().getFieldsMap();
+			String fieldschanged = "";
 			
-			ServiceContext serviceContext = new ServiceContext();
-			
+			ServiceContext serviceContext = new ServiceContext();	
 	        serviceContext.setAddGroupPermissions(true);
 	        serviceContext.setAddGuestPermissions(true);
-	        serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
-	        
+	        serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());        
 	        serviceContext.setUserId(themeDisplay.getUserId());
 
 			Map<String, Map<String, String>> fieldmap_options = null;
@@ -78,6 +81,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 					continue;
 				}
 				try {
+					String newfieldvalue = "";
 					if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("select")) {
 						// Select
 						if(fieldmap.get(fieldname).get("multiple").equalsIgnoreCase("true")) {
@@ -97,6 +101,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 							//System.out.println(fieldvalue);
 							Field field_new = new Field(fieldname, fieldvalue);
 							fields.put(field_new);
+							newfieldvalue = fieldvalue;
 						} else {
 							// Dropbox
 							String value = ParamUtil.getString(request, fieldname);
@@ -105,6 +110,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 							}
 							Field field_new = new Field(fieldname, "[\"" + value + "\"]");
 							fields.put(field_new);
+							newfieldvalue = "[\"" + value + "\"]";
 						}
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("text")) {
 						String value = ParamUtil.getString(request, fieldname);
@@ -113,6 +119,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 						}
 						Field field_new = new Field(fieldname, value);
 						fields.put(field_new);
+						newfieldvalue = value;
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("textarea")) {
 						String value = ParamUtil.getString(request, fieldname);
 						if(value == null) {
@@ -120,6 +127,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 						}
 						Field field_new = new Field(fieldname, value);
 						fields.put(field_new);
+						newfieldvalue = value;
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-text-html")) {
 						String value = ParamUtil.getString(request, fieldname);
 						if(value == null) {
@@ -127,6 +135,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 						}
 						Field field_new = new Field(fieldname, "[\"" + value + "\"]");
 						fields.put(field_new);
+						newfieldvalue = "[\"" + value + "\"]";
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-number")) {
 						String value = ParamUtil.getString(request, fieldname);
 						if(value == null) {
@@ -134,6 +143,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 						}
 						Field field_new = new Field(fieldname, value);
 						fields.put(field_new);
+						newfieldvalue = value;
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-integer")) {
 						String value = ParamUtil.getString(request, fieldname);
 						if(value == null) {
@@ -141,6 +151,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 						}
 						Field field_new = new Field(fieldname, value);
 						fields.put(field_new);
+						newfieldvalue = value;
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-decimal")) {
 						String value = ParamUtil.getString(request, fieldname);
 						if(value == null) {
@@ -148,11 +159,12 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 						}
 						Field field_new = new Field(fieldname, value);
 						fields.put(field_new);
+						newfieldvalue = value;
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("ddm-date")) {
 						Date valuedate = ParamUtil.getDate(request, fieldname, dateFormat);
-						System.out.println(dateFormat.format(valuedate) + " - " + valuedate.getTime());
 						Field field_new = new Field(fieldname, valuedate.getTime());
 						fields.put(field_new);
+						newfieldvalue = String.valueOf(valuedate);
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("checkbox")) {
 						String value = ParamUtil.getString(request, fieldname);
 						if(value == null) {
@@ -160,6 +172,7 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 						}
 						Field field_new = new Field(fieldname, value);
 						fields.put(field_new);
+						newfieldvalue = value;
 					} else if(fieldmap.get(fieldname).get("type").equalsIgnoreCase("radio")) {
 						String value = ParamUtil.getString(request, fieldname);
 						if(value == null) {
@@ -167,6 +180,24 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 						}
 						Field field_new = new Field(fieldname, value);
 						fields.put(field_new);
+						newfieldvalue = value;
+					}
+					// Determine if there was an update on a value.
+					Field field_old = record.getField(fieldname);
+					Field field_new = fields.get(fieldname);
+					if(field_new != null && field_new.getValue() != null) {
+						if(field_old != null && field_old.getValue() != null) {
+							String oldvalue = field_old.getValue().toString();
+							if(!oldvalue.equalsIgnoreCase(newfieldvalue)) {
+								fieldschanged = "<br>" + fieldname + " answer changed from " + oldvalue + " to " + newfieldvalue + ".";
+								System.out.println(fieldschanged);
+							}
+						} else {
+							if(!newfieldvalue.equalsIgnoreCase("")) {
+								fieldschanged = "<br>" + fieldname + " new answer: " + newfieldvalue;
+								System.out.println(fieldschanged);
+							}
+						}
 					}
 				} catch(Exception ex) {
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.ddl.DynamicDataListDisplayExtended::updateDDL] Error wihle Updating DDL field: " + fieldname + ".");
@@ -174,11 +205,54 @@ public class DynamicDataListDisplayExtended extends MVCPortlet {
 				}
 			}
 			DDLRecordLocalServiceUtil.updateRecord(themeDisplay.getUserId(), recordId, false, record.getDisplayIndex(), fields, false, serviceContext);
-			// Update Modivide date of Organization
+			// Update Modified date of Organization
 			// Add event for Organization
+			if(organizationId != 0) {
+				Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+				// Update Modified date
+				organization.setModifiedDate(new Date());
+				OrganizationLocalServiceUtil.updateOrganization(organization);
+				
+				// Add event for Organization
+				if(fieldschanged.equalsIgnoreCase("")) {
+					fieldschanged = "<br>No Items have changed.";
+				}
+				
+				String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+				String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+			 	if(organizationtype.equalsIgnoreCase("Biobank")) {
+			 		orgPath = orgPath + "/bb_home";
+			 	} else if (organizationtype.equalsIgnoreCase("Registry")) {
+			 		orgPath = orgPath + "/reg_home";
+			 	} else if (organizationtype.equalsIgnoreCase("Network")) {
+			 		orgPath = orgPath + "/home";
+			 	}
+				
+				String eventtype = "Data Updated: " + "[url organization " + organizationId + "]" + organization.getName() + "[urlend]";
+				String shorttext = "[url organization " + organizationId + "]" + organization.getName() + "[urlend] updated the fields in " + recordset.getName();
+				String longtext = themeDisplay.getUser().getFullName() + " updated the fields in " + recordset.getName() + " for [url organization " + organizationId + "]" + organization.getName() + "[urlend]." + fieldschanged;
+				String link = "";
+				String restricted = "false";
+				addEventEntry(eventtype, new Date(), organizationId, themeDisplay.getUserId(), shorttext, longtext, link, restricted);
+			}
 		} catch(Exception ex) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.ddl.DynamicDataListDisplayExtended::updateDDL] Error wihle Updating DDL.");
 			ex.printStackTrace();
 		}
+	}
+	
+	/**
+	 * RD-Connect Event System add event entry
+	 * 
+	 * @param eventdate
+	 * @param organizationId
+	 * @param userId
+	 * @param shorttext
+	 * @param longtext
+	 * @param link
+	 * @param restricted
+	 */
+	private void addEventEntry(String eventtype, Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted) {
+		RDConnectEventLocalServiceUtil.createEvent(eventtype, eventdate, organizationId, userId, shorttext, longtext, link, restricted);
 	}
 }

@@ -62,9 +62,34 @@ span:hover.fieldnametip span {
   margin-left: -100px;
   z-index: 999;
 }
+
+.aui .custome-portlet-title {
+	font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.6;
+    margin: 0;
+    padding-right: 80px;
+}
+
+.aui .custome-portlet-title-text {
+    display: inline-block;
+    max-width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.aui .custome-portlet-tooltip-text {
+	font-size: 14px;
+	font-weight: normal;
+}
 </style>
 
 <%
+boolean headerenabled_cfg = GetterUtil.getBoolean(portletPreferences.getValue("headerenabled", "false"));
+String headertitle_cfg = GetterUtil.getString(portletPreferences.getValue("headertitle", ""));
+String headertooltip_cfg = GetterUtil.getString(portletPreferences.getValue("headertooltip", ""));
 // Get Configurations
 String recordname_cfg = GetterUtil.getString(portletPreferences.getValue("recordname", ""));
 boolean countFields_cfg = GetterUtil.getBoolean(portletPreferences.getValue("countFields", "false"));
@@ -78,6 +103,7 @@ long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 String actionId_add_diseasematrix = "EDIT_DDL_ENTRY";
+String editimgpath = "/images/pencil-v4.png";
 
 // Setup Organization
 long organizationId = 0;
@@ -88,41 +114,59 @@ if (currentGroup.isOrganization()) {
   	organizationId = currentGroup.getClassPK();
   	organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 }
-%>
-
-<h3>Record Name: <%= recordname_cfg %></h3><br>
-
-<% 
+ 
 List<DDLRecordSet> recordsets = DDLRecordSetLocalServiceUtil.getRecordSets(scopeGroupId);
 for (DDLRecordSet recordset : recordsets) {
 	if(recordname_cfg.equalsIgnoreCase(recordset.getNameCurrentValue())) {
 		List<DDLRecord> records = recordset.getRecords();
 		for (DDLRecord record : records) {
+			if(headerenabled_cfg) {
+				%>
+				<header class="portlet-topper">
+					<h1 class="custome-portlet-title" style="padding-right: 0;">
+						<span class="custome-portlet-title-text"><%= headertitle_cfg %></span>
+						<span class="fieldnametip custome-portlet-tooltip-text"><img src='<%= request.getContextPath() + "/images/icon_fragezeichen.png" %>' alt="?"><span><%= headertooltip_cfg %></span></span>
+						<c:choose>
+							<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">
+								<portlet:renderURL var="editDDLEntryURL">
+									<portlet:param name="mvcPath" value="/html/ddl/dynamicdatalistdisplayextended/edit.jsp" />
+									<portlet:param name="recordsetId" value="<%= Long.toString(recordset.getRecordSetId()) %>" />
+									<portlet:param name="recordId" value="<%= Long.toString(record.getRecordId()) %>" />
+									<portlet:param name="redirect" value="<%= redirect %>" />
+								</portlet:renderURL>
+								<span style="float:right; margin-right: 20px;"><aui:a href="<%= editDDLEntryURL %>"><img style="width: 14px;height: 14px;" alt="logo" src="<%= editimgpath %>" width="14px" height="14px" /></aui:a></span>
+							</c:when>
+						</c:choose>
+					</h1>
+				</header>
+
+				<%
+			} else {
+				%>			
+				<c:choose>
+					<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">
+						<aui:button-row>
+							<portlet:renderURL var="editDDLEntryURL">
+								<portlet:param name="mvcPath" value="/html/ddl/dynamicdatalistdisplayextended/edit.jsp" />
+								<portlet:param name="recordsetId" value="<%= Long.toString(recordset.getRecordSetId()) %>" />
+								<portlet:param name="recordId" value="<%= Long.toString(record.getRecordId()) %>" />
+								<portlet:param name="redirect" value="<%= redirect %>" />
+							</portlet:renderURL>
+							<aui:button value="edit-ddl-entry" onClick="<%= editDDLEntryURL.toString() %>"/>
+						</aui:button-row>
+					</c:when>
+				</c:choose>
+				
+				<%
+			}
 			%>
-			<c:choose>
-				<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix) %>">
-					<aui:button-row>
-						<portlet:renderURL var="editDDLEntryURL">
-							<portlet:param name="mvcPath" value="/html/ddl/dynamicdatalistdisplayextended/edit.jsp" />
-							<portlet:param name="recordsetId" value="<%= Long.toString(recordset.getRecordSetId()) %>" />
-							<portlet:param name="recordId" value="<%= Long.toString(record.getRecordId()) %>" />
-							<portlet:param name="redirect" value="<%= redirect %>" />
-						</portlet:renderURL>
-						<aui:button value="edit-ddl-entry" onClick="<%= editDDLEntryURL.toString() %>"/>
-					</aui:button-row>
-				</c:when>
-			</c:choose>
+			
+			<div class="portlet-content">
 			
 			<div style="clear: both;">
 			<div class="floatingddlcontainer clear">
 			<%
 			Map<String, Map<String, String>> fieldmap = recordset.getDDMStructure().getFieldsMap();
-			/*for(String key : fieldmap.keySet()) {
-				System.out.println(key);
-				for(String key2 : fieldmap.get(key).keySet()) {
-					System.out.println("  " + key2 + " - " + fieldmap.get(key).get(key2));
-				}
-			}*/
 
 			Map<String, Map<String, String>> fieldmap_options = null;
 			fieldmap_options = recordset.getDDMStructure().getTransientFieldsMap(themeDisplay.getLocale().toString());
@@ -155,23 +199,25 @@ for (DDLRecordSet recordset : recordsets) {
 					
 					// Display Filter
 					String[] displayfilters = fieldconfiguration.getViewscript().split("§statement§");
-					boolean displayfiltershit = false;
-					for(String displayfilter : displayfilters) {
-						String[] elments = displayfilter.split("§=§");
-						if(elments.length == 2) {
-							Field compare_field = record.getField(elments[0]);
-							if(!compare_field.getValue().toString().contains(elments[1])) {
-								displayfiltershit = true;
+					if(!fieldconfiguration.getViewscript().equalsIgnoreCase("")) {
+						boolean displayfiltershit = false;
+						for(String displayfilter : displayfilters) {
+							String[] elments = displayfilter.split("§=§");
+							if(elments.length == 2) {
+								Field compare_field = record.getField(elments[0]);
+								if(compare_field != null && compare_field.getValue() != null && compare_field.getValue().toString().matches(".*" + elments[1] + ".*")) {
+									displayfiltershit = true;
+								}
 							}
 						}
-					}
-					if(displayfiltershit) {
-						continue;
+						if(!displayfiltershit) {
+							continue;
+						}
 					}
 					
 					// Configuration Display Styles
 					if(fieldconfiguration.getColumwidth() != 0) {
-						cssclasselementwidth = "width: " + fieldconfiguration.getColumwidth() + "%;";
+						//cssclasselementwidth = "width: " + fieldconfiguration.getColumwidth() + "%;";
 					}
 					titlecss = fieldconfiguration.getViewtitlecss();
 					valuecss = fieldconfiguration.getViewvaluecss();
@@ -305,6 +351,7 @@ for (DDLRecordSet recordset : recordsets) {
 							<div style="float: left;<%= titlecss %>"><%= fieldtitle %></div>
 							<div  style="float: left;<%= valuecss %>">
 								<%
+								boolean hitcounter = false;
 								String newline = "";
 								String[] field_options_options = field.getValue().toString().replaceAll("\\[\"", "").replaceAll("\"\\]", "").split("\",\"");
 								for(String field_options_option : field_options_options) {
@@ -312,12 +359,21 @@ for (DDLRecordSet recordset : recordsets) {
 									<%= newline %><%= field_options.get(fieldname).get(field_options_option) %>
 									<%
 									newline = "<br>";
+									if(!field_options_option.equalsIgnoreCase("not specified")) {
+										hitcounter = true;
+									}
+								}
+								if(hitcounter) {
+									counter_filled ++;
 								}
 								%>
 							</div>
 							<%
 						} else {
 							// Dropdown
+							if(field != null && field.getValue() != null && !field.getValue().toString().replaceAll("\\[\"", "").replaceAll("\"\\]", "").equalsIgnoreCase("not specified")) {
+								counter_filled ++;
+							}
 							%>
 							<div style="float: left;<%= titlecss %>"><%= fieldtitle %></div><div  style="float: left;<%= valuecss %>"><%= field_options.get(fieldname).get(field.getValue().toString().replaceAll("\\[\"", "").replaceAll("\"\\]", "")) %></div>
 							<%
@@ -346,6 +402,7 @@ for (DDLRecordSet recordset : recordsets) {
 			}
 			%>
 			<span class="modifieddateforddl">v<%= record.getVersion() %> | <%= dateFormat.format(record.getModifiedDate()) %></span>
+			</div>
 			<%
 		}
 	}
