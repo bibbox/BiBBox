@@ -76,6 +76,58 @@ public class rdconnectServiceSoap {
 		}
 	}
 
+	public static void updateregbb(long organizationId,
+		com.liferay.portal.kernel.json.JSONObject json)
+		throws RemoteException {
+		try {
+			rdconnectServiceUtil.updateregbb(organizationId, json);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void updateregbb2(long organizationId)
+		throws RemoteException {
+		try {
+			rdconnectServiceUtil.updateregbb2(organizationId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void updatedisease(long organizationId,
+		java.lang.String diseasename, java.lang.String count)
+		throws RemoteException {
+		try {
+			rdconnectServiceUtil.updatedisease(organizationId, diseasename,
+				count);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void updatedisease(long organizationId, long diseasematrixId,
+		java.lang.String count) throws RemoteException {
+		try {
+			rdconnectServiceUtil.updatedisease(organizationId, diseasematrixId,
+				count);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String regbb(long organizationId)
 		throws RemoteException {
 		try {

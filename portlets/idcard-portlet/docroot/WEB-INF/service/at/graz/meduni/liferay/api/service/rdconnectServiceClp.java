@@ -36,21 +36,41 @@ public class rdconnectServiceClp implements rdconnectService {
 
 		_methodParameterTypes3 = new String[] {  };
 
-		_methodName4 = "regbb";
+		_methodName4 = "updateregbb";
 
-		_methodParameterTypes4 = new String[] { "long" };
+		_methodParameterTypes4 = new String[] {
+				"long", "com.liferay.portal.kernel.json.JSONObject"
+			};
 
-		_methodName5 = "regbbs";
+		_methodName5 = "updateregbb2";
 
-		_methodParameterTypes5 = new String[] {  };
+		_methodParameterTypes5 = new String[] { "long" };
 
-		_methodName6 = "regs";
+		_methodName6 = "updatedisease";
 
-		_methodParameterTypes6 = new String[] {  };
+		_methodParameterTypes6 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
 
-		_methodName7 = "bbs";
+		_methodName7 = "updatedisease";
 
-		_methodParameterTypes7 = new String[] {  };
+		_methodParameterTypes7 = new String[] { "long", "long", "java.lang.String" };
+
+		_methodName8 = "regbb";
+
+		_methodParameterTypes8 = new String[] { "long" };
+
+		_methodName9 = "regbbs";
+
+		_methodParameterTypes9 = new String[] {  };
+
+		_methodName10 = "regs";
+
+		_methodParameterTypes10 = new String[] {  };
+
+		_methodName11 = "bbs";
+
+		_methodParameterTypes11 = new String[] {  };
 	}
 
 	@Override
@@ -137,12 +157,107 @@ public class rdconnectServiceClp implements rdconnectService {
 	}
 
 	@Override
+	public void updateregbb(long organizationId,
+		com.liferay.portal.kernel.json.JSONObject json) {
+		try {
+			_invokableService.invokeMethod(_methodName4,
+				_methodParameterTypes4,
+				new Object[] { organizationId, ClpSerializer.translateInput(
+						json) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void updateregbb2(long organizationId) {
+		try {
+			_invokableService.invokeMethod(_methodName5,
+				_methodParameterTypes5, new Object[] { organizationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void updatedisease(long organizationId,
+		java.lang.String diseasename, java.lang.String count) {
+		try {
+			_invokableService.invokeMethod(_methodName6,
+				_methodParameterTypes6,
+				new Object[] {
+					organizationId,
+					
+				ClpSerializer.translateInput(diseasename),
+					
+				ClpSerializer.translateInput(count)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void updatedisease(long organizationId, long diseasematrixId,
+		java.lang.String count) {
+		try {
+			_invokableService.invokeMethod(_methodName7,
+				_methodParameterTypes7,
+				new Object[] {
+					organizationId,
+					
+				diseasematrixId,
+					
+				ClpSerializer.translateInput(count)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
 	public com.liferay.portal.kernel.json.JSONObject regbb(long organizationId) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4, new Object[] { organizationId });
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] { organizationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -164,8 +279,8 @@ public class rdconnectServiceClp implements rdconnectService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5, new Object[] {  });
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -187,8 +302,8 @@ public class rdconnectServiceClp implements rdconnectService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] {  });
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -210,8 +325,8 @@ public class rdconnectServiceClp implements rdconnectService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] {  });
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -243,4 +358,12 @@ public class rdconnectServiceClp implements rdconnectService {
 	private String[] _methodParameterTypes6;
 	private String _methodName7;
 	private String[] _methodParameterTypes7;
+	private String _methodName8;
+	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
+	private String _methodName11;
+	private String[] _methodParameterTypes11;
 }

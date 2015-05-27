@@ -152,8 +152,7 @@ int counter_filled = 0;
 String group = "";
 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 %>
-<portlet:actionURL name="updateDDL" var="updateDDLURL"
-	windowState="normal" />
+<portlet:actionURL name="updateDDL" var="updateDDLURL" windowState="normal" />
 <aui:form action="<%=updateDDLURL%>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%=redirect%>" />

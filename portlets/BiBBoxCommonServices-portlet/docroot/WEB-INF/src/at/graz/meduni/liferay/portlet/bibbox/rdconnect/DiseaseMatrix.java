@@ -77,6 +77,14 @@ public class DiseaseMatrix extends MVCPortlet {
 
 		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrix = DiseaseMatrixLocalServiceUtil.diseaseMatrixFromRequest(request);
 		DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(diseasematrix);
+		
+		long organizationId = ParamUtil.getLong(request, "organizationId");
+		if(organizationId != 0) {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+			// Update Modified date
+			organization.setModifiedDate(new Date());
+			OrganizationLocalServiceUtil.updateOrganization(organization);
+		}
 
 		sendRedirect(request, response);
 	}
@@ -86,9 +94,17 @@ public class DiseaseMatrix extends MVCPortlet {
 	 * 
 	 */
 	public void updateDiseaseMatrix(ActionRequest request, ActionResponse response) throws Exception {
-
 		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasematrix = DiseaseMatrixLocalServiceUtil.diseaseMatrixFromRequest(request);
 		DiseaseMatrixLocalServiceUtil.updateDiseaseMatrix(diseasematrix);
+		
+		long organizationId = ParamUtil.getLong(request, "organizationId");
+		if(organizationId != 0) {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+			// Update Modified date
+			organization.setModifiedDate(new Date());
+			OrganizationLocalServiceUtil.updateOrganization(organization);
+		}
+		
 		sendRedirect(request, response);
 	}
 
@@ -100,6 +116,7 @@ public class DiseaseMatrix extends MVCPortlet {
 
 		long diseasematrixId = ParamUtil.getLong(request, "diseasematrixId");
 		DiseaseMatrixLocalServiceUtil.deleteDiseaseMatrix(diseasematrixId);
+		
 		sendRedirect(request, response);
 	}
 
@@ -274,6 +291,14 @@ public class DiseaseMatrix extends MVCPortlet {
 				// TODO Auto-generated catch block
 				System.err.println("Error on Reading File" + e.getMessage());
 			}
+			
+			if(organisation_id != 0) {
+				Organization organization = OrganizationLocalServiceUtil.getOrganization(organisation_id);
+				// Update Modified date
+				organization.setModifiedDate(new Date());
+				OrganizationLocalServiceUtil.updateOrganization(organization);
+			}
+			
 			if(upreq.getFile("fileupload").toString().endsWith("xls")) {
 				readXLSFile(inputStream, organisation_id, request);
 			} else if(upreq.getFile("fileupload").toString().endsWith("xlsx")) {

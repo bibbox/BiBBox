@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
@@ -64,6 +65,55 @@ public class rdconnectServiceImpl extends rdconnectServiceBaseImpl {
 	 */
 	public rdconnect getRdconnect() throws PortalException, SystemException {
 		return rdconnectLocalServiceUtil.getrdconnect(1);
+	}
+	
+	@JSONWebService(value = "updateregbb", method = "POST")
+	public void updateregbb(long organizationId, JSONObject json) {
+		System.out.println("-updateRegbb-" + organizationId + " - " + json.toString());
+		//, JSONObject json
+
+	}
+	
+	@JSONWebService(value = "updateregbb2", method = "POST")
+	public void updateregbb2(long organizationId) {
+		System.out.println("-updateRegbb2-" + organizationId);
+		//, JSONObject json
+
+	}
+	
+	@JSONWebService(value = "updatedisease", method = "POST")
+	public void updatedisease(long organizationId, String diseasename, String count) {
+		System.out.println("-updatedisease-" + organizationId + " - " + diseasename + " - " + count);
+		if(organizationId == 11729 || organizationId == 16016 || organizationId == 61401 || organizationId == 41081) {
+			try {
+				List<DiseaseMatrix> diseaseMatrixList = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organizationId, -1, -1);
+				for(DiseaseMatrix diseaseMatrix : diseaseMatrixList) {
+					if(diseaseMatrix.getDiseasename().equalsIgnoreCase(diseasename)) {
+						diseaseMatrix.setPatientcount(count);
+						DiseaseMatrixLocalServiceUtil.updateDiseaseMatrix(diseaseMatrix);
+					}
+				}
+			} catch(Exception e) {
+				System.out.println("ERROR: rdconnectServiceImpl::updatedisease(long organizationId, long diseasematrixId, String count)");
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@JSONWebService(value = "updatedisease", method = "POST")
+	public void updatedisease(long organizationId, long diseasematrixId, String count) {
+		if(organizationId == 11729 || organizationId == 16016 || organizationId == 61401 || organizationId == 41081) {
+			try {
+				DiseaseMatrix diseaseMatrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(diseasematrixId);
+				if(diseaseMatrix.getOrganizationId() == organizationId) {
+					diseaseMatrix.setPatientcount(count);
+					DiseaseMatrixLocalServiceUtil.updateDiseaseMatrix(diseaseMatrix);
+				}
+			} catch(Exception e) {
+				System.out.println("ERROR: rdconnectServiceImpl::updatedisease(long organizationId, long diseasematrixId, String count)");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**

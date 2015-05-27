@@ -64,6 +64,29 @@ public class rdconnectServiceWrapper implements rdconnectService,
 	}
 
 	@Override
+	public void updateregbb(long organizationId,
+		com.liferay.portal.kernel.json.JSONObject json) {
+		_rdconnectService.updateregbb(organizationId, json);
+	}
+
+	@Override
+	public void updateregbb2(long organizationId) {
+		_rdconnectService.updateregbb2(organizationId);
+	}
+
+	@Override
+	public void updatedisease(long organizationId,
+		java.lang.String diseasename, java.lang.String count) {
+		_rdconnectService.updatedisease(organizationId, diseasename, count);
+	}
+
+	@Override
+	public void updatedisease(long organizationId, long diseasematrixId,
+		java.lang.String count) {
+		_rdconnectService.updatedisease(organizationId, diseasematrixId, count);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.json.JSONObject regbb(long organizationId) {
 		return _rdconnectService.regbb(organizationId);
 	}

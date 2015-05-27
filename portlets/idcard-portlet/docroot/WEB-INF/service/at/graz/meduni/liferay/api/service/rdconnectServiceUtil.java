@@ -69,6 +69,25 @@ public class rdconnectServiceUtil {
 		return getService().getRdconnect();
 	}
 
+	public static void updateregbb(long organizationId,
+		com.liferay.portal.kernel.json.JSONObject json) {
+		getService().updateregbb(organizationId, json);
+	}
+
+	public static void updateregbb2(long organizationId) {
+		getService().updateregbb2(organizationId);
+	}
+
+	public static void updatedisease(long organizationId,
+		java.lang.String diseasename, java.lang.String count) {
+		getService().updatedisease(organizationId, diseasename, count);
+	}
+
+	public static void updatedisease(long organizationId, long diseasematrixId,
+		java.lang.String count) {
+		getService().updatedisease(organizationId, diseasematrixId, count);
+	}
+
 	public static com.liferay.portal.kernel.json.JSONObject regbb(
 		long organizationId) {
 		return getService().regbb(organizationId);

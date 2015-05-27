@@ -36,21 +36,43 @@ public class rdconnectServiceClpInvoker {
 
 		_methodParameterTypes24 = new String[] {  };
 
-		_methodName25 = "regbb";
+		_methodName25 = "updateregbb";
 
-		_methodParameterTypes25 = new String[] { "long" };
+		_methodParameterTypes25 = new String[] {
+				"long", "com.liferay.portal.kernel.json.JSONObject"
+			};
 
-		_methodName26 = "regbbs";
+		_methodName26 = "updateregbb2";
 
-		_methodParameterTypes26 = new String[] {  };
+		_methodParameterTypes26 = new String[] { "long" };
 
-		_methodName27 = "regs";
+		_methodName27 = "updatedisease";
 
-		_methodParameterTypes27 = new String[] {  };
+		_methodParameterTypes27 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
 
-		_methodName28 = "bbs";
+		_methodName28 = "updatedisease";
 
-		_methodParameterTypes28 = new String[] {  };
+		_methodParameterTypes28 = new String[] {
+				"long", "long", "java.lang.String"
+			};
+
+		_methodName29 = "regbb";
+
+		_methodParameterTypes29 = new String[] { "long" };
+
+		_methodName30 = "regbbs";
+
+		_methodParameterTypes30 = new String[] {  };
+
+		_methodName31 = "regs";
+
+		_methodParameterTypes31 = new String[] {  };
+
+		_methodName32 = "bbs";
+
+		_methodParameterTypes32 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -74,21 +96,52 @@ public class rdconnectServiceClpInvoker {
 
 		if (_methodName25.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
-			return rdconnectServiceUtil.regbb(((Long)arguments[0]).longValue());
+			rdconnectServiceUtil.updateregbb(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.kernel.json.JSONObject)arguments[1]);
+
+			return null;
 		}
 
 		if (_methodName26.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
-			return rdconnectServiceUtil.regbbs();
+			rdconnectServiceUtil.updateregbb2(((Long)arguments[0]).longValue());
+
+			return null;
 		}
 
 		if (_methodName27.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
-			return rdconnectServiceUtil.regs();
+			rdconnectServiceUtil.updatedisease(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+
+			return null;
 		}
 
 		if (_methodName28.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
+			rdconnectServiceUtil.updatedisease(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
+
+			return null;
+		}
+
+		if (_methodName29.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes29, parameterTypes)) {
+			return rdconnectServiceUtil.regbb(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName30.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
+			return rdconnectServiceUtil.regbbs();
+		}
+
+		if (_methodName31.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
+			return rdconnectServiceUtil.regs();
+		}
+
+		if (_methodName32.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
 			return rdconnectServiceUtil.bbs();
 		}
 
@@ -109,4 +162,12 @@ public class rdconnectServiceClpInvoker {
 	private String[] _methodParameterTypes27;
 	private String _methodName28;
 	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
+	private String _methodName30;
+	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
 }
