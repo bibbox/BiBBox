@@ -216,10 +216,6 @@ AUI().use(
     		sortable: true
     	},
     	{
-    		key: 'Days since last modified',
-    		sortable: true
-    	},
-    	{
     		key: 'Main Contact',
     		sortable: true
     	},

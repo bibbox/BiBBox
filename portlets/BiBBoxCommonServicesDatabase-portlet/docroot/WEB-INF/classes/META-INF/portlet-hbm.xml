@@ -3,6 +3,9 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.DDLConfigurationImpl" table="bibboxcs.ddlconfiguration">
 		<cache usage="read-write" />
 		<id name="ddlconfigurationId" type="long">
@@ -19,5 +22,34 @@
 		<property name="columwidth" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="editscript" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="edittip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationImpl" table="bibboxcs.iconconfiguration">
+		<cache usage="read-write" />
+		<id name="iconconfigurationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="symbolconfigurationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="position" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
+		<property name="image" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="elementcolor" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl" table="bibboxcs.symbolconfiguration">
+		<cache usage="read-write" />
+		<id name="symbolconfigurationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="scope" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eventtype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="basecolor" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="symboltype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolTypeConfigurationImpl" table="bibboxcs.symboltypeconfiguration">
+		<cache usage="read-write" />
+		<id name="symboltypeconfigurationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="symboltype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="template" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

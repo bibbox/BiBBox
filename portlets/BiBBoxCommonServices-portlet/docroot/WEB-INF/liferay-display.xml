@@ -37,4 +37,7 @@
 		<portlet id="dynamic-data-list-display-extended"></portlet>
 		<portlet id="dynamic-data-list-config-extended"></portlet>
 	</category>
+	<category name="BiBBox Symbol">
+		<portlet id="symbol-configuration"></portlet>
+	</category>
 </display>

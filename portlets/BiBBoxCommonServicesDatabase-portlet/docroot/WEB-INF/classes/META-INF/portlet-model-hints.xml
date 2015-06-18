@@ -27,4 +27,26 @@
 			<hint name="max-length">5000</hint>
 		</field>
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration">
+		<field name="iconconfigurationId" type="long" />
+		<field name="symbolconfigurationId" type="long" />
+		<field name="position" type="String" />
+		<field name="key" type="String" />
+		<field name="image" type="String" />
+		<field name="elementcolor" type="String" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration">
+		<field name="symbolconfigurationId" type="long" />
+		<field name="scope" type="String" />
+		<field name="eventtype" type="String" />
+		<field name="basecolor" type="String" />
+		<field name="symboltype" type="String" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration">
+		<field name="symboltypeconfigurationId" type="long" />
+		<field name="symboltype" type="String" />
+		<field name="template" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
 </model-hints>

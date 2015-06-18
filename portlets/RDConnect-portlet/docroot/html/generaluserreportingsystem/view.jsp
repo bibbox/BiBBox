@@ -11,6 +11,8 @@
 <portlet:defineObjects />
 
 <%
+long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "13320"));
+
 	String keywords = "";
 	HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
 	httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
@@ -55,7 +57,7 @@
 </aui:form>
 
 <%
-	String textresult = SearchIndexLocalServiceUtil.getSearchIndexByKeyword(keywords, candidatetype, themeDisplay, request.getContextPath());
+	String textresult = SearchIndexLocalServiceUtil.getSearchIndexByKeyword(keywords, candidatetype, themeDisplay, request.getContextPath(), optionsMainContactRole_cfg);
 //textresult = "{Name: 'Test', OrganizationLink: '/home', Type: 'Biobank', 'Number of Cases': 5, 'Data Access Committe': 'no', 'Request data':  'http://rd-connect.eu', 'Nuber of access': 0}";
 %>
 
@@ -73,6 +75,14 @@ AUI().use(
   function(Y) {
     var remoteData = [<%= textresult %>];
     var nestedCols = [ 
+    	{
+    		key: 'Logo',
+    		sortable: false,
+    		allowHTML: true,
+    		formatter: function (o) {
+    			return '<img width="60px" src="' + o.data.OrganizationImageLink + '" alt="logo">';
+    		}
+    	},
     	{
     		key: 'Name',
     		sortable: true,
@@ -97,7 +107,7 @@ AUI().use(
     		key: 'Request data',
     		sortable: true,
     		allowHTML: true,
-    		formatter: '<a href="{value}">{value}</a>'
+    		formatter: '<a href="mailto:{value}">{value}</a>'
     	},
     	{
     		key: 'Number of access',

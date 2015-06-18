@@ -17,6 +17,9 @@ package at.graz.meduni.liferay.portlet.bibbox.service.base;
 import at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationService;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.DDLConfigurationPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconConfigurationPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolConfigurationPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolTypeConfigurationPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -103,6 +106,177 @@ public abstract class DDLConfigurationServiceBaseImpl extends BaseServiceImpl
 	public void setDDLConfigurationPersistence(
 		DDLConfigurationPersistence ddlConfigurationPersistence) {
 		this.ddlConfigurationPersistence = ddlConfigurationPersistence;
+	}
+
+	/**
+	 * Returns the icon configuration local service.
+	 *
+	 * @return the icon configuration local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalService getIconConfigurationLocalService() {
+		return iconConfigurationLocalService;
+	}
+
+	/**
+	 * Sets the icon configuration local service.
+	 *
+	 * @param iconConfigurationLocalService the icon configuration local service
+	 */
+	public void setIconConfigurationLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalService iconConfigurationLocalService) {
+		this.iconConfigurationLocalService = iconConfigurationLocalService;
+	}
+
+	/**
+	 * Returns the icon configuration remote service.
+	 *
+	 * @return the icon configuration remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationService getIconConfigurationService() {
+		return iconConfigurationService;
+	}
+
+	/**
+	 * Sets the icon configuration remote service.
+	 *
+	 * @param iconConfigurationService the icon configuration remote service
+	 */
+	public void setIconConfigurationService(
+		at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationService iconConfigurationService) {
+		this.iconConfigurationService = iconConfigurationService;
+	}
+
+	/**
+	 * Returns the icon configuration persistence.
+	 *
+	 * @return the icon configuration persistence
+	 */
+	public IconConfigurationPersistence getIconConfigurationPersistence() {
+		return iconConfigurationPersistence;
+	}
+
+	/**
+	 * Sets the icon configuration persistence.
+	 *
+	 * @param iconConfigurationPersistence the icon configuration persistence
+	 */
+	public void setIconConfigurationPersistence(
+		IconConfigurationPersistence iconConfigurationPersistence) {
+		this.iconConfigurationPersistence = iconConfigurationPersistence;
+	}
+
+	/**
+	 * Returns the symbol configuration local service.
+	 *
+	 * @return the symbol configuration local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService getSymbolConfigurationLocalService() {
+		return symbolConfigurationLocalService;
+	}
+
+	/**
+	 * Sets the symbol configuration local service.
+	 *
+	 * @param symbolConfigurationLocalService the symbol configuration local service
+	 */
+	public void setSymbolConfigurationLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService symbolConfigurationLocalService) {
+		this.symbolConfigurationLocalService = symbolConfigurationLocalService;
+	}
+
+	/**
+	 * Returns the symbol configuration remote service.
+	 *
+	 * @return the symbol configuration remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService getSymbolConfigurationService() {
+		return symbolConfigurationService;
+	}
+
+	/**
+	 * Sets the symbol configuration remote service.
+	 *
+	 * @param symbolConfigurationService the symbol configuration remote service
+	 */
+	public void setSymbolConfigurationService(
+		at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService symbolConfigurationService) {
+		this.symbolConfigurationService = symbolConfigurationService;
+	}
+
+	/**
+	 * Returns the symbol configuration persistence.
+	 *
+	 * @return the symbol configuration persistence
+	 */
+	public SymbolConfigurationPersistence getSymbolConfigurationPersistence() {
+		return symbolConfigurationPersistence;
+	}
+
+	/**
+	 * Sets the symbol configuration persistence.
+	 *
+	 * @param symbolConfigurationPersistence the symbol configuration persistence
+	 */
+	public void setSymbolConfigurationPersistence(
+		SymbolConfigurationPersistence symbolConfigurationPersistence) {
+		this.symbolConfigurationPersistence = symbolConfigurationPersistence;
+	}
+
+	/**
+	 * Returns the symbol type configuration local service.
+	 *
+	 * @return the symbol type configuration local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalService getSymbolTypeConfigurationLocalService() {
+		return symbolTypeConfigurationLocalService;
+	}
+
+	/**
+	 * Sets the symbol type configuration local service.
+	 *
+	 * @param symbolTypeConfigurationLocalService the symbol type configuration local service
+	 */
+	public void setSymbolTypeConfigurationLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalService symbolTypeConfigurationLocalService) {
+		this.symbolTypeConfigurationLocalService = symbolTypeConfigurationLocalService;
+	}
+
+	/**
+	 * Returns the symbol type configuration remote service.
+	 *
+	 * @return the symbol type configuration remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationService getSymbolTypeConfigurationService() {
+		return symbolTypeConfigurationService;
+	}
+
+	/**
+	 * Sets the symbol type configuration remote service.
+	 *
+	 * @param symbolTypeConfigurationService the symbol type configuration remote service
+	 */
+	public void setSymbolTypeConfigurationService(
+		at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationService symbolTypeConfigurationService) {
+		this.symbolTypeConfigurationService = symbolTypeConfigurationService;
+	}
+
+	/**
+	 * Returns the symbol type configuration persistence.
+	 *
+	 * @return the symbol type configuration persistence
+	 */
+	public SymbolTypeConfigurationPersistence getSymbolTypeConfigurationPersistence() {
+		return symbolTypeConfigurationPersistence;
+	}
+
+	/**
+	 * Sets the symbol type configuration persistence.
+	 *
+	 * @param symbolTypeConfigurationPersistence the symbol type configuration persistence
+	 */
+	public void setSymbolTypeConfigurationPersistence(
+		SymbolTypeConfigurationPersistence symbolTypeConfigurationPersistence) {
+		this.symbolTypeConfigurationPersistence = symbolTypeConfigurationPersistence;
 	}
 
 	/**
@@ -282,6 +456,24 @@ public abstract class DDLConfigurationServiceBaseImpl extends BaseServiceImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationService ddlConfigurationService;
 	@BeanReference(type = DDLConfigurationPersistence.class)
 	protected DDLConfigurationPersistence ddlConfigurationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalService iconConfigurationLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationService iconConfigurationService;
+	@BeanReference(type = IconConfigurationPersistence.class)
+	protected IconConfigurationPersistence iconConfigurationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService symbolConfigurationLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService symbolConfigurationService;
+	@BeanReference(type = SymbolConfigurationPersistence.class)
+	protected SymbolConfigurationPersistence symbolConfigurationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalService symbolTypeConfigurationLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationService symbolTypeConfigurationService;
+	@BeanReference(type = SymbolTypeConfigurationPersistence.class)
+	protected SymbolTypeConfigurationPersistence symbolTypeConfigurationPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

@@ -273,7 +273,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	 * @param type
 	 * @return
 	 */
-	public String getSearchIndexByKeyword(String keyword, String type, ThemeDisplay themeDisplay, String contextpath) {
+	public String getSearchIndexByKeyword(String keyword, String type, ThemeDisplay themeDisplay, String contextpath, long maincontactrole) {
 		keyword = keyword.trim();
 		type = type.trim();
 		String searchresultstring = "";
@@ -351,18 +351,40 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 				  	}
 				  	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
 				  	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+				  	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
 				  	int numberofacces = RDCOrganizationUserAccessLocalServiceUtil.countRDCOrganizationUserAccess(organization.getOrganizationId());
 					if(organizationtype.equalsIgnoreCase("Biobank")) {
+						if(organization.getLogoId() == 0) {
+				 			imgPath = "/BiBBoxCommonServices-portlet/images/Biobank.png";
+				 		}
 						orgPath = orgPath + "/bb_home";	
 					} else {
+						if(organization.getLogoId() == 0) {
+				 			imgPath = "/BiBBoxCommonServices-portlet/images/Registry.png";
+				 		}
 						orgPath = orgPath + "/reg_home";
 					} 
+					String maincontactmail = "";
+					User maincontact = null;
+					List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+					for(User usertmp : userlist) {
+						List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(usertmp.getUserId(), organization.getGroup().getGroupId());
+						for (UserGroupRole ugr : usergrouprolles) {
+							if(ugr.getRoleId() == maincontactrole) {
+								maincontact =  usertmp;
+							}
+						}
+					}
+					if(maincontact != null) {
+						maincontactmail = maincontact.getEmailAddress();
+					}
 					searchresultstring += "{Name: '" + organization.getName().replaceAll("'", "&lsquo;") + "', "
 							+ "OrganizationLink: '" + orgPath + "',"
+							+ "OrganizationImageLink: '" + imgPath + "',"
 							+ "Type: '" + organization.getExpandoBridge().getAttribute("Organization Type").toString() + "',"
 							+ "'Number of Cases': " + diseascount + ","
 							+ "'Data Access Committe': '" + dataaccess + "',"
-							+ "'Request data':  'http://rd-connect.eu', "
+							+ "'Request data':  '" + maincontactmail + "', "
 							+ "'Number of access': " + numberofacces + "}";
 					// New Hit
 					oldorganizationid = serachresult.getOrganisationid();

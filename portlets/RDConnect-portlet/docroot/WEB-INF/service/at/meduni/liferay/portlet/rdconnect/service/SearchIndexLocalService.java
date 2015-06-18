@@ -268,7 +268,7 @@ public interface SearchIndexLocalService extends BaseLocalService,
 	public java.lang.String getSearchIndexByKeyword(java.lang.String keyword,
 		java.lang.String type,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String contextpath);
+		java.lang.String contextpath, long maincontactrole);
 
 	/**
 	* Create User Statistics

@@ -1,4 +1,10 @@
-
+<style>
+<!--
+.aui h3 {
+    font-size: 20.5px;
+}
+-->
+</style>
 <%
 long organizationId = 0;
 java.util.Date modifieddate = null;
@@ -83,7 +89,47 @@ for(Organization organization : organizations) {
 	}
 }
 
+java.util.Date today = new java.util.Date();
+
+//1 day, 1 week, 2 weeks, 1 month
+boolean day = true;
+boolean week1 = true;
+boolean week2 = true;
+boolean month1 = true;
+boolean monthlonger = true;
+
 for(java.util.Date date : sortetdata.keySet()) {
+	if(monthlonger && ((today.getTime() - date.getTime()) / 86400000) > 32) {
+		day = false;
+		week1 = false;
+		week2 = false;
+		month1 = false;
+		monthlonger = false;
+		%><h3>Last update more than 2 months</h3><%	
+	}
+	if(day && ((today.getTime() - date.getTime()) / 86400000) <= 1) {
+		day = false;
+		%><h3>Updated Today</h3><%	
+	}
+	if(week1 && ((today.getTime() - date.getTime()) / 86400000) <= 7 && ((today.getTime() - date.getTime()) / 86400000) > 1) {
+		day = false;
+		week1 = false;
+		%><h3>Updated this week</h3><%	
+	}
+	if(week2 && ((today.getTime() - date.getTime()) / 86400000) <= 14 && ((today.getTime() - date.getTime()) / 86400000) > 7) {
+		day = false;
+		week1 = false;
+		week2 = false;
+		%><h3>Updated last 2 weeks</h3><%	
+	}
+	if(month1 && ((today.getTime() - date.getTime()) / 86400000) <= 30 && ((today.getTime() - date.getTime()) / 86400000) > 14) {
+		day = false;
+		week1 = false;
+		week2 = false;
+		month1 = false;
+		%><h3>Updated this month</h3><%	
+	}
+	
 	%><%= sortetdata.get(date) %><%	
 }
 %>

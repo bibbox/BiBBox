@@ -28,8 +28,57 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationModelImpl">
+		<attributes>
+			<id name="iconconfigurationId" />
+			<basic name="symbolconfigurationId" />
+			<basic name="position" />
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="image" />
+			<basic name="elementcolor" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationModelImpl">
+		<attributes>
+			<id name="symbolconfigurationId" />
+			<basic name="scope" />
+			<basic name="eventtype" />
+			<basic name="basecolor" />
+			<basic name="symboltype" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolTypeConfigurationModelImpl">
+		<attributes>
+			<id name="symboltypeconfigurationId" />
+			<basic name="symboltype" />
+			<basic name="template" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.DDLConfigurationImpl" name="DDLConfiguration">
 		<table name="bibboxcs.ddlconfiguration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationImpl" name="IconConfiguration">
+		<table name="bibboxcs.iconconfiguration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl" name="SymbolConfiguration">
+		<table name="bibboxcs.symbolconfiguration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolTypeConfigurationImpl" name="SymbolTypeConfiguration">
+		<table name="bibboxcs.symboltypeconfiguration" />
 		<attributes />
 	</entity>
 </entity-mappings>

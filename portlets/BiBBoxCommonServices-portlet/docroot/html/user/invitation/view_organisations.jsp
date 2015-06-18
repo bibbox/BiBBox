@@ -56,7 +56,7 @@ user/edit_invitation
 		<tr>
 			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-first-header bibbox-cs-datatable-col-name">Name</th>
 			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Type</th>
-			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Days since last modified</th>
+			<!-- <th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Days since last modified</th> -->
 			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Main Contact</th>
 			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Main Contact last login</th>
 			<th class="bibbox-cs-datatable-header bibbox-cs-datatable-col-name">Last Contacted</th>
@@ -141,7 +141,7 @@ user/edit_invitation
 		}
 		
 		tablerow += "<td class=\"" + rowcss + "\">" + type + "</td>";
-		tablerow += "<td class=\"" + rowcss + "\">" + ((now.getTime() - modifieddate.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(modifieddate) + ")</td>";
+		//tablerow += "<td class=\"" + rowcss + "\">" + ((now.getTime() - modifieddate.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(modifieddate) + ")</td>";
 		if(maincontact != null) {
 			tablerow += "<td class=\"" + rowcss + "\">" + maincontact.getFullName() + "</td>";
 			java.util.Date lastlogin = maincontact.getLastLoginDate();

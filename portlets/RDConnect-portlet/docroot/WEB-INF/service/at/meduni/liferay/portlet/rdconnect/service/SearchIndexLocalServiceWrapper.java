@@ -309,9 +309,9 @@ public class SearchIndexLocalServiceWrapper implements SearchIndexLocalService,
 	public java.lang.String getSearchIndexByKeyword(java.lang.String keyword,
 		java.lang.String type,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String contextpath) {
+		java.lang.String contextpath, long maincontactrole) {
 		return _searchIndexLocalService.getSearchIndexByKeyword(keyword, type,
-			themeDisplay, contextpath);
+			themeDisplay, contextpath, maincontactrole);
 	}
 
 	/**

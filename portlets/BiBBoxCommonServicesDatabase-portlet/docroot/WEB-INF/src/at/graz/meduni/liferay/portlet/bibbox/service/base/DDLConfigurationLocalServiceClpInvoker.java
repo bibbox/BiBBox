@@ -106,17 +106,17 @@ public class DDLConfigurationLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration"
 			};
 
-		_methodName34 = "getBeanIdentifier";
+		_methodName52 = "getBeanIdentifier";
 
-		_methodParameterTypes34 = new String[] {  };
+		_methodParameterTypes52 = new String[] {  };
 
-		_methodName35 = "setBeanIdentifier";
+		_methodName53 = "setBeanIdentifier";
 
-		_methodParameterTypes35 = new String[] { "java.lang.String" };
+		_methodParameterTypes53 = new String[] { "java.lang.String" };
 
-		_methodName40 = "getDDLConfigurationForField";
+		_methodName58 = "getDDLConfigurationForField";
 
-		_methodParameterTypes40 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes58 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -208,20 +208,20 @@ public class DDLConfigurationLocalServiceClpInvoker {
 			return DDLConfigurationLocalServiceUtil.updateDDLConfiguration((at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration)arguments[0]);
 		}
 
-		if (_methodName34.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
 			return DDLConfigurationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName35.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
 			DDLConfigurationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName40.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return DDLConfigurationLocalServiceUtil.getDDLConfigurationForField(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
@@ -261,10 +261,10 @@ public class DDLConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName34;
-	private String[] _methodParameterTypes34;
-	private String _methodName35;
-	private String[] _methodParameterTypes35;
-	private String _methodName40;
-	private String[] _methodParameterTypes40;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
 }

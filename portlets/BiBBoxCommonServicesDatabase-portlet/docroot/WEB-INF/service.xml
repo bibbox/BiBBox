@@ -3,7 +3,7 @@
 <service-builder package-path="at.graz.meduni.liferay.portlet.bibbox">
 	<author>reihsr</author>
 	<namespace>bibboxcsdb</namespace>
-
+	<!-- DDL Configuration -->
 	<entity name="DDLConfiguration" local-service="true" remote-service="true" table="bibboxcs.ddlconfiguration">
 		<!-- PK fields -->
 		<column name="ddlconfigurationId" primary="true" type="long"></column>
@@ -29,5 +29,40 @@
 			<finder-column name="ddmstructureId" />
 			<finder-column name="fieldname" />
 		</finder>
+	</entity>
+	<!-- SymbolMeter -->
+	<entity name="SymbolTypeConfiguration" local-service="true" remote-service="true" table="bibboxcs.symboltypeconfiguration">
+		<!-- PK fields -->
+		<column name="symboltypeconfigurationId" primary="true" type="long"></column>
+		<!-- fields -->
+		<column name="symboltype" type="String"></column>
+		<column name="template" type="String"></column>
+		<finder name="FieldSymbolType" return-type="SymbolTypeConfiguration" >
+			<finder-column name="symboltype" />
+		</finder>
+	</entity>
+	<entity name="SymbolConfiguration" local-service="true" remote-service="true" table="bibboxcs.symbolconfiguration">
+		<!-- PK fields -->
+		<column name="symbolconfigurationId" primary="true" type="long"></column>
+		<!-- fields -->
+		<column name="scope" type="String"></column>
+		<column name="eventtype" type="String"></column>
+		<column name="basecolor" type="String"></column>
+		<column name="symboltype" type="String"></column>
+		<finder name="FieldSymbol" return-type="SymbolTypeConfiguration" >
+			<finder-column name="scope" />
+			<finder-column name="eventtype" />
+		</finder>
+	</entity>
+	<entity name="IconConfiguration" local-service="true" remote-service="true" table="bibboxcs.iconconfiguration">
+		<!-- PK fields -->
+		<column name="iconconfigurationId" primary="true" type="long"></column>
+		<!-- FK fields -->
+		<column name="symbolconfigurationId" type="long"></column>
+		<!-- fields -->
+		<column name="position" type="String"></column>
+		<column name="key" type="String"></column>
+		<column name="image" type="String"></column>
+		<column name="elementcolor" type="String"></column>
 	</entity>
 </service-builder>

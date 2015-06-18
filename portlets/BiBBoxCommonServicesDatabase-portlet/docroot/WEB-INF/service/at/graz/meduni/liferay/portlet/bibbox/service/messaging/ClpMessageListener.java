@@ -17,6 +17,12 @@ package at.graz.meduni.liferay.portlet.bibbox.service.messaging;
 import at.graz.meduni.liferay.portlet.bibbox.service.ClpSerializer;
 import at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -39,6 +45,15 @@ public class ClpMessageListener extends BaseMessageListener {
 			DDLConfigurationLocalServiceUtil.clearService();
 
 			DDLConfigurationServiceUtil.clearService();
+			IconConfigurationLocalServiceUtil.clearService();
+
+			IconConfigurationServiceUtil.clearService();
+			SymbolConfigurationLocalServiceUtil.clearService();
+
+			SymbolConfigurationServiceUtil.clearService();
+			SymbolTypeConfigurationLocalServiceUtil.clearService();
+
+			SymbolTypeConfigurationServiceUtil.clearService();
 		}
 	}
 }

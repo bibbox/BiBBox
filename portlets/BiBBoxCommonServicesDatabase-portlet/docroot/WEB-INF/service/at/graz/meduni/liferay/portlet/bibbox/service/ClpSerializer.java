@@ -15,6 +15,9 @@
 package at.graz.meduni.liferay.portlet.bibbox.service;
 
 import at.graz.meduni.liferay.portlet.bibbox.model.DDLConfigurationClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.IconConfigurationClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfigurationClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfigurationClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -106,6 +109,18 @@ public class ClpSerializer {
 			return translateInputDDLConfiguration(oldModel);
 		}
 
+		if (oldModelClassName.equals(IconConfigurationClp.class.getName())) {
+			return translateInputIconConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(SymbolConfigurationClp.class.getName())) {
+			return translateInputSymbolConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(SymbolTypeConfigurationClp.class.getName())) {
+			return translateInputSymbolTypeConfiguration(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +140,38 @@ public class ClpSerializer {
 		DDLConfigurationClp oldClpModel = (DDLConfigurationClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getDDLConfigurationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputIconConfiguration(BaseModel<?> oldModel) {
+		IconConfigurationClp oldClpModel = (IconConfigurationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getIconConfigurationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputSymbolConfiguration(
+		BaseModel<?> oldModel) {
+		SymbolConfigurationClp oldClpModel = (SymbolConfigurationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getSymbolConfigurationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputSymbolTypeConfiguration(
+		BaseModel<?> oldModel) {
+		SymbolTypeConfigurationClp oldClpModel = (SymbolTypeConfigurationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getSymbolTypeConfigurationRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +198,21 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.model.impl.DDLConfigurationImpl")) {
 			return translateOutputDDLConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationImpl")) {
+			return translateOutputIconConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl")) {
+			return translateOutputSymbolConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolTypeConfigurationImpl")) {
+			return translateOutputSymbolTypeConfiguration(oldModel);
 		}
 
 		return oldModel;
@@ -238,6 +300,21 @@ public class ClpSerializer {
 			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchDDLConfigurationException();
 		}
 
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchIconConfigurationException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchIconConfigurationException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchSymbolConfigurationException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchSymbolConfigurationException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchSymbolTypeConfigurationException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchSymbolTypeConfigurationException();
+		}
+
 		return throwable;
 	}
 
@@ -247,6 +324,38 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setDDLConfigurationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputIconConfiguration(BaseModel<?> oldModel) {
+		IconConfigurationClp newModel = new IconConfigurationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setIconConfigurationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputSymbolConfiguration(
+		BaseModel<?> oldModel) {
+		SymbolConfigurationClp newModel = new SymbolConfigurationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSymbolConfigurationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputSymbolTypeConfiguration(
+		BaseModel<?> oldModel) {
+		SymbolTypeConfigurationClp newModel = new SymbolTypeConfigurationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSymbolTypeConfigurationRemoteModel(oldModel);
 
 		return newModel;
 	}

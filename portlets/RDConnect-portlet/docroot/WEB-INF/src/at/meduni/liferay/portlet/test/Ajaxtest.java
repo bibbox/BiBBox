@@ -8,29 +8,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletException;
-
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.LocalizationUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
-import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
-import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
-import com.liferay.portlet.dynamicdatalists.model.DDLRecordSetConstants;
-import com.liferay.portlet.dynamicdatalists.service.DDLRecordServiceUtil;
-import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
-import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetServiceUtil;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.storage.Fields;
-import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -41,11 +18,11 @@ public class Ajaxtest extends MVCPortlet {
     final int N_ = alphabet_.length();
     Random random_ = new Random();
 	
-	public void somethingHappensHere(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException, PortalException, SystemException { 
+	/*public void somethingHappensHere(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException, PortalException, SystemException { 
 		System.out.println("ID: " + ParamUtil.getString(actionRequest, "id"));
 		System.out.println("Name: " + ParamUtil.getString(actionRequest, "name"));
 		System.out.println("Somthing has happend");
-		
+		*/
 		
 		
 		/*DDLRecordSet rs = DDLRecordSetLocalServiceUtil.getRecordSet(1);
@@ -65,6 +42,7 @@ public class Ajaxtest extends MVCPortlet {
 		
 		
 		*/
+    /*
 		try {
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(24401);
 		
@@ -124,7 +102,7 @@ public class Ajaxtest extends MVCPortlet {
 		displaynames += ",Text1877" + "_INSTANCE_aklm";
 		fields.put("_fieldsDisplay", displaynames);
 		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);
-		
+		*/
 		/*Map<String,Serializable> fields = new HashMap<String, Serializable>();
 		String displaynames = "";
 		fields.put("name", "autoname");
@@ -149,11 +127,11 @@ public class Ajaxtest extends MVCPortlet {
 		displaynames += "," + "year_of_establishment" + randomIdGenerator();
 		fields.put("_fieldsDisplay", displaynames);
 		DDLRecord r = DDLRecordServiceUtil.addRecord(groupId, recordSet.getRecordSetId(), DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields, serviceContext);*/
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-	} 
+	} */
 	
 	private String randomIdGenerator() {
 		String id = "_INSTANCE_";

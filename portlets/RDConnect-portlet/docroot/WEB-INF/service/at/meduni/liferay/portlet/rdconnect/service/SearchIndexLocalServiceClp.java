@@ -126,7 +126,8 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 
 		_methodParameterTypes20 = new String[] {
 				"java.lang.String", "java.lang.String",
-				"com.liferay.portal.theme.ThemeDisplay", "java.lang.String"
+				"com.liferay.portal.theme.ThemeDisplay", "java.lang.String",
+				"long"
 			};
 
 		_methodName21 = "getUserStatistiks";
@@ -720,7 +721,7 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 	public java.lang.String getSearchIndexByKeyword(java.lang.String keyword,
 		java.lang.String type,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String contextpath) {
+		java.lang.String contextpath, long maincontactrole) {
 		Object returnObj = null;
 
 		try {
@@ -733,7 +734,9 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 						
 					ClpSerializer.translateInput(themeDisplay),
 						
-					ClpSerializer.translateInput(contextpath)
+					ClpSerializer.translateInput(contextpath),
+						
+					maincontactrole
 					});
 		}
 		catch (Throwable t) {
