@@ -234,6 +234,25 @@ public class SymbolConfigurationClp extends BaseModelImpl<SymbolConfiguration>
 	}
 
 	@Override
+	public java.lang.String getSymbolIconConfiguration() {
+		try {
+			String methodName = "getSymbolIconConfiguration";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getTemplate() {
 		try {
 			String methodName = "getTemplate";

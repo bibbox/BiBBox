@@ -101,6 +101,21 @@ public interface SymbolTypeConfigurationModel extends BaseModel<SymbolTypeConfig
 	 */
 	public void setTemplate(String template);
 
+	/**
+	 * Returns the symboliconconfiguration of this symbol type configuration.
+	 *
+	 * @return the symboliconconfiguration of this symbol type configuration
+	 */
+	@AutoEscape
+	public String getSymboliconconfiguration();
+
+	/**
+	 * Sets the symboliconconfiguration of this symbol type configuration.
+	 *
+	 * @param symboliconconfiguration the symboliconconfiguration of this symbol type configuration
+	 */
+	public void setSymboliconconfiguration(String symboliconconfiguration);
+
 	@Override
 	public boolean isNew();
 

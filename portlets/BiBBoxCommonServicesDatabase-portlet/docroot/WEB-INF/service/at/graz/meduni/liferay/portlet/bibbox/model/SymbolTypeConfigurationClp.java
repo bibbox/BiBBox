@@ -77,6 +77,7 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 			getSymboltypeconfigurationId());
 		attributes.put("symboltype", getSymboltype());
 		attributes.put("template", getTemplate());
+		attributes.put("symboliconconfiguration", getSymboliconconfiguration());
 
 		return attributes;
 	}
@@ -100,6 +101,13 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 
 		if (template != null) {
 			setTemplate(template);
+		}
+
+		String symboliconconfiguration = (String)attributes.get(
+				"symboliconconfiguration");
+
+		if (symboliconconfiguration != null) {
+			setSymboliconconfiguration(symboliconconfiguration);
 		}
 	}
 
@@ -167,6 +175,31 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 				Method method = clazz.getMethod("setTemplate", String.class);
 
 				method.invoke(_symbolTypeConfigurationRemoteModel, template);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getSymboliconconfiguration() {
+		return _symboliconconfiguration;
+	}
+
+	@Override
+	public void setSymboliconconfiguration(String symboliconconfiguration) {
+		_symboliconconfiguration = symboliconconfiguration;
+
+		if (_symbolTypeConfigurationRemoteModel != null) {
+			try {
+				Class<?> clazz = _symbolTypeConfigurationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setSymboliconconfiguration",
+						String.class);
+
+				method.invoke(_symbolTypeConfigurationRemoteModel,
+					symboliconconfiguration);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -248,6 +281,7 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 		clone.setSymboltypeconfigurationId(getSymboltypeconfigurationId());
 		clone.setSymboltype(getSymboltype());
 		clone.setTemplate(getTemplate());
+		clone.setSymboliconconfiguration(getSymboliconconfiguration());
 
 		return clone;
 	}
@@ -296,7 +330,7 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{symboltypeconfigurationId=");
 		sb.append(getSymboltypeconfigurationId());
@@ -304,6 +338,8 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 		sb.append(getSymboltype());
 		sb.append(", template=");
 		sb.append(getTemplate());
+		sb.append(", symboliconconfiguration=");
+		sb.append(getSymboliconconfiguration());
 		sb.append("}");
 
 		return sb.toString();
@@ -311,7 +347,7 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -330,6 +366,10 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 			"<column><column-name>template</column-name><column-value><![CDATA[");
 		sb.append(getTemplate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>symboliconconfiguration</column-name><column-value><![CDATA[");
+		sb.append(getSymboliconconfiguration());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -339,5 +379,6 @@ public class SymbolTypeConfigurationClp extends BaseModelImpl<SymbolTypeConfigur
 	private long _symboltypeconfigurationId;
 	private String _symboltype;
 	private String _template;
+	private String _symboliconconfiguration;
 	private BaseModel<?> _symbolTypeConfigurationRemoteModel;
 }

@@ -48,5 +48,6 @@
 		<field name="template" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
+		<field name="symboliconconfiguration" type="String" />
 	</model>
 </model-hints>

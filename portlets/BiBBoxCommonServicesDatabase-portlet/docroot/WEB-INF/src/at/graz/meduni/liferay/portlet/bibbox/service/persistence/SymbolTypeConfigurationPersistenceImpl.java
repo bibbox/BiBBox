@@ -648,6 +648,7 @@ public class SymbolTypeConfigurationPersistenceImpl extends BasePersistenceImpl<
 		symbolTypeConfigurationImpl.setSymboltypeconfigurationId(symbolTypeConfiguration.getSymboltypeconfigurationId());
 		symbolTypeConfigurationImpl.setSymboltype(symbolTypeConfiguration.getSymboltype());
 		symbolTypeConfigurationImpl.setTemplate(symbolTypeConfiguration.getTemplate());
+		symbolTypeConfigurationImpl.setSymboliconconfiguration(symbolTypeConfiguration.getSymboliconconfiguration());
 
 		return symbolTypeConfigurationImpl;
 	}

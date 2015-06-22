@@ -33,5 +33,6 @@ create table bibboxcs.symbolconfiguration (
 create table bibboxcs.symboltypeconfiguration (
 	symboltypeconfigurationId LONG not null primary key,
 	symboltype VARCHAR(75) null,
-	template TEXT null
+	template TEXT null,
+	symboliconconfiguration VARCHAR(75) null
 );

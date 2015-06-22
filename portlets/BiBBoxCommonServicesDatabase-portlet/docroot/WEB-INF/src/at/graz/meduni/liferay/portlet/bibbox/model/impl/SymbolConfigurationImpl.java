@@ -59,4 +59,16 @@ public class SymbolConfigurationImpl extends SymbolConfigurationBaseImpl {
 		}
 		return template;
 	}
+	
+	public String getSymbolIconConfiguration() {
+		String config = "";
+		try {
+			SymbolTypeConfiguration symboltypeconfiguration = SymbolTypeConfigurationLocalServiceUtil.getSymbolTypeConfigurationBySymbolType(this.getSymboltype());
+			config = symboltypeconfiguration.getSymboliconconfiguration();
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl::getSymbolIconConfiguration] Error retrieving SymbolIconConfiguration for " + this.getSymboltype() + ".");
+			ex.printStackTrace();
+		}
+		return config;
+	}
 }

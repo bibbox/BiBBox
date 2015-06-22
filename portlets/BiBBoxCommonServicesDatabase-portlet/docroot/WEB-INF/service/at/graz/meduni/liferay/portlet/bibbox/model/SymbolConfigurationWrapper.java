@@ -326,6 +326,11 @@ public class SymbolConfigurationWrapper implements SymbolConfiguration,
 	}
 
 	@Override
+	public java.lang.String getSymbolIconConfiguration() {
+		return _symbolConfiguration.getSymbolIconConfiguration();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

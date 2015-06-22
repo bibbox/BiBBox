@@ -54,6 +54,7 @@ public class SymbolTypeConfigurationWrapper implements SymbolTypeConfiguration,
 			getSymboltypeconfigurationId());
 		attributes.put("symboltype", getSymboltype());
 		attributes.put("template", getTemplate());
+		attributes.put("symboliconconfiguration", getSymboliconconfiguration());
 
 		return attributes;
 	}
@@ -77,6 +78,13 @@ public class SymbolTypeConfigurationWrapper implements SymbolTypeConfiguration,
 
 		if (template != null) {
 			setTemplate(template);
+		}
+
+		String symboliconconfiguration = (String)attributes.get(
+				"symboliconconfiguration");
+
+		if (symboliconconfiguration != null) {
+			setSymboliconconfiguration(symboliconconfiguration);
 		}
 	}
 
@@ -158,6 +166,27 @@ public class SymbolTypeConfigurationWrapper implements SymbolTypeConfiguration,
 	@Override
 	public void setTemplate(java.lang.String template) {
 		_symbolTypeConfiguration.setTemplate(template);
+	}
+
+	/**
+	* Returns the symboliconconfiguration of this symbol type configuration.
+	*
+	* @return the symboliconconfiguration of this symbol type configuration
+	*/
+	@Override
+	public java.lang.String getSymboliconconfiguration() {
+		return _symbolTypeConfiguration.getSymboliconconfiguration();
+	}
+
+	/**
+	* Sets the symboliconconfiguration of this symbol type configuration.
+	*
+	* @param symboliconconfiguration the symboliconconfiguration of this symbol type configuration
+	*/
+	@Override
+	public void setSymboliconconfiguration(
+		java.lang.String symboliconconfiguration) {
+		_symbolTypeConfiguration.setSymboliconconfiguration(symboliconconfiguration);
 	}
 
 	@Override

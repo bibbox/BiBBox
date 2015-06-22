@@ -65,9 +65,10 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "symboltypeconfigurationId", Types.BIGINT },
 			{ "symboltype", Types.VARCHAR },
-			{ "template", Types.VARCHAR }
+			{ "template", Types.VARCHAR },
+			{ "symboliconconfiguration", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.symboltypeconfiguration (symboltypeconfigurationId LONG not null primary key,symboltype VARCHAR(75) null,template TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.symboltypeconfiguration (symboltypeconfigurationId LONG not null primary key,symboltype VARCHAR(75) null,template TEXT null,symboliconconfiguration VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.symboltypeconfiguration";
 	public static final String ORDER_BY_JPQL = " ORDER BY symbolTypeConfiguration.symboltypeconfigurationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.symboltypeconfiguration.symboltypeconfigurationId ASC";
@@ -103,6 +104,7 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 		model.setSymboltypeconfigurationId(soapModel.getSymboltypeconfigurationId());
 		model.setSymboltype(soapModel.getSymboltype());
 		model.setTemplate(soapModel.getTemplate());
+		model.setSymboliconconfiguration(soapModel.getSymboliconconfiguration());
 
 		return model;
 	}
@@ -172,6 +174,7 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 			getSymboltypeconfigurationId());
 		attributes.put("symboltype", getSymboltype());
 		attributes.put("template", getTemplate());
+		attributes.put("symboliconconfiguration", getSymboliconconfiguration());
 
 		return attributes;
 	}
@@ -195,6 +198,13 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 
 		if (template != null) {
 			setTemplate(template);
+		}
+
+		String symboliconconfiguration = (String)attributes.get(
+				"symboliconconfiguration");
+
+		if (symboliconconfiguration != null) {
+			setSymboliconconfiguration(symboliconconfiguration);
 		}
 	}
 
@@ -251,6 +261,22 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 		_template = template;
 	}
 
+	@JSON
+	@Override
+	public String getSymboliconconfiguration() {
+		if (_symboliconconfiguration == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _symboliconconfiguration;
+		}
+	}
+
+	@Override
+	public void setSymboliconconfiguration(String symboliconconfiguration) {
+		_symboliconconfiguration = symboliconconfiguration;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -285,6 +311,7 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 		symbolTypeConfigurationImpl.setSymboltypeconfigurationId(getSymboltypeconfigurationId());
 		symbolTypeConfigurationImpl.setSymboltype(getSymboltype());
 		symbolTypeConfigurationImpl.setTemplate(getTemplate());
+		symbolTypeConfigurationImpl.setSymboliconconfiguration(getSymboliconconfiguration());
 
 		symbolTypeConfigurationImpl.resetOriginalValues();
 
@@ -364,12 +391,21 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 			symbolTypeConfigurationCacheModel.template = null;
 		}
 
+		symbolTypeConfigurationCacheModel.symboliconconfiguration = getSymboliconconfiguration();
+
+		String symboliconconfiguration = symbolTypeConfigurationCacheModel.symboliconconfiguration;
+
+		if ((symboliconconfiguration != null) &&
+				(symboliconconfiguration.length() == 0)) {
+			symbolTypeConfigurationCacheModel.symboliconconfiguration = null;
+		}
+
 		return symbolTypeConfigurationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{symboltypeconfigurationId=");
 		sb.append(getSymboltypeconfigurationId());
@@ -377,6 +413,8 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 		sb.append(getSymboltype());
 		sb.append(", template=");
 		sb.append(getTemplate());
+		sb.append(", symboliconconfiguration=");
+		sb.append(getSymboliconconfiguration());
 		sb.append("}");
 
 		return sb.toString();
@@ -384,7 +422,7 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -403,6 +441,10 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 			"<column><column-name>template</column-name><column-value><![CDATA[");
 		sb.append(getTemplate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>symboliconconfiguration</column-name><column-value><![CDATA[");
+		sb.append(getSymboliconconfiguration());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -417,6 +459,7 @@ public class SymbolTypeConfigurationModelImpl extends BaseModelImpl<SymbolTypeCo
 	private String _symboltype;
 	private String _originalSymboltype;
 	private String _template;
+	private String _symboliconconfiguration;
 	private long _columnBitmask;
 	private SymbolTypeConfiguration _escapedModel;
 }

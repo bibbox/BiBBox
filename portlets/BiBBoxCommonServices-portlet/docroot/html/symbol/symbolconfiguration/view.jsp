@@ -71,6 +71,25 @@
 	.changecolor {
 		background-color: green;
 	}
+	.eventtype {
+		width: 150px;
+	   	height: 20px;
+	   	border: 1px solid black;
+	   	border-bottom: 0px solid black;
+	   	background-color: #A8A8A8;
+		color: #FFFFFF;
+		font-size: 14px;
+		line-height: 20px;
+		text-align: left;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+	.symbolconfigurationoverview {
+		width: 450px;
+		border: 1px solid black;
+		background-color: #DBDBDB;
+		padding: 10px;
+	}
 </style>
 
 <% 
@@ -83,16 +102,23 @@ String headerimage = request.getContextPath() + "/images/header.gif";
 
 <div style="background-image: url('<%= headerimage %>');background-repeat: repeat-x;"><img alt="logo" src="<%= headerlogo %>" width="252px" /></div>
 
+
+
 <%
 List<SymbolConfiguration> symbolconfigurations = SymbolConfigurationLocalServiceUtil.getSymbolConfigurations(-1, -1);
 for(SymbolConfiguration symbolconfiguration : symbolconfigurations) {
 	%>
-	<div style="width: 100%;">
+	<div style="width: 100%;margin-top: 5px;">
 		<div style="width: 75%;">
-			<%= symbolconfiguration.getEventtype() %><br>
-			<input class="basecolor" type="color" label="Basecolor" name="basecolor" value='<%= "#" + symbolconfiguration.getBasecolor() %>'>
+			<div class="eventtype"><%= symbolconfiguration.getEventtype() %></div>
+			<div class="symbolconfigurationoverview">
+				<span><div style="float: left;margin-right:5px;">Color: </div><div style="float: left;margin-right:5px;">#<%= symbolconfiguration.getBasecolor() %></div><div style="background-color: #<%= symbolconfiguration.getBasecolor() %>;float: left;width: 20px;height: 20px;margin-right:5px;"></div></span>
+				<br>
+				<span>conf icons <%= symbolconfiguration.getSymbolIconConfiguration() %></span>
+			</div>
 		</div>
 		<div style="float: right;width: 20%;">
+			<input class="basecolor" type="color" label="Basecolor" name="basecolor" value='<%= "#" + symbolconfiguration.getBasecolor() %>'><br>
 			<%= symbolconfiguration.getTemplate().replaceAll("§basecoler§", symbolconfiguration.getBasecolor()).replaceAll("§date§", dateFormat.format(new java.util.Date())) %><br>
 		</div>
 	</div>

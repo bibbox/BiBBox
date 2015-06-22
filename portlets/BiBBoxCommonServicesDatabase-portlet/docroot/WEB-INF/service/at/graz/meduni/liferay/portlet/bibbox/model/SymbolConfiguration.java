@@ -37,4 +37,6 @@ public interface SymbolConfiguration extends SymbolConfigurationModel,
 	* @return
 	*/
 	public java.lang.String getTemplate();
+
+	public java.lang.String getSymbolIconConfiguration();
 }
