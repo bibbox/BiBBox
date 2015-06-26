@@ -21,6 +21,7 @@ import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpParameterConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpParameterOptionsPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpPatientPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.KdssmpRulesPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.persistence.patientnamegeneratorPersistence;
 
@@ -480,6 +481,44 @@ public abstract class KdssmpParameterOptionsLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the kdssmp patient local service.
+	 *
+	 * @return the kdssmp patient local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpPatientLocalService getKdssmpPatientLocalService() {
+		return kdssmpPatientLocalService;
+	}
+
+	/**
+	 * Sets the kdssmp patient local service.
+	 *
+	 * @param kdssmpPatientLocalService the kdssmp patient local service
+	 */
+	public void setKdssmpPatientLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpPatientLocalService kdssmpPatientLocalService) {
+		this.kdssmpPatientLocalService = kdssmpPatientLocalService;
+	}
+
+	/**
+	 * Returns the kdssmp patient persistence.
+	 *
+	 * @return the kdssmp patient persistence
+	 */
+	public KdssmpPatientPersistence getKdssmpPatientPersistence() {
+		return kdssmpPatientPersistence;
+	}
+
+	/**
+	 * Sets the kdssmp patient persistence.
+	 *
+	 * @param kdssmpPatientPersistence the kdssmp patient persistence
+	 */
+	public void setKdssmpPatientPersistence(
+		KdssmpPatientPersistence kdssmpPatientPersistence) {
+		this.kdssmpPatientPersistence = kdssmpPatientPersistence;
+	}
+
+	/**
 	 * Returns the kdssmp rules local service.
 	 *
 	 * @return the kdssmp rules local service
@@ -751,6 +790,10 @@ public abstract class KdssmpParameterOptionsLocalServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpParameterOptionsLocalService kdssmpParameterOptionsLocalService;
 	@BeanReference(type = KdssmpParameterOptionsPersistence.class)
 	protected KdssmpParameterOptionsPersistence kdssmpParameterOptionsPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpPatientLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpPatientLocalService kdssmpPatientLocalService;
+	@BeanReference(type = KdssmpPatientPersistence.class)
+	protected KdssmpPatientPersistence kdssmpPatientPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpRulesLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpRulesLocalService kdssmpRulesLocalService;
 	@BeanReference(type = KdssmpRulesPersistence.class)

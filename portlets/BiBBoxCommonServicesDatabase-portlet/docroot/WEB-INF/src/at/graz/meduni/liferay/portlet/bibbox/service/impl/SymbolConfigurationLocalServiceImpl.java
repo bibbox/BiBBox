@@ -42,15 +42,64 @@ public class SymbolConfigurationLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalServiceUtil} to access the symbol configuration local service.
 	 */
+	/**
+	 * 
+	 */
 	public String getSymbol(String scope, String eventtype, LinkedHashMap<String, String> icons) {
 		String symbol = "";
 		try {
 			SymbolConfiguration symbolconfig = symbolConfigurationPersistence.findByFieldSymbol(scope, eventtype);
 			SymbolTypeConfiguration symboltype = SymbolTypeConfigurationLocalServiceUtil.getSymbolTypeConfigurationBySymbolType(symbolconfig.getSymboltype());
 			symbol = symboltype.getTemplate();
+			
+			// Substitution
+			symbol = symbol.replaceAll("§basecoler§", symbolconfig.getBasecolor());
+			symbol = symbol.replaceAll("§link§", icons.get("link"));
+			
+			symbol = symbol.replaceAll("§ASUMMETY§", icons.get("ASUMMETY"));
+			symbol = symbol.replaceAll("§ACODE§", icons.get("ACODE"));
+			symbol = symbol.replaceAll("§A2§", symbolconfig.getIconsForKeyPosition(icons.get("A2"), "A2").getHTMLIcon());
+			String a2elementcolor = symbolconfig.getIconsForKeyPosition(icons.get("A2"), "A2").getElementcolor();
+			if(a2elementcolor.equalsIgnoreCase("")) {
+				a2elementcolor = symbolconfig.getBasecolor();
+			}
+			symbol = symbol.replaceAll("§A2ELEMENTCOLOR§", a2elementcolor);
+			if(icons.get("A4").startsWith("TEXT:")) {
+				symbol = symbol.replaceAll("§A4-1§", icons.get("A4").replaceAll("TEXT:", ""));
+			} else {
+				int a4counter = 1;
+				for(String a4 : icons.get("A4").split("§")) {
+					symbol = symbol.replaceAll("§A4-" + a4counter + "§", symbolconfig.getIconsForKeyPosition(a4, "A4").getHTMLIcon());
+					String a4elementcolor = symbolconfig.getIconsForKeyPosition(a4, "A4").getElementcolor();
+					if(a4elementcolor.equalsIgnoreCase("")) {
+						a4elementcolor = symbolconfig.getBasecolor();
+					}
+					symbol = symbol.replaceAll("§A4-" + a4counter + "ELEMENTCOLOR§", a4elementcolor);
+				}
+				a4counter ++;
+			}
+			
 		} catch (Exception ex) {
 			
 		}
+		symbol = replaceRemainingPlacholders(symbol);
 		return symbol;
+	}
+	
+	private String replaceRemainingPlacholders(String template) {
+		template = template.replaceAll("§link§", "");
+		template = template.replaceAll("§date§", "");
+		template = template.replaceAll("§basecoler§", "");
+		template = template.replaceAll("§ACODE§", "");
+		template = template.replaceAll("§ASUMMETY§", "");
+		template = template.replaceAll("§A1§", "");
+		template = template.replaceAll("§A2§", "");
+		template = template.replaceAll("§A2ELEMENTCOLOR§", "");
+		template = template.replaceAll("§A3§", "");
+		template = template.replaceAll("§A4-1§", "");
+		template = template.replaceAll("§A4-2§", "");
+		template = template.replaceAll("§A4-3§", "");
+		template = template.replaceAll("§A4-4§", "");
+		return template;
 	}
 }

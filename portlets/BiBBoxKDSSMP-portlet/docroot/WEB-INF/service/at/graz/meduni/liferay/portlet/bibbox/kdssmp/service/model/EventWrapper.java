@@ -51,6 +51,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 
 		attributes.put("eventId", getEventId());
 		attributes.put("patientId", getPatientId());
+		attributes.put("layoutId", getLayoutId());
 		attributes.put("eventdate", getEventdate());
 		attributes.put("eventtype", getEventtype());
 
@@ -69,6 +70,12 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 
 		if (patientId != null) {
 			setPatientId(patientId);
+		}
+
+		Long layoutId = (Long)attributes.get("layoutId");
+
+		if (layoutId != null) {
+			setLayoutId(layoutId);
 		}
 
 		Date eventdate = (Date)attributes.get("eventdate");
@@ -142,6 +149,26 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	@Override
 	public void setPatientId(long patientId) {
 		_event.setPatientId(patientId);
+	}
+
+	/**
+	* Returns the layout ID of this event.
+	*
+	* @return the layout ID of this event
+	*/
+	@Override
+	public long getLayoutId() {
+		return _event.getLayoutId();
+	}
+
+	/**
+	* Sets the layout ID of this event.
+	*
+	* @param layoutId the layout ID of this event
+	*/
+	@Override
+	public void setLayoutId(long layoutId) {
+		_event.setLayoutId(layoutId);
 	}
 
 	/**

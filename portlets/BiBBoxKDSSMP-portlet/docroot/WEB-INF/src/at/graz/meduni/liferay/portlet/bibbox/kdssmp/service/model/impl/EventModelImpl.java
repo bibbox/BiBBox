@@ -61,10 +61,11 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "eventId", Types.BIGINT },
 			{ "patientId", Types.BIGINT },
+			{ "layoutId", Types.BIGINT },
 			{ "eventdate", Types.TIMESTAMP },
 			{ "eventtype", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table kdssmp.event (eventId LONG not null primary key,patientId LONG,eventdate DATE null,eventtype VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table kdssmp.event (eventId LONG not null primary key,patientId LONG,layoutId LONG,eventdate DATE null,eventtype VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.event";
 	public static final String ORDER_BY_JPQL = " ORDER BY event.patientId ASC, event.eventdate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.event.patientId ASC, kdssmp.event.eventdate ASC";
@@ -124,6 +125,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		attributes.put("eventId", getEventId());
 		attributes.put("patientId", getPatientId());
+		attributes.put("layoutId", getLayoutId());
 		attributes.put("eventdate", getEventdate());
 		attributes.put("eventtype", getEventtype());
 
@@ -142,6 +144,12 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		if (patientId != null) {
 			setPatientId(patientId);
+		}
+
+		Long layoutId = (Long)attributes.get("layoutId");
+
+		if (layoutId != null) {
+			setLayoutId(layoutId);
 		}
 
 		Date eventdate = (Date)attributes.get("eventdate");
@@ -187,6 +195,16 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	public long getOriginalPatientId() {
 		return _originalPatientId;
+	}
+
+	@Override
+	public long getLayoutId() {
+		return _layoutId;
+	}
+
+	@Override
+	public void setLayoutId(long layoutId) {
+		_layoutId = layoutId;
 	}
 
 	@Override
@@ -249,6 +267,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		eventImpl.setEventId(getEventId());
 		eventImpl.setPatientId(getPatientId());
+		eventImpl.setLayoutId(getLayoutId());
 		eventImpl.setEventdate(getEventdate());
 		eventImpl.setEventtype(getEventtype());
 
@@ -330,6 +349,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		eventCacheModel.patientId = getPatientId();
 
+		eventCacheModel.layoutId = getLayoutId();
+
 		Date eventdate = getEventdate();
 
 		if (eventdate != null) {
@@ -352,12 +373,14 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
 		sb.append(", patientId=");
 		sb.append(getPatientId());
+		sb.append(", layoutId=");
+		sb.append(getLayoutId());
 		sb.append(", eventdate=");
 		sb.append(getEventdate());
 		sb.append(", eventtype=");
@@ -369,7 +392,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -383,6 +406,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		sb.append(
 			"<column><column-name>patientId</column-name><column-value><![CDATA[");
 		sb.append(getPatientId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>layoutId</column-name><column-value><![CDATA[");
+		sb.append(getLayoutId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>eventdate</column-name><column-value><![CDATA[");
@@ -404,6 +431,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private long _patientId;
 	private long _originalPatientId;
 	private boolean _setOriginalPatientId;
+	private long _layoutId;
 	private Date _eventdate;
 	private String _eventtype;
 	private long _columnBitmask;

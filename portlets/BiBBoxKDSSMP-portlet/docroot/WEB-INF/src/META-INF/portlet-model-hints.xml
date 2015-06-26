@@ -4,12 +4,13 @@
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event">
 		<field name="eventId" type="long" />
 		<field name="patientId" type="long" />
+		<field name="layoutId" type="long" />
 		<field name="eventdate" type="Date" />
 		<field name="eventtype" type="String" />
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData">
 		<field name="eventdataId" type="long" />
-		<field name="eventlayoutId" type="long" />
+		<field name="eventId" type="long" />
 		<field name="patientId" type="long" />
 		<field name="ontology" type="String">
 			<hint name="max-length">10000</hint>
@@ -44,6 +45,15 @@
 		<field name="parameterconfigurationId" type="long" />
 		<field name="option" type="String" />
 		<field name="value" type="String" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpPatient">
+		<field name="patientId" type="long" />
+		<field name="organizationId" type="long" />
+		<field name="firstname" type="String" />
+		<field name="lastname" type="String" />
+		<field name="gender" type="String" />
+		<field name="dateofbirth" type="Date" />
+		<field name="dateofdeath" type="Date" />
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRules">
 		<field name="ruleId" type="long" />

@@ -234,6 +234,27 @@ public class SymbolConfigurationClp extends BaseModelImpl<SymbolConfiguration>
 	}
 
 	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForPosition(
+		java.lang.String position) {
+		try {
+			String methodName = "getIconsForPosition";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.lang.String.class };
+
+			Object[] parameterValues = new Object[] { position };
+
+			java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> returnObj =
+				(java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getSymbolIconConfiguration() {
 		try {
 			String methodName = "getSymbolIconConfiguration";
@@ -253,6 +274,27 @@ public class SymbolConfigurationClp extends BaseModelImpl<SymbolConfiguration>
 	}
 
 	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForKey(
+		java.lang.String key) {
+		try {
+			String methodName = "getIconsForKey";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.lang.String.class };
+
+			Object[] parameterValues = new Object[] { key };
+
+			java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> returnObj =
+				(java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getTemplate() {
 		try {
 			String methodName = "getTemplate";
@@ -262,6 +304,29 @@ public class SymbolConfigurationClp extends BaseModelImpl<SymbolConfiguration>
 			Object[] parameterValues = new Object[] {  };
 
 			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration getIconsForKeyPosition(
+		java.lang.String key, java.lang.String position) {
+		try {
+			String methodName = "getIconsForKeyPosition";
+
+			Class<?>[] parameterTypes = new Class<?>[] {
+					java.lang.String.class, java.lang.String.class
+				};
+
+			Object[] parameterValues = new Object[] { key, position };
+
+			at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration returnObj =
+				(at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration)invokeOnRemoteModel(methodName,
 					parameterTypes, parameterValues);
 
 			return returnObj;

@@ -19,6 +19,7 @@ import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventDataClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterOptionsClp;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpPatientClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRulesClp;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegeneratorClp;
 
@@ -129,6 +130,10 @@ public class ClpSerializer {
 			return translateInputKdssmpParameterOptions(oldModel);
 		}
 
+		if (oldModelClassName.equals(KdssmpPatientClp.class.getName())) {
+			return translateInputKdssmpPatient(oldModel);
+		}
+
 		if (oldModelClassName.equals(KdssmpRulesClp.class.getName())) {
 			return translateInputKdssmpRules(oldModel);
 		}
@@ -205,6 +210,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputKdssmpPatient(BaseModel<?> oldModel) {
+		KdssmpPatientClp oldClpModel = (KdssmpPatientClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getKdssmpPatientRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputKdssmpRules(BaseModel<?> oldModel) {
 		KdssmpRulesClp oldClpModel = (KdssmpRulesClp)oldModel;
 
@@ -266,6 +281,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterOptionsImpl")) {
 			return translateOutputKdssmpParameterOptions(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpPatientImpl")) {
+			return translateOutputKdssmpPatient(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -384,6 +404,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpPatientException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpPatientException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpRulesException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpRulesException();
 		}
@@ -445,6 +470,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setKdssmpParameterOptionsRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputKdssmpPatient(BaseModel<?> oldModel) {
+		KdssmpPatientClp newModel = new KdssmpPatientClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setKdssmpPatientRemoteModel(oldModel);
 
 		return newModel;
 	}

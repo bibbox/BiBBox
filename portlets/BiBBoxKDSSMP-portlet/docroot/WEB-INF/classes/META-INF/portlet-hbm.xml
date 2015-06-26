@@ -7,6 +7,7 @@
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterOptions" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpPatient" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRules" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegenerator" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventImpl" table="kdssmp.event">
@@ -15,6 +16,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="patientId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="layoutId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="eventdate" type="org.hibernate.type.TimestampType" />
 		<property name="eventtype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
@@ -23,7 +25,7 @@
 		<id name="eventdataId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="eventlayoutId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="patientId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="ontology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -59,6 +61,18 @@
 		<property name="parameterconfigurationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="option" type="com.liferay.portal.dao.orm.hibernate.StringType" column="option_" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpPatientImpl" table="kdssmp.patient">
+		<cache usage="read-write" />
+		<id name="patientId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organizationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="firstname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lastname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dateofbirth" type="org.hibernate.type.TimestampType" />
+		<property name="dateofdeath" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpRulesImpl" table="kdssmp.rules">
 		<cache usage="read-write" />

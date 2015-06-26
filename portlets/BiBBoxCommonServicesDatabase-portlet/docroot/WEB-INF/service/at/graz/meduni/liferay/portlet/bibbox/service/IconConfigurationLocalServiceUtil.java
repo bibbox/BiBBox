@@ -275,6 +275,32 @@ public class IconConfigurationLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* @return
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForPosition(
+		long symbolconfigurationId, java.lang.String position) {
+		return getService().getIconsForPosition(symbolconfigurationId, position);
+	}
+
+	/**
+	* @return
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForKey(
+		long symbolconfigurationId, java.lang.String key) {
+		return getService().getIconsForKey(symbolconfigurationId, key);
+	}
+
+	/**
+	* @return
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration getIconsForKeyPosition(
+		long symbolconfigurationId, java.lang.String key,
+		java.lang.String position) {
+		return getService()
+				   .getIconsForKeyPosition(symbolconfigurationId, key, position);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

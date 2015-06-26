@@ -19,6 +19,8 @@ import at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationLocalServic
 import at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.IconsLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.IconsServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalServiceUtil;
@@ -48,6 +50,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			IconConfigurationLocalServiceUtil.clearService();
 
 			IconConfigurationServiceUtil.clearService();
+			IconsLocalServiceUtil.clearService();
+
+			IconsServiceUtil.clearService();
 			SymbolConfigurationLocalServiceUtil.clearService();
 
 			SymbolConfigurationServiceUtil.clearService();

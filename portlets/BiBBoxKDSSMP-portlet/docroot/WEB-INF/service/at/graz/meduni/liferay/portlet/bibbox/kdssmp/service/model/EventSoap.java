@@ -32,6 +32,7 @@ public class EventSoap implements Serializable {
 
 		soapModel.setEventId(model.getEventId());
 		soapModel.setPatientId(model.getPatientId());
+		soapModel.setLayoutId(model.getLayoutId());
 		soapModel.setEventdate(model.getEventdate());
 		soapModel.setEventtype(model.getEventtype());
 
@@ -102,6 +103,14 @@ public class EventSoap implements Serializable {
 		_patientId = patientId;
 	}
 
+	public long getLayoutId() {
+		return _layoutId;
+	}
+
+	public void setLayoutId(long layoutId) {
+		_layoutId = layoutId;
+	}
+
 	public Date getEventdate() {
 		return _eventdate;
 	}
@@ -120,6 +129,7 @@ public class EventSoap implements Serializable {
 
 	private long _eventId;
 	private long _patientId;
+	private long _layoutId;
 	private Date _eventdate;
 	private String _eventtype;
 }

@@ -14,6 +14,9 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.service.base.SymbolTypeConfigurationLocalServiceBaseImpl;
 
@@ -38,11 +41,20 @@ public class SymbolTypeConfigurationLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalServiceUtil} to access the symbol type configuration local service.
 	 */
+	/**
+	 * Error Format for date
+	 */
+	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	
+	/**
+	 * 
+	 */
 	public SymbolTypeConfiguration getSymbolTypeConfigurationBySymbolType(String symboltype) {
 		try {
 			return symbolTypeConfigurationPersistence.findByFieldSymbolType(symboltype);
 		} catch (Exception ex) {
-			
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.service.impl.SymbolTypeConfigurationLocalServiceImpl::getSymbolTypeConfigurationBySymbolType] Info no SymbolTypeConfiguration found for search: (" + symboltype + ".");
 		}
 		return null; 
 	}

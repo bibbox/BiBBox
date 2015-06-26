@@ -37,12 +37,14 @@ import java.util.Date;
 public class EventCacheModel implements CacheModel<Event>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{eventId=");
 		sb.append(eventId);
 		sb.append(", patientId=");
 		sb.append(patientId);
+		sb.append(", layoutId=");
+		sb.append(layoutId);
 		sb.append(", eventdate=");
 		sb.append(eventdate);
 		sb.append(", eventtype=");
@@ -58,6 +60,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 
 		eventImpl.setEventId(eventId);
 		eventImpl.setPatientId(patientId);
+		eventImpl.setLayoutId(layoutId);
 
 		if (eventdate == Long.MIN_VALUE) {
 			eventImpl.setEventdate(null);
@@ -82,6 +85,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		eventId = objectInput.readLong();
 		patientId = objectInput.readLong();
+		layoutId = objectInput.readLong();
 		eventdate = objectInput.readLong();
 		eventtype = objectInput.readUTF();
 	}
@@ -91,6 +95,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		throws IOException {
 		objectOutput.writeLong(eventId);
 		objectOutput.writeLong(patientId);
+		objectOutput.writeLong(layoutId);
 		objectOutput.writeLong(eventdate);
 
 		if (eventtype == null) {
@@ -103,6 +108,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 
 	public long eventId;
 	public long patientId;
+	public long layoutId;
 	public long eventdate;
 	public String eventtype;
 }

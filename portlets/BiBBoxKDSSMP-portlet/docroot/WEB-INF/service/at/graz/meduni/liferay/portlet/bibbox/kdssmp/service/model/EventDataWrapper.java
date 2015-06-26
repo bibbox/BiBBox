@@ -49,7 +49,7 @@ public class EventDataWrapper implements EventData, ModelWrapper<EventData> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("eventdataId", getEventdataId());
-		attributes.put("eventlayoutId", getEventlayoutId());
+		attributes.put("eventId", getEventId());
 		attributes.put("patientId", getPatientId());
 		attributes.put("ontology", getOntology());
 		attributes.put("value", getValue());
@@ -65,10 +65,10 @@ public class EventDataWrapper implements EventData, ModelWrapper<EventData> {
 			setEventdataId(eventdataId);
 		}
 
-		Long eventlayoutId = (Long)attributes.get("eventlayoutId");
+		Long eventId = (Long)attributes.get("eventId");
 
-		if (eventlayoutId != null) {
-			setEventlayoutId(eventlayoutId);
+		if (eventId != null) {
+			setEventId(eventId);
 		}
 
 		Long patientId = (Long)attributes.get("patientId");
@@ -131,23 +131,23 @@ public class EventDataWrapper implements EventData, ModelWrapper<EventData> {
 	}
 
 	/**
-	* Returns the eventlayout ID of this event data.
+	* Returns the event ID of this event data.
 	*
-	* @return the eventlayout ID of this event data
+	* @return the event ID of this event data
 	*/
 	@Override
-	public long getEventlayoutId() {
-		return _eventData.getEventlayoutId();
+	public long getEventId() {
+		return _eventData.getEventId();
 	}
 
 	/**
-	* Sets the eventlayout ID of this event data.
+	* Sets the event ID of this event data.
 	*
-	* @param eventlayoutId the eventlayout ID of this event data
+	* @param eventId the event ID of this event data
 	*/
 	@Override
-	public void setEventlayoutId(long eventlayoutId) {
-		_eventData.setEventlayoutId(eventlayoutId);
+	public void setEventId(long eventId) {
+		_eventData.setEventId(eventId);
 	}
 
 	/**

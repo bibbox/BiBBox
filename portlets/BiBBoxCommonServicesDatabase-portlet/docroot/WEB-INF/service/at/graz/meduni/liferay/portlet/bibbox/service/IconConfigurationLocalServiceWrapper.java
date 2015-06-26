@@ -290,6 +290,37 @@ public class IconConfigurationLocalServiceWrapper
 	}
 
 	/**
+	* @return
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForPosition(
+		long symbolconfigurationId, java.lang.String position) {
+		return _iconConfigurationLocalService.getIconsForPosition(symbolconfigurationId,
+			position);
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForKey(
+		long symbolconfigurationId, java.lang.String key) {
+		return _iconConfigurationLocalService.getIconsForKey(symbolconfigurationId,
+			key);
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration getIconsForKeyPosition(
+		long symbolconfigurationId, java.lang.String key,
+		java.lang.String position) {
+		return _iconConfigurationLocalService.getIconsForKeyPosition(symbolconfigurationId,
+			key, position);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public IconConfigurationLocalService getWrappedIconConfigurationLocalService() {

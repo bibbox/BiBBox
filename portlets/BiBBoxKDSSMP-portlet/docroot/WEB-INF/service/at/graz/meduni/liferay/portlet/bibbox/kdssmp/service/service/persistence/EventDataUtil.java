@@ -111,169 +111,164 @@ public class EventDataUtil {
 	}
 
 	/**
-	* Returns all the event datas where eventlayoutId = &#63;.
+	* Returns all the event datas where eventId = &#63;.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @return the matching event datas
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByEventLayout(
-		long eventlayoutId)
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByEvent(
+		long eventId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByEventLayout(eventlayoutId);
+		return getPersistence().findByEvent(eventId);
 	}
 
 	/**
-	* Returns a range of all the event datas where eventlayoutId = &#63;.
+	* Returns a range of all the event datas where eventId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param start the lower bound of the range of event datas
 	* @param end the upper bound of the range of event datas (not inclusive)
 	* @return the range of matching event datas
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByEventLayout(
-		long eventlayoutId, int start, int end)
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByEvent(
+		long eventId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByEventLayout(eventlayoutId, start, end);
+		return getPersistence().findByEvent(eventId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the event datas where eventlayoutId = &#63;.
+	* Returns an ordered range of all the event datas where eventId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param start the lower bound of the range of event datas
 	* @param end the upper bound of the range of event datas (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching event datas
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByEventLayout(
-		long eventlayoutId, int start, int end,
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData> findByEvent(
+		long eventId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByEventLayout(eventlayoutId, start, end,
-			orderByComparator);
+				   .findByEvent(eventId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the first event data in the ordered set where eventlayoutId = &#63;.
+	* Returns the first event data in the ordered set where eventId = &#63;.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching event data
 	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData findByEventLayout_First(
-		long eventlayoutId,
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData findByEvent_First(
+		long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByEventLayout_First(eventlayoutId, orderByComparator);
+		return getPersistence().findByEvent_First(eventId, orderByComparator);
 	}
 
 	/**
-	* Returns the first event data in the ordered set where eventlayoutId = &#63;.
+	* Returns the first event data in the ordered set where eventId = &#63;.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching event data, or <code>null</code> if a matching event data could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByEventLayout_First(
-		long eventlayoutId,
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByEvent_First(
+		long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByEventLayout_First(eventlayoutId, orderByComparator);
+		return getPersistence().fetchByEvent_First(eventId, orderByComparator);
 	}
 
 	/**
-	* Returns the last event data in the ordered set where eventlayoutId = &#63;.
+	* Returns the last event data in the ordered set where eventId = &#63;.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching event data
 	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData findByEventLayout_Last(
-		long eventlayoutId,
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData findByEvent_Last(
+		long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByEventLayout_Last(eventlayoutId, orderByComparator);
+		return getPersistence().findByEvent_Last(eventId, orderByComparator);
 	}
 
 	/**
-	* Returns the last event data in the ordered set where eventlayoutId = &#63;.
+	* Returns the last event data in the ordered set where eventId = &#63;.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching event data, or <code>null</code> if a matching event data could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByEventLayout_Last(
-		long eventlayoutId,
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByEvent_Last(
+		long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByEventLayout_Last(eventlayoutId, orderByComparator);
+		return getPersistence().fetchByEvent_Last(eventId, orderByComparator);
 	}
 
 	/**
-	* Returns the event datas before and after the current event data in the ordered set where eventlayoutId = &#63;.
+	* Returns the event datas before and after the current event data in the ordered set where eventId = &#63;.
 	*
 	* @param eventdataId the primary key of the current event data
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next event data
 	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a event data with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData[] findByEventLayout_PrevAndNext(
-		long eventdataId, long eventlayoutId,
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData[] findByEvent_PrevAndNext(
+		long eventdataId, long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByEventLayout_PrevAndNext(eventdataId, eventlayoutId,
+				   .findByEvent_PrevAndNext(eventdataId, eventId,
 			orderByComparator);
 	}
 
 	/**
-	* Removes all the event datas where eventlayoutId = &#63; from the database.
+	* Removes all the event datas where eventId = &#63; from the database.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByEventLayout(long eventlayoutId)
+	public static void removeByEvent(long eventId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByEventLayout(eventlayoutId);
+		getPersistence().removeByEvent(eventId);
 	}
 
 	/**
-	* Returns the number of event datas where eventlayoutId = &#63;.
+	* Returns the number of event datas where eventId = &#63;.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @return the number of matching event datas
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByEventLayout(long eventlayoutId)
+	public static int countByEvent(long eventId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByEventLayout(eventlayoutId);
+		return getPersistence().countByEvent(eventId);
 	}
 
 	/**
@@ -439,79 +434,78 @@ public class EventDataUtil {
 	}
 
 	/**
-	* Returns the event data where eventlayoutId = &#63; and ontology = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException} if it could not be found.
+	* Returns the event data where eventId = &#63; and ontology = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException} if it could not be found.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param ontology the ontology
 	* @return the matching event data
 	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData findByDataByOntology(
-		long eventlayoutId, java.lang.String ontology)
+		long eventId, java.lang.String ontology)
 		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByDataByOntology(eventlayoutId, ontology);
+		return getPersistence().findByDataByOntology(eventId, ontology);
 	}
 
 	/**
-	* Returns the event data where eventlayoutId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Returns the event data where eventId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param ontology the ontology
 	* @return the matching event data, or <code>null</code> if a matching event data could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByDataByOntology(
-		long eventlayoutId, java.lang.String ontology)
+		long eventId, java.lang.String ontology)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByDataByOntology(eventlayoutId, ontology);
+		return getPersistence().fetchByDataByOntology(eventId, ontology);
 	}
 
 	/**
-	* Returns the event data where eventlayoutId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Returns the event data where eventId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param ontology the ontology
 	* @param retrieveFromCache whether to use the finder cache
 	* @return the matching event data, or <code>null</code> if a matching event data could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData fetchByDataByOntology(
-		long eventlayoutId, java.lang.String ontology, boolean retrieveFromCache)
+		long eventId, java.lang.String ontology, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByDataByOntology(eventlayoutId, ontology,
-			retrieveFromCache);
+				   .fetchByDataByOntology(eventId, ontology, retrieveFromCache);
 	}
 
 	/**
-	* Removes the event data where eventlayoutId = &#63; and ontology = &#63; from the database.
+	* Removes the event data where eventId = &#63; and ontology = &#63; from the database.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param ontology the ontology
 	* @return the event data that was removed
 	* @throws SystemException if a system exception occurred
 	*/
 	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData removeByDataByOntology(
-		long eventlayoutId, java.lang.String ontology)
+		long eventId, java.lang.String ontology)
 		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().removeByDataByOntology(eventlayoutId, ontology);
+		return getPersistence().removeByDataByOntology(eventId, ontology);
 	}
 
 	/**
-	* Returns the number of event datas where eventlayoutId = &#63; and ontology = &#63;.
+	* Returns the number of event datas where eventId = &#63; and ontology = &#63;.
 	*
-	* @param eventlayoutId the eventlayout ID
+	* @param eventId the event ID
 	* @param ontology the ontology
 	* @return the number of matching event datas
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByDataByOntology(long eventlayoutId,
+	public static int countByDataByOntology(long eventId,
 		java.lang.String ontology)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByDataByOntology(eventlayoutId, ontology);
+		return getPersistence().countByDataByOntology(eventId, ontology);
 	}
 
 	/**

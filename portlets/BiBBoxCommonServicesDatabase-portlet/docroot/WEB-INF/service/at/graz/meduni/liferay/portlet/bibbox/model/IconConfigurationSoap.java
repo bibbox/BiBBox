@@ -34,8 +34,10 @@ public class IconConfigurationSoap implements Serializable {
 		soapModel.setSymbolconfigurationId(model.getSymbolconfigurationId());
 		soapModel.setPosition(model.getPosition());
 		soapModel.setKey(model.getKey());
-		soapModel.setImage(model.getImage());
+		soapModel.setIconsId(model.getIconsId());
 		soapModel.setElementcolor(model.getElementcolor());
+		soapModel.setWidth(model.getWidth());
+		soapModel.setHeight(model.getHeight());
 
 		return soapModel;
 	}
@@ -123,12 +125,12 @@ public class IconConfigurationSoap implements Serializable {
 		_key = key;
 	}
 
-	public String getImage() {
-		return _image;
+	public long getIconsId() {
+		return _iconsId;
 	}
 
-	public void setImage(String image) {
-		_image = image;
+	public void setIconsId(long iconsId) {
+		_iconsId = iconsId;
 	}
 
 	public String getElementcolor() {
@@ -139,10 +141,28 @@ public class IconConfigurationSoap implements Serializable {
 		_elementcolor = elementcolor;
 	}
 
+	public String getWidth() {
+		return _width;
+	}
+
+	public void setWidth(String width) {
+		_width = width;
+	}
+
+	public String getHeight() {
+		return _height;
+	}
+
+	public void setHeight(String height) {
+		_height = height;
+	}
+
 	private long _iconconfigurationId;
 	private long _symbolconfigurationId;
 	private String _position;
 	private String _key;
-	private String _image;
+	private long _iconsId;
 	private String _elementcolor;
+	private String _width;
+	private String _height;
 }

@@ -3,12 +3,19 @@
 
 <display>
 	
-	<category name="kDSSMP">
+	<category name="kDSSMP Demo1">
 		<portlet id="create-patient"></portlet>
 		<portlet id="patient"></portlet>
 		<portlet id="event-list"></portlet>
 		<portlet id="create-event"></portlet>
 		<portlet id="display-event-parameter"></portlet>
 		<portlet id="informed-consent"></portlet>
+	</category>
+	<category name="kDSSMP">
+		<portlet id="create-patient2"></portlet>
+		<portlet id="list-patients"></portlet>
+		<portlet id="create-event2"></portlet>
+		<portlet id="view-patient"></portlet>
+		<portlet id="counseling-group"></portlet>
 	</category>
 </display>

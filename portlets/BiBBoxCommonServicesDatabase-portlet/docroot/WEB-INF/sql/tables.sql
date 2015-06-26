@@ -18,8 +18,16 @@ create table bibboxcs.iconconfiguration (
 	symbolconfigurationId LONG,
 	position VARCHAR(75) null,
 	key_ VARCHAR(75) null,
-	image VARCHAR(75) null,
-	elementcolor VARCHAR(75) null
+	iconsId LONG,
+	elementcolor VARCHAR(75) null,
+	width VARCHAR(75) null,
+	height VARCHAR(75) null
+);
+
+create table bibboxcs.icons (
+	iconsId LONG not null primary key,
+	iconurl VARCHAR(75) null,
+	group_ VARCHAR(75) null
 );
 
 create table bibboxcs.symbolconfiguration (

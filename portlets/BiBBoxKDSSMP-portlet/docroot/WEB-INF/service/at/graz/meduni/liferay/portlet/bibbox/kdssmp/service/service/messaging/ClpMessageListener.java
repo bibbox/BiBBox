@@ -20,6 +20,7 @@ import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalSe
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpParameterConfigurationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpParameterOptionsLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpPatientLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpRulesLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalServiceUtil;
 
@@ -50,6 +51,8 @@ public class ClpMessageListener extends BaseMessageListener {
 			KdssmpParameterConfigurationLocalServiceUtil.clearService();
 
 			KdssmpParameterOptionsLocalServiceUtil.clearService();
+
+			KdssmpPatientLocalServiceUtil.clearService();
 
 			KdssmpRulesLocalServiceUtil.clearService();
 

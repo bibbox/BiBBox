@@ -115,6 +115,20 @@ public class IconConfigurationLocalServiceClp
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getIconsForPosition";
+
+		_methodParameterTypes19 = new String[] { "long", "java.lang.String" };
+
+		_methodName20 = "getIconsForKey";
+
+		_methodParameterTypes20 = new String[] { "long", "java.lang.String" };
+
+		_methodName21 = "getIconsForKeyPosition";
+
+		_methodParameterTypes21 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -672,6 +686,96 @@ public class IconConfigurationLocalServiceClp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForPosition(
+		long symbolconfigurationId, java.lang.String position) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						symbolconfigurationId,
+						
+					ClpSerializer.translateInput(position)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForKey(
+		long symbolconfigurationId, java.lang.String key) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						symbolconfigurationId,
+						
+					ClpSerializer.translateInput(key)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration getIconsForKeyPosition(
+		long symbolconfigurationId, java.lang.String key,
+		java.lang.String position) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] {
+						symbolconfigurationId,
+						
+					ClpSerializer.translateInput(key),
+						
+					ClpSerializer.translateInput(position)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -709,4 +813,10 @@ public class IconConfigurationLocalServiceClp
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

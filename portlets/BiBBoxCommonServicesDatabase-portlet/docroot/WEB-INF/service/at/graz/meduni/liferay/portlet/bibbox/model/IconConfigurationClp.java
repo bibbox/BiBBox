@@ -77,8 +77,10 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 		attributes.put("symbolconfigurationId", getSymbolconfigurationId());
 		attributes.put("position", getPosition());
 		attributes.put("key", getKey());
-		attributes.put("image", getImage());
+		attributes.put("iconsId", getIconsId());
 		attributes.put("elementcolor", getElementcolor());
+		attributes.put("width", getWidth());
+		attributes.put("height", getHeight());
 
 		return attributes;
 	}
@@ -110,16 +112,28 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 			setKey(key);
 		}
 
-		String image = (String)attributes.get("image");
+		Long iconsId = (Long)attributes.get("iconsId");
 
-		if (image != null) {
-			setImage(image);
+		if (iconsId != null) {
+			setIconsId(iconsId);
 		}
 
 		String elementcolor = (String)attributes.get("elementcolor");
 
 		if (elementcolor != null) {
 			setElementcolor(elementcolor);
+		}
+
+		String width = (String)attributes.get("width");
+
+		if (width != null) {
+			setWidth(width);
+		}
+
+		String height = (String)attributes.get("height");
+
+		if (height != null) {
+			setHeight(height);
 		}
 	}
 
@@ -219,21 +233,21 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 	}
 
 	@Override
-	public String getImage() {
-		return _image;
+	public long getIconsId() {
+		return _iconsId;
 	}
 
 	@Override
-	public void setImage(String image) {
-		_image = image;
+	public void setIconsId(long iconsId) {
+		_iconsId = iconsId;
 
 		if (_iconConfigurationRemoteModel != null) {
 			try {
 				Class<?> clazz = _iconConfigurationRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setImage", String.class);
+				Method method = clazz.getMethod("setIconsId", long.class);
 
-				method.invoke(_iconConfigurationRemoteModel, image);
+				method.invoke(_iconConfigurationRemoteModel, iconsId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -261,6 +275,90 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
 			}
+		}
+	}
+
+	@Override
+	public String getWidth() {
+		return _width;
+	}
+
+	@Override
+	public void setWidth(String width) {
+		_width = width;
+
+		if (_iconConfigurationRemoteModel != null) {
+			try {
+				Class<?> clazz = _iconConfigurationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setWidth", String.class);
+
+				method.invoke(_iconConfigurationRemoteModel, width);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getHeight() {
+		return _height;
+	}
+
+	@Override
+	public void setHeight(String height) {
+		_height = height;
+
+		if (_iconConfigurationRemoteModel != null) {
+			try {
+				Class<?> clazz = _iconConfigurationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setHeight", String.class);
+
+				method.invoke(_iconConfigurationRemoteModel, height);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public java.lang.String getHTMLIcon() {
+		try {
+			String methodName = "getHTMLIcon";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.String getIconUrl() {
+		try {
+			String methodName = "getIconUrl";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
 		}
 	}
 
@@ -339,8 +437,10 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 		clone.setSymbolconfigurationId(getSymbolconfigurationId());
 		clone.setPosition(getPosition());
 		clone.setKey(getKey());
-		clone.setImage(getImage());
+		clone.setIconsId(getIconsId());
 		clone.setElementcolor(getElementcolor());
+		clone.setWidth(getWidth());
+		clone.setHeight(getHeight());
 
 		return clone;
 	}
@@ -389,7 +489,7 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{iconconfigurationId=");
 		sb.append(getIconconfigurationId());
@@ -399,10 +499,14 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 		sb.append(getPosition());
 		sb.append(", key=");
 		sb.append(getKey());
-		sb.append(", image=");
-		sb.append(getImage());
+		sb.append(", iconsId=");
+		sb.append(getIconsId());
 		sb.append(", elementcolor=");
 		sb.append(getElementcolor());
+		sb.append(", width=");
+		sb.append(getWidth());
+		sb.append(", height=");
+		sb.append(getHeight());
 		sb.append("}");
 
 		return sb.toString();
@@ -410,7 +514,7 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -434,12 +538,20 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 		sb.append(getKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>image</column-name><column-value><![CDATA[");
-		sb.append(getImage());
+			"<column><column-name>iconsId</column-name><column-value><![CDATA[");
+		sb.append(getIconsId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>elementcolor</column-name><column-value><![CDATA[");
 		sb.append(getElementcolor());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>width</column-name><column-value><![CDATA[");
+		sb.append(getWidth());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>height</column-name><column-value><![CDATA[");
+		sb.append(getHeight());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -451,7 +563,9 @@ public class IconConfigurationClp extends BaseModelImpl<IconConfiguration>
 	private long _symbolconfigurationId;
 	private String _position;
 	private String _key;
-	private String _image;
+	private long _iconsId;
 	private String _elementcolor;
+	private String _width;
+	private String _height;
 	private BaseModel<?> _iconConfigurationRemoteModel;
 }

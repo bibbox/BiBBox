@@ -16,8 +16,11 @@ package at.graz.meduni.liferay.portlet.bibbox.model.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration;
+import at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalServiceUtil;
 
 /**
@@ -60,6 +63,10 @@ public class SymbolConfigurationImpl extends SymbolConfigurationBaseImpl {
 		return template;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getSymbolIconConfiguration() {
 		String config = "";
 		try {
@@ -70,5 +77,47 @@ public class SymbolConfigurationImpl extends SymbolConfigurationBaseImpl {
 			ex.printStackTrace();
 		}
 		return config;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<IconConfiguration> getIconsForPosition(String position) {
+		try {
+			return IconConfigurationLocalServiceUtil.getIconsForPosition(this.getSymbolconfigurationId(), position);
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl::getIconsForPosition] Error retrieving IconConfigurations for search (" + this.getSymbolconfigurationId() + ", " + position + ").");
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<IconConfiguration> getIconsForKey(String key) {
+		try {
+			return IconConfigurationLocalServiceUtil.getIconsForKey(this.getSymbolconfigurationId(), key);
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl::getIconsForKey] Error retrieving IconConfigurations for search (" + this.getSymbolconfigurationId() + ", " + key + ").");
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public IconConfiguration getIconsForKeyPosition(String key, String position) {
+		try {
+			return IconConfigurationLocalServiceUtil.getIconsForKeyPosition(this.getSymbolconfigurationId(), key, position);
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl::getIconsForKeyPosition] Error retrieving IconConfigurations for search (" + this.getSymbolconfigurationId() + ", " + key + ", " + position + ").");
+			ex.printStackTrace();
+		}
+		return null;
 	}
 }

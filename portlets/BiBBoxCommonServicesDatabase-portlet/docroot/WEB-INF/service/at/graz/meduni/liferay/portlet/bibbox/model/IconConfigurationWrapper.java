@@ -53,8 +53,10 @@ public class IconConfigurationWrapper implements IconConfiguration,
 		attributes.put("symbolconfigurationId", getSymbolconfigurationId());
 		attributes.put("position", getPosition());
 		attributes.put("key", getKey());
-		attributes.put("image", getImage());
+		attributes.put("iconsId", getIconsId());
 		attributes.put("elementcolor", getElementcolor());
+		attributes.put("width", getWidth());
+		attributes.put("height", getHeight());
 
 		return attributes;
 	}
@@ -86,16 +88,28 @@ public class IconConfigurationWrapper implements IconConfiguration,
 			setKey(key);
 		}
 
-		String image = (String)attributes.get("image");
+		Long iconsId = (Long)attributes.get("iconsId");
 
-		if (image != null) {
-			setImage(image);
+		if (iconsId != null) {
+			setIconsId(iconsId);
 		}
 
 		String elementcolor = (String)attributes.get("elementcolor");
 
 		if (elementcolor != null) {
 			setElementcolor(elementcolor);
+		}
+
+		String width = (String)attributes.get("width");
+
+		if (width != null) {
+			setWidth(width);
+		}
+
+		String height = (String)attributes.get("height");
+
+		if (height != null) {
+			setHeight(height);
 		}
 	}
 
@@ -200,23 +214,23 @@ public class IconConfigurationWrapper implements IconConfiguration,
 	}
 
 	/**
-	* Returns the image of this icon configuration.
+	* Returns the icons ID of this icon configuration.
 	*
-	* @return the image of this icon configuration
+	* @return the icons ID of this icon configuration
 	*/
 	@Override
-	public java.lang.String getImage() {
-		return _iconConfiguration.getImage();
+	public long getIconsId() {
+		return _iconConfiguration.getIconsId();
 	}
 
 	/**
-	* Sets the image of this icon configuration.
+	* Sets the icons ID of this icon configuration.
 	*
-	* @param image the image of this icon configuration
+	* @param iconsId the icons ID of this icon configuration
 	*/
 	@Override
-	public void setImage(java.lang.String image) {
-		_iconConfiguration.setImage(image);
+	public void setIconsId(long iconsId) {
+		_iconConfiguration.setIconsId(iconsId);
 	}
 
 	/**
@@ -237,6 +251,46 @@ public class IconConfigurationWrapper implements IconConfiguration,
 	@Override
 	public void setElementcolor(java.lang.String elementcolor) {
 		_iconConfiguration.setElementcolor(elementcolor);
+	}
+
+	/**
+	* Returns the width of this icon configuration.
+	*
+	* @return the width of this icon configuration
+	*/
+	@Override
+	public java.lang.String getWidth() {
+		return _iconConfiguration.getWidth();
+	}
+
+	/**
+	* Sets the width of this icon configuration.
+	*
+	* @param width the width of this icon configuration
+	*/
+	@Override
+	public void setWidth(java.lang.String width) {
+		_iconConfiguration.setWidth(width);
+	}
+
+	/**
+	* Returns the height of this icon configuration.
+	*
+	* @return the height of this icon configuration
+	*/
+	@Override
+	public java.lang.String getHeight() {
+		return _iconConfiguration.getHeight();
+	}
+
+	/**
+	* Sets the height of this icon configuration.
+	*
+	* @param height the height of this icon configuration
+	*/
+	@Override
+	public void setHeight(java.lang.String height) {
+		_iconConfiguration.setHeight(height);
 	}
 
 	@Override
@@ -342,6 +396,19 @@ public class IconConfigurationWrapper implements IconConfiguration,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_iconConfiguration.persist();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public java.lang.String getIconUrl() {
+		return _iconConfiguration.getIconUrl();
+	}
+
+	@Override
+	public java.lang.String getHTMLIcon() {
+		return _iconConfiguration.getHTMLIcon();
 	}
 
 	@Override

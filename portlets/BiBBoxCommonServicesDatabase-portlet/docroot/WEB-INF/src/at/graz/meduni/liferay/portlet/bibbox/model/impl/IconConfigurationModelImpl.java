@@ -67,10 +67,12 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 			{ "symbolconfigurationId", Types.BIGINT },
 			{ "position", Types.VARCHAR },
 			{ "key_", Types.VARCHAR },
-			{ "image", Types.VARCHAR },
-			{ "elementcolor", Types.VARCHAR }
+			{ "iconsId", Types.BIGINT },
+			{ "elementcolor", Types.VARCHAR },
+			{ "width", Types.VARCHAR },
+			{ "height", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.iconconfiguration (iconconfigurationId LONG not null primary key,symbolconfigurationId LONG,position VARCHAR(75) null,key_ VARCHAR(75) null,image VARCHAR(75) null,elementcolor VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.iconconfiguration (iconconfigurationId LONG not null primary key,symbolconfigurationId LONG,position VARCHAR(75) null,key_ VARCHAR(75) null,iconsId LONG,elementcolor VARCHAR(75) null,width VARCHAR(75) null,height VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.iconconfiguration";
 	public static final String ORDER_BY_JPQL = " ORDER BY iconConfiguration.iconconfigurationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.iconconfiguration.iconconfigurationId ASC";
@@ -83,7 +85,13 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration"),
+			true);
+	public static long KEY_COLUMN_BITMASK = 1L;
+	public static long POSITION_COLUMN_BITMASK = 2L;
+	public static long SYMBOLCONFIGURATIONID_COLUMN_BITMASK = 4L;
+	public static long ICONCONFIGURATIONID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -102,8 +110,10 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 		model.setSymbolconfigurationId(soapModel.getSymbolconfigurationId());
 		model.setPosition(soapModel.getPosition());
 		model.setKey(soapModel.getKey());
-		model.setImage(soapModel.getImage());
+		model.setIconsId(soapModel.getIconsId());
 		model.setElementcolor(soapModel.getElementcolor());
+		model.setWidth(soapModel.getWidth());
+		model.setHeight(soapModel.getHeight());
 
 		return model;
 	}
@@ -173,8 +183,10 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 		attributes.put("symbolconfigurationId", getSymbolconfigurationId());
 		attributes.put("position", getPosition());
 		attributes.put("key", getKey());
-		attributes.put("image", getImage());
+		attributes.put("iconsId", getIconsId());
 		attributes.put("elementcolor", getElementcolor());
+		attributes.put("width", getWidth());
+		attributes.put("height", getHeight());
 
 		return attributes;
 	}
@@ -206,16 +218,28 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 			setKey(key);
 		}
 
-		String image = (String)attributes.get("image");
+		Long iconsId = (Long)attributes.get("iconsId");
 
-		if (image != null) {
-			setImage(image);
+		if (iconsId != null) {
+			setIconsId(iconsId);
 		}
 
 		String elementcolor = (String)attributes.get("elementcolor");
 
 		if (elementcolor != null) {
 			setElementcolor(elementcolor);
+		}
+
+		String width = (String)attributes.get("width");
+
+		if (width != null) {
+			setWidth(width);
+		}
+
+		String height = (String)attributes.get("height");
+
+		if (height != null) {
+			setHeight(height);
 		}
 	}
 
@@ -238,7 +262,19 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 
 	@Override
 	public void setSymbolconfigurationId(long symbolconfigurationId) {
+		_columnBitmask |= SYMBOLCONFIGURATIONID_COLUMN_BITMASK;
+
+		if (!_setOriginalSymbolconfigurationId) {
+			_setOriginalSymbolconfigurationId = true;
+
+			_originalSymbolconfigurationId = _symbolconfigurationId;
+		}
+
 		_symbolconfigurationId = symbolconfigurationId;
+	}
+
+	public long getOriginalSymbolconfigurationId() {
+		return _originalSymbolconfigurationId;
 	}
 
 	@JSON
@@ -254,7 +290,17 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 
 	@Override
 	public void setPosition(String position) {
+		_columnBitmask |= POSITION_COLUMN_BITMASK;
+
+		if (_originalPosition == null) {
+			_originalPosition = _position;
+		}
+
 		_position = position;
+	}
+
+	public String getOriginalPosition() {
+		return GetterUtil.getString(_originalPosition);
 	}
 
 	@JSON
@@ -270,23 +316,28 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 
 	@Override
 	public void setKey(String key) {
+		_columnBitmask |= KEY_COLUMN_BITMASK;
+
+		if (_originalKey == null) {
+			_originalKey = _key;
+		}
+
 		_key = key;
+	}
+
+	public String getOriginalKey() {
+		return GetterUtil.getString(_originalKey);
 	}
 
 	@JSON
 	@Override
-	public String getImage() {
-		if (_image == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _image;
-		}
+	public long getIconsId() {
+		return _iconsId;
 	}
 
 	@Override
-	public void setImage(String image) {
-		_image = image;
+	public void setIconsId(long iconsId) {
+		_iconsId = iconsId;
 	}
 
 	@JSON
@@ -303,6 +354,42 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 	@Override
 	public void setElementcolor(String elementcolor) {
 		_elementcolor = elementcolor;
+	}
+
+	@JSON
+	@Override
+	public String getWidth() {
+		if (_width == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _width;
+		}
+	}
+
+	@Override
+	public void setWidth(String width) {
+		_width = width;
+	}
+
+	@JSON
+	@Override
+	public String getHeight() {
+		if (_height == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _height;
+		}
+	}
+
+	@Override
+	public void setHeight(String height) {
+		_height = height;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -336,8 +423,10 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 		iconConfigurationImpl.setSymbolconfigurationId(getSymbolconfigurationId());
 		iconConfigurationImpl.setPosition(getPosition());
 		iconConfigurationImpl.setKey(getKey());
-		iconConfigurationImpl.setImage(getImage());
+		iconConfigurationImpl.setIconsId(getIconsId());
 		iconConfigurationImpl.setElementcolor(getElementcolor());
+		iconConfigurationImpl.setWidth(getWidth());
+		iconConfigurationImpl.setHeight(getHeight());
 
 		iconConfigurationImpl.resetOriginalValues();
 
@@ -388,6 +477,17 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 
 	@Override
 	public void resetOriginalValues() {
+		IconConfigurationModelImpl iconConfigurationModelImpl = this;
+
+		iconConfigurationModelImpl._originalSymbolconfigurationId = iconConfigurationModelImpl._symbolconfigurationId;
+
+		iconConfigurationModelImpl._setOriginalSymbolconfigurationId = false;
+
+		iconConfigurationModelImpl._originalPosition = iconConfigurationModelImpl._position;
+
+		iconConfigurationModelImpl._originalKey = iconConfigurationModelImpl._key;
+
+		iconConfigurationModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -414,13 +514,7 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 			iconConfigurationCacheModel.key = null;
 		}
 
-		iconConfigurationCacheModel.image = getImage();
-
-		String image = iconConfigurationCacheModel.image;
-
-		if ((image != null) && (image.length() == 0)) {
-			iconConfigurationCacheModel.image = null;
-		}
+		iconConfigurationCacheModel.iconsId = getIconsId();
 
 		iconConfigurationCacheModel.elementcolor = getElementcolor();
 
@@ -430,12 +524,28 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 			iconConfigurationCacheModel.elementcolor = null;
 		}
 
+		iconConfigurationCacheModel.width = getWidth();
+
+		String width = iconConfigurationCacheModel.width;
+
+		if ((width != null) && (width.length() == 0)) {
+			iconConfigurationCacheModel.width = null;
+		}
+
+		iconConfigurationCacheModel.height = getHeight();
+
+		String height = iconConfigurationCacheModel.height;
+
+		if ((height != null) && (height.length() == 0)) {
+			iconConfigurationCacheModel.height = null;
+		}
+
 		return iconConfigurationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{iconconfigurationId=");
 		sb.append(getIconconfigurationId());
@@ -445,10 +555,14 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 		sb.append(getPosition());
 		sb.append(", key=");
 		sb.append(getKey());
-		sb.append(", image=");
-		sb.append(getImage());
+		sb.append(", iconsId=");
+		sb.append(getIconsId());
 		sb.append(", elementcolor=");
 		sb.append(getElementcolor());
+		sb.append(", width=");
+		sb.append(getWidth());
+		sb.append(", height=");
+		sb.append(getHeight());
 		sb.append("}");
 
 		return sb.toString();
@@ -456,7 +570,7 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -480,12 +594,20 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 		sb.append(getKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>image</column-name><column-value><![CDATA[");
-		sb.append(getImage());
+			"<column><column-name>iconsId</column-name><column-value><![CDATA[");
+		sb.append(getIconsId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>elementcolor</column-name><column-value><![CDATA[");
 		sb.append(getElementcolor());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>width</column-name><column-value><![CDATA[");
+		sb.append(getWidth());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>height</column-name><column-value><![CDATA[");
+		sb.append(getHeight());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -499,9 +621,16 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 		};
 	private long _iconconfigurationId;
 	private long _symbolconfigurationId;
+	private long _originalSymbolconfigurationId;
+	private boolean _setOriginalSymbolconfigurationId;
 	private String _position;
+	private String _originalPosition;
 	private String _key;
-	private String _image;
+	private String _originalKey;
+	private long _iconsId;
 	private String _elementcolor;
+	private String _width;
+	private String _height;
+	private long _columnBitmask;
 	private IconConfiguration _escapedModel;
 }

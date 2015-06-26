@@ -71,7 +71,7 @@
 	.changecolor {
 		background-color: green;
 	}
-	.eventtype {
+	.configurationeventtype {
 		width: 150px;
 	   	height: 20px;
 	   	border: 1px solid black;
@@ -102,7 +102,29 @@ String headerimage = request.getContextPath() + "/images/header.gif";
 
 <div style="background-image: url('<%= headerimage %>');background-repeat: repeat-x;"><img alt="logo" src="<%= headerlogo %>" width="252px" /></div>
 
+<div class="event-container-text-right" style="background-color: #DBDBDB; ">
+	<div class="event-date">12/05/2014</div>
+	<div class="event changecolor">
+		<div style="background-color: red;width: 75px;height: 74px;clear: both;float: right;overflow:hidden;border-top-right-radius: 15px;">A3
+		</div>
+		<div style="width: 35px;height: 25px;overflow:hidden;">
+			A1
+		</div>
+	
+		<div style="background-color: blue;width: 35px;height: 14px;float: left;text-align: center;font: 12px arial, sans-serif;overflow:hidden;">
+			Code<br>
+		</div>
+		<div style="background-color: orange;width: 35px;height: 35px;float: left;overflow:hidden;">A2
+		</div>
+		
+		<div style="background-color: blue;width: 110px;height: 25px;position: absolute;bottom: 0px;border-top: 1px solid #ffffff;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;overflow:hidden;">
+			A4
+		</div>
+	</div>
+	<div class="event-text">Event Text</div>
+</div><br>
 
+<!-- <img alt="logo" src="/BiBBoxCommonServicesDatabase-portlet/images/icons/basic/zeit.png" width="252px" style="background-color: blue;" /> -->
 
 <%
 List<SymbolConfiguration> symbolconfigurations = SymbolConfigurationLocalServiceUtil.getSymbolConfigurations(-1, -1);
@@ -110,11 +132,31 @@ for(SymbolConfiguration symbolconfiguration : symbolconfigurations) {
 	%>
 	<div style="width: 100%;margin-top: 5px;">
 		<div style="width: 75%;">
-			<div class="eventtype"><%= symbolconfiguration.getEventtype() %></div>
+			<div class="configurationeventtype"><%= symbolconfiguration.getEventtype() %></div>
 			<div class="symbolconfigurationoverview">
-				<span><div style="float: left;margin-right:5px;">Color: </div><div style="float: left;margin-right:5px;">#<%= symbolconfiguration.getBasecolor() %></div><div style="background-color: #<%= symbolconfiguration.getBasecolor() %>;float: left;width: 20px;height: 20px;margin-right:5px;"></div></span>
+				<div><div style="float: left;margin-right:5px;">Color: </div><div style="float: left;margin-right:5px;">#<%= symbolconfiguration.getBasecolor() %></div><div style="background-color: #<%= symbolconfiguration.getBasecolor() %>;float: left;width: 20px;height: 20px;margin-right:5px;"></div></div>
 				<br>
-				<span>conf icons <%= symbolconfiguration.getSymbolIconConfiguration() %></span>
+				<div>Icon Config:<br> 
+					<%
+					String symboliconconfiguration = symbolconfiguration.getSymbolIconConfiguration();
+					String[] extractedsymboliconconfiguration = symboliconconfiguration.split("-");
+					int position = 1;
+					for(String iconcount : extractedsymboliconconfiguration) {
+						%>
+						Icon area A<%= position %>: <%= iconcount %><br>
+						<% 
+						for(IconConfiguration iconconfiguration : symbolconfiguration.getIconsForPosition(String.valueOf(position))) {
+							%>
+							<img title="<%= iconconfiguration.getKey() %>" alt="<%= iconconfiguration.getKey() %>" src="<%= iconconfiguration.getIconUrl() %>" style="background-color: #<%= iconconfiguration.getElementcolor() %>;height: 35px;"/>
+							<%
+						}
+						%>
+						<br>
+						<%
+						position ++;
+					} 
+					%>
+				</div>
 			</div>
 		</div>
 		<div style="float: right;width: 20%;">

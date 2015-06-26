@@ -72,18 +72,18 @@ public interface EventDataModel extends BaseModel<EventData> {
 	public void setEventdataId(long eventdataId);
 
 	/**
-	 * Returns the eventlayout ID of this event data.
+	 * Returns the event ID of this event data.
 	 *
-	 * @return the eventlayout ID of this event data
+	 * @return the event ID of this event data
 	 */
-	public long getEventlayoutId();
+	public long getEventId();
 
 	/**
-	 * Sets the eventlayout ID of this event data.
+	 * Sets the event ID of this event data.
 	 *
-	 * @param eventlayoutId the eventlayout ID of this event data
+	 * @param eventId the event ID of this event data
 	 */
-	public void setEventlayoutId(long eventlayoutId);
+	public void setEventId(long eventId);
 
 	/**
 	 * Returns the patient ID of this event data.

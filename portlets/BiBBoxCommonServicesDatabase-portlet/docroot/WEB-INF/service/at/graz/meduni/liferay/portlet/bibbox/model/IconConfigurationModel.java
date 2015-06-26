@@ -116,19 +116,18 @@ public interface IconConfigurationModel extends BaseModel<IconConfiguration> {
 	public void setKey(String key);
 
 	/**
-	 * Returns the image of this icon configuration.
+	 * Returns the icons ID of this icon configuration.
 	 *
-	 * @return the image of this icon configuration
+	 * @return the icons ID of this icon configuration
 	 */
-	@AutoEscape
-	public String getImage();
+	public long getIconsId();
 
 	/**
-	 * Sets the image of this icon configuration.
+	 * Sets the icons ID of this icon configuration.
 	 *
-	 * @param image the image of this icon configuration
+	 * @param iconsId the icons ID of this icon configuration
 	 */
-	public void setImage(String image);
+	public void setIconsId(long iconsId);
 
 	/**
 	 * Returns the elementcolor of this icon configuration.
@@ -144,6 +143,36 @@ public interface IconConfigurationModel extends BaseModel<IconConfiguration> {
 	 * @param elementcolor the elementcolor of this icon configuration
 	 */
 	public void setElementcolor(String elementcolor);
+
+	/**
+	 * Returns the width of this icon configuration.
+	 *
+	 * @return the width of this icon configuration
+	 */
+	@AutoEscape
+	public String getWidth();
+
+	/**
+	 * Sets the width of this icon configuration.
+	 *
+	 * @param width the width of this icon configuration
+	 */
+	public void setWidth(String width);
+
+	/**
+	 * Returns the height of this icon configuration.
+	 *
+	 * @return the height of this icon configuration
+	 */
+	@AutoEscape
+	public String getHeight();
+
+	/**
+	 * Sets the height of this icon configuration.
+	 *
+	 * @param height the height of this icon configuration
+	 */
+	public void setHeight(String height);
 
 	@Override
 	public boolean isNew();

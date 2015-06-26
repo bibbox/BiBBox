@@ -48,7 +48,7 @@ public class EventDataLocalServiceImpl extends EventDataLocalServiceBaseImpl {
 		try {
 			eventdata = new EventDataImpl();
 			eventdata.setEventdataId(CounterLocalServiceUtil.increment(EventData.class.getName()));
-			eventdata.setEventlayoutId(eventId);
+			//eventdata.setEventlayoutId(eventId);
 			eventdata.setPatientId(patientId);
 			eventdata.setOntology(key);
 			eventdata.setValue(value);

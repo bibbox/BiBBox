@@ -48,3 +48,4 @@
 <!-- Symbol -->
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration"%>
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalServiceUtil"%>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration"%>

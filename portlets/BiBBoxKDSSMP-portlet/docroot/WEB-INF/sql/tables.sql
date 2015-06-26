@@ -25,13 +25,14 @@ create table kdssmp.configuration (
 create table kdssmp.event (
 	eventId LONG not null primary key,
 	patientId LONG,
+	layoutId LONG,
 	eventdate DATE null,
 	eventtype VARCHAR(75) null
 );
 
 create table kdssmp.eventdata (
 	eventdataId LONG not null primary key,
-	eventlayoutId LONG,
+	eventId LONG,
 	patientId LONG,
 	ontology TEXT null,
 	value TEXT null
@@ -54,6 +55,16 @@ create table kdssmp.parameteroptions (
 	parameterconfigurationId LONG,
 	option_ VARCHAR(75) null,
 	value VARCHAR(75) null
+);
+
+create table kdssmp.patient (
+	patientId LONG not null primary key,
+	organizationId LONG,
+	firstname VARCHAR(75) null,
+	lastname VARCHAR(75) null,
+	gender VARCHAR(75) null,
+	dateofbirth DATE null,
+	dateofdeath DATE null
 );
 
 create table kdssmp.patientnamegenerator (

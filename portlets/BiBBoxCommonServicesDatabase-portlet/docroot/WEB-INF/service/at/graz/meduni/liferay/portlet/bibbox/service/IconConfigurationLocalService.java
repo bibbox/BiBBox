@@ -248,4 +248,26 @@ public interface IconConfigurationLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForPosition(
+		long symbolconfigurationId, java.lang.String position);
+
+	/**
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForKey(
+		long symbolconfigurationId, java.lang.String key);
+
+	/**
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration getIconsForKeyPosition(
+		long symbolconfigurationId, java.lang.String key,
+		java.lang.String position);
 }

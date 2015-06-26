@@ -18,6 +18,7 @@ import at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalService;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.DDLConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconConfigurationPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconsPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolTypeConfigurationPersistence;
 
@@ -398,6 +399,62 @@ public abstract class IconConfigurationLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the icons local service.
+	 *
+	 * @return the icons local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.IconsLocalService getIconsLocalService() {
+		return iconsLocalService;
+	}
+
+	/**
+	 * Sets the icons local service.
+	 *
+	 * @param iconsLocalService the icons local service
+	 */
+	public void setIconsLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.IconsLocalService iconsLocalService) {
+		this.iconsLocalService = iconsLocalService;
+	}
+
+	/**
+	 * Returns the icons remote service.
+	 *
+	 * @return the icons remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.IconsService getIconsService() {
+		return iconsService;
+	}
+
+	/**
+	 * Sets the icons remote service.
+	 *
+	 * @param iconsService the icons remote service
+	 */
+	public void setIconsService(
+		at.graz.meduni.liferay.portlet.bibbox.service.IconsService iconsService) {
+		this.iconsService = iconsService;
+	}
+
+	/**
+	 * Returns the icons persistence.
+	 *
+	 * @return the icons persistence
+	 */
+	public IconsPersistence getIconsPersistence() {
+		return iconsPersistence;
+	}
+
+	/**
+	 * Sets the icons persistence.
+	 *
+	 * @param iconsPersistence the icons persistence
+	 */
+	public void setIconsPersistence(IconsPersistence iconsPersistence) {
+		this.iconsPersistence = iconsPersistence;
+	}
+
+	/**
 	 * Returns the symbol configuration local service.
 	 *
 	 * @return the symbol configuration local service
@@ -699,6 +756,12 @@ public abstract class IconConfigurationLocalServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationService iconConfigurationService;
 	@BeanReference(type = IconConfigurationPersistence.class)
 	protected IconConfigurationPersistence iconConfigurationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.IconsLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.IconsLocalService iconsLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.IconsService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.IconsService iconsService;
+	@BeanReference(type = IconsPersistence.class)
+	protected IconsPersistence iconsPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService symbolConfigurationLocalService;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService.class)

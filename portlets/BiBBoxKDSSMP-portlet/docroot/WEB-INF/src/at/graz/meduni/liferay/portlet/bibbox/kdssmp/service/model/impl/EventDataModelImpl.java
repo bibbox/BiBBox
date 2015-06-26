@@ -59,15 +59,15 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 	public static final String TABLE_NAME = "kdssmp.eventdata";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "eventdataId", Types.BIGINT },
-			{ "eventlayoutId", Types.BIGINT },
+			{ "eventId", Types.BIGINT },
 			{ "patientId", Types.BIGINT },
 			{ "ontology", Types.VARCHAR },
 			{ "value", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table kdssmp.eventdata (eventdataId LONG not null primary key,eventlayoutId LONG,patientId LONG,ontology TEXT null,value TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table kdssmp.eventdata (eventdataId LONG not null primary key,eventId LONG,patientId LONG,ontology TEXT null,value TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.eventdata";
-	public static final String ORDER_BY_JPQL = " ORDER BY eventData.eventlayoutId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.eventdata.eventlayoutId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY eventData.eventId ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.eventdata.eventId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -80,7 +80,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData"),
 			true);
-	public static long EVENTLAYOUTID_COLUMN_BITMASK = 1L;
+	public static long EVENTID_COLUMN_BITMASK = 1L;
 	public static long ONTOLOGY_COLUMN_BITMASK = 2L;
 	public static long PATIENTID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
@@ -124,7 +124,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("eventdataId", getEventdataId());
-		attributes.put("eventlayoutId", getEventlayoutId());
+		attributes.put("eventId", getEventId());
 		attributes.put("patientId", getPatientId());
 		attributes.put("ontology", getOntology());
 		attributes.put("value", getValue());
@@ -140,10 +140,10 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 			setEventdataId(eventdataId);
 		}
 
-		Long eventlayoutId = (Long)attributes.get("eventlayoutId");
+		Long eventId = (Long)attributes.get("eventId");
 
-		if (eventlayoutId != null) {
-			setEventlayoutId(eventlayoutId);
+		if (eventId != null) {
+			setEventId(eventId);
 		}
 
 		Long patientId = (Long)attributes.get("patientId");
@@ -176,25 +176,25 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 	}
 
 	@Override
-	public long getEventlayoutId() {
-		return _eventlayoutId;
+	public long getEventId() {
+		return _eventId;
 	}
 
 	@Override
-	public void setEventlayoutId(long eventlayoutId) {
+	public void setEventId(long eventId) {
 		_columnBitmask = -1L;
 
-		if (!_setOriginalEventlayoutId) {
-			_setOriginalEventlayoutId = true;
+		if (!_setOriginalEventId) {
+			_setOriginalEventId = true;
 
-			_originalEventlayoutId = _eventlayoutId;
+			_originalEventId = _eventId;
 		}
 
-		_eventlayoutId = eventlayoutId;
+		_eventId = eventId;
 	}
 
-	public long getOriginalEventlayoutId() {
-		return _originalEventlayoutId;
+	public long getOriginalEventId() {
+		return _originalEventId;
 	}
 
 	@Override
@@ -291,7 +291,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 		EventDataImpl eventDataImpl = new EventDataImpl();
 
 		eventDataImpl.setEventdataId(getEventdataId());
-		eventDataImpl.setEventlayoutId(getEventlayoutId());
+		eventDataImpl.setEventId(getEventId());
 		eventDataImpl.setPatientId(getPatientId());
 		eventDataImpl.setOntology(getOntology());
 		eventDataImpl.setValue(getValue());
@@ -305,10 +305,10 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 	public int compareTo(EventData eventData) {
 		int value = 0;
 
-		if (getEventlayoutId() < eventData.getEventlayoutId()) {
+		if (getEventId() < eventData.getEventId()) {
 			value = -1;
 		}
-		else if (getEventlayoutId() > eventData.getEventlayoutId()) {
+		else if (getEventId() > eventData.getEventId()) {
 			value = 1;
 		}
 		else {
@@ -353,9 +353,9 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 	public void resetOriginalValues() {
 		EventDataModelImpl eventDataModelImpl = this;
 
-		eventDataModelImpl._originalEventlayoutId = eventDataModelImpl._eventlayoutId;
+		eventDataModelImpl._originalEventId = eventDataModelImpl._eventId;
 
-		eventDataModelImpl._setOriginalEventlayoutId = false;
+		eventDataModelImpl._setOriginalEventId = false;
 
 		eventDataModelImpl._originalPatientId = eventDataModelImpl._patientId;
 
@@ -372,7 +372,7 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 		eventDataCacheModel.eventdataId = getEventdataId();
 
-		eventDataCacheModel.eventlayoutId = getEventlayoutId();
+		eventDataCacheModel.eventId = getEventId();
 
 		eventDataCacheModel.patientId = getPatientId();
 
@@ -401,8 +401,8 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 
 		sb.append("{eventdataId=");
 		sb.append(getEventdataId());
-		sb.append(", eventlayoutId=");
-		sb.append(getEventlayoutId());
+		sb.append(", eventId=");
+		sb.append(getEventId());
 		sb.append(", patientId=");
 		sb.append(getPatientId());
 		sb.append(", ontology=");
@@ -428,8 +428,8 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 		sb.append(getEventdataId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventlayoutId</column-name><column-value><![CDATA[");
-		sb.append(getEventlayoutId());
+			"<column><column-name>eventId</column-name><column-value><![CDATA[");
+		sb.append(getEventId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>patientId</column-name><column-value><![CDATA[");
@@ -454,9 +454,9 @@ public class EventDataModelImpl extends BaseModelImpl<EventData>
 			EventData.class
 		};
 	private long _eventdataId;
-	private long _eventlayoutId;
-	private long _originalEventlayoutId;
-	private boolean _setOriginalEventlayoutId;
+	private long _eventId;
+	private long _originalEventId;
+	private boolean _setOriginalEventId;
 	private long _patientId;
 	private long _originalPatientId;
 	private boolean _setOriginalPatientId;

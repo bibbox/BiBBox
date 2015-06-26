@@ -828,6 +828,7 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 
 		eventImpl.setEventId(event.getEventId());
 		eventImpl.setPatientId(event.getPatientId());
+		eventImpl.setLayoutId(event.getLayoutId());
 		eventImpl.setEventdate(event.getEventdate());
 		eventImpl.setEventtype(event.getEventtype());
 

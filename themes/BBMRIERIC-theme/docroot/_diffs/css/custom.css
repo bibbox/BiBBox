@@ -982,3 +982,13 @@ $dockbarOpenGradientStart: #0EA6F9;
 @import url(custom_tooltip.css);
 @import url(custom_dropdown.css);
 @import url(custom_footer.css);
+
+.toggler-header-collapsed::before {
+    content: "+";
+}
+
+.toggler-header-expanded::before {
+    content: "-";
+    font-size: 120%;
+    margin: 0 2.5px;
+}

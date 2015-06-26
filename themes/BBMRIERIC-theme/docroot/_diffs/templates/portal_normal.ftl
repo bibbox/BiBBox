@@ -122,7 +122,7 @@ ${theme.include(body_top_include)}
 			<#include "${full_templates_path}/navigation_footer.ftl" />
 		</div>	
 		<footer id="footer" role="contentinfo">
-			<a href="/web/guest/contact">contact</a> <span style="color: #FFFFFF;">|</span> <a href="/web/guest/imprint">IMPRINT</a>
+			<a href="/contact">contact</a> <span style="color: #FFFFFF;">|</span> <a href="/imprint">IMPRINT</a>
 		</footer>
 	</div>
 </div>

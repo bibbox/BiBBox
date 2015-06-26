@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.Icons" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.DDLConfigurationImpl" table="bibboxcs.ddlconfiguration">
@@ -31,8 +32,18 @@
 		<property name="symbolconfigurationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="position" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
-		<property name="image" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="iconsId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="elementcolor" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="width" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="height" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.IconsImpl" table="bibboxcs.icons">
+		<cache usage="read-write" />
+		<id name="iconsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="iconurl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="group" type="com.liferay.portal.dao.orm.hibernate.StringType" column="group_" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl" table="bibboxcs.symbolconfiguration">
 		<cache usage="read-write" />

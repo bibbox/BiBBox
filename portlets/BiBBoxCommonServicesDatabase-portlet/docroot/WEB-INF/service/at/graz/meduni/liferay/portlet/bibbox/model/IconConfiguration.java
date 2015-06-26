@@ -31,4 +31,11 @@ public interface IconConfiguration extends IconConfigurationModel, PersistedMode
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+
+	/**
+	* @return
+	*/
+	public java.lang.String getIconUrl();
+
+	public java.lang.String getHTMLIcon();
 }

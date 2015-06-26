@@ -63,7 +63,29 @@
 		<!-- fields -->
 		<column name="position" type="String"></column>
 		<column name="key" type="String"></column>
-		<column name="image" type="String"></column>
+		<column name="iconsId" type="long"></column>
 		<column name="elementcolor" type="String"></column>
+		<column name="width" type="String"></column>
+		<column name="height" type="String"></column>
+		<finder name="IconsPosition" return-type="Collection" >
+			<finder-column name="symbolconfigurationId" />
+			<finder-column name="position" />
+		</finder>
+		<finder name="IconsKey" return-type="Collection" >
+			<finder-column name="symbolconfigurationId" />
+			<finder-column name="key" />
+		</finder>
+		<finder name="IconsKeyPosition" return-type="IconConfiguration" >
+			<finder-column name="symbolconfigurationId" />
+			<finder-column name="key" />
+			<finder-column name="position" />
+		</finder>
+	</entity>
+	<entity name="Icons" local-service="true" remote-service="true" table="bibboxcs.icons">
+		<!-- PK fields -->
+		<column name="iconsId" primary="true" type="long"></column>
+		<!-- fields -->
+		<column name="iconurl" type="String"></column>
+		<column name="group" type="String"></column>
 	</entity>
 </service-builder>

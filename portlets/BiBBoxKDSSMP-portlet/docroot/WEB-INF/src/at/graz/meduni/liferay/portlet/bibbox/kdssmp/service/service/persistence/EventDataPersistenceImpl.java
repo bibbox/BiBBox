@@ -83,68 +83,64 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_EVENTLAYOUT =
-		new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_EVENT = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataModelImpl.FINDER_CACHE_ENABLED, EventDataImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByEventLayout",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByEvent",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENTLAYOUT =
-		new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENT = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataModelImpl.FINDER_CACHE_ENABLED, EventDataImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByEventLayout",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByEvent",
 			new String[] { Long.class.getName() },
-			EventDataModelImpl.EVENTLAYOUTID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_EVENTLAYOUT = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
+			EventDataModelImpl.EVENTID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_EVENT = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEventLayout",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEvent",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the event datas where eventlayoutId = &#63;.
+	 * Returns all the event datas where eventId = &#63;.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @return the matching event datas
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<EventData> findByEventLayout(long eventlayoutId)
-		throws SystemException {
-		return findByEventLayout(eventlayoutId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<EventData> findByEvent(long eventId) throws SystemException {
+		return findByEvent(eventId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the event datas where eventlayoutId = &#63;.
+	 * Returns a range of all the event datas where eventId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param start the lower bound of the range of event datas
 	 * @param end the upper bound of the range of event datas (not inclusive)
 	 * @return the range of matching event datas
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<EventData> findByEventLayout(long eventlayoutId, int start,
-		int end) throws SystemException {
-		return findByEventLayout(eventlayoutId, start, end, null);
+	public List<EventData> findByEvent(long eventId, int start, int end)
+		throws SystemException {
+		return findByEvent(eventId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the event datas where eventlayoutId = &#63;.
+	 * Returns an ordered range of all the event datas where eventId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param start the lower bound of the range of event datas
 	 * @param end the upper bound of the range of event datas (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -152,8 +148,8 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<EventData> findByEventLayout(long eventlayoutId, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<EventData> findByEvent(long eventId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -161,16 +157,12 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENTLAYOUT;
-			finderArgs = new Object[] { eventlayoutId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENT;
+			finderArgs = new Object[] { eventId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_EVENTLAYOUT;
-			finderArgs = new Object[] {
-					eventlayoutId,
-					
-					start, end, orderByComparator
-				};
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_EVENT;
+			finderArgs = new Object[] { eventId, start, end, orderByComparator };
 		}
 
 		List<EventData> list = (List<EventData>)FinderCacheUtil.getResult(finderPath,
@@ -178,7 +170,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		if ((list != null) && !list.isEmpty()) {
 			for (EventData eventData : list) {
-				if ((eventlayoutId != eventData.getEventlayoutId())) {
+				if ((eventId != eventData.getEventId())) {
 					list = null;
 
 					break;
@@ -199,7 +191,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 			query.append(_SQL_SELECT_EVENTDATA_WHERE);
 
-			query.append(_FINDER_COLUMN_EVENTLAYOUT_EVENTLAYOUTID_2);
+			query.append(_FINDER_COLUMN_EVENT_EVENTID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -221,7 +213,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(eventlayoutId);
+				qPos.add(eventId);
 
 				if (!pagination) {
 					list = (List<EventData>)QueryUtil.list(q, getDialect(),
@@ -254,20 +246,19 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	/**
-	 * Returns the first event data in the ordered set where eventlayoutId = &#63;.
+	 * Returns the first event data in the ordered set where eventId = &#63;.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching event data
 	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData findByEventLayout_First(long eventlayoutId,
+	public EventData findByEvent_First(long eventId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEventDataException, SystemException {
-		EventData eventData = fetchByEventLayout_First(eventlayoutId,
-				orderByComparator);
+		EventData eventData = fetchByEvent_First(eventId, orderByComparator);
 
 		if (eventData != null) {
 			return eventData;
@@ -277,8 +268,8 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("eventlayoutId=");
-		msg.append(eventlayoutId);
+		msg.append("eventId=");
+		msg.append(eventId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -286,18 +277,17 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	/**
-	 * Returns the first event data in the ordered set where eventlayoutId = &#63;.
+	 * Returns the first event data in the ordered set where eventId = &#63;.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching event data, or <code>null</code> if a matching event data could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData fetchByEventLayout_First(long eventlayoutId,
+	public EventData fetchByEvent_First(long eventId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<EventData> list = findByEventLayout(eventlayoutId, 0, 1,
-				orderByComparator);
+		List<EventData> list = findByEvent(eventId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -307,20 +297,19 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	/**
-	 * Returns the last event data in the ordered set where eventlayoutId = &#63;.
+	 * Returns the last event data in the ordered set where eventId = &#63;.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching event data
 	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData findByEventLayout_Last(long eventlayoutId,
+	public EventData findByEvent_Last(long eventId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEventDataException, SystemException {
-		EventData eventData = fetchByEventLayout_Last(eventlayoutId,
-				orderByComparator);
+		EventData eventData = fetchByEvent_Last(eventId, orderByComparator);
 
 		if (eventData != null) {
 			return eventData;
@@ -330,8 +319,8 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("eventlayoutId=");
-		msg.append(eventlayoutId);
+		msg.append("eventId=");
+		msg.append(eventId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -339,24 +328,24 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	/**
-	 * Returns the last event data in the ordered set where eventlayoutId = &#63;.
+	 * Returns the last event data in the ordered set where eventId = &#63;.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching event data, or <code>null</code> if a matching event data could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData fetchByEventLayout_Last(long eventlayoutId,
+	public EventData fetchByEvent_Last(long eventId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByEventLayout(eventlayoutId);
+		int count = countByEvent(eventId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<EventData> list = findByEventLayout(eventlayoutId, count - 1,
-				count, orderByComparator);
+		List<EventData> list = findByEvent(eventId, count - 1, count,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -366,18 +355,18 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	/**
-	 * Returns the event datas before and after the current event data in the ordered set where eventlayoutId = &#63;.
+	 * Returns the event datas before and after the current event data in the ordered set where eventId = &#63;.
 	 *
 	 * @param eventdataId the primary key of the current event data
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next event data
 	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a event data with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData[] findByEventLayout_PrevAndNext(long eventdataId,
-		long eventlayoutId, OrderByComparator orderByComparator)
+	public EventData[] findByEvent_PrevAndNext(long eventdataId, long eventId,
+		OrderByComparator orderByComparator)
 		throws NoSuchEventDataException, SystemException {
 		EventData eventData = findByPrimaryKey(eventdataId);
 
@@ -388,13 +377,13 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 			EventData[] array = new EventDataImpl[3];
 
-			array[0] = getByEventLayout_PrevAndNext(session, eventData,
-					eventlayoutId, orderByComparator, true);
+			array[0] = getByEvent_PrevAndNext(session, eventData, eventId,
+					orderByComparator, true);
 
 			array[1] = eventData;
 
-			array[2] = getByEventLayout_PrevAndNext(session, eventData,
-					eventlayoutId, orderByComparator, false);
+			array[2] = getByEvent_PrevAndNext(session, eventData, eventId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -406,9 +395,9 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		}
 	}
 
-	protected EventData getByEventLayout_PrevAndNext(Session session,
-		EventData eventData, long eventlayoutId,
-		OrderByComparator orderByComparator, boolean previous) {
+	protected EventData getByEvent_PrevAndNext(Session session,
+		EventData eventData, long eventId, OrderByComparator orderByComparator,
+		boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -421,7 +410,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		query.append(_SQL_SELECT_EVENTDATA_WHERE);
 
-		query.append(_FINDER_COLUMN_EVENTLAYOUT_EVENTLAYOUTID_2);
+		query.append(_FINDER_COLUMN_EVENT_EVENTID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -491,7 +480,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(eventlayoutId);
+		qPos.add(eventId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(eventData);
@@ -512,32 +501,31 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	/**
-	 * Removes all the event datas where eventlayoutId = &#63; from the database.
+	 * Removes all the event datas where eventId = &#63; from the database.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByEventLayout(long eventlayoutId)
-		throws SystemException {
-		for (EventData eventData : findByEventLayout(eventlayoutId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByEvent(long eventId) throws SystemException {
+		for (EventData eventData : findByEvent(eventId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
 			remove(eventData);
 		}
 	}
 
 	/**
-	 * Returns the number of event datas where eventlayoutId = &#63;.
+	 * Returns the number of event datas where eventId = &#63;.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @return the number of matching event datas
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByEventLayout(long eventlayoutId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_EVENTLAYOUT;
+	public int countByEvent(long eventId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_EVENT;
 
-		Object[] finderArgs = new Object[] { eventlayoutId };
+		Object[] finderArgs = new Object[] { eventId };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -547,7 +535,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 			query.append(_SQL_COUNT_EVENTDATA_WHERE);
 
-			query.append(_FINDER_COLUMN_EVENTLAYOUT_EVENTLAYOUTID_2);
+			query.append(_FINDER_COLUMN_EVENT_EVENTID_2);
 
 			String sql = query.toString();
 
@@ -560,7 +548,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(eventlayoutId);
+				qPos.add(eventId);
 
 				count = (Long)q.uniqueResult();
 
@@ -579,7 +567,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_EVENTLAYOUT_EVENTLAYOUTID_2 = "eventData.eventlayoutId = ?";
+	private static final String _FINDER_COLUMN_EVENT_EVENTID_2 = "eventData.eventId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PATIENT = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataModelImpl.FINDER_CACHE_ENABLED, EventDataImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByPatient",
@@ -595,7 +583,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByPatient",
 			new String[] { Long.class.getName() },
 			EventDataModelImpl.PATIENTID_COLUMN_BITMASK |
-			EventDataModelImpl.EVENTLAYOUTID_COLUMN_BITMASK);
+			EventDataModelImpl.EVENTID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_PATIENT = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPatient",
@@ -1073,7 +1061,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 			EventDataModelImpl.FINDER_CACHE_ENABLED, EventDataImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByDataByOntology",
 			new String[] { Long.class.getName(), String.class.getName() },
-			EventDataModelImpl.EVENTLAYOUTID_COLUMN_BITMASK |
+			EventDataModelImpl.EVENTID_COLUMN_BITMASK |
 			EventDataModelImpl.ONTOLOGY_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_DATABYONTOLOGY = new FinderPath(EventDataModelImpl.ENTITY_CACHE_ENABLED,
 			EventDataModelImpl.FINDER_CACHE_ENABLED, Long.class,
@@ -1081,26 +1069,26 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns the event data where eventlayoutId = &#63; and ontology = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException} if it could not be found.
+	 * Returns the event data where eventId = &#63; and ontology = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException} if it could not be found.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param ontology the ontology
 	 * @return the matching event data
 	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventDataException if a matching event data could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData findByDataByOntology(long eventlayoutId, String ontology)
+	public EventData findByDataByOntology(long eventId, String ontology)
 		throws NoSuchEventDataException, SystemException {
-		EventData eventData = fetchByDataByOntology(eventlayoutId, ontology);
+		EventData eventData = fetchByDataByOntology(eventId, ontology);
 
 		if (eventData == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("eventlayoutId=");
-			msg.append(eventlayoutId);
+			msg.append("eventId=");
+			msg.append(eventId);
 
 			msg.append(", ontology=");
 			msg.append(ontology);
@@ -1118,32 +1106,32 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	/**
-	 * Returns the event data where eventlayoutId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the event data where eventId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param ontology the ontology
 	 * @return the matching event data, or <code>null</code> if a matching event data could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData fetchByDataByOntology(long eventlayoutId, String ontology)
+	public EventData fetchByDataByOntology(long eventId, String ontology)
 		throws SystemException {
-		return fetchByDataByOntology(eventlayoutId, ontology, true);
+		return fetchByDataByOntology(eventId, ontology, true);
 	}
 
 	/**
-	 * Returns the event data where eventlayoutId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the event data where eventId = &#63; and ontology = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param ontology the ontology
 	 * @param retrieveFromCache whether to use the finder cache
 	 * @return the matching event data, or <code>null</code> if a matching event data could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData fetchByDataByOntology(long eventlayoutId, String ontology,
+	public EventData fetchByDataByOntology(long eventId, String ontology,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { eventlayoutId, ontology };
+		Object[] finderArgs = new Object[] { eventId, ontology };
 
 		Object result = null;
 
@@ -1155,7 +1143,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		if (result instanceof EventData) {
 			EventData eventData = (EventData)result;
 
-			if ((eventlayoutId != eventData.getEventlayoutId()) ||
+			if ((eventId != eventData.getEventId()) ||
 					!Validator.equals(ontology, eventData.getOntology())) {
 				result = null;
 			}
@@ -1166,7 +1154,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 			query.append(_SQL_SELECT_EVENTDATA_WHERE);
 
-			query.append(_FINDER_COLUMN_DATABYONTOLOGY_EVENTLAYOUTID_2);
+			query.append(_FINDER_COLUMN_DATABYONTOLOGY_EVENTID_2);
 
 			boolean bindOntology = false;
 
@@ -1193,7 +1181,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(eventlayoutId);
+				qPos.add(eventId);
 
 				if (bindOntology) {
 					qPos.add(ontology);
@@ -1219,7 +1207,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 					cacheResult(eventData);
 
-					if ((eventData.getEventlayoutId() != eventlayoutId) ||
+					if ((eventData.getEventId() != eventId) ||
 							(eventData.getOntology() == null) ||
 							!eventData.getOntology().equals(ontology)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
@@ -1247,35 +1235,35 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	}
 
 	/**
-	 * Removes the event data where eventlayoutId = &#63; and ontology = &#63; from the database.
+	 * Removes the event data where eventId = &#63; and ontology = &#63; from the database.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param ontology the ontology
 	 * @return the event data that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventData removeByDataByOntology(long eventlayoutId, String ontology)
+	public EventData removeByDataByOntology(long eventId, String ontology)
 		throws NoSuchEventDataException, SystemException {
-		EventData eventData = findByDataByOntology(eventlayoutId, ontology);
+		EventData eventData = findByDataByOntology(eventId, ontology);
 
 		return remove(eventData);
 	}
 
 	/**
-	 * Returns the number of event datas where eventlayoutId = &#63; and ontology = &#63;.
+	 * Returns the number of event datas where eventId = &#63; and ontology = &#63;.
 	 *
-	 * @param eventlayoutId the eventlayout ID
+	 * @param eventId the event ID
 	 * @param ontology the ontology
 	 * @return the number of matching event datas
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByDataByOntology(long eventlayoutId, String ontology)
+	public int countByDataByOntology(long eventId, String ontology)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_DATABYONTOLOGY;
 
-		Object[] finderArgs = new Object[] { eventlayoutId, ontology };
+		Object[] finderArgs = new Object[] { eventId, ontology };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -1285,7 +1273,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 			query.append(_SQL_COUNT_EVENTDATA_WHERE);
 
-			query.append(_FINDER_COLUMN_DATABYONTOLOGY_EVENTLAYOUTID_2);
+			query.append(_FINDER_COLUMN_DATABYONTOLOGY_EVENTID_2);
 
 			boolean bindOntology = false;
 
@@ -1312,7 +1300,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(eventlayoutId);
+				qPos.add(eventId);
 
 				if (bindOntology) {
 					qPos.add(ontology);
@@ -1335,7 +1323,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_DATABYONTOLOGY_EVENTLAYOUTID_2 = "eventData.eventlayoutId = ? AND ";
+	private static final String _FINDER_COLUMN_DATABYONTOLOGY_EVENTID_2 = "eventData.eventId = ? AND ";
 	private static final String _FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_1 = "eventData.ontology IS NULL";
 	private static final String _FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_2 = "eventData.ontology = ?";
 	private static final String _FINDER_COLUMN_DATABYONTOLOGY_ONTOLOGY_3 = "(eventData.ontology IS NULL OR eventData.ontology = '')";
@@ -1355,7 +1343,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 			EventDataImpl.class, eventData.getPrimaryKey(), eventData);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DATABYONTOLOGY,
-			new Object[] { eventData.getEventlayoutId(), eventData.getOntology() },
+			new Object[] { eventData.getEventId(), eventData.getOntology() },
 			eventData);
 
 		eventData.resetOriginalValues();
@@ -1434,7 +1422,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 	protected void cacheUniqueFindersCache(EventData eventData) {
 		if (eventData.isNew()) {
 			Object[] args = new Object[] {
-					eventData.getEventlayoutId(), eventData.getOntology()
+					eventData.getEventId(), eventData.getOntology()
 				};
 
 			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DATABYONTOLOGY,
@@ -1448,7 +1436,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 			if ((eventDataModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_DATABYONTOLOGY.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						eventData.getEventlayoutId(), eventData.getOntology()
+						eventData.getEventId(), eventData.getOntology()
 					};
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DATABYONTOLOGY,
@@ -1463,7 +1451,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		EventDataModelImpl eventDataModelImpl = (EventDataModelImpl)eventData;
 
 		Object[] args = new Object[] {
-				eventData.getEventlayoutId(), eventData.getOntology()
+				eventData.getEventId(), eventData.getOntology()
 			};
 
 		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DATABYONTOLOGY, args);
@@ -1472,7 +1460,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		if ((eventDataModelImpl.getColumnBitmask() &
 				FINDER_PATH_FETCH_BY_DATABYONTOLOGY.getColumnBitmask()) != 0) {
 			args = new Object[] {
-					eventDataModelImpl.getOriginalEventlayoutId(),
+					eventDataModelImpl.getOriginalEventId(),
 					eventDataModelImpl.getOriginalOntology()
 				};
 
@@ -1626,21 +1614,19 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 
 		else {
 			if ((eventDataModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENTLAYOUT.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENT.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						eventDataModelImpl.getOriginalEventlayoutId()
+						eventDataModelImpl.getOriginalEventId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_EVENTLAYOUT,
-					args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENTLAYOUT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_EVENT, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENT,
 					args);
 
-				args = new Object[] { eventDataModelImpl.getEventlayoutId() };
+				args = new Object[] { eventDataModelImpl.getEventId() };
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_EVENTLAYOUT,
-					args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENTLAYOUT,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_EVENT, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EVENT,
 					args);
 			}
 
@@ -1682,7 +1668,7 @@ public class EventDataPersistenceImpl extends BasePersistenceImpl<EventData>
 		eventDataImpl.setPrimaryKey(eventData.getPrimaryKey());
 
 		eventDataImpl.setEventdataId(eventData.getEventdataId());
-		eventDataImpl.setEventlayoutId(eventData.getEventlayoutId());
+		eventDataImpl.setEventId(eventData.getEventId());
 		eventDataImpl.setPatientId(eventData.getPatientId());
 		eventDataImpl.setOntology(eventData.getOntology());
 		eventDataImpl.setValue(eventData.getValue());

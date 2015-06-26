@@ -36,7 +36,7 @@ public class IconConfigurationCacheModel implements CacheModel<IconConfiguration
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{iconconfigurationId=");
 		sb.append(iconconfigurationId);
@@ -46,10 +46,14 @@ public class IconConfigurationCacheModel implements CacheModel<IconConfiguration
 		sb.append(position);
 		sb.append(", key=");
 		sb.append(key);
-		sb.append(", image=");
-		sb.append(image);
+		sb.append(", iconsId=");
+		sb.append(iconsId);
 		sb.append(", elementcolor=");
 		sb.append(elementcolor);
+		sb.append(", width=");
+		sb.append(width);
+		sb.append(", height=");
+		sb.append(height);
 		sb.append("}");
 
 		return sb.toString();
@@ -76,18 +80,27 @@ public class IconConfigurationCacheModel implements CacheModel<IconConfiguration
 			iconConfigurationImpl.setKey(key);
 		}
 
-		if (image == null) {
-			iconConfigurationImpl.setImage(StringPool.BLANK);
-		}
-		else {
-			iconConfigurationImpl.setImage(image);
-		}
+		iconConfigurationImpl.setIconsId(iconsId);
 
 		if (elementcolor == null) {
 			iconConfigurationImpl.setElementcolor(StringPool.BLANK);
 		}
 		else {
 			iconConfigurationImpl.setElementcolor(elementcolor);
+		}
+
+		if (width == null) {
+			iconConfigurationImpl.setWidth(StringPool.BLANK);
+		}
+		else {
+			iconConfigurationImpl.setWidth(width);
+		}
+
+		if (height == null) {
+			iconConfigurationImpl.setHeight(StringPool.BLANK);
+		}
+		else {
+			iconConfigurationImpl.setHeight(height);
 		}
 
 		iconConfigurationImpl.resetOriginalValues();
@@ -101,8 +114,10 @@ public class IconConfigurationCacheModel implements CacheModel<IconConfiguration
 		symbolconfigurationId = objectInput.readLong();
 		position = objectInput.readUTF();
 		key = objectInput.readUTF();
-		image = objectInput.readUTF();
+		iconsId = objectInput.readLong();
 		elementcolor = objectInput.readUTF();
+		width = objectInput.readUTF();
+		height = objectInput.readUTF();
 	}
 
 	@Override
@@ -125,12 +140,7 @@ public class IconConfigurationCacheModel implements CacheModel<IconConfiguration
 			objectOutput.writeUTF(key);
 		}
 
-		if (image == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(image);
-		}
+		objectOutput.writeLong(iconsId);
 
 		if (elementcolor == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -138,12 +148,28 @@ public class IconConfigurationCacheModel implements CacheModel<IconConfiguration
 		else {
 			objectOutput.writeUTF(elementcolor);
 		}
+
+		if (width == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(width);
+		}
+
+		if (height == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(height);
+		}
 	}
 
 	public long iconconfigurationId;
 	public long symbolconfigurationId;
 	public String position;
 	public String key;
-	public String image;
+	public long iconsId;
 	public String elementcolor;
+	public String width;
+	public String height;
 }

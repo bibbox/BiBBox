@@ -38,5 +38,26 @@ public interface SymbolConfiguration extends SymbolConfigurationModel,
 	*/
 	public java.lang.String getTemplate();
 
+	/**
+	* @return
+	*/
 	public java.lang.String getSymbolIconConfiguration();
+
+	/**
+	* @return
+	*/
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForPosition(
+		java.lang.String position);
+
+	/**
+	* @return
+	*/
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForKey(
+		java.lang.String key);
+
+	/**
+	* @return
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration getIconsForKeyPosition(
+		java.lang.String key, java.lang.String position);
 }

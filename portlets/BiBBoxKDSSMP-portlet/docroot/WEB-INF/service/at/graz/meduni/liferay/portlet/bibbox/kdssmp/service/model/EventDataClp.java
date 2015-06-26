@@ -73,7 +73,7 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("eventdataId", getEventdataId());
-		attributes.put("eventlayoutId", getEventlayoutId());
+		attributes.put("eventId", getEventId());
 		attributes.put("patientId", getPatientId());
 		attributes.put("ontology", getOntology());
 		attributes.put("value", getValue());
@@ -89,10 +89,10 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 			setEventdataId(eventdataId);
 		}
 
-		Long eventlayoutId = (Long)attributes.get("eventlayoutId");
+		Long eventId = (Long)attributes.get("eventId");
 
-		if (eventlayoutId != null) {
-			setEventlayoutId(eventlayoutId);
+		if (eventId != null) {
+			setEventId(eventId);
 		}
 
 		Long patientId = (Long)attributes.get("patientId");
@@ -138,21 +138,21 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 	}
 
 	@Override
-	public long getEventlayoutId() {
-		return _eventlayoutId;
+	public long getEventId() {
+		return _eventId;
 	}
 
 	@Override
-	public void setEventlayoutId(long eventlayoutId) {
-		_eventlayoutId = eventlayoutId;
+	public void setEventId(long eventId) {
+		_eventId = eventId;
 
 		if (_eventDataRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDataRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventlayoutId", long.class);
+				Method method = clazz.getMethod("setEventId", long.class);
 
-				method.invoke(_eventDataRemoteModel, eventlayoutId);
+				method.invoke(_eventDataRemoteModel, eventId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -299,7 +299,7 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 		EventDataClp clone = new EventDataClp();
 
 		clone.setEventdataId(getEventdataId());
-		clone.setEventlayoutId(getEventlayoutId());
+		clone.setEventId(getEventId());
 		clone.setPatientId(getPatientId());
 		clone.setOntology(getOntology());
 		clone.setValue(getValue());
@@ -311,10 +311,10 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 	public int compareTo(EventData eventData) {
 		int value = 0;
 
-		if (getEventlayoutId() < eventData.getEventlayoutId()) {
+		if (getEventId() < eventData.getEventId()) {
 			value = -1;
 		}
-		else if (getEventlayoutId() > eventData.getEventlayoutId()) {
+		else if (getEventId() > eventData.getEventId()) {
 			value = 1;
 		}
 		else {
@@ -361,8 +361,8 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 
 		sb.append("{eventdataId=");
 		sb.append(getEventdataId());
-		sb.append(", eventlayoutId=");
-		sb.append(getEventlayoutId());
+		sb.append(", eventId=");
+		sb.append(getEventId());
 		sb.append(", patientId=");
 		sb.append(getPatientId());
 		sb.append(", ontology=");
@@ -388,8 +388,8 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 		sb.append(getEventdataId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventlayoutId</column-name><column-value><![CDATA[");
-		sb.append(getEventlayoutId());
+			"<column><column-name>eventId</column-name><column-value><![CDATA[");
+		sb.append(getEventId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>patientId</column-name><column-value><![CDATA[");
@@ -410,7 +410,7 @@ public class EventDataClp extends BaseModelImpl<EventData> implements EventData 
 	}
 
 	private long _eventdataId;
-	private long _eventlayoutId;
+	private long _eventId;
 	private long _patientId;
 	private String _ontology;
 	private String _value;

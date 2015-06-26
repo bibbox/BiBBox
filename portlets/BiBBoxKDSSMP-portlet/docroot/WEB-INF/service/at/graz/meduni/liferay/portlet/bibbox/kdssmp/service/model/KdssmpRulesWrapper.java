@@ -194,7 +194,8 @@ public class KdssmpRulesWrapper implements KdssmpRules,
 	}
 
 	@Override
-	public int compareTo(KdssmpRules kdssmpRules) {
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRules kdssmpRules) {
 		return _kdssmpRules.compareTo(kdssmpRules);
 	}
 
@@ -204,17 +205,17 @@ public class KdssmpRulesWrapper implements KdssmpRules,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<KdssmpRules> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRules> toCacheModel() {
 		return _kdssmpRules.toCacheModel();
 	}
 
 	@Override
-	public KdssmpRules toEscapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRules toEscapedModel() {
 		return new KdssmpRulesWrapper(_kdssmpRules.toEscapedModel());
 	}
 
 	@Override
-	public KdssmpRules toUnescapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpRules toUnescapedModel() {
 		return new KdssmpRulesWrapper(_kdssmpRules.toUnescapedModel());
 	}
 

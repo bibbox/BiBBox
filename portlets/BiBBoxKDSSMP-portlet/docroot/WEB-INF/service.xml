@@ -26,24 +26,24 @@
 		<!-- PK fields -->
 		<column name="eventdataId" type="long" primary="true" />
 		<!-- Group instance -->
-		<column name="eventlayoutId" type="long" />
+		<column name="eventId" type="long" />
 		<column name="patientId" type="long" />
 		<!-- Audit fields -->
 		<column name="ontology" type="String" />
 		<column name="value" type="String" />
 		<!-- Order -->
 		<order by="asc">
-			<order-column name="eventlayoutId" />
+			<order-column name="eventId" />
 		</order>
 		<!-- Finder methods -->
-		<finder name="EventLayout" return-type="Collection">
-			<finder-column name="eventlayoutId" />
+		<finder name="Event" return-type="Collection">
+			<finder-column name="eventId" />
 		</finder>
 		<finder name="Patient" return-type="Collection">
 			<finder-column name="patientId" />
 		</finder>
 		<finder name="DataByOntology" return-type="EventData">
-			<finder-column name="eventlayoutId" />
+			<finder-column name="eventId" />
 			<finder-column name="ontology" />
 		</finder>
 	</entity>
@@ -52,6 +52,7 @@
 		<column name="eventId" type="long" primary="true" />
 		<!-- Group instance -->
 		<column name="patientId" type="long" />
+		<column name="layoutId" type="long" />
 		<!-- Audit fields -->
 		<column name="eventdate" type="Date" />
 		<column name="eventtype" type="String" />
@@ -124,5 +125,21 @@
 		<column name="ruleId" type="long" primary="true" />
 		<!-- Fields -->
 		<column name="rule" type="String" />
+	</entity>
+	<entity name="KdssmpPatient" local-service="true" remote-service="false"  table="kdssmp.patient" >
+		<!-- PK fields -->
+		<column name="patientId" type="long" primary="true" />
+		<!-- FK fields -->
+		<column name="organizationId" type="long" />
+		<!-- Fields -->
+		<column name="firstname" type="String" />
+		<column name="lastname" type="String" />
+		<column name="gender" type="String" />
+		<column name="dateofbirth" type="Date" />
+		<column name="dateofdeath" type="Date" />
+		<!-- Finder methods -->
+		<finder name="Organization" return-type="KdssmpPatient">
+			<finder-column name="organizationId" />
+		</finder>
 	</entity>
 </service-builder>

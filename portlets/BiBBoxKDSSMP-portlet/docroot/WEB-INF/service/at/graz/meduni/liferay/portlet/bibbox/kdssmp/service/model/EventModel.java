@@ -88,6 +88,20 @@ public interface EventModel extends BaseModel<Event> {
 	public void setPatientId(long patientId);
 
 	/**
+	 * Returns the layout ID of this event.
+	 *
+	 * @return the layout ID of this event
+	 */
+	public long getLayoutId();
+
+	/**
+	 * Sets the layout ID of this event.
+	 *
+	 * @param layoutId the layout ID of this event
+	 */
+	public void setLayoutId(long layoutId);
+
+	/**
 	 * Returns the eventdate of this event.
 	 *
 	 * @return the eventdate of this event

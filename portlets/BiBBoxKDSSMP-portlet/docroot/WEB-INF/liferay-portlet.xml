@@ -65,6 +65,58 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>informed-consent-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>create-patient2</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2.config.CreatePatientConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>create-patient2-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>list-patients</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2.config.ListPatientsConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>list-patients-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>create-event2</portlet-name>
+		<icon>/icon.png</icon>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+	    <friendly-url-mapping>event2</friendly-url-mapping>
+	    <friendly-url-routes>at/graz/meduni/liferay/portlet/bibbox/kdssmp/demo2/event-friendly-url-routes.xml</friendly-url-routes>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>create-event2-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>view-patient</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2.config.ViewPatientConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>view-patient-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>counseling-group</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2.config.CounselingGroupConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>counseling-group-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

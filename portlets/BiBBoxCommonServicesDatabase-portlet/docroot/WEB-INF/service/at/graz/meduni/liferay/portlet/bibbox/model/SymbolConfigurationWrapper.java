@@ -325,9 +325,39 @@ public class SymbolConfigurationWrapper implements SymbolConfiguration,
 		return _symbolConfiguration.getTemplate();
 	}
 
+	/**
+	* @return
+	*/
 	@Override
 	public java.lang.String getSymbolIconConfiguration() {
 		return _symbolConfiguration.getSymbolIconConfiguration();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForPosition(
+		java.lang.String position) {
+		return _symbolConfiguration.getIconsForPosition(position);
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration> getIconsForKey(
+		java.lang.String key) {
+		return _symbolConfiguration.getIconsForKey(key);
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration getIconsForKeyPosition(
+		java.lang.String key, java.lang.String position) {
+		return _symbolConfiguration.getIconsForKeyPosition(key, position);
 	}
 
 	@Override

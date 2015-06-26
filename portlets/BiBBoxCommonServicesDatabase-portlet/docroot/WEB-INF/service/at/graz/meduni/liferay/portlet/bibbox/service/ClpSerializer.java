@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service;
 
 import at.graz.meduni.liferay.portlet.bibbox.model.DDLConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.IconConfigurationClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.IconsClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfigurationClp;
 
@@ -113,6 +114,10 @@ public class ClpSerializer {
 			return translateInputIconConfiguration(oldModel);
 		}
 
+		if (oldModelClassName.equals(IconsClp.class.getName())) {
+			return translateInputIcons(oldModel);
+		}
+
 		if (oldModelClassName.equals(SymbolConfigurationClp.class.getName())) {
 			return translateInputSymbolConfiguration(oldModel);
 		}
@@ -150,6 +155,16 @@ public class ClpSerializer {
 		IconConfigurationClp oldClpModel = (IconConfigurationClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getIconConfigurationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputIcons(BaseModel<?> oldModel) {
+		IconsClp oldClpModel = (IconsClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getIconsRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -203,6 +218,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationImpl")) {
 			return translateOutputIconConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.IconsImpl")) {
+			return translateOutputIcons(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -306,6 +326,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchIconsException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchIconsException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.NoSuchSymbolConfigurationException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchSymbolConfigurationException();
 		}
@@ -334,6 +359,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setIconConfigurationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputIcons(BaseModel<?> oldModel) {
+		IconsClp newModel = new IconsClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setIconsRemoteModel(oldModel);
 
 		return newModel;
 	}

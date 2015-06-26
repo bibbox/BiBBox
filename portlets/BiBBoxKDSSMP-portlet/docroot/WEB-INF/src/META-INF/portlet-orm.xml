@@ -11,6 +11,7 @@
 		<attributes>
 			<id name="eventId" />
 			<basic name="patientId" />
+			<basic name="layoutId" />
 			<basic name="eventdate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -23,7 +24,7 @@
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataModelImpl">
 		<attributes>
 			<id name="eventdataId" />
-			<basic name="eventlayoutId" />
+			<basic name="eventId" />
 			<basic name="patientId" />
 			<basic name="ontology" />
 			<basic name="value" />
@@ -72,6 +73,24 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpPatientModelImpl">
+		<attributes>
+			<id name="patientId" />
+			<basic name="organizationId" />
+			<basic name="firstname" />
+			<basic name="lastname" />
+			<basic name="gender" />
+			<basic name="dateofbirth">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="dateofdeath">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpRulesModelImpl">
 		<attributes>
 			<id name="ruleId" />
@@ -111,6 +130,10 @@
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterOptionsImpl" name="KdssmpParameterOptions">
 		<table name="kdssmp.parameteroptions" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpPatientImpl" name="KdssmpPatient">
+		<table name="kdssmp.patient" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpRulesImpl" name="KdssmpRules">
