@@ -49,6 +49,7 @@ ${theme.include(body_top_include)}
 	<a href="/about"><div class="bbmri_eric_header-innercontainer">
 		<div class="bbmri_eric_header-logo">
 			<div class="bbmri_eric_header-logo-floating">
+				<img alt="${logo_description}" height="110" src="http://bbmri.de/documents/10197/0/GBN_RGB_schwarz.png" style="height: 110px;" />
 				<img alt="${logo_description}" height="${site_logo_height}" src="${site_logo}" width="${site_logo_width}" />
 			</div>
 		</div>
@@ -120,7 +121,8 @@ ${theme.include(body_top_include)}
 		</div>
 		
 		<div class="bbmrieric-footer-menue-left">
-			<span style="color:#ed660a">${company_name}</span> | ${potaladdress}
+			<span style="color:#ed660a">${company_name}</span> | ${potaladdress}<br>
+			<span>Dieses Projekt wird gefördert durch das <img height="50" src="http://bbmri.de/documents/10197/0/Logo+BMBF.jpg" style="height: 50px;" /></span>
 		</div>	
 		<div class="bbmrieric-footer-menue">
 			<#include "${full_templates_path}/navigation_footer.ftl" />

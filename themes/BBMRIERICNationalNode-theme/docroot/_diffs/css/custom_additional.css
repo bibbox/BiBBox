@@ -301,9 +301,3 @@
 .aui p {
     margin: 0;
 }
-
-.aui #content img {
-	-webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
-	-moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
-	box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
-}

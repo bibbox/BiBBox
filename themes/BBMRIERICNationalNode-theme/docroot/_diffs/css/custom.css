@@ -106,7 +106,7 @@ div.portlet-body {
 	margin: auto;
 	text-align: left;
 	height: 40px;
-	background: url(/BBMRIERICNationalNode-theme/images/header_lvl2.png);
+	background: url(/BBMRIERIC-BBMRIDE-theme/images/header_lvl2.png);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	-webkit-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
@@ -202,7 +202,7 @@ div.portlet-body {
 .container-fluid-background {
 	width: 1200px;
 	margin: auto;
-	background: url(/BBMRIERICNationalNode-theme/images/02_content_background.png) repeat-y;
+	background: url(/BBMRIERIC-BBMRIDE-theme/images/02_content_background.png) repeat-y;
 	-webkit-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
    box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
@@ -215,7 +215,7 @@ div.portlet-body {
 }
 .bbmri-eric-header-container {
 	height: 300px;
-	background: url(/BBMRIERICNationalNode-theme/images/Fotolia_13157710_XL.jpg) no-repeat;
+	background: url(/BBMRIERIC-BBMRIDE-theme/images/Fotolia_13157710_XL.jpg) no-repeat;
 }
 .bbmri-eric-header-container-spacer {
 	height: 70px;
@@ -356,7 +356,7 @@ div.portlet-body {
 	}
 
 	#sign-in {
-		background: url(/BBMRIERICNationalNode-theme/images/common/key.png) no-repeat 3px 50%;
+		background: url(/BBMRIERIC-BBMRIDE-theme/images/common/key.png) no-repeat 3px 50%;
 		font-weight: bold;
 		padding: 5px 5px 5px 25px;
 		position: absolute;
