@@ -40,4 +40,7 @@
 	<category name="BiBBox Symbol">
 		<portlet id="symbol-configuration"></portlet>
 	</category>
+	<category name="BiBBox Ontologie">
+		<portlet id="ontologie-upload-importer"></portlet>
+	</category>
 </display>

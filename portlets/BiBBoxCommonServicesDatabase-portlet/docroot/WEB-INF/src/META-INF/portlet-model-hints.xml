@@ -27,11 +27,66 @@
 			<hint name="max-length">5000</hint>
 		</field>
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.Gene">
+		<field name="geneId" type="long" />
+		<field name="orphanetdisorderId" type="long" />
+		<field name="symbol" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="description" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="geneorphanumber" type="long" />
+		<field name="genetype" type="long" />
+		<field name="genetypeorphanumber" type="long" />
+		<field name="genetypename" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="disordergeneassociationtype" type="long" />
+		<field name="disordergeneassociationtypename" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="disordergeneassociationstatus" type="long" />
+		<field name="disordergeneassociationstatusname" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.GeneLocus">
+		<field name="genelocusId" type="long" />
+		<field name="geneId" type="long" />
+		<field name="genelocus" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="genelocuskey" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.GeneReference">
+		<field name="genereferenceId" type="long" />
+		<field name="geneId" type="long" />
+		<field name="source" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="reference" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.GeneSynonym">
+		<field name="genesynonymId" type="long" />
+		<field name="geneId" type="long" />
+		<field name="synonym" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration">
 		<field name="iconconfigurationId" type="long" />
 		<field name="symbolconfigurationId" type="long" />
-		<field name="position" type="String" />
-		<field name="key" type="String" />
+		<field name="position" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="key" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="iconsId" type="long" />
 		<field name="elementcolor" type="String" />
 		<field name="width" type="String" />
@@ -41,6 +96,48 @@
 		<field name="iconsId" type="long" />
 		<field name="iconurl" type="String" />
 		<field name="group" type="String" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.OrphanetDisorder">
+		<field name="orphanetdisorderId" type="long" />
+		<field name="orphanumber" type="long" />
+		<field name="orpahnetlink" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="diseasename" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.OrphanetReference">
+		<field name="orphanetreferenceId" type="long" />
+		<field name="orphanetdisorderId" type="long" />
+		<field name="source" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="reference" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="disordermappingrelation" type="long" />
+		<field name="disordermappingrelationorphanumber" type="long" />
+		<field name="disordermappingrelationname" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="disordermappingicdrelation" type="long" />
+		<field name="disordermappingicdrelationorphanumber" type="long" />
+		<field name="disordermappingicdrelationname" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="disordermappingvalidationstatus" type="long" />
+		<field name="disordermappingvalidationstatusorphanumber" type="long" />
+		<field name="disordermappingvalidationstatusname" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.OrphanetSynonym">
+		<field name="orphanetsynonymId" type="long" />
+		<field name="orphanetdisorderId" type="long" />
+		<field name="synonym" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration">
 		<field name="symbolconfigurationId" type="long" />

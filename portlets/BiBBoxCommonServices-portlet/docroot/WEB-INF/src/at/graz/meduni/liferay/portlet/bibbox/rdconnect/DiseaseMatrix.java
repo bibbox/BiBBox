@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,7 @@ import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
@@ -32,11 +34,16 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import at.graz.meduni.liferay.portlet.bibbox.model.OrphanetDisorder;
+import at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixImpl;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -45,8 +52,10 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
@@ -129,35 +138,71 @@ public class DiseaseMatrix extends MVCPortlet {
 	public void serveResource(ResourceRequest request, ResourceResponse response) throws IOException {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		String cmd = request.getParameter(Constants.CMD);
-		System.out.println(cmd);
-		long organizationId = Long.valueOf(request.getParameter("RDCOrganisationId"));
-		String fileName = "RDConnect_DeaseasMatrix.";
-		OutputStream out = response.getPortletOutputStream();
-		byte[] bytes;
-		if(cmd.equals("export_xls")) {
-			fileName += "xls";
-		} else {
-			fileName += "xlsx";
-		}
-		response.setContentType("application/vnd.ms-excel");
-		response.addProperty("Content-disposition", "atachment; filename=" + fileName);
-		Workbook wb;
-		try {
-			if(cmd.equals("export_xls")) {
-				wb = writeXLSFile(organizationId);
-			} else  {
-				wb = writeXLSXFile(organizationId);
+		System.out.println("CMD:" + cmd);
+		if (cmd.equals("get_orphanumbers")) {
+			try {
+				getOrphanumbers(request, response);
+			} catch (PortletException e) {
+				System.err.println("- ERROR: serveResource Disease Matrix");
+				e.printStackTrace();
 			}
-			wb.write(out);
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} else {
+			long organizationId = Long.valueOf(request.getParameter("RDCOrganisationId"));
+			String fileName = "RDConnect_DeaseasMatrix.";
+			OutputStream out = response.getPortletOutputStream();
+			byte[] bytes;
+			if(cmd.equals("export_xls")) {
+				fileName += "xls";
+			} else {
+				fileName += "xlsx";
+			}
+			response.setContentType("application/vnd.ms-excel");
+			response.addProperty("Content-disposition", "atachment; filename=" + fileName);
+			Workbook wb;
+			try {
+				if(cmd.equals("export_xls")) {
+					wb = writeXLSFile(organizationId);
+				} else  {
+					wb = writeXLSXFile(organizationId);
+				}
+				wb.write(out);
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			out.flush();
+			out.close();
 		}
-		out.flush();
-		out.close();
+	}
+	
+	/**
+	 * 
+	 * @param resourceRequest
+	 * @param resourceResponse
+	 * @throws IOException
+	 * @throws PortletException
+	 */
+	private void getOrphanumbers(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
+		System.out.println(new Date());
+		JSONArray disordersJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONObject disorderJSON=null;
+		try {
+			List<OrphanetDisorder> orphanetdisorders = OrphanetDisorderLocalServiceUtil.getOrphanetDisorders(-1, -1);
+			System.out.println("Orphanetdisorder Count: " + orphanetdisorders.size());
+			for(OrphanetDisorder orphanetdisorder : orphanetdisorders) {
+				disorderJSON=JSONFactoryUtil.createJSONObject();
+				disorderJSON.put("diseasename", orphanetdisorder.getDiseasename());
+				disorderJSON.put("orphanumber", "ORPHA" + orphanetdisorder.getOrphanumber());
+				disordersJSONArray.put(disorderJSON);
+			}
+		} catch (Exception e) {
+		}
+		PrintWriter out=resourceResponse.getWriter();
+		out.println(disordersJSONArray.toString());
+		System.out.println(new Date());
 	}
 
 	/**

@@ -15,8 +15,15 @@
 package at.graz.meduni.liferay.portlet.bibbox.service;
 
 import at.graz.meduni.liferay.portlet.bibbox.model.DDLConfigurationClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.GeneClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.GeneLocusClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.GeneReferenceClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.GeneSynonymClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.IconConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.IconsClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.OrphanetDisorderClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.OrphanetReferenceClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.OrphanetSynonymClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfigurationClp;
 
@@ -110,12 +117,40 @@ public class ClpSerializer {
 			return translateInputDDLConfiguration(oldModel);
 		}
 
+		if (oldModelClassName.equals(GeneClp.class.getName())) {
+			return translateInputGene(oldModel);
+		}
+
+		if (oldModelClassName.equals(GeneLocusClp.class.getName())) {
+			return translateInputGeneLocus(oldModel);
+		}
+
+		if (oldModelClassName.equals(GeneReferenceClp.class.getName())) {
+			return translateInputGeneReference(oldModel);
+		}
+
+		if (oldModelClassName.equals(GeneSynonymClp.class.getName())) {
+			return translateInputGeneSynonym(oldModel);
+		}
+
 		if (oldModelClassName.equals(IconConfigurationClp.class.getName())) {
 			return translateInputIconConfiguration(oldModel);
 		}
 
 		if (oldModelClassName.equals(IconsClp.class.getName())) {
 			return translateInputIcons(oldModel);
+		}
+
+		if (oldModelClassName.equals(OrphanetDisorderClp.class.getName())) {
+			return translateInputOrphanetDisorder(oldModel);
+		}
+
+		if (oldModelClassName.equals(OrphanetReferenceClp.class.getName())) {
+			return translateInputOrphanetReference(oldModel);
+		}
+
+		if (oldModelClassName.equals(OrphanetSynonymClp.class.getName())) {
+			return translateInputOrphanetSynonym(oldModel);
 		}
 
 		if (oldModelClassName.equals(SymbolConfigurationClp.class.getName())) {
@@ -151,6 +186,46 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputGene(BaseModel<?> oldModel) {
+		GeneClp oldClpModel = (GeneClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getGeneRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputGeneLocus(BaseModel<?> oldModel) {
+		GeneLocusClp oldClpModel = (GeneLocusClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getGeneLocusRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputGeneReference(BaseModel<?> oldModel) {
+		GeneReferenceClp oldClpModel = (GeneReferenceClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getGeneReferenceRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputGeneSynonym(BaseModel<?> oldModel) {
+		GeneSynonymClp oldClpModel = (GeneSynonymClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getGeneSynonymRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputIconConfiguration(BaseModel<?> oldModel) {
 		IconConfigurationClp oldClpModel = (IconConfigurationClp)oldModel;
 
@@ -165,6 +240,36 @@ public class ClpSerializer {
 		IconsClp oldClpModel = (IconsClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getIconsRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputOrphanetDisorder(BaseModel<?> oldModel) {
+		OrphanetDisorderClp oldClpModel = (OrphanetDisorderClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getOrphanetDisorderRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputOrphanetReference(BaseModel<?> oldModel) {
+		OrphanetReferenceClp oldClpModel = (OrphanetReferenceClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getOrphanetReferenceRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputOrphanetSynonym(BaseModel<?> oldModel) {
+		OrphanetSynonymClp oldClpModel = (OrphanetSynonymClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getOrphanetSynonymRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -216,6 +321,26 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneImpl")) {
+			return translateOutputGene(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneLocusImpl")) {
+			return translateOutputGeneLocus(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneReferenceImpl")) {
+			return translateOutputGeneReference(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneSynonymImpl")) {
+			return translateOutputGeneSynonym(oldModel);
+		}
+
+		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationImpl")) {
 			return translateOutputIconConfiguration(oldModel);
 		}
@@ -223,6 +348,21 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.model.impl.IconsImpl")) {
 			return translateOutputIcons(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetDisorderImpl")) {
+			return translateOutputOrphanetDisorder(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetReferenceImpl")) {
+			return translateOutputOrphanetReference(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetSynonymImpl")) {
+			return translateOutputOrphanetSynonym(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -321,6 +461,26 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchGeneException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchGeneException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchGeneLocusException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchGeneLocusException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchGeneReferenceException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchGeneReferenceException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchGeneSynonymException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchGeneSynonymException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.NoSuchIconConfigurationException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchIconConfigurationException();
 		}
@@ -328,6 +488,21 @@ public class ClpSerializer {
 		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.NoSuchIconsException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchIconsException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchOrphanetDisorderException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchOrphanetDisorderException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchOrphanetReferenceException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchOrphanetReferenceException();
+		}
+
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchOrphanetSynonymException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchOrphanetSynonymException();
 		}
 
 		if (className.equals(
@@ -353,6 +528,46 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateOutputGene(BaseModel<?> oldModel) {
+		GeneClp newModel = new GeneClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setGeneRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputGeneLocus(BaseModel<?> oldModel) {
+		GeneLocusClp newModel = new GeneLocusClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setGeneLocusRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputGeneReference(BaseModel<?> oldModel) {
+		GeneReferenceClp newModel = new GeneReferenceClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setGeneReferenceRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputGeneSynonym(BaseModel<?> oldModel) {
+		GeneSynonymClp newModel = new GeneSynonymClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setGeneSynonymRemoteModel(oldModel);
+
+		return newModel;
+	}
+
 	public static Object translateOutputIconConfiguration(BaseModel<?> oldModel) {
 		IconConfigurationClp newModel = new IconConfigurationClp();
 
@@ -369,6 +584,36 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setIconsRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputOrphanetDisorder(BaseModel<?> oldModel) {
+		OrphanetDisorderClp newModel = new OrphanetDisorderClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setOrphanetDisorderRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputOrphanetReference(BaseModel<?> oldModel) {
+		OrphanetReferenceClp newModel = new OrphanetReferenceClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setOrphanetReferenceRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputOrphanetSynonym(BaseModel<?> oldModel) {
+		OrphanetSynonymClp newModel = new OrphanetSynonymClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setOrphanetSynonymRemoteModel(oldModel);
 
 		return newModel;
 	}
