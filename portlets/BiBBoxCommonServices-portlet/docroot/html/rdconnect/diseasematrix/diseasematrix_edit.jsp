@@ -97,7 +97,7 @@ if (diseasematrix != null) {
 				success: function() {
 					new A.AutoCompleteList(
 					{
-						allowBrowserAutocomplete: 'true',
+						allowBrowserAutocomplete: 'false',
 						activateFirstItem: 'true',
 						inputNode: '#<portlet:namespace/>InputOrphanumber',
 						resultTextLocator: 'orphanumber',
@@ -118,7 +118,7 @@ if (diseasematrix != null) {
 				success: function() {
 					new A.AutoCompleteList(
 					{
-						allowBrowserAutocomplete: 'true',
+						allowBrowserAutocomplete: 'false',
 						activateFirstItem: 'true',
 						inputNode: '#<portlet:namespace/>InputDiseasename',
 						resultTextLocator: 'diseasename',

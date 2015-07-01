@@ -102,6 +102,7 @@ public class rdconnectServiceImpl extends rdconnectServiceBaseImpl {
 	
 	@JSONWebService(value = "updatedisease", method = "POST")
 	public void updatedisease(long organizationId, long diseasematrixId, String count) {
+		System.out.println("-updatedisease-" + organizationId + " - " + diseasematrixId + " - " + count);
 		if(organizationId == 11729 || organizationId == 16016 || organizationId == 61401 || organizationId == 41081) {
 			try {
 				DiseaseMatrix diseaseMatrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(diseasematrixId);
