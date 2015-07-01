@@ -9,6 +9,12 @@ user/edit_invitation
 <liferay-theme:defineObjects />
 
 <%
+/**
+ * Error Format for date
+ */
+String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+
 	// Parameters for permission Checking
 	long groupId = scopeGroupId;
 	String name = portletDisplay.getRootPortletId();
@@ -41,12 +47,15 @@ user/edit_invitation
 	try {
 		invitation = InvitationLocalServiceUtil.getInvitation(invitationId);
 	} catch (Exception e) {
+		System.err.println("[" + date_format_apache_error.format(new java.util.Date()) + "] [error] [BiBBoxCommonServices-portlet::/html/user/invitation/view_organisations.jsp::Line 50] Error get Invitation for ID (" + invitationId + ").");
 		e.printStackTrace();
 	}
-	if(invitation.getStatus() == InvitationLocalServiceUtil.getStatusFromString("send")) {
-		actionId_add_invitation = "X";
-		actionId_edit_invitation = "X";
-		alredysend = true;
+	if(invitation != null) {
+		if(invitation.getStatus() == InvitationLocalServiceUtil.getStatusFromString("send")) {
+			actionId_add_invitation = "X";
+			actionId_edit_invitation = "X";
+			alredysend = true;
+		}
 	}
 	List<InvitationOrganisation> invitationorganisations = InvitationOrganisationLocalServiceUtil.getOrganisationByInvitation(invitationId);
 	
