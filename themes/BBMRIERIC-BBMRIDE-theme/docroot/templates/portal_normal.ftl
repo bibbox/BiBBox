@@ -49,7 +49,6 @@ ${theme.include(body_top_include)}
 	<a href="/about"><div class="bbmri_eric_header-innercontainer">
 		<div class="bbmri_eric_header-logo">
 			<div class="bbmri_eric_header-logo-floating">
-				<img alt="${logo_description}" height="110" src="http://bbmri.de/documents/10197/0/GBN_RGB_schwarz.png" style="height: 110px;" />
 				<img alt="${logo_description}" height="${site_logo_height}" src="${site_logo}" width="${site_logo_width}" />
 			</div>
 		</div>
