@@ -19,4 +19,8 @@
 		<portlet id="file-toddl-to-file"></portlet>
 		<portlet id="ldap-browser"></portlet>
 	</category>
+	<category name="BBMRI-ERIC ID-Card">
+		<portlet id="id-card"></portlet>
+		<portlet id="biobank-lister"></portlet>
+	</category>
 </display>

@@ -983,12 +983,21 @@ $dockbarOpenGradientStart: #0EA6F9;
 @import url(custom_dropdown.css);
 @import url(custom_footer.css);
 
-.toggler-header-collapsed::before {
+.container-fluid .toggler-header-collapsed::before {
     content: "+";
+    padding: 2px 5px;
+    margin-right: 5px;
+    background-color: #ed660a;
+    color: #ffffff;
+    border-radius: 5px;
 }
 
-.toggler-header-expanded::before {
+.container-fluid .toggler-header-expanded::before {
     content: "-";
     font-size: 120%;
-    margin: 0 2.5px;
+    padding: 0px 5px;
+    margin-right: 5px;
+    background-color: #184b8a;
+    color: #ffffff;
+    border-radius: 5px;
 }

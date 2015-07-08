@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.meduni.liferay.portlet.bbmrieric.model.BioBank" />
+	<import class="at.meduni.liferay.portlet.bbmrieric.model.SearchIndex" />
+	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl" table="bbmrieric.biobank">
+		<cache usage="read-write" />
+		<id name="biobankId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organisationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ldapbiobankID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankcountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobanktype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobanksize" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankdescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankjuristicperson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="UUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.SearchIndexImpl" table="bbmrieric.searchindex">
+		<cache usage="read-write" />
+		<id name="searchid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="organisationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="locationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="searchindexkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="searchindexvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="UUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

@@ -16,6 +16,12 @@
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalServiceUtil" %>
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.model.BioBank" %>
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil" %>
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.model.SearchIndex" %>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />

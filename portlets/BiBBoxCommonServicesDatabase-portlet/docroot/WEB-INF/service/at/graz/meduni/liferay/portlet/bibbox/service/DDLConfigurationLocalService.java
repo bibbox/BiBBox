@@ -252,4 +252,9 @@ public interface DDLConfigurationLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration getDDLConfigurationForField(
 		long ddmstructureId, java.lang.String fieldname);
+
+	/**
+	* @return
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration createDDLConfiguration();
 }

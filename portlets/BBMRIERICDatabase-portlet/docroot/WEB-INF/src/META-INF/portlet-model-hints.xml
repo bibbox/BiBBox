@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.meduni.liferay.portlet.bbmrieric.model.BioBank">
+		<field name="biobankId" type="long" />
+		<field name="organisationid" type="long" />
+		<field name="ldapbiobankID" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankcountry" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankname" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobanktype" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobanksize" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankdescription" type="String" />
+		<field name="biobankjuristicperson" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="UUID" type="String" />
+	</model>
+	<model name="at.meduni.liferay.portlet.bbmrieric.model.SearchIndex">
+		<field name="searchid" type="long" />
+		<field name="organisationid" type="long" />
+		<field name="locationid" type="long" />
+		<field name="location" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="searchindexkey" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="searchindexvalue" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="UUID" type="String" />
+	</model>
+</model-hints>

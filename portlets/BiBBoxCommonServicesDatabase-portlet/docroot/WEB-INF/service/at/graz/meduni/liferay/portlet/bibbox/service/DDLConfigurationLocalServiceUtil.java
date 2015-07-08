@@ -281,6 +281,13 @@ public class DDLConfigurationLocalServiceUtil {
 				   .getDDLConfigurationForField(ddmstructureId, fieldname);
 	}
 
+	/**
+	* @return
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration createDDLConfiguration() {
+		return getService().createDDLConfiguration();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

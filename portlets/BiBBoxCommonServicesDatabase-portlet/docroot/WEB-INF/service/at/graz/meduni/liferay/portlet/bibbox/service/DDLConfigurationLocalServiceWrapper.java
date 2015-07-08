@@ -297,6 +297,14 @@ public class DDLConfigurationLocalServiceWrapper
 	}
 
 	/**
+	* @return
+	*/
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration createDDLConfiguration() {
+		return _ddlConfigurationLocalService.createDDLConfiguration();
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public DDLConfigurationLocalService getWrappedDDLConfigurationLocalService() {

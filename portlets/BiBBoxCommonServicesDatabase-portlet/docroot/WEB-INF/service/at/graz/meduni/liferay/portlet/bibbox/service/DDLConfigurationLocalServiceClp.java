@@ -119,6 +119,10 @@ public class DDLConfigurationLocalServiceClp
 		_methodName19 = "getDDLConfigurationForField";
 
 		_methodParameterTypes19 = new String[] { "long", "java.lang.String" };
+
+		_methodName20 = "createDDLConfiguration";
+
+		_methodParameterTypes20 = new String[] {  };
 	}
 
 	@Override
@@ -703,6 +707,29 @@ public class DDLConfigurationLocalServiceClp
 		return (at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration createDDLConfiguration() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -742,4 +769,6 @@ public class DDLConfigurationLocalServiceClp
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

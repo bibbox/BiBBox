@@ -14,7 +14,13 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.liferay.counter.service.CounterLocalServiceUtil;
+
 import at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration;
+import at.graz.meduni.liferay.portlet.bibbox.model.impl.DDLConfigurationImpl;
 import at.graz.meduni.liferay.portlet.bibbox.service.base.DDLConfigurationLocalServiceBaseImpl;
 
 /**
@@ -38,11 +44,36 @@ public class DDLConfigurationLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationLocalServiceUtil} to access the d d l configuration local service.
 	 */
+	/**
+	 * Error Format for date
+	 */
+	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	
+	/**
+	 * 
+	 */
 	public DDLConfiguration getDDLConfigurationForField(long ddmstructureId, String fieldname) {
 		try {
 			return ddlConfigurationPersistence.findByFieldOptions(ddmstructureId, fieldname);
 		} catch (Exception ex) {
-			
+			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.service.impl.DDLConfigurationLocalServiceImpl::getDDLConfigurationForField] Could not find DDLConfigurationForField (" + ddmstructureId + ", " + fieldname + ".");
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public DDLConfiguration createDDLConfiguration() {
+		try {
+			DDLConfigurationImpl ddlconfiguration = new DDLConfigurationImpl();
+			ddlconfiguration.setDdlconfigurationId(CounterLocalServiceUtil.increment(DDLConfiguration.class.getName()));
+			return ddlconfiguration;
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.service.impl.DDLConfigurationLocalServiceImpl::createDDLConfiguration] Error creating DDLConfiguration.");
+			ex.printStackTrace();
 		}
 		return null;
 	}

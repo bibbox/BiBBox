@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.meduni.liferay.portlet.bbmrieric">
+	<author>reihsr</author>
+	<namespace>bbmriericdb</namespace>
+	<entity name="SearchIndex" local-service="true" remote-service="false" table="bbmrieric.searchindex">
+		<!-- PK fields -->
+		<column name="searchid" type="long" primary="true" />
+		<!-- Other fields -->
+		<column name="organisationid" type="long" />
+		<column name="locationid" type="long" />
+		<column name="location" type="String" />
+		<column name="searchindexkey" type="String" />
+		<column name="searchindexvalue" type="String" />
+		<column name="UUID" type="String" />
+		<finder name="ExactSearch" return-type="Collection">
+			<finder-column name="searchindexvalue" />
+		</finder>
+		<finder name="SearchIndexByOrganization" return-type="Collection">
+			<finder-column name="organisationid" />
+		</finder>
+		<finder name="SearchIndex" return-type="SearchIndex">
+			<finder-column name="organisationid" />
+			<finder-column name="searchindexkey" />
+		</finder>
+        <finder name="NotUUID" return-type="Collection">
+            <finder-column comparator="!=" name="UUID"></finder-column>
+        </finder>
+	</entity>
+	<entity name="BioBank" local-service="true" remote-service="false" table="bbmrieric.biobank">
+		<!-- PK fields -->
+		<column name="biobankId" type="long" primary="true" />
+		<!-- FK fields -->
+		<column name="organisationid" type="long" />
+		<column name="ldapbiobankID" type="String" />
+		<!-- Other fields -->
+		<column name="biobankcountry" type="String" />
+		<column name="biobankname" type="String" />
+		<column name="biobanktype" type="String" />
+		<column name="biobanksize" type="String" />
+		<column name="biobankdescription" type="String" />
+		<column name="biobankjuristicperson" type="String" />
+		<column name="UUID" type="String" />
+		<finder name="LADPBiobankId" return-type="BioBank">
+			<finder-column name="ldapbiobankID" />
+		</finder>
+		<finder name="BiobankCountry" return-type="Collection">
+			<finder-column name="biobankcountry" />
+		</finder>
+		<finder name="NotUUID" return-type="Collection">
+            <finder-column comparator="!=" name="UUID"></finder-column>
+        </finder>
+	</entity>
+</service-builder>

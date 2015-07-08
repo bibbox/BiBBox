@@ -117,6 +117,10 @@ public class DDLConfigurationLocalServiceClpInvoker {
 		_methodName64 = "getDDLConfigurationForField";
 
 		_methodParameterTypes64 = new String[] { "long", "java.lang.String" };
+
+		_methodName65 = "createDDLConfiguration";
+
+		_methodParameterTypes65 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -226,6 +230,11 @@ public class DDLConfigurationLocalServiceClpInvoker {
 				(java.lang.String)arguments[1]);
 		}
 
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			return DDLConfigurationLocalServiceUtil.createDDLConfiguration();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -267,4 +276,6 @@ public class DDLConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes59;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
 }
