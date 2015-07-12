@@ -321,6 +321,14 @@ public class BioBankLocalServiceWrapper implements BioBankLocalService,
 		return _bioBankLocalService.getBioBankByCountryInJavaScriptArray(country);
 	}
 
+	@Override
+	public java.lang.String getBioBankFiltered(java.lang.String keyword,
+		java.lang.String country, java.lang.String materialtype,
+		java.lang.String diagnosisavailable, java.lang.String biobanksize) {
+		return _bioBankLocalService.getBioBankFiltered(keyword, country,
+			materialtype, diagnosisavailable, biobanksize);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

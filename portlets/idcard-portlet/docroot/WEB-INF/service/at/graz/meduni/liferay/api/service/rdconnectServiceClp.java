@@ -44,7 +44,7 @@ public class rdconnectServiceClp implements rdconnectService {
 
 		_methodName5 = "updateregbb2";
 
-		_methodParameterTypes5 = new String[] { "long" };
+		_methodParameterTypes5 = new String[] { "long", "java.util.Map" };
 
 		_methodName6 = "updatedisease";
 
@@ -179,10 +179,15 @@ public class rdconnectServiceClp implements rdconnectService {
 	}
 
 	@Override
-	public void updateregbb2(long organizationId) {
+	public void updateregbb2(long organizationId, java.util.Map jsondata) {
 		try {
 			_invokableService.invokeMethod(_methodName5,
-				_methodParameterTypes5, new Object[] { organizationId });
+				_methodParameterTypes5,
+				new Object[] {
+					organizationId,
+					
+				ClpSerializer.translateInput(jsondata)
+				});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

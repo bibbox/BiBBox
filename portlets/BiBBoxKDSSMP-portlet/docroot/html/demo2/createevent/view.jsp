@@ -34,10 +34,12 @@ if(organization != null) {
 	HashMap<String, String> eventcreation = new HashMap<String, String>();
 	List<KdssmpConfiguration> event_options = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("EventGroup");
 	for(KdssmpConfiguration event_option : event_options) {
+		String tag = event_option.getOptionkey();
+		String text = KdssmpConfigurationLocalServiceUtil.getConfigurationOption("Display", event_option.getOptionkey()).getOptionvalue();
 		if(eventcreation.containsKey(event_option.getOptionvalue())) {
-			eventcreation.put(event_option.getOptionvalue(), eventcreation.get(event_option.getOptionvalue()) + "<br>" + "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + event_option.getOptionkey().toLowerCase().replaceAll(" ", "").replaceAll("ä", "a") + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + event_option.getOptionkey() + "</i>");
+			eventcreation.put(event_option.getOptionvalue(), eventcreation.get(event_option.getOptionvalue()) + "<br>" + "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + tag + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + text + "</i>");
 		} else {
-			eventcreation.put(event_option.getOptionvalue(), "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + event_option.getOptionkey().toLowerCase().replaceAll(" ", "").replaceAll("ä", "a") + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + event_option.getOptionkey() + "</i>");
+			eventcreation.put(event_option.getOptionvalue(), "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + tag + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + text + "</i>");
 		}
 	}
 	for(String key : eventcreation.keySet()) {
@@ -54,10 +56,10 @@ if(organization != null) {
 	<% 
 	String addOrganizationURL = themeDisplay.getURLCurrent().split("[?]")[0];
 	if(addOrganizationURL.matches("/web/" + organizationId)) {
-		addOrganizationURL += "/patient";
+		addOrganizationURL += "/patient-overview";
 	}
 	if(addOrganizationURL.matches("/web/" + organizationId + "/")) {
-		addOrganizationURL += "patient";
+		addOrganizationURL += "patient-overview";
 	}
 	addOrganizationURL = addOrganizationURL + "/-/event2/createevent2/" + organizationId;
 	%>
@@ -67,7 +69,7 @@ if(organization != null) {
 	               'click',
 	               function(event) {
 	               	  var tag = event.target.getAttribute('tag');
-	               	  
+	               	  var titleheadline = event.target.getHTML();
 	               	  var text = "";
 					  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 					
@@ -84,7 +86,7 @@ if(organization != null) {
 	                           width: 1000
 	                        },
 	                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addorganisation' + text + tag,
-	                        title: '<%= "Create " %> ' + tag + ' <%= " for Patient " + organization.getName() %>',
+	                        title: 'Create ' + titleheadline + ' <%= " for Patient " + organization.getName() %>',
 	                        uri: '<%= addOrganizationURL %>' + '/' + tag
 	                     }
 	                  );

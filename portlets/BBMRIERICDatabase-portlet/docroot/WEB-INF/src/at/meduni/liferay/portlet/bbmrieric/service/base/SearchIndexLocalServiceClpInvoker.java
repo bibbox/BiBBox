@@ -132,6 +132,22 @@ public class SearchIndexLocalServiceClpInvoker {
 		_methodName45 = "notUpdatedSearchIndex";
 
 		_methodParameterTypes45 = new String[] { "java.lang.String" };
+
+		_methodName46 = "getMaterialTypes";
+
+		_methodParameterTypes46 = new String[] {  };
+
+		_methodName47 = "getDiagnosisAvailable";
+
+		_methodParameterTypes47 = new String[] {  };
+
+		_methodName48 = "getCountry";
+
+		_methodParameterTypes48 = new String[] {  };
+
+		_methodName49 = "getBiobankSize";
+
+		_methodParameterTypes49 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -258,6 +274,26 @@ public class SearchIndexLocalServiceClpInvoker {
 			return SearchIndexLocalServiceUtil.notUpdatedSearchIndex((java.lang.String)arguments[0]);
 		}
 
+		if (_methodName46.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getMaterialTypes();
+		}
+
+		if (_methodName47.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getDiagnosisAvailable();
+		}
+
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getCountry();
+		}
+
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getBiobankSize();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -305,4 +341,12 @@ public class SearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes44;
 	private String _methodName45;
 	private String[] _methodParameterTypes45;
+	private String _methodName46;
+	private String[] _methodParameterTypes46;
+	private String _methodName47;
+	private String[] _methodParameterTypes47;
+	private String _methodName48;
+	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
 }

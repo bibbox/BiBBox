@@ -89,10 +89,10 @@ public class rdconnectServiceSoap {
 		}
 	}
 
-	public static void updateregbb2(long organizationId)
-		throws RemoteException {
+	public static void updateregbb2(long organizationId,
+		java.lang.String jsondata) throws RemoteException {
 		try {
-			rdconnectServiceUtil.updateregbb2(organizationId);
+			rdconnectServiceUtil.updateregbb2(organizationId, jsondata);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

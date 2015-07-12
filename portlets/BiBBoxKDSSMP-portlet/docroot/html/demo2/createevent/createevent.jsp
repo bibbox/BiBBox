@@ -1,15 +1,107 @@
 <%@ include file="/html/demo2/init.jsp" %> 
 
 <portlet:defineObjects />
-A1
+
+<style>
+	.yui3-skin-sam .yui3-calendarnav-prevmonth span, .yui3-skin-sam .yui3-calendarnav-nextmonth span {
+	    display: inline;
+	}
+</style>
 <%
+String redirect = PortalUtil.getCurrentURL(renderRequest);	
 long organizationId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 if (currentGroup.isOrganization()) {
 	organizationId = currentGroup.getClassPK();
+	String eventtype = ParamUtil.getString(request, "eventtype");
+	String eventdisplay = KdssmpConfigurationLocalServiceUtil.getConfigurationOption("Display", eventtype).getOptionvalue();
+	
+	%>
+	
+	<portlet:actionURL name='createEvent' var="createEventURL" windowState="normal" />
+
+	<aui:form action="<%= createEventURL %>" method="POST" name="fm">
+		<aui:fieldset>
+			<aui:layout>
+				<aui:input type="hidden" name="organizationId" value="<%= String.valueOf(organizationId) %>" />
+				<aui:input type="hidden" name="eventType" value="<%= eventtype %>" />
+				<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
+				<aui:column columnWidth="100" first="true">
+					<label for="kdssmpdate"><%= "Date of " + eventdisplay %></label>
+					<input cssClass="kdssmpdate" name="<portlet:namespace />kdssmpdate" type="text"	placeholder="dd-mm-yyyy" value="">
+					
+				</aui:column>
+				<%
+				List<KdssmpConfiguration> parameters = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", eventtype);
+				for(KdssmpConfiguration parameter : parameters) {
+					KdssmpParameterConfiguration parameterconfig = KdssmpParameterConfigurationLocalServiceUtil.getKdssmpParameterConfiguration(Long.parseLong(parameter.getOptionvalue()));
+					String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
+					if(parameterconfig.getGrouping().equalsIgnoreCase("")) {
+						if(!parameterconfig.getComputed()) {
+							if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelements/html.jspf" %><%
+							} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelements/text.jspf" %><%
+							} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelements/textbox.jspf" %><%
+							} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelements/select.jspf" %><%
+							} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelements/multiselect.jspf" %><%
+							}
+						}
+					}
+				}
+				%>
+			</aui:layout>
+		</aui:fieldset>
+		<aui:button-row>
+			<aui:button type="submit" />
+			<aui:button type="cancel" />
+		</aui:button-row>
+	</aui:form>
+	<%
 }
-String eventtype = ParamUtil.getString(request, "eventtype");
+
 //String eventdisplay = KdssmpConfigurationLocalServiceUtil.getConfigurationOption("Display", eventtype).getOptionvalue();
 %>
 
-Create Event <%= eventtype %>
+<aui:script use="aui-io-request, event, node, aui-popover, valuechange, event-hover, aui-tooltip, event-valuechange, click">
+AUI().use(
+  'aui-datepicker',
+  function(Y) {
+    var datepicker = new Y.DatePicker(
+      {
+        trigger: 'input',
+        mask: '%d-%m-%Y',
+        popover: {
+          toolbars: {
+            header: [[
+              {
+                icon:'icon-trash',
+                label: 'Clear',
+                on: {
+                  click: function() {
+                    datepicker.clearSelection();
+                  }
+                }
+              },
+              {
+                icon:'icon-globe',
+                label: 'Today',
+                on: {
+                  click: function() {
+                    datepicker.clearSelection();
+                    datepicker.selectDates(new Date());
+                  }
+                }
+              }
+            ]]
+          },
+          zIndex: 1
+        }
+      }
+    );
+  }
+);
+</aui:script>

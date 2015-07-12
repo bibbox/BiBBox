@@ -273,4 +273,9 @@ public interface BioBankLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getBioBankByCountryInJavaScriptArray(
 		java.lang.String country);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getBioBankFiltered(java.lang.String keyword,
+		java.lang.String country, java.lang.String materialtype,
+		java.lang.String diagnosisavailable, java.lang.String biobanksize);
 }

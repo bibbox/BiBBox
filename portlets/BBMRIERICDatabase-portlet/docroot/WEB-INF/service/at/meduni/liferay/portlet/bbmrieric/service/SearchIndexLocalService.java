@@ -283,4 +283,16 @@ public interface SearchIndexLocalService extends BaseLocalService,
 	*/
 	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.SearchIndex> notUpdatedSearchIndex(
 		java.lang.String uuid);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getMaterialTypes();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getDiagnosisAvailable();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getCountry();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String[] getBiobankSize();
 }

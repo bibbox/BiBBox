@@ -15,6 +15,7 @@
 package at.graz.meduni.liferay.api.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -74,9 +75,10 @@ public class rdconnectServiceImpl extends rdconnectServiceBaseImpl {
 
 	}
 	
+	@Override
 	@JSONWebService(value = "updateregbb2", method = "POST")
-	public void updateregbb2(long organizationId) {
-		System.out.println("-updateRegbb2-" + organizationId);
+	public void updateregbb2(long organizationId, Map jsondata) {
+		System.out.println("-updateRegbb2-3-" + organizationId + "  -  " + jsondata.size());
 		//, JSONObject json
 
 	}

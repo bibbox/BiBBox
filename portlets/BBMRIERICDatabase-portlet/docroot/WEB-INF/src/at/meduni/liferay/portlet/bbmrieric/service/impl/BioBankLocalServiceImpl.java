@@ -19,9 +19,18 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 
 import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
+import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
 import at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl;
+import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.base.BioBankLocalServiceBaseImpl;
 
 /**
@@ -94,6 +103,9 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 		return null;
 	}
 	
+	/**
+	 * 
+	 */
 	public List<BioBank> getBioBankByCountry(String country) {
 		try {
 			if(country.equalsIgnoreCase("")) {
@@ -107,6 +119,9 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 		return null;
 	}
 	
+	/**
+	 * 
+	 */
 	public String getBioBankByCountryInJavaScriptArray(String country) {
 		String array = "";
 		//{Name: 'Test', OrganizationLink: '/home', Type: 'Biobank', 'Number of Cases': 5, 'Data Access Committe': 'no', 'Request data':  'http://rd-connect.eu', 'Nuber of access': 0}
@@ -137,6 +152,87 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 			}
 		} catch (Exception ex) {
 			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.service.impl.BioBankLocalServiceImpl::getBioBankByCountry] Could not get Biobank List for Countrys " + country + ".");
+		}
+		return array;
+	}
+	
+	public String getBioBankFiltered(String keyword, String country, String materialtype, String diagnosisavailable, String biobanksize) {
+		String array = "";
+		try {
+			DynamicQuery dynamicQuery = BioBankLocalServiceUtil.dynamicQuery();		
+			Criterion criterion = null;
+			
+			if(!keyword.equalsIgnoreCase("")) {
+				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+				subQuery.add(PropertyFactoryUtil.forName("searchindexvalue").like("%" + keyword + "%"));
+				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
+				
+				if(criterion == null) {
+					criterion = PropertyFactoryUtil.forName("organisationid").in(subQuery);
+				} else {
+					criterion = RestrictionsFactoryUtil.and(criterion, PropertyFactoryUtil.forName("organisationid").in(subQuery));
+				}
+			}
+			if(!country.equalsIgnoreCase("")) {
+				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+				subQuery.add(PropertyFactoryUtil.forName("searchindexvalue").eq(country));
+				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
+				
+				if(criterion == null) {
+					criterion = PropertyFactoryUtil.forName("organisationid").in(subQuery);
+				} else {
+					criterion = RestrictionsFactoryUtil.and(criterion, PropertyFactoryUtil.forName("organisationid").in(subQuery));
+				}
+			}
+			if(!diagnosisavailable.equalsIgnoreCase("")) {
+				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+				subQuery.add(PropertyFactoryUtil.forName("searchindexvalue").eq(diagnosisavailable));
+				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
+
+				if(criterion == null) {
+					criterion = PropertyFactoryUtil.forName("organisationid").in(subQuery);
+				} else {
+					criterion = RestrictionsFactoryUtil.and(criterion, PropertyFactoryUtil.forName("organisationid").in(subQuery));
+				}
+			}
+			if(!materialtype.equalsIgnoreCase("")) {
+				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+				Criterion criterion_sub = RestrictionsFactoryUtil.like("searchindexkey", materialtype);
+				criterion_sub = RestrictionsFactoryUtil.and(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "TRUE"));
+				subQuery.add(criterion_sub);
+				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
+				
+				if(criterion == null) {
+					criterion = PropertyFactoryUtil.forName("organisationid").in(subQuery);
+				} else {
+					criterion = RestrictionsFactoryUtil.and(criterion, PropertyFactoryUtil.forName("organisationid").in(subQuery));
+				}
+			}
+			if(criterion != null) {
+				dynamicQuery.add(criterion);
+			}
+			List<BioBank> biobanks = BioBankLocalServiceUtil.dynamicQuery(dynamicQuery);
+			String seperator = "";
+			for(BioBank biobank : biobanks) {
+				array += seperator + "{";
+				//Country
+				array += "Country: '" + biobank.getBiobankcountry().replaceAll("'", "\\\\'") + "',";
+				//BB ID
+				array += "'BB_ID': '" + biobank.getLdapbiobankID().replaceAll("'", "\\\\'") + "',";
+				//Name
+				array += "Name: '" + biobank.getBiobankname().replaceAll("'", "\\\\'") + "',";
+				//Type
+				array += "Type: '" + biobank.getBiobanktype().replaceAll("'", "\\\\'") + "',";
+				//Size
+				array += "Size: '" + biobank.getBiobanksize().replaceAll("'", "\\\\'") + "',";
+				//Juristic Person
+				array += "'Juristic Person': '" + biobank.getBiobankjuristicperson().replaceAll("'", "\\\\'") + "'";
+				array += "}";
+				seperator = ",";
+			}
+		} catch (Exception ex) {
+			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.service.impl.BioBankLocalServiceImpl::getBioBankFiltered] Could not get Biobank List filtered (" + keyword + ", " + country + ", " + materialtype + ", " + diagnosisavailable + ", " + biobanksize + ").");
+			ex.printStackTrace();
 		}
 		return array;
 	}

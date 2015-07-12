@@ -74,8 +74,8 @@ public class rdconnectServiceUtil {
 		getService().updateregbb(organizationId, json);
 	}
 
-	public static void updateregbb2(long organizationId) {
-		getService().updateregbb2(organizationId);
+	public static void updateregbb2(long organizationId, java.util.Map jsondata) {
+		getService().updateregbb2(organizationId, jsondata);
 	}
 
 	public static void updatedisease(long organizationId,

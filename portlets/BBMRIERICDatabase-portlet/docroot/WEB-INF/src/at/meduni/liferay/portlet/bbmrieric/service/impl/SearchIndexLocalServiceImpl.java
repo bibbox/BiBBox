@@ -16,9 +16,15 @@ package at.meduni.liferay.portlet.bbmrieric.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionList;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
 import at.meduni.liferay.portlet.bbmrieric.model.impl.SearchIndexImpl;
@@ -118,5 +124,77 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.service.impl.SearchIndexLocalServiceImpl::notUpdatedSearchIndex] Could not find SearchIndex with not having (" + uuid + ").");
 		}
 		return null;
+	}
+	
+	public String[] getMaterialTypes() {
+		try {
+			DynamicQuery dynamicQuery = SearchIndexLocalServiceUtil.dynamicQuery();
+			Criterion criterion = RestrictionsFactoryUtil.like("searchindexkey", "biobankMaterialStored%");
+			dynamicQuery.add(criterion);
+			ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+			projectionList.add(ProjectionFactoryUtil.groupProperty("searchindexkey"));
+		    //projectionList.add(ProjectionFactoryUtil.rowCount());
+		    dynamicQuery.setProjection(projectionList);
+		    List<Object> results = results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+		    /*for(Object result : results) {
+		    	System.out.println(result);	
+		    }*/
+		    return results.toArray(new String[results.size()]);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return new String[] {};
+	}
+	
+	public String[] getDiagnosisAvailable() {
+		try {
+			DynamicQuery dynamicQuery = SearchIndexLocalServiceUtil.dynamicQuery();
+			Criterion criterion = RestrictionsFactoryUtil.like("searchindexkey", "diagnosisAvailable");
+			dynamicQuery.add(criterion);
+			ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+			projectionList.add(ProjectionFactoryUtil.groupProperty("searchindexvalue"));
+		    //projectionList.add(ProjectionFactoryUtil.rowCount());
+		    dynamicQuery.setProjection(projectionList);
+		    List<Object> results = results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+		    /*for(Object result : results) {
+		    	System.out.println(result);	
+		    }*/
+		    return results.toArray(new String[results.size()]);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return new String[] {};
+	}
+	
+	public String[] getCountry() {
+		try {
+			DynamicQuery dynamicQuery = SearchIndexLocalServiceUtil.dynamicQuery();
+			Criterion criterion = RestrictionsFactoryUtil.like("searchindexkey", "biobankCountry");
+			dynamicQuery.add(criterion);
+			ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+			projectionList.add(ProjectionFactoryUtil.groupProperty("searchindexvalue"));
+		    //projectionList.add(ProjectionFactoryUtil.rowCount());
+		    dynamicQuery.setProjection(projectionList);
+		    List<Object> results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+		    /*for(Object result : results) {
+		    	System.out.println(result);	
+		    }*/
+		    return results.toArray(new String[results.size()]);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return new String[] {};
+	}
+	
+	public String[] getBiobankSize() {
+		return new String[] {"< 10 Samples",
+		"10 - 100 Samples",
+		"100 - 1.000 Samples",
+		"1.000 - 10.000 Samples",
+		"10.000 - 100.000 Samples",
+		"100.000 - 1.000.000 Samples",
+		"1.000.000 - 10.000.000 Samples",
+		"10.000.000 - 100.000.000 Samples",
+		"100.000.000 - 1.000.000.000 Samples"};	
 	}
 }

@@ -73,7 +73,7 @@ public interface rdconnectService extends BaseService, InvokableService {
 	public void updateregbb(long organizationId,
 		com.liferay.portal.kernel.json.JSONObject json);
 
-	public void updateregbb2(long organizationId);
+	public void updateregbb2(long organizationId, java.util.Map jsondata);
 
 	public void updatedisease(long organizationId,
 		java.lang.String diseasename, java.lang.String count);

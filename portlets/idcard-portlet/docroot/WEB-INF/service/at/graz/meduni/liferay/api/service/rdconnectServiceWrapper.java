@@ -70,8 +70,8 @@ public class rdconnectServiceWrapper implements rdconnectService,
 	}
 
 	@Override
-	public void updateregbb2(long organizationId) {
-		_rdconnectService.updateregbb2(organizationId);
+	public void updateregbb2(long organizationId, java.util.Map jsondata) {
+		_rdconnectService.updateregbb2(organizationId, jsondata);
 	}
 
 	@Override

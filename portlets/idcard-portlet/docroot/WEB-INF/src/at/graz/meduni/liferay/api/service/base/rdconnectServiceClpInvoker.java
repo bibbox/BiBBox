@@ -44,7 +44,7 @@ public class rdconnectServiceClpInvoker {
 
 		_methodName26 = "updateregbb2";
 
-		_methodParameterTypes26 = new String[] { "long" };
+		_methodParameterTypes26 = new String[] { "long", "java.util.Map" };
 
 		_methodName27 = "updatedisease";
 
@@ -104,7 +104,8 @@ public class rdconnectServiceClpInvoker {
 
 		if (_methodName26.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
-			rdconnectServiceUtil.updateregbb2(((Long)arguments[0]).longValue());
+			rdconnectServiceUtil.updateregbb2(((Long)arguments[0]).longValue(),
+				(java.util.Map)arguments[1]);
 
 			return null;
 		}

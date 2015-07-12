@@ -133,6 +133,13 @@ public class BioBankLocalServiceClp implements BioBankLocalService {
 		_methodName23 = "getBioBankByCountryInJavaScriptArray";
 
 		_methodParameterTypes23 = new String[] { "java.lang.String" };
+
+		_methodName24 = "getBioBankFiltered";
+
+		_methodParameterTypes24 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -810,6 +817,42 @@ public class BioBankLocalServiceClp implements BioBankLocalService {
 		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.lang.String getBioBankFiltered(java.lang.String keyword,
+		java.lang.String country, java.lang.String materialtype,
+		java.lang.String diagnosisavailable, java.lang.String biobanksize) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
+					new Object[] {
+						ClpSerializer.translateInput(keyword),
+						
+					ClpSerializer.translateInput(country),
+						
+					ClpSerializer.translateInput(materialtype),
+						
+					ClpSerializer.translateInput(diagnosisavailable),
+						
+					ClpSerializer.translateInput(biobanksize)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -857,4 +900,6 @@ public class BioBankLocalServiceClp implements BioBankLocalService {
 	private String[] _methodParameterTypes22;
 	private String _methodName23;
 	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

@@ -25,34 +25,89 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 		keywords = "";
 	}
 
-	String candidatetype = ParamUtil.getString(request, "candidatetype");
-	if(candidatetype.equalsIgnoreCase("")) {
-		candidatetype = "all";
+	String candidatetype = httpRequest.getParameter(renderResponse.getNamespace() + "candidatetype");
+	if(candidatetype == null) {
+		candidatetype = "";
+	}
+	
+	String country_filter = httpRequest.getParameter(renderResponse.getNamespace() + "country");
+	if (country_filter == null) {
+		country_filter = "";
+	}
+	
+	String materialtype = httpRequest.getParameter(renderResponse.getNamespace() + "materialtype");
+	if (materialtype == null) {
+		materialtype = "";
+	}
+	
+	String diagnosisavailable_filter = httpRequest.getParameter(renderResponse.getNamespace() + "diagnosisavailable");
+	if (diagnosisavailable_filter == null) {
+		diagnosisavailable_filter = "";
+	}
+	String biobanksize_filter = httpRequest.getParameter(renderResponse.getNamespace() + "biobanksize");
+	if (biobanksize_filter == null) {
+		biobanksize_filter = "";
 	}
 
-	String[] types = {};
-	//bbmri-eric
-	String url = themeDisplay.getURLPortal()+"/web/guest/id-card-beta?biobankId=";
+	String[] materialtypes = SearchIndexLocalServiceUtil.getMaterialTypes();
+	String[] diagnosisavailable = SearchIndexLocalServiceUtil.getDiagnosisAvailable();
+	String[] country = SearchIndexLocalServiceUtil.getCountry();
+	String[] biobanksize = SearchIndexLocalServiceUtil.getBiobankSize();
+ 
+	//String url = themeDisplay.getURLPortal()+"/web/guest/id-card-beta?biobankId=";
+	String url = themeDisplay.getURLPortal()+"/web/guest/bbmri-eric?biobankId=";
+	
+	String searchurl = themeDisplay.getURLPortal() + layout.getFriendlyURL(); //"/web/guest/bbmri-eric";//
 %>
 
-<portlet:actionURL name='filterList' var="filterListURL" />
-<aui:form action="<%= filterListURL.toString() %>" method="POST" name="fm">
+<aui:form action="<%= searchurl.toString() %>" method="GET" name="fm">
 	<aui:layout>
 		<aui:fieldset>
 		 
-			<aui:column columnWidth="50" first="true">
+			<aui:column columnWidth="100" first="true">
 				<input style="width: 420px;" type="text" placeholder="search by: Disease Name, Gene, ORPHACODE,  ICD10, OMIM ..." value="<%= keywords %>" name="SEARCH" size="60">
 			</aui:column>
-			<aui:column columnWidth="35">
-				<aui:select inlineLabel="left" name="candidatetype" label="Type:" cssClass="rdc-filter-input"  >
-					<% for (String string : types) { %>
-					<aui:option value="<%= string %>" selected="<%= candidatetype.equalsIgnoreCase(string) ? true : false %>">
-						<%= string %>
+			<aui:column columnWidth="25" first="true">
+				<aui:select inlineLabel="left" name="materialtype" label="Material Types:" cssClass="rdc-filter-input"  >
+					<aui:option value="" selected='<%= materialtype.equalsIgnoreCase("") ? true : false %>'></aui:option>
+					<% for (String string : materialtypes) { %>
+					<aui:option value="<%= string %>" selected="<%= materialtype.equalsIgnoreCase(string) ? true : false %>">
+						<%= string.replaceAll("biobankMaterialStored", "") %>
 					</aui:option>
 					<% } %>
 				</aui:select>
 			</aui:column>
-			<aui:column columnWidth="15" last="true">
+			<aui:column columnWidth="25" >
+				<aui:select inlineLabel="left" name="diagnosisavailable" label="Diagnosis Available:" cssClass="rdc-filter-input"  >
+					<aui:option value="" selected='<%= diagnosisavailable_filter.equalsIgnoreCase("") ? true : false %>'></aui:option>
+					<% for (String string : diagnosisavailable) { %>
+					<aui:option value="<%= string %>" selected="<%= diagnosisavailable_filter.equalsIgnoreCase(string) ? true : false %>">
+						<%= string.replaceAll("urn:miriam:", "") %>
+					</aui:option>
+					<% } %>
+				</aui:select>
+			</aui:column>
+			<aui:column columnWidth="25" >
+				<aui:select inlineLabel="left" name="country" label="Country:" cssClass="rdc-filter-input"  >
+					<aui:option value="" selected='<%= country_filter.equalsIgnoreCase("") ? true : false %>'></aui:option>
+					<% for (String string : country) { %>
+					<aui:option value="<%= string %>" selected="<%= country_filter.equalsIgnoreCase(string) ? true : false %>">
+						<%= com.liferay.portal.service.CountryServiceUtil.getCountryByA2(string).getNameCurrentValue() %>
+					</aui:option>
+					<% } %>
+				</aui:select>
+			</aui:column>
+			<!--<aui:column columnWidth="25" last="true" >
+				<aui:select inlineLabel="left" name="biobanksize" label="Biobank Size:" cssClass="rdc-filter-input"  >
+					<aui:option value="" selected='<%= biobanksize_filter.equalsIgnoreCase("") ? true : false %>'></aui:option>
+					<% for (String string : biobanksize) { %>
+					<aui:option value="<%= string %>" selected="<%= biobanksize_filter.equalsIgnoreCase(string) ? true : false %>">
+						<%= string %>
+					</aui:option>
+					<% } %>
+				</aui:select>
+			</aui:column>-->
+			<aui:column columnWidth="15" first="true">
 				<aui:button-row cssClass="searchFiledFloat">
 					<aui:button type="submit" value="Filter" />
 				</aui:button-row>
@@ -63,7 +118,8 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 </aui:form>
 
 <%
-String textresult = BioBankLocalServiceUtil.getBioBankByCountryInJavaScriptArray("");
+String textresult = BioBankLocalServiceUtil.getBioBankFiltered(keywords, country_filter, materialtype, diagnosisavailable_filter, biobanksize_filter);
+//String textresult = BioBankLocalServiceUtil.getBioBankByCountryInJavaScriptArray("");
 %>
 
 <div id="myDataTable"></div>
@@ -83,12 +139,17 @@ AUI().use(
     var nestedCols = [ 
     	{
     		key: 'Country',
-    		sortable: false,
+    		sortable: true,
     	},
     	{
     		key: 'BB_ID',
     		label: 'BB ID',
-    		sortable: true
+    		sortable: true,
+    		allowHTML: true,
+    		formatter: function (o) {
+    			//encodeURIComponent
+    			return '<a href="<%= url %>' + encodeURIComponent(o.data.BB_ID) + '">' + o.data.BB_ID.replace('bbmri-eric:', '') + '</a>';
+    		}
     	},
     	{
     		key: 'Name',

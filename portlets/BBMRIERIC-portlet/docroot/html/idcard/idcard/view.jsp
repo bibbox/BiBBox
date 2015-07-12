@@ -79,6 +79,7 @@
 }
 </style>
 
+
 <%
 String biobankId = "";
 HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
@@ -95,6 +96,8 @@ if(!biobankId.equalsIgnoreCase("")) {
 	String orgPath = "#";
 	String imgPath = "http://www.geonames.org/flags/x/" + biobank.getBiobankcountry().toLowerCase() + ".gif";
 	%>
+	<div><aui:a href="/services">Services</aui:a> / <aui:a href="/bbmri-eric-catalouge-beta2">Catalogue</aui:a> / <aui:a href="bbmri-eric-catalouge-beta2"><%= biobank.getBiobankname() %></aui:a></div>
+	<br>
 	<!-- ID Card -->
 	<div class="idcard_idcardbody">
 		<!-- top -->
@@ -118,6 +121,7 @@ if(!biobankId.equalsIgnoreCase("")) {
 	</div>
 	<br><br>
 	<div>
+	<br>
 		<h3>Main Contact</h3>
 		<%
 		String name = "";
@@ -138,9 +142,9 @@ if(!biobankId.equalsIgnoreCase("")) {
 			Name: <%= name %><br>
 			<%
 		}
-		String email = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankContactLastName").getSearchindexvalue();
+		String email = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankContactEmail").getSearchindexvalue();
 		%>
-		E-Mail: <aui:a href="<%= email %>"><%= email %></aui:a><br>
+		E-Mail: <a href='<%= "mailto:" + email %>'><%= email %></a><br>
 		<%
 		String address = "";
 		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankContactAddress");
@@ -166,9 +170,9 @@ if(!biobankId.equalsIgnoreCase("")) {
 		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankContactCountry");
 		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
 			if(address.equalsIgnoreCase("")) {
-				address = searchindex.getSearchindexvalue();
+				address = com.liferay.portal.service.CountryServiceUtil.getCountryByA2(searchindex.getSearchindexvalue()).getNameCurrentValue();
 			} else {
-				address += ", " + searchindex.getSearchindexvalue();
+				address += ", " + com.liferay.portal.service.CountryServiceUtil.getCountryByA2(searchindex.getSearchindexvalue()).getNameCurrentValue();
 			}
 		}
 		if(!address.equalsIgnoreCase("")) {
@@ -183,11 +187,184 @@ if(!biobankId.equalsIgnoreCase("")) {
 			<%
 		}
 		%>
+		<br>
 		<h3>Overview</h3>
+		<%
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankSize");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			String bbsize = "";
+			if(searchindex.getSearchindexvalue().equalsIgnoreCase("0")) {
+	        	 bbsize = "< 10 Samples";
+			} else if(searchindex.getSearchindexvalue().equalsIgnoreCase("1")) {
+	        	 bbsize = "10 - 100 Samples";
+			} else if(searchindex.getSearchindexvalue().equalsIgnoreCase("2")) {
+	        	 bbsize = "100 - 1.000 Samples";
+			} else if(searchindex.getSearchindexvalue().equalsIgnoreCase("3")) {
+	        	 bbsize = "1.000 - 10.000 Samples";
+			} else if(searchindex.getSearchindexvalue().equalsIgnoreCase("4")) {
+	        	 bbsize = "10.000 - 100.000 Samples";
+			} else if(searchindex.getSearchindexvalue().equalsIgnoreCase("5")) {
+	        	 bbsize = "100.000 - 1.000.000 Samples";
+			} else if(searchindex.getSearchindexvalue().equalsIgnoreCase("6")) {
+	        	 bbsize = "1.000.000 - 10.000.000 Samples";
+			} else if(searchindex.getSearchindexvalue().equalsIgnoreCase("7")) {
+	        	 bbsize = "10.000.000 - 100.000.000 Samples";
+			} else if(searchindex.getSearchindexvalue().equalsIgnoreCase("8")) {
+	        	 bbsize = "100.000.000 - 1.000.000.000 Samples";
+			} else  {
+	        	 bbsize = "Samples not specified";
+			}
+			%>
+			Biobank Size: <%= bbsize %><br>
+			<%
+		}
+		%>
+		Biobank Type: <%= biobank.getBiobanktype() %><br>
+		<%
+		String biobankPartnerCharterSigned = "not specified";
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankPartnerCharterSigned");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				biobankPartnerCharterSigned = "yes";
+			} else {
+				biobankPartnerCharterSigned = "no";
+			}
+		}
+		%>
+		BBMRI-ERIC Partner Charter Signed: <%= biobankPartnerCharterSigned %><br>
+		
+		<br>
 		<h3>Material Type</h3>
+		<%
+		String[] biobankmaterialstoredarray = {"biobankMaterialStoredDNA","biobankMaterialStoredcDNAmRNA","biobankMaterialStoredmicroRNA",
+				"biobankMaterialStoredWholeBlood","biobankMaterialStoredPBC","biobankMaterialStoredPlasma","biobankMaterialStoredSerum",
+				"biobankMaterialStoredTissueCryo","biobankMaterialStoredTissueParaffin","biobankMaterialStoredCellLines","biobankMaterialStoredUrine",
+				"biobankMaterialStoredSaliva","biobankMaterialStoredFaeces","biobankMaterialStoredPathogen","biobankMaterialStoredRNA",
+				"biobankMaterialStoredOther"};
+		String biobankmaterialstored_display = "";
+		String splitter = "";
+		for(String biobankmaterialstored : biobankmaterialstoredarray) {
+			searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), biobankmaterialstored);
+			if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("") && searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				biobankmaterialstored_display += splitter + searchindex.getSearchindexkey().replaceAll("biobankMaterialStored", "");
+				splitter = ", ";
+			}
+		}
+		%>
+		<%= biobankmaterialstored_display %><br>
+		
+		<br>
 		<h3>Available Data</h3>
+		<%
+		String[] biobankdataarray = {"biobankAvailableMaleSamplesData","biobankAvailableFemaleSamplesData","biobankAvailableBiologicalSamples",
+				"biobankAvailableSurveyData","biobankAvailableImagingData","biobankAvailableMedicalRecords","biobankAvailableNationalRegistries",
+				"biobankAvailableGenealogicalRecords","biobankAvailablePhysioBiochemMeasurements","biobankAvailableOther"};
+		String biobankdata_display = "";
+		splitter = "";
+		for(String biobankdata : biobankdataarray) {
+			searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), biobankdata);
+			if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("") && searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				biobankdata_display += splitter + searchindex.getSearchindexkey().replaceAll("biobankAvailable", "");
+				splitter = ", ";
+			}
+		}
+		%>
+		<%= biobankdata_display %><br>
+		
+		<br>
 		<h3>Available Diagnosis</h3>
+		<%
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "diagnosisAvailable");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			%>
+			Available diagnosis: <%= searchindex.getSearchindexvalue() %><br>
+			<%
+		}
+		%>
+		
+		<br>
 		<h3>Access Condition</h3>
+		<%
+		String display = "";
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankSampleAccessFee");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				display = "yes";
+			} else {
+				display = "no";
+			}
+			%>
+			Sample Access Fee: <%= display %><br>
+			<%
+		}
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankSampleAccessJointProjects");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				display = "yes";
+			} else {
+				display = "no";
+			}
+			%>
+			Sample Access on Joint Projects: <%= display %><br>
+			<%
+		}
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankSampleAccessDescription");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				display = "yes";
+			} else {
+				display = "no";
+			}
+			%>
+			Sample Access Rules: <%= display %><br>
+			<%
+		}
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankSampleAccessURI");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			%>
+			URL for access policy for the samples: <aui:a href="<%= searchindex.getSearchindexvalue() %>">here</aui:a><br>
+			<%
+		}
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankDataAccessFee");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				display = "yes";
+			} else {
+				display = "no";
+			}
+			%>
+			Data Access Fee: <%= display %><br>
+			<%
+		}
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankDataAccessJointProjects");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				display = "yes";
+			} else {
+				display = "no";
+			}
+			%>
+			Data Access on Joint Projects: <%= display %><br>
+			<%
+		}
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankDataAccessDescription");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
+				display = "yes";
+			} else {
+				display = "no";
+			}
+			%>
+			Data Access Rules: <%= display %><br>
+			<%
+		}
+		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankDataAccessURI");
+		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
+			%>
+			URL for access policy for the data: <aui:a href="<%= searchindex.getSearchindexvalue() %>">here</aui:a><br>
+			<%
+		}
+		%>
 	</div>
 	
 	<%

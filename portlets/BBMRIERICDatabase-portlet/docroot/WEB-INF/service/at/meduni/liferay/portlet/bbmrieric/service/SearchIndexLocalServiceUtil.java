@@ -316,6 +316,22 @@ public class SearchIndexLocalServiceUtil {
 		return getService().notUpdatedSearchIndex(uuid);
 	}
 
+	public static java.lang.String[] getMaterialTypes() {
+		return getService().getMaterialTypes();
+	}
+
+	public static java.lang.String[] getDiagnosisAvailable() {
+		return getService().getDiagnosisAvailable();
+	}
+
+	public static java.lang.String[] getCountry() {
+		return getService().getCountry();
+	}
+
+	public static java.lang.String[] getBiobankSize() {
+		return getService().getBiobankSize();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

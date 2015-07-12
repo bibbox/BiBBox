@@ -307,6 +307,15 @@ public class BioBankLocalServiceUtil {
 		return getService().getBioBankByCountryInJavaScriptArray(country);
 	}
 
+	public static java.lang.String getBioBankFiltered(
+		java.lang.String keyword, java.lang.String country,
+		java.lang.String materialtype, java.lang.String diagnosisavailable,
+		java.lang.String biobanksize) {
+		return getService()
+				   .getBioBankFiltered(keyword, country, materialtype,
+			diagnosisavailable, biobanksize);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -133,6 +133,13 @@ public class BioBankLocalServiceClpInvoker {
 		_methodName46 = "getBioBankByCountryInJavaScriptArray";
 
 		_methodParameterTypes46 = new String[] { "java.lang.String" };
+
+		_methodName47 = "getBioBankFiltered";
+
+		_methodParameterTypes47 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -261,6 +268,13 @@ public class BioBankLocalServiceClpInvoker {
 			return BioBankLocalServiceUtil.getBioBankByCountryInJavaScriptArray((java.lang.String)arguments[0]);
 		}
 
+		if (_methodName47.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+			return BioBankLocalServiceUtil.getBioBankFiltered((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -310,4 +324,6 @@ public class BioBankLocalServiceClpInvoker {
 	private String[] _methodParameterTypes45;
 	private String _methodName46;
 	private String[] _methodParameterTypes46;
+	private String _methodName47;
+	private String[] _methodParameterTypes47;
 }

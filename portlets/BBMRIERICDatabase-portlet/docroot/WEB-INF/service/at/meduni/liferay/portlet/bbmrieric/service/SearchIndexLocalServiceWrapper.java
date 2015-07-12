@@ -333,6 +333,26 @@ public class SearchIndexLocalServiceWrapper implements SearchIndexLocalService,
 		return _searchIndexLocalService.notUpdatedSearchIndex(uuid);
 	}
 
+	@Override
+	public java.lang.String[] getMaterialTypes() {
+		return _searchIndexLocalService.getMaterialTypes();
+	}
+
+	@Override
+	public java.lang.String[] getDiagnosisAvailable() {
+		return _searchIndexLocalService.getDiagnosisAvailable();
+	}
+
+	@Override
+	public java.lang.String[] getCountry() {
+		return _searchIndexLocalService.getCountry();
+	}
+
+	@Override
+	public java.lang.String[] getBiobankSize() {
+		return _searchIndexLocalService.getBiobankSize();
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
