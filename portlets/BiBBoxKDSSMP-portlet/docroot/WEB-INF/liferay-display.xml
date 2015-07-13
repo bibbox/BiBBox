@@ -17,5 +17,6 @@
 		<portlet id="create-event2"></portlet>
 		<portlet id="view-patient"></portlet>
 		<portlet id="counseling-group"></portlet>
+		<portlet id="list-events"></portlet>
 	</category>
 </display>

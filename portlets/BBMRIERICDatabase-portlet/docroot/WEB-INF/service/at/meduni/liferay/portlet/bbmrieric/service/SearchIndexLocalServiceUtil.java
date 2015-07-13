@@ -332,6 +332,10 @@ public class SearchIndexLocalServiceUtil {
 		return getService().getBiobankSize();
 	}
 
+	public static java.lang.String[] getTypeOfBiobank() {
+		return getService().getTypeOfBiobank();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

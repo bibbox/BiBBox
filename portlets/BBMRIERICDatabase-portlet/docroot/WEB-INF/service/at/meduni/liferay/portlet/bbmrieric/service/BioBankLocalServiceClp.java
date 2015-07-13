@@ -138,7 +138,7 @@ public class BioBankLocalServiceClp implements BioBankLocalService {
 
 		_methodParameterTypes24 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String"
+				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
 	}
 
@@ -820,7 +820,8 @@ public class BioBankLocalServiceClp implements BioBankLocalService {
 	@Override
 	public java.lang.String getBioBankFiltered(java.lang.String keyword,
 		java.lang.String country, java.lang.String materialtype,
-		java.lang.String diagnosisavailable, java.lang.String biobanksize) {
+		java.lang.String diagnosisavailable, java.lang.String biobanksize,
+		java.lang.String typeofbiobank) {
 		Object returnObj = null;
 
 		try {
@@ -835,7 +836,9 @@ public class BioBankLocalServiceClp implements BioBankLocalService {
 						
 					ClpSerializer.translateInput(diagnosisavailable),
 						
-					ClpSerializer.translateInput(biobanksize)
+					ClpSerializer.translateInput(biobanksize),
+						
+					ClpSerializer.translateInput(typeofbiobank)
 					});
 		}
 		catch (Throwable t) {

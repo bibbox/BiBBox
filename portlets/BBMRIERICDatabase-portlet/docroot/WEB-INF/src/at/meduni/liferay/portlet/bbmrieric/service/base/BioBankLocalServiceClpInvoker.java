@@ -106,39 +106,39 @@ public class BioBankLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.bbmrieric.model.BioBank"
 			};
 
-		_methodName36 = "getBeanIdentifier";
+		_methodName40 = "getBeanIdentifier";
 
-		_methodParameterTypes36 = new String[] {  };
+		_methodParameterTypes40 = new String[] {  };
 
-		_methodName37 = "setBeanIdentifier";
+		_methodName41 = "setBeanIdentifier";
 
-		_methodParameterTypes37 = new String[] { "java.lang.String" };
+		_methodParameterTypes41 = new String[] { "java.lang.String" };
 
-		_methodName42 = "notUpdatedBioBank";
-
-		_methodParameterTypes42 = new String[] { "java.lang.String" };
-
-		_methodName43 = "createBioBank";
-
-		_methodParameterTypes43 = new String[] { "java.lang.String" };
-
-		_methodName44 = "getBioBank";
-
-		_methodParameterTypes44 = new String[] { "java.lang.String" };
-
-		_methodName45 = "getBioBankByCountry";
-
-		_methodParameterTypes45 = new String[] { "java.lang.String" };
-
-		_methodName46 = "getBioBankByCountryInJavaScriptArray";
+		_methodName46 = "notUpdatedBioBank";
 
 		_methodParameterTypes46 = new String[] { "java.lang.String" };
 
-		_methodName47 = "getBioBankFiltered";
+		_methodName47 = "createBioBank";
 
-		_methodParameterTypes47 = new String[] {
+		_methodParameterTypes47 = new String[] { "java.lang.String" };
+
+		_methodName48 = "getBioBank";
+
+		_methodParameterTypes48 = new String[] { "java.lang.String" };
+
+		_methodName49 = "getBioBankByCountry";
+
+		_methodParameterTypes49 = new String[] { "java.lang.String" };
+
+		_methodName50 = "getBioBankByCountryInJavaScriptArray";
+
+		_methodParameterTypes50 = new String[] { "java.lang.String" };
+
+		_methodName51 = "getBioBankFiltered";
+
+		_methodParameterTypes51 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String"
+				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
 	}
 
@@ -231,48 +231,49 @@ public class BioBankLocalServiceClpInvoker {
 			return BioBankLocalServiceUtil.updateBioBank((at.meduni.liferay.portlet.bbmrieric.model.BioBank)arguments[0]);
 		}
 
-		if (_methodName36.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
+		if (_methodName40.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
 			return BioBankLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName37.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
+		if (_methodName41.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
 			BioBankLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName42.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			return BioBankLocalServiceUtil.notUpdatedBioBank((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName43.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			return BioBankLocalServiceUtil.createBioBank((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName44.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
-			return BioBankLocalServiceUtil.getBioBank((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
-			return BioBankLocalServiceUtil.getBioBankByCountry((java.lang.String)arguments[0]);
-		}
-
 		if (_methodName46.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			return BioBankLocalServiceUtil.getBioBankByCountryInJavaScriptArray((java.lang.String)arguments[0]);
+			return BioBankLocalServiceUtil.notUpdatedBioBank((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+			return BioBankLocalServiceUtil.createBioBank((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+			return BioBankLocalServiceUtil.getBioBank((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+			return BioBankLocalServiceUtil.getBioBankByCountry((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			return BioBankLocalServiceUtil.getBioBankByCountryInJavaScriptArray((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			return BioBankLocalServiceUtil.getBioBankFiltered((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3], (java.lang.String)arguments[4]);
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -310,20 +311,20 @@ public class BioBankLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName36;
-	private String[] _methodParameterTypes36;
-	private String _methodName37;
-	private String[] _methodParameterTypes37;
-	private String _methodName42;
-	private String[] _methodParameterTypes42;
-	private String _methodName43;
-	private String[] _methodParameterTypes43;
-	private String _methodName44;
-	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
+	private String _methodName40;
+	private String[] _methodParameterTypes40;
+	private String _methodName41;
+	private String[] _methodParameterTypes41;
 	private String _methodName46;
 	private String[] _methodParameterTypes46;
 	private String _methodName47;
 	private String[] _methodParameterTypes47;
+	private String _methodName48;
+	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
 }

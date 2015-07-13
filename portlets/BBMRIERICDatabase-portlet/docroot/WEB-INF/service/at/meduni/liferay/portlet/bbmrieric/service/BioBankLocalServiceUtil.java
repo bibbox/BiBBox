@@ -310,10 +310,10 @@ public class BioBankLocalServiceUtil {
 	public static java.lang.String getBioBankFiltered(
 		java.lang.String keyword, java.lang.String country,
 		java.lang.String materialtype, java.lang.String diagnosisavailable,
-		java.lang.String biobanksize) {
+		java.lang.String biobanksize, java.lang.String typeofbiobank) {
 		return getService()
 				   .getBioBankFiltered(keyword, country, materialtype,
-			diagnosisavailable, biobanksize);
+			diagnosisavailable, biobanksize, typeofbiobank);
 	}
 
 	public static void clearService() {

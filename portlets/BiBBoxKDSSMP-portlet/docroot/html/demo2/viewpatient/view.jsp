@@ -18,7 +18,7 @@ String layouttemplate = "";
 if(optionsHorizontalLayout_cfg.equalsIgnoreCase("vertical")) {
 	layouttemplate = "Fistname: §FIRSTNAME§<br>Lastname: §LASTNAME§<br>Date of birth: §DOB§ (§AGE§)<br>Gender: §GENDER§";
 } else {
-	layouttemplate = "";
+	layouttemplate = "Fistname: §FIRSTNAME§&nbsp&nbsp|&nbsp&nbspLastname: §LASTNAME§&nbsp&nbsp|&nbsp&nbspDate of birth: §DOB§ (§AGE§)&nbsp&nbsp|&nbsp&nbspGender: §GENDER§";
 }
 
 if(organization != null) {

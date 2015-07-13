@@ -142,7 +142,7 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 				//Name
 				array += "Name: '" + biobank.getBiobankname().replaceAll("'", "\\\\'") + "',";
 				//Type
-				array += "Type: '" + biobank.getBiobanktype().replaceAll("'", "\\\\'") + "',";
+				array += "Type: '" + biobank.getBiobanktype().replaceAll("'", "\\\\'").replaceAll(", biobankContact", "").replaceAll("biobankContact", "") + "',";
 				//Size
 				array += "Size: '" + biobank.getBiobanksize().replaceAll("'", "\\\\'") + "',";
 				//Juristic Person
@@ -156,7 +156,7 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 		return array;
 	}
 	
-	public String getBioBankFiltered(String keyword, String country, String materialtype, String diagnosisavailable, String biobanksize) {
+	public String getBioBankFiltered(String keyword, String country, String materialtype, String diagnosisavailable, String biobanksize, String typeofbiobank) {
 		String array = "";
 		try {
 			DynamicQuery dynamicQuery = BioBankLocalServiceUtil.dynamicQuery();		
@@ -164,7 +164,7 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 			
 			if(!keyword.equalsIgnoreCase("")) {
 				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
-				subQuery.add(PropertyFactoryUtil.forName("searchindexvalue").like("%" + keyword + "%"));
+				subQuery.add(RestrictionsFactoryUtil.ilike("searchindexvalue", "%" + keyword + "%"));
 				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
 				
 				if(criterion == null) {
@@ -185,8 +185,9 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 				}
 			}
 			if(!diagnosisavailable.equalsIgnoreCase("")) {
+				Criterion criterion_sub = createSearchDiagnosisString(diagnosisavailable);
 				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
-				subQuery.add(PropertyFactoryUtil.forName("searchindexvalue").eq(diagnosisavailable));
+				subQuery.add(criterion_sub);
 				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
 
 				if(criterion == null) {
@@ -208,6 +209,55 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 					criterion = RestrictionsFactoryUtil.and(criterion, PropertyFactoryUtil.forName("organisationid").in(subQuery));
 				}
 			}
+			if(!typeofbiobank.equalsIgnoreCase("")) {
+				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+				Criterion criterion_sub = RestrictionsFactoryUtil.like("searchindexkey", "objectClass");
+				criterion_sub = RestrictionsFactoryUtil.and(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + typeofbiobank + "%"));
+				subQuery.add(criterion_sub);
+				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
+				
+				if(criterion == null) {
+					criterion = PropertyFactoryUtil.forName("organisationid").in(subQuery);
+				} else {
+					criterion = RestrictionsFactoryUtil.and(criterion, PropertyFactoryUtil.forName("organisationid").in(subQuery));
+				}
+			}
+			if(!biobanksize.equalsIgnoreCase("")) {
+				
+				String bbsize = "";
+				if(biobanksize.equalsIgnoreCase("< 10 Samples")) {
+		        	 bbsize = "0";
+				} else if(biobanksize.equalsIgnoreCase("10 - 100 Samples")) {
+		        	 bbsize = "1";
+				} else if(biobanksize.equalsIgnoreCase("100 - 1.000 Samples")) {
+		        	 bbsize = "2";
+				} else if(biobanksize.equalsIgnoreCase("1.000 - 10.000 Samples")) {
+		        	 bbsize = "3";
+				} else if(biobanksize.equalsIgnoreCase("10.000 - 100.000 Samples")) {
+		        	 bbsize = "4";
+				} else if(biobanksize.equalsIgnoreCase("100.000 - 1.000.000 Samples")) {
+		        	 bbsize = "5";
+				} else if(biobanksize.equalsIgnoreCase("1.000.000 - 10.000.000 Samples")) {
+		        	 bbsize = "6";
+				} else if(biobanksize.equalsIgnoreCase("10.000.000 - 100.000.000 Samples")) {
+		        	 bbsize = "7";
+				} else if(biobanksize.equalsIgnoreCase("100.000.000 - 1.000.000.000 Samples")) {
+		        	 bbsize = "8";
+				}
+				
+				DynamicQuery subQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+				Criterion criterion_sub = RestrictionsFactoryUtil.like("searchindexkey", "biobankSize");
+				criterion_sub = RestrictionsFactoryUtil.and(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", bbsize));
+				subQuery.add(criterion_sub);
+				subQuery.setProjection(ProjectionFactoryUtil.property("organisationid"));
+				
+				if(criterion == null) {
+					criterion = PropertyFactoryUtil.forName("organisationid").in(subQuery);
+				} else {
+					criterion = RestrictionsFactoryUtil.and(criterion, PropertyFactoryUtil.forName("organisationid").in(subQuery));
+				}
+			}
+			// Add Criterion to the Main Biobank Query
 			if(criterion != null) {
 				dynamicQuery.add(criterion);
 			}
@@ -235,5 +285,196 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 			ex.printStackTrace();
 		}
 		return array;
+	}
+	
+	private Criterion createSearchDiagnosisString(String diagnosisavailable) {
+		Criterion criterion_sub = null;
+		if(diagnosisavailable.contains("--")) {
+			diagnosisavailable = diagnosisavailable.replaceAll("\\(.*\\)", "").replaceAll("-", "").trim();
+			criterion_sub = RestrictionsFactoryUtil.like("searchindexvalue", "%" + diagnosisavailable + "%");
+			if(diagnosisavailable.startsWith("B")) {
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%A00-B%"));
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%B*%"));
+			} else if(diagnosisavailable.startsWith("D")) {
+				try {
+					int number = Integer.parseInt(diagnosisavailable.substring(1, 3));
+					if(number >= 50) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D50-D%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D*%"));
+					} else {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%C00-D%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D*%"));
+					}
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			} else if(diagnosisavailable.startsWith("H")) {
+				try {
+					int number = Integer.parseInt(diagnosisavailable.substring(1, 3));
+					if(number >= 60) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H60-H%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H*%"));
+					} else {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H00-H%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H*%"));
+					}
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			} else if(diagnosisavailable.startsWith("T")) {
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%S00-T%"));
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%T*%"));
+			} else if(diagnosisavailable.startsWith("Y")) {
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%V00-Y%"));
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%Y*%"));
+			} else {
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + diagnosisavailable.charAt(0) + "00-%"));
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + diagnosisavailable.charAt(0) + "*%"));
+			}
+			criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%icd:*%"));
+		} else if(diagnosisavailable.contains("-")) {
+			// Subgroup
+			try {
+				diagnosisavailable = diagnosisavailable.replaceAll("\\(.*\\)", "").replaceAll("- ", "").trim();
+				// Search for individual codes
+				String startletter = String.valueOf(diagnosisavailable.charAt(0));
+				int number = Integer.parseInt(diagnosisavailable.substring(1, 3));
+				int number_stop = Integer.parseInt(diagnosisavailable.substring(5, 7));
+				for(int counter = (int)Math.floor(number/10.); counter <= (int)Math.floor(number_stop/10.); counter ++) {
+					if(criterion_sub == null) {
+						criterion_sub = RestrictionsFactoryUtil.like("searchindexvalue", "%" + startletter + counter + "%");
+					} else {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + startletter + counter + "%"));
+					}
+				}
+				// Search for groups
+				if(diagnosisavailable.startsWith("B")) {
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%A00-B%"));
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%B*%"));
+				} else if(diagnosisavailable.startsWith("D")) {
+					try {
+						if(number >= 50) {
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D50-D%"));
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D*%"));
+						} else {
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%C00-D%"));
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D*%"));
+						}
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				} else if(diagnosisavailable.startsWith("H")) {
+					try {
+						if(number >= 60) {
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H60-H%"));
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H*%"));
+						} else {
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H00-H%"));
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H*%"));
+						}
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				} else if(diagnosisavailable.startsWith("T")) {
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%S00-T%"));
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%T*%"));
+				} else if(diagnosisavailable.startsWith("Y")) {
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%V00-Y%"));
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%Y*%"));
+				} else {
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + diagnosisavailable.charAt(0) + "00-%"));
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + diagnosisavailable.charAt(0) + "*%"));
+				}
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%icd:*%"));
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			if(diagnosisavailable.contains("ICD*")) {
+				criterion_sub = RestrictionsFactoryUtil.like("searchindexvalue", "%icd:%");
+			} else if(diagnosisavailable.contains("OMIM*")) {
+				criterion_sub = RestrictionsFactoryUtil.like("searchindexvalue", "%omim:%");
+			} else if(diagnosisavailable.contains("ORPHA*")) {
+				criterion_sub = RestrictionsFactoryUtil.like("searchindexvalue", "%orphanet%");
+			} else {
+				// Gruppen Search
+				try {
+					diagnosisavailable = diagnosisavailable.replaceAll("\\(.*\\)", "").replaceAll("- ", "").trim();
+					//System.out.println("++++++" + startletter + number + diagnosisavailable.substring(4, 5) + number_stop);
+					String startletter = String.valueOf(diagnosisavailable.charAt(0));
+					String endletter = diagnosisavailable.substring(4, 5);
+					int number = Integer.parseInt(diagnosisavailable.substring(1, 3));
+					int number_stop = Integer.parseInt(diagnosisavailable.substring(5, 7));
+					// Search for individual codes
+					if(startletter.equalsIgnoreCase(endletter)) {
+						for(int counter = (int)Math.floor(number/10.); counter <= (int)Math.floor(number_stop/10.); counter ++) {
+							if(criterion_sub == null) {
+								criterion_sub = RestrictionsFactoryUtil.like("searchindexvalue", "%" + startletter + counter + "%");
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + startletter + counter + "%"));
+							}
+						}
+					} else {
+						for(int counter = (int)Math.floor(number/10.); counter <= 9; counter ++) {
+							if(criterion_sub == null) {
+								criterion_sub = RestrictionsFactoryUtil.like("searchindexvalue", "%" + startletter + counter + "%");
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + startletter + counter + "%"));
+							}
+						}
+						for(int counter = 0; counter <= (int)Math.floor(number_stop/10.); counter ++) {
+							if(criterion_sub == null) {
+								criterion_sub = RestrictionsFactoryUtil.like("searchindexvalue", "%" + startletter + counter + "%");
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + startletter + counter + "%"));
+							}
+						}
+					}
+					// Search for groups
+					if(diagnosisavailable.startsWith("B")) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%A00-B%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%B*%"));
+					} else if(diagnosisavailable.startsWith("D")) {
+						try {
+							if(number >= 50) {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D50-D%"));
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D*%"));
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%C00-D%"));
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%D*%"));
+							}
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					} else if(diagnosisavailable.startsWith("H")) {
+						try {
+							if(number >= 60) {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H60-H%"));
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H*%"));
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H00-H%"));
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%H*%"));
+							}
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					} else if(diagnosisavailable.startsWith("T")) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%S00-T%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%T*%"));
+					} else if(diagnosisavailable.startsWith("Y")) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%V00-Y%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%Y*%"));
+					} else {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + diagnosisavailable.charAt(0) + "00-%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%" + diagnosisavailable.charAt(0) + "*%"));
+					}
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("searchindexvalue", "%icd:*%"));
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		System.out.println("|" + diagnosisavailable + "|");
+		return criterion_sub;
 	}
 }

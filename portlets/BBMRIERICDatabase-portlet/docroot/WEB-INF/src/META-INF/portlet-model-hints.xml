@@ -25,6 +25,15 @@
 		</field>
 		<field name="UUID" type="String" />
 	</model>
+	<model name="at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscription">
+		<field name="diseasediscriptionId" type="long" />
+		<field name="diseasecode" type="String" />
+		<field name="diseasegroup" type="String" />
+		<field name="diseasediscription" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="root" type="boolean" />
+	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.SearchIndex">
 		<field name="searchid" type="long" />
 		<field name="organisationid" type="long" />

@@ -219,7 +219,7 @@ if(!biobankId.equalsIgnoreCase("")) {
 			<%
 		}
 		%>
-		Biobank Type: <%= biobank.getBiobanktype() %><br>
+		Biobank Type: <%= biobank.getBiobanktype().replaceAll(", biobankContact", "").replaceAll("biobankContact", "") %><br>
 		<%
 		String biobankPartnerCharterSigned = "not specified";
 		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankPartnerCharterSigned");

@@ -11,6 +11,14 @@ create table bbmrieric.biobank (
 	UUID VARCHAR(75) null
 );
 
+create table bbmrieric.diseasediscription (
+	diseasediscriptionId LONG not null primary key,
+	diseasecode VARCHAR(75) null,
+	diseasegroup VARCHAR(75) null,
+	diseasediscription TEXT null,
+	root BOOLEAN
+);
+
 create table bbmrieric.searchindex (
 	searchid LONG not null primary key,
 	organisationid LONG,

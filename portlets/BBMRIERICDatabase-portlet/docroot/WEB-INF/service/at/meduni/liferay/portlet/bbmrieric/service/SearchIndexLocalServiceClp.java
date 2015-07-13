@@ -149,6 +149,10 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 		_methodName26 = "getBiobankSize";
 
 		_methodParameterTypes26 = new String[] {  };
+
+		_methodName27 = "getTypeOfBiobank";
+
+		_methodParameterTypes27 = new String[] {  };
 	}
 
 	@Override
@@ -905,6 +909,29 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 		return (java.lang.String[])ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.lang.String[] getTypeOfBiobank() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName27,
+					_methodParameterTypes27, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String[])ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -958,4 +985,6 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 	private String[] _methodParameterTypes25;
 	private String _methodName26;
 	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
 }

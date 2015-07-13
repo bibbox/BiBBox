@@ -17,6 +17,7 @@ package at.meduni.liferay.portlet.bbmrieric.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -26,8 +27,10 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionList;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 
+import at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscription;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
 import at.meduni.liferay.portlet.bbmrieric.model.impl.SearchIndexImpl;
+import at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.base.SearchIndexLocalServiceBaseImpl;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.SearchIndexPersistence;
@@ -148,18 +151,28 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	
 	public String[] getDiagnosisAvailable() {
 		try {
-			DynamicQuery dynamicQuery = SearchIndexLocalServiceUtil.dynamicQuery();
+			/*DynamicQuery dynamicQuery = SearchIndexLocalServiceUtil.dynamicQuery();
 			Criterion criterion = RestrictionsFactoryUtil.like("searchindexkey", "diagnosisAvailable");
 			dynamicQuery.add(criterion);
 			ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
 			projectionList.add(ProjectionFactoryUtil.groupProperty("searchindexvalue"));
-		    //projectionList.add(ProjectionFactoryUtil.rowCount());
 		    dynamicQuery.setProjection(projectionList);
-		    List<Object> results = results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+		    List<Object> results = results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);*/
 		    /*for(Object result : results) {
 		    	System.out.println(result);	
 		    }*/
-		    return results.toArray(new String[results.size()]);
+			LinkedHashSet<String> resultcleand = new LinkedHashSet<String>();
+			List<DiseaseDiscription> diseasediscriptions = DiseaseDiscriptionLocalServiceUtil.getRootEntrys();
+			for(DiseaseDiscription diseasediscription : diseasediscriptions) {
+				resultcleand.add(diseasediscription.getDiseasecode() + " (" + diseasediscription.getDiseasediscription() + ")");
+				for(DiseaseDiscription diseasediscription_sub : DiseaseDiscriptionLocalServiceUtil.getDiseaseDiscriptionByGroup(diseasediscription.getDiseasecode())) {
+					resultcleand.add("- " + diseasediscription_sub.getDiseasecode() + " (" + diseasediscription_sub.getDiseasediscription() + ")");
+					for(DiseaseDiscription diseasediscription_sub_sub : DiseaseDiscriptionLocalServiceUtil.getDiseaseDiscriptionByGroup(diseasediscription_sub.getDiseasecode())) {
+						resultcleand.add("-- " + diseasediscription_sub_sub.getDiseasecode() + " (" + diseasediscription_sub_sub.getDiseasediscription() + ")");
+					}
+				}
+			}
+		    return resultcleand.toArray(new String[resultcleand.size()]);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -196,5 +209,32 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 		"1.000.000 - 10.000.000 Samples",
 		"10.000.000 - 100.000.000 Samples",
 		"100.000.000 - 1.000.000.000 Samples"};	
+	}
+	
+	public String[] getTypeOfBiobank() {
+		try {
+			HashSet<String> resultcleand = new HashSet<String>();
+			DynamicQuery dynamicQuery = SearchIndexLocalServiceUtil.dynamicQuery();
+			Criterion criterion = RestrictionsFactoryUtil.like("searchindexkey", "objectClass");
+			dynamicQuery.add(criterion);
+			ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+			projectionList.add(ProjectionFactoryUtil.groupProperty("searchindexvalue"));
+		    dynamicQuery.setProjection(projectionList);
+		    List<Object> results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+		    for(Object result : results) {
+		    	for(String split : result.toString().split(", ")) {
+		    		if(split.equalsIgnoreCase("biobankContact")) {
+		    			continue;
+		    		}
+		    		if(!resultcleand.contains(split)) {
+		    			resultcleand.add(split);
+		    		}
+		    	}
+		    }
+		    return resultcleand.toArray(new String[resultcleand.size()]);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return new String[] {};
 	}
 }

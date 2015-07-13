@@ -24,6 +24,18 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionModelImpl">
+		<attributes>
+			<id name="diseasediscriptionId" />
+			<basic name="diseasecode" />
+			<basic name="diseasegroup" />
+			<basic name="diseasediscription" />
+			<basic name="root" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.SearchIndexModelImpl">
 		<attributes>
 			<id name="searchid" />
@@ -40,6 +52,10 @@
 	</mapped-superclass>
 	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl" name="BioBank">
 		<table name="bbmrieric.biobank" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionImpl" name="DiseaseDiscription">
+		<table name="bbmrieric.diseasediscription" />
 		<attributes />
 	</entity>
 	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.SearchIndexImpl" name="SearchIndex">

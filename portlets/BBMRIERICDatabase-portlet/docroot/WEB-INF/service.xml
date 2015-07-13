@@ -51,4 +51,25 @@
             <finder-column comparator="!=" name="UUID"></finder-column>
         </finder>
 	</entity>
+	<entity name="DiseaseDiscription" local-service="true" remote-service="false" table="bbmrieric.diseasediscription">
+		<!-- PK fields -->
+		<column name="diseasediscriptionId" type="long" primary="true" />
+		<!-- Other fields -->
+		<column name="diseasecode" type="String" />
+		<column name="diseasegroup" type="String" />
+		<column name="diseasediscription" type="String" />
+		<column name="root" type="boolean" />
+		<order by="asc">
+			<order-column name="diseasegroup" />
+		</order>
+		<finder name="DiseaseCode" return-type="DiseaseDiscription">
+            <finder-column name="diseasecode"></finder-column>
+        </finder>
+        <finder name="DiseaseGroup" return-type="Collection">
+            <finder-column name="diseasegroup"></finder-column>
+        </finder>
+        <finder name="Root" return-type="Collection">
+            <finder-column name="root"></finder-column>
+        </finder>
+	</entity>
 </service-builder>

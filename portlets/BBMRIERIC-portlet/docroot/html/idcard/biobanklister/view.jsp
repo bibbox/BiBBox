@@ -13,7 +13,16 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <portlet:defineObjects />
-
+<style>
+<!--
+.optionitelic {
+	font-style: italic;
+}
+.optionbold {
+	font-weight: bold;
+}
+-->
+</style>
 <%
 long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "13320"));
 
@@ -48,14 +57,19 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 	if (biobanksize_filter == null) {
 		biobanksize_filter = "";
 	}
+	String typeofbiobank = httpRequest.getParameter(renderResponse.getNamespace() + "typeofbiobank");
+	if (typeofbiobank == null) {
+		typeofbiobank = "";
+	}
 
 	String[] materialtypes = SearchIndexLocalServiceUtil.getMaterialTypes();
 	String[] diagnosisavailable = SearchIndexLocalServiceUtil.getDiagnosisAvailable();
 	String[] country = SearchIndexLocalServiceUtil.getCountry();
 	String[] biobanksize = SearchIndexLocalServiceUtil.getBiobankSize();
+	String[] typeofbiobanks = SearchIndexLocalServiceUtil.getTypeOfBiobank();
  
-	//String url = themeDisplay.getURLPortal()+"/web/guest/id-card-beta?biobankId=";
-	String url = themeDisplay.getURLPortal()+"/web/guest/bbmri-eric?biobankId=";
+	String url = themeDisplay.getURLPortal()+"/web/guest/id-card-beta?biobankId=";
+	//String url = themeDisplay.getURLPortal()+"/web/guest/bbmri-eric?biobankId=";
 	
 	String searchurl = themeDisplay.getURLPortal() + layout.getFriendlyURL(); //"/web/guest/bbmri-eric";//
 %>
@@ -80,8 +94,16 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 			<aui:column columnWidth="25" >
 				<aui:select inlineLabel="left" name="diagnosisavailable" label="Diagnosis Available:" cssClass="rdc-filter-input"  >
 					<aui:option value="" selected='<%= diagnosisavailable_filter.equalsIgnoreCase("") ? true : false %>'></aui:option>
-					<% for (String string : diagnosisavailable) { %>
-					<aui:option value="<%= string %>" selected="<%= diagnosisavailable_filter.equalsIgnoreCase(string) ? true : false %>">
+					<% for (String string : diagnosisavailable) { 
+						String cssclass = "";
+						if(string.startsWith("--")) {
+							cssclass = "optionitelic";
+						}
+						if(!string.startsWith("-")) {
+							cssclass = "optionbold";
+						}
+						%>
+					<aui:option cssClass="<%= cssclass %>" value="<%= string %>" selected="<%= diagnosisavailable_filter.equalsIgnoreCase(string) ? true : false %>">
 						<%= string.replaceAll("urn:miriam:", "") %>
 					</aui:option>
 					<% } %>
@@ -97,7 +119,7 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 					<% } %>
 				</aui:select>
 			</aui:column>
-			<!--<aui:column columnWidth="25" last="true" >
+			<aui:column columnWidth="25" last="true" >
 				<aui:select inlineLabel="left" name="biobanksize" label="Biobank Size:" cssClass="rdc-filter-input"  >
 					<aui:option value="" selected='<%= biobanksize_filter.equalsIgnoreCase("") ? true : false %>'></aui:option>
 					<% for (String string : biobanksize) { %>
@@ -106,8 +128,18 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 					</aui:option>
 					<% } %>
 				</aui:select>
-			</aui:column>-->
-			<aui:column columnWidth="15" first="true">
+			</aui:column>
+			<aui:column columnWidth="25" first="true" >
+				<aui:select inlineLabel="left" name="typeofbiobank" label="Type of Biobank:" cssClass="rdc-filter-input"  >
+					<aui:option value="" selected='<%= typeofbiobank.equalsIgnoreCase("") ? true : false %>'></aui:option>
+					<% for (String string : typeofbiobanks) { %>
+					<aui:option value="<%= string %>" selected="<%= typeofbiobank.equalsIgnoreCase(string) ? true : false %>">
+						<%= string %>
+					</aui:option>
+					<% } %>
+				</aui:select>
+			</aui:column>
+			<aui:column columnWidth="15" >
 				<aui:button-row cssClass="searchFiledFloat">
 					<aui:button type="submit" value="Filter" />
 				</aui:button-row>
@@ -118,13 +150,14 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 </aui:form>
 
 <%
-String textresult = BioBankLocalServiceUtil.getBioBankFiltered(keywords, country_filter, materialtype, diagnosisavailable_filter, biobanksize_filter);
+String textresult = BioBankLocalServiceUtil.getBioBankFiltered(keywords, country_filter, materialtype, diagnosisavailable_filter, biobanksize_filter, typeofbiobank);
 //String textresult = BioBankLocalServiceUtil.getBioBankByCountryInJavaScriptArray("");
 %>
 
 <div id="myDataTable"></div>
 
 <br />
+
 
 <% if(textresult.equalsIgnoreCase("No Results for the query.")) { %>
 <h4><%= textresult %></h4>

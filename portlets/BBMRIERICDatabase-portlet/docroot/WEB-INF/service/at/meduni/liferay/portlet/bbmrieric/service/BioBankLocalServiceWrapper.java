@@ -324,9 +324,10 @@ public class BioBankLocalServiceWrapper implements BioBankLocalService,
 	@Override
 	public java.lang.String getBioBankFiltered(java.lang.String keyword,
 		java.lang.String country, java.lang.String materialtype,
-		java.lang.String diagnosisavailable, java.lang.String biobanksize) {
+		java.lang.String diagnosisavailable, java.lang.String biobanksize,
+		java.lang.String typeofbiobank) {
 		return _bioBankLocalService.getBioBankFiltered(keyword, country,
-			materialtype, diagnosisavailable, biobanksize);
+			materialtype, diagnosisavailable, biobanksize, typeofbiobank);
 	}
 
 	/**

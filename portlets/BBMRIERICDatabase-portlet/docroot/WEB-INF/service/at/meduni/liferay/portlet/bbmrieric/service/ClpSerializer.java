@@ -15,6 +15,7 @@
 package at.meduni.liferay.portlet.bbmrieric.service;
 
 import at.meduni.liferay.portlet.bbmrieric.model.BioBankClp;
+import at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscriptionClp;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndexClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -107,6 +108,10 @@ public class ClpSerializer {
 			return translateInputBioBank(oldModel);
 		}
 
+		if (oldModelClassName.equals(DiseaseDiscriptionClp.class.getName())) {
+			return translateInputDiseaseDiscription(oldModel);
+		}
+
 		if (oldModelClassName.equals(SearchIndexClp.class.getName())) {
 			return translateInputSearchIndex(oldModel);
 		}
@@ -130,6 +135,16 @@ public class ClpSerializer {
 		BioBankClp oldClpModel = (BioBankClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getBioBankRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputDiseaseDiscription(BaseModel<?> oldModel) {
+		DiseaseDiscriptionClp oldClpModel = (DiseaseDiscriptionClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getDiseaseDiscriptionRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -166,6 +181,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl")) {
 			return translateOutputBioBank(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionImpl")) {
+			return translateOutputDiseaseDiscription(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -259,6 +279,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.meduni.liferay.portlet.bbmrieric.NoSuchDiseaseDiscriptionException")) {
+			return new at.meduni.liferay.portlet.bbmrieric.NoSuchDiseaseDiscriptionException();
+		}
+
+		if (className.equals(
 					"at.meduni.liferay.portlet.bbmrieric.NoSuchSearchIndexException")) {
 			return new at.meduni.liferay.portlet.bbmrieric.NoSuchSearchIndexException();
 		}
@@ -272,6 +297,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setBioBankRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputDiseaseDiscription(
+		BaseModel<?> oldModel) {
+		DiseaseDiscriptionClp newModel = new DiseaseDiscriptionClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setDiseaseDiscriptionRemoteModel(oldModel);
 
 		return newModel;
 	}

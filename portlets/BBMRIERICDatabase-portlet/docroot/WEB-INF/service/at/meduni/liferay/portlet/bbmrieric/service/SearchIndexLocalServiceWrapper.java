@@ -353,6 +353,11 @@ public class SearchIndexLocalServiceWrapper implements SearchIndexLocalService,
 		return _searchIndexLocalService.getBiobankSize();
 	}
 
+	@Override
+	public java.lang.String[] getTypeOfBiobank() {
+		return _searchIndexLocalService.getTypeOfBiobank();
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

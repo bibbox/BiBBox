@@ -17,6 +17,7 @@ package at.meduni.liferay.portlet.bbmrieric.service.base;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalService;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.BioBankPersistence;
+import at.meduni.liferay.portlet.bbmrieric.service.persistence.DiseaseDiscriptionPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.SearchIndexPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -319,6 +320,44 @@ public abstract class SearchIndexLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the disease discription local service.
+	 *
+	 * @return the disease discription local service
+	 */
+	public at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService getDiseaseDiscriptionLocalService() {
+		return diseaseDiscriptionLocalService;
+	}
+
+	/**
+	 * Sets the disease discription local service.
+	 *
+	 * @param diseaseDiscriptionLocalService the disease discription local service
+	 */
+	public void setDiseaseDiscriptionLocalService(
+		at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService diseaseDiscriptionLocalService) {
+		this.diseaseDiscriptionLocalService = diseaseDiscriptionLocalService;
+	}
+
+	/**
+	 * Returns the disease discription persistence.
+	 *
+	 * @return the disease discription persistence
+	 */
+	public DiseaseDiscriptionPersistence getDiseaseDiscriptionPersistence() {
+		return diseaseDiscriptionPersistence;
+	}
+
+	/**
+	 * Sets the disease discription persistence.
+	 *
+	 * @param diseaseDiscriptionPersistence the disease discription persistence
+	 */
+	public void setDiseaseDiscriptionPersistence(
+		DiseaseDiscriptionPersistence diseaseDiscriptionPersistence) {
+		this.diseaseDiscriptionPersistence = diseaseDiscriptionPersistence;
+	}
+
+	/**
 	 * Returns the search index local service.
 	 *
 	 * @return the search index local service
@@ -536,6 +575,10 @@ public abstract class SearchIndexLocalServiceBaseImpl
 	protected at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalService bioBankLocalService;
 	@BeanReference(type = BioBankPersistence.class)
 	protected BioBankPersistence bioBankPersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService.class)
+	protected at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService diseaseDiscriptionLocalService;
+	@BeanReference(type = DiseaseDiscriptionPersistence.class)
+	protected DiseaseDiscriptionPersistence diseaseDiscriptionPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalService.class)
 	protected at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalService searchIndexLocalService;
 	@BeanReference(type = SearchIndexPersistence.class)

@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.BioBank" />
+	<import class="at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscription" />
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.SearchIndex" />
 	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl" table="bbmrieric.biobank">
 		<cache usage="read-write" />
@@ -18,6 +19,16 @@
 		<property name="biobankdescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biobankjuristicperson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="UUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionImpl" table="bbmrieric.diseasediscription">
+		<cache usage="read-write" />
+		<id name="diseasediscriptionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="diseasecode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseasegroup" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseasediscription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="root" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.SearchIndexImpl" table="bbmrieric.searchindex">
 		<cache usage="read-write" />
