@@ -82,7 +82,7 @@
 			<finder-column name="organizationId"></finder-column>
 		</finder>
 	</entity>
-	<entity name="DiseaseMatrix" local-service="true" remote-service="false" table="rdconnect.diseasematrix">
+	<entity name="DiseaseMatrix" local-service="true" remote-service="true" table="rdconnect.diseasematrix">
 		<column name="diseasematrixId" primary="true" type="long"></column>
 		<column name="organizationId" type="long"></column>
 		<column name="diseasename" type="String"></column>

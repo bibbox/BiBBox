@@ -283,7 +283,15 @@ public class KdssmpConfigurationClp extends BaseModelImpl<KdssmpConfiguration>
 	public int compareTo(KdssmpConfiguration kdssmpConfiguration) {
 		int value = 0;
 
-		value = getOptionkey().compareTo(kdssmpConfiguration.getOptionkey());
+		if (getConfigurationId() < kdssmpConfiguration.getConfigurationId()) {
+			value = -1;
+		}
+		else if (getConfigurationId() > kdssmpConfiguration.getConfigurationId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;

@@ -288,6 +288,11 @@ public class EventLocalServiceUtil {
 		return getService().getEventsForPatient(patientId);
 	}
 
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event getEventForLayout(
+		long plid) {
+		return getService().getEventForLayout(plid);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -17,7 +17,13 @@ package at.graz.meduni.liferay.portlet.bibbox.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.portlet.ActionRequest;
+
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration;
+import at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolTypeConfigurationImpl;
 import at.graz.meduni.liferay.portlet.bibbox.service.base.SymbolTypeConfigurationLocalServiceBaseImpl;
 
 /**
@@ -54,8 +60,28 @@ public class SymbolTypeConfigurationLocalServiceImpl
 		try {
 			return symbolTypeConfigurationPersistence.findByFieldSymbolType(symboltype);
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.service.impl.SymbolTypeConfigurationLocalServiceImpl::getSymbolTypeConfigurationBySymbolType] Info no SymbolTypeConfiguration found for search: (" + symboltype + ".");
+			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [indo] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.service.impl.SymbolTypeConfigurationLocalServiceImpl::getSymbolTypeConfigurationBySymbolType] Info no SymbolTypeConfiguration found for search: (" + symboltype + ".");
 		}
 		return null; 
+	}
+	
+	public SymbolTypeConfiguration symbolTypeConfigurationFromRequest(ActionRequest request) {
+		try {
+			SymbolTypeConfigurationImpl symboltypeconfiguration = new SymbolTypeConfigurationImpl();
+			long symboltypeconfigurationId = ParamUtil.getLong(request, "symboltypeconfigurationId");
+			if(symboltypeconfigurationId == 0) {
+				symboltypeconfiguration.setSymboltypeconfigurationId(CounterLocalServiceUtil.increment(SymbolTypeConfiguration.class.getName()));
+			} else {
+				symboltypeconfiguration.setSymboltypeconfigurationId(symboltypeconfigurationId);
+			}
+			symboltypeconfiguration.setSymboltype(ParamUtil.getString(request, "symboltype"));
+			symboltypeconfiguration.setTemplate(ParamUtil.getString(request, "template"));
+			symboltypeconfiguration.setSymboliconconfiguration(ParamUtil.getString(request, "symboliconconfiguration"));
+			return symboltypeconfiguration;
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServicesDatabase-portlet::at.graz.meduni.liferay.portlet.bibbox.service.impl.SymbolTypeConfigurationLocalServiceImpl::symbolTypeConfigurationFromRequest] Error creating SymbolTypeConfiguration from request.");
+			ex.printStackTrace();
+		}
+		return null;
 	}
 }

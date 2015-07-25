@@ -21,9 +21,15 @@
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration">
 		<field name="configurationId" type="long" />
-		<field name="scope" type="String" />
-		<field name="optionkey" type="String" />
-		<field name="optionvalue" type="String" />
+		<field name="scope" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="optionkey" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="optionvalue" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfiguration">
 		<field name="parameterconfigurationId" type="long" />

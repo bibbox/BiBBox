@@ -2,6 +2,7 @@ create index IX_7AAAB69A on kdssmp.configuration (scope);
 create index IX_EA96A820 on kdssmp.configuration (scope, optionkey);
 create index IX_DE0A46F2 on kdssmp.configuration (scope, optionvalue);
 
+create index IX_23F56E7 on kdssmp.event (layoutId);
 create index IX_EE52D922 on kdssmp.event (patientId);
 
 create index IX_BA6D04D on kdssmp.eventdata (eventId);

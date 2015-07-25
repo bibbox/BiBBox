@@ -120,13 +120,11 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName67 = "getConfigurationOptionValue";
+		_methodName67 = "symbolKdssmpConfigurationFromRequest";
 
-		_methodParameterTypes67 = new String[] {
-				"java.lang.String", "java.lang.String"
-			};
+		_methodParameterTypes67 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName68 = "getConfigurationOptions";
+		_methodName68 = "getConfigurationOptionValue";
 
 		_methodParameterTypes68 = new String[] {
 				"java.lang.String", "java.lang.String"
@@ -134,7 +132,13 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 
 		_methodName69 = "getConfigurationOptions";
 
-		_methodParameterTypes69 = new String[] { "java.lang.String" };
+		_methodParameterTypes69 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName70 = "getConfigurationOptions";
+
+		_methodParameterTypes70 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -246,18 +250,23 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 
 		if (_methodName67.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
-			return KdssmpConfigurationLocalServiceUtil.getConfigurationOptionValue((java.lang.String)arguments[0],
-				(java.lang.String)arguments[1]);
+			return KdssmpConfigurationLocalServiceUtil.symbolKdssmpConfigurationFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
 		if (_methodName68.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
-			return KdssmpConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0],
+			return KdssmpConfigurationLocalServiceUtil.getConfigurationOptionValue((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+			return KdssmpConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
 			return KdssmpConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0]);
 		}
 
@@ -308,4 +317,6 @@ public class KdssmpConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes68;
 	private String _methodName69;
 	private String[] _methodParameterTypes69;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
 }

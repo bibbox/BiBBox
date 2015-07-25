@@ -285,6 +285,11 @@ public class SymbolTypeConfigurationLocalServiceUtil {
 		return getService().getSymbolTypeConfigurationBySymbolType(symboltype);
 	}
 
+	public static at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration symbolTypeConfigurationFromRequest(
+		javax.portlet.ActionRequest request) {
+		return getService().symbolTypeConfigurationFromRequest(request);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

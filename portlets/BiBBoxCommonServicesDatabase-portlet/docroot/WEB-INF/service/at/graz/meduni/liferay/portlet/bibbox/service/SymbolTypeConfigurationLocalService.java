@@ -252,4 +252,7 @@ public interface SymbolTypeConfigurationLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration getSymbolTypeConfigurationBySymbolType(
 		java.lang.String symboltype);
+
+	public at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration symbolTypeConfigurationFromRequest(
+		javax.portlet.ActionRequest request);
 }

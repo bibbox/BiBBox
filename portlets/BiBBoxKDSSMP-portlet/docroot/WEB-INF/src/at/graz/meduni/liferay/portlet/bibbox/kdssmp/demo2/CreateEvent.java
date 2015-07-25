@@ -10,12 +10,17 @@ import javax.portlet.ActionResponse;
 
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo.Patient;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpPatient;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventDataLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpParameterConfigurationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpPatientLocalServiceUtil;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -65,13 +70,53 @@ public class CreateEvent extends MVCPortlet {
 			Layout layout = createLayout(pagetitle, eventtype, organizationId, userId, groupId);
 			
 			// Create Event
-			Event event = EventLocalServiceUtil.createNewEvent(layout.getLayoutId(), patient.getPatientId(), eventdate, eventtype);
+			Event event = EventLocalServiceUtil.createNewEvent(layout.getPlid(), patient.getPatientId(), eventdate, eventtype);
+			
+			// Add Event Data
+			createEventData(request, patient.getPatientId(), event.getEventId());
 			
 		} catch (Exception ex) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxKDSSMP-portlet::at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2.CreateEvent::createEvent] Error in creating Event.");
 			ex.printStackTrace();
 		}
 	} 
+	
+	private void createEventData(ActionRequest request, long patientId, long eventId) {
+		try {
+			String eventtype = ParamUtil.getString(request, "eventType");
+			List<KdssmpConfiguration> parameters = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", eventtype);
+			for(KdssmpConfiguration parameter : parameters) {
+				KdssmpParameterConfiguration parameterconfig = KdssmpParameterConfigurationLocalServiceUtil.getKdssmpParameterConfiguration(Long.parseLong(parameter.getOptionvalue()));
+				String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
+				String value = "";
+				System.out.println(parameterconfig.getDatatype());
+				if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
+					value = ParamUtil.getString(request, id);
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
+					value = ParamUtil.getString(request, id);
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
+					value = ParamUtil.getString(request, id);
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
+					value = ParamUtil.getString(request, id);
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
+					String[] items = ParamUtil.getParameterValues(request, id);
+					boolean first = true;
+					for(String item : items){
+						if(!first) {
+							value += ";";
+						} else {
+							first = false;
+						}
+						value += "\"" + item + "\"";
+					}
+				}
+				EventDataLocalServiceUtil.createNewEventData(eventId, patientId, String.valueOf(parameterconfig.getParameterconfigurationId()), value);
+			}
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxKDSSMP-portlet::at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2.CreateEvent::createEvent] Error in creating Event.");
+			ex.printStackTrace();
+		}
+	}
 	
 	private Layout createLayout(String pagetitle, String eventtype, long organizationId, long userId, long groupId) {
 		try {

@@ -38,6 +38,7 @@
 		<column name="symboltype" type="String"></column>
 		<column name="template" type="String"></column>
 		<column name="symboliconconfiguration" type="String"></column>
+		<column name="symboldiscription" type="String"></column>
 		<finder name="FieldSymbolType" return-type="SymbolTypeConfiguration" >
 			<finder-column name="symboltype" />
 		</finder>

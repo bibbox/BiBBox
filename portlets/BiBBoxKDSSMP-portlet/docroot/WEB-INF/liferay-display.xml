@@ -18,5 +18,9 @@
 		<portlet id="view-patient"></portlet>
 		<portlet id="counseling-group"></portlet>
 		<portlet id="list-events"></portlet>
+		<portlet id="view-event-data"></portlet>
+	</category>
+	<category name="kDSSMP Configuration">
+		<portlet id="kdssmp-configuration"></portlet>
 	</category>
 </display>

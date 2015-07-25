@@ -263,6 +263,13 @@ public interface KdssmpConfigurationLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* @param request
+	* @return
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration symbolKdssmpConfigurationFromRequest(
+		javax.portlet.ActionRequest request);
+
+	/**
 	* @param scope
 	* @param value
 	* @return

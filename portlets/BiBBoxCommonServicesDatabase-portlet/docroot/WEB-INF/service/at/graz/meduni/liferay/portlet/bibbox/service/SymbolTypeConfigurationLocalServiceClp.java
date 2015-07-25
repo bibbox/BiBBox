@@ -119,6 +119,10 @@ public class SymbolTypeConfigurationLocalServiceClp
 		_methodName19 = "getSymbolTypeConfigurationBySymbolType";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String" };
+
+		_methodName20 = "symbolTypeConfigurationFromRequest";
+
+		_methodParameterTypes20 = new String[] { "javax.portlet.ActionRequest" };
 	}
 
 	@Override
@@ -706,6 +710,31 @@ public class SymbolTypeConfigurationLocalServiceClp
 		return (at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration symbolTypeConfigurationFromRequest(
+		javax.portlet.ActionRequest request) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] { ClpSerializer.translateInput(request) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -745,4 +774,6 @@ public class SymbolTypeConfigurationLocalServiceClp
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

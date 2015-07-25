@@ -299,6 +299,12 @@ public class EventLocalServiceWrapper implements EventLocalService,
 		return _eventLocalService.getEventsForPatient(patientId);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event getEventForLayout(
+		long plid) {
+		return _eventLocalService.getEventForLayout(plid);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

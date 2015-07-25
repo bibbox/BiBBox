@@ -36,7 +36,7 @@ public class SymbolTypeConfigurationCacheModel implements CacheModel<SymbolTypeC
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{symboltypeconfigurationId=");
 		sb.append(symboltypeconfigurationId);
@@ -46,6 +46,8 @@ public class SymbolTypeConfigurationCacheModel implements CacheModel<SymbolTypeC
 		sb.append(template);
 		sb.append(", symboliconconfiguration=");
 		sb.append(symboliconconfiguration);
+		sb.append(", symboldiscription=");
+		sb.append(symboldiscription);
 		sb.append("}");
 
 		return sb.toString();
@@ -78,6 +80,13 @@ public class SymbolTypeConfigurationCacheModel implements CacheModel<SymbolTypeC
 			symbolTypeConfigurationImpl.setSymboliconconfiguration(symboliconconfiguration);
 		}
 
+		if (symboldiscription == null) {
+			symbolTypeConfigurationImpl.setSymboldiscription(StringPool.BLANK);
+		}
+		else {
+			symbolTypeConfigurationImpl.setSymboldiscription(symboldiscription);
+		}
+
 		symbolTypeConfigurationImpl.resetOriginalValues();
 
 		return symbolTypeConfigurationImpl;
@@ -89,6 +98,7 @@ public class SymbolTypeConfigurationCacheModel implements CacheModel<SymbolTypeC
 		symboltype = objectInput.readUTF();
 		template = objectInput.readUTF();
 		symboliconconfiguration = objectInput.readUTF();
+		symboldiscription = objectInput.readUTF();
 	}
 
 	@Override
@@ -116,10 +126,18 @@ public class SymbolTypeConfigurationCacheModel implements CacheModel<SymbolTypeC
 		else {
 			objectOutput.writeUTF(symboliconconfiguration);
 		}
+
+		if (symboldiscription == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(symboldiscription);
+		}
 	}
 
 	public long symboltypeconfigurationId;
 	public String symboltype;
 	public String template;
 	public String symboliconconfiguration;
+	public String symboldiscription;
 }

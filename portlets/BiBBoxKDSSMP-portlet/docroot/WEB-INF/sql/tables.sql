@@ -17,9 +17,9 @@ create table kdssmp.arameteroptions (
 
 create table kdssmp.configuration (
 	configurationId LONG not null primary key,
-	scope VARCHAR(75) null,
-	optionkey VARCHAR(75) null,
-	optionvalue VARCHAR(75) null
+	scope TEXT null,
+	optionkey TEXT null,
+	optionvalue TEXT null
 );
 
 create table kdssmp.event (

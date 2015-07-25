@@ -75,7 +75,6 @@ public class rdconnectServiceImpl extends rdconnectServiceBaseImpl {
 
 	}
 	
-	@Override
 	@JSONWebService(value = "updateregbb2", method = "POST")
 	public void updateregbb2(long organizationId, Map jsondata) {
 		System.out.println("-updateRegbb2-3-" + organizationId + "  -  " + jsondata.size());

@@ -98,9 +98,19 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 String headerlogo = request.getContextPath() + "/images/logo_mib.gif";
 String headerimage = request.getContextPath() + "/images/header.gif";
+
+String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
 
 <div style="background-image: url('<%= headerimage %>');background-repeat: repeat-x;"><img alt="logo" src="<%= headerlogo %>" width="252px" /></div>
+
+<aui:button-row>
+	<portlet:renderURL var="listTemplatesURL">
+		<portlet:param name="mvcPath" value="/html/symbol/symbolconfiguration/listtemplates.jsp" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
+	</portlet:renderURL>
+	<aui:button value="list-templates" onClick="<%= listTemplatesURL.toString() %>"/>
+</aui:button-row>
 
 <div class="event-container-text-right" style="background-color: #DBDBDB; ">
 	<div class="event-date">12/05/2014</div>

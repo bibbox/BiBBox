@@ -14,13 +14,21 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.portlet.ActionRequest;
+
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ParamUtil;
 
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpConfigurationImpl;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.base.KdssmpConfigurationLocalServiceBaseImpl;
+import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration;
 
 /**
  * The implementation of the kdssmp configuration local service.
@@ -44,6 +52,12 @@ public class KdssmpConfigurationLocalServiceImpl
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil} to access the kdssmp configuration local service.
 	 */
 	/**
+	 * Error Format for date
+	 */
+	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	
+	/**
 	 * 
 	 * @param scope
 	 * @param key
@@ -52,7 +66,38 @@ public class KdssmpConfigurationLocalServiceImpl
 	 * @throws SystemException 
 	 */
 	public KdssmpConfiguration getConfigurationOption(String scope, String key) throws NoSuchKdssmpConfigurationException, SystemException {
-		return kdssmpConfigurationPersistence.findByoptionfinder(scope, key);
+		try {
+			return kdssmpConfigurationPersistence.findByoptionfinder(scope, key);
+		} catch(Exception ex) {
+			System.out.println("Cound not find Configuration for Parameters (" + scope + " " + key + ")");
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public KdssmpConfiguration symbolKdssmpConfigurationFromRequest(ActionRequest request) {
+		try {
+			KdssmpConfigurationImpl kdssmpconfiguration = new KdssmpConfigurationImpl();
+			long configurationId = ParamUtil.getLong(request, "configurationId");
+			if(configurationId == 0) {
+				kdssmpconfiguration.setConfigurationId(CounterLocalServiceUtil.increment(KdssmpConfiguration.class.getName()));
+			} else {
+				kdssmpconfiguration.setConfigurationId(configurationId);
+			}
+			System.out.println(kdssmpconfiguration.getConfigurationId() + " - " + ParamUtil.getString(request, "scope") + " - " + ParamUtil.getString(request, "optionkey") + " - " + ParamUtil.getString(request, "optionvalue"));
+			kdssmpconfiguration.setScope(ParamUtil.getString(request, "scope"));
+			kdssmpconfiguration.setOptionkey(ParamUtil.getString(request, "optionkey"));
+			kdssmpconfiguration.setOptionvalue(ParamUtil.getString(request, "optionvalue"));
+			return kdssmpconfiguration;
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxKDSSMP-portlet::at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.impl.KdssmpConfigurationLocalServiceImpl::symbolKdssmpConfigurationFromRequest] Error creating KDSSMPConfiguration.");
+			ex.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**

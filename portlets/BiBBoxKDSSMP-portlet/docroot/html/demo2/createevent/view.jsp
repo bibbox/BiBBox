@@ -36,10 +36,20 @@ if(organization != null) {
 	for(KdssmpConfiguration event_option : event_options) {
 		String tag = event_option.getOptionkey();
 		String text = KdssmpConfigurationLocalServiceUtil.getConfigurationOption("Display", event_option.getOptionkey()).getOptionvalue();
-		if(eventcreation.containsKey(event_option.getOptionvalue())) {
-			eventcreation.put(event_option.getOptionvalue(), eventcreation.get(event_option.getOptionvalue()) + "<br>" + "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + tag + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + text + "</i>");
-		} else {
-			eventcreation.put(event_option.getOptionvalue(), "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + tag + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + text + "</i>");
+		KdssmpPatient patient = KdssmpPatientLocalServiceUtil.getPatientForOrganization(organizationId);
+		List<Event> events = EventLocalServiceUtil.getEventsForPatient(patient.getPatientId());
+		if(events.size() == 0 && event_option.getOptionvalue().equalsIgnoreCase("Erstdiagnose")) {
+			if(eventcreation.containsKey(event_option.getOptionvalue())) {
+				eventcreation.put(event_option.getOptionvalue(), eventcreation.get(event_option.getOptionvalue()) + "<br>" + "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + tag + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + text + "</i>");
+			} else {
+				eventcreation.put(event_option.getOptionvalue(), "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + tag + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + text + "</i>");
+			}
+		} else if(events.size() != 0 && !event_option.getOptionvalue().equalsIgnoreCase("Erstdiagnose")) {
+			if(eventcreation.containsKey(event_option.getOptionvalue())) {
+				eventcreation.put(event_option.getOptionvalue(), eventcreation.get(event_option.getOptionvalue()) + "<br>" + "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + tag + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + text + "</i>");
+			} else {
+				eventcreation.put(event_option.getOptionvalue(), "&nbsp<i id=\"kdssmpcreateevent\" tag=\"" + tag + "\" style=\"cursor: pointer;\" class=\"fa fa-plus\">&nbsp" + text + "</i>");
+			}
 		}
 	}
 	for(String key : eventcreation.keySet()) {

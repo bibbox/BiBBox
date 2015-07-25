@@ -106,17 +106,17 @@ public class GeneralInformationLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation"
 			};
 
-		_methodName58 = "getBeanIdentifier";
+		_methodName60 = "getBeanIdentifier";
 
-		_methodParameterTypes58 = new String[] {  };
+		_methodParameterTypes60 = new String[] {  };
 
-		_methodName59 = "setBeanIdentifier";
+		_methodName61 = "setBeanIdentifier";
 
-		_methodParameterTypes59 = new String[] { "java.lang.String" };
+		_methodParameterTypes61 = new String[] { "java.lang.String" };
 
-		_methodName64 = "getGeneralInformationByOrganization";
+		_methodName66 = "getGeneralInformationByOrganization";
 
-		_methodParameterTypes64 = new String[] { "long" };
+		_methodParameterTypes66 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -208,20 +208,20 @@ public class GeneralInformationLocalServiceClpInvoker {
 			return GeneralInformationLocalServiceUtil.updateGeneralInformation((at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation)arguments[0]);
 		}
 
-		if (_methodName58.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return GeneralInformationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName59.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			GeneralInformationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return GeneralInformationLocalServiceUtil.getGeneralInformationByOrganization(((Long)arguments[0]).longValue());
 		}
 
@@ -260,10 +260,10 @@ public class GeneralInformationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName58;
-	private String[] _methodParameterTypes58;
-	private String _methodName59;
-	private String[] _methodParameterTypes59;
-	private String _methodName64;
-	private String[] _methodParameterTypes64;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
 }

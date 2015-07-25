@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.impl;
 
 import java.util.LinkedHashMap;
 
+import at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration;
 import at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalServiceUtil;
@@ -54,36 +55,54 @@ public class SymbolConfigurationLocalServiceImpl
 			
 			// Substitution
 			symbol = symbol.replaceAll("§basecoler§", symbolconfig.getBasecolor());
-			symbol = symbol.replaceAll("§link§", icons.get("link"));
+			symbol = symbol.replaceAll("§link§", getStringFromMap(icons, "link"));
+			symbol = symbol.replaceAll("§date§", getStringFromMap(icons, "date"));
 			
-			symbol = symbol.replaceAll("§ASUMMETY§", icons.get("ASUMMETY"));
-			symbol = symbol.replaceAll("§ACODE§", icons.get("ACODE"));
-			symbol = symbol.replaceAll("§A2§", symbolconfig.getIconsForKeyPosition(icons.get("A2"), "A2").getHTMLIcon());
-			String a2elementcolor = symbolconfig.getIconsForKeyPosition(icons.get("A2"), "A2").getElementcolor();
-			if(a2elementcolor.equalsIgnoreCase("")) {
-				a2elementcolor = symbolconfig.getBasecolor();
-			}
-			symbol = symbol.replaceAll("§A2ELEMENTCOLOR§", a2elementcolor);
-			if(icons.get("A4").startsWith("TEXT:")) {
-				symbol = symbol.replaceAll("§A4-1§", icons.get("A4").replaceAll("TEXT:", ""));
+			symbol = symbol.replaceAll("§ASUMMETY§", getStringFromMap(icons, "ASUMMETY"));
+			symbol = symbol.replaceAll("§ACODE§", getStringFromMap(icons, "ACODE"));
+			
+			symbol = replaceIconStrings(symbol, "A1", "A1", symbolconfig, icons);
+			symbol = replaceIconStrings(symbol, "A2", "A2", symbolconfig, icons);
+			
+			if(getStringFromMap(icons, "A4").startsWith("TEXT:")) {
+				symbol = symbol.replaceAll("§A4-1§", getStringFromMap(icons, "A4").replaceAll("TEXT:", ""));
 			} else {
 				int a4counter = 1;
-				for(String a4 : icons.get("A4").split("§")) {
-					symbol = symbol.replaceAll("§A4-" + a4counter + "§", symbolconfig.getIconsForKeyPosition(a4, "A4").getHTMLIcon());
-					String a4elementcolor = symbolconfig.getIconsForKeyPosition(a4, "A4").getElementcolor();
-					if(a4elementcolor.equalsIgnoreCase("")) {
-						a4elementcolor = symbolconfig.getBasecolor();
-					}
-					symbol = symbol.replaceAll("§A4-" + a4counter + "ELEMENTCOLOR§", a4elementcolor);
+				for(String a4 : getStringFromMap(icons, "A4").split("§")) {
+					symbol = replaceIconStrings(symbol, "A4", "A4-" + a4counter, symbolconfig, icons);
 				}
 				a4counter ++;
 			}
 			
 		} catch (Exception ex) {
-			
+			System.err.println("ERROR: getSymbol");
+			ex.printStackTrace();
 		}
 		symbol = replaceRemainingPlacholders(symbol);
 		return symbol;
+	}
+	
+	private String replaceIconStrings(String symbol, String positionkey, String replacepositionkey, SymbolConfiguration symbolconfig, LinkedHashMap<String, String> icons) {
+		IconConfiguration iconconfiguration = symbolconfig.getIconsForKeyPosition(getStringFromMap(icons, positionkey), positionkey);
+		if(iconconfiguration != null) {
+			symbol = symbol.replaceAll("§" + replacepositionkey + "§", iconconfiguration.getHTMLIcon());
+			String a2elementcolor = iconconfiguration.getElementcolor();
+			if(a2elementcolor.equalsIgnoreCase("")) {
+				a2elementcolor = symbolconfig.getBasecolor();
+			}
+			symbol = symbol.replaceAll("§" + replacepositionkey + "ELEMENTCOLOR§", a2elementcolor);
+		} else {
+			System.out.println("iconconfiguration Null");
+		}
+		return symbol;
+	}
+	
+	private String getStringFromMap(LinkedHashMap<String, String> icons, String key) {
+		String returnvalue = "";
+		if(icons.containsKey(key)) {
+			returnvalue = icons.get(key);
+		}
+		return returnvalue;
 	}
 	
 	private String replaceRemainingPlacholders(String template) {
@@ -96,6 +115,7 @@ public class SymbolConfigurationLocalServiceImpl
 		template = template.replaceAll("§A2§", "");
 		template = template.replaceAll("§A2ELEMENTCOLOR§", "");
 		template = template.replaceAll("§A3§", "");
+		template = template.replaceAll("§A4§", "");
 		template = template.replaceAll("§A4-1§", "");
 		template = template.replaceAll("§A4-2§", "");
 		template = template.replaceAll("§A4-3§", "");

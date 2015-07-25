@@ -63,5 +63,6 @@
 		<property name="symboltype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="template" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="symboliconconfiguration" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="symboldiscription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

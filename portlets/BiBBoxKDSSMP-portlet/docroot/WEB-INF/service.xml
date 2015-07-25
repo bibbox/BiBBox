@@ -65,6 +65,9 @@
 		<finder name="Patient" return-type="Collection">
 			<finder-column name="patientId" />
 		</finder>
+		<finder name="LayoutId" return-type="Event">
+			<finder-column name="layoutId" />
+		</finder>
 	</entity>
 	<entity name="KdssmpConfiguration" local-service="true" remote-service="false"  table="kdssmp.configuration" >
 		<!-- PK fields -->
@@ -75,7 +78,7 @@
 		<column name="optionvalue" type="String" />
 		<!-- Order -->
 		<order by="asc">
-			<order-column name="optionkey" />
+			<order-column name="configurationId" />
 		</order>
 		<!-- Finder methods -->
 		<finder name="optionfinder" return-type="KdssmpConfiguration">

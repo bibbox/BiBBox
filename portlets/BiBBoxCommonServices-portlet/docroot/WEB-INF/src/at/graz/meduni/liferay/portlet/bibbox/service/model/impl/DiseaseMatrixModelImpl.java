@@ -16,8 +16,10 @@ package at.graz.meduni.liferay.portlet.bibbox.service.model.impl;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixModel;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixSoap;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,8 +35,10 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,6 +54,7 @@ import java.util.Map;
  * @see at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixModel
  * @generated
  */
+@JSON(strict = true)
 public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 	implements DiseaseMatrixModel {
 	/*
@@ -88,6 +93,54 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 			true);
 	public static long ORGANIZATIONID_COLUMN_BITMASK = 1L;
 	public static long DISEASEMATRIXID_COLUMN_BITMASK = 2L;
+
+	/**
+	 * Converts the soap model instance into a normal model instance.
+	 *
+	 * @param soapModel the soap model instance to convert
+	 * @return the normal model instance
+	 */
+	public static DiseaseMatrix toModel(DiseaseMatrixSoap soapModel) {
+		if (soapModel == null) {
+			return null;
+		}
+
+		DiseaseMatrix model = new DiseaseMatrixImpl();
+
+		model.setDiseasematrixId(soapModel.getDiseasematrixId());
+		model.setOrganizationId(soapModel.getOrganizationId());
+		model.setDiseasename(soapModel.getDiseasename());
+		model.setPatientcount(soapModel.getPatientcount());
+		model.setGene(soapModel.getGene());
+		model.setOrphanumber(soapModel.getOrphanumber());
+		model.setIcd10(soapModel.getIcd10());
+		model.setOmim(soapModel.getOmim());
+		model.setSynonym(soapModel.getSynonym());
+		model.setModifieddate(soapModel.getModifieddate());
+
+		return model;
+	}
+
+	/**
+	 * Converts the soap model instances into normal model instances.
+	 *
+	 * @param soapModels the soap model instances to convert
+	 * @return the normal model instances
+	 */
+	public static List<DiseaseMatrix> toModels(DiseaseMatrixSoap[] soapModels) {
+		if (soapModels == null) {
+			return null;
+		}
+
+		List<DiseaseMatrix> models = new ArrayList<DiseaseMatrix>(soapModels.length);
+
+		for (DiseaseMatrixSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix"));
 
@@ -205,6 +258,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		}
 	}
 
+	@JSON
 	@Override
 	public long getDiseasematrixId() {
 		return _diseasematrixId;
@@ -215,6 +269,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_diseasematrixId = diseasematrixId;
 	}
 
+	@JSON
 	@Override
 	public long getOrganizationId() {
 		return _organizationId;
@@ -237,6 +292,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		return _originalOrganizationId;
 	}
 
+	@JSON
 	@Override
 	public String getDiseasename() {
 		if (_diseasename == null) {
@@ -252,6 +308,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_diseasename = diseasename;
 	}
 
+	@JSON
 	@Override
 	public String getPatientcount() {
 		if (_patientcount == null) {
@@ -267,6 +324,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_patientcount = patientcount;
 	}
 
+	@JSON
 	@Override
 	public String getGene() {
 		if (_gene == null) {
@@ -282,6 +340,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_gene = gene;
 	}
 
+	@JSON
 	@Override
 	public String getOrphanumber() {
 		if (_orphanumber == null) {
@@ -297,6 +356,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_orphanumber = orphanumber;
 	}
 
+	@JSON
 	@Override
 	public String getIcd10() {
 		if (_icd10 == null) {
@@ -312,6 +372,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_icd10 = icd10;
 	}
 
+	@JSON
 	@Override
 	public String getOmim() {
 		if (_omim == null) {
@@ -327,6 +388,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_omim = omim;
 	}
 
+	@JSON
 	@Override
 	public String getSynonym() {
 		if (_synonym == null) {
@@ -342,6 +404,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_synonym = synonym;
 	}
 
+	@JSON
 	@Override
 	public Date getModifieddate() {
 		return _modifieddate;

@@ -108,7 +108,9 @@ for(KdssmpPatient patient : patients) {
 	icons.put("link", orgPath);
 	
 	List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroup().getGroupId());
+	System.out.println("***************" + usergrouprolles.size() + " " + organization.getName());
 	for (UserGroupRole ugr : usergrouprolles) {
+		System.out.println("*************** " + ugr.getRoleId() + "==" + optionsRoleForUser_cfg);
 		if(ugr.getRoleId() == optionsRoleForUser_cfg) {
 			icons.put("A4", "stared");
 		}

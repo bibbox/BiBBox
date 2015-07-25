@@ -290,6 +290,15 @@ public class KdssmpConfigurationLocalServiceUtil {
 	}
 
 	/**
+	* @param request
+	* @return
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration symbolKdssmpConfigurationFromRequest(
+		javax.portlet.ActionRequest request) {
+		return getService().symbolKdssmpConfigurationFromRequest(request);
+	}
+
+	/**
 	* @param scope
 	* @param value
 	* @return

@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventImpl;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.base.EventLocalServiceBaseImpl;
 
 /**
@@ -45,13 +46,15 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalServiceUtil} to access the event local service.
 	 */
 	public Event createNewEvent(long layoutId, long patientId, Date eventdate, String eventtype) {
-		EventImpl event = null;
+		Event event = null;
 		try {
 			event = new EventImpl();
-			event.setEventId(layoutId);
+			event.setEventId(CounterLocalServiceUtil.increment(Event.class.getName()));
 			event.setPatientId(patientId);
 			event.setEventdate(eventdate);
 			event.setEventtype(eventtype);
+			event.setLayoutId(layoutId);
+			event = EventLocalServiceUtil.addEvent(event);
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -60,5 +63,14 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 	
 	public List<Event> getEventsForPatient(long patientId) throws SystemException {
 		return eventPersistence.findByPatient(patientId);
+	}
+	
+	public Event getEventForLayout(long plid) {
+		try {
+			return eventPersistence.findByLayoutId(plid);
+		} catch(Exception ex) {
+			
+		}
+		return null;
 	}
 }

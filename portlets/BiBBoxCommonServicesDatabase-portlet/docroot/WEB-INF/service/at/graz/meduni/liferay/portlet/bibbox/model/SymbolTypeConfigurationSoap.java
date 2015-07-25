@@ -35,6 +35,7 @@ public class SymbolTypeConfigurationSoap implements Serializable {
 		soapModel.setSymboltype(model.getSymboltype());
 		soapModel.setTemplate(model.getTemplate());
 		soapModel.setSymboliconconfiguration(model.getSymboliconconfiguration());
+		soapModel.setSymboldiscription(model.getSymboldiscription());
 
 		return soapModel;
 	}
@@ -122,8 +123,17 @@ public class SymbolTypeConfigurationSoap implements Serializable {
 		_symboliconconfiguration = symboliconconfiguration;
 	}
 
+	public String getSymboldiscription() {
+		return _symboldiscription;
+	}
+
+	public void setSymboldiscription(String symboldiscription) {
+		_symboldiscription = symboldiscription;
+	}
+
 	private long _symboltypeconfigurationId;
 	private String _symboltype;
 	private String _template;
 	private String _symboliconconfiguration;
+	private String _symboldiscription;
 }

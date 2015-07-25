@@ -470,4 +470,86 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>view-event-data</portlet-name>
+		<display-name>View Event Data</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2.ViewEventData
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/demo2/vieweventdata/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/demo2/vieweventdata/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>View Event Data</title>
+			<short-title>View Event Data</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>kdssmp-configuration</portlet-name>
+		<display-name>Kdssmp Configuration</display-name>
+		<portlet-class>
+			at.graz.meduni.liferay.portlet.bibbox.kdssmp.configuration.KDSSMPConfiguration
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/configuration/kdssmpconfiguration/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/configuration/kdssmpconfiguration/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Kdssmp Configuration</title>
+			<short-title>Kdssmp Configuration</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

@@ -81,8 +81,9 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event"),
 			true);
-	public static long PATIENTID_COLUMN_BITMASK = 1L;
-	public static long EVENTDATE_COLUMN_BITMASK = 2L;
+	public static long LAYOUTID_COLUMN_BITMASK = 1L;
+	public static long PATIENTID_COLUMN_BITMASK = 2L;
+	public static long EVENTDATE_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event"));
 
@@ -204,7 +205,19 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public void setLayoutId(long layoutId) {
+		_columnBitmask |= LAYOUTID_COLUMN_BITMASK;
+
+		if (!_setOriginalLayoutId) {
+			_setOriginalLayoutId = true;
+
+			_originalLayoutId = _layoutId;
+		}
+
 		_layoutId = layoutId;
+	}
+
+	public long getOriginalLayoutId() {
+		return _originalLayoutId;
 	}
 
 	@Override
@@ -338,6 +351,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		eventModelImpl._setOriginalPatientId = false;
 
+		eventModelImpl._originalLayoutId = eventModelImpl._layoutId;
+
+		eventModelImpl._setOriginalLayoutId = false;
+
 		eventModelImpl._columnBitmask = 0;
 	}
 
@@ -432,6 +449,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private long _originalPatientId;
 	private boolean _setOriginalPatientId;
 	private long _layoutId;
+	private long _originalLayoutId;
+	private boolean _setOriginalLayoutId;
 	private Date _eventdate;
 	private String _eventtype;
 	private long _columnBitmask;

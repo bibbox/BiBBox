@@ -117,6 +117,10 @@ public class SymbolTypeConfigurationLocalServiceClpInvoker {
 		_methodName64 = "getSymbolTypeConfigurationBySymbolType";
 
 		_methodParameterTypes64 = new String[] { "java.lang.String" };
+
+		_methodName65 = "symbolTypeConfigurationFromRequest";
+
+		_methodParameterTypes65 = new String[] { "javax.portlet.ActionRequest" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -225,6 +229,11 @@ public class SymbolTypeConfigurationLocalServiceClpInvoker {
 			return SymbolTypeConfigurationLocalServiceUtil.getSymbolTypeConfigurationBySymbolType((java.lang.String)arguments[0]);
 		}
 
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			return SymbolTypeConfigurationLocalServiceUtil.symbolTypeConfigurationFromRequest((javax.portlet.ActionRequest)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -266,4 +275,6 @@ public class SymbolTypeConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes59;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
 }

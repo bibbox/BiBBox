@@ -123,6 +123,10 @@ public class EventLocalServiceClp implements EventLocalService {
 		_methodName20 = "getEventsForPatient";
 
 		_methodParameterTypes20 = new String[] { "long" };
+
+		_methodName21 = "getEventForLayout";
+
+		_methodParameterTypes21 = new String[] { "long" };
 	}
 
 	@Override
@@ -738,6 +742,30 @@ public class EventLocalServiceClp implements EventLocalService {
 		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event getEventForLayout(
+		long plid) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] { plid });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -779,4 +807,6 @@ public class EventLocalServiceClp implements EventLocalService {
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

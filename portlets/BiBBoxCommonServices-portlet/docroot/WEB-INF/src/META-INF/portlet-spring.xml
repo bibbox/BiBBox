@@ -5,6 +5,7 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.BiobankPanelAssessmentService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.BiobankPanelAssessmentServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.BiobankPanelAssessmentPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.BiobankPanelAssessmentPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.DiseaseMatrixLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.DiseaseMatrixServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.GeneralInformationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.GeneralInformationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.GeneralInformationPersistenceImpl" parent="basePersistence" />

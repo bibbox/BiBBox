@@ -122,13 +122,11 @@ public class KdssmpConfigurationLocalServiceClp
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName20 = "getConfigurationOptionValue";
+		_methodName20 = "symbolKdssmpConfigurationFromRequest";
 
-		_methodParameterTypes20 = new String[] {
-				"java.lang.String", "java.lang.String"
-			};
+		_methodParameterTypes20 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName21 = "getConfigurationOptions";
+		_methodName21 = "getConfigurationOptionValue";
 
 		_methodParameterTypes21 = new String[] {
 				"java.lang.String", "java.lang.String"
@@ -136,7 +134,13 @@ public class KdssmpConfigurationLocalServiceClp
 
 		_methodName22 = "getConfigurationOptions";
 
-		_methodParameterTypes22 = new String[] { "java.lang.String" };
+		_methodParameterTypes22 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName23 = "getConfigurationOptions";
+
+		_methodParameterTypes23 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -735,6 +739,31 @@ public class KdssmpConfigurationLocalServiceClp
 	}
 
 	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration symbolKdssmpConfigurationFromRequest(
+		javax.portlet.ActionRequest request) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] { ClpSerializer.translateInput(request) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration getConfigurationOptionValue(
 		java.lang.String scope, java.lang.String value)
 		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException,
@@ -742,8 +771,8 @@ public class KdssmpConfigurationLocalServiceClp
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] {
 						ClpSerializer.translateInput(scope),
 						
@@ -781,8 +810,8 @@ public class KdssmpConfigurationLocalServiceClp
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
 					new Object[] {
 						ClpSerializer.translateInput(scope),
 						
@@ -820,8 +849,8 @@ public class KdssmpConfigurationLocalServiceClp
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22,
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
 					new Object[] { ClpSerializer.translateInput(scope) });
 		}
 		catch (Throwable t) {
@@ -892,4 +921,6 @@ public class KdssmpConfigurationLocalServiceClp
 	private String[] _methodParameterTypes21;
 	private String _methodName22;
 	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
 }

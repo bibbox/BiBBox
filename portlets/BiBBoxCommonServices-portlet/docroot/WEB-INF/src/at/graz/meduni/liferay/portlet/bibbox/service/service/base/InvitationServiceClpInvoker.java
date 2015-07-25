@@ -24,24 +24,24 @@ import java.util.Arrays;
  */
 public class InvitationServiceClpInvoker {
 	public InvitationServiceClpInvoker() {
-		_methodName42 = "getBeanIdentifier";
+		_methodName44 = "getBeanIdentifier";
 
-		_methodParameterTypes42 = new String[] {  };
+		_methodParameterTypes44 = new String[] {  };
 
-		_methodName43 = "setBeanIdentifier";
+		_methodName45 = "setBeanIdentifier";
 
-		_methodParameterTypes43 = new String[] { "java.lang.String" };
+		_methodParameterTypes45 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName42.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
 			return InvitationServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName43.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
+		if (_methodName45.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
 			InvitationServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -50,8 +50,8 @@ public class InvitationServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName42;
-	private String[] _methodParameterTypes42;
-	private String _methodName43;
-	private String[] _methodParameterTypes43;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
+	private String _methodName45;
+	private String[] _methodParameterTypes45;
 }

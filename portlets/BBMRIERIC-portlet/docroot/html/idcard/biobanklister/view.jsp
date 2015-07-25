@@ -23,6 +23,39 @@
 }
 -->
 </style>
+
+<style>
+a.tooltip_size {outline:none; }
+a.tooltip_size strong {line-height:30px;}
+a.tooltip_size:hover {text-decoration:none;} 
+a.tooltip_size span {
+    z-index:10;
+    display:none; 
+    padding:14px 20px;
+    margin-top:25px; 
+    margin-left:-160px;
+    width:250px; 
+    line-height:16px;
+}
+a.tooltip_size:hover span{
+    display:inline; 
+    position:absolute; 
+    border:2px solid #FFF;  
+    color:#EEE;
+    background:#184b8a;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+    
+/*CSS3 extras*/
+a.tooltip_size span
+{
+    border-radius:2px;        
+    box-shadow: 0px 0px 8px 4px #666;
+    /*opacity: 0.8;*/
+}
+</style>
+
 <%
 long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "13320"));
 
@@ -79,7 +112,7 @@ long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue
 		<aui:fieldset>
 		 
 			<aui:column columnWidth="100" first="true">
-				<input style="width: 420px;" type="text" placeholder="search by: Disease Name, Gene, ORPHACODE,  ICD10, OMIM ..." value="<%= keywords %>" name="SEARCH" size="60">
+				<input style="width: 458px;" type="text" placeholder="search by: BioBank Name ..." value="<%= keywords %>" name="SEARCH" size="100">
 			</aui:column>
 			<aui:column columnWidth="25" first="true">
 				<aui:select inlineLabel="left" name="materialtype" label="Material Types:" cssClass="rdc-filter-input"  >
@@ -175,16 +208,6 @@ AUI().use(
     		sortable: true,
     	},
     	{
-    		key: 'BB_ID',
-    		label: 'BB ID',
-    		sortable: true,
-    		allowHTML: true,
-    		formatter: function (o) {
-    			//encodeURIComponent
-    			return '<a href="<%= url %>' + encodeURIComponent(o.data.BB_ID) + '">' + o.data.BB_ID.replace('bbmri-eric:', '') + '</a>';
-    		}
-    	},
-    	{
     		key: 'Name',
     		sortable: true,
     		allowHTML: true,
@@ -198,8 +221,53 @@ AUI().use(
     		sortable: true
     	},
     	{
-    		key: 'Size',
+    		key: 'Diagnosis',
     		sortable: true
+    	},
+    	{
+    		key: 'Size',
+    		sortable: true,
+    		allowHTML: true, 
+    		formatter: function (o) {
+    			//encodeURIComponent
+    			var sizeexpond = o.data.Size
+    			var returnvalue = '<a href="#" class="tooltip_size">' + '10<sup>' + sizeexpond + '</sup>';
+    			returnvalue += '<span><strong>Biobank Size: > 10<sup>' + sizeexpond + '</sup></strong><br />';
+    			switch(sizeexpond) {
+    				case '0':
+    					returnvalue += '< 10';
+    					break;
+    				case '1':
+    					returnvalue += '10 - 100';
+    					break;
+    				case '2':
+    					returnvalue += '100 - 1.000';
+    					break;
+    				case '3':
+    					returnvalue += '1.000 - 10.000';
+    					break;
+    				case '4':
+    					returnvalue += '10.000 - 100.000';
+    					break;
+    				case '5':
+    					returnvalue += '100.000 - 1.000.000';
+    					break;
+    				case '6':
+    					returnvalue += '1.000.000 - 10.000.000';
+    					break;
+    				case '7':
+    					returnvalue += '10.000.000 - 100.000.000';
+    					break;
+    				case '8':
+    					returnvalue += '100.000.000 - 1.000.000.000';
+    					break;
+    				default:
+    					returnvalue += 'NA';
+    					break;
+    			}
+    			returnvalue += ' Samples</span></a>';
+    			return returnvalue;
+    		}
     	},
     	{
     		key: 'Juristic Person',

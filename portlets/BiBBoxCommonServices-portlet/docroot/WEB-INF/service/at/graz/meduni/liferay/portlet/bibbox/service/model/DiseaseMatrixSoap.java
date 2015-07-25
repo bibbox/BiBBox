@@ -21,9 +21,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services.
+ * This class is used by SOAP remote services, specifically {@link at.graz.meduni.liferay.portlet.bibbox.service.service.http.DiseaseMatrixServiceSoap}.
  *
  * @author reihsr
+ * @see at.graz.meduni.liferay.portlet.bibbox.service.service.http.DiseaseMatrixServiceSoap
  * @generated
  */
 public class DiseaseMatrixSoap implements Serializable {

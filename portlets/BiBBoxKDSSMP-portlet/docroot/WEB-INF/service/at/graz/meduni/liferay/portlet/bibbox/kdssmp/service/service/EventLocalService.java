@@ -257,4 +257,8 @@ public interface EventLocalService extends BaseLocalService,
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event> getEventsForPatient(
 		long patientId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event getEventForLayout(
+		long plid);
 }

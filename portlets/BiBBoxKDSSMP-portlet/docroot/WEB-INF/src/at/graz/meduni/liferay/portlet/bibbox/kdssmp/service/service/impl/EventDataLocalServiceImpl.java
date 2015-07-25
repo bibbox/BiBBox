@@ -48,7 +48,7 @@ public class EventDataLocalServiceImpl extends EventDataLocalServiceBaseImpl {
 		try {
 			eventdata = new EventDataImpl();
 			eventdata.setEventdataId(CounterLocalServiceUtil.increment(EventData.class.getName()));
-			//eventdata.setEventlayoutId(eventId);
+			eventdata.setEventId(eventId);
 			eventdata.setPatientId(patientId);
 			eventdata.setOntology(key);
 			eventdata.setValue(value);
@@ -61,9 +61,9 @@ public class EventDataLocalServiceImpl extends EventDataLocalServiceBaseImpl {
 		return null;
 	}
 	
-	public EventData getEventDataByOntology(long eventlayoutId, String ontology) {
+	public EventData getEventDataByOntology(long eventId, String ontology) {
 		try {
-			return eventDataPersistence.findByDataByOntology(eventlayoutId, ontology);
+			return eventDataPersistence.findByDataByOntology(eventId, ontology);
 		} catch (NoSuchEventDataException e) {
 			// TODO Auto-generated catch block
 			System.err.println("No Data for event found.");

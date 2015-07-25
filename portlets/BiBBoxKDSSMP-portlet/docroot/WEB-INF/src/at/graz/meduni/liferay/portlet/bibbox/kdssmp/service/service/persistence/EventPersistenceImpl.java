@@ -569,6 +569,223 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 	}
 
 	private static final String _FINDER_COLUMN_PATIENT_PATIENTID_2 = "event.patientId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_LAYOUTID = new FinderPath(EventModelImpl.ENTITY_CACHE_ENABLED,
+			EventModelImpl.FINDER_CACHE_ENABLED, EventImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByLayoutId",
+			new String[] { Long.class.getName() },
+			EventModelImpl.LAYOUTID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_LAYOUTID = new FinderPath(EventModelImpl.ENTITY_CACHE_ENABLED,
+			EventModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByLayoutId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the event where layoutId = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException} if it could not be found.
+	 *
+	 * @param layoutId the layout ID
+	 * @return the matching event
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException if a matching event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event findByLayoutId(long layoutId)
+		throws NoSuchEventException, SystemException {
+		Event event = fetchByLayoutId(layoutId);
+
+		if (event == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("layoutId=");
+			msg.append(layoutId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEventException(msg.toString());
+		}
+
+		return event;
+	}
+
+	/**
+	 * Returns the event where layoutId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param layoutId the layout ID
+	 * @return the matching event, or <code>null</code> if a matching event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event fetchByLayoutId(long layoutId) throws SystemException {
+		return fetchByLayoutId(layoutId, true);
+	}
+
+	/**
+	 * Returns the event where layoutId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param layoutId the layout ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching event, or <code>null</code> if a matching event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event fetchByLayoutId(long layoutId, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { layoutId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_LAYOUTID,
+					finderArgs, this);
+		}
+
+		if (result instanceof Event) {
+			Event event = (Event)result;
+
+			if ((layoutId != event.getLayoutId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_EVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_LAYOUTID_LAYOUTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(layoutId);
+
+				List<Event> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LAYOUTID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"EventPersistenceImpl.fetchByLayoutId(long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					Event event = list.get(0);
+
+					result = event;
+
+					cacheResult(event);
+
+					if ((event.getLayoutId() != layoutId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LAYOUTID,
+							finderArgs, event);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LAYOUTID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Event)result;
+		}
+	}
+
+	/**
+	 * Removes the event where layoutId = &#63; from the database.
+	 *
+	 * @param layoutId the layout ID
+	 * @return the event that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Event removeByLayoutId(long layoutId)
+		throws NoSuchEventException, SystemException {
+		Event event = findByLayoutId(layoutId);
+
+		return remove(event);
+	}
+
+	/**
+	 * Returns the number of events where layoutId = &#63;.
+	 *
+	 * @param layoutId the layout ID
+	 * @return the number of matching events
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByLayoutId(long layoutId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_LAYOUTID;
+
+		Object[] finderArgs = new Object[] { layoutId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_EVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_LAYOUTID_LAYOUTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(layoutId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_LAYOUTID_LAYOUTID_2 = "event.layoutId = ?";
 
 	public EventPersistenceImpl() {
 		setModelClass(Event.class);
@@ -583,6 +800,9 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 	public void cacheResult(Event event) {
 		EntityCacheUtil.putResult(EventModelImpl.ENTITY_CACHE_ENABLED,
 			EventImpl.class, event.getPrimaryKey(), event);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LAYOUTID,
+			new Object[] { event.getLayoutId() }, event);
 
 		event.resetOriginalValues();
 	}
@@ -639,6 +859,8 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(event);
 	}
 
 	@Override
@@ -649,6 +871,48 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 		for (Event event : events) {
 			EntityCacheUtil.removeResult(EventModelImpl.ENTITY_CACHE_ENABLED,
 				EventImpl.class, event.getPrimaryKey());
+
+			clearUniqueFindersCache(event);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(Event event) {
+		if (event.isNew()) {
+			Object[] args = new Object[] { event.getLayoutId() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LAYOUTID, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LAYOUTID, args, event);
+		}
+		else {
+			EventModelImpl eventModelImpl = (EventModelImpl)event;
+
+			if ((eventModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_LAYOUTID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { event.getLayoutId() };
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LAYOUTID, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LAYOUTID, args,
+					event);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(Event event) {
+		EventModelImpl eventModelImpl = (EventModelImpl)event;
+
+		Object[] args = new Object[] { event.getLayoutId() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_LAYOUTID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LAYOUTID, args);
+
+		if ((eventModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_LAYOUTID.getColumnBitmask()) != 0) {
+			args = new Object[] { eventModelImpl.getOriginalLayoutId() };
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_LAYOUTID, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LAYOUTID, args);
 		}
 	}
 
@@ -812,6 +1076,9 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 
 		EntityCacheUtil.putResult(EventModelImpl.ENTITY_CACHE_ENABLED,
 			EventImpl.class, event.getPrimaryKey(), event);
+
+		clearUniqueFindersCache(event);
+		cacheUniqueFindersCache(event);
 
 		return event;
 	}

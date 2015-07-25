@@ -106,53 +106,53 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation"
 			};
 
-		_methodName58 = "getBeanIdentifier";
+		_methodName60 = "getBeanIdentifier";
 
-		_methodParameterTypes58 = new String[] {  };
+		_methodParameterTypes60 = new String[] {  };
 
-		_methodName59 = "setBeanIdentifier";
+		_methodName61 = "setBeanIdentifier";
 
-		_methodParameterTypes59 = new String[] { "java.lang.String" };
+		_methodParameterTypes61 = new String[] { "java.lang.String" };
 
-		_methodName64 = "getOrganisationByInvitationCount";
-
-		_methodParameterTypes64 = new String[] { "long" };
-
-		_methodName65 = "getOrganisationByInvitation";
-
-		_methodParameterTypes65 = new String[] { "long" };
-
-		_methodName66 = "getInvitationsByOrganisation";
+		_methodName66 = "getOrganisationByInvitationCount";
 
 		_methodParameterTypes66 = new String[] { "long" };
 
-		_methodName67 = "getInvitationsByStatus";
+		_methodName67 = "getOrganisationByInvitation";
 
 		_methodParameterTypes67 = new String[] { "long" };
 
-		_methodName68 = "getInvitationOrganisation";
+		_methodName68 = "getInvitationsByOrganisation";
 
-		_methodParameterTypes68 = new String[] { "long", "long" };
+		_methodParameterTypes68 = new String[] { "long" };
 
-		_methodName69 = "getInvitationRespons";
+		_methodName69 = "getInvitationsByStatus";
 
 		_methodParameterTypes69 = new String[] { "long" };
 
-		_methodName70 = "getInvitationOrganisationByStatus";
+		_methodName70 = "getInvitationOrganisation";
 
-		_methodParameterTypes70 = new String[] { "boolean" };
+		_methodParameterTypes70 = new String[] { "long", "long" };
 
-		_methodName71 = "getInvitationStatisticsInvitationsSend";
+		_methodName71 = "getInvitationRespons";
 
-		_methodParameterTypes71 = new String[] {  };
+		_methodParameterTypes71 = new String[] { "long" };
 
-		_methodName72 = "getInvitationStatisticsReacted";
+		_methodName72 = "getInvitationOrganisationByStatus";
 
-		_methodParameterTypes72 = new String[] {  };
+		_methodParameterTypes72 = new String[] { "boolean" };
 
-		_methodName73 = "getInvitationStatisticsRejected";
+		_methodName73 = "getInvitationStatisticsInvitationsSend";
 
 		_methodParameterTypes73 = new String[] {  };
+
+		_methodName74 = "getInvitationStatisticsReacted";
+
+		_methodParameterTypes74 = new String[] {  };
+
+		_methodName75 = "getInvitationStatisticsRejected";
+
+		_methodParameterTypes75 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -244,66 +244,66 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 			return InvitationOrganisationLocalServiceUtil.updateInvitationOrganisation((at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation)arguments[0]);
 		}
 
-		if (_methodName58.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return InvitationOrganisationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName59.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			InvitationOrganisationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getOrganisationByInvitationCount(((Long)arguments[0]).longValue());
-		}
-
-		if (_methodName65.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getOrganisationByInvitation(((Long)arguments[0]).longValue());
-		}
-
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationsByOrganisation(((Long)arguments[0]).longValue());
+			return InvitationOrganisationLocalServiceUtil.getOrganisationByInvitationCount(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName67.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationsByStatus(((Long)arguments[0]).longValue());
+			return InvitationOrganisationLocalServiceUtil.getOrganisationByInvitation(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName68.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisation(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+			return InvitationOrganisationLocalServiceUtil.getInvitationsByOrganisation(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationRespons(((Long)arguments[0]).longValue());
+			return InvitationOrganisationLocalServiceUtil.getInvitationsByStatus(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisationByStatus(((Boolean)arguments[0]).booleanValue());
+			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisation(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName71.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationStatisticsInvitationsSend();
+			return InvitationOrganisationLocalServiceUtil.getInvitationRespons(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName72.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
-			return InvitationOrganisationLocalServiceUtil.getInvitationStatisticsReacted();
+			return InvitationOrganisationLocalServiceUtil.getInvitationOrganisationByStatus(((Boolean)arguments[0]).booleanValue());
 		}
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+			return InvitationOrganisationLocalServiceUtil.getInvitationStatisticsInvitationsSend();
+		}
+
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+			return InvitationOrganisationLocalServiceUtil.getInvitationStatisticsReacted();
+		}
+
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
 			return InvitationOrganisationLocalServiceUtil.getInvitationStatisticsRejected();
 		}
 
@@ -342,14 +342,10 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName58;
-	private String[] _methodParameterTypes58;
-	private String _methodName59;
-	private String[] _methodParameterTypes59;
-	private String _methodName64;
-	private String[] _methodParameterTypes64;
-	private String _methodName65;
-	private String[] _methodParameterTypes65;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
 	private String _methodName66;
 	private String[] _methodParameterTypes66;
 	private String _methodName67;
@@ -366,4 +362,8 @@ public class InvitationOrganisationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes72;
 	private String _methodName73;
 	private String[] _methodParameterTypes73;
+	private String _methodName74;
+	private String[] _methodParameterTypes74;
+	private String _methodName75;
+	private String[] _methodParameterTypes75;
 }

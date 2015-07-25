@@ -30,6 +30,7 @@ import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
 import at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl;
 import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalService;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.base.BioBankLocalServiceBaseImpl;
 
@@ -264,11 +265,18 @@ public class BioBankLocalServiceImpl extends BioBankLocalServiceBaseImpl {
 			List<BioBank> biobanks = BioBankLocalServiceUtil.dynamicQuery(dynamicQuery);
 			String seperator = "";
 			for(BioBank biobank : biobanks) {
+				String diagnosis_avialavble = "";
+				SearchIndex searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "diagnosisAvailable");
+				if(searchindex != null) {
+					diagnosis_avialavble = searchindex.getSearchindexvalue().replaceAll("urn:miriam:", "");
+				}
 				array += seperator + "{";
 				//Country
 				array += "Country: '" + biobank.getBiobankcountry().replaceAll("'", "\\\\'") + "',";
 				//BB ID
 				array += "'BB_ID': '" + biobank.getLdapbiobankID().replaceAll("'", "\\\\'") + "',";
+				//BB Diagnosis
+				array += "'Diagnosis': '" + diagnosis_avialavble.replaceAll("'", "\\\\'") + "',";
 				//Name
 				array += "Name: '" + biobank.getBiobankname().replaceAll("'", "\\\\'") + "',";
 				//Type

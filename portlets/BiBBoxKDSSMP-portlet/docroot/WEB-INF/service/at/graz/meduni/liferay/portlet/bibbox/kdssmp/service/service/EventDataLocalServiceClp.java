@@ -711,17 +711,14 @@ public class EventDataLocalServiceClp implements EventDataLocalService {
 
 	@Override
 	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData getEventDataByOntology(
-		long eventlayoutId, java.lang.String ontology) {
+		long eventId, java.lang.String ontology) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
-					new Object[] {
-						eventlayoutId,
-						
-					ClpSerializer.translateInput(ontology)
-					});
+					new Object[] { eventId, ClpSerializer.translateInput(
+							ontology) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

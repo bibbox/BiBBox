@@ -123,6 +123,10 @@ public class EventLocalServiceClpInvoker {
 		_methodName67 = "getEventsForPatient";
 
 		_methodParameterTypes67 = new String[] { "long" };
+
+		_methodName68 = "getEventForLayout";
+
+		_methodParameterTypes68 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -238,6 +242,11 @@ public class EventLocalServiceClpInvoker {
 			return EventLocalServiceUtil.getEventsForPatient(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+			return EventLocalServiceUtil.getEventForLayout(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -281,4 +290,6 @@ public class EventLocalServiceClpInvoker {
 	private String[] _methodParameterTypes66;
 	private String _methodName67;
 	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
 }

@@ -49,3 +49,5 @@
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration"%>
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalServiceUtil"%>
 <%@ page import="at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration"%>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration"%>
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.service.SymbolTypeConfigurationLocalServiceUtil"%>

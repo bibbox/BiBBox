@@ -356,6 +356,25 @@ public abstract class NetworksLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the disease matrix remote service.
+	 *
+	 * @return the disease matrix remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixService getDiseaseMatrixService() {
+		return diseaseMatrixService;
+	}
+
+	/**
+	 * Sets the disease matrix remote service.
+	 *
+	 * @param diseaseMatrixService the disease matrix remote service
+	 */
+	public void setDiseaseMatrixService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixService diseaseMatrixService) {
+		this.diseaseMatrixService = diseaseMatrixService;
+	}
+
+	/**
 	 * Returns the disease matrix persistence.
 	 *
 	 * @return the disease matrix persistence
@@ -747,6 +766,8 @@ public abstract class NetworksLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected BiobankPanelAssessmentPersistence biobankPanelAssessmentPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalService diseaseMatrixLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixService diseaseMatrixService;
 	@BeanReference(type = DiseaseMatrixPersistence.class)
 	protected DiseaseMatrixPersistence diseaseMatrixPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalService.class)

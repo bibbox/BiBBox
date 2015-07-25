@@ -296,6 +296,12 @@ public class SymbolTypeConfigurationLocalServiceWrapper
 		return _symbolTypeConfigurationLocalService.getSymbolTypeConfigurationBySymbolType(symboltype);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration symbolTypeConfigurationFromRequest(
+		javax.portlet.ActionRequest request) {
+		return _symbolTypeConfigurationLocalService.symbolTypeConfigurationFromRequest(request);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

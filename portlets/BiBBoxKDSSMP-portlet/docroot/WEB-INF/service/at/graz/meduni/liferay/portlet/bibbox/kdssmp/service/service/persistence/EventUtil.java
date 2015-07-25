@@ -271,6 +271,74 @@ public class EventUtil {
 	}
 
 	/**
+	* Returns the event where layoutId = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException} if it could not be found.
+	*
+	* @param layoutId the layout ID
+	* @return the matching event
+	* @throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException if a matching event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event findByLayoutId(
+		long layoutId)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByLayoutId(layoutId);
+	}
+
+	/**
+	* Returns the event where layoutId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param layoutId the layout ID
+	* @return the matching event, or <code>null</code> if a matching event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event fetchByLayoutId(
+		long layoutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByLayoutId(layoutId);
+	}
+
+	/**
+	* Returns the event where layoutId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param layoutId the layout ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching event, or <code>null</code> if a matching event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event fetchByLayoutId(
+		long layoutId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByLayoutId(layoutId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the event where layoutId = &#63; from the database.
+	*
+	* @param layoutId the layout ID
+	* @return the event that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event removeByLayoutId(
+		long layoutId)
+		throws at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchEventException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().removeByLayoutId(layoutId);
+	}
+
+	/**
+	* Returns the number of events where layoutId = &#63;.
+	*
+	* @param layoutId the layout ID
+	* @return the number of matching events
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByLayoutId(long layoutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByLayoutId(layoutId);
+	}
+
+	/**
 	* Caches the event in the entity cache if it is enabled.
 	*
 	* @param event the event
