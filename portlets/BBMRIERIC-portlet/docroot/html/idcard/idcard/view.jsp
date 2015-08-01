@@ -62,6 +62,10 @@
 	height:150px;
 	width:100%;
 }
+.idcard_idcardbodybottom-shortdescription:before, .idcard_idcardbodybottom-shortdescription:after, .idcard_idcardbodybottom-shortdescription > * {
+	opacity: 1; 
+}
+
 .idcard_idcardbodybottom-shortdescription {
 	width: 436px;
 	height:60px;
@@ -72,6 +76,32 @@
 	overflow: hidden;
   	text-overflow: ellipsis;
   	font-size: 16px;
+}
+
+.idcard_idcardbodybottom-shortdescription:before {
+	content: "";
+	float: left;
+	width: 5px; 
+	height: 60px; 
+}
+
+.idcard_idcardbodybottom-shortdescription > *:first-child {
+	float: right;
+	width: 100%; 
+	margin-left: -5px;
+}
+.idcard_idcardbodybottom-shortdescription:after {
+	content: "...";
+	float: right; 
+	position: relative;
+	top: -20px;	
+	left: 100%;
+	width: 25px; 
+	margin-left: -25px;
+	padding-right: 5px;
+	background: red; 
+	font-size: 14px; 
+	opacity: 0.95;
 }
 .idcard_idcardbodybottom-menue {
 	width: 494px;
@@ -116,7 +146,7 @@ if(!biobankId.equalsIgnoreCase("")) {
 		biobankDescription = searchindex.getSearchindexvalue();
 	}
 	%>
-	<div><aui:a href="/services">Services</aui:a> / <aui:a href="/bbmri-eric-directory-1.0">Catalogue</aui:a> / <aui:a href='<%= "id-card-beta?biobankId=" + biobank.getLdapbiobankID() %>'><%= biobank.getBiobankname() %></aui:a></div>
+	<div><aui:a href="/services">Services</aui:a> / <aui:a href="/bbmri-eric-directory-1.0">Directory 1.0</aui:a> / <aui:a href='<%= "id-card-beta?biobankId=" + biobank.getLdapbiobankID() %>'><%= biobank.getBiobankname() %></aui:a></div>
 	<br>
 	<!-- ID Card -->
 	<div class="idcard_idcardbody">
@@ -278,16 +308,41 @@ if(!biobankId.equalsIgnoreCase("")) {
 		%>
 		<div><div class="fieldname">BBMRI-ERIC Partner Charter Signed:</div><div class="fieldvalue"><%= biobankPartnerCharterSigned %></div><div style='content: "";clear: both;display: table;'></div> 
 	</div>
+	
+		<%
+		if(biobankDescription.length() != 0) {
+			%>
+			<div><div class="fieldname">Biobank Description:</div><div class="fieldvalue"><%= biobankDescription %></div><div style='content: "";clear: both;display: table;'></div> 
+	</div>
+			
+			<%			
+		}
+		%>
 		<br>
 		<div style='content: "";clear: both;display: table;'></div>
 		<br>
 		<h1 class="bbmriericrecentnews">Material Type</h1>
 		<%
-		String[] biobankmaterialstoredarray = {"biobankMaterialStoredDNA","biobankMaterialStoredcDNAmRNA","biobankMaterialStoredmicroRNA",
+		/*String[] biobankmaterialstoredarray = {"biobankMaterialStoredDNA","biobankMaterialStoredcDNAmRNA","biobankMaterialStoredmicroRNA",
 				"biobankMaterialStoredWholeBlood","biobankMaterialStoredPBC","biobankMaterialStoredPlasma","biobankMaterialStoredSerum",
-				"biobankMaterialStoredTissueCryo","biobankMaterialStoredTissueParaffin","biobankMaterialStoredCellLines","biobankMaterialStoredUrine",
+				"biobankMaterialStoredTissueCryo","biobankMaterialStoredTissueFFPE","biobankMaterialStoredCellLines","biobankMaterialStoredUrine",
 				"biobankMaterialStoredSaliva","biobankMaterialStoredFaeces","biobankMaterialStoredPathogen","biobankMaterialStoredRNA",
-				"biobankMaterialStoredOther"};
+				"biobankMaterialStoredOther"};*/
+		
+		String[] biobankmaterialstoredarray = {"biobankMaterialStoredDNA",
+		 "biobankMaterialStoredPlasma",
+		 "biobankMaterialStoredSerum",
+		 "biobankMaterialStoredUrine",
+		 "biobankMaterialStoredSaliva",
+		 "biobankMaterialStoredFaeces",
+		 "biobankMaterialStoredOther",
+		 "biobankMaterialStoredRNA",
+		 "biobankMaterialStoredBlood",
+		 "biobankMaterialStoredTissueFrozen",
+		 "biobankMaterialStoredTissueFFPE",
+		 "biobankMaterialStoredImmortalizedCellLines",
+		 "biobankMaterialStoredIsolatedPathogen"};
+		
 		String biobankmaterialstored_display = "";
 		String splitter = "";
 		for(String biobankmaterialstored : biobankmaterialstoredarray) {
@@ -363,11 +418,7 @@ if(!biobankId.equalsIgnoreCase("")) {
 		}
 		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankSampleAccessDescription");
 		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
-			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
-				display = "yes";
-			} else {
-				display = "no";
-			}
+			display = searchindex.getSearchindexvalue();
 			%>
 			<div><div class="fieldname">Sample Access Rules:</div><div class="fieldvalue"><%= display %></div><div style='content: "";clear: both;display: table;'></div> 
 	</div>
@@ -407,11 +458,7 @@ if(!biobankId.equalsIgnoreCase("")) {
 		}
 		searchindex = SearchIndexLocalServiceUtil.getSearchIndex(biobank.getOrganisationid(), "biobankDataAccessDescription");
 		if(searchindex != null && !searchindex.getSearchindexvalue().equalsIgnoreCase("")) {
-			if(searchindex.getSearchindexvalue().equalsIgnoreCase("true")) {
-				display = "yes";
-			} else {
-				display = "no";
-			}
+			display = searchindex.getSearchindexvalue();
 			%>
 			<div><div class="fieldname">Data Access Rules:</div><div class="fieldvalue"><%= display %></div><div style='content: "";clear: both;display: table;'></div> 
 	</div>

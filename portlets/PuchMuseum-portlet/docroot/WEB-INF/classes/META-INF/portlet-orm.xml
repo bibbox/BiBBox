@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.FahrzeugModelImpl">
+		<attributes>
+			<id name="fahrzeugId" />
+			<basic name="createrUserId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedUserId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="typ" />
+			<transient name="createrUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="modifiedUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.PersonModelImpl">
+		<attributes>
+			<id name="personId" />
+			<basic name="createrUserId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedUserId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="vorname" />
+			<transient name="createrUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="modifiedUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektModelImpl">
+		<attributes>
+			<id name="puchmuseumsobjectId" />
+			<basic name="createrUserId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedUserId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="objekttyp" />
+			<basic name="objektid" />
+			<basic name="folder" />
+			<transient name="createrUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="modifiedUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionModelImpl">
+		<attributes>
+			<id name="transaktionId" />
+			<basic name="createrUserId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedUserId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="typ" />
+			<transient name="createrUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="modifiedUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.FahrzeugImpl" name="Fahrzeug">
+		<table name="puchmuseum.fahrzeug" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.PersonImpl" name="Person">
+		<table name="puchmuseum.person" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektImpl" name="PuchMuseumsObjekt">
+		<table name="puchmuseum.puchmuseumsobjekt" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionImpl" name="Transaktion">
+		<table name="puchmuseum.transaktion" />
+		<attributes />
+	</entity>
+</entity-mappings>

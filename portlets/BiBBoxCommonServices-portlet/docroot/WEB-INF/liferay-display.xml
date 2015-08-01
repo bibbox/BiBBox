@@ -39,5 +39,6 @@
 	</category>
 	<category name="BiBBox Symbol">
 		<portlet id="symbol-configuration"></portlet>
+		<portlet id="icons-image-config"></portlet>
 	</category>
 </display>

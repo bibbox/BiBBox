@@ -16,6 +16,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="eventtype" />
+			<basic name="status" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

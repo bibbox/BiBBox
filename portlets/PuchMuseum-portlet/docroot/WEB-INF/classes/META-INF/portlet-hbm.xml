@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.Fahrzeug" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.Person" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.Transaktion" />
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.FahrzeugImpl" table="puchmuseum.fahrzeug">
+		<cache usage="read-write" />
+		<id name="fahrzeugId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createrUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="typ" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.PersonImpl" table="puchmuseum.person">
+		<cache usage="read-write" />
+		<id name="personId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createrUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="vorname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektImpl" table="puchmuseum.puchmuseumsobjekt">
+		<cache usage="read-write" />
+		<id name="puchmuseumsobjectId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createrUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="objekttyp" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="objektid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="folder" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionImpl" table="puchmuseum.transaktion">
+		<cache usage="read-write" />
+		<id name="transaktionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createrUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="typ" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

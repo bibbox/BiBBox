@@ -113,6 +113,10 @@ public class IconsLocalServiceClp implements IconsLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "iconsFromRequest";
+
+		_methodParameterTypes19 = new String[] { "javax.portlet.ActionRequest" };
 	}
 
 	@Override
@@ -665,6 +669,31 @@ public class IconsLocalServiceClp implements IconsLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.Icons iconsFromRequest(
+		javax.portlet.ActionRequest request) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] { ClpSerializer.translateInput(request) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.model.Icons)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -702,4 +731,6 @@ public class IconsLocalServiceClp implements IconsLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

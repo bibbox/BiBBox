@@ -112,28 +112,6 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	<aui:button value="list-templates" onClick="<%= listTemplatesURL.toString() %>"/>
 </aui:button-row>
 
-<div class="event-container-text-right" style="background-color: #DBDBDB; ">
-	<div class="event-date">12/05/2014</div>
-	<div class="event changecolor">
-		<div style="background-color: red;width: 75px;height: 74px;clear: both;float: right;overflow:hidden;border-top-right-radius: 15px;">A3
-		</div>
-		<div style="width: 35px;height: 25px;overflow:hidden;">
-			A1
-		</div>
-	
-		<div style="background-color: blue;width: 35px;height: 14px;float: left;text-align: center;font: 12px arial, sans-serif;overflow:hidden;">
-			Code<br>
-		</div>
-		<div style="background-color: orange;width: 35px;height: 35px;float: left;overflow:hidden;">A2
-		</div>
-		
-		<div style="background-color: blue;width: 110px;height: 25px;position: absolute;bottom: 0px;border-top: 1px solid #ffffff;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;overflow:hidden;">
-			A4
-		</div>
-	</div>
-	<div class="event-text">Event Text</div>
-</div><br>
-
 <!-- <img alt="logo" src="/BiBBoxCommonServicesDatabase-portlet/images/icons/basic/zeit.png" width="252px" style="background-color: blue;" /> -->
 
 <%

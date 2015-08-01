@@ -56,6 +56,7 @@
 		<!-- Audit fields -->
 		<column name="eventdate" type="Date" />
 		<column name="eventtype" type="String" />
+		<column name="status" type="String" />
 		<!-- Order -->
 		<order by="asc">
 			<order-column name="patientId" />

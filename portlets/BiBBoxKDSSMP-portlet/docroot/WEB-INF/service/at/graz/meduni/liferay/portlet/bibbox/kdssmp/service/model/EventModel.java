@@ -130,6 +130,21 @@ public interface EventModel extends BaseModel<Event> {
 	 */
 	public void setEventtype(String eventtype);
 
+	/**
+	 * Returns the status of this event.
+	 *
+	 * @return the status of this event
+	 */
+	@AutoEscape
+	public String getStatus();
+
+	/**
+	 * Sets the status of this event.
+	 *
+	 * @param status the status of this event
+	 */
+	public void setStatus(String status);
+
 	@Override
 	public boolean isNew();
 

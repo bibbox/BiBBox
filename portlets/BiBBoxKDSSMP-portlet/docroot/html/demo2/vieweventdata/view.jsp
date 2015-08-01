@@ -25,6 +25,8 @@ boolean showsubgroups = true;
 long organizationId = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 long eventlayoutid =  themeDisplay.getLayout().getPlid();
+long eventid = 0;
+long patientId = 0;
 
 %><h3><%= optionsTitle_cfg %></h3>
 <portlet:actionURL name='createEvent' var="createEventURL" windowState="normal" />
@@ -39,8 +41,13 @@ if (currentGroup.isOrganization()) {
 	organizationId = currentGroup.getClassPK();
 	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 	Event event = EventLocalServiceUtil.getEventForLayout(eventlayoutid);
+	eventid = event.getEventId();
+	boolean status = false;
+	if(event.getStatus().equalsIgnoreCase("signed")) {
+		status = true;
+	}
 	KdssmpPatient patient = KdssmpPatientLocalServiceUtil.getKdssmpPatient(event.getPatientId());
-	long eventid = event.getEventId();
+	patientId = patient.getPatientId();
 	List<KdssmpConfiguration> parameters = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", event.getEventtype());
 	for(KdssmpConfiguration parameter : parameters) {
 		KdssmpParameterConfiguration parameterconfig = KdssmpParameterConfigurationLocalServiceUtil.getKdssmpParameterConfiguration(Long.parseLong(parameter.getOptionvalue()));
@@ -88,8 +95,9 @@ AUI.add('datastore', function (A) {
 			A.io.request(url,{
 				//this is the data that you are sending to the action method
 				data: {
-				   <portlet:namespace />eventlayoutid: <%= eventlayoutid %>,
-				   <portlet:namespace />patientid: <%= organizationId %>,
+				   <portlet:namespace />eventid: <%= eventid %>,
+				   <portlet:namespace />organizationId: <%= organizationId %>,
+				   <portlet:namespace />patientId: <%= patientId %>,
 				   <portlet:namespace />ontology: target.get('id'),
 				   <portlet:namespace />value: valuetarget
 				},

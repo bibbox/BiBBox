@@ -27,7 +27,8 @@ create table kdssmp.event (
 	patientId LONG,
 	layoutId LONG,
 	eventdate DATE null,
-	eventtype VARCHAR(75) null
+	eventtype VARCHAR(75) null,
+	status VARCHAR(75) null
 );
 
 create table kdssmp.eventdata (

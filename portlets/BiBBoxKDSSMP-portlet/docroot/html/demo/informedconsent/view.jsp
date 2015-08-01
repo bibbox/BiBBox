@@ -1,4 +1,4 @@
-<%@ include file="/html/demo/init.jsp" %> 
+<%@ include file="/html/demo2/init.jsp" %> 
 
 <portlet:defineObjects />
 
@@ -7,16 +7,18 @@ com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup
 if (currentGroup.isOrganization()) {
 	long organizationId = currentGroup.getClassPK();
   	Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-  	String az = organization.getExpandoBridge().getAttribute("aznummer").toString();
-  	String male = organization.getExpandoBridge().getAttribute("male").toString();
-  	String date_ = organization.getExpandoBridge().getAttribute("dateofbirth").toString();
+  	KdssmpPatient patient = KdssmpPatientLocalServiceUtil.getPatientForOrganization(organizationId);
+  	String az = String.valueOf(patient.getPatientId());
+  	String male = patient.getGender();
+  	
   	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+  	String date_ = dateFormat.format(patient.getDateofbirth());
   	Date dateofbirth = dateFormat.parse(date_);
   	Date now = new Date();
   	long calc = now.getTime() - dateofbirth.getTime();
   	long MILLS_IN_YEAR = 1000L * 60 * 60 * 24 * 365;
   	long age = calc/MILLS_IN_YEAR;
-  	String name = organization.getExpandoBridge().getAttribute("firstname").toString() + " " + organization.getExpandoBridge().getAttribute("lastname").toString() + " (" + organization.getExpandoBridge().getAttribute("dateofbirth").toString() + ")";
+  	String name = patient.getFirstname() + " " + patient.getLastname() + " (" + dateofbirth + ")";
   	
 	%>
 
@@ -81,8 +83,8 @@ Ihre Einwilligung dazu ist völlig freiwillig und hat keinen Einfluss auf die für
 
 <h2>Einverständniserklärung</h2>
 
-Ich, <b><%= organization.getExpandoBridge().getAttribute("firstname").toString() + " " + organization.getExpandoBridge().getAttribute("lastname").toString() %></b> geboren am  
-<b><%= dateFormat.format(dateofbirth) %></b> habe die mir zur Kenntnis gebrachte PatientInneninformation zum Forschungsvorhaben: &quot;Bereitstellung von Gewebsproben, Blutproben und anderen Körperflüssigkeiten zu Forschungszwecken und zur Entwicklung neuer Diagnoseverfahren, Vorbeugemaßnahmen und Behandlungen&quot;, bestehend aus 3 Seiten, gelesen und verstanden. <br>
+Ich, <b><%= patient.getFirstname() + " " + patient.getLastname() %></b> geboren am  
+<b><%= patient.getDateofbirth() %></b> habe die mir zur Kenntnis gebrachte PatientInneninformation zum Forschungsvorhaben: &quot;Bereitstellung von Gewebsproben, Blutproben und anderen Körperflüssigkeiten zu Forschungszwecken und zur Entwicklung neuer Diagnoseverfahren, Vorbeugemaßnahmen und Behandlungen&quot;, bestehend aus 3 Seiten, gelesen und verstanden. <br>
 
 Ich wurde im Rahmen eines diesbezüglichen Aufklärungsgespräches von Herrn/Frau (Dr. med.) <%= themeDisplay.getUser().getFullName() %> führlich und verständlich über Wesen, Bedeutung und Tragweite des Forschungsvorhabens informiert. Alle meine Fragen wurden ausreichend beantwortet und ich hatte ausreichend Zeit, mich zu entscheiden. Zur Zeit habe ich keine weiteren Fragen mehr.<br>
 
@@ -109,7 +111,7 @@ Ich wünsche über für mich persönlich oder meine direkten Nachkommen bedeutsame m
 </div>
 <br>
 <div style="margin: auto;width: 100%;text-align: center;">
-Ich habe Herrn /Frau <b><%= organization.getExpandoBridge().getAttribute("firstname").toString() + " " + organization.getExpandoBridge().getAttribute("lastname").toString() %></b> vor der Unterzeichnung dieser Erklärung ausführlich beraten und bestätige, keinen Druck ausgeübt zu haben. 
+Ich habe Herrn /Frau <b><%= patient.getFirstname() + " " + patient.getLastname() %></b> vor der Unterzeichnung dieser Erklärung ausführlich beraten und bestätige, keinen Druck ausgeübt zu haben. 
 </div>
 <br><br><br>
 <div style="margin: auto;width: 100%;text-align: center;">

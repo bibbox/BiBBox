@@ -24,6 +24,7 @@ String optionsTitle_cfg = GetterUtil.getString(portletPreferences.getValue("opti
 boolean showsubgroups = true;
 long organizationId = 0;
 long eventlayoutid = 0;
+long eventid = 0;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 
 %><h3><%= optionsTitle_cfg %></h3>
@@ -41,6 +42,7 @@ if (currentGroup.isOrganization()) {
 	Layout event_layout = themeDisplay.getLayout();
 	eventlayoutid = event_layout.getLayoutId();
 	Event event = EventLocalServiceUtil.getEvent(event_layout.getLayoutId());
+	eventid = event.getEventId();
 	KdssmpConfiguration eventtype_display = KdssmpConfigurationLocalServiceUtil.getConfigurationOptionValue("Display", event.getEventtype());
 	List<KdssmpConfiguration> parameters = KdssmpConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", eventtype_display.getOptionkey());
 	for(KdssmpConfiguration parameter : parameters) {
@@ -89,8 +91,8 @@ AUI.add('datastore', function (A) {
 			A.io.request(url,{
 				//this is the data that you are sending to the action method
 				data: {
-				   <portlet:namespace />eventlayoutid: <%= eventlayoutid %>,
-				   <portlet:namespace />patientid: <%= organizationId %>,
+				   <portlet:namespace />eventid: <%= eventid %>,
+				   <portlet:namespace />organizationId: <%= organizationId %>,
 				   <portlet:namespace />ontology: target.get('id'),
 				   <portlet:namespace />value: valuetarget
 				},

@@ -113,6 +113,10 @@ public class IconsLocalServiceClpInvoker {
 		_methodName59 = "setBeanIdentifier";
 
 		_methodParameterTypes59 = new String[] { "java.lang.String" };
+
+		_methodName64 = "iconsFromRequest";
+
+		_methodParameterTypes64 = new String[] { "javax.portlet.ActionRequest" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +220,11 @@ public class IconsLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return IconsLocalServiceUtil.iconsFromRequest((javax.portlet.ActionRequest)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +264,6 @@ public class IconsLocalServiceClpInvoker {
 	private String[] _methodParameterTypes58;
 	private String _methodName59;
 	private String[] _methodParameterTypes59;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
 }

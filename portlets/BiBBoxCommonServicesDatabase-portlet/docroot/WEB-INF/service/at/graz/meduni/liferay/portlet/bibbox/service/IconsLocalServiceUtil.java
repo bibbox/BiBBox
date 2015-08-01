@@ -275,6 +275,11 @@ public class IconsLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static at.graz.meduni.liferay.portlet.bibbox.model.Icons iconsFromRequest(
+		javax.portlet.ActionRequest request) {
+		return getService().iconsFromRequest(request);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

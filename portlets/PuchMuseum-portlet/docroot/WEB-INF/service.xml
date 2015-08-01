@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.graz.hmmc.liferay.portlet.puch">
+	<author>reihsr</author>
+	<namespace>puchmuseum</namespace>
+	
+	<entity name="PuchMuseumsObjekt" local-service="true" remote-service="false"  table="puchmuseum.puchmuseumsobjekt">
+		<!-- PK fields -->
+		<column name="puchmuseumsobjectId" type="long" primary="true" />
+		
+		<!-- Audit fields -->
+		<column name="createrUserId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedUserId" type="long" />
+		<column name="modifiedDate" type="Date" />
+		
+		<!-- DataGroup -->
+		<column name="objekttyp" type="String" />
+		<column name="objektid" type="long" />
+		
+		<column name="folder" type="String" />
+	</entity>
+
+	<entity name="Fahrzeug" local-service="true" remote-service="false"  table="puchmuseum.fahrzeug">
+		<!-- PK fields -->
+		<column name="fahrzeugId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="createrUserId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedUserId" type="long" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+		<column name="typ" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="typ" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="Typ" return-type="Collection">
+			<finder-column name="typ" />
+		</finder>
+	</entity>
+		<entity name="Person" local-service="true" remote-service="false"  table="puchmuseum.person">
+		<!-- PK fields -->
+		<column name="personId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="createrUserId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedUserId" type="long" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+		<column name="vorname" type="String" />
+		
+		<!-- Finder methods -->
+		<finder name="Vorname" return-type="Collection">
+			<finder-column name="vorname" />
+		</finder>
+	</entity>
+	<entity name="Transaktion" local-service="true" remote-service="false"  table="puchmuseum.transaktion">
+		<!-- PK fields -->
+		<column name="transaktionId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="createrUserId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedUserId" type="long" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+		<column name="typ" type="String" />
+		
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="typ" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="Typ" return-type="Collection">
+			<finder-column name="typ" />
+		</finder>
+	</entity>
+</service-builder>

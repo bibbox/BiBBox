@@ -19,6 +19,7 @@
 		<property name="layoutId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="eventdate" type="org.hibernate.type.TimestampType" />
 		<property name="eventtype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.EventDataImpl" table="kdssmp.eventdata">
 		<cache usage="read-write" />

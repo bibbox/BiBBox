@@ -23,6 +23,8 @@ import java.util.List;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Order;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionList;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
@@ -188,6 +190,8 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			projectionList.add(ProjectionFactoryUtil.groupProperty("searchindexvalue"));
 		    //projectionList.add(ProjectionFactoryUtil.rowCount());
 		    dynamicQuery.setProjection(projectionList);
+		    Order defaultOrder = OrderFactoryUtil.desc("searchindexvalue");
+		    dynamicQuery.addOrder(defaultOrder);
 		    List<Object> results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
 		    /*for(Object result : results) {
 		    	System.out.println(result);	

@@ -20,6 +20,9 @@ if (currentGroup.isOrganization()) {
   		icons.put("date", dateFormat.format(event.getEventdate()));
   		icons.put("A1", event.getEventtype());
   		icons.put("ACODE", event.getEventtype());
+  		if(event.getStatus().equalsIgnoreCase("signed")) {
+  			icons.put("A4", "signed");
+  		}
   		
   		Layout event_layout = LayoutLocalServiceUtil.getLayout(event.getLayoutId());
   		icons.put("link", "/web"+organization.getGroup().getFriendlyURL() + "" + event_layout.getFriendlyURL());

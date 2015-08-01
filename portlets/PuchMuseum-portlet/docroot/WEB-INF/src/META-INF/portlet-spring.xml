@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.FahrzeugLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.FahrzeugLocalServiceImpl" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.FahrzeugPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.FahrzeugPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.PersonLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.PersonLocalServiceImpl" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.PersonPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.PersonPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.PuchMuseumsObjektLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.PuchMuseumsObjektLocalServiceImpl" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.PuchMuseumsObjektPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.PuchMuseumsObjektPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.TransaktionLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.TransaktionLocalServiceImpl" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionPersistenceImpl" parent="basePersistence" />
+</beans>

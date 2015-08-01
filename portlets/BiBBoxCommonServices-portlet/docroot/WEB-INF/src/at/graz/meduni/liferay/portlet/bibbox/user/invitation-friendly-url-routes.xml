@@ -3,18 +3,8 @@
 
 <routes>
     <route>
-        <pattern>/organisations/{invitationId:\d+}</pattern>
-        <generated-parameter name="mvcPath">/html/user/invitation/edit_organization.jsp</generated-parameter>
-        <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
-    </route>
-    <route>
-        <pattern>/vieworganisations/{invitationId:\d+}</pattern>
-        <generated-parameter name="mvcPath">/html/user/invitation/view_organisations.jsp</generated-parameter>
-        <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
-    </route>
-    <route>
-        <pattern>/biobank/{biobankId:\d+}</pattern>
-        <generated-parameter name="mvcPath">/html/user/invitation/invitationutilorganizationstatuslist/biobankprintpage.jsp</generated-parameter>
+        <pattern>/puchobjecttype/fahrzeug/{puchmuseumsobjectId:\d+}</pattern>
+        <generated-parameter name="mvcPath">/html/puchmuseumsobjekterstellen/objecttype/fahrzeug.jsp</generated-parameter>
         <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
     </route>
 </routes>

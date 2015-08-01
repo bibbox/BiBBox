@@ -14,9 +14,9 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	<aui:button value="add-templates" onClick="<%= addTemplateURL.toString() %>"/>
 </aui:button-row>
 
-<liferay-ui:search-container emptyResultsMessage="empty-results-message">
+<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "5")) %>' emptyResultsMessage="empty-results-message">
 	<liferay-ui:search-container-results
-		results="<%= KdssmpConfigurationLocalServiceUtil.getKdssmpConfigurations(-1, -1) %>"
+		results="<%= KdssmpConfigurationLocalServiceUtil.getKdssmpConfigurations(searchContainer.getStart(), searchContainer.getEnd()) %>"
 		total="<%= KdssmpConfigurationLocalServiceUtil.getKdssmpConfigurationsCount() %>"
 	/>
 	

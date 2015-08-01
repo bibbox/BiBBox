@@ -54,6 +54,7 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
 			event.setEventdate(eventdate);
 			event.setEventtype(eventtype);
 			event.setLayoutId(layoutId);
+			event.setStatus("open");
 			event = EventLocalServiceUtil.addEvent(event);
 		} catch(Exception ex) {
 			ex.printStackTrace();

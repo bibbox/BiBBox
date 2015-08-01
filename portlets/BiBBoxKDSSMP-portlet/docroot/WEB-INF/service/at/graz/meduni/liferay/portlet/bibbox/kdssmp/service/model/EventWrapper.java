@@ -54,6 +54,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 		attributes.put("layoutId", getLayoutId());
 		attributes.put("eventdate", getEventdate());
 		attributes.put("eventtype", getEventtype());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -88,6 +89,12 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 
 		if (eventtype != null) {
 			setEventtype(eventtype);
+		}
+
+		String status = (String)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -209,6 +216,26 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	@Override
 	public void setEventtype(java.lang.String eventtype) {
 		_event.setEventtype(eventtype);
+	}
+
+	/**
+	* Returns the status of this event.
+	*
+	* @return the status of this event
+	*/
+	@Override
+	public java.lang.String getStatus() {
+		return _event.getStatus();
+	}
+
+	/**
+	* Sets the status of this event.
+	*
+	* @param status the status of this event
+	*/
+	@Override
+	public void setStatus(java.lang.String status) {
+		_event.setStatus(status);
 	}
 
 	@Override

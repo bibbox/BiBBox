@@ -63,9 +63,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			{ "patientId", Types.BIGINT },
 			{ "layoutId", Types.BIGINT },
 			{ "eventdate", Types.TIMESTAMP },
-			{ "eventtype", Types.VARCHAR }
+			{ "eventtype", Types.VARCHAR },
+			{ "status", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table kdssmp.event (eventId LONG not null primary key,patientId LONG,layoutId LONG,eventdate DATE null,eventtype VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table kdssmp.event (eventId LONG not null primary key,patientId LONG,layoutId LONG,eventdate DATE null,eventtype VARCHAR(75) null,status VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.event";
 	public static final String ORDER_BY_JPQL = " ORDER BY event.patientId ASC, event.eventdate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.event.patientId ASC, kdssmp.event.eventdate ASC";
@@ -129,6 +130,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		attributes.put("layoutId", getLayoutId());
 		attributes.put("eventdate", getEventdate());
 		attributes.put("eventtype", getEventtype());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -163,6 +165,12 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		if (eventtype != null) {
 			setEventtype(eventtype);
+		}
+
+		String status = (String)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -247,6 +255,21 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		_eventtype = eventtype;
 	}
 
+	@Override
+	public String getStatus() {
+		if (_status == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _status;
+		}
+	}
+
+	@Override
+	public void setStatus(String status) {
+		_status = status;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -283,6 +306,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		eventImpl.setLayoutId(getLayoutId());
 		eventImpl.setEventdate(getEventdate());
 		eventImpl.setEventtype(getEventtype());
+		eventImpl.setStatus(getStatus());
 
 		eventImpl.resetOriginalValues();
 
@@ -385,12 +409,20 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			eventCacheModel.eventtype = null;
 		}
 
+		eventCacheModel.status = getStatus();
+
+		String status = eventCacheModel.status;
+
+		if ((status != null) && (status.length() == 0)) {
+			eventCacheModel.status = null;
+		}
+
 		return eventCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
@@ -402,6 +434,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		sb.append(getEventdate());
 		sb.append(", eventtype=");
 		sb.append(getEventtype());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append("}");
 
 		return sb.toString();
@@ -409,7 +443,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -436,6 +470,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			"<column><column-name>eventtype</column-name><column-value><![CDATA[");
 		sb.append(getEventtype());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -453,6 +491,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private boolean _setOriginalLayoutId;
 	private Date _eventdate;
 	private String _eventtype;
+	private String _status;
 	private long _columnBitmask;
 	private Event _escapedModel;
 }

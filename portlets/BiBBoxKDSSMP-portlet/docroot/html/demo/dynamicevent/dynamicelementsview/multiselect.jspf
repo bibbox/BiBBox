@@ -6,7 +6,7 @@ if(eventdata != null) {
 }
 %>
 <div class="<%= id %>">
-	<aui:select cssClass='<%= "ms_" + id %>' name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>"  multiple="true">
+	<aui:select disabled="<%= status %>" cssClass='<%= "ms_" + id %>' name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>"  multiple="true">
 		<%
 		List<KdssmpParameterOptions> options = KdssmpParameterOptionsLocalServiceUtil.getOptions(parameterconfig.getParameterconfigurationId());
 		for(KdssmpParameterOptions option : options) {

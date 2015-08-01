@@ -23,10 +23,11 @@ public class ViewEventData extends MVCPortlet {
 	 * @throws Exception
 	 */
 	public void updateData(ActionRequest request, ActionResponse response) throws Exception {	
-		long eventlayoutid = ParamUtil.getLong(request, "eventlayoutid");
-		long patientid = ParamUtil.getLong(request, "patientid");
+		long eventid = ParamUtil.getLong(request, "eventid");
+		long organizationId = ParamUtil.getLong(request, "organizationId");
+		long patientid = ParamUtil.getLong(request, "patientId");
 		String ontology = ParamUtil.getString(request, "ontology");
-		//System.out.println("eventlayoutid: " + eventlayoutid + "; patientid: " + patientid + "; ontology: " + ontology + ";");
+		//System.out.println("eventid: " + eventid + "; organizationId: " + organizationId + "; ontology: " + ontology + ";");
 		String value = ParamUtil.getString(request, "value");
 		//System.out.println(value);
 		
@@ -40,14 +41,14 @@ public class ViewEventData extends MVCPortlet {
 			key = m.group(0);
 		}
 		try {
-			EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(eventlayoutid, key);
+			EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(eventid, key);
 			if(eventdata != null) {
 				eventdata.setValue(value);
 				EventDataLocalServiceUtil.updateEventData(eventdata);
-				System.out.println("Update: eventlayoutid: " + eventlayoutid + "; patientid: " + patientid + "; ontology: " + ontology + "; value: " + value);
+				//System.out.println("Update: eventlayoutid: " + eventlayoutid + "; patientid: " + patientid + "; ontology: " + ontology + "; value: " + value);
 			} else {
-				EventDataLocalServiceUtil.createNewEventData(eventlayoutid, patientid, key, value);
-				System.out.println("Create: eventlayoutid: " + eventlayoutid + "; patientid: " + patientid + "; ontology: " + ontology + "; value: " + value);
+				EventDataLocalServiceUtil.createNewEventData(eventid, patientid, key, value);
+				//System.out.println("Create: eventlayoutid: " + eventlayoutid + "; patientid: " + patientid + "; ontology: " + ontology + "; value: " + value);
 			}
 		} catch(Exception ex) {
 			System.err.println("ERROR: DisplayEventParameter::updateData(ActionRequest request, ActionResponse response)");

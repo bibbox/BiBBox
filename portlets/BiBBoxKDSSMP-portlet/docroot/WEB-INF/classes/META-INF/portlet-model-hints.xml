@@ -7,6 +7,7 @@
 		<field name="layoutId" type="long" />
 		<field name="eventdate" type="Date" />
 		<field name="eventtype" type="String" />
+		<field name="status" type="String" />
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.EventData">
 		<field name="eventdataId" type="long" />

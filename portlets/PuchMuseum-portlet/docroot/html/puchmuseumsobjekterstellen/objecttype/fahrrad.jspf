@@ -1,0 +1,6 @@
+<aui:select label="Schlauchtyp" name="schlauchtyp" >
+	<aui:option value="keinschlauch">Kein Schlauch</aui:option>
+	<aui:option value="28-47/622">28-47/622</aui:option>
+	<aui:option value="32-630">32-630</aui:option>
+	<aui:option value="40-635">40-635</aui:option>
+</aui:select>

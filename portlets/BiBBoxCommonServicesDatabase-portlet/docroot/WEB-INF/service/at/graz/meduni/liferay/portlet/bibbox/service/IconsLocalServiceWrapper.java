@@ -284,6 +284,12 @@ public class IconsLocalServiceWrapper implements IconsLocalService,
 		return _iconsLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.model.Icons iconsFromRequest(
+		javax.portlet.ActionRequest request) {
+		return _iconsLocalService.iconsFromRequest(request);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -79,6 +79,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		attributes.put("layoutId", getLayoutId());
 		attributes.put("eventdate", getEventdate());
 		attributes.put("eventtype", getEventtype());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -113,6 +114,12 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 		if (eventtype != null) {
 			setEventtype(eventtype);
+		}
+
+		String status = (String)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -232,6 +239,29 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	}
 
 	@Override
+	public String getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(String status) {
+		_status = status;
+
+		if (_eventRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatus", String.class);
+
+				method.invoke(_eventRemoteModel, status);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public java.lang.String getEventGroup() {
 		try {
 			String methodName = "getEventGroup";
@@ -324,6 +354,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		clone.setLayoutId(getLayoutId());
 		clone.setEventdate(getEventdate());
 		clone.setEventtype(getEventtype());
+		clone.setStatus(getStatus());
 
 		return clone;
 	}
@@ -384,7 +415,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
@@ -396,6 +427,8 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		sb.append(getEventdate());
 		sb.append(", eventtype=");
 		sb.append(getEventtype());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append("}");
 
 		return sb.toString();
@@ -403,7 +436,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -430,6 +463,10 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 			"<column><column-name>eventtype</column-name><column-value><![CDATA[");
 		sb.append(getEventtype());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -441,5 +478,6 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	private long _layoutId;
 	private Date _eventdate;
 	private String _eventtype;
+	private String _status;
 	private BaseModel<?> _eventRemoteModel;
 }

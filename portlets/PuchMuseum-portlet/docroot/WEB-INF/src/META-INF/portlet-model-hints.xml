@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.Fahrzeug">
+		<field name="fahrzeugId" type="long" />
+		<field name="createrUserId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedUserId" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="typ" type="String" />
+	</model>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.Person">
+		<field name="personId" type="long" />
+		<field name="createrUserId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedUserId" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="vorname" type="String" />
+	</model>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt">
+		<field name="puchmuseumsobjectId" type="long" />
+		<field name="createrUserId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedUserId" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="objekttyp" type="String" />
+		<field name="objektid" type="long" />
+		<field name="folder" type="String" />
+	</model>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.Transaktion">
+		<field name="transaktionId" type="long" />
+		<field name="createrUserId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedUserId" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="typ" type="String" />
+	</model>
+</model-hints>

@@ -248,4 +248,7 @@ public interface IconsLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public at.graz.meduni.liferay.portlet.bibbox.model.Icons iconsFromRequest(
+		javax.portlet.ActionRequest request);
 }
