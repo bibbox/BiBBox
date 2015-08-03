@@ -17,6 +17,39 @@
 			puch-museums-objekt-erstellen-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>configuration-puch-museum</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			configuration-puch-museum-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>parameter-configuration</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			parameter-configuration-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>parameter-option-configuration</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			parameter-option-configuration-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

@@ -14,7 +14,10 @@
 
 package at.graz.hmmc.liferay.portlet.puch.service;
 
-import at.graz.hmmc.liferay.portlet.puch.model.FahrzeugClp;
+import at.graz.hmmc.liferay.portlet.puch.model.ConfigurationClp;
+import at.graz.hmmc.liferay.portlet.puch.model.ObjectDataClp;
+import at.graz.hmmc.liferay.portlet.puch.model.ParameterConfigurationClp;
+import at.graz.hmmc.liferay.portlet.puch.model.ParameterOptionsConfigurationClp;
 import at.graz.hmmc.liferay.portlet.puch.model.PersonClp;
 import at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjektClp;
 import at.graz.hmmc.liferay.portlet.puch.model.TransaktionClp;
@@ -105,8 +108,21 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
-		if (oldModelClassName.equals(FahrzeugClp.class.getName())) {
-			return translateInputFahrzeug(oldModel);
+		if (oldModelClassName.equals(ConfigurationClp.class.getName())) {
+			return translateInputConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(ObjectDataClp.class.getName())) {
+			return translateInputObjectData(oldModel);
+		}
+
+		if (oldModelClassName.equals(ParameterConfigurationClp.class.getName())) {
+			return translateInputParameterConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					ParameterOptionsConfigurationClp.class.getName())) {
+			return translateInputParameterOptionsConfiguration(oldModel);
 		}
 
 		if (oldModelClassName.equals(PersonClp.class.getName())) {
@@ -136,10 +152,42 @@ public class ClpSerializer {
 		return newList;
 	}
 
-	public static Object translateInputFahrzeug(BaseModel<?> oldModel) {
-		FahrzeugClp oldClpModel = (FahrzeugClp)oldModel;
+	public static Object translateInputConfiguration(BaseModel<?> oldModel) {
+		ConfigurationClp oldClpModel = (ConfigurationClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getFahrzeugRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getConfigurationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputObjectData(BaseModel<?> oldModel) {
+		ObjectDataClp oldClpModel = (ObjectDataClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getObjectDataRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputParameterConfiguration(
+		BaseModel<?> oldModel) {
+		ParameterConfigurationClp oldClpModel = (ParameterConfigurationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getParameterConfigurationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputParameterOptionsConfiguration(
+		BaseModel<?> oldModel) {
+		ParameterOptionsConfigurationClp oldClpModel = (ParameterOptionsConfigurationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getParameterOptionsConfigurationRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -194,8 +242,23 @@ public class ClpSerializer {
 		String oldModelClassName = oldModelClass.getName();
 
 		if (oldModelClassName.equals(
-					"at.graz.hmmc.liferay.portlet.puch.model.impl.FahrzeugImpl")) {
-			return translateOutputFahrzeug(oldModel);
+					"at.graz.hmmc.liferay.portlet.puch.model.impl.ConfigurationImpl")) {
+			return translateOutputConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl")) {
+			return translateOutputObjectData(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl")) {
+			return translateOutputParameterConfiguration(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterOptionsConfigurationImpl")) {
+			return translateOutputParameterOptionsConfiguration(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -294,8 +357,23 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
-					"at.graz.hmmc.liferay.portlet.puch.NoSuchFahrzeugException")) {
-			return new at.graz.hmmc.liferay.portlet.puch.NoSuchFahrzeugException();
+					"at.graz.hmmc.liferay.portlet.puch.NoSuchConfigurationException")) {
+			return new at.graz.hmmc.liferay.portlet.puch.NoSuchConfigurationException();
+		}
+
+		if (className.equals(
+					"at.graz.hmmc.liferay.portlet.puch.NoSuchObjectDataException")) {
+			return new at.graz.hmmc.liferay.portlet.puch.NoSuchObjectDataException();
+		}
+
+		if (className.equals(
+					"at.graz.hmmc.liferay.portlet.puch.NoSuchParameterConfigurationException")) {
+			return new at.graz.hmmc.liferay.portlet.puch.NoSuchParameterConfigurationException();
+		}
+
+		if (className.equals(
+					"at.graz.hmmc.liferay.portlet.puch.NoSuchParameterOptionsConfigurationException")) {
+			return new at.graz.hmmc.liferay.portlet.puch.NoSuchParameterOptionsConfigurationException();
 		}
 
 		if (className.equals(
@@ -316,12 +394,44 @@ public class ClpSerializer {
 		return throwable;
 	}
 
-	public static Object translateOutputFahrzeug(BaseModel<?> oldModel) {
-		FahrzeugClp newModel = new FahrzeugClp();
+	public static Object translateOutputConfiguration(BaseModel<?> oldModel) {
+		ConfigurationClp newModel = new ConfigurationClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
-		newModel.setFahrzeugRemoteModel(oldModel);
+		newModel.setConfigurationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputObjectData(BaseModel<?> oldModel) {
+		ObjectDataClp newModel = new ObjectDataClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setObjectDataRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputParameterConfiguration(
+		BaseModel<?> oldModel) {
+		ParameterConfigurationClp newModel = new ParameterConfigurationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setParameterConfigurationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputParameterOptionsConfiguration(
+		BaseModel<?> oldModel) {
+		ParameterOptionsConfigurationClp newModel = new ParameterOptionsConfigurationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setParameterOptionsConfigurationRemoteModel(oldModel);
 
 		return newModel;
 	}

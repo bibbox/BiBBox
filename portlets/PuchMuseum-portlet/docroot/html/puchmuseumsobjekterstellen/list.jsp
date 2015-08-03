@@ -8,24 +8,20 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 %>
 
 <aui:button-row>
-	<portlet:renderURL var="addObjectFahrzeugURL">
-		<portlet:param name="mvcPath" value="/html/puchmuseumsobjekterstellen/edit.jsp" />
-		<portlet:param name="objekttyp" value="fahrzeug" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-	</portlet:renderURL>
-	<aui:a href="<%= addObjectFahrzeugURL.toString() %>"><i class="fa fa-car fa-3x"></i></aui:a>
-	<portlet:renderURL var="addObjectMotorradURL">
-		<portlet:param name="mvcPath" value="/html/puchmuseumsobjekterstellen/edit.jsp" />
-		<portlet:param name="objekttyp" value="motorrad" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-	</portlet:renderURL>
-	<aui:a href="<%= addObjectMotorradURL.toString() %>"><i class="fa fa-motorcycle fa-3x"></i></aui:a>
-	<portlet:renderURL var="addObjectFahrradURL">
-		<portlet:param name="mvcPath" value="/html/puchmuseumsobjekterstellen/edit.jsp" />
-		<portlet:param name="objekttyp" value="fahrrad" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
-	</portlet:renderURL>
-	<aui:a href="<%= addObjectFahrradURL.toString() %>"><i class="fa fa-bicycle fa-3x"></i></aui:a>
+	<%
+	List<Configuration> configurations = ConfigurationLocalServiceUtil.getConfigurationOptions("Object");
+	for(Configuration configuration : configurations) {
+		Configuration icon_configuration = ConfigurationLocalServiceUtil.getConfigurationOption("Icon", configuration.getOptionvalue());
+		%>
+		<portlet:renderURL var="addObjectFahrzeugURL">
+			<portlet:param name="mvcPath" value="/html/puchmuseumsobjekterstellen/edit.jsp" />
+			<portlet:param name="objekttyp" value="<%= configuration.getOptionvalue() %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+		</portlet:renderURL>
+		<aui:a href="<%= addObjectFahrzeugURL.toString() %>"><%= icon_configuration.getOptionvalue() %></aui:a>
+		<%
+	}
+	%>
 </aui:button-row>
 
 <liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "5")) %>' emptyResultsMessage="empty-results-message-objects">

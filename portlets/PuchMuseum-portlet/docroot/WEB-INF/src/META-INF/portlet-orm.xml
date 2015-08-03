@@ -7,21 +7,63 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.FahrzeugModelImpl">
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.ConfigurationModelImpl">
 		<attributes>
-			<id name="fahrzeugId" />
-			<basic name="createrUserId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedUserId" />
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="typ" />
-			<transient name="createrUserUuid" />
+			<id name="configurationId" />
+			<basic name="scope" />
+			<basic name="optionkey" />
+			<basic name="optionvalue" />
 			<transient name="modelAttributes" />
-			<transient name="modifiedUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataModelImpl">
+		<attributes>
+			<id name="objectdataId" />
+			<basic name="puchmuseumsobjectId" />
+			<basic name="objectkey" />
+			<basic name="objectvalue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationModelImpl">
+		<attributes>
+			<id name="parameterconfigurationId" />
+			<basic name="displaynameshort" />
+			<basic name="displaynamelong" />
+			<basic name="datatype" />
+			<basic name="group">
+				<column name="GROUP_" />
+			</basic>
+			<basic name="tab" />
+			<basic name="viewscript" />
+			<basic name="viewvisible" />
+			<basic name="viewtip" />
+			<basic name="viewtitlecss" />
+			<basic name="viewvaluecss" />
+			<basic name="viewcss" />
+			<basic name="editscript" />
+			<basic name="editvisible" />
+			<basic name="edittip" />
+			<basic name="edittitlecss" />
+			<basic name="editvaluecss" />
+			<basic name="editcss" />
+			<basic name="editcolumnwidth" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterOptionsConfigurationModelImpl">
+		<attributes>
+			<id name="parameteroptionsconfigurationId" />
+			<basic name="parameterconfigurationId" />
+			<basic name="optionkey" />
+			<basic name="optionvalue" />
+			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -85,8 +127,20 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.FahrzeugImpl" name="Fahrzeug">
-		<table name="puchmuseum.fahrzeug" />
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ConfigurationImpl" name="Configuration">
+		<table name="puchmuseum.configuration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl" name="ObjectData">
+		<table name="puchmuseum.objectdata" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl" name="ParameterConfiguration">
+		<table name="puchmuseum.parameterconfiguration" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterOptionsConfigurationImpl" name="ParameterOptionsConfiguration">
+		<table name="puchmuseum.parameteroptionsconfiguration" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.PersonImpl" name="Person">

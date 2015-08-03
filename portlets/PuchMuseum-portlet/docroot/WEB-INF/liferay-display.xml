@@ -6,4 +6,9 @@
 	<category name="PuchMuseum">
 		<portlet id="puch-museums-objekt-erstellen"></portlet>
 	</category>
+	<category name="PuchMuseum Configuration">
+		<portlet id="configuration-puch-museum"></portlet>
+		<portlet id="parameter-configuration"></portlet>
+		<portlet id="parameter-option-configuration"></portlet>
+	</category>
 </display>

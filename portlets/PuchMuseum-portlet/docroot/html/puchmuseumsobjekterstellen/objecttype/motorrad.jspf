@@ -1,5 +1,0 @@
-<aui:select label="Motorad Typ" name="motorradtyp" >
-	<aui:option value="Rennmaschine">Rennmaschine</aui:option>
-	<aui:option value="Enduro">Enduro</aui:option>
-	<aui:option value="Beiwagenmaschine">Beiwagenmaschine</aui:option>
-</aui:select>

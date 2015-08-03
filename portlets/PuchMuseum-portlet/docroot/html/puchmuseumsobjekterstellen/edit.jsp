@@ -1,5 +1,7 @@
 <%@ include file="/html/init.jsp" %>
 
+<script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
+
 <%
 PuchMuseumsObjekt puchmuseumsobjekt = null;
 
@@ -34,14 +36,23 @@ creating <%= objekttyp %><br>
 		<aui:input type="hidden" name="configurationId" value='<%= puchmuseumsobjekt == null ? "" : puchmuseumsobjekt.getPuchmuseumsobjectId() %>'/>
 		
 		<%
-			if(objekttyp.equalsIgnoreCase("fahrzeug")) {
-				%><%@ include file="/html/puchmuseumsobjekterstellen/objecttype/fahrzeug.jspf" %><%
-			} else if(objekttyp.equalsIgnoreCase("fahrrad")) {
-				%><%@ include file="/html/puchmuseumsobjekterstellen/objecttype/fahrrad.jspf" %><%
-			} else if(objekttyp.equalsIgnoreCase("motorrad")) {
-				%><%@ include file="/html/puchmuseumsobjekterstellen/objecttype/motorrad.jspf" %><%
-			} else {
-				System.err.println("Type not defined");
+			List<Configuration> configurations = ConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", objekttyp);
+			for(Configuration configuration : configurations) {
+				ParameterConfiguration parameterconfig = ParameterConfigurationLocalServiceUtil.getParameterConfiguration(Long.parseLong(configuration.getOptionvalue()));
+
+				String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
+				//parameterconfig.getParameterconfigurationId()
+				if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
+					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/html.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
+					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/text.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
+					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/textbox.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
+					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/select.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
+					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/multiselect.jspf" %><%
+				}
 			}
 		%>
 		

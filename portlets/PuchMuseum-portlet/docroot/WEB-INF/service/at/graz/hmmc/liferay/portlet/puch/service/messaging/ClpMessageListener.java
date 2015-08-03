@@ -15,7 +15,10 @@
 package at.graz.hmmc.liferay.portlet.puch.service.messaging;
 
 import at.graz.hmmc.liferay.portlet.puch.service.ClpSerializer;
-import at.graz.hmmc.liferay.portlet.puch.service.FahrzeugLocalServiceUtil;
+import at.graz.hmmc.liferay.portlet.puch.service.ConfigurationLocalServiceUtil;
+import at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalServiceUtil;
+import at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalServiceUtil;
+import at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.PersonLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.PuchMuseumsObjektLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.TransaktionLocalServiceUtil;
@@ -38,7 +41,13 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
-			FahrzeugLocalServiceUtil.clearService();
+			ConfigurationLocalServiceUtil.clearService();
+
+			ObjectDataLocalServiceUtil.clearService();
+
+			ParameterConfigurationLocalServiceUtil.clearService();
+
+			ParameterOptionsConfigurationLocalServiceUtil.clearService();
 
 			PersonLocalServiceUtil.clearService();
 

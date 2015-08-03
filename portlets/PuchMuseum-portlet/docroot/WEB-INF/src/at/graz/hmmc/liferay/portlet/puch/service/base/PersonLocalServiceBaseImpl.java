@@ -16,7 +16,10 @@ package at.graz.hmmc.liferay.portlet.puch.service.base;
 
 import at.graz.hmmc.liferay.portlet.puch.model.Person;
 import at.graz.hmmc.liferay.portlet.puch.service.PersonLocalService;
-import at.graz.hmmc.liferay.portlet.puch.service.persistence.FahrzeugPersistence;
+import at.graz.hmmc.liferay.portlet.puch.service.persistence.ConfigurationPersistence;
+import at.graz.hmmc.liferay.portlet.puch.service.persistence.ObjectDataPersistence;
+import at.graz.hmmc.liferay.portlet.puch.service.persistence.ParameterConfigurationPersistence;
+import at.graz.hmmc.liferay.portlet.puch.service.persistence.ParameterOptionsConfigurationPersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.PersonPersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.PuchMuseumsObjektPersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionPersistence;
@@ -277,40 +280,155 @@ public abstract class PersonLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the fahrzeug local service.
+	 * Returns the configuration local service.
 	 *
-	 * @return the fahrzeug local service
+	 * @return the configuration local service
 	 */
-	public at.graz.hmmc.liferay.portlet.puch.service.FahrzeugLocalService getFahrzeugLocalService() {
-		return fahrzeugLocalService;
+	public at.graz.hmmc.liferay.portlet.puch.service.ConfigurationLocalService getConfigurationLocalService() {
+		return configurationLocalService;
 	}
 
 	/**
-	 * Sets the fahrzeug local service.
+	 * Sets the configuration local service.
 	 *
-	 * @param fahrzeugLocalService the fahrzeug local service
+	 * @param configurationLocalService the configuration local service
 	 */
-	public void setFahrzeugLocalService(
-		at.graz.hmmc.liferay.portlet.puch.service.FahrzeugLocalService fahrzeugLocalService) {
-		this.fahrzeugLocalService = fahrzeugLocalService;
+	public void setConfigurationLocalService(
+		at.graz.hmmc.liferay.portlet.puch.service.ConfigurationLocalService configurationLocalService) {
+		this.configurationLocalService = configurationLocalService;
 	}
 
 	/**
-	 * Returns the fahrzeug persistence.
+	 * Returns the configuration persistence.
 	 *
-	 * @return the fahrzeug persistence
+	 * @return the configuration persistence
 	 */
-	public FahrzeugPersistence getFahrzeugPersistence() {
-		return fahrzeugPersistence;
+	public ConfigurationPersistence getConfigurationPersistence() {
+		return configurationPersistence;
 	}
 
 	/**
-	 * Sets the fahrzeug persistence.
+	 * Sets the configuration persistence.
 	 *
-	 * @param fahrzeugPersistence the fahrzeug persistence
+	 * @param configurationPersistence the configuration persistence
 	 */
-	public void setFahrzeugPersistence(FahrzeugPersistence fahrzeugPersistence) {
-		this.fahrzeugPersistence = fahrzeugPersistence;
+	public void setConfigurationPersistence(
+		ConfigurationPersistence configurationPersistence) {
+		this.configurationPersistence = configurationPersistence;
+	}
+
+	/**
+	 * Returns the object data local service.
+	 *
+	 * @return the object data local service
+	 */
+	public at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalService getObjectDataLocalService() {
+		return objectDataLocalService;
+	}
+
+	/**
+	 * Sets the object data local service.
+	 *
+	 * @param objectDataLocalService the object data local service
+	 */
+	public void setObjectDataLocalService(
+		at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalService objectDataLocalService) {
+		this.objectDataLocalService = objectDataLocalService;
+	}
+
+	/**
+	 * Returns the object data persistence.
+	 *
+	 * @return the object data persistence
+	 */
+	public ObjectDataPersistence getObjectDataPersistence() {
+		return objectDataPersistence;
+	}
+
+	/**
+	 * Sets the object data persistence.
+	 *
+	 * @param objectDataPersistence the object data persistence
+	 */
+	public void setObjectDataPersistence(
+		ObjectDataPersistence objectDataPersistence) {
+		this.objectDataPersistence = objectDataPersistence;
+	}
+
+	/**
+	 * Returns the parameter configuration local service.
+	 *
+	 * @return the parameter configuration local service
+	 */
+	public at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalService getParameterConfigurationLocalService() {
+		return parameterConfigurationLocalService;
+	}
+
+	/**
+	 * Sets the parameter configuration local service.
+	 *
+	 * @param parameterConfigurationLocalService the parameter configuration local service
+	 */
+	public void setParameterConfigurationLocalService(
+		at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalService parameterConfigurationLocalService) {
+		this.parameterConfigurationLocalService = parameterConfigurationLocalService;
+	}
+
+	/**
+	 * Returns the parameter configuration persistence.
+	 *
+	 * @return the parameter configuration persistence
+	 */
+	public ParameterConfigurationPersistence getParameterConfigurationPersistence() {
+		return parameterConfigurationPersistence;
+	}
+
+	/**
+	 * Sets the parameter configuration persistence.
+	 *
+	 * @param parameterConfigurationPersistence the parameter configuration persistence
+	 */
+	public void setParameterConfigurationPersistence(
+		ParameterConfigurationPersistence parameterConfigurationPersistence) {
+		this.parameterConfigurationPersistence = parameterConfigurationPersistence;
+	}
+
+	/**
+	 * Returns the parameter options configuration local service.
+	 *
+	 * @return the parameter options configuration local service
+	 */
+	public at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalService getParameterOptionsConfigurationLocalService() {
+		return parameterOptionsConfigurationLocalService;
+	}
+
+	/**
+	 * Sets the parameter options configuration local service.
+	 *
+	 * @param parameterOptionsConfigurationLocalService the parameter options configuration local service
+	 */
+	public void setParameterOptionsConfigurationLocalService(
+		at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalService parameterOptionsConfigurationLocalService) {
+		this.parameterOptionsConfigurationLocalService = parameterOptionsConfigurationLocalService;
+	}
+
+	/**
+	 * Returns the parameter options configuration persistence.
+	 *
+	 * @return the parameter options configuration persistence
+	 */
+	public ParameterOptionsConfigurationPersistence getParameterOptionsConfigurationPersistence() {
+		return parameterOptionsConfigurationPersistence;
+	}
+
+	/**
+	 * Sets the parameter options configuration persistence.
+	 *
+	 * @param parameterOptionsConfigurationPersistence the parameter options configuration persistence
+	 */
+	public void setParameterOptionsConfigurationPersistence(
+		ParameterOptionsConfigurationPersistence parameterOptionsConfigurationPersistence) {
+		this.parameterOptionsConfigurationPersistence = parameterOptionsConfigurationPersistence;
 	}
 
 	/**
@@ -602,10 +720,22 @@ public abstract class PersonLocalServiceBaseImpl extends BaseLocalServiceImpl
 		}
 	}
 
-	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.FahrzeugLocalService.class)
-	protected at.graz.hmmc.liferay.portlet.puch.service.FahrzeugLocalService fahrzeugLocalService;
-	@BeanReference(type = FahrzeugPersistence.class)
-	protected FahrzeugPersistence fahrzeugPersistence;
+	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.ConfigurationLocalService.class)
+	protected at.graz.hmmc.liferay.portlet.puch.service.ConfigurationLocalService configurationLocalService;
+	@BeanReference(type = ConfigurationPersistence.class)
+	protected ConfigurationPersistence configurationPersistence;
+	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalService.class)
+	protected at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalService objectDataLocalService;
+	@BeanReference(type = ObjectDataPersistence.class)
+	protected ObjectDataPersistence objectDataPersistence;
+	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalService.class)
+	protected at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalService parameterConfigurationLocalService;
+	@BeanReference(type = ParameterConfigurationPersistence.class)
+	protected ParameterConfigurationPersistence parameterConfigurationPersistence;
+	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalService.class)
+	protected at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalService parameterOptionsConfigurationLocalService;
+	@BeanReference(type = ParameterOptionsConfigurationPersistence.class)
+	protected ParameterOptionsConfigurationPersistence parameterOptionsConfigurationPersistence;
 	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.PersonLocalService.class)
 	protected at.graz.hmmc.liferay.portlet.puch.service.PersonLocalService personLocalService;
 	@BeanReference(type = PersonPersistence.class)

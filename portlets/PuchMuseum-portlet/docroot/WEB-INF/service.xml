@@ -21,30 +21,28 @@
 		<column name="folder" type="String" />
 	</entity>
 
-	<entity name="Fahrzeug" local-service="true" remote-service="false"  table="puchmuseum.fahrzeug">
+	<entity name="ObjectData" local-service="true" remote-service="false"  table="puchmuseum.objectdata" >
 		<!-- PK fields -->
-		<column name="fahrzeugId" type="long" primary="true" />
-
+		<column name="objectdataId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="puchmuseumsobjectId" type="long" />
 		<!-- Audit fields -->
-		<column name="createrUserId" type="long" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedUserId" type="long" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-		<column name="typ" type="String" />
-
+		<column name="objectkey" type="String" />
+		<column name="objectvalue" type="String" />
 		<!-- Order -->
 		<order by="asc">
-			<order-column name="typ" />
+			<order-column name="puchmuseumsobjectId" />
 		</order>
-
 		<!-- Finder methods -->
-		<finder name="Typ" return-type="Collection">
-			<finder-column name="typ" />
+		<finder name="Event" return-type="Collection">
+			<finder-column name="puchmuseumsobjectId" />
+		</finder>
+		<finder name="DataByOntology" return-type="EventData">
+			<finder-column name="puchmuseumsobjectId" />
+			<finder-column name="objectkey" />
 		</finder>
 	</entity>
-		<entity name="Person" local-service="true" remote-service="false"  table="puchmuseum.person">
+	<entity name="Person" local-service="true" remote-service="false"  table="puchmuseum.person">
 		<!-- PK fields -->
 		<column name="personId" type="long" primary="true" />
 
@@ -83,6 +81,76 @@
 		<!-- Finder methods -->
 		<finder name="Typ" return-type="Collection">
 			<finder-column name="typ" />
+		</finder>
+	</entity>
+	
+	<!-- Configurations -->
+	
+	<entity name="Configuration" local-service="true" remote-service="false"  table="puchmuseum.configuration">
+		<!-- PK fields -->
+		<column name="configurationId" type="long" primary="true" />
+		<!-- Other fields -->
+		<column name="scope" type="String" />
+		<column name="optionkey" type="String" />
+		<column name="optionvalue" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="configurationId" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="optionFinder" return-type="Configuration">
+			<finder-column name="scope" />
+			<finder-column name="optionkey" />
+		</finder>
+		<finder name="optionsFinderValue" return-type="Configuration">
+			<finder-column name="scope" />
+			<finder-column name="optionvalue" />
+		</finder>
+		<finder name="optionsFinderKey" return-type="Collection">
+			<finder-column name="scope" />
+			<finder-column name="optionkey" />
+		</finder>
+		<finder name="optionsFinder" return-type="Collection">
+			<finder-column name="scope" />
+		</finder>
+		<finder name="OptionsFinderForKey" return-type="Collection">
+			<finder-column name="optionkey" />
+		</finder>
+	</entity>
+	<entity name="ParameterConfiguration" local-service="true" remote-service="false"  table="puchmuseum.parameterconfiguration">
+		<!-- PK fields -->
+		<column name="parameterconfigurationId" type="long" primary="true" />
+		<!-- Other fields -->
+		<column name="displaynameshort" type="String" />
+		<column name="displaynamelong" type="String" />
+		<column name="datatype" type="String" />
+		<column name="group" type="String" />
+		<column name="tab" type="String" />
+		<!-- View -->
+		<column name="viewscript" type="String" />
+		<column name="viewvisible" type="boolean" />
+		<column name="viewtip" type="String" />
+		<column name="viewtitlecss" type="String" />
+		<column name="viewvaluecss" type="String" />
+		<column name="viewcss" type="String" />
+		<!-- Edit -->
+		<column name="editscript" type="String" />
+		<column name="editvisible" type="boolean" />
+		<column name="edittip" type="String" />
+		<column name="edittitlecss" type="String" />
+		<column name="editvaluecss" type="String" />
+		<column name="editcss" type="String" />
+		<column name="editcolumnwidth" type="long" />
+	</entity>
+	<entity name="ParameterOptionsConfiguration" local-service="true" remote-service="false"  table="puchmuseum.parameteroptionsconfiguration">
+		<!-- PK fields -->
+		<column name="parameteroptionsconfigurationId" type="long" primary="true" />
+		<!-- Other fields -->
+		<column name="parameterconfigurationId" type="long" />
+		<column name="optionkey" type="String" />
+		<column name="optionvalue" type="String" />
+		<finder name="OptionsForParameter" return-type="Collection">
+			<finder-column name="parameterconfigurationId" />
 		</finder>
 	</entity>
 </service-builder>

@@ -20,9 +20,16 @@
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="java.util.List" %>
 
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt"%>
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.service.PuchMuseumsObjektLocalServiceUtil"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.model.Configuration"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ConfigurationLocalServiceUtil"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalServiceUtil"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.model.ParameterOptionsConfiguration"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalServiceUtil"%>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />

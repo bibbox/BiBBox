@@ -1,0 +1,24 @@
+<%
+//EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(eventid, String.valueOf(parameterconfig.getParameterconfigurationId()));
+String data = "not specified";
+/*if(eventdata != null) {
+	data = eventdata.getValue();
+}*/
+%>
+	<aui:select cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplaynameshort() %>"  multiple="true" >
+		<%
+		List<ParameterOptionsConfiguration> options = ParameterOptionsConfigurationLocalServiceUtil.getParameterOptionsConfigurationForParameterConfiguration(parameterconfig.getParameterconfigurationId());
+		if(options != null) {
+			for(ParameterOptionsConfiguration option : options) {
+				%>
+				<aui:option cssClass='<%= id + "_" + option.getOptionvalue() %>' selected="<%= data.equalsIgnoreCase(option.getOptionvalue()) %>" value="<%= option.getOptionvalue() %>"><liferay-ui:message key='<%= option.getOptionvalue() %>' /></aui:option>
+				<%
+			}
+		}
+		%>
+		<aui:option cssClass='<%= id + "_" + "notspecified" %>' selected='<%= data.equalsIgnoreCase("not specified") %>' value="not specified"><liferay-ui:message key='Not Specified' /></aui:option>
+	</aui:select>
+
+<aui:script>
+	<%= parameterconfig.getEditscript() %>
+</aui:script>

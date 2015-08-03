@@ -2,20 +2,63 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
-	<import class="at.graz.hmmc.liferay.portlet.puch.model.Fahrzeug" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.Configuration" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.ObjectData" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.ParameterOptionsConfiguration" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.Person" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.Transaktion" />
-	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.FahrzeugImpl" table="puchmuseum.fahrzeug">
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ConfigurationImpl" table="puchmuseum.configuration">
 		<cache usage="read-write" />
-		<id name="fahrzeugId" type="long">
+		<id name="configurationId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="createrUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="typ" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="scope" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="optionkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="optionvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl" table="puchmuseum.objectdata">
+		<cache usage="read-write" />
+		<id name="objectdataId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="puchmuseumsobjectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="objectkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="objectvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl" table="puchmuseum.parameterconfiguration">
+		<cache usage="read-write" />
+		<id name="parameterconfigurationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="displaynameshort" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="displaynamelong" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="datatype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="group" type="com.liferay.portal.dao.orm.hibernate.StringType" column="group_" />
+		<property name="tab" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="viewscript" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="viewvisible" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="viewtip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="viewtitlecss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="viewvaluecss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="viewcss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="editscript" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="editvisible" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="edittip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="edittitlecss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="editvaluecss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="editcss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="editcolumnwidth" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterOptionsConfigurationImpl" table="puchmuseum.parameteroptionsconfiguration">
+		<cache usage="read-write" />
+		<id name="parameteroptionsconfigurationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="parameterconfigurationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="optionkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="optionvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.PersonImpl" table="puchmuseum.person">
 		<cache usage="read-write" />

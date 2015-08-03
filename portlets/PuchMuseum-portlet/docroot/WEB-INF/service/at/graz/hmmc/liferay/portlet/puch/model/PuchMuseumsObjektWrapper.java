@@ -401,7 +401,8 @@ public class PuchMuseumsObjektWrapper implements PuchMuseumsObjekt,
 	}
 
 	@Override
-	public int compareTo(PuchMuseumsObjekt puchMuseumsObjekt) {
+	public int compareTo(
+		at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt puchMuseumsObjekt) {
 		return _puchMuseumsObjekt.compareTo(puchMuseumsObjekt);
 	}
 
@@ -411,17 +412,17 @@ public class PuchMuseumsObjektWrapper implements PuchMuseumsObjekt,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<PuchMuseumsObjekt> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt> toCacheModel() {
 		return _puchMuseumsObjekt.toCacheModel();
 	}
 
 	@Override
-	public PuchMuseumsObjekt toEscapedModel() {
+	public at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt toEscapedModel() {
 		return new PuchMuseumsObjektWrapper(_puchMuseumsObjekt.toEscapedModel());
 	}
 
 	@Override
-	public PuchMuseumsObjekt toUnescapedModel() {
+	public at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt toUnescapedModel() {
 		return new PuchMuseumsObjektWrapper(_puchMuseumsObjekt.toUnescapedModel());
 	}
 

@@ -41,4 +41,133 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>configuration-puch-museum</portlet-name>
+		<display-name>Configuration Puch Museum</display-name>
+		<portlet-class>
+			at.graz.hmmc.liferay.portlet.puch.configuration.ConfigurationPuchMuseum
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/configuration/configurationpuchmuseum/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/configuration/configurationpuchmuseum/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Configuration Puch Museum</title>
+			<short-title>Configuration Puch Museum</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>parameter-configuration</portlet-name>
+		<display-name>Parameter Configuration</display-name>
+		<portlet-class>
+			at.graz.hmmc.liferay.portlet.puch.configuration.ParameterConfiguration
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/configuration/parameterconfiguration/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/configuration/parameterconfiguration/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Parameter Configuration</title>
+			<short-title>Parameter Configuration</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>parameter-option-configuration</portlet-name>
+		<display-name>Parameter Option Configuration</display-name>
+		<portlet-class>
+			at.graz.hmmc.liferay.portlet.puch.configuration.ParameterOptionConfiguration
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/configuration/parameteroptionconfiguration/view.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/configuration/parameteroptionconfiguration/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Parameter Option Configuration</title>
+			<short-title>Parameter Option Configuration</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

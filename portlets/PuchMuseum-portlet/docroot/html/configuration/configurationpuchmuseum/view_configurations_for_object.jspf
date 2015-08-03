@@ -1,0 +1,39 @@
+<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "20")) %>' emptyResultsMessage="empty-results-message">
+	<liferay-ui:search-container-results
+		results="<%= ConfigurationLocalServiceUtil.getConfigurationOptionsForKey(configuration.getOptionvalue(), searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= ConfigurationLocalServiceUtil.getConfigurationOptionsForKeyCount(configuration.getOptionvalue()) %>"
+	/>
+	
+	<liferay-ui:search-container-row
+		className="at.graz.hmmc.liferay.portlet.puch.model.Configuration"
+		keyProperty="configurationId"
+		modelVar="sub_configuration" escapedModel="<%= true %>"
+	>
+		<liferay-ui:search-container-column-text
+			name="ID"
+			value="<%= Long.toString(sub_configuration.getConfigurationId()) %>"
+		/>
+		
+		<liferay-ui:search-container-column-text
+			name="Scope"
+			value="<%= sub_configuration.getScope() %>"
+		/>
+		
+		<liferay-ui:search-container-column-text
+			name="Key"
+			value="<%= sub_configuration.getOptionkey() %>"
+		/>
+		
+		<liferay-ui:search-container-column-text
+			name="Value"
+			value="<%= sub_configuration.getOptionvalue() %>"
+		/>
+		
+		<liferay-ui:search-container-column-jsp
+			align="right"
+			path="/html/configuration/configurationpuchmuseum/configuration_actions.jsp"
+		/>
+		
+	</liferay-ui:search-container-row>
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>

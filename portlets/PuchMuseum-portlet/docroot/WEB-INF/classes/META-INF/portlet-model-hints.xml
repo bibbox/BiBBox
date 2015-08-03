@@ -1,13 +1,82 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="at.graz.hmmc.liferay.portlet.puch.model.Fahrzeug">
-		<field name="fahrzeugId" type="long" />
-		<field name="createrUserId" type="long" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedUserId" type="long" />
-		<field name="modifiedDate" type="Date" />
-		<field name="typ" type="String" />
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.Configuration">
+		<field name="configurationId" type="long" />
+		<field name="scope" type="String" />
+		<field name="optionkey" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="optionvalue" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+	</model>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.ObjectData">
+		<field name="objectdataId" type="long" />
+		<field name="puchmuseumsobjectId" type="long" />
+		<field name="objectkey" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="objectvalue" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+	</model>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration">
+		<field name="parameterconfigurationId" type="long" />
+		<field name="displaynameshort" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="displaynamelong" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="datatype" type="String" />
+		<field name="group" type="String" />
+		<field name="tab" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="viewscript" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="viewvisible" type="boolean" />
+		<field name="viewtip" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="viewtitlecss" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="viewvaluecss" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="viewcss" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="editscript" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="editvisible" type="boolean" />
+		<field name="edittip" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="edittitlecss" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="editvaluecss" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="editcss" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="editcolumnwidth" type="long" />
+	</model>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.ParameterOptionsConfiguration">
+		<field name="parameteroptionsconfigurationId" type="long" />
+		<field name="parameterconfigurationId" type="long" />
+		<field name="optionkey" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="optionvalue" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 	</model>
 	<model name="at.graz.hmmc.liferay.portlet.puch.model.Person">
 		<field name="personId" type="long" />
