@@ -56,6 +56,7 @@ public class ParameterConfigurationWrapper implements ParameterConfiguration,
 		attributes.put("datatype", getDatatype());
 		attributes.put("group", getGroup());
 		attributes.put("tab", getTab());
+		attributes.put("summery", getSummery());
 		attributes.put("viewscript", getViewscript());
 		attributes.put("viewvisible", getViewvisible());
 		attributes.put("viewtip", getViewtip());
@@ -110,6 +111,12 @@ public class ParameterConfigurationWrapper implements ParameterConfiguration,
 
 		if (tab != null) {
 			setTab(tab);
+		}
+
+		Boolean summery = (Boolean)attributes.get("summery");
+
+		if (summery != null) {
+			setSummery(summery);
 		}
 
 		String viewscript = (String)attributes.get("viewscript");
@@ -329,6 +336,36 @@ public class ParameterConfigurationWrapper implements ParameterConfiguration,
 	@Override
 	public void setTab(java.lang.String tab) {
 		_parameterConfiguration.setTab(tab);
+	}
+
+	/**
+	* Returns the summery of this parameter configuration.
+	*
+	* @return the summery of this parameter configuration
+	*/
+	@Override
+	public boolean getSummery() {
+		return _parameterConfiguration.getSummery();
+	}
+
+	/**
+	* Returns <code>true</code> if this parameter configuration is summery.
+	*
+	* @return <code>true</code> if this parameter configuration is summery; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isSummery() {
+		return _parameterConfiguration.isSummery();
+	}
+
+	/**
+	* Sets whether this parameter configuration is summery.
+	*
+	* @param summery the summery of this parameter configuration
+	*/
+	@Override
+	public void setSummery(boolean summery) {
+		_parameterConfiguration.setSummery(summery);
 	}
 
 	/**

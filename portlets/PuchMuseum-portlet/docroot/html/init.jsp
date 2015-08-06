@@ -30,6 +30,8 @@
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalServiceUtil"%>
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.model.ParameterOptionsConfiguration"%>
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalServiceUtil"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.model.ObjectData"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalServiceUtil"%>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />

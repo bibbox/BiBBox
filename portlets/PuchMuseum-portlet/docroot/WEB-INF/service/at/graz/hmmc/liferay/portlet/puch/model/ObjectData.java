@@ -17,7 +17,7 @@ package at.graz.hmmc.liferay.portlet.puch.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the ObjectData service. Represents a row in the &quot;puchmuseum.objectdata&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the ObjectData service. Represents a row in the &quot;puchmuseum_objectdata&quot; database table, with each column mapped to a property of this class.
  *
  * @author reihsr
  * @see ObjectDataModel
@@ -31,4 +31,5 @@ public interface ObjectData extends ObjectDataModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String formatValueHTML();
 }

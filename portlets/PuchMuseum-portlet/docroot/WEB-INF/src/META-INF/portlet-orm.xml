@@ -39,6 +39,7 @@
 				<column name="GROUP_" />
 			</basic>
 			<basic name="tab" />
+			<basic name="summery" />
 			<basic name="viewscript" />
 			<basic name="viewvisible" />
 			<basic name="viewtip" />
@@ -128,31 +129,31 @@
 		</attributes>
 	</mapped-superclass>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ConfigurationImpl" name="Configuration">
-		<table name="puchmuseum.configuration" />
+		<table name="puchmuseum_configuration" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl" name="ObjectData">
-		<table name="puchmuseum.objectdata" />
+		<table name="puchmuseum_objectdata" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl" name="ParameterConfiguration">
-		<table name="puchmuseum.parameterconfiguration" />
+		<table name="puchmuseum_parameterconfiguration" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterOptionsConfigurationImpl" name="ParameterOptionsConfiguration">
-		<table name="puchmuseum.parameteroptionsconfiguration" />
+		<table name="puchmuseum_parameteroptionsconfiguration" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.PersonImpl" name="Person">
-		<table name="puchmuseum.person" />
+		<table name="puchmuseum_person" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektImpl" name="PuchMuseumsObjekt">
-		<table name="puchmuseum.puchmuseumsobjekt" />
+		<table name="puchmuseum_puchmuseumsobjekt" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionImpl" name="Transaktion">
-		<table name="puchmuseum.transaktion" />
+		<table name="puchmuseum_transaktion" />
 		<attributes />
 	</entity>
 </entity-mappings>

@@ -1,10 +1,3 @@
-<%
-//EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(eventid, String.valueOf(parameterconfig.getParameterconfigurationId()));
-String data = "";
-/*if(eventdata != null) {
-	data = eventdata.getValue();
-}*/
-%>
 <aui:field-wrapper cssClass="<%= id %>" label="<%= id %>">
 	<textarea name="<portlet:namespace /><%= id %>"><%= data %></textarea>
 	<script>

@@ -284,6 +284,13 @@ public class ObjectDataLocalServiceUtil {
 		return getService().objectDataFromRequest(request);
 	}
 
+	public static at.graz.hmmc.liferay.portlet.puch.model.ObjectData addObjectData(
+		long puchmuseumsobjectId, java.lang.String objectkey,
+		java.lang.String objectvalue) {
+		return getService()
+				   .addObjectData(puchmuseumsobjectId, objectkey, objectvalue);
+	}
+
 	public static at.graz.hmmc.liferay.portlet.puch.model.ObjectData getObjectDataForObject(
 		long puchmuseumsobjectId, java.lang.String objectkey) {
 		return getService()

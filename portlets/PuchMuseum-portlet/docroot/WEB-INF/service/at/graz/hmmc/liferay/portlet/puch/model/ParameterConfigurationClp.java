@@ -79,6 +79,7 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 		attributes.put("datatype", getDatatype());
 		attributes.put("group", getGroup());
 		attributes.put("tab", getTab());
+		attributes.put("summery", getSummery());
 		attributes.put("viewscript", getViewscript());
 		attributes.put("viewvisible", getViewvisible());
 		attributes.put("viewtip", getViewtip());
@@ -133,6 +134,12 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 
 		if (tab != null) {
 			setTab(tab);
+		}
+
+		Boolean summery = (Boolean)attributes.get("summery");
+
+		if (summery != null) {
+			setSummery(summery);
 		}
 
 		String viewscript = (String)attributes.get("viewscript");
@@ -351,6 +358,34 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 				Method method = clazz.getMethod("setTab", String.class);
 
 				method.invoke(_parameterConfigurationRemoteModel, tab);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public boolean getSummery() {
+		return _summery;
+	}
+
+	@Override
+	public boolean isSummery() {
+		return _summery;
+	}
+
+	@Override
+	public void setSummery(boolean summery) {
+		_summery = summery;
+
+		if (_parameterConfigurationRemoteModel != null) {
+			try {
+				Class<?> clazz = _parameterConfigurationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setSummery", boolean.class);
+
+				method.invoke(_parameterConfigurationRemoteModel, summery);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -745,6 +780,7 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 		clone.setDatatype(getDatatype());
 		clone.setGroup(getGroup());
 		clone.setTab(getTab());
+		clone.setSummery(getSummery());
 		clone.setViewscript(getViewscript());
 		clone.setViewvisible(getViewvisible());
 		clone.setViewtip(getViewtip());
@@ -806,7 +842,7 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{parameterconfigurationId=");
 		sb.append(getParameterconfigurationId());
@@ -820,6 +856,8 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 		sb.append(getGroup());
 		sb.append(", tab=");
 		sb.append(getTab());
+		sb.append(", summery=");
+		sb.append(getSummery());
 		sb.append(", viewscript=");
 		sb.append(getViewscript());
 		sb.append(", viewvisible=");
@@ -853,7 +891,7 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -883,6 +921,10 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 		sb.append(
 			"<column><column-name>tab</column-name><column-value><![CDATA[");
 		sb.append(getTab());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>summery</column-name><column-value><![CDATA[");
+		sb.append(getSummery());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>viewscript</column-name><column-value><![CDATA[");
@@ -948,6 +990,7 @@ public class ParameterConfigurationClp extends BaseModelImpl<ParameterConfigurat
 	private String _datatype;
 	private String _group;
 	private String _tab;
+	private boolean _summery;
 	private String _viewscript;
 	private boolean _viewvisible;
 	private String _viewtip;

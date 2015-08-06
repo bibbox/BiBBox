@@ -443,6 +443,11 @@ public class PuchMuseumsObjektWrapper implements PuchMuseumsObjekt,
 	}
 
 	@Override
+	public java.lang.String getHTMLSummery() {
+		return _puchMuseumsObjekt.getHTMLSummery();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

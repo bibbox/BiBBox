@@ -32,6 +32,7 @@ ParameterConfiguration parameterconfiguration = null;
 			<aui:input name="datatype" />
 			<aui:input name="group" />
 			<aui:input name="tab" />
+			<aui:input name="summery" />
 		</aui:layout>
 		
 		<aui:layout cssClass="cssgroup">

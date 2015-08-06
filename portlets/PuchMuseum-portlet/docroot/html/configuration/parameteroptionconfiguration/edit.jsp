@@ -24,7 +24,7 @@ ParameterOptionsConfiguration parameteroptionsconfiguration = null;
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 
-		<aui:input type="hidden" name="parameterconfigurationId" value='<%= parameteroptionsconfiguration == null ? "" : parameteroptionsconfiguration.getParameteroptionsconfigurationId() %>'/>
+		<aui:input type="hidden" name="parameteroptionsconfigurationId" value='<%= parameteroptionsconfiguration == null ? "" : parameteroptionsconfiguration.getParameteroptionsconfigurationId() %>'/>
 		
 		<aui:input name="parameterconfigurationId" />
 		<aui:input name="optionkey" />

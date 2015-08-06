@@ -17,7 +17,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		<portlet:param name="puchmuseumsobjectId" value="<%= String.valueOf(puchmuseumsobjectId) %>"/>
 		<portlet:param name="redirect" value="<%= redirect %>"/>
 	</portlet:renderURL>
-	<liferay-ui:icon image="edit" url="<%=viewURL.toString() %>" />
+	<liferay-ui:icon image="view" url="<%=viewURL.toString() %>" />
 
 	<portlet:renderURL var="editURL">
 		<portlet:param name="mvcPath" value="/html/puchmuseumsobjekterstellen/edit.jsp" />

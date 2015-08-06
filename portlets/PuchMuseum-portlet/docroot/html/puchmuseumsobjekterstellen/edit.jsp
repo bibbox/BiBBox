@@ -5,7 +5,7 @@
 <%
 PuchMuseumsObjekt puchmuseumsobjekt = null;
 
-	long puchmuseumsobjektId = ParamUtil.getLong(request, "puchmuseumsobjektId");
+	long puchmuseumsobjektId = ParamUtil.getLong(request, "puchmuseumsobjectId");
 
 	if (puchmuseumsobjektId > 0) {
 		puchmuseumsobjekt = PuchMuseumsObjektLocalServiceUtil.getPuchMuseumsObjekt(puchmuseumsobjektId);
@@ -28,20 +28,26 @@ PuchMuseumsObjekt puchmuseumsobjekt = null;
 
 creating <%= objekttyp %><br>
 
-<portlet:actionURL name='<%= puchmuseumsobjekt == null ? "addKdssmpConfiguration" : "updateKdssmpConfiguration" %>' var="editKdssmpConfigurationURL" windowState="normal" />
-<aui:form action="<%= editKdssmpConfigurationURL %>" method="POST" name="fm">
+<portlet:actionURL name='<%= puchmuseumsobjekt == null ? "addPuchMuseumsObject" : "updatePuchMuseumsObject" %>' var="editPuchMuseumsObjectURL" windowState="normal" />
+<aui:form action="<%= editPuchMuseumsObjectURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 		<aui:input type="hidden" name="objekttyp" value="<%= objekttyp %>" />
-		<aui:input type="hidden" name="configurationId" value='<%= puchmuseumsobjekt == null ? "" : puchmuseumsobjekt.getPuchmuseumsobjectId() %>'/>
+		<aui:input type="hidden" name="puchmuseumsobjektId" value='<%= puchmuseumsobjekt == null ? "" : puchmuseumsobjekt.getPuchmuseumsobjectId() %>'/>
 		
 		<%
 			List<Configuration> configurations = ConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", objekttyp);
 			for(Configuration configuration : configurations) {
 				ParameterConfiguration parameterconfig = ParameterConfigurationLocalServiceUtil.getParameterConfiguration(Long.parseLong(configuration.getOptionvalue()));
 
-				String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
-				//parameterconfig.getParameterconfigurationId()
+				String id = parameterconfig.getParameterconfigurationId() + "";
+				
+				ObjectData objectdata = ObjectDataLocalServiceUtil.getObjectDataForObject(puchmuseumsobjektId, id);
+				String data = "";
+				if(objectdata != null) {
+					data = objectdata.getObjectvalue();
+				}
+				
 				if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
 					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/html.jspf" %><%
 				} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {

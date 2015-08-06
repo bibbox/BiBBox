@@ -256,6 +256,10 @@ public interface ObjectDataLocalService extends BaseLocalService,
 	public at.graz.hmmc.liferay.portlet.puch.model.ObjectData objectDataFromRequest(
 		javax.portlet.ActionRequest request);
 
+	public at.graz.hmmc.liferay.portlet.puch.model.ObjectData addObjectData(
+		long puchmuseumsobjectId, java.lang.String objectkey,
+		java.lang.String objectvalue);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public at.graz.hmmc.liferay.portlet.puch.model.ObjectData getObjectDataForObject(
 		long puchmuseumsobjectId, java.lang.String objectkey);

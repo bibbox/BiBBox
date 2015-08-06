@@ -275,6 +275,11 @@ public class PuchMuseumsObjektLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt addPuchMuseumsObjekt(
+		java.lang.String objekttyp, long userId) {
+		return getService().addPuchMuseumsObjekt(objekttyp, userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

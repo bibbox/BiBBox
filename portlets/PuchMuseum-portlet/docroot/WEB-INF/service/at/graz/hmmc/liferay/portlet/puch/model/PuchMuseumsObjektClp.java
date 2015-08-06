@@ -345,6 +345,25 @@ public class PuchMuseumsObjektClp extends BaseModelImpl<PuchMuseumsObjekt>
 		}
 	}
 
+	@Override
+	public java.lang.String getHTMLSummery() {
+		try {
+			String methodName = "getHTMLSummery";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getPuchMuseumsObjektRemoteModel() {
 		return _puchMuseumsObjektRemoteModel;
 	}

@@ -14,6 +14,13 @@
 
 package at.graz.hmmc.liferay.portlet.puch.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.liferay.counter.service.CounterLocalServiceUtil;
+
+import at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt;
+import at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektImpl;
 import at.graz.hmmc.liferay.portlet.puch.service.base.PuchMuseumsObjektLocalServiceBaseImpl;
 
 /**
@@ -37,4 +44,26 @@ public class PuchMuseumsObjektLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.hmmc.liferay.portlet.puch.service.PuchMuseumsObjektLocalServiceUtil} to access the puch museums objekt local service.
 	 */
+	/**
+	 * Error Format for date
+	 */
+	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	
+	public PuchMuseumsObjekt addPuchMuseumsObjekt(String objekttyp, long userId) {
+		try {
+			PuchMuseumsObjektImpl puchmuseumsobjekt = new PuchMuseumsObjektImpl();
+			puchmuseumsobjekt.setPuchmuseumsobjectId(CounterLocalServiceUtil.increment(PuchMuseumsObjekt.class.getName()));
+			puchmuseumsobjekt.setObjekttyp(objekttyp);
+			puchmuseumsobjekt.setCreateDate(new Date());
+			puchmuseumsobjekt.setModifiedDate(new Date());
+			puchmuseumsobjekt.setModifiedUserId(userId);
+			puchmuseumsobjekt.setCreaterUserId(userId);
+			return puchmuseumsobjekt;
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [PuchMuseum-portlet::at.graz.hmmc.liferay.portlet.puch.service.impl.PuchMuseumsObjektLocalServiceImpl::addPuchMuseumsObjekt] Error creating new Object (" + objekttyp+ ").");
+			ex.printStackTrace();
+		}
+		return null;
+	}
 }

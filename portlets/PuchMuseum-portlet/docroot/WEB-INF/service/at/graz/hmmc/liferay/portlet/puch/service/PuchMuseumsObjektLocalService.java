@@ -248,4 +248,7 @@ public interface PuchMuseumsObjektLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt addPuchMuseumsObjekt(
+		java.lang.String objekttyp, long userId);
 }

@@ -113,6 +113,10 @@ public class PuchMuseumsObjektLocalServiceClpInvoker {
 		_methodName57 = "setBeanIdentifier";
 
 		_methodParameterTypes57 = new String[] { "java.lang.String" };
+
+		_methodName62 = "addPuchMuseumsObjekt";
+
+		_methodParameterTypes62 = new String[] { "java.lang.String", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +220,12 @@ public class PuchMuseumsObjektLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+			return PuchMuseumsObjektLocalServiceUtil.addPuchMuseumsObjekt((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +265,6 @@ public class PuchMuseumsObjektLocalServiceClpInvoker {
 	private String[] _methodParameterTypes56;
 	private String _methodName57;
 	private String[] _methodParameterTypes57;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
 }

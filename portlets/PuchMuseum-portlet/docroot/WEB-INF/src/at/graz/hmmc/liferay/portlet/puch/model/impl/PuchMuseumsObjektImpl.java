@@ -31,4 +31,9 @@ public class PuchMuseumsObjektImpl extends PuchMuseumsObjektBaseImpl {
 	 */
 	public PuchMuseumsObjektImpl() {
 	}
+	
+	public String getHTMLSummery() {
+		//TODO Add Search for summery fields
+		return "test";
+	}
 }

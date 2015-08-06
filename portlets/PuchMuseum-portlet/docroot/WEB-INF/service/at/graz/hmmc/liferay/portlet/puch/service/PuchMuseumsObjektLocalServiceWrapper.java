@@ -289,6 +289,13 @@ public class PuchMuseumsObjektLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	@Override
+	public at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt addPuchMuseumsObjekt(
+		java.lang.String objekttyp, long userId) {
+		return _puchMuseumsObjektLocalService.addPuchMuseumsObjekt(objekttyp,
+			userId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

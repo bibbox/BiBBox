@@ -118,9 +118,15 @@ public class ObjectDataLocalServiceClpInvoker {
 
 		_methodParameterTypes62 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName63 = "getObjectDataForObject";
+		_methodName63 = "addObjectData";
 
-		_methodParameterTypes63 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes63 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName64 = "getObjectDataForObject";
+
+		_methodParameterTypes64 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -231,6 +237,12 @@ public class ObjectDataLocalServiceClpInvoker {
 
 		if (_methodName63.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return ObjectDataLocalServiceUtil.addObjectData(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+		}
+
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return ObjectDataLocalServiceUtil.getObjectDataForObject(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
@@ -278,4 +290,6 @@ public class ObjectDataLocalServiceClpInvoker {
 	private String[] _methodParameterTypes62;
 	private String _methodName63;
 	private String[] _methodParameterTypes63;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
 }

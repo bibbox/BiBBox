@@ -36,7 +36,7 @@ public class ParameterConfigurationCacheModel implements CacheModel<ParameterCon
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{parameterconfigurationId=");
 		sb.append(parameterconfigurationId);
@@ -50,6 +50,8 @@ public class ParameterConfigurationCacheModel implements CacheModel<ParameterCon
 		sb.append(group);
 		sb.append(", tab=");
 		sb.append(tab);
+		sb.append(", summery=");
+		sb.append(summery);
 		sb.append(", viewscript=");
 		sb.append(viewscript);
 		sb.append(", viewvisible=");
@@ -121,6 +123,8 @@ public class ParameterConfigurationCacheModel implements CacheModel<ParameterCon
 		else {
 			parameterConfigurationImpl.setTab(tab);
 		}
+
+		parameterConfigurationImpl.setSummery(summery);
 
 		if (viewscript == null) {
 			parameterConfigurationImpl.setViewscript(StringPool.BLANK);
@@ -211,6 +215,7 @@ public class ParameterConfigurationCacheModel implements CacheModel<ParameterCon
 		datatype = objectInput.readUTF();
 		group = objectInput.readUTF();
 		tab = objectInput.readUTF();
+		summery = objectInput.readBoolean();
 		viewscript = objectInput.readUTF();
 		viewvisible = objectInput.readBoolean();
 		viewtip = objectInput.readUTF();
@@ -265,6 +270,8 @@ public class ParameterConfigurationCacheModel implements CacheModel<ParameterCon
 		else {
 			objectOutput.writeUTF(tab);
 		}
+
+		objectOutput.writeBoolean(summery);
 
 		if (viewscript == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -349,6 +356,7 @@ public class ParameterConfigurationCacheModel implements CacheModel<ParameterCon
 	public String datatype;
 	public String group;
 	public String tab;
+	public boolean summery;
 	public String viewscript;
 	public boolean viewvisible;
 	public String viewtip;

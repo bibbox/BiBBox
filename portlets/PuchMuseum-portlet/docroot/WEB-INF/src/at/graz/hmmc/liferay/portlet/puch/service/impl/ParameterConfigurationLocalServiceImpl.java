@@ -72,6 +72,7 @@ public class ParameterConfigurationLocalServiceImpl
 			configuration.setDatatype(ParamUtil.getString(request, "datatype"));
 			configuration.setGroup(ParamUtil.getString(request, "group"));
 			configuration.setTab(ParamUtil.getString(request, "tab"));
+			configuration.setSummery(ParamUtil.getBoolean(request, "summery"));
 			
 			configuration.setViewscript(ParamUtil.getString(request, "viewscript"));
 			configuration.setViewvisible(ParamUtil.getBoolean(request, "viewvisible"));

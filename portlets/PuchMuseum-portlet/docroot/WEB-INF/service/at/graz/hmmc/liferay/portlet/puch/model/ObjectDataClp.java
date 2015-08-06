@@ -201,6 +201,25 @@ public class ObjectDataClp extends BaseModelImpl<ObjectData>
 		}
 	}
 
+	@Override
+	public java.lang.String formatValueHTML() {
+		try {
+			String methodName = "formatValueHTML";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getObjectDataRemoteModel() {
 		return _objectDataRemoteModel;
 	}

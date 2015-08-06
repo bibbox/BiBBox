@@ -337,6 +337,7 @@ public class ParameterConfigurationPersistenceImpl extends BasePersistenceImpl<P
 		parameterConfigurationImpl.setDatatype(parameterConfiguration.getDatatype());
 		parameterConfigurationImpl.setGroup(parameterConfiguration.getGroup());
 		parameterConfigurationImpl.setTab(parameterConfiguration.getTab());
+		parameterConfigurationImpl.setSummery(parameterConfiguration.isSummery());
 		parameterConfigurationImpl.setViewscript(parameterConfiguration.getViewscript());
 		parameterConfigurationImpl.setViewvisible(parameterConfiguration.isViewvisible());
 		parameterConfigurationImpl.setViewtip(parameterConfiguration.getViewtip());

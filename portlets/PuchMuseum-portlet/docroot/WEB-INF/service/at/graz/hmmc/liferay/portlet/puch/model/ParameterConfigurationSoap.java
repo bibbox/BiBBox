@@ -36,6 +36,7 @@ public class ParameterConfigurationSoap implements Serializable {
 		soapModel.setDatatype(model.getDatatype());
 		soapModel.setGroup(model.getGroup());
 		soapModel.setTab(model.getTab());
+		soapModel.setSummery(model.getSummery());
 		soapModel.setViewscript(model.getViewscript());
 		soapModel.setViewvisible(model.getViewvisible());
 		soapModel.setViewtip(model.getViewtip());
@@ -150,6 +151,18 @@ public class ParameterConfigurationSoap implements Serializable {
 
 	public void setTab(String tab) {
 		_tab = tab;
+	}
+
+	public boolean getSummery() {
+		return _summery;
+	}
+
+	public boolean isSummery() {
+		return _summery;
+	}
+
+	public void setSummery(boolean summery) {
+		_summery = summery;
 	}
 
 	public String getViewscript() {
@@ -270,6 +283,7 @@ public class ParameterConfigurationSoap implements Serializable {
 	private String _datatype;
 	private String _group;
 	private String _tab;
+	private boolean _summery;
 	private String _viewscript;
 	private boolean _viewvisible;
 	private String _viewtip;

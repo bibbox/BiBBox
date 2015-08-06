@@ -119,9 +119,15 @@ public class ObjectDataLocalServiceClp implements ObjectDataLocalService {
 
 		_methodParameterTypes19 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName20 = "getObjectDataForObject";
+		_methodName20 = "addObjectData";
 
-		_methodParameterTypes20 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes20 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName21 = "getObjectDataForObject";
+
+		_methodParameterTypes21 = new String[] { "long", "java.lang.String" };
 	}
 
 	@Override
@@ -700,13 +706,45 @@ public class ObjectDataLocalServiceClp implements ObjectDataLocalService {
 	}
 
 	@Override
-	public at.graz.hmmc.liferay.portlet.puch.model.ObjectData getObjectDataForObject(
-		long puchmuseumsobjectId, java.lang.String objectkey) {
+	public at.graz.hmmc.liferay.portlet.puch.model.ObjectData addObjectData(
+		long puchmuseumsobjectId, java.lang.String objectkey,
+		java.lang.String objectvalue) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
+					new Object[] {
+						puchmuseumsobjectId,
+						
+					ClpSerializer.translateInput(objectkey),
+						
+					ClpSerializer.translateInput(objectvalue)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.hmmc.liferay.portlet.puch.model.ObjectData)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public at.graz.hmmc.liferay.portlet.puch.model.ObjectData getObjectDataForObject(
+		long puchmuseumsobjectId, java.lang.String objectkey) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] {
 						puchmuseumsobjectId,
 						
@@ -769,4 +807,6 @@ public class ObjectDataLocalServiceClp implements ObjectDataLocalService {
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

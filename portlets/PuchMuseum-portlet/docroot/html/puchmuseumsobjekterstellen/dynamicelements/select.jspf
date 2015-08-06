@@ -1,11 +1,4 @@
-<%
-//EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(eventid, String.valueOf(parameterconfig.getParameterconfigurationId()));
-String data = "not specified";
-/*if(eventdata != null) {
-	data = eventdata.getValue();
-}*/
-%>
-	<aui:select cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplaynameshort() %>" >
+<aui:select cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplaynameshort() %>" >
 		<%
 		List<ParameterOptionsConfiguration> options = ParameterOptionsConfigurationLocalServiceUtil.getParameterOptionsConfigurationForParameterConfiguration(parameterconfig.getParameterconfigurationId());
 		if(options != null) {

@@ -14,6 +14,18 @@
 
 package at.graz.hmmc.liferay.portlet.puch.model.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.script.Compilable;
+import javax.script.CompiledScript;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
+import at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration;
+import at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalServiceUtil;
+
 /**
  * The extended model implementation for the ObjectData service. Represents a row in the &quot;puchmuseum.objectdata&quot; database table, with each column mapped to a property of this class.
  *
@@ -30,5 +42,30 @@ public class ObjectDataImpl extends ObjectDataBaseImpl {
 	 * Never reference this class directly. All methods that expect a object data model instance should use the {@link at.graz.hmmc.liferay.portlet.puch.model.ObjectData} interface instead.
 	 */
 	public ObjectDataImpl() {
+	}
+	
+	/**
+	 * Error Format for date
+	 */
+	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	
+	public String formatValueHTML() {
+		try {
+			ParameterConfiguration parameterconfig = ParameterConfigurationLocalServiceUtil.getParameterConfiguration(Long.parseLong(this.getObjectkey()));
+			ScriptEngineManager manager = new ScriptEngineManager();
+		    ScriptEngine engine = manager.getEngineByName("javascript");
+		    engine.put("optionvalue", this.getObjectvalue());
+		    if(parameterconfig.getViewscript().equalsIgnoreCase("")) {
+		    	return this.getObjectvalue();
+		    }
+		    engine.eval(parameterconfig.getViewscript());
+		    String formatedstring = (String) engine.get("output");
+		    return formatedstring;
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [PuchMuseum-portlet::at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl::formatValueHTML] Error formating ObjectData Value.");
+			ex.printStackTrace();
+		}
+		return this.getObjectvalue();
 	}
 }

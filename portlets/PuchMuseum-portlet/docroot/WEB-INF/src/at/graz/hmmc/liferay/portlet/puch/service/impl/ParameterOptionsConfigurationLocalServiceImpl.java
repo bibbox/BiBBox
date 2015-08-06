@@ -64,7 +64,7 @@ public class ParameterOptionsConfigurationLocalServiceImpl
 	public ParameterOptionsConfiguration parameterOptionsConfigurationFromRequest(ActionRequest request) {
 		try {
 			ParameterOptionsConfigurationImpl configuration = new ParameterOptionsConfigurationImpl();
-			long parameteroptionsconfigurationId = ParamUtil.getLong(request, "configurationId");
+			long parameteroptionsconfigurationId = ParamUtil.getLong(request, "parameteroptionsconfigurationId");
 			if(parameteroptionsconfigurationId == 0) {
 				configuration.setParameteroptionsconfigurationId(CounterLocalServiceUtil.increment(ParameterOptionsConfiguration.class.getName()));
 			} else {
@@ -86,7 +86,7 @@ public class ParameterOptionsConfigurationLocalServiceImpl
 	 */
 	public List<ParameterOptionsConfiguration> getParameterOptionsConfigurationForParameterConfiguration(long parameterconfigurationId) {
 		try {
-			parameterOptionsConfigurationPersistence.findByOptionsForParameter(parameterconfigurationId);
+			return parameterOptionsConfigurationPersistence.findByOptionsForParameter(parameterconfigurationId);
 		} catch(Exception ex) {
 			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [PuchMuseum-portlet::at.graz.hmmc.liferay.portlet.puch.service.impl.ParameterOptionsConfigurationLocalServiceImpl::getParameterOptionsConfigurationForParameterConfiguration] Cound not find ParameterOptionsConfiguration for (" + parameterconfigurationId + ").");
 		}

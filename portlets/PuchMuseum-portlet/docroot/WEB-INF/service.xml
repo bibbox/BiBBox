@@ -4,7 +4,7 @@
 	<author>reihsr</author>
 	<namespace>puchmuseum</namespace>
 	
-	<entity name="PuchMuseumsObjekt" local-service="true" remote-service="false"  table="puchmuseum.puchmuseumsobjekt">
+	<entity name="PuchMuseumsObjekt" local-service="true" remote-service="false"  table="puchmuseum_puchmuseumsobjekt">
 		<!-- PK fields -->
 		<column name="puchmuseumsobjectId" type="long" primary="true" />
 		
@@ -21,7 +21,7 @@
 		<column name="folder" type="String" />
 	</entity>
 
-	<entity name="ObjectData" local-service="true" remote-service="false"  table="puchmuseum.objectdata" >
+	<entity name="ObjectData" local-service="true" remote-service="false"  table="puchmuseum_objectdata" >
 		<!-- PK fields -->
 		<column name="objectdataId" type="long" primary="true" />
 		<!-- Group instance -->
@@ -42,7 +42,7 @@
 			<finder-column name="objectkey" />
 		</finder>
 	</entity>
-	<entity name="Person" local-service="true" remote-service="false"  table="puchmuseum.person">
+	<entity name="Person" local-service="true" remote-service="false"  table="puchmuseum_person">
 		<!-- PK fields -->
 		<column name="personId" type="long" primary="true" />
 
@@ -60,7 +60,7 @@
 			<finder-column name="vorname" />
 		</finder>
 	</entity>
-	<entity name="Transaktion" local-service="true" remote-service="false"  table="puchmuseum.transaktion">
+	<entity name="Transaktion" local-service="true" remote-service="false"  table="puchmuseum_transaktion">
 		<!-- PK fields -->
 		<column name="transaktionId" type="long" primary="true" />
 
@@ -86,7 +86,7 @@
 	
 	<!-- Configurations -->
 	
-	<entity name="Configuration" local-service="true" remote-service="false"  table="puchmuseum.configuration">
+	<entity name="Configuration" local-service="true" remote-service="false"  table="puchmuseum_configuration">
 		<!-- PK fields -->
 		<column name="configurationId" type="long" primary="true" />
 		<!-- Other fields -->
@@ -117,7 +117,7 @@
 			<finder-column name="optionkey" />
 		</finder>
 	</entity>
-	<entity name="ParameterConfiguration" local-service="true" remote-service="false"  table="puchmuseum.parameterconfiguration">
+	<entity name="ParameterConfiguration" local-service="true" remote-service="false"  table="puchmuseum_parameterconfiguration">
 		<!-- PK fields -->
 		<column name="parameterconfigurationId" type="long" primary="true" />
 		<!-- Other fields -->
@@ -126,6 +126,7 @@
 		<column name="datatype" type="String" />
 		<column name="group" type="String" />
 		<column name="tab" type="String" />
+		<column name="summery" type="boolean" />
 		<!-- View -->
 		<column name="viewscript" type="String" />
 		<column name="viewvisible" type="boolean" />
@@ -142,7 +143,7 @@
 		<column name="editcss" type="String" />
 		<column name="editcolumnwidth" type="long" />
 	</entity>
-	<entity name="ParameterOptionsConfiguration" local-service="true" remote-service="false"  table="puchmuseum.parameteroptionsconfiguration">
+	<entity name="ParameterOptionsConfiguration" local-service="true" remote-service="false"  table="puchmuseum_parameteroptionsconfiguration">
 		<!-- PK fields -->
 		<column name="parameteroptionsconfigurationId" type="long" primary="true" />
 		<!-- Other fields -->

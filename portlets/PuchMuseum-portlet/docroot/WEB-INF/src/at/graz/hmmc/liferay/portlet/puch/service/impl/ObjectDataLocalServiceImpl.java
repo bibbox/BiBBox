@@ -77,12 +77,26 @@ public class ObjectDataLocalServiceImpl extends ObjectDataLocalServiceBaseImpl {
 		return null;
 	}
 	
+	public ObjectData addObjectData(long puchmuseumsobjectId, String objectkey, String objectvalue) {
+		try {
+			ObjectDataImpl objectdata = new ObjectDataImpl();
+			objectdata.setObjectdataId(CounterLocalServiceUtil.increment(ObjectData.class.getName()));
+			objectdata.setPuchmuseumsobjectId(puchmuseumsobjectId);
+			objectdata.setObjectkey(objectkey);
+			objectdata.setObjectvalue(objectvalue);
+			return objectdata;
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [PuchMuseum-portlet::at.graz.hmmc.liferay.portlet.puch.service.impl.ObjectDataLocalServiceImpl::addObjectData] Error creating new Object (" + puchmuseumsobjectId + ", " + objectkey + ", " + objectvalue + ").");
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
 	public ObjectData getObjectDataForObject(long puchmuseumsobjectId, String objectkey) {
 		try {
 			return objectDataPersistence.findByDataByOntology(puchmuseumsobjectId, objectkey);
 		} catch(Exception ex) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [PuchMuseum-portlet::at.graz.hmmc.liferay.portlet.puch.service.impl.ObjectDataLocalServiceImpl::getObjectDataForObject] No ObjectData exist for (" + puchmuseumsobjectId + ", " + objectkey + ").");
-			ex.printStackTrace();
 		}
 		return null;
 	}

@@ -298,6 +298,14 @@ public class ObjectDataLocalServiceWrapper implements ObjectDataLocalService,
 	}
 
 	@Override
+	public at.graz.hmmc.liferay.portlet.puch.model.ObjectData addObjectData(
+		long puchmuseumsobjectId, java.lang.String objectkey,
+		java.lang.String objectvalue) {
+		return _objectDataLocalService.addObjectData(puchmuseumsobjectId,
+			objectkey, objectvalue);
+	}
+
+	@Override
 	public at.graz.hmmc.liferay.portlet.puch.model.ObjectData getObjectDataForObject(
 		long puchmuseumsobjectId, java.lang.String objectkey) {
 		return _objectDataLocalService.getObjectDataForObject(puchmuseumsobjectId,

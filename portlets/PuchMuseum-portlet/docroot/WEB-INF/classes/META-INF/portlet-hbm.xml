@@ -9,7 +9,7 @@
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.Person" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.Transaktion" />
-	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ConfigurationImpl" table="puchmuseum.configuration">
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ConfigurationImpl" table="puchmuseum_configuration">
 		<cache usage="read-write" />
 		<id name="configurationId" type="long">
 			<generator class="assigned" />
@@ -18,7 +18,7 @@
 		<property name="optionkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="optionvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl" table="puchmuseum.objectdata">
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl" table="puchmuseum_objectdata">
 		<cache usage="read-write" />
 		<id name="objectdataId" type="long">
 			<generator class="assigned" />
@@ -27,7 +27,7 @@
 		<property name="objectkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="objectvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl" table="puchmuseum.parameterconfiguration">
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl" table="puchmuseum_parameterconfiguration">
 		<cache usage="read-write" />
 		<id name="parameterconfigurationId" type="long">
 			<generator class="assigned" />
@@ -37,6 +37,7 @@
 		<property name="datatype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="group" type="com.liferay.portal.dao.orm.hibernate.StringType" column="group_" />
 		<property name="tab" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="summery" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="viewscript" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="viewvisible" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="viewtip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -51,7 +52,7 @@
 		<property name="editcss" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="editcolumnwidth" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
-	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterOptionsConfigurationImpl" table="puchmuseum.parameteroptionsconfiguration">
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterOptionsConfigurationImpl" table="puchmuseum_parameteroptionsconfiguration">
 		<cache usage="read-write" />
 		<id name="parameteroptionsconfigurationId" type="long">
 			<generator class="assigned" />
@@ -60,7 +61,7 @@
 		<property name="optionkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="optionvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.PersonImpl" table="puchmuseum.person">
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.PersonImpl" table="puchmuseum_person">
 		<cache usage="read-write" />
 		<id name="personId" type="long">
 			<generator class="assigned" />
@@ -71,7 +72,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="vorname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektImpl" table="puchmuseum.puchmuseumsobjekt">
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektImpl" table="puchmuseum_puchmuseumsobjekt">
 		<cache usage="read-write" />
 		<id name="puchmuseumsobjectId" type="long">
 			<generator class="assigned" />
@@ -84,7 +85,7 @@
 		<property name="objektid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="folder" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionImpl" table="puchmuseum.transaktion">
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionImpl" table="puchmuseum_transaktion">
 		<cache usage="read-write" />
 		<id name="transaktionId" type="long">
 			<generator class="assigned" />

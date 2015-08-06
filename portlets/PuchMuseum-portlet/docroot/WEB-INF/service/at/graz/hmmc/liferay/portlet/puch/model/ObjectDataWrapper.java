@@ -289,6 +289,11 @@ public class ObjectDataWrapper implements ObjectData, ModelWrapper<ObjectData> {
 	}
 
 	@Override
+	public java.lang.String formatValueHTML() {
+		return _objectData.formatValueHTML();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

@@ -17,7 +17,7 @@ package at.graz.hmmc.liferay.portlet.puch.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the PuchMuseumsObjekt service. Represents a row in the &quot;puchmuseum.puchmuseumsobjekt&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the PuchMuseumsObjekt service. Represents a row in the &quot;puchmuseum_puchmuseumsobjekt&quot; database table, with each column mapped to a property of this class.
  *
  * @author reihsr
  * @see PuchMuseumsObjektModel
@@ -31,4 +31,5 @@ public interface PuchMuseumsObjekt extends PuchMuseumsObjektModel, PersistedMode
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getHTMLSummery();
 }
