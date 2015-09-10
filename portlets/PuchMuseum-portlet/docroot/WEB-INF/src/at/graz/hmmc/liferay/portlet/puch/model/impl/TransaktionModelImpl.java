@@ -66,9 +66,12 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedUserId", Types.BIGINT },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "typ", Types.VARCHAR }
+			{ "typ", Types.VARCHAR },
+			{ "puchmuseumsobjectId", Types.BIGINT },
+			{ "startDate", Types.TIMESTAMP },
+			{ "endDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table puchmuseum_transaktion (transaktionId LONG not null primary key,createrUserId LONG,createDate DATE null,modifiedUserId LONG,modifiedDate DATE null,typ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table puchmuseum_transaktion (transaktionId LONG not null primary key,createrUserId LONG,createDate DATE null,modifiedUserId LONG,modifiedDate DATE null,typ VARCHAR(75) null,puchmuseumsobjectId LONG,startDate DATE null,endDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table puchmuseum_transaktion";
 	public static final String ORDER_BY_JPQL = " ORDER BY transaktion.typ ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY puchmuseum_transaktion.typ ASC";
@@ -84,7 +87,8 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.at.graz.hmmc.liferay.portlet.puch.model.Transaktion"),
 			true);
-	public static long TYP_COLUMN_BITMASK = 1L;
+	public static long PUCHMUSEUMSOBJECTID_COLUMN_BITMASK = 1L;
+	public static long TYP_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.hmmc.liferay.portlet.puch.model.Transaktion"));
 
@@ -131,6 +135,9 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 		attributes.put("modifiedUserId", getModifiedUserId());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("typ", getTyp());
+		attributes.put("puchmuseumsobjectId", getPuchmuseumsobjectId());
+		attributes.put("startDate", getStartDate());
+		attributes.put("endDate", getEndDate());
 
 		return attributes;
 	}
@@ -171,6 +178,24 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 
 		if (typ != null) {
 			setTyp(typ);
+		}
+
+		Long puchmuseumsobjectId = (Long)attributes.get("puchmuseumsobjectId");
+
+		if (puchmuseumsobjectId != null) {
+			setPuchmuseumsobjectId(puchmuseumsobjectId);
+		}
+
+		Date startDate = (Date)attributes.get("startDate");
+
+		if (startDate != null) {
+			setStartDate(startDate);
+		}
+
+		Date endDate = (Date)attributes.get("endDate");
+
+		if (endDate != null) {
+			setEndDate(endDate);
 		}
 	}
 
@@ -271,6 +296,48 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 		return GetterUtil.getString(_originalTyp);
 	}
 
+	@Override
+	public long getPuchmuseumsobjectId() {
+		return _puchmuseumsobjectId;
+	}
+
+	@Override
+	public void setPuchmuseumsobjectId(long puchmuseumsobjectId) {
+		_columnBitmask |= PUCHMUSEUMSOBJECTID_COLUMN_BITMASK;
+
+		if (!_setOriginalPuchmuseumsobjectId) {
+			_setOriginalPuchmuseumsobjectId = true;
+
+			_originalPuchmuseumsobjectId = _puchmuseumsobjectId;
+		}
+
+		_puchmuseumsobjectId = puchmuseumsobjectId;
+	}
+
+	public long getOriginalPuchmuseumsobjectId() {
+		return _originalPuchmuseumsobjectId;
+	}
+
+	@Override
+	public Date getStartDate() {
+		return _startDate;
+	}
+
+	@Override
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+	}
+
+	@Override
+	public Date getEndDate() {
+		return _endDate;
+	}
+
+	@Override
+	public void setEndDate(Date endDate) {
+		_endDate = endDate;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -308,6 +375,9 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 		transaktionImpl.setModifiedUserId(getModifiedUserId());
 		transaktionImpl.setModifiedDate(getModifiedDate());
 		transaktionImpl.setTyp(getTyp());
+		transaktionImpl.setPuchmuseumsobjectId(getPuchmuseumsobjectId());
+		transaktionImpl.setStartDate(getStartDate());
+		transaktionImpl.setEndDate(getEndDate());
 
 		transaktionImpl.resetOriginalValues();
 
@@ -360,6 +430,10 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 
 		transaktionModelImpl._originalTyp = transaktionModelImpl._typ;
 
+		transaktionModelImpl._originalPuchmuseumsobjectId = transaktionModelImpl._puchmuseumsobjectId;
+
+		transaktionModelImpl._setOriginalPuchmuseumsobjectId = false;
+
 		transaktionModelImpl._columnBitmask = 0;
 	}
 
@@ -399,12 +473,32 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 			transaktionCacheModel.typ = null;
 		}
 
+		transaktionCacheModel.puchmuseumsobjectId = getPuchmuseumsobjectId();
+
+		Date startDate = getStartDate();
+
+		if (startDate != null) {
+			transaktionCacheModel.startDate = startDate.getTime();
+		}
+		else {
+			transaktionCacheModel.startDate = Long.MIN_VALUE;
+		}
+
+		Date endDate = getEndDate();
+
+		if (endDate != null) {
+			transaktionCacheModel.endDate = endDate.getTime();
+		}
+		else {
+			transaktionCacheModel.endDate = Long.MIN_VALUE;
+		}
+
 		return transaktionCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{transaktionId=");
 		sb.append(getTransaktionId());
@@ -418,6 +512,12 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 		sb.append(getModifiedDate());
 		sb.append(", typ=");
 		sb.append(getTyp());
+		sb.append(", puchmuseumsobjectId=");
+		sb.append(getPuchmuseumsobjectId());
+		sb.append(", startDate=");
+		sb.append(getStartDate());
+		sb.append(", endDate=");
+		sb.append(getEndDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -425,7 +525,7 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("at.graz.hmmc.liferay.portlet.puch.model.Transaktion");
@@ -455,6 +555,18 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 			"<column><column-name>typ</column-name><column-value><![CDATA[");
 		sb.append(getTyp());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>puchmuseumsobjectId</column-name><column-value><![CDATA[");
+		sb.append(getPuchmuseumsobjectId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>startDate</column-name><column-value><![CDATA[");
+		sb.append(getStartDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>endDate</column-name><column-value><![CDATA[");
+		sb.append(getEndDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -474,6 +586,11 @@ public class TransaktionModelImpl extends BaseModelImpl<Transaktion>
 	private Date _modifiedDate;
 	private String _typ;
 	private String _originalTyp;
+	private long _puchmuseumsobjectId;
+	private long _originalPuchmuseumsobjectId;
+	private boolean _setOriginalPuchmuseumsobjectId;
+	private Date _startDate;
+	private Date _endDate;
 	private long _columnBitmask;
 	private Transaktion _escapedModel;
 }

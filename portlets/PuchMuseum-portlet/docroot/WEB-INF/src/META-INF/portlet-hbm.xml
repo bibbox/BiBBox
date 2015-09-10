@@ -4,11 +4,13 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.Configuration" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.ObjectData" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.ObjectImage" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.ParameterOptionsConfiguration" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.Person" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt" />
 	<import class="at.graz.hmmc.liferay.portlet.puch.model.Transaktion" />
+	<import class="at.graz.hmmc.liferay.portlet.puch.model.TransaktionData" />
 	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ConfigurationImpl" table="puchmuseum_configuration">
 		<cache usage="read-write" />
 		<id name="configurationId" type="long">
@@ -26,6 +28,20 @@
 		<property name="puchmuseumsobjectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="objectkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="objectvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectImageImpl" table="puchmuseum_objectimage">
+		<cache usage="read-write" />
+		<id name="objectimageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="puchmuseumsobjectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createrUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="dlappimagerawId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="dlappimageprocessedId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="dlappimagewebId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl" table="puchmuseum_parameterconfiguration">
 		<cache usage="read-write" />
@@ -83,7 +99,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="objekttyp" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="objektid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="folder" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="folder" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionImpl" table="puchmuseum_transaktion">
 		<cache usage="read-write" />
@@ -95,5 +111,18 @@
 		<property name="modifiedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="typ" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="puchmuseumsobjectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="endDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionDataImpl" table="puchmuseum_transaktiondata">
+		<cache usage="read-write" />
+		<id name="transaktiondataId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="puchmuseumsobjectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="transaktionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="objectkey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="objectvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

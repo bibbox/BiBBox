@@ -114,6 +114,27 @@ public class TransaktionLocalServiceClp implements TransaktionLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getLastTransactionOfType";
+
+		_methodParameterTypes19 = new String[] { "long", "java.lang.String" };
+
+		_methodName20 = "getTransactionOfType";
+
+		_methodParameterTypes20 = new String[] { "long", "java.lang.String" };
+
+		_methodName21 = "getTransactionTableOfType";
+
+		_methodParameterTypes21 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName22 = "addTransaction";
+
+		_methodParameterTypes22 = new String[] {
+				"long", "java.lang.String", "java.util.Date", "java.util.Date",
+				"long"
+			};
 	}
 
 	@Override
@@ -666,6 +687,132 @@ public class TransaktionLocalServiceClp implements TransaktionLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public at.graz.hmmc.liferay.portlet.puch.model.Transaktion getLastTransactionOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						puchmuseumsobjectId,
+						
+					ClpSerializer.translateInput(transactiontype)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.hmmc.liferay.portlet.puch.model.Transaktion)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<at.graz.hmmc.liferay.portlet.puch.model.Transaktion> getTransactionOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						puchmuseumsobjectId,
+						
+					ClpSerializer.translateInput(transactiontype)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.hmmc.liferay.portlet.puch.model.Transaktion>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.lang.String getTransactionTableOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype,
+		java.lang.String baseurl) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] {
+						puchmuseumsobjectId,
+						
+					ClpSerializer.translateInput(transactiontype),
+						
+					ClpSerializer.translateInput(baseurl)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public at.graz.hmmc.liferay.portlet.puch.model.Transaktion addTransaction(
+		long puchmuseumsobjectId, java.lang.String transactiontype,
+		java.util.Date startdate, java.util.Date enddate, long userId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
+					new Object[] {
+						puchmuseumsobjectId,
+						
+					ClpSerializer.translateInput(transactiontype),
+						
+					ClpSerializer.translateInput(startdate),
+						
+					ClpSerializer.translateInput(enddate),
+						
+					userId
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.hmmc.liferay.portlet.puch.model.Transaktion)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -703,4 +850,12 @@ public class TransaktionLocalServiceClp implements TransaktionLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

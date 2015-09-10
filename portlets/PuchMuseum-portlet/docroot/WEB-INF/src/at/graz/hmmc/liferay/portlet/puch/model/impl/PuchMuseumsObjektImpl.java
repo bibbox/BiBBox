@@ -14,6 +14,17 @@
 
 package at.graz.hmmc.liferay.portlet.puch.model.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import at.graz.hmmc.liferay.portlet.puch.model.Configuration;
+import at.graz.hmmc.liferay.portlet.puch.model.ObjectData;
+import at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration;
+import at.graz.hmmc.liferay.portlet.puch.service.ConfigurationLocalServiceUtil;
+import at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalServiceUtil;
+import at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalServiceUtil;
+
 /**
  * The extended model implementation for the PuchMuseumsObjekt service. Represents a row in the &quot;puchmuseum.puchmuseumsobjekt&quot; database table, with each column mapped to a property of this class.
  *
@@ -32,8 +43,30 @@ public class PuchMuseumsObjektImpl extends PuchMuseumsObjektBaseImpl {
 	public PuchMuseumsObjektImpl() {
 	}
 	
+	/**
+	 * Error Format for date
+	 */
+	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	
 	public String getHTMLSummery() {
-		//TODO Add Search for summery fields
-		return "test";
+		String returnvalue = "";
+		try {
+			List<Configuration> configurations = ConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", this.getObjekttyp());
+			for(Configuration configuration : configurations) {
+				ParameterConfiguration parameterconfig = ParameterConfigurationLocalServiceUtil.getParameterConfiguration(Long.parseLong(configuration.getOptionvalue()));
+				if(parameterconfig.getSummery()) {
+					ObjectData objectdata = ObjectDataLocalServiceUtil.getObjectDataForObject(this.getPuchmuseumsobjectId(), String.valueOf(parameterconfig.getParameterconfigurationId()));
+					if(!returnvalue.equalsIgnoreCase("")) {
+						returnvalue += "<br>";
+					}
+					returnvalue += objectdata.formatValueHTML();
+				}
+			}
+		} catch(Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [PuchMuseum-portlet::at.graz.hmmc.liferay.portlet.puch.model.impl.PuchMuseumsObjektImpl::getHTMLSummery] Error getting Summery for Object.");
+			ex.printStackTrace();
+		}
+		return returnvalue;
 	}
 }

@@ -81,6 +81,9 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 		attributes.put("modifiedUserId", getModifiedUserId());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("typ", getTyp());
+		attributes.put("puchmuseumsobjectId", getPuchmuseumsobjectId());
+		attributes.put("startDate", getStartDate());
+		attributes.put("endDate", getEndDate());
 
 		return attributes;
 	}
@@ -121,6 +124,24 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 
 		if (typ != null) {
 			setTyp(typ);
+		}
+
+		Long puchmuseumsobjectId = (Long)attributes.get("puchmuseumsobjectId");
+
+		if (puchmuseumsobjectId != null) {
+			setPuchmuseumsobjectId(puchmuseumsobjectId);
+		}
+
+		Date startDate = (Date)attributes.get("startDate");
+
+		if (startDate != null) {
+			setStartDate(startDate);
+		}
+
+		Date endDate = (Date)attributes.get("endDate");
+
+		if (endDate != null) {
+			setEndDate(endDate);
 		}
 	}
 
@@ -284,6 +305,76 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 		}
 	}
 
+	@Override
+	public long getPuchmuseumsobjectId() {
+		return _puchmuseumsobjectId;
+	}
+
+	@Override
+	public void setPuchmuseumsobjectId(long puchmuseumsobjectId) {
+		_puchmuseumsobjectId = puchmuseumsobjectId;
+
+		if (_transaktionRemoteModel != null) {
+			try {
+				Class<?> clazz = _transaktionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPuchmuseumsobjectId",
+						long.class);
+
+				method.invoke(_transaktionRemoteModel, puchmuseumsobjectId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getStartDate() {
+		return _startDate;
+	}
+
+	@Override
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+
+		if (_transaktionRemoteModel != null) {
+			try {
+				Class<?> clazz = _transaktionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStartDate", Date.class);
+
+				method.invoke(_transaktionRemoteModel, startDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getEndDate() {
+		return _endDate;
+	}
+
+	@Override
+	public void setEndDate(Date endDate) {
+		_endDate = endDate;
+
+		if (_transaktionRemoteModel != null) {
+			try {
+				Class<?> clazz = _transaktionRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEndDate", Date.class);
+
+				method.invoke(_transaktionRemoteModel, endDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getTransaktionRemoteModel() {
 		return _transaktionRemoteModel;
 	}
@@ -359,6 +450,9 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 		clone.setModifiedUserId(getModifiedUserId());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setTyp(getTyp());
+		clone.setPuchmuseumsobjectId(getPuchmuseumsobjectId());
+		clone.setStartDate(getStartDate());
+		clone.setEndDate(getEndDate());
 
 		return clone;
 	}
@@ -405,7 +499,7 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{transaktionId=");
 		sb.append(getTransaktionId());
@@ -419,6 +513,12 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 		sb.append(getModifiedDate());
 		sb.append(", typ=");
 		sb.append(getTyp());
+		sb.append(", puchmuseumsobjectId=");
+		sb.append(getPuchmuseumsobjectId());
+		sb.append(", startDate=");
+		sb.append(getStartDate());
+		sb.append(", endDate=");
+		sb.append(getEndDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -426,7 +526,7 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("at.graz.hmmc.liferay.portlet.puch.model.Transaktion");
@@ -456,6 +556,18 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 			"<column><column-name>typ</column-name><column-value><![CDATA[");
 		sb.append(getTyp());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>puchmuseumsobjectId</column-name><column-value><![CDATA[");
+		sb.append(getPuchmuseumsobjectId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>startDate</column-name><column-value><![CDATA[");
+		sb.append(getStartDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>endDate</column-name><column-value><![CDATA[");
+		sb.append(getEndDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -470,5 +582,8 @@ public class TransaktionClp extends BaseModelImpl<Transaktion>
 	private String _modifiedUserUuid;
 	private Date _modifiedDate;
 	private String _typ;
+	private long _puchmuseumsobjectId;
+	private Date _startDate;
+	private Date _endDate;
 	private BaseModel<?> _transaktionRemoteModel;
 }

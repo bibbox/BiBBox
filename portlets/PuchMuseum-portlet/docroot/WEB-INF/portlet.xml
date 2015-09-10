@@ -9,6 +9,10 @@
 			at.graz.hmmc.liferay.portlet.puch.PuchMuseumsObjektErstellen
 		</portlet-class>
 		<init-param>
+         	<name>copy-request-parameters</name>
+         	<value>true</value> 
+      	</init-param>
+		<init-param>
 			<name>view-template</name>
 			<value>/html/puchmuseumsobjekterstellen/list.jsp</value>
 		</init-param>
@@ -155,6 +159,92 @@
 		<portlet-info>
 			<title>Parameter Option Configuration</title>
 			<short-title>Parameter Option Configuration</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>transactions</portlet-name>
+		<display-name>Transactions</display-name>
+		<portlet-class>
+			at.graz.hmmc.liferay.portlet.puch.Transactions
+		</portlet-class>
+		<init-param>
+         	<name>copy-request-parameters</name>
+         	<value>true</value> 
+      	</init-param>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/transactions/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/transactions/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Transactions</title>
+			<short-title>Transactions</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>image-upload</portlet-name>
+		<display-name>Image Upload</display-name>
+		<portlet-class>
+			at.graz.hmmc.liferay.portlet.puch.ImageUpload
+		</portlet-class>
+		<init-param>
+         	<name>copy-request-parameters</name>
+         	<value>true</value> 
+      	</init-param>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/imageupload/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/html/imageupload/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Image Upload</title>
+			<short-title>Image Upload</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

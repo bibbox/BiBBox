@@ -92,13 +92,7 @@ public class PuchMuseumsObjektCacheModel implements CacheModel<PuchMuseumsObjekt
 		}
 
 		puchMuseumsObjektImpl.setObjektid(objektid);
-
-		if (folder == null) {
-			puchMuseumsObjektImpl.setFolder(StringPool.BLANK);
-		}
-		else {
-			puchMuseumsObjektImpl.setFolder(folder);
-		}
+		puchMuseumsObjektImpl.setFolder(folder);
 
 		puchMuseumsObjektImpl.resetOriginalValues();
 
@@ -114,7 +108,7 @@ public class PuchMuseumsObjektCacheModel implements CacheModel<PuchMuseumsObjekt
 		modifiedDate = objectInput.readLong();
 		objekttyp = objectInput.readUTF();
 		objektid = objectInput.readLong();
-		folder = objectInput.readUTF();
+		folder = objectInput.readLong();
 	}
 
 	@Override
@@ -134,13 +128,7 @@ public class PuchMuseumsObjektCacheModel implements CacheModel<PuchMuseumsObjekt
 		}
 
 		objectOutput.writeLong(objektid);
-
-		if (folder == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(folder);
-		}
+		objectOutput.writeLong(folder);
 	}
 
 	public long puchmuseumsobjectId;
@@ -150,5 +138,5 @@ public class PuchMuseumsObjektCacheModel implements CacheModel<PuchMuseumsObjekt
 	public long modifiedDate;
 	public String objekttyp;
 	public long objektid;
-	public String folder;
+	public long folder;
 }

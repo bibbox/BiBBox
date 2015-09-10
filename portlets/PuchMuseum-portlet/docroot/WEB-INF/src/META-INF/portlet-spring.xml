@@ -5,6 +5,8 @@
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.ConfigurationPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.ConfigurationPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.ObjectDataLocalServiceImpl" />
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.ObjectDataPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.ObjectDataPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.ObjectImageLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.ObjectImageLocalServiceImpl" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.ObjectImagePersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.ObjectImagePersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.ParameterConfigurationLocalServiceImpl" />
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.ParameterConfigurationPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.ParameterConfigurationPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.ParameterOptionsConfigurationLocalServiceImpl" />
@@ -15,4 +17,6 @@
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.PuchMuseumsObjektPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.PuchMuseumsObjektPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.TransaktionLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.TransaktionLocalServiceImpl" />
 	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.TransaktionDataLocalService" class="at.graz.hmmc.liferay.portlet.puch.service.impl.TransaktionDataLocalServiceImpl" />
+	<bean id="at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionDataPersistence" class="at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionDataPersistenceImpl" parent="basePersistence" />
 </beans>

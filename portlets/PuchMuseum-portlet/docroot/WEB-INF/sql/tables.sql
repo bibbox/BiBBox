@@ -21,6 +21,18 @@ create table puchmuseum.objectdata (
 	objectvalue TEXT null
 );
 
+create table puchmuseum.objectimage (
+	objectimageId LONG not null primary key,
+	puchmuseumsobjectId LONG,
+	createrUserId LONG,
+	createDate DATE null,
+	modifiedUserId LONG,
+	modifiedDate DATE null,
+	dlappimagerawId LONG,
+	dlappimageprocessedId LONG,
+	dlappimagewebId LONG
+);
+
 create table puchmuseum.parameterconfiguration (
 	parameterconfigurationId LONG not null primary key,
 	displaynameshort TEXT null,
@@ -68,7 +80,7 @@ create table puchmuseum.puchmuseumsobjekt (
 	modifiedDate DATE null,
 	objekttyp VARCHAR(75) null,
 	objektid LONG,
-	folder VARCHAR(75) null
+	folder LONG
 );
 
 create table puchmuseum.transaktion (
@@ -77,7 +89,18 @@ create table puchmuseum.transaktion (
 	createDate DATE null,
 	modifiedUserId LONG,
 	modifiedDate DATE null,
-	typ VARCHAR(75) null
+	typ VARCHAR(75) null,
+	puchmuseumsobjectId LONG,
+	startDate DATE null,
+	endDate DATE null
+);
+
+create table puchmuseum.transaktiondata (
+	transaktiondataId LONG not null primary key,
+	puchmuseumsobjectId LONG,
+	transaktionId LONG,
+	objectkey VARCHAR(75) null,
+	objectvalue VARCHAR(75) null
 );
 
 create table puchmuseum_configuration (
@@ -92,6 +115,18 @@ create table puchmuseum_objectdata (
 	puchmuseumsobjectId LONG,
 	objectkey TEXT null,
 	objectvalue TEXT null
+);
+
+create table puchmuseum_objectimage (
+	objectimageId LONG not null primary key,
+	puchmuseumsobjectId LONG,
+	createrUserId LONG,
+	createDate DATE null,
+	modifiedUserId LONG,
+	modifiedDate DATE null,
+	dlappimagerawId LONG,
+	dlappimageprocessedId LONG,
+	dlappimagewebId LONG
 );
 
 create table puchmuseum_parameterconfiguration (
@@ -141,7 +176,7 @@ create table puchmuseum_puchmuseumsobjekt (
 	modifiedDate DATE null,
 	objekttyp VARCHAR(75) null,
 	objektid LONG,
-	folder VARCHAR(75) null
+	folder LONG
 );
 
 create table puchmuseum_transaktion (
@@ -150,5 +185,16 @@ create table puchmuseum_transaktion (
 	createDate DATE null,
 	modifiedUserId LONG,
 	modifiedDate DATE null,
-	typ VARCHAR(75) null
+	typ VARCHAR(75) null,
+	puchmuseumsobjectId LONG,
+	startDate DATE null,
+	endDate DATE null
+);
+
+create table puchmuseum_transaktiondata (
+	transaktiondataId LONG not null primary key,
+	puchmuseumsobjectId LONG,
+	transaktionId LONG,
+	objectkey VARCHAR(75) null,
+	objectvalue VARCHAR(75) null
 );

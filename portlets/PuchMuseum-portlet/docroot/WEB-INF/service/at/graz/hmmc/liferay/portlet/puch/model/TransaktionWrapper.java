@@ -56,6 +56,9 @@ public class TransaktionWrapper implements Transaktion,
 		attributes.put("modifiedUserId", getModifiedUserId());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("typ", getTyp());
+		attributes.put("puchmuseumsobjectId", getPuchmuseumsobjectId());
+		attributes.put("startDate", getStartDate());
+		attributes.put("endDate", getEndDate());
 
 		return attributes;
 	}
@@ -96,6 +99,24 @@ public class TransaktionWrapper implements Transaktion,
 
 		if (typ != null) {
 			setTyp(typ);
+		}
+
+		Long puchmuseumsobjectId = (Long)attributes.get("puchmuseumsobjectId");
+
+		if (puchmuseumsobjectId != null) {
+			setPuchmuseumsobjectId(puchmuseumsobjectId);
+		}
+
+		Date startDate = (Date)attributes.get("startDate");
+
+		if (startDate != null) {
+			setStartDate(startDate);
+		}
+
+		Date endDate = (Date)attributes.get("endDate");
+
+		if (endDate != null) {
+			setEndDate(endDate);
 		}
 	}
 
@@ -281,6 +302,66 @@ public class TransaktionWrapper implements Transaktion,
 	@Override
 	public void setTyp(java.lang.String typ) {
 		_transaktion.setTyp(typ);
+	}
+
+	/**
+	* Returns the puchmuseumsobject ID of this transaktion.
+	*
+	* @return the puchmuseumsobject ID of this transaktion
+	*/
+	@Override
+	public long getPuchmuseumsobjectId() {
+		return _transaktion.getPuchmuseumsobjectId();
+	}
+
+	/**
+	* Sets the puchmuseumsobject ID of this transaktion.
+	*
+	* @param puchmuseumsobjectId the puchmuseumsobject ID of this transaktion
+	*/
+	@Override
+	public void setPuchmuseumsobjectId(long puchmuseumsobjectId) {
+		_transaktion.setPuchmuseumsobjectId(puchmuseumsobjectId);
+	}
+
+	/**
+	* Returns the start date of this transaktion.
+	*
+	* @return the start date of this transaktion
+	*/
+	@Override
+	public java.util.Date getStartDate() {
+		return _transaktion.getStartDate();
+	}
+
+	/**
+	* Sets the start date of this transaktion.
+	*
+	* @param startDate the start date of this transaktion
+	*/
+	@Override
+	public void setStartDate(java.util.Date startDate) {
+		_transaktion.setStartDate(startDate);
+	}
+
+	/**
+	* Returns the end date of this transaktion.
+	*
+	* @return the end date of this transaktion
+	*/
+	@Override
+	public java.util.Date getEndDate() {
+		return _transaktion.getEndDate();
+	}
+
+	/**
+	* Sets the end date of this transaktion.
+	*
+	* @param endDate the end date of this transaktion
+	*/
+	@Override
+	public void setEndDate(java.util.Date endDate) {
+		_transaktion.setEndDate(endDate);
 	}
 
 	@Override

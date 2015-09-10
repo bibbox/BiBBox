@@ -21,6 +21,14 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="java.util.Random" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLAppServiceUtil" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.FileVersion" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
+<%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjekt"%>
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.service.PuchMuseumsObjektLocalServiceUtil"%>
@@ -32,6 +40,12 @@
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalServiceUtil"%>
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.model.ObjectData"%>
 <%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalServiceUtil"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.model.Transaktion"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.service.TransaktionLocalServiceUtil"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.model.TransaktionData"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.service.TransaktionDataLocalServiceUtil"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.model.ObjectImage"%>
+<%@ page import="at.graz.hmmc.liferay.portlet.puch.service.ObjectImageLocalServiceUtil"%>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />

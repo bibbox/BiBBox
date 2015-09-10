@@ -287,6 +287,41 @@ public class TransaktionLocalServiceWrapper implements TransaktionLocalService,
 			arguments);
 	}
 
+	@Override
+	public at.graz.hmmc.liferay.portlet.puch.model.Transaktion getLastTransactionOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype) {
+		return _transaktionLocalService.getLastTransactionOfType(puchmuseumsobjectId,
+			transactiontype);
+	}
+
+	/**
+	* @param puchmuseumsobjectId
+	* @param transactiontype
+	* @return
+	*/
+	@Override
+	public java.util.List<at.graz.hmmc.liferay.portlet.puch.model.Transaktion> getTransactionOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype) {
+		return _transaktionLocalService.getTransactionOfType(puchmuseumsobjectId,
+			transactiontype);
+	}
+
+	@Override
+	public java.lang.String getTransactionTableOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype,
+		java.lang.String baseurl) {
+		return _transaktionLocalService.getTransactionTableOfType(puchmuseumsobjectId,
+			transactiontype, baseurl);
+	}
+
+	@Override
+	public at.graz.hmmc.liferay.portlet.puch.model.Transaktion addTransaction(
+		long puchmuseumsobjectId, java.lang.String transactiontype,
+		java.util.Date startdate, java.util.Date enddate, long userId) {
+		return _transaktionLocalService.addTransaction(puchmuseumsobjectId,
+			transactiontype, startdate, enddate, userId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

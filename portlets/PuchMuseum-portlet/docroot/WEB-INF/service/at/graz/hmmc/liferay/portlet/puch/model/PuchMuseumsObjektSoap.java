@@ -149,11 +149,11 @@ public class PuchMuseumsObjektSoap implements Serializable {
 		_objektid = objektid;
 	}
 
-	public String getFolder() {
+	public long getFolder() {
 		return _folder;
 	}
 
-	public void setFolder(String folder) {
+	public void setFolder(long folder) {
 		_folder = folder;
 	}
 
@@ -164,5 +164,5 @@ public class PuchMuseumsObjektSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _objekttyp;
 	private long _objektid;
-	private String _folder;
+	private long _folder;
 }

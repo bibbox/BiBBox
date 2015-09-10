@@ -18,10 +18,12 @@ import at.graz.hmmc.liferay.portlet.puch.model.ParameterOptionsConfiguration;
 import at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalService;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.ConfigurationPersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.ObjectDataPersistence;
+import at.graz.hmmc.liferay.portlet.puch.service.persistence.ObjectImagePersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.ParameterConfigurationPersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.ParameterOptionsConfigurationPersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.PersonPersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.PuchMuseumsObjektPersistence;
+import at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionDataPersistence;
 import at.graz.hmmc.liferay.portlet.puch.service.persistence.TransaktionPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -370,6 +372,44 @@ public abstract class ParameterOptionsConfigurationLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the object image local service.
+	 *
+	 * @return the object image local service
+	 */
+	public at.graz.hmmc.liferay.portlet.puch.service.ObjectImageLocalService getObjectImageLocalService() {
+		return objectImageLocalService;
+	}
+
+	/**
+	 * Sets the object image local service.
+	 *
+	 * @param objectImageLocalService the object image local service
+	 */
+	public void setObjectImageLocalService(
+		at.graz.hmmc.liferay.portlet.puch.service.ObjectImageLocalService objectImageLocalService) {
+		this.objectImageLocalService = objectImageLocalService;
+	}
+
+	/**
+	 * Returns the object image persistence.
+	 *
+	 * @return the object image persistence
+	 */
+	public ObjectImagePersistence getObjectImagePersistence() {
+		return objectImagePersistence;
+	}
+
+	/**
+	 * Sets the object image persistence.
+	 *
+	 * @param objectImagePersistence the object image persistence
+	 */
+	public void setObjectImagePersistence(
+		ObjectImagePersistence objectImagePersistence) {
+		this.objectImagePersistence = objectImagePersistence;
+	}
+
+	/**
 	 * Returns the parameter configuration local service.
 	 *
 	 * @return the parameter configuration local service
@@ -559,6 +599,44 @@ public abstract class ParameterOptionsConfigurationLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the transaktion data local service.
+	 *
+	 * @return the transaktion data local service
+	 */
+	public at.graz.hmmc.liferay.portlet.puch.service.TransaktionDataLocalService getTransaktionDataLocalService() {
+		return transaktionDataLocalService;
+	}
+
+	/**
+	 * Sets the transaktion data local service.
+	 *
+	 * @param transaktionDataLocalService the transaktion data local service
+	 */
+	public void setTransaktionDataLocalService(
+		at.graz.hmmc.liferay.portlet.puch.service.TransaktionDataLocalService transaktionDataLocalService) {
+		this.transaktionDataLocalService = transaktionDataLocalService;
+	}
+
+	/**
+	 * Returns the transaktion data persistence.
+	 *
+	 * @return the transaktion data persistence
+	 */
+	public TransaktionDataPersistence getTransaktionDataPersistence() {
+		return transaktionDataPersistence;
+	}
+
+	/**
+	 * Sets the transaktion data persistence.
+	 *
+	 * @param transaktionDataPersistence the transaktion data persistence
+	 */
+	public void setTransaktionDataPersistence(
+		TransaktionDataPersistence transaktionDataPersistence) {
+		this.transaktionDataPersistence = transaktionDataPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -742,6 +820,10 @@ public abstract class ParameterOptionsConfigurationLocalServiceBaseImpl
 	protected at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalService objectDataLocalService;
 	@BeanReference(type = ObjectDataPersistence.class)
 	protected ObjectDataPersistence objectDataPersistence;
+	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.ObjectImageLocalService.class)
+	protected at.graz.hmmc.liferay.portlet.puch.service.ObjectImageLocalService objectImageLocalService;
+	@BeanReference(type = ObjectImagePersistence.class)
+	protected ObjectImagePersistence objectImagePersistence;
 	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalService.class)
 	protected at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalService parameterConfigurationLocalService;
 	@BeanReference(type = ParameterConfigurationPersistence.class)
@@ -762,6 +844,10 @@ public abstract class ParameterOptionsConfigurationLocalServiceBaseImpl
 	protected at.graz.hmmc.liferay.portlet.puch.service.TransaktionLocalService transaktionLocalService;
 	@BeanReference(type = TransaktionPersistence.class)
 	protected TransaktionPersistence transaktionPersistence;
+	@BeanReference(type = at.graz.hmmc.liferay.portlet.puch.service.TransaktionDataLocalService.class)
+	protected at.graz.hmmc.liferay.portlet.puch.service.TransaktionDataLocalService transaktionDataLocalService;
+	@BeanReference(type = TransaktionDataPersistence.class)
+	protected TransaktionDataPersistence transaktionDataPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

@@ -36,6 +36,9 @@ public class TransaktionSoap implements Serializable {
 		soapModel.setModifiedUserId(model.getModifiedUserId());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setTyp(model.getTyp());
+		soapModel.setPuchmuseumsobjectId(model.getPuchmuseumsobjectId());
+		soapModel.setStartDate(model.getStartDate());
+		soapModel.setEndDate(model.getEndDate());
 
 		return soapModel;
 	}
@@ -136,10 +139,37 @@ public class TransaktionSoap implements Serializable {
 		_typ = typ;
 	}
 
+	public long getPuchmuseumsobjectId() {
+		return _puchmuseumsobjectId;
+	}
+
+	public void setPuchmuseumsobjectId(long puchmuseumsobjectId) {
+		_puchmuseumsobjectId = puchmuseumsobjectId;
+	}
+
+	public Date getStartDate() {
+		return _startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return _endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		_endDate = endDate;
+	}
+
 	private long _transaktionId;
 	private long _createrUserId;
 	private Date _createDate;
 	private long _modifiedUserId;
 	private Date _modifiedDate;
 	private String _typ;
+	private long _puchmuseumsobjectId;
+	private Date _startDate;
+	private Date _endDate;
 }

@@ -50,6 +50,27 @@
 			parameter-option-configuration-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>transactions</portlet-name>
+		<icon>/icon.png</icon>
+		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
+	    <friendly-url-mapping>puch</friendly-url-mapping>
+	    <friendly-url-routes>at/graz/hmmc/liferay/portlet/puch/puch-friendly-url-routes.xml</friendly-url-routes>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>transactions-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>image-upload</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>image-upload-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

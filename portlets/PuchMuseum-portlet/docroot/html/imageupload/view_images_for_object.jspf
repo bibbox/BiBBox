@@ -1,0 +1,61 @@
+<h3>Bilder</h3>
+
+<%
+if(puchmuseumsobjektId > 0) {
+	long imageid = 0;
+	String baseimageURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/puch/images/";
+	String addimageURL = baseimageURL + puchmuseumsobjektId + "/" + 0;
+	String createiamgeURL = baseimageURL + puchmuseumsobjektId + "/" + imageid;
+	%>
+	<i id='addeditimage' tag="image" tagurl="<%= addimageURL %>" style="cursor: pointer;float: right;margin-left: 5px;" class="fa fa-plus-square-o"></i>
+	<%
+	List<ObjectImage> objectimages = ObjectImageLocalServiceUtil.getObjectImagesByObject(puchmuseumsobjektId);
+	for(ObjectImage objectimage : objectimages) {
+		FileEntry fileentryraw = DLAppServiceUtil.getFileEntry(objectimage.getDlappimagerawId());
+		FileEntry fileentryprocessed = DLAppServiceUtil.getFileEntry(objectimage.getDlappimageprocessedId());
+		%>
+		<span class="document-thumbnail">
+			<%
+			String thumbnailrawSrc = DLUtil.getThumbnailSrc(fileentryraw, null, themeDisplay);
+			String thumbnailprocessedSrc = DLUtil.getThumbnailSrc(fileentryprocessed, null, themeDisplay);
+			%>
+			<img alt="" border="no" class="thumbnail" src="<%= thumbnailrawSrc %>" style="max-height: 150px; max-width: 150px;float: left;" />
+			<img alt="" border="no" class="thumbnail" src="<%= thumbnailprocessedSrc %>" style="max-height: 150px; max-width: 150px;float: left;" />
+			<div style='content: "";clear: both;display: table;'></div>
+		</span>
+		<%
+	}
+}
+%>
+
+<!-- Popup for adding Organiaztions to the list -->
+			<aui:script use="aui-base">
+	            A.all('#addeditimage').on(
+	               'click',
+	               function(event) {
+	               	  var tag = event.target.getAttribute('tag');
+	               	  var tagurl = event.target.getAttribute('tagurl');
+	               	  var titleheadline = event.target.getHTML();
+	               	  var text = "";
+					  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+					
+					  for( var i=0; i < 5; i++ ) {
+					  	text += possible.charAt(Math.floor(Math.random() * possible.length));
+					  }
+	               	  
+	                  Liferay.Util.selectEntity(
+	                     {
+	                        dialog: {
+	                           cache: false,
+	                           constrain: true,
+	                           modal: true,
+	                           width: 1000
+	                        },
+	                        id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addeditimage' + text,
+	                        title: 'Add Image',
+	                        uri: tagurl
+	                     }
+	                  );
+	               }
+	            );
+			</aui:script>

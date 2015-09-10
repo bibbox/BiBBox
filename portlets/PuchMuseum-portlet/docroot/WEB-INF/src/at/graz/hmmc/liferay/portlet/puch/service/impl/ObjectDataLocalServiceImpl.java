@@ -77,6 +77,9 @@ public class ObjectDataLocalServiceImpl extends ObjectDataLocalServiceBaseImpl {
 		return null;
 	}
 	
+	/**
+	 * 
+	 */
 	public ObjectData addObjectData(long puchmuseumsobjectId, String objectkey, String objectvalue) {
 		try {
 			ObjectDataImpl objectdata = new ObjectDataImpl();
@@ -92,6 +95,9 @@ public class ObjectDataLocalServiceImpl extends ObjectDataLocalServiceBaseImpl {
 		return null;
 	}
 	
+	/**
+	 * 
+	 */
 	public ObjectData getObjectDataForObject(long puchmuseumsobjectId, String objectkey) {
 		try {
 			return objectDataPersistence.findByDataByOntology(puchmuseumsobjectId, objectkey);

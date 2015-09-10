@@ -10,5 +10,9 @@
 		<portlet id="web-gl-l01"></portlet>
 		<portlet id="bc-net-main-menu"></portlet>
 		<portlet id="test-ddl-display"></portlet>
+		<portlet id="checkbox-select-test"></portlet>
+	</category>
+	<category name="category.test">
+		<portlet id="test-jsonws"></portlet>
 	</category>
 </display>

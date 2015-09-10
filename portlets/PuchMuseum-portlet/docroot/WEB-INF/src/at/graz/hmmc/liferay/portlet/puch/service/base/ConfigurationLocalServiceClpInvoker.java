@@ -106,59 +106,59 @@ public class ConfigurationLocalServiceClpInvoker {
 				"at.graz.hmmc.liferay.portlet.puch.model.Configuration"
 			};
 
-		_methodName56 = "getBeanIdentifier";
+		_methodName64 = "getBeanIdentifier";
 
-		_methodParameterTypes56 = new String[] {  };
+		_methodParameterTypes64 = new String[] {  };
 
-		_methodName57 = "setBeanIdentifier";
+		_methodName65 = "setBeanIdentifier";
 
-		_methodParameterTypes57 = new String[] { "java.lang.String" };
+		_methodParameterTypes65 = new String[] { "java.lang.String" };
 
-		_methodName62 = "configurationFromRequest";
+		_methodName70 = "configurationFromRequest";
 
-		_methodParameterTypes62 = new String[] { "javax.portlet.ActionRequest" };
+		_methodParameterTypes70 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName63 = "getConfigurationOptionValue";
+		_methodName71 = "getConfigurationOptionValue";
 
-		_methodParameterTypes63 = new String[] {
+		_methodParameterTypes71 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName64 = "getConfigurationOption";
+		_methodName72 = "getConfigurationOption";
 
-		_methodParameterTypes64 = new String[] {
+		_methodParameterTypes72 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName65 = "getConfigurationOptions";
+		_methodName73 = "getConfigurationOptions";
 
-		_methodParameterTypes65 = new String[] {
+		_methodParameterTypes73 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName66 = "getConfigurationOptions";
+		_methodName74 = "getConfigurationOptions";
 
-		_methodParameterTypes66 = new String[] { "java.lang.String" };
+		_methodParameterTypes74 = new String[] { "java.lang.String" };
 
-		_methodName67 = "getConfigurationOptions";
+		_methodName75 = "getConfigurationOptions";
 
-		_methodParameterTypes67 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes75 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName68 = "getConfigurationOptionsCount";
+		_methodName76 = "getConfigurationOptionsCount";
 
-		_methodParameterTypes68 = new String[] { "java.lang.String" };
+		_methodParameterTypes76 = new String[] { "java.lang.String" };
 
-		_methodName69 = "getConfigurationOptionsForKey";
+		_methodName77 = "getConfigurationOptionsForKey";
 
-		_methodParameterTypes69 = new String[] { "java.lang.String" };
+		_methodParameterTypes77 = new String[] { "java.lang.String" };
 
-		_methodName70 = "getConfigurationOptionsForKey";
+		_methodName78 = "getConfigurationOptionsForKey";
 
-		_methodParameterTypes70 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes78 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName71 = "getConfigurationOptionsForKeyCount";
+		_methodName79 = "getConfigurationOptionsForKeyCount";
 
-		_methodParameterTypes71 = new String[] { "java.lang.String" };
+		_methodParameterTypes79 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -250,72 +250,72 @@ public class ConfigurationLocalServiceClpInvoker {
 			return ConfigurationLocalServiceUtil.updateConfiguration((at.graz.hmmc.liferay.portlet.puch.model.Configuration)arguments[0]);
 		}
 
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName57.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
 			ConfigurationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName62.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.configurationFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
-		if (_methodName63.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+		if (_methodName71.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOptionValue((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOption((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName65.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOptions((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOptionsCount((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName69.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOptionsForKey((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName70.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOptionsForKey((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName71.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			return ConfigurationLocalServiceUtil.getConfigurationOptionsForKeyCount((java.lang.String)arguments[0]);
 		}
 
@@ -354,28 +354,28 @@ public class ConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName56;
-	private String[] _methodParameterTypes56;
-	private String _methodName57;
-	private String[] _methodParameterTypes57;
-	private String _methodName62;
-	private String[] _methodParameterTypes62;
-	private String _methodName63;
-	private String[] _methodParameterTypes63;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
 	private String _methodName65;
 	private String[] _methodParameterTypes65;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
-	private String _methodName69;
-	private String[] _methodParameterTypes69;
 	private String _methodName70;
 	private String[] _methodParameterTypes70;
 	private String _methodName71;
 	private String[] _methodParameterTypes71;
+	private String _methodName72;
+	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
+	private String _methodName74;
+	private String[] _methodParameterTypes74;
+	private String _methodName75;
+	private String[] _methodParameterTypes75;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
+	private String _methodName77;
+	private String[] _methodParameterTypes77;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
 }

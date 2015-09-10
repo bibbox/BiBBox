@@ -106,17 +106,17 @@ public class ParameterConfigurationLocalServiceClpInvoker {
 				"at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration"
 			};
 
-		_methodName56 = "getBeanIdentifier";
+		_methodName64 = "getBeanIdentifier";
 
-		_methodParameterTypes56 = new String[] {  };
+		_methodParameterTypes64 = new String[] {  };
 
-		_methodName57 = "setBeanIdentifier";
+		_methodName65 = "setBeanIdentifier";
 
-		_methodParameterTypes57 = new String[] { "java.lang.String" };
+		_methodParameterTypes65 = new String[] { "java.lang.String" };
 
-		_methodName62 = "parameterConfigurationFromRequest";
+		_methodName70 = "parameterConfigurationFromRequest";
 
-		_methodParameterTypes62 = new String[] { "javax.portlet.ActionRequest" };
+		_methodParameterTypes70 = new String[] { "javax.portlet.ActionRequest" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -208,20 +208,20 @@ public class ParameterConfigurationLocalServiceClpInvoker {
 			return ParameterConfigurationLocalServiceUtil.updateParameterConfiguration((at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration)arguments[0]);
 		}
 
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return ParameterConfigurationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName57.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
 			ParameterConfigurationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName62.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
 			return ParameterConfigurationLocalServiceUtil.parameterConfigurationFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
@@ -260,10 +260,10 @@ public class ParameterConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName56;
-	private String[] _methodParameterTypes56;
-	private String _methodName57;
-	private String[] _methodParameterTypes57;
-	private String _methodName62;
-	private String[] _methodParameterTypes62;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
 }

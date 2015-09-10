@@ -270,6 +270,189 @@ public class TransaktionUtil {
 	}
 
 	/**
+	* Returns all the transaktions where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @return the matching transaktions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.hmmc.liferay.portlet.puch.model.Transaktion> findByTypAndObject(
+		java.lang.String typ, long puchmuseumsobjectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByTypAndObject(typ, puchmuseumsobjectId);
+	}
+
+	/**
+	* Returns a range of all the transaktions where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @param start the lower bound of the range of transaktions
+	* @param end the upper bound of the range of transaktions (not inclusive)
+	* @return the range of matching transaktions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.hmmc.liferay.portlet.puch.model.Transaktion> findByTypAndObject(
+		java.lang.String typ, long puchmuseumsobjectId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByTypAndObject(typ, puchmuseumsobjectId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the transaktions where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @param start the lower bound of the range of transaktions
+	* @param end the upper bound of the range of transaktions (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching transaktions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.graz.hmmc.liferay.portlet.puch.model.Transaktion> findByTypAndObject(
+		java.lang.String typ, long puchmuseumsobjectId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByTypAndObject(typ, puchmuseumsobjectId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching transaktion
+	* @throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException if a matching transaktion could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.hmmc.liferay.portlet.puch.model.Transaktion findByTypAndObject_First(
+		java.lang.String typ, long puchmuseumsobjectId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByTypAndObject_First(typ, puchmuseumsobjectId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching transaktion, or <code>null</code> if a matching transaktion could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.hmmc.liferay.portlet.puch.model.Transaktion fetchByTypAndObject_First(
+		java.lang.String typ, long puchmuseumsobjectId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByTypAndObject_First(typ, puchmuseumsobjectId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching transaktion
+	* @throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException if a matching transaktion could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.hmmc.liferay.portlet.puch.model.Transaktion findByTypAndObject_Last(
+		java.lang.String typ, long puchmuseumsobjectId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByTypAndObject_Last(typ, puchmuseumsobjectId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching transaktion, or <code>null</code> if a matching transaktion could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.hmmc.liferay.portlet.puch.model.Transaktion fetchByTypAndObject_Last(
+		java.lang.String typ, long puchmuseumsobjectId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByTypAndObject_Last(typ, puchmuseumsobjectId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the transaktions before and after the current transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* @param transaktionId the primary key of the current transaktion
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next transaktion
+	* @throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException if a transaktion with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.graz.hmmc.liferay.portlet.puch.model.Transaktion[] findByTypAndObject_PrevAndNext(
+		long transaktionId, java.lang.String typ, long puchmuseumsobjectId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByTypAndObject_PrevAndNext(transaktionId, typ,
+			puchmuseumsobjectId, orderByComparator);
+	}
+
+	/**
+	* Removes all the transaktions where typ = &#63; and puchmuseumsobjectId = &#63; from the database.
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByTypAndObject(java.lang.String typ,
+		long puchmuseumsobjectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByTypAndObject(typ, puchmuseumsobjectId);
+	}
+
+	/**
+	* Returns the number of transaktions where typ = &#63; and puchmuseumsobjectId = &#63;.
+	*
+	* @param typ the typ
+	* @param puchmuseumsobjectId the puchmuseumsobject ID
+	* @return the number of matching transaktions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByTypAndObject(java.lang.String typ,
+		long puchmuseumsobjectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByTypAndObject(typ, puchmuseumsobjectId);
+	}
+
+	/**
 	* Caches the transaktion in the entity cache if it is enabled.
 	*
 	* @param transaktion the transaktion

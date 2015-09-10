@@ -248,4 +248,26 @@ public interface TransaktionLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.graz.hmmc.liferay.portlet.puch.model.Transaktion getLastTransactionOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype);
+
+	/**
+	* @param puchmuseumsobjectId
+	* @param transactiontype
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.hmmc.liferay.portlet.puch.model.Transaktion> getTransactionOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getTransactionTableOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype,
+		java.lang.String baseurl);
+
+	public at.graz.hmmc.liferay.portlet.puch.model.Transaktion addTransaction(
+		long puchmuseumsobjectId, java.lang.String transactiontype,
+		java.util.Date startdate, java.util.Date enddate, long userId);
 }

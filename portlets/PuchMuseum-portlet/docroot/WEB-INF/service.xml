@@ -18,7 +18,7 @@
 		<column name="objekttyp" type="String" />
 		<column name="objektid" type="long" />
 		
-		<column name="folder" type="String" />
+		<column name="folder" type="long" />
 	</entity>
 
 	<entity name="ObjectData" local-service="true" remote-service="false"  table="puchmuseum_objectdata" >
@@ -37,7 +37,7 @@
 		<finder name="Event" return-type="Collection">
 			<finder-column name="puchmuseumsobjectId" />
 		</finder>
-		<finder name="DataByOntology" return-type="EventData">
+		<finder name="DataByOntology" return-type="ObjectData">
 			<finder-column name="puchmuseumsobjectId" />
 			<finder-column name="objectkey" />
 		</finder>
@@ -72,6 +72,9 @@
 
 		<!-- Other fields -->
 		<column name="typ" type="String" />
+		<column name="puchmuseumsobjectId" type="long" />
+		<column name="startDate" type="Date" />
+		<column name="endDate" type="Date" />
 		
 		<!-- Order -->
 		<order by="asc">
@@ -82,8 +85,53 @@
 		<finder name="Typ" return-type="Collection">
 			<finder-column name="typ" />
 		</finder>
+		<finder name="TypAndObject" return-type="Collection">
+			<finder-column name="typ" />
+			<finder-column name="puchmuseumsobjectId" />
+		</finder>
+	</entity>
+	<entity name="TransaktionData" local-service="true" remote-service="false"  table="puchmuseum_transaktiondata" >
+		<!-- PK fields -->
+		<column name="transaktiondataId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="puchmuseumsobjectId" type="long" />
+		<column name="transaktionId" type="long" />
+		<!-- Audit fields -->
+		<column name="objectkey" type="String" />
+		<column name="objectvalue" type="String" />
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="transaktionId" />
+		</order>
+		<!-- Finder methods -->
+		<finder name="Transaction" return-type="Collection">
+			<finder-column name="transaktionId" />
+		</finder>
+		<finder name="DataByOntology" return-type="TransaktionData">
+			<finder-column name="transaktionId" />
+			<finder-column name="objectkey" />
+		</finder>
 	</entity>
 	
+	<entity name="ObjectImage" local-service="true" remote-service="false"  table="puchmuseum_objectimage" >
+		<!-- PK fields -->
+		<column name="objectimageId" type="long" primary="true" />
+		<!-- Group instance -->
+		<column name="puchmuseumsobjectId" type="long" />
+		<!-- Audit fields -->
+		<column name="createrUserId" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedUserId" type="long" />
+		<column name="modifiedDate" type="Date" />
+		<!-- Other fields -->
+		<column name="dlappimagerawId" type="long" />
+		<column name="dlappimageprocessedId" type="long" />
+		<column name="dlappimagewebId" type="long" />
+		<!-- Finder methods -->
+		<finder name="Object" return-type="Collection">
+			<finder-column name="puchmuseumsobjectId" />
+		</finder>
+	</entity>
 	<!-- Configurations -->
 	
 	<entity name="Configuration" local-service="true" remote-service="false"  table="puchmuseum_configuration">

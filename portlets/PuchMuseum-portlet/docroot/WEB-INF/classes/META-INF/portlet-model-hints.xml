@@ -21,6 +21,17 @@
 			<hint name="max-length">10000</hint>
 		</field>
 	</model>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.ObjectImage">
+		<field name="objectimageId" type="long" />
+		<field name="puchmuseumsobjectId" type="long" />
+		<field name="createrUserId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedUserId" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="dlappimagerawId" type="long" />
+		<field name="dlappimageprocessedId" type="long" />
+		<field name="dlappimagewebId" type="long" />
+	</model>
 	<model name="at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration">
 		<field name="parameterconfigurationId" type="long" />
 		<field name="displaynameshort" type="String">
@@ -95,7 +106,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="objekttyp" type="String" />
 		<field name="objektid" type="long" />
-		<field name="folder" type="String" />
+		<field name="folder" type="long" />
 	</model>
 	<model name="at.graz.hmmc.liferay.portlet.puch.model.Transaktion">
 		<field name="transaktionId" type="long" />
@@ -104,5 +115,15 @@
 		<field name="modifiedUserId" type="long" />
 		<field name="modifiedDate" type="Date" />
 		<field name="typ" type="String" />
+		<field name="puchmuseumsobjectId" type="long" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+	</model>
+	<model name="at.graz.hmmc.liferay.portlet.puch.model.TransaktionData">
+		<field name="transaktiondataId" type="long" />
+		<field name="puchmuseumsobjectId" type="long" />
+		<field name="transaktionId" type="long" />
+		<field name="objectkey" type="String" />
+		<field name="objectvalue" type="String" />
 	</model>
 </model-hints>

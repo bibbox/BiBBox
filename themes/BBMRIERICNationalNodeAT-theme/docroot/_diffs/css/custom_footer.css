@@ -1,0 +1,112 @@
+.bbmrieric-footer-twitter {
+	position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px; 
+    border: 0px solid black;
+    right: -1050px;
+    top: -96px;
+}
+
+#bbmrieric-footer-twitter-slide {
+    position: absolute;
+    bottom: -25px;
+    width: 50px;
+    height: 50px;
+    background: blue;
+    transition: 1s;
+}
+
+.bbmrieric-footer-twitter:hover #bbmrieric-footer-twitter-slide {
+    transition: 1s;
+    bottom: 0;
+}
+.bbmrieric-footer-linkedin {
+	position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px; 
+    border: 0px solid black;
+    right: -990px;
+    top: -146px;
+}
+
+#bbmrieric-footer-linkedin-slide {
+    position: absolute;
+    bottom: -25px;
+    width: 50px;
+    height: 50px;
+    background: blue;
+    transition: 1s;
+}
+
+.bbmrieric-footer-linkedin:hover #bbmrieric-footer-linkedin-slide {
+    transition: 1s;
+    bottom: 0;
+}
+
+/* ---------- Footer ----------- */
+.aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.aui .bbmrieric-footer .bbmrieric-footer-menue a, .aui .bbmrieric-footer .bbmrieric-footer-menue a:hover {
+   color: #FFFFFF;
+   text-decoration:none;
+}
+.bbmrieric-footer-container {
+	width: 100%;
+	height: 210px;
+}
+.bbmrieric-footer {
+	margin: auto;
+	width: 1200px;
+	height: 165px;
+	padding-top: 45px;
+	background: url(@theme_image_path@/footer_blank.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#footer {
+	width: 1000px;
+	margin: auto;
+}
+.bbmrieric-footer-menue-left {
+	width: 400px;
+	height: 20px;
+	margin-left: 100px;
+	margin-right: 0;
+	text-align: left;
+	align: left;
+	margin-top: -70px;
+	margin-bottom: 30px;
+	float: left;
+	color: #ffffff;
+}
+.bbmrieric-footer-menue {
+	width: 400px;
+	height: 20px;
+	margin-right: 100px;
+	text-align: right;
+	align: right;
+	margin-top: -70px;
+	margin-bottom: 30px;
+	float: right;
+	color: #ffffff;
+}
+.bbmrieric-footer-menue ul {
+	padding: 0px;
+	list-style-type: none;
+	height: 70px;
+	float: right;
+	width: 400px;
+}
+.bbmrieric-footer-menue li {
+	list-style-type: none;
+	margin-left: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 20px;
+	float: right;
+}
+/* ---------- Footer ende ----------- */

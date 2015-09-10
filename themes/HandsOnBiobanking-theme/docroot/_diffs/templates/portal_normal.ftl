@@ -43,18 +43,18 @@ ${theme.include(body_top_include)}
 <div class="bbmri_eric_header-maincontainer">
 	<div class="bbmri_eric_header-maincontainer-verlauf">
 		<div class="bbmri_eric_header-maincontainer-verlauf-inner">
-			<img  alt="${logo_description}" height="215px" src="/HandsOnBiobanking-theme/images/BBMRI-ERIC_new_header_image.png" width="1200px" >
+			<img  alt="${logo_description}" height="215px" src="/HandsOnBiobanking-theme/images/HOBB_2016_header_logo_image.png" width="1200px" >
 		</div>
 	</div>
 	<a href="/about"><div class="bbmri_eric_header-innercontainer">
 		<div class="bbmri_eric_header-logo">
 			<div class="bbmri_eric_header-logo-flaot">
 				<div class="bbmri_eric_header-logo-white">
-					<span style="font-size: 40px;font-weight: bold;line-height: 45px;">HandsOn: Biobanks 2015</span><br />
-					<span style="font-size: 20px;line-height: 25px;">The EXPOnential relevance of Biobanking</span>
+					<span style="font-size: 40px;font-weight: bold;line-height: 45px;">HandsOn: Biobanks 2016</span><br />
+					<span style="font-size: 20px;line-height: 25px;">Biobanks for Health Innovation</span>
 				</div>
 				<div class="bbmri_eric_header-logo-orange">
-					<span style="font-size: 20px;color: #FFFFFF;line-height: 25px;">29-31 July + EXPO + Milan, Italy</span>
+					<span style="font-size: 20px;color: #FFFFFF;line-height: 25px;">27-29 September | Vienna, Austria</span>
 				</div>
 			</div>
 		</div>
@@ -130,7 +130,7 @@ ${theme.include(body_top_include)}
 		
 		<div class="bbmrieric-footer-menue">
 			<div style="margin: auto;display:inline-block;">
-				<div style="float: left;color: #FFFFFF;font-size: 14px;margin-left: 20px;margin-right: 25px;">HandsOn Biobanks 2015: EXPO | University of Milano-Bicocca | Piazza dell'Ateneo Nuovo, 1 | 20126, Milano/ITALY</div>
+				<div style="float: left;color: #FFFFFF;font-size: 14px;margin-left: 20px;margin-right: 25px;">HandsOn Biobanks 2016: BBMRI.at | Neue Stiftingtalstasse 2/B/6 | 8010 Graz | Austria</div>
 			</div>
 		</div>	
 		<footer id="footer" role="contentinfo">

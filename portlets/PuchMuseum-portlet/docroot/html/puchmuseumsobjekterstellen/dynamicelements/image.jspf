@@ -1,0 +1,3 @@
+<aui:column columnWidth="100">	
+	<aui:input cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplaynameshort() %>" type="file" size="75"/>
+</aui:column>

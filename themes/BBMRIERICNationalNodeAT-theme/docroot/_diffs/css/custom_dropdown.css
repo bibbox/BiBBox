@@ -1,0 +1,48 @@
+.bbmri_eric_header-submainmenu-floating ul:after {
+   content: ""; 
+   clear: both; 
+   display: block;
+}
+.bbmri_eric_header-submainmenu-floating ul ul {
+   display: none;
+   background: rgba(24, 75, 138, 0.2); 
+   border-radius: 0px; 
+   padding: 0;
+   position: absolute; 
+   top: 30px;
+   left: 0px;
+   z-index: 500;
+}
+.bbmri_eric_header-submainmenu-floating ul ul li {
+   position: relative;
+   float: left;
+   width: 245px;
+   padding-left: 20px;
+   padding-top: 3px;
+   align: left;
+   text-align: left;
+   height: 25px;
+   font-weight:normal;
+}
+.bbmri_eric_header-submainmenu-floating ul ul li a {
+   color: #FFFFFF;
+   font-size: 9.5pt;
+}
+.bbmri_eric_header-submainmenu-floating ul ul li a:hover {
+   color: #FFFFFF;
+   text-decoration:none;
+   font-size: 9.5pt;
+}
+.bbmri_eric_header-submainmenu-floating ul li:hover > ul {
+   display: block;
+   background: rgba(24, 75, 138, 0.75);
+   transition-delay: 5s;
+}
+.bbmri_eric_header-submainmenu-floating ul ul li a.selected_weight_normal {
+	font-weight: normal;
+	text-transform: none;
+}
+.bbmri_eric_header-submainmenu-floating ul ul li a.selected_weight_bold {
+	font-weight: bold;
+	text-transform: none;
+}

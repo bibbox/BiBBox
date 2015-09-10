@@ -32,24 +32,28 @@ public class DiseaseMatrixServiceClpInvoker {
 
 		_methodParameterTypes45 = new String[] { "java.lang.String" };
 
-		_methodName50 = "updatediseasematrix";
+		_methodName50 = "testupdatediseasematrix";
 
-		_methodParameterTypes50 = new String[] {
+		_methodParameterTypes50 = new String[] { "long" };
+
+		_methodName51 = "updatediseasematrix";
+
+		_methodParameterTypes51 = new String[] {
 				"long",
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix"
 			};
 
-		_methodName51 = "updatediseasematrixs";
+		_methodName52 = "updatediseasematrixs";
 
-		_methodParameterTypes51 = new String[] { "long", "java.util.List" };
+		_methodParameterTypes52 = new String[] { "long", "java.util.List" };
 
-		_methodName52 = "regbb";
-
-		_methodParameterTypes52 = new String[] { "long" };
-
-		_methodName53 = "getDiseaseMatrix";
+		_methodName53 = "regbb";
 
 		_methodParameterTypes53 = new String[] { "long" };
+
+		_methodName54 = "getDiseaseMatrix";
+
+		_methodParameterTypes54 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -68,27 +72,30 @@ public class DiseaseMatrixServiceClpInvoker {
 
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
-			DiseaseMatrixServiceUtil.updatediseasematrix(((Long)arguments[0]).longValue(),
-				(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix)arguments[1]);
-
-			return null;
+			return DiseaseMatrixServiceUtil.testupdatediseasematrix(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName51.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+			return DiseaseMatrixServiceUtil.updatediseasematrix(((Long)arguments[0]).longValue(),
+				(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix)arguments[1]);
+		}
+
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
 			DiseaseMatrixServiceUtil.updatediseasematrixs(((Long)arguments[0]).longValue(),
 				(java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix>)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
 			return DiseaseMatrixServiceUtil.regbb(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
 			return DiseaseMatrixServiceUtil.getDiseaseMatrix(((Long)arguments[0]).longValue());
 		}
 
@@ -107,4 +114,6 @@ public class DiseaseMatrixServiceClpInvoker {
 	private String[] _methodParameterTypes52;
 	private String _methodName53;
 	private String[] _methodParameterTypes53;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
 }

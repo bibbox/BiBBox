@@ -23,6 +23,10 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
+
 import at.graz.hmmc.liferay.portlet.puch.model.ParameterConfiguration;
 import at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalServiceUtil;
 
@@ -52,15 +56,17 @@ public class ObjectDataImpl extends ObjectDataBaseImpl {
 	
 	public String formatValueHTML() {
 		try {
+			String formatedstring = "";
 			ParameterConfiguration parameterconfig = ParameterConfigurationLocalServiceUtil.getParameterConfiguration(Long.parseLong(this.getObjectkey()));
 			ScriptEngineManager manager = new ScriptEngineManager();
-		    ScriptEngine engine = manager.getEngineByName("javascript");
-		    engine.put("optionvalue", this.getObjectvalue());
-		    if(parameterconfig.getViewscript().equalsIgnoreCase("")) {
-		    	return this.getObjectvalue();
-		    }
-		    engine.eval(parameterconfig.getViewscript());
-		    String formatedstring = (String) engine.get("output");
+			ScriptEngine engine = manager.getEngineByName("javascript");
+			engine.put("optionvalue", this.getObjectvalue());
+			if(parameterconfig.getViewscript().equalsIgnoreCase("")) {
+			  	return this.getObjectvalue();
+			}
+			engine.eval(parameterconfig.getViewscript());
+			formatedstring = (String) engine.get("output");
+
 		    return formatedstring;
 		} catch(Exception ex) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [PuchMuseum-portlet::at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl::formatValueHTML] Error formating ObjectData Value.");

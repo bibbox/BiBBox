@@ -17,10 +17,12 @@ package at.graz.hmmc.liferay.portlet.puch.service.messaging;
 import at.graz.hmmc.liferay.portlet.puch.service.ClpSerializer;
 import at.graz.hmmc.liferay.portlet.puch.service.ConfigurationLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.ObjectDataLocalServiceUtil;
+import at.graz.hmmc.liferay.portlet.puch.service.ObjectImageLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.ParameterConfigurationLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.ParameterOptionsConfigurationLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.PersonLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.PuchMuseumsObjektLocalServiceUtil;
+import at.graz.hmmc.liferay.portlet.puch.service.TransaktionDataLocalServiceUtil;
 import at.graz.hmmc.liferay.portlet.puch.service.TransaktionLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -45,6 +47,8 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			ObjectDataLocalServiceUtil.clearService();
 
+			ObjectImageLocalServiceUtil.clearService();
+
 			ParameterConfigurationLocalServiceUtil.clearService();
 
 			ParameterOptionsConfigurationLocalServiceUtil.clearService();
@@ -54,6 +58,8 @@ public class ClpMessageListener extends BaseMessageListener {
 			PuchMuseumsObjektLocalServiceUtil.clearService();
 
 			TransaktionLocalServiceUtil.clearService();
+
+			TransaktionDataLocalServiceUtil.clearService();
 		}
 	}
 }

@@ -68,9 +68,9 @@ public class PuchMuseumsObjektModelImpl extends BaseModelImpl<PuchMuseumsObjekt>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "objekttyp", Types.VARCHAR },
 			{ "objektid", Types.BIGINT },
-			{ "folder", Types.VARCHAR }
+			{ "folder", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table puchmuseum_puchmuseumsobjekt (puchmuseumsobjectId LONG not null primary key,createrUserId LONG,createDate DATE null,modifiedUserId LONG,modifiedDate DATE null,objekttyp VARCHAR(75) null,objektid LONG,folder VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table puchmuseum_puchmuseumsobjekt (puchmuseumsobjectId LONG not null primary key,createrUserId LONG,createDate DATE null,modifiedUserId LONG,modifiedDate DATE null,objekttyp VARCHAR(75) null,objektid LONG,folder LONG)";
 	public static final String TABLE_SQL_DROP = "drop table puchmuseum_puchmuseumsobjekt";
 	public static final String ORDER_BY_JPQL = " ORDER BY puchMuseumsObjekt.puchmuseumsobjectId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY puchmuseum_puchmuseumsobjekt.puchmuseumsobjectId ASC";
@@ -180,7 +180,7 @@ public class PuchMuseumsObjektModelImpl extends BaseModelImpl<PuchMuseumsObjekt>
 			setObjektid(objektid);
 		}
 
-		String folder = (String)attributes.get("folder");
+		Long folder = (Long)attributes.get("folder");
 
 		if (folder != null) {
 			setFolder(folder);
@@ -285,17 +285,12 @@ public class PuchMuseumsObjektModelImpl extends BaseModelImpl<PuchMuseumsObjekt>
 	}
 
 	@Override
-	public String getFolder() {
-		if (_folder == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _folder;
-		}
+	public long getFolder() {
+		return _folder;
 	}
 
 	@Override
-	public void setFolder(String folder) {
+	public void setFolder(long folder) {
 		_folder = folder;
 	}
 
@@ -426,12 +421,6 @@ public class PuchMuseumsObjektModelImpl extends BaseModelImpl<PuchMuseumsObjekt>
 
 		puchMuseumsObjektCacheModel.folder = getFolder();
 
-		String folder = puchMuseumsObjektCacheModel.folder;
-
-		if ((folder != null) && (folder.length() == 0)) {
-			puchMuseumsObjektCacheModel.folder = null;
-		}
-
 		return puchMuseumsObjektCacheModel;
 	}
 
@@ -519,6 +508,6 @@ public class PuchMuseumsObjektModelImpl extends BaseModelImpl<PuchMuseumsObjekt>
 	private Date _modifiedDate;
 	private String _objekttyp;
 	private long _objektid;
-	private String _folder;
+	private long _folder;
 	private PuchMuseumsObjekt _escapedModel;
 }

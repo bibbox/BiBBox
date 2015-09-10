@@ -1,5 +1,6 @@
 <%@ include file="/html/init.jsp"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
@@ -176,8 +177,8 @@ if(!biobankId.equalsIgnoreCase("")) {
 				%>
 			</div>
 			<div class="idcard_idcardbodybottom-menue">
-				<div style="width: 90px;font-weight:bold;float:left;">PI:</div><div style="float:left;"><%= name %></div> <br>
-				<div style="width: 90px;font-weight:bold;float:left;">Hosted by:</div><div style="float:left;"><%= biobank.getBiobankjuristicperson() %></div>
+				<div style="width: 110px;font-weight:bold;float:left;">Main contact:</div><div style="float:left;"><%= HtmlUtil.unescape(name) %></div> <br>
+				<div style="width: 110px;font-weight:bold;float:left;">Institution:</div><div style="float:left;"><%= biobank.getBiobankjuristicperson() %></div>
 			</div>
 		</div>
 	</div>

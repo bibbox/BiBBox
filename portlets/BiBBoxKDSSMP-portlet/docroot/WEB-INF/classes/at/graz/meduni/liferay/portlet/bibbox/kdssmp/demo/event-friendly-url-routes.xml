@@ -3,23 +3,18 @@
 
 <routes>
     <route>
-        <pattern>/createevent/{patientId:\d+}</pattern>
-        <generated-parameter name="mvcPath">/html/demo/dynamicevent/createevent.jsp</generated-parameter>
+        <pattern>/organisations/{invitationId:\d+}</pattern>
+        <generated-parameter name="mvcPath">/html/user/invitation/edit_organization.jsp</generated-parameter>
         <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
     </route>
     <route>
-        <pattern>/createevent/{patientId:\d+}/{eventtype:\w+}</pattern>
-        <generated-parameter name="mvcPath">/html/demo/dynamicevent/createevent.jsp</generated-parameter>
+        <pattern>/vieworganisations/{invitationId:\d+}</pattern>
+        <generated-parameter name="mvcPath">/html/user/invitation/view_organisations.jsp</generated-parameter>
         <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
     </route>
     <route>
-        <pattern>/createevent2/{patientId:\d+}</pattern>
-        <generated-parameter name="mvcPath">/html/demo2/createevent/createeventsadsad.jsp</generated-parameter>
-        <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
-    </route>
-    <route>
-        <pattern>/createevent2/{patientId:\d+}/{eventtype:\w+}</pattern>
-        <generated-parameter name="mvcPath">/html/demo2/createevent/createeventasdsada.jsp</generated-parameter>
+        <pattern>/biobank/{biobankId:\d+}</pattern>
+        <generated-parameter name="mvcPath">/html/user/invitation/invitationutilorganizationstatuslist/biobankprintpage.jsp</generated-parameter>
         <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
     </route>
 </routes>

@@ -131,7 +131,7 @@ public class PuchMuseumsObjektClp extends BaseModelImpl<PuchMuseumsObjekt>
 			setObjektid(objektid);
 		}
 
-		String folder = (String)attributes.get("folder");
+		Long folder = (Long)attributes.get("folder");
 
 		if (folder != null) {
 			setFolder(folder);
@@ -323,19 +323,19 @@ public class PuchMuseumsObjektClp extends BaseModelImpl<PuchMuseumsObjekt>
 	}
 
 	@Override
-	public String getFolder() {
+	public long getFolder() {
 		return _folder;
 	}
 
 	@Override
-	public void setFolder(String folder) {
+	public void setFolder(long folder) {
 		_folder = folder;
 
 		if (_puchMuseumsObjektRemoteModel != null) {
 			try {
 				Class<?> clazz = _puchMuseumsObjektRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setFolder", String.class);
+				Method method = clazz.getMethod("setFolder", long.class);
 
 				method.invoke(_puchMuseumsObjektRemoteModel, folder);
 			}
@@ -569,6 +569,6 @@ public class PuchMuseumsObjektClp extends BaseModelImpl<PuchMuseumsObjekt>
 	private Date _modifiedDate;
 	private String _objekttyp;
 	private long _objektid;
-	private String _folder;
+	private long _folder;
 	private BaseModel<?> _puchMuseumsObjektRemoteModel;
 }

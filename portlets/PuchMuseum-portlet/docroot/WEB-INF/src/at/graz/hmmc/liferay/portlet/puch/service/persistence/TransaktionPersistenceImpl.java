@@ -612,6 +612,584 @@ public class TransaktionPersistenceImpl extends BasePersistenceImpl<Transaktion>
 	private static final String _FINDER_COLUMN_TYP_TYP_1 = "transaktion.typ IS NULL";
 	private static final String _FINDER_COLUMN_TYP_TYP_2 = "transaktion.typ = ?";
 	private static final String _FINDER_COLUMN_TYP_TYP_3 = "(transaktion.typ IS NULL OR transaktion.typ = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_TYPANDOBJECT =
+		new FinderPath(TransaktionModelImpl.ENTITY_CACHE_ENABLED,
+			TransaktionModelImpl.FINDER_CACHE_ENABLED, TransaktionImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByTypAndObject",
+			new String[] {
+				String.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TYPANDOBJECT =
+		new FinderPath(TransaktionModelImpl.ENTITY_CACHE_ENABLED,
+			TransaktionModelImpl.FINDER_CACHE_ENABLED, TransaktionImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByTypAndObject",
+			new String[] { String.class.getName(), Long.class.getName() },
+			TransaktionModelImpl.TYP_COLUMN_BITMASK |
+			TransaktionModelImpl.PUCHMUSEUMSOBJECTID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_TYPANDOBJECT = new FinderPath(TransaktionModelImpl.ENTITY_CACHE_ENABLED,
+			TransaktionModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByTypAndObject",
+			new String[] { String.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the transaktions where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @return the matching transaktions
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Transaktion> findByTypAndObject(String typ,
+		long puchmuseumsobjectId) throws SystemException {
+		return findByTypAndObject(typ, puchmuseumsobjectId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the transaktions where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @param start the lower bound of the range of transaktions
+	 * @param end the upper bound of the range of transaktions (not inclusive)
+	 * @return the range of matching transaktions
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Transaktion> findByTypAndObject(String typ,
+		long puchmuseumsobjectId, int start, int end) throws SystemException {
+		return findByTypAndObject(typ, puchmuseumsobjectId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the transaktions where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @param start the lower bound of the range of transaktions
+	 * @param end the upper bound of the range of transaktions (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching transaktions
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Transaktion> findByTypAndObject(String typ,
+		long puchmuseumsobjectId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TYPANDOBJECT;
+			finderArgs = new Object[] { typ, puchmuseumsobjectId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_TYPANDOBJECT;
+			finderArgs = new Object[] {
+					typ, puchmuseumsobjectId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Transaktion> list = (List<Transaktion>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Transaktion transaktion : list) {
+				if (!Validator.equals(typ, transaktion.getTyp()) ||
+						(puchmuseumsobjectId != transaktion.getPuchmuseumsobjectId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_TRANSAKTION_WHERE);
+
+			boolean bindTyp = false;
+
+			if (typ == null) {
+				query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_1);
+			}
+			else if (typ.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_3);
+			}
+			else {
+				bindTyp = true;
+
+				query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_2);
+			}
+
+			query.append(_FINDER_COLUMN_TYPANDOBJECT_PUCHMUSEUMSOBJECTID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(TransaktionModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindTyp) {
+					qPos.add(typ);
+				}
+
+				qPos.add(puchmuseumsobjectId);
+
+				if (!pagination) {
+					list = (List<Transaktion>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Transaktion>(list);
+				}
+				else {
+					list = (List<Transaktion>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching transaktion
+	 * @throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException if a matching transaktion could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Transaktion findByTypAndObject_First(String typ,
+		long puchmuseumsobjectId, OrderByComparator orderByComparator)
+		throws NoSuchTransaktionException, SystemException {
+		Transaktion transaktion = fetchByTypAndObject_First(typ,
+				puchmuseumsobjectId, orderByComparator);
+
+		if (transaktion != null) {
+			return transaktion;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("typ=");
+		msg.append(typ);
+
+		msg.append(", puchmuseumsobjectId=");
+		msg.append(puchmuseumsobjectId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchTransaktionException(msg.toString());
+	}
+
+	/**
+	 * Returns the first transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching transaktion, or <code>null</code> if a matching transaktion could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Transaktion fetchByTypAndObject_First(String typ,
+		long puchmuseumsobjectId, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<Transaktion> list = findByTypAndObject(typ, puchmuseumsobjectId,
+				0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching transaktion
+	 * @throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException if a matching transaktion could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Transaktion findByTypAndObject_Last(String typ,
+		long puchmuseumsobjectId, OrderByComparator orderByComparator)
+		throws NoSuchTransaktionException, SystemException {
+		Transaktion transaktion = fetchByTypAndObject_Last(typ,
+				puchmuseumsobjectId, orderByComparator);
+
+		if (transaktion != null) {
+			return transaktion;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("typ=");
+		msg.append(typ);
+
+		msg.append(", puchmuseumsobjectId=");
+		msg.append(puchmuseumsobjectId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchTransaktionException(msg.toString());
+	}
+
+	/**
+	 * Returns the last transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching transaktion, or <code>null</code> if a matching transaktion could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Transaktion fetchByTypAndObject_Last(String typ,
+		long puchmuseumsobjectId, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByTypAndObject(typ, puchmuseumsobjectId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Transaktion> list = findByTypAndObject(typ, puchmuseumsobjectId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the transaktions before and after the current transaktion in the ordered set where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * @param transaktionId the primary key of the current transaktion
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next transaktion
+	 * @throws at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException if a transaktion with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Transaktion[] findByTypAndObject_PrevAndNext(long transaktionId,
+		String typ, long puchmuseumsobjectId,
+		OrderByComparator orderByComparator)
+		throws NoSuchTransaktionException, SystemException {
+		Transaktion transaktion = findByPrimaryKey(transaktionId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Transaktion[] array = new TransaktionImpl[3];
+
+			array[0] = getByTypAndObject_PrevAndNext(session, transaktion, typ,
+					puchmuseumsobjectId, orderByComparator, true);
+
+			array[1] = transaktion;
+
+			array[2] = getByTypAndObject_PrevAndNext(session, transaktion, typ,
+					puchmuseumsobjectId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Transaktion getByTypAndObject_PrevAndNext(Session session,
+		Transaktion transaktion, String typ, long puchmuseumsobjectId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TRANSAKTION_WHERE);
+
+		boolean bindTyp = false;
+
+		if (typ == null) {
+			query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_1);
+		}
+		else if (typ.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_3);
+		}
+		else {
+			bindTyp = true;
+
+			query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_2);
+		}
+
+		query.append(_FINDER_COLUMN_TYPANDOBJECT_PUCHMUSEUMSOBJECTID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(TransaktionModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindTyp) {
+			qPos.add(typ);
+		}
+
+		qPos.add(puchmuseumsobjectId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(transaktion);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Transaktion> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the transaktions where typ = &#63; and puchmuseumsobjectId = &#63; from the database.
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByTypAndObject(String typ, long puchmuseumsobjectId)
+		throws SystemException {
+		for (Transaktion transaktion : findByTypAndObject(typ,
+				puchmuseumsobjectId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(transaktion);
+		}
+	}
+
+	/**
+	 * Returns the number of transaktions where typ = &#63; and puchmuseumsobjectId = &#63;.
+	 *
+	 * @param typ the typ
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID
+	 * @return the number of matching transaktions
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByTypAndObject(String typ, long puchmuseumsobjectId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_TYPANDOBJECT;
+
+		Object[] finderArgs = new Object[] { typ, puchmuseumsobjectId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_TRANSAKTION_WHERE);
+
+			boolean bindTyp = false;
+
+			if (typ == null) {
+				query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_1);
+			}
+			else if (typ.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_3);
+			}
+			else {
+				bindTyp = true;
+
+				query.append(_FINDER_COLUMN_TYPANDOBJECT_TYP_2);
+			}
+
+			query.append(_FINDER_COLUMN_TYPANDOBJECT_PUCHMUSEUMSOBJECTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindTyp) {
+					qPos.add(typ);
+				}
+
+				qPos.add(puchmuseumsobjectId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_TYPANDOBJECT_TYP_1 = "transaktion.typ IS NULL AND ";
+	private static final String _FINDER_COLUMN_TYPANDOBJECT_TYP_2 = "transaktion.typ = ? AND ";
+	private static final String _FINDER_COLUMN_TYPANDOBJECT_TYP_3 = "(transaktion.typ IS NULL OR transaktion.typ = '') AND ";
+	private static final String _FINDER_COLUMN_TYPANDOBJECT_PUCHMUSEUMSOBJECTID_2 =
+		"transaktion.puchmuseumsobjectId = ?";
 
 	public TransaktionPersistenceImpl() {
 		setModelClass(Transaktion.class);
@@ -854,6 +1432,29 @@ public class TransaktionPersistenceImpl extends BasePersistenceImpl<Transaktion>
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TYP,
 					args);
 			}
+
+			if ((transaktionModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TYPANDOBJECT.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						transaktionModelImpl.getOriginalTyp(),
+						transaktionModelImpl.getOriginalPuchmuseumsobjectId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TYPANDOBJECT,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TYPANDOBJECT,
+					args);
+
+				args = new Object[] {
+						transaktionModelImpl.getTyp(),
+						transaktionModelImpl.getPuchmuseumsobjectId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TYPANDOBJECT,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TYPANDOBJECT,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(TransaktionModelImpl.ENTITY_CACHE_ENABLED,
@@ -878,6 +1479,9 @@ public class TransaktionPersistenceImpl extends BasePersistenceImpl<Transaktion>
 		transaktionImpl.setModifiedUserId(transaktion.getModifiedUserId());
 		transaktionImpl.setModifiedDate(transaktion.getModifiedDate());
 		transaktionImpl.setTyp(transaktion.getTyp());
+		transaktionImpl.setPuchmuseumsobjectId(transaktion.getPuchmuseumsobjectId());
+		transaktionImpl.setStartDate(transaktion.getStartDate());
+		transaktionImpl.setEndDate(transaktion.getEndDate());
 
 		return transaktionImpl;
 	}

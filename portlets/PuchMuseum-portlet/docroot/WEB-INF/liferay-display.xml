@@ -5,6 +5,8 @@
 	
 	<category name="PuchMuseum">
 		<portlet id="puch-museums-objekt-erstellen"></portlet>
+		<portlet id="transactions"></portlet>
+		<portlet id="image-upload"></portlet>
 	</category>
 	<category name="PuchMuseum Configuration">
 		<portlet id="configuration-puch-museum"></portlet>

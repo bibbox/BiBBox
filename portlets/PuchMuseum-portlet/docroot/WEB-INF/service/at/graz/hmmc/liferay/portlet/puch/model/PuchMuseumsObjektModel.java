@@ -194,15 +194,14 @@ public interface PuchMuseumsObjektModel extends BaseModel<PuchMuseumsObjekt> {
 	 *
 	 * @return the folder of this puch museums objekt
 	 */
-	@AutoEscape
-	public String getFolder();
+	public long getFolder();
 
 	/**
 	 * Sets the folder of this puch museums objekt.
 	 *
 	 * @param folder the folder of this puch museums objekt
 	 */
-	public void setFolder(String folder);
+	public void setFolder(long folder);
 
 	@Override
 	public boolean isNew();

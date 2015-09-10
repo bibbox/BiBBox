@@ -47,20 +47,41 @@ public class DiseaseMatrixServiceImpl extends DiseaseMatrixServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixServiceUtil} to access the disease matrix remote service.
 	 */
+	@JSONWebService(value = "testupdatediseasematrix", method = "POST")
+	public JSONObject testupdatediseasematrix(long organizationId) {
+		System.out.println("public JSONObject testupdatediseasematrix(long organizationId) {");
+		System.out.println("-testupdatediseasematrix-3-" + organizationId + "  -  ");
+		JSONObject json = JSONFactoryUtil.createJSONObject();
+		json.put("version", "0.2");
+		return json;
+	}
+	
 	@JSONWebService(value = "updatediseasematrix", method = "POST")
-	public void updatediseasematrix(long organizationId, DiseaseMatrix matrix) {
+	public DiseaseMatrix updatediseasematrix(long organizationId, DiseaseMatrix matrix) {
+		System.out.println("public DiseaseMatrix updatediseasematrix(long organizationId, DiseaseMatrix matrix) {");
 		System.out.println("-updateRegbb2-3-" + organizationId + "  -  ");
 		if(matrix != null) {
 			System.out.println("Matrix != null:: Size ");
 		} else {
 			System.out.println("Matrix == null");
 		}
+		try {
+			return DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(101);
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JSONObject json = JSONFactoryUtil.createJSONObject();
-		json.put("version", "0.1");
+		json.put("diseasename", "0.3");
+		return null;
 	}
 	
 	@JSONWebService(value = "updatediseasematrixs", method = "POST")
 	public void updatediseasematrixs(long organizationId, List<DiseaseMatrix> matrixs) {
+		System.out.println("public void updatediseasematrixs(long organizationId, List<DiseaseMatrix> matrixs) {");
 		System.out.println("-updateRegbb2-3-" + organizationId + "  -  ");
 		if(matrixs != null) {
 			System.out.println("Matrix != null:: Size " + matrixs.size());
@@ -72,12 +93,14 @@ public class DiseaseMatrixServiceImpl extends DiseaseMatrixServiceBaseImpl {
 	}
 	
 	public JSONObject regbb(long organizationId) {
+		System.out.println("public JSONObject regbb(long organizationId) {");
 		JSONObject json = JSONFactoryUtil.createJSONObject();
 		json.put("ID", organizationId);
 		return json;
 	}
 	
 	public DiseaseMatrix getDiseaseMatrix(long organizationId) {
+		System.out.println("public DiseaseMatrix getDiseaseMatrix(long organizationId) {");
 		try {
 			return DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(101);
 		} catch (PortalException e) {

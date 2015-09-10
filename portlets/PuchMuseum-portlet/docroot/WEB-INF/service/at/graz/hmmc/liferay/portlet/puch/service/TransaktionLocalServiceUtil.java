@@ -275,6 +275,40 @@ public class TransaktionLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static at.graz.hmmc.liferay.portlet.puch.model.Transaktion getLastTransactionOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype) {
+		return getService()
+				   .getLastTransactionOfType(puchmuseumsobjectId,
+			transactiontype);
+	}
+
+	/**
+	* @param puchmuseumsobjectId
+	* @param transactiontype
+	* @return
+	*/
+	public static java.util.List<at.graz.hmmc.liferay.portlet.puch.model.Transaktion> getTransactionOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype) {
+		return getService()
+				   .getTransactionOfType(puchmuseumsobjectId, transactiontype);
+	}
+
+	public static java.lang.String getTransactionTableOfType(
+		long puchmuseumsobjectId, java.lang.String transactiontype,
+		java.lang.String baseurl) {
+		return getService()
+				   .getTransactionTableOfType(puchmuseumsobjectId,
+			transactiontype, baseurl);
+	}
+
+	public static at.graz.hmmc.liferay.portlet.puch.model.Transaktion addTransaction(
+		long puchmuseumsobjectId, java.lang.String transactiontype,
+		java.util.Date startdate, java.util.Date enddate, long userId) {
+		return getService()
+				   .addTransaction(puchmuseumsobjectId, transactiontype,
+			startdate, enddate, userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -29,6 +29,28 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectImageModelImpl">
+		<attributes>
+			<id name="objectimageId" />
+			<basic name="puchmuseumsobjectId" />
+			<basic name="createrUserId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedUserId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="dlappimagerawId" />
+			<basic name="dlappimageprocessedId" />
+			<basic name="dlappimagewebId" />
+			<transient name="createrUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="modifiedUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationModelImpl">
 		<attributes>
 			<id name="parameterconfigurationId" />
@@ -121,9 +143,28 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="typ" />
+			<basic name="puchmuseumsobjectId" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="createrUserUuid" />
 			<transient name="modelAttributes" />
 			<transient name="modifiedUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionDataModelImpl">
+		<attributes>
+			<id name="transaktiondataId" />
+			<basic name="puchmuseumsobjectId" />
+			<basic name="transaktionId" />
+			<basic name="objectkey" />
+			<basic name="objectvalue" />
+			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -134,6 +175,10 @@
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectDataImpl" name="ObjectData">
 		<table name="puchmuseum_objectdata" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectImageImpl" name="ObjectImage">
+		<table name="puchmuseum_objectimage" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl" name="ParameterConfiguration">
@@ -154,6 +199,10 @@
 	</entity>
 	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionImpl" name="Transaktion">
 		<table name="puchmuseum_transaktion" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionDataImpl" name="TransaktionData">
+		<table name="puchmuseum_transaktiondata" />
 		<attributes />
 	</entity>
 </entity-mappings>

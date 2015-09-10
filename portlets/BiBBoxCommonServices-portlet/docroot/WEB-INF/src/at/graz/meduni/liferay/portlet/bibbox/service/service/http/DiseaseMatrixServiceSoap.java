@@ -62,13 +62,31 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class DiseaseMatrixServiceSoap {
-	public static void updatediseasematrix(long organizationId,
+	public static java.lang.String testupdatediseasematrix(long organizationId)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = DiseaseMatrixServiceUtil.testupdatediseasematrix(organizationId);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixSoap updatediseasematrix(
+		long organizationId,
 		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixSoap matrix)
 		throws RemoteException {
 		try {
-			DiseaseMatrixServiceUtil.updatediseasematrix(organizationId,
-				at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixModelImpl.toModel(
-					matrix));
+			at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix returnValue =
+				DiseaseMatrixServiceUtil.updatediseasematrix(organizationId,
+					at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixModelImpl.toModel(
+						matrix));
+
+			return at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

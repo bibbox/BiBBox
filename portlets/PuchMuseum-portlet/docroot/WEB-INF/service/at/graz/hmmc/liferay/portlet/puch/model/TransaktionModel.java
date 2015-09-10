@@ -175,6 +175,48 @@ public interface TransaktionModel extends BaseModel<Transaktion> {
 	 */
 	public void setTyp(String typ);
 
+	/**
+	 * Returns the puchmuseumsobject ID of this transaktion.
+	 *
+	 * @return the puchmuseumsobject ID of this transaktion
+	 */
+	public long getPuchmuseumsobjectId();
+
+	/**
+	 * Sets the puchmuseumsobject ID of this transaktion.
+	 *
+	 * @param puchmuseumsobjectId the puchmuseumsobject ID of this transaktion
+	 */
+	public void setPuchmuseumsobjectId(long puchmuseumsobjectId);
+
+	/**
+	 * Returns the start date of this transaktion.
+	 *
+	 * @return the start date of this transaktion
+	 */
+	public Date getStartDate();
+
+	/**
+	 * Sets the start date of this transaktion.
+	 *
+	 * @param startDate the start date of this transaktion
+	 */
+	public void setStartDate(Date startDate);
+
+	/**
+	 * Returns the end date of this transaktion.
+	 *
+	 * @return the end date of this transaktion
+	 */
+	public Date getEndDate();
+
+	/**
+	 * Sets the end date of this transaktion.
+	 *
+	 * @param endDate the end date of this transaktion
+	 */
+	public void setEndDate(Date endDate);
+
 	@Override
 	public boolean isNew();
 

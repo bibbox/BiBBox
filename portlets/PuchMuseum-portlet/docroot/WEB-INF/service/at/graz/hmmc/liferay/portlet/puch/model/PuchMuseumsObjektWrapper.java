@@ -106,7 +106,7 @@ public class PuchMuseumsObjektWrapper implements PuchMuseumsObjekt,
 			setObjektid(objektid);
 		}
 
-		String folder = (String)attributes.get("folder");
+		Long folder = (Long)attributes.get("folder");
 
 		if (folder != null) {
 			setFolder(folder);
@@ -323,7 +323,7 @@ public class PuchMuseumsObjektWrapper implements PuchMuseumsObjekt,
 	* @return the folder of this puch museums objekt
 	*/
 	@Override
-	public java.lang.String getFolder() {
+	public long getFolder() {
 		return _puchMuseumsObjekt.getFolder();
 	}
 
@@ -333,7 +333,7 @@ public class PuchMuseumsObjektWrapper implements PuchMuseumsObjekt,
 	* @param folder the folder of this puch museums objekt
 	*/
 	@Override
-	public void setFolder(java.lang.String folder) {
+	public void setFolder(long folder) {
 		_puchMuseumsObjekt.setFolder(folder);
 	}
 

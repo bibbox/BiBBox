@@ -1,0 +1,80 @@
+<%
+if(puchmuseumsobjektId > 0) {
+	Configuration header_configuration = ConfigurationLocalServiceUtil.getConfigurationOption("Header", transactiontype);
+	String title = "";
+	if(header_configuration != null) {
+		title = header_configuration.getOptionvalue();
+	}
+	// get Last Transaction of type for Object
+	transaction = TransaktionLocalServiceUtil.getLastTransactionOfType(puchmuseumsobjektId, transactiontype);
+	String idfortransaction = "createtransaction";
+	long transactionId = 0;
+	if(transaction != null) {
+		transactionId = transaction.getTransaktionId();
+	}
+	String basetransactionURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/puch/transaction/" ;
+	String addtransactionURL = basetransactionURL + puchmuseumsobjektId + "/" + 0;
+	String createtransactionURL = basetransactionURL + puchmuseumsobjektId + "/" + transactionId;
+	
+	%>
+	<h3><%= title %></h3><i id='createtransaction' tag="<%= transactiontype %>" tagurl="<%= addtransactionURL %>" style="cursor: pointer;float: right;margin-left: 5px;" class="fa fa-plus-square-o"></i><i id='createtransaction' tag="<%= transactiontype %>" tagurl="<%= createtransactionURL %>" style="cursor: pointer;float: right;" class="fa fa-file-text-o"></i>
+	<%
+	configurations_sub = ConfigurationLocalServiceUtil.getConfigurationOptions("Parameter", transactiontype);
+	for (Configuration configuration : configurations_sub) {
+		ParameterConfiguration parameterconfig = ParameterConfigurationLocalServiceUtil.getParameterConfiguration(Long.parseLong(configuration.getOptionvalue()));
+		if(!parameterconfig.getViewvisible()) {
+			continue;
+		}
+		
+		String id = parameterconfig.getParameterconfigurationId() + "";
+		
+		TransaktionData transaktiondata = null;
+		if(transaction != null) {
+			transaktiondata = TransaktionDataLocalServiceUtil.getTransaktionDataForObject(transaction.getTransaktionId(), id);
+		}
+		
+		%>
+		<div style='<%= parameterconfig.getViewcss() %>'>
+		<%
+		if (transaktiondata != null) {
+			if (parameterconfig.getDatatype().equalsIgnoreCase("html")) {
+				%>
+				<div style="<%= parameterconfig.getViewtitlecss() %>"><%= parameterconfig.getDisplaynameshort() %>: </div><div style="<%= parameterconfig.getViewvaluecss() %>"><%= transaktiondata.formatValueHTML() %></div>
+				<%
+			} else if (parameterconfig.getDatatype().equalsIgnoreCase("text")) {
+				%>
+				<div style="<%= parameterconfig.getViewtitlecss() %>"><%= parameterconfig.getDisplaynameshort() %>: </div><div style="<%= parameterconfig.getViewvaluecss() %>"><%= transaktiondata.formatValueHTML() %></div>
+				<%
+			} else if (parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
+				%>
+				<div style="<%= parameterconfig.getViewtitlecss() %>"><%= parameterconfig.getDisplaynameshort() %>: </div><div style="<%= parameterconfig.getViewvaluecss() %>"><%= transaktiondata.formatValueHTML() %></div>
+				<%
+			} else if (parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
+				%>
+				<div style="<%= parameterconfig.getViewtitlecss() %>"><%= parameterconfig.getDisplaynameshort() %>: </div><div style="<%= parameterconfig.getViewvaluecss() %>"><%= transaktiondata.formatValueHTML() %></div>
+				<%
+			} else if (parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
+				%>
+				<div style="<%= parameterconfig.getViewtitlecss() %>"><%= parameterconfig.getDisplaynameshort() %>: </div><div style="<%= parameterconfig.getViewvaluecss() %>"><%= transaktiondata.formatValueHTML() %></div>
+				<%
+			}
+		} else {
+			%>
+			<%= parameterconfig.getDisplaynameshort() %><br>
+			<%
+		}
+		%>
+		<div style='content: "";clear: both;display: table;'></div>
+		</div>
+		<%
+	}
+	%>
+	<div style='content: "";clear: both;display: table;'></div>
+	<br>
+	<div id="<%= "tableof" + transactiontype %>"></div>
+	<aui:script use="node,aui-datatable,aui-datatype,datatable-sort">
+		<%= TransaktionLocalServiceUtil.getTransactionTableOfType(puchmuseumsobjektId, transactiontype, basetransactionURL) %>
+	</aui:script>
+	<%
+}
+%>

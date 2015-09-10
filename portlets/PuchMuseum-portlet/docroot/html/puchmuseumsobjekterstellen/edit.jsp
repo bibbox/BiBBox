@@ -29,7 +29,7 @@ PuchMuseumsObjekt puchmuseumsobjekt = null;
 creating <%= objekttyp %><br>
 
 <portlet:actionURL name='<%= puchmuseumsobjekt == null ? "addPuchMuseumsObject" : "updatePuchMuseumsObject" %>' var="editPuchMuseumsObjectURL" windowState="normal" />
-<aui:form action="<%= editPuchMuseumsObjectURL %>" method="POST" name="fm">
+<aui:form action="<%= editPuchMuseumsObjectURL %>" enctype="multipart/form-data" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 		<aui:input type="hidden" name="objekttyp" value="<%= objekttyp %>" />
@@ -58,6 +58,8 @@ creating <%= objekttyp %><br>
 					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/select.jspf" %><%
 				} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
 					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/multiselect.jspf" %><%
+				} else if(parameterconfig.getDatatype().equalsIgnoreCase("image")) {
+					%><%@ include file="/html/puchmuseumsobjekterstellen/dynamicelements/image.jspf" %><%
 				}
 			}
 		%>

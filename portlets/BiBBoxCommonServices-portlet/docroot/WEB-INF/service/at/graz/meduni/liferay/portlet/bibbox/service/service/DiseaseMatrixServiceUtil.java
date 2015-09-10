@@ -63,9 +63,15 @@ public class DiseaseMatrixServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static void updatediseasematrix(long organizationId,
+	public static com.liferay.portal.kernel.json.JSONObject testupdatediseasematrix(
+		long organizationId) {
+		return getService().testupdatediseasematrix(organizationId);
+	}
+
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix updatediseasematrix(
+		long organizationId,
 		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix matrix) {
-		getService().updatediseasematrix(organizationId, matrix);
+		return getService().updatediseasematrix(organizationId, matrix);
 	}
 
 	public static void updatediseasematrixs(long organizationId,

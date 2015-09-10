@@ -38,7 +38,7 @@ public class TransaktionCacheModel implements CacheModel<Transaktion>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{transaktionId=");
 		sb.append(transaktionId);
@@ -52,6 +52,12 @@ public class TransaktionCacheModel implements CacheModel<Transaktion>,
 		sb.append(modifiedDate);
 		sb.append(", typ=");
 		sb.append(typ);
+		sb.append(", puchmuseumsobjectId=");
+		sb.append(puchmuseumsobjectId);
+		sb.append(", startDate=");
+		sb.append(startDate);
+		sb.append(", endDate=");
+		sb.append(endDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -87,6 +93,22 @@ public class TransaktionCacheModel implements CacheModel<Transaktion>,
 			transaktionImpl.setTyp(typ);
 		}
 
+		transaktionImpl.setPuchmuseumsobjectId(puchmuseumsobjectId);
+
+		if (startDate == Long.MIN_VALUE) {
+			transaktionImpl.setStartDate(null);
+		}
+		else {
+			transaktionImpl.setStartDate(new Date(startDate));
+		}
+
+		if (endDate == Long.MIN_VALUE) {
+			transaktionImpl.setEndDate(null);
+		}
+		else {
+			transaktionImpl.setEndDate(new Date(endDate));
+		}
+
 		transaktionImpl.resetOriginalValues();
 
 		return transaktionImpl;
@@ -100,6 +122,9 @@ public class TransaktionCacheModel implements CacheModel<Transaktion>,
 		modifiedUserId = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		typ = objectInput.readUTF();
+		puchmuseumsobjectId = objectInput.readLong();
+		startDate = objectInput.readLong();
+		endDate = objectInput.readLong();
 	}
 
 	@Override
@@ -117,6 +142,10 @@ public class TransaktionCacheModel implements CacheModel<Transaktion>,
 		else {
 			objectOutput.writeUTF(typ);
 		}
+
+		objectOutput.writeLong(puchmuseumsobjectId);
+		objectOutput.writeLong(startDate);
+		objectOutput.writeLong(endDate);
 	}
 
 	public long transaktionId;
@@ -125,4 +154,7 @@ public class TransaktionCacheModel implements CacheModel<Transaktion>,
 	public long modifiedUserId;
 	public long modifiedDate;
 	public String typ;
+	public long puchmuseumsobjectId;
+	public long startDate;
+	public long endDate;
 }

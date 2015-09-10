@@ -16,11 +16,13 @@ package at.graz.hmmc.liferay.portlet.puch.service;
 
 import at.graz.hmmc.liferay.portlet.puch.model.ConfigurationClp;
 import at.graz.hmmc.liferay.portlet.puch.model.ObjectDataClp;
+import at.graz.hmmc.liferay.portlet.puch.model.ObjectImageClp;
 import at.graz.hmmc.liferay.portlet.puch.model.ParameterConfigurationClp;
 import at.graz.hmmc.liferay.portlet.puch.model.ParameterOptionsConfigurationClp;
 import at.graz.hmmc.liferay.portlet.puch.model.PersonClp;
 import at.graz.hmmc.liferay.portlet.puch.model.PuchMuseumsObjektClp;
 import at.graz.hmmc.liferay.portlet.puch.model.TransaktionClp;
+import at.graz.hmmc.liferay.portlet.puch.model.TransaktionDataClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -116,6 +118,10 @@ public class ClpSerializer {
 			return translateInputObjectData(oldModel);
 		}
 
+		if (oldModelClassName.equals(ObjectImageClp.class.getName())) {
+			return translateInputObjectImage(oldModel);
+		}
+
 		if (oldModelClassName.equals(ParameterConfigurationClp.class.getName())) {
 			return translateInputParameterConfiguration(oldModel);
 		}
@@ -135,6 +141,10 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals(TransaktionClp.class.getName())) {
 			return translateInputTransaktion(oldModel);
+		}
+
+		if (oldModelClassName.equals(TransaktionDataClp.class.getName())) {
+			return translateInputTransaktionData(oldModel);
 		}
 
 		return oldModel;
@@ -166,6 +176,16 @@ public class ClpSerializer {
 		ObjectDataClp oldClpModel = (ObjectDataClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getObjectDataRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputObjectImage(BaseModel<?> oldModel) {
+		ObjectImageClp oldClpModel = (ObjectImageClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getObjectImageRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -224,6 +244,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputTransaktionData(BaseModel<?> oldModel) {
+		TransaktionDataClp oldClpModel = (TransaktionDataClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getTransaktionDataRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInput(Object obj) {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
@@ -252,6 +282,11 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
+					"at.graz.hmmc.liferay.portlet.puch.model.impl.ObjectImageImpl")) {
+			return translateOutputObjectImage(oldModel);
+		}
+
+		if (oldModelClassName.equals(
 					"at.graz.hmmc.liferay.portlet.puch.model.impl.ParameterConfigurationImpl")) {
 			return translateOutputParameterConfiguration(oldModel);
 		}
@@ -274,6 +309,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionImpl")) {
 			return translateOutputTransaktion(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.hmmc.liferay.portlet.puch.model.impl.TransaktionDataImpl")) {
+			return translateOutputTransaktionData(oldModel);
 		}
 
 		return oldModel;
@@ -367,6 +407,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.hmmc.liferay.portlet.puch.NoSuchObjectImageException")) {
+			return new at.graz.hmmc.liferay.portlet.puch.NoSuchObjectImageException();
+		}
+
+		if (className.equals(
 					"at.graz.hmmc.liferay.portlet.puch.NoSuchParameterConfigurationException")) {
 			return new at.graz.hmmc.liferay.portlet.puch.NoSuchParameterConfigurationException();
 		}
@@ -391,6 +436,11 @@ public class ClpSerializer {
 			return new at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionException();
 		}
 
+		if (className.equals(
+					"at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionDataException")) {
+			return new at.graz.hmmc.liferay.portlet.puch.NoSuchTransaktionDataException();
+		}
+
 		return throwable;
 	}
 
@@ -410,6 +460,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setObjectDataRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputObjectImage(BaseModel<?> oldModel) {
+		ObjectImageClp newModel = new ObjectImageClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setObjectImageRemoteModel(oldModel);
 
 		return newModel;
 	}
@@ -462,6 +522,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setTransaktionRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputTransaktionData(BaseModel<?> oldModel) {
+		TransaktionDataClp newModel = new TransaktionDataClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setTransaktionDataRemoteModel(oldModel);
 
 		return newModel;
 	}

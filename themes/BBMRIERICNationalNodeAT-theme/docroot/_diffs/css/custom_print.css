@@ -1,0 +1,5 @@
+@media print {
+	.bbmri_eric_header-maincontainer {
+		display: none;
+	}
+}

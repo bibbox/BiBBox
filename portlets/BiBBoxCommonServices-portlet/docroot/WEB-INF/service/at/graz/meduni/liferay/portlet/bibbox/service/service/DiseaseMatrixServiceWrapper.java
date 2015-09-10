@@ -59,9 +59,16 @@ public class DiseaseMatrixServiceWrapper implements DiseaseMatrixService,
 	}
 
 	@Override
-	public void updatediseasematrix(long organizationId,
+	public com.liferay.portal.kernel.json.JSONObject testupdatediseasematrix(
+		long organizationId) {
+		return _diseaseMatrixService.testupdatediseasematrix(organizationId);
+	}
+
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix updatediseasematrix(
+		long organizationId,
 		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix matrix) {
-		_diseaseMatrixService.updatediseasematrix(organizationId, matrix);
+		return _diseaseMatrixService.updatediseasematrix(organizationId, matrix);
 	}
 
 	@Override

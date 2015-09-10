@@ -32,24 +32,28 @@ public class DiseaseMatrixServiceClp implements DiseaseMatrixService {
 
 		_methodParameterTypes1 = new String[] { "java.lang.String" };
 
-		_methodName3 = "updatediseasematrix";
+		_methodName3 = "testupdatediseasematrix";
 
-		_methodParameterTypes3 = new String[] {
+		_methodParameterTypes3 = new String[] { "long" };
+
+		_methodName4 = "updatediseasematrix";
+
+		_methodParameterTypes4 = new String[] {
 				"long",
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix"
 			};
 
-		_methodName4 = "updatediseasematrixs";
+		_methodName5 = "updatediseasematrixs";
 
-		_methodParameterTypes4 = new String[] { "long", "java.util.List" };
+		_methodParameterTypes5 = new String[] { "long", "java.util.List" };
 
-		_methodName5 = "regbb";
-
-		_methodParameterTypes5 = new String[] { "long" };
-
-		_methodName6 = "getDiseaseMatrix";
+		_methodName6 = "regbb";
 
 		_methodParameterTypes6 = new String[] { "long" };
+
+		_methodName7 = "getDiseaseMatrix";
+
+		_methodParameterTypes7 = new String[] { "long" };
 	}
 
 	@Override
@@ -103,16 +107,13 @@ public class DiseaseMatrixServiceClp implements DiseaseMatrixService {
 	}
 
 	@Override
-	public void updatediseasematrix(long organizationId,
-		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix matrix) {
+	public com.liferay.portal.kernel.json.JSONObject testupdatediseasematrix(
+		long organizationId) {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName3,
-				_methodParameterTypes3,
-				new Object[] {
-					organizationId,
-					
-				ClpSerializer.translateInput(matrix)
-				});
+			returnObj = _invokableService.invokeMethod(_methodName3,
+					_methodParameterTypes3, new Object[] { organizationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -125,14 +126,46 @@ public class DiseaseMatrixServiceClp implements DiseaseMatrixService {
 					" is not a valid exception");
 			}
 		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix updatediseasematrix(
+		long organizationId,
+		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix matrix) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
+					new Object[] {
+						organizationId,
+						
+					ClpSerializer.translateInput(matrix)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
 	public void updatediseasematrixs(long organizationId,
 		java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> matrixs) {
 		try {
-			_invokableService.invokeMethod(_methodName4,
-				_methodParameterTypes4,
+			_invokableService.invokeMethod(_methodName5,
+				_methodParameterTypes5,
 				new Object[] {
 					organizationId,
 					
@@ -157,8 +190,8 @@ public class DiseaseMatrixServiceClp implements DiseaseMatrixService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5, new Object[] { organizationId });
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6, new Object[] { organizationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -181,8 +214,8 @@ public class DiseaseMatrixServiceClp implements DiseaseMatrixService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] { organizationId });
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7, new Object[] { organizationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -212,4 +245,6 @@ public class DiseaseMatrixServiceClp implements DiseaseMatrixService {
 	private String[] _methodParameterTypes5;
 	private String _methodName6;
 	private String[] _methodParameterTypes6;
+	private String _methodName7;
+	private String[] _methodParameterTypes7;
 }
