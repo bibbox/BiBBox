@@ -79,6 +79,7 @@ public class ObjectImageLocalServiceImpl extends ObjectImageLocalServiceBaseImpl
 		try {
 			ObjectImageImpl oibjectimage = new ObjectImageImpl();
 			oibjectimage.setObjectimageId(CounterLocalServiceUtil.increment(ObjectImage.class.getName()));
+			oibjectimage.setPuchmuseumsobjectId(puchmuseumsobjectId);
 			// User Data
 			oibjectimage.setCreaterUserId(userId);
 			oibjectimage.setModifiedUserId(userId);

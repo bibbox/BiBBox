@@ -18,17 +18,19 @@ $(document).on('ready',function(){
         $.ajax({
         //url: 'http://localhost:8080/api/jsonws/BiBBoxCommonServices-portlet.diseasematrix/regbb/organization-id/10779',
           //url: 'http://localhost:8080/api/jsonws/BiBBoxCommonServices-portlet.diseasematrix/get-disease-matrix/organization-id/16016',
-          url: 'http://localhost:8080/api/jsonws/BiBBoxCommonServices-portlet.diseasematrix/updatediseasematrix',
+          //url: 'http://localhost:8080/api/jsonws/BiBBoxCommonServices-portlet.diseasematrix/updatediseasematrix',
+          //url: 'http://catalogue.rd-connect.eu/BiBBoxCommonServices-portlet/api/jsonws/logapi/regbbs',
+          url: 'http://catalogue.rd-connect.eu/api/jsonws/BiBBoxCommonServices-portlet.logapi/regbbs',
           dataType: "json",
-          data:{organizationId: 101,
-        	   matrix: {"diseasematrixId": 101}
+          data:{
  	   		},
           type: "post",
           success: function(data){
-                  alert(data.version);
+                  alert(data.name);
           },
           beforeSend: function(xhr){
                   xhr.setRequestHeader('Authorization',make_base_auth(username, password));
+                  xhr.setRequestHeader("Access-Control-Allow-Origin","*");
                             },
                             complete: function(){
                             },
@@ -44,11 +46,10 @@ $(document).on('ready',function(){
 
 
 Liferay.Service(
-  '/BiBBoxCommonServices-portlet.diseasematrix/updatediseasematrix',
+  '/BiBBoxCommonServices-portlet.logapi/regbbs',
   {
     organizationId: 101,
-    matrix: [{   "diseasematrixId": 101,   "diseasename": "jhasdjfasf",   "gene": "",   "icd10": "xcv",   "modifieddate": 1435330786284,   "omim": "",   "organizationId": 15801,   "orphanumber": "xcvx",   "patientcount": "324",   "synonym": "" }]
-  },
+ },
   function(obj) {
     console.log(obj);
   }
@@ -68,13 +69,13 @@ Liferay.Service(
 	function(A){
 		A.all('#checkemail').each(function() {
 	      this.on('click', function(event){
-			var url = 'http://localhost:8080/api/jsonws/BiBBoxCommonServices-portlet.diseasematrix/updatediseasematrix';
+			//var url = 'http://localhost:8080/api/jsonws/BiBBoxCommonServices-portlet.diseasematrix/updatediseasematrix';
+			//var url = 'http://catalogue.rd-connect.eu/BiBBoxCommonServices-portlet/api/jsonws/logapi/regbbs';
+			var url = 'http://catalogue.rd-connect.eu/api/jsonws/BiBBoxCommonServices-portlet.logapi/regbbs';
 			A.io.request(url,{
 				//this is the data that you are sending to the action method
-				method: 'POST',
+				method: 'GET',
 				data: {
-				   organizationId: 101,
-        	   		matrix: {"diseasematrixId": 101}
 				},
 				dataType: 'json',
 				on: {

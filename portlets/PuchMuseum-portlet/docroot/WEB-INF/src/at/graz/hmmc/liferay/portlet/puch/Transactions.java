@@ -188,6 +188,7 @@ public class Transactions extends MVCPortlet {
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			long puchmuseumsobjektId = ParamUtil.getLong(actionRequest, "puchmuseumsobjektId");
+			System.out.println("puchmuseumsobjektId: " + puchmuseumsobjektId);
 			System.out.println("--------- " + ParamUtil.getLong(actionRequest, "ojid") + " # " +  ParamUtil.getLong(actionRequest, "puchmuseumsobjektId") + " ---------");
 			PuchMuseumsObjekt puchmuseumsobjekt = PuchMuseumsObjektLocalServiceUtil.getPuchMuseumsObjekt(puchmuseumsobjektId);
 			if(puchmuseumsobjekt.getFolder() == 0) {
@@ -202,7 +203,7 @@ public class Transactions extends MVCPortlet {
 			long processedimageId = uploadFile("imageProcessed", uploadRequest, actionRequest, puchmuseumsobjekt);
 			long webimageId = 0;
 			
-			ObjectImage objectimage = ObjectImageLocalServiceUtil.addObjectImage(rowimageId, processedimageId, webimageId, themeDisplay.getUserId(), puchmuseumsobjekt.getPuchmuseumsobjectId());
+			ObjectImage objectimage = ObjectImageLocalServiceUtil.addObjectImage(rowimageId, processedimageId, webimageId, themeDisplay.getUserId(), puchmuseumsobjektId);
 			ObjectImageLocalServiceUtil.addObjectImage(objectimage);
 			
 			SessionMessages.add(actionRequest, "success");

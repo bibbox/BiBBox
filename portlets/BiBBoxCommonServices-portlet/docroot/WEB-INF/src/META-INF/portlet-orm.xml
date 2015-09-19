@@ -136,6 +136,22 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.LogapiModelImpl">
+		<attributes>
+			<id name="logapiId" />
+			<basic name="userId" />
+			<basic name="userip" />
+			<basic name="logmsg" />
+			<basic name="date">
+				<column name="DATE_" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.NetworksModelImpl">
 		<attributes>
 			<id name="networkId" />
@@ -167,6 +183,10 @@
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationOrganisationImpl" name="InvitationOrganisation">
 		<table name="bibboxcs.invitation_organisation" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.LogapiImpl" name="Logapi">
+		<table name="rdconnect.logapi" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.NetworksImpl" name="Networks">

@@ -106,25 +106,25 @@ public class NetworksLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.Networks"
 			};
 
-		_methodName60 = "getBeanIdentifier";
+		_methodName66 = "getBeanIdentifier";
 
-		_methodParameterTypes60 = new String[] {  };
+		_methodParameterTypes66 = new String[] {  };
 
-		_methodName61 = "setBeanIdentifier";
+		_methodName67 = "setBeanIdentifier";
 
-		_methodParameterTypes61 = new String[] { "java.lang.String" };
+		_methodParameterTypes67 = new String[] { "java.lang.String" };
 
-		_methodName66 = "getNetworkOrganizations";
+		_methodName72 = "getNetworkOrganizations";
 
-		_methodParameterTypes66 = new String[] { "long" };
+		_methodParameterTypes72 = new String[] { "long" };
 
-		_methodName67 = "isOrganizationInNetwork";
+		_methodName73 = "isOrganizationInNetwork";
 
-		_methodParameterTypes67 = new String[] { "long", "long" };
+		_methodParameterTypes73 = new String[] { "long", "long" };
 
-		_methodName68 = "getNetworkIdList";
+		_methodName74 = "getNetworkIdList";
 
-		_methodParameterTypes68 = new String[] { "long" };
+		_methodParameterTypes74 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,31 +216,31 @@ public class NetworksLocalServiceClpInvoker {
 			return NetworksLocalServiceUtil.updateNetworks((at.graz.meduni.liferay.portlet.bibbox.service.model.Networks)arguments[0]);
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return NetworksLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName61.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			NetworksLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
 			return NetworksLocalServiceUtil.getNetworkOrganizations(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
 			return NetworksLocalServiceUtil.isOrganizationInNetwork(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
 			return NetworksLocalServiceUtil.getNetworkIdList(((Long)arguments[0]).longValue());
 		}
 
@@ -279,14 +279,14 @@ public class NetworksLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
-	private String _methodName61;
-	private String[] _methodParameterTypes61;
 	private String _methodName66;
 	private String[] _methodParameterTypes66;
 	private String _methodName67;
 	private String[] _methodParameterTypes67;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
+	private String _methodName72;
+	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
+	private String _methodName74;
+	private String[] _methodParameterTypes74;
 }

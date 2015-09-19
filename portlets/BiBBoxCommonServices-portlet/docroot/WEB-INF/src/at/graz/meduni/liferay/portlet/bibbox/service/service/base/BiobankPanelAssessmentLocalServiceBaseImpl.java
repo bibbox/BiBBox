@@ -21,6 +21,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.Disease
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.GeneralInformationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.LogapiPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.NetworksPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -556,6 +557,62 @@ public abstract class BiobankPanelAssessmentLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the logapi local service.
+	 *
+	 * @return the logapi local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalService getLogapiLocalService() {
+		return logapiLocalService;
+	}
+
+	/**
+	 * Sets the logapi local service.
+	 *
+	 * @param logapiLocalService the logapi local service
+	 */
+	public void setLogapiLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalService logapiLocalService) {
+		this.logapiLocalService = logapiLocalService;
+	}
+
+	/**
+	 * Returns the logapi remote service.
+	 *
+	 * @return the logapi remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiService getLogapiService() {
+		return logapiService;
+	}
+
+	/**
+	 * Sets the logapi remote service.
+	 *
+	 * @param logapiService the logapi remote service
+	 */
+	public void setLogapiService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiService logapiService) {
+		this.logapiService = logapiService;
+	}
+
+	/**
+	 * Returns the logapi persistence.
+	 *
+	 * @return the logapi persistence
+	 */
+	public LogapiPersistence getLogapiPersistence() {
+		return logapiPersistence;
+	}
+
+	/**
+	 * Sets the logapi persistence.
+	 *
+	 * @param logapiPersistence the logapi persistence
+	 */
+	public void setLogapiPersistence(LogapiPersistence logapiPersistence) {
+		this.logapiPersistence = logapiPersistence;
+	}
+
+	/**
 	 * Returns the networks local service.
 	 *
 	 * @return the networks local service
@@ -796,6 +853,12 @@ public abstract class BiobankPanelAssessmentLocalServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService invitationOrganisationService;
 	@BeanReference(type = InvitationOrganisationPersistence.class)
 	protected InvitationOrganisationPersistence invitationOrganisationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalService logapiLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiService logapiService;
+	@BeanReference(type = LogapiPersistence.class)
+	protected LogapiPersistence logapiPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalService networksLocalService;
 	@BeanReference(type = NetworksPersistence.class)

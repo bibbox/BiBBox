@@ -12,8 +12,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <%= puchmuseumsobjektId %>
 
-<!-- <portlet:param name="jspPage" value="/html/imageupload/edit_image_popup.jsp.jsp" /> -->
-
 <portlet:actionURL var="uploadImageURL" name="uploadImage">
 
 </portlet:actionURL>

@@ -12,7 +12,8 @@
 			</#if>
 
 			<li ${nav_item_attr_selected} class="${nav_item_css_class} " id="layout_${nav_item.getLayoutId()}" role="presentation">
-				<a aria-labelledby="layout_${nav_item.getLayoutId()}" ${nav_item_attr_has_popup} href="${nav_item.getURL()}" ${nav_item.getTarget()} role="menuitem">
+				<#assign itemhrefurl = nav_item.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+				<a aria-labelledby="layout_${nav_item.getLayoutId()}" ${nav_item_attr_has_popup} href="${itemhrefurl}" ${nav_item.getTarget()} role="menuitem">
 				<div style="float: left;">
 				<#if nav_item.isSelected()>
 					<div class="bbmri-eric-square-orange"></div>

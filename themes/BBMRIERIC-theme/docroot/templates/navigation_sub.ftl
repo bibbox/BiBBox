@@ -18,7 +18,8 @@
                      <#assign first = false />
                   </#if>
                   <li style="padding-left: 4px;padding-right: 4px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
-                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
+                     <#assign itemhrefurl = nav_child.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${itemhrefurl}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/${nav_child.getName()?substring(6, 8)?lower_case}.gif" height="15px" />
                         <div class="bbmrieric-tooltip-div">
                            <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/NationalNodesSymbol.png" >
@@ -35,7 +36,8 @@
                      <#assign first = false />
                   </#if>
                   <li style="padding-left: 4px;padding-right: 4px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
-                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
+                     <#assign itemhrefurl = nav_child.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${itemhrefurl}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/de.gif" height="15px" />
                         <div class="bbmrieric-tooltip-div">
                            <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/NationalNodesSymbol.png" >
@@ -50,7 +52,8 @@
                      <#assign first = false />
                   </#if>
                   <li style="padding-left: 4px;padding-right: 4px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
-                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
+                     <#assign itemhrefurl = nav_child.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${itemhrefurl}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/itFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
                            <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/itIcon.png" >
@@ -65,7 +68,8 @@
                      <#assign first = false />
                   </#if>
                   <li style="padding-left: 4px;padding-right: 4px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
-                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
+                     <#assign itemhrefurl = nav_child.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${itemhrefurl}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/iarc-logo.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
                            <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/NationalNodesSymbol.png" >
@@ -80,7 +84,8 @@
                      <#assign first = false />
                   </#if>
                   <li style="padding-left: 30px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
-                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
+                     <#assign itemhrefurl = nav_child.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${itemhrefurl}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/hqFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
                            <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/hqIcon.png" >
@@ -95,7 +100,8 @@
                      <#assign first = false />
                   </#if>
                   <li style="padding-left: 10px;padding-right: 5px;" ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
-                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">
+                     <#assign itemhrefurl = nav_child.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+                     <a class="tooltips" aria-labelledby="layout_${nav_child.getLayoutId()}" href="${itemhrefurl}" ${nav_child.getTarget()} role="menuitem">
                         <img style="height:15px;" id='countryflag' src="/BBMRIERIC-theme/images/elsiFlag.png" height="15px" />
                         <div class="bbmrieric-tooltip-div">
                            <img class="bbmrieric-tooltip-image" height="30px" width="30px" src="/BBMRIERIC-theme/images/elsiIcon.png" >
@@ -116,7 +122,8 @@
                      </#if>
                   </#list>
    					<li ${nav_child_attr_selected} class="${nav_child_css_class} " id="layout_${nav_child.getLayoutId()}" role="presentation">
-   						<a aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">${nav_child.getName()}</a>
+   						<#assign itemhrefurl = nav_child.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+   						<a aria-labelledby="layout_${nav_child.getLayoutId()}" href="${itemhrefurl}" ${nav_child.getTarget()} role="menuitem">${nav_child.getName()}</a>
    					    <!-- Dropdown Menue -->
    					    <ul>
    					    <#if nav_child.hasChildren()>
@@ -132,7 +139,8 @@
                             <#assign nav_child_child_css_class_weight = "selected_weight_bold" />
                          </#if>
    					       <li ${nav_child_child_attr_selected} class="${nav_child_child_css_class} " id="layout_${nav_child_child.getLayoutId()}" role="presentation">
-   					          <a class="${nav_child_child_css_class_weight}" aria-labelledby="layout_${nav_child_child.getLayoutId()}" href="${nav_child_child.getURL()}" ${nav_child_child.getTarget()} role="menuitem">${nav_child_child.getName()}</a>
+   					          <#assign itemhrefurl = nav_child_child.getURL()?replace("(.+)web(.+)guest", "", 'r') />
+   					          <a class="${nav_child_child_css_class_weight}" aria-labelledby="layout_${nav_child_child.getLayoutId()}" href="${itemhrefurl}" ${nav_child_child.getTarget()} role="menuitem">${nav_child_child.getName()}</a>
    					       </li>
    					    </#list>
    					    <#if nav_child.hasChildren()>

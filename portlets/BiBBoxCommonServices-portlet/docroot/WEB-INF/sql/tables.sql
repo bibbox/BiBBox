@@ -85,6 +85,14 @@ create table rdconnect.generalgnformation (
 	modifieddate DATE null
 );
 
+create table rdconnect.logapi (
+	logapiId LONG not null primary key,
+	userId LONG,
+	userip VARCHAR(75) null,
+	logmsg TEXT null,
+	date_ DATE null
+);
+
 create table rdconnect.networks (
 	networkId LONG not null primary key,
 	organizationnetworkId LONG,

@@ -2,6 +2,14 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+<style>
+<!--
+.aui table {
+    width: 100%;
+}
+-->
+</style>
+
 <%
 PuchMuseumsObjekt puchmuseumsobjekt = null;
 long puchmuseumsobjektId = ParamUtil.getLong(request, "puchmuseumsobjectId");

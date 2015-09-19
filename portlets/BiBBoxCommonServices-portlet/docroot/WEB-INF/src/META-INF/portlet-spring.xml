@@ -15,6 +15,9 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationOrganisationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationOrganisationServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.LogapiPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.LogapiPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.NetworksLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.NetworksPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.NetworksPersistenceImpl" parent="basePersistence" />
 </beans>

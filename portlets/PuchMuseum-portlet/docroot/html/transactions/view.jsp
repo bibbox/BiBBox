@@ -2,4 +2,4 @@
 
 <portlet:defineObjects />
 
-This is the <b>Transactions</b> portlet in View mode.
+Transaction compleaded.

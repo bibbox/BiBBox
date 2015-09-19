@@ -106,33 +106,33 @@ public class InvitationLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation"
 			};
 
-		_methodName60 = "getBeanIdentifier";
+		_methodName66 = "getBeanIdentifier";
 
-		_methodParameterTypes60 = new String[] {  };
+		_methodParameterTypes66 = new String[] {  };
 
-		_methodName61 = "setBeanIdentifier";
-
-		_methodParameterTypes61 = new String[] { "java.lang.String" };
-
-		_methodName66 = "invitationFromRequest";
-
-		_methodParameterTypes66 = new String[] { "javax.portlet.PortletRequest" };
-
-		_methodName67 = "getMyFilteredInvitations";
+		_methodName67 = "setBeanIdentifier";
 
 		_methodParameterTypes67 = new String[] { "java.lang.String" };
 
-		_methodName68 = "getMyFilteredInvitationsCount";
+		_methodName72 = "invitationFromRequest";
 
-		_methodParameterTypes68 = new String[] { "java.lang.String" };
+		_methodParameterTypes72 = new String[] { "javax.portlet.PortletRequest" };
 
-		_methodName69 = "getStatusFromString";
+		_methodName73 = "getMyFilteredInvitations";
 
-		_methodParameterTypes69 = new String[] { "java.lang.String" };
+		_methodParameterTypes73 = new String[] { "java.lang.String" };
 
-		_methodName70 = "getStatusFromLong";
+		_methodName74 = "getMyFilteredInvitationsCount";
 
-		_methodParameterTypes70 = new String[] { "long" };
+		_methodParameterTypes74 = new String[] { "java.lang.String" };
+
+		_methodName75 = "getStatusFromString";
+
+		_methodParameterTypes75 = new String[] { "java.lang.String" };
+
+		_methodName76 = "getStatusFromLong";
+
+		_methodParameterTypes76 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -224,40 +224,40 @@ public class InvitationLocalServiceClpInvoker {
 			return InvitationLocalServiceUtil.updateInvitation((at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation)arguments[0]);
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return InvitationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName61.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			InvitationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
 			return InvitationLocalServiceUtil.invitationFromRequest((javax.portlet.PortletRequest)arguments[0]);
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
 			return InvitationLocalServiceUtil.getMyFilteredInvitations((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
 			return InvitationLocalServiceUtil.getMyFilteredInvitationsCount((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName69.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
 			return InvitationLocalServiceUtil.getStatusFromString((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName70.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			return InvitationLocalServiceUtil.getStatusFromLong(((Long)arguments[0]).longValue());
 		}
 
@@ -296,18 +296,18 @@ public class InvitationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
-	private String _methodName61;
-	private String[] _methodParameterTypes61;
 	private String _methodName66;
 	private String[] _methodParameterTypes66;
 	private String _methodName67;
 	private String[] _methodParameterTypes67;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
-	private String _methodName69;
-	private String[] _methodParameterTypes69;
-	private String _methodName70;
-	private String[] _methodParameterTypes70;
+	private String _methodName72;
+	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
+	private String _methodName74;
+	private String[] _methodParameterTypes74;
+	private String _methodName75;
+	private String[] _methodParameterTypes75;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
 }

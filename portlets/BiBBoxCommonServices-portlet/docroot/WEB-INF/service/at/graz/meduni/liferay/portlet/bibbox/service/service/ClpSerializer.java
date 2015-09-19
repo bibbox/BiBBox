@@ -19,6 +19,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisationClp;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.LogapiClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.NetworksClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -127,6 +128,10 @@ public class ClpSerializer {
 			return translateInputInvitationOrganisation(oldModel);
 		}
 
+		if (oldModelClassName.equals(LogapiClp.class.getName())) {
+			return translateInputLogapi(oldModel);
+		}
+
 		if (oldModelClassName.equals(NetworksClp.class.getName())) {
 			return translateInputNetworks(oldModel);
 		}
@@ -198,6 +203,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputLogapi(BaseModel<?> oldModel) {
+		LogapiClp oldClpModel = (LogapiClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getLogapiRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputNetworks(BaseModel<?> oldModel) {
 		NetworksClp oldClpModel = (NetworksClp)oldModel;
 
@@ -248,6 +263,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationOrganisationImpl")) {
 			return translateOutputInvitationOrganisation(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.LogapiImpl")) {
+			return translateOutputLogapi(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -361,6 +381,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchLogapiException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchLogapiException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException();
 		}
@@ -417,6 +442,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setInvitationOrganisationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputLogapi(BaseModel<?> oldModel) {
+		LogapiClp newModel = new LogapiClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setLogapiRemoteModel(oldModel);
 
 		return newModel;
 	}

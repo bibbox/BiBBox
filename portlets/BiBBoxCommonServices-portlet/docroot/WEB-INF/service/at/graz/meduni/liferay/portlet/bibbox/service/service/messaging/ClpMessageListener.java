@@ -24,6 +24,8 @@ import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalServ
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -58,6 +60,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			InvitationOrganisationLocalServiceUtil.clearService();
 
 			InvitationOrganisationServiceUtil.clearService();
+			LogapiLocalServiceUtil.clearService();
+
+			LogapiServiceUtil.clearService();
 			NetworksLocalServiceUtil.clearService();
 		}
 	}

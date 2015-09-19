@@ -151,6 +151,15 @@
 		<field name="status" type="long" />
 		<field name="statusdate" type="Date" />
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi">
+		<field name="logapiId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userip" type="String" />
+		<field name="logmsg" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="date" type="Date" />
+	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.Networks">
 		<field name="networkId" type="long" />
 		<field name="organizationnetworkId" type="long" />
