@@ -109,6 +109,11 @@ public class LogapiServiceUtil {
 		return getService().regbb(organizationId, collectionId);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject regbb(
+		java.lang.String id) {
+		return getService().regbb(id);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

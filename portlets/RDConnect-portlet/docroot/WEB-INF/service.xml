@@ -146,6 +146,10 @@
 		<finder name="ExactSearch" return-type="Collection">
 			<finder-column name="value" />
 		</finder>
+		<finder name="ValueForOrganization" return-type="SearchIndex">
+			<finder-column name="organisationid" />
+			<finder-column name="key" />
+		</finder>
 	</entity>
 	<entity name="RDCRecommender" local-service="true" remote-service="false" table="rdconnect.rdcrecommender">
 		<!-- PK fields -->

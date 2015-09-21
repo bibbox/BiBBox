@@ -2,7 +2,7 @@
 
 <portlet:defineObjects />
 
-xyz
+xyza
 
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
@@ -22,6 +22,7 @@ $(document).on('ready',function(){
           //url: 'http://catalogue.rd-connect.eu/BiBBoxCommonServices-portlet/api/jsonws/logapi/regbbs',
           url: 'http://catalogue.rd-connect.eu/api/jsonws/BiBBoxCommonServices-portlet.logapi/regbbs',
           dataType: "json",
+          headers: {"Access-Control-Allow-Origin" : "*"},
           data:{
  	   		},
           type: "post",
@@ -41,53 +42,3 @@ $(document).on('ready',function(){
 });
 </script>
 
-<script type="text/javascript">
-<!--
-
-
-Liferay.Service(
-  '/BiBBoxCommonServices-portlet.logapi/regbbs',
-  {
-    organizationId: 101,
- },
-  function(obj) {
-    console.log(obj);
-  }
-);
-
-
-//-->
-</script>
-
-<a id='checkemail'>Check if user exists</a>
-
-<aui:script use="aui-base,aui-io-request,aui-io-request,event,node,aui-popover,valuechange,event-hover,aui-tooltip,event-valuechange,click">
-	AUI().use(
-	'aui-base',
-	'aui-io-request',  
-	'node', 
-	function(A){
-		A.all('#checkemail').each(function() {
-	      this.on('click', function(event){
-			//var url = 'http://localhost:8080/api/jsonws/BiBBoxCommonServices-portlet.diseasematrix/updatediseasematrix';
-			//var url = 'http://catalogue.rd-connect.eu/BiBBoxCommonServices-portlet/api/jsonws/logapi/regbbs';
-			var url = 'http://catalogue.rd-connect.eu/api/jsonws/BiBBoxCommonServices-portlet.logapi/regbbs';
-			A.io.request(url,{
-				//this is the data that you are sending to the action method
-				method: 'GET',
-				data: {
-				},
-				dataType: 'json',
-				on: {
-				  failure: function() { alert('There is a problem with the server connection.'); },
-				  success: function(data) { 
-				  	var response = this.get('responseData');
-				  	alert(response);
-				  	
-				  }
-				}
-			});
-		});
-	});
-	});
-</aui:script>

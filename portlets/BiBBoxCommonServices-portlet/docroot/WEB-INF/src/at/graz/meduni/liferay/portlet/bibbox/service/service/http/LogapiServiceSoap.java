@@ -163,5 +163,19 @@ public class LogapiServiceSoap {
 		}
 	}
 
+	public static java.lang.String regbb(java.lang.String id)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = LogapiServiceUtil.regbb(id);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(LogapiServiceSoap.class);
 }

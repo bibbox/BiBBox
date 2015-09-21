@@ -81,8 +81,10 @@ public class SearchIndexModelImpl extends BaseModelImpl<SearchIndex>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.at.meduni.liferay.portlet.rdconnect.model.SearchIndex"),
 			true);
-	public static long VALUE_COLUMN_BITMASK = 1L;
-	public static long SEARCHID_COLUMN_BITMASK = 2L;
+	public static long KEY_COLUMN_BITMASK = 1L;
+	public static long ORGANISATIONID_COLUMN_BITMASK = 2L;
+	public static long VALUE_COLUMN_BITMASK = 4L;
+	public static long SEARCHID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.meduni.liferay.portlet.rdconnect.model.SearchIndex"));
 
@@ -189,7 +191,19 @@ public class SearchIndexModelImpl extends BaseModelImpl<SearchIndex>
 
 	@Override
 	public void setOrganisationid(long organisationid) {
+		_columnBitmask |= ORGANISATIONID_COLUMN_BITMASK;
+
+		if (!_setOriginalOrganisationid) {
+			_setOriginalOrganisationid = true;
+
+			_originalOrganisationid = _organisationid;
+		}
+
 		_organisationid = organisationid;
+	}
+
+	public long getOriginalOrganisationid() {
+		return _originalOrganisationid;
 	}
 
 	@Override
@@ -229,7 +243,17 @@ public class SearchIndexModelImpl extends BaseModelImpl<SearchIndex>
 
 	@Override
 	public void setKey(String key) {
+		_columnBitmask |= KEY_COLUMN_BITMASK;
+
+		if (_originalKey == null) {
+			_originalKey = _key;
+		}
+
 		_key = key;
+	}
+
+	public String getOriginalKey() {
+		return GetterUtil.getString(_originalKey);
 	}
 
 	@Override
@@ -346,6 +370,12 @@ public class SearchIndexModelImpl extends BaseModelImpl<SearchIndex>
 	public void resetOriginalValues() {
 		SearchIndexModelImpl searchIndexModelImpl = this;
 
+		searchIndexModelImpl._originalOrganisationid = searchIndexModelImpl._organisationid;
+
+		searchIndexModelImpl._setOriginalOrganisationid = false;
+
+		searchIndexModelImpl._originalKey = searchIndexModelImpl._key;
+
 		searchIndexModelImpl._originalValue = searchIndexModelImpl._value;
 
 		searchIndexModelImpl._columnBitmask = 0;
@@ -453,9 +483,12 @@ public class SearchIndexModelImpl extends BaseModelImpl<SearchIndex>
 		};
 	private long _searchid;
 	private long _organisationid;
+	private long _originalOrganisationid;
+	private boolean _setOriginalOrganisationid;
 	private long _locationid;
 	private String _location;
 	private String _key;
+	private String _originalKey;
 	private String _value;
 	private String _originalValue;
 	private long _columnBitmask;

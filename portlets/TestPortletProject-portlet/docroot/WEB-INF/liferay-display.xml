@@ -15,4 +15,7 @@
 	<category name="category.test">
 		<portlet id="test-jsonws"></portlet>
 	</category>
+	<category name="MolgenisTest">
+		<portlet id="molgenis-diseas-matrix"></portlet>
+	</category>
 </display>

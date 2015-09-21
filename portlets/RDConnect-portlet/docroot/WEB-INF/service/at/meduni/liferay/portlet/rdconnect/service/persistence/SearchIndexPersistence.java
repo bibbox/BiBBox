@@ -176,6 +176,70 @@ public interface SearchIndexPersistence extends BasePersistence<SearchIndex> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the search index where organisationid = &#63; and key = &#63; or throws a {@link at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException} if it could not be found.
+	*
+	* @param organisationid the organisationid
+	* @param key the key
+	* @return the matching search index
+	* @throws at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException if a matching search index could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.meduni.liferay.portlet.rdconnect.model.SearchIndex findByValueForOrganization(
+		long organisationid, java.lang.String key)
+		throws at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the search index where organisationid = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param organisationid the organisationid
+	* @param key the key
+	* @return the matching search index, or <code>null</code> if a matching search index could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.meduni.liferay.portlet.rdconnect.model.SearchIndex fetchByValueForOrganization(
+		long organisationid, java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the search index where organisationid = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param organisationid the organisationid
+	* @param key the key
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching search index, or <code>null</code> if a matching search index could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.meduni.liferay.portlet.rdconnect.model.SearchIndex fetchByValueForOrganization(
+		long organisationid, java.lang.String key, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the search index where organisationid = &#63; and key = &#63; from the database.
+	*
+	* @param organisationid the organisationid
+	* @param key the key
+	* @return the search index that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.meduni.liferay.portlet.rdconnect.model.SearchIndex removeByValueForOrganization(
+		long organisationid, java.lang.String key)
+		throws at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of search indexs where organisationid = &#63; and key = &#63;.
+	*
+	* @param organisationid the organisationid
+	* @param key the key
+	* @return the number of matching search indexs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByValueForOrganization(long organisationid,
+		java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the search index in the entity cache if it is enabled.
 	*
 	* @param searchIndex the search index

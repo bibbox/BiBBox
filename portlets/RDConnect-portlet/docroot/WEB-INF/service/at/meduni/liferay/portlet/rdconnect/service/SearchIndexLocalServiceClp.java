@@ -115,24 +115,28 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getSearchIndexByKeyword";
+		_methodName19 = "getSearchIndexValueByKey";
 
-		_methodParameterTypes19 = new String[] {
-				"java.lang.String", "com.liferay.portal.theme.ThemeDisplay",
-				"java.lang.String"
-			};
+		_methodParameterTypes19 = new String[] { "java.lang.String", "long" };
 
 		_methodName20 = "getSearchIndexByKeyword";
 
 		_methodParameterTypes20 = new String[] {
+				"java.lang.String", "com.liferay.portal.theme.ThemeDisplay",
+				"java.lang.String"
+			};
+
+		_methodName21 = "getSearchIndexByKeyword";
+
+		_methodParameterTypes21 = new String[] {
 				"java.lang.String", "java.lang.String",
 				"com.liferay.portal.theme.ThemeDisplay", "java.lang.String",
 				"long"
 			};
 
-		_methodName21 = "getUserStatistiks";
+		_methodName22 = "getUserStatistiks";
 
-		_methodParameterTypes21 = new String[] {  };
+		_methodParameterTypes22 = new String[] {  };
 	}
 
 	@Override
@@ -686,14 +690,43 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 	}
 
 	@Override
+	public java.lang.String getSearchIndexValueByKey(java.lang.String keyword,
+		long organizationId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						ClpSerializer.translateInput(keyword),
+						
+					organizationId
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public java.lang.String getSearchIndexByKeyword(java.lang.String keyword,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
 		java.lang.String contextpath) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19,
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
 					new Object[] {
 						ClpSerializer.translateInput(keyword),
 						
@@ -725,8 +758,8 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] {
 						ClpSerializer.translateInput(keyword),
 						
@@ -759,8 +792,8 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -820,4 +853,6 @@ public class SearchIndexLocalServiceClp implements SearchIndexLocalService {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

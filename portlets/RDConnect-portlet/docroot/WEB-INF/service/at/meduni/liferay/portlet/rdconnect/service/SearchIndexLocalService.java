@@ -249,6 +249,10 @@ public interface SearchIndexLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getSearchIndexValueByKey(java.lang.String keyword,
+		long organizationId);
+
 	/**
 	* Search index for normal Search
 	*/

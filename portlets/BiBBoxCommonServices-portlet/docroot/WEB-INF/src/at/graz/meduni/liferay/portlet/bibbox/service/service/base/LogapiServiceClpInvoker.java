@@ -55,6 +55,10 @@ public class LogapiServiceClpInvoker {
 		_methodName61 = "regbb";
 
 		_methodParameterTypes61 = new String[] { "long", "long" };
+
+		_methodName62 = "regbb";
+
+		_methodParameterTypes62 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -102,6 +106,11 @@ public class LogapiServiceClpInvoker {
 				((Long)arguments[1]).longValue());
 		}
 
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+			return LogapiServiceUtil.regbb((java.lang.String)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -121,4 +130,6 @@ public class LogapiServiceClpInvoker {
 	private String[] _methodParameterTypes60;
 	private String _methodName61;
 	private String[] _methodParameterTypes61;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
 }

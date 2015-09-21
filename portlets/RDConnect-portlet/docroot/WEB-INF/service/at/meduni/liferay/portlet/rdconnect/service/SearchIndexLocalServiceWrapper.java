@@ -287,6 +287,13 @@ public class SearchIndexLocalServiceWrapper implements SearchIndexLocalService,
 			arguments);
 	}
 
+	@Override
+	public java.lang.String getSearchIndexValueByKey(java.lang.String keyword,
+		long organizationId) {
+		return _searchIndexLocalService.getSearchIndexValueByKey(keyword,
+			organizationId);
+	}
+
 	/**
 	* Search index for normal Search
 	*/

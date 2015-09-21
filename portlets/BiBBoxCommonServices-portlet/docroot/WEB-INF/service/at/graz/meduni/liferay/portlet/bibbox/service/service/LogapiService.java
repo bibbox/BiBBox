@@ -98,4 +98,6 @@ public interface LogapiService extends BaseService, InvokableService {
 	*/
 	public com.liferay.portal.kernel.json.JSONObject regbb(
 		long organizationId, long collectionId);
+
+	public com.liferay.portal.kernel.json.JSONObject regbb(java.lang.String id);
 }

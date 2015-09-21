@@ -55,6 +55,10 @@ public class LogapiServiceClp implements LogapiService {
 		_methodName8 = "regbb";
 
 		_methodParameterTypes8 = new String[] { "long", "long" };
+
+		_methodName9 = "regbb";
+
+		_methodParameterTypes9 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -247,6 +251,30 @@ public class LogapiServiceClp implements LogapiService {
 		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject regbb(java.lang.String id) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
+					new Object[] { ClpSerializer.translateInput(id) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -264,4 +292,6 @@ public class LogapiServiceClp implements LogapiService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }

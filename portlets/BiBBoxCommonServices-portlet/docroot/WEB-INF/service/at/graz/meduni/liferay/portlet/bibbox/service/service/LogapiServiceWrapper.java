@@ -107,6 +107,11 @@ public class LogapiServiceWrapper implements LogapiService,
 		return _logapiService.regbb(organizationId, collectionId);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject regbb(java.lang.String id) {
+		return _logapiService.regbb(id);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

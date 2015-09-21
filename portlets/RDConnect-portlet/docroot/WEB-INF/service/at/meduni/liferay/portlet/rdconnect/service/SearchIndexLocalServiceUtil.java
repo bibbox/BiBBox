@@ -275,6 +275,11 @@ public class SearchIndexLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.lang.String getSearchIndexValueByKey(
+		java.lang.String keyword, long organizationId) {
+		return getService().getSearchIndexValueByKey(keyword, organizationId);
+	}
+
 	/**
 	* Search index for normal Search
 	*/

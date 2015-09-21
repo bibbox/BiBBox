@@ -621,6 +621,279 @@ public class SearchIndexPersistenceImpl extends BasePersistenceImpl<SearchIndex>
 	private static final String _FINDER_COLUMN_EXACTSEARCH_VALUE_1 = "searchIndex.value IS NULL";
 	private static final String _FINDER_COLUMN_EXACTSEARCH_VALUE_2 = "searchIndex.value = ?";
 	private static final String _FINDER_COLUMN_EXACTSEARCH_VALUE_3 = "(searchIndex.value IS NULL OR searchIndex.value = '')";
+	public static final FinderPath FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION = new FinderPath(SearchIndexModelImpl.ENTITY_CACHE_ENABLED,
+			SearchIndexModelImpl.FINDER_CACHE_ENABLED, SearchIndexImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByValueForOrganization",
+			new String[] { Long.class.getName(), String.class.getName() },
+			SearchIndexModelImpl.ORGANISATIONID_COLUMN_BITMASK |
+			SearchIndexModelImpl.KEY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_VALUEFORORGANIZATION = new FinderPath(SearchIndexModelImpl.ENTITY_CACHE_ENABLED,
+			SearchIndexModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByValueForOrganization",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the search index where organisationid = &#63; and key = &#63; or throws a {@link at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException} if it could not be found.
+	 *
+	 * @param organisationid the organisationid
+	 * @param key the key
+	 * @return the matching search index
+	 * @throws at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException if a matching search index could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SearchIndex findByValueForOrganization(long organisationid,
+		String key) throws NoSuchSearchIndexException, SystemException {
+		SearchIndex searchIndex = fetchByValueForOrganization(organisationid,
+				key);
+
+		if (searchIndex == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("organisationid=");
+			msg.append(organisationid);
+
+			msg.append(", key=");
+			msg.append(key);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchSearchIndexException(msg.toString());
+		}
+
+		return searchIndex;
+	}
+
+	/**
+	 * Returns the search index where organisationid = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param organisationid the organisationid
+	 * @param key the key
+	 * @return the matching search index, or <code>null</code> if a matching search index could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SearchIndex fetchByValueForOrganization(long organisationid,
+		String key) throws SystemException {
+		return fetchByValueForOrganization(organisationid, key, true);
+	}
+
+	/**
+	 * Returns the search index where organisationid = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param organisationid the organisationid
+	 * @param key the key
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching search index, or <code>null</code> if a matching search index could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SearchIndex fetchByValueForOrganization(long organisationid,
+		String key, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { organisationid, key };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+					finderArgs, this);
+		}
+
+		if (result instanceof SearchIndex) {
+			SearchIndex searchIndex = (SearchIndex)result;
+
+			if ((organisationid != searchIndex.getOrganisationid()) ||
+					!Validator.equals(key, searchIndex.getKey())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_SEARCHINDEX_WHERE);
+
+			query.append(_FINDER_COLUMN_VALUEFORORGANIZATION_ORGANISATIONID_2);
+
+			boolean bindKey = false;
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_VALUEFORORGANIZATION_KEY_1);
+			}
+			else if (key.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_VALUEFORORGANIZATION_KEY_3);
+			}
+			else {
+				bindKey = true;
+
+				query.append(_FINDER_COLUMN_VALUEFORORGANIZATION_KEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(organisationid);
+
+				if (bindKey) {
+					qPos.add(key);
+				}
+
+				List<SearchIndex> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"SearchIndexPersistenceImpl.fetchByValueForOrganization(long, String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					SearchIndex searchIndex = list.get(0);
+
+					result = searchIndex;
+
+					cacheResult(searchIndex);
+
+					if ((searchIndex.getOrganisationid() != organisationid) ||
+							(searchIndex.getKey() == null) ||
+							!searchIndex.getKey().equals(key)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+							finderArgs, searchIndex);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (SearchIndex)result;
+		}
+	}
+
+	/**
+	 * Removes the search index where organisationid = &#63; and key = &#63; from the database.
+	 *
+	 * @param organisationid the organisationid
+	 * @param key the key
+	 * @return the search index that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SearchIndex removeByValueForOrganization(long organisationid,
+		String key) throws NoSuchSearchIndexException, SystemException {
+		SearchIndex searchIndex = findByValueForOrganization(organisationid, key);
+
+		return remove(searchIndex);
+	}
+
+	/**
+	 * Returns the number of search indexs where organisationid = &#63; and key = &#63;.
+	 *
+	 * @param organisationid the organisationid
+	 * @param key the key
+	 * @return the number of matching search indexs
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByValueForOrganization(long organisationid, String key)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_VALUEFORORGANIZATION;
+
+		Object[] finderArgs = new Object[] { organisationid, key };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_SEARCHINDEX_WHERE);
+
+			query.append(_FINDER_COLUMN_VALUEFORORGANIZATION_ORGANISATIONID_2);
+
+			boolean bindKey = false;
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_VALUEFORORGANIZATION_KEY_1);
+			}
+			else if (key.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_VALUEFORORGANIZATION_KEY_3);
+			}
+			else {
+				bindKey = true;
+
+				query.append(_FINDER_COLUMN_VALUEFORORGANIZATION_KEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(organisationid);
+
+				if (bindKey) {
+					qPos.add(key);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_VALUEFORORGANIZATION_ORGANISATIONID_2 =
+		"searchIndex.organisationid = ? AND ";
+	private static final String _FINDER_COLUMN_VALUEFORORGANIZATION_KEY_1 = "searchIndex.key IS NULL";
+	private static final String _FINDER_COLUMN_VALUEFORORGANIZATION_KEY_2 = "searchIndex.key = ?";
+	private static final String _FINDER_COLUMN_VALUEFORORGANIZATION_KEY_3 = "(searchIndex.key IS NULL OR searchIndex.key = '')";
 
 	public SearchIndexPersistenceImpl() {
 		setModelClass(SearchIndex.class);
@@ -635,6 +908,10 @@ public class SearchIndexPersistenceImpl extends BasePersistenceImpl<SearchIndex>
 	public void cacheResult(SearchIndex searchIndex) {
 		EntityCacheUtil.putResult(SearchIndexModelImpl.ENTITY_CACHE_ENABLED,
 			SearchIndexImpl.class, searchIndex.getPrimaryKey(), searchIndex);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+			new Object[] { searchIndex.getOrganisationid(), searchIndex.getKey() },
+			searchIndex);
 
 		searchIndex.resetOriginalValues();
 	}
@@ -692,6 +969,8 @@ public class SearchIndexPersistenceImpl extends BasePersistenceImpl<SearchIndex>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(searchIndex);
 	}
 
 	@Override
@@ -702,6 +981,62 @@ public class SearchIndexPersistenceImpl extends BasePersistenceImpl<SearchIndex>
 		for (SearchIndex searchIndex : searchIndexs) {
 			EntityCacheUtil.removeResult(SearchIndexModelImpl.ENTITY_CACHE_ENABLED,
 				SearchIndexImpl.class, searchIndex.getPrimaryKey());
+
+			clearUniqueFindersCache(searchIndex);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(SearchIndex searchIndex) {
+		if (searchIndex.isNew()) {
+			Object[] args = new Object[] {
+					searchIndex.getOrganisationid(), searchIndex.getKey()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VALUEFORORGANIZATION,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+				args, searchIndex);
+		}
+		else {
+			SearchIndexModelImpl searchIndexModelImpl = (SearchIndexModelImpl)searchIndex;
+
+			if ((searchIndexModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						searchIndex.getOrganisationid(), searchIndex.getKey()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VALUEFORORGANIZATION,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+					args, searchIndex);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(SearchIndex searchIndex) {
+		SearchIndexModelImpl searchIndexModelImpl = (SearchIndexModelImpl)searchIndex;
+
+		Object[] args = new Object[] {
+				searchIndex.getOrganisationid(), searchIndex.getKey()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_VALUEFORORGANIZATION,
+			args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+			args);
+
+		if ((searchIndexModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					searchIndexModelImpl.getOriginalOrganisationid(),
+					searchIndexModelImpl.getOriginalKey()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_VALUEFORORGANIZATION,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VALUEFORORGANIZATION,
+				args);
 		}
 	}
 
@@ -869,6 +1204,9 @@ public class SearchIndexPersistenceImpl extends BasePersistenceImpl<SearchIndex>
 
 		EntityCacheUtil.putResult(SearchIndexModelImpl.ENTITY_CACHE_ENABLED,
 			SearchIndexImpl.class, searchIndex.getPrimaryKey(), searchIndex);
+
+		clearUniqueFindersCache(searchIndex);
+		cacheUniqueFindersCache(searchIndex);
 
 		return searchIndex;
 	}

@@ -19,6 +19,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +33,7 @@ import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +51,7 @@ import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
+import at.meduni.liferay.portlet.rdconnect.NoSuchSearchIndexException;
 import at.meduni.liferay.portlet.rdconnect.model.SearchIndex;
 import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.service.RDCOrganizationUserAccessLocalServiceUtil;
@@ -74,6 +78,28 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil} to access the search index local service.
 	 */
+	/**
+	 * Error Format for date
+	 */
+	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	
+	/**
+	 * 
+	 */
+	public String getSearchIndexValueByKey(String keyword, long organizationId) {
+		try {
+			return searchIndexPersistence.findByValueForOrganization(organizationId, keyword).getValue();
+		} catch (NoSuchSearchIndexException e) {
+			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [RDConnect-portlet::at.meduni.liferay.portlet.rdconnect.service.impl.SearchIndexLocalServiceImpl::getSearchIndexValueByKey] Could not find SearchIndex (" + keyword + ", " + organizationId + ".");
+			e.printStackTrace();
+		} catch (SystemException e) {
+			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [error] [RDConnect-portlet::at.meduni.liferay.portlet.rdconnect.service.impl.SearchIndexLocalServiceImpl::getSearchIndexValueByKey] Error gettint value from SearchIndex for (" + keyword + ", " + organizationId + ".");
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 	/**
 	 * Search index for normal Search
 	 */

@@ -17,6 +17,8 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -29,6 +31,7 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
@@ -37,11 +40,15 @@ import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.LogapiServiceBaseImpl;
+import at.meduni.liferay.portlet.rdconnect.model.SearchIndex;
+import at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil;
 
 /**
  * The implementation of the logapi remote service.
@@ -74,6 +81,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	 * 
 	 * @return
 	 */
+	@AccessControlled(guestAccessEnabled=true)
 	@JSONWebService(value = "getapiversion", method = "GET")
 	public JSONObject getAPIVersion() {
 		long userid = 0;
@@ -99,6 +107,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	 * 
 	 * @return
 	 */
+	@AccessControlled(guestAccessEnabled=true)
 	@JSONWebService(value = "regbbs", method = "GET")
 	public JSONArray regbbs() {
 		long userid = 0;
@@ -121,7 +130,16 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 			List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(CompanyThreadLocal.getCompanyId(), parentid);
 			for(Organization organization : organizations) {
 				try {
-					String type = organization.getExpandoBridge().getAttribute("Organization Type").toString().toLowerCase();
+					String type = "reg/bb";
+					try {
+						type = SearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+					} catch (Exception ex) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+						ex.printStackTrace();
+					}
+					
 					JSONObject json = JSONFactoryUtil.createJSONObject();
 					json.put("ID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId());
 					json.put("OrganizationID", organization.getOrganizationId());
@@ -154,6 +172,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	 * 
 	 * @return
 	 */
+	@AccessControlled(guestAccessEnabled=true)
 	@JSONWebService(value = "regs", method = "GET")
 	public JSONArray regs() {
 		long userid = 0;
@@ -176,7 +195,15 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 			List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(CompanyThreadLocal.getCompanyId(), parentid);
 			for(Organization organization : organizations) {
 				try {
-					String type = organization.getExpandoBridge().getAttribute("Organization Type").toString().toLowerCase();
+					String type = "reg/bb";
+					try {
+						type = SearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+					} catch (Exception ex) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+						ex.printStackTrace();
+					}
 					if(!type.equalsIgnoreCase("registry")) {
 						continue;
 					}
@@ -212,6 +239,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	 * 
 	 * @return
 	 */
+	@AccessControlled(guestAccessEnabled=true)
 	@JSONWebService(value = "bbs", method = "GET")
 	public JSONArray bbs() {
 		long userid = 0;
@@ -234,7 +262,15 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 			List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(CompanyThreadLocal.getCompanyId(), parentid);
 			for(Organization organization : organizations) {
 				try {
-					String type = organization.getExpandoBridge().getAttribute("Organization Type").toString().toLowerCase();
+					String type = "reg/bb";
+					try {
+						type = SearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+					} catch (Exception ex) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+						ex.printStackTrace();
+					}
 					if(!type.equalsIgnoreCase("biobank")) {
 						continue;
 					}
@@ -271,6 +307,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	 * @param organizationId
 	 * @return
 	 */
+	@AccessControlled(guestAccessEnabled=true)
 	@JSONWebService(value = "regbb", method = "GET")
 	public JSONObject regbb(long organizationId) {
 		long userid = 0;
@@ -290,7 +327,15 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		long maincontactrole = Long.parseLong(PropsUtil.get("rdconnectmaincontactid"));
 		try {
 			Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-			String type = organization.getExpandoBridge().getAttribute("Organization Type").toString().toLowerCase();
+			String type = "reg/bb";
+			try {
+				type = SearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+				LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+				LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+				ex.printStackTrace();
+			}
 			json.put("ID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId());
 			json.put("OrganizationID", organization.getOrganizationId());
 			json.put("name", organization.getName());
@@ -405,6 +450,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	 * @param organizationId
 	 * @return
 	 */
+	@AccessControlled(guestAccessEnabled=true)
 	@JSONWebService(value = "regbb", method = "GET")
 	public JSONObject regbb(long organizationId, long collectionId) {
 		long userid = 0;
@@ -426,7 +472,15 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		} else {
 			try {
 				Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-				String type = organization.getExpandoBridge().getAttribute("Organization Type").toString().toLowerCase();
+				String type = "reg/bb";
+				try {
+					type = SearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+				} catch (Exception ex) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+					LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+					LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+					ex.printStackTrace();
+				}
 				json.put("ID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId());
 				json.put("OrganizationID", organization.getOrganizationId());
 				json.put("name", organization.getName());
@@ -455,4 +509,44 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		}
 		return json;
 	}
+	
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "regbb", method = "GET")
+	public JSONObject regbb(String id) {
+		long userid = 0;
+		String userip = "";
+		try {
+			User user = this.getGuestOrUser();
+			userid = user.getUserId();
+			userip = user.getLoginIP();
+			LogapiLocalServiceUtil.addLogAPI(user.getUserId(), user.getLoginIP(), "API Request getAPIVersion().");
+		} catch (Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbb] Error getting user data for API Logging.");
+			LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbb] Error getting user data for API Logging.");
+			LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		try {
+			System.out.println(id);
+			Matcher m = r.matcher(id);
+			if (m.find( )) {
+				long organizationid = Long.parseLong(m.group(1));
+				if(m.group(2) != null) {
+					long collectionid = Long.parseLong(m.group(3));
+					return regbb(organizationid, collectionid);
+				} else {
+					return regbb(organizationid);
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbb] Error getting data for organization with organizationId (" + id + ").");
+			LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbb] Error getting data for organization with organizationId (" + id + ").");
+			LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	String pattern = "http%3A%2F%2Fcatalogue.rd-connect.eu%2Fid%2Forganization-id%2F(\\d+)(%2Fcollection-id%2F)?(\\d+)?";
+	Pattern r = Pattern.compile(pattern);
 }

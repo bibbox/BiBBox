@@ -13,4 +13,5 @@ create index IX_1C65726C on rdconnect.rdcorganizationuseraccess (organisationId)
 
 create index IX_278FD8A3 on rdconnect.rdcrecommender (organisationId, recommendedorganisationId);
 
+create index IX_A12340B0 on rdconnect.searchindex_rdconnect (organisationid, key_);
 create index IX_35DEDE4E on rdconnect.searchindex_rdconnect (value);
