@@ -118,7 +118,7 @@ public class MolgenisAPIRequestLocalServiceClp
 
 		_methodName19 = "getAgregatedJsonFromMolgenis";
 
-		_methodParameterTypes19 = new String[] {  };
+		_methodParameterTypes19 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -682,12 +682,14 @@ public class MolgenisAPIRequestLocalServiceClp
 	}
 
 	@Override
-	public java.lang.String getAgregatedJsonFromMolgenis() {
+	public java.lang.String getAgregatedJsonFromMolgenis(
+		java.lang.String biobankid) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19, new Object[] {  });
+					_methodParameterTypes19,
+					new Object[] { ClpSerializer.translateInput(biobankid) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

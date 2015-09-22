@@ -249,6 +249,10 @@ public interface MolgenisAPIRequestLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	/**
+	* @return the javascript for creating the table or an empty sting if there was an error.
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getAgregatedJsonFromMolgenis();
+	public java.lang.String getAgregatedJsonFromMolgenis(
+		java.lang.String biobankid);
 }

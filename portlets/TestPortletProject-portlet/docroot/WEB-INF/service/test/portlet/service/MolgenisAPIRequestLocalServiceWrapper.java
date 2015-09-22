@@ -289,9 +289,13 @@ public class MolgenisAPIRequestLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	/**
+	* @return the javascript for creating the table or an empty sting if there was an error.
+	*/
 	@Override
-	public java.lang.String getAgregatedJsonFromMolgenis() {
-		return _molgenisAPIRequestLocalService.getAgregatedJsonFromMolgenis();
+	public java.lang.String getAgregatedJsonFromMolgenis(
+		java.lang.String biobankid) {
+		return _molgenisAPIRequestLocalService.getAgregatedJsonFromMolgenis(biobankid);
 	}
 
 	/**

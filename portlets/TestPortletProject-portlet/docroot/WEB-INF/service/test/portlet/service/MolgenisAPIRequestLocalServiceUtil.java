@@ -275,8 +275,12 @@ public class MolgenisAPIRequestLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.lang.String getAgregatedJsonFromMolgenis() {
-		return getService().getAgregatedJsonFromMolgenis();
+	/**
+	* @return the javascript for creating the table or an empty sting if there was an error.
+	*/
+	public static java.lang.String getAgregatedJsonFromMolgenis(
+		java.lang.String biobankid) {
+		return getService().getAgregatedJsonFromMolgenis(biobankid);
 	}
 
 	public static void clearService() {

@@ -7,7 +7,7 @@
 <div id="diseasematrix"></div>
 
 <script  type="text/javascript">
-<%= MolgenisAPIRequestLocalServiceUtil.getAgregatedJsonFromMolgenis() %>
+<%= MolgenisAPIRequestLocalServiceUtil.getAgregatedJsonFromMolgenis("http%3A%2F%2Fcatalogue.rd-connect.eu%2Fweb%2F71542") %>
 </script>
 
 <script  type="text/javascript">

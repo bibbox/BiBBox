@@ -48,6 +48,15 @@ public class DiseaseMatrixLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil} to access the disease matrix local service.
 	 */
+	public String getDiseaseMatrixTable(long organizationId) {
+		try {
+			List<DiseaseMatrix> editmatrix = diseaseMatrixPersistence.findByOrganizationFinder(organizationId);
+		} catch(Exception ex) {
+			
+		}
+		return "";
+	}
+	
 	public List<DiseaseMatrix> getDiseaseMatrixs(long organizationID, int begin, int end) throws SystemException {
 		try {
 			return diseaseMatrixPersistence.findByOrganizationFinder(organizationID, begin, end);
