@@ -42,6 +42,14 @@
 		<field name="iconurl" type="String" />
 		<field name="group" type="String" />
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex">
+		<field name="searchid" type="long" />
+		<field name="organisationid" type="long" />
+		<field name="locationid" type="long" />
+		<field name="location" type="String" />
+		<field name="key" type="String" />
+		<field name="value" type="String" />
+	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration">
 		<field name="symbolconfigurationId" type="long" />
 		<field name="scope" type="String" />

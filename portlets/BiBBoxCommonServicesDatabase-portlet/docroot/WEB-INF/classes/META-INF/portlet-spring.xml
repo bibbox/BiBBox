@@ -10,6 +10,8 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.IconsLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.IconsLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.IconsService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.IconsServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconsPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconsPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.OrganizationSearchIndexLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.OrganizationSearchIndexLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrganizationSearchIndexPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrganizationSearchIndexPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.SymbolConfigurationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.SymbolConfigurationServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolConfigurationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolConfigurationPersistenceImpl" parent="basePersistence" />

@@ -8,3 +8,6 @@ create index IX_DA438FB1 on bibboxcs.iconconfiguration (symbolconfigurationId, p
 create index IX_96DA16 on bibboxcs.symbolconfiguration (scope, eventtype);
 
 create index IX_A84733E2 on bibboxcs.symboltypeconfiguration (symboltype);
+
+create index IX_A12340B0 on rdconnect.searchindex_rdconnect (organisationid, key_);
+create index IX_35DEDE4E on rdconnect.searchindex_rdconnect (value);

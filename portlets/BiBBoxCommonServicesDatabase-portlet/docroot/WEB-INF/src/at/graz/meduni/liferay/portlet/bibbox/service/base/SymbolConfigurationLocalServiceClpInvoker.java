@@ -106,17 +106,17 @@ public class SymbolConfigurationLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration"
 			};
 
-		_methodName58 = "getBeanIdentifier";
+		_methodName62 = "getBeanIdentifier";
 
-		_methodParameterTypes58 = new String[] {  };
+		_methodParameterTypes62 = new String[] {  };
 
-		_methodName59 = "setBeanIdentifier";
+		_methodName63 = "setBeanIdentifier";
 
-		_methodParameterTypes59 = new String[] { "java.lang.String" };
+		_methodParameterTypes63 = new String[] { "java.lang.String" };
 
-		_methodName64 = "getSymbol";
+		_methodName68 = "getSymbol";
 
-		_methodParameterTypes64 = new String[] {
+		_methodParameterTypes68 = new String[] {
 				"java.lang.String", "java.lang.String",
 				"java.util.LinkedHashMap"
 			};
@@ -211,20 +211,20 @@ public class SymbolConfigurationLocalServiceClpInvoker {
 			return SymbolConfigurationLocalServiceUtil.updateSymbolConfiguration((at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration)arguments[0]);
 		}
 
-		if (_methodName58.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
 			return SymbolConfigurationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName59.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			SymbolConfigurationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return SymbolConfigurationLocalServiceUtil.getSymbol((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1],
 				(java.util.LinkedHashMap<java.lang.String, java.lang.String>)arguments[2]);
@@ -265,10 +265,10 @@ public class SymbolConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName58;
-	private String[] _methodParameterTypes58;
-	private String _methodName59;
-	private String[] _methodParameterTypes59;
-	private String _methodName64;
-	private String[] _methodParameterTypes64;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
 }

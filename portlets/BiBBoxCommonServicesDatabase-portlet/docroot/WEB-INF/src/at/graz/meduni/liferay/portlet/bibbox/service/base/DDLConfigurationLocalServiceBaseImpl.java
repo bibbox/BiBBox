@@ -19,6 +19,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationLocalServic
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.DDLConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconsPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrganizationSearchIndexPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolTypeConfigurationPersistence;
 
@@ -455,6 +456,44 @@ public abstract class DDLConfigurationLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the organization search index local service.
+	 *
+	 * @return the organization search index local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.OrganizationSearchIndexLocalService getOrganizationSearchIndexLocalService() {
+		return organizationSearchIndexLocalService;
+	}
+
+	/**
+	 * Sets the organization search index local service.
+	 *
+	 * @param organizationSearchIndexLocalService the organization search index local service
+	 */
+	public void setOrganizationSearchIndexLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.OrganizationSearchIndexLocalService organizationSearchIndexLocalService) {
+		this.organizationSearchIndexLocalService = organizationSearchIndexLocalService;
+	}
+
+	/**
+	 * Returns the organization search index persistence.
+	 *
+	 * @return the organization search index persistence
+	 */
+	public OrganizationSearchIndexPersistence getOrganizationSearchIndexPersistence() {
+		return organizationSearchIndexPersistence;
+	}
+
+	/**
+	 * Sets the organization search index persistence.
+	 *
+	 * @param organizationSearchIndexPersistence the organization search index persistence
+	 */
+	public void setOrganizationSearchIndexPersistence(
+		OrganizationSearchIndexPersistence organizationSearchIndexPersistence) {
+		this.organizationSearchIndexPersistence = organizationSearchIndexPersistence;
+	}
+
+	/**
 	 * Returns the symbol configuration local service.
 	 *
 	 * @return the symbol configuration local service
@@ -762,6 +801,10 @@ public abstract class DDLConfigurationLocalServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.IconsService iconsService;
 	@BeanReference(type = IconsPersistence.class)
 	protected IconsPersistence iconsPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.OrganizationSearchIndexLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.OrganizationSearchIndexLocalService organizationSearchIndexLocalService;
+	@BeanReference(type = OrganizationSearchIndexPersistence.class)
+	protected OrganizationSearchIndexPersistence organizationSearchIndexPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService symbolConfigurationLocalService;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService.class)

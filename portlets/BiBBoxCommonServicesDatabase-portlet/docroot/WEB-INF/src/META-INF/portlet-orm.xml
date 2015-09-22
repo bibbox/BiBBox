@@ -57,6 +57,21 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrganizationSearchIndexModelImpl">
+		<attributes>
+			<id name="searchid" />
+			<basic name="organisationid" />
+			<basic name="locationid" />
+			<basic name="location" />
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="value" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationModelImpl">
 		<attributes>
 			<id name="symbolconfigurationId" />
@@ -91,6 +106,10 @@
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.IconsImpl" name="Icons">
 		<table name="bibboxcs.icons" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrganizationSearchIndexImpl" name="OrganizationSearchIndex">
+		<table name="rdconnect.searchindex_rdconnect" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl" name="SymbolConfiguration">

@@ -17,6 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service;
 import at.graz.meduni.liferay.portlet.bibbox.model.DDLConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.IconConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.IconsClp;
+import at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndexClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfigurationClp;
 import at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfigurationClp;
 
@@ -118,6 +119,10 @@ public class ClpSerializer {
 			return translateInputIcons(oldModel);
 		}
 
+		if (oldModelClassName.equals(OrganizationSearchIndexClp.class.getName())) {
+			return translateInputOrganizationSearchIndex(oldModel);
+		}
+
 		if (oldModelClassName.equals(SymbolConfigurationClp.class.getName())) {
 			return translateInputSymbolConfiguration(oldModel);
 		}
@@ -165,6 +170,17 @@ public class ClpSerializer {
 		IconsClp oldClpModel = (IconsClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getIconsRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputOrganizationSearchIndex(
+		BaseModel<?> oldModel) {
+		OrganizationSearchIndexClp oldClpModel = (OrganizationSearchIndexClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getOrganizationSearchIndexRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -223,6 +239,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.model.impl.IconsImpl")) {
 			return translateOutputIcons(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.model.impl.OrganizationSearchIndexImpl")) {
+			return translateOutputOrganizationSearchIndex(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -331,6 +352,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.NoSuchSymbolConfigurationException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.NoSuchSymbolConfigurationException();
 		}
@@ -369,6 +395,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setIconsRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputOrganizationSearchIndex(
+		BaseModel<?> oldModel) {
+		OrganizationSearchIndexClp newModel = new OrganizationSearchIndexClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setOrganizationSearchIndexRemoteModel(oldModel);
 
 		return newModel;
 	}

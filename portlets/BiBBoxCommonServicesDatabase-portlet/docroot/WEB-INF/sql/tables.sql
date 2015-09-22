@@ -45,3 +45,12 @@ create table bibboxcs.symboltypeconfiguration (
 	symboliconconfiguration VARCHAR(75) null,
 	symboldiscription VARCHAR(75) null
 );
+
+create table rdconnect.searchindex_rdconnect (
+	searchid LONG not null primary key,
+	organisationid LONG,
+	locationid LONG,
+	location VARCHAR(75) null,
+	key_ VARCHAR(75) null,
+	value VARCHAR(75) null
+);
