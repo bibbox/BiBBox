@@ -250,6 +250,9 @@ public interface DiseaseMatrixLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getDiseaseMatrixTable(long organizationId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> getDiseaseMatrixs(
 		long organizationID, int begin, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;

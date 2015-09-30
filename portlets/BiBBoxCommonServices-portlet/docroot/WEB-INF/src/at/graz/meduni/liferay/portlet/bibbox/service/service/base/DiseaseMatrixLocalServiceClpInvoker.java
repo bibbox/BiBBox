@@ -114,21 +114,25 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 
 		_methodParameterTypes67 = new String[] { "java.lang.String" };
 
-		_methodName72 = "getDiseaseMatrixs";
+		_methodName72 = "getDiseaseMatrixTable";
 
-		_methodParameterTypes72 = new String[] { "long", "int", "int" };
+		_methodParameterTypes72 = new String[] { "long" };
 
-		_methodName73 = "getDiseaseMatrixsCount";
+		_methodName73 = "getDiseaseMatrixs";
 
-		_methodParameterTypes73 = new String[] { "long" };
+		_methodParameterTypes73 = new String[] { "long", "int", "int" };
 
-		_methodName74 = "diseaseMatrixFromRequest";
+		_methodName74 = "getDiseaseMatrixsCount";
 
-		_methodParameterTypes74 = new String[] { "javax.portlet.PortletRequest" };
+		_methodParameterTypes74 = new String[] { "long" };
 
-		_methodName75 = "addDiseaseMatrix";
+		_methodName75 = "diseaseMatrixFromRequest";
 
-		_methodParameterTypes75 = new String[] {
+		_methodParameterTypes75 = new String[] { "javax.portlet.PortletRequest" };
+
+		_methodName76 = "addDiseaseMatrix";
+
+		_methodParameterTypes76 = new String[] {
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix"
 			};
 	}
@@ -236,23 +240,28 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 
 		if (_methodName72.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+			return DiseaseMatrixLocalServiceUtil.getDiseaseMatrixTable(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
 			return DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName73.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			return DiseaseMatrixLocalServiceUtil.getDiseaseMatrixsCount(((Long)arguments[0]).longValue());
-		}
-
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
-			return DiseaseMatrixLocalServiceUtil.diseaseMatrixFromRequest((javax.portlet.PortletRequest)arguments[0]);
+			return DiseaseMatrixLocalServiceUtil.getDiseaseMatrixsCount(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+			return DiseaseMatrixLocalServiceUtil.diseaseMatrixFromRequest((javax.portlet.PortletRequest)arguments[0]);
+		}
+
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			return DiseaseMatrixLocalServiceUtil.addDiseaseMatrix((at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix)arguments[0]);
 		}
 
@@ -303,4 +312,6 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
 	private String[] _methodParameterTypes75;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
 }

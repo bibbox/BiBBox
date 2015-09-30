@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
@@ -75,6 +76,7 @@ public class MolgenisAPIRequestLocalServiceImpl extends
 	 * @return the javascript for creating the table or an empty sting if there was an error.
 	 */
 	public String getAgregatedJsonFromMolgenis(String biobankid) {
+		test();
 		//javax.net.ssl.SSLProtocolException: handshake alert:  unrecognized_name
 		System.setProperty("jsse.enableSNIExtension", "false");
 		Date currentdate = new Date();
@@ -92,6 +94,35 @@ public class MolgenisAPIRequestLocalServiceImpl extends
 			}
 		}
 		return "";
+	}
+	
+	private void test() {
+		HttpClient c = HttpClientBuilder.create().build();
+		HttpPost p = new HttpPost("http://localhost:8080/api/jsonws/invoke");
+//BiBBoxCommonServices-portlet.logapi/getapiversion/data/
+		//BiBBoxCommonServices-portlet.logapi/testmethode
+		
+		String post = "{\"/BiBBoxCommonServices-portlet.logapi/testmethode\": {\"jason\": abc,\"param2\": 123,\"param3\": test}}";
+		
+		p.setEntity(new StringEntity(post,
+				ContentType.create("application/json")));
+
+		try {
+			HttpResponse r = c.execute(p);
+			BufferedReader rd = new BufferedReader(new InputStreamReader(r
+					.getEntity().getContent()));
+			String line = "";
+			while ((line = rd.readLine()) != null) {
+				System.out.println("+++++++" + line);
+			}
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**

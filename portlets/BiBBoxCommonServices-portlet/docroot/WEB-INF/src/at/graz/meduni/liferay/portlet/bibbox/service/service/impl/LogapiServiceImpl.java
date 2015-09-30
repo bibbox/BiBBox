@@ -22,9 +22,11 @@ import java.util.regex.Pattern;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
@@ -98,6 +100,28 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		json.put("API", "RD-Connect API");
 		json.put("Version", "1.0");
 		return json;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "regbbs", method = "POST")
+	public JSONArray regbbs(String data) {
+		JSONArray jsonarray = JSONFactoryUtil.createJSONArray();
+		try {
+			JSONArray array = JSONFactoryUtil.createJSONArray(data);
+			for(int arrayindex = 0; arrayindex < array.length(); arrayindex++) {
+				jsonarray.put(regbb(array.getLong(arrayindex)));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return jsonarray;
 	}
 	
 	/**
@@ -542,6 +566,12 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "testmethode", method = "POST")
+	public void testMethode(String jason) {
+		System.out.println(jason);
 	}
 	
 	String pattern = "http%3A%2F%2Fcatalogue.rd-connect.eu%2Fid%2Forganization-id%2F(\\d+)(%2Fcollection-id%2F)?(\\d+)?";

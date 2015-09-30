@@ -46,9 +46,15 @@
 		<field name="searchid" type="long" />
 		<field name="organisationid" type="long" />
 		<field name="locationid" type="long" />
-		<field name="location" type="String" />
-		<field name="key" type="String" />
-		<field name="value" type="String" />
+		<field name="location" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="key" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="value" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration">
 		<field name="symbolconfigurationId" type="long" />

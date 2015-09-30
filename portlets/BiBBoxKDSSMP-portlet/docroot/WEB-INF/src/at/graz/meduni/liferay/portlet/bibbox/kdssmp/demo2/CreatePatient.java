@@ -12,6 +12,8 @@ import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.patientnamegen
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpPatientLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.patientnamegeneratorLocalServiceUtil;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -47,9 +49,11 @@ public class CreatePatient extends MVCPortlet {
 	 * 
 	 * @param request
 	 * @param response
+	 * @throws SystemException 
+	 * @throws PortalException 
 	 * @throws Exception
 	 */
-	public void createNewPatientWithAZ(ActionRequest request, ActionResponse response) throws Exception {	
+	public void createNewPatientWithAZ(ActionRequest request, ActionResponse response) {	
 		try {
 			Random randomGenerator = new Random();
 			int randomInt = randomGenerator.nextInt(560)+1;

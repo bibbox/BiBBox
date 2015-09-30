@@ -275,6 +275,10 @@ public class DiseaseMatrixLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.lang.String getDiseaseMatrixTable(long organizationId) {
+		return getService().getDiseaseMatrixTable(organizationId);
+	}
+
 	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> getDiseaseMatrixs(
 		long organizationID, int begin, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

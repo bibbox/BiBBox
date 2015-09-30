@@ -68,6 +68,15 @@ public class LogapiServiceWrapper implements LogapiService,
 	* @return
 	*/
 	@Override
+	public com.liferay.portal.kernel.json.JSONArray regbbs(
+		java.lang.String data) {
+		return _logapiService.regbbs(data);
+	}
+
+	/**
+	* @return
+	*/
+	@Override
 	public com.liferay.portal.kernel.json.JSONArray regbbs() {
 		return _logapiService.regbbs();
 	}
@@ -110,6 +119,11 @@ public class LogapiServiceWrapper implements LogapiService,
 	@Override
 	public com.liferay.portal.kernel.json.JSONObject regbb(java.lang.String id) {
 		return _logapiService.regbb(id);
+	}
+
+	@Override
+	public void testMethode(java.lang.String jason) {
+		_logapiService.testMethode(jason);
 	}
 
 	/**

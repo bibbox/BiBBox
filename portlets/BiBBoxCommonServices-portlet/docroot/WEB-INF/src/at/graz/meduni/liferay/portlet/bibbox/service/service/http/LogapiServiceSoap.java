@@ -81,6 +81,23 @@ public class LogapiServiceSoap {
 	/**
 	* @return
 	*/
+	public static java.lang.String regbbs(java.lang.String data)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONArray returnValue = LogapiServiceUtil.regbbs(data);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @return
+	*/
 	public static java.lang.String regbbs() throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArray returnValue = LogapiServiceUtil.regbbs();
@@ -169,6 +186,18 @@ public class LogapiServiceSoap {
 			com.liferay.portal.kernel.json.JSONObject returnValue = LogapiServiceUtil.regbb(id);
 
 			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testMethode(java.lang.String jason)
+		throws RemoteException {
+		try {
+			LogapiServiceUtil.testMethode(jason);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

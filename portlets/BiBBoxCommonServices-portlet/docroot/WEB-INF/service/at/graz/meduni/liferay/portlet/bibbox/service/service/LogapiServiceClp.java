@@ -38,27 +38,35 @@ public class LogapiServiceClp implements LogapiService {
 
 		_methodName4 = "regbbs";
 
-		_methodParameterTypes4 = new String[] {  };
+		_methodParameterTypes4 = new String[] { "java.lang.String" };
 
-		_methodName5 = "regs";
+		_methodName5 = "regbbs";
 
 		_methodParameterTypes5 = new String[] {  };
 
-		_methodName6 = "bbs";
+		_methodName6 = "regs";
 
 		_methodParameterTypes6 = new String[] {  };
 
-		_methodName7 = "regbb";
+		_methodName7 = "bbs";
 
-		_methodParameterTypes7 = new String[] { "long" };
+		_methodParameterTypes7 = new String[] {  };
 
 		_methodName8 = "regbb";
 
-		_methodParameterTypes8 = new String[] { "long", "long" };
+		_methodParameterTypes8 = new String[] { "long" };
 
 		_methodName9 = "regbb";
 
-		_methodParameterTypes9 = new String[] { "java.lang.String" };
+		_methodParameterTypes9 = new String[] { "long", "long" };
+
+		_methodName10 = "regbb";
+
+		_methodParameterTypes10 = new String[] { "java.lang.String" };
+
+		_methodName11 = "testMethode";
+
+		_methodParameterTypes11 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -135,12 +143,14 @@ public class LogapiServiceClp implements LogapiService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray regbbs() {
+	public com.liferay.portal.kernel.json.JSONArray regbbs(
+		java.lang.String data) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4, new Object[] {  });
+					_methodParameterTypes4,
+					new Object[] { ClpSerializer.translateInput(data) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -158,7 +168,7 @@ public class LogapiServiceClp implements LogapiService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray regs() {
+	public com.liferay.portal.kernel.json.JSONArray regbbs() {
 		Object returnObj = null;
 
 		try {
@@ -181,7 +191,7 @@ public class LogapiServiceClp implements LogapiService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray bbs() {
+	public com.liferay.portal.kernel.json.JSONArray regs() {
 		Object returnObj = null;
 
 		try {
@@ -204,12 +214,35 @@ public class LogapiServiceClp implements LogapiService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONObject regbb(long organizationId) {
+	public com.liferay.portal.kernel.json.JSONArray bbs() {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] { organizationId });
+					_methodParameterTypes7, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject regbb(long organizationId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] { organizationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -232,8 +265,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
 					new Object[] { organizationId, collectionId });
 		}
 		catch (Throwable t) {
@@ -256,8 +289,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName9,
-					_methodParameterTypes9,
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
 					new Object[] { ClpSerializer.translateInput(id) });
 		}
 		catch (Throwable t) {
@@ -273,6 +306,26 @@ public class LogapiServiceClp implements LogapiService {
 		}
 
 		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void testMethode(java.lang.String jason) {
+		try {
+			_invokableService.invokeMethod(_methodName11,
+				_methodParameterTypes11,
+				new Object[] { ClpSerializer.translateInput(jason) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
 	}
 
 	private InvokableService _invokableService;
@@ -294,4 +347,8 @@ public class LogapiServiceClp implements LogapiService {
 	private String[] _methodParameterTypes8;
 	private String _methodName9;
 	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
+	private String _methodName11;
+	private String[] _methodParameterTypes11;
 }

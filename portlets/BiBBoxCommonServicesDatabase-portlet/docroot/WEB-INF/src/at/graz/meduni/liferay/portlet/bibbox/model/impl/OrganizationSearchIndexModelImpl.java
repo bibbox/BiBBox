@@ -65,7 +65,7 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 			{ "key_", Types.VARCHAR },
 			{ "value", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.searchindex_rdconnect (searchid LONG not null primary key,organisationid LONG,locationid LONG,location VARCHAR(75) null,key_ VARCHAR(75) null,value VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.searchindex_rdconnect (searchid LONG not null primary key,organisationid LONG,locationid LONG,location TEXT null,key_ TEXT null,value TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.searchindex_rdconnect";
 	public static final String ORDER_BY_JPQL = " ORDER BY organizationSearchIndex.searchid ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.searchindex_rdconnect.searchid ASC";

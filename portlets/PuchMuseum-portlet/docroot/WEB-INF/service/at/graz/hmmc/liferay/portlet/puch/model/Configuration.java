@@ -17,7 +17,7 @@ package at.graz.hmmc.liferay.portlet.puch.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the Configuration service. Represents a row in the &quot;puchmuseum_configuration&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the Configuration service. Represents a row in the &quot;puchmuseum.configuration&quot; database table, with each column mapped to a property of this class.
  *
  * @author reihsr
  * @see ConfigurationModel

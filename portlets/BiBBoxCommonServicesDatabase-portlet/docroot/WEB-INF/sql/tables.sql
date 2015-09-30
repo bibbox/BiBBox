@@ -50,7 +50,7 @@ create table rdconnect.searchindex_rdconnect (
 	searchid LONG not null primary key,
 	organisationid LONG,
 	locationid LONG,
-	location VARCHAR(75) null,
-	key_ VARCHAR(75) null,
-	value VARCHAR(75) null
+	location TEXT null,
+	key_ TEXT null,
+	value TEXT null
 );

@@ -73,6 +73,14 @@ public class LogapiServiceUtil {
 	/**
 	* @return
 	*/
+	public static com.liferay.portal.kernel.json.JSONArray regbbs(
+		java.lang.String data) {
+		return getService().regbbs(data);
+	}
+
+	/**
+	* @return
+	*/
 	public static com.liferay.portal.kernel.json.JSONArray regbbs() {
 		return getService().regbbs();
 	}
@@ -112,6 +120,10 @@ public class LogapiServiceUtil {
 	public static com.liferay.portal.kernel.json.JSONObject regbb(
 		java.lang.String id) {
 		return getService().regbb(id);
+	}
+
+	public static void testMethode(java.lang.String jason) {
+		getService().testMethode(jason);
 	}
 
 	public static void clearService() {

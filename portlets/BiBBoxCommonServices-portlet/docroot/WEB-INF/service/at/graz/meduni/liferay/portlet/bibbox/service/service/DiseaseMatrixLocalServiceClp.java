@@ -115,17 +115,21 @@ public class DiseaseMatrixLocalServiceClp implements DiseaseMatrixLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getDiseaseMatrixs";
+		_methodName19 = "getDiseaseMatrixTable";
 
-		_methodParameterTypes19 = new String[] { "long", "int", "int" };
+		_methodParameterTypes19 = new String[] { "long" };
 
-		_methodName20 = "getDiseaseMatrixsCount";
+		_methodName20 = "getDiseaseMatrixs";
 
-		_methodParameterTypes20 = new String[] { "long" };
+		_methodParameterTypes20 = new String[] { "long", "int", "int" };
 
-		_methodName21 = "diseaseMatrixFromRequest";
+		_methodName21 = "getDiseaseMatrixsCount";
 
-		_methodParameterTypes21 = new String[] { "javax.portlet.PortletRequest" };
+		_methodParameterTypes21 = new String[] { "long" };
+
+		_methodName22 = "diseaseMatrixFromRequest";
+
+		_methodParameterTypes22 = new String[] { "javax.portlet.PortletRequest" };
 	}
 
 	@Override
@@ -679,14 +683,37 @@ public class DiseaseMatrixLocalServiceClp implements DiseaseMatrixLocalService {
 	}
 
 	@Override
+	public java.lang.String getDiseaseMatrixTable(long organizationId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] { organizationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> getDiseaseMatrixs(
 		long organizationID, int begin, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19,
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
 					new Object[] { organizationID, begin, end });
 		}
 		catch (Throwable t) {
@@ -714,8 +741,8 @@ public class DiseaseMatrixLocalServiceClp implements DiseaseMatrixLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20, new Object[] { organizationID });
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] { organizationID });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -742,8 +769,8 @@ public class DiseaseMatrixLocalServiceClp implements DiseaseMatrixLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
 					new Object[] { ClpSerializer.translateInput(request) });
 		}
 		catch (Throwable t) {
@@ -804,4 +831,6 @@ public class DiseaseMatrixLocalServiceClp implements DiseaseMatrixLocalService {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

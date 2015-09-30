@@ -289,6 +289,11 @@ public class DiseaseMatrixLocalServiceWrapper
 	}
 
 	@Override
+	public java.lang.String getDiseaseMatrixTable(long organizationId) {
+		return _diseaseMatrixLocalService.getDiseaseMatrixTable(organizationId);
+	}
+
+	@Override
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> getDiseaseMatrixs(
 		long organizationID, int begin, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -4,7 +4,7 @@
 	<author>reihsr</author>
 	<namespace>puchmuseum</namespace>
 	
-	<entity name="PuchMuseumsObjekt" local-service="true" remote-service="false"  table="puchmuseum_puchmuseumsobjekt">
+	<entity name="PuchMuseumsObjekt" local-service="true" remote-service="false"  table="puchmuseum.puchmuseumsobjekt">
 		<!-- PK fields -->
 		<column name="puchmuseumsobjectId" type="long" primary="true" />
 		
@@ -21,7 +21,7 @@
 		<column name="folder" type="long" />
 	</entity>
 
-	<entity name="ObjectData" local-service="true" remote-service="false"  table="puchmuseum_objectdata" >
+	<entity name="ObjectData" local-service="true" remote-service="false"  table="puchmuseum.objectdata" >
 		<!-- PK fields -->
 		<column name="objectdataId" type="long" primary="true" />
 		<!-- Group instance -->
@@ -42,7 +42,7 @@
 			<finder-column name="objectkey" />
 		</finder>
 	</entity>
-	<entity name="Person" local-service="true" remote-service="false"  table="puchmuseum_person">
+	<entity name="Person" local-service="true" remote-service="false"  table="puchmuseum.person">
 		<!-- PK fields -->
 		<column name="personId" type="long" primary="true" />
 
@@ -60,7 +60,7 @@
 			<finder-column name="vorname" />
 		</finder>
 	</entity>
-	<entity name="Transaktion" local-service="true" remote-service="false"  table="puchmuseum_transaktion">
+	<entity name="Transaktion" local-service="true" remote-service="false"  table="puchmuseum.transaktion">
 		<!-- PK fields -->
 		<column name="transaktionId" type="long" primary="true" />
 
@@ -90,7 +90,7 @@
 			<finder-column name="puchmuseumsobjectId" />
 		</finder>
 	</entity>
-	<entity name="TransaktionData" local-service="true" remote-service="false"  table="puchmuseum_transaktiondata" >
+	<entity name="TransaktionData" local-service="true" remote-service="false"  table="puchmuseum.transaktiondata" >
 		<!-- PK fields -->
 		<column name="transaktiondataId" type="long" primary="true" />
 		<!-- Group instance -->
@@ -113,7 +113,7 @@
 		</finder>
 	</entity>
 	
-	<entity name="ObjectImage" local-service="true" remote-service="false"  table="puchmuseum_objectimage" >
+	<entity name="ObjectImage" local-service="true" remote-service="false"  table="puchmuseum.objectimage" >
 		<!-- PK fields -->
 		<column name="objectimageId" type="long" primary="true" />
 		<!-- Group instance -->
@@ -134,7 +134,7 @@
 	</entity>
 	<!-- Configurations -->
 	
-	<entity name="Configuration" local-service="true" remote-service="false"  table="puchmuseum_configuration">
+	<entity name="Configuration" local-service="true" remote-service="false"  table="puchmuseum.configuration">
 		<!-- PK fields -->
 		<column name="configurationId" type="long" primary="true" />
 		<!-- Other fields -->
@@ -165,7 +165,7 @@
 			<finder-column name="optionkey" />
 		</finder>
 	</entity>
-	<entity name="ParameterConfiguration" local-service="true" remote-service="false"  table="puchmuseum_parameterconfiguration">
+	<entity name="ParameterConfiguration" local-service="true" remote-service="false"  table="puchmuseum.parameterconfiguration">
 		<!-- PK fields -->
 		<column name="parameterconfigurationId" type="long" primary="true" />
 		<!-- Other fields -->
@@ -191,7 +191,7 @@
 		<column name="editcss" type="String" />
 		<column name="editcolumnwidth" type="long" />
 	</entity>
-	<entity name="ParameterOptionsConfiguration" local-service="true" remote-service="false"  table="puchmuseum_parameteroptionsconfiguration">
+	<entity name="ParameterOptionsConfiguration" local-service="true" remote-service="false"  table="puchmuseum.parameteroptionsconfiguration">
 		<!-- PK fields -->
 		<column name="parameteroptionsconfigurationId" type="long" primary="true" />
 		<!-- Other fields -->
