@@ -131,6 +131,13 @@
 .taglib-header {
 	display: none;
 }
+.bbmri-eric-header-redisplay .taglib-header {
+    display: block;
+}
+
+.bbmri-eric-header-redisplay .taglib-header .header-back-to a {
+	padding: 0.1em 0.5em 0.5em 0;
+}
 .asset-title {
 	display: none;
 }

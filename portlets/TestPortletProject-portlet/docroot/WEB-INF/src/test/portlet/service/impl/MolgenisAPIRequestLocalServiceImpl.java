@@ -76,7 +76,7 @@ public class MolgenisAPIRequestLocalServiceImpl extends
 	 * @return the javascript for creating the table or an empty sting if there was an error.
 	 */
 	public String getAgregatedJsonFromMolgenis(String biobankid) {
-		test();
+		//test();
 		//javax.net.ssl.SSLProtocolException: handshake alert:  unrecognized_name
 		System.setProperty("jsse.enableSNIExtension", "false");
 		Date currentdate = new Date();
@@ -169,7 +169,7 @@ public class MolgenisAPIRequestLocalServiceImpl extends
 	private String readData(String biobankid) {
 		//String url = "https://molgenis21.target.rug.nl/api/v2/test?aggs=x==Diseases;distinct==ParticipantID&q=BiobankID=q=\"http%3A%2F%2Fcatalogue.rd-connect.eu%2Fweb%2F71542\"";
 		//String url = "https://molgenis21.target.rug.nl/api/v2/test?aggs=x==Diseases;distinct==ParticipantID";
-		String url = "https://molgenis21.target.rug.nl/api/v2/test?aggs=x==Diseases;distinct==ParticipantID&q=BiobankID==" + biobankid;
+		String url = "https://molgenis21.target.rug.nl/api/v2/test?aggs=x==Disease;distinct==ParticipantID&q=BiobankID==" + biobankid;
 		System.out.println(url);
 		try {
 			// Construct Table Columns

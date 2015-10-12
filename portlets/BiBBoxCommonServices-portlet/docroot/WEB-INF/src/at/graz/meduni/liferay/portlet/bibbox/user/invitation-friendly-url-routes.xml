@@ -1,10 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.2.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_2_0.dtd">
 
+
 <routes>
     <route>
-        <pattern>/puchobjecttype/fahrzeug/{puchmuseumsobjectId:\d+}</pattern>
-        <generated-parameter name="mvcPath">/html/puchmuseumsobjekterstellen/objecttype/fahrzeug.jsp</generated-parameter>
+        <pattern>/organisations/{invitationId:\d+}</pattern>
+        <generated-parameter name="mvcPath">/html/user/invitation/edit_organization.jsp</generated-parameter>
+        <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
+    </route>
+    <route>
+        <pattern>/vieworganisations/{invitationId:\d+}</pattern>
+        <generated-parameter name="mvcPath">/html/user/invitation/view_organisations.jsp</generated-parameter>
+        <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
+    </route>
+    <route>
+        <pattern>/biobank/{biobankId:\d+}</pattern>
+        <generated-parameter name="mvcPath">/html/user/invitation/invitationutilorganizationstatuslist/biobankprintpage.jsp</generated-parameter>
         <implicit-parameter name="p_p_state">pop_up</implicit-parameter>
     </route>
 </routes>

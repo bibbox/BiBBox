@@ -23,5 +23,6 @@
 	</category>
 	<category name="kDSSMP Configuration">
 		<portlet id="kdssmp-configuration"></portlet>
+		<portlet id="kdssmp-parameter-configuration"></portlet>
 	</category>
 </display>

@@ -43,7 +43,7 @@
 }
 .bbmri_eric_header-mainmenu-floating {
 	float: left;
-	margin-left: 270px;
+	margin-left: 320px;
 }
 .bbmri_eric_header-mainmenu {
 	width: 1200px;
@@ -184,7 +184,7 @@
 	position: absolute;
 	display: none;
 	top: 0px;
-	left: 25px;
+	left: 30px;
 	width: 150px;
 	height: 70px;
 	padding-left: 30px;
@@ -206,7 +206,6 @@
 	position: absolute;
    	top: 0px;
    	left: 0px;
-	border-radius: 23px;
    	width: 45px;
    	height: 45px;
    	z-index: 1000;

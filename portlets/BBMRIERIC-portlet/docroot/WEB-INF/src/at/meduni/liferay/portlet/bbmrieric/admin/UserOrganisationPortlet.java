@@ -143,7 +143,6 @@ public class UserOrganisationPortlet extends MVCPortlet {
 	private void resetUserPasswordForOrganisation(long organisation_id, String password, boolean passwordreset, boolean silentchange) {
 		try {
 			silentchange = true;
-			passwordreset = true;
 			// Get the Group
 			Group group = GroupLocalServiceUtil.getGroup(organisation_id);
 			// Get first set of Users
@@ -189,7 +188,6 @@ public class UserOrganisationPortlet extends MVCPortlet {
 				if(change) {
 				
 					System.out.println("Change password for:" + user.getFullName());
-					passwordreset = true;
 					UserLocalServiceUtil.updatePassword(user.getUserId(), password, password, passwordreset, silentchange);
 				
 				}

@@ -48,7 +48,7 @@ ${theme.include(body_top_include)}
 			<!-- Login area -->
 			<div class="bbmri_eric_header-login-top-right">
 				<#if is_signed_in>
-					<img style="border-style: ridge;border-width: 4px;border-color: #F0F8FF;" class="bbmri_eric_header-login-image-position" src="/image/user_male_portrait?img_id=${user.portraitId}" alt="Test Test" width="45">
+					<img style="border-style: ridge;border-width: 2px;border-color: #F0F8FF;" class="bbmri_eric_header-login-image-position" src="${user.getPortraitURL(themeDisplay)}" alt="Test Test" width="45">
 					<!--<img class="bbmri_eric_header-login-image-position" alt="Login" height="45px" src="/BBMRIERICRITrain-theme/images/Login_button_ring.png" width="45px" >-->
 					<div class="bbmri_eric_header-login-top-right-name">
 						<div class="bbmri_eric_header-login-top-right-name-title">${user.firstName} ${user.lastName}</div>

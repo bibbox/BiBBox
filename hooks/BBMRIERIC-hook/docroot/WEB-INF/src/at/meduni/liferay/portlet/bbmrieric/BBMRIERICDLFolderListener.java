@@ -1,12 +1,18 @@
 package at.meduni.liferay.portlet.bbmrieric;
 
+import java.util.HashSet;
+import java.util.List;
+
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
 public class BBMRIERICDLFolderListener implements ModelListener<DLFolder>  {
@@ -45,17 +51,50 @@ public class BBMRIERICDLFolderListener implements ModelListener<DLFolder>  {
 	}
 	@Override
 	public void onAfterCreate(DLFolder model) throws ModelListenerException {
-		// TODO Auto-generated method stub
-		for(int i=0; i < rolesacces.length; i++ ) {
+		if(model.getCompanyId() == companyId) {
+			// BBMRI-ERIC Webpage
+			for(int i=0; i < rolesacces.length; i++ ) {
+				try {
+					long roleId = RoleLocalServiceUtil.getRole(companyId,rolesacces[i][0][0]).getRoleId();
+					String[] permissions = rolesacces[i][1];
+					System.out.println(rolesacces[i][0][0] + ": " + roleId + " - " + permissions.toString());
+					ResourcePermissionLocalServiceUtil.setResourcePermissions(companyId,DLFolder.class.getName(),ResourceConstants.SCOPE_INDIVIDUAL,""+model.getFolderId(), roleId, permissions);	
+				} catch (PortalException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SystemException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} else {
 			try {
-				long roleId = RoleLocalServiceUtil.getRole(companyId,rolesacces[i][0][0]).getRoleId();
-				String[] permissions = rolesacces[i][1];
-				System.out.println(rolesacces[i][0][0] + ": " + roleId + " - " + permissions.toString());
-				ResourcePermissionLocalServiceUtil.setResourcePermissions(companyId,DLFolder.class.getName(),ResourceConstants.SCOPE_INDIVIDUAL,""+model.getFolderId(), roleId, permissions);	
-			} catch (PortalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SystemException e) {
+				//long roleId = RoleLocalServiceUtil.getRole(model.getCompanyId(), "Site Member").getRoleId();
+				List<Role> roles = RoleLocalServiceUtil.getRoles(model.getCompanyId());
+				for(Role role : roles) {
+					System.out.println("Roles: " + role.getName());
+					try {
+						HashSet<String> accesslist = new HashSet<String>();
+						for(String actionkey : fullAccess) {
+							try {
+								if(ResourcePermissionLocalServiceUtil.hasResourcePermission(model.getCompanyId(), DLFolder.class.getName(), ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(model.getParentFolder().getPrimaryKey()), role.getRoleId(), actionkey)) {
+									accesslist.add(actionkey);
+									/*if(role.getName().equalsIgnoreCase("Site Member")) {
+										System.out.println(" - " + actionkey);
+									}*/
+								}
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						ResourcePermissionLocalServiceUtil.setResourcePermissions(model.getCompanyId(),DLFolder.class.getName(),ResourceConstants.SCOPE_INDIVIDUAL,""+model.getFolderId(), role.getRoleId(), accesslist.toArray(noAccess));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -75,15 +114,17 @@ public class BBMRIERICDLFolderListener implements ModelListener<DLFolder>  {
 	}
 	@Override
 	public void onAfterUpdate(DLFolder model) throws ModelListenerException {
-		// TODO Auto-generated method stub
-		try {
-			ResourcePermissionLocalServiceUtil.setResourcePermissions(companyId,DLFolder.class.getName(),ResourceConstants.SCOPE_INDIVIDUAL,""+model.getFolderId(), RoleLocalServiceUtil.getRole(companyId,"Owner").getRoleId(), noAccess);
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(model.getCompanyId() == companyId) {
+			// BBMRI-ERIC Webpage
+			try {
+				ResourcePermissionLocalServiceUtil.setResourcePermissions(companyId,DLFolder.class.getName(),ResourceConstants.SCOPE_INDIVIDUAL,""+model.getFolderId(), RoleLocalServiceUtil.getRole(companyId,"Owner").getRoleId(), noAccess);
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	@Override
