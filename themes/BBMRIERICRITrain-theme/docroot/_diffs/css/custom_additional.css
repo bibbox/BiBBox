@@ -128,14 +128,11 @@
 .aui .bbmriericrecentnews {
 	color: #ED660A;
 }
-.taglib-header {
-	display: none;
-}
 .bbmri-eric-header-redisplay .taglib-header {
-    display: block;
+    display: none;
 }
 
-.bbmri-eric-header-redisplay .taglib-header .header-back-to a {
+.taglib-header .header-back-to a {
 	padding: 0.1em 0.5em 0.5em 0;
 }
 .asset-title {
