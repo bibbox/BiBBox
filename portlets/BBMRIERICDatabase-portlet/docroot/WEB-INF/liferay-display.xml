@@ -6,4 +6,7 @@
 	<category name="category.sample">
 		<portlet id="ldap-sync-service"></portlet>
 	</category>
+	<category name="BBMRI-ERIC Directory 2.0">
+		<portlet id="d2-biobank"></portlet>
+	</category>
 </display>

@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.BioBank" />
+	<import class="at.meduni.liferay.portlet.bbmrieric.model.D2Biobank" />
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscription" />
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.SearchIndex" />
 	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl" table="bbmrieric.biobank">
@@ -19,6 +20,51 @@
 		<property name="biobankdescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biobankjuristicperson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="UUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl" table="bbmrieric.d2biobank">
+		<cache usage="read-write" />
+		<id name="biobankId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="contactIDRef" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactPriority" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="biobankID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankJurisdicalPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankPartnerCharterSigned" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="bioresourceReference" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankNetworkIDRef" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geoLatitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geoLongitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collaborationPartnersCommercial" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collaborationPartnersNonforprofit" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankITSupportAvailable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankITStaffSize" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="biobankISAvailable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankHISAvailable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankAcronym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankHeadFirstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankHeadLastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankHeadRole" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankClinical" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankPopulation" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankResearchStudy" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankNonHuman" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankCollection" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionImpl" table="bbmrieric.diseasediscription">
 		<cache usage="read-write" />

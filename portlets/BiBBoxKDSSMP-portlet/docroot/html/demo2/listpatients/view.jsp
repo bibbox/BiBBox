@@ -102,23 +102,23 @@ for(KdssmpPatient patient : patients) {
 	icons.put("A2", patient.getGender());
 	icons.put("ASUMMETY", patient.getFirstname() + " " + patient.getLastname() + "<br>" + dateFormat.format(patient.getDateofbirth()));
 	icons.put("ACODE", patient.getGender());
+	icons.put("A4", "+");
 	
 	Organization organization = OrganizationLocalServiceUtil.getOrganization(patient.getOrganizationId());
 	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
 	icons.put("link", orgPath);
 	
 	List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroup().getGroupId());
-	System.out.println("***************" + usergrouprolles.size() + " " + organization.getName());
 	for (UserGroupRole ugr : usergrouprolles) {
-		System.out.println("*************** " + ugr.getRoleId() + "==" + optionsRoleForUser_cfg);
 		if(ugr.getRoleId() == optionsRoleForUser_cfg) {
-			icons.put("A4", "stared");
+			icons.put("A4", icons.get("A4") + "§,§stared");
 		}
 	}
 	
 	if(patient.getDateofdeath() != null) {
-		icons.put("A4", "death");
+		icons.put("A4", icons.get("A4") + "§,§death");
 	}
+	icons.put("A4", icons.get("A4") + "§,§TEXT:" + patient.getNumberOfEvents());
 	
 	%>
 	<%= SymbolConfigurationLocalServiceUtil.getSymbol("default", "patient", icons) %>

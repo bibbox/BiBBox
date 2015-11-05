@@ -31,4 +31,5 @@ public interface KdssmpPatient extends KdssmpPatientModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpPatientImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public int getNumberOfEvents();
 }

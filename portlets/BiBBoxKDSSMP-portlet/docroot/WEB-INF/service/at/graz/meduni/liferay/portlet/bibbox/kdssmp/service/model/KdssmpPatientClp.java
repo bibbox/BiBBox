@@ -291,6 +291,25 @@ public class KdssmpPatientClp extends BaseModelImpl<KdssmpPatient>
 		}
 	}
 
+	@Override
+	public int getNumberOfEvents() {
+		try {
+			String methodName = "getNumberOfEvents";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			Integer returnObj = (Integer)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getKdssmpPatientRemoteModel() {
 		return _kdssmpPatientRemoteModel;
 	}

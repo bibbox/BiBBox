@@ -14,6 +14,11 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.EventLocalServiceUtil;
+
 /**
  * The extended model implementation for the KdssmpPatient service. Represents a row in the &quot;kdssmp.patient&quot; database table, with each column mapped to a property of this class.
  *
@@ -30,5 +35,21 @@ public class KdssmpPatientImpl extends KdssmpPatientBaseImpl {
 	 * Never reference this class directly. All methods that expect a kdssmp patient model instance should use the {@link at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpPatient} interface instead.
 	 */
 	public KdssmpPatientImpl() {
+	}
+	
+	/**
+	 * Error Format for date
+	 */
+	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	
+	public int getNumberOfEvents() {
+		try {
+			return EventLocalServiceUtil.getEventsForPatient(this.getPatientId()).size();
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxkDSSMP-portlet::at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpPatientImpl::getNumberOfEvents] Error getting Eventcount for patient " + this.getPatientId() + ".");
+		}
+		return 0;
 	}
 }

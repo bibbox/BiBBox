@@ -25,6 +25,48 @@
 		</field>
 		<field name="UUID" type="String" />
 	</model>
+	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2Biobank">
+		<field name="uuid" type="String" />
+		<field name="biobankId" type="long" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="contactIDRef" type="String" />
+		<field name="contactPriority" type="long" />
+		<field name="biobankID" type="String" />
+		<field name="biobankName" type="String" />
+		<field name="biobankJurisdicalPerson" type="String" />
+		<field name="biobankCountry" type="String" />
+		<field name="biobankPartnerCharterSigned" type="boolean" />
+		<field name="bioresourceReference" type="String" />
+		<field name="biobankNetworkIDRef" type="String" />
+		<field name="geoLatitude" type="String" />
+		<field name="geoLongitude" type="String" />
+		<field name="collaborationPartnersCommercial" type="boolean" />
+		<field name="collaborationPartnersNonforprofit" type="boolean" />
+		<field name="biobankITSupportAvailable" type="boolean" />
+		<field name="biobankITStaffSize" type="long" />
+		<field name="biobankISAvailable" type="boolean" />
+		<field name="biobankHISAvailable" type="boolean" />
+		<field name="biobankAcronym" type="String" />
+		<field name="biobankDescription" type="String" />
+		<field name="biobankURL" type="String" />
+		<field name="biobankHeadFirstName" type="String" />
+		<field name="biobankHeadLastName" type="String" />
+		<field name="biobankHeadRole" type="String" />
+		<field name="biobankClinical" type="boolean" />
+		<field name="biobankPopulation" type="boolean" />
+		<field name="biobankResearchStudy" type="boolean" />
+		<field name="biobankNonHuman" type="boolean" />
+		<field name="biobankCollection" type="boolean" />
+	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscription">
 		<field name="diseasediscriptionId" type="long" />
 		<field name="diseasecode" type="String" />

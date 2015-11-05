@@ -2,7 +2,7 @@
 
 <#include init />
 
-<html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
+<html style="background-color: #0c2848;background-size: cover;-o-background-size: cover;-moz-background-size: cover;-webkit-background-size: cover;" class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
 	<title>${the_title} - ${company_name}</title>
@@ -43,7 +43,7 @@ ${theme.include(body_top_include)}
 <div class="bbmri_eric_header-maincontainer">
 	<div class="bbmri_eric_header-maincontainer-verlauf">
 		<div class="bbmri_eric_header-maincontainer-verlauf-inner">
-			<img  alt="${logo_description}" height="215px" src="/BBMRIERICRITrain-theme/images/BBMRI-ERIC_new_header_image.png" width="1200px" >
+			<img  alt="${logo_description}" style="position: absolute;top: 0;" height="215px" src="/BBMRIERICRITrain-theme/images/BBMRI-ERIC_new_header_image.png" width="1200px" >
 			
 			<!-- Login area -->
 			<div class="bbmri_eric_header-login-top-right">
@@ -103,6 +103,7 @@ ${theme.include(body_top_include)}
 
 <!-- New Header End -->
 <div class="container-fluid-background">
+	
 	<div class="container-fluid" id="wrapper">
 	<div>
 			<#if is_signed_in>

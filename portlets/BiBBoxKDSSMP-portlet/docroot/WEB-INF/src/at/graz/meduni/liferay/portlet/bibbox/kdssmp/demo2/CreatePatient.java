@@ -3,6 +3,7 @@ package at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 import javax.portlet.ActionRequest;
@@ -24,12 +25,14 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -122,6 +125,7 @@ public class CreatePatient extends MVCPortlet {
 			long parentorganisation = ParamUtil.getLong(request, "kdssmp_parentorganisation");
 			long pagetemplate = ParamUtil.getLong(request, "kdssmp_pagetemplate");
 			long roleforuser = ParamUtil.getLong(request, "kdssmp_roleforuser");
+			long roleforpatient = ParamUtil.getLong(request, "kdssmp_roleforpatient");
 			boolean site = pagetemplate == 0 ? false : true;
 			Organization organization = createOrganization(organizationname, company, site, parentorganisation);
 			KdssmpPatientLocalServiceUtil.createKdssmpPatient(firstname, lastname, dob, dod, gender, organization.getOrganizationId());
@@ -133,10 +137,57 @@ public class CreatePatient extends MVCPortlet {
 				long[] userroleid_array = {roleforuser};
 				UserGroupRoleLocalServiceUtil.addUserGroupRoles(themeDisplay.getUserId(), organization.getGroup().getGroupId(), userroleid_array);
 			}
+			ServiceContext serviceContext = new ServiceContext();
+	        serviceContext.setAddGroupPermissions(true);
+	        serviceContext.setAddGuestPermissions(true);
+			User patient = createUser(null, firstname, lastname, themeDisplay.getCompany(), firstname.toLowerCase() + "." + lastname.toLowerCase() + "@bibbox.org", organization, serviceContext, themeDisplay.getLocale());
+			if(roleforpatient != 0) {
+				long[] userroleid_array = {roleforpatient};
+				UserGroupRoleLocalServiceUtil.addUserGroupRoles(patient.getUserId(), organization.getGroup().getGroupId(), userroleid_array);
+			}
 		} catch (Exception ex) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxkDSSMP-portlet::at.graz.meduni.liferay.portlet.bibbox.kdssmp.demo2.CreatePatient::createNewPatient] Error Creating a new Patient.");
 			ex.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 
+	 * @param user
+	 * @param company
+	 * @param mail
+	 * @param organization
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	private User createUser(User user, String firstName, String lastName, Company company, String mail, Organization organization, ServiceContext serviceContext, Locale default_locale) throws PortalException, SystemException {
+		boolean autoPassword = false;
+		String password1 = "20fenris14";
+		boolean autoScreenName = true;
+		String screenName = "";
+		long facebookId = 0;
+		String openId = "";
+		String middleName = "";
+		int prefixId = 0;
+		int suffixId = 0;
+		int birthdayMonth = 1;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = "";
+		long[] groupIds = new long[0];
+		long[] organizationIds = {organization.getOrganizationId()};
+		long[] roleIds = new long[0];
+		long[] userGroupIds = new long[0];
+		boolean male = false;
+		boolean sendEmail = false;
+		user = UserLocalServiceUtil.addUser(company.getDefaultUser().getUserId(), company.getCompanyId(), autoPassword, password1, password1, 
+				autoScreenName, screenName, mail, facebookId, openId, default_locale, firstName, middleName, lastName, 
+				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+		user.setPasswordReset(false);
+		UserLocalServiceUtil.updateUser(user);
+		return user;
 	}
 	
 	/**

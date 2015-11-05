@@ -17,6 +17,7 @@ package at.meduni.liferay.portlet.bbmrieric.service.base;
 import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
 import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalService;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.BioBankPersistence;
+import at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.DiseaseDiscriptionPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.SearchIndexPersistence;
 
@@ -313,6 +314,44 @@ public abstract class BioBankLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the d2 biobank local service.
+	 *
+	 * @return the d2 biobank local service
+	 */
+	public at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService getD2BiobankLocalService() {
+		return d2BiobankLocalService;
+	}
+
+	/**
+	 * Sets the d2 biobank local service.
+	 *
+	 * @param d2BiobankLocalService the d2 biobank local service
+	 */
+	public void setD2BiobankLocalService(
+		at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService d2BiobankLocalService) {
+		this.d2BiobankLocalService = d2BiobankLocalService;
+	}
+
+	/**
+	 * Returns the d2 biobank persistence.
+	 *
+	 * @return the d2 biobank persistence
+	 */
+	public D2BiobankPersistence getD2BiobankPersistence() {
+		return d2BiobankPersistence;
+	}
+
+	/**
+	 * Sets the d2 biobank persistence.
+	 *
+	 * @param d2BiobankPersistence the d2 biobank persistence
+	 */
+	public void setD2BiobankPersistence(
+		D2BiobankPersistence d2BiobankPersistence) {
+		this.d2BiobankPersistence = d2BiobankPersistence;
+	}
+
+	/**
 	 * Returns the disease discription local service.
 	 *
 	 * @return the disease discription local service
@@ -568,6 +607,10 @@ public abstract class BioBankLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalService bioBankLocalService;
 	@BeanReference(type = BioBankPersistence.class)
 	protected BioBankPersistence bioBankPersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService.class)
+	protected at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService d2BiobankLocalService;
+	@BeanReference(type = D2BiobankPersistence.class)
+	protected D2BiobankPersistence d2BiobankPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService.class)
 	protected at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService diseaseDiscriptionLocalService;
 	@BeanReference(type = DiseaseDiscriptionPersistence.class)

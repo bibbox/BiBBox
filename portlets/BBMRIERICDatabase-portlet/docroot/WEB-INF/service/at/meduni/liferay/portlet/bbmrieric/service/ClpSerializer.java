@@ -15,6 +15,7 @@
 package at.meduni.liferay.portlet.bbmrieric.service;
 
 import at.meduni.liferay.portlet.bbmrieric.model.BioBankClp;
+import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankClp;
 import at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscriptionClp;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndexClp;
 
@@ -108,6 +109,10 @@ public class ClpSerializer {
 			return translateInputBioBank(oldModel);
 		}
 
+		if (oldModelClassName.equals(D2BiobankClp.class.getName())) {
+			return translateInputD2Biobank(oldModel);
+		}
+
 		if (oldModelClassName.equals(DiseaseDiscriptionClp.class.getName())) {
 			return translateInputDiseaseDiscription(oldModel);
 		}
@@ -135,6 +140,16 @@ public class ClpSerializer {
 		BioBankClp oldClpModel = (BioBankClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getBioBankRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputD2Biobank(BaseModel<?> oldModel) {
+		D2BiobankClp oldClpModel = (D2BiobankClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getD2BiobankRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -181,6 +196,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl")) {
 			return translateOutputBioBank(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl")) {
+			return translateOutputD2Biobank(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -279,6 +299,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException")) {
+			return new at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException();
+		}
+
+		if (className.equals(
 					"at.meduni.liferay.portlet.bbmrieric.NoSuchDiseaseDiscriptionException")) {
 			return new at.meduni.liferay.portlet.bbmrieric.NoSuchDiseaseDiscriptionException();
 		}
@@ -297,6 +322,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setBioBankRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputD2Biobank(BaseModel<?> oldModel) {
+		D2BiobankClp newModel = new D2BiobankClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setD2BiobankRemoteModel(oldModel);
 
 		return newModel;
 	}

@@ -7,6 +7,7 @@
 long optionsPageTemplate_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsPageTemplate", "0"));
 long optionsParentOrganisation_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsParentOrganisation", "0"));
 long optionsRoleForUser_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsRoleForUser", "0"));
+long optionsRoleForPatient_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsRoleForPatient", "0"));
 
 int[] role_type = {RoleConstants.TYPE_ORGANIZATION};
 List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), role_type);
@@ -49,6 +50,17 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 					for(Role role : roles) {
 						%>
 						<aui:option value="<%= role.getRoleId() %>" selected='<%= optionsRoleForUser_cfg == role.getRoleId() ? true : false %>' ><%= role.getName() %></aui:option>
+						<%
+					}
+					%>
+				</aui:select>
+			</aui:column>
+			<aui:column columnWidth="25">
+				<aui:select lable="Select Role for Patient" name="preferences--optionsRoleForPatient--">
+					<%
+					for(Role role : roles) {
+						%>
+						<aui:option value="<%= role.getRoleId() %>" selected='<%= optionsRoleForPatient_cfg == role.getRoleId() ? true : false %>' ><%= role.getName() %></aui:option>
 						<%
 					}
 					%>

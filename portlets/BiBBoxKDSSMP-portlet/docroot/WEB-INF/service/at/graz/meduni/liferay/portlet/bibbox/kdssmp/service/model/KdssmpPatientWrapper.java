@@ -372,6 +372,11 @@ public class KdssmpPatientWrapper implements KdssmpPatient,
 	}
 
 	@Override
+	public int getNumberOfEvents() {
+		return _kdssmpPatient.getNumberOfEvents();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

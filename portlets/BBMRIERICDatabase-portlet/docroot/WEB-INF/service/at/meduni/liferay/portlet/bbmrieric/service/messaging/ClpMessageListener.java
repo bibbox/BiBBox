@@ -16,6 +16,7 @@ package at.meduni.liferay.portlet.bbmrieric.service.messaging;
 
 import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.ClpSerializer;
+import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
 
@@ -38,6 +39,8 @@ public class ClpMessageListener extends BaseMessageListener {
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
 			BioBankLocalServiceUtil.clearService();
+
+			D2BiobankLocalServiceUtil.clearService();
 
 			DiseaseDiscriptionLocalServiceUtil.clearService();
 

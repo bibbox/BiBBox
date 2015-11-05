@@ -3,6 +3,7 @@
 <service-builder package-path="at.meduni.liferay.portlet.bbmrieric">
 	<author>reihsr</author>
 	<namespace>bbmriericdb</namespace>
+	<!-- Directory 1.0 -->
 	<entity name="SearchIndex" local-service="true" remote-service="false" table="bbmrieric.searchindex">
 		<!-- PK fields -->
 		<column name="searchid" type="long" primary="true" />
@@ -71,5 +72,71 @@
         <finder name="Root" return-type="Collection">
             <finder-column name="root"></finder-column>
         </finder>
+	</entity>
+	<!-- Directory 2.0 -->
+	<entity name="D2Biobank" uuid="true" local-service="true" remote-service="false" table="bbmrieric.d2biobank">
+		<!-- PK fields -->
+		<column name="biobankId" type="long" primary="true" />
+		<!-- provenance fields -->
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<!-- mandatory fields -->
+		<column name="contactIDRef" type="String" />
+		<column name="contactPriority" type="long" />
+		<column name="biobankID" type="String" />
+		<column name="biobankName" type="String" />
+		<column name="biobankJurisdicalPerson" type="String" />
+		<column name="biobankCountry" type="String" />
+		<column name="biobankPartnerCharterSigned" type="boolean" />
+		<!-- optional fields -->
+		<column name="bioresourceReference" type="String" />
+		<column name="biobankNetworkIDRef" type="String" />
+		<column name="geoLatitude" type="String" />
+		<column name="geoLongitude" type="String" />
+		<column name="collaborationPartnersCommercial" type="boolean" />
+		<column name="collaborationPartnersNonforprofit" type="boolean" />
+		<column name="biobankITSupportAvailable" type="boolean" />
+		<column name="biobankITStaffSize" type="long" />
+		<column name="biobankISAvailable" type="boolean" />
+		<column name="biobankHISAvailable" type="boolean" />
+		<column name="biobankAcronym" type="String" />
+		<column name="biobankDescription" type="String" />
+		<column name="biobankURL" type="String" />
+		<column name="biobankHeadFirstName" type="String" />
+		<column name="biobankHeadLastName" type="String" />
+		<column name="biobankHeadRole" type="String" />
+		<column name="biobankClinical" type="boolean" />
+		<column name="biobankPopulation" type="boolean" />
+		<column name="biobankResearchStudy" type="boolean" />
+		<column name="biobankNonHuman" type="boolean" />
+		<column name="biobankCollection" type="boolean" />
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection"> 
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="BiobankName" return-type="Collection"> 
+			<finder-column name="groupId" />
+			<finder-column name="biobankName" />
+		</finder>
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="Biobank" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="biobankId" />
+		</finder>
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
 	</entity>
 </service-builder>

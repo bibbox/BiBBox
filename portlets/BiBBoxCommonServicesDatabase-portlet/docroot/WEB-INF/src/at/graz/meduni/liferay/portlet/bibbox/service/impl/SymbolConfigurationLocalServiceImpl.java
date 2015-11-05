@@ -68,8 +68,16 @@ public class SymbolConfigurationLocalServiceImpl
 				symbol = symbol.replaceAll("§A4-1§", getStringFromMap(icons, "A4").replaceAll("TEXT:", ""));
 			} else {
 				int a4counter = 1;
-				for(String a4 : getStringFromMap(icons, "A4").split("§")) {
-					symbol = replaceIconStrings(symbol, "A4", "A4-" + a4counter, symbolconfig, icons);
+				for(String a4 : getStringFromMap(icons, "A4").split("§,§")) {
+					if(a4.equalsIgnoreCase("+")) {
+						continue;
+					}
+					if(a4.startsWith("TEXT:")) {
+						symbol = symbol.replaceAll("§A4-" + a4counter + "§", a4.replaceAll("TEXT:", ""));
+					} else {
+						icons.put("A4-" + a4counter, a4);
+						symbol = replaceIconStrings(symbol, "A4", "A4-" + a4counter, symbolconfig, icons);
+					}
 				}
 				a4counter ++;
 			}

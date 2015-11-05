@@ -12,6 +12,7 @@
 long optionsPageTemplate_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsPageTemplate", "0"));
 long optionsParentOrganisation_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsParentOrganisation", "0"));
 long optionsRoleForUser_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsRoleForUser", "0"));
+long optionsRoleForPatient_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsRoleForPatient", "0"));
 //Parameters for permission Checking
 long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
@@ -27,6 +28,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_create_organ
 				<aui:input name="kdssmp_pagetemplate" type="hidden" value ="<%= optionsPageTemplate_cfg %>" />
 				<aui:input name="kdssmp_parentorganisation" type="hidden" value ="<%= optionsParentOrganisation_cfg %>" />
 				<aui:input name="kdssmp_roleforuser" type="hidden" value ="<%= optionsRoleForUser_cfg %>" />
+				<aui:input name="kdssmp_roleforpatient" type="hidden" value ="<%= optionsRoleForPatient_cfg %>" />
 				<aui:layout>
 					<aui:column columnWidth="100" first="true">
 						<aui:input name="kdssmp_az" label="Patient AZ" type="text" value ="" />	
@@ -46,6 +48,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_create_organ
 				<aui:input name="kdssmp_pagetemplate" type="hidden" value ="<%= optionsPageTemplate_cfg %>" />
 				<aui:input name="kdssmp_parentorganisation" type="hidden" value ="<%= optionsParentOrganisation_cfg %>" />
 				<aui:input name="kdssmp_roleforuser" type="hidden" value ="<%= optionsRoleForUser_cfg %>" />
+				<aui:input name="kdssmp_roleforpatient" type="hidden" value ="<%= optionsRoleForPatient_cfg %>" />
 				<aui:layout>
 					<aui:column columnWidth="50" first="true">
 						<aui:input name="kdssmp_firstname" label="First Name" type="text" value ="" />	

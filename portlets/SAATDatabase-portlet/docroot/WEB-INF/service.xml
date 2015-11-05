@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.graz.meduni.liferay.portlet.saat">
+	<author>reihsr</author>
+	<namespace>saat</namespace>
+
+	<!-- SAAT -->
+	<entity name="SAATBackgroundTaske" uuid="true" local-service="true" remote-service="true" table="saat.saatbackgroundtaske">
+		<!-- PK fields -->
+		<column name="saatbackgroundtaskeId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+		<column name="backgroundtaskId" type="long" />
+		<column name="started" type="boolean" />
+		<column name="startdate" type="Date" />
+		<column name="processes" type="long" />
+		<column name="processescompleted" type="long" />
+		<column name="processesavgtime" type="long" />
+		<column name="ended" type="boolean" />
+		<column name="enddate" type="Date" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="saatbackgroundtaskesId" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection"> 
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="BackgroundTaskId" return-type="Collection"> 
+			<finder-column name="groupId" />
+			<finder-column name="backgroundtaskId" />
+		</finder>
+	</entity>
+	<!-- Pathology -->
+	<entity name="Patient" uuid="true" local-service="true" remote-service="true" table="pathology.patient">
+		<!-- PK fields -->
+		<column name="patientId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+		<!-- Other fields -->
+		<column name="firstname" type="String" />
+		<column name="lastname" type="String" />
+		<column name="gender" type="String" />
+		<column name="dateofbirth" type="Date" />
+		<column name="dateofdeath" type="Date" />
+		<column name="autopsy" type="String" />
+		<column name="icdn" type="String" />
+		<column name="icde" type="String" />
+		<column name="source" type="String" />
+		
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="patientId" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection"> 
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="PatientId" return-type="Collection"> 
+			<finder-column name="groupId" />
+			<finder-column name="patientId" />
+		</finder>
+	</entity>
+</service-builder>

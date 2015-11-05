@@ -17,7 +17,7 @@ html {
     overflow-y: scroll; 
 }
 
-.aui {
+.xxxxauixxxx {
    background-color: #0C2848;
    -webkit-background-size: cover;
    -moz-background-size: cover;
@@ -28,7 +28,7 @@ html {
 .container-fluid-background {
 	width: 1200px;
 	margin: auto;
-	background: url(/BBMRIERIC-theme/images/02_content_background.png) repeat-y;
+	background: url(/BBMRIERICRITrain-theme/images/02_content_background.png) repeat-y;
 	-webkit-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
    box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
@@ -38,10 +38,19 @@ html {
 /* ---------- My Styling ----------- */
 .aui .bbmri-eric-body {
 	background-color: #0C2848;
+	min-width: 1200px;
+	padding-left: 0;
+    padding-right: 0;
+}
+.dialog-iframe-root-node {
+	background-color: #FFFFFF;
+}
+.cke_wysiwyg_frame .aui {
+	background-color: #FFFFFF;
 }
 .bbmri-eric-header-container {
 	height: 300px;
-	background: url(/BBMRIERIC-theme/images/Fotolia_13157710_XL.jpg) no-repeat;
+	background: url(/BBMRIERICRITrain-theme/images/Fotolia_13157710_XL.jpg) no-repeat;
 }
 .bbmri-eric-header-container-spacer {
 	height: 70px;
@@ -182,7 +191,7 @@ html {
 	}
 
 	#sign-in {
-		background: url(/BBMRIERIC-theme/images/common/key.png) no-repeat 3px 50%;
+		background: url(/BBMRIERICRITrain-theme/images/common/key.png) no-repeat 3px 50%;
 		font-weight: bold;
 		padding: 5px 5px 5px 25px;
 		position: absolute;

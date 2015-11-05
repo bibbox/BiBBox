@@ -3,6 +3,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.BioBankLocalServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.BioBankPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.BioBankPersistenceImpl" parent="basePersistence" />
+	<bean id="at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.D2BiobankLocalServiceImpl" />
+	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankPersistenceImpl" parent="basePersistence" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.DiseaseDiscriptionLocalServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.DiseaseDiscriptionPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.DiseaseDiscriptionPersistenceImpl" parent="basePersistence" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.SearchIndexLocalServiceImpl" />

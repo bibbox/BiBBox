@@ -71,7 +71,7 @@ public class LDAPSyncService implements MessageListener {
 		String uuid = PortalUUIDUtil.generate();
 		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Info started LDAP Sync Scheduler (" + uuid + ").");
 		
-		connectLDAP(uuid);
+		//connectLDAP(uuid);
 		
 		// End
 		long datediff = new Date().getTime() - startdate.getTime();

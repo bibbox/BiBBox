@@ -69,7 +69,7 @@ if(optionsDisplayMaincontact_option) {
 		</span>
 		<% 
 		if(maincontact != null) {
-			String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+maincontact.getScreenName()+"&amp;companyId="+maincontact.getCompanyId();
+			String imgPath = maincontact.getPortraitURL(themeDisplay);
 			String role = "";
 			String[] user_roles = maincontact.getExpandoBridge().getAttribute("Role within the organisation").toString().split(";");
 			for(String user_role : user_roles) {
@@ -150,7 +150,7 @@ for(User user_om : users) {
 		continue;
 	}
 	String role = "";
-	String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+user_om.getScreenName()+"&amp;companyId="+user_om.getCompanyId();
+	String imgPath = user_om.getPortraitURL(themeDisplay);
 	if(user_om.getExpandoBridge() != null) {
 		if(user_om.getExpandoBridge().getAttribute("Role within the organisation") != null) {
 			String user_roles_string = user_om.getExpandoBridge().getAttribute("Role within the organisation").toString();

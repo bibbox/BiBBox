@@ -24,6 +24,63 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl">
+		<attributes>
+			<id name="biobankId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="contactIDRef" />
+			<basic name="contactPriority" />
+			<basic name="biobankID" />
+			<basic name="biobankName" />
+			<basic name="biobankJurisdicalPerson" />
+			<basic name="biobankCountry" />
+			<basic name="biobankPartnerCharterSigned" />
+			<basic name="bioresourceReference" />
+			<basic name="biobankNetworkIDRef" />
+			<basic name="geoLatitude" />
+			<basic name="geoLongitude" />
+			<basic name="collaborationPartnersCommercial" />
+			<basic name="collaborationPartnersNonforprofit" />
+			<basic name="biobankITSupportAvailable" />
+			<basic name="biobankITStaffSize" />
+			<basic name="biobankISAvailable" />
+			<basic name="biobankHISAvailable" />
+			<basic name="biobankAcronym" />
+			<basic name="biobankDescription" />
+			<basic name="biobankURL" />
+			<basic name="biobankHeadFirstName" />
+			<basic name="biobankHeadLastName" />
+			<basic name="biobankHeadRole" />
+			<basic name="biobankClinical" />
+			<basic name="biobankPopulation" />
+			<basic name="biobankResearchStudy" />
+			<basic name="biobankNonHuman" />
+			<basic name="biobankCollection" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="statusByUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionModelImpl">
 		<attributes>
 			<id name="diseasediscriptionId" />
@@ -52,6 +109,10 @@
 	</mapped-superclass>
 	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl" name="BioBank">
 		<table name="bbmrieric.biobank" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl" name="D2Biobank">
+		<table name="bbmrieric.d2biobank" />
 		<attributes />
 	</entity>
 	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionImpl" name="DiseaseDiscription">
