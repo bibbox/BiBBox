@@ -62,9 +62,10 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("updateuuid", getUpdateuuid());
 		attributes.put("contactIDRef", getContactIDRef());
 		attributes.put("contactPriority", getContactPriority());
-		attributes.put("biobankID", getBiobankID());
+		attributes.put("bbmribiobankID", getBbmribiobankID());
 		attributes.put("biobankName", getBiobankName());
 		attributes.put("biobankJurisdicalPerson", getBiobankJurisdicalPerson());
 		attributes.put("biobankCountry", getBiobankCountry());
@@ -172,6 +173,12 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 			setModifiedDate(modifiedDate);
 		}
 
+		String updateuuid = (String)attributes.get("updateuuid");
+
+		if (updateuuid != null) {
+			setUpdateuuid(updateuuid);
+		}
+
 		String contactIDRef = (String)attributes.get("contactIDRef");
 
 		if (contactIDRef != null) {
@@ -184,10 +191,10 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 			setContactPriority(contactPriority);
 		}
 
-		String biobankID = (String)attributes.get("biobankID");
+		String bbmribiobankID = (String)attributes.get("bbmribiobankID");
 
-		if (biobankID != null) {
-			setBiobankID(biobankID);
+		if (bbmribiobankID != null) {
+			setBbmribiobankID(bbmribiobankID);
 		}
 
 		String biobankName = (String)attributes.get("biobankName");
@@ -658,6 +665,26 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 	}
 
 	/**
+	* Returns the updateuuid of this d2 biobank.
+	*
+	* @return the updateuuid of this d2 biobank
+	*/
+	@Override
+	public java.lang.String getUpdateuuid() {
+		return _d2Biobank.getUpdateuuid();
+	}
+
+	/**
+	* Sets the updateuuid of this d2 biobank.
+	*
+	* @param updateuuid the updateuuid of this d2 biobank
+	*/
+	@Override
+	public void setUpdateuuid(java.lang.String updateuuid) {
+		_d2Biobank.setUpdateuuid(updateuuid);
+	}
+
+	/**
 	* Returns the contact i d ref of this d2 biobank.
 	*
 	* @return the contact i d ref of this d2 biobank
@@ -698,23 +725,23 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 	}
 
 	/**
-	* Returns the biobank i d of this d2 biobank.
+	* Returns the bbmribiobank i d of this d2 biobank.
 	*
-	* @return the biobank i d of this d2 biobank
+	* @return the bbmribiobank i d of this d2 biobank
 	*/
 	@Override
-	public java.lang.String getBiobankID() {
-		return _d2Biobank.getBiobankID();
+	public java.lang.String getBbmribiobankID() {
+		return _d2Biobank.getBbmribiobankID();
 	}
 
 	/**
-	* Sets the biobank i d of this d2 biobank.
+	* Sets the bbmribiobank i d of this d2 biobank.
 	*
-	* @param biobankID the biobank i d of this d2 biobank
+	* @param bbmribiobankID the bbmribiobank i d of this d2 biobank
 	*/
 	@Override
-	public void setBiobankID(java.lang.String biobankID) {
-		_d2Biobank.setBiobankID(biobankID);
+	public void setBbmribiobankID(java.lang.String bbmribiobankID) {
+		_d2Biobank.setBbmribiobankID(bbmribiobankID);
 	}
 
 	/**

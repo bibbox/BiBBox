@@ -36,18 +36,18 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>d2-biobank</portlet-name>
-		<display-name>D2 Biobank</display-name>
+		<portlet-name>biobank</portlet-name>
+		<display-name>Biobank</display-name>
 		<portlet-class>
-			at.meduni.liferay.portlet.bbmrieric.portlet.D2Biobank
+			at.meduni.liferay.portlet.bbmrieric.portlet.Biobank
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/idcard/d2biobank/view.jsp</value>
+			<value>/html/idcard/biobank/view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>config-template</name>
-			<value>/html/idcard/d2biobank/config.jsp</value>
+			<value>/html/idcard/biobank/config.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -57,8 +57,8 @@
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>D2 Biobank</title>
-			<short-title>D2 Biobank</short-title>
+			<title>Biobank</title>
+			<short-title>Biobank</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

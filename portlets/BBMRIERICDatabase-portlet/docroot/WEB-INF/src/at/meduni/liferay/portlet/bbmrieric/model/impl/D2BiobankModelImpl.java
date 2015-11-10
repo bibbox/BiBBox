@@ -75,9 +75,10 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "updateuuid", Types.VARCHAR },
 			{ "contactIDRef", Types.VARCHAR },
 			{ "contactPriority", Types.BIGINT },
-			{ "biobankID", Types.VARCHAR },
+			{ "bbmribiobankID", Types.VARCHAR },
 			{ "biobankName", Types.VARCHAR },
 			{ "biobankJurisdicalPerson", Types.VARCHAR },
 			{ "biobankCountry", Types.VARCHAR },
@@ -104,7 +105,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 			{ "biobankNonHuman", Types.BOOLEAN },
 			{ "biobankCollection", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bbmrieric.d2biobank (uuid_ VARCHAR(75) null,biobankId LONG not null primary key,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,contactIDRef VARCHAR(75) null,contactPriority LONG,biobankID VARCHAR(75) null,biobankName VARCHAR(75) null,biobankJurisdicalPerson VARCHAR(75) null,biobankCountry VARCHAR(75) null,biobankPartnerCharterSigned BOOLEAN,bioresourceReference VARCHAR(75) null,biobankNetworkIDRef VARCHAR(75) null,geoLatitude VARCHAR(75) null,geoLongitude VARCHAR(75) null,collaborationPartnersCommercial BOOLEAN,collaborationPartnersNonforprofit BOOLEAN,biobankITSupportAvailable BOOLEAN,biobankITStaffSize LONG,biobankISAvailable BOOLEAN,biobankHISAvailable BOOLEAN,biobankAcronym VARCHAR(75) null,biobankDescription VARCHAR(75) null,biobankURL VARCHAR(75) null,biobankHeadFirstName VARCHAR(75) null,biobankHeadLastName VARCHAR(75) null,biobankHeadRole VARCHAR(75) null,biobankClinical BOOLEAN,biobankPopulation BOOLEAN,biobankResearchStudy BOOLEAN,biobankNonHuman BOOLEAN,biobankCollection BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table bbmrieric.d2biobank (uuid_ VARCHAR(75) null,biobankId LONG not null primary key,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,updateuuid VARCHAR(75) null,contactIDRef VARCHAR(75) null,contactPriority LONG,bbmribiobankID VARCHAR(75) null,biobankName TEXT null,biobankJurisdicalPerson TEXT null,biobankCountry VARCHAR(75) null,biobankPartnerCharterSigned BOOLEAN,bioresourceReference VARCHAR(75) null,biobankNetworkIDRef VARCHAR(75) null,geoLatitude VARCHAR(75) null,geoLongitude VARCHAR(75) null,collaborationPartnersCommercial BOOLEAN,collaborationPartnersNonforprofit BOOLEAN,biobankITSupportAvailable BOOLEAN,biobankITStaffSize LONG,biobankISAvailable BOOLEAN,biobankHISAvailable BOOLEAN,biobankAcronym VARCHAR(75) null,biobankDescription TEXT null,biobankURL VARCHAR(500) null,biobankHeadFirstName VARCHAR(75) null,biobankHeadLastName VARCHAR(75) null,biobankHeadRole VARCHAR(75) null,biobankClinical BOOLEAN,biobankPopulation BOOLEAN,biobankResearchStudy BOOLEAN,biobankNonHuman BOOLEAN,biobankCollection BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table bbmrieric.d2biobank";
 	public static final String ORDER_BY_JPQL = " ORDER BY d2Biobank.biobankId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bbmrieric.d2biobank.biobankId ASC";
@@ -120,12 +121,14 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.at.meduni.liferay.portlet.bbmrieric.model.D2Biobank"),
 			true);
-	public static long BIOBANKID_COLUMN_BITMASK = 1L;
-	public static long BIOBANKNAME_COLUMN_BITMASK = 2L;
-	public static long COMPANYID_COLUMN_BITMASK = 4L;
-	public static long GROUPID_COLUMN_BITMASK = 8L;
-	public static long STATUS_COLUMN_BITMASK = 16L;
-	public static long UUID_COLUMN_BITMASK = 32L;
+	public static long BBMRIBIOBANKID_COLUMN_BITMASK = 1L;
+	public static long BIOBANKID_COLUMN_BITMASK = 2L;
+	public static long BIOBANKNAME_COLUMN_BITMASK = 4L;
+	public static long COMPANYID_COLUMN_BITMASK = 8L;
+	public static long GROUPID_COLUMN_BITMASK = 16L;
+	public static long STATUS_COLUMN_BITMASK = 32L;
+	public static long UPDATEUUID_COLUMN_BITMASK = 64L;
+	public static long UUID_COLUMN_BITMASK = 128L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.meduni.liferay.portlet.bbmrieric.model.D2Biobank"));
 
@@ -178,9 +181,10 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("updateuuid", getUpdateuuid());
 		attributes.put("contactIDRef", getContactIDRef());
 		attributes.put("contactPriority", getContactPriority());
-		attributes.put("biobankID", getBiobankID());
+		attributes.put("bbmribiobankID", getBbmribiobankID());
 		attributes.put("biobankName", getBiobankName());
 		attributes.put("biobankJurisdicalPerson", getBiobankJurisdicalPerson());
 		attributes.put("biobankCountry", getBiobankCountry());
@@ -288,6 +292,12 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 			setModifiedDate(modifiedDate);
 		}
 
+		String updateuuid = (String)attributes.get("updateuuid");
+
+		if (updateuuid != null) {
+			setUpdateuuid(updateuuid);
+		}
+
 		String contactIDRef = (String)attributes.get("contactIDRef");
 
 		if (contactIDRef != null) {
@@ -300,10 +310,10 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 			setContactPriority(contactPriority);
 		}
 
-		String biobankID = (String)attributes.get("biobankID");
+		String bbmribiobankID = (String)attributes.get("bbmribiobankID");
 
-		if (biobankID != null) {
-			setBiobankID(biobankID);
+		if (bbmribiobankID != null) {
+			setBbmribiobankID(bbmribiobankID);
 		}
 
 		String biobankName = (String)attributes.get("biobankName");
@@ -682,6 +692,31 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 	}
 
 	@Override
+	public String getUpdateuuid() {
+		if (_updateuuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _updateuuid;
+		}
+	}
+
+	@Override
+	public void setUpdateuuid(String updateuuid) {
+		_columnBitmask |= UPDATEUUID_COLUMN_BITMASK;
+
+		if (_originalUpdateuuid == null) {
+			_originalUpdateuuid = _updateuuid;
+		}
+
+		_updateuuid = updateuuid;
+	}
+
+	public String getOriginalUpdateuuid() {
+		return GetterUtil.getString(_originalUpdateuuid);
+	}
+
+	@Override
 	public String getContactIDRef() {
 		if (_contactIDRef == null) {
 			return StringPool.BLANK;
@@ -707,18 +742,28 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 	}
 
 	@Override
-	public String getBiobankID() {
-		if (_biobankID == null) {
+	public String getBbmribiobankID() {
+		if (_bbmribiobankID == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _biobankID;
+			return _bbmribiobankID;
 		}
 	}
 
 	@Override
-	public void setBiobankID(String biobankID) {
-		_biobankID = biobankID;
+	public void setBbmribiobankID(String bbmribiobankID) {
+		_columnBitmask |= BBMRIBIOBANKID_COLUMN_BITMASK;
+
+		if (_originalBbmribiobankID == null) {
+			_originalBbmribiobankID = _bbmribiobankID;
+		}
+
+		_bbmribiobankID = bbmribiobankID;
+	}
+
+	public String getOriginalBbmribiobankID() {
+		return GetterUtil.getString(_originalBbmribiobankID);
 	}
 
 	@Override
@@ -1241,9 +1286,10 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		d2BiobankImpl.setUserName(getUserName());
 		d2BiobankImpl.setCreateDate(getCreateDate());
 		d2BiobankImpl.setModifiedDate(getModifiedDate());
+		d2BiobankImpl.setUpdateuuid(getUpdateuuid());
 		d2BiobankImpl.setContactIDRef(getContactIDRef());
 		d2BiobankImpl.setContactPriority(getContactPriority());
-		d2BiobankImpl.setBiobankID(getBiobankID());
+		d2BiobankImpl.setBbmribiobankID(getBbmribiobankID());
 		d2BiobankImpl.setBiobankName(getBiobankName());
 		d2BiobankImpl.setBiobankJurisdicalPerson(getBiobankJurisdicalPerson());
 		d2BiobankImpl.setBiobankCountry(getBiobankCountry());
@@ -1339,6 +1385,10 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 
 		d2BiobankModelImpl._setOriginalGroupId = false;
 
+		d2BiobankModelImpl._originalUpdateuuid = d2BiobankModelImpl._updateuuid;
+
+		d2BiobankModelImpl._originalBbmribiobankID = d2BiobankModelImpl._bbmribiobankID;
+
 		d2BiobankModelImpl._originalBiobankName = d2BiobankModelImpl._biobankName;
 
 		d2BiobankModelImpl._columnBitmask = 0;
@@ -1411,6 +1461,14 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 			d2BiobankCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
+		d2BiobankCacheModel.updateuuid = getUpdateuuid();
+
+		String updateuuid = d2BiobankCacheModel.updateuuid;
+
+		if ((updateuuid != null) && (updateuuid.length() == 0)) {
+			d2BiobankCacheModel.updateuuid = null;
+		}
+
 		d2BiobankCacheModel.contactIDRef = getContactIDRef();
 
 		String contactIDRef = d2BiobankCacheModel.contactIDRef;
@@ -1421,12 +1479,12 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 
 		d2BiobankCacheModel.contactPriority = getContactPriority();
 
-		d2BiobankCacheModel.biobankID = getBiobankID();
+		d2BiobankCacheModel.bbmribiobankID = getBbmribiobankID();
 
-		String biobankID = d2BiobankCacheModel.biobankID;
+		String bbmribiobankID = d2BiobankCacheModel.bbmribiobankID;
 
-		if ((biobankID != null) && (biobankID.length() == 0)) {
-			d2BiobankCacheModel.biobankID = null;
+		if ((bbmribiobankID != null) && (bbmribiobankID.length() == 0)) {
+			d2BiobankCacheModel.bbmribiobankID = null;
 		}
 
 		d2BiobankCacheModel.biobankName = getBiobankName();
@@ -1567,7 +1625,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(81);
+		StringBundler sb = new StringBundler(83);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1593,12 +1651,14 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", updateuuid=");
+		sb.append(getUpdateuuid());
 		sb.append(", contactIDRef=");
 		sb.append(getContactIDRef());
 		sb.append(", contactPriority=");
 		sb.append(getContactPriority());
-		sb.append(", biobankID=");
-		sb.append(getBiobankID());
+		sb.append(", bbmribiobankID=");
+		sb.append(getBbmribiobankID());
 		sb.append(", biobankName=");
 		sb.append(getBiobankName());
 		sb.append(", biobankJurisdicalPerson=");
@@ -1656,7 +1716,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(124);
+		StringBundler sb = new StringBundler(127);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.bbmrieric.model.D2Biobank");
@@ -1711,6 +1771,10 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>updateuuid</column-name><column-value><![CDATA[");
+		sb.append(getUpdateuuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>contactIDRef</column-name><column-value><![CDATA[");
 		sb.append(getContactIDRef());
 		sb.append("]]></column-value></column>");
@@ -1719,8 +1783,8 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		sb.append(getContactPriority());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>biobankID</column-name><column-value><![CDATA[");
-		sb.append(getBiobankID());
+			"<column><column-name>bbmribiobankID</column-name><column-value><![CDATA[");
+		sb.append(getBbmribiobankID());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>biobankName</column-name><column-value><![CDATA[");
@@ -1855,9 +1919,12 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _updateuuid;
+	private String _originalUpdateuuid;
 	private String _contactIDRef;
 	private long _contactPriority;
-	private String _biobankID;
+	private String _bbmribiobankID;
+	private String _originalBbmribiobankID;
 	private String _biobankName;
 	private String _originalBiobankName;
 	private String _biobankJurisdicalPerson;

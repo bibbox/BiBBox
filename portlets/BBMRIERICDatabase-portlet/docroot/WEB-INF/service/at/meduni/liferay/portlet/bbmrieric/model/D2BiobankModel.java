@@ -291,6 +291,21 @@ public interface D2BiobankModel extends BaseModel<D2Biobank>, StagedGroupedModel
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the updateuuid of this d2 biobank.
+	 *
+	 * @return the updateuuid of this d2 biobank
+	 */
+	@AutoEscape
+	public String getUpdateuuid();
+
+	/**
+	 * Sets the updateuuid of this d2 biobank.
+	 *
+	 * @param updateuuid the updateuuid of this d2 biobank
+	 */
+	public void setUpdateuuid(String updateuuid);
+
+	/**
 	 * Returns the contact i d ref of this d2 biobank.
 	 *
 	 * @return the contact i d ref of this d2 biobank
@@ -320,19 +335,19 @@ public interface D2BiobankModel extends BaseModel<D2Biobank>, StagedGroupedModel
 	public void setContactPriority(long contactPriority);
 
 	/**
-	 * Returns the biobank i d of this d2 biobank.
+	 * Returns the bbmribiobank i d of this d2 biobank.
 	 *
-	 * @return the biobank i d of this d2 biobank
+	 * @return the bbmribiobank i d of this d2 biobank
 	 */
 	@AutoEscape
-	public String getBiobankID();
+	public String getBbmribiobankID();
 
 	/**
-	 * Sets the biobank i d of this d2 biobank.
+	 * Sets the bbmribiobank i d of this d2 biobank.
 	 *
-	 * @param biobankID the biobank i d of this d2 biobank
+	 * @param bbmribiobankID the bbmribiobank i d of this d2 biobank
 	 */
-	public void setBiobankID(String biobankID);
+	public void setBbmribiobankID(String bbmribiobankID);
 
 	/**
 	 * Returns the biobank name of this d2 biobank.

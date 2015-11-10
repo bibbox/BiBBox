@@ -88,9 +88,10 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("updateuuid", getUpdateuuid());
 		attributes.put("contactIDRef", getContactIDRef());
 		attributes.put("contactPriority", getContactPriority());
-		attributes.put("biobankID", getBiobankID());
+		attributes.put("bbmribiobankID", getBbmribiobankID());
 		attributes.put("biobankName", getBiobankName());
 		attributes.put("biobankJurisdicalPerson", getBiobankJurisdicalPerson());
 		attributes.put("biobankCountry", getBiobankCountry());
@@ -198,6 +199,12 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 			setModifiedDate(modifiedDate);
 		}
 
+		String updateuuid = (String)attributes.get("updateuuid");
+
+		if (updateuuid != null) {
+			setUpdateuuid(updateuuid);
+		}
+
 		String contactIDRef = (String)attributes.get("contactIDRef");
 
 		if (contactIDRef != null) {
@@ -210,10 +217,10 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 			setContactPriority(contactPriority);
 		}
 
-		String biobankID = (String)attributes.get("biobankID");
+		String bbmribiobankID = (String)attributes.get("bbmribiobankID");
 
-		if (biobankID != null) {
-			setBiobankID(biobankID);
+		if (bbmribiobankID != null) {
+			setBbmribiobankID(bbmribiobankID);
 		}
 
 		String biobankName = (String)attributes.get("biobankName");
@@ -678,6 +685,29 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 	}
 
 	@Override
+	public String getUpdateuuid() {
+		return _updateuuid;
+	}
+
+	@Override
+	public void setUpdateuuid(String updateuuid) {
+		_updateuuid = updateuuid;
+
+		if (_d2BiobankRemoteModel != null) {
+			try {
+				Class<?> clazz = _d2BiobankRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUpdateuuid", String.class);
+
+				method.invoke(_d2BiobankRemoteModel, updateuuid);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getContactIDRef() {
 		return _contactIDRef;
 	}
@@ -724,21 +754,22 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 	}
 
 	@Override
-	public String getBiobankID() {
-		return _biobankID;
+	public String getBbmribiobankID() {
+		return _bbmribiobankID;
 	}
 
 	@Override
-	public void setBiobankID(String biobankID) {
-		_biobankID = biobankID;
+	public void setBbmribiobankID(String bbmribiobankID) {
+		_bbmribiobankID = bbmribiobankID;
 
 		if (_d2BiobankRemoteModel != null) {
 			try {
 				Class<?> clazz = _d2BiobankRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setBiobankID", String.class);
+				Method method = clazz.getMethod("setBbmribiobankID",
+						String.class);
 
-				method.invoke(_d2BiobankRemoteModel, biobankID);
+				method.invoke(_d2BiobankRemoteModel, bbmribiobankID);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1577,9 +1608,10 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setUpdateuuid(getUpdateuuid());
 		clone.setContactIDRef(getContactIDRef());
 		clone.setContactPriority(getContactPriority());
-		clone.setBiobankID(getBiobankID());
+		clone.setBbmribiobankID(getBbmribiobankID());
 		clone.setBiobankName(getBiobankName());
 		clone.setBiobankJurisdicalPerson(getBiobankJurisdicalPerson());
 		clone.setBiobankCountry(getBiobankCountry());
@@ -1653,7 +1685,7 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(81);
+		StringBundler sb = new StringBundler(83);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1679,12 +1711,14 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", updateuuid=");
+		sb.append(getUpdateuuid());
 		sb.append(", contactIDRef=");
 		sb.append(getContactIDRef());
 		sb.append(", contactPriority=");
 		sb.append(getContactPriority());
-		sb.append(", biobankID=");
-		sb.append(getBiobankID());
+		sb.append(", bbmribiobankID=");
+		sb.append(getBbmribiobankID());
 		sb.append(", biobankName=");
 		sb.append(getBiobankName());
 		sb.append(", biobankJurisdicalPerson=");
@@ -1742,7 +1776,7 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(124);
+		StringBundler sb = new StringBundler(127);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.bbmrieric.model.D2Biobank");
@@ -1797,6 +1831,10 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>updateuuid</column-name><column-value><![CDATA[");
+		sb.append(getUpdateuuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>contactIDRef</column-name><column-value><![CDATA[");
 		sb.append(getContactIDRef());
 		sb.append("]]></column-value></column>");
@@ -1805,8 +1843,8 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 		sb.append(getContactPriority());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>biobankID</column-name><column-value><![CDATA[");
-		sb.append(getBiobankID());
+			"<column><column-name>bbmribiobankID</column-name><column-value><![CDATA[");
+		sb.append(getBbmribiobankID());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>biobankName</column-name><column-value><![CDATA[");
@@ -1928,9 +1966,10 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _updateuuid;
 	private String _contactIDRef;
 	private long _contactPriority;
-	private String _biobankID;
+	private String _bbmribiobankID;
 	private String _biobankName;
 	private String _biobankJurisdicalPerson;
 	private String _biobankCountry;

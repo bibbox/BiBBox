@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -44,6 +45,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
@@ -1870,6 +1872,320 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 	}
 
 	/**
+	 * Returns all the d2 biobanks that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @return the range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByGroupId(long groupId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<D2Biobank>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the d2 biobanks before and after the current d2 biobank in the ordered set of d2 biobanks that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param biobankId the primary key of the current d2 biobank
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank[] filterFindByGroupId_PrevAndNext(long biobankId,
+		long groupId, OrderByComparator orderByComparator)
+		throws NoSuchD2BiobankException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByGroupId_PrevAndNext(biobankId, groupId,
+				orderByComparator);
+		}
+
+		D2Biobank d2Biobank = findByPrimaryKey(biobankId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			D2Biobank[] array = new D2BiobankImpl[3];
+
+			array[0] = filterGetByGroupId_PrevAndNext(session, d2Biobank,
+					groupId, orderByComparator, true);
+
+			array[1] = d2Biobank;
+
+			array[2] = filterGetByGroupId_PrevAndNext(session, d2Biobank,
+					groupId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected D2Biobank filterGetByGroupId_PrevAndNext(Session session,
+		D2Biobank d2Biobank, long groupId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(d2Biobank);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<D2Biobank> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the d2 biobanks where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
@@ -1934,6 +2250,55 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of d2 biobanks that the user has permission to view where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByGroupId(groupId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_D2BIOBANK_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "d2Biobank.groupId = ?";
@@ -2911,6 +3276,362 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 	}
 
 	/**
+	 * Returns all the d2 biobanks that the user has permission to view where groupId = &#63; and biobankName = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param biobankName the biobank name
+	 * @return the matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByBiobankName(long groupId,
+		String biobankName) throws SystemException {
+		return filterFindByBiobankName(groupId, biobankName, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63; and biobankName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param biobankName the biobank name
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @return the range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByBiobankName(long groupId,
+		String biobankName, int start, int end) throws SystemException {
+		return filterFindByBiobankName(groupId, biobankName, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63; and biobankName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param biobankName the biobank name
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByBiobankName(long groupId,
+		String biobankName, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByBiobankName(groupId, biobankName, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_BIOBANKNAME_GROUPID_2);
+
+		boolean bindBiobankName = false;
+
+		if (biobankName == null) {
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_1);
+		}
+		else if (biobankName.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_3);
+		}
+		else {
+			bindBiobankName = true;
+
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_2);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (bindBiobankName) {
+				qPos.add(biobankName);
+			}
+
+			return (List<D2Biobank>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the d2 biobanks before and after the current d2 biobank in the ordered set of d2 biobanks that the user has permission to view where groupId = &#63; and biobankName = &#63;.
+	 *
+	 * @param biobankId the primary key of the current d2 biobank
+	 * @param groupId the group ID
+	 * @param biobankName the biobank name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank[] filterFindByBiobankName_PrevAndNext(long biobankId,
+		long groupId, String biobankName, OrderByComparator orderByComparator)
+		throws NoSuchD2BiobankException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByBiobankName_PrevAndNext(biobankId, groupId,
+				biobankName, orderByComparator);
+		}
+
+		D2Biobank d2Biobank = findByPrimaryKey(biobankId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			D2Biobank[] array = new D2BiobankImpl[3];
+
+			array[0] = filterGetByBiobankName_PrevAndNext(session, d2Biobank,
+					groupId, biobankName, orderByComparator, true);
+
+			array[1] = d2Biobank;
+
+			array[2] = filterGetByBiobankName_PrevAndNext(session, d2Biobank,
+					groupId, biobankName, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected D2Biobank filterGetByBiobankName_PrevAndNext(Session session,
+		D2Biobank d2Biobank, long groupId, String biobankName,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_BIOBANKNAME_GROUPID_2);
+
+		boolean bindBiobankName = false;
+
+		if (biobankName == null) {
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_1);
+		}
+		else if (biobankName.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_3);
+		}
+		else {
+			bindBiobankName = true;
+
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_2);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (bindBiobankName) {
+			qPos.add(biobankName);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(d2Biobank);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<D2Biobank> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the d2 biobanks where groupId = &#63; and biobankName = &#63; from the database.
 	 *
 	 * @param groupId the group ID
@@ -2997,6 +3718,75 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of d2 biobanks that the user has permission to view where groupId = &#63; and biobankName = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param biobankName the biobank name
+	 * @return the number of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByBiobankName(long groupId, String biobankName)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByBiobankName(groupId, biobankName);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_D2BIOBANK_WHERE);
+
+		query.append(_FINDER_COLUMN_BIOBANKNAME_GROUPID_2);
+
+		boolean bindBiobankName = false;
+
+		if (biobankName == null) {
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_1);
+		}
+		else if (biobankName.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_3);
+		}
+		else {
+			bindBiobankName = true;
+
+			query.append(_FINDER_COLUMN_BIOBANKNAME_BIOBANKNAME_2);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (bindBiobankName) {
+				qPos.add(biobankName);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	private static final String _FINDER_COLUMN_BIOBANKNAME_GROUPID_2 = "d2Biobank.groupId = ? AND ";
@@ -3453,6 +4243,332 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 	}
 
 	/**
+	 * Returns all the d2 biobanks that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByG_S(long groupId, int status)
+		throws SystemException {
+		return filterFindByG_S(groupId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @return the range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByG_S(long groupId, int status, int start,
+		int end) throws SystemException {
+		return filterFindByG_S(groupId, status, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByG_S(long groupId, int status, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_S(groupId, status, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(status);
+
+			return (List<D2Biobank>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the d2 biobanks before and after the current d2 biobank in the ordered set of d2 biobanks that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param biobankId the primary key of the current d2 biobank
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank[] filterFindByG_S_PrevAndNext(long biobankId,
+		long groupId, int status, OrderByComparator orderByComparator)
+		throws NoSuchD2BiobankException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_S_PrevAndNext(biobankId, groupId, status,
+				orderByComparator);
+		}
+
+		D2Biobank d2Biobank = findByPrimaryKey(biobankId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			D2Biobank[] array = new D2BiobankImpl[3];
+
+			array[0] = filterGetByG_S_PrevAndNext(session, d2Biobank, groupId,
+					status, orderByComparator, true);
+
+			array[1] = d2Biobank;
+
+			array[2] = filterGetByG_S_PrevAndNext(session, d2Biobank, groupId,
+					status, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected D2Biobank filterGetByG_S_PrevAndNext(Session session,
+		D2Biobank d2Biobank, long groupId, int status,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(d2Biobank);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<D2Biobank> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Removes all the d2 biobanks where groupId = &#63; and status = &#63; from the database.
 	 *
 	 * @param groupId the group ID
@@ -3523,6 +4639,61 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of d2 biobanks that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the number of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByG_S(long groupId, int status)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByG_S(groupId, status);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_D2BIOBANK_WHERE);
+
+		query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(status);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "d2Biobank.groupId = ? AND ";
@@ -3829,6 +5000,143 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 	}
 
 	/**
+	 * Returns all the d2 biobanks that the user has permission to view where groupId = &#63; and biobankId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param biobankId the biobank ID
+	 * @return the matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByBiobank(long groupId, long biobankId)
+		throws SystemException {
+		return filterFindByBiobank(groupId, biobankId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63; and biobankId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param biobankId the biobank ID
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @return the range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByBiobank(long groupId, long biobankId,
+		int start, int end) throws SystemException {
+		return filterFindByBiobank(groupId, biobankId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63; and biobankId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param biobankId the biobank ID
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByBiobank(long groupId, long biobankId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByBiobank(groupId, biobankId, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_BIOBANK_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_BIOBANK_BIOBANKID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(biobankId);
+
+			return (List<D2Biobank>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Removes all the d2 biobanks where groupId = &#63; and biobankId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
@@ -3903,8 +5211,1322 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 		return count.intValue();
 	}
 
+	/**
+	 * Returns the number of d2 biobanks that the user has permission to view where groupId = &#63; and biobankId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param biobankId the biobank ID
+	 * @return the number of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByBiobank(long groupId, long biobankId)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByBiobank(groupId, biobankId);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_D2BIOBANK_WHERE);
+
+		query.append(_FINDER_COLUMN_BIOBANK_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_BIOBANK_BIOBANKID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(biobankId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	private static final String _FINDER_COLUMN_BIOBANK_GROUPID_2 = "d2Biobank.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_BIOBANK_BIOBANKID_2 = "d2Biobank.biobankId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID = new FinderPath(D2BiobankModelImpl.ENTITY_CACHE_ENABLED,
+			D2BiobankModelImpl.FINDER_CACHE_ENABLED, D2BiobankImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByBiobankBBMRIERICID",
+			new String[] { Long.class.getName(), String.class.getName() },
+			D2BiobankModelImpl.GROUPID_COLUMN_BITMASK |
+			D2BiobankModelImpl.BBMRIBIOBANKID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_BIOBANKBBMRIERICID = new FinderPath(D2BiobankModelImpl.ENTITY_CACHE_ENABLED,
+			D2BiobankModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByBiobankBBMRIERICID",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the d2 biobank where groupId = &#63; and bbmribiobankID = &#63; or throws a {@link at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException} if it could not be found.
+	 *
+	 * @param groupId the group ID
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @return the matching d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank findByBiobankBBMRIERICID(long groupId,
+		String bbmribiobankID) throws NoSuchD2BiobankException, SystemException {
+		D2Biobank d2Biobank = fetchByBiobankBBMRIERICID(groupId, bbmribiobankID);
+
+		if (d2Biobank == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", bbmribiobankID=");
+			msg.append(bbmribiobankID);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchD2BiobankException(msg.toString());
+		}
+
+		return d2Biobank;
+	}
+
+	/**
+	 * Returns the d2 biobank where groupId = &#63; and bbmribiobankID = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @return the matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank fetchByBiobankBBMRIERICID(long groupId,
+		String bbmribiobankID) throws SystemException {
+		return fetchByBiobankBBMRIERICID(groupId, bbmribiobankID, true);
+	}
+
+	/**
+	 * Returns the d2 biobank where groupId = &#63; and bbmribiobankID = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank fetchByBiobankBBMRIERICID(long groupId,
+		String bbmribiobankID, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, bbmribiobankID };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+					finderArgs, this);
+		}
+
+		if (result instanceof D2Biobank) {
+			D2Biobank d2Biobank = (D2Biobank)result;
+
+			if ((groupId != d2Biobank.getGroupId()) ||
+					!Validator.equals(bbmribiobankID,
+						d2Biobank.getBbmribiobankID())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_D2BIOBANK_WHERE);
+
+			query.append(_FINDER_COLUMN_BIOBANKBBMRIERICID_GROUPID_2);
+
+			boolean bindBbmribiobankID = false;
+
+			if (bbmribiobankID == null) {
+				query.append(_FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_1);
+			}
+			else if (bbmribiobankID.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_3);
+			}
+			else {
+				bindBbmribiobankID = true;
+
+				query.append(_FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (bindBbmribiobankID) {
+					qPos.add(bbmribiobankID);
+				}
+
+				List<D2Biobank> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"D2BiobankPersistenceImpl.fetchByBiobankBBMRIERICID(long, String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					D2Biobank d2Biobank = list.get(0);
+
+					result = d2Biobank;
+
+					cacheResult(d2Biobank);
+
+					if ((d2Biobank.getGroupId() != groupId) ||
+							(d2Biobank.getBbmribiobankID() == null) ||
+							!d2Biobank.getBbmribiobankID().equals(bbmribiobankID)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+							finderArgs, d2Biobank);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (D2Biobank)result;
+		}
+	}
+
+	/**
+	 * Removes the d2 biobank where groupId = &#63; and bbmribiobankID = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @return the d2 biobank that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank removeByBiobankBBMRIERICID(long groupId,
+		String bbmribiobankID) throws NoSuchD2BiobankException, SystemException {
+		D2Biobank d2Biobank = findByBiobankBBMRIERICID(groupId, bbmribiobankID);
+
+		return remove(d2Biobank);
+	}
+
+	/**
+	 * Returns the number of d2 biobanks where groupId = &#63; and bbmribiobankID = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @return the number of matching d2 biobanks
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByBiobankBBMRIERICID(long groupId, String bbmribiobankID)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_BIOBANKBBMRIERICID;
+
+		Object[] finderArgs = new Object[] { groupId, bbmribiobankID };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_D2BIOBANK_WHERE);
+
+			query.append(_FINDER_COLUMN_BIOBANKBBMRIERICID_GROUPID_2);
+
+			boolean bindBbmribiobankID = false;
+
+			if (bbmribiobankID == null) {
+				query.append(_FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_1);
+			}
+			else if (bbmribiobankID.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_3);
+			}
+			else {
+				bindBbmribiobankID = true;
+
+				query.append(_FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (bindBbmribiobankID) {
+					qPos.add(bbmribiobankID);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_BIOBANKBBMRIERICID_GROUPID_2 = "d2Biobank.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_1 =
+		"d2Biobank.bbmribiobankID IS NULL";
+	private static final String _FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_2 =
+		"d2Biobank.bbmribiobankID = ?";
+	private static final String _FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_3 =
+		"(d2Biobank.bbmribiobankID IS NULL OR d2Biobank.bbmribiobankID = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_NOTUUID = new FinderPath(D2BiobankModelImpl.ENTITY_CACHE_ENABLED,
+			D2BiobankModelImpl.FINDER_CACHE_ENABLED, D2BiobankImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByNotUUID",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_NOTUUID = new FinderPath(D2BiobankModelImpl.ENTITY_CACHE_ENABLED,
+			D2BiobankModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByNotUUID",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @return the matching d2 biobanks
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> findByNotUUID(long groupId, String updateuuid)
+		throws SystemException {
+		return findByNotUUID(groupId, updateuuid, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @return the range of matching d2 biobanks
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> findByNotUUID(long groupId, String updateuuid,
+		int start, int end) throws SystemException {
+		return findByNotUUID(groupId, updateuuid, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d2 biobanks
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> findByNotUUID(long groupId, String updateuuid,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_NOTUUID;
+		finderArgs = new Object[] {
+				groupId, updateuuid,
+				
+				start, end, orderByComparator
+			};
+
+		List<D2Biobank> list = (List<D2Biobank>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (D2Biobank d2Biobank : list) {
+				if ((groupId != d2Biobank.getGroupId()) ||
+						Validator.equals(updateuuid, d2Biobank.getUpdateuuid())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_D2BIOBANK_WHERE);
+
+			query.append(_FINDER_COLUMN_NOTUUID_GROUPID_2);
+
+			boolean bindUpdateuuid = false;
+
+			if (updateuuid == null) {
+				query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_1);
+			}
+			else if (updateuuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_3);
+			}
+			else {
+				bindUpdateuuid = true;
+
+				query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (bindUpdateuuid) {
+					qPos.add(updateuuid);
+				}
+
+				if (!pagination) {
+					list = (List<D2Biobank>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<D2Biobank>(list);
+				}
+				else {
+					list = (List<D2Biobank>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank findByNotUUID_First(long groupId, String updateuuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchD2BiobankException, SystemException {
+		D2Biobank d2Biobank = fetchByNotUUID_First(groupId, updateuuid,
+				orderByComparator);
+
+		if (d2Biobank != null) {
+			return d2Biobank;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", updateuuid=");
+		msg.append(updateuuid);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchD2BiobankException(msg.toString());
+	}
+
+	/**
+	 * Returns the first d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank fetchByNotUUID_First(long groupId, String updateuuid,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<D2Biobank> list = findByNotUUID(groupId, updateuuid, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank findByNotUUID_Last(long groupId, String updateuuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchD2BiobankException, SystemException {
+		D2Biobank d2Biobank = fetchByNotUUID_Last(groupId, updateuuid,
+				orderByComparator);
+
+		if (d2Biobank != null) {
+			return d2Biobank;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", updateuuid=");
+		msg.append(updateuuid);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchD2BiobankException(msg.toString());
+	}
+
+	/**
+	 * Returns the last d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank fetchByNotUUID_Last(long groupId, String updateuuid,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByNotUUID(groupId, updateuuid);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<D2Biobank> list = findByNotUUID(groupId, updateuuid, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the d2 biobanks before and after the current d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param biobankId the primary key of the current d2 biobank
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank[] findByNotUUID_PrevAndNext(long biobankId, long groupId,
+		String updateuuid, OrderByComparator orderByComparator)
+		throws NoSuchD2BiobankException, SystemException {
+		D2Biobank d2Biobank = findByPrimaryKey(biobankId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			D2Biobank[] array = new D2BiobankImpl[3];
+
+			array[0] = getByNotUUID_PrevAndNext(session, d2Biobank, groupId,
+					updateuuid, orderByComparator, true);
+
+			array[1] = d2Biobank;
+
+			array[2] = getByNotUUID_PrevAndNext(session, d2Biobank, groupId,
+					updateuuid, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected D2Biobank getByNotUUID_PrevAndNext(Session session,
+		D2Biobank d2Biobank, long groupId, String updateuuid,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_D2BIOBANK_WHERE);
+
+		query.append(_FINDER_COLUMN_NOTUUID_GROUPID_2);
+
+		boolean bindUpdateuuid = false;
+
+		if (updateuuid == null) {
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_1);
+		}
+		else if (updateuuid.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_3);
+		}
+		else {
+			bindUpdateuuid = true;
+
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (bindUpdateuuid) {
+			qPos.add(updateuuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(d2Biobank);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<D2Biobank> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Returns all the d2 biobanks that the user has permission to view where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @return the matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByNotUUID(long groupId, String updateuuid)
+		throws SystemException {
+		return filterFindByNotUUID(groupId, updateuuid, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @return the range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByNotUUID(long groupId, String updateuuid,
+		int start, int end) throws SystemException {
+		return filterFindByNotUUID(groupId, updateuuid, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param start the lower bound of the range of d2 biobanks
+	 * @param end the upper bound of the range of d2 biobanks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<D2Biobank> filterFindByNotUUID(long groupId, String updateuuid,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByNotUUID(groupId, updateuuid, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_NOTUUID_GROUPID_2);
+
+		boolean bindUpdateuuid = false;
+
+		if (updateuuid == null) {
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_1);
+		}
+		else if (updateuuid.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_3);
+		}
+		else {
+			bindUpdateuuid = true;
+
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_2);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator, true);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator, true);
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (bindUpdateuuid) {
+				qPos.add(updateuuid);
+			}
+
+			return (List<D2Biobank>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Returns the d2 biobanks before and after the current d2 biobank in the ordered set of d2 biobanks that the user has permission to view where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param biobankId the primary key of the current d2 biobank
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank[] filterFindByNotUUID_PrevAndNext(long biobankId,
+		long groupId, String updateuuid, OrderByComparator orderByComparator)
+		throws NoSuchD2BiobankException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByNotUUID_PrevAndNext(biobankId, groupId, updateuuid,
+				orderByComparator);
+		}
+
+		D2Biobank d2Biobank = findByPrimaryKey(biobankId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			D2Biobank[] array = new D2BiobankImpl[3];
+
+			array[0] = filterGetByNotUUID_PrevAndNext(session, d2Biobank,
+					groupId, updateuuid, orderByComparator, true);
+
+			array[1] = d2Biobank;
+
+			array[2] = filterGetByNotUUID_PrevAndNext(session, d2Biobank,
+					groupId, updateuuid, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected D2Biobank filterGetByNotUUID_PrevAndNext(Session session,
+		D2Biobank d2Biobank, long groupId, String updateuuid,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_NOTUUID_GROUPID_2);
+
+		boolean bindUpdateuuid = false;
+
+		if (updateuuid == null) {
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_1);
+		}
+		else if (updateuuid.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_3);
+		}
+		else {
+			bindUpdateuuid = true;
+
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_2);
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(D2BiobankModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(D2BiobankModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, D2BiobankImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, D2BiobankImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (bindUpdateuuid) {
+			qPos.add(updateuuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(d2Biobank);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<D2Biobank> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByNotUUID(long groupId, String updateuuid)
+		throws SystemException {
+		for (D2Biobank d2Biobank : findByNotUUID(groupId, updateuuid,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(d2Biobank);
+		}
+	}
+
+	/**
+	 * Returns the number of d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @return the number of matching d2 biobanks
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByNotUUID(long groupId, String updateuuid)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_NOTUUID;
+
+		Object[] finderArgs = new Object[] { groupId, updateuuid };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_D2BIOBANK_WHERE);
+
+			query.append(_FINDER_COLUMN_NOTUUID_GROUPID_2);
+
+			boolean bindUpdateuuid = false;
+
+			if (updateuuid == null) {
+				query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_1);
+			}
+			else if (updateuuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_3);
+			}
+			else {
+				bindUpdateuuid = true;
+
+				query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (bindUpdateuuid) {
+					qPos.add(updateuuid);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of d2 biobanks that the user has permission to view where groupId = &#63; and updateuuid &ne; &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param updateuuid the updateuuid
+	 * @return the number of matching d2 biobanks that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int filterCountByNotUUID(long groupId, String updateuuid)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByNotUUID(groupId, updateuuid);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_D2BIOBANK_WHERE);
+
+		query.append(_FINDER_COLUMN_NOTUUID_GROUPID_2);
+
+		boolean bindUpdateuuid = false;
+
+		if (updateuuid == null) {
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_1);
+		}
+		else if (updateuuid.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_3);
+		}
+		else {
+			bindUpdateuuid = true;
+
+			query.append(_FINDER_COLUMN_NOTUUID_UPDATEUUID_2);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				D2Biobank.class.getName(),
+				_FILTER_ENTITY_TABLE_FILTER_PK_COLUMN, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (bindUpdateuuid) {
+				qPos.add(updateuuid);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	private static final String _FINDER_COLUMN_NOTUUID_GROUPID_2 = "d2Biobank.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_NOTUUID_UPDATEUUID_1 = "d2Biobank.updateuuid IS NOT NULL";
+	private static final String _FINDER_COLUMN_NOTUUID_UPDATEUUID_2 = "d2Biobank.updateuuid != ?";
+	private static final String _FINDER_COLUMN_NOTUUID_UPDATEUUID_3 = "(d2Biobank.updateuuid IS NULL OR d2Biobank.updateuuid != '')";
 
 	public D2BiobankPersistenceImpl() {
 		setModelClass(D2Biobank.class);
@@ -3922,6 +6544,10 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { d2Biobank.getUuid(), d2Biobank.getGroupId() },
+			d2Biobank);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+			new Object[] { d2Biobank.getGroupId(), d2Biobank.getBbmribiobankID() },
 			d2Biobank);
 
 		d2Biobank.resetOriginalValues();
@@ -4007,6 +6633,15 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 				Long.valueOf(1));
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 				d2Biobank);
+
+			args = new Object[] {
+					d2Biobank.getGroupId(), d2Biobank.getBbmribiobankID()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BIOBANKBBMRIERICID,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+				args, d2Biobank);
 		}
 		else {
 			D2BiobankModelImpl d2BiobankModelImpl = (D2BiobankModelImpl)d2Biobank;
@@ -4021,6 +6656,18 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 					Long.valueOf(1));
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
 					d2Biobank);
+			}
+
+			if ((d2BiobankModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						d2Biobank.getGroupId(), d2Biobank.getBbmribiobankID()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BIOBANKBBMRIERICID,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+					args, d2Biobank);
 			}
 		}
 	}
@@ -4042,6 +6689,28 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 
 			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		args = new Object[] {
+				d2Biobank.getGroupId(), d2Biobank.getBbmribiobankID()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BIOBANKBBMRIERICID,
+			args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+			args);
+
+		if ((d2BiobankModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					d2BiobankModelImpl.getOriginalGroupId(),
+					d2BiobankModelImpl.getOriginalBbmribiobankID()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BIOBANKBBMRIERICID,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+				args);
 		}
 	}
 
@@ -4368,9 +7037,10 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 		d2BiobankImpl.setUserName(d2Biobank.getUserName());
 		d2BiobankImpl.setCreateDate(d2Biobank.getCreateDate());
 		d2BiobankImpl.setModifiedDate(d2Biobank.getModifiedDate());
+		d2BiobankImpl.setUpdateuuid(d2Biobank.getUpdateuuid());
 		d2BiobankImpl.setContactIDRef(d2Biobank.getContactIDRef());
 		d2BiobankImpl.setContactPriority(d2Biobank.getContactPriority());
-		d2BiobankImpl.setBiobankID(d2Biobank.getBiobankID());
+		d2BiobankImpl.setBbmribiobankID(d2Biobank.getBbmribiobankID());
 		d2BiobankImpl.setBiobankName(d2Biobank.getBiobankName());
 		d2BiobankImpl.setBiobankJurisdicalPerson(d2Biobank.getBiobankJurisdicalPerson());
 		d2BiobankImpl.setBiobankCountry(d2Biobank.getBiobankCountry());
@@ -4714,7 +7384,17 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 	private static final String _SQL_SELECT_D2BIOBANK_WHERE = "SELECT d2Biobank FROM D2Biobank d2Biobank WHERE ";
 	private static final String _SQL_COUNT_D2BIOBANK = "SELECT COUNT(d2Biobank) FROM D2Biobank d2Biobank";
 	private static final String _SQL_COUNT_D2BIOBANK_WHERE = "SELECT COUNT(d2Biobank) FROM D2Biobank d2Biobank WHERE ";
+	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "d2Biobank.biobankId";
+	private static final String _FILTER_SQL_SELECT_D2BIOBANK_WHERE = "SELECT DISTINCT {d2Biobank.*} FROM bbmrieric.d2biobank d2Biobank WHERE ";
+	private static final String _FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {bbmrieric.d2biobank.*} FROM (SELECT DISTINCT d2Biobank.biobankId FROM bbmrieric.d2biobank d2Biobank WHERE ";
+	private static final String _FILTER_SQL_SELECT_D2BIOBANK_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN bbmrieric.d2biobank ON TEMP_TABLE.biobankId = bbmrieric.d2biobank.biobankId";
+	private static final String _FILTER_SQL_COUNT_D2BIOBANK_WHERE = "SELECT COUNT(DISTINCT d2Biobank.biobankId) AS COUNT_VALUE FROM bbmrieric.d2biobank d2Biobank WHERE ";
+	private static final String _FILTER_ENTITY_ALIAS = "d2Biobank";
+	private static final String _FILTER_ENTITY_TABLE = "bbmrieric.d2biobank";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "d2Biobank.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "bbmrieric.d2biobank.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No D2Biobank exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No D2Biobank exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(

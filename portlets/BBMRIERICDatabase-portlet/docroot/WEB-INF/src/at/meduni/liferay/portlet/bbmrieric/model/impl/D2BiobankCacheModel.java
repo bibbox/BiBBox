@@ -38,7 +38,7 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(81);
+		StringBundler sb = new StringBundler(83);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -64,12 +64,14 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", updateuuid=");
+		sb.append(updateuuid);
 		sb.append(", contactIDRef=");
 		sb.append(contactIDRef);
 		sb.append(", contactPriority=");
 		sb.append(contactPriority);
-		sb.append(", biobankID=");
-		sb.append(biobankID);
+		sb.append(", bbmribiobankID=");
+		sb.append(bbmribiobankID);
 		sb.append(", biobankName=");
 		sb.append(biobankName);
 		sb.append(", biobankJurisdicalPerson=");
@@ -179,6 +181,13 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 			d2BiobankImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		if (updateuuid == null) {
+			d2BiobankImpl.setUpdateuuid(StringPool.BLANK);
+		}
+		else {
+			d2BiobankImpl.setUpdateuuid(updateuuid);
+		}
+
 		if (contactIDRef == null) {
 			d2BiobankImpl.setContactIDRef(StringPool.BLANK);
 		}
@@ -188,11 +197,11 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 
 		d2BiobankImpl.setContactPriority(contactPriority);
 
-		if (biobankID == null) {
-			d2BiobankImpl.setBiobankID(StringPool.BLANK);
+		if (bbmribiobankID == null) {
+			d2BiobankImpl.setBbmribiobankID(StringPool.BLANK);
 		}
 		else {
-			d2BiobankImpl.setBiobankID(biobankID);
+			d2BiobankImpl.setBbmribiobankID(bbmribiobankID);
 		}
 
 		if (biobankName == null) {
@@ -320,9 +329,10 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
+		updateuuid = objectInput.readUTF();
 		contactIDRef = objectInput.readUTF();
 		contactPriority = objectInput.readLong();
-		biobankID = objectInput.readUTF();
+		bbmribiobankID = objectInput.readUTF();
 		biobankName = objectInput.readUTF();
 		biobankJurisdicalPerson = objectInput.readUTF();
 		biobankCountry = objectInput.readUTF();
@@ -386,6 +396,13 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
+		if (updateuuid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(updateuuid);
+		}
+
 		if (contactIDRef == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -395,11 +412,11 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 
 		objectOutput.writeLong(contactPriority);
 
-		if (biobankID == null) {
+		if (bbmribiobankID == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(biobankID);
+			objectOutput.writeUTF(bbmribiobankID);
 		}
 
 		if (biobankName == null) {
@@ -521,9 +538,10 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public String updateuuid;
 	public String contactIDRef;
 	public long contactPriority;
-	public String biobankID;
+	public String bbmribiobankID;
 	public String biobankName;
 	public String biobankJurisdicalPerson;
 	public String biobankCountry;

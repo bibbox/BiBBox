@@ -42,9 +42,10 @@ public class D2BiobankSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setUpdateuuid(model.getUpdateuuid());
 		soapModel.setContactIDRef(model.getContactIDRef());
 		soapModel.setContactPriority(model.getContactPriority());
-		soapModel.setBiobankID(model.getBiobankID());
+		soapModel.setBbmribiobankID(model.getBbmribiobankID());
 		soapModel.setBiobankName(model.getBiobankName());
 		soapModel.setBiobankJurisdicalPerson(model.getBiobankJurisdicalPerson());
 		soapModel.setBiobankCountry(model.getBiobankCountry());
@@ -218,6 +219,14 @@ public class D2BiobankSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public String getUpdateuuid() {
+		return _updateuuid;
+	}
+
+	public void setUpdateuuid(String updateuuid) {
+		_updateuuid = updateuuid;
+	}
+
 	public String getContactIDRef() {
 		return _contactIDRef;
 	}
@@ -234,12 +243,12 @@ public class D2BiobankSoap implements Serializable {
 		_contactPriority = contactPriority;
 	}
 
-	public String getBiobankID() {
-		return _biobankID;
+	public String getBbmribiobankID() {
+		return _bbmribiobankID;
 	}
 
-	public void setBiobankID(String biobankID) {
-		_biobankID = biobankID;
+	public void setBbmribiobankID(String bbmribiobankID) {
+		_bbmribiobankID = bbmribiobankID;
 	}
 
 	public String getBiobankName() {
@@ -501,9 +510,10 @@ public class D2BiobankSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _updateuuid;
 	private String _contactIDRef;
 	private long _contactPriority;
-	private String _biobankID;
+	private String _bbmribiobankID;
 	private String _biobankName;
 	private String _biobankJurisdicalPerson;
 	private String _biobankCountry;

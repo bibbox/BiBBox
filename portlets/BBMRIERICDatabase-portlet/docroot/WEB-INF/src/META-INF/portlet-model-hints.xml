@@ -38,11 +38,16 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="updateuuid" type="String" />
 		<field name="contactIDRef" type="String" />
 		<field name="contactPriority" type="long" />
-		<field name="biobankID" type="String" />
-		<field name="biobankName" type="String" />
-		<field name="biobankJurisdicalPerson" type="String" />
+		<field name="bbmribiobankID" type="String" />
+		<field name="biobankName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankJurisdicalPerson" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biobankCountry" type="String" />
 		<field name="biobankPartnerCharterSigned" type="boolean" />
 		<field name="bioresourceReference" type="String" />
@@ -56,8 +61,12 @@
 		<field name="biobankISAvailable" type="boolean" />
 		<field name="biobankHISAvailable" type="boolean" />
 		<field name="biobankAcronym" type="String" />
-		<field name="biobankDescription" type="String" />
-		<field name="biobankURL" type="String" />
+		<field name="biobankDescription" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankURL" type="String">
+			<hint name="max-length">500</hint>
+		</field>
 		<field name="biobankHeadFirstName" type="String" />
 		<field name="biobankHeadLastName" type="String" />
 		<field name="biobankHeadRole" type="String" />

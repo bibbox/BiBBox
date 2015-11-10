@@ -353,6 +353,50 @@ public class D2BiobankLocalServiceWrapper implements D2BiobankLocalService,
 			arguments);
 	}
 
+	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2BiobankFromRequest(
+		javax.portlet.ActionRequest request) {
+		return _d2BiobankLocalService.d2BiobankFromRequest(request);
+	}
+
+	/**
+	* @param groupId
+	* @return
+	* @throws SystemException
+	*/
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getD2Biobanks(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _d2BiobankLocalService.getD2Biobanks(groupId);
+	}
+
+	/**
+	* @param groupId
+	* @param start
+	* @param end
+	* @return
+	* @throws SystemException
+	*/
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getD2Biobanks(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _d2BiobankLocalService.getD2Biobanks(groupId, start, end);
+	}
+
+	/**
+	* @param groupId
+	* @param bbmribiobankID
+	* @return
+	*/
+	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankByBBMRIERICID(
+		long groupId, java.lang.String bbmribiobankID) {
+		return _d2BiobankLocalService.getD2BiobankByBBMRIERICID(groupId,
+			bbmribiobankID);
+	}
+
 	/**
 	* @param newbiobank
 	* @param serviceContext
@@ -366,18 +410,6 @@ public class D2BiobankLocalServiceWrapper implements D2BiobankLocalService,
 	}
 
 	/**
-	* @param newbiobank
-	* @param serviceContext
-	* @return
-	*/
-	@Override
-	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank updateD2Biobank(
-		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank newbiobank,
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _d2BiobankLocalService.updateD2Biobank(newbiobank, serviceContext);
-	}
-
-	/**
 	* @param biobankId
 	* @param serviceContext
 	* @return
@@ -385,9 +417,47 @@ public class D2BiobankLocalServiceWrapper implements D2BiobankLocalService,
 	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank addD2Biobank(
 		long biobankId, long companyId, long groupId, long userId,
+		java.lang.String biobankName, java.lang.String ldapbiobankID,
+		java.lang.String ldapupdateuuid, java.lang.String contactIDRef,
+		long contactPriority, java.lang.String biobankJurisdicalPerson,
+		java.lang.String biobankCountry, boolean biobankPartnerCharterSigned,
+		java.lang.String bioresourceReference,
+		java.lang.String biobankNetworkIDRef, java.lang.String geoLatitude,
+		java.lang.String geoLongitude, boolean collaborationPartnersCommercial,
+		boolean collaborationPartnersNonforprofit,
+		boolean biobankITSupportAvailable, long biobankITStaffSize,
+		boolean biobankISAvailable, boolean biobankHISAvailable,
+		java.lang.String biobankAcronym, java.lang.String biobankDescription,
+		java.lang.String biobankURL, java.lang.String biobankHeadFirstName,
+		java.lang.String biobankHeadLastName, java.lang.String biobankHeadRole,
+		boolean biobankClinical, boolean biobankPopulation,
+		boolean biobankResearchStudy, boolean biobankNonHuman,
+		boolean biobankCollection,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _d2BiobankLocalService.addD2Biobank(biobankId, companyId,
-			groupId, userId, serviceContext);
+			groupId, userId, biobankName, ldapbiobankID, ldapupdateuuid,
+			contactIDRef, contactPriority, biobankJurisdicalPerson,
+			biobankCountry, biobankPartnerCharterSigned, bioresourceReference,
+			biobankNetworkIDRef, geoLatitude, geoLongitude,
+			collaborationPartnersCommercial, collaborationPartnersNonforprofit,
+			biobankITSupportAvailable, biobankITStaffSize, biobankISAvailable,
+			biobankHISAvailable, biobankAcronym, biobankDescription,
+			biobankURL, biobankHeadFirstName, biobankHeadLastName,
+			biobankHeadRole, biobankClinical, biobankPopulation,
+			biobankResearchStudy, biobankNonHuman, biobankCollection,
+			serviceContext);
+	}
+
+	/**
+	* @param newbiobank
+	* @param serviceContext
+	* @return
+	*/
+	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank updateD2Biobank(
+		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2biobank,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _d2BiobankLocalService.updateD2Biobank(d2biobank, serviceContext);
 	}
 
 	/**
@@ -397,9 +467,35 @@ public class D2BiobankLocalServiceWrapper implements D2BiobankLocalService,
 	*/
 	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank updateD2Biobank(
-		long biobankId, long userId,
+		long biobankId, long userId, java.lang.String biobankName,
+		java.lang.String ldapbiobankID, java.lang.String ldapupdateuuid,
+		java.lang.String contactIDRef, long contactPriority,
+		java.lang.String biobankJurisdicalPerson,
+		java.lang.String biobankCountry, boolean biobankPartnerCharterSigned,
+		java.lang.String bioresourceReference,
+		java.lang.String biobankNetworkIDRef, java.lang.String geoLatitude,
+		java.lang.String geoLongitude, boolean collaborationPartnersCommercial,
+		boolean collaborationPartnersNonforprofit,
+		boolean biobankITSupportAvailable, long biobankITStaffSize,
+		boolean biobankISAvailable, boolean biobankHISAvailable,
+		java.lang.String biobankAcronym, java.lang.String biobankDescription,
+		java.lang.String biobankURL, java.lang.String biobankHeadFirstName,
+		java.lang.String biobankHeadLastName, java.lang.String biobankHeadRole,
+		boolean biobankClinical, boolean biobankPopulation,
+		boolean biobankResearchStudy, boolean biobankNonHuman,
+		boolean biobankCollection,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _d2BiobankLocalService.updateD2Biobank(biobankId, userId,
+			biobankName, ldapbiobankID, ldapupdateuuid, contactIDRef,
+			contactPriority, biobankJurisdicalPerson, biobankCountry,
+			biobankPartnerCharterSigned, bioresourceReference,
+			biobankNetworkIDRef, geoLatitude, geoLongitude,
+			collaborationPartnersCommercial, collaborationPartnersNonforprofit,
+			biobankITSupportAvailable, biobankITStaffSize, biobankISAvailable,
+			biobankHISAvailable, biobankAcronym, biobankDescription,
+			biobankURL, biobankHeadFirstName, biobankHeadLastName,
+			biobankHeadRole, biobankClinical, biobankPopulation,
+			biobankResearchStudy, biobankNonHuman, biobankCollection,
 			serviceContext);
 	}
 
@@ -412,6 +508,13 @@ public class D2BiobankLocalServiceWrapper implements D2BiobankLocalService,
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank deleteD2Biobank(
 		long biobankId, com.liferay.portal.service.ServiceContext serviceContext) {
 		return _d2BiobankLocalService.deleteD2Biobank(biobankId, serviceContext);
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getLDAPNotUpdatedBiobanks(
+		long groupId, java.lang.String ldapupdateuuid) {
+		return _d2BiobankLocalService.getLDAPNotUpdatedBiobanks(groupId,
+			ldapupdateuuid);
 	}
 
 	/**

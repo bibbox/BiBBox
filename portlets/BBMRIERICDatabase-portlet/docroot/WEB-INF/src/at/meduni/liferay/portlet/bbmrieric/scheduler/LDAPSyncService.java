@@ -18,8 +18,11 @@ import javax.naming.directory.SearchResult;
 import javax.naming.ldap.LdapContext;
 
 import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
+import at.meduni.liferay.portlet.bbmrieric.model.D2Biobank;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
+import at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl;
 import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -28,6 +31,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.MessageListenerException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Address;
@@ -72,11 +76,225 @@ public class LDAPSyncService implements MessageListener {
 		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Info started LDAP Sync Scheduler (" + uuid + ").");
 		
 		//connectLDAP(uuid);
-		
+		try {
+			System.out.println("-" + PropsUtil.get("D2BiobankCompany") + "-");
+			System.out.println("-" + PropsUtil.get("D2BiobankGroup") + "-");
+			long companyId = Long.parseLong(PropsUtil.get("D2BiobankCompany"));
+	        long groupId = Long.parseLong(PropsUtil.get("D2BiobankGroup"));
+			d2Update(uuid, groupId, companyId);
+		} catch (NumberFormatException ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Error NumberFormatException while reading config from portal-ext.properties.");
+			ex.printStackTrace();
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Error Reading Data from LDAP.");
+			ex.printStackTrace();
+		} 
 		// End
 		long datediff = new Date().getTime() - startdate.getTime();
 		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Info LDAP Sync Scheduler (" + uuid + ") finished in " + datediff + "ms.");
 	} 
+	
+	private void d2Update(String ldapupdateuuid, long groupId, long companyId) {
+		// ServiceContext to create the assets 
+		ServiceContext serviceContext = new ServiceContext();
+        serviceContext.setAddGroupPermissions(true);
+        serviceContext.setAddGuestPermissions(true);
+		try {
+			Company company = CompanyLocalServiceUtil.getCompany(companyId);
+			serviceContext.setUserId(company.getDefaultUser().getUserId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        serviceContext.setCompanyId(companyId);
+        serviceContext.setScopeGroupId(groupId);
+		
+        // Reading data from the LDAP
+		Hashtable<String, String> environment = new Hashtable<String, String>();
+		environment.put(LdapContext.CONTROL_FACTORIES, "com.sun.jndi.ldap.ControlFactory");
+		environment.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+		environment.put(Context.PROVIDER_URL, "ldap://directory.bbmri-eric.eu:10389");
+		environment.put(Context.SECURITY_AUTHENTICATION, "simple");
+		environment.put(Context.REFERRAL, "follow");
+		try {
+			DirContext ctx = new InitialDirContext(environment);
+			SearchControls ctls = new SearchControls();
+			ctls.setReturningAttributes(null);
+			ctls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+			// Search for objects using filter and controls
+			NamingEnumeration<?> answer = ctx.search("dc=directory,dc=bbmri-eric,dc=eu", "(objectclass=*)", ctls);
+			int counter = 0;
+			int counter_biobanks = 0;
+			while (answer.hasMore()) {
+				counter++;
+				SearchResult sr = (SearchResult) answer.next();
+				Attributes attrs = sr.getAttributes();
+				try {
+					if(attrs.get("biobankCountry") != null) {
+						counter_biobanks++;
+						String ldapbiobankID = getAttributeValues(attrs.get("biobankID"));
+						ldapbiobankID = ldapbiobankID.replaceAll("bbmri-eric:ID:", "");
+						
+						//System.out.println("ldapbiobankID: " + ldapbiobankID);
+						
+						D2Biobank biobank = D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(groupId, ldapbiobankID);
+						if(biobank == null) {
+							addBiobank(ldapbiobankID, serviceContext, attrs, ldapupdateuuid);
+						} else {
+							updateBiobank(ldapbiobankID, serviceContext, attrs, ldapupdateuuid);
+						}
+					}
+				} catch (Exception ex) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error Creating Entrys for Biobank: " + getAttributeValues(attrs.get("biobankName")));
+					ex.printStackTrace();
+				}
+			}
+			System.out.println("LDAP contained: " + counter + " entrys with " + counter_biobanks + " Biobanks.");
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error reading data from LDAP Server.");
+			ex.printStackTrace();
+		}
+		
+		try {
+			deleteD2BiobanksNotExistingInLdap(ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error deleting not updated Entries.");
+			ex.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param uuid
+	 */
+	private void deleteD2BiobanksNotExistingInLdap(String uuid, long groupId) {
+		List<D2Biobank> biobanks = D2BiobankLocalServiceUtil.getLDAPNotUpdatedBiobanks(groupId, uuid);
+		for(D2Biobank biobank : biobanks) {
+			try {
+				D2BiobankLocalServiceUtil.deleteD2Biobank(biobank);
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::deleteD2BiobanksNotExistingInLdap] Error deleting Biobanks not in LDAP.");
+				ex.printStackTrace();
+			}
+		}
+		System.out.println("LDAP deltetions: " + biobanks.size() + " Biobanks deleted.");
+	}
+	
+	private void addBiobank(String ldapbiobankID, ServiceContext serviceContext, Attributes attrs, String ldapupdateuuid) {
+		serviceContext.setCreateDate(new Date());
+        serviceContext.setModifiedDate(new Date());
+        D2BiobankImpl d2biobank = new D2BiobankImpl();
+        // Mandatory Fields
+        d2biobank.setBiobankName(getAttributeValues(attrs.get("biobankName")));
+        d2biobank.setBbmribiobankID(ldapbiobankID);
+        d2biobank.setUpdateuuid(ldapupdateuuid);
+        d2biobank.setContactIDRef(getAttributeValues(attrs.get("contactIDRef")));
+        d2biobank.setContactPriority(getAttributeValuesLong(attrs.get("contactPriority")));
+        d2biobank.setBiobankJurisdicalPerson(getAttributeValues(attrs.get("biobankJurisdicalPerson")));
+        d2biobank.setBiobankCountry(getAttributeValues(attrs.get("biobankCountry")));
+        d2biobank.setBiobankPartnerCharterSigned(getAttributeValuesBoolean(attrs.get("biobankPartnerCharterSigned")));
+        // Optional Fields
+        d2biobank.setBioresourceReference(getAttributeValues(attrs.get("bioresourceReference")));
+        d2biobank.setBiobankNetworkIDRef(getAttributeValues(attrs.get("biobankNetworkIDRef")));
+        d2biobank.setGeoLatitude(getAttributeValues(attrs.get("geoLatitude")));
+        d2biobank.setGeoLongitude(getAttributeValues(attrs.get("geoLongitude")));
+        d2biobank.setCollaborationPartnersCommercial(getAttributeValuesBoolean(attrs.get("collaborationPartnersCommercial")));
+        d2biobank.setCollaborationPartnersNonforprofit(getAttributeValuesBoolean(attrs.get("collaborationPartnersNonforprofit")));
+        d2biobank.setBiobankITSupportAvailable(getAttributeValuesBoolean(attrs.get("biobankITSupportAvailable")));
+        d2biobank.setBiobankITStaffSize(getAttributeValuesLong(attrs.get("biobankITStaffSize")));
+        d2biobank.setBiobankISAvailable(getAttributeValuesBoolean(attrs.get("biobankISAvailable")));
+        d2biobank.setBiobankHISAvailable(getAttributeValuesBoolean(attrs.get("biobankHISAvailable")));
+        d2biobank.setBiobankAcronym(getAttributeValues(attrs.get("biobankAcronym")));
+        d2biobank.setBiobankDescription(getAttributeValues(attrs.get("biobankDescription")));
+        d2biobank.setBiobankURL(getAttributeValues(attrs.get("biobankURL")));
+        d2biobank.setBiobankHeadFirstName(getAttributeValues(attrs.get("biobankHeadFirstName")));
+        d2biobank.setBiobankHeadLastName(getAttributeValues(attrs.get("biobankHeadLastName")));
+        d2biobank.setBiobankHeadRole(getAttributeValues(attrs.get("biobankHeadRole")));
+        String types = getAttributeValues(attrs.get("objectClass"));
+        if(types.contains("biobankClinical")) {
+        	d2biobank.setBiobankClinical(true);
+        } else {
+        	d2biobank.setBiobankClinical(false);
+        }
+        if(types.contains("biobankPopulation")) {
+        	d2biobank.setBiobankPopulation(true);
+        } else {
+        	d2biobank.setBiobankPopulation(false);
+        }
+        if(types.contains("biobankResearchStudy")) {
+        	d2biobank.setBiobankResearchStudy(true);
+        } else {
+        	d2biobank.setBiobankResearchStudy(false);
+        }
+        if(types.contains("biobankNonHuman")) {
+        	d2biobank.setBiobankNonHuman(true);
+        } else {
+        	d2biobank.setBiobankNonHuman(false);
+        }
+        if(types.contains("biobankCollection")) {
+        	d2biobank.setBiobankCollection(true);
+        } else {
+        	d2biobank.setBiobankCollection(false);
+        }
+        D2BiobankLocalServiceUtil.addD2Biobank(d2biobank, serviceContext);
+	}
+	
+	private void updateBiobank(String ldapbiobankID, ServiceContext serviceContext, Attributes attrs, String ldapupdateuuid) {
+		serviceContext.setModifiedDate(new Date());
+        D2Biobank d2biobank =D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(serviceContext.getScopeGroupId(), ldapbiobankID);
+        // Mandatory Fields
+        d2biobank.setBiobankName(getAttributeValues(attrs.get("biobankName")));
+        d2biobank.setBbmribiobankID(ldapbiobankID);
+        d2biobank.setUpdateuuid(ldapupdateuuid);
+        d2biobank.setContactIDRef(getAttributeValues(attrs.get("contactIDRef")));
+        d2biobank.setContactPriority(getAttributeValuesLong(attrs.get("contactPriority")));
+        d2biobank.setBiobankJurisdicalPerson(getAttributeValues(attrs.get("biobankJurisdicalPerson")));
+        d2biobank.setBiobankCountry(getAttributeValues(attrs.get("biobankCountry")));
+        d2biobank.setBiobankPartnerCharterSigned(getAttributeValuesBoolean(attrs.get("biobankPartnerCharterSigned")));
+        // Optional Fields
+        d2biobank.setBioresourceReference(getAttributeValues(attrs.get("bioresourceReference")));
+        d2biobank.setBiobankNetworkIDRef(getAttributeValues(attrs.get("biobankNetworkIDRef")));
+        d2biobank.setGeoLatitude(getAttributeValues(attrs.get("geoLatitude")));
+        d2biobank.setGeoLongitude(getAttributeValues(attrs.get("geoLongitude")));
+        d2biobank.setCollaborationPartnersCommercial(getAttributeValuesBoolean(attrs.get("collaborationPartnersCommercial")));
+        d2biobank.setCollaborationPartnersNonforprofit(getAttributeValuesBoolean(attrs.get("collaborationPartnersNonforprofit")));
+        d2biobank.setBiobankITSupportAvailable(getAttributeValuesBoolean(attrs.get("biobankITSupportAvailable")));
+        d2biobank.setBiobankITStaffSize(getAttributeValuesLong(attrs.get("biobankITStaffSize")));
+        d2biobank.setBiobankISAvailable(getAttributeValuesBoolean(attrs.get("biobankISAvailable")));
+        d2biobank.setBiobankHISAvailable(getAttributeValuesBoolean(attrs.get("biobankHISAvailable")));
+        d2biobank.setBiobankAcronym(getAttributeValues(attrs.get("biobankAcronym")));
+        d2biobank.setBiobankDescription(getAttributeValues(attrs.get("biobankDescription")));
+        d2biobank.setBiobankURL(getAttributeValues(attrs.get("biobankURL")));
+        d2biobank.setBiobankHeadFirstName(getAttributeValues(attrs.get("biobankHeadFirstName")));
+        d2biobank.setBiobankHeadLastName(getAttributeValues(attrs.get("biobankHeadLastName")));
+        d2biobank.setBiobankHeadRole(getAttributeValues(attrs.get("biobankHeadRole")));
+        String types = getAttributeValues(attrs.get("objectClass"));
+        if(types.contains("biobankClinical")) {
+        	d2biobank.setBiobankClinical(true);
+        } else {
+        	d2biobank.setBiobankClinical(false);
+        }
+        if(types.contains("biobankPopulation")) {
+        	d2biobank.setBiobankPopulation(true);
+        } else {
+        	d2biobank.setBiobankPopulation(false);
+        }
+        if(types.contains("biobankResearchStudy")) {
+        	d2biobank.setBiobankResearchStudy(true);
+        } else {
+        	d2biobank.setBiobankResearchStudy(false);
+        }
+        if(types.contains("biobankNonHuman")) {
+        	d2biobank.setBiobankNonHuman(true);
+        } else {
+        	d2biobank.setBiobankNonHuman(false);
+        }
+        if(types.contains("biobankCollection")) {
+        	d2biobank.setBiobankCollection(true);
+        } else {
+        	d2biobank.setBiobankCollection(false);
+        }
+        D2BiobankLocalServiceUtil.updateD2Biobank(d2biobank, serviceContext);
+	}
  
 	/**
 	 * 
@@ -625,11 +843,57 @@ public class LDAPSyncService implements MessageListener {
 				seperator = ", ";
 			}
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes " + attr.toString() + ".");
+			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
 			//ex.printStackTrace();
 			return "";
 		}
 		return values; 
+	}
+	
+	/**
+	 * 
+	 * @param attr
+	 * @return
+	 */
+	private Long getAttributeValuesLong(Attribute attr) {
+		String values = "";
+		String seperator = "";
+		long return_value = 0;
+		try {
+			for (NamingEnumeration e = attr.getAll(); e.hasMore(); ) {
+				values += seperator + e.next();
+				seperator = ", ";
+			}
+			return_value = Long.parseLong(values);
+		} catch (Exception ex) {
+			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
+			//ex.printStackTrace();
+			return (long) 0;
+		}
+		return return_value; 
+	}
+	
+	/**
+	 * 
+	 * @param attr
+	 * @return
+	 */
+	private Boolean getAttributeValuesBoolean(Attribute attr) {
+		String values = "";
+		String seperator = "";
+		boolean return_value = false;
+		try {
+			for (NamingEnumeration e = attr.getAll(); e.hasMore(); ) {
+				values += seperator + e.next();
+				seperator = ", ";
+			}
+			return_value = Boolean.parseBoolean(values);
+		} catch (Exception ex) {
+			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
+			//ex.printStackTrace();
+			return false;
+		}
+		return return_value; 
 	}
 
 }

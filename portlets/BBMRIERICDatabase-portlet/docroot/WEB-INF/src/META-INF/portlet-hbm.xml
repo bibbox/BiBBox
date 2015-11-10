@@ -37,9 +37,10 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updateuuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="contactIDRef" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="contactPriority" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="biobankID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bbmribiobankID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biobankName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biobankJurisdicalPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biobankCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />

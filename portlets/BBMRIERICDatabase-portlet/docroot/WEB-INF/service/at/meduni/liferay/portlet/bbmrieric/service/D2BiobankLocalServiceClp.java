@@ -130,38 +130,73 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 
 		_methodParameterTypes21 = new String[] { "java.lang.String" };
 
-		_methodName23 = "addD2Biobank";
+		_methodName23 = "d2BiobankFromRequest";
 
-		_methodParameterTypes23 = new String[] {
-				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
-				"com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes23 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName24 = "updateD2Biobank";
+		_methodName24 = "getD2Biobanks";
 
-		_methodParameterTypes24 = new String[] {
-				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
-				"com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes24 = new String[] { "long" };
 
-		_methodName25 = "addD2Biobank";
+		_methodName25 = "getD2Biobanks";
 
-		_methodParameterTypes25 = new String[] {
-				"long", "long", "long", "long",
-				"com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes25 = new String[] { "long", "int", "int" };
 
-		_methodName26 = "updateD2Biobank";
+		_methodName26 = "getD2BiobankByBBMRIERICID";
 
-		_methodParameterTypes26 = new String[] {
-				"long", "long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes26 = new String[] { "long", "java.lang.String" };
 
-		_methodName27 = "deleteD2Biobank";
+		_methodName27 = "addD2Biobank";
 
 		_methodParameterTypes27 = new String[] {
+				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName28 = "addD2Biobank";
+
+		_methodParameterTypes28 = new String[] {
+				"long", "long", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"long", "java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "boolean", "boolean", "boolean", "long",
+				"boolean", "boolean", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "boolean", "boolean", "boolean", "boolean",
+				"boolean", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName29 = "updateD2Biobank";
+
+		_methodParameterTypes29 = new String[] {
+				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName30 = "updateD2Biobank";
+
+		_methodParameterTypes30 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "boolean", "boolean", "boolean", "long",
+				"boolean", "boolean", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "boolean", "boolean", "boolean", "boolean",
+				"boolean", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName31 = "deleteD2Biobank";
+
+		_methodParameterTypes31 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName32 = "getLDAPNotUpdatedBiobanks";
+
+		_methodParameterTypes32 = new String[] { "long", "java.lang.String" };
 	}
 
 	@Override
@@ -845,18 +880,101 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 	}
 
 	@Override
-	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank addD2Biobank(
-		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank newbiobank,
-		com.liferay.portal.service.ServiceContext serviceContext) {
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2BiobankFromRequest(
+		javax.portlet.ActionRequest request) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName23,
 					_methodParameterTypes23,
+					new Object[] { ClpSerializer.translateInput(request) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getD2Biobanks(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24, new Object[] { groupId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getD2Biobanks(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
+					new Object[] { groupId, start, end });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankByBBMRIERICID(
+		long groupId, java.lang.String bbmribiobankID) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26,
 					new Object[] {
-						ClpSerializer.translateInput(newbiobank),
+						groupId,
 						
-					ClpSerializer.translateInput(serviceContext)
+					ClpSerializer.translateInput(bbmribiobankID)
 					});
 		}
 		catch (Throwable t) {
@@ -875,14 +993,14 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 	}
 
 	@Override
-	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank updateD2Biobank(
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank addD2Biobank(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank newbiobank,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName24,
-					_methodParameterTypes24,
+			returnObj = _invokableLocalService.invokeMethod(_methodName27,
+					_methodParameterTypes27,
 					new Object[] {
 						ClpSerializer.translateInput(newbiobank),
 						
@@ -907,12 +1025,28 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank addD2Biobank(
 		long biobankId, long companyId, long groupId, long userId,
+		java.lang.String biobankName, java.lang.String ldapbiobankID,
+		java.lang.String ldapupdateuuid, java.lang.String contactIDRef,
+		long contactPriority, java.lang.String biobankJurisdicalPerson,
+		java.lang.String biobankCountry, boolean biobankPartnerCharterSigned,
+		java.lang.String bioresourceReference,
+		java.lang.String biobankNetworkIDRef, java.lang.String geoLatitude,
+		java.lang.String geoLongitude, boolean collaborationPartnersCommercial,
+		boolean collaborationPartnersNonforprofit,
+		boolean biobankITSupportAvailable, long biobankITStaffSize,
+		boolean biobankISAvailable, boolean biobankHISAvailable,
+		java.lang.String biobankAcronym, java.lang.String biobankDescription,
+		java.lang.String biobankURL, java.lang.String biobankHeadFirstName,
+		java.lang.String biobankHeadLastName, java.lang.String biobankHeadRole,
+		boolean biobankClinical, boolean biobankPopulation,
+		boolean biobankResearchStudy, boolean biobankNonHuman,
+		boolean biobankCollection,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName25,
-					_methodParameterTypes25,
+			returnObj = _invokableLocalService.invokeMethod(_methodName28,
+					_methodParameterTypes28,
 					new Object[] {
 						biobankId,
 						
@@ -921,6 +1055,64 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 					groupId,
 						
 					userId,
+						
+					ClpSerializer.translateInput(biobankName),
+						
+					ClpSerializer.translateInput(ldapbiobankID),
+						
+					ClpSerializer.translateInput(ldapupdateuuid),
+						
+					ClpSerializer.translateInput(contactIDRef),
+						
+					contactPriority,
+						
+					ClpSerializer.translateInput(biobankJurisdicalPerson),
+						
+					ClpSerializer.translateInput(biobankCountry),
+						
+					biobankPartnerCharterSigned,
+						
+					ClpSerializer.translateInput(bioresourceReference),
+						
+					ClpSerializer.translateInput(biobankNetworkIDRef),
+						
+					ClpSerializer.translateInput(geoLatitude),
+						
+					ClpSerializer.translateInput(geoLongitude),
+						
+					collaborationPartnersCommercial,
+						
+					collaborationPartnersNonforprofit,
+						
+					biobankITSupportAvailable,
+						
+					biobankITStaffSize,
+						
+					biobankISAvailable,
+						
+					biobankHISAvailable,
+						
+					ClpSerializer.translateInput(biobankAcronym),
+						
+					ClpSerializer.translateInput(biobankDescription),
+						
+					ClpSerializer.translateInput(biobankURL),
+						
+					ClpSerializer.translateInput(biobankHeadFirstName),
+						
+					ClpSerializer.translateInput(biobankHeadLastName),
+						
+					ClpSerializer.translateInput(biobankHeadRole),
+						
+					biobankClinical,
+						
+					biobankPopulation,
+						
+					biobankResearchStudy,
+						
+					biobankNonHuman,
+						
+					biobankCollection,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -942,17 +1134,121 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 
 	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank updateD2Biobank(
-		long biobankId, long userId,
+		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2biobank,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName26,
-					_methodParameterTypes26,
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29,
+					new Object[] {
+						ClpSerializer.translateInput(d2biobank),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank updateD2Biobank(
+		long biobankId, long userId, java.lang.String biobankName,
+		java.lang.String ldapbiobankID, java.lang.String ldapupdateuuid,
+		java.lang.String contactIDRef, long contactPriority,
+		java.lang.String biobankJurisdicalPerson,
+		java.lang.String biobankCountry, boolean biobankPartnerCharterSigned,
+		java.lang.String bioresourceReference,
+		java.lang.String biobankNetworkIDRef, java.lang.String geoLatitude,
+		java.lang.String geoLongitude, boolean collaborationPartnersCommercial,
+		boolean collaborationPartnersNonforprofit,
+		boolean biobankITSupportAvailable, long biobankITStaffSize,
+		boolean biobankISAvailable, boolean biobankHISAvailable,
+		java.lang.String biobankAcronym, java.lang.String biobankDescription,
+		java.lang.String biobankURL, java.lang.String biobankHeadFirstName,
+		java.lang.String biobankHeadLastName, java.lang.String biobankHeadRole,
+		boolean biobankClinical, boolean biobankPopulation,
+		boolean biobankResearchStudy, boolean biobankNonHuman,
+		boolean biobankCollection,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
 					new Object[] {
 						biobankId,
 						
 					userId,
+						
+					ClpSerializer.translateInput(biobankName),
+						
+					ClpSerializer.translateInput(ldapbiobankID),
+						
+					ClpSerializer.translateInput(ldapupdateuuid),
+						
+					ClpSerializer.translateInput(contactIDRef),
+						
+					contactPriority,
+						
+					ClpSerializer.translateInput(biobankJurisdicalPerson),
+						
+					ClpSerializer.translateInput(biobankCountry),
+						
+					biobankPartnerCharterSigned,
+						
+					ClpSerializer.translateInput(bioresourceReference),
+						
+					ClpSerializer.translateInput(biobankNetworkIDRef),
+						
+					ClpSerializer.translateInput(geoLatitude),
+						
+					ClpSerializer.translateInput(geoLongitude),
+						
+					collaborationPartnersCommercial,
+						
+					collaborationPartnersNonforprofit,
+						
+					biobankITSupportAvailable,
+						
+					biobankITStaffSize,
+						
+					biobankISAvailable,
+						
+					biobankHISAvailable,
+						
+					ClpSerializer.translateInput(biobankAcronym),
+						
+					ClpSerializer.translateInput(biobankDescription),
+						
+					ClpSerializer.translateInput(biobankURL),
+						
+					ClpSerializer.translateInput(biobankHeadFirstName),
+						
+					ClpSerializer.translateInput(biobankHeadLastName),
+						
+					ClpSerializer.translateInput(biobankHeadRole),
+						
+					biobankClinical,
+						
+					biobankPopulation,
+						
+					biobankResearchStudy,
+						
+					biobankNonHuman,
+						
+					biobankCollection,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -978,8 +1274,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27,
+			returnObj = _invokableLocalService.invokeMethod(_methodName31,
+					_methodParameterTypes31,
 					new Object[] {
 						biobankId,
 						
@@ -999,6 +1295,35 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		}
 
 		return (at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getLDAPNotUpdatedBiobanks(
+		long groupId, java.lang.String ldapupdateuuid) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName32,
+					_methodParameterTypes32,
+					new Object[] {
+						groupId,
+						
+					ClpSerializer.translateInput(ldapupdateuuid)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;
@@ -1056,4 +1381,14 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 	private String[] _methodParameterTypes26;
 	private String _methodName27;
 	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
+	private String _methodName30;
+	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
 }

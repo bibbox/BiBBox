@@ -46,9 +46,10 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="updateuuid" />
 			<basic name="contactIDRef" />
 			<basic name="contactPriority" />
-			<basic name="biobankID" />
+			<basic name="bbmribiobankID" />
 			<basic name="biobankName" />
 			<basic name="biobankJurisdicalPerson" />
 			<basic name="biobankCountry" />

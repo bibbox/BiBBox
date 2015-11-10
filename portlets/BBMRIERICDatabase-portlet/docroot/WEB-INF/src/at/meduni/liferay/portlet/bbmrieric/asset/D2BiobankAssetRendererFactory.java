@@ -1,6 +1,7 @@
 package at.meduni.liferay.portlet.bbmrieric.asset;
 
 import at.meduni.liferay.portlet.bbmrieric.model.D2Biobank;
+import at.meduni.liferay.portlet.bbmrieric.permission.D2BiobankPermission;
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -41,9 +42,7 @@ public class D2BiobankAssetRendererFactory extends BaseAssetRendererFactory {
     public boolean hasPermission(
                     PermissionChecker permissionChecker, long classPK, String actionId)
             throws Exception {
-		// TODO: Setup Permission Checker
-		return true;
-            //return GuestbookPermission.contains(permissionChecker, classPK, actionId);
+		return D2BiobankPermission.contains(permissionChecker, classPK, actionId);
     }
 
 }

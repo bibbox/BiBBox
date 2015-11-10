@@ -22,14 +22,15 @@
 		<css-class-wrapper>ldap-sync-service-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>d2-biobank</portlet-name>
-		<icon>/icon.png</icon>
+		<portlet-name>biobank</portlet-name>
+		<icon>/image/biobank_icon.png</icon>
+		<indexer-class>at.meduni.liferay.portlet.bbmrieric.search.D2BiobankIndexer</indexer-class>
 		<asset-renderer-factory>at.meduni.liferay.portlet.bbmrieric.asset.D2BiobankAssetRendererFactory</asset-renderer-factory>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
-		<css-class-wrapper>d2-biobank-portlet</css-class-wrapper>
+		<css-class-wrapper>biobank-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

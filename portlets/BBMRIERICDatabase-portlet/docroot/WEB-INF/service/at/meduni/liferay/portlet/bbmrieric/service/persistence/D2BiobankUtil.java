@@ -656,6 +656,80 @@ public class D2BiobankUtil {
 	}
 
 	/**
+	* Returns all the d2 biobanks that the user has permission to view where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	/**
+	* Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @return the range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the d2 biobanks before and after the current d2 biobank in the ordered set of d2 biobanks that the user has permission to view where groupId = &#63;.
+	*
+	* @param biobankId the primary key of the current d2 biobank
+	* @param groupId the group ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank[] filterFindByGroupId_PrevAndNext(
+		long biobankId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId_PrevAndNext(biobankId, groupId,
+			orderByComparator);
+	}
+
+	/**
 	* Removes all the d2 biobanks where groupId = &#63; from the database.
 	*
 	* @param groupId the group ID
@@ -676,6 +750,18 @@ public class D2BiobankUtil {
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	/**
+	* Returns the number of d2 biobanks that the user has permission to view where groupId = &#63;.
+	*
+	* @param groupId the group ID
+	* @return the number of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
 	}
 
 	/**
@@ -1000,6 +1086,86 @@ public class D2BiobankUtil {
 	}
 
 	/**
+	* Returns all the d2 biobanks that the user has permission to view where groupId = &#63; and biobankName = &#63;.
+	*
+	* @param groupId the group ID
+	* @param biobankName the biobank name
+	* @return the matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByBiobankName(
+		long groupId, java.lang.String biobankName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByBiobankName(groupId, biobankName);
+	}
+
+	/**
+	* Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63; and biobankName = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param biobankName the biobank name
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @return the range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByBiobankName(
+		long groupId, java.lang.String biobankName, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByBiobankName(groupId, biobankName, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63; and biobankName = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param biobankName the biobank name
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByBiobankName(
+		long groupId, java.lang.String biobankName, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByBiobankName(groupId, biobankName, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the d2 biobanks before and after the current d2 biobank in the ordered set of d2 biobanks that the user has permission to view where groupId = &#63; and biobankName = &#63;.
+	*
+	* @param biobankId the primary key of the current d2 biobank
+	* @param groupId the group ID
+	* @param biobankName the biobank name
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank[] filterFindByBiobankName_PrevAndNext(
+		long biobankId, long groupId, java.lang.String biobankName,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByBiobankName_PrevAndNext(biobankId, groupId,
+			biobankName, orderByComparator);
+	}
+
+	/**
 	* Removes all the d2 biobanks where groupId = &#63; and biobankName = &#63; from the database.
 	*
 	* @param groupId the group ID
@@ -1024,6 +1190,20 @@ public class D2BiobankUtil {
 		java.lang.String biobankName)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByBiobankName(groupId, biobankName);
+	}
+
+	/**
+	* Returns the number of d2 biobanks that the user has permission to view where groupId = &#63; and biobankName = &#63;.
+	*
+	* @param groupId the group ID
+	* @param biobankName the biobank name
+	* @return the number of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByBiobankName(long groupId,
+		java.lang.String biobankName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByBiobankName(groupId, biobankName);
 	}
 
 	/**
@@ -1177,6 +1357,85 @@ public class D2BiobankUtil {
 	}
 
 	/**
+	* Returns all the d2 biobanks that the user has permission to view where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @return the matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByG_S(
+		long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_S(groupId, status);
+	}
+
+	/**
+	* Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @return the range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByG_S(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_S(groupId, status, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByG_S(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_S(groupId, status, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the d2 biobanks before and after the current d2 biobank in the ordered set of d2 biobanks that the user has permission to view where groupId = &#63; and status = &#63;.
+	*
+	* @param biobankId the primary key of the current d2 biobank
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank[] filterFindByG_S_PrevAndNext(
+		long biobankId, long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_S_PrevAndNext(biobankId, groupId, status,
+			orderByComparator);
+	}
+
+	/**
 	* Removes all the d2 biobanks where groupId = &#63; and status = &#63; from the database.
 	*
 	* @param groupId the group ID
@@ -1199,6 +1458,19 @@ public class D2BiobankUtil {
 	public static int countByG_S(long groupId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_S(groupId, status);
+	}
+
+	/**
+	* Returns the number of d2 biobanks that the user has permission to view where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @return the number of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_S(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_S(groupId, status);
 	}
 
 	/**
@@ -1332,6 +1604,65 @@ public class D2BiobankUtil {
 	}
 
 	/**
+	* Returns all the d2 biobanks that the user has permission to view where groupId = &#63; and biobankId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param biobankId the biobank ID
+	* @return the matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByBiobank(
+		long groupId, long biobankId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByBiobank(groupId, biobankId);
+	}
+
+	/**
+	* Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63; and biobankId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param biobankId the biobank ID
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @return the range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByBiobank(
+		long groupId, long biobankId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByBiobank(groupId, biobankId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63; and biobankId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param biobankId the biobank ID
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByBiobank(
+		long groupId, long biobankId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByBiobank(groupId, biobankId, start, end,
+			orderByComparator);
+	}
+
+	/**
 	* Removes all the d2 biobanks where groupId = &#63; and biobankId = &#63; from the database.
 	*
 	* @param groupId the group ID
@@ -1354,6 +1685,368 @@ public class D2BiobankUtil {
 	public static int countByBiobank(long groupId, long biobankId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByBiobank(groupId, biobankId);
+	}
+
+	/**
+	* Returns the number of d2 biobanks that the user has permission to view where groupId = &#63; and biobankId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param biobankId the biobank ID
+	* @return the number of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByBiobank(long groupId, long biobankId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByBiobank(groupId, biobankId);
+	}
+
+	/**
+	* Returns the d2 biobank where groupId = &#63; and bbmribiobankID = &#63; or throws a {@link at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException} if it could not be found.
+	*
+	* @param groupId the group ID
+	* @param bbmribiobankID the bbmribiobank i d
+	* @return the matching d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank findByBiobankBBMRIERICID(
+		long groupId, java.lang.String bbmribiobankID)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByBiobankBBMRIERICID(groupId, bbmribiobankID);
+	}
+
+	/**
+	* Returns the d2 biobank where groupId = &#63; and bbmribiobankID = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID
+	* @param bbmribiobankID the bbmribiobank i d
+	* @return the matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank fetchByBiobankBBMRIERICID(
+		long groupId, java.lang.String bbmribiobankID)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByBiobankBBMRIERICID(groupId, bbmribiobankID);
+	}
+
+	/**
+	* Returns the d2 biobank where groupId = &#63; and bbmribiobankID = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID
+	* @param bbmribiobankID the bbmribiobank i d
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank fetchByBiobankBBMRIERICID(
+		long groupId, java.lang.String bbmribiobankID, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByBiobankBBMRIERICID(groupId, bbmribiobankID,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the d2 biobank where groupId = &#63; and bbmribiobankID = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param bbmribiobankID the bbmribiobank i d
+	* @return the d2 biobank that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank removeByBiobankBBMRIERICID(
+		long groupId, java.lang.String bbmribiobankID)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .removeByBiobankBBMRIERICID(groupId, bbmribiobankID);
+	}
+
+	/**
+	* Returns the number of d2 biobanks where groupId = &#63; and bbmribiobankID = &#63;.
+	*
+	* @param groupId the group ID
+	* @param bbmribiobankID the bbmribiobank i d
+	* @return the number of matching d2 biobanks
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByBiobankBBMRIERICID(long groupId,
+		java.lang.String bbmribiobankID)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByBiobankBBMRIERICID(groupId, bbmribiobankID);
+	}
+
+	/**
+	* Returns all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @return the matching d2 biobanks
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> findByNotUUID(
+		long groupId, java.lang.String updateuuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByNotUUID(groupId, updateuuid);
+	}
+
+	/**
+	* Returns a range of all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @return the range of matching d2 biobanks
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> findByNotUUID(
+		long groupId, java.lang.String updateuuid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByNotUUID(groupId, updateuuid, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d2 biobanks
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> findByNotUUID(
+		long groupId, java.lang.String updateuuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNotUUID(groupId, updateuuid, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank findByNotUUID_First(
+		long groupId, java.lang.String updateuuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNotUUID_First(groupId, updateuuid, orderByComparator);
+	}
+
+	/**
+	* Returns the first d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank fetchByNotUUID_First(
+		long groupId, java.lang.String updateuuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByNotUUID_First(groupId, updateuuid, orderByComparator);
+	}
+
+	/**
+	* Returns the last d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank findByNotUUID_Last(
+		long groupId, java.lang.String updateuuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNotUUID_Last(groupId, updateuuid, orderByComparator);
+	}
+
+	/**
+	* Returns the last d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank fetchByNotUUID_Last(
+		long groupId, java.lang.String updateuuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByNotUUID_Last(groupId, updateuuid, orderByComparator);
+	}
+
+	/**
+	* Returns the d2 biobanks before and after the current d2 biobank in the ordered set where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param biobankId the primary key of the current d2 biobank
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank[] findByNotUUID_PrevAndNext(
+		long biobankId, long groupId, java.lang.String updateuuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByNotUUID_PrevAndNext(biobankId, groupId, updateuuid,
+			orderByComparator);
+	}
+
+	/**
+	* Returns all the d2 biobanks that the user has permission to view where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @return the matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByNotUUID(
+		long groupId, java.lang.String updateuuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByNotUUID(groupId, updateuuid);
+	}
+
+	/**
+	* Returns a range of all the d2 biobanks that the user has permission to view where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @return the range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByNotUUID(
+		long groupId, java.lang.String updateuuid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByNotUUID(groupId, updateuuid, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the d2 biobanks that the user has permissions to view where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param start the lower bound of the range of d2 biobanks
+	* @param end the upper bound of the range of d2 biobanks (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> filterFindByNotUUID(
+		long groupId, java.lang.String updateuuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByNotUUID(groupId, updateuuid, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the d2 biobanks before and after the current d2 biobank in the ordered set of d2 biobanks that the user has permission to view where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param biobankId the primary key of the current d2 biobank
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a d2 biobank with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank[] filterFindByNotUUID_PrevAndNext(
+		long biobankId, long groupId, java.lang.String updateuuid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByNotUUID_PrevAndNext(biobankId, groupId,
+			updateuuid, orderByComparator);
+	}
+
+	/**
+	* Removes all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByNotUUID(long groupId, java.lang.String updateuuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByNotUUID(groupId, updateuuid);
+	}
+
+	/**
+	* Returns the number of d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @return the number of matching d2 biobanks
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByNotUUID(long groupId, java.lang.String updateuuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByNotUUID(groupId, updateuuid);
+	}
+
+	/**
+	* Returns the number of d2 biobanks that the user has permission to view where groupId = &#63; and updateuuid &ne; &#63;.
+	*
+	* @param groupId the group ID
+	* @param updateuuid the updateuuid
+	* @return the number of matching d2 biobanks that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByNotUUID(long groupId,
+		java.lang.String updateuuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByNotUUID(groupId, updateuuid);
 	}
 
 	/**
