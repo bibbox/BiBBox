@@ -56,7 +56,7 @@ public class D2CollectionImpl extends D2CollectionBaseImpl {
 			} else {
 				returnvalue += "},{";
 			}
-			returnvalue += child.getChildD2CollectionAuiTreeStructure() + "label: '<span id=\"" + child.getBbmricollectionID() + "\">" + child.getCollectionName() + "</span>'";
+			returnvalue += child.getChildD2CollectionAuiTreeStructure() + "label: '<span id=\"treecollection-" + child.getD2collectionId() + "\">" + child.getCollectionName() + "</span>'";
 		}
 		if(!returnvalue.equals("")) {
 			returnvalue += "}],";

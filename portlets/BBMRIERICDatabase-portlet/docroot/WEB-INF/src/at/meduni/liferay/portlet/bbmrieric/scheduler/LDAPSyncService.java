@@ -82,7 +82,7 @@ public class LDAPSyncService implements MessageListener {
 		String uuid = PortalUUIDUtil.generate();
 		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [" + classpath_ + "::receive] Info started LDAP Sync Scheduler (" + uuid + ").");
 		
-		//connectLDAP(uuid);
+		connectLDAP(uuid);
 		try {
 			long companyId = Long.parseLong(PropsUtil.get("D2BiobankCompany"));
 	        long groupId = Long.parseLong(PropsUtil.get("D2BiobankGroup"));

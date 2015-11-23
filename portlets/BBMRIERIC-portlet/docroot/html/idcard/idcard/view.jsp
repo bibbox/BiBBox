@@ -170,9 +170,15 @@ if(!biobankId.equalsIgnoreCase("")) {
 					A short discription of the <%= biobank.getBiobankname() %> Biobank will follow soon.
 					<%
 				} else {
-					%>
-					<%= biobankDescription %>
-					<%			
+					if(biobankDescription.length() > 170) {
+						%>
+						<%= biobankDescription.subSequence(0, 170) %>...
+						<%
+					} else {
+						%>
+						<%= biobankDescription %>
+						<%
+					}
 				}
 				%>
 			</div>

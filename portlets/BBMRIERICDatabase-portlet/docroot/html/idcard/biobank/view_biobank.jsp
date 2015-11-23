@@ -60,7 +60,7 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 				} else {
 					if(biobank.getBiobankDescription().length() > 300) {
 						%>
-						<%= biobank.getBiobankDescription().subSequence(0, 300) %>
+						<%= biobank.getBiobankDescription().subSequence(0, 300) %>...
 						<%
 					} else {
 						%>
@@ -163,316 +163,28 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 	</div>
 	<br>&nbsp;
 	</div>
-	<br><br>
-	
+	<hr>
 	<%
 	List<D2Collection> collections = biobank.getCollections();
 	%>
-	
-	<div id="collectionTabs">
-		<ul class="nav nav-tabs">
-		    <% 
-		    String activeclass = "active";
-		    for(D2Collection collection : collections) {
-			    %>
-			    <li class="activeclass"><a href="#ctab<%= collection.getCompanyId() %>"><%= collection.getCollectionName() %></a></li>		 		    
-			    <%
-			    activeclass = "";
-		    }
-		    %>
-	    </ul>
-		<div class="tab-content">
-			<% 
-			String cssdisplayclass = "";
-		    for(D2Collection collection : collections) {
-			    %>
-			    <div id="ctab<%= collection.getCompanyId() %>" class="<%= cssdisplayclass %>">
-			    	<!-- Name & Collection Type -->
-			    	<%
-			    	String acronym = "";
-			    	if(!collection.getCollectionAcronym().equals("")) {
-			    		acronym = "(" + collection.getCollectionAcronym() + ")";
-			    	}
-			    	%>
-			    	<h1 style="color: #8bbf39;"><%= collection.getCollectionName() %> <%= acronym %></h1>
-			    	<!-- Main Contact -->
-			    	<h1 class="bbmriericrecentnews">Main Contact</h1>
-			    	<%
-					ContactInformation contactinformation_collection = collection.getContactInformation();
-					if(contactinformation != null) {
-						%>
-						<div>
-							<div class="fieldname">Name:</div>
-							<div class="fieldvalue"><%= contactinformation_collection.getContactFirstName() + " " + contactinformation_collection.getContactLastName() %></div>
-							<div style='content: "";clear: both;display: table;'></div> 
-						</div>
-						<div>
-							<div class="fieldname">E-Mail:</div>
-							<div class="fieldvalue"><a href='<%= "mailto:" + contactinformation_collection.getContactEmail() %>'><%= contactinformation_collection.getContactEmail() %></a></div>
-							<div style='content: "";clear: both;display: table;'></div> 
-						</div>
-						<%
-						if(!contactinformation_collection.getHtmlAddress().equalsIgnoreCase("")) {
-							%>
-							<div>
-								<div class="fieldname">Address:</div>
-								<div class="fieldvalue"><%= contactinformation_collection.getHtmlAddress() %></div>
-								<div style='content: "";clear: both;display: table;'></div> 
-							</div>
-							<%
-						}
-						%>
-						<%
-						if(!contactinformation_collection.getContactPhone().equalsIgnoreCase("")) {
-							%>
-							<div>
-								<div class="fieldname">Phone:</div>
-								<div class="fieldvalue"><%= contactinformation_collection.getContactPhone() %></div>
-								<div style='content: "";clear: both;display: table;'></div> 
-							</div>
-							<%
-						}
-						%>
-						<%
-					}
-					%>
-			    	<div style='content: "";clear: both;display: table;'></div>
-					<br>
-			    	<!-- Overview -->
-			    	<h1 class="bbmriericrecentnews">Overview</h1>
-			    	<div>
-						<div class="fieldname">Head:</div>
-						<div class="fieldvalue"><%= collection.getCollectionHeadFirstName() + " " + collection.getCollectionHeadLastName() %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-					<div>
-						<div class="fieldname">Collection Type:</div>
-						<div class="fieldvalue"><%= collection.getCollectionTypeHTML() %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-					<div>
-						<div class="fieldname">Collection Size:</div>
-						<%
-						String size = "";
-						if(collection.getCollectionSize() != 0) {
-							size += collection.getCollectionSize() + " Samples";
-		    			} else {
-		    				if(collection.getCollectionOrderOfMagnitude() ==  0) {
-		    					size = "< 10 Samples";
-		    				} else if(collection.getCollectionOrderOfMagnitude() ==  1) {
-		    					size = "10 - 100 Samples";
-		    				} else if(collection.getCollectionOrderOfMagnitude() ==  2) {
-		    					size = "100 - 1.000 Samples";
-		    				} else if(collection.getCollectionOrderOfMagnitude() ==  3) {
-		    					size = "1.000 - 10.000 Samples";
-		    				} else if(collection.getCollectionOrderOfMagnitude() ==  4) {
-		    					size = "10.000 - 100.000 Samples";
-		    				} else if(collection.getCollectionOrderOfMagnitude() ==  5) {
-		    					size = "100.000 - 1.000.000 Samples";
-		    				} else if(collection.getCollectionOrderOfMagnitude() ==  6) {
-		    					size = "1.000.000 - 10.000.000 Samples";
-		    				} else if(collection.getCollectionOrderOfMagnitude() ==  7) {
-		    					size = "10.000.000 - 100.000.000 Samples";
-		    				} else if(collection.getCollectionOrderOfMagnitude() ==  8) {
-		    					size = "100.000.000 - 1.000.000.000 Samples";
-		    				} else  {
-		    					size = "Sample size not specified";
-		    				}
-		    			}
-						%>
-						<div class="fieldvalue"><%= size %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-					<%
-					if(collection.getCollectionAgeLow() != 0 || collection.getCollectionAgeHigh() != 0) {
-						%>
-						<div>
-							<div class="fieldname">Collection age distribution:</div>
-							<div class="fieldvalue"><%= collection.getCollectionAgeLow() + " - " + collection.getCollectionAgeHigh() + collection.getCollectionAgeUnit() %></div>
-							<div style='content: "";clear: both;display: table;'></div> 
-						</div>
-						<%
-		    		}
-					%>
-					<%
-					if(collection.getCollectionSexFemale() || collection.getCollectionSexMale() || collection.getCollectionSexUndiferrentiated() || collection.getCollectionSexUnknown()) {
-						String splitter = "";
-						%>
-						<div>
-							<div class="fieldname">Gender:</div>
-							<div class="fieldvalue">
-								<%
-								if(collection.getCollectionSexFemale()) {
-									%>
-									<%= splitter %>Female
-									<%
-									splitter = ", ";
-								}
-								if(collection.getCollectionSexMale()) {
-									%>
-									<%= splitter %>Male
-									<%
-									splitter = ", ";
-								}
-								if(collection.getCollectionSexUndiferrentiated()) {
-									%>
-									<%= splitter %>Undiferrentiated
-									<%
-									splitter = ", ";
-								}
-								if(collection.getCollectionSexUnknown()) {
-									%>
-									<%= splitter %>Unknown
-									<%
-									splitter = ", ";
-								}
-								%>
-							</div>
-							<div style='content: "";clear: both;display: table;'></div> 
-						</div>
-						<%
-		    		}
-					%>
-					<div>
-						<div class="fieldname">Collection storage temperature:</div>
-						<div class="fieldvalue"><%= collection.getCollectionTemeratureHTML() %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-					<div>
-						<div class="fieldname">Collection Description:</div>
-						<div class="fieldvalue"><%= collection.getCollectionDescription() %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-			    	<!-- Material Type -->
-			    	<h1 class="bbmriericrecentnews">Material Type</h1>
-			    	<div class="fieldvalue" style="width: 545px;"><%= collection.getCollectionMaterialTypeHTML() %></div>
-					<div style='content: "";clear: both;display: table;'></div> 
-			    	<!-- Available Data -->
-			    	<h1 class="bbmriericrecentnews">Available Data</h1>
-			    	<div class="fieldvalue" style="width: 545px;"><%= collection.getCollectionDataAvailableHTML() %></div>
-					<div style='content: "";clear: both;display: table;'></div> 
-			    	<!-- Available Diagnosis -->
-			    	<h1 class="bbmriericrecentnews">Available Diagnosis</h1>
-			    	<div class="fieldvalue" style="width: 545px;"><%= collection.getDiagnosisAvailable().replaceAll("urn:miriam:", "") %></div>
-					<div style='content: "";clear: both;display: table;'></div> 
-					<!-- Access Condition -->
-					<h1 class="bbmriericrecentnews">Access Condition</h1>
-					<div>
-						<%
-						String display_access = "";
-						if(collection.getCollectionSampleAccessFee()) {
-							display_access = "yes";
-						} else {
-							display_access = "no";
-						}
-						%>
-						<div class="fieldname">Sample Access Fee:</div>
-						<div class="fieldvalue"><%= display_access %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-					<div>
-						<%
-						display_access = "";
-						if(collection.getCollectionSampleAccessJointProjects()) {
-							display_access = "yes";
-						} else {
-							display_access = "no";
-						}
-						%>
-						<div class="fieldname">Sample Access on Joint Projects:</div>
-						<div class="fieldvalue"><%= display_access %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-					<%
-					if(!collection.getCollectionSampleAccessDescription().equals("")) {
-						%>
-						<div>
-							<div class="fieldname">Sample Access Rules:</div>
-							<div class="fieldvalue"><%= collection.getCollectionSampleAccessDescription() %></div>
-							<div style='content: "";clear: both;display: table;'></div> 
-						</div>
-						<%
-					}
-					%>
-					<%
-					if(!collection.getCollectionSampleAccessURI().equals("")) {
-						%>
-						<div>
-							<div class="fieldname">URL for access policy for the samples:</div>
-							<div class="fieldvalue"><%= collection.getCollectionSampleAccessURI() %></div>
-							<div style='content: "";clear: both;display: table;'></div> 
-						</div>
-						<%
-					}
-					%>
-					<div>
-						<%
-						display_access = "";
-						if(collection.getCollectionDataAccessFee()) {
-							display_access = "yes";
-						} else {
-							display_access = "no";
-						}
-						%>
-						<div class="fieldname">Data Access Fee:</div>
-						<div class="fieldvalue"><%= display_access %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-					<div>
-						<%
-						display_access = "";
-						if(collection.getCollectionDataAccessJointProjects()) {
-							display_access = "yes";
-						} else {
-							display_access = "no";
-						}
-						%>
-						<div class="fieldname">Data Access on Joint Projects:</div>
-						<div class="fieldvalue"><%= display_access %></div>
-						<div style='content: "";clear: both;display: table;'></div> 
-					</div>
-					<%
-					if(!collection.getCollectionDataAccessDescription().equals("")) {
-						%>
-						<div>
-							<div class="fieldname">Access Rules:</div>
-							<div class="fieldvalue"><%= collection.getCollectionDataAccessDescription() %></div>
-							<div style='content: "";clear: both;display: table;'></div> 
-						</div>
-						<%
-					}
-					%>
-					<%
-					if(!collection.getCollectionDataAccessURI().equals("")) {
-						%>
-						<div>
-							<div class="fieldname">URL for access policy for the data:</div>
-							<div class="fieldvalue"><%= collection.getCollectionDataAccessURI() %></div>
-							<div style='content: "";clear: both;display: table;'></div> 
-						</div>
-						<%
-					}
-					%>
-			    </div>
-			    <%
-			    cssdisplayclass = "tab-pane";
-		    }
-		    %>
-		</div>
-	</div>
 
-
-<div id="collectionTreeView"></div>
+<div id="collectionTreeView" style="margin-top: 20px;margin-bottom: 15px;"></div>
 
 <style>
 .collection-view-hidden {
 	display: none;
 }
+.collection-tree-selected { 
+	background: rgba(237, 102, 10,0.4);
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 5px;
+}
 </style>
 
-	<div class="collection-view">
+	<div class="collections-view">
 	<% 
-			cssdisplayclass = "";
+			String cssdisplayclass = "collection-view";
 		    for(D2Collection collection : collections) {
 			    %>
 			    <div id="collection-<%= collection.getD2collectionId() %>" class="<%= cssdisplayclass %>">
@@ -744,7 +456,7 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 					%>
 			    </div>
 			    <%
-			    cssdisplayclass = "collection-view-hidden";
+			    cssdisplayclass = "collection-view collection-view-hidden";
 		    }
 		    %>
 		</div>
@@ -757,11 +469,14 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 <%
 List<D2Collection> rootcollections = biobank.getRootCollections();
 String collectiontree = "";
+String select_css = "collection-tree-selected";
 for(D2Collection rootcollection : rootcollections) {
-	collectiontree += "{" + rootcollection.getChildD2CollectionAuiTreeStructure() + "expanded: true,label: '<span id=\"" + rootcollection.getBbmricollectionID() + "\">" + rootcollection.getCollectionName() + "</span>'},";
+	collectiontree += "{" + rootcollection.getChildD2CollectionAuiTreeStructure() + "expanded: true,label: '<span id=\"treecollection-" + rootcollection.getD2collectionId() + "\" class=\"" + select_css + "\">" + rootcollection.getCollectionName() + "</span>'},";
+	select_css = "";
 }
 %>
 
+<!-- Create Collection Tree -->
 <aui:script>
 YUI().use(
   'aui-tree-view',
@@ -776,6 +491,7 @@ YUI().use(
   }
 );
 </aui:script>  
+<!-- Display the selected Collection -->
 <aui:script>
 YUI().use('aui-node',function(Y) {
 	var nodes = Y.all('.tree-node');
@@ -787,20 +503,12 @@ YUI().use('aui-node',function(Y) {
       	if(id.startsWith('yui_')) {
       		id = node.get('parentNode').one('span').one('span').get("id");
       	}
-      	Y.all('collection-view').all('div').addClass('collection-view-hidden');
+      	id = id.replace("treecollection-", "");
+      	Y.all('.collection-view').addClass('collection-view-hidden');
+      	Y.one('#collection-' + id).removeClass('collection-view-hidden');
+      	Y.all('.collection-tree-selected').removeClass('collection-tree-selected');
+      	Y.one('#treecollection-' + id).addClass('collection-tree-selected');
       }
     );
 });
 </aui:script>    
-<aui:script>       
-YUI().use(
-  'aui-tabview',
-  function(Y) {
-    new Y.TabView(
-      {
-        srcNode: '#collectionTabs'
-      }
-    ).render();
-  }
-);
-</aui:script>
