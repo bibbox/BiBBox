@@ -38,7 +38,7 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(83);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -122,6 +122,8 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 		sb.append(biobankNonHuman);
 		sb.append(", biobankCollection=");
 		sb.append(biobankCollection);
+		sb.append(", biobankType=");
+		sb.append(biobankType);
 		sb.append("}");
 
 		return sb.toString();
@@ -310,6 +312,13 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 		d2BiobankImpl.setBiobankNonHuman(biobankNonHuman);
 		d2BiobankImpl.setBiobankCollection(biobankCollection);
 
+		if (biobankType == null) {
+			d2BiobankImpl.setBiobankType(StringPool.BLANK);
+		}
+		else {
+			d2BiobankImpl.setBiobankType(biobankType);
+		}
+
 		d2BiobankImpl.resetOriginalValues();
 
 		return d2BiobankImpl;
@@ -358,6 +367,7 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 		biobankResearchStudy = objectInput.readBoolean();
 		biobankNonHuman = objectInput.readBoolean();
 		biobankCollection = objectInput.readBoolean();
+		biobankType = objectInput.readUTF();
 	}
 
 	@Override
@@ -524,6 +534,13 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 		objectOutput.writeBoolean(biobankResearchStudy);
 		objectOutput.writeBoolean(biobankNonHuman);
 		objectOutput.writeBoolean(biobankCollection);
+
+		if (biobankType == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(biobankType);
+		}
 	}
 
 	public String uuid;
@@ -567,4 +584,5 @@ public class D2BiobankCacheModel implements CacheModel<D2Biobank>,
 	public boolean biobankResearchStudy;
 	public boolean biobankNonHuman;
 	public boolean biobankCollection;
+	public String biobankType;
 }

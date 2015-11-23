@@ -31,4 +31,16 @@ public interface D2Biobank extends D2BiobankModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public at.meduni.liferay.portlet.bbmrieric.model.ContactInformation getContactInformation();
+
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection> getCollections();
+
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection> getRootCollections();
+
+	public int getCollectionsCount();
+
+	/**
+	* @return
+	*/
+	public java.lang.String getBiobankJavascriptTable();
 }

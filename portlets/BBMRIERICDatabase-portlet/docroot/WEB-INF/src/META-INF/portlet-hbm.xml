@@ -3,7 +3,9 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.BioBank" />
+	<import class="at.meduni.liferay.portlet.bbmrieric.model.ContactInformation" />
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.D2Biobank" />
+	<import class="at.meduni.liferay.portlet.bbmrieric.model.D2Collection" />
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscription" />
 	<import class="at.meduni.liferay.portlet.bbmrieric.model.SearchIndex" />
 	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.BioBankImpl" table="bbmrieric.biobank">
@@ -20,6 +22,29 @@
 		<property name="biobankdescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biobankjuristicperson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="UUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.ContactInformationImpl" table="bbmrieric.contactinformation">
+		<cache usage="read-write" />
+		<id name="contactinformationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updateuuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactEmail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactFirstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactLastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactZIP" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactCity" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl" table="bbmrieric.d2biobank">
 		<cache usage="read-write" />
@@ -66,6 +91,96 @@
 		<property name="biobankResearchStudy" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="biobankNonHuman" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="biobankCollection" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="biobankType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.D2CollectionImpl" table="bbmrieric.d2collection">
+		<cache usage="read-write" />
+		<id name="d2collectionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="biobankId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="parentd2collectionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updateuuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bbmricollectionID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bbmriparentcollectionID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bbmribiobankID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="materialStoredDNA" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredPlasma" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredSerum" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredUrine" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredSaliva" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredFaeces" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredRNA" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredBlood" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredTissueFrozen" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredTissueFFPE" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredImmortalizedCellLines" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredIsolatedPathogen" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="materialStoredOther" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionTypeCaseControl" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypeCohort" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypeCrossSectional" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypeLongitudinal" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypeTwinStudy" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypeQualityControl" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypePopulationBased" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypeDiseaseSpecific" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypeBirthCohort" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionTypeOther" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionOrderOfMagnitude" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="bioresourceReference" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactIDRef" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactPriority" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="biobankNetworkIDRef" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geoLatitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geoLongitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collaborationPartnersCommercial" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collaborationPartnersNonforprofit" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAcronym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionSexMale" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionSexFemale" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionSexUnknown" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionSexUndiferrentiated" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAgeLow" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="collectionAgeHigh" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="collectionAgeUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionAvailableBiologicalSamples" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAvailableSurveyData" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAvailableImagingData" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAvailableMedicalRecords" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAvailableNationalRegistries" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAvailableGenealogicalRecords" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAvailablePhysioBiochemMeasurements" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionAvailableOther" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="temperatureRoom" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="temperature2to10" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="temperature18to35" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="temperature60to85" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="temperatureLN" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="temperatureOther" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diagnosisAvailable" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionHeadFirstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionHeadLastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionHeadRole" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionSampleAccessFee" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionSampleAccessJointProjects" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionSampleAccessDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionSampleAccessURI" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionDataAccessFee" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionDataAccessJointProjects" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="collectionDataAccessDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionDataAccessURI" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="collectionSize" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="collectionSizeTimestamp" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionImpl" table="bbmrieric.diseasediscription">
 		<cache usage="read-write" />

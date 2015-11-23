@@ -14,14 +14,28 @@ $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
 .aui {
+	background-color: transparent;
+}
+
+.bbmri-eric-background {
    background-color: #0C2848;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
 }
-
+.aui .bbmri-eric-body {
+	background-color: #0C2848;
+	min-width: 1200px;
+	padding-left: 0;
+    padding-right: 0;
+    -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
 /* ---------- New Header ----------- */
+
 .bbmri_eric_header-maincontainer {
 	height: 255px;
 	margin-bottom: 0;
@@ -982,6 +996,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 @import url(custom_tooltip.css);
 @import url(custom_dropdown.css);
 @import url(custom_footer.css);
+@import url(custom_editor.css);
 
 .container-fluid .toggler-header-collapsed::before {
     content: "+";
@@ -1001,3 +1016,4 @@ $dockbarOpenGradientStart: #0EA6F9;
     color: #ffffff;
     border-radius: 5px;
 }
+

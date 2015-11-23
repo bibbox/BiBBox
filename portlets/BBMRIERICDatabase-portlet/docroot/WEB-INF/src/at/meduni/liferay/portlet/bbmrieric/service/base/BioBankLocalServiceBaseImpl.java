@@ -17,7 +17,9 @@ package at.meduni.liferay.portlet.bbmrieric.service.base;
 import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
 import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalService;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.BioBankPersistence;
+import at.meduni.liferay.portlet.bbmrieric.service.persistence.ContactInformationPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankPersistence;
+import at.meduni.liferay.portlet.bbmrieric.service.persistence.D2CollectionPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.DiseaseDiscriptionPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.SearchIndexPersistence;
 
@@ -314,6 +316,44 @@ public abstract class BioBankLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the contact information local service.
+	 *
+	 * @return the contact information local service
+	 */
+	public at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalService getContactInformationLocalService() {
+		return contactInformationLocalService;
+	}
+
+	/**
+	 * Sets the contact information local service.
+	 *
+	 * @param contactInformationLocalService the contact information local service
+	 */
+	public void setContactInformationLocalService(
+		at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalService contactInformationLocalService) {
+		this.contactInformationLocalService = contactInformationLocalService;
+	}
+
+	/**
+	 * Returns the contact information persistence.
+	 *
+	 * @return the contact information persistence
+	 */
+	public ContactInformationPersistence getContactInformationPersistence() {
+		return contactInformationPersistence;
+	}
+
+	/**
+	 * Sets the contact information persistence.
+	 *
+	 * @param contactInformationPersistence the contact information persistence
+	 */
+	public void setContactInformationPersistence(
+		ContactInformationPersistence contactInformationPersistence) {
+		this.contactInformationPersistence = contactInformationPersistence;
+	}
+
+	/**
 	 * Returns the d2 biobank local service.
 	 *
 	 * @return the d2 biobank local service
@@ -349,6 +389,44 @@ public abstract class BioBankLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setD2BiobankPersistence(
 		D2BiobankPersistence d2BiobankPersistence) {
 		this.d2BiobankPersistence = d2BiobankPersistence;
+	}
+
+	/**
+	 * Returns the d2 collection local service.
+	 *
+	 * @return the d2 collection local service
+	 */
+	public at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService getD2CollectionLocalService() {
+		return d2CollectionLocalService;
+	}
+
+	/**
+	 * Sets the d2 collection local service.
+	 *
+	 * @param d2CollectionLocalService the d2 collection local service
+	 */
+	public void setD2CollectionLocalService(
+		at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService d2CollectionLocalService) {
+		this.d2CollectionLocalService = d2CollectionLocalService;
+	}
+
+	/**
+	 * Returns the d2 collection persistence.
+	 *
+	 * @return the d2 collection persistence
+	 */
+	public D2CollectionPersistence getD2CollectionPersistence() {
+		return d2CollectionPersistence;
+	}
+
+	/**
+	 * Sets the d2 collection persistence.
+	 *
+	 * @param d2CollectionPersistence the d2 collection persistence
+	 */
+	public void setD2CollectionPersistence(
+		D2CollectionPersistence d2CollectionPersistence) {
+		this.d2CollectionPersistence = d2CollectionPersistence;
 	}
 
 	/**
@@ -607,10 +685,18 @@ public abstract class BioBankLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalService bioBankLocalService;
 	@BeanReference(type = BioBankPersistence.class)
 	protected BioBankPersistence bioBankPersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalService.class)
+	protected at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalService contactInformationLocalService;
+	@BeanReference(type = ContactInformationPersistence.class)
+	protected ContactInformationPersistence contactInformationPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService.class)
 	protected at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService d2BiobankLocalService;
 	@BeanReference(type = D2BiobankPersistence.class)
 	protected D2BiobankPersistence d2BiobankPersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService.class)
+	protected at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService d2CollectionLocalService;
+	@BeanReference(type = D2CollectionPersistence.class)
+	protected D2CollectionPersistence d2CollectionPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService.class)
 	protected at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService diseaseDiscriptionLocalService;
 	@BeanReference(type = DiseaseDiscriptionPersistence.class)

@@ -95,6 +95,7 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 		attributes.put("biobankResearchStudy", getBiobankResearchStudy());
 		attributes.put("biobankNonHuman", getBiobankNonHuman());
 		attributes.put("biobankCollection", getBiobankCollection());
+		attributes.put("biobankType", getBiobankType());
 
 		return attributes;
 	}
@@ -357,6 +358,12 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 
 		if (biobankCollection != null) {
 			setBiobankCollection(biobankCollection);
+		}
+
+		String biobankType = (String)attributes.get("biobankType");
+
+		if (biobankType != null) {
+			setBiobankType(biobankType);
 		}
 	}
 
@@ -1359,6 +1366,26 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 	}
 
 	/**
+	* Returns the biobank type of this d2 biobank.
+	*
+	* @return the biobank type of this d2 biobank
+	*/
+	@Override
+	public java.lang.String getBiobankType() {
+		return _d2Biobank.getBiobankType();
+	}
+
+	/**
+	* Sets the biobank type of this d2 biobank.
+	*
+	* @param biobankType the biobank type of this d2 biobank
+	*/
+	@Override
+	public void setBiobankType(java.lang.String biobankType) {
+		_d2Biobank.setBiobankType(biobankType);
+	}
+
+	/**
 	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
 	*/
 	@Override
@@ -1549,6 +1576,34 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_d2Biobank.persist();
+	}
+
+	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.ContactInformation getContactInformation() {
+		return _d2Biobank.getContactInformation();
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection> getCollections() {
+		return _d2Biobank.getCollections();
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection> getRootCollections() {
+		return _d2Biobank.getRootCollections();
+	}
+
+	@Override
+	public int getCollectionsCount() {
+		return _d2Biobank.getCollectionsCount();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public java.lang.String getBiobankJavascriptTable() {
+		return _d2Biobank.getBiobankJavascriptTable();
 	}
 
 	@Override

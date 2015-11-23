@@ -140,7 +140,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			projectionList.add(ProjectionFactoryUtil.groupProperty("searchindexkey"));
 		    //projectionList.add(ProjectionFactoryUtil.rowCount());
 		    dynamicQuery.setProjection(projectionList);
-		    List<Object> results = results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+		    List<Object> results = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
 		    /*for(Object result : results) {
 		    	System.out.println(result);	
 		    }*/

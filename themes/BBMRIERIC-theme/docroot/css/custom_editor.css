@@ -1,0 +1,24 @@
+.test-for-running {
+	background: #fdfdfd;
+	background-color: #fdfdfd;
+	color: red;
+}
+.cke_wysiwyg_frame .aui {
+	background-color: #FFFFFF;
+}
+.cke_wysiwyg_frame .aui, .cke_wysiwyg_div .aui, .aui .cke_editable, .dialog-iframe-root-node  {
+	background-color: #fdfdfd;
+    background: #fdfdfd;
+	background: -moz-linear-gradient(left,  #fdfdfd 0%, #d1d7e1 74%, #90959b 100%);
+	background: -webkit-linear-gradient(left,  #fdfdfd 0%,#d1d7e1 74%,#90959b 100%);
+	background: linear-gradient(to right,  #fdfdfd 0%,#d1d7e1 74%,#90959b 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd', endColorstr='#90959b',GradientType=1 );
+	-webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
+.test-for-running {
+	background-color: yellow;
+	color: blue;
+}

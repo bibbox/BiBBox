@@ -7066,6 +7066,7 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 		d2BiobankImpl.setBiobankResearchStudy(d2Biobank.isBiobankResearchStudy());
 		d2BiobankImpl.setBiobankNonHuman(d2Biobank.isBiobankNonHuman());
 		d2BiobankImpl.setBiobankCollection(d2Biobank.isBiobankCollection());
+		d2BiobankImpl.setBiobankType(d2Biobank.getBiobankType());
 
 		return d2BiobankImpl;
 	}

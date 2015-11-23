@@ -103,9 +103,10 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 			{ "biobankPopulation", Types.BOOLEAN },
 			{ "biobankResearchStudy", Types.BOOLEAN },
 			{ "biobankNonHuman", Types.BOOLEAN },
-			{ "biobankCollection", Types.BOOLEAN }
+			{ "biobankCollection", Types.BOOLEAN },
+			{ "biobankType", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bbmrieric.d2biobank (uuid_ VARCHAR(75) null,biobankId LONG not null primary key,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,updateuuid VARCHAR(75) null,contactIDRef VARCHAR(75) null,contactPriority LONG,bbmribiobankID VARCHAR(75) null,biobankName TEXT null,biobankJurisdicalPerson TEXT null,biobankCountry VARCHAR(75) null,biobankPartnerCharterSigned BOOLEAN,bioresourceReference VARCHAR(75) null,biobankNetworkIDRef VARCHAR(75) null,geoLatitude VARCHAR(75) null,geoLongitude VARCHAR(75) null,collaborationPartnersCommercial BOOLEAN,collaborationPartnersNonforprofit BOOLEAN,biobankITSupportAvailable BOOLEAN,biobankITStaffSize LONG,biobankISAvailable BOOLEAN,biobankHISAvailable BOOLEAN,biobankAcronym VARCHAR(75) null,biobankDescription TEXT null,biobankURL VARCHAR(500) null,biobankHeadFirstName VARCHAR(75) null,biobankHeadLastName VARCHAR(75) null,biobankHeadRole VARCHAR(75) null,biobankClinical BOOLEAN,biobankPopulation BOOLEAN,biobankResearchStudy BOOLEAN,biobankNonHuman BOOLEAN,biobankCollection BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table bbmrieric.d2biobank (uuid_ VARCHAR(75) null,biobankId LONG not null primary key,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,updateuuid VARCHAR(75) null,contactIDRef VARCHAR(75) null,contactPriority LONG,bbmribiobankID VARCHAR(75) null,biobankName TEXT null,biobankJurisdicalPerson TEXT null,biobankCountry VARCHAR(75) null,biobankPartnerCharterSigned BOOLEAN,bioresourceReference VARCHAR(75) null,biobankNetworkIDRef VARCHAR(75) null,geoLatitude VARCHAR(75) null,geoLongitude VARCHAR(75) null,collaborationPartnersCommercial BOOLEAN,collaborationPartnersNonforprofit BOOLEAN,biobankITSupportAvailable BOOLEAN,biobankITStaffSize LONG,biobankISAvailable BOOLEAN,biobankHISAvailable BOOLEAN,biobankAcronym VARCHAR(75) null,biobankDescription TEXT null,biobankURL VARCHAR(500) null,biobankHeadFirstName VARCHAR(75) null,biobankHeadLastName VARCHAR(75) null,biobankHeadRole VARCHAR(75) null,biobankClinical BOOLEAN,biobankPopulation BOOLEAN,biobankResearchStudy BOOLEAN,biobankNonHuman BOOLEAN,biobankCollection BOOLEAN,biobankType VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table bbmrieric.d2biobank";
 	public static final String ORDER_BY_JPQL = " ORDER BY d2Biobank.biobankId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bbmrieric.d2biobank.biobankId ASC";
@@ -214,6 +215,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		attributes.put("biobankResearchStudy", getBiobankResearchStudy());
 		attributes.put("biobankNonHuman", getBiobankNonHuman());
 		attributes.put("biobankCollection", getBiobankCollection());
+		attributes.put("biobankType", getBiobankType());
 
 		return attributes;
 	}
@@ -476,6 +478,12 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 
 		if (biobankCollection != null) {
 			setBiobankCollection(biobankCollection);
+		}
+
+		String biobankType = (String)attributes.get("biobankType");
+
+		if (biobankType != null) {
+			setBiobankType(biobankType);
 		}
 	}
 
@@ -1150,6 +1158,21 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 	}
 
 	@Override
+	public String getBiobankType() {
+		if (_biobankType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _biobankType;
+		}
+	}
+
+	@Override
+	public void setBiobankType(String biobankType) {
+		_biobankType = biobankType;
+	}
+
+	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
 				D2Biobank.class.getName()));
@@ -1315,6 +1338,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		d2BiobankImpl.setBiobankResearchStudy(getBiobankResearchStudy());
 		d2BiobankImpl.setBiobankNonHuman(getBiobankNonHuman());
 		d2BiobankImpl.setBiobankCollection(getBiobankCollection());
+		d2BiobankImpl.setBiobankType(getBiobankType());
 
 		d2BiobankImpl.resetOriginalValues();
 
@@ -1620,12 +1644,20 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 
 		d2BiobankCacheModel.biobankCollection = getBiobankCollection();
 
+		d2BiobankCacheModel.biobankType = getBiobankType();
+
+		String biobankType = d2BiobankCacheModel.biobankType;
+
+		if ((biobankType != null) && (biobankType.length() == 0)) {
+			d2BiobankCacheModel.biobankType = null;
+		}
+
 		return d2BiobankCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(83);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1709,6 +1741,8 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		sb.append(getBiobankNonHuman());
 		sb.append(", biobankCollection=");
 		sb.append(getBiobankCollection());
+		sb.append(", biobankType=");
+		sb.append(getBiobankType());
 		sb.append("}");
 
 		return sb.toString();
@@ -1716,7 +1750,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(127);
+		StringBundler sb = new StringBundler(130);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.bbmrieric.model.D2Biobank");
@@ -1886,6 +1920,10 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 			"<column><column-name>biobankCollection</column-name><column-value><![CDATA[");
 		sb.append(getBiobankCollection());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>biobankType</column-name><column-value><![CDATA[");
+		sb.append(getBiobankType());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1951,6 +1989,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 	private boolean _biobankResearchStudy;
 	private boolean _biobankNonHuman;
 	private boolean _biobankCollection;
+	private String _biobankType;
 	private long _columnBitmask;
 	private D2Biobank _escapedModel;
 }

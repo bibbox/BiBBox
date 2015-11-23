@@ -71,6 +71,7 @@ public class D2BiobankSoap implements Serializable {
 		soapModel.setBiobankResearchStudy(model.getBiobankResearchStudy());
 		soapModel.setBiobankNonHuman(model.getBiobankNonHuman());
 		soapModel.setBiobankCollection(model.getBiobankCollection());
+		soapModel.setBiobankType(model.getBiobankType());
 
 		return soapModel;
 	}
@@ -498,6 +499,14 @@ public class D2BiobankSoap implements Serializable {
 		_biobankCollection = biobankCollection;
 	}
 
+	public String getBiobankType() {
+		return _biobankType;
+	}
+
+	public void setBiobankType(String biobankType) {
+		_biobankType = biobankType;
+	}
+
 	private String _uuid;
 	private long _biobankId;
 	private int _status;
@@ -539,4 +548,5 @@ public class D2BiobankSoap implements Serializable {
 	private boolean _biobankResearchStudy;
 	private boolean _biobankNonHuman;
 	private boolean _biobankCollection;
+	private String _biobankType;
 }

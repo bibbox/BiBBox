@@ -121,6 +121,7 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 		attributes.put("biobankResearchStudy", getBiobankResearchStudy());
 		attributes.put("biobankNonHuman", getBiobankNonHuman());
 		attributes.put("biobankCollection", getBiobankCollection());
+		attributes.put("biobankType", getBiobankType());
 
 		return attributes;
 	}
@@ -383,6 +384,12 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 
 		if (biobankCollection != null) {
 			setBiobankCollection(biobankCollection);
+		}
+
+		String biobankType = (String)attributes.get("biobankType");
+
+		if (biobankType != null) {
+			setBiobankType(biobankType);
 		}
 	}
 
@@ -1434,6 +1441,127 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 	}
 
 	@Override
+	public String getBiobankType() {
+		return _biobankType;
+	}
+
+	@Override
+	public void setBiobankType(String biobankType) {
+		_biobankType = biobankType;
+
+		if (_d2BiobankRemoteModel != null) {
+			try {
+				Class<?> clazz = _d2BiobankRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBiobankType", String.class);
+
+				method.invoke(_d2BiobankRemoteModel, biobankType);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getCollectionsCount() {
+		try {
+			String methodName = "getCollectionsCount";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			Integer returnObj = (Integer)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection> getCollections() {
+		try {
+			String methodName = "getCollections";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection> returnObj =
+				(java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.ContactInformation getContactInformation() {
+		try {
+			String methodName = "getContactInformation";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			at.meduni.liferay.portlet.bbmrieric.model.ContactInformation returnObj =
+				(at.meduni.liferay.portlet.bbmrieric.model.ContactInformation)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.String getBiobankJavascriptTable() {
+		try {
+			String methodName = "getBiobankJavascriptTable";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection> getRootCollections() {
+		try {
+			String methodName = "getRootCollections";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection> returnObj =
+				(java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Collection>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
 				D2Biobank.class.getName()));
@@ -1637,6 +1765,7 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 		clone.setBiobankResearchStudy(getBiobankResearchStudy());
 		clone.setBiobankNonHuman(getBiobankNonHuman());
 		clone.setBiobankCollection(getBiobankCollection());
+		clone.setBiobankType(getBiobankType());
 
 		return clone;
 	}
@@ -1685,7 +1814,7 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(83);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1769,6 +1898,8 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 		sb.append(getBiobankNonHuman());
 		sb.append(", biobankCollection=");
 		sb.append(getBiobankCollection());
+		sb.append(", biobankType=");
+		sb.append(getBiobankType());
 		sb.append("}");
 
 		return sb.toString();
@@ -1776,7 +1907,7 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(127);
+		StringBundler sb = new StringBundler(130);
 
 		sb.append("<model><model-name>");
 		sb.append("at.meduni.liferay.portlet.bbmrieric.model.D2Biobank");
@@ -1946,6 +2077,10 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 			"<column><column-name>biobankCollection</column-name><column-value><![CDATA[");
 		sb.append(getBiobankCollection());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>biobankType</column-name><column-value><![CDATA[");
+		sb.append(getBiobankType());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1995,5 +2130,6 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 	private boolean _biobankResearchStudy;
 	private boolean _biobankNonHuman;
 	private boolean _biobankCollection;
+	private String _biobankType;
 	private BaseModel<?> _d2BiobankRemoteModel;
 }

@@ -15,7 +15,9 @@
 package at.meduni.liferay.portlet.bbmrieric.service;
 
 import at.meduni.liferay.portlet.bbmrieric.model.BioBankClp;
+import at.meduni.liferay.portlet.bbmrieric.model.ContactInformationClp;
 import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankClp;
+import at.meduni.liferay.portlet.bbmrieric.model.D2CollectionClp;
 import at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscriptionClp;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndexClp;
 
@@ -109,8 +111,16 @@ public class ClpSerializer {
 			return translateInputBioBank(oldModel);
 		}
 
+		if (oldModelClassName.equals(ContactInformationClp.class.getName())) {
+			return translateInputContactInformation(oldModel);
+		}
+
 		if (oldModelClassName.equals(D2BiobankClp.class.getName())) {
 			return translateInputD2Biobank(oldModel);
+		}
+
+		if (oldModelClassName.equals(D2CollectionClp.class.getName())) {
+			return translateInputD2Collection(oldModel);
 		}
 
 		if (oldModelClassName.equals(DiseaseDiscriptionClp.class.getName())) {
@@ -146,10 +156,30 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputContactInformation(BaseModel<?> oldModel) {
+		ContactInformationClp oldClpModel = (ContactInformationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getContactInformationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputD2Biobank(BaseModel<?> oldModel) {
 		D2BiobankClp oldClpModel = (D2BiobankClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getD2BiobankRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputD2Collection(BaseModel<?> oldModel) {
+		D2CollectionClp oldClpModel = (D2CollectionClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getD2CollectionRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -199,8 +229,18 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.bbmrieric.model.impl.ContactInformationImpl")) {
+			return translateOutputContactInformation(oldModel);
+		}
+
+		if (oldModelClassName.equals(
 					"at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl")) {
 			return translateOutputD2Biobank(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.bbmrieric.model.impl.D2CollectionImpl")) {
+			return translateOutputD2Collection(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -299,8 +339,18 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.meduni.liferay.portlet.bbmrieric.NoSuchContactInformationException")) {
+			return new at.meduni.liferay.portlet.bbmrieric.NoSuchContactInformationException();
+		}
+
+		if (className.equals(
 					"at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException")) {
 			return new at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException();
+		}
+
+		if (className.equals(
+					"at.meduni.liferay.portlet.bbmrieric.NoSuchD2CollectionException")) {
+			return new at.meduni.liferay.portlet.bbmrieric.NoSuchD2CollectionException();
 		}
 
 		if (className.equals(
@@ -326,12 +376,33 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateOutputContactInformation(
+		BaseModel<?> oldModel) {
+		ContactInformationClp newModel = new ContactInformationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setContactInformationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
 	public static Object translateOutputD2Biobank(BaseModel<?> oldModel) {
 		D2BiobankClp newModel = new D2BiobankClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setD2BiobankRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputD2Collection(BaseModel<?> oldModel) {
+		D2CollectionClp newModel = new D2CollectionClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setD2CollectionRemoteModel(oldModel);
 
 		return newModel;
 	}

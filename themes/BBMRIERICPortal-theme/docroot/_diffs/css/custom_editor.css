@@ -1,0 +1,193 @@
+.aui {
+	background-color: transparent;
+}
+
+.cke_wysiwyg_frame .aui, .cke_wysiwyg_div .aui, .aui .cke_editable, .dialog-iframe-root-node  {
+	background-color: #fdfdfd;
+    background: #fdfdfd;
+	background: -moz-linear-gradient(left,  #fdfdfd 0%, #d1d7e1 74%, #90959b 100%);
+	background: -webkit-linear-gradient(left,  #fdfdfd 0%,#d1d7e1 74%,#90959b 100%);
+	background: linear-gradient(to right,  #fdfdfd 0%,#d1d7e1 74%,#90959b 100%);
+
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd', endColorstr='#90959b',GradientType=1 );
+	-webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+	/* --- Header devinitions --- */
+	h1, .aui h1 a  {
+		font-size: 11.5pt;
+	   line-height: 16pt;
+	   font-weight: bold;
+	   color: #184B8A;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   text-transform: uppercase;
+	   margin: 0;
+	} 
+	.h1-node {
+	   font-size: 11.5pt;
+	   line-height: 16pt;
+	   font-weight: bold;
+	   color: #000000;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	} 
+	 h2, h2 a {
+		font-size: 10.5pt;
+		line-height: 16pt;
+		font-weight: bold;
+		color: #184B8A;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	}
+	h3, h3 a {
+		font-size: 9.5pt;
+	   line-height: 16pt;
+	   font-weight: bold;
+	   font-style:italic;
+	   color: #184B8A;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	} 
+	h4, h4 a  {
+		font-size: 9.5pt;
+		line-height: 16pt;
+		font-style:italic;
+		font-weight: normal;
+		color: #184B8A;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	}
+	.h4-cv {
+		font-size: 9.5pt;
+		line-height: 16pt;
+		font-style:italic;
+		font-weight: normal;
+		color: #000000;
+	    font-family: 'PT Sans', normal, sans-serif;
+	    margin: 0;
+	    text-transform: uppercase;
+	}
+	h5, h5 a {
+		font-size: 9.5pt;
+	   line-height: 16pt;
+	   font-weight: normal;
+	   color: #505050;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	}
+	h6, h6 a {
+		font-size: 9.5pt;
+		line-height: 16pt;
+		font-weight: normal;
+		color: #505050;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	}
+	a, a:hover {
+	    color: #184B8A;
+	    text-decoration:none;
+	}
+}
+
+.aui .cke_editable h3 {
+	color: green;
+
+	}
+	
+.aui .cke_editable {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+	/* --- Header devinitions --- */
+	h1, h1 a  {
+		font-size: 11.5pt;
+	   line-height: 16pt;
+	   font-weight: bold;
+	   color: #184B8A;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   text-transform: uppercase;
+	   margin: 0;
+	} 
+	.h1-node {
+	   font-size: 11.5pt;
+	   line-height: 16pt;
+	   font-weight: bold;
+	   color: #000000;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	} 
+	h2, h2 a {
+		font-size: 10.5pt;
+		line-height: 16pt;
+		font-weight: bold;
+		color: #184B8A;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	}
+	h3, h3 a {
+		font-size: 9.5pt;
+	   line-height: 16pt;
+	   font-weight: bold;
+	   font-style:italic;
+	   color: #184B8A;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	} 
+	h4, h4 a  {
+		font-size: 9.5pt;
+		line-height: 16pt;
+		font-style:italic;
+		font-weight: normal;
+		color: #184B8A;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	}
+	.h4-cv {
+		font-size: 9.5pt;
+		line-height: 16pt;
+		font-style:italic;
+		font-weight: normal;
+		color: #000000;
+	    font-family: 'PT Sans', normal, sans-serif;
+	    margin: 0;
+	    text-transform: uppercase;
+	}
+	h5, h5 a {
+		font-size: 9.5pt;
+	   line-height: 16pt;
+	   font-weight: normal;
+	   color: #505050;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	}
+	h6, h6 a {
+		font-size: 9.5pt;
+		line-height: 16pt;
+		font-weight: normal;
+		color: #505050;
+	   font-family: 'PT Sans', normal, sans-serif;
+	   text-align:initial;
+	   margin: 0;
+	}
+	a, a:hover {
+	    color: #184B8A;
+	    text-decoration:none;
+	}
+}

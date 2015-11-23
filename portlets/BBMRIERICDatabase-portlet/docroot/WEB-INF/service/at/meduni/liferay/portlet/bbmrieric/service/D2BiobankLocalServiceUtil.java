@@ -407,7 +407,7 @@ public class D2BiobankLocalServiceUtil {
 		java.lang.String biobankHeadLastName, java.lang.String biobankHeadRole,
 		boolean biobankClinical, boolean biobankPopulation,
 		boolean biobankResearchStudy, boolean biobankNonHuman,
-		boolean biobankCollection,
+		boolean biobankCollection, java.lang.String biobankType,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addD2Biobank(biobankId, companyId, groupId, userId,
@@ -421,7 +421,7 @@ public class D2BiobankLocalServiceUtil {
 			biobankURL, biobankHeadFirstName, biobankHeadLastName,
 			biobankHeadRole, biobankClinical, biobankPopulation,
 			biobankResearchStudy, biobankNonHuman, biobankCollection,
-			serviceContext);
+			biobankType, serviceContext);
 	}
 
 	/**
@@ -457,7 +457,7 @@ public class D2BiobankLocalServiceUtil {
 		java.lang.String biobankHeadLastName, java.lang.String biobankHeadRole,
 		boolean biobankClinical, boolean biobankPopulation,
 		boolean biobankResearchStudy, boolean biobankNonHuman,
-		boolean biobankCollection,
+		boolean biobankCollection, java.lang.String biobankType,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateD2Biobank(biobankId, userId, biobankName,
@@ -471,7 +471,7 @@ public class D2BiobankLocalServiceUtil {
 			biobankURL, biobankHeadFirstName, biobankHeadLastName,
 			biobankHeadRole, biobankClinical, biobankPopulation,
 			biobankResearchStudy, biobankNonHuman, biobankCollection,
-			serviceContext);
+			biobankType, serviceContext);
 	}
 
 	/**
@@ -484,9 +484,30 @@ public class D2BiobankLocalServiceUtil {
 		return getService().deleteD2Biobank(biobankId, serviceContext);
 	}
 
+	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getD2Biobanks(
+		java.lang.String keyword, java.lang.String country,
+		java.lang.String materialtype, java.lang.String diagnosisavailable,
+		java.lang.String biobanksize, java.lang.String typeofbiobank,
+		java.lang.String typeofcollection) {
+		return getService()
+				   .getD2Biobanks(keyword, country, materialtype,
+			diagnosisavailable, biobanksize, typeofbiobank, typeofcollection);
+	}
+
 	public static java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getLDAPNotUpdatedBiobanks(
 		long groupId, java.lang.String ldapupdateuuid) {
 		return getService().getLDAPNotUpdatedBiobanks(groupId, ldapupdateuuid);
+	}
+
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getBiobankWithLdapUpdate(
+		long biobankId) {
+		return getService().getBiobankWithLdapUpdate(biobankId);
+	}
+
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankFromLDAP(
+		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2biobank,
+		javax.naming.directory.Attributes attrs) {
+		return getService().getD2BiobankFromLDAP(d2biobank, attrs);
 	}
 
 	public static void clearService() {

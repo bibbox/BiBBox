@@ -24,6 +24,38 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.ContactInformationModelImpl">
+		<attributes>
+			<id name="contactinformationId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="updateuuid" />
+			<basic name="contactID" />
+			<basic name="contactEmail" />
+			<basic name="contactCountry" />
+			<basic name="contactFirstName" />
+			<basic name="contactLastName" />
+			<basic name="contactPhone" />
+			<basic name="contactAddress" />
+			<basic name="contactZIP" />
+			<basic name="contactCity" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankModelImpl">
 		<attributes>
 			<id name="biobankId" />
@@ -75,10 +107,109 @@
 			<basic name="biobankResearchStudy" />
 			<basic name="biobankNonHuman" />
 			<basic name="biobankCollection" />
+			<basic name="biobankType" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2CollectionModelImpl">
+		<attributes>
+			<id name="d2collectionId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="biobankId" />
+			<basic name="parentd2collectionId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="updateuuid" />
+			<basic name="bbmricollectionID" />
+			<basic name="bbmriparentcollectionID" />
+			<basic name="bbmribiobankID" />
+			<basic name="collectionName" />
+			<basic name="materialStoredDNA" />
+			<basic name="materialStoredPlasma" />
+			<basic name="materialStoredSerum" />
+			<basic name="materialStoredUrine" />
+			<basic name="materialStoredSaliva" />
+			<basic name="materialStoredFaeces" />
+			<basic name="materialStoredRNA" />
+			<basic name="materialStoredBlood" />
+			<basic name="materialStoredTissueFrozen" />
+			<basic name="materialStoredTissueFFPE" />
+			<basic name="materialStoredImmortalizedCellLines" />
+			<basic name="materialStoredIsolatedPathogen" />
+			<basic name="materialStoredOther" />
+			<basic name="collectionTypeCaseControl" />
+			<basic name="collectionTypeCohort" />
+			<basic name="collectionTypeCrossSectional" />
+			<basic name="collectionTypeLongitudinal" />
+			<basic name="collectionTypeTwinStudy" />
+			<basic name="collectionTypeQualityControl" />
+			<basic name="collectionTypePopulationBased" />
+			<basic name="collectionTypeDiseaseSpecific" />
+			<basic name="collectionTypeBirthCohort" />
+			<basic name="collectionTypeOther" />
+			<basic name="collectionOrderOfMagnitude" />
+			<basic name="bioresourceReference" />
+			<basic name="contactIDRef" />
+			<basic name="contactPriority" />
+			<basic name="biobankNetworkIDRef" />
+			<basic name="geoLatitude" />
+			<basic name="geoLongitude" />
+			<basic name="collaborationPartnersCommercial" />
+			<basic name="collaborationPartnersNonforprofit" />
+			<basic name="collectionAcronym" />
+			<basic name="collectionDescription" />
+			<basic name="collectionSexMale" />
+			<basic name="collectionSexFemale" />
+			<basic name="collectionSexUnknown" />
+			<basic name="collectionSexUndiferrentiated" />
+			<basic name="collectionAgeLow" />
+			<basic name="collectionAgeHigh" />
+			<basic name="collectionAgeUnit" />
+			<basic name="collectionAvailableBiologicalSamples" />
+			<basic name="collectionAvailableSurveyData" />
+			<basic name="collectionAvailableImagingData" />
+			<basic name="collectionAvailableMedicalRecords" />
+			<basic name="collectionAvailableNationalRegistries" />
+			<basic name="collectionAvailableGenealogicalRecords" />
+			<basic name="collectionAvailablePhysioBiochemMeasurements" />
+			<basic name="collectionAvailableOther" />
+			<basic name="temperatureRoom" />
+			<basic name="temperature2to10" />
+			<basic name="temperature18to35" />
+			<basic name="temperature60to85" />
+			<basic name="temperatureLN" />
+			<basic name="temperatureOther" />
+			<basic name="diagnosisAvailable" />
+			<basic name="collectionHeadFirstName" />
+			<basic name="collectionHeadLastName" />
+			<basic name="collectionHeadRole" />
+			<basic name="collectionSampleAccessFee" />
+			<basic name="collectionSampleAccessJointProjects" />
+			<basic name="collectionSampleAccessDescription" />
+			<basic name="collectionSampleAccessURI" />
+			<basic name="collectionDataAccessFee" />
+			<basic name="collectionDataAccessJointProjects" />
+			<basic name="collectionDataAccessDescription" />
+			<basic name="collectionDataAccessURI" />
+			<basic name="collectionSize" />
+			<basic name="collectionSizeTimestamp" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -112,8 +243,16 @@
 		<table name="bbmrieric.biobank" />
 		<attributes />
 	</entity>
+	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.ContactInformationImpl" name="ContactInformation">
+		<table name="bbmrieric.contactinformation" />
+		<attributes />
+	</entity>
 	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl" name="D2Biobank">
 		<table name="bbmrieric.d2biobank" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2CollectionImpl" name="D2Collection">
+		<table name="bbmrieric.d2collection" />
 		<attributes />
 	</entity>
 	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.DiseaseDiscriptionImpl" name="DiseaseDiscription">

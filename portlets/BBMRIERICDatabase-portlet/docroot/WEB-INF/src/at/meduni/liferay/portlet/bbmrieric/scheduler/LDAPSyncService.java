@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
@@ -18,12 +19,17 @@ import javax.naming.directory.SearchResult;
 import javax.naming.ldap.LdapContext;
 
 import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
+import at.meduni.liferay.portlet.bbmrieric.model.ContactInformation;
 import at.meduni.liferay.portlet.bbmrieric.model.D2Biobank;
+import at.meduni.liferay.portlet.bbmrieric.model.D2Collection;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
 import at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl;
 import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.util.LDAPAttributeEscaper;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -65,7 +71,8 @@ public class LDAPSyncService implements MessageListener {
 	 */
 	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
 	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
-
+	String classpath_ = "BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService";
+	
 	/**
 	 * 
 	 */
@@ -73,27 +80,31 @@ public class LDAPSyncService implements MessageListener {
 	public void receive(Message message) throws MessageListenerException {
 		Date startdate = new Date();
 		String uuid = PortalUUIDUtil.generate();
-		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Info started LDAP Sync Scheduler (" + uuid + ").");
+		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [" + classpath_ + "::receive] Info started LDAP Sync Scheduler (" + uuid + ").");
 		
 		//connectLDAP(uuid);
 		try {
-			System.out.println("-" + PropsUtil.get("D2BiobankCompany") + "-");
-			System.out.println("-" + PropsUtil.get("D2BiobankGroup") + "-");
 			long companyId = Long.parseLong(PropsUtil.get("D2BiobankCompany"));
 	        long groupId = Long.parseLong(PropsUtil.get("D2BiobankGroup"));
 			d2Update(uuid, groupId, companyId);
 		} catch (NumberFormatException ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Error NumberFormatException while reading config from portal-ext.properties.");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::receive] Error NumberFormatException while reading config from portal-ext.properties.");
 			ex.printStackTrace();
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Error Reading Data from LDAP.");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::receive] Error Reading Data from LDAP.");
 			ex.printStackTrace();
 		} 
 		// End
 		long datediff = new Date().getTime() - startdate.getTime();
-		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::receive] Info LDAP Sync Scheduler (" + uuid + ") finished in " + datediff + "ms.");
+		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [" + classpath_ + "::receive] Info LDAP Sync Scheduler (" + uuid + ") finished in " + datediff + "ms.");
 	} 
 	
+	/**
+	 * 
+	 * @param ldapupdateuuid
+	 * @param groupId
+	 * @param companyId
+	 */
 	private void d2Update(String ldapupdateuuid, long groupId, long companyId) {
 		// ServiceContext to create the assets 
 		ServiceContext serviceContext = new ServiceContext();
@@ -115,56 +126,216 @@ public class LDAPSyncService implements MessageListener {
 		environment.put(Context.PROVIDER_URL, "ldap://directory.bbmri-eric.eu:10389");
 		environment.put(Context.SECURITY_AUTHENTICATION, "simple");
 		environment.put(Context.REFERRAL, "follow");
+		DirContext ctx = null;
 		try {
-			DirContext ctx = new InitialDirContext(environment);
-			SearchControls ctls = new SearchControls();
-			ctls.setReturningAttributes(null);
-			ctls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-			// Search for objects using filter and controls
-			NamingEnumeration<?> answer = ctx.search("dc=directory,dc=bbmri-eric,dc=eu", "(objectclass=*)", ctls);
-			int counter = 0;
-			int counter_biobanks = 0;
-			while (answer.hasMore()) {
-				counter++;
-				SearchResult sr = (SearchResult) answer.next();
-				Attributes attrs = sr.getAttributes();
-				try {
-					if(attrs.get("biobankCountry") != null) {
-						counter_biobanks++;
-						String ldapbiobankID = getAttributeValues(attrs.get("biobankID"));
-						ldapbiobankID = ldapbiobankID.replaceAll("bbmri-eric:ID:", "");
-						
-						//System.out.println("ldapbiobankID: " + ldapbiobankID);
-						
-						D2Biobank biobank = D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(groupId, ldapbiobankID);
-						if(biobank == null) {
-							addBiobank(ldapbiobankID, serviceContext, attrs, ldapupdateuuid);
-						} else {
-							updateBiobank(ldapbiobankID, serviceContext, attrs, ldapupdateuuid);
-						}
-					}
-				} catch (Exception ex) {
-					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error Creating Entrys for Biobank: " + getAttributeValues(attrs.get("biobankName")));
-					ex.printStackTrace();
-				}
-			}
-			System.out.println("LDAP contained: " + counter + " entrys with " + counter_biobanks + " Biobanks.");
+			ctx = new InitialDirContext(environment);
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error reading data from LDAP Server.");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error reading data from LDAP Server.");
 			ex.printStackTrace();
 		}
-		
+		// Synchronize D2Biobanks
+		try {
+			synchronizeD2Biobank(ctx, serviceContext, ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error syncronicing D2Biobank.");
+			ex.printStackTrace();
+		}
+		// Synchronize ContactInformation
+		try {
+			synchronizeContactInformation(ctx, serviceContext, ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error syncronicing ContactInformation.");
+			ex.printStackTrace();
+		}
+		// Remove ContactInformation Not in the LDAP any more
+		try {
+			deleteContactInformationNotExistingInLdap(ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated ContactInformation.");
+			ex.printStackTrace();
+		}
+		// Remove Biobanks Not in the LDAP any more
 		try {
 			deleteD2BiobanksNotExistingInLdap(ldapupdateuuid, groupId);
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error deleting not updated Entries.");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated Entries.");
+			ex.printStackTrace();
+		}
+		// Remove D2Collection Not in the LDAP any more
+		try {
+			deleteD2CollectionNotExistingInLdap(ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated D2Collection.");
 			ex.printStackTrace();
 		}
 	}
 	
 	/**
 	 * 
-	 * @param uuid
+	 * @param ctx
+	 * @param serviceContext
+	 * @param ldapupdateuuid
+	 * @param groupId
+	 * @throws NamingException
+	 */
+	private void synchronizeContactInformation(DirContext ctx, ServiceContext serviceContext, String ldapupdateuuid, long groupId) throws NamingException {
+		SearchControls ctls = new SearchControls();
+		ctls.setReturningAttributes(null);
+		ctls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+		serviceContext.setModifiedDate(new Date());
+		// Search for objects using filter and controls
+		NamingEnumeration<?> answer = ctx.search("ou=contacts,dc=directory,dc=bbmri-eric,dc=eu", "(objectclass=*)", ctls);
+		int counter = 0;
+		int counter_contacts = 0;
+		while (answer.hasMore()) {
+			counter++;
+			SearchResult sr = (SearchResult) answer.next();
+			Attributes attrs = sr.getAttributes();
+			try {
+				if(attrs.get("contactID") != null) {
+					counter_contacts++;
+					String contactID = LDAPAttributeEscaper.getAttributeValues(attrs.get("contactID"));
+					
+					//System.out.println("contactID: " + contactID);
+					ContactInformation contactinformation = ContactInformationLocalServiceUtil.getContactInformationByBBMRIERICID(groupId, contactID);
+					if(contactinformation == null) {
+						serviceContext.setCreateDate(new Date());
+						contactinformation = ContactInformationLocalServiceUtil.contactInformationFromLdapAttribute(attrs, null);
+						contactinformation.setUpdateuuid(ldapupdateuuid);
+						contactinformation = ContactInformationLocalServiceUtil.addContactInformation(contactinformation, serviceContext);
+					} else {
+						contactinformation = ContactInformationLocalServiceUtil.contactInformationFromLdapAttribute(attrs, contactinformation);
+						contactinformation.setUpdateuuid(ldapupdateuuid);
+						contactinformation = ContactInformationLocalServiceUtil.updateContactInformation(contactinformation, serviceContext);
+					}
+				}
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error Creating Entrys for Biobank: " + LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankName")));
+				ex.printStackTrace();
+			}
+		}
+		System.out.println("LDAP contained: " + counter + " entrys with " + counter_contacts + " Contacts.");
+	}
+	
+	/**
+	 * 
+	 * @param ctx
+	 * @param serviceContext
+	 * @param ldapupdateuuid
+	 * @param groupId
+	 * @throws NamingException
+	 */
+	private void synchronizeD2Biobank(DirContext ctx, ServiceContext serviceContext, String ldapupdateuuid, long groupId) throws NamingException {
+		SearchControls ctls = new SearchControls();
+		ctls.setReturningAttributes(null);
+		ctls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+		// Search for objects using filter and controls
+		NamingEnumeration<?> answer = ctx.search("ou=biobanks,dc=directory,dc=bbmri-eric,dc=eu", "(objectclass=*)", ctls);
+		int counter_biobanks = 0;
+		int counter_collections = 0;
+		while (answer.hasMore()) {
+			SearchResult sr = (SearchResult) answer.next();
+			Attributes attrs = sr.getAttributes();
+			try {
+				if(attrs.get("biobankID") != null) {
+					counter_biobanks++;
+					String bbmribiobankID = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankID"));
+					
+					//System.out.println("ldapbiobankID: " + ldapbiobankID);
+					
+					D2Biobank biobank = D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(groupId, bbmribiobankID);
+					if(biobank == null) {
+						addBiobank(bbmribiobankID, serviceContext, attrs, ldapupdateuuid);
+					} else {
+						updateBiobank(bbmribiobankID, serviceContext, attrs, ldapupdateuuid);
+					}
+				} else if (attrs.get("collectionID") != null){
+					counter_collections++;
+					String[] ldapid = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID")).split(":");
+					String bbmricollectionID = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID"));
+					String bbmribiobankID = "";
+					String bbmriparentcollectionID = "";
+					int idcount = 0;
+					for(int count = ldapid.length-1; count >= 0; count--) {
+						idcount ++;
+						if(ldapid[count].equals("collection")) {
+							if(idcount > 2) {
+								for(int parentcounter = 0; parentcounter < ldapid.length-1; parentcounter++) {
+									if(bbmriparentcollectionID.length() != 0) {
+										bbmriparentcollectionID += ":";
+									}
+									bbmriparentcollectionID += ldapid[parentcounter];
+								}
+								break;
+							} else {
+								break;
+							}
+						}
+					}
+					for(int count = 0; count < ldapid.length-idcount; count++) {
+						if(bbmribiobankID.length() != 0) {
+							bbmribiobankID += ":";
+						}
+						bbmribiobankID += ldapid[count];
+					}
+					D2Biobank biobank = D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(groupId, bbmribiobankID);
+					long biobankId = 0;
+					if(biobank != null) {
+						biobankId = biobank.getBiobankId();
+					}
+					long parentcollectionId = 0;
+					if(!bbmriparentcollectionID.equals("")) {
+						D2Collection parentcollection = D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(groupId, bbmriparentcollectionID, bbmribiobankID);
+						if(parentcollection != null) {
+							parentcollectionId = parentcollection.getD2collectionId();
+						}
+					}
+					D2Collection collection = D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(groupId, bbmricollectionID, bbmribiobankID);
+					if(collection == null) {	
+						serviceContext.setCreateDate(new Date());
+						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs);
+						collection.setUpdateuuid(ldapupdateuuid);
+						collection.setBiobankId(biobankId);
+						collection.setParentd2collectionId(parentcollectionId);
+						collection = D2CollectionLocalServiceUtil.addD2Collection(collection, serviceContext);
+					} else {
+						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs);
+						collection.setUpdateuuid(ldapupdateuuid);
+						collection.setBiobankId(biobankId);
+						collection.setParentd2collectionId(parentcollectionId);
+						collection = D2CollectionLocalServiceUtil.updateD2Collection(collection, serviceContext);
+					}
+				}
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error Creating Entrys for Biobank: " + LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankName")));
+				ex.printStackTrace();
+			}
+		}
+		System.out.println("LDAP contained: " + counter_biobanks + " Biobanks and " + counter_collections + " Collections");
+	}
+	
+	/**
+	 * 
+	 * @param ldapupdateuuid
+	 * @param groupId
+	 */
+	private void deleteContactInformationNotExistingInLdap(String ldapupdateuuid, long groupId) {
+		List<ContactInformation> contactinformations = ContactInformationLocalServiceUtil.getLDAPNotUpdatedContactInformation(groupId, ldapupdateuuid);
+		for(ContactInformation contactinformation : contactinformations) {
+			try {
+				ContactInformationLocalServiceUtil.deleteContactInformation(contactinformation);
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::deleteContactInformationNotExistingInLdap] Error deleting ContactInformation not in LDAP.");
+				ex.printStackTrace();
+			}
+		}
+		System.out.println("LDAP deltetions: " + contactinformations.size() + " ContactInformation deleted.");
+	}
+	
+	/**
+	 * 
+	 * @param ldapupdateuuid
+	 * @param groupId
 	 */
 	private void deleteD2BiobanksNotExistingInLdap(String uuid, long groupId) {
 		List<D2Biobank> biobanks = D2BiobankLocalServiceUtil.getLDAPNotUpdatedBiobanks(groupId, uuid);
@@ -172,44 +343,71 @@ public class LDAPSyncService implements MessageListener {
 			try {
 				D2BiobankLocalServiceUtil.deleteD2Biobank(biobank);
 			} catch (Exception ex) {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::deleteD2BiobanksNotExistingInLdap] Error deleting Biobanks not in LDAP.");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::deleteD2BiobanksNotExistingInLdap] Error deleting Biobanks not in LDAP.");
 				ex.printStackTrace();
 			}
 		}
 		System.out.println("LDAP deltetions: " + biobanks.size() + " Biobanks deleted.");
 	}
 	
+	/**
+	 * 
+	 * @param uuid
+	 * @param groupId
+	 */
+	private void deleteD2CollectionNotExistingInLdap(String uuid, long groupId) {
+		List<D2Collection> collections = D2CollectionLocalServiceUtil.getLDAPNotUpdatedCollection(groupId, uuid);
+		for(D2Collection collection : collections) {
+			try {
+				D2CollectionLocalServiceUtil.deleteD2Collection(collection);
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::deleteD2CollectionNotExistingInLdap] Error deleting Collections not in LDAP.");
+				ex.printStackTrace();
+			}
+		}
+		System.out.println("LDAP deltetions: " + collections.size() + " Collections deleted.");
+	}
+	
+	//--------------------------------------------------------------------------------
+	/**
+	 * 
+	 * @param ldapbiobankID
+	 * @param serviceContext
+	 * @param attrs
+	 * @param ldapupdateuuid
+	 */
 	private void addBiobank(String ldapbiobankID, ServiceContext serviceContext, Attributes attrs, String ldapupdateuuid) {
 		serviceContext.setCreateDate(new Date());
         serviceContext.setModifiedDate(new Date());
         D2BiobankImpl d2biobank = new D2BiobankImpl();
         // Mandatory Fields
-        d2biobank.setBiobankName(getAttributeValues(attrs.get("biobankName")));
+        d2biobank.setBiobankName(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankName")));
         d2biobank.setBbmribiobankID(ldapbiobankID);
         d2biobank.setUpdateuuid(ldapupdateuuid);
-        d2biobank.setContactIDRef(getAttributeValues(attrs.get("contactIDRef")));
-        d2biobank.setContactPriority(getAttributeValuesLong(attrs.get("contactPriority")));
-        d2biobank.setBiobankJurisdicalPerson(getAttributeValues(attrs.get("biobankJurisdicalPerson")));
-        d2biobank.setBiobankCountry(getAttributeValues(attrs.get("biobankCountry")));
-        d2biobank.setBiobankPartnerCharterSigned(getAttributeValuesBoolean(attrs.get("biobankPartnerCharterSigned")));
+        d2biobank.setContactIDRef(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactIDRef")));
+        d2biobank.setContactPriority(LDAPAttributeEscaper.getAttributeValuesLong(attrs.get("contactPriority")));
+        d2biobank.setBiobankJurisdicalPerson(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankJuridicalPerson")));
+        d2biobank.setBiobankCountry(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankCountry")));
+        d2biobank.setBiobankPartnerCharterSigned(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("biobankPartnerCharterSigned")));
         // Optional Fields
-        d2biobank.setBioresourceReference(getAttributeValues(attrs.get("bioresourceReference")));
-        d2biobank.setBiobankNetworkIDRef(getAttributeValues(attrs.get("biobankNetworkIDRef")));
-        d2biobank.setGeoLatitude(getAttributeValues(attrs.get("geoLatitude")));
-        d2biobank.setGeoLongitude(getAttributeValues(attrs.get("geoLongitude")));
-        d2biobank.setCollaborationPartnersCommercial(getAttributeValuesBoolean(attrs.get("collaborationPartnersCommercial")));
-        d2biobank.setCollaborationPartnersNonforprofit(getAttributeValuesBoolean(attrs.get("collaborationPartnersNonforprofit")));
-        d2biobank.setBiobankITSupportAvailable(getAttributeValuesBoolean(attrs.get("biobankITSupportAvailable")));
-        d2biobank.setBiobankITStaffSize(getAttributeValuesLong(attrs.get("biobankITStaffSize")));
-        d2biobank.setBiobankISAvailable(getAttributeValuesBoolean(attrs.get("biobankISAvailable")));
-        d2biobank.setBiobankHISAvailable(getAttributeValuesBoolean(attrs.get("biobankHISAvailable")));
-        d2biobank.setBiobankAcronym(getAttributeValues(attrs.get("biobankAcronym")));
-        d2biobank.setBiobankDescription(getAttributeValues(attrs.get("biobankDescription")));
-        d2biobank.setBiobankURL(getAttributeValues(attrs.get("biobankURL")));
-        d2biobank.setBiobankHeadFirstName(getAttributeValues(attrs.get("biobankHeadFirstName")));
-        d2biobank.setBiobankHeadLastName(getAttributeValues(attrs.get("biobankHeadLastName")));
-        d2biobank.setBiobankHeadRole(getAttributeValues(attrs.get("biobankHeadRole")));
-        String types = getAttributeValues(attrs.get("objectClass"));
+        d2biobank.setBioresourceReference(LDAPAttributeEscaper.getAttributeValues(attrs.get("bioresourceReference")));
+        d2biobank.setBiobankNetworkIDRef(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankNetworkIDRef")));
+        d2biobank.setGeoLatitude(LDAPAttributeEscaper.getAttributeValues(attrs.get("geoLatitude")));
+        d2biobank.setGeoLongitude(LDAPAttributeEscaper.getAttributeValues(attrs.get("geoLongitude")));
+        d2biobank.setCollaborationPartnersCommercial(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("collaborationPartnersCommercial")));
+        d2biobank.setCollaborationPartnersNonforprofit(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("collaborationPartnersNonforprofit")));
+        d2biobank.setBiobankITSupportAvailable(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("biobankITSupportAvailable")));
+        d2biobank.setBiobankITStaffSize(LDAPAttributeEscaper.getAttributeValuesLong(attrs.get("biobankITStaffSize")));
+        d2biobank.setBiobankISAvailable(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("biobankISAvailable")));
+        d2biobank.setBiobankHISAvailable(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("biobankHISAvailable")));
+        d2biobank.setBiobankAcronym(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankAcronym")));
+        d2biobank.setBiobankDescription(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankDescription")));
+        d2biobank.setBiobankURL(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankURL")));
+        d2biobank.setBiobankHeadFirstName(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankHeadFirstName")));
+        d2biobank.setBiobankHeadLastName(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankHeadLastName")));
+        d2biobank.setBiobankHeadRole(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankHeadRole")));
+        String types = LDAPAttributeEscaper.getAttributeValues(attrs.get("objectClass"));
+        d2biobank.setBiobankType(types);
         if(types.contains("biobankClinical")) {
         	d2biobank.setBiobankClinical(true);
         } else {
@@ -242,32 +440,33 @@ public class LDAPSyncService implements MessageListener {
 		serviceContext.setModifiedDate(new Date());
         D2Biobank d2biobank =D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(serviceContext.getScopeGroupId(), ldapbiobankID);
         // Mandatory Fields
-        d2biobank.setBiobankName(getAttributeValues(attrs.get("biobankName")));
+        d2biobank.setBiobankName(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankName")));
         d2biobank.setBbmribiobankID(ldapbiobankID);
         d2biobank.setUpdateuuid(ldapupdateuuid);
-        d2biobank.setContactIDRef(getAttributeValues(attrs.get("contactIDRef")));
-        d2biobank.setContactPriority(getAttributeValuesLong(attrs.get("contactPriority")));
-        d2biobank.setBiobankJurisdicalPerson(getAttributeValues(attrs.get("biobankJurisdicalPerson")));
-        d2biobank.setBiobankCountry(getAttributeValues(attrs.get("biobankCountry")));
-        d2biobank.setBiobankPartnerCharterSigned(getAttributeValuesBoolean(attrs.get("biobankPartnerCharterSigned")));
+        d2biobank.setContactIDRef(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactIDRef")));
+        d2biobank.setContactPriority(LDAPAttributeEscaper.getAttributeValuesLong(attrs.get("contactPriority")));
+        d2biobank.setBiobankJurisdicalPerson(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankJuridicalPerson")));
+        d2biobank.setBiobankCountry(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankCountry")));
+        d2biobank.setBiobankPartnerCharterSigned(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("biobankPartnerCharterSigned")));
         // Optional Fields
-        d2biobank.setBioresourceReference(getAttributeValues(attrs.get("bioresourceReference")));
-        d2biobank.setBiobankNetworkIDRef(getAttributeValues(attrs.get("biobankNetworkIDRef")));
-        d2biobank.setGeoLatitude(getAttributeValues(attrs.get("geoLatitude")));
-        d2biobank.setGeoLongitude(getAttributeValues(attrs.get("geoLongitude")));
-        d2biobank.setCollaborationPartnersCommercial(getAttributeValuesBoolean(attrs.get("collaborationPartnersCommercial")));
-        d2biobank.setCollaborationPartnersNonforprofit(getAttributeValuesBoolean(attrs.get("collaborationPartnersNonforprofit")));
-        d2biobank.setBiobankITSupportAvailable(getAttributeValuesBoolean(attrs.get("biobankITSupportAvailable")));
-        d2biobank.setBiobankITStaffSize(getAttributeValuesLong(attrs.get("biobankITStaffSize")));
-        d2biobank.setBiobankISAvailable(getAttributeValuesBoolean(attrs.get("biobankISAvailable")));
-        d2biobank.setBiobankHISAvailable(getAttributeValuesBoolean(attrs.get("biobankHISAvailable")));
-        d2biobank.setBiobankAcronym(getAttributeValues(attrs.get("biobankAcronym")));
-        d2biobank.setBiobankDescription(getAttributeValues(attrs.get("biobankDescription")));
-        d2biobank.setBiobankURL(getAttributeValues(attrs.get("biobankURL")));
-        d2biobank.setBiobankHeadFirstName(getAttributeValues(attrs.get("biobankHeadFirstName")));
-        d2biobank.setBiobankHeadLastName(getAttributeValues(attrs.get("biobankHeadLastName")));
-        d2biobank.setBiobankHeadRole(getAttributeValues(attrs.get("biobankHeadRole")));
-        String types = getAttributeValues(attrs.get("objectClass"));
+        d2biobank.setBioresourceReference(LDAPAttributeEscaper.getAttributeValues(attrs.get("bioresourceReference")));
+        d2biobank.setBiobankNetworkIDRef(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankNetworkIDRef")));
+        d2biobank.setGeoLatitude(LDAPAttributeEscaper.getAttributeValues(attrs.get("geoLatitude")));
+        d2biobank.setGeoLongitude(LDAPAttributeEscaper.getAttributeValues(attrs.get("geoLongitude")));
+        d2biobank.setCollaborationPartnersCommercial(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("collaborationPartnersCommercial")));
+        d2biobank.setCollaborationPartnersNonforprofit(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("collaborationPartnersNonforprofit")));
+        d2biobank.setBiobankITSupportAvailable(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("biobankITSupportAvailable")));
+        d2biobank.setBiobankITStaffSize(LDAPAttributeEscaper.getAttributeValuesLong(attrs.get("biobankITStaffSize")));
+        d2biobank.setBiobankISAvailable(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("biobankISAvailable")));
+        d2biobank.setBiobankHISAvailable(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("biobankHISAvailable")));
+        d2biobank.setBiobankAcronym(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankAcronym")));
+        d2biobank.setBiobankDescription(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankDescription")));
+        d2biobank.setBiobankURL(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankURL")));
+        d2biobank.setBiobankHeadFirstName(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankHeadFirstName")));
+        d2biobank.setBiobankHeadLastName(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankHeadLastName")));
+        d2biobank.setBiobankHeadRole(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankHeadRole")));
+        String types = LDAPAttributeEscaper.getAttributeValues(attrs.get("objectClass"));
+        d2biobank.setBiobankType(types);
         if(types.contains("biobankClinical")) {
         	d2biobank.setBiobankClinical(true);
         } else {
@@ -325,7 +524,7 @@ public class LDAPSyncService implements MessageListener {
 				try {
 					if(attrs.get("biobankCountry") != null) {
 						counter_biobanks++;
-						String ldapbiobankID = getAttributeValues(attrs.get("biobankID"));
+						String ldapbiobankID = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankID"));
 						BioBank biobank = BioBankLocalServiceUtil.getBioBank(ldapbiobankID);
 						if(biobank == null) {
 							biobank = BioBankLocalServiceUtil.createBioBank(ldapbiobankID);
@@ -336,16 +535,16 @@ public class LDAPSyncService implements MessageListener {
 							BioBankLocalServiceUtil.updateBioBank(biobank);
 						}
 						
-						biobank.setBiobankcountry(getAttributeValues(attrs.get("biobankCountry")));
-						biobank.setBiobankjuristicperson(getAttributeValues(attrs.get("biobankJuridicalPerson")));
-						biobank.setBiobankname(getAttributeValues(attrs.get("biobankName")));
+						biobank.setBiobankcountry(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankCountry")));
+						biobank.setBiobankjuristicperson(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankJuridicalPerson")));
+						biobank.setBiobankname(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankName")));
 						
-						biobank.setBiobanktype(getAttributeValues(attrs.get("objectClass")));
-						biobank.setBiobanksize(getAttributeValues(attrs.get("biobankSize")));
+						biobank.setBiobanktype(LDAPAttributeEscaper.getAttributeValues(attrs.get("objectClass")));
+						biobank.setBiobanksize(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankSize")));
 						biobank.setUUID(uuid);
 						BioBankLocalServiceUtil.updateBioBank(biobank);
 						
-						System.out.println("Update Biobank:" + biobank.getBiobankname() + ", with Organization ID: " + biobank.getOrganisationid());
+						//System.out.println("Update Biobank:" + biobank.getBiobankname() + ", with Organization ID: " + biobank.getOrganisationid());
 						
 						if(biobank.getOrganisationid() == 0) {
 							BioBankLocalServiceUtil.deleteBioBank(biobank);
@@ -354,13 +553,13 @@ public class LDAPSyncService implements MessageListener {
 						createSearchIndex(attrs, biobank, uuid);
 					}
 				} catch (Exception ex) {
-					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error Creating Entrys for Biobank: " + getAttributeValues(attrs.get("biobankName")));
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error Creating Entrys for Biobank: " + LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankName")));
 					ex.printStackTrace();
 				}
 			}
 			System.out.println("LDAP contained: " + counter + " entrys with " + counter_biobanks + " Biobanks.");
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error reading data from LDAP Server.");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error reading data from LDAP Server.");
 			ex.printStackTrace();
 		}
 		
@@ -368,7 +567,7 @@ public class LDAPSyncService implements MessageListener {
 			deleteSearchIndexNotUpdated(uuid);
 			deleteBioBanksNotUpdated(uuid);
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error deleting not updated Entries.");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated Entries.");
 			ex.printStackTrace();
 		}
 	}
@@ -386,7 +585,7 @@ public class LDAPSyncService implements MessageListener {
 				OrganizationLocalServiceUtil.deleteOrganization(organization);
 				BioBankLocalServiceUtil.deleteBioBank(biobank);
 			} catch (Exception ex) {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::createSearchIndex] Error creating search index.");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::createSearchIndex] Error creating search index.");
 				ex.printStackTrace();
 			}
 		}
@@ -402,7 +601,7 @@ public class LDAPSyncService implements MessageListener {
 			try {
 				SearchIndexLocalServiceUtil.deleteSearchIndex(searchindex);
 			} catch (Exception ex) {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::createSearchIndex] Error creating search index.");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::createSearchIndex] Error creating search index.");
 				ex.printStackTrace();
 			}
 		}
@@ -420,7 +619,7 @@ public class LDAPSyncService implements MessageListener {
 			for (NamingEnumeration ae = attrs.getAll(); ae.hasMore();) {
 				try {
 					Attribute attr = (Attribute) ae.next();
-					String value = getAttributeValues(attrs.get(attr.getID()));
+					String value = LDAPAttributeEscaper.getAttributeValues(attrs.get(attr.getID()));
 					String key = attr.getID();
 					long organizationid = biobank.getOrganisationid();
 					SearchIndex searchindex = SearchIndexLocalServiceUtil
@@ -440,7 +639,7 @@ public class LDAPSyncService implements MessageListener {
 							.println("["
 									+ date_format_apache_error
 											.format(new Date())
-									+ "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::createSearchIndex] Error creating search index.");
+									+ "] [error] [" + classpath_ + "::createSearchIndex] Error creating search index.");
 					ex.printStackTrace();
 				}
 			}
@@ -448,7 +647,7 @@ public class LDAPSyncService implements MessageListener {
 			System.err
 					.println("["
 							+ date_format_apache_error.format(new Date())
-							+ "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::createSearchIndex] Error reading Element atrributes.");
+							+ "] [error] [" + classpath_ + "::createSearchIndex] Error reading Element atrributes.");
 			ex.printStackTrace();
 		}
 	}
@@ -464,7 +663,7 @@ public class LDAPSyncService implements MessageListener {
 			User defaultUser = company.getDefaultUser();
 			long userId = company.getDefaultUser().getUserId();
 			
-			String parentname = "BBMRI." + getAttributeValues(attrs.get("biobankCountry")).toLowerCase();
+			String parentname = "BBMRI." + LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankCountry")).toLowerCase();
 	        long parentOrganizationId = OrganizationLocalServiceUtil.getOrganization(company.getCompanyId(), parentname).getOrganizationId();
 	        String type = OrganizationConstants.TYPE_REGULAR_ORGANIZATION;
 	        boolean recursable = true;
@@ -482,7 +681,7 @@ public class LDAPSyncService implements MessageListener {
 	        boolean site = true;
 	        
 	        //TODO Update that Organization name longer than 100 characters
-	        String name = getAttributeValues(attrs.get("biobankID")) + "__" + getAttributeValues(attrs.get("biobankName"));
+	        String name = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankID")) + "__" + LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankName"));
 	        if(name.length() > 100) {
 	        	name = name.substring(0, 100);
 	        }
@@ -505,7 +704,7 @@ public class LDAPSyncService implements MessageListener {
 	        
 	        return organization;
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes " + attrs.toString() + ".");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::getAttributeValues] Error getting Attributes " + attrs.toString() + ".");
 			ex.printStackTrace();
 		}
 		return null;
@@ -535,10 +734,10 @@ public class LDAPSyncService implements MessageListener {
 					EmailAddressLocalServiceUtil.updateEmailAddress(emailaddress);
 				}
 			} else {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addEmail] Error more than one Email for the organization; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addEmail] Error more than one Email for the organization; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			}
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addEmail] Error creating email; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addEmail] Error creating email; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			ex.printStackTrace();
 		}
 	}
@@ -552,7 +751,7 @@ public class LDAPSyncService implements MessageListener {
 	private void addWebpage(Attributes attrs, Organization organization, User user) {
 		try {
 			List<Website> websites_organization = WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
-			String url = getAttributeValues(attrs.get("biobankURL"));
+			String url = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankURL"));
 			if(url.equalsIgnoreCase("")) {
 				return;
 			}
@@ -571,10 +770,10 @@ public class LDAPSyncService implements MessageListener {
 					WebsiteLocalServiceUtil.updateWebsite(website);
 				}
 			} else {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addWebpage] Error more than one webpage for the organization; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addWebpage] Error more than one webpage for the organization; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			}
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addWebpage] Error creating webpage; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addWebpage] Error creating webpage; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			ex.printStackTrace();
 		}
 	}
@@ -594,7 +793,7 @@ public class LDAPSyncService implements MessageListener {
 	        serviceContext.setScopeGroupId(group.getGroupId());
 			List<Phone> phones_organization = PhoneLocalServiceUtil.getPhones(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
 			List<Phone> phones_user = PhoneLocalServiceUtil.getPhones(organization.getCompanyId(), User.class.getName(), user.getUserId());
-			String phonenumber = getAttributeValues(attrs.get("biobankContactPhone"));
+			String phonenumber = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankContactPhone"));
 			
 			long userId = user.getUserId();
 			int typeId_user = 11006; //Bussines
@@ -610,7 +809,7 @@ public class LDAPSyncService implements MessageListener {
 					PhoneLocalServiceUtil.updatePhone(phone);
 				}
 			} else {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addPhone] Error more than one phone for the organization; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addPhone] Error more than one phone for the organization; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			}
 			
 			serviceContext.setScopeGroupId(user.getGroup().getGroupId());
@@ -624,10 +823,10 @@ public class LDAPSyncService implements MessageListener {
 					PhoneLocalServiceUtil.updatePhone(phone);
 				}
 			} else {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addPhone] Error more than one phone for the user; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addPhone] Error more than one phone for the user; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			}
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addPhone] Error creating phone; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addPhone] Error creating phone; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			ex.printStackTrace();
 		}
 	}
@@ -650,12 +849,12 @@ public class LDAPSyncService implements MessageListener {
 			String street1 = "-";
 			String street2 = "";
 			String street3 = "";
-			String city = getAttributeValues(attrs.get("biobankContactCity"));
-			String zip = getAttributeValues(attrs.get("biobankContactZIP"));
+			String city = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankContactCity"));
+			String zip = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankContactZIP"));
 			
 			int end = 0;
 			int start = 0;
-			String addressstring = getAttributeValues(attrs.get("biobankContactAddress"));
+			String addressstring = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankContactAddress"));
 			if(addressstring.length() <= 75) {
 				street1 = addressstring;
 			} else if (addressstring.length() > 75 && addressstring.length() <= 150) {
@@ -682,7 +881,7 @@ public class LDAPSyncService implements MessageListener {
 			int typeId_organization = 12001;
 			int typeId_user = 11000;
 			long regionId = 0;
-			long countryId = CountryServiceUtil.getCountryByA2(getAttributeValues(attrs.get("biobankCountry"))).getCountryId();
+			long countryId = CountryServiceUtil.getCountryByA2(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankCountry"))).getCountryId();
 			long userid = user.getUserId();
 			boolean mailing = false;
 			boolean primary = true;
@@ -704,12 +903,12 @@ public class LDAPSyncService implements MessageListener {
 					AddressLocalServiceUtil.updateAddress(address);
 				}
 			} else {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addAddress] Error more than one address for the organization; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addAddress] Error more than one address for the organization; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			}
 			
 			// Update User Address
 			serviceContext.setScopeGroupId(user.getGroup().getGroupId());
-			countryId = CountryServiceUtil.getCountryByA2(getAttributeValues(attrs.get("biobankContactCountry"))).getCountryId();
+			countryId = CountryServiceUtil.getCountryByA2(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankContactCountry"))).getCountryId();
 			if(addresses_user.size() == 0) {
 				addresses_user = new ArrayList<Address>();
 				addresses_user.add(AddressLocalServiceUtil.addAddress(userid, Organization.class.getName(), organization.getOrganizationId(), street1, street2, street3, city, zip, 
@@ -726,10 +925,10 @@ public class LDAPSyncService implements MessageListener {
 					AddressLocalServiceUtil.updateAddress(address);
 				}
 			} else {
-				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addAddress] Error more than one address for the user; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addAddress] Error more than one address for the user; Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			}
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addAddress] Error creating address Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addAddress] Error creating address Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ", UserID: " + user.getUserId() + ".");
 			ex.printStackTrace();
 		}
 	}
@@ -743,14 +942,14 @@ public class LDAPSyncService implements MessageListener {
 	private User addUser(Attributes attrs, Organization organization) {
 		try {
 			removeUsersFromOrganization(organization);
-			String email = getAttributeValues(attrs.get("biobankContactEmail"));
-			String firstname = getAttributeValues(attrs.get("biobankContactEmail"));
-			String lastname = getAttributeValues(attrs.get("biobankContactEmail"));
+			String email = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankContactEmail"));
+			String firstname = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankContactEmail"));
+			String lastname = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankContactEmail"));
 			User user = null;
 			try {
 				user = UserLocalServiceUtil.getUserByEmailAddress(organization.getCompanyId(), email);
 			} catch (Exception ex) {
-				System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addUser] No user exist with email: " + email + ".");
+				System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [" + classpath_ + "::addUser] No user exist with email: " + email + ".");
 			}
 			if(user == null) {
 				user = createUser(organization, email, firstname, lastname);
@@ -761,7 +960,7 @@ public class LDAPSyncService implements MessageListener {
 			}
 			return user;
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::addUser] Error Adding user to Organization Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ".");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addUser] Error Adding user to Organization Attributes: " + attrs.toString() + ", OrganizationID: " + organization.getOrganizationId() + ".");
 			ex.printStackTrace();
 		}
 		return null;
@@ -824,76 +1023,9 @@ public class LDAPSyncService implements MessageListener {
 				OrganizationLocalServiceUtil.deleteUserOrganization(u.getUserId(), organization);
 			}
 		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::removeUsersFromOrganization] Error removing users from Organization (" + organization.getOrganizationId() + ").");
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::removeUsersFromOrganization] Error removing users from Organization (" + organization.getOrganizationId() + ").");
 			ex.printStackTrace();
 		}
-	}
-	
-	/**
-	 * 
-	 * @param attr
-	 * @return
-	 */
-	private String getAttributeValues(Attribute attr) {
-		String values = "";
-		String seperator = "";
-		try {
-			for (NamingEnumeration e = attr.getAll(); e.hasMore(); ) {
-				values += seperator + e.next();
-				seperator = ", ";
-			}
-		} catch (Exception ex) {
-			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
-			//ex.printStackTrace();
-			return "";
-		}
-		return values; 
-	}
-	
-	/**
-	 * 
-	 * @param attr
-	 * @return
-	 */
-	private Long getAttributeValuesLong(Attribute attr) {
-		String values = "";
-		String seperator = "";
-		long return_value = 0;
-		try {
-			for (NamingEnumeration e = attr.getAll(); e.hasMore(); ) {
-				values += seperator + e.next();
-				seperator = ", ";
-			}
-			return_value = Long.parseLong(values);
-		} catch (Exception ex) {
-			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
-			//ex.printStackTrace();
-			return (long) 0;
-		}
-		return return_value; 
-	}
-	
-	/**
-	 * 
-	 * @param attr
-	 * @return
-	 */
-	private Boolean getAttributeValuesBoolean(Attribute attr) {
-		String values = "";
-		String seperator = "";
-		boolean return_value = false;
-		try {
-			for (NamingEnumeration e = attr.getAll(); e.hasMore(); ) {
-				values += seperator + e.next();
-				seperator = ", ";
-			}
-			return_value = Boolean.parseBoolean(values);
-		} catch (Exception ex) {
-			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
-			//ex.printStackTrace();
-			return false;
-		}
-		return return_value; 
 	}
 
 }

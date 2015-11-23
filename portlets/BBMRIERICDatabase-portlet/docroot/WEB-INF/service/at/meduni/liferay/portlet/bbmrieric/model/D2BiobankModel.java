@@ -793,6 +793,21 @@ public interface D2BiobankModel extends BaseModel<D2Biobank>, StagedGroupedModel
 	public void setBiobankCollection(boolean biobankCollection);
 
 	/**
+	 * Returns the biobank type of this d2 biobank.
+	 *
+	 * @return the biobank type of this d2 biobank
+	 */
+	@AutoEscape
+	public String getBiobankType();
+
+	/**
+	 * Sets the biobank type of this d2 biobank.
+	 *
+	 * @param biobankType the biobank type of this d2 biobank
+	 */
+	public void setBiobankType(String biobankType);
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
 	 */
 	@Override

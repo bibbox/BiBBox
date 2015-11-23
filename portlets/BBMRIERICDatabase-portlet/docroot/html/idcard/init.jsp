@@ -15,6 +15,8 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 
+<%@ page import="java.text.SimpleDateFormat" %>
+
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %>
 
@@ -53,11 +55,14 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <!-- Service Builder includes -->
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.model.ContactInformation" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.model.D2Biobank" %>
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.model.D2Collection" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.permission.D2BiobankModelPermission" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.permission.D2BiobankPermission" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.util.WebKeys" %>
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.util.D2BiobankKeys" %>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />

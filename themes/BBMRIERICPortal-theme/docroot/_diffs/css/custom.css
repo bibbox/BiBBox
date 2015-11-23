@@ -1072,6 +1072,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 		}
 	}
 }
+@import url(custom_editor.css);
 .dialog-iframe-root-node .dockbar {
    display: none;
 }

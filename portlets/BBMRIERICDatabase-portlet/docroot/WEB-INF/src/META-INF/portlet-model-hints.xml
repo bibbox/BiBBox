@@ -25,6 +25,28 @@
 		</field>
 		<field name="UUID" type="String" />
 	</model>
+	<model name="at.meduni.liferay.portlet.bbmrieric.model.ContactInformation">
+		<field name="uuid" type="String" />
+		<field name="contactinformationId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="updateuuid" type="String" />
+		<field name="contactID" type="String" />
+		<field name="contactEmail" type="String" />
+		<field name="contactCountry" type="String" />
+		<field name="contactFirstName" type="String" />
+		<field name="contactLastName" type="String" />
+		<field name="contactPhone" type="String" />
+		<field name="contactAddress" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactZIP" type="String" />
+		<field name="contactCity" type="String" />
+	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2Biobank">
 		<field name="uuid" type="String" />
 		<field name="biobankId" type="long" />
@@ -75,6 +97,103 @@
 		<field name="biobankResearchStudy" type="boolean" />
 		<field name="biobankNonHuman" type="boolean" />
 		<field name="biobankCollection" type="boolean" />
+		<field name="biobankType" type="String" />
+	</model>
+	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2Collection">
+		<field name="uuid" type="String" />
+		<field name="d2collectionId" type="long" />
+		<field name="biobankId" type="long" />
+		<field name="parentd2collectionId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="updateuuid" type="String" />
+		<field name="bbmricollectionID" type="String" />
+		<field name="bbmriparentcollectionID" type="String" />
+		<field name="bbmribiobankID" type="String" />
+		<field name="collectionName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="materialStoredDNA" type="boolean" />
+		<field name="materialStoredPlasma" type="boolean" />
+		<field name="materialStoredSerum" type="boolean" />
+		<field name="materialStoredUrine" type="boolean" />
+		<field name="materialStoredSaliva" type="boolean" />
+		<field name="materialStoredFaeces" type="boolean" />
+		<field name="materialStoredRNA" type="boolean" />
+		<field name="materialStoredBlood" type="boolean" />
+		<field name="materialStoredTissueFrozen" type="boolean" />
+		<field name="materialStoredTissueFFPE" type="boolean" />
+		<field name="materialStoredImmortalizedCellLines" type="boolean" />
+		<field name="materialStoredIsolatedPathogen" type="boolean" />
+		<field name="materialStoredOther" type="String" />
+		<field name="collectionTypeCaseControl" type="boolean" />
+		<field name="collectionTypeCohort" type="boolean" />
+		<field name="collectionTypeCrossSectional" type="boolean" />
+		<field name="collectionTypeLongitudinal" type="boolean" />
+		<field name="collectionTypeTwinStudy" type="boolean" />
+		<field name="collectionTypeQualityControl" type="boolean" />
+		<field name="collectionTypePopulationBased" type="boolean" />
+		<field name="collectionTypeDiseaseSpecific" type="boolean" />
+		<field name="collectionTypeBirthCohort" type="boolean" />
+		<field name="collectionTypeOther" type="String" />
+		<field name="collectionOrderOfMagnitude" type="long" />
+		<field name="bioresourceReference" type="String" />
+		<field name="contactIDRef" type="String" />
+		<field name="contactPriority" type="long" />
+		<field name="biobankNetworkIDRef" type="String" />
+		<field name="geoLatitude" type="String" />
+		<field name="geoLongitude" type="String" />
+		<field name="collaborationPartnersCommercial" type="boolean" />
+		<field name="collaborationPartnersNonforprofit" type="boolean" />
+		<field name="collectionAcronym" type="String" />
+		<field name="collectionDescription" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="collectionSexMale" type="boolean" />
+		<field name="collectionSexFemale" type="boolean" />
+		<field name="collectionSexUnknown" type="boolean" />
+		<field name="collectionSexUndiferrentiated" type="boolean" />
+		<field name="collectionAgeLow" type="long" />
+		<field name="collectionAgeHigh" type="long" />
+		<field name="collectionAgeUnit" type="String" />
+		<field name="collectionAvailableBiologicalSamples" type="boolean" />
+		<field name="collectionAvailableSurveyData" type="boolean" />
+		<field name="collectionAvailableImagingData" type="boolean" />
+		<field name="collectionAvailableMedicalRecords" type="boolean" />
+		<field name="collectionAvailableNationalRegistries" type="boolean" />
+		<field name="collectionAvailableGenealogicalRecords" type="boolean" />
+		<field name="collectionAvailablePhysioBiochemMeasurements" type="boolean" />
+		<field name="collectionAvailableOther" type="String" />
+		<field name="temperatureRoom" type="boolean" />
+		<field name="temperature2to10" type="boolean" />
+		<field name="temperature18to35" type="boolean" />
+		<field name="temperature60to85" type="boolean" />
+		<field name="temperatureLN" type="boolean" />
+		<field name="temperatureOther" type="String" />
+		<field name="diagnosisAvailable" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="collectionHeadFirstName" type="String" />
+		<field name="collectionHeadLastName" type="String" />
+		<field name="collectionHeadRole" type="String" />
+		<field name="collectionSampleAccessFee" type="boolean" />
+		<field name="collectionSampleAccessJointProjects" type="boolean" />
+		<field name="collectionSampleAccessDescription" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="collectionSampleAccessURI" type="String" />
+		<field name="collectionDataAccessFee" type="boolean" />
+		<field name="collectionDataAccessJointProjects" type="boolean" />
+		<field name="collectionDataAccessDescription" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="collectionDataAccessURI" type="String" />
+		<field name="collectionSize" type="long" />
+		<field name="collectionSizeTimestamp" type="long" />
 	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscription">
 		<field name="diseasediscriptionId" type="long" />

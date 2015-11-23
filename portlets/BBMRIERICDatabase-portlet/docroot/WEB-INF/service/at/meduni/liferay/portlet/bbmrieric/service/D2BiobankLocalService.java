@@ -370,7 +370,7 @@ public interface D2BiobankLocalService extends BaseLocalService,
 		java.lang.String biobankHeadLastName, java.lang.String biobankHeadRole,
 		boolean biobankClinical, boolean biobankPopulation,
 		boolean biobankResearchStudy, boolean biobankNonHuman,
-		boolean biobankCollection,
+		boolean biobankCollection, java.lang.String biobankType,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	/**
@@ -404,7 +404,7 @@ public interface D2BiobankLocalService extends BaseLocalService,
 		java.lang.String biobankHeadLastName, java.lang.String biobankHeadRole,
 		boolean biobankClinical, boolean biobankPopulation,
 		boolean biobankResearchStudy, boolean biobankNonHuman,
-		boolean biobankCollection,
+		boolean biobankCollection, java.lang.String biobankType,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	/**
@@ -416,6 +416,22 @@ public interface D2BiobankLocalService extends BaseLocalService,
 		long biobankId, com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getD2Biobanks(
+		java.lang.String keyword, java.lang.String country,
+		java.lang.String materialtype, java.lang.String diagnosisavailable,
+		java.lang.String biobanksize, java.lang.String typeofbiobank,
+		java.lang.String typeofcollection);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2Biobank> getLDAPNotUpdatedBiobanks(
 		long groupId, java.lang.String ldapupdateuuid);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getBiobankWithLdapUpdate(
+		long biobankId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankFromLDAP(
+		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2biobank,
+		javax.naming.directory.Attributes attrs);
 }

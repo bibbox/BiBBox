@@ -15,25 +15,56 @@
 package at.meduni.liferay.portlet.bbmrieric.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.NamingEnumeration;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
+import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
+import javax.naming.ldap.LdapContext;
 import javax.portlet.ActionRequest;
 
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionList;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
 
+import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
+import at.meduni.liferay.portlet.bbmrieric.model.ContactInformation;
 import at.meduni.liferay.portlet.bbmrieric.model.D2Biobank;
+import at.meduni.liferay.portlet.bbmrieric.model.D2Collection;
+import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
 import at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl;
+import at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.base.D2BiobankLocalServiceBaseImpl;
+import at.meduni.liferay.portlet.bbmrieric.util.D2BiobankKeys;
+import at.meduni.liferay.portlet.bbmrieric.util.LDAPAttributeEscaper;
 
 /**
  * The implementation of the d2 biobank local service.
@@ -119,7 +150,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 				newbiobank.getBiobankITSupportAvailable(), newbiobank.getBiobankITStaffSize(), newbiobank.getBiobankISAvailable(), newbiobank.getBiobankHISAvailable(),
 				newbiobank.getBiobankAcronym(), newbiobank.getBiobankDescription(), newbiobank.getBiobankURL(), newbiobank.getBiobankHeadFirstName(), newbiobank.getBiobankHeadLastName(),
 				newbiobank.getBiobankHeadRole(), newbiobank.getBiobankClinical(), newbiobank.getBiobankPopulation(), newbiobank.getBiobankResearchStudy(), newbiobank.getBiobankNonHuman(),
-				newbiobank.getBiobankCollection(), serviceContext);
+				newbiobank.getBiobankCollection(), newbiobank.getBiobankType(), serviceContext);
 	}
 	
 	/**
@@ -135,7 +166,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 			boolean biobankITSupportAvailable, long biobankITStaffSize, boolean biobankISAvailable, boolean biobankHISAvailable,
 			String biobankAcronym, String biobankDescription, String biobankURL, String biobankHeadFirstName, String biobankHeadLastName,
 			String biobankHeadRole, boolean biobankClinical, boolean biobankPopulation, boolean biobankResearchStudy, boolean biobankNonHuman,
-			boolean biobankCollection, ServiceContext serviceContext) {
+			boolean biobankCollection, String biobankType, ServiceContext serviceContext) {
 		try {
 			// Create the Biobank Entry
 			// Set Primary Key
@@ -190,6 +221,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 	        d2biobank.setBiobankResearchStudy(biobankResearchStudy);
 	        d2biobank.setBiobankNonHuman(biobankNonHuman);
 	        d2biobank.setBiobankCollection(biobankCollection);
+	        d2biobank.setBiobankType(biobankType);
 	        // Liferay Expension Fields
 			d2biobank.setExpandoBridgeAttributes(serviceContext);
 			d2BiobankPersistence.update(d2biobank);
@@ -257,7 +289,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 			boolean biobankITSupportAvailable, long biobankITStaffSize, boolean biobankISAvailable, boolean biobankHISAvailable,
 			String biobankAcronym, String biobankDescription, String biobankURL, String biobankHeadFirstName, String biobankHeadLastName,
 			String biobankHeadRole, boolean biobankClinical, boolean biobankPopulation, boolean biobankResearchStudy, boolean biobankNonHuman,
-			boolean biobankCollection, ServiceContext serviceContext) {
+			boolean biobankCollection, String biobankType, ServiceContext serviceContext) {
 		try {
 			// Update the Biobank Entry
 			D2Biobank d2biobank = getD2Biobank(biobankId);
@@ -299,6 +331,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 	        d2biobank.setBiobankResearchStudy(biobankResearchStudy);
 	        d2biobank.setBiobankNonHuman(biobankNonHuman);
 	        d2biobank.setBiobankCollection(biobankCollection);
+	        d2biobank.setBiobankType(biobankType);
 	        // Liferay Expension Fields
 			d2biobank.setExpandoBridgeAttributes(serviceContext);
 			d2BiobankPersistence.update(d2biobank);
@@ -343,13 +376,553 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 		return null;
 	}
 	
+	public List<D2Biobank> getD2Biobanks(String keyword, String country, String materialtype, String diagnosisavailable, String biobanksize, String typeofbiobank, String typeofcollection) {
+		keyword = keyword.trim();
+		if(keyword.equals("") && country.equals("") && materialtype.equals("") && diagnosisavailable.equals("") && biobanksize.equals("") && typeofbiobank.equals("") && typeofcollection.equals("")) {
+			try {
+				return this.getD2Biobanks(-1, -1);
+			} catch(Exception e) {
+				System.out.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.service.impl.D2BiobankLocalServiceImpl::getD2Biobanks] Error getting all biobanks.");
+				e.printStackTrace();
+			}
+		} else {
+			DynamicQuery subquerycontact = null;
+			DynamicQuery subquerycollection = null;
+			DynamicQuery subquerycollectionkeyword = null;
+			DynamicQuery dynamicQuerykeyword = null;
+			DynamicQuery dynamicQuery = null;
+			List<Long> searchlist_biobank = new ArrayList<Long>();
+			if(!keyword.equals("")) {
+				try {
+					List<Long> searchlist_contact = new ArrayList<Long>();
+					List<Long> searchlist_collection = new ArrayList<Long>();
+					subquerycontact = getContactInformationSubquery(keyword);
+					if(subquerycontact != null) {
+						searchlist_contact.addAll(D2BiobankLocalServiceUtil.dynamicQuery(subquerycontact));
+					}
+					subquerycollectionkeyword = getCollectionSubqueryForKeywords(keyword);
+					if(subquerycollectionkeyword != null) {
+						searchlist_collection.addAll(D2BiobankLocalServiceUtil.dynamicQuery(subquerycollectionkeyword));
+					}
+					dynamicQuerykeyword = getBiobankQueryForKeywords(keyword);
+					if(dynamicQuerykeyword != null) {
+						searchlist_biobank.addAll(D2BiobankLocalServiceUtil.dynamicQuery(dynamicQuerykeyword));
+					}
+					searchlist_contact.removeAll(searchlist_biobank);
+					searchlist_biobank.addAll(searchlist_contact);
+					searchlist_collection.removeAll(searchlist_biobank);
+					searchlist_biobank.addAll(searchlist_collection);
+					System.out.println("Keyword Biobanks Found: " + searchlist_biobank.size());
+				} catch (SystemException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			long powerof = 0;
+			if(!biobanksize.equals("")) {
+				powerof = D2BiobankKeys.getBiobankSizeFromSelect(biobanksize);
+			}
+			if(!materialtype.equals("") || !diagnosisavailable.equals("") || !biobanksize.equals("") || !typeofcollection.equals("")) {
+				subquerycollection = getCollectionSubquery(materialtype, diagnosisavailable, biobanksize, powerof, typeofcollection);
+			}
+			//Create Main Query
+			dynamicQuery = getBiobankQuery(country, typeofbiobank);
+			if(subquerycollection != null) {
+				dynamicQuery.add(PropertyFactoryUtil.forName("biobankId").in(subquerycollection));
+			}
+			if(searchlist_biobank.size() != 0) {
+				dynamicQuery.add(PropertyFactoryUtil.forName("biobankId").in(searchlist_biobank));
+			}
+			try {
+				List<D2Biobank> searchlist = D2BiobankLocalServiceUtil.dynamicQuery(dynamicQuery);
+				return searchlist;
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	private DynamicQuery getBiobankQueryForKeywords(String keyword) {
+		DynamicQuery dynamicQuery = D2BiobankLocalServiceUtil.dynamicQuery();
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+		projectionList.add(ProjectionFactoryUtil.groupProperty("biobankId"));
+		dynamicQuery.setProjection(projectionList);
+		String[] keywords = keyword.split(" ");
+		Criterion criterion = null;
+		if(!keyword.equals("")) {
+			for(String search : keywords) {
+				if(criterion == null) {
+					criterion = RestrictionsFactoryUtil.ilike("bbmribiobankID", "%" + search + "%");
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankJurisdicalPerson", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankCountry", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("bioresourceReference", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankAcronym", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankDescription", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankHeadFirstName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankHeadLastName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankHeadRole", "%" + search + "%"));
+				} else {
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("bbmribiobankID", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankJurisdicalPerson", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankCountry", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("bioresourceReference", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankAcronym", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankDescription", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankHeadFirstName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankHeadLastName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("biobankHeadRole", "%" + search + "%"));
+				}
+			}
+		}
+		if(criterion != null) {
+			dynamicQuery.add(criterion);
+		}
+		return dynamicQuery;
+	}
+	
+	private DynamicQuery getBiobankQuery(String country, String typeofbiobank) {
+		DynamicQuery dynamicQuery = D2BiobankLocalServiceUtil.dynamicQuery();
+		Criterion criterion = null;
+		if(!country.equals("")) {
+			criterion = RestrictionsFactoryUtil.ilike("biobankCountry", "%" + country + "%");
+		}
+		if(!typeofbiobank.equals("")) {
+			if(criterion == null) {
+				criterion = RestrictionsFactoryUtil.ilike("biobankType", "%" + typeofbiobank.replaceAll(" ", "") + "%");
+			} else {
+				criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("biobankType", "%" + typeofbiobank.replaceAll(" ", "") + "%"));
+			}
+		}
+		if(criterion != null) {
+			dynamicQuery.add(criterion);
+		}
+		return dynamicQuery;
+	}
+	
+	private DynamicQuery getCollectionSubqueryForKeywords(String keyword) {
+		DynamicQuery dynamicQuery = D2CollectionLocalServiceUtil.dynamicQuery();
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+		projectionList.add(ProjectionFactoryUtil.groupProperty("biobankId"));
+		dynamicQuery.setProjection(projectionList);
+		String[] keywords = keyword.split(" ");
+		Criterion criterion = null;
+		if(!keyword.equals("")) {
+			for(String search : keywords) {
+				if(criterion == null) {
+					criterion = RestrictionsFactoryUtil.ilike("bbmricollectionID", "%" + search + "%");
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("materialStoredOther", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionTypeOther", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("bioresourceReference", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionAcronym", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionDescription", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("temperatureOther", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("diagnosisAvailable", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionHeadFirstName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionHeadLastName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionHeadRole", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionSampleAccessDescription", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionDataAccessDescription", "%" + search + "%"));
+				} else {
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("bbmricollectionID", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("materialStoredOther", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionTypeOther", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("bioresourceReference", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionAcronym", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionDescription", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("temperatureOther", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("diagnosisAvailable", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionHeadFirstName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionHeadLastName", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionHeadRole", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionSampleAccessDescription", "%" + search + "%"));
+					criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("collectionDataAccessDescription", "%" + search + "%"));
+				}
+			}
+		}
+		if(criterion != null) {
+			dynamicQuery.add(criterion);
+		}
+		return dynamicQuery;
+	}
+	
+	private DynamicQuery getCollectionSubquery(String materialtype, String diagnosisavailable, String biobanksize, long powerof, String typeofcollection) {
+		DynamicQuery dynamicQuery = D2CollectionLocalServiceUtil.dynamicQuery();
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+		projectionList.add(ProjectionFactoryUtil.groupProperty("biobankId"));
+		dynamicQuery.setProjection(projectionList);
+		
+		Criterion criterion = null;
+		
+		if(!materialtype.equals("")) {
+			String[] materialtypes = {"Plasma","Serum","Urine","Saliva","Faeces","RNA","Blood","Tissue Frozen","Tissue FFPE","Immortalized Cell Lines","Isolated Pathogen"};
+			boolean others = true;
+			for(String materialtypes_tmp : materialtypes) {
+				if(typeofcollection.equals(materialtypes_tmp)) {
+					String colname = "materialStored" + materialtypes_tmp.replaceAll(" ", "");
+					if(criterion == null) {
+						criterion = RestrictionsFactoryUtil.eq(colname, true);
+					} else {
+						criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq(colname, true));
+					}
+					others = false;
+				}
+			}
+			if(others) {
+				if(criterion == null) {
+					criterion = RestrictionsFactoryUtil.ilike("materialStoredOther", "%" + typeofcollection + "%");
+				} else {
+					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("materialStoredOther", "%" + typeofcollection + "%"));
+				}
+			}
+		}
+		if(!diagnosisavailable.equals("")) {
+			if(criterion == null) {
+				criterion = RestrictionsFactoryUtil.ilike("diagnosisavailable", "%" + diagnosisavailable + "%");
+			} else {
+				criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("diagnosisavailable", "%" + diagnosisavailable + "%"));
+			}
+		}
+		if(!biobanksize.equals("")) {
+			if(criterion == null) {
+				criterion = RestrictionsFactoryUtil.eq("collectionOrderOfMagnitude", powerof);
+			} else {
+				criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("collectionOrderOfMagnitude", powerof));
+			}
+		}
+		if(!typeofcollection.equals("")) {
+			String[] typeofcollections = {"Case Control","Cohort","Cross Sectional","Longitudinal","Twin Study","Quality Control","Population Based","Disease Specific","Birth Cohort"};
+			boolean others = true;
+			for(String typeofcollection_tmp : typeofcollections) {
+				if(typeofcollection.equals(typeofcollection_tmp)) {
+					String colname = "collectionType" + typeofcollection_tmp.replaceAll(" ", "");
+					if(criterion == null) {
+						criterion = RestrictionsFactoryUtil.eq(colname, true);
+					} else {
+						criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq(colname, true));
+					}
+					others = false;
+				}
+			}
+			if(others) {
+				if(criterion == null) {
+					criterion = RestrictionsFactoryUtil.ilike("collectionTypeOther", "%" + typeofcollection + "%");
+				} else {
+					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("collectionTypeOther", "%" + typeofcollection + "%"));
+				}
+			}
+		}
+		dynamicQuery.add(criterion);
+		return dynamicQuery;
+	}
+	
+	private DynamicQuery getContactInformationSubquery(String keyword) {
+		DynamicQuery dynamicQuery = D2BiobankLocalServiceUtil.dynamicQuery();
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+		projectionList.add(ProjectionFactoryUtil.groupProperty("biobankId"));
+		dynamicQuery.setProjection(projectionList);
+		
+		DynamicQuery dynamicQuerySub = ContactInformationLocalServiceUtil.dynamicQuery();
+		ProjectionList projectionList_Sub = ProjectionFactoryUtil.projectionList();
+		projectionList_Sub.add(ProjectionFactoryUtil.groupProperty("contactID"));
+		dynamicQuerySub.setProjection(projectionList_Sub);
+		String[] keywords = keyword.split(" ");
+		Criterion criterion = null;
+		for(String search : keywords) {
+			if(criterion == null) {
+				criterion = RestrictionsFactoryUtil.ilike("contactID", "%" + search + "%");
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactEmail", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactCountry", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactFirstName", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactLastName", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactPhone", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactAddress", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactZIP", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactCity", "%" + search + "%"));
+			} else {
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactID", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactEmail", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactCountry", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactFirstName", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactLastName", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactPhone", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactAddress", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactZIP", "%" + search + "%"));
+				criterion = RestrictionsFactoryUtil.or(criterion, RestrictionsFactoryUtil.ilike("contactCity", "%" + search + "%"));
+			}
+		}
+		dynamicQuerySub.add(criterion);
+		dynamicQuery.add(PropertyFactoryUtil.forName("contactIDRef").in(dynamicQuerySub));
+		return dynamicQuery;
+	}
+	
+	/**
+	 * 
+	 */
 	public List<D2Biobank> getLDAPNotUpdatedBiobanks(long groupId, String ldapupdateuuid) {
 		try {
-			return d2BiobankPersistence.filterFindByNotUUID(groupId, ldapupdateuuid);
+			return d2BiobankPersistence.findByNotUUID(groupId, ldapupdateuuid);
 		} catch (SystemException e) {
 			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.service.impl.D2BiobankLocalServiceImpl::getLDAPNotUpdatedBiobanks] Error getting Biobank List with updateId: " + ldapupdateuuid + ".");
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * 
+	 */
+	public D2Biobank getBiobankWithLdapUpdate(long biobankId) {
+		D2Biobank d2biobank = null;
+		// ServiceContext to create the assets
+		long companyId = Long.parseLong(PropsUtil.get("D2BiobankCompany"));
+		long groupId = Long.parseLong(PropsUtil.get("D2BiobankGroup"));
+		ServiceContext serviceContext = new ServiceContext();
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		try {
+			Company company = CompanyLocalServiceUtil.getCompany(companyId);
+			serviceContext.setUserId(company.getDefaultUser().getUserId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		serviceContext.setCompanyId(companyId);
+		serviceContext.setScopeGroupId(groupId);
+		
+		// Reading data from the LDAP
+		Hashtable<String, String> environment = new Hashtable<String, String>();
+		environment.put(LdapContext.CONTROL_FACTORIES,
+				"com.sun.jndi.ldap.ControlFactory");
+		environment.put(Context.INITIAL_CONTEXT_FACTORY,
+				"com.sun.jndi.ldap.LdapCtxFactory");
+		environment.put(Context.PROVIDER_URL,
+				"ldap://directory.bbmri-eric.eu:10389");
+		environment.put(Context.SECURITY_AUTHENTICATION, "simple");
+		environment.put(Context.REFERRAL, "follow");
+		try {
+			d2biobank = D2BiobankLocalServiceUtil
+					.getD2Biobank(biobankId);
+
+			DirContext ctx = new InitialDirContext(environment);
+			SearchControls ctls = new SearchControls();
+			ctls.setReturningAttributes(null);
+			ctls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+			// Search for objects using filter and controls
+			String filter = "biobankID="
+					+ d2biobank.getBbmribiobankID() + ",c="
+					+ d2biobank.getBiobankCountry().toLowerCase()
+					+ ",ou=biobanks,dc=directory,dc=bbmri-eric,dc=eu";
+			NamingEnumeration<?> answer = ctx.search(filter, "(objectclass=*)",
+					ctls);
+			int counter_collections = 0;
+			int counter_biobanks = 0;
+			while (answer.hasMore()) {
+				SearchResult sr = (SearchResult) answer.next();
+				Attributes attrs = sr.getAttributes();
+				try {
+					if (attrs.get("biobankID") != null) {
+						counter_biobanks++;
+						String ldapbiobankID = getAttributeValues(attrs
+								.get("biobankID"));
+
+						d2biobank = getD2BiobankFromLDAP(d2biobank, attrs);
+						D2BiobankLocalServiceUtil.updateD2Biobank(d2biobank,
+								serviceContext);
+					} else {
+						counter_collections++;
+						String[] ldapid = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID")).split(":");
+						String bbmricollectionID = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID"));
+						String bbmribiobankID = "";
+						String bbmriparentcollectionID = "";
+						int idcount = 0;
+						for(int count = ldapid.length-1; count >= 0; count--) {
+							idcount ++;
+							if(ldapid[count].equals("collection")) {
+								if(idcount > 2) {
+									for(int parentcounter = 0; parentcounter < ldapid.length-1; parentcounter++) {
+										if(bbmriparentcollectionID.length() != 0) {
+											bbmriparentcollectionID += ":";
+										}
+										bbmriparentcollectionID += ldapid[parentcounter];
+									}
+									break;
+								} else {
+									break;
+								}
+							}
+						}
+						for(int count = 0; count < ldapid.length-idcount; count++) {
+							if(bbmribiobankID.length() != 0) {
+								bbmribiobankID += ":";
+							}
+							bbmribiobankID += ldapid[count];
+						}
+						long parentcollectionId = 0;
+						if(!bbmriparentcollectionID.equals("")) {
+							D2Collection parentcollection = D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(groupId, bbmriparentcollectionID, bbmribiobankID);
+							if(parentcollection != null) {
+								parentcollectionId = parentcollection.getD2collectionId();
+							}
+						}
+						D2Collection collection = D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(groupId, bbmricollectionID, bbmribiobankID);
+						if(collection == null) {	
+							serviceContext.setCreateDate(new Date());
+							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs);
+							collection.setBiobankId(biobankId);
+							collection.setParentd2collectionId(parentcollectionId);
+							collection = D2CollectionLocalServiceUtil.addD2Collection(collection, serviceContext);
+						} else {
+							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs);
+							collection.setBiobankId(biobankId);
+							collection.setParentd2collectionId(parentcollectionId);
+							collection = D2CollectionLocalServiceUtil.updateD2Collection(collection, serviceContext);
+						}
+					}
+				} catch (Exception ex) {
+					System.err
+							.println("["
+									+ date_format_apache_error
+											.format(new Date())
+									+ "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error Creating Entrys for Biobank: "
+									+ getAttributeValues(attrs
+											.get("biobankName")));
+					ex.printStackTrace();
+				}
+			}
+			System.out.println("LDAP contained: " + counter_biobanks + " Biobanks and " + counter_collections + " Collections");
+		} catch (Exception ex) {
+			System.err
+					.println("["
+							+ date_format_apache_error.format(new Date())
+							+ "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::connectLDAP] Error reading data from LDAP Server.");
+			ex.printStackTrace();
+		}
+		return d2biobank;
+	}
+	
+	public D2Biobank getD2BiobankFromLDAP(D2Biobank d2biobank, Attributes attrs) {
+		d2biobank.setBiobankName(getAttributeValues(attrs.get("biobankName")));
+        d2biobank.setContactIDRef(getAttributeValues(attrs.get("contactIDRef")));
+        d2biobank.setContactPriority(getAttributeValuesLong(attrs.get("contactPriority")));
+        d2biobank.setBiobankJurisdicalPerson(getAttributeValues(attrs.get("biobankJurisdicalPerson")));
+        d2biobank.setBiobankCountry(getAttributeValues(attrs.get("biobankCountry")));
+        d2biobank.setBiobankPartnerCharterSigned(getAttributeValuesBoolean(attrs.get("biobankPartnerCharterSigned")));
+        // Optional Fields
+        d2biobank.setBioresourceReference(getAttributeValues(attrs.get("bioresourceReference")));
+        d2biobank.setBiobankNetworkIDRef(getAttributeValues(attrs.get("biobankNetworkIDRef")));
+        d2biobank.setGeoLatitude(getAttributeValues(attrs.get("geoLatitude")));
+        d2biobank.setGeoLongitude(getAttributeValues(attrs.get("geoLongitude")));
+        d2biobank.setCollaborationPartnersCommercial(getAttributeValuesBoolean(attrs.get("collaborationPartnersCommercial")));
+        d2biobank.setCollaborationPartnersNonforprofit(getAttributeValuesBoolean(attrs.get("collaborationPartnersNonforprofit")));
+        d2biobank.setBiobankITSupportAvailable(getAttributeValuesBoolean(attrs.get("biobankITSupportAvailable")));
+        d2biobank.setBiobankITStaffSize(getAttributeValuesLong(attrs.get("biobankITStaffSize")));
+        d2biobank.setBiobankISAvailable(getAttributeValuesBoolean(attrs.get("biobankISAvailable")));
+        d2biobank.setBiobankHISAvailable(getAttributeValuesBoolean(attrs.get("biobankHISAvailable")));
+        d2biobank.setBiobankAcronym(getAttributeValues(attrs.get("biobankAcronym")));
+        d2biobank.setBiobankDescription(getAttributeValues(attrs.get("biobankDescription")));
+        d2biobank.setBiobankURL(getAttributeValues(attrs.get("biobankURL")));
+        d2biobank.setBiobankHeadFirstName(getAttributeValues(attrs.get("biobankHeadFirstName")));
+        d2biobank.setBiobankHeadLastName(getAttributeValues(attrs.get("biobankHeadLastName")));
+        d2biobank.setBiobankHeadRole(getAttributeValues(attrs.get("biobankHeadRole")));
+        String types = getAttributeValues(attrs.get("objectClass"));
+        d2biobank.setBiobankType(types);
+        if(types.contains("biobankClinical")) {
+        	d2biobank.setBiobankClinical(true);
+        } else {
+        	d2biobank.setBiobankClinical(false);
+        }
+        if(types.contains("biobankPopulation")) {
+        	d2biobank.setBiobankPopulation(true);
+        } else {
+        	d2biobank.setBiobankPopulation(false);
+        }
+        if(types.contains("biobankResearchStudy")) {
+        	d2biobank.setBiobankResearchStudy(true);
+        } else {
+        	d2biobank.setBiobankResearchStudy(false);
+        }
+        if(types.contains("biobankNonHuman")) {
+        	d2biobank.setBiobankNonHuman(true);
+        } else {
+        	d2biobank.setBiobankNonHuman(false);
+        }
+        if(types.contains("biobankCollection")) {
+        	d2biobank.setBiobankCollection(true);
+        } else {
+        	d2biobank.setBiobankCollection(false);
+        }
+        return d2biobank;
+	}
+	
+	/**
+	 * 
+	 * @param attr
+	 * @return
+	 */
+	private String getAttributeValues(Attribute attr) {
+		String values = "";
+		String seperator = "";
+		try {
+			for (NamingEnumeration e = attr.getAll(); e.hasMore(); ) {
+				values += seperator + e.next();
+				seperator = ", ";
+			}
+		} catch (Exception ex) {
+			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
+			//ex.printStackTrace();
+			return "";
+		}
+		return values; 
+	}
+	
+	/**
+	 * 
+	 * @param attr
+	 * @return
+	 */
+	private Long getAttributeValuesLong(Attribute attr) {
+		String values = "";
+		String seperator = "";
+		long return_value = 0;
+		try {
+			for (NamingEnumeration e = attr.getAll(); e.hasMore(); ) {
+				values += seperator + e.next();
+				seperator = ", ";
+			}
+			return_value = Long.parseLong(values);
+		} catch (Exception ex) {
+			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
+			//ex.printStackTrace();
+			return (long) 0;
+		}
+		return return_value; 
+	}
+	
+	/**
+	 * 
+	 * @param attr
+	 * @return
+	 */
+	private Boolean getAttributeValuesBoolean(Attribute attr) {
+		String values = "";
+		String seperator = "";
+		boolean return_value = false;
+		try {
+			for (NamingEnumeration e = attr.getAll(); e.hasMore(); ) {
+				values += seperator + e.next();
+				seperator = ", ";
+			}
+			return_value = Boolean.parseBoolean(values);
+		} catch (Exception ex) {
+			//System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.scheduler.LDAPSyncService::getAttributeValues] Error getting Attributes.");
+			//ex.printStackTrace();
+			return false;
+		}
+		return return_value; 
 	}
 }
