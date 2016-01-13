@@ -78,6 +78,8 @@
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil"%>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder"%>
 
+<%@ page import="at.graz.meduni.liferay.portlet.bibbox.rdconnect.portlet.event.EventUtil" %>
+
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 

@@ -110,6 +110,7 @@
 		<column name="computed" type="boolean" />
 		<column name="confirmationscript" type="String" />
 		<column name="grouping" type="String" />
+		<column name="columnwidth" type="String" />
 	</entity>
 	<entity name="KdssmpParameterOptions" local-service="true" remote-service="false"  table="kdssmp.parameteroptions" >
 		<!-- PK fields -->

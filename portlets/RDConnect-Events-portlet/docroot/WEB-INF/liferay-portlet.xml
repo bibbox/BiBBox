@@ -13,6 +13,27 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>event-feed-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>event-notification</portlet-name>
+		<icon>/icon.png</icon>
+		<scheduler-entry>
+			<scheduler-event-listener-class>at.graz.meduni.liferay.portlet.bibbox.rdconnect.portlet.event.EventNotificationSchedule</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<simple-trigger-value>1</simple-trigger-value>
+					<time-unit>day</time-unit>
+					<!-- time unit can be day","hour", "minute", "second", or "week"-->  
+				</simple>
+			</trigger>
+		</scheduler-entry>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			event-notification-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

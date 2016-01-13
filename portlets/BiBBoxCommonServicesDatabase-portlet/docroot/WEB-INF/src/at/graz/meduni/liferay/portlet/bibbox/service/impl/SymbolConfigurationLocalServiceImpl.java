@@ -63,6 +63,7 @@ public class SymbolConfigurationLocalServiceImpl
 			
 			symbol = replaceIconStrings(symbol, "A1", "A1", symbolconfig, icons);
 			symbol = replaceIconStrings(symbol, "A2", "A2", symbolconfig, icons);
+			symbol = replaceIconStrings(symbol, "A3", "A3", symbolconfig, icons);
 			
 			if(getStringFromMap(icons, "A4").startsWith("TEXT:")) {
 				symbol = symbol.replaceAll("§A4-1§", getStringFromMap(icons, "A4").replaceAll("TEXT:", ""));
@@ -76,10 +77,10 @@ public class SymbolConfigurationLocalServiceImpl
 						symbol = symbol.replaceAll("§A4-" + a4counter + "§", a4.replaceAll("TEXT:", ""));
 					} else {
 						icons.put("A4-" + a4counter, a4);
-						symbol = replaceIconStrings(symbol, "A4", "A4-" + a4counter, symbolconfig, icons);
+						symbol = replaceIconStrings(symbol, "A4-" + a4counter, "A4-" + a4counter, symbolconfig, icons);
 					}
+					a4counter ++;
 				}
-				a4counter ++;
 			}
 			
 		} catch (Exception ex) {
@@ -91,7 +92,11 @@ public class SymbolConfigurationLocalServiceImpl
 	}
 	
 	private String replaceIconStrings(String symbol, String positionkey, String replacepositionkey, SymbolConfiguration symbolconfig, LinkedHashMap<String, String> icons) {
-		IconConfiguration iconconfiguration = symbolconfig.getIconsForKeyPosition(getStringFromMap(icons, positionkey), positionkey);
+		String positionkey_seach = positionkey;
+		if(positionkey_seach.contains("-")) {
+			positionkey_seach = positionkey_seach.split("-")[0];
+		}
+		IconConfiguration iconconfiguration = symbolconfig.getIconsForKeyPosition(getStringFromMap(icons, positionkey), positionkey_seach);
 		if(iconconfiguration != null) {
 			symbol = symbol.replaceAll("§" + replacepositionkey + "§", iconconfiguration.getHTMLIcon());
 			String a2elementcolor = iconconfiguration.getElementcolor();

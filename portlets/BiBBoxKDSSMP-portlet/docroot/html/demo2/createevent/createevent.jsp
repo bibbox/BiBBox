@@ -7,9 +7,42 @@
 	    display: inline;
 	}
 </style>
+<style>
+	.notdisplayInput {
+		display: none;
+	}
+	.aui .highliteMultiselect {
+		border: 1px solid red;
+	}
+	.highliteMultiselectElement {
+		border: 1px solid red;
+		color: red;
+	}
+	.aui select[multiple] {
+		height: 200px;
+	}
+	.select-highlight-suggest-1p {
+		color: #CC3333;
+	}
+	.select-highlight-suggest-2p {
+		color: #0000CC;
+		background-color: #FFFF66;
+	}
+	.select-highlight-suggest-1n {
+		color: #585858;
+	}
+	.select-highlight-suggest-2n {
+		color: #909090;
+	}
+	.stagingfooter {
+		font-size: 80%;
+	}
+</style>
 <%
 String redirect = PortalUtil.getCurrentURL(renderRequest);	
 long organizationId = 0;
+long eventid = 0;
+boolean status = false;
 com.liferay.portal.model.Group currentGroup =  themeDisplay.getLayout().getGroup();
 if (currentGroup.isOrganization()) {
 	organizationId = currentGroup.getClassPK();
@@ -28,7 +61,7 @@ if (currentGroup.isOrganization()) {
 				<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 				<aui:column columnWidth="100" first="true">
 					<label for="kdssmpdate"><%= "Date of " + eventdisplay %></label>
-					<input cssClass="kdssmpdate" name="<portlet:namespace />kdssmpdate" type="text"	placeholder="dd-mm-yyyy" value="">
+					<input class="kdssmpdate" name="<portlet:namespace />kdssmpdate" type="text"	placeholder="dd-mm-yyyy" value="">
 					
 				</aui:column>
 				<%
@@ -38,17 +71,26 @@ if (currentGroup.isOrganization()) {
 					String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
 					if(parameterconfig.getGrouping().equalsIgnoreCase("")) {
 						if(!parameterconfig.getComputed()) {
-							if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
-								%><%@ include file="/html/demo/dynamicevent/dynamicelements/html.jspf" %><%
-							} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
-								%><%@ include file="/html/demo/dynamicevent/dynamicelements/text.jspf" %><%
-							} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
-								%><%@ include file="/html/demo/dynamicevent/dynamicelements/textbox.jspf" %><%
-							} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
-								%><%@ include file="/html/demo/dynamicevent/dynamicelements/select.jspf" %><%
-							} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
-								%><%@ include file="/html/demo/dynamicevent/dynamicelements/multiselect.jspf" %><%
+							int columnwidth = 100;
+							if(!parameterconfig.getColumnwidth().equals("")) {
+								columnwidth = Integer.parseInt(parameterconfig.getColumnwidth());
 							}
+							if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/html.jspf" %><%
+							} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/text.jspf" %><%
+							} else if(parameterconfig.getDatatype().equalsIgnoreCase("textbox")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/textbox.jspf" %><%
+							} else if(parameterconfig.getDatatype().equalsIgnoreCase("Select")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/select.jspf" %><%
+							} else if(parameterconfig.getDatatype().equalsIgnoreCase("Multiselect")) {
+								%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/multiselect.jspf" %><%
+							} 
+						}
+						if(!parameterconfig.getConfirmationscript().equals("")) {
+							%>
+							<aui:script><%= parameterconfig.getConfirmationscript() %></aui:script>
+							<%
 						}
 					}
 				}
@@ -65,6 +107,16 @@ if (currentGroup.isOrganization()) {
 
 //String eventdisplay = KdssmpConfigurationLocalServiceUtil.getConfigurationOption("Display", eventtype).getOptionvalue();
 %>
+<aui:script>
+AUI.add('datastore', function(A) {
+	A.DatakDSSMPStore = {
+		kDSSMPStore: function (target) {
+			var tmp = "DO Nothing because no Event created yet";
+		}
+	}
+}
+);
+</aui:script>
 
 <aui:script use="aui-io-request, event, node, aui-popover, valuechange, event-hover, aui-tooltip, event-valuechange, click">
 AUI().use(
@@ -72,7 +124,7 @@ AUI().use(
   function(Y) {
     var datepicker = new Y.DatePicker(
       {
-        trigger: 'input',
+        trigger: '.kdssmpdate',
         mask: '%d-%m-%Y',
         popover: {
           toolbars: {

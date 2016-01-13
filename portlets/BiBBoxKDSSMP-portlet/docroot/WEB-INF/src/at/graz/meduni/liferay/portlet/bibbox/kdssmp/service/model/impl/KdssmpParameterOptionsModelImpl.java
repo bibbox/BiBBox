@@ -63,7 +63,7 @@ public class KdssmpParameterOptionsModelImpl extends BaseModelImpl<KdssmpParamet
 			{ "option_", Types.VARCHAR },
 			{ "value", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table kdssmp.parameteroptions (parameteroptionsId LONG not null primary key,parameterconfigurationId LONG,option_ VARCHAR(75) null,value VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table kdssmp.parameteroptions (parameteroptionsId LONG not null primary key,parameterconfigurationId LONG,option_ TEXT null,value TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table kdssmp.parameteroptions";
 	public static final String ORDER_BY_JPQL = " ORDER BY kdssmpParameterOptions.parameteroptionsId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY kdssmp.parameteroptions.parameteroptionsId ASC";

@@ -82,6 +82,7 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 		attributes.put("computed", getComputed());
 		attributes.put("confirmationscript", getConfirmationscript());
 		attributes.put("grouping", getGrouping());
+		attributes.put("columnwidth", getColumnwidth());
 
 		return attributes;
 	}
@@ -141,6 +142,12 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 
 		if (grouping != null) {
 			setGrouping(grouping);
+		}
+
+		String columnwidth = (String)attributes.get("columnwidth");
+
+		if (columnwidth != null) {
+			setColumnwidth(columnwidth);
 		}
 	}
 
@@ -370,6 +377,30 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 	}
 
 	@Override
+	public String getColumnwidth() {
+		return _columnwidth;
+	}
+
+	@Override
+	public void setColumnwidth(String columnwidth) {
+		_columnwidth = columnwidth;
+
+		if (_kdssmpParameterConfigurationRemoteModel != null) {
+			try {
+				Class<?> clazz = _kdssmpParameterConfigurationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setColumnwidth", String.class);
+
+				method.invoke(_kdssmpParameterConfigurationRemoteModel,
+					columnwidth);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public java.lang.String getInputParameter() {
 		try {
 			String methodName = "getInputParameter";
@@ -468,6 +499,7 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 		clone.setComputed(getComputed());
 		clone.setConfirmationscript(getConfirmationscript());
 		clone.setGrouping(getGrouping());
+		clone.setColumnwidth(getColumnwidth());
 
 		return clone;
 	}
@@ -517,7 +549,7 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{parameterconfigurationId=");
 		sb.append(getParameterconfigurationId());
@@ -537,6 +569,8 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 		sb.append(getConfirmationscript());
 		sb.append(", grouping=");
 		sb.append(getGrouping());
+		sb.append(", columnwidth=");
+		sb.append(getColumnwidth());
 		sb.append("}");
 
 		return sb.toString();
@@ -544,7 +578,7 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -587,6 +621,10 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 			"<column><column-name>grouping</column-name><column-value><![CDATA[");
 		sb.append(getGrouping());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>columnwidth</column-name><column-value><![CDATA[");
+		sb.append(getColumnwidth());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -602,5 +640,6 @@ public class KdssmpParameterConfigurationClp extends BaseModelImpl<KdssmpParamet
 	private boolean _computed;
 	private String _confirmationscript;
 	private String _grouping;
+	private String _columnwidth;
 	private BaseModel<?> _kdssmpParameterConfigurationRemoteModel;
 }

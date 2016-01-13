@@ -3044,6 +3044,11 @@ public class D2CollectionWrapper implements D2Collection,
 	}
 
 	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork> getNetworksWhereCollectionIsMember() {
+		return _d2Collection.getNetworksWhereCollectionIsMember();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

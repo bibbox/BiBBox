@@ -644,7 +644,8 @@ public interface D2CollectionLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Collection getD2CollectionFromLDAP(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Collection d2collection,
-		javax.naming.directory.Attributes attrs);
+		javax.naming.directory.Attributes attrs,
+		javax.naming.directory.SearchResult sr);
 
 	/**
 	* @param groupId

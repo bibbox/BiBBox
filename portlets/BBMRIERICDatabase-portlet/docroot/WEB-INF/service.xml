@@ -73,7 +73,9 @@
             <finder-column name="root"></finder-column>
         </finder>
 	</entity>
+	<!-- ****************************************** -->
 	<!-- Directory 2.0 -->
+	<!-- ****************************************** -->
 	<entity name="D2Biobank" uuid="true" local-service="true" remote-service="false" table="bbmrieric.d2biobank">
 		<!-- PK fields -->
 		<column name="biobankId" type="long" primary="true" />
@@ -308,5 +310,91 @@
 			<finder-column name="groupId" />
             <finder-column comparator="!=" name="updateuuid"></finder-column>
         </finder>
+	</entity>
+	<entity name="D2BiobankNetwork" uuid="true" local-service="true" remote-service="false" table="bbmrieric.d2biobanknetwork">
+		<!-- PK fields -->
+		<column name="d2biobanknetworkId" type="long" primary="true" />
+		<!-- FK fields -->
+		<column name="parentd2biobanknetworkId" type="long" />
+		<!-- provenance fields -->
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<!-- LDAP Update provenance -->
+		<column name="updateuuid" type="String" />
+		<!-- mandatory fields -->
+		<column name="contactIDRef" type="String" />
+		<column name="contactPriority" type="long" />
+		<column name="bbmriBiobankNetworkID" type="String" />
+		<column name="biobankNetworkName" type="String" />
+		<column name="biobankNetworkCommonCollectionFocus" type="boolean" />
+		<column name="biobankNetworkCommonCharter" type="boolean" />
+		<column name="biobankNetworkCommonSOPs" type="boolean" />
+		<column name="biobankNetworkCommonDataAccessPolicy" type="boolean" />
+		<column name="biobankNetworkCommonSampleAccessPolicy" type="boolean" />
+		<column name="biobankNetworkCommonMTA" type="boolean" />
+		<column name="biobankNetworkCommonRepresentation" type="boolean" />
+		<column name="biobankNetworkCommonURL" type="boolean" />
+		<!-- optional fields -->
+		<column name="biobankNetworkIDRef" type="String" />
+		<column name="geoLatitude" type="String" />
+		<column name="geoLongitude" type="String" />
+		<column name="biobankNetworkAcronym" type="String" />
+		<column name="biobankNetworkDescription" type="String" />
+		<column name="biobankNetworkURL" type="String" />
+		<column name="biobankNetworkJuridicalPerson" type="String" />
+		<finder name="NotUUID" return-type="Collection">
+			<finder-column name="groupId" />
+            <finder-column comparator="!=" name="updateuuid"></finder-column>
+        </finder>	
+        <finder name="BiobankNetworkBBMRIERICID" return-type="D2BiobankNetwork">
+			<finder-column name="groupId" />
+			<finder-column name="bbmriBiobankNetworkID" />
+		</finder>
+	</entity>
+	<entity name="D2BiobankNetworkLink" uuid="true" local-service="true" remote-service="false" table="bbmrieric.d2biobanknetworklink">
+		<!-- PK fields -->
+		<column name="d2biobanknetworklinkId" type="long" primary="true" />
+		<!-- FK fields -->
+		<column name="d2biobanknetworkId" type="long" />
+		<column name="d2linkId" type="long" />
+		<column name="d2linktype" type="String" />
+		<!-- provenance fields -->
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<!-- LDAP Update provenance -->
+		<column name="updateuuid" type="String" />
+		<finder name="NetworkLinkByChild" return-type="D2BiobankNetworkLink">
+			<finder-column name="d2biobanknetworkId" />
+			<finder-column name="d2linkId" />
+			<finder-column name="d2linktype" />
+		</finder>
+		<finder name="NetworkLinksForChild" return-type="Collection">
+			<finder-column name="d2linkId" />
+			<finder-column name="d2linktype" />
+		</finder>
+		<finder name="ChildForNetworkLinks" return-type="Collection">
+			<finder-column name="d2biobanknetworkId" />
+			<finder-column name="d2linktype" />
+		</finder>
+		<finder name="NotUUID" return-type="Collection">
+			<finder-column name="groupId" />
+            <finder-column comparator="!=" name="updateuuid"></finder-column>
+        </finder>	
 	</entity>
 </service-builder>

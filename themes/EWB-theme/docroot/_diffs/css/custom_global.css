@@ -1,0 +1,23 @@
+#wrapper {
+    padding: 0;
+}
+@media only screen and (min-width: 980px) {
+	#wrapper {
+		padding: 0 5% 0 5%;
+		/* fallback */ 
+		background-color: #EEEEEE; 
+		background-repeat: repeat-x; 
+		/* Safari 4-5, Chrome 1-9 */ 
+		background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#EEEEEE)); 
+		/* Safari 5.1, Chrome 10+ */ 
+		background: -webkit-linear-gradient(top, #EEEEEE, #FFFFFF); 
+		/* Firefox 3.6+ */ 
+		background: -moz-linear-gradient(top, #EEEEEE, #FFFFFF); 
+		/* IE 10 */ 
+		background: -ms-linear-gradient(top, #EEEEEE, #FFFFFF); 
+		/* Opera 11.10+ */ 
+		background: -o-linear-gradient(top, #EEEEEE, #FFFFFF);
+	}
+}
+
+@import url(custom_global_fonts.css);

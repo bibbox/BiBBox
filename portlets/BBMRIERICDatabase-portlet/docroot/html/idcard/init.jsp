@@ -57,8 +57,10 @@
 <!-- Service Builder includes -->
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.model.ContactInformation" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.model.D2Biobank" %>
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.model.D2Collection" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil" %>
+<%@ page import="at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalServiceUtil" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.permission.D2BiobankModelPermission" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.permission.D2BiobankPermission" %>
 <%@ page import="at.meduni.liferay.portlet.bbmrieric.util.WebKeys" %>

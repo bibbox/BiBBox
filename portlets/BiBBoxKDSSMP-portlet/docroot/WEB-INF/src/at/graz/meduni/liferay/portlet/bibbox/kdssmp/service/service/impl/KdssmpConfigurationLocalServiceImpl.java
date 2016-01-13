@@ -84,7 +84,8 @@ public class KdssmpConfigurationLocalServiceImpl
 			KdssmpConfigurationImpl kdssmpconfiguration = new KdssmpConfigurationImpl();
 			long configurationId = ParamUtil.getLong(request, "configurationId");
 			if(configurationId == 0) {
-				kdssmpconfiguration.setConfigurationId(CounterLocalServiceUtil.increment(KdssmpConfiguration.class.getName()));
+				configurationId = CounterLocalServiceUtil.increment(KdssmpConfiguration.class.getName());
+				kdssmpconfiguration.setConfigurationId(configurationId);
 			} else {
 				kdssmpconfiguration.setConfigurationId(configurationId);
 			}

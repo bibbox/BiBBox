@@ -243,6 +243,7 @@ public class RDConnectSearchSchedule implements MessageListener {
 		organizationtype.setValue(type);
 		returnvalue.add(organizationtype);
 		// OrganizationAddress
+		RDConnectSearchIndexObject organizationcountry = null;
 		try {
 			for(Address address : organization.getAddresses()) {
 				RDConnectSearchIndexObject organizationaddress = new RDConnectSearchIndexObject();
@@ -250,8 +251,14 @@ public class RDConnectSearchSchedule implements MessageListener {
 				organizationaddress.setLocationId(address.getAddressId());
 				organizationaddress.setLocation("Address");
 				organizationaddress.setKey("Street");
-				organizationaddress.setValue(address.getStreet1() + "<br>" + address.getStreet2() + "<br>" + address.getStreet3() + "<br>" + address.getZip() + " " + address.getCity()  + "<br>" + address.getCountry().getName());
+				organizationaddress.setValue(address.getStreet1() + "<br>" + address.getStreet2() + "<br>" + address.getStreet3() + "<br>" + address.getZip() + " " + address.getCity()  + "<br>" + address.getCountry().getNameCurrentValue());
 				returnvalue.add(organizationaddress);
+				if(organizationcountry == null) {
+					organizationcountry = organizationaddress;
+					organizationcountry.setKey("Country");
+					organizationcountry.setValue(address.getCountry().getNameCurrentValue());
+					returnvalue.add(organizationcountry);
+				}
 			}
 		} catch (SystemException e) {
 			System.err.println("RDConnectSearchScheduler::RDConnectSearchSchedule::getIndexFromOrganization->OrganizationAddress");

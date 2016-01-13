@@ -4,9 +4,13 @@ String data = "not specified";
 if(eventdata != null) {
 	data = eventdata.getValue();
 }
+String text_type = "text";
+if(!parameterconfig.getVisible()) {
+	text_type = "hidden";
+}
 %>
-<aui:column columnWidth="100" first="true">
-	<aui:input disabled="<%= status %>" cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>" type="text" />
+<aui:column columnWidth="<%= columnwidth %>">
+	<aui:input disabled="<%= status %>" cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>" type="<%= text_type %>" value="<%= data %>" />
 </aui:column>
 
 <aui:script>

@@ -99,6 +99,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 List<KdssmpPatient> patients = KdssmpPatientLocalServiceUtil.getKdssmpPatients(-1, -1);
 for(KdssmpPatient patient : patients) {
 	LinkedHashMap<String, String> icons = new LinkedHashMap<String, String>();
+	icons.put("A1", "patient");
 	icons.put("A2", patient.getGender());
 	icons.put("ASUMMETY", patient.getFirstname() + " " + patient.getLastname() + "<br>" + dateFormat.format(patient.getDateofbirth()));
 	icons.put("ACODE", patient.getGender());
@@ -115,10 +116,16 @@ for(KdssmpPatient patient : patients) {
 		}
 	}
 	
+	String initialdiagnosis = patient.getInitialDiagnosis();
+	if(!initialdiagnosis.equals("")) {
+		initialdiagnosis = initialdiagnosis.replaceAll("erstdiagnose", "");
+		icons.put("A3", initialdiagnosis);
+	}
+	
 	if(patient.getDateofdeath() != null) {
 		icons.put("A4", icons.get("A4") + "§,§death");
 	}
-	icons.put("A4", icons.get("A4") + "§,§TEXT:" + patient.getNumberOfEvents());
+	icons.put("A4", icons.get("A4") + "§,§TEXT:<div style=\"background-image: url('/BiBBoxKDSSMP-portlet/images/folder_document.png');background-size: 20px 20px;background-repeat: no-repeat;width: 25px;height: 25px;margin-left: 6px;margin-top: 2px;\">" + patient.getNumberOfEvents() + "</div>");
 	
 	%>
 	<%= SymbolConfigurationLocalServiceUtil.getSymbol("default", "patient", icons) %>

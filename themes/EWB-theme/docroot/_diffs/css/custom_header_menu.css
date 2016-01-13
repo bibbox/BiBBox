@@ -1,0 +1,105 @@
+.aui .site-navigation {
+    margin-bottom: 0;
+}
+.aui .navbar {
+    overflow: visible;
+}
+.aui article, .aui aside, .aui details, .aui figcaption, .aui figure, .aui footer, .aui header, .aui hgroup, .aui nav, .aui section {
+    display: block;
+}
+.aui .navbar-inner::before, .aui .navbar-inner::after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.aui .navbar-inner::after {
+    clear: both;
+}
+.aui .navbar-inner::before, .aui .navbar-inner::after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.aui #navigation .navbar-inner {
+    border-radius: 0;
+    box-shadow: none;
+}
+.aui #navigation .navbar-inner {
+    background: #964027 none repeat scroll 0 0;
+    border-width: 0;
+    min-height: 36px;
+}
+.aui .navbar-inner {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.aui .nav-collapse.collapse {
+    height: auto !important;
+    overflow: visible !important;
+}
+.aui .nav-collapse.collapse {
+    height: auto;
+    overflow: visible;
+}
+.aui .collapse {
+    height: 0;
+    overflow: hidden;
+    position: relative;
+    transition: height 0.35s ease 0s;
+}
+.aui .navbar .nav {
+    display: block;
+    float: left;
+    left: 0;
+    margin: 0 10px 0 0;
+    position: relative;
+}
+.aui .nav {
+    list-style: outside none none;
+}
+.aui ul, .aui ol {
+    padding: 0;
+}
+.aui .navbar .nav > li {
+    float: left;
+}
+.aui li {
+    line-height: 27px;
+}
+.modify-pages li {
+    position: relative;
+}
+.aui #navigation .nav li.active > a {
+    background-color: #277D96;
+}
+.aui #navigation .nav .dropdown-menu {
+    background-color: #277D96;
+}
+.aui #navigation .nav > .active > a {
+    background-image: linear-gradient(#118ade 0px, #118ade 47%, #1273c7 100%);
+    box-shadow: none;
+}
+.aui #navigation .navbar-inner li a {
+    text-shadow: none;
+}
+.aui #navigation .navbar-inner li a {
+    color: #fff;
+}
+.aui #navigation .nav > li > a {
+    padding: 4px 15px 5px;
+}
+.aui .navbar .nav > .active > a, .aui .navbar .nav > .active > a:hover, .aui .navbar .nav > .active > a:focus {
+    text-decoration: none;
+}
+.aui .navbar .nav li > a {
+    word-break: break-all;
+}
+.aui .navbar .nav > li > a {
+    float: none;
+}
+.aui .nav > li > a {
+    display: block;
+}
+.aui #navigation .nav .selected span {
+	font-weight: bold;
+}

@@ -251,4 +251,7 @@ public interface LogapiLocalService extends BaseLocalService,
 
 	public void addLogAPI(long userId, java.lang.String userIp,
 		java.lang.String msg);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getCountryNameByOrganizationId(long organizationId);
 }

@@ -1,0 +1,22 @@
+.aui #footer {
+	background-color: #EEEEEE;
+	color: #B3A04C; 
+	text-align: center;
+}
+.aui #footer .footer-fluid {
+	padding: 25px 0 15px 0;
+}
+.aui #footer .footer-center img {
+	padding: 0 20px 0 20px;
+}
+.aui #footer .footer-text {
+	margin: 15px auto 0 auto;
+}
+.aui #footer a {
+	color: #B3A04C;
+}
+.aui #footer a:hover {
+	color: #B36D4C;
+}
+
+@import url(custom_footer_responsive.css);

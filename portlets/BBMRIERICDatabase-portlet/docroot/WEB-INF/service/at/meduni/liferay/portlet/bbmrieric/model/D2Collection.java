@@ -44,4 +44,6 @@ public interface D2Collection extends D2CollectionModel, PersistedModel {
 	public java.lang.String getCollectionDataAvailableHTML();
 
 	public java.lang.String getCollectionMaterialTypeHTML();
+
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork> getNetworksWhereCollectionIsMember();
 }

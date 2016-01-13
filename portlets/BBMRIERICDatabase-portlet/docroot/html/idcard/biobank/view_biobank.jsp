@@ -7,6 +7,7 @@ if(biobank == null) {
 	biobank = D2BiobankLocalServiceUtil.getD2Biobank(biobankId);
 }
 String redirect = ParamUtil.getString(request, "redirect");
+String redirect_this = PortalUtil.getCurrentURL(renderRequest);
 
 AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(D2Biobank.class.getName(), biobank.getBiobankId());
 
@@ -33,7 +34,7 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='Back to Directory'
+	title='Back'
 />
 
 	<br>
@@ -126,6 +127,30 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 	</div>
 	
 		<%
+		List<D2BiobankNetwork> networks = biobank.getNetworksWhereBiobankIsMember();
+		if(networks.size() != 0) {
+			%>
+			<div><div class="fieldname">Associated Networks for the Biobank:</div>
+			<div class="fieldvalue">
+				<%
+				String networksplitter = "";
+				for(D2BiobankNetwork network : networks) {
+					%>
+					<portlet:renderURL var="viewNetworkURL">
+						<portlet:param name="biobanknetworkId" value="<%= String.valueOf(network.getD2biobanknetworkId()) %>" />
+						<portlet:param name="mvcPath" value="/html/idcard/biobank/view_network.jsp" />
+						<portlet:param name="redirect" value="<%= redirect_this %>"/>
+					</portlet:renderURL>
+					<aui:a href="<%= viewNetworkURL.toString() %>"><%= networksplitter + network.getBiobankNetworkName() %></aui:a>
+					<%
+					networksplitter = ", ";
+				}
+				%>
+			</div>
+			<div style='content: "";clear: both;display: table;'></div>
+			<%
+		}
+		
 		if(biobank.getBiobankDescription().length() != 0) {
 			%>
 			<div><div class="fieldname">Biobank Description:</div><div class="fieldvalue"><%= biobank.getBiobankDescription() %></div><div style='content: "";clear: both;display: table;'></div> 
@@ -168,7 +193,9 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 	List<D2Collection> collections = biobank.getCollections();
 	%>
 
+<div style='content: "";clear: both;display: table;'></div>
 <div id="collectionTreeView" style="margin-top: 20px;margin-bottom: 15px;"></div>
+<div style='content: "";clear: both;display: table;'></div>
 
 <style>
 .collection-view-hidden {
@@ -200,7 +227,7 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 			    	<h1 class="bbmriericrecentnews">Main Contact</h1>
 			    	<%
 					ContactInformation contactinformation_collection = collection.getContactInformation();
-					if(contactinformation != null) {
+					if(contactinformation_collection != null) {
 						%>
 						<div>
 							<div class="fieldname">Name:</div>
@@ -339,6 +366,31 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 						<div class="fieldvalue"><%= collection.getCollectionTemeratureHTML() %></div>
 						<div style='content: "";clear: both;display: table;'></div> 
 					</div>
+					<%
+					List<D2BiobankNetwork> networks_collection = collection.getNetworksWhereCollectionIsMember();
+					if(networks_collection.size() != 0) {
+						%>
+						<div><div class="fieldname">Associated Networks for the Collection:</div>
+						<div class="fieldvalue">
+							<%
+							String networksplitter = "";
+							for(D2BiobankNetwork network : networks_collection) {
+								%>
+								<portlet:renderURL var="viewNetwork2URL">
+									<portlet:param name="biobanknetworkId" value="xxxxbiobankIdxxxx" />
+									<portlet:param name="mvcPath" value="/html/idcard/biobank/view_network.jsp" />
+									<portlet:param name="redirect" value="<%= redirect_this %>"/>
+								</portlet:renderURL>
+								<aui:a href='<%= viewNetwork2URL.toString().replaceAll("xxxxbiobankIdxxxx", String.valueOf(network.getD2biobanknetworkId())) %>'><%= networksplitter + network.getBiobankNetworkName() %></aui:a>
+								<%
+								networksplitter = ", ";
+							}
+							%>
+						</div>
+						<div style='content: "";clear: both;display: table;'></div>
+						<%
+					}
+					%>
 					<div>
 						<div class="fieldname">Collection Description:</div>
 						<div class="fieldvalue"><%= collection.getCollectionDescription() %></div>
@@ -400,7 +452,7 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 						%>
 						<div>
 							<div class="fieldname">URL for access policy for the samples:</div>
-							<div class="fieldvalue"><%= collection.getCollectionSampleAccessURI() %></div>
+							<div class="fieldvalue"><aui:a href="<%= collection.getCollectionSampleAccessURI() %>"><%= collection.getCollectionSampleAccessURI() %></aui:a></div>
 							<div style='content: "";clear: both;display: table;'></div> 
 						</div>
 						<%
@@ -448,13 +500,14 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 						%>
 						<div>
 							<div class="fieldname">URL for access policy for the data:</div>
-							<div class="fieldvalue"><%= collection.getCollectionDataAccessURI() %></div>
+							<div class="fieldvalue"><aui:a href="<%= collection.getCollectionDataAccessURI() %>"><%= collection.getCollectionDataAccessURI() %></aui:a></div>
 							<div style='content: "";clear: both;display: table;'></div> 
 						</div>
 						<%
 					}
 					%>
 			    </div>
+			</div>
 			    <%
 			    cssdisplayclass = "collection-view collection-view-hidden";
 		    }
@@ -475,6 +528,8 @@ for(D2Collection rootcollection : rootcollections) {
 	select_css = "";
 }
 %>
+
+
 
 <!-- Create Collection Tree -->
 <aui:script>
@@ -500,7 +555,7 @@ YUI().use('aui-node',function(Y) {
       function(event) {
       	var id = event.target.get("id");
       	var node = event.target;
-      	if(id.startsWith('yui_')) {
+      	if(id.indexOf('yui_') > -1) {
       		id = node.get('parentNode').one('span').one('span').get("id");
       	}
       	id = id.replace("treecollection-", "");

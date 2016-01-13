@@ -14,11 +14,16 @@
 
 package at.meduni.liferay.portlet.bbmrieric.model.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import at.meduni.liferay.portlet.bbmrieric.model.ContactInformation;
+import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork;
+import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetworkLink;
 import at.meduni.liferay.portlet.bbmrieric.model.D2Collection;
 import at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalServiceUtil;
 
 /**
@@ -86,7 +91,7 @@ public class D2BiobankImpl extends D2BiobankBaseImpl {
 		String collectionlistsplitter = "";
 		String diagnosis = "";
 		String diagnosis_splitter = "";
-		List<D2Collection> collections = this.getCollections();
+		List<D2Collection> collections = this.getRootCollections();
 		for(D2Collection collection : collections) {
 			size += Math.pow(10, collection.getCollectionOrderOfMagnitude());
 			collectionlist += collectionlistsplitter + "<b>" + collection.getCollectionName() + ":<br>";
@@ -157,5 +162,18 @@ public class D2BiobankImpl extends D2BiobankBaseImpl {
 				break;
 		}
 		return returnvalue;
+	}
+	
+	public List<D2BiobankNetwork> getNetworksWhereBiobankIsMember() {
+		List<D2BiobankNetwork> networks = new ArrayList<D2BiobankNetwork>();
+		List<D2BiobankNetworkLink> networklinks = D2BiobankNetworkLinkLocalServiceUtil.getNetworkLinksForChilde(this.getBiobankId(), "D2Biobank");
+		for(D2BiobankNetworkLink networklink : networklinks) {
+			try {
+				networks.add(D2BiobankNetworkLocalServiceUtil.getD2BiobankNetwork(networklink.getD2biobanknetworkId()));
+			} catch(Exception ex) {
+				
+			}
+		}
+		return networks;
 	}
 }

@@ -3140,6 +3140,26 @@ public class D2CollectionClp extends BaseModelImpl<D2Collection>
 	}
 
 	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork> getNetworksWhereCollectionIsMember() {
+		try {
+			String methodName = "getNetworksWhereCollectionIsMember";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork> returnObj =
+				(java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getCollectionTemeratureHTML() {
 		try {
 			String methodName = "getCollectionTemeratureHTML";

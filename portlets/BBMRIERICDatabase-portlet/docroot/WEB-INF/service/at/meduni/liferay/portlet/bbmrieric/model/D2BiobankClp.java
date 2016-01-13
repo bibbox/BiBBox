@@ -1464,6 +1464,26 @@ public class D2BiobankClp extends BaseModelImpl<D2Biobank> implements D2Biobank 
 	}
 
 	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork> getNetworksWhereBiobankIsMember() {
+		try {
+			String methodName = "getNetworksWhereBiobankIsMember";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork> returnObj =
+				(java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public int getCollectionsCount() {
 		try {
 			String methodName = "getCollectionsCount";

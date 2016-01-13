@@ -203,6 +203,21 @@ public interface KdssmpParameterConfigurationModel extends BaseModel<KdssmpParam
 	 */
 	public void setGrouping(String grouping);
 
+	/**
+	 * Returns the columnwidth of this kdssmp parameter configuration.
+	 *
+	 * @return the columnwidth of this kdssmp parameter configuration
+	 */
+	@AutoEscape
+	public String getColumnwidth();
+
+	/**
+	 * Sets the columnwidth of this kdssmp parameter configuration.
+	 *
+	 * @param columnwidth the columnwidth of this kdssmp parameter configuration
+	 */
+	public void setColumnwidth(String columnwidth);
+
 	@Override
 	public boolean isNew();
 

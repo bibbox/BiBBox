@@ -280,6 +280,11 @@ public class LogapiLocalServiceUtil {
 		getService().addLogAPI(userId, userIp, msg);
 	}
 
+	public static java.lang.String getCountryNameByOrganizationId(
+		long organizationId) {
+		return getService().getCountryNameByOrganizationId(organizationId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

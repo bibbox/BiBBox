@@ -18,6 +18,8 @@ import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
 import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalService;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.BioBankPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.ContactInformationPersistence;
+import at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankNetworkLinkPersistence;
+import at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankNetworkPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.D2CollectionPersistence;
 import at.meduni.liferay.portlet.bbmrieric.service.persistence.DiseaseDiscriptionPersistence;
@@ -392,6 +394,82 @@ public abstract class BioBankLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the d2 biobank network local service.
+	 *
+	 * @return the d2 biobank network local service
+	 */
+	public at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalService getD2BiobankNetworkLocalService() {
+		return d2BiobankNetworkLocalService;
+	}
+
+	/**
+	 * Sets the d2 biobank network local service.
+	 *
+	 * @param d2BiobankNetworkLocalService the d2 biobank network local service
+	 */
+	public void setD2BiobankNetworkLocalService(
+		at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalService d2BiobankNetworkLocalService) {
+		this.d2BiobankNetworkLocalService = d2BiobankNetworkLocalService;
+	}
+
+	/**
+	 * Returns the d2 biobank network persistence.
+	 *
+	 * @return the d2 biobank network persistence
+	 */
+	public D2BiobankNetworkPersistence getD2BiobankNetworkPersistence() {
+		return d2BiobankNetworkPersistence;
+	}
+
+	/**
+	 * Sets the d2 biobank network persistence.
+	 *
+	 * @param d2BiobankNetworkPersistence the d2 biobank network persistence
+	 */
+	public void setD2BiobankNetworkPersistence(
+		D2BiobankNetworkPersistence d2BiobankNetworkPersistence) {
+		this.d2BiobankNetworkPersistence = d2BiobankNetworkPersistence;
+	}
+
+	/**
+	 * Returns the d2 biobank network link local service.
+	 *
+	 * @return the d2 biobank network link local service
+	 */
+	public at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalService getD2BiobankNetworkLinkLocalService() {
+		return d2BiobankNetworkLinkLocalService;
+	}
+
+	/**
+	 * Sets the d2 biobank network link local service.
+	 *
+	 * @param d2BiobankNetworkLinkLocalService the d2 biobank network link local service
+	 */
+	public void setD2BiobankNetworkLinkLocalService(
+		at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalService d2BiobankNetworkLinkLocalService) {
+		this.d2BiobankNetworkLinkLocalService = d2BiobankNetworkLinkLocalService;
+	}
+
+	/**
+	 * Returns the d2 biobank network link persistence.
+	 *
+	 * @return the d2 biobank network link persistence
+	 */
+	public D2BiobankNetworkLinkPersistence getD2BiobankNetworkLinkPersistence() {
+		return d2BiobankNetworkLinkPersistence;
+	}
+
+	/**
+	 * Sets the d2 biobank network link persistence.
+	 *
+	 * @param d2BiobankNetworkLinkPersistence the d2 biobank network link persistence
+	 */
+	public void setD2BiobankNetworkLinkPersistence(
+		D2BiobankNetworkLinkPersistence d2BiobankNetworkLinkPersistence) {
+		this.d2BiobankNetworkLinkPersistence = d2BiobankNetworkLinkPersistence;
+	}
+
+	/**
 	 * Returns the d2 collection local service.
 	 *
 	 * @return the d2 collection local service
@@ -693,6 +771,14 @@ public abstract class BioBankLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService d2BiobankLocalService;
 	@BeanReference(type = D2BiobankPersistence.class)
 	protected D2BiobankPersistence d2BiobankPersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalService.class)
+	protected at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalService d2BiobankNetworkLocalService;
+	@BeanReference(type = D2BiobankNetworkPersistence.class)
+	protected D2BiobankNetworkPersistence d2BiobankNetworkPersistence;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalService.class)
+	protected at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalService d2BiobankNetworkLinkLocalService;
+	@BeanReference(type = D2BiobankNetworkLinkPersistence.class)
+	protected D2BiobankNetworkLinkPersistence d2BiobankNetworkLinkPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService.class)
 	protected at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService d2CollectionLocalService;
 	@BeanReference(type = D2CollectionPersistence.class)

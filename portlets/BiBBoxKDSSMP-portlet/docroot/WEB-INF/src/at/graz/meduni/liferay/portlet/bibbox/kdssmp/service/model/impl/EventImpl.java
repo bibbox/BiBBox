@@ -14,11 +14,14 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.NoSuchKdssmpConfigurationException;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpConfiguration;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpPatient;
 import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpConfigurationLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.service.KdssmpPatientLocalServiceUtil;
 
 /**
  * The extended model implementation for the Event service. Represents a row in the &quot;kdssmp.event&quot; database table, with each column mapped to a property of this class.
@@ -54,5 +57,20 @@ public class EventImpl extends EventBaseImpl {
 			return_calue = config.getOptionvalue();
 		}
 		return return_calue;
+	}
+	
+	public String getPatientName() {
+		String patientname = "";
+		try {
+			KdssmpPatient patient = KdssmpPatientLocalServiceUtil.getKdssmpPatient(this.getPatientId());
+			patientname = patient.getFirstname() + " " + patient.getLastname();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return patientname;
 	}
 }

@@ -64,6 +64,8 @@ public class CandidatePropose extends MVCPortlet {
 					+ "<br>Address: " + candidate.getAddress()
 					+ "<br>URL: <a href=\"" + candidate.getUrl() + "\">" + candidate.getUrl() + "</a>";
 			addEventEntry(new Date(), 0, themeDisplay.getUserId(), shortdiscription, longdiscription, "", "RD-Connect CURATOR");
+			sendEmailToProposer(request, candidate);
+			sendNotificationToCurators(request, candidate);
 			//response.setRenderParameter("success", "true");
 			sendRedirect(request, response);
 		} else {
@@ -115,7 +117,7 @@ public class CandidatePropose extends MVCPortlet {
 		return candidate;
 	}
 	
-	private static boolean validateCandidate(Candidate candidate, List errors) {
+	private static boolean validateCandidate(Candidate candidate, List<String> errors) {
 		boolean valid = true;
 		if (Validator.isNull(candidate.getName())) {
 			errors.add("candidate-name-required");
@@ -153,6 +155,33 @@ public class CandidatePropose extends MVCPortlet {
 	 */
 	private void addEventEntry(Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted) {
 		RDConnectEventLocalServiceUtil.createEvent("Candidate Propose", eventdate, organizationId, userId, shorttext, longtext, link, restricted);
+	}
+	
+	/**
+	 * Send Notification mail to Proposer
+	 * 
+	 * @param request
+	 * @param candidate 
+	 */
+	private void sendEmailToProposer(ActionRequest request, Candidate candidate) {
+		String subject = "RD-Connect ID-Card Proposal #" + candidate.getCandidateId();
+		String body = "Dear " + candidate.getSubmittername() + ", <br>";
+		body += "Thank you for proposing the " + candidate.getCandidatetype() + ": " + candidate.getName() + " for the RD-Connect Network.<br>";
+		body += "We will inform you as soon as our team has processed the proposal. If you have any additional questions, pleans replay to this ";
+		body += "email or use the subject of theis email in your response. It makes the tracking of issues easier for us.<br>";
+		body += "<br>With best regards,<br>Your RD-Connect Curator Team.";
+	}
+	
+	/**
+	 * Send Notification to Curators
+	 * 
+	 * Send Notification to Curators who have subscribed to the notification settings
+	 * 
+	 * @param request
+	 * @param candidate 
+	 */
+	private void sendNotificationToCurators(ActionRequest request, Candidate candidate) {
+		String subject = "RD-Connect ID-Card Proposal #" + candidate.getCandidateId();
 	}
 
 }

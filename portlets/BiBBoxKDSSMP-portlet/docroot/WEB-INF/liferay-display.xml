@@ -20,6 +20,7 @@
 		<portlet id="list-events"></portlet>
 		<portlet id="view-event-data"></portlet>
 		<portlet id="sign-event"></portlet>
+		<portlet id="ngs-file-to-ddl"></portlet>
 	</category>
 	<category name="kDSSMP Configuration">
 		<portlet id="kdssmp-configuration"></portlet>

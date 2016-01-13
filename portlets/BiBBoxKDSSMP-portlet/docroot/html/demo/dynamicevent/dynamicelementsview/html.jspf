@@ -2,7 +2,7 @@
 EventData eventdata = EventDataLocalServiceUtil.getEventDataByOntology(eventid, String.valueOf(parameterconfig.getParameterconfigurationId()));
 String data = "";
 if(eventdata != null) {
-	data = eventdata.getValue();
+	data = eventdata.getValue().replace("\n", "").replace("\r", "");
 }
 %>
 <aui:column columnWidth="100" first="true">
@@ -17,17 +17,31 @@ if(eventdata != null) {
 			<liferay-ui:input-editor cssClass="<%= id %>" name="<%= id %>" toolbarSet="liferay-article" initMethod="initEditor" width="100%" />
 			<script type="text/javascript">
 				function <portlet:namespace />initEditor() { return '<%= data %>'; }
+				function <portlet:namespace />extractCodeFromEditor() {
+                    var x = document.<portlet:namespace />fm.<portlet:namespace />html350.value = window.<portlet:namespace />editor.getHTML();
+                    alert(x);
+        		}
 			</script>
 			<%
+			if(eventdata != null) {
+				%>
+				<br>
+				<button class="savebutton<%= id %>" type="button">Save <%= parameterconfig.getDisplayname() %></button> 
+				<%
+			}
 		}
 		%>
 	</aui:field-wrapper>
 </aui:column>
 
 <aui:script>
-AUI().use('aui-base', 'datastore', function(A){
-	A.all('.<%= id %>').on('change',function(event){
-		A.DatakDSSMPStore.kDSSMPStore(event.target);
+AUI().use('event', 'node', function(A){
+	A.all('.<%= "savebutton" + id %>').on('click',function(event){
+		var x = document.getElementsByClassName("cke_wysiwyg_frame")[0];
+		var y = (x.contentWindow || x.contentDocument);
+		if (y.document)y = y.document;
+		var storageid = '<%= id %>';
+		A.DatakDSSMPStore.kDSSMPStoreElement(storageid, y.body.innerHTML);
 	});
 });
 </aui:script>

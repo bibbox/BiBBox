@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.naming.directory.Attributes;
+import javax.naming.directory.SearchResult;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
@@ -293,7 +294,7 @@ public class D2CollectionLocalServiceImpl
 			d2collection.setCollectionDataAccessURI(collectionDataAccessURI);
 			d2collection.setCollectionSize(collectionSize);
 			d2collection.setCollectionSizeTimestamp(collectionSizeTimestamp);
-			d2CollectionPersistence.update(d2collection);
+			return d2CollectionPersistence.update(d2collection);
 		} catch (Exception ex) {
 			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::addD2Collection] Error adding D2Collection.");
 			ex.printStackTrace();
@@ -313,7 +314,7 @@ public class D2CollectionLocalServiceImpl
 			d2collection.setModifiedDate(serviceContext.getModifiedDate(now));
 	        // Liferay Expension Fields
 			d2collection.setExpandoBridgeAttributes(serviceContext);
-			d2CollectionPersistence.update(d2collection);
+			return d2CollectionPersistence.update(d2collection);
 		} catch (Exception ex) {
 			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::updateD2Collection] Error updating D2Collection.");
 			ex.printStackTrace();
@@ -422,7 +423,8 @@ public class D2CollectionLocalServiceImpl
 			String collectionSampleAccessDescription, String collectionSampleAccessURI, boolean collectionDataAccessFee, boolean collectionDataAccessJointProjects,
 			String collectionDataAccessDescription, String collectionDataAccessURI, long collectionSize, long collectionSizeTimestamp, ServiceContext serviceContext) {
 		try {
-			D2Collection d2collection = d2CollectionPersistence.create(collectionId);
+			//D2Collection d2collection = d2CollectionPersistence.create(collectionId);
+			D2Collection d2collection = D2CollectionLocalServiceUtil.getD2Collection(collectionId);
 			// Set provenance fields
 			if(companyId == 0) {
 				companyId =serviceContext.getCompanyId();
@@ -516,7 +518,7 @@ public class D2CollectionLocalServiceImpl
 			d2collection.setCollectionDataAccessURI(collectionDataAccessURI);
 			d2collection.setCollectionSize(collectionSize);
 			d2collection.setCollectionSizeTimestamp(collectionSizeTimestamp);
-			d2CollectionPersistence.update(d2collection);
+			return d2CollectionPersistence.update(d2collection);
 		} catch (Exception ex) {
 			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::updateD2Collection] Error updating D2Collection.");
 			ex.printStackTrace();
@@ -601,11 +603,11 @@ public class D2CollectionLocalServiceImpl
 	 * @param attrs
 	 * @return
 	 */
-	public D2Collection getD2CollectionFromLDAP(D2Collection d2collection, Attributes attrs) {
+	public D2Collection getD2CollectionFromLDAP(D2Collection d2collection, Attributes attrs, SearchResult sr) {
 		if(d2collection == null) {
 			d2collection = new D2CollectionImpl();
 		}
-		String[] ldapid = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID")).split(":");
+		/*String[] ldapid = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID")).split(":");
 		String bbmricollectionID = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID"));
 		String bbmribiobankID = "";
 		String bbmriparentcollectionID = "";
@@ -631,7 +633,31 @@ public class D2CollectionLocalServiceImpl
 				bbmribiobankID += ":";
 			}
 			bbmribiobankID += ldapid[count];
+		}*/
+		
+		String id_string = sr.getNameInNamespace();
+		String bbmricollectionID = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID"));
+		String bbmribiobankID = "";
+		String bbmriparentcollectionID = "";
+		
+		String[] ldapid = id_string.split(",");
+		boolean firstid = true;
+		for(String id : ldapid) {
+			if(firstid) {
+				firstid = false;
+				continue;
+			}
+			String[] title_id = id.split("=");
+			if(title_id[0].equalsIgnoreCase("collectionID") && bbmriparentcollectionID.equals("")) {
+				bbmriparentcollectionID = title_id[1];
+				continue;
+			}
+			if(title_id[0].equalsIgnoreCase("biobankID")) {
+				bbmribiobankID = title_id[1];
+				break;
+			}
 		}
+		
 		d2collection.setBbmribiobankID(bbmribiobankID);
 		d2collection.setBbmricollectionID(bbmricollectionID);
 		d2collection.setBbmriparentcollectionID(bbmriparentcollectionID);

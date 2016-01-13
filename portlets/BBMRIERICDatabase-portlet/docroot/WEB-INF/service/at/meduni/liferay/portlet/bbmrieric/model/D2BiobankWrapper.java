@@ -1607,6 +1607,11 @@ public class D2BiobankWrapper implements D2Biobank, ModelWrapper<D2Biobank> {
 	}
 
 	@Override
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork> getNetworksWhereBiobankIsMember() {
+		return _d2Biobank.getNetworksWhereBiobankIsMember();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

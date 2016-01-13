@@ -1,0 +1,8 @@
+#content {
+	background-color: #FFFFFF;
+}
+#hrefFm {
+	margin: 0;
+}
+
+@import url(custom_content_responsive.css);

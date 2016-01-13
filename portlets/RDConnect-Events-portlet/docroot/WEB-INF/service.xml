@@ -15,6 +15,7 @@
 		<column name="longtext" type="String" />
 		<column name="link" type="String" />
 		<column name="restricted" type="String" />
+		<column name="notificationsend" type="boolean" />
 		<order by="desc">
 			<order-column name="eventdate" />
 		</order>
@@ -24,5 +25,10 @@
 		<finder name="Eventdate" return-type="Collection">
 			<finder-column name="eventdate" />
 		</finder>
+	</entity>
+	<entity name="RDConnectEventNotification" local-service="true" remote-service="false" table="rdconnect.eventnotification">
+		<column name="eventnotificationId" type="long" primary="true" />
+		<column name="notificationtype" type="String"></column>
+		<column name="userId" type="long"></column>
 	</entity>
 </service-builder>

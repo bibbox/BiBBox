@@ -1,0 +1,5 @@
+@media only screen and (max-width: 979px) {
+	#footer .footer-center {
+		display: none;
+	}
+}

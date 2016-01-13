@@ -16,6 +16,22 @@
 	.aui select[multiple] {
 		height: 200px;
 	}
+	.select-highlight-suggest-1p {
+		color: #CC3333;
+	}
+	.select-highlight-suggest-2p {
+		color: #0000CC;
+		background-color: #FFFF66;
+	}
+	.select-highlight-suggest-1n {
+		color: #585858;
+	}
+	.select-highlight-suggest-2n {
+		color: #909090;
+	}
+	.stagingfooter {
+		font-size: 80%;
+	}
 </style>
 
 <%
@@ -31,7 +47,7 @@ long patientId = 0;
 %><h3><%= optionsTitle_cfg %></h3>
 <portlet:actionURL name='createEvent' var="createEventURL" windowState="normal" />
 
-<aui:form action="<%= createEventURL %>" method="POST" name="fm">
+<aui:form action="<%= createEventURL %>" enctype="multipart/form-data" method="post" name="fm" cssClass="kdssmpformclass">
 	<aui:fieldset>
 		<aui:layout>
 			<aui:input type="hidden" name="patientId" value="<%= String.valueOf(organizationId) %>" />
@@ -53,6 +69,11 @@ if (currentGroup.isOrganization()) {
 		KdssmpParameterConfiguration parameterconfig = KdssmpParameterConfigurationLocalServiceUtil.getKdssmpParameterConfiguration(Long.parseLong(parameter.getOptionvalue()));
 		String id = parameterconfig.getDatatype() + parameterconfig.getParameterconfigurationId();
 		if((parameterconfig.getGrouping().startsWith(optionsGroupFilter_cfg) && showsubgroups) || parameterconfig.getGrouping().equals(optionsGroupFilter_cfg)) {
+			int columnwidth = 100;
+			if(!parameterconfig.getColumnwidth().equals("")) {
+				columnwidth = Integer.parseInt(parameterconfig.getColumnwidth());
+			}
+			
 			if(parameterconfig.getDatatype().equalsIgnoreCase("html")) {
 				%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/html.jspf" %><%
 			} else if(parameterconfig.getDatatype().equalsIgnoreCase("text")) {
@@ -65,7 +86,43 @@ if (currentGroup.isOrganization()) {
 				%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/multiselect.jspf" %><%
 			} else if(parameterconfig.getDatatype().equalsIgnoreCase("Calculated")) {
 				%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/calculated.jspf" %><%
+			} else if(parameterconfig.getDatatype().equalsIgnoreCase("fileupload") && !status) {
+				%><%@ include file="/html/demo/dynamicevent/dynamicelementsview/fileupload.jspf" %><%
+				%>
+				<%@ page import="com.liferay.util.PwdGenerator"%>
+				<% 
+				String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4); 
+				String redirect = PortalUtil.getCurrentURL(renderRequest);
+				%>
+				<portlet:actionURL var="uploadImageURL" name="uploadImage" />
+				<liferay-ui:success key="success" message="Image uploaded successfully!" />
+				<liferay-ui:error key="error" message="Sorry, an error prevented the upload. Please try again." />
+				<liferay-ui:upload-progress id="<%= uploadProgressId %>" message="uploading" redirect="<%= uploadImageURL %>" />
+				<aui:form action="<%= uploadImageURL %>" enctype="multipart/form-data" method="post" >
+					<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
+					<aui:input type="hidden" name="eventdataid" value="<%= id %>" />
+					<aui:input type="hidden" name="patientid" value="<%= patientId %>" />
+					<aui:input type="hidden" name="eventid" value="<%= eventid %>" />
+					<aui:input type="hidden" name="eventlayoutid" value="<%= eventlayoutid %>" />
+					<aui:input type="hidden" name="store375" cssClass="store375" value="" />
+					<aui:input type="file" label="File zum Hochladen auswählen" name="kDSSMPFile" size="75"/>
+					<input type="submit" value="<liferay-ui:message key="upload" />" onClick="<%= uploadProgressId %>.startProgress(); return true;"/>
+				</aui:form>
+				<aui:script>
+					AUI().use('node', 'datastore', function(A) {
+					    var form = A.all('.kdssmpformclass');
+					    form.on('submit', function() {
+					        A.DatakDSSMPStore.kDSSMPUpdateStoreAll();
+					    });
+					});
+				</aui:script>
+				<%
 			}  
+			if(!parameterconfig.getConfirmationscript().equals("")) {
+				%>
+				<aui:script><%= parameterconfig.getConfirmationscript() %></aui:script>
+				<%
+			}
 		}
 	}
 }
@@ -107,6 +164,27 @@ AUI.add('datastore', function (A) {
 				  success: function(event, id, obj) { "success" }
 				}
 			});
+	   },
+	   kDSSMPStoreElement: function (fieldid, fieldvalue) {
+		   var url = '<%= updateDataURL.toString() %>';
+			A.io.request(url,{
+				data: {
+				   <portlet:namespace />eventid: <%= eventid %>,
+				   <portlet:namespace />organizationId: <%= organizationId %>,
+				   <portlet:namespace />patientId: <%= patientId %>,
+				   <portlet:namespace />ontology: fieldid,
+				   <portlet:namespace />value: fieldvalue
+				},
+				dataType: 'json',
+				on: {
+				  failure: function() { alert('failure'); },
+				  success: function(event, id, obj) { "success" }
+				}
+			});
+	   },
+	   kDSSMPUpdateStoreAll: function () {
+	   		var formdata = A.one(".kdssmpstoredataform");
+	   		A.all(".store375").setHTML(formdata.getHTML());
 	   }
    }
 });

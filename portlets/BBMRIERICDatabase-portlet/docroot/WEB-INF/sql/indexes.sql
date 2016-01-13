@@ -23,6 +23,20 @@ create index IX_BEF697DB on bbmrieric.d2biobank (uuid_);
 create index IX_A647856D on bbmrieric.d2biobank (uuid_, companyId);
 create unique index IX_A4DC832F on bbmrieric.d2biobank (uuid_, groupId);
 
+create index IX_E9E8CFD0 on bbmrieric.d2biobanknetwork (groupId, bbmriBiobankNetworkID);
+create index IX_EF29EEA1 on bbmrieric.d2biobanknetwork (groupId, updateuuid);
+create index IX_431A6B73 on bbmrieric.d2biobanknetwork (uuid_);
+create index IX_3B0C02D5 on bbmrieric.d2biobanknetwork (uuid_, companyId);
+create unique index IX_ABF13A97 on bbmrieric.d2biobanknetwork (uuid_, groupId);
+
+create index IX_9EB361EF on bbmrieric.d2biobanknetworklink (d2biobanknetworkId, d2linkId, d2linktype);
+create index IX_3B8BC438 on bbmrieric.d2biobanknetworklink (d2biobanknetworkId, d2linktype);
+create index IX_69EE9788 on bbmrieric.d2biobanknetworklink (d2linkId, d2linktype);
+create index IX_CCB89AE7 on bbmrieric.d2biobanknetworklink (groupId, updateuuid);
+create index IX_A6096A39 on bbmrieric.d2biobanknetworklink (uuid_);
+create index IX_8CD82C4F on bbmrieric.d2biobanknetworklink (uuid_, companyId);
+create unique index IX_83CD7A91 on bbmrieric.d2biobanknetworklink (uuid_, groupId);
+
 create index IX_B973517A on bbmrieric.d2collection (biobankId);
 create index IX_A9DED87F on bbmrieric.d2collection (biobankId, parentd2collectionId);
 create index IX_8E9D8A33 on bbmrieric.d2collection (companyId);

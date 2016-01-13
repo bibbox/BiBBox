@@ -119,6 +119,10 @@ public class LogapiLocalServiceClpInvoker {
 		_methodParameterTypes72 = new String[] {
 				"long", "java.lang.String", "java.lang.String"
 			};
+
+		_methodName73 = "getCountryNameByOrganizationId";
+
+		_methodParameterTypes73 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -230,6 +234,11 @@ public class LogapiLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+			return LogapiLocalServiceUtil.getCountryNameByOrganizationId(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -271,4 +280,6 @@ public class LogapiLocalServiceClpInvoker {
 	private String[] _methodParameterTypes67;
 	private String _methodName72;
 	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
 }

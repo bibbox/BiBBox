@@ -122,40 +122,40 @@ public class D2BiobankLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank"
 			};
 
-		_methodName66 = "getBeanIdentifier";
+		_methodName74 = "getBeanIdentifier";
 
-		_methodParameterTypes66 = new String[] {  };
+		_methodParameterTypes74 = new String[] {  };
 
-		_methodName67 = "setBeanIdentifier";
+		_methodName75 = "setBeanIdentifier";
 
-		_methodParameterTypes67 = new String[] { "java.lang.String" };
+		_methodParameterTypes75 = new String[] { "java.lang.String" };
 
-		_methodName72 = "d2BiobankFromRequest";
+		_methodName80 = "d2BiobankFromRequest";
 
-		_methodParameterTypes72 = new String[] { "javax.portlet.ActionRequest" };
+		_methodParameterTypes80 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName73 = "getD2Biobanks";
+		_methodName81 = "getD2Biobanks";
 
-		_methodParameterTypes73 = new String[] { "long" };
+		_methodParameterTypes81 = new String[] { "long" };
 
-		_methodName74 = "getD2Biobanks";
+		_methodName82 = "getD2Biobanks";
 
-		_methodParameterTypes74 = new String[] { "long", "int", "int" };
+		_methodParameterTypes82 = new String[] { "long", "int", "int" };
 
-		_methodName75 = "getD2BiobankByBBMRIERICID";
+		_methodName83 = "getD2BiobankByBBMRIERICID";
 
-		_methodParameterTypes75 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes83 = new String[] { "long", "java.lang.String" };
 
-		_methodName76 = "addD2Biobank";
+		_methodName84 = "addD2Biobank";
 
-		_methodParameterTypes76 = new String[] {
+		_methodParameterTypes84 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName77 = "addD2Biobank";
+		_methodName85 = "addD2Biobank";
 
-		_methodParameterTypes77 = new String[] {
+		_methodParameterTypes85 = new String[] {
 				"long", "long", "long", "long", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"long", "java.lang.String", "java.lang.String", "boolean",
@@ -168,16 +168,16 @@ public class D2BiobankLocalServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName78 = "updateD2Biobank";
+		_methodName86 = "updateD2Biobank";
 
-		_methodParameterTypes78 = new String[] {
+		_methodParameterTypes86 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName79 = "updateD2Biobank";
+		_methodName87 = "updateD2Biobank";
 
-		_methodParameterTypes79 = new String[] {
+		_methodParameterTypes87 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.lang.String", "boolean",
@@ -190,31 +190,31 @@ public class D2BiobankLocalServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName80 = "deleteD2Biobank";
+		_methodName88 = "deleteD2Biobank";
 
-		_methodParameterTypes80 = new String[] {
+		_methodParameterTypes88 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName81 = "getD2Biobanks";
+		_methodName89 = "getD2Biobanks";
 
-		_methodParameterTypes81 = new String[] {
+		_methodParameterTypes89 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName87 = "getLDAPNotUpdatedBiobanks";
+		_methodName96 = "getLDAPNotUpdatedBiobanks";
 
-		_methodParameterTypes87 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes96 = new String[] { "long", "java.lang.String" };
 
-		_methodName88 = "getBiobankWithLdapUpdate";
+		_methodName97 = "getBiobankWithLdapUpdate";
 
-		_methodParameterTypes88 = new String[] { "long" };
+		_methodParameterTypes97 = new String[] { "long" };
 
-		_methodName89 = "getD2BiobankFromLDAP";
+		_methodName98 = "getD2BiobankFromLDAP";
 
-		_methodParameterTypes89 = new String[] {
+		_methodParameterTypes98 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
 				"javax.naming.directory.Attributes"
 			};
@@ -333,49 +333,49 @@ public class D2BiobankLocalServiceClpInvoker {
 			return D2BiobankLocalServiceUtil.updateD2Biobank((at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)arguments[0]);
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
 			D2BiobankLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName72.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.d2BiobankFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
-		if (_methodName73.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getD2Biobanks(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName74.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+		if (_methodName82.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getD2Biobanks(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName75.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+		if (_methodName83.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName76.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.addD2Biobank((at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName77.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+		if (_methodName85.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.addD2Biobank(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -411,14 +411,14 @@ public class D2BiobankLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[34]);
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.updateD2Biobank((at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName79.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+		if (_methodName87.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.updateD2Biobank(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -451,33 +451,33 @@ public class D2BiobankLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[32]);
 		}
 
-		if (_methodName80.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+		if (_methodName88.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.deleteD2Biobank(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName81.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+		if (_methodName89.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getD2Biobanks((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6]);
 		}
 
-		if (_methodName87.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
+		if (_methodName96.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getLDAPNotUpdatedBiobanks(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName88.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+		if (_methodName97.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName89.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
+		if (_methodName98.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getD2BiobankFromLDAP((at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)arguments[0],
 				(javax.naming.directory.Attributes)arguments[1]);
 		}
@@ -525,34 +525,34 @@ public class D2BiobankLocalServiceClpInvoker {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
-	private String _methodName72;
-	private String[] _methodParameterTypes72;
-	private String _methodName73;
-	private String[] _methodParameterTypes73;
 	private String _methodName74;
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
 	private String[] _methodParameterTypes75;
-	private String _methodName76;
-	private String[] _methodParameterTypes76;
-	private String _methodName77;
-	private String[] _methodParameterTypes77;
-	private String _methodName78;
-	private String[] _methodParameterTypes78;
-	private String _methodName79;
-	private String[] _methodParameterTypes79;
 	private String _methodName80;
 	private String[] _methodParameterTypes80;
 	private String _methodName81;
 	private String[] _methodParameterTypes81;
+	private String _methodName82;
+	private String[] _methodParameterTypes82;
+	private String _methodName83;
+	private String[] _methodParameterTypes83;
+	private String _methodName84;
+	private String[] _methodParameterTypes84;
+	private String _methodName85;
+	private String[] _methodParameterTypes85;
+	private String _methodName86;
+	private String[] _methodParameterTypes86;
 	private String _methodName87;
 	private String[] _methodParameterTypes87;
 	private String _methodName88;
 	private String[] _methodParameterTypes88;
 	private String _methodName89;
 	private String[] _methodParameterTypes89;
+	private String _methodName96;
+	private String[] _methodParameterTypes96;
+	private String _methodName97;
+	private String[] _methodParameterTypes97;
+	private String _methodName98;
+	private String[] _methodParameterTypes98;
 }

@@ -5,6 +5,7 @@ if(eventdata != null) {
 	data = eventdata.getValue();
 }
 %>
+<aui:column columnWidth="<%= columnwidth %>">
 	<aui:select disabled="<%= status %>" cssClass="<%= id %>" name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>" >
 		<%
 		List<KdssmpParameterOptions> options = KdssmpParameterOptionsLocalServiceUtil.getOptions(parameterconfig.getParameterconfigurationId());
@@ -16,10 +17,7 @@ if(eventdata != null) {
 		%>
 		<aui:option cssClass='<%= id + "_" + "notspecified" %>' selected='<%= data.equalsIgnoreCase("not specified") %>' value="not specified"><liferay-ui:message key='Not Specified' /></aui:option>
 	</aui:select>
-
-<aui:script>
-	<%= parameterconfig.getConfirmationscript() %>
-</aui:script>
+</aui:column>
 
 <aui:script>
 AUI().use('aui-base', 'datastore', function(A){

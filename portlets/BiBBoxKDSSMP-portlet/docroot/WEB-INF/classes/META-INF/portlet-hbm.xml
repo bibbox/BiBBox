@@ -53,6 +53,7 @@
 		<property name="computed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="confirmationscript" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="grouping" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="columnwidth" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.impl.KdssmpParameterOptionsImpl" table="kdssmp.parameteroptions">
 		<cache usage="read-write" />

@@ -310,6 +310,46 @@ public class KdssmpPatientClp extends BaseModelImpl<KdssmpPatient>
 		}
 	}
 
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event getLastEventOfType(
+		java.lang.String eventtype) {
+		try {
+			String methodName = "getLastEventOfType";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.lang.String.class };
+
+			Object[] parameterValues = new Object[] { eventtype };
+
+			at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event returnObj =
+				(at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.String getInitialDiagnosis() {
+		try {
+			String methodName = "getInitialDiagnosis";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getKdssmpPatientRemoteModel() {
 		return _kdssmpPatientRemoteModel;
 	}

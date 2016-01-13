@@ -21,12 +21,16 @@ import javax.naming.ldap.LdapContext;
 import at.meduni.liferay.portlet.bbmrieric.model.BioBank;
 import at.meduni.liferay.portlet.bbmrieric.model.ContactInformation;
 import at.meduni.liferay.portlet.bbmrieric.model.D2Biobank;
+import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork;
+import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetworkLink;
 import at.meduni.liferay.portlet.bbmrieric.model.D2Collection;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndex;
 import at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl;
 import at.meduni.liferay.portlet.bbmrieric.service.BioBankLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.util.LDAPAttributeEscaper;
@@ -82,7 +86,7 @@ public class LDAPSyncService implements MessageListener {
 		String uuid = PortalUUIDUtil.generate();
 		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [" + classpath_ + "::receive] Info started LDAP Sync Scheduler (" + uuid + ").");
 		
-		connectLDAP(uuid);
+		//connectLDAP(uuid);
 		try {
 			long companyId = Long.parseLong(PropsUtil.get("D2BiobankCompany"));
 	        long groupId = Long.parseLong(PropsUtil.get("D2BiobankGroup"));
@@ -95,6 +99,7 @@ public class LDAPSyncService implements MessageListener {
 			ex.printStackTrace();
 		} 
 		// End
+		System.out.println("");
 		long datediff = new Date().getTime() - startdate.getTime();
 		System.out.println("[" + date_format_apache_error.format(new Date()) + "] [info] [" + classpath_ + "::receive] Info LDAP Sync Scheduler (" + uuid + ") finished in " + datediff + "ms.");
 	} 
@@ -133,13 +138,6 @@ public class LDAPSyncService implements MessageListener {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error reading data from LDAP Server.");
 			ex.printStackTrace();
 		}
-		// Synchronize D2Biobanks
-		try {
-			synchronizeD2Biobank(ctx, serviceContext, ldapupdateuuid, groupId);
-		} catch (Exception ex) {
-			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error syncronicing D2Biobank.");
-			ex.printStackTrace();
-		}
 		// Synchronize ContactInformation
 		try {
 			synchronizeContactInformation(ctx, serviceContext, ldapupdateuuid, groupId);
@@ -152,6 +150,27 @@ public class LDAPSyncService implements MessageListener {
 			deleteContactInformationNotExistingInLdap(ldapupdateuuid, groupId);
 		} catch (Exception ex) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated ContactInformation.");
+			ex.printStackTrace();
+		}
+		// Synchronize D2BiobankNetworks
+		try {
+			synchronizeD2BiobankNetworks(ctx, serviceContext, ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error syncronicing ContactInformation.");
+			ex.printStackTrace();
+		}
+		// Remove D2BiobankNetworks Not in the LDAP any more
+		try {
+			deleteD2BiobankNetworksNotExistingInLdap(ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated ContactInformation.");
+			ex.printStackTrace();
+		}
+		// Synchronize D2Biobanks
+		try {
+			synchronizeD2Biobank(ctx, serviceContext, ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error syncronicing D2Biobank.");
 			ex.printStackTrace();
 		}
 		// Remove Biobanks Not in the LDAP any more
@@ -168,6 +187,88 @@ public class LDAPSyncService implements MessageListener {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated D2Collection.");
 			ex.printStackTrace();
 		}
+		// Remove Network Links Not in the LDAP any more
+		try {
+			deleteD2BiobankNetworkLinksNotExistingInLdap(ldapupdateuuid, groupId);
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated D2BiobankNetworkLinksNotExistingInLdap.");
+			ex.printStackTrace();
+		}
+	}
+	
+	private void synchronizeLinks(String networkbbmriId, long childId, String childtype, long groupId, String ldapupdateuuid) {
+		String[] networkssplit = networkbbmriId.split(",");
+		for(String bbmribiobanknetworkID : networkssplit) {
+			try {
+				System.out.println("Network Link ID: " + bbmribiobanknetworkID);
+				bbmribiobanknetworkID = bbmribiobanknetworkID.trim();
+				D2BiobankNetwork biobanknetwork = D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworkByBBMRIERICID(groupId, bbmribiobanknetworkID);
+				long d2biobanknetworkId = 0;
+				if(biobanknetwork != null) {
+					d2biobanknetworkId = biobanknetwork.getD2biobanknetworkId();
+					D2BiobankNetworkLink biobanknetworklink = D2BiobankNetworkLinkLocalServiceUtil.getD2BiobankNetworkLink(d2biobanknetworkId, childId, childtype);
+					if(biobanknetworklink == null) {
+						biobanknetworklink = D2BiobankNetworkLinkLocalServiceUtil.addD2BiobankNetworkLink(d2biobanknetworkId, childId, childtype, groupId, ldapupdateuuid);
+					} else {
+						biobanknetworklink.setUpdateuuid(ldapupdateuuid);
+						biobanknetworklink.setGroupId(groupId);
+						D2BiobankNetworkLinkLocalServiceUtil.updateD2BiobankNetworkLink(biobanknetworklink);
+					}
+				}
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::synchronizeLinks] Error processing Links.");
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param ctx
+	 * @param serviceContext
+	 * @param ldapupdateuuid
+	 * @param groupId
+	 * @throws NamingException
+	 */
+	private void synchronizeD2BiobankNetworks(DirContext ctx, ServiceContext serviceContext, String ldapupdateuuid, long groupId) throws NamingException {
+		SearchControls ctls = new SearchControls();
+		ctls.setReturningAttributes(null);
+		ctls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+		serviceContext.setModifiedDate(new Date());
+		// Search for objects using filter and controls
+		NamingEnumeration<?> answer = ctx.search("ou=biobanknetworks,dc=directory,dc=bbmri-eric,dc=eu", "(objectclass=*)", ctls);
+		int counter = 0;
+		int counter_networks = 0;
+		while (answer.hasMore()) {
+			counter++;
+			SearchResult sr = (SearchResult) answer.next();
+			Attributes attrs = sr.getAttributes();
+			try {
+				if(attrs.get("biobankNetworkID") != null) {
+					counter_networks++;
+					String bbmribiobankNetworkID = LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankNetworkID"));
+					// Update Networks
+					D2BiobankNetwork network = D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworkByBBMRIERICID(groupId, bbmribiobankNetworkID);
+					if(network == null) {
+						serviceContext.setCreateDate(new Date());
+						network = D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworkFromLDAP(null, attrs);
+						network.setUpdateuuid(ldapupdateuuid);
+						network = D2BiobankNetworkLocalServiceUtil.addD2BiobankNetwork(network, serviceContext);
+					} else {
+						network = D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworkFromLDAP(network, attrs);
+						network.setUpdateuuid(ldapupdateuuid);
+						network = D2BiobankNetworkLocalServiceUtil.updateD2BiobankNetwork(network, serviceContext);
+					}
+					if(!network.getBiobankNetworkIDRef().equals("")) {
+						synchronizeLinks(network.getBiobankNetworkIDRef(), network.getD2biobanknetworkId(), "D2BiobankNetwork", groupId, ldapupdateuuid);
+					}
+				}
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::synchronizeD2BiobankNetworks] Error Creating Entrys for BiobankNetwork: " + LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankNetworkName")));
+				ex.printStackTrace();
+			}
+		}
+		System.out.println("LDAP contained: " + counter + " entrys with " + counter_networks + " Biobank Networks.");
 	}
 	
 	/**
@@ -235,6 +336,7 @@ public class LDAPSyncService implements MessageListener {
 		int counter_collections = 0;
 		while (answer.hasMore()) {
 			SearchResult sr = (SearchResult) answer.next();
+			//System.out.println(">>" + sr.getNameInNamespace());
 			Attributes attrs = sr.getAttributes();
 			try {
 				if(attrs.get("biobankID") != null) {
@@ -249,35 +351,35 @@ public class LDAPSyncService implements MessageListener {
 					} else {
 						updateBiobank(bbmribiobankID, serviceContext, attrs, ldapupdateuuid);
 					}
+					if(!biobank.getBiobankNetworkIDRef().equals("")) {
+						synchronizeLinks(biobank.getBiobankNetworkIDRef(), biobank.getBiobankId(), "D2Biobank", groupId, ldapupdateuuid);
+					}
 				} else if (attrs.get("collectionID") != null){
+					//>>collectionID=bbmri-eric:collectionID:BE_B0383_PEARL,biobankID=bbmri-eric:biobankID:BE_B0383,c=be,ou=biobanks,dc=directory,dc=bbmri-eric,dc=eu
+					String id_string = sr.getNameInNamespace();
 					counter_collections++;
-					String[] ldapid = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID")).split(":");
 					String bbmricollectionID = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID"));
 					String bbmribiobankID = "";
 					String bbmriparentcollectionID = "";
-					int idcount = 0;
-					for(int count = ldapid.length-1; count >= 0; count--) {
-						idcount ++;
-						if(ldapid[count].equals("collection")) {
-							if(idcount > 2) {
-								for(int parentcounter = 0; parentcounter < ldapid.length-1; parentcounter++) {
-									if(bbmriparentcollectionID.length() != 0) {
-										bbmriparentcollectionID += ":";
-									}
-									bbmriparentcollectionID += ldapid[parentcounter];
-								}
-								break;
-							} else {
-								break;
-							}
+					
+					String[] ldapid = id_string.split(",");
+					boolean firstid = true;
+					for(String id : ldapid) {
+						if(firstid) {
+							firstid = false;
+							continue;
+						}
+						String[] title_id = id.split("=");
+						if(title_id[0].equalsIgnoreCase("collectionID") && bbmriparentcollectionID.equals("")) {
+							bbmriparentcollectionID = title_id[1];
+							continue;
+						}
+						if(title_id[0].equalsIgnoreCase("biobankID")) {
+							bbmribiobankID = title_id[1];
+							break;
 						}
 					}
-					for(int count = 0; count < ldapid.length-idcount; count++) {
-						if(bbmribiobankID.length() != 0) {
-							bbmribiobankID += ":";
-						}
-						bbmribiobankID += ldapid[count];
-					}
+					
 					D2Biobank biobank = D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(groupId, bbmribiobankID);
 					long biobankId = 0;
 					if(biobank != null) {
@@ -293,17 +395,22 @@ public class LDAPSyncService implements MessageListener {
 					D2Collection collection = D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(groupId, bbmricollectionID, bbmribiobankID);
 					if(collection == null) {	
 						serviceContext.setCreateDate(new Date());
-						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs);
+						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr);
 						collection.setUpdateuuid(ldapupdateuuid);
 						collection.setBiobankId(biobankId);
 						collection.setParentd2collectionId(parentcollectionId);
 						collection = D2CollectionLocalServiceUtil.addD2Collection(collection, serviceContext);
 					} else {
-						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs);
+						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr);
 						collection.setUpdateuuid(ldapupdateuuid);
 						collection.setBiobankId(biobankId);
 						collection.setParentd2collectionId(parentcollectionId);
 						collection = D2CollectionLocalServiceUtil.updateD2Collection(collection, serviceContext);
+					}
+					if(collection != null) {
+						if(!collection.getBiobankNetworkIDRef().equals("")) {
+							synchronizeLinks(collection.getBiobankNetworkIDRef(), collection.getD2collectionId(), "D2Collection", groupId, ldapupdateuuid);
+						}
 					}
 				}
 			} catch (Exception ex) {
@@ -367,6 +474,44 @@ public class LDAPSyncService implements MessageListener {
 		}
 		System.out.println("LDAP deltetions: " + collections.size() + " Collections deleted.");
 	}
+	
+	/**
+	 * 
+	 * @param uuid
+	 * @param groupId
+	 */
+	private void deleteD2BiobankNetworksNotExistingInLdap(String uuid, long groupId) {
+		List<D2BiobankNetwork> networks = D2BiobankNetworkLocalServiceUtil.getLDAPNotUpdatedNetworks(groupId, uuid);
+		for(D2BiobankNetwork network : networks) {
+			try {
+				D2BiobankNetworkLocalServiceUtil.deleteD2BiobankNetwork(network);
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::deleteD2CollectionNotExistingInLdap] Error deleting Collections not in LDAP.");
+				ex.printStackTrace();
+			}
+		}
+		System.out.println("LDAP deltetions: " + networks.size() + " Networks deleted.");
+	}
+	
+	/**
+	 * 
+	 * @param uuid
+	 * @param groupId
+	 */
+	private void deleteD2BiobankNetworkLinksNotExistingInLdap(String uuid, long groupId) {
+		List<D2BiobankNetworkLink> networkslinks = D2BiobankNetworkLinkLocalServiceUtil.getLDAPNotUpdatedNetworkLinks(groupId, uuid);
+		for(D2BiobankNetworkLink networkslink : networkslinks) {
+			try {
+				D2BiobankNetworkLinkLocalServiceUtil.deleteD2BiobankNetworkLink(networkslink);
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::deleteD2BiobankNetworkLinksNotExistingInLdap] Error deleting Network Link not in LDAP.");
+				ex.printStackTrace();
+			}
+		}
+		System.out.println("LDAP deltetions: " + networkslinks.size() + " Network Links deleted.");
+	}
+	
+	
 	
 	//--------------------------------------------------------------------------------
 	/**

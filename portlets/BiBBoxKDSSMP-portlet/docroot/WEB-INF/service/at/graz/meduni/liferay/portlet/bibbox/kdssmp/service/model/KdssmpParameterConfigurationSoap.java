@@ -39,6 +39,7 @@ public class KdssmpParameterConfigurationSoap implements Serializable {
 		soapModel.setComputed(model.getComputed());
 		soapModel.setConfirmationscript(model.getConfirmationscript());
 		soapModel.setGrouping(model.getGrouping());
+		soapModel.setColumnwidth(model.getColumnwidth());
 
 		return soapModel;
 	}
@@ -174,6 +175,14 @@ public class KdssmpParameterConfigurationSoap implements Serializable {
 		_grouping = grouping;
 	}
 
+	public String getColumnwidth() {
+		return _columnwidth;
+	}
+
+	public void setColumnwidth(String columnwidth) {
+		_columnwidth = columnwidth;
+	}
+
 	private long _parameterconfigurationId;
 	private String _displayname;
 	private String _datatype;
@@ -183,4 +192,5 @@ public class KdssmpParameterConfigurationSoap implements Serializable {
 	private boolean _computed;
 	private String _confirmationscript;
 	private String _grouping;
+	private String _columnwidth;
 }

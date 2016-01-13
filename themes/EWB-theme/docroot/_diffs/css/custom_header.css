@@ -1,0 +1,70 @@
+#banner {
+	background-color: #FFFFFF;
+}
+#heading {
+	background-image: url(@theme_image_path@/header_background.png);
+	background-color: #cccccc;
+	background-position: right 30%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 180px;
+}
+.aui #sign-in {
+    background: rgba(0, 0, 0, 0) url("/EWB-theme/images/common/key.png") no-repeat scroll 3px 50%;
+    font-weight: bold;
+    padding: 5px 5px 5px 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.aui .heading-text {
+	color: #FFFFFF;
+}
+.aui .heading-text-title {
+	color: #FFFFFF;
+	background-color: #5C96F7;
+	font-size: 35px;
+	font-weight: bold;
+	line-height: 45px;
+    position: relative;
+    top: 70px;
+    width: 600px;
+	padding-left: 65px;
+    background: -webkit-linear-gradient(left, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* Standard syntax */
+}
+.aui .heading-text-subtitle {
+	color: #FFFFFF;
+	background-color: #5C96F7;
+	font-size: 25px;
+	line-height: 35px;
+    position: relative;
+    top: 70px;
+	width: 600px;
+	padding-left: 65px;
+    background: -webkit-linear-gradient(left, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* Standard syntax */
+}
+.aui .heading-text-date {
+	color: #FFFFFF;
+	background-color: #FE8204;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 30px;
+    position: relative;
+    top: 70px;
+	width: 600px;
+	padding-left: 65px;
+	background: -webkit-linear-gradient(left, rgba(254, 130, 4, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, rgba(254, 130, 4, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, rgba(254, 130, 4, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, rgba(254, 130, 4, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* Standard syntax */
+}
+
+@import url(custom_header_menu.css);
+@import url(custom_header_responsive.css);

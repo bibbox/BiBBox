@@ -77,6 +77,61 @@ create table bbmrieric.d2biobank (
 	biobankType VARCHAR(75) null
 );
 
+create table bbmrieric.d2biobanknetwork (
+	uuid_ VARCHAR(75) null,
+	d2biobanknetworkId LONG not null primary key,
+	parentd2biobanknetworkId LONG,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	updateuuid VARCHAR(75) null,
+	contactIDRef VARCHAR(75) null,
+	contactPriority LONG,
+	bbmriBiobankNetworkID VARCHAR(75) null,
+	biobankNetworkName TEXT null,
+	biobankNetworkCommonCollectionFocus BOOLEAN,
+	biobankNetworkCommonCharter BOOLEAN,
+	biobankNetworkCommonSOPs BOOLEAN,
+	biobankNetworkCommonDataAccessPolicy BOOLEAN,
+	biobankNetworkCommonSampleAccessPolicy BOOLEAN,
+	biobankNetworkCommonMTA BOOLEAN,
+	biobankNetworkCommonRepresentation BOOLEAN,
+	biobankNetworkCommonURL BOOLEAN,
+	biobankNetworkIDRef VARCHAR(75) null,
+	geoLatitude VARCHAR(75) null,
+	geoLongitude VARCHAR(75) null,
+	biobankNetworkAcronym VARCHAR(75) null,
+	biobankNetworkDescription TEXT null,
+	biobankNetworkURL TEXT null,
+	biobankNetworkJuridicalPerson TEXT null
+);
+
+create table bbmrieric.d2biobanknetworklink (
+	uuid_ VARCHAR(75) null,
+	d2biobanknetworklinkId LONG not null primary key,
+	d2biobanknetworkId LONG,
+	d2linkId LONG,
+	d2linktype VARCHAR(75) null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null,
+	companyId LONG,
+	groupId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	updateuuid VARCHAR(75) null
+);
+
 create table bbmrieric.d2collection (
 	uuid_ VARCHAR(75) null,
 	d2collectionId LONG not null primary key,
@@ -155,11 +210,11 @@ create table bbmrieric.d2collection (
 	collectionSampleAccessFee BOOLEAN,
 	collectionSampleAccessJointProjects BOOLEAN,
 	collectionSampleAccessDescription TEXT null,
-	collectionSampleAccessURI VARCHAR(75) null,
+	collectionSampleAccessURI TEXT null,
 	collectionDataAccessFee BOOLEAN,
 	collectionDataAccessJointProjects BOOLEAN,
 	collectionDataAccessDescription TEXT null,
-	collectionDataAccessURI VARCHAR(75) null,
+	collectionDataAccessURI TEXT null,
 	collectionSize LONG,
 	collectionSizeTimestamp LONG
 );

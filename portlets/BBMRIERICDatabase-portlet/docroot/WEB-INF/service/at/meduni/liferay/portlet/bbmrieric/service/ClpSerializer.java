@@ -17,6 +17,8 @@ package at.meduni.liferay.portlet.bbmrieric.service;
 import at.meduni.liferay.portlet.bbmrieric.model.BioBankClp;
 import at.meduni.liferay.portlet.bbmrieric.model.ContactInformationClp;
 import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankClp;
+import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetworkClp;
+import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetworkLinkClp;
 import at.meduni.liferay.portlet.bbmrieric.model.D2CollectionClp;
 import at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscriptionClp;
 import at.meduni.liferay.portlet.bbmrieric.model.SearchIndexClp;
@@ -119,6 +121,14 @@ public class ClpSerializer {
 			return translateInputD2Biobank(oldModel);
 		}
 
+		if (oldModelClassName.equals(D2BiobankNetworkClp.class.getName())) {
+			return translateInputD2BiobankNetwork(oldModel);
+		}
+
+		if (oldModelClassName.equals(D2BiobankNetworkLinkClp.class.getName())) {
+			return translateInputD2BiobankNetworkLink(oldModel);
+		}
+
 		if (oldModelClassName.equals(D2CollectionClp.class.getName())) {
 			return translateInputD2Collection(oldModel);
 		}
@@ -170,6 +180,27 @@ public class ClpSerializer {
 		D2BiobankClp oldClpModel = (D2BiobankClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getD2BiobankRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputD2BiobankNetwork(BaseModel<?> oldModel) {
+		D2BiobankNetworkClp oldClpModel = (D2BiobankNetworkClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getD2BiobankNetworkRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputD2BiobankNetworkLink(
+		BaseModel<?> oldModel) {
+		D2BiobankNetworkLinkClp oldClpModel = (D2BiobankNetworkLinkClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getD2BiobankNetworkLinkRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -236,6 +267,16 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl")) {
 			return translateOutputD2Biobank(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankNetworkImpl")) {
+			return translateOutputD2BiobankNetwork(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankNetworkLinkImpl")) {
+			return translateOutputD2BiobankNetworkLink(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -349,6 +390,16 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankNetworkException")) {
+			return new at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankNetworkException();
+		}
+
+		if (className.equals(
+					"at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankNetworkLinkException")) {
+			return new at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankNetworkLinkException();
+		}
+
+		if (className.equals(
 					"at.meduni.liferay.portlet.bbmrieric.NoSuchD2CollectionException")) {
 			return new at.meduni.liferay.portlet.bbmrieric.NoSuchD2CollectionException();
 		}
@@ -393,6 +444,27 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setD2BiobankRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputD2BiobankNetwork(BaseModel<?> oldModel) {
+		D2BiobankNetworkClp newModel = new D2BiobankNetworkClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setD2BiobankNetworkRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputD2BiobankNetworkLink(
+		BaseModel<?> oldModel) {
+		D2BiobankNetworkLinkClp newModel = new D2BiobankNetworkLinkClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setD2BiobankNetworkLinkRemoteModel(oldModel);
 
 		return newModel;
 	}

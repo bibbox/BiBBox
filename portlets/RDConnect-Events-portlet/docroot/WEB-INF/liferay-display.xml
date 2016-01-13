@@ -5,5 +5,6 @@
 	
 	<category name="RDConnect Events">
 		<portlet id="event-feed"></portlet>
+		<portlet id="event-notification"></portlet>
 	</category>
 </display>

@@ -290,6 +290,11 @@ public class LogapiLocalServiceWrapper implements LogapiLocalService,
 		_logapiLocalService.addLogAPI(userId, userIp, msg);
 	}
 
+	@Override
+	public java.lang.String getCountryNameByOrganizationId(long organizationId) {
+		return _logapiLocalService.getCountryNameByOrganizationId(organizationId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

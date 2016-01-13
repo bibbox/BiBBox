@@ -197,7 +197,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 	        d2biobank.setContactIDRef(contactIDRef);
 	        d2biobank.setContactPriority(contactPriority);
 	        d2biobank.setBiobankJurisdicalPerson(biobankJurisdicalPerson);
-	        d2biobank.setBiobankCountry(biobankCountry);
+ 	        d2biobank.setBiobankCountry(biobankCountry.toUpperCase());
 	        d2biobank.setBiobankPartnerCharterSigned(biobankPartnerCharterSigned);
 			// Set optional fields
 	        d2biobank.setBioresourceReference(bioresourceReference);
@@ -256,6 +256,8 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 			}
 			Date now = new Date();
 			d2biobank.setModifiedDate(serviceContext.getModifiedDate(now));
+			
+			d2biobank.setBiobankCountry(d2biobank.getBiobankCountry().toUpperCase());
 	        // Liferay Expension Fields
 			d2biobank.setExpandoBridgeAttributes(serviceContext);
 			d2BiobankPersistence.update(d2biobank);
@@ -307,6 +309,9 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 	        d2biobank.setContactIDRef(contactIDRef);
 	        d2biobank.setContactPriority(contactPriority);
 	        d2biobank.setBiobankJurisdicalPerson(biobankJurisdicalPerson);
+	        if(biobankCountry.equalsIgnoreCase("ee")) {
+	        	biobankCountry = "et";
+	        }
 	        d2biobank.setBiobankCountry(biobankCountry);
 	        d2biobank.setBiobankPartnerCharterSigned(biobankPartnerCharterSigned);
 			// Set optional fields
@@ -412,7 +417,6 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 					searchlist_biobank.addAll(searchlist_contact);
 					searchlist_collection.removeAll(searchlist_biobank);
 					searchlist_biobank.addAll(searchlist_collection);
-					System.out.println("Keyword Biobanks Found: " + searchlist_biobank.size());
 				} catch (SystemException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -551,6 +555,196 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 		return dynamicQuery;
 	}
 	
+	private Criterion createSearchDiagnosisString(String diagnosisavailable) {
+		Criterion criterion_sub = null;
+		if(diagnosisavailable.contains("--")) {
+			diagnosisavailable = diagnosisavailable.replaceAll("\\(.*\\)", "").replaceAll("-", "").trim();
+			criterion_sub = RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + diagnosisavailable + "%");
+			if(diagnosisavailable.startsWith("B")) {
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%A00-B%"));
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%B*%"));
+			} else if(diagnosisavailable.startsWith("D")) {
+				try {
+					int number = Integer.parseInt(diagnosisavailable.substring(1, 3));
+					if(number >= 50) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D50-D%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D*%"));
+					} else {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%C00-D%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D*%"));
+					}
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			} else if(diagnosisavailable.startsWith("H")) {
+				try {
+					int number = Integer.parseInt(diagnosisavailable.substring(1, 3));
+					if(number >= 60) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H60-H%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H*%"));
+					} else {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H00-H%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H*%"));
+					}
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			} else if(diagnosisavailable.startsWith("T")) {
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%S00-T%"));
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%T*%"));
+			} else if(diagnosisavailable.startsWith("Y")) {
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%V00-Y%"));
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%Y*%"));
+			} else {
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + diagnosisavailable.charAt(0) + "00-%"));
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + diagnosisavailable.charAt(0) + "*%"));
+			}
+			criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%icd:*%"));
+		} else if(diagnosisavailable.contains("-")) {
+			// Subgroup
+			try {
+				diagnosisavailable = diagnosisavailable.replaceAll("\\(.*\\)", "").replaceAll("- ", "").trim();
+				// Search for individual codes
+				String startletter = String.valueOf(diagnosisavailable.charAt(0));
+				int number = Integer.parseInt(diagnosisavailable.substring(1, 3));
+				int number_stop = Integer.parseInt(diagnosisavailable.substring(5, 7));
+				for(int counter = (int)Math.floor(number/10.); counter <= (int)Math.floor(number_stop/10.); counter ++) {
+					if(criterion_sub == null) {
+						criterion_sub = RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + startletter + counter + "%");
+					} else {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + startletter + counter + "%"));
+					}
+				}
+				// Search for groups
+				if(diagnosisavailable.startsWith("B")) {
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%A00-B%"));
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%B*%"));
+				} else if(diagnosisavailable.startsWith("D")) {
+					try {
+						if(number >= 50) {
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D50-D%"));
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D*%"));
+						} else {
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%C00-D%"));
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D*%"));
+						}
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				} else if(diagnosisavailable.startsWith("H")) {
+					try {
+						if(number >= 60) {
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H60-H%"));
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H*%"));
+						} else {
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H00-H%"));
+							criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H*%"));
+						}
+					} catch(Exception ex) {
+						ex.printStackTrace();
+					}
+				} else if(diagnosisavailable.startsWith("T")) {
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%S00-T%"));
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%T*%"));
+				} else if(diagnosisavailable.startsWith("Y")) {
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%V00-Y%"));
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%Y*%"));
+				} else {
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + diagnosisavailable.charAt(0) + "00-%"));
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + diagnosisavailable.charAt(0) + "*%"));
+				}
+				criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%icd:*%"));
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		} else {
+			if(diagnosisavailable.contains("ICD*")) {
+				criterion_sub = RestrictionsFactoryUtil.like("diagnosisAvailable", "%icd:%");
+			} else if(diagnosisavailable.contains("OMIM*")) {
+				criterion_sub = RestrictionsFactoryUtil.like("diagnosisAvailable", "%omim:%");
+			} else if(diagnosisavailable.contains("ORPHA*")) {
+				criterion_sub = RestrictionsFactoryUtil.like("diagnosisAvailable", "%orphanet%");
+			} else {
+				// Gruppen Search
+				try {
+					diagnosisavailable = diagnosisavailable.replaceAll("\\(.*\\)", "").replaceAll("- ", "").trim();
+					//System.out.println("++++++" + startletter + number + diagnosisavailable.substring(4, 5) + number_stop);
+					String startletter = String.valueOf(diagnosisavailable.charAt(0));
+					String endletter = diagnosisavailable.substring(4, 5);
+					int number = Integer.parseInt(diagnosisavailable.substring(1, 3));
+					int number_stop = Integer.parseInt(diagnosisavailable.substring(5, 7));
+					// Search for individual codes
+					if(startletter.equalsIgnoreCase(endletter)) {
+						for(int counter = (int)Math.floor(number/10.); counter <= (int)Math.floor(number_stop/10.); counter ++) {
+							if(criterion_sub == null) {
+								criterion_sub = RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + startletter + counter + "%");
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + startletter + counter + "%"));
+							}
+						}
+					} else {
+						for(int counter = (int)Math.floor(number/10.); counter <= 9; counter ++) {
+							if(criterion_sub == null) {
+								criterion_sub = RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + startletter + counter + "%");
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + startletter + counter + "%"));
+							}
+						}
+						for(int counter = 0; counter <= (int)Math.floor(number_stop/10.); counter ++) {
+							if(criterion_sub == null) {
+								criterion_sub = RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + startletter + counter + "%");
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + startletter + counter + "%"));
+							}
+						}
+					}
+					// Search for groups
+					if(diagnosisavailable.startsWith("B")) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%A00-B%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%B*%"));
+					} else if(diagnosisavailable.startsWith("D")) {
+						try {
+							if(number >= 50) {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D50-D%"));
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D*%"));
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%C00-D%"));
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%D*%"));
+							}
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					} else if(diagnosisavailable.startsWith("H")) {
+						try {
+							if(number >= 60) {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H60-H%"));
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H*%"));
+							} else {
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H00-H%"));
+								criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%H*%"));
+							}
+						} catch(Exception ex) {
+							ex.printStackTrace();
+						}
+					} else if(diagnosisavailable.startsWith("T")) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%S00-T%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%T*%"));
+					} else if(diagnosisavailable.startsWith("Y")) {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%V00-Y%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%Y*%"));
+					} else {
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + diagnosisavailable.charAt(0) + "00-%"));
+						criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%" + diagnosisavailable.charAt(0) + "*%"));
+					}
+					criterion_sub = RestrictionsFactoryUtil.or(criterion_sub, RestrictionsFactoryUtil.like("diagnosisAvailable", "%icd:*%"));
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return criterion_sub;
+	}
+	
 	private DynamicQuery getCollectionSubquery(String materialtype, String diagnosisavailable, String biobanksize, long powerof, String typeofcollection) {
 		DynamicQuery dynamicQuery = D2CollectionLocalServiceUtil.dynamicQuery();
 		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
@@ -562,8 +756,9 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 		if(!materialtype.equals("")) {
 			String[] materialtypes = {"Plasma","Serum","Urine","Saliva","Faeces","RNA","Blood","Tissue Frozen","Tissue FFPE","Immortalized Cell Lines","Isolated Pathogen"};
 			boolean others = true;
+			
 			for(String materialtypes_tmp : materialtypes) {
-				if(typeofcollection.equals(materialtypes_tmp)) {
+				if(materialtype.equalsIgnoreCase(materialtypes_tmp)) {
 					String colname = "materialStored" + materialtypes_tmp.replaceAll(" ", "");
 					if(criterion == null) {
 						criterion = RestrictionsFactoryUtil.eq(colname, true);
@@ -575,17 +770,17 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 			}
 			if(others) {
 				if(criterion == null) {
-					criterion = RestrictionsFactoryUtil.ilike("materialStoredOther", "%" + typeofcollection + "%");
+					criterion = RestrictionsFactoryUtil.ilike("materialStoredOther", "%" + materialtype + "%");
 				} else {
-					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("materialStoredOther", "%" + typeofcollection + "%"));
+					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("materialStoredOther", "%" + materialtype + "%"));
 				}
 			}
 		}
 		if(!diagnosisavailable.equals("")) {
 			if(criterion == null) {
-				criterion = RestrictionsFactoryUtil.ilike("diagnosisavailable", "%" + diagnosisavailable + "%");
+				criterion = createSearchDiagnosisString(diagnosisavailable);
 			} else {
-				criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("diagnosisavailable", "%" + diagnosisavailable + "%"));
+				criterion = RestrictionsFactoryUtil.and(criterion, createSearchDiagnosisString(diagnosisavailable));
 			}
 		}
 		if(!biobanksize.equals("")) {
@@ -599,7 +794,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 			String[] typeofcollections = {"Case Control","Cohort","Cross Sectional","Longitudinal","Twin Study","Quality Control","Population Based","Disease Specific","Birth Cohort"};
 			boolean others = true;
 			for(String typeofcollection_tmp : typeofcollections) {
-				if(typeofcollection.equals(typeofcollection_tmp)) {
+				if(typeofcollection.equalsIgnoreCase(typeofcollection_tmp)) {
 					String colname = "collectionType" + typeofcollection_tmp.replaceAll(" ", "");
 					if(criterion == null) {
 						criterion = RestrictionsFactoryUtil.eq(colname, true);
@@ -734,7 +929,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 						D2BiobankLocalServiceUtil.updateD2Biobank(d2biobank,
 								serviceContext);
 					} else {
-						counter_collections++;
+						/*counter_collections++;
 						String[] ldapid = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID")).split(":");
 						String bbmricollectionID = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID"));
 						String bbmribiobankID = "";
@@ -761,6 +956,28 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 								bbmribiobankID += ":";
 							}
 							bbmribiobankID += ldapid[count];
+						}*/
+						String id_string = sr.getNameInNamespace();
+						String bbmricollectionID = LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionID"));
+						String bbmribiobankID = "";
+						String bbmriparentcollectionID = "";
+						
+						String[] ldapid = id_string.split(",");
+						boolean firstid = true;
+						for(String id : ldapid) {
+							if(firstid) {
+								firstid = false;
+								continue;
+							}
+							String[] title_id = id.split("=");
+							if(title_id[0].equalsIgnoreCase("collectionID") && bbmriparentcollectionID.equals("")) {
+								bbmriparentcollectionID = title_id[1];
+								continue;
+							}
+							if(title_id[0].equalsIgnoreCase("biobankID")) {
+								bbmribiobankID = title_id[1];
+								break;
+							}
 						}
 						long parentcollectionId = 0;
 						if(!bbmriparentcollectionID.equals("")) {
@@ -772,12 +989,12 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 						D2Collection collection = D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(groupId, bbmricollectionID, bbmribiobankID);
 						if(collection == null) {	
 							serviceContext.setCreateDate(new Date());
-							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs);
+							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr);
 							collection.setBiobankId(biobankId);
 							collection.setParentd2collectionId(parentcollectionId);
 							collection = D2CollectionLocalServiceUtil.addD2Collection(collection, serviceContext);
 						} else {
-							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs);
+							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr);
 							collection.setBiobankId(biobankId);
 							collection.setParentd2collectionId(parentcollectionId);
 							collection = D2CollectionLocalServiceUtil.updateD2Collection(collection, serviceContext);
@@ -809,8 +1026,9 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 		d2biobank.setBiobankName(getAttributeValues(attrs.get("biobankName")));
         d2biobank.setContactIDRef(getAttributeValues(attrs.get("contactIDRef")));
         d2biobank.setContactPriority(getAttributeValuesLong(attrs.get("contactPriority")));
-        d2biobank.setBiobankJurisdicalPerson(getAttributeValues(attrs.get("biobankJurisdicalPerson")));
-        d2biobank.setBiobankCountry(getAttributeValues(attrs.get("biobankCountry")));
+        d2biobank.setBiobankJurisdicalPerson(getAttributeValues(attrs.get("biobankJuridicalPerson")));
+        String biobankCountry = getAttributeValues(attrs.get("biobankCountry"));
+        d2biobank.setBiobankCountry(biobankCountry.toUpperCase());
         d2biobank.setBiobankPartnerCharterSigned(getAttributeValuesBoolean(attrs.get("biobankPartnerCharterSigned")));
         // Optional Fields
         d2biobank.setBioresourceReference(getAttributeValues(attrs.get("bioresourceReference")));

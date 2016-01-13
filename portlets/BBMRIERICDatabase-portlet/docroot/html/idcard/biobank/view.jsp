@@ -114,6 +114,15 @@ String[] typeofbiobanks = D2BiobankKeys.getTypeOfBiobank();
 String[] typeofcollections = D2BiobankKeys.getTypeOfCollection();
 %>
 
+<div id="myTab">
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#tab-biobank">Biobanks</a></li>
+    <li><a href="#tab-network">Biobank Networks</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="tab-biobank" class="tab-pane">
+    
+    
 <liferay-portlet:renderURL varImpl="searchURL">
         <portlet:param name="mvcPath" value="/html/idcard/biobank/view.jsp" />
 </liferay-portlet:renderURL>
@@ -204,14 +213,6 @@ String[] typeofcollections = D2BiobankKeys.getTypeOfCollection();
 	</aui:layout>
 </aui:form>
 
-<br />
-
-<div id="BBMRIERICBiobankList">
-<div id="ajaxloader"></div>
-</div>
-
-<br />
-
 <%
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 List<D2Biobank> biobanks = D2BiobankLocalServiceUtil.getD2Biobanks(keywords, country_filter, materialtype, diagnosisavailable_filter, biobanksize_filter, typeofbiobank, typeofcollection);
@@ -223,13 +224,140 @@ if(biobanks != null) {
 		textresult_splitter = ",";
 	}
 }
+
+String textresult_networks = "";
+textresult_splitter = "";
+List<D2BiobankNetwork> networks = D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworks(-1, -1);
+if(networks != null) {
+	for(D2BiobankNetwork network : networks) {
+		textresult_networks += textresult_splitter + network.getBiobankNetworkJavascriptTable();
+		textresult_splitter = ",";
+	}
+}
 %>
+
+<br />
+<span style="font-size: 80%;">Number of Biobanks: <%= biobanks.size() %></span><br>
+<div id="BBMRIERICBiobankList">
+<div id="ajaxloader"></div>
+</div>
+
+<br />
+
+	</div>
+    <div id="tab-network">
+    
+    	<div id="BBMRIERICBiobankNetworkList">
+		<div id="ajaxloader-network"></div>
+    
+    </div>
+</div>
+
+
 
 <portlet:renderURL var="viewURL">
 	<portlet:param name="biobankId" value="xxxxbiobankIdxxxx" />
 	<portlet:param name="mvcPath" value="/html/idcard/biobank/view_biobank.jsp" />
 	<portlet:param name="redirect" value="<%= redirect %>"/>
 </portlet:renderURL>
+
+<portlet:renderURL var="viewNetworkURL">
+	<portlet:param name="biobanknetworkId" value="xxxxbiobanknetworkIdxxxx" />
+	<portlet:param name="mvcPath" value="/html/idcard/biobank/view_network.jsp" />
+	<portlet:param name="redirect" value="<%= redirect %>"/>
+</portlet:renderURL>
+
+<aui:script use="node">
+	YUI().use(
+  'aui-tabview',
+  function(Y) {
+    new Y.TabView(
+      {
+        srcNode: '#myTab'
+      }
+    ).render();
+  }
+);
+</aui:script>
+
+<aui:script use="node,aui-datatable,aui-datatype,datatable-sort">
+AUI().use(
+  'aui-datatable',
+  'aui-datatype',
+  'datatable-sort',
+  function(Y) {
+    var remoteData = [<%= textresult_networks %>];
+    var nestedCols = [ 
+    	{
+    		key: 'Name',
+    		sortable: true,
+    		allowHTML: true,
+    		formatter: function (o) {
+    			//encodeURIComponent
+    			var url = '<a href="<%= viewNetworkURL %>">' + o.data.Name + '</a>';
+    			url = url.replace('xxxxbiobanknetworkIdxxxx', o.data.BB_ID);
+    			return url;
+    		}
+    	},
+    	{
+    		key: 'Juristic Person',
+    		sortable: true
+    	},
+    	{
+    		key: 'Assosiations',
+    		sortable: true,
+    		allowHTML: true, 
+    		formatter: function (o) {
+    			//encodeURIComponent
+    			var Numberofnetworks = o.data.Numberofnetworks;
+    			var Numberofbiobanks = o.data.Numberofbiobanks;
+    			var Numberofcollections = o.data.Numberofcollections;
+    			var returnvalue = '<a href="#" class="tooltip_size">N' + Numberofnetworks + '/B' + Numberofbiobanks + '/C' + Numberofcollections;
+    			returnvalue += '<span>Networks: ' + Numberofnetworks + '<br>Biobanks: ' + Numberofbiobanks + '<br>Collections: ' + Numberofcollections + '</span></a>';
+    			return returnvalue;
+    		}
+    	},
+    	{
+    		key: 'Collection Focus',
+    		sortable: true
+    	},
+    	{
+    		key: 'Charter',
+    		sortable: true
+    	},
+    	{
+    		key: 'SOP',
+    		sortable: true
+    	},
+    	{
+    		key: 'Data Access Policy',
+    		label: 'Data A.P.',
+    		sortable: true
+    	},
+    	{
+    		key: 'Sample Access Policy',
+    		label: 'Sample A.P.',
+    		sortable: true
+    	},
+    	{
+    		key: 'MTA',
+    		sortable: true
+    	}
+    ];
+	var dataTable = new Y.DataTable(
+      {
+        columns: nestedCols,
+        data: remoteData,
+      }
+    ).render('#BBMRIERICBiobankNetworkList');
+    
+
+    Y.all('#ajaxloader-network').setStyle('display', 'none');;
+    
+  }
+);
+</aui:script>
+    	
 
 <aui:script use="node,aui-datatable,aui-datatype,datatable-sort">
 AUI().use(
@@ -298,8 +426,8 @@ AUI().use(
         data: remoteData,
       }
     ).render('#BBMRIERICBiobankList');
+    dataTable.sort('Country');
     
-
     Y.all('#ajaxloader').setStyle('display', 'none');;
     
   }

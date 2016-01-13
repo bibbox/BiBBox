@@ -757,8 +757,9 @@ public class D2CollectionLocalServiceUtil {
 	*/
 	public static at.meduni.liferay.portlet.bbmrieric.model.D2Collection getD2CollectionFromLDAP(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Collection d2collection,
-		javax.naming.directory.Attributes attrs) {
-		return getService().getD2CollectionFromLDAP(d2collection, attrs);
+		javax.naming.directory.Attributes attrs,
+		javax.naming.directory.SearchResult sr) {
+		return getService().getD2CollectionFromLDAP(d2collection, attrs, sr);
 	}
 
 	/**

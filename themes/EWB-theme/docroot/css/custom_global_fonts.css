@@ -1,0 +1,85 @@
+.aui {
+	font-family: 'PT Sans', normal, sans-serif;
+}
+.aui a, .aui a:hover {
+    color: #184B8A;
+    text-decoration:none;
+}
+
+/* --- Header devinitions --- */
+.aui h1, .aui h1 a  {
+	font-size: 11.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   text-transform: uppercase;
+   margin: 0;
+} 
+.h1-node {
+   font-size: 11.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   color: #000000;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+} 
+.aui h2, .aui h2 a {
+	font-size: 10.5pt;
+	line-height: 16pt;
+	font-weight: bold;
+	color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h3, .aui h3 a {
+	font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   font-style:italic;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+} 
+.aui h4, .aui h4 a  {
+	font-size: 9.5pt;
+	line-height: 16pt;
+	font-style:italic;
+	font-weight: normal;
+	color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.h4-cv {
+	font-size: 9.5pt;
+	line-height: 16pt;
+	font-style:italic;
+	font-weight: normal;
+	color: #000000;
+    font-family: 'PT Sans', normal, sans-serif;
+    margin: 0;
+    text-transform: uppercase;
+}
+.aui h5, .aui h5 a {
+	font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: normal;
+   color: #505050;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h6, .aui h6 a {
+	font-size: 9.5pt;
+	line-height: 16pt;
+	font-weight: normal;
+	color: #505050;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}

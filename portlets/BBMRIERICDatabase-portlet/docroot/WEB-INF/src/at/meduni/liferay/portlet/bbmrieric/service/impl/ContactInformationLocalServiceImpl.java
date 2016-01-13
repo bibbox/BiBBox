@@ -127,7 +127,7 @@ public class ContactInformationLocalServiceImpl
 			// Mandatory Fields
 			contactinformation.setContactID(contactID);
 			contactinformation.setContactEmail(contactEmail);
-			contactinformation.setContactCountry(contactCountry);
+			contactinformation.setContactCountry(contactCountry.toUpperCase());
 			// Set optional fields
 			contactinformation.setContactFirstName(contactFirstName);
 			contactinformation.setContactLastName(contactLastName);
@@ -154,6 +154,8 @@ public class ContactInformationLocalServiceImpl
 			if(contactinformation.getUserId() == 0) {
 				contactinformation.setUserId(serviceContext.getUserId());
 			}
+			
+			contactinformation.setContactCountry(contactinformation.getContactCountry().toUpperCase());
 			Date now = new Date();
 			contactinformation.setModifiedDate(serviceContext.getModifiedDate(now));
 			return contactInformationPersistence.update(contactinformation);
@@ -196,7 +198,7 @@ public class ContactInformationLocalServiceImpl
 			// Mandatory Fields
 			contactinformation.setContactID(contactID);
 			contactinformation.setContactEmail(contactEmail);
-			contactinformation.setContactCountry(contactCountry);
+			contactinformation.setContactCountry(contactCountry.toUpperCase());
 			// Set optional fields
 			contactinformation.setContactFirstName(contactFirstName);
 			contactinformation.setContactLastName(contactLastName);
@@ -230,7 +232,8 @@ public class ContactInformationLocalServiceImpl
 		}
 		contactinformation.setContactID(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactID")));
 		contactinformation.setContactEmail(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactEmail")));
-		contactinformation.setContactCountry(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactCountry")));
+		String contactCountry = LDAPAttributeEscaper.getAttributeValues(attrs.get("contactCountry"));
+		contactinformation.setContactCountry(contactCountry.toUpperCase());
 		contactinformation.setContactFirstName(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactFirstName")));
 		contactinformation.setContactLastName(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactLastName")));
 		contactinformation.setContactPhone(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactPhone")));

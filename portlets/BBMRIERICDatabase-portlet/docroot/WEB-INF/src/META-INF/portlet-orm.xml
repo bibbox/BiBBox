@@ -115,6 +115,89 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankNetworkModelImpl">
+		<attributes>
+			<id name="d2biobanknetworkId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="parentd2biobanknetworkId" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="updateuuid" />
+			<basic name="contactIDRef" />
+			<basic name="contactPriority" />
+			<basic name="bbmriBiobankNetworkID" />
+			<basic name="biobankNetworkName" />
+			<basic name="biobankNetworkCommonCollectionFocus" />
+			<basic name="biobankNetworkCommonCharter" />
+			<basic name="biobankNetworkCommonSOPs" />
+			<basic name="biobankNetworkCommonDataAccessPolicy" />
+			<basic name="biobankNetworkCommonSampleAccessPolicy" />
+			<basic name="biobankNetworkCommonMTA" />
+			<basic name="biobankNetworkCommonRepresentation" />
+			<basic name="biobankNetworkCommonURL" />
+			<basic name="biobankNetworkIDRef" />
+			<basic name="geoLatitude" />
+			<basic name="geoLongitude" />
+			<basic name="biobankNetworkAcronym" />
+			<basic name="biobankNetworkDescription" />
+			<basic name="biobankNetworkURL" />
+			<basic name="biobankNetworkJuridicalPerson" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="statusByUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankNetworkLinkModelImpl">
+		<attributes>
+			<id name="d2biobanknetworklinkId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="d2biobanknetworkId" />
+			<basic name="d2linkId" />
+			<basic name="d2linktype" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="updateuuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="statusByUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2CollectionModelImpl">
 		<attributes>
 			<id name="d2collectionId" />
@@ -249,6 +332,14 @@
 	</entity>
 	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankImpl" name="D2Biobank">
 		<table name="bbmrieric.d2biobank" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankNetworkImpl" name="D2BiobankNetwork">
+		<table name="bbmrieric.d2biobanknetwork" />
+		<attributes />
+	</entity>
+	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2BiobankNetworkLinkImpl" name="D2BiobankNetworkLink">
+		<table name="bbmrieric.d2biobanknetworklink" />
 		<attributes />
 	</entity>
 	<entity class="at.meduni.liferay.portlet.bbmrieric.model.impl.D2CollectionImpl" name="D2Collection">

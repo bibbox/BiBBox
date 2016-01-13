@@ -16,9 +16,9 @@ if (currentGroup.isOrganization()) {
 String optionsHorizontalLayout_cfg = GetterUtil.getString(portletPreferences.getValue("optionsHorizontalLayout", "vertical"));
 String layouttemplate = "";
 if(optionsHorizontalLayout_cfg.equalsIgnoreCase("vertical")) {
-	layouttemplate = "Fistname: §FIRSTNAME§<br>Lastname: §LASTNAME§<br>Date of birth: <details id=\"kdssmp_dob\" style=\"display: inline;\">§DOB§</details> (§AGE§)<br>Gender: §GENDER§";
+	layouttemplate = "Fistname: §FIRSTNAME§<br>Lastname: §LASTNAME§<br>Date of birth: §DOB§ (§AGE§)<br>Gender: §GENDER§";
 } else {
-	layouttemplate = "Fistname: §FIRSTNAME§&nbsp&nbsp|&nbsp&nbspLastname: §LASTNAME§&nbsp&nbsp|&nbsp&nbspDate of birth: <details id=\"kdssmp_dob\" style=\"display: inline;\">§DOB§</details> (§AGE§)&nbsp&nbsp|&nbsp&nbspGender: §GENDER§";
+	layouttemplate = "Fistname: §FIRSTNAME§&nbsp&nbsp|&nbsp&nbspLastname: §LASTNAME§&nbsp&nbsp|&nbsp&nbspDate of birth: §DOB§ (§AGE§)&nbsp&nbsp|&nbsp&nbspGender: §GENDER§";
 }
 
 if(organization != null) {

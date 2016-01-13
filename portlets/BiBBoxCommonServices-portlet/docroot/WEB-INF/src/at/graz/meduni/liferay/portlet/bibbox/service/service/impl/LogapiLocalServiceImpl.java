@@ -17,12 +17,21 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 import java.util.Date;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.model.Country;
+import com.liferay.portal.service.CountryServiceUtil;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.impl.LogapiImpl;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.LogapiLocalServiceBaseImpl;
+import at.meduni.liferay.portlet.rdconnect.model.SearchIndex;
+import at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil;
 
 /**
  * The implementation of the logapi local service.
@@ -57,5 +66,16 @@ public class LogapiLocalServiceImpl extends LogapiLocalServiceBaseImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public String getCountryNameByOrganizationId(long organizationId) {
+		try {
+			String si = SearchIndexLocalServiceUtil.getSearchIndexValueByKey("Country", organizationId);
+			return si;
+		} catch (Exception e) {
+			System.err.println("Error Getting Country getCountryNameById");
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

@@ -46,15 +46,15 @@ ${theme.include(body_top_include)}
 			<img  alt="${logo_description}" height="215px" src="/HandsOnBiobanking-theme/images/HOBB_2016_header_logo_image.png" width="1200px" >
 		</div>
 	</div>
-	<a href="/about"><div class="bbmri_eric_header-innercontainer">
+	<a href="http://europebiobankweek.eu/"><div class="bbmri_eric_header-innercontainer">
 		<div class="bbmri_eric_header-logo">
 			<div class="bbmri_eric_header-logo-flaot">
 				<div class="bbmri_eric_header-logo-white">
-					<span style="font-size: 40px;font-weight: bold;line-height: 45px;">HandsOn: Biobanks 2016</span><br />
-					<span style="font-size: 20px;line-height: 25px;">Biobanks for Health Innovation</span>
+					<span style="font-size: 40px;font-weight: bold;line-height: 45px;">HandsOn: Biobanks</span><br />
+					<span style="font-size: 20px;line-height: 25px;">is now <b>Europe Biobank Week</b></span>
 				</div>
 				<div class="bbmri_eric_header-logo-orange">
-					<span style="font-size: 20px;color: #FFFFFF;line-height: 25px;">27-29 September | Vienna, Austria</span>
+					<span style="font-size: 20px;color: #FFFFFF;line-height: 25px;">visit http://europebiobankweek.eu</span>
 				</div>
 			</div>
 		</div>

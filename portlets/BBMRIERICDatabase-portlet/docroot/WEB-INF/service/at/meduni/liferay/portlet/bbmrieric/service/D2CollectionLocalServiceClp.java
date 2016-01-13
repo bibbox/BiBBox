@@ -219,7 +219,8 @@ public class D2CollectionLocalServiceClp implements D2CollectionLocalService {
 
 		_methodParameterTypes32 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Collection",
-				"javax.naming.directory.Attributes"
+				"javax.naming.directory.Attributes",
+				"javax.naming.directory.SearchResult"
 			};
 
 		_methodName33 = "getLDAPNotUpdatedCollection";
@@ -1582,7 +1583,8 @@ public class D2CollectionLocalServiceClp implements D2CollectionLocalService {
 	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Collection getD2CollectionFromLDAP(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Collection d2collection,
-		javax.naming.directory.Attributes attrs) {
+		javax.naming.directory.Attributes attrs,
+		javax.naming.directory.SearchResult sr) {
 		Object returnObj = null;
 
 		try {
@@ -1591,7 +1593,9 @@ public class D2CollectionLocalServiceClp implements D2CollectionLocalService {
 					new Object[] {
 						ClpSerializer.translateInput(d2collection),
 						
-					ClpSerializer.translateInput(attrs)
+					ClpSerializer.translateInput(attrs),
+						
+					ClpSerializer.translateInput(sr)
 					});
 		}
 		catch (Throwable t) {

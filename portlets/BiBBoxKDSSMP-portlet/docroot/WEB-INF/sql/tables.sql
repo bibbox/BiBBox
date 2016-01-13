@@ -41,21 +41,22 @@ create table kdssmp.eventdata (
 
 create table kdssmp.parameterconfiguration (
 	parameterconfigurationId LONG not null primary key,
-	displayname VARCHAR(75) null,
+	displayname TEXT null,
 	datatype VARCHAR(75) null,
 	valuerange VARCHAR(75) null,
 	displayoptions VARCHAR(75) null,
 	visible BOOLEAN,
 	computed BOOLEAN,
 	confirmationscript TEXT null,
-	grouping TEXT null
+	grouping TEXT null,
+	columnwidth VARCHAR(75) null
 );
 
 create table kdssmp.parameteroptions (
 	parameteroptionsId LONG not null primary key,
 	parameterconfigurationId LONG,
-	option_ VARCHAR(75) null,
-	value VARCHAR(75) null
+	option_ TEXT null,
+	value TEXT null
 );
 
 create table kdssmp.patient (

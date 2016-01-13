@@ -1,0 +1,12 @@
+<aui:column columnWidth="100" first="true">
+	<aui:select name="<%= id %>" label="<%= parameterconfig.getDisplayname() %>" multiple="true">
+		<%
+		List<KdssmpParameterOptions> options = KdssmpParameterOptionsLocalServiceUtil.getOptions(parameterconfig.getParameterconfigurationId());
+		for(KdssmpParameterOptions option : options) {
+			%>
+			<aui:option value="<%= option.getValue() %>"><liferay-ui:message key='<%= option.getOption() %>' /></aui:option>
+			<%
+		}
+		%>
+	</aui:select>
+</aui:column>

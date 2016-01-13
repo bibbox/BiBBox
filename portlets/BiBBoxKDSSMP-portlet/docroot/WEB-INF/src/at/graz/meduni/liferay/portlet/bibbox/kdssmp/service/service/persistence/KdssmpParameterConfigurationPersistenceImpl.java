@@ -345,6 +345,7 @@ public class KdssmpParameterConfigurationPersistenceImpl
 		kdssmpParameterConfigurationImpl.setComputed(kdssmpParameterConfiguration.isComputed());
 		kdssmpParameterConfigurationImpl.setConfirmationscript(kdssmpParameterConfiguration.getConfirmationscript());
 		kdssmpParameterConfigurationImpl.setGrouping(kdssmpParameterConfiguration.getGrouping());
+		kdssmpParameterConfigurationImpl.setColumnwidth(kdssmpParameterConfiguration.getColumnwidth());
 
 		return kdssmpParameterConfigurationImpl;
 	}

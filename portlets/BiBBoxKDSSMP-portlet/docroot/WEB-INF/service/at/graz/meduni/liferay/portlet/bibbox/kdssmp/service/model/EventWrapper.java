@@ -349,6 +349,11 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	}
 
 	@Override
+	public java.lang.String getPatientName() {
+		return _event.getPatientName();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

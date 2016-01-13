@@ -60,6 +60,7 @@ public class KdssmpParameterConfigurationWrapper
 		attributes.put("computed", getComputed());
 		attributes.put("confirmationscript", getConfirmationscript());
 		attributes.put("grouping", getGrouping());
+		attributes.put("columnwidth", getColumnwidth());
 
 		return attributes;
 	}
@@ -119,6 +120,12 @@ public class KdssmpParameterConfigurationWrapper
 
 		if (grouping != null) {
 			setGrouping(grouping);
+		}
+
+		String columnwidth = (String)attributes.get("columnwidth");
+
+		if (columnwidth != null) {
+			setColumnwidth(columnwidth);
 		}
 	}
 
@@ -340,6 +347,26 @@ public class KdssmpParameterConfigurationWrapper
 	@Override
 	public void setGrouping(java.lang.String grouping) {
 		_kdssmpParameterConfiguration.setGrouping(grouping);
+	}
+
+	/**
+	* Returns the columnwidth of this kdssmp parameter configuration.
+	*
+	* @return the columnwidth of this kdssmp parameter configuration
+	*/
+	@Override
+	public java.lang.String getColumnwidth() {
+		return _kdssmpParameterConfiguration.getColumnwidth();
+	}
+
+	/**
+	* Sets the columnwidth of this kdssmp parameter configuration.
+	*
+	* @param columnwidth the columnwidth of this kdssmp parameter configuration
+	*/
+	@Override
+	public void setColumnwidth(java.lang.String columnwidth) {
+		_kdssmpParameterConfiguration.setColumnwidth(columnwidth);
 	}
 
 	@Override

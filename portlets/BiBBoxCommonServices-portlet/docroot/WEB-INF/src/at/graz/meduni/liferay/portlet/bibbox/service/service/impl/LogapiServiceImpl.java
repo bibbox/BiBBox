@@ -35,6 +35,7 @@ import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -162,13 +163,13 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 					}
 					
 					JSONObject json = JSONFactoryUtil.createJSONObject();
-					json.put("ID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId());
+					json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
 					json.put("OrganizationID", organization.getOrganizationId());
 					json.put("name", organization.getName());
 					json.put("type", type);
 					JSONArray json_collection_array = JSONFactoryUtil.createJSONArray();
 					JSONObject json_default_collection = JSONFactoryUtil.createJSONObject();
-					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
+					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
 					json_default_collection.put("CollectionName", "default");
 					json_collection_array.put(json_default_collection);
 					json.put("Collections", json_collection_array);
@@ -229,13 +230,13 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 						continue;
 					}
 					JSONObject json = JSONFactoryUtil.createJSONObject();
-					json.put("ID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId());
+					json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
 					json.put("OrganizationID", organization.getOrganizationId());
 					json.put("name", organization.getName());
 					json.put("type", type);
 					JSONArray json_collection_array = JSONFactoryUtil.createJSONArray();
 					JSONObject json_default_collection = JSONFactoryUtil.createJSONObject();
-					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
+					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
 					json_default_collection.put("CollectionName", "default");
 					json_collection_array.put(json_default_collection);
 					json.put("Collections", json_collection_array);
@@ -296,13 +297,13 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 						continue;
 					}
 					JSONObject json = JSONFactoryUtil.createJSONObject();
-					json.put("ID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId());
+					json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
 					json.put("OrganizationID", organization.getOrganizationId());
 					json.put("name", organization.getName());
 					json.put("type", type);
 					JSONArray json_collection_array = JSONFactoryUtil.createJSONArray();
 					JSONObject json_default_collection = JSONFactoryUtil.createJSONObject();
-					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
+					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
 					json_default_collection.put("CollectionName", "default");
 					json_collection_array.put(json_default_collection);
 					json.put("Collections", json_collection_array);
@@ -357,7 +358,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 				LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
 				ex.printStackTrace();
 			}
-			json.put("ID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId());
+			json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
 			json.put("OrganizationID", organization.getOrganizationId());
 			json.put("name", organization.getName());
 			json.put("date of inclusion", organization.getCreateDate());
@@ -368,7 +369,8 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 			json_address.put("street2", organization.getAddress().getStreet3());
 			json_address.put("zip", organization.getAddress().getZip());
 			json_address.put("city", organization.getAddress().getCity());
-			json_address.put("country", organization.getAddress().getCountry().getNameCurrentValue());
+
+			json_address.put("country", LogapiLocalServiceUtil.getCountryNameByOrganizationId(organization.getOrganizationId()));
 			json.put("address", json_address);
 			json.put("type", type);
 			List<Website> websites = WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
@@ -383,7 +385,6 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 				List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user_mc.getUserId(), organization.getGroup().getGroupId());
 				for (UserGroupRole ugr : usergrouprolles) {
 					if(ugr.getRoleId() == maincontactrole) {
-						json_main_contact.put("title", user_mc.getGreeting());
 						json_main_contact.put("first name", user_mc.getFirstName());
 						json_main_contact.put("last name", user_mc.getLastName());
 						List<Phone> phones = user_mc.getPhones();
@@ -438,7 +439,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		  	}
 		  	JSONArray json_collection_array = JSONFactoryUtil.createJSONArray();
 			JSONObject json_default_collection = JSONFactoryUtil.createJSONObject();
-			json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
+			json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
 			json_default_collection.put("CollectionName", "default");
 			json_collection_array.put(json_default_collection);
 			json.put("Collections", json_collection_array);
@@ -502,10 +503,10 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 					LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
 					ex.printStackTrace();
 				}
-				json.put("ID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId());
+				json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
 				json.put("OrganizationID", organization.getOrganizationId());
 				json.put("name", organization.getName());
-				json.put("CollectionID", "http://catalogue.rd-connect.eu/id/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
+				json.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
 				json.put("CollectionName", "default");
 				JSONArray json_diseases_array = JSONFactoryUtil.createJSONArray();
 				List<DiseaseMatrix> diseasematrixs = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organizationId, -1, -1);

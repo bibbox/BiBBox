@@ -99,6 +99,67 @@
 		<field name="biobankCollection" type="boolean" />
 		<field name="biobankType" type="String" />
 	</model>
+	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork">
+		<field name="uuid" type="String" />
+		<field name="d2biobanknetworkId" type="long" />
+		<field name="parentd2biobanknetworkId" type="long" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="updateuuid" type="String" />
+		<field name="contactIDRef" type="String" />
+		<field name="contactPriority" type="long" />
+		<field name="bbmriBiobankNetworkID" type="String" />
+		<field name="biobankNetworkName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankNetworkCommonCollectionFocus" type="boolean" />
+		<field name="biobankNetworkCommonCharter" type="boolean" />
+		<field name="biobankNetworkCommonSOPs" type="boolean" />
+		<field name="biobankNetworkCommonDataAccessPolicy" type="boolean" />
+		<field name="biobankNetworkCommonSampleAccessPolicy" type="boolean" />
+		<field name="biobankNetworkCommonMTA" type="boolean" />
+		<field name="biobankNetworkCommonRepresentation" type="boolean" />
+		<field name="biobankNetworkCommonURL" type="boolean" />
+		<field name="biobankNetworkIDRef" type="String" />
+		<field name="geoLatitude" type="String" />
+		<field name="geoLongitude" type="String" />
+		<field name="biobankNetworkAcronym" type="String" />
+		<field name="biobankNetworkDescription" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankNetworkURL" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankNetworkJuridicalPerson" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+	</model>
+	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetworkLink">
+		<field name="uuid" type="String" />
+		<field name="d2biobanknetworklinkId" type="long" />
+		<field name="d2biobanknetworkId" type="long" />
+		<field name="d2linkId" type="long" />
+		<field name="d2linktype" type="String" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="updateuuid" type="String" />
+	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2Collection">
 		<field name="uuid" type="String" />
 		<field name="d2collectionId" type="long" />
@@ -185,13 +246,17 @@
 		<field name="collectionSampleAccessDescription" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
-		<field name="collectionSampleAccessURI" type="String" />
+		<field name="collectionSampleAccessURI" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collectionDataAccessFee" type="boolean" />
 		<field name="collectionDataAccessJointProjects" type="boolean" />
 		<field name="collectionDataAccessDescription" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
-		<field name="collectionDataAccessURI" type="String" />
+		<field name="collectionDataAccessURI" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collectionSize" type="long" />
 		<field name="collectionSizeTimestamp" type="long" />
 	</model>

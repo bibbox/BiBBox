@@ -36,7 +36,7 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{parameterconfigurationId=");
 		sb.append(parameterconfigurationId);
@@ -56,6 +56,8 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 		sb.append(confirmationscript);
 		sb.append(", grouping=");
 		sb.append(grouping);
+		sb.append(", columnwidth=");
+		sb.append(columnwidth);
 		sb.append("}");
 
 		return sb.toString();
@@ -112,6 +114,13 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 			kdssmpParameterConfigurationImpl.setGrouping(grouping);
 		}
 
+		if (columnwidth == null) {
+			kdssmpParameterConfigurationImpl.setColumnwidth(StringPool.BLANK);
+		}
+		else {
+			kdssmpParameterConfigurationImpl.setColumnwidth(columnwidth);
+		}
+
 		kdssmpParameterConfigurationImpl.resetOriginalValues();
 
 		return kdssmpParameterConfigurationImpl;
@@ -128,6 +137,7 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 		computed = objectInput.readBoolean();
 		confirmationscript = objectInput.readUTF();
 		grouping = objectInput.readUTF();
+		columnwidth = objectInput.readUTF();
 	}
 
 	@Override
@@ -179,6 +189,13 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 		else {
 			objectOutput.writeUTF(grouping);
 		}
+
+		if (columnwidth == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(columnwidth);
+		}
 	}
 
 	public long parameterconfigurationId;
@@ -190,4 +207,5 @@ public class KdssmpParameterConfigurationCacheModel implements CacheModel<Kdssmp
 	public boolean computed;
 	public String confirmationscript;
 	public String grouping;
+	public String columnwidth;
 }

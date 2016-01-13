@@ -377,6 +377,17 @@ public class KdssmpPatientWrapper implements KdssmpPatient,
 	}
 
 	@Override
+	public java.lang.String getInitialDiagnosis() {
+		return _kdssmpPatient.getInitialDiagnosis();
+	}
+
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.Event getLastEventOfType(
+		java.lang.String eventtype) {
+		return _kdssmpPatient.getLastEventOfType(eventtype);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

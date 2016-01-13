@@ -34,7 +34,9 @@
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterConfiguration">
 		<field name="parameterconfigurationId" type="long" />
-		<field name="displayname" type="String" />
+		<field name="displayname" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 		<field name="datatype" type="String" />
 		<field name="valuerange" type="String" />
 		<field name="displayoptions" type="String" />
@@ -46,12 +48,17 @@
 		<field name="grouping" type="String">
 			<hint name="max-length">10000</hint>
 		</field>
+		<field name="columnwidth" type="String" />
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpParameterOptions">
 		<field name="parameteroptionsId" type="long" />
 		<field name="parameterconfigurationId" type="long" />
-		<field name="option" type="String" />
-		<field name="value" type="String" />
+		<field name="option" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="value" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.kdssmp.service.model.KdssmpPatient">
 		<field name="patientId" type="long" />

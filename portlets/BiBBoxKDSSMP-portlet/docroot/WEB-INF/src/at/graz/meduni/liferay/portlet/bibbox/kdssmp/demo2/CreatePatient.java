@@ -163,6 +163,7 @@ public class CreatePatient extends MVCPortlet {
 	 * @throws SystemException
 	 */
 	private User createUser(User user, String firstName, String lastName, Company company, String mail, Organization organization, ServiceContext serviceContext, Locale default_locale) throws PortalException, SystemException {
+		System.out.println(mail);
 		boolean autoPassword = false;
 		String password1 = "20fenris14";
 		boolean autoScreenName = true;

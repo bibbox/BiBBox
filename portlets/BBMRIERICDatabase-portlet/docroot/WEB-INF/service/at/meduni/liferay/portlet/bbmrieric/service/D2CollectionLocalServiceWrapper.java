@@ -788,9 +788,10 @@ public class D2CollectionLocalServiceWrapper implements D2CollectionLocalService
 	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Collection getD2CollectionFromLDAP(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Collection d2collection,
-		javax.naming.directory.Attributes attrs) {
+		javax.naming.directory.Attributes attrs,
+		javax.naming.directory.SearchResult sr) {
 		return _d2CollectionLocalService.getD2CollectionFromLDAP(d2collection,
-			attrs);
+			attrs, sr);
 	}
 
 	/**

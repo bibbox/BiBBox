@@ -43,4 +43,6 @@ public interface D2Biobank extends D2BiobankModel, PersistedModel {
 	* @return
 	*/
 	public java.lang.String getBiobankJavascriptTable();
+
+	public java.util.List<at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork> getNetworksWhereBiobankIsMember();
 }

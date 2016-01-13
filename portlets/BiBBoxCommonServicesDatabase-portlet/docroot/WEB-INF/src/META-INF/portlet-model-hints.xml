@@ -39,7 +39,9 @@
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.model.Icons">
 		<field name="iconsId" type="long" />
-		<field name="iconurl" type="String" />
+		<field name="iconurl" type="String" >
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="group" type="String" />
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex">
