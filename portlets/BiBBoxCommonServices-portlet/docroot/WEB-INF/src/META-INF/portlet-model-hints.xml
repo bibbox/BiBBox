@@ -121,6 +121,12 @@
 		</field>
 		<field name="modifieddate" type="Date" />
 	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig">
+		<field name="importerconfigId" type="long" />
+		<field name="scope" type="String" />
+		<field name="elementId" type="String" />
+		<field name="elementvalue" type="String" />
+	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation">
 		<field name="invitationId" type="long" />
 		<field name="name" type="String" />

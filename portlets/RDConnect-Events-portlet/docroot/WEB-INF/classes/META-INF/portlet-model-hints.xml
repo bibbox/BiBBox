@@ -21,5 +21,12 @@
 		<field name="restricted" type="String">
 			<hint name="max-length">10000</hint>
 		</field>
+		<field name="notificationsend" type="boolean" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEventNotification">
+		<field name="eventnotificationId" type="long" />
+		<field name="notificationtype" type="String" />
+		<field name="userId" type="long" />
+		<field name="notificationselected" type="boolean" />
 	</model>
 </model-hints>

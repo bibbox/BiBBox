@@ -106,29 +106,29 @@ public class RDConnectEventLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent"
 			};
 
-		_methodName32 = "getBeanIdentifier";
+		_methodName36 = "getBeanIdentifier";
 
-		_methodParameterTypes32 = new String[] {  };
+		_methodParameterTypes36 = new String[] {  };
 
-		_methodName33 = "setBeanIdentifier";
+		_methodName37 = "setBeanIdentifier";
 
-		_methodParameterTypes33 = new String[] { "java.lang.String" };
+		_methodParameterTypes37 = new String[] { "java.lang.String" };
 
-		_methodName38 = "createEvent";
+		_methodName42 = "createEvent";
 
-		_methodParameterTypes38 = new String[] {
+		_methodParameterTypes42 = new String[] {
 				"java.lang.String", "java.util.Date", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName39 = "getEvents";
+		_methodName43 = "getEvents";
 
-		_methodParameterTypes39 = new String[] {  };
+		_methodParameterTypes43 = new String[] {  };
 
-		_methodName40 = "getEventsByOrganizationIds";
+		_methodName44 = "getEventsByOrganizationIds";
 
-		_methodParameterTypes40 = new String[] { "java.util.List" };
+		_methodParameterTypes44 = new String[] { "java.util.List" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -220,20 +220,20 @@ public class RDConnectEventLocalServiceClpInvoker {
 			return RDConnectEventLocalServiceUtil.updateRDConnectEvent((at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent)arguments[0]);
 		}
 
-		if (_methodName32.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+		if (_methodName36.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
 			return RDConnectEventLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName33.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
+		if (_methodName37.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
 			RDConnectEventLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName38.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
+		if (_methodName42.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
 			RDConnectEventLocalServiceUtil.createEvent((java.lang.String)arguments[0],
 				(java.util.Date)arguments[1], ((Long)arguments[2]).longValue(),
 				((Long)arguments[3]).longValue(),
@@ -243,13 +243,13 @@ public class RDConnectEventLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName39.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
+		if (_methodName43.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
 			return RDConnectEventLocalServiceUtil.getEvents();
 		}
 
-		if (_methodName40.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
 			return RDConnectEventLocalServiceUtil.getEventsByOrganizationIds((java.util.List<java.lang.Long>)arguments[0]);
 		}
 
@@ -288,14 +288,14 @@ public class RDConnectEventLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName32;
-	private String[] _methodParameterTypes32;
-	private String _methodName33;
-	private String[] _methodParameterTypes33;
-	private String _methodName38;
-	private String[] _methodParameterTypes38;
-	private String _methodName39;
-	private String[] _methodParameterTypes39;
-	private String _methodName40;
-	private String[] _methodParameterTypes40;
+	private String _methodName36;
+	private String[] _methodParameterTypes36;
+	private String _methodName37;
+	private String[] _methodParameterTypes37;
+	private String _methodName42;
+	private String[] _methodParameterTypes42;
+	private String _methodName43;
+	private String[] _methodParameterTypes43;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
 }

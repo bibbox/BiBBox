@@ -38,7 +38,7 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{eventId=");
 		sb.append(eventId);
@@ -58,6 +58,8 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 		sb.append(link);
 		sb.append(", restricted=");
 		sb.append(restricted);
+		sb.append(", notificationsend=");
+		sb.append(notificationsend);
 		sb.append("}");
 
 		return sb.toString();
@@ -114,6 +116,8 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 			rdConnectEventImpl.setRestricted(restricted);
 		}
 
+		rdConnectEventImpl.setNotificationsend(notificationsend);
+
 		rdConnectEventImpl.resetOriginalValues();
 
 		return rdConnectEventImpl;
@@ -130,6 +134,7 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 		longtext = objectInput.readUTF();
 		link = objectInput.readUTF();
 		restricted = objectInput.readUTF();
+		notificationsend = objectInput.readBoolean();
 	}
 
 	@Override
@@ -175,6 +180,8 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 		else {
 			objectOutput.writeUTF(restricted);
 		}
+
+		objectOutput.writeBoolean(notificationsend);
 	}
 
 	public long eventId;
@@ -186,4 +193,5 @@ public class RDConnectEventCacheModel implements CacheModel<RDConnectEvent>,
 	public String longtext;
 	public String link;
 	public String restricted;
+	public boolean notificationsend;
 }

@@ -1448,6 +1448,7 @@ public class RDConnectEventPersistenceImpl extends BasePersistenceImpl<RDConnect
 		rdConnectEventImpl.setLongtext(rdConnectEvent.getLongtext());
 		rdConnectEventImpl.setLink(rdConnectEvent.getLink());
 		rdConnectEventImpl.setRestricted(rdConnectEvent.getRestricted());
+		rdConnectEventImpl.setNotificationsend(rdConnectEvent.isNotificationsend());
 
 		return rdConnectEventImpl;
 	}

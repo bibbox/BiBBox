@@ -30,5 +30,13 @@
 		<column name="eventnotificationId" type="long" primary="true" />
 		<column name="notificationtype" type="String"></column>
 		<column name="userId" type="long"></column>
+		<column name="notificationselected" type="boolean"></column>
+		<finder name="EventNotificationForUser" return-type="RDConnectEventNotification">
+			<finder-column name="notificationtype" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="EventNotificationsForUser" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
 	</entity>
 </service-builder>

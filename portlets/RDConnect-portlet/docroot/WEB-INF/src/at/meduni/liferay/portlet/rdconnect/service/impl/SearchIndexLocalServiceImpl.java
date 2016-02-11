@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,6 +99,58 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	/**
+	 * 
+	 */
+	public List<Long> getOrganizationIdByKeywordAndValue(String key, String value) {
+		value = value.trim();
+		List<Long> returnvalue = new ArrayList<Long>();
+		//System.out.println("value for search: " + value);
+		try {
+			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+			Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + value + StringPool.PERCENT);
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("key", key));
+			dynamicQuery.add(criterion);
+			Order order_organisationid = OrderFactoryUtil.asc("organisationid");
+			dynamicQuery.addOrder(order_organisationid);
+			List<SearchIndex> serachresults = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+			for(SearchIndex serachresult : serachresults) {
+				if(!returnvalue.contains(serachresult.getOrganisationid())) {
+					returnvalue.add(serachresult.getOrganisationid());
+				}
+			}
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnvalue;
+	}
+	
+	/**
+	 * 
+	 * @param organizationId
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public List<SearchIndex> getSearchIndexByOrganizationKeyValue(long organizationId, String key, String value) {
+		try {
+			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
+			Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + value + StringPool.PERCENT);
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.ilike("key", key));
+			criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("organisationid", organizationId));
+			dynamicQuery.add(criterion);
+			Order order_organisationid = OrderFactoryUtil.asc("organisationid");
+			dynamicQuery.addOrder(order_organisationid);
+			List<SearchIndex> serachresults = SearchIndexLocalServiceUtil.dynamicQuery(dynamicQuery);
+			return serachresults;
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**

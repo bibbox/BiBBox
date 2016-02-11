@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.messagin
 
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.ClpSerializer;
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventNotificationLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -36,6 +37,8 @@ public class ClpMessageListener extends BaseMessageListener {
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
 			RDConnectEventLocalServiceUtil.clearService();
+
+			RDConnectEventNotificationLocalServiceUtil.clearService();
 		}
 	}
 }

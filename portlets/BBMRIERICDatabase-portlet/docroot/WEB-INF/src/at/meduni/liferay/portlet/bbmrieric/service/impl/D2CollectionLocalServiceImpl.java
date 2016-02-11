@@ -603,7 +603,7 @@ public class D2CollectionLocalServiceImpl
 	 * @param attrs
 	 * @return
 	 */
-	public D2Collection getD2CollectionFromLDAP(D2Collection d2collection, Attributes attrs, SearchResult sr) {
+	public D2Collection getD2CollectionFromLDAP(D2Collection d2collection, Attributes attrs, SearchResult sr, boolean contact) {
 		if(d2collection == null) {
 			d2collection = new D2CollectionImpl();
 		}
@@ -661,7 +661,6 @@ public class D2CollectionLocalServiceImpl
 		d2collection.setBbmribiobankID(bbmribiobankID);
 		d2collection.setBbmricollectionID(bbmricollectionID);
 		d2collection.setBbmriparentcollectionID(bbmriparentcollectionID);
-		d2collection.setContactIDRef(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactIDRef")));
 		// Mandatory Fields
 		d2collection.setCollectionName(LDAPAttributeEscaper.getAttributeValues(attrs.get("collectionName")));
 		d2collection.setMaterialStoredDNA(LDAPAttributeEscaper.getAttributeValuesBoolean(attrs.get("materialStoredDNA")));
@@ -690,8 +689,10 @@ public class D2CollectionLocalServiceImpl
 		d2collection.setCollectionOrderOfMagnitude(LDAPAttributeEscaper.getAttributeValuesLong(attrs.get("collectionOrderOfMagnitude")));
 		// Optional Fields
 		d2collection.setBioresourceReference(LDAPAttributeEscaper.getAttributeValues(attrs.get("bioresourceReference")));
-		d2collection.setContactIDRef(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactIDRef")));
-		d2collection.setContactPriority(LDAPAttributeEscaper.getAttributeValuesLong(attrs.get("contactPriority")));
+		if(contact) {
+			d2collection.setContactIDRef(LDAPAttributeEscaper.getAttributeValues(attrs.get("contactIDRef")));
+			d2collection.setContactPriority(LDAPAttributeEscaper.getAttributeValuesLong(attrs.get("contactPriority")));
+		}
 		d2collection.setBiobankNetworkIDRef(LDAPAttributeEscaper.getAttributeValues(attrs.get("biobankNetworkIDRef")));
 		d2collection.setGeoLatitude(LDAPAttributeEscaper.getAttributeValues(attrs.get("geoLatitude")));
 		d2collection.setGeoLongitude(LDAPAttributeEscaper.getAttributeValues(attrs.get("geoLongitude")));

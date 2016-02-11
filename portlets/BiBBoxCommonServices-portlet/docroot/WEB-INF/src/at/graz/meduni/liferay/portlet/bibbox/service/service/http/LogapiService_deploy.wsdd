@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_bibboxcs_LogapiService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="bbs" qname="operNS:bbs" returnQName="bbsReturn" returnType="rtns:string" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getAPIVersion" qname="operNS:getAPIVersion" returnQName="getAPIVersionReturn" returnType="rtns:string" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="regbb" qname="operNS:regbb" returnQName="regbbReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="regbb" qname="operNS:regbb" returnQName="regbbReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="collectionId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="regbb" qname="operNS:regbb" returnQName="regbbReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="id" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="regbbs" qname="operNS:regbbs" returnQName="regbbsReturn" returnType="rtns:string" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="regbbs" qname="operNS:regbbs" returnQName="regbbsReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="regs" qname="operNS:regs" returnQName="regsReturn" returnType="rtns:string" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" name="resttest01" qname="operNS:resttest01" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" name="resttest02" qname="operNS:resttest02" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="text" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" name="resttest03" qname="operNS:resttest03" soapAction="">
+			<parameter xmlns:tns="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" qname="array" type="tns:ArrayOf_xsd_long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" name="testMethode" qname="operNS:testMethode" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="jason" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="bbs getAPIVersion regbb regbbs regs resttest01 resttest02 resttest03 testMethode" />
+		<parameter name="className" value="at.graz.meduni.liferay.portlet.bibbox.service.service.http.LogapiServiceSoap" />
+		<parameter name="schemaUnqualified" value="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="LogapiServiceSoap" />
+		<parameter name="wsdlServiceElement" value="LogapiServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_bibboxcs_LogapiService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" />
+	</service>
+</deployment>

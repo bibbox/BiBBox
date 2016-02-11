@@ -145,4 +145,14 @@
 		<column name="logmsg" type="String"></column>
 		<column name="date" type="Date"></column>
 	</entity>
+	<entity name="ImporterConfig" local-service="true" remote-service="true" table="rdconnect.importerconfig">
+		<column name="importerconfigId" primary="true" type="long"></column>
+		<column name="scope" type="String"></column>
+		<column name="elementId" type="String"></column>
+		<column name="elementvalue" type="String"></column>
+		<finder return-type="Collection" name="ImporterConfig">
+			<finder-column name="scope"></finder-column>
+			<finder-column name="elementId"></finder-column>
+		</finder>
+	</entity>
 </service-builder>

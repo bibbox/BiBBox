@@ -216,7 +216,7 @@ public class D2BiobankLocalServiceClpInvoker {
 
 		_methodParameterTypes98 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
-				"javax.naming.directory.Attributes"
+				"javax.naming.directory.Attributes", "boolean"
 			};
 	}
 
@@ -479,7 +479,8 @@ public class D2BiobankLocalServiceClpInvoker {
 		if (_methodName98.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
 			return D2BiobankLocalServiceUtil.getD2BiobankFromLDAP((at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)arguments[0],
-				(javax.naming.directory.Attributes)arguments[1]);
+				(javax.naming.directory.Attributes)arguments[1],
+				((Boolean)arguments[2]).booleanValue());
 		}
 
 		throw new UnsupportedOperationException();

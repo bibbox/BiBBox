@@ -85,6 +85,13 @@ create table rdconnect.generalgnformation (
 	modifieddate DATE null
 );
 
+create table rdconnect.importerconfig (
+	importerconfigId LONG not null primary key,
+	scope VARCHAR(75) null,
+	elementId VARCHAR(75) null,
+	elementvalue VARCHAR(75) null
+);
+
 create table rdconnect.logapi (
 	logapiId LONG not null primary key,
 	userId LONG,

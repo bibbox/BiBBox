@@ -39,6 +39,7 @@ public class RDConnectEventSoap implements Serializable {
 		soapModel.setLongtext(model.getLongtext());
 		soapModel.setLink(model.getLink());
 		soapModel.setRestricted(model.getRestricted());
+		soapModel.setNotificationsend(model.getNotificationsend());
 
 		return soapModel;
 	}
@@ -163,6 +164,18 @@ public class RDConnectEventSoap implements Serializable {
 		_restricted = restricted;
 	}
 
+	public boolean getNotificationsend() {
+		return _notificationsend;
+	}
+
+	public boolean isNotificationsend() {
+		return _notificationsend;
+	}
+
+	public void setNotificationsend(boolean notificationsend) {
+		_notificationsend = notificationsend;
+	}
+
 	private long _eventId;
 	private Date _eventdate;
 	private String _eventtype;
@@ -172,4 +185,5 @@ public class RDConnectEventSoap implements Serializable {
 	private String _longtext;
 	private String _link;
 	private String _restricted;
+	private boolean _notificationsend;
 }

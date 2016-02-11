@@ -280,6 +280,24 @@ public class SearchIndexLocalServiceUtil {
 		return getService().getSearchIndexValueByKey(keyword, organizationId);
 	}
 
+	public static java.util.List<java.lang.Long> getOrganizationIdByKeywordAndValue(
+		java.lang.String key, java.lang.String value) {
+		return getService().getOrganizationIdByKeywordAndValue(key, value);
+	}
+
+	/**
+	* @param organizationId
+	* @param key
+	* @param value
+	* @return
+	*/
+	public static java.util.List<at.meduni.liferay.portlet.rdconnect.model.SearchIndex> getSearchIndexByOrganizationKeyValue(
+		long organizationId, java.lang.String key, java.lang.String value) {
+		return getService()
+				   .getSearchIndexByOrganizationKeyValue(organizationId, key,
+			value);
+	}
+
 	/**
 	* Search index for normal Search
 	*/

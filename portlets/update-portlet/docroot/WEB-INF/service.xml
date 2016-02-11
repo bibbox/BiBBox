@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder
+	package-path="at.graz.meduni.liferay.portlet.bibbox.service">
+	<author>reihsr</author>
+	<namespace>rdconnect_api_update</namespace>
+
+	<entity name="idcard" local-service="true" remote-service="true" table="rdconnect.idcardapiupdate">
+		<column name="idcardId" primary="true" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userip" type="String"></column>
+		<column name="logmsg" type="String"></column>
+		<column name="date" type="Date"></column>
+	</entity>
+</service-builder>

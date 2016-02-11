@@ -253,6 +253,20 @@ public interface SearchIndexLocalService extends BaseLocalService,
 	public java.lang.String getSearchIndexValueByKey(java.lang.String keyword,
 		long organizationId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<java.lang.Long> getOrganizationIdByKeywordAndValue(
+		java.lang.String key, java.lang.String value);
+
+	/**
+	* @param organizationId
+	* @param key
+	* @param value
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.SearchIndex> getSearchIndexByOrganizationKeyValue(
+		long organizationId, java.lang.String key, java.lang.String value);
+
 	/**
 	* Search index for normal Search
 	*/

@@ -106,29 +106,29 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
 			};
 
-		_methodName66 = "getBeanIdentifier";
+		_methodName72 = "getBeanIdentifier";
 
-		_methodParameterTypes66 = new String[] {  };
+		_methodParameterTypes72 = new String[] {  };
 
-		_methodName67 = "setBeanIdentifier";
+		_methodName73 = "setBeanIdentifier";
 
-		_methodParameterTypes67 = new String[] { "java.lang.String" };
+		_methodParameterTypes73 = new String[] { "java.lang.String" };
 
-		_methodName72 = "biobankPanelAssessmentFromRequest";
+		_methodName78 = "biobankPanelAssessmentFromRequest";
 
-		_methodParameterTypes72 = new String[] { "javax.portlet.ActionRequest" };
+		_methodParameterTypes78 = new String[] { "javax.portlet.ActionRequest" };
 
-		_methodName74 = "getNumberOfAssessmentsForOrganization";
+		_methodName80 = "getNumberOfAssessmentsForOrganization";
 
-		_methodParameterTypes74 = new String[] { "long" };
+		_methodParameterTypes80 = new String[] { "long" };
 
-		_methodName75 = "getAssessmentsForOrganization";
+		_methodName81 = "getAssessmentsForOrganization";
 
-		_methodParameterTypes75 = new String[] { "long" };
+		_methodParameterTypes81 = new String[] { "long" };
 
-		_methodName76 = "addBiobankPanelAssessment";
+		_methodName82 = "addBiobankPanelAssessment";
 
-		_methodParameterTypes76 = new String[] {
+		_methodParameterTypes82 = new String[] {
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment"
 			};
 	}
@@ -222,35 +222,35 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 			return BiobankPanelAssessmentLocalServiceUtil.updateBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
 			return BiobankPanelAssessmentLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
 			BiobankPanelAssessmentLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName72.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			return BiobankPanelAssessmentLocalServiceUtil.biobankPanelAssessmentFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
-		if (_methodName74.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return BiobankPanelAssessmentLocalServiceUtil.getNumberOfAssessmentsForOrganization(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName75.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			return BiobankPanelAssessmentLocalServiceUtil.getAssessmentsForOrganization(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName76.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+		if (_methodName82.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
 			return BiobankPanelAssessmentLocalServiceUtil.addBiobankPanelAssessment((at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment)arguments[0]);
 		}
 
@@ -289,16 +289,16 @@ public class BiobankPanelAssessmentLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
 	private String _methodName72;
 	private String[] _methodParameterTypes72;
-	private String _methodName74;
-	private String[] _methodParameterTypes74;
-	private String _methodName75;
-	private String[] _methodParameterTypes75;
-	private String _methodName76;
-	private String[] _methodParameterTypes76;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
+	private String _methodName82;
+	private String[] _methodParameterTypes82;
 }

@@ -20,6 +20,8 @@ import at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationOrganisationServiceUtil;
@@ -54,6 +56,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			DiseaseMatrixServiceUtil.clearService();
 			GeneralInformationLocalServiceUtil.clearService();
 
+			ImporterConfigLocalServiceUtil.clearService();
+
+			ImporterConfigServiceUtil.clearService();
 			InvitationLocalServiceUtil.clearService();
 
 			InvitationServiceUtil.clearService();

@@ -85,6 +85,7 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 		attributes.put("longtext", getLongtext());
 		attributes.put("link", getLink());
 		attributes.put("restricted", getRestricted());
+		attributes.put("notificationsend", getNotificationsend());
 
 		return attributes;
 	}
@@ -143,6 +144,12 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 		if (restricted != null) {
 			setRestricted(restricted);
+		}
+
+		Boolean notificationsend = (Boolean)attributes.get("notificationsend");
+
+		if (notificationsend != null) {
+			setNotificationsend(notificationsend);
 		}
 	}
 
@@ -363,6 +370,35 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 		}
 	}
 
+	@Override
+	public boolean getNotificationsend() {
+		return _notificationsend;
+	}
+
+	@Override
+	public boolean isNotificationsend() {
+		return _notificationsend;
+	}
+
+	@Override
+	public void setNotificationsend(boolean notificationsend) {
+		_notificationsend = notificationsend;
+
+		if (_rdConnectEventRemoteModel != null) {
+			try {
+				Class<?> clazz = _rdConnectEventRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setNotificationsend",
+						boolean.class);
+
+				method.invoke(_rdConnectEventRemoteModel, notificationsend);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getRDConnectEventRemoteModel() {
 		return _rdConnectEventRemoteModel;
 	}
@@ -443,6 +479,7 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 		clone.setLongtext(getLongtext());
 		clone.setLink(getLink());
 		clone.setRestricted(getRestricted());
+		clone.setNotificationsend(getNotificationsend());
 
 		return clone;
 	}
@@ -491,7 +528,7 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
@@ -511,6 +548,8 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 		sb.append(getLink());
 		sb.append(", restricted=");
 		sb.append(getRestricted());
+		sb.append(", notificationsend=");
+		sb.append(getNotificationsend());
 		sb.append("}");
 
 		return sb.toString();
@@ -518,7 +557,7 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -561,6 +600,10 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 			"<column><column-name>restricted</column-name><column-value><![CDATA[");
 		sb.append(getRestricted());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>notificationsend</column-name><column-value><![CDATA[");
+		sb.append(getNotificationsend());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -577,5 +620,6 @@ public class RDConnectEventClp extends BaseModelImpl<RDConnectEvent>
 	private String _longtext;
 	private String _link;
 	private String _restricted;
+	private boolean _notificationsend;
 	private BaseModel<?> _rdConnectEventRemoteModel;
 }

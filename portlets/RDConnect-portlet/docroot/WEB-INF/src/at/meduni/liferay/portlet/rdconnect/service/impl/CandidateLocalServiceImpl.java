@@ -264,7 +264,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	}
 	
 	public String[] getTypesOfCandidatesNewEntry() {
-		String[] array = new String[] { "Biobank", "Registry", "Biobank/Registry"};
+		String[] array = new String[] { "Biobank", "Registry"};
 		return array;
 	}
 	

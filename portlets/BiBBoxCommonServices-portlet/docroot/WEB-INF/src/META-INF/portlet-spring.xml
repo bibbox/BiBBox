@@ -9,6 +9,9 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.GeneralInformationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.GeneralInformationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.GeneralInformationPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.ImporterConfigLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.ImporterConfigServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.ImporterConfigPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.ImporterConfigPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService" class="at.graz.meduni.liferay.portlet.bibbox.service.service.impl.InvitationServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistenceImpl" parent="basePersistence" />

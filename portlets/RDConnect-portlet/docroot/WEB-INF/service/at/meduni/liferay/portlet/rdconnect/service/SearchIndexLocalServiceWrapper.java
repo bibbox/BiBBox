@@ -294,6 +294,26 @@ public class SearchIndexLocalServiceWrapper implements SearchIndexLocalService,
 			organizationId);
 	}
 
+	@Override
+	public java.util.List<java.lang.Long> getOrganizationIdByKeywordAndValue(
+		java.lang.String key, java.lang.String value) {
+		return _searchIndexLocalService.getOrganizationIdByKeywordAndValue(key,
+			value);
+	}
+
+	/**
+	* @param organizationId
+	* @param key
+	* @param value
+	* @return
+	*/
+	@Override
+	public java.util.List<at.meduni.liferay.portlet.rdconnect.model.SearchIndex> getSearchIndexByOrganizationKeyValue(
+		long organizationId, java.lang.String key, java.lang.String value) {
+		return _searchIndexLocalService.getSearchIndexByOrganizationKeyValue(organizationId,
+			key, value);
+	}
+
 	/**
 	* Search index for normal Search
 	*/

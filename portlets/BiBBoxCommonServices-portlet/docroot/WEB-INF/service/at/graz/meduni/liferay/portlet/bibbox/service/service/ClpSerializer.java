@@ -17,6 +17,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessmentClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformationClp;
+import at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfigClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisationClp;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.LogapiClp;
@@ -120,6 +121,10 @@ public class ClpSerializer {
 			return translateInputGeneralInformation(oldModel);
 		}
 
+		if (oldModelClassName.equals(ImporterConfigClp.class.getName())) {
+			return translateInputImporterConfig(oldModel);
+		}
+
 		if (oldModelClassName.equals(InvitationClp.class.getName())) {
 			return translateInputInvitation(oldModel);
 		}
@@ -176,6 +181,16 @@ public class ClpSerializer {
 		GeneralInformationClp oldClpModel = (GeneralInformationClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getGeneralInformationRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputImporterConfig(BaseModel<?> oldModel) {
+		ImporterConfigClp oldClpModel = (ImporterConfigClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getImporterConfigRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -253,6 +268,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.GeneralInformationImpl")) {
 			return translateOutputGeneralInformation(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.model.impl.ImporterConfigImpl")) {
+			return translateOutputImporterConfig(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -371,6 +391,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchImporterConfigException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchImporterConfigException();
+		}
+
+		if (className.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException")) {
 			return new at.graz.meduni.liferay.portlet.bibbox.service.NoSuchInvitationException();
 		}
@@ -421,6 +446,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setGeneralInformationRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputImporterConfig(BaseModel<?> oldModel) {
+		ImporterConfigClp newModel = new ImporterConfigClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setImporterConfigRemoteModel(oldModel);
 
 		return newModel;
 	}

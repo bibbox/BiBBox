@@ -506,8 +506,8 @@ public class D2BiobankLocalServiceUtil {
 
 	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankFromLDAP(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2biobank,
-		javax.naming.directory.Attributes attrs) {
-		return getService().getD2BiobankFromLDAP(d2biobank, attrs);
+		javax.naming.directory.Attributes attrs, boolean contact) {
+		return getService().getD2BiobankFromLDAP(d2biobank, attrs, contact);
 	}
 
 	public static void clearService() {

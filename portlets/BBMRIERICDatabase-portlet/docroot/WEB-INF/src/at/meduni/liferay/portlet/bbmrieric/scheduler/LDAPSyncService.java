@@ -194,8 +194,133 @@ public class LDAPSyncService implements MessageListener {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated D2BiobankNetworkLinksNotExistingInLdap.");
 			ex.printStackTrace();
 		}
+		// Set Contacts according to Priority
+		try {
+			updateD2BiobankNetworksContactInformations();
+			updateD2BiobankContactInformations();
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::connectLDAP] Error deleting not updated D2BiobankNetworkLinksNotExistingInLdap.");
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void updateD2BiobankNetworksContactInformations() {
+		try {
+			List<D2BiobankNetwork> networks = D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworks(-1, -1);
+			for(D2BiobankNetwork network : networks) {
+				if(network.getParentd2biobanknetworkId() == 0) {
+					List<D2BiobankNetwork> assosiatednetworks = network.getAssosiatedNetworks();
+					for(D2BiobankNetwork assosiatednetwork : assosiatednetworks) {
+						updateD2BiobankNetworksContactInformationsRecursive(assosiatednetwork);
+					}
+				}
+			}
+		} catch (SystemException e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::updateD2BiobankNetworksContactInformations] Error updating Contact information for network.");
+			e.printStackTrace();
+		}
 	}
 	
+	/**
+	 * 
+	 * @param network
+	 */
+	private void updateD2BiobankNetworksContactInformationsRecursive(D2BiobankNetwork network) {
+		List<D2BiobankNetwork> assosiatednetworks = network.getAssosiatedNetworks();
+		for(D2BiobankNetwork assosiatednetwork : assosiatednetworks) {
+			if(network.getContactPriority() > assosiatednetwork.getContactPriority()) {
+				try {
+					assosiatednetwork.setContactIDRef(network.getContactIDRef());
+					assosiatednetwork.setContactPriority(network.getContactPriority());
+					D2BiobankNetworkLocalServiceUtil.updateD2BiobankNetwork(assosiatednetwork);
+				} catch (SystemException e) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::updateD2BiobankNetworksContactInformationsRecursive] Error updating Contact information for network.");
+					e.printStackTrace();
+				}
+			}
+			updateD2BiobankNetworksContactInformationsRecursive(assosiatednetwork);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	private void updateD2BiobankContactInformations() {
+		try {
+			List<D2Biobank> biobanks = D2BiobankLocalServiceUtil.getD2Biobanks(-1, -1);
+			for(D2Biobank biobank : biobanks) {
+				List<D2BiobankNetwork> assosiatednetworks = biobank.getNetworksWhereBiobankIsMember();
+				for(D2BiobankNetwork assosiatednetwork : assosiatednetworks) {
+					if(assosiatednetwork.getContactPriority() > biobank.getContactPriority()) {
+						biobank.setContactIDRef(assosiatednetwork.getContactIDRef());
+						biobank.setContactPriority(assosiatednetwork.getContactPriority());
+						D2BiobankLocalServiceUtil.updateD2Biobank(biobank);
+					}
+				}
+				List<D2Collection> collections = biobank.getRootCollections();
+				for(D2Collection collection : collections) {
+					updateD2CollactionContactInformations(collection, null, biobank);
+				}
+			}
+		} catch (SystemException e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::updateD2BiobankContactInformations] Error updating Contact information for network.");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param collection
+	 * @param parrentcollection
+	 * @param biobank
+	 */
+	private void updateD2CollactionContactInformations(D2Collection collection, D2Collection parrentcollection, D2Biobank biobank) {
+		if(parrentcollection == null) {
+			if(biobank.getContactPriority() > collection.getContactPriority()) {
+				try {
+					collection.setContactIDRef(biobank.getContactIDRef());
+					collection.setContactPriority(biobank.getContactPriority());
+					D2CollectionLocalServiceUtil.updateD2Collection(collection);
+				} catch (SystemException e) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::updateD2CollactionContactInformations] Error updating Contact information for network.");
+					e.printStackTrace();
+				}
+			}
+		} else {
+			if(parrentcollection.getContactPriority() > collection.getContactPriority()) {
+				try {
+					collection.setContactIDRef(parrentcollection.getContactIDRef());
+					collection.setContactPriority(parrentcollection.getContactPriority());
+					D2CollectionLocalServiceUtil.updateD2Collection(collection);
+				} catch (SystemException e) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::updateD2CollactionContactInformations] Error updating Contact information for network.");
+					e.printStackTrace();
+				}
+			}
+		}
+		List<D2BiobankNetwork> assosiatednetworks = collection.getNetworksWhereCollectionIsMember();
+		for(D2BiobankNetwork assosiatednetwork : assosiatednetworks) {
+			if(assosiatednetwork.getContactPriority() > collection.getContactPriority()) {
+				try {
+					collection.setContactIDRef(assosiatednetwork.getContactIDRef());
+					collection.setContactPriority(assosiatednetwork.getContactPriority());
+					D2CollectionLocalServiceUtil.updateD2Collection(collection);
+				} catch (SystemException e) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [" + classpath_ + "::updateD2CollactionContactInformations] Error updating Contact information for network.");
+					e.printStackTrace();
+				}
+			}
+		}
+		// Recursive Update
+		List<D2Collection> collections = collection.getChildD2Collection();
+		for(D2Collection childcollection : collections) {
+			updateD2CollactionContactInformations(childcollection, collection, null);
+		}
+	}
+
 	private void synchronizeLinks(String networkbbmriId, long childId, String childtype, long groupId, String ldapupdateuuid) {
 		String[] networkssplit = networkbbmriId.split(",");
 		for(String bbmribiobanknetworkID : networkssplit) {
@@ -395,13 +520,13 @@ public class LDAPSyncService implements MessageListener {
 					D2Collection collection = D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(groupId, bbmricollectionID, bbmribiobankID);
 					if(collection == null) {	
 						serviceContext.setCreateDate(new Date());
-						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr);
+						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr, true);
 						collection.setUpdateuuid(ldapupdateuuid);
 						collection.setBiobankId(biobankId);
 						collection.setParentd2collectionId(parentcollectionId);
 						collection = D2CollectionLocalServiceUtil.addD2Collection(collection, serviceContext);
 					} else {
-						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr);
+						collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr, true);
 						collection.setUpdateuuid(ldapupdateuuid);
 						collection.setBiobankId(biobankId);
 						collection.setParentd2collectionId(parentcollectionId);

@@ -19,20 +19,23 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.MessageListenerException;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.Website;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.WebsiteLocalServiceUtil;
 
 public class RDConnectSearchSchedule implements MessageListener {
 
 	@Override
 	public void receive(Message message) throws MessageListenerException {
+		String uuid = PortalUUIDUtil.generate();
 		System.out.println("----------------------");
-		System.out.println("RDConnectSearchSchedule Start");
+		System.out.println("RDConnectSearchSchedule Start: " + uuid);
 		System.out.println(new Date().toString());
-		
 		// DB Statements
 		String sql_organizationtype = "SELECT data_ FROM expandovalue WHERE classpk = ?;";
 		String sql_select_searchid = "SELECT searchid FROM rdconnect.searchindex_rdconnect WHERE organisationid = ?;";
@@ -72,7 +75,7 @@ public class RDConnectSearchSchedule implements MessageListener {
 			e.printStackTrace();
 		}
 		
-		System.out.println("RDConnectSearchSchedule Done");
+		System.out.println("RDConnectSearchSchedule Done: " + uuid);
 		System.out.println(new Date().toString());
 		System.out.println("----------------------");
 	}
@@ -100,6 +103,9 @@ public class RDConnectSearchSchedule implements MessageListener {
 			Iterator searchidsiterator = searchids.iterator();
 			// Update/Insert the index
 			for(RDConnectSearchIndexObject index : organizationindex) {
+				/*if(index.getValue().equalsIgnoreCase("OrganizationURL")) {
+					System.out.println("insert Index:" + "OrganizationURL=" + index.getKey());
+				}*/
 				if(searchidsiterator.hasNext()) {
 					// Update
 					statement_update_searchindex.clearParameters();
@@ -277,6 +283,23 @@ public class RDConnectSearchSchedule implements MessageListener {
 			}
 		} catch (SystemException e) {
 			System.err.println("RDConnectSearchScheduler::RDConnectSearchSchedule::getIndexFromOrganization->OrganizationUser");
+			e.printStackTrace();
+		}
+		// OrganizationURL
+		try {
+			List<Website> websites = WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
+			for(Website website : websites) {
+				RDConnectSearchIndexObject organizationurl = new RDConnectSearchIndexObject();
+				organizationurl.setOrganizationId(organizationId);
+				organizationurl.setLocationId(website.getWebsiteId());
+				organizationurl.setLocation("Organization");
+				organizationurl.setKey("OrganizationURL");
+				organizationurl.setValue(website.getUrl());
+				returnvalue.add(organizationurl);
+				//System.out.println("create Index:" + "OrganizationURL=" + website.getUrl());
+			}
+		} catch (SystemException e) {
+			System.err.println("RDConnectSearchScheduler::RDConnectSearchSchedule::getIndexFromOrganization->OrganizationURL");
 			e.printStackTrace();
 		}
 		return returnvalue;

@@ -10,7 +10,7 @@
 			<scheduler-event-listener-class>at.graz.meduni.liferay.portlet.rdconnect.RDConnectSearchSchedule</scheduler-event-listener-class>
 			<trigger>
 				<simple>
-					<simple-trigger-value>5</simple-trigger-value>
+					<simple-trigger-value>15</simple-trigger-value>
 					<time-unit>minute</time-unit>
 				</simple>
 			</trigger>

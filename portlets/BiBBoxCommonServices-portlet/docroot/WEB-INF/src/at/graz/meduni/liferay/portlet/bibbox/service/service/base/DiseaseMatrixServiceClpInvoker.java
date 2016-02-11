@@ -24,96 +24,96 @@ import java.util.Arrays;
  */
 public class DiseaseMatrixServiceClpInvoker {
 	public DiseaseMatrixServiceClpInvoker() {
-		_methodName50 = "getBeanIdentifier";
+		_methodName56 = "getBeanIdentifier";
 
-		_methodParameterTypes50 = new String[] {  };
+		_methodParameterTypes56 = new String[] {  };
 
-		_methodName51 = "setBeanIdentifier";
+		_methodName57 = "setBeanIdentifier";
 
-		_methodParameterTypes51 = new String[] { "java.lang.String" };
+		_methodParameterTypes57 = new String[] { "java.lang.String" };
 
-		_methodName56 = "testupdatediseasematrix";
+		_methodName62 = "testupdatediseasematrix";
 
-		_methodParameterTypes56 = new String[] { "long" };
+		_methodParameterTypes62 = new String[] { "long" };
 
-		_methodName57 = "updatediseasematrix";
+		_methodName63 = "updatediseasematrix";
 
-		_methodParameterTypes57 = new String[] {
+		_methodParameterTypes63 = new String[] {
 				"long",
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix"
 			};
 
-		_methodName58 = "updatediseasematrixs";
+		_methodName64 = "updatediseasematrixs";
 
-		_methodParameterTypes58 = new String[] { "long", "java.util.List" };
+		_methodParameterTypes64 = new String[] { "long", "java.util.List" };
 
-		_methodName59 = "regbb";
+		_methodName65 = "regbb";
 
-		_methodParameterTypes59 = new String[] { "long" };
+		_methodParameterTypes65 = new String[] { "long" };
 
-		_methodName60 = "getDiseaseMatrix";
+		_methodName66 = "getDiseaseMatrix";
 
-		_methodParameterTypes60 = new String[] { "long" };
+		_methodParameterTypes66 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return DiseaseMatrixServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			DiseaseMatrixServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
 			return DiseaseMatrixServiceUtil.testupdatediseasematrix(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName57.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			return DiseaseMatrixServiceUtil.updatediseasematrix(((Long)arguments[0]).longValue(),
 				(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix)arguments[1]);
 		}
 
-		if (_methodName58.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			DiseaseMatrixServiceUtil.updatediseasematrixs(((Long)arguments[0]).longValue(),
 				(java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix>)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName59.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
 			return DiseaseMatrixServiceUtil.regbb(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return DiseaseMatrixServiceUtil.getDiseaseMatrix(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
-	private String _methodName51;
-	private String[] _methodParameterTypes51;
 	private String _methodName56;
 	private String[] _methodParameterTypes56;
 	private String _methodName57;
 	private String[] _methodParameterTypes57;
-	private String _methodName58;
-	private String[] _methodParameterTypes58;
-	private String _methodName59;
-	private String[] _methodParameterTypes59;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
 }

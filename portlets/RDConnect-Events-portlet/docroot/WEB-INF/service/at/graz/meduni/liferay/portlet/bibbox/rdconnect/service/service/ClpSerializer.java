@@ -15,6 +15,7 @@
 package at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service;
 
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEventClp;
+import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEventNotificationClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -106,6 +107,11 @@ public class ClpSerializer {
 			return translateInputRDConnectEvent(oldModel);
 		}
 
+		if (oldModelClassName.equals(
+					RDConnectEventNotificationClp.class.getName())) {
+			return translateInputRDConnectEventNotification(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +131,17 @@ public class ClpSerializer {
 		RDConnectEventClp oldClpModel = (RDConnectEventClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getRDConnectEventRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputRDConnectEventNotification(
+		BaseModel<?> oldModel) {
+		RDConnectEventNotificationClp oldClpModel = (RDConnectEventNotificationClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getRDConnectEventNotificationRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +168,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.impl.RDConnectEventImpl")) {
 			return translateOutputRDConnectEvent(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.impl.RDConnectEventNotificationImpl")) {
+			return translateOutputRDConnectEventNotification(oldModel);
 		}
 
 		return oldModel;
@@ -238,6 +260,11 @@ public class ClpSerializer {
 			return new at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.NoSuchRDConnectEventException();
 		}
 
+		if (className.equals(
+					"at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.NoSuchRDConnectEventNotificationException")) {
+			return new at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.NoSuchRDConnectEventNotificationException();
+		}
+
 		return throwable;
 	}
 
@@ -247,6 +274,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setRDConnectEventRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputRDConnectEventNotification(
+		BaseModel<?> oldModel) {
+		RDConnectEventNotificationClp newModel = new RDConnectEventNotificationClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setRDConnectEventNotificationRemoteModel(oldModel);
 
 		return newModel;
 	}

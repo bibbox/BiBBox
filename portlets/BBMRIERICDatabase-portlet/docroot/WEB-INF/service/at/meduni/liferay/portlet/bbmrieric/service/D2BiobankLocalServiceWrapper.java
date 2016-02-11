@@ -537,8 +537,9 @@ public class D2BiobankLocalServiceWrapper implements D2BiobankLocalService,
 	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankFromLDAP(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2biobank,
-		javax.naming.directory.Attributes attrs) {
-		return _d2BiobankLocalService.getD2BiobankFromLDAP(d2biobank, attrs);
+		javax.naming.directory.Attributes attrs, boolean contact) {
+		return _d2BiobankLocalService.getD2BiobankFromLDAP(d2biobank, attrs,
+			contact);
 	}
 
 	/**

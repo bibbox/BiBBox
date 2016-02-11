@@ -19,6 +19,7 @@ import at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.BiobankPanelAssessmentPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.DiseaseMatrixPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.GeneralInformationPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.ImporterConfigPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationOrganisationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.InvitationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.persistence.LogapiPersistence;
@@ -204,6 +205,63 @@ public abstract class InvitationServiceBaseImpl extends BaseServiceImpl
 	public void setGeneralInformationPersistence(
 		GeneralInformationPersistence generalInformationPersistence) {
 		this.generalInformationPersistence = generalInformationPersistence;
+	}
+
+	/**
+	 * Returns the importer config local service.
+	 *
+	 * @return the importer config local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigLocalService getImporterConfigLocalService() {
+		return importerConfigLocalService;
+	}
+
+	/**
+	 * Sets the importer config local service.
+	 *
+	 * @param importerConfigLocalService the importer config local service
+	 */
+	public void setImporterConfigLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigLocalService importerConfigLocalService) {
+		this.importerConfigLocalService = importerConfigLocalService;
+	}
+
+	/**
+	 * Returns the importer config remote service.
+	 *
+	 * @return the importer config remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigService getImporterConfigService() {
+		return importerConfigService;
+	}
+
+	/**
+	 * Sets the importer config remote service.
+	 *
+	 * @param importerConfigService the importer config remote service
+	 */
+	public void setImporterConfigService(
+		at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigService importerConfigService) {
+		this.importerConfigService = importerConfigService;
+	}
+
+	/**
+	 * Returns the importer config persistence.
+	 *
+	 * @return the importer config persistence
+	 */
+	public ImporterConfigPersistence getImporterConfigPersistence() {
+		return importerConfigPersistence;
+	}
+
+	/**
+	 * Sets the importer config persistence.
+	 *
+	 * @param importerConfigPersistence the importer config persistence
+	 */
+	public void setImporterConfigPersistence(
+		ImporterConfigPersistence importerConfigPersistence) {
+		this.importerConfigPersistence = importerConfigPersistence;
 	}
 
 	/**
@@ -600,6 +658,12 @@ public abstract class InvitationServiceBaseImpl extends BaseServiceImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.GeneralInformationLocalService generalInformationLocalService;
 	@BeanReference(type = GeneralInformationPersistence.class)
 	protected GeneralInformationPersistence generalInformationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigLocalService importerConfigLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigService importerConfigService;
+	@BeanReference(type = ImporterConfigPersistence.class)
+	protected ImporterConfigPersistence importerConfigPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationLocalService invitationLocalService;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.service.InvitationService.class)

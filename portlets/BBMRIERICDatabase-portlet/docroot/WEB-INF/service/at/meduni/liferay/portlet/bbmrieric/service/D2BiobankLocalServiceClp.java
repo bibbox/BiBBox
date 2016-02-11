@@ -216,7 +216,7 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 
 		_methodParameterTypes35 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
-				"javax.naming.directory.Attributes"
+				"javax.naming.directory.Attributes", "boolean"
 			};
 	}
 
@@ -1420,7 +1420,7 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankFromLDAP(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank d2biobank,
-		javax.naming.directory.Attributes attrs) {
+		javax.naming.directory.Attributes attrs, boolean contact) {
 		Object returnObj = null;
 
 		try {
@@ -1429,7 +1429,9 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 					new Object[] {
 						ClpSerializer.translateInput(d2biobank),
 						
-					ClpSerializer.translateInput(attrs)
+					ClpSerializer.translateInput(attrs),
+						
+					contact
 					});
 		}
 		catch (Throwable t) {

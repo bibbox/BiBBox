@@ -118,24 +118,36 @@ public class SearchIndexLocalServiceClpInvoker {
 
 		_methodParameterTypes62 = new String[] { "java.lang.String", "long" };
 
-		_methodName63 = "getSearchIndexByKeyword";
+		_methodName63 = "getOrganizationIdByKeywordAndValue";
 
 		_methodParameterTypes63 = new String[] {
-				"java.lang.String", "com.liferay.portal.theme.ThemeDisplay",
-				"java.lang.String"
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName64 = "getSearchIndexByOrganizationKeyValue";
+
+		_methodParameterTypes64 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
 			};
 
 		_methodName65 = "getSearchIndexByKeyword";
 
 		_methodParameterTypes65 = new String[] {
+				"java.lang.String", "com.liferay.portal.theme.ThemeDisplay",
+				"java.lang.String"
+			};
+
+		_methodName67 = "getSearchIndexByKeyword";
+
+		_methodParameterTypes67 = new String[] {
 				"java.lang.String", "java.lang.String",
 				"com.liferay.portal.theme.ThemeDisplay", "java.lang.String",
 				"long"
 			};
 
-		_methodName66 = "getUserStatistiks";
+		_methodName68 = "getUserStatistiks";
 
-		_methodParameterTypes66 = new String[] {  };
+		_methodParameterTypes68 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -247,21 +259,33 @@ public class SearchIndexLocalServiceClpInvoker {
 
 		if (_methodName63.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getOrganizationIdByKeywordAndValue((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getSearchIndexByOrganizationKeyValue(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+		}
+
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getSearchIndexByKeyword((java.lang.String)arguments[0],
 				(com.liferay.portal.theme.ThemeDisplay)arguments[1],
 				(java.lang.String)arguments[2]);
 		}
 
-		if (_methodName65.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getSearchIndexByKeyword((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1],
 				(com.liferay.portal.theme.ThemeDisplay)arguments[2],
 				(java.lang.String)arguments[3], ((Long)arguments[4]).longValue());
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getUserStatistiks();
 		}
 
@@ -308,8 +332,12 @@ public class SearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes62;
 	private String _methodName63;
 	private String[] _methodParameterTypes63;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
 	private String _methodName65;
 	private String[] _methodParameterTypes65;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
 }

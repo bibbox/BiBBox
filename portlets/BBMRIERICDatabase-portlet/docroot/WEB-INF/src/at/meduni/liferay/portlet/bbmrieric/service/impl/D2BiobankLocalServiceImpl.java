@@ -925,7 +925,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 						String ldapbiobankID = getAttributeValues(attrs
 								.get("biobankID"));
 
-						d2biobank = getD2BiobankFromLDAP(d2biobank, attrs);
+						d2biobank = getD2BiobankFromLDAP(d2biobank, attrs, false);
 						D2BiobankLocalServiceUtil.updateD2Biobank(d2biobank,
 								serviceContext);
 					} else {
@@ -989,12 +989,12 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 						D2Collection collection = D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(groupId, bbmricollectionID, bbmribiobankID);
 						if(collection == null) {	
 							serviceContext.setCreateDate(new Date());
-							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr);
+							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr, false);
 							collection.setBiobankId(biobankId);
 							collection.setParentd2collectionId(parentcollectionId);
 							collection = D2CollectionLocalServiceUtil.addD2Collection(collection, serviceContext);
 						} else {
-							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr);
+							collection = D2CollectionLocalServiceUtil.getD2CollectionFromLDAP(collection, attrs, sr, false);
 							collection.setBiobankId(biobankId);
 							collection.setParentd2collectionId(parentcollectionId);
 							collection = D2CollectionLocalServiceUtil.updateD2Collection(collection, serviceContext);
@@ -1022,10 +1022,12 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 		return d2biobank;
 	}
 	
-	public D2Biobank getD2BiobankFromLDAP(D2Biobank d2biobank, Attributes attrs) {
+	public D2Biobank getD2BiobankFromLDAP(D2Biobank d2biobank, Attributes attrs, boolean contact) {
 		d2biobank.setBiobankName(getAttributeValues(attrs.get("biobankName")));
-        d2biobank.setContactIDRef(getAttributeValues(attrs.get("contactIDRef")));
-        d2biobank.setContactPriority(getAttributeValuesLong(attrs.get("contactPriority")));
+		if(contact) {
+	        d2biobank.setContactIDRef(getAttributeValues(attrs.get("contactIDRef")));
+	        d2biobank.setContactPriority(getAttributeValuesLong(attrs.get("contactPriority")));
+		}
         d2biobank.setBiobankJurisdicalPerson(getAttributeValues(attrs.get("biobankJuridicalPerson")));
         String biobankCountry = getAttributeValues(attrs.get("biobankCountry"));
         d2biobank.setBiobankCountry(biobankCountry.toUpperCase());

@@ -206,6 +206,27 @@ public interface RDConnectEventModel extends BaseModel<RDConnectEvent> {
 	 */
 	public void setRestricted(String restricted);
 
+	/**
+	 * Returns the notificationsend of this r d connect event.
+	 *
+	 * @return the notificationsend of this r d connect event
+	 */
+	public boolean getNotificationsend();
+
+	/**
+	 * Returns <code>true</code> if this r d connect event is notificationsend.
+	 *
+	 * @return <code>true</code> if this r d connect event is notificationsend; <code>false</code> otherwise
+	 */
+	public boolean isNotificationsend();
+
+	/**
+	 * Sets whether this r d connect event is notificationsend.
+	 *
+	 * @param notificationsend the notificationsend of this r d connect event
+	 */
+	public void setNotificationsend(boolean notificationsend);
+
 	@Override
 	public boolean isNew();
 

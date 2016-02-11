@@ -43,8 +43,8 @@ ${theme.include(body_top_include)}
 <div class="bbmri_eric_header-maincontainer">
 	<div class="bbmri_eric_header-maincontainer-verlauf">
 		<div class="bbmri_eric_header-maincontainer-verlauf-inner">
-			<img  alt="${logo_description}" style="position: absolute;top: 0;" height="215px" src="/BBMRIERICRITrain-theme/images/BBMRI-ERIC_new_header_image.png" width="1200px" >
-			
+			<img id="Image-Maps-Com-image-maps-2016-01-25-124307" usemap="#image-maps-2016-01-25-124307" alt="${logo_description}" style="position: absolute;top: 0;" height="215px" src="/BBMRIERICRITrain-theme/images/BBMRI-ERIC_new_header_image.png" width="1200px" >
+		
 			<!-- Login area -->
 			<div class="bbmri_eric_header-login-top-right">
 				<#if is_signed_in>
@@ -63,6 +63,27 @@ ${theme.include(body_top_include)}
 					</a>
 				</#if>
 			</div>
+			<div class="bbmri_eric_header-logo">
+				<img style="border-style: ridge;border-width: 0px;border-color: #F0F8FF;" class="bbmri_eric_header-logo-position" src="/BBMRIERICRITrain-theme/images/logo_ritrain.png" alt="RItrain" width="99">
+			</div>
+			<a href="http://www.bbmri-eric.eu"><div style="position: absolute;top: 0px;left: 140px;width: 192px;height: 57px;z-index: 1001;"></div></a>
+			<a href="http://www.cnrs.fr"><div style="position: absolute;top: 58px;left: 140px;width: 60px;height: 63px;z-index: 1001;"></div></a>
+			<a href="https://www.dariah.eu"><div style="position: absolute;top: 58px;left: 203px;width: 150px;height: 63px;z-index: 1001;"></div></a>
+			<a href="https://www.infrafrontier.eu"><div style="position: absolute;top: 124px;left: 203px;width: 198px;height: 63px;z-index: 1001;"></div></a>
+			
+			<a href="https://www.ebi.ac.uk/"><div style="position: absolute;top: 0px;left: 380px;width: 159px;height: 58px;z-index: 1001;"></div></a>
+			<a href="https://www.elixir-europe.org/"><div style="position: absolute;top: 0px;left: 538px;width: 88px;height: 59px;z-index: 1001;"></div></a>
+			<a href="http://www.uminho.pt/"><div style="position: absolute;top: 61px;left: 380px;width: 201px;height: 61px;z-index: 1001;"></div></a>
+			<a href="http://www.isbe.eu"><div style="position: absolute;top: 120px;left: 380px;width: 247px;height: 54px;z-index: 1001;"></div></a>
+			
+			<a href="https://www.meduniwien.ac.at"><div style="position: absolute;top: 0px;left: 673px;width: 153px;height: 65px;z-index: 1001;"></div></a>
+			<a href="http://www.ecrin.org/"><div style="position: absolute;top: 0px;left: 825px;width: 98px;height: 58px;z-index: 1001;"></div></a>
+			<a href="http://www.eatris.eu"><div style="position: absolute;top: 65px;left: 673px;width: 184px;height: 61px;z-index: 1001;"></div></a>
+			<a href="http://www.img.cas.cz/en"><div style="position: absolute;top: 123px;left: 673px;width: 213px;height: 50px;z-index: 1001;"></div></a>
+			
+			<a href="http://www.emtrain.eu"><div style="position: absolute;top: 0px;left: 929px;width: 81px;height: 52px;z-index: 1001;"></div></a>
+			<a href="http://www.share-project.org"><div style="position: absolute;top: 57px;left: 907px;width: 87px;height: 63px;z-index: 1001;"></div></a>
+			<a href="http://www.unimib.it/"><div style="position: absolute;top: 120px;left: 933px;width: 52px;height: 51px;z-index: 1001;"></div></a>
 		</div>
 	</div>
 	<div class="bbmri_eric_header-innercontainer">

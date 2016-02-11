@@ -5,6 +5,7 @@
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.InvitationOrganisation" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi" />
@@ -73,6 +74,15 @@
 		<property name="imagingavailable" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="theregistrybiobanksislistedinotherinventoriesnetworks" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="modifieddate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.ImporterConfigImpl" table="rdconnect.importerconfig">
+		<cache usage="read-write" />
+		<id name="importerconfigId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="scope" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="elementId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="elementvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" table="bibboxcs.invitation">
 		<cache usage="read-write" />

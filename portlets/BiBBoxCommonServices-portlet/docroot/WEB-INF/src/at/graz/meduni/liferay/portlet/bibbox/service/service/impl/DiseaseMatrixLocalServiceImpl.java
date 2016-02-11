@@ -96,6 +96,9 @@ public class DiseaseMatrixLocalServiceImpl
 	 *
 	 */
 	public DiseaseMatrix addDiseaseMatrix(DiseaseMatrix diseasematrix) throws SystemException {
+		if(diseasematrix == null) {
+			diseasematrix = new DiseaseMatrixImpl();
+		}
 		long diseasematrixId = CounterLocalServiceUtil.increment(DiseaseMatrix.class.getName());
 
 		diseasematrix.setDiseasematrixId(diseasematrixId);

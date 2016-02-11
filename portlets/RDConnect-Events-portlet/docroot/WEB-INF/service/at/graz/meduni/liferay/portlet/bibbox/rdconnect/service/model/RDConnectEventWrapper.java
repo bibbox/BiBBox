@@ -59,6 +59,7 @@ public class RDConnectEventWrapper implements RDConnectEvent,
 		attributes.put("longtext", getLongtext());
 		attributes.put("link", getLink());
 		attributes.put("restricted", getRestricted());
+		attributes.put("notificationsend", getNotificationsend());
 
 		return attributes;
 	}
@@ -117,6 +118,12 @@ public class RDConnectEventWrapper implements RDConnectEvent,
 
 		if (restricted != null) {
 			setRestricted(restricted);
+		}
+
+		Boolean notificationsend = (Boolean)attributes.get("notificationsend");
+
+		if (notificationsend != null) {
+			setNotificationsend(notificationsend);
 		}
 	}
 
@@ -340,6 +347,36 @@ public class RDConnectEventWrapper implements RDConnectEvent,
 	@Override
 	public void setRestricted(java.lang.String restricted) {
 		_rdConnectEvent.setRestricted(restricted);
+	}
+
+	/**
+	* Returns the notificationsend of this r d connect event.
+	*
+	* @return the notificationsend of this r d connect event
+	*/
+	@Override
+	public boolean getNotificationsend() {
+		return _rdConnectEvent.getNotificationsend();
+	}
+
+	/**
+	* Returns <code>true</code> if this r d connect event is notificationsend.
+	*
+	* @return <code>true</code> if this r d connect event is notificationsend; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isNotificationsend() {
+		return _rdConnectEvent.isNotificationsend();
+	}
+
+	/**
+	* Sets whether this r d connect event is notificationsend.
+	*
+	* @param notificationsend the notificationsend of this r d connect event
+	*/
+	@Override
+	public void setNotificationsend(boolean notificationsend) {
+		_rdConnectEvent.setNotificationsend(notificationsend);
 	}
 
 	@Override

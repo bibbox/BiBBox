@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_bibboxcs_DiseaseMatrixService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:cmp-ns="http://model.service.bibbox.portlet.liferay.meduni.graz.at" qname="ns:ArrayOf_tns2_DiseaseMatrixSoap" type="java:at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixSoap[]" innerType="cmp-ns:DiseaseMatrixSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.service.bibbox.portlet.liferay.meduni.graz.at" qname="ns:DiseaseMatrixSoap" type="java:at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrixSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://model.service.bibbox.portlet.liferay.meduni.graz.at" name="getDiseaseMatrix" qname="operNS:getDiseaseMatrix" returnQName="getDiseaseMatrixReturn" returnType="rtns:DiseaseMatrixSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="regbb" qname="operNS:regbb" returnQName="regbbReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="testupdatediseasematrix" qname="operNS:testupdatediseasematrix" returnQName="testupdatediseasematrixReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" xmlns:rtns="http://model.service.bibbox.portlet.liferay.meduni.graz.at" name="updatediseasematrix" qname="operNS:updatediseasematrix" returnQName="updatediseasematrixReturn" returnType="rtns:DiseaseMatrixSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://model.service.bibbox.portlet.liferay.meduni.graz.at" qname="matrix" type="tns:DiseaseMatrixSoap"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" name="updatediseasematrixs" qname="operNS:updatediseasematrixs" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+			<parameter xmlns:tns="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" qname="matrixs" type="tns:ArrayOf_tns2_DiseaseMatrixSoap"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="getDiseaseMatrix regbb testupdatediseasematrix updatediseasematrix updatediseasematrixs" />
+		<parameter name="className" value="at.graz.meduni.liferay.portlet.bibbox.service.service.http.DiseaseMatrixServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.service.bibbox.portlet.liferay.meduni.graz.at,urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="DiseaseMatrixServiceSoap" />
+		<parameter name="wsdlServiceElement" value="DiseaseMatrixServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_bibboxcs_DiseaseMatrixService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.service.bibbox.portlet.liferay.meduni.graz.at" />
+	</service>
+</deployment>

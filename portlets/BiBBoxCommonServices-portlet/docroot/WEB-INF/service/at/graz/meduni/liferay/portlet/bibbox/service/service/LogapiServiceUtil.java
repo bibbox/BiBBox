@@ -126,6 +126,45 @@ public class LogapiServiceUtil {
 		getService().testMethode(jason);
 	}
 
+	public static void resttest01(long organizationId) {
+		getService().resttest01(organizationId);
+	}
+
+	public static void resttest02(java.lang.String text) {
+		getService().resttest02(text);
+	}
+
+	public static void resttest03(long[] array) {
+		getService().resttest03(array);
+	}
+
+	public static void resttest04(java.lang.String[] array) {
+		getService().resttest04(array);
+	}
+
+	public static void resttest05(java.lang.String url,
+		com.liferay.portal.model.User user) {
+		getService().resttest05(url, user);
+	}
+
+	public static void resttest06(java.lang.String url,
+		java.lang.String diseasname, java.lang.String patientcount,
+		java.lang.String gene, java.lang.String orphanumber,
+		java.lang.String icd10, java.lang.String omim, java.lang.String synonym) {
+		getService()
+			.resttest06(url, diseasname, patientcount, gene, orphanumber,
+			icd10, omim, synonym);
+	}
+
+	public static void resttest07(java.lang.String url,
+		java.lang.String diseasname, java.lang.String patientcount,
+		java.lang.String gene, java.lang.String orphanumber,
+		java.lang.String icd10, java.lang.String omim, java.lang.String synonym) {
+		getService()
+			.resttest07(url, diseasname, patientcount, gene, orphanumber,
+			icd10, omim, synonym);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

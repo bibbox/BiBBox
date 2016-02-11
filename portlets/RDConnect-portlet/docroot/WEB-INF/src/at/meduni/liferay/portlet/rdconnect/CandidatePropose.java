@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
+import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
@@ -22,6 +23,8 @@ import at.meduni.liferay.portlet.rdconnect.model.impl.CandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl;
 import at.meduni.liferay.portlet.rdconnect.service.CandidateLocalServiceUtil;
 
+import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -64,6 +67,7 @@ public class CandidatePropose extends MVCPortlet {
 					+ "<br>Address: " + candidate.getAddress()
 					+ "<br>URL: <a href=\"" + candidate.getUrl() + "\">" + candidate.getUrl() + "</a>";
 			addEventEntry(new Date(), 0, themeDisplay.getUserId(), shortdiscription, longdiscription, "", "RD-Connect CURATOR");
+			System.out.println("Send Emails");
 			sendEmailToProposer(request, candidate);
 			sendNotificationToCurators(request, candidate);
 			//response.setRenderParameter("success", "true");
@@ -170,6 +174,7 @@ public class CandidatePropose extends MVCPortlet {
 		body += "We will inform you as soon as our team has processed the proposal. If you have any additional questions, pleans replay to this ";
 		body += "email or use the subject of theis email in your response. It makes the tracking of issues easier for us.<br>";
 		body += "<br>With best regards,<br>Your RD-Connect Curator Team.";
+		sendEmail(candidate.getSubmitteremail(), subject, body);
 	}
 	
 	/**
@@ -182,6 +187,41 @@ public class CandidatePropose extends MVCPortlet {
 	 */
 	private void sendNotificationToCurators(ActionRequest request, Candidate candidate) {
 		String subject = "RD-Connect ID-Card Proposal #" + candidate.getCandidateId();
+		String body = "Dear Curators, <br>";
+		body += "There was a new " + candidate.getCandidatetype() + " proposed to the portal.<br>";
+		body += candidate.getSubmittername() + " (" + candidate.getSubmitteremail() + ")<br><br>";
+		body += "Name: " + candidate.getName() + "<br>";
+		body += "Country: " + candidate.getCountry() + "<br>";
+		body += "Head: " + candidate.getHead() + "<br>";
+		body += "Contact: " + candidate.getContactperson() + " (" + candidate.getMail() + ")" + "<br>";
+		body += "URL: " + candidate.getUrl() + "<br>";
+		body += "<br><br>Pleace use the subject of this email for every contact concerning this Proposel, ";
+		body += "and include the catalogue@rd-connect.eu email in the comunication.";
+		sendEmail(candidate.getSubmitteremail(), subject, body);
+	}
+	
+	/**
+	 * Sending email to specified user and CC to sender email
+	 */
+	private void sendEmail(String email, String mailSubject, String mailBody) {
+		System.out.println("====sendMailMessage===");
+		System.out.println("email:" + email);
+		System.out.println("Subject:" + mailSubject);
+		System.out.println("Body:" + mailBody);
+        String senderMailAddress="catalogue@rd-connect.eu";
+        String receiverMailAddress=email;
+        try {
+        	MailMessage mailMessage=new MailMessage();
+        	mailMessage.setHTMLFormat(true);
+		    mailMessage.setBody(mailBody);
+		    mailMessage.setSubject(mailSubject);
+		    mailMessage.setFrom(new InternetAddress(senderMailAddress));
+		    mailMessage.setTo(new InternetAddress(receiverMailAddress));
+		    mailMessage.setCC(new InternetAddress(senderMailAddress));
+	        MailServiceUtil.sendEmail(mailMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 
 }

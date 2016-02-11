@@ -67,6 +67,44 @@ public class LogapiServiceClp implements LogapiService {
 		_methodName11 = "testMethode";
 
 		_methodParameterTypes11 = new String[] { "java.lang.String" };
+
+		_methodName12 = "resttest01";
+
+		_methodParameterTypes12 = new String[] { "long" };
+
+		_methodName13 = "resttest02";
+
+		_methodParameterTypes13 = new String[] { "java.lang.String" };
+
+		_methodName14 = "resttest03";
+
+		_methodParameterTypes14 = new String[] { "long[][]" };
+
+		_methodName15 = "resttest04";
+
+		_methodParameterTypes15 = new String[] { "java.lang.String[][]" };
+
+		_methodName16 = "resttest05";
+
+		_methodParameterTypes16 = new String[] {
+				"java.lang.String", "com.liferay.portal.model.User"
+			};
+
+		_methodName17 = "resttest06";
+
+		_methodParameterTypes17 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName18 = "resttest07";
+
+		_methodParameterTypes18 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -328,6 +366,188 @@ public class LogapiServiceClp implements LogapiService {
 		}
 	}
 
+	@Override
+	public void resttest01(long organizationId) {
+		try {
+			_invokableService.invokeMethod(_methodName12,
+				_methodParameterTypes12, new Object[] { organizationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void resttest02(java.lang.String text) {
+		try {
+			_invokableService.invokeMethod(_methodName13,
+				_methodParameterTypes13,
+				new Object[] { ClpSerializer.translateInput(text) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void resttest03(long[] array) {
+		try {
+			_invokableService.invokeMethod(_methodName14,
+				_methodParameterTypes14,
+				new Object[] { ClpSerializer.translateInput(array) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void resttest04(java.lang.String[] array) {
+		try {
+			_invokableService.invokeMethod(_methodName15,
+				_methodParameterTypes15,
+				new Object[] { ClpSerializer.translateInput(array) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void resttest05(java.lang.String url,
+		com.liferay.portal.model.User user) {
+		try {
+			_invokableService.invokeMethod(_methodName16,
+				_methodParameterTypes16,
+				new Object[] {
+					ClpSerializer.translateInput(url),
+					
+				ClpSerializer.translateInput(user)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void resttest06(java.lang.String url, java.lang.String diseasname,
+		java.lang.String patientcount, java.lang.String gene,
+		java.lang.String orphanumber, java.lang.String icd10,
+		java.lang.String omim, java.lang.String synonym) {
+		try {
+			_invokableService.invokeMethod(_methodName17,
+				_methodParameterTypes17,
+				new Object[] {
+					ClpSerializer.translateInput(url),
+					
+				ClpSerializer.translateInput(diseasname),
+					
+				ClpSerializer.translateInput(patientcount),
+					
+				ClpSerializer.translateInput(gene),
+					
+				ClpSerializer.translateInput(orphanumber),
+					
+				ClpSerializer.translateInput(icd10),
+					
+				ClpSerializer.translateInput(omim),
+					
+				ClpSerializer.translateInput(synonym)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void resttest07(java.lang.String url, java.lang.String diseasname,
+		java.lang.String patientcount, java.lang.String gene,
+		java.lang.String orphanumber, java.lang.String icd10,
+		java.lang.String omim, java.lang.String synonym) {
+		try {
+			_invokableService.invokeMethod(_methodName18,
+				_methodParameterTypes18,
+				new Object[] {
+					ClpSerializer.translateInput(url),
+					
+				ClpSerializer.translateInput(diseasname),
+					
+				ClpSerializer.translateInput(patientcount),
+					
+				ClpSerializer.translateInput(gene),
+					
+				ClpSerializer.translateInput(orphanumber),
+					
+				ClpSerializer.translateInput(icd10),
+					
+				ClpSerializer.translateInput(omim),
+					
+				ClpSerializer.translateInput(synonym)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -351,4 +571,18 @@ public class LogapiServiceClp implements LogapiService {
 	private String[] _methodParameterTypes10;
 	private String _methodName11;
 	private String[] _methodParameterTypes11;
+	private String _methodName12;
+	private String[] _methodParameterTypes12;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
+	private String _methodName14;
+	private String[] _methodParameterTypes14;
+	private String _methodName15;
+	private String[] _methodParameterTypes15;
+	private String _methodName16;
+	private String[] _methodParameterTypes16;
+	private String _methodName17;
+	private String[] _methodParameterTypes17;
+	private String _methodName18;
+	private String[] _methodParameterTypes18;
 }

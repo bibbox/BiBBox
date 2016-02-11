@@ -108,4 +108,25 @@ public interface LogapiService extends BaseService, InvokableService {
 	public com.liferay.portal.kernel.json.JSONObject regbb(java.lang.String id);
 
 	public void testMethode(java.lang.String jason);
+
+	public void resttest01(long organizationId);
+
+	public void resttest02(java.lang.String text);
+
+	public void resttest03(long[] array);
+
+	public void resttest04(java.lang.String[] array);
+
+	public void resttest05(java.lang.String url,
+		com.liferay.portal.model.User user);
+
+	public void resttest06(java.lang.String url, java.lang.String diseasname,
+		java.lang.String patientcount, java.lang.String gene,
+		java.lang.String orphanumber, java.lang.String icd10,
+		java.lang.String omim, java.lang.String synonym);
+
+	public void resttest07(java.lang.String url, java.lang.String diseasname,
+		java.lang.String patientcount, java.lang.String gene,
+		java.lang.String orphanumber, java.lang.String icd10,
+		java.lang.String omim, java.lang.String synonym);
 }

@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.base;
 
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.RDConnectEvent;
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalService;
+import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.persistence.RDConnectEventNotificationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.persistence.RDConnectEventPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -319,6 +320,44 @@ public abstract class RDConnectEventLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the r d connect event notification local service.
+	 *
+	 * @return the r d connect event notification local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventNotificationLocalService getRDConnectEventNotificationLocalService() {
+		return rdConnectEventNotificationLocalService;
+	}
+
+	/**
+	 * Sets the r d connect event notification local service.
+	 *
+	 * @param rdConnectEventNotificationLocalService the r d connect event notification local service
+	 */
+	public void setRDConnectEventNotificationLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventNotificationLocalService rdConnectEventNotificationLocalService) {
+		this.rdConnectEventNotificationLocalService = rdConnectEventNotificationLocalService;
+	}
+
+	/**
+	 * Returns the r d connect event notification persistence.
+	 *
+	 * @return the r d connect event notification persistence
+	 */
+	public RDConnectEventNotificationPersistence getRDConnectEventNotificationPersistence() {
+		return rdConnectEventNotificationPersistence;
+	}
+
+	/**
+	 * Sets the r d connect event notification persistence.
+	 *
+	 * @param rdConnectEventNotificationPersistence the r d connect event notification persistence
+	 */
+	public void setRDConnectEventNotificationPersistence(
+		RDConnectEventNotificationPersistence rdConnectEventNotificationPersistence) {
+		this.rdConnectEventNotificationPersistence = rdConnectEventNotificationPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -498,6 +537,10 @@ public abstract class RDConnectEventLocalServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalService rdConnectEventLocalService;
 	@BeanReference(type = RDConnectEventPersistence.class)
 	protected RDConnectEventPersistence rdConnectEventPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventNotificationLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventNotificationLocalService rdConnectEventNotificationLocalService;
+	@BeanReference(type = RDConnectEventNotificationPersistence.class)
+	protected RDConnectEventNotificationPersistence rdConnectEventNotificationPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

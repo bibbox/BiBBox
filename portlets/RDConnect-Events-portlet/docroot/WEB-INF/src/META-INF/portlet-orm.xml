@@ -22,6 +22,19 @@
 			</basic>
 			<basic name="link" />
 			<basic name="restricted" />
+			<basic name="notificationsend" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.impl.RDConnectEventNotificationModelImpl">
+		<attributes>
+			<id name="eventnotificationId" />
+			<basic name="notificationtype" />
+			<basic name="userId" />
+			<basic name="notificationselected" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -30,6 +43,10 @@
 	</mapped-superclass>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.impl.RDConnectEventImpl" name="RDConnectEvent">
 		<table name="rdconnect.event" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.model.impl.RDConnectEventNotificationImpl" name="RDConnectEventNotification">
+		<table name="rdconnect.eventnotification" />
 		<attributes />
 	</entity>
 </entity-mappings>

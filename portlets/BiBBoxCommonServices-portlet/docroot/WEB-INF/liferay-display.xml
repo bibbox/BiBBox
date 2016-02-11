@@ -28,6 +28,7 @@
 	<category name="BiBBox RD-Connect">
 		<portlet id="disease-matrix"></portlet>
 		<portlet id="general-information"></portlet>
+		<portlet id="scaleus-importer"></portlet>
 	</category>
 	<category name="BiBBox Network">
 		<portlet id="network-view-organizations"></portlet>

@@ -219,7 +219,7 @@ public class D2CollectionLocalServiceClpInvoker {
 		_methodParameterTypes79 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Collection",
 				"javax.naming.directory.Attributes",
-				"javax.naming.directory.SearchResult"
+				"javax.naming.directory.SearchResult", "boolean"
 			};
 
 		_methodName80 = "getLDAPNotUpdatedCollection";
@@ -561,7 +561,8 @@ public class D2CollectionLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			return D2CollectionLocalServiceUtil.getD2CollectionFromLDAP((at.meduni.liferay.portlet.bbmrieric.model.D2Collection)arguments[0],
 				(javax.naming.directory.Attributes)arguments[1],
-				(javax.naming.directory.SearchResult)arguments[2]);
+				(javax.naming.directory.SearchResult)arguments[2],
+				((Boolean)arguments[3]).booleanValue());
 		}
 
 		if (_methodName80.equals(name) &&

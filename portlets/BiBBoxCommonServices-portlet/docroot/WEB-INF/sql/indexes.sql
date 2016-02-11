@@ -14,5 +14,7 @@ create index IX_89618AEF on rdconnect.diseasematrix (organizationId);
 
 create index IX_EB153260 on rdconnect.generalgnformation (organizationId);
 
+create index IX_BE20CF3 on rdconnect.importerconfig (scope, elementId);
+
 create index IX_7E1D5865 on rdconnect.networks (organizationnetworkId);
 create index IX_3A34F207 on rdconnect.networks (organizationnetworkId, organizationId);

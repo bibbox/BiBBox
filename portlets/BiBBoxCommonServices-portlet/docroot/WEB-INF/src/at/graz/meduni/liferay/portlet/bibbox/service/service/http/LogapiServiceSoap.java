@@ -206,5 +206,97 @@ public class LogapiServiceSoap {
 		}
 	}
 
+	public static void resttest01(long organizationId)
+		throws RemoteException {
+		try {
+			LogapiServiceUtil.resttest01(organizationId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void resttest02(java.lang.String text)
+		throws RemoteException {
+		try {
+			LogapiServiceUtil.resttest02(text);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void resttest03(long[] array) throws RemoteException {
+		try {
+			LogapiServiceUtil.resttest03(array);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void resttest04(java.lang.String[] array)
+		throws RemoteException {
+		try {
+			LogapiServiceUtil.resttest04(array);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void resttest05(java.lang.String url,
+		com.liferay.portal.model.UserSoap user) throws RemoteException {
+		try {
+			LogapiServiceUtil.resttest05(url,
+				com.liferay.portal.model.impl.UserModelImpl.toModel(user));
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void resttest06(java.lang.String url,
+		java.lang.String diseasname, java.lang.String patientcount,
+		java.lang.String gene, java.lang.String orphanumber,
+		java.lang.String icd10, java.lang.String omim, java.lang.String synonym)
+		throws RemoteException {
+		try {
+			LogapiServiceUtil.resttest06(url, diseasname, patientcount, gene,
+				orphanumber, icd10, omim, synonym);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void resttest07(java.lang.String url,
+		java.lang.String diseasname, java.lang.String patientcount,
+		java.lang.String gene, java.lang.String orphanumber,
+		java.lang.String icd10, java.lang.String omim, java.lang.String synonym)
+		throws RemoteException {
+		try {
+			LogapiServiceUtil.resttest07(url, diseasname, patientcount, gene,
+				orphanumber, icd10, omim, synonym);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(LogapiServiceSoap.class);
 }

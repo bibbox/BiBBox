@@ -85,6 +85,17 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.ImporterConfigModelImpl">
+		<attributes>
+			<id name="importerconfigId" />
+			<basic name="scope" />
+			<basic name="elementId" />
+			<basic name="elementvalue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationModelImpl">
 		<attributes>
 			<id name="invitationId" />
@@ -175,6 +186,10 @@
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.GeneralInformationImpl" name="GeneralInformation">
 		<table name="rdconnect.generalgnformation" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.ImporterConfigImpl" name="ImporterConfig">
+		<table name="rdconnect.importerconfig" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.InvitationImpl" name="Invitation">

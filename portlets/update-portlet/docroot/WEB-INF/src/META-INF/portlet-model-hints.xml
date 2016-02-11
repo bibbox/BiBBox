@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.idcard">
+		<field name="idcardId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userip" type="String" />
+		<field name="logmsg" type="String" />
+		<field name="date" type="Date" />
+	</model>
+</model-hints>
