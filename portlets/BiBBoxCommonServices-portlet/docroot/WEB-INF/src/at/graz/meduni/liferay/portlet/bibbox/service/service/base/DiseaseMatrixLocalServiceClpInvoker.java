@@ -135,6 +135,10 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 		_methodParameterTypes82 = new String[] {
 				"at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix"
 			};
+
+		_methodName83 = "createEmpltyDiseaseMatrix";
+
+		_methodParameterTypes83 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -265,6 +269,11 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 			return DiseaseMatrixLocalServiceUtil.addDiseaseMatrix((at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix)arguments[0]);
 		}
 
+		if (_methodName83.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
+			return DiseaseMatrixLocalServiceUtil.createEmpltyDiseaseMatrix();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -314,4 +323,6 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 	private String[] _methodParameterTypes81;
 	private String _methodName82;
 	private String[] _methodParameterTypes82;
+	private String _methodName83;
+	private String[] _methodParameterTypes83;
 }

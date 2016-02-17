@@ -298,6 +298,16 @@ public class NetworksLocalServiceWrapper implements NetworksLocalService,
 
 	/**
 	* @param organizationId
+	* @return
+	*/
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> getOrganizationNetworkOrganizations(
+		long organizationId) {
+		return _networksLocalService.getOrganizationNetworkOrganizations(organizationId);
+	}
+
+	/**
+	* @param organizationId
 	* @param networkId
 	* @return
 	*/

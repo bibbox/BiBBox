@@ -21,6 +21,15 @@ if(contactinformation != null) {
 %>
 
 <style>
+.email_float_left {
+    float: left;
+}
+.email_float {
+    float: right;
+}
+.point_class:before {
+	content: ".";
+}
 .aui #portlet_biobank_WAR_BBMRIERICDatabaseportlet .taglib-header {
 	display: inline;
 	border-bottom: 1px solid #184b8a;
@@ -112,7 +121,7 @@ if(contactinformation != null) {
 			</div>
 			<div>
 				<div class="fieldname">E-Mail:</div>
-				<div class="fieldvalue"><a href='<%= "mailto:" + contactinformation.getContactEmail() %>'><%= contactinformation.getContactEmail() %></a></div>
+				<div class="fieldvalue"><%= contactinformation.getContactEmailMunged() %></div>
 				<div style='content: "";clear: both;display: table;'></div> 
 			</div>
 			<%

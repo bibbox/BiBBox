@@ -30,6 +30,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 
+import at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.Networks;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.NetworksLocalServiceUtil;
@@ -175,22 +176,24 @@ public class idcardServiceImpl extends idcardServiceBaseImpl {
 				json.put("Organization", organization.getName());
 				// DiseaseMatrix
 				at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasmatrix = null;
+				System.out.println("diseaseid: " + diseaseid);
 				if(diseaseid != 0) {
 					try {
-						diseasmatrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(diseaseid);
+						try {
+							diseasmatrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(diseaseid);
+						} catch (Exception e) {
+							System.out.println("No Diseas Matrix Exists " + diseaseid);
+						}
 						if(diseasmatrix.getOrganizationId() == organization.getOrganizationId()) {
 							diseasmatrix = updateDiseaseMatrix(diseasmatrix, diseasename, patientcount, gene, orphanumber, icd10, omim, synonym);
-							json.put("API", "RD-Connect ID-Card API");
+							json.put("DiseaseMatrix", getJsonFromDiseaseMatrix(diseasmatrix));
 							return json;
 						} else {
 							json.put("API", "RD-Connect ID-Card API");
 							json.put("ERROR", "DiseaseId not matching Organization; Organization: " + organization.getName() + "; DiseaseId" + diseaseid);
 							return json;
 						}
-					} catch (PortalException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (SystemException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -199,10 +202,12 @@ public class idcardServiceImpl extends idcardServiceBaseImpl {
 					// Multiple matches when "diseasename-xy" and "diseasename-xy Type I"
 					for(SearchIndex searchindex : searchindexs) {
 						try {
-							diseasmatrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(searchindex.getLocationid());
-							diseasmatrix = updateDiseaseMatrix(diseasmatrix, diseasename, patientcount, gene, orphanumber, icd10, omim, synonym);
-							json.put("API", "RD-Connect ID-Card API");
-							return json;
+							if(searchindex.getValue().equalsIgnoreCase(diseasename)) {
+								diseasmatrix = DiseaseMatrixLocalServiceUtil.getDiseaseMatrix(searchindex.getLocationid());
+								diseasmatrix = updateDiseaseMatrix(diseasmatrix, diseasename, patientcount, gene, orphanumber, icd10, omim, synonym);
+								json.put("DiseaseMatrix", getJsonFromDiseaseMatrix(diseasmatrix));
+								return json;
+							}
 						} catch (PortalException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -213,7 +218,7 @@ public class idcardServiceImpl extends idcardServiceBaseImpl {
 					}
 					if(searchindexs.size() == 0) {
 						try {
-							diseasmatrix = DiseaseMatrixLocalServiceUtil.addDiseaseMatrix(null);
+							diseasmatrix = DiseaseMatrixLocalServiceUtil.createEmpltyDiseaseMatrix();
 							diseasmatrix.setOrganizationId(organization.getOrganizationId());
 							diseasmatrix.setDiseasename(diseasename);
 							diseasmatrix.setPatientcount(patientcount);
@@ -224,7 +229,7 @@ public class idcardServiceImpl extends idcardServiceBaseImpl {
 							diseasmatrix.setSynonym(synonym);
 							diseasmatrix.setModifieddate(new Date());
 							DiseaseMatrixLocalServiceUtil.updateDiseaseMatrix(diseasmatrix);
-							json.put("API", "RD-Connect ID-Card API");
+							json.put("DiseaseMatrix", getJsonFromDiseaseMatrix(diseasmatrix));
 							return json;
 						} catch (SystemException e) {
 							// TODO Auto-generated catch block
@@ -251,6 +256,19 @@ public class idcardServiceImpl extends idcardServiceBaseImpl {
 		return json;
 	}
 	
+	private JSONObject getJsonFromDiseaseMatrix(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasmatrix) {
+		JSONObject json = JSONFactoryUtil.createJSONObject();
+		json.put("DiseasematrixId", diseasmatrix.getDiseasematrixId());
+		json.put("Diseasename", diseasmatrix.getDiseasename());
+		json.put("Gene", diseasmatrix.getGene());
+		json.put("ICD10", diseasmatrix.getIcd10());
+		json.put("OMIM", diseasmatrix.getOmim());
+		json.put("Orphanumber", diseasmatrix.getOrphanumber());
+		json.put("Patient Count", diseasmatrix.getPatientcount());
+		json.put("Synonym", diseasmatrix.getSynonym());
+		return json;
+	}
+
 	private at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix updateDiseaseMatrix(at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseasmatrix, String diseasename, String patientcount, String gene, String orphanumber, String icd10, String omim, String synonym) {
 		try {
 			if(!diseasename.equalsIgnoreCase(diseasmatrix.getDiseasename())) {
@@ -295,13 +313,17 @@ public class idcardServiceImpl extends idcardServiceBaseImpl {
 			try {
 				List<Long> testorganizations = new ArrayList<Long>();
 				testorganizations.add(organization.getOrganizationId());
-				List<Networks> networks = NetworksLocalServiceUtil.getNetworkOrganizations(organization.getOrganizationId());
+				System.out.println("Add OrganizationId: " + organization.getOrganizationId());
+				List<Networks> networks = NetworksLocalServiceUtil.getOrganizationNetworkOrganizations(organization.getOrganizationId());
+				System.out.println("Network Size: " + networks.size());
 				for(Networks network : networks) {
 					if(!testorganizations.contains(network.getOrganizationnetworkId())) {
 						testorganizations.add(network.getOrganizationnetworkId());
+						System.out.println("Add OrganizationId: " + network.getOrganizationnetworkId());
 					}
 				}
 				for(long userorganizationid : user.getOrganizationIds()) {
+					System.out.println("Test User OrganizationIds: " + userorganizationid);
 					if(testorganizations.contains(userorganizationid)) {
 						return true;
 					}

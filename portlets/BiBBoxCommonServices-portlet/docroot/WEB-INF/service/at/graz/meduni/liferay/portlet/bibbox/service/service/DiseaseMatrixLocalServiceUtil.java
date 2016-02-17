@@ -299,6 +299,14 @@ public class DiseaseMatrixLocalServiceUtil {
 		return getService().diseaseMatrixFromRequest(request);
 	}
 
+	/**
+	* Adds the DiseaseMatrix to the database incrementing the primary key
+	*/
+	public static at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix createEmpltyDiseaseMatrix()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().createEmpltyDiseaseMatrix();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

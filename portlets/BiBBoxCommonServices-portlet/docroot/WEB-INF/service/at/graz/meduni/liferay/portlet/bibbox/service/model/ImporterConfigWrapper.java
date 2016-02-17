@@ -248,7 +248,8 @@ public class ImporterConfigWrapper implements ImporterConfig,
 	}
 
 	@Override
-	public int compareTo(ImporterConfig importerConfig) {
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig importerConfig) {
 		return _importerConfig.compareTo(importerConfig);
 	}
 
@@ -258,17 +259,17 @@ public class ImporterConfigWrapper implements ImporterConfig,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<ImporterConfig> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig> toCacheModel() {
 		return _importerConfig.toCacheModel();
 	}
 
 	@Override
-	public ImporterConfig toEscapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig toEscapedModel() {
 		return new ImporterConfigWrapper(_importerConfig.toEscapedModel());
 	}
 
 	@Override
-	public ImporterConfig toUnescapedModel() {
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig toUnescapedModel() {
 		return new ImporterConfigWrapper(_importerConfig.toUnescapedModel());
 	}
 

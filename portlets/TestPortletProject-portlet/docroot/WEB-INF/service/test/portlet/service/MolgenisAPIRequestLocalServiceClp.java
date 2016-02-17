@@ -119,6 +119,10 @@ public class MolgenisAPIRequestLocalServiceClp
 		_methodName19 = "getAgregatedJsonFromMolgenis";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String" };
+
+		_methodName20 = "testAPIUpdate";
+
+		_methodParameterTypes20 = new String[] {  };
 	}
 
 	@Override
@@ -706,6 +710,25 @@ public class MolgenisAPIRequestLocalServiceClp
 		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public void testAPIUpdate() {
+		try {
+			_invokableLocalService.invokeMethod(_methodName20,
+				_methodParameterTypes20, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -745,4 +768,6 @@ public class MolgenisAPIRequestLocalServiceClp
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

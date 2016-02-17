@@ -255,4 +255,6 @@ public interface MolgenisAPIRequestLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getAgregatedJsonFromMolgenis(
 		java.lang.String biobankid);
+
+	public void testAPIUpdate();
 }

@@ -18,4 +18,4 @@
 
 <portlet:defineObjects />
 
-This is the <b>Update</b> portlet.
+This is the <b>Test Update</b> portlet.

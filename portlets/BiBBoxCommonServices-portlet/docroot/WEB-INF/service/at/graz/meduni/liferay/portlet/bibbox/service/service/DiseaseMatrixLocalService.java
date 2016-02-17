@@ -267,4 +267,10 @@ public interface DiseaseMatrixLocalService extends BaseLocalService,
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseaseMatrixFromRequest(
 		javax.portlet.PortletRequest request);
+
+	/**
+	* Adds the DiseaseMatrix to the database incrementing the primary key
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix createEmpltyDiseaseMatrix()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

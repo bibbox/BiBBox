@@ -32,11 +32,13 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.protocol.HTTP;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import sun.misc.BASE64Encoder;
 import test.portlet.service.base.MolgenisAPIRequestLocalServiceBaseImpl;
 
 /**
@@ -94,6 +96,36 @@ public class MolgenisAPIRequestLocalServiceImpl extends
 			}
 		}
 		return "";
+	}
+	
+	public void testAPIUpdate() {
+		String url = "http://catalogue.rd-connect.eu/apiv1/update";
+		System.out.println("-- API Update Test: " + url);
+		try {
+			HttpClient c = HttpClientBuilder.create().build();
+
+			HttpPost p = new HttpPost(url);
+			BASE64Encoder base = new BASE64Encoder();
+			String encoding = base.encode("jud@patientcrossroads.com:rdc2016".getBytes());
+			p.addHeader("Authorization", "Basic " + encoding);
+			p.setHeader(HTTP.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
+			System.out.println("Authorization:" + encoding);
+		
+			String entry = "[{\"/update-portlet.idcard/diseasematrix\": {\"url\": \"https://connect.patientcrossroads.org/?org=algsa\",\"diseasname\": \"Alagille Syndrome 1\",\"patientcount\": \"\",\"gene\": \"JAG1\",\"orphanumber\": \"ORPHA52\",\"icd10\": \"Q44.7\",\"omim\": \"#610205\",\"synonym\": \"ALGS1\"}}]";
+			p.setEntity(new StringEntity(entry, ContentType.APPLICATION_JSON));
+
+			HttpResponse r = c.execute(p);
+
+			BufferedReader rd = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
+			String line = "";
+			while ((line = rd.readLine()) != null) {
+				// Parse our JSON response
+				System.out.println(line);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 	
 	private void test() {

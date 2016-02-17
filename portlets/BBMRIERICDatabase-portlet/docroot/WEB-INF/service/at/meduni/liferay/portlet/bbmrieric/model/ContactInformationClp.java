@@ -640,6 +640,25 @@ public class ContactInformationClp extends BaseModelImpl<ContactInformation>
 	}
 
 	@Override
+	public java.lang.String getContactEmailMunged() {
+		try {
+			String methodName = "getContactEmailMunged";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public java.lang.String getHtmlAddress() {
 		try {
 			String methodName = "getHtmlAddress";

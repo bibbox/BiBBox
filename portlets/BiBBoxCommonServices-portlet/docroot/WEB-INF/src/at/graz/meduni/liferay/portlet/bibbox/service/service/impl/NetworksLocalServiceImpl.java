@@ -65,6 +65,21 @@ public class NetworksLocalServiceImpl extends NetworksLocalServiceBaseImpl {
 	/**
 	 * 
 	 * @param organizationId
+	 * @return
+	 */
+	public List<Networks> getOrganizationNetworkOrganizations(long organizationId) {
+		try {
+			return networksPersistence.findByOrganizationNetworkOrganizations(organizationId);
+		} catch (SystemException e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.NetworksLocalServiceImpl::getNetworkOrganizations] Network finder Exception.");
+			e.printStackTrace();
+		}	
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param organizationId
 	 * @param networkId
 	 * @return
 	 */

@@ -275,6 +275,16 @@ public class ImporterConfigLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.lang.String getPredicate(java.lang.String scope,
+		java.lang.String elementId) {
+		return getService().getPredicate(scope, elementId);
+	}
+
+	public static void setPredicate(java.lang.String scope,
+		java.lang.String elementId, java.lang.String elementvalue) {
+		getService().setPredicate(scope, elementId, elementvalue);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

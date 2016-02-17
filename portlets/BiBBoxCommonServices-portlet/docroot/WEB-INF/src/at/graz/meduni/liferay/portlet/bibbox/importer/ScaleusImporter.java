@@ -15,6 +15,7 @@ import javax.portlet.ActionResponse;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -23,6 +24,7 @@ import org.apache.http.protocol.HTTP;
 
 import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
+import at.graz.meduni.liferay.portlet.bibbox.service.service.ImporterConfigLocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -54,6 +56,8 @@ public class ScaleusImporter extends MVCPortlet {
 	SimpleDateFormat date_format_ = new SimpleDateFormat(date_format_pattern_);
 	
 	public void testImport(ActionRequest request, ActionResponse response) throws Exception {
+		//clearScaleusDatabase();
+		
 		HashMap<String, String> biobank = readBiobankData(request);
 		HashMap<String, String> collection = readCollectionData(request);
 		HashMap<String, String> diseasematrix_list = readDiseaseMatrixData(request);
@@ -75,29 +79,46 @@ public class ScaleusImporter extends MVCPortlet {
 		String BiobankID = ParamUtil.getString(request, "BiobankID");
 		if(!BiobankID.equals("")) {
 			identifier_string = BiobankID;
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "BiobankID", BiobankID);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "BiobankID", "");
 		}
 		String identifier_collection_string = "collection-id";
 		String CollectionID = ParamUtil.getString(request, "CollectionID");
 		if(!CollectionID.equals("")) {
 			identifier_collection_string = CollectionID;
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CollectionID", CollectionID);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CollectionID", "");
 		}
 		String identifier_diseasmatrix_string = "disease-matrix-id";
 		String DiseaseMatrixID = ParamUtil.getString(request, "DiseaseMatrixID");
 		if(!DiseaseMatrixID.equals("")) {
 			identifier_diseasmatrix_string = DiseaseMatrixID;
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DiseaseMatrixID", DiseaseMatrixID);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DiseaseMatrixID", "");
 		}
 		String identifier_user_string = "person-id";
 		String UserID = ParamUtil.getString(request, "UserID");
 		if(!UserID.equals("")) {
 			identifier_user_string = UserID;
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "UserID", UserID);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "UserID", "");
 		}
 		long maincontactrole = Long.parseLong(PropsUtil.get("rdconnectmaincontactid"));
 		String MaincontactIDPredicate = ParamUtil.getString(request, "MaincontactIDPredicate");
+		ImporterConfigLocalServiceUtil.setPredicate("scaleus", "MaincontactIDPredicate", MaincontactIDPredicate);
 		String CollectionIDPredicate = ParamUtil.getString(request, "CollectionIDPredicate");
+		ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CollectionIDPredicate", CollectionIDPredicate);
 		String DiseasMatrixIDPredicate = ParamUtil.getString(request, "DiseasMatrixIDPredicate");
+		ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DiseasMatrixIDPredicate", DiseasMatrixIDPredicate);
 		
 		// Regular input
 		for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(companyid, parentid)) {
+			if(true)
+				break;
 			organizationId = organization.getOrganizationId();
 			/*organizationId = organization.getOrganizationId();
 			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/identifier", String.valueOf(organization.getOrganizationId()));
@@ -171,7 +192,7 @@ public class ScaleusImporter extends MVCPortlet {
 		int count = 0; 
 		for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(companyid, parentid)) {
 			count ++;
-			if(count > 10) {
+			if(count > 0) {
 				break;
 			}
 			organizationId = organization.getOrganizationId();
@@ -731,14 +752,23 @@ public class ScaleusImporter extends MVCPortlet {
 		String FirstnamePredicate = ParamUtil.getString(request, "FirstnamePredicate");
 		if(!FirstnamePredicate.equals("")) {
 			user.put("FirstnamePredicate", FirstnamePredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "FirstnamePredicate", FirstnamePredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "FirstnamePredicate", "");
 		}
 		String LastnamePredicate = ParamUtil.getString(request, "LastnamePredicate");
 		if(!LastnamePredicate.equals("")) {
 			user.put("LastnamePredicate", LastnamePredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "LastnamePredicate", LastnamePredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "LastnamePredicate", "");
 		}
 		String EMailPredicate = ParamUtil.getString(request, "EMailPredicate");
 		if(!EMailPredicate.equals("")) {
 			user.put("EMailPredicate", EMailPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "EMailPredicate", EMailPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "EMailPredicate", "");
 		}
 		return user;
 	}
@@ -748,34 +778,58 @@ public class ScaleusImporter extends MVCPortlet {
 		String DiseaseName = ParamUtil.getString(request, "DiseaseName");
 		if(!DiseaseName.equals("")) {
 			diseasematrix.put("DiseaseName", DiseaseName);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DiseaseName", DiseaseName);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DiseaseName", "");
 		}
 		String NumberOfPatients = ParamUtil.getString(request, "NumberOfPatients");
 		if(!NumberOfPatients.equals("")) {
 			diseasematrix.put("NumberOfPatients", NumberOfPatients);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "NumberOfPatients", NumberOfPatients);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "NumberOfPatients", "");
 		}
 		String Gene = ParamUtil.getString(request, "Gene");
 		if(!Gene.equals("")) {
 			diseasematrix.put("Gene", Gene);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "Gene", Gene);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "Gene", "");
 		}
 		String ORPHACode = ParamUtil.getString(request, "ORPHACode");
 		if(!ORPHACode.equals("")) {
 			diseasematrix.put("ORPHACode", ORPHACode);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ORPHACode", ORPHACode);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ORPHACode", "");
 		}
 		String ICD10 = ParamUtil.getString(request, "ICD10");
 		if(!ICD10.equals("")) {
 			diseasematrix.put("ICD10", ICD10);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ICD10", ICD10);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ICD10", "");
 		}
 		String OMIM = ParamUtil.getString(request, "OMIM");
 		if(!OMIM.equals("")) {
 			diseasematrix.put("OMIM", OMIM);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "OMIM", OMIM);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "OMIM", "");
 		}
 		String Synonym = ParamUtil.getString(request, "Synonym");
 		if(!Synonym.equals("")) {
 			diseasematrix.put("Synonym", Synonym);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "Synonym", Synonym);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "Synonym", "");
 		}
 		String ModifiedDate = ParamUtil.getString(request, "ModifiedDate");
 		if(!ModifiedDate.equals("")) {
 			diseasematrix.put("ModifiedDate", ModifiedDate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ModifiedDate", ModifiedDate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ModifiedDate", "");
 		}
 		return diseasematrix;
 	}
@@ -785,6 +839,9 @@ public class ScaleusImporter extends MVCPortlet {
 		String CollectionNamePredicate = ParamUtil.getString(request, "CollectionNamePredicate");
 		if(!CollectionNamePredicate.equals("")) {
 			collection.put("CollectionNamePredicate", CollectionNamePredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CollectionNamePredicate", CollectionNamePredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CollectionNamePredicate", "");
 		}
 		return collection;
 	}
@@ -795,101 +852,229 @@ public class ScaleusImporter extends MVCPortlet {
 		String NamePredicate = ParamUtil.getString(request, "NamePredicate");
 		if(!NamePredicate.equals("")) {
 			biobank.put("NamePredicate", NamePredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "NamePredicate", NamePredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "NamePredicate", "");
 		}
 		String OrganizationIDPredicate = ParamUtil.getString(request, "OrganizationIDPredicate");
 		if(!OrganizationIDPredicate.equals("")) {
 			biobank.put("OrganizationIDPredicate", OrganizationIDPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "OrganizationIDPredicate", OrganizationIDPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "OrganizationIDPredicate", "");
 		}
 		String AcronymPredicate = ParamUtil.getString(request, "AcronymPredicate");
 		if(!AcronymPredicate.equals("")) {
 			biobank.put("AcronymPredicate", AcronymPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "AcronymPredicate", AcronymPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "AcronymPredicate", "");
 		}
 		String TypePredicate = ParamUtil.getString(request, "TypePredicate");
 		if(!TypePredicate.equals("")) {
 			biobank.put("TypePredicate", TypePredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TypePredicate", TypePredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TypePredicate", "");
 		}   
 		String URLPredicate = ParamUtil.getString(request, "URLPredicate");
 		if(!URLPredicate.equals("")) {
 			biobank.put("URLPredicate", URLPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "URLPredicate", URLPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "URLPredicate", "");
 		}
 		String IDCardURLPredicate = ParamUtil.getString(request, "IDCardURLPredicate");
 		if(!IDCardURLPredicate.equals("")) {
 			biobank.put("IDCardURLPredicate", IDCardURLPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "IDCardURLPredicate", IDCardURLPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "IDCardURLPredicate", "");
 		}
 		String AlsoListedInPredicate = ParamUtil.getString(request, "AlsoListedInPredicate");
 		if(!AlsoListedInPredicate.equals("")) {
 			biobank.put("AlsoListedInPredicate", AlsoListedInPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "AlsoListedInPredicate", AlsoListedInPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "AlsoListedInPredicate", "");
 		}
 		String LastActivitiesPredicate = ParamUtil.getString(request, "LastActivitiesPredicate");
 		if(!LastActivitiesPredicate.equals("")) {
 			biobank.put("LastActivitiesPredicate", LastActivitiesPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "LastActivitiesPredicate", LastActivitiesPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "LastActivitiesPredicate", "");
 		}
 		String DateOfInclusioPredicate = ParamUtil.getString(request, "DateOfInclusioPredicate");
 		if(!DateOfInclusioPredicate.equals("")) {
 			biobank.put("DateOfInclusioPredicate", DateOfInclusioPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DateOfInclusioPredicate", DateOfInclusioPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DateOfInclusioPredicate", "");
 		}
 		String TypeOfHostInstitutionPredicate = ParamUtil.getString(request, "TypeOfHostInstitutionPredicate");
 		if(!TypeOfHostInstitutionPredicate.equals("")) {
 			biobank.put("TypeOfHostInstitutionPredicate", TypeOfHostInstitutionPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TypeOfHostInstitutionPredicate", TypeOfHostInstitutionPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TypeOfHostInstitutionPredicate", "");
 		}
 		String TargetPopulationPredicate = ParamUtil.getString(request, "TargetPopulationPredicate");
 		if(!TargetPopulationPredicate.equals("")) {
 			biobank.put("TargetPopulationPredicate", TargetPopulationPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TargetPopulationPredicate", TargetPopulationPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TargetPopulationPredicate", "");
 		}
 		String AddressPredicate = ParamUtil.getString(request, "AddressPredicate");
 		if(!AddressPredicate.equals("")) {
 			biobank.put("AddressPredicate", AddressPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "AddressPredicate", AddressPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "AddressPredicate", "");
 		}
 		String NameOfHostInstitutionPredicate = ParamUtil.getString(request, "NameOfHostInstitutionPredicate");
 		if(!NameOfHostInstitutionPredicate.equals("")) {
 			biobank.put("NameOfHostInstitutionPredicate", NameOfHostInstitutionPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "NameOfHostInstitutionPredicate", NameOfHostInstitutionPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "NameOfHostInstitutionPredicate", "");
 		}
 		String Street1Predicate = ParamUtil.getString(request, "Street1Predicate");
 		if(!Street1Predicate.equals("")) {
 			biobank.put("Street1Predicate", Street1Predicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "Street1Predicate", Street1Predicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "Street1Predicate", "");
 		}
 		String Street2Predicate = ParamUtil.getString(request, "Street2Predicate");
 		if(!Street2Predicate.equals("")) {
 			biobank.put("Street2Predicate", Street2Predicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "Street2Predicate", Street2Predicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "Street2Predicate", "");
 		}
 		String ZIPPredicate = ParamUtil.getString(request, "ZIPPredicate");
 		if(!ZIPPredicate.equals("")) {
 			biobank.put("ZIPPredicate", ZIPPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ZIPPredicate", ZIPPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ZIPPredicate", "");
 		}
 		String CityPredicate = ParamUtil.getString(request, "CityPredicate");
 		if(!CityPredicate.equals("")) {
 			biobank.put("CityPredicate", CityPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CityPredicate", CityPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CityPredicate", "");
 		}
 		String CountryPredicate = ParamUtil.getString(request, "CountryPredicate");
 		if(!CountryPredicate.equals("")) {
 			biobank.put("CountryPredicate", CountryPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CountryPredicate", CountryPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "CountryPredicate", "");
 		}
 		String DescriptionPredicate = ParamUtil.getString(request, "DescriptionPredicate");
 		if(!DescriptionPredicate.equals("")) {
 			biobank.put("DescriptionPredicate", DescriptionPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DescriptionPredicate", DescriptionPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DescriptionPredicate", "");
 		}
 		String SourceOfFundingPredicate = ParamUtil.getString(request, "SourceOfFundingPredicate");
 		if(!SourceOfFundingPredicate.equals("")) {
 			biobank.put("SourceOfFundingPredicate", SourceOfFundingPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "SourceOfFundingPredicate", SourceOfFundingPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "SourceOfFundingPredicate", "");
+		}
+		String TargetCountryPredicate = ParamUtil.getString(request, "TargetCountryPredicate");
+		if(!TargetCountryPredicate.equals("")) {
+			biobank.put("TargetCountryPredicate", TargetCountryPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TargetCountryPredicate", TargetCountryPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TargetCountryPredicate", "");
 		}
 		String YearOfEstablishmentPredicate = ParamUtil.getString(request, "YearOfEstablishmentPredicate");
 		if(!YearOfEstablishmentPredicate.equals("")) {
 			biobank.put("YearOfEstablishmentPredicate", YearOfEstablishmentPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "YearOfEstablishmentPredicate", YearOfEstablishmentPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "YearOfEstablishmentPredicate", "");
 		}
 		String OntologiesPredicate = ParamUtil.getString(request, "OntologiesPredicate");
 		if(!OntologiesPredicate.equals("")) {
 			biobank.put("OntologiesPredicate", OntologiesPredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "OntologiesPredicate", OntologiesPredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "OntologiesPredicate", "");
 		}
 		String AssociatedDataAvailablePredicate = ParamUtil.getString(request, "AssociatedDataAvailablePredicate");
 		if(!AssociatedDataAvailablePredicate.equals("")) {
 			biobank.put("AssociatedDataAvailablePredicate", AssociatedDataAvailablePredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "AssociatedDataAvailablePredicate", AssociatedDataAvailablePredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "AssociatedDataAvailablePredicate", "");
 		}
 		String ImagingAvailablePredicate = ParamUtil.getString(request, "ImagingAvailablePredicate");
 		if(!ImagingAvailablePredicate.equals("")) {
 			biobank.put("ImagingAvailablePredicate", ImagingAvailablePredicate);
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ImagingAvailablePredicate", ImagingAvailablePredicate);
+		} else {
+			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "ImagingAvailablePredicate", "");
 		}
 		return biobank;
 	}
+	
+	/*
+	private void clearScaleusDatabase() {
+		String url = "http://localhost:8085/scaleus/api/v1/dataset/default";
+		HttpClient c = HttpClientBuilder.create().build();
+		
+		HttpDelete d = new HttpDelete(url);
+		d.setHeader(HTTP.CONTENT_TYPE, ContentType.APPLICATION_FORM_URLENCODED.getMimeType());
+		try {
+			HttpResponse r = c.execute(d);
+			BufferedReader rd = new BufferedReader(new InputStreamReader(r
+					.getEntity().getContent()));
+			String line = "";
+			while ((line = rd.readLine()) != null) {
+				
+				System.out.println(line);
+			}
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		HttpPost p = new HttpPost(url);
+		p.setHeader(HTTP.CONTENT_TYPE, ContentType.APPLICATION_FORM_URLENCODED.getMimeType());
+		
+		StringEntity stringentitiy = new StringEntity("", ContentType.APPLICATION_FORM_URLENCODED );
+		
+		p.setEntity(stringentitiy);
+		
+		try {
+			HttpResponse r = c.execute(p);
+			BufferedReader rd = new BufferedReader(new InputStreamReader(r
+					.getEntity().getContent()));
+			String line = "";
+			while ((line = rd.readLine()) != null) {
+				
+				System.out.println(line);
+			}
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
 	
 	private void addScaleusEntry(HttpPost p, HttpClient c, String subject, String predicate, String object) throws UnsupportedEncodingException {
 		

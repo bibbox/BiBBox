@@ -697,6 +697,11 @@ public class ContactInformationWrapper implements ContactInformation,
 	}
 
 	@Override
+	public java.lang.String getContactEmailMunged() {
+		return _contactInformation.getContactEmailMunged();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

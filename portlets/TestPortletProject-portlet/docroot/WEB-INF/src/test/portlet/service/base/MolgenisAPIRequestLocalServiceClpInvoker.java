@@ -117,6 +117,10 @@ public class MolgenisAPIRequestLocalServiceClpInvoker {
 		_methodName40 = "getAgregatedJsonFromMolgenis";
 
 		_methodParameterTypes40 = new String[] { "java.lang.String" };
+
+		_methodName41 = "testAPIUpdate";
+
+		_methodParameterTypes41 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -225,6 +229,13 @@ public class MolgenisAPIRequestLocalServiceClpInvoker {
 			return MolgenisAPIRequestLocalServiceUtil.getAgregatedJsonFromMolgenis((java.lang.String)arguments[0]);
 		}
 
+		if (_methodName41.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
+			MolgenisAPIRequestLocalServiceUtil.testAPIUpdate();
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -266,4 +277,6 @@ public class MolgenisAPIRequestLocalServiceClpInvoker {
 	private String[] _methodParameterTypes35;
 	private String _methodName40;
 	private String[] _methodParameterTypes40;
+	private String _methodName41;
+	private String[] _methodParameterTypes41;
 }

@@ -105,4 +105,18 @@ public class DiseaseMatrixLocalServiceImpl
 
 		return super.addDiseaseMatrix(diseasematrix);
 	}
+	
+	/**
+	 * Adds the DiseaseMatrix to the database incrementing the primary key
+	 *
+	 */
+	public DiseaseMatrix createEmpltyDiseaseMatrix() throws SystemException {
+		DiseaseMatrix diseasematrix = new DiseaseMatrixImpl();
+		
+		long diseasematrixId = CounterLocalServiceUtil.increment(DiseaseMatrix.class.getName());
+
+		diseasematrix.setDiseasematrixId(diseasematrixId);
+
+		return super.addDiseaseMatrix(diseasematrix);
+	}
 }

@@ -114,6 +114,18 @@ public class ImporterConfigLocalServiceClp implements ImporterConfigLocalService
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getPredicate";
+
+		_methodParameterTypes19 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName20 = "setPredicate";
+
+		_methodParameterTypes20 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -666,6 +678,62 @@ public class ImporterConfigLocalServiceClp implements ImporterConfigLocalService
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public java.lang.String getPredicate(java.lang.String scope,
+		java.lang.String elementId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						ClpSerializer.translateInput(scope),
+						
+					ClpSerializer.translateInput(elementId)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void setPredicate(java.lang.String scope,
+		java.lang.String elementId, java.lang.String elementvalue) {
+		try {
+			_invokableLocalService.invokeMethod(_methodName20,
+				_methodParameterTypes20,
+				new Object[] {
+					ClpSerializer.translateInput(scope),
+					
+				ClpSerializer.translateInput(elementId),
+					
+				ClpSerializer.translateInput(elementvalue)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -703,4 +771,8 @@ public class ImporterConfigLocalServiceClp implements ImporterConfigLocalService
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

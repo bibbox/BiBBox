@@ -259,6 +259,14 @@ public interface NetworksLocalService extends BaseLocalService,
 
 	/**
 	* @param organizationId
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> getOrganizationNetworkOrganizations(
+		long organizationId);
+
+	/**
+	* @param organizationId
 	* @param networkId
 	* @return
 	*/

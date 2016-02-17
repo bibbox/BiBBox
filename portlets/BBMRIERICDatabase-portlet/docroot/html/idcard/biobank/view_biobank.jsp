@@ -23,6 +23,15 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 	%>
 
 <style>
+.email_float_left {
+    float: left;
+}
+.email_float {
+    float: right;
+}
+.point_class:before {
+	content: ".";
+}
 .aui #portlet_biobank_WAR_BBMRIERICDatabaseportlet .taglib-header {
 	display: inline;
 	border-bottom: 1px solid #184b8a;
@@ -93,7 +102,7 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 		
 		
 		%>
-		<div><div class="fieldname">E-Mail:</div><div class="fieldvalue"><a href='<%= "mailto:" + contactinformation.getContactEmail() %>'><%= contactinformation.getContactEmail() %></a></div><div style='content: "";clear: both;display: table;'></div> 
+		<div><div class="fieldname">E-Mail:</div><div class="fieldvalue"><%= contactinformation.getContactEmailMunged() %></div><div style='content: "";clear: both;display: table;'></div> 
 	</div>
 		<%
 		if(!contactinformation.getHtmlAddress().equalsIgnoreCase("")) {
@@ -236,7 +245,7 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 						</div>
 						<div>
 							<div class="fieldname">E-Mail:</div>
-							<div class="fieldvalue"><a href='<%= "mailto:" + contactinformation_collection.getContactEmail() %>'><%= contactinformation_collection.getContactEmail() %></a></div>
+							<div class="fieldvalue"><%= contactinformation_collection.getContactEmailMunged() %></div>
 							<div style='content: "";clear: both;display: table;'></div> 
 						</div>
 						<%

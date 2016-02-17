@@ -248,4 +248,11 @@ public interface ImporterConfigLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getPredicate(java.lang.String scope,
+		java.lang.String elementId);
+
+	public void setPredicate(java.lang.String scope,
+		java.lang.String elementId, java.lang.String elementvalue);
 }

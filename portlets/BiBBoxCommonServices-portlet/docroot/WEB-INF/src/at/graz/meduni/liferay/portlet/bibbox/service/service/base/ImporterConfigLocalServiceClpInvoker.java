@@ -113,6 +113,18 @@ public class ImporterConfigLocalServiceClpInvoker {
 		_methodName73 = "setBeanIdentifier";
 
 		_methodParameterTypes73 = new String[] { "java.lang.String" };
+
+		_methodName78 = "getPredicate";
+
+		_methodParameterTypes78 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName79 = "setPredicate";
+
+		_methodParameterTypes79 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +228,20 @@ public class ImporterConfigLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+			return ImporterConfigLocalServiceUtil.getPredicate((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			ImporterConfigLocalServiceUtil.setPredicate((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +281,8 @@ public class ImporterConfigLocalServiceClpInvoker {
 	private String[] _methodParameterTypes72;
 	private String _methodName73;
 	private String[] _methodParameterTypes73;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
 }

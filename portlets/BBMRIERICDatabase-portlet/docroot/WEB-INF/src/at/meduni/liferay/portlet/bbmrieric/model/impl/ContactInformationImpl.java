@@ -75,4 +75,25 @@ public class ContactInformationImpl extends ContactInformationBaseImpl {
 		}
 		return return_value;
 	}
+	
+	public String getContactEmailMunged() {
+		String email = this.getContactEmail();
+		String[] split_email = email.split("@");
+		email = "<i class=\"email_float_left\">";
+		String point = "";
+		String emailpart = "";
+		for(String split_email_short : split_email[1].split("\\.")) {
+			emailpart = "<i class=\"email_float\">" + split_email_short + "</i>" + point + emailpart;
+			point = "<i class=\"point_class email_float\"></i>";
+		}
+		email += emailpart + "<i class=\"email_float\">&#64;</i>";
+		point = "";
+		emailpart = "";
+		for(String split_email_short : split_email[0].split("\\.")) {
+			emailpart = "<i class=\"email_float\">" + split_email_short + "</i>" + point + emailpart;
+			point = "<i class=\"point_class email_float\"></i>";
+		}
+		email += emailpart+ "</i>";		
+		return email;
+	}
 }

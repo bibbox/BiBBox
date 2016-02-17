@@ -286,6 +286,15 @@ public class NetworksLocalServiceUtil {
 
 	/**
 	* @param organizationId
+	* @return
+	*/
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> getOrganizationNetworkOrganizations(
+		long organizationId) {
+		return getService().getOrganizationNetworkOrganizations(organizationId);
+	}
+
+	/**
+	* @param organizationId
 	* @param networkId
 	* @return
 	*/

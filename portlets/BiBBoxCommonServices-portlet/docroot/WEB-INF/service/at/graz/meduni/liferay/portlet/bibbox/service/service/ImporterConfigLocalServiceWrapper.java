@@ -288,6 +288,18 @@ public class ImporterConfigLocalServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public java.lang.String getPredicate(java.lang.String scope,
+		java.lang.String elementId) {
+		return _importerConfigLocalService.getPredicate(scope, elementId);
+	}
+
+	@Override
+	public void setPredicate(java.lang.String scope,
+		java.lang.String elementId, java.lang.String elementvalue) {
+		_importerConfigLocalService.setPredicate(scope, elementId, elementvalue);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

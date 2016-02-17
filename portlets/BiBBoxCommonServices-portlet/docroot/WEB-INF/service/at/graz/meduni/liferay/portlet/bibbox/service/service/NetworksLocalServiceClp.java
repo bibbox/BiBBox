@@ -118,13 +118,17 @@ public class NetworksLocalServiceClp implements NetworksLocalService {
 
 		_methodParameterTypes19 = new String[] { "long" };
 
-		_methodName20 = "isOrganizationInNetwork";
+		_methodName20 = "getOrganizationNetworkOrganizations";
 
-		_methodParameterTypes20 = new String[] { "long", "long" };
+		_methodParameterTypes20 = new String[] { "long" };
 
-		_methodName21 = "getNetworkIdList";
+		_methodName21 = "isOrganizationInNetwork";
 
-		_methodParameterTypes21 = new String[] { "long" };
+		_methodParameterTypes21 = new String[] { "long", "long" };
+
+		_methodName22 = "getNetworkIdList";
+
+		_methodParameterTypes22 = new String[] { "long" };
 	}
 
 	@Override
@@ -702,12 +706,36 @@ public class NetworksLocalServiceClp implements NetworksLocalService {
 	}
 
 	@Override
-	public boolean isOrganizationInNetwork(long organizationId, long networkId) {
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> getOrganizationNetworkOrganizations(
+		long organizationId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
+					_methodParameterTypes20, new Object[] { organizationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public boolean isOrganizationInNetwork(long organizationId, long networkId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] { organizationId, networkId });
 		}
 		catch (Throwable t) {
@@ -730,8 +758,8 @@ public class NetworksLocalServiceClp implements NetworksLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21, new Object[] { networkid });
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22, new Object[] { networkid });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -791,4 +819,6 @@ public class NetworksLocalServiceClp implements NetworksLocalService {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

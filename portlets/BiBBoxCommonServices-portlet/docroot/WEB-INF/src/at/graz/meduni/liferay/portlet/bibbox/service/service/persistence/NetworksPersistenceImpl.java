@@ -592,6 +592,513 @@ public class NetworksPersistenceImpl extends BasePersistenceImpl<Networks>
 
 	private static final String _FINDER_COLUMN_NETWORKORGANIZATIONSFINDER_ORGANIZATIONNETWORKID_2 =
 		"networks.organizationnetworkId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ORGANIZATIONNETWORKORGANIZATIONS =
+		new FinderPath(NetworksModelImpl.ENTITY_CACHE_ENABLED,
+			NetworksModelImpl.FINDER_CACHE_ENABLED, NetworksImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByOrganizationNetworkOrganizations",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONNETWORKORGANIZATIONS =
+		new FinderPath(NetworksModelImpl.ENTITY_CACHE_ENABLED,
+			NetworksModelImpl.FINDER_CACHE_ENABLED, NetworksImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByOrganizationNetworkOrganizations",
+			new String[] { Long.class.getName() },
+			NetworksModelImpl.ORGANIZATIONID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ORGANIZATIONNETWORKORGANIZATIONS =
+		new FinderPath(NetworksModelImpl.ENTITY_CACHE_ENABLED,
+			NetworksModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByOrganizationNetworkOrganizations",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the networkses where organizationId = &#63;.
+	 *
+	 * @param organizationId the organization ID
+	 * @return the matching networkses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Networks> findByOrganizationNetworkOrganizations(
+		long organizationId) throws SystemException {
+		return findByOrganizationNetworkOrganizations(organizationId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the networkses where organizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.NetworksModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param organizationId the organization ID
+	 * @param start the lower bound of the range of networkses
+	 * @param end the upper bound of the range of networkses (not inclusive)
+	 * @return the range of matching networkses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Networks> findByOrganizationNetworkOrganizations(
+		long organizationId, int start, int end) throws SystemException {
+		return findByOrganizationNetworkOrganizations(organizationId, start,
+			end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the networkses where organizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.NetworksModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param organizationId the organization ID
+	 * @param start the lower bound of the range of networkses
+	 * @param end the upper bound of the range of networkses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching networkses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Networks> findByOrganizationNetworkOrganizations(
+		long organizationId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONNETWORKORGANIZATIONS;
+			finderArgs = new Object[] { organizationId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ORGANIZATIONNETWORKORGANIZATIONS;
+			finderArgs = new Object[] {
+					organizationId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Networks> list = (List<Networks>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Networks networks : list) {
+				if ((organizationId != networks.getOrganizationId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_NETWORKS_WHERE);
+
+			query.append(_FINDER_COLUMN_ORGANIZATIONNETWORKORGANIZATIONS_ORGANIZATIONID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(NetworksModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(organizationId);
+
+				if (!pagination) {
+					list = (List<Networks>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Networks>(list);
+				}
+				else {
+					list = (List<Networks>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first networks in the ordered set where organizationId = &#63;.
+	 *
+	 * @param organizationId the organization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching networks
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException if a matching networks could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Networks findByOrganizationNetworkOrganizations_First(
+		long organizationId, OrderByComparator orderByComparator)
+		throws NoSuchNetworksException, SystemException {
+		Networks networks = fetchByOrganizationNetworkOrganizations_First(organizationId,
+				orderByComparator);
+
+		if (networks != null) {
+			return networks;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("organizationId=");
+		msg.append(organizationId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchNetworksException(msg.toString());
+	}
+
+	/**
+	 * Returns the first networks in the ordered set where organizationId = &#63;.
+	 *
+	 * @param organizationId the organization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching networks, or <code>null</code> if a matching networks could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Networks fetchByOrganizationNetworkOrganizations_First(
+		long organizationId, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<Networks> list = findByOrganizationNetworkOrganizations(organizationId,
+				0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last networks in the ordered set where organizationId = &#63;.
+	 *
+	 * @param organizationId the organization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching networks
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException if a matching networks could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Networks findByOrganizationNetworkOrganizations_Last(
+		long organizationId, OrderByComparator orderByComparator)
+		throws NoSuchNetworksException, SystemException {
+		Networks networks = fetchByOrganizationNetworkOrganizations_Last(organizationId,
+				orderByComparator);
+
+		if (networks != null) {
+			return networks;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("organizationId=");
+		msg.append(organizationId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchNetworksException(msg.toString());
+	}
+
+	/**
+	 * Returns the last networks in the ordered set where organizationId = &#63;.
+	 *
+	 * @param organizationId the organization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching networks, or <code>null</code> if a matching networks could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Networks fetchByOrganizationNetworkOrganizations_Last(
+		long organizationId, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByOrganizationNetworkOrganizations(organizationId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Networks> list = findByOrganizationNetworkOrganizations(organizationId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the networkses before and after the current networks in the ordered set where organizationId = &#63;.
+	 *
+	 * @param networkId the primary key of the current networks
+	 * @param organizationId the organization ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next networks
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchNetworksException if a networks with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Networks[] findByOrganizationNetworkOrganizations_PrevAndNext(
+		long networkId, long organizationId, OrderByComparator orderByComparator)
+		throws NoSuchNetworksException, SystemException {
+		Networks networks = findByPrimaryKey(networkId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Networks[] array = new NetworksImpl[3];
+
+			array[0] = getByOrganizationNetworkOrganizations_PrevAndNext(session,
+					networks, organizationId, orderByComparator, true);
+
+			array[1] = networks;
+
+			array[2] = getByOrganizationNetworkOrganizations_PrevAndNext(session,
+					networks, organizationId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Networks getByOrganizationNetworkOrganizations_PrevAndNext(
+		Session session, Networks networks, long organizationId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_NETWORKS_WHERE);
+
+		query.append(_FINDER_COLUMN_ORGANIZATIONNETWORKORGANIZATIONS_ORGANIZATIONID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(NetworksModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(organizationId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(networks);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Networks> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the networkses where organizationId = &#63; from the database.
+	 *
+	 * @param organizationId the organization ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByOrganizationNetworkOrganizations(long organizationId)
+		throws SystemException {
+		for (Networks networks : findByOrganizationNetworkOrganizations(
+				organizationId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(networks);
+		}
+	}
+
+	/**
+	 * Returns the number of networkses where organizationId = &#63;.
+	 *
+	 * @param organizationId the organization ID
+	 * @return the number of matching networkses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByOrganizationNetworkOrganizations(long organizationId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ORGANIZATIONNETWORKORGANIZATIONS;
+
+		Object[] finderArgs = new Object[] { organizationId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_NETWORKS_WHERE);
+
+			query.append(_FINDER_COLUMN_ORGANIZATIONNETWORKORGANIZATIONS_ORGANIZATIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(organizationId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ORGANIZATIONNETWORKORGANIZATIONS_ORGANIZATIONID_2 =
+		"networks.organizationId = ?";
 	public static final FinderPath FINDER_PATH_FETCH_BY_NETWORKORGANIZATIONFINDER =
 		new FinderPath(NetworksModelImpl.ENTITY_CACHE_ENABLED,
 			NetworksModelImpl.FINDER_CACHE_ENABLED, NetworksImpl.class,
@@ -1151,6 +1658,25 @@ public class NetworksPersistenceImpl extends BasePersistenceImpl<Networks>
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NETWORKORGANIZATIONSFINDER,
 					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NETWORKORGANIZATIONSFINDER,
+					args);
+			}
+
+			if ((networksModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONNETWORKORGANIZATIONS.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						networksModelImpl.getOriginalOrganizationId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATIONNETWORKORGANIZATIONS,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONNETWORKORGANIZATIONS,
+					args);
+
+				args = new Object[] { networksModelImpl.getOrganizationId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATIONNETWORKORGANIZATIONS,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONNETWORKORGANIZATIONS,
 					args);
 			}
 		}

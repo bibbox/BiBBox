@@ -298,6 +298,11 @@ public class MolgenisAPIRequestLocalServiceWrapper
 		return _molgenisAPIRequestLocalService.getAgregatedJsonFromMolgenis(biobankid);
 	}
 
+	@Override
+	public void testAPIUpdate() {
+		_molgenisAPIRequestLocalService.testAPIUpdate();
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

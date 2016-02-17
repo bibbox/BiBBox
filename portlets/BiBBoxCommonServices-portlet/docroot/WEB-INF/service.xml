@@ -133,6 +133,9 @@
 		<finder return-type="Collection" name="NetworkOrganizationsFinder">
 			<finder-column name="organizationnetworkId"></finder-column>
 		</finder>
+		<finder return-type="Collection" name="OrganizationNetworkOrganizations">
+			<finder-column name="organizationId"></finder-column>
+		</finder>
 		<finder return-type="Networks" name="NetworkOrganizationFinder">
 			<finder-column name="organizationnetworkId"></finder-column>
 			<finder-column name="organizationId"></finder-column>
@@ -150,7 +153,7 @@
 		<column name="scope" type="String"></column>
 		<column name="elementId" type="String"></column>
 		<column name="elementvalue" type="String"></column>
-		<finder return-type="Collection" name="ImporterConfig">
+		<finder return-type="ImporterConfig" name="ImporterConfig">
 			<finder-column name="scope"></finder-column>
 			<finder-column name="elementId"></finder-column>
 		</finder>

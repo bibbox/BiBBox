@@ -318,6 +318,15 @@ public class DiseaseMatrixLocalServiceWrapper
 	}
 
 	/**
+	* Adds the DiseaseMatrix to the database incrementing the primary key
+	*/
+	@Override
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix createEmpltyDiseaseMatrix()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _diseaseMatrixLocalService.createEmpltyDiseaseMatrix();
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public DiseaseMatrixLocalService getWrappedDiseaseMatrixLocalService() {

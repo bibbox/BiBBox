@@ -283,6 +283,10 @@ public class MolgenisAPIRequestLocalServiceUtil {
 		return getService().getAgregatedJsonFromMolgenis(biobankid);
 	}
 
+	public static void testAPIUpdate() {
+		getService().testAPIUpdate();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

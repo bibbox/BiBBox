@@ -118,13 +118,17 @@ public class NetworksLocalServiceClpInvoker {
 
 		_methodParameterTypes78 = new String[] { "long" };
 
-		_methodName79 = "isOrganizationInNetwork";
+		_methodName79 = "getOrganizationNetworkOrganizations";
 
-		_methodParameterTypes79 = new String[] { "long", "long" };
+		_methodParameterTypes79 = new String[] { "long" };
 
-		_methodName80 = "getNetworkIdList";
+		_methodName80 = "isOrganizationInNetwork";
 
-		_methodParameterTypes80 = new String[] { "long" };
+		_methodParameterTypes80 = new String[] { "long", "long" };
+
+		_methodName81 = "getNetworkIdList";
+
+		_methodParameterTypes81 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -235,12 +239,17 @@ public class NetworksLocalServiceClpInvoker {
 
 		if (_methodName79.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
-			return NetworksLocalServiceUtil.isOrganizationInNetwork(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+			return NetworksLocalServiceUtil.getOrganizationNetworkOrganizations(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName80.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+			return NetworksLocalServiceUtil.isOrganizationInNetwork(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			return NetworksLocalServiceUtil.getNetworkIdList(((Long)arguments[0]).longValue());
 		}
 
@@ -289,4 +298,6 @@ public class NetworksLocalServiceClpInvoker {
 	private String[] _methodParameterTypes79;
 	private String _methodName80;
 	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
 }

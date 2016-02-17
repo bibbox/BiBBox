@@ -12,6 +12,7 @@
 		<portlet id="test-ddl-display"></portlet>
 		<portlet id="checkbox-select-test"></portlet>
 		<portlet id="test-data-table"></portlet>
+		<portlet id="test-api-update-call"></portlet>
 	</category>
 	<category name="category.test">
 		<portlet id="test-jsonws"></portlet>

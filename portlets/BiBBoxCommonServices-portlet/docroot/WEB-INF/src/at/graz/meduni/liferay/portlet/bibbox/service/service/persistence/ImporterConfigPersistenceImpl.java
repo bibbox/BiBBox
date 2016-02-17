@@ -85,22 +85,10 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ImporterConfigModelImpl.ENTITY_CACHE_ENABLED,
 			ImporterConfigModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_IMPORTERCONFIG =
-		new FinderPath(ImporterConfigModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_IMPORTERCONFIG = new FinderPath(ImporterConfigModelImpl.ENTITY_CACHE_ENABLED,
 			ImporterConfigModelImpl.FINDER_CACHE_ENABLED,
-			ImporterConfigImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByImporterConfig",
-			new String[] {
-				String.class.getName(), String.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IMPORTERCONFIG =
-		new FinderPath(ImporterConfigModelImpl.ENTITY_CACHE_ENABLED,
-			ImporterConfigModelImpl.FINDER_CACHE_ENABLED,
-			ImporterConfigImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByImporterConfig",
+			ImporterConfigImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByImporterConfig",
 			new String[] { String.class.getName(), String.class.getName() },
 			ImporterConfigModelImpl.SCOPE_COLUMN_BITMASK |
 			ImporterConfigModelImpl.ELEMENTID_COLUMN_BITMASK);
@@ -110,103 +98,88 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 			new String[] { String.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns all the importer configs where scope = &#63; and elementId = &#63;.
+	 * Returns the importer config where scope = &#63; and elementId = &#63; or throws a {@link at.graz.meduni.liferay.portlet.bibbox.service.NoSuchImporterConfigException} if it could not be found.
 	 *
 	 * @param scope the scope
 	 * @param elementId the element ID
-	 * @return the matching importer configs
+	 * @return the matching importer config
+	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchImporterConfigException if a matching importer config could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ImporterConfig> findByImporterConfig(String scope,
-		String elementId) throws SystemException {
-		return findByImporterConfig(scope, elementId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public ImporterConfig findByImporterConfig(String scope, String elementId)
+		throws NoSuchImporterConfigException, SystemException {
+		ImporterConfig importerConfig = fetchByImporterConfig(scope, elementId);
+
+		if (importerConfig == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("scope=");
+			msg.append(scope);
+
+			msg.append(", elementId=");
+			msg.append(elementId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchImporterConfigException(msg.toString());
+		}
+
+		return importerConfig;
 	}
 
 	/**
-	 * Returns a range of all the importer configs where scope = &#63; and elementId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.ImporterConfigModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
+	 * Returns the importer config where scope = &#63; and elementId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param scope the scope
 	 * @param elementId the element ID
-	 * @param start the lower bound of the range of importer configs
-	 * @param end the upper bound of the range of importer configs (not inclusive)
-	 * @return the range of matching importer configs
+	 * @return the matching importer config, or <code>null</code> if a matching importer config could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ImporterConfig> findByImporterConfig(String scope,
-		String elementId, int start, int end) throws SystemException {
-		return findByImporterConfig(scope, elementId, start, end, null);
+	public ImporterConfig fetchByImporterConfig(String scope, String elementId)
+		throws SystemException {
+		return fetchByImporterConfig(scope, elementId, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the importer configs where scope = &#63; and elementId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.ImporterConfigModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
+	 * Returns the importer config where scope = &#63; and elementId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param scope the scope
 	 * @param elementId the element ID
-	 * @param start the lower bound of the range of importer configs
-	 * @param end the upper bound of the range of importer configs (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching importer configs
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching importer config, or <code>null</code> if a matching importer config could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ImporterConfig> findByImporterConfig(String scope,
-		String elementId, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
+	public ImporterConfig fetchByImporterConfig(String scope, String elementId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { scope, elementId };
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IMPORTERCONFIG;
-			finderArgs = new Object[] { scope, elementId };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_IMPORTERCONFIG;
-			finderArgs = new Object[] {
-					scope, elementId,
-					
-					start, end, orderByComparator
-				};
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG,
+					finderArgs, this);
 		}
 
-		List<ImporterConfig> list = (List<ImporterConfig>)FinderCacheUtil.getResult(finderPath,
-				finderArgs, this);
+		if (result instanceof ImporterConfig) {
+			ImporterConfig importerConfig = (ImporterConfig)result;
 
-		if ((list != null) && !list.isEmpty()) {
-			for (ImporterConfig importerConfig : list) {
-				if (!Validator.equals(scope, importerConfig.getScope()) ||
-						!Validator.equals(elementId,
-							importerConfig.getElementId())) {
-					list = null;
-
-					break;
-				}
+			if (!Validator.equals(scope, importerConfig.getScope()) ||
+					!Validator.equals(elementId, importerConfig.getElementId())) {
+				result = null;
 			}
 		}
 
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_SELECT_IMPORTERCONFIG_WHERE);
 
@@ -238,15 +211,6 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 				query.append(_FINDER_COLUMN_IMPORTERCONFIG_ELEMENTID_2);
 			}
 
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(ImporterConfigModelImpl.ORDER_BY_JPQL);
-			}
-
 			String sql = query.toString();
 
 			Session session = null;
@@ -266,25 +230,38 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 					qPos.add(elementId);
 				}
 
-				if (!pagination) {
-					list = (List<ImporterConfig>)QueryUtil.list(q,
-							getDialect(), start, end, false);
+				List<ImporterConfig> list = q.list();
 
-					Collections.sort(list);
-
-					list = new UnmodifiableList<ImporterConfig>(list);
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG,
+						finderArgs, list);
 				}
 				else {
-					list = (List<ImporterConfig>)QueryUtil.list(q,
-							getDialect(), start, end);
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"ImporterConfigPersistenceImpl.fetchByImporterConfig(String, String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					ImporterConfig importerConfig = list.get(0);
+
+					result = importerConfig;
+
+					cacheResult(importerConfig);
+
+					if ((importerConfig.getScope() == null) ||
+							!importerConfig.getScope().equals(scope) ||
+							(importerConfig.getElementId() == null) ||
+							!importerConfig.getElementId().equals(elementId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG,
+							finderArgs, importerConfig);
+					}
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, list);
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG,
+					finderArgs);
 
 				throw processException(e);
 			}
@@ -293,327 +270,28 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 			}
 		}
 
-		return list;
-	}
-
-	/**
-	 * Returns the first importer config in the ordered set where scope = &#63; and elementId = &#63;.
-	 *
-	 * @param scope the scope
-	 * @param elementId the element ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching importer config
-	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchImporterConfigException if a matching importer config could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ImporterConfig findByImporterConfig_First(String scope,
-		String elementId, OrderByComparator orderByComparator)
-		throws NoSuchImporterConfigException, SystemException {
-		ImporterConfig importerConfig = fetchByImporterConfig_First(scope,
-				elementId, orderByComparator);
-
-		if (importerConfig != null) {
-			return importerConfig;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("scope=");
-		msg.append(scope);
-
-		msg.append(", elementId=");
-		msg.append(elementId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchImporterConfigException(msg.toString());
-	}
-
-	/**
-	 * Returns the first importer config in the ordered set where scope = &#63; and elementId = &#63;.
-	 *
-	 * @param scope the scope
-	 * @param elementId the element ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching importer config, or <code>null</code> if a matching importer config could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ImporterConfig fetchByImporterConfig_First(String scope,
-		String elementId, OrderByComparator orderByComparator)
-		throws SystemException {
-		List<ImporterConfig> list = findByImporterConfig(scope, elementId, 0,
-				1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last importer config in the ordered set where scope = &#63; and elementId = &#63;.
-	 *
-	 * @param scope the scope
-	 * @param elementId the element ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching importer config
-	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchImporterConfigException if a matching importer config could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ImporterConfig findByImporterConfig_Last(String scope,
-		String elementId, OrderByComparator orderByComparator)
-		throws NoSuchImporterConfigException, SystemException {
-		ImporterConfig importerConfig = fetchByImporterConfig_Last(scope,
-				elementId, orderByComparator);
-
-		if (importerConfig != null) {
-			return importerConfig;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("scope=");
-		msg.append(scope);
-
-		msg.append(", elementId=");
-		msg.append(elementId);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchImporterConfigException(msg.toString());
-	}
-
-	/**
-	 * Returns the last importer config in the ordered set where scope = &#63; and elementId = &#63;.
-	 *
-	 * @param scope the scope
-	 * @param elementId the element ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching importer config, or <code>null</code> if a matching importer config could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ImporterConfig fetchByImporterConfig_Last(String scope,
-		String elementId, OrderByComparator orderByComparator)
-		throws SystemException {
-		int count = countByImporterConfig(scope, elementId);
-
-		if (count == 0) {
+		if (result instanceof List<?>) {
 			return null;
 		}
-
-		List<ImporterConfig> list = findByImporterConfig(scope, elementId,
-				count - 1, count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
+		else {
+			return (ImporterConfig)result;
 		}
-
-		return null;
 	}
 
 	/**
-	 * Returns the importer configs before and after the current importer config in the ordered set where scope = &#63; and elementId = &#63;.
+	 * Removes the importer config where scope = &#63; and elementId = &#63; from the database.
 	 *
-	 * @param importerconfigId the primary key of the current importer config
 	 * @param scope the scope
 	 * @param elementId the element ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next importer config
-	 * @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchImporterConfigException if a importer config with the primary key could not be found
+	 * @return the importer config that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ImporterConfig[] findByImporterConfig_PrevAndNext(
-		long importerconfigId, String scope, String elementId,
-		OrderByComparator orderByComparator)
+	public ImporterConfig removeByImporterConfig(String scope, String elementId)
 		throws NoSuchImporterConfigException, SystemException {
-		ImporterConfig importerConfig = findByPrimaryKey(importerconfigId);
+		ImporterConfig importerConfig = findByImporterConfig(scope, elementId);
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			ImporterConfig[] array = new ImporterConfigImpl[3];
-
-			array[0] = getByImporterConfig_PrevAndNext(session, importerConfig,
-					scope, elementId, orderByComparator, true);
-
-			array[1] = importerConfig;
-
-			array[2] = getByImporterConfig_PrevAndNext(session, importerConfig,
-					scope, elementId, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected ImporterConfig getByImporterConfig_PrevAndNext(Session session,
-		ImporterConfig importerConfig, String scope, String elementId,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_IMPORTERCONFIG_WHERE);
-
-		boolean bindScope = false;
-
-		if (scope == null) {
-			query.append(_FINDER_COLUMN_IMPORTERCONFIG_SCOPE_1);
-		}
-		else if (scope.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_IMPORTERCONFIG_SCOPE_3);
-		}
-		else {
-			bindScope = true;
-
-			query.append(_FINDER_COLUMN_IMPORTERCONFIG_SCOPE_2);
-		}
-
-		boolean bindElementId = false;
-
-		if (elementId == null) {
-			query.append(_FINDER_COLUMN_IMPORTERCONFIG_ELEMENTID_1);
-		}
-		else if (elementId.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_IMPORTERCONFIG_ELEMENTID_3);
-		}
-		else {
-			bindElementId = true;
-
-			query.append(_FINDER_COLUMN_IMPORTERCONFIG_ELEMENTID_2);
-		}
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(ImporterConfigModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		if (bindScope) {
-			qPos.add(scope);
-		}
-
-		if (bindElementId) {
-			qPos.add(elementId);
-		}
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(importerConfig);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<ImporterConfig> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the importer configs where scope = &#63; and elementId = &#63; from the database.
-	 *
-	 * @param scope the scope
-	 * @param elementId the element ID
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public void removeByImporterConfig(String scope, String elementId)
-		throws SystemException {
-		for (ImporterConfig importerConfig : findByImporterConfig(scope,
-				elementId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(importerConfig);
-		}
+		return remove(importerConfig);
 	}
 
 	/**
@@ -725,6 +403,11 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 			ImporterConfigImpl.class, importerConfig.getPrimaryKey(),
 			importerConfig);
 
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG,
+			new Object[] {
+				importerConfig.getScope(), importerConfig.getElementId()
+			}, importerConfig);
+
 		importerConfig.resetOriginalValues();
 	}
 
@@ -781,6 +464,8 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(importerConfig);
 	}
 
 	@Override
@@ -791,6 +476,60 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 		for (ImporterConfig importerConfig : importerConfigs) {
 			EntityCacheUtil.removeResult(ImporterConfigModelImpl.ENTITY_CACHE_ENABLED,
 				ImporterConfigImpl.class, importerConfig.getPrimaryKey());
+
+			clearUniqueFindersCache(importerConfig);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(ImporterConfig importerConfig) {
+		if (importerConfig.isNew()) {
+			Object[] args = new Object[] {
+					importerConfig.getScope(), importerConfig.getElementId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_IMPORTERCONFIG,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG,
+				args, importerConfig);
+		}
+		else {
+			ImporterConfigModelImpl importerConfigModelImpl = (ImporterConfigModelImpl)importerConfig;
+
+			if ((importerConfigModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_IMPORTERCONFIG.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						importerConfig.getScope(), importerConfig.getElementId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_IMPORTERCONFIG,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG,
+					args, importerConfig);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(ImporterConfig importerConfig) {
+		ImporterConfigModelImpl importerConfigModelImpl = (ImporterConfigModelImpl)importerConfig;
+
+		Object[] args = new Object[] {
+				importerConfig.getScope(), importerConfig.getElementId()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_IMPORTERCONFIG, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG, args);
+
+		if ((importerConfigModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_IMPORTERCONFIG.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					importerConfigModelImpl.getOriginalScope(),
+					importerConfigModelImpl.getOriginalElementId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_IMPORTERCONFIG,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_IMPORTERCONFIG,
+				args);
 		}
 	}
 
@@ -906,8 +645,6 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 
 		boolean isNew = importerConfig.isNew();
 
-		ImporterConfigModelImpl importerConfigModelImpl = (ImporterConfigModelImpl)importerConfig;
-
 		Session session = null;
 
 		try {
@@ -935,34 +672,12 @@ public class ImporterConfigPersistenceImpl extends BasePersistenceImpl<ImporterC
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
-		else {
-			if ((importerConfigModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IMPORTERCONFIG.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						importerConfigModelImpl.getOriginalScope(),
-						importerConfigModelImpl.getOriginalElementId()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_IMPORTERCONFIG,
-					args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IMPORTERCONFIG,
-					args);
-
-				args = new Object[] {
-						importerConfigModelImpl.getScope(),
-						importerConfigModelImpl.getElementId()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_IMPORTERCONFIG,
-					args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_IMPORTERCONFIG,
-					args);
-			}
-		}
-
 		EntityCacheUtil.putResult(ImporterConfigModelImpl.ENTITY_CACHE_ENABLED,
 			ImporterConfigImpl.class, importerConfig.getPrimaryKey(),
 			importerConfig);
+
+		clearUniqueFindersCache(importerConfig);
+		cacheUniqueFindersCache(importerConfig);
 
 		return importerConfig;
 	}

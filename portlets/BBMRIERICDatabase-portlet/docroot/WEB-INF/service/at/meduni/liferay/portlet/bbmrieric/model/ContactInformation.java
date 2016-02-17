@@ -33,4 +33,6 @@ public interface ContactInformation extends ContactInformationModel,
 	 * Never modify this interface directly. Add methods to {@link at.meduni.liferay.portlet.bbmrieric.model.impl.ContactInformationImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.lang.String getHtmlAddress();
+
+	public java.lang.String getContactEmailMunged();
 }
