@@ -28,6 +28,10 @@ ${theme.include(body_top_include)}
 				<div class="heading-text-title">Europe Biobank Week</div>
 				<div class="heading-text-subtitle">Biobanking for Health Innovation</div>
 				<div class="heading-text-date">September 13-16, 2016 | Vienna, Austria</div>
+				<div class="heading-logos">
+					<img src="${images_folder}/BBMRI-header.png" alt="BBMRI-ERIC" style="width:333px;height:97px;float:left;margin-top:20;">
+					<img src="${images_folder}/ESBB-header.png" alt="ESBB" style="width:333px;height:97px;float:right;margin-top:20;">
+				</div>
 			</div>
 		</div>
 

@@ -307,6 +307,11 @@ public class DiseaseMatrixLocalServiceUtil {
 		return getService().createEmpltyDiseaseMatrix();
 	}
 
+	public static java.lang.String getDiseaseMatrixFromFederation(
+		long organizationId) {
+		return getService().getDiseaseMatrixFromFederation(organizationId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -96,22 +96,26 @@ AUI().use(
     		sortable: true
     	},
     	{
-    		key: 'Number of Cases',
-    		sortable: true
+    		label: 'Number of enrolled cases (last report)',
+    		key: 'NumberofCases',
+    		sortable: true,
+    		allowHTML: true,
+    		formatter: function (o) {
+    			var returnvalue = '';
+    			if(o.data.NumberofCases == 0) {
+    				returnvalue = 'Not reported';
+    			} else {
+    				returnvalue = o.data.NumberofCases + ' (' + o.data.lastupdated + ')';
+    			}
+    			return returnvalue;
+    		}
     	},
     	{
-    		key: 'Data Access Committe',
-    		sortable: true
-    	},
-    	{
+    		label: 'Main contact',
     		key: 'Request data',
     		sortable: true,
     		allowHTML: true,
     		formatter: '<a href="mailto:{value}">{value}</a>'
-    	},
-    	{
-    		key: 'Number of access',
-    		sortable: true
     	}
     ];
 	var dataTable = new Y.DataTable(

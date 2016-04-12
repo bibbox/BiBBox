@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.pw">
+	<author>reihsr</author>
+	<namespace>pw</namespace>
+
+	<entity name="Inventory" local-service="true" remote-service="true">
+		<!-- PK fields -->
+		<column name="inventoryId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+		<column name="inventarnummer" type="long" />
+		<column name="webcontentId" type="long" />
+		<column name="folderId" type="long" />
+		<column name="structureId" type="String" />
+		<column name="structuretemplateId" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="inventoryId" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="webcontentId" return-type="Inventory">
+			<finder-column name="webcontentId" />
+		</finder>
+	</entity>
+</service-builder>

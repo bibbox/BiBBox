@@ -9,5 +9,11 @@ create index IX_96DA16 on bibboxcs.symbolconfiguration (scope, eventtype);
 
 create index IX_A84733E2 on bibboxcs.symboltypeconfiguration (symboltype);
 
+create index IX_6CA43D81 on ontologies.orphanetdisorder (orphanumber);
+
+create index IX_EB3CE5EE on ontologies.orphanetreference (orphanetdisorderId, source);
+
+create index IX_D02606CF on ontologies.orphanetsynonym (orphanetdisorderId);
+
 create index IX_A12340B0 on rdconnect.searchindex_rdconnect (organisationid, key_);
 create index IX_35DEDE4E on rdconnect.searchindex_rdconnect (value);

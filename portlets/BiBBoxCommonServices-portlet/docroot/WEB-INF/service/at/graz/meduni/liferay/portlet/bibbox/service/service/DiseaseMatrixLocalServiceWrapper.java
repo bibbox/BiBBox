@@ -326,6 +326,11 @@ public class DiseaseMatrixLocalServiceWrapper
 		return _diseaseMatrixLocalService.createEmpltyDiseaseMatrix();
 	}
 
+	@Override
+	public java.lang.String getDiseaseMatrixFromFederation(long organizationId) {
+		return _diseaseMatrixLocalService.getDiseaseMatrixFromFederation(organizationId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

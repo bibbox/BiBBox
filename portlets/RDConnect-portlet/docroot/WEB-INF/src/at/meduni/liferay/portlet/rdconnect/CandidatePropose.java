@@ -171,8 +171,8 @@ public class CandidatePropose extends MVCPortlet {
 		String subject = "RD-Connect ID-Card Proposal #" + candidate.getCandidateId();
 		String body = "Dear " + candidate.getSubmittername() + ", <br>";
 		body += "Thank you for proposing the " + candidate.getCandidatetype() + ": " + candidate.getName() + " for the RD-Connect Network.<br>";
-		body += "We will inform you as soon as our team has processed the proposal. If you have any additional questions, pleans replay to this ";
-		body += "email or use the subject of theis email in your response. It makes the tracking of issues easier for us.<br>";
+		body += "We will inform you as soon as our team has processed the proposal. If you have any additional questions, please reply to this ";
+		body += "email or use the subject of this email in your response. It makes the tracking of issues easier for us.<br>";
 		body += "<br>With best regards,<br>Your RD-Connect Curator Team.";
 		sendEmail(candidate.getSubmitteremail(), subject, body);
 	}
@@ -195,9 +195,9 @@ public class CandidatePropose extends MVCPortlet {
 		body += "Head: " + candidate.getHead() + "<br>";
 		body += "Contact: " + candidate.getContactperson() + " (" + candidate.getMail() + ")" + "<br>";
 		body += "URL: " + candidate.getUrl() + "<br>";
-		body += "<br><br>Pleace use the subject of this email for every contact concerning this Proposel, ";
-		body += "and include the catalogue@rd-connect.eu email in the comunication.";
-		sendEmail(candidate.getSubmitteremail(), subject, body);
+		body += "<br><br>Please use the subject of this email for every contact concerning this Proposal, ";
+		body += "and include the catalogue@rd-connect.eu email in the communication.";
+		sendEmail("rd-connect.wp2@iss.it", subject, body);
 	}
 	
 	/**

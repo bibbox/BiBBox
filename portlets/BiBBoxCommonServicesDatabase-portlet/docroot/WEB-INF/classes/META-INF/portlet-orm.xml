@@ -28,6 +28,57 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneModelImpl">
+		<attributes>
+			<id name="geneId" />
+			<basic name="orphanetdisorderId" />
+			<basic name="symbol" />
+			<basic name="description" />
+			<basic name="geneorphanumber" />
+			<basic name="genetype" />
+			<basic name="genetypeorphanumber" />
+			<basic name="genetypename" />
+			<basic name="disordergeneassociationtype" />
+			<basic name="disordergeneassociationtypename" />
+			<basic name="disordergeneassociationstatus" />
+			<basic name="disordergeneassociationstatusname" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneLocusModelImpl">
+		<attributes>
+			<id name="genelocusId" />
+			<basic name="geneId" />
+			<basic name="genelocus" />
+			<basic name="genelocuskey" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneReferenceModelImpl">
+		<attributes>
+			<id name="genereferenceId" />
+			<basic name="geneId" />
+			<basic name="source" />
+			<basic name="reference" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneSynonymModelImpl">
+		<attributes>
+			<id name="genesynonymId" />
+			<basic name="geneId" />
+			<basic name="synonym" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationModelImpl">
 		<attributes>
 			<id name="iconconfigurationId" />
@@ -72,6 +123,47 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetDisorderModelImpl">
+		<attributes>
+			<id name="orphanetdisorderId" />
+			<basic name="orphanumber" />
+			<basic name="orpahnetlink" />
+			<basic name="diseasename" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetReferenceModelImpl">
+		<attributes>
+			<id name="orphanetreferenceId" />
+			<basic name="orphanetdisorderId" />
+			<basic name="source" />
+			<basic name="reference" />
+			<basic name="disordermappingrelation" />
+			<basic name="disordermappingrelationorphanumber" />
+			<basic name="disordermappingrelationname" />
+			<basic name="disordermappingicdrelation" />
+			<basic name="disordermappingicdrelationorphanumber" />
+			<basic name="disordermappingicdrelationname" />
+			<basic name="disordermappingvalidationstatus" />
+			<basic name="disordermappingvalidationstatusorphanumber" />
+			<basic name="disordermappingvalidationstatusname" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetSynonymModelImpl">
+		<attributes>
+			<id name="orphanetsynonymId" />
+			<basic name="orphanetdisorderId" />
+			<basic name="synonym" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationModelImpl">
 		<attributes>
 			<id name="symbolconfigurationId" />
@@ -100,6 +192,22 @@
 		<table name="bibboxcs.ddlconfiguration" />
 		<attributes />
 	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneImpl" name="Gene">
+		<table name="ontologies.gene" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneLocusImpl" name="GeneLocus">
+		<table name="ontologies.genelocus" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneReferenceImpl" name="GeneReference">
+		<table name="ontologies.genereference" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneSynonymImpl" name="GeneSynonym">
+		<table name="ontologies.genesynonym" />
+		<attributes />
+	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationImpl" name="IconConfiguration">
 		<table name="bibboxcs.iconconfiguration" />
 		<attributes />
@@ -110,6 +218,18 @@
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrganizationSearchIndexImpl" name="OrganizationSearchIndex">
 		<table name="rdconnect.searchindex_rdconnect" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetDisorderImpl" name="OrphanetDisorder">
+		<table name="ontologies.orphanetdisorder" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetReferenceImpl" name="OrphanetReference">
+		<table name="ontologies.orphanetreference" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetSynonymImpl" name="OrphanetSynonym">
+		<table name="ontologies.orphanetsynonym" />
 		<attributes />
 	</entity>
 	<entity class="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl" name="SymbolConfiguration">

@@ -106,17 +106,17 @@ public class OrganizationSearchIndexLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex"
 			};
 
-		_methodName62 = "getBeanIdentifier";
+		_methodName104 = "getBeanIdentifier";
 
-		_methodParameterTypes62 = new String[] {  };
+		_methodParameterTypes104 = new String[] {  };
 
-		_methodName63 = "setBeanIdentifier";
+		_methodName105 = "setBeanIdentifier";
 
-		_methodParameterTypes63 = new String[] { "java.lang.String" };
+		_methodParameterTypes105 = new String[] { "java.lang.String" };
 
-		_methodName68 = "getSearchIndexValueByKey";
+		_methodName110 = "getSearchIndexValueByKey";
 
-		_methodParameterTypes68 = new String[] { "java.lang.String", "long" };
+		_methodParameterTypes110 = new String[] { "java.lang.String", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -208,20 +208,20 @@ public class OrganizationSearchIndexLocalServiceClpInvoker {
 			return OrganizationSearchIndexLocalServiceUtil.updateOrganizationSearchIndex((at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex)arguments[0]);
 		}
 
-		if (_methodName62.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+		if (_methodName104.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
 			return OrganizationSearchIndexLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName63.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+		if (_methodName105.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
 			OrganizationSearchIndexLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
 			return OrganizationSearchIndexLocalServiceUtil.getSearchIndexValueByKey((java.lang.String)arguments[0],
 				((Long)arguments[1]).longValue());
 		}
@@ -261,10 +261,10 @@ public class OrganizationSearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName62;
-	private String[] _methodParameterTypes62;
-	private String _methodName63;
-	private String[] _methodParameterTypes63;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
+	private String _methodName104;
+	private String[] _methodParameterTypes104;
+	private String _methodName105;
+	private String[] _methodParameterTypes105;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
 }

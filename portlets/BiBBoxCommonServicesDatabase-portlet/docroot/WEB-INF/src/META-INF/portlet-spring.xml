@@ -4,6 +4,18 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.DDLConfigurationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.DDLConfigurationServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.DDLConfigurationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.DDLConfigurationPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.GeneLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.GeneLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.GeneService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.GeneServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.GenePersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.GenePersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.GeneLocusLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.GeneLocusServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneLocusPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneLocusPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.GeneReferenceLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.GeneReferenceServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneReferencePersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneReferencePersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.GeneSynonymLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.GeneSynonymServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneSynonymPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneSynonymPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.IconConfigurationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.IconConfigurationServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconConfigurationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconConfigurationPersistenceImpl" parent="basePersistence" />
@@ -12,6 +24,15 @@
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconsPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconsPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.OrganizationSearchIndexLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.OrganizationSearchIndexLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrganizationSearchIndexPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrganizationSearchIndexPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.OrphanetDisorderLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.OrphanetDisorderServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetDisorderPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetDisorderPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.OrphanetReferenceLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.OrphanetReferenceServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetReferencePersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetReferencePersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.OrphanetSynonymLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.OrphanetSynonymServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetSynonymPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetSynonymPersistenceImpl" parent="basePersistence" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.SymbolConfigurationLocalServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService" class="at.graz.meduni.liferay.portlet.bibbox.service.impl.SymbolConfigurationServiceImpl" />
 	<bean id="at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolConfigurationPersistence" class="at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolConfigurationPersistenceImpl" parent="basePersistence" />

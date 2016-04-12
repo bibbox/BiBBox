@@ -85,6 +85,9 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
 	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
 	
+	String date_format_pattern_ = "dd.MM.yyyy";
+	SimpleDateFormat date_format_ = new SimpleDateFormat(date_format_pattern_);
+	
 	/**
 	 * 
 	 */
@@ -396,78 +399,95 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			HashMap<String, String> hits = null;
 			boolean first = true;
 			for(SearchIndex serachresult : serachresults) {
-				if(oldorganizationid == 0 || oldorganizationid != serachresult.getOrganisationid()) {
-					if(!first) {
-						searchresultstring += ",";
-					}
-					first = false;
-					organization = OrganizationLocalServiceUtil.getOrganization(serachresult.getOrganisationid());
-					// Disease Matrix
-					List<DiseaseMatrix> diseasematrixes = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organization.getOrganizationId(), -1, -1);
-					long diseascount = 0;
-					for(DiseaseMatrix diseasematrix : diseasematrixes) {
-						try {
-							diseascount += Long.parseLong(diseasematrix.getPatientcount());
-						} catch(Exception ex) {
-							
+				try {
+					if(oldorganizationid == 0 || oldorganizationid != serachresult.getOrganisationid()) {
+						if(!first) {
+							searchresultstring += ",";
 						}
-					}
-					// Data Access Committee
-					String dataaccess = "not specified";
-					List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
-				  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
-				  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
-				  		 if(rdc_rsname.equals("reg_accessibility")) {
-				  			List<DDLRecord> records = rdc_rs.getRecords();
-				  			for(DDLRecord record : records) { 
-				  				try {
-				  					dataaccess = record.getFieldValue("Has_the_registry_a_Data_Access_Committee_").toString().replaceAll("\"\\]|\\[\"", "");
-				  				} catch (Exception ex) {
-				  					
-				  				}
-				  			}
-				  		 }
-				  	}
-				  	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
-				  	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
-				  	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
-				  	int numberofacces = RDCOrganizationUserAccessLocalServiceUtil.countRDCOrganizationUserAccess(organization.getOrganizationId());
-					if(organizationtype.equalsIgnoreCase("Biobank")) {
-						if(organization.getLogoId() == 0) {
-				 			imgPath = "/BiBBoxCommonServices-portlet/images/Biobank.png";
-				 		}
-						orgPath = orgPath + "/bb_home";	
-					} else {
-						if(organization.getLogoId() == 0) {
-				 			imgPath = "/BiBBoxCommonServices-portlet/images/Registry.png";
-				 		}
-						orgPath = orgPath + "/reg_home";
-					} 
-					String maincontactmail = "";
-					User maincontact = null;
-					List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
-					for(User usertmp : userlist) {
-						List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(usertmp.getUserId(), organization.getGroup().getGroupId());
-						for (UserGroupRole ugr : usergrouprolles) {
-							if(ugr.getRoleId() == maincontactrole) {
-								maincontact =  usertmp;
+						first = false;
+						organization = OrganizationLocalServiceUtil.getOrganization(serachresult.getOrganisationid());
+						// Disease Matrix
+						List<DiseaseMatrix> diseasematrixes = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organization.getOrganizationId(), -1, -1);
+						long diseascount = 0;
+						Date tmp_lastupdated = null;
+						for(DiseaseMatrix diseasematrix : diseasematrixes) {
+							try {
+								if(tmp_lastupdated == null) {
+									tmp_lastupdated =diseasematrix.getModifieddate();
+								}
+								if(tmp_lastupdated.before(diseasematrix.getModifieddate())) {
+									tmp_lastupdated =diseasematrix.getModifieddate();
+								}
+								
+								diseascount += Long.parseLong(diseasematrix.getPatientcount());
+							} catch(Exception ex) {
+								
 							}
 						}
-					}
-					if(maincontact != null) {
-						maincontactmail = maincontact.getEmailAddress();
-					}
-					searchresultstring += "{Name: '" + organization.getName().replaceAll("'", "&lsquo;") + "', "
-							+ "OrganizationLink: '" + orgPath + "',"
-							+ "OrganizationImageLink: '" + imgPath + "',"
-							+ "Type: '" + organization.getExpandoBridge().getAttribute("Organization Type").toString() + "',"
-							+ "'Number of Cases': " + diseascount + ","
-							+ "'Data Access Committe': '" + dataaccess + "',"
-							+ "'Request data':  '" + maincontactmail + "', "
-							+ "'Number of access': " + numberofacces + "}";
-					// New Hit
-					oldorganizationid = serachresult.getOrganisationid();
-				}			
+						String lastupdated = "";
+						if(tmp_lastupdated != null) {
+							lastupdated = date_format_.format(tmp_lastupdated);
+						}
+						// Data Access Committee
+						String dataaccess = "not specified";
+						List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+					  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+					  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+					  		 if(rdc_rsname.equals("reg_accessibility")) {
+					  			List<DDLRecord> records = rdc_rs.getRecords();
+					  			for(DDLRecord record : records) { 
+					  				try {
+					  					dataaccess = record.getFieldValue("Has_the_registry_a_Data_Access_Committee_").toString().replaceAll("\"\\]|\\[\"", "");
+					  				} catch (Exception ex) {
+					  					
+					  				}
+					  			}
+					  		 }
+					  	}
+					  	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+					  	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+					  	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
+					  	int numberofacces = RDCOrganizationUserAccessLocalServiceUtil.countRDCOrganizationUserAccess(organization.getOrganizationId());
+						if(organizationtype.equalsIgnoreCase("Biobank")) {
+							if(organization.getLogoId() == 0) {
+					 			imgPath = "/BiBBoxCommonServices-portlet/images/Biobank.png";
+					 		}
+							orgPath = orgPath + "/bb_home";	
+						} else {
+							if(organization.getLogoId() == 0) {
+					 			imgPath = "/BiBBoxCommonServices-portlet/images/Registry.png";
+					 		}
+							orgPath = orgPath + "/reg_home";
+						} 
+						String maincontactmail = "";
+						User maincontact = null;
+						List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+						for(User usertmp : userlist) {
+							List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(usertmp.getUserId(), organization.getGroup().getGroupId());
+							for (UserGroupRole ugr : usergrouprolles) {
+								if(ugr.getRoleId() == maincontactrole) {
+									maincontact =  usertmp;
+								}
+							}
+						}
+						if(maincontact != null) {
+							maincontactmail = maincontact.getEmailAddress();
+						}
+						searchresultstring += "{Name: '" + organization.getName().replaceAll("'", "&lsquo;") + "', "
+								+ "OrganizationLink: '" + orgPath + "',"
+								+ "OrganizationImageLink: '" + imgPath + "',"
+								+ "Type: '" + organization.getExpandoBridge().getAttribute("Organization Type").toString() + "',"
+								+ "'NumberofCases': " + diseascount + ","
+								+ "'Data Access Committe': '" + dataaccess + "',"
+								+ "'Request data':  '" + maincontactmail + "', "
+								+ "'lastupdated':  '" + lastupdated + "', "
+								+ "'Number of access': " + numberofacces + "}";
+						// New Hit
+						oldorganizationid = serachresult.getOrganisationid();
+					}	
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

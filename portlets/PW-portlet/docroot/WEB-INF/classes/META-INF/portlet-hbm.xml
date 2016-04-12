@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.pw.model.Inventory" />
+	<class name="at.pw.model.impl.InventoryImpl" table="pw_Inventory">
+		<cache usage="read-write" />
+		<id name="inventoryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="inventarnummer" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="webcontentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="folderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="structureId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="structuretemplateId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

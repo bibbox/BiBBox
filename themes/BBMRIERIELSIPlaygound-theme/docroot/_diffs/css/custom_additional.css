@@ -1,0 +1,321 @@
+.js .controls-hidden .lfr-meta-actions, .js .controls-hidden .portlet-borderless-bar, .js .controls-hidden .portlet-topper-toolbar, .js .controls-hidden .lfr-configurator-visibility {
+	display: inline;
+}
+.portlet-title-text {
+	display: none;
+}
+#portlet_mailinglist_WAR_BBMRIERICportlet .indicates-required {
+	display: none;
+}
+
+#portlet_mailinglist_WAR_BBMRIERICportlet .portlet-topper {
+	display: none;
+}
+
+#portlet_mailinglist_WAR_BBMRIERICportlet .mc-field-group {
+	float: right;
+}
+#portlet_mailinglist_WAR_BBMRIERICportlet .portlet-content {
+	padding: 0;
+	border-width: 0;
+}
+#portlet_bbmrilogin_WAR_BBMRIERICportlet .portlet-content {
+	padding: 0;
+	border-width: 0;
+}
+#mc_embed_signup .mc-field-group {
+	clear:left; 
+	position:relative; 
+	width:96%; 
+	padding-bottom:0; 
+	min-height:50px;
+}
+#mc_embed_signup .mc-field-group {
+	padding-bottom: 0;
+}
+#mc_embed_signup{
+	clear:left; 
+	font:12px Helvetica,Arial,sans-serif; 
+}
+#mc_embed_signup form {
+    display: block;
+    padding: 0;
+    position: relative;
+    text-align: left;
+}
+.mc-field-group-float {
+	float: right;
+	width: 100%;
+}
+#mc_embed_signup .mc-field-group {
+	width: 100%;
+}
+#mc_embed_signup .mc-field-group-float #mc-embedded-subscribe {
+	background-color: #b3b2b2;
+	color: #FFFFFF;
+	width: 20%;
+	height: 25px;
+	padding: 0;
+	margin: 0;
+	clear: none;
+	border: 0px solid #999999;
+	display: inline;
+}
+.aui #mc_embed_signup form {
+	margin: 0 0 0 0;
+}
+#mc_embed_signup .mc-field-group-float #mce-EMAIL {
+	width: 75%;
+	margin: 0;
+	clear: none;
+	border: 0px solid #999999;
+	display: inline;
+	height: 25px;
+	text-align: right;
+	color: #184B8A;
+	padding: 0 5px 0 0;
+	background: -webkit-linear-gradient(left, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* Standard syntax */
+}
+#mc_embed_signup .mc-field-group-float #mce-SEARCH {
+	width: 75%;
+	margin: 0;
+	clear: none;
+	border: 0px solid #999999;
+	display: inline;
+	height: 25px;
+	text-align: right;
+   color: #184B8A;
+   padding: 0 5px 0 0;
+	background: -webkit-linear-gradient(left, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Safari 5.1 to 6.0 */
+   background: -o-linear-gradient(right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Opera 11.1 to 12.0 */
+   background: -moz-linear-gradient(right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* For Firefox 3.6 to 15 */
+   background: linear-gradient(to right, rgba(255,255,255, 0), rgba(255,255,255, 1)); /* Standard syntax */
+}
+#mc_embed_signup div.response {
+    float: right;
+    margin: 1em 0;
+    padding: 1em 0.5em 0.5em 0;
+    text-align: right;
+    top: -1.5em;
+    width: 80%;
+    z-index: 1;
+}
+
+#mc_embed_signup div#mce-responses {
+    clear: both;
+    float: right;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    top: -1.4em;
+    width: 90%;
+}
+.portlet-content {
+	padding: 0;
+}
+.portlet-asset-publisher .asset-full-content.show-asset-title .asset-content {
+    margin-right: 0;
+}
+.portlet-asset-publisher .asset-content {
+    clear: right;
+    margin-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
+}
+.aui .bbmriericrecentnews {
+	color: #ED660A;
+}
+.taglib-header {
+	display: none;
+}
+.asset-title {
+	display: none;
+}
+.portlet-asset-publisher-aaaaaaaa {
+	text-align: justify;
+   font-family: 'PT Sans', normal, sans-serif;
+   font-size: 9.5pt;
+   line-height: 16pt;
+}
+.portlet-asset-publisher .asset-content, .aui .portlet-asset-publisher .asset-content li {
+	text-align: justify;
+	font-family: 'PT Sans', normal, sans-serif;
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+.portlet-journal-content, .aui .portlet-journal-content li  {
+	text-align: justify;
+	font-family: 'PT Sans', normal, sans-serif;
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+.bbmri-eric-recent-news, .aui .bbmri-eric-recent-news li  {
+	text-align: justify;
+	font-family: 'PT Sans', normal, sans-serif;
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+.bbmri-eric-news, .aui .bbmri-eric-news li  {
+	text-align: justify;
+	font-family: 'PT Sans', normal, sans-serif;
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+/* --- Header devinitions --- */
+.aui h1, .aui h1 a  {
+	font-size: 11.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   text-transform: uppercase;
+   margin: 0;
+} 
+.h1-node {
+   font-size: 11.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   color: #000000;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+} 
+.aui h2, .aui h2 a {
+	font-size: 10.5pt;
+	line-height: 16pt;
+	font-weight: bold;
+	color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h3, .aui h3 a {
+	font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: bold;
+   font-style:italic;
+   color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+} 
+.aui h4, .aui h4 a  {
+	font-size: 9.5pt;
+	line-height: 16pt;
+	font-style:italic;
+	font-weight: normal;
+	color: #184B8A;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.h4-cv {
+	font-size: 9.5pt;
+	line-height: 16pt;
+	font-style:italic;
+	font-weight: normal;
+	color: #000000;
+    font-family: 'PT Sans', normal, sans-serif;
+    margin: 0;
+    text-transform: uppercase;
+}
+.aui h5, .aui h5 a {
+	font-size: 9.5pt;
+   line-height: 16pt;
+   font-weight: normal;
+   color: #505050;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.aui h6, .aui h6 a {
+	font-size: 9.5pt;
+	line-height: 16pt;
+	font-weight: normal;
+	color: #505050;
+   font-family: 'PT Sans', normal, sans-serif;
+   text-align:initial;
+   margin: 0;
+}
+.container-fluid {
+	width: 1000px;
+	margin: auto;
+}
+.aui a, .aui a:hover {
+    color: #184B8A;
+    text-decoration:none;
+}
+.bbmri_eric_header-submainmenu a {
+	color: #184B8A;
+	font-size: 9.5pt;
+	text-transform:uppercase;
+}
+.bbmri_eric_header-submainmenu a:hover {
+	color: #184B8A;
+	text-decoration:none;
+	font-size: 9.5pt;
+	text-transform:uppercase;
+}
+.bbmri_eric_header-subsubmainmenu a {
+	color: #FFFFFF;
+}
+.bbmri_eric_header-subsubmainmenu a:hover {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.aui .bbmrieric-footer a, .aui .bbmrieric-footer a:hover {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+.aui .bbmrieric-footer .bbmrieric-footer-menue a, .aui .bbmrieric-footer .bbmrieric-footer-menue a:hover {
+   color: #4A4A49;
+   text-decoration:none;
+}
+.aui .portlet-journal-content .lfr-icon-actions {
+	font-size: 9.5pt;
+	line-height: 16pt;
+}
+.bbmri-eric-article-image img
+{
+    filter: url(filters.svg#grayscale); /* Firefox 3.5+ */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(1); /* Google Chrome & Safari 6+ */
+}
+.bbmri-eric-article-image img:hover
+{
+    filter: none;
+    -webkit-filter: none;
+}
+.bbmri-eric-recent-events {
+	text-align: right;
+	font-size: 9.5pt;
+   line-height: 16pt;
+   font-family: 'PT Sans', normal, sans-serif;
+}
+.bbmri-eric-recent-events-page {
+   text-align: left;
+   font-size: 9.5pt;
+   line-height: 16pt;
+   font-family: 'PT Sans', normal, sans-serif;
+}
+.bbmri-eric-recent-news {
+	text-align: right;
+}
+.aui p {
+    margin: 0;
+}
+
+.bbmri_eric_header-submainmenu a {
+    color: #000000;
+    font-size: 9.5pt;
+}
+
+.aui #content img {
+	-webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+	box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+}

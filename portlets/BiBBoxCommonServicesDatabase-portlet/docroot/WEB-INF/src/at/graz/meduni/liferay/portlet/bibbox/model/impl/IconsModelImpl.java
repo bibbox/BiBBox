@@ -66,7 +66,7 @@ public class IconsModelImpl extends BaseModelImpl<Icons> implements IconsModel {
 			{ "iconurl", Types.VARCHAR },
 			{ "group_", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.icons (iconsId LONG not null primary key,iconurl VARCHAR(75) null,group_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.icons (iconsId LONG not null primary key,iconurl TEXT null,group_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.icons";
 	public static final String ORDER_BY_JPQL = " ORDER BY icons.iconsId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.icons.iconsId ASC";

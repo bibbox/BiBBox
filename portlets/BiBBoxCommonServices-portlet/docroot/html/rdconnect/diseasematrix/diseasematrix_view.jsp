@@ -85,6 +85,123 @@ if (currentGroup.isOrganization()) {
 		</c:when>
 	</c:choose>
 	
+	<!-- -------------------------------- -->
+	<!-- Load Federated DiseaseMatrixData -->
+	<style>
+		#ajaxloader
+		{
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			border: 8px solid #ed660a;
+			border-right-color: transparent;
+			border-radius: 50%;
+			box-shadow: 0 0 25px 2px #eee;
+		}
+		#ajaxloader
+		{
+			animation: spin 1s linear infinite;
+		}
+		@keyframes spin
+		{
+			from { transform: rotate(0deg);   opacity: 0.2; }
+			50%  { transform: rotate(180deg); opacity: 1.0; }
+			to   { transform: rotate(360deg); opacity: 0.2; }
+		}
+	</style>
+	<%
+	//String dmdata = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixFromFederation(organizationId);
+	//if(!dmdata.equals("")) {
+	%>
+	<div id="BBMRIERICBiobankList">
+		<div id="ajaxloader"></div>
+	</div>
+	
+	<portlet:resourceURL var="resourceURL">
+		<portlet:param name="<%=Constants.CMD%>" value="load_federated_data" />
+		<portlet:param name="RDCOrganisationId" value="<%= String.valueOf(organizationId) %>" />
+	</portlet:resourceURL>
+	
+	<aui:script use="aui-base,node,aui-datatable,aui-datatype,datatable-sort,aui-io-request">
+		AUI().use(
+		  'aui-datatable',
+		  'aui-datatype',
+		  'datatable-sort',
+		  'aui-io-request',
+		  'aui-base',
+		  function(Y) {
+		  	Y.io.request('<%= resourceURL %>',{
+		  		dataType: 'json',
+			  	on: {
+	              failure: function() { 
+	              	Y.all('#ajaxloader').setStyle('display', 'none');
+	              	alert('Unable to Load Data'); 
+	              },
+	              success: function() {
+	                Y.all('#ajaxloader').setStyle('display', 'none'); 
+	              	var remoteData = Y.JSON.parse(Y.JSON.stringify(this.get('responseData')));
+	              	if(Y.JSON.stringify(this.get('responseData')) == "[]") {
+	              		Y.all('#BBMRIERICBiobankList').setStyle('display', 'none');
+	              	}
+				    var nestedCols = [ 
+				    	{
+				    		key: 'Disease Name',
+				    		sortable: true
+				    	},
+				    	{
+				    		key: 'NumberofPatientsDonors',
+				    		sortable: true
+				    	},
+				    	{
+				    		key: 'ORPHA Code',
+				    		sortable: true
+				    	},  	
+				    	{
+				    		key: 'ICD 10',
+				    		sortable: true
+				    	},  	
+				    	{
+				    		key: 'OMIM',
+				    		sortable: true
+				    	},  	
+				    	{
+				    		key: 'Synonym',
+				    		label: 'Synonym(s)',
+				    		sortable: true
+				    	},  	
+				    	{
+				    		key: 'SampleCatalogue',
+				    		label: 'Sample Catalogue',
+				    		sortable: true,
+		    				allowHTML: true,
+		    				formatter: function (o) {
+				    			var url = o.data.SampleCatalogue;
+				    			var returnvalue = '<a href="' + url + '" target="_blank">Sample Catalogue</a>';
+				    			return returnvalue;
+				    		}
+				    	}
+				    ];
+					var dataTable = new Y.DataTable(
+				      {
+				        columns: nestedCols,
+				        data: remoteData,
+				      }
+				    ).render('#BBMRIERICBiobankList');
+				    
+				
+				    
+				}
+		      }
+		    });
+		  }
+		);
+	</aui:script>
+	<%
+	//}
+	%>
+	
+	<!-- ---------------------------- -->
+	<!-- Load Local DiseaseMatrixData -->
 	<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "5")) %>' emptyResultsMessage="diseasematrix-empty-results-message">
 		<liferay-ui:search-container-results
 			results="<%= DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organizationId, searchContainer.getStart(), searchContainer.getEnd()) %>"

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixImpl;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.DiseaseMatrixLocalServiceBaseImpl;
+import at.graz.meduni.liferay.portlet.bibbox.util.Molgenis;
 
 /**
  * The implementation of the disease matrix local service.
@@ -118,5 +119,13 @@ public class DiseaseMatrixLocalServiceImpl
 		diseasematrix.setDiseasematrixId(diseasematrixId);
 
 		return super.addDiseaseMatrix(diseasematrix);
+	}
+	
+	/**
+	 * 
+	 */
+	public String getDiseaseMatrixFromFederation(long organizationId) {
+		Molgenis molgens = Molgenis.getInstance();
+		return molgens.getAgregatedJsonFromMolgenis(String.valueOf(organizationId));
 	}
 }

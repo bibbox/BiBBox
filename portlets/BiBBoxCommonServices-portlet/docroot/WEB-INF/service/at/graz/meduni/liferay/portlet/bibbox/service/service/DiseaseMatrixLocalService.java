@@ -273,4 +273,7 @@ public interface DiseaseMatrixLocalService extends BaseLocalService,
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix createEmpltyDiseaseMatrix()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getDiseaseMatrixFromFederation(long organizationId);
 }

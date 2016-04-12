@@ -72,7 +72,7 @@ public class IconConfigurationModelImpl extends BaseModelImpl<IconConfiguration>
 			{ "width", Types.VARCHAR },
 			{ "height", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.iconconfiguration (iconconfigurationId LONG not null primary key,symbolconfigurationId LONG,position VARCHAR(75) null,key_ VARCHAR(75) null,iconsId LONG,elementcolor VARCHAR(75) null,width VARCHAR(75) null,height VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.iconconfiguration (iconconfigurationId LONG not null primary key,symbolconfigurationId LONG,position TEXT null,key_ TEXT null,iconsId LONG,elementcolor TEXT null,width TEXT null,height TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.iconconfiguration";
 	public static final String ORDER_BY_JPQL = " ORDER BY iconConfiguration.iconconfigurationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.iconconfiguration.iconconfigurationId ASC";

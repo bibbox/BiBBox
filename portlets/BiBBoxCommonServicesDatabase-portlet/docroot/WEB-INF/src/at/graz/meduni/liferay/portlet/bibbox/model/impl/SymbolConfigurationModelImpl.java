@@ -69,7 +69,7 @@ public class SymbolConfigurationModelImpl extends BaseModelImpl<SymbolConfigurat
 			{ "basecolor", Types.VARCHAR },
 			{ "symboltype", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bibboxcs.symbolconfiguration (symbolconfigurationId LONG not null primary key,scope VARCHAR(75) null,eventtype VARCHAR(75) null,basecolor VARCHAR(75) null,symboltype VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table bibboxcs.symbolconfiguration (symbolconfigurationId LONG not null primary key,scope TEXT null,eventtype VARCHAR(75) null,basecolor VARCHAR(75) null,symboltype VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table bibboxcs.symbolconfiguration";
 	public static final String ORDER_BY_JPQL = " ORDER BY symbolConfiguration.symbolconfigurationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bibboxcs.symbolconfiguration.symbolconfigurationId ASC";

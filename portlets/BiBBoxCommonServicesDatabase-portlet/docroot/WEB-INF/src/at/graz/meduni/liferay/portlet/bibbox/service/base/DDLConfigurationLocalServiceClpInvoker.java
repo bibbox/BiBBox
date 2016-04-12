@@ -106,21 +106,21 @@ public class DDLConfigurationLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration"
 			};
 
-		_methodName62 = "getBeanIdentifier";
+		_methodName104 = "getBeanIdentifier";
 
-		_methodParameterTypes62 = new String[] {  };
+		_methodParameterTypes104 = new String[] {  };
 
-		_methodName63 = "setBeanIdentifier";
+		_methodName105 = "setBeanIdentifier";
 
-		_methodParameterTypes63 = new String[] { "java.lang.String" };
+		_methodParameterTypes105 = new String[] { "java.lang.String" };
 
-		_methodName68 = "getDDLConfigurationForField";
+		_methodName110 = "getDDLConfigurationForField";
 
-		_methodParameterTypes68 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes110 = new String[] { "long", "java.lang.String" };
 
-		_methodName69 = "createDDLConfiguration";
+		_methodName111 = "createDDLConfiguration";
 
-		_methodParameterTypes69 = new String[] {  };
+		_methodParameterTypes111 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -212,26 +212,26 @@ public class DDLConfigurationLocalServiceClpInvoker {
 			return DDLConfigurationLocalServiceUtil.updateDDLConfiguration((at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration)arguments[0]);
 		}
 
-		if (_methodName62.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+		if (_methodName104.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
 			return DDLConfigurationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName63.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+		if (_methodName105.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
 			DDLConfigurationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
 			return DDLConfigurationLocalServiceUtil.getDDLConfigurationForField(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName69.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+		if (_methodName111.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
 			return DDLConfigurationLocalServiceUtil.createDDLConfiguration();
 		}
 
@@ -270,12 +270,12 @@ public class DDLConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName62;
-	private String[] _methodParameterTypes62;
-	private String _methodName63;
-	private String[] _methodParameterTypes63;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
-	private String _methodName69;
-	private String[] _methodParameterTypes69;
+	private String _methodName104;
+	private String[] _methodParameterTypes104;
+	private String _methodName105;
+	private String[] _methodParameterTypes105;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
+	private String _methodName111;
+	private String[] _methodParameterTypes111;
 }

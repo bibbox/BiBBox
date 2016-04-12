@@ -7,7 +7,7 @@
 	background-position: right 30%;
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 180px;
+	height: 332px;
 }
 .aui #sign-in {
     background: rgba(0, 0, 0, 0) url("/EWB-theme/images/common/key.png") no-repeat scroll 3px 50%;
@@ -23,47 +23,44 @@
 }
 .aui .heading-text-title {
 	color: #FFFFFF;
-	background-color: #5C96F7;
-	font-size: 35px;
+	background-color: rgba(24, 75, 138, 0.8);
+	font-size: 37px;
 	font-weight: bold;
 	line-height: 45px;
-    position: relative;
-    top: 70px;
-    width: 600px;
-	padding-left: 65px;
-    background: -webkit-linear-gradient(left, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* Standard syntax */
+	margin: auto;
+	text-align: center;
+    width: 700px;
+	padding-top: 20px;
 }
 .aui .heading-text-subtitle {
 	color: #FFFFFF;
-	background-color: #5C96F7;
+	background-color: rgba(24, 75, 138, 0.8);
+	font-weight: bold;
 	font-size: 25px;
 	line-height: 35px;
-    position: relative;
-    top: 70px;
-	width: 600px;
-	padding-left: 65px;
-    background: -webkit-linear-gradient(left, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, rgba(92, 150, 247, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* Standard syntax */
+	width: 700px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	margin: auto;
+	text-align: center;
 }
 .aui .heading-text-date {
 	color: #FFFFFF;
-	background-color: #FE8204;
+	background-color: rgba(0, 102, 51, 0.8);
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 30px;
-    position: relative;
-    top: 70px;
-	width: 600px;
-	padding-left: 65px;
-	background: -webkit-linear-gradient(left, rgba(254, 130, 4, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(right, rgba(254, 130, 4, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, rgba(254, 130, 4, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to right, rgba(254, 130, 4, 0.8) 80%, rgba(255, 255, 255, 0) 100%); /* Standard syntax */
+	width: 700px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin: auto;
+	text-align: center;
+}
+
+.aui .heading-logos {
+	padding-top: 20px;
+	width: 700px;
+	margin: auto;
 }
 
 @import url(custom_header_menu.css);

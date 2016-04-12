@@ -360,6 +360,12 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 			}
 			json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
 			json.put("OrganizationID", organization.getOrganizationId());
+			String startpage = "reg_home";
+			if(type.equalsIgnoreCase("biobank")) {
+				startpage = "bb_home";
+			}
+			String idc_url = "http://catalogue.rd-connect.eu/web"+organization.getGroup().getFriendlyURL() + "/" + startpage;
+			json.put("idcardurl", idc_url);
 			json.put("name", organization.getName());
 			json.put("date of inclusion", organization.getCreateDate());
 			json.put("last activities", organization.getModifiedDate());
@@ -494,7 +500,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		} else {
 			try {
 				Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
-				String type = "reg/bb";
+				String type = "reg/bb";	
 				try {
 					type = OrganizationSearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
 				} catch (Exception ex) {
@@ -505,6 +511,12 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 				}
 				json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
 				json.put("OrganizationID", organization.getOrganizationId());
+				String startpage = "reg_home";
+				if(type.equalsIgnoreCase("biobank")) {
+					startpage = "bb_home";
+				}
+				String idc_url = "http://catalogue.rd-connect.eu/web"+organization.getGroup().getFriendlyURL() + "/" + startpage;
+				json.put("idcardurl", idc_url);
 				json.put("name", organization.getName());
 				json.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
 				json.put("CollectionName", "default");

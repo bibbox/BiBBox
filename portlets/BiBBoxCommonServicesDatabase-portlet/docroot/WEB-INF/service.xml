@@ -107,4 +107,93 @@
 			<finder-column name="key" />
 		</finder>
 	</entity>
+	<!-- Ontologies -->
+	<entity name="OrphanetDisorder" local-service="true" remote-service="true" table="ontologies.orphanetdisorder">
+		<!-- PK fields -->
+		<column name="orphanetdisorderId" primary="true" type="long"></column>
+		<!-- ID fields -->
+		<column name="orphanumber" type="long"></column>
+		<!-- fields -->
+		<column name="orpahnetlink" type="String"></column>
+		<column name="diseasename" type="String"></column>
+		<finder name="OrphaNumber" return-type="OrphanetDisorder">
+			<finder-column name="orphanumber" />
+		</finder>
+	</entity>
+	<entity name="OrphanetSynonym" local-service="true" remote-service="true" table="ontologies.orphanetsynonym">
+		<!-- PK fields -->
+		<column name="orphanetsynonymId" primary="true" type="long"></column>
+		<!-- FK fields -->
+		<column name="orphanetdisorderId" type="long"></column>
+		<!-- fields -->
+		<column name="synonym" type="String"></column>
+		<finder name="OrphanetDisorderId" return-type="Collection">
+			<finder-column name="orphanetdisorderId" />
+		</finder>
+	</entity>
+	<entity name="OrphanetReference" local-service="true" remote-service="true" table="ontologies.orphanetreference">
+		<!-- PK fields -->
+		<column name="orphanetreferenceId" primary="true" type="long"></column>
+		<!-- FK fields -->
+		<column name="orphanetdisorderId" type="long"></column>
+		<!-- fields -->
+		<column name="source" type="String"></column>
+		<column name="reference" type="String"></column>
+		<column name="disordermappingrelation" type="long"></column>
+		<column name="disordermappingrelationorphanumber" type="long"></column>
+		<column name="disordermappingrelationname" type="String"></column>
+		<column name="disordermappingicdrelation" type="long"></column>
+		<column name="disordermappingicdrelationorphanumber" type="long"></column>
+		<column name="disordermappingicdrelationname" type="String"></column>
+		<column name="disordermappingvalidationstatus" type="long"></column>
+		<column name="disordermappingvalidationstatusorphanumber" type="long"></column>
+		<column name="disordermappingvalidationstatusname" type="String"></column>
+		<finder name="OrphanetDisorderIdAndSource" return-type="Collection">
+			<finder-column name="orphanetdisorderId" />
+			<finder-column name="source" />
+		</finder>
+	</entity>
+	<entity name="Gene" local-service="true" remote-service="true" table="ontologies.gene">
+		<!-- PK fields -->
+		<column name="geneId" primary="true" type="long"></column>
+		<!-- FK fields -->
+		<column name="orphanetdisorderId" type="long"></column>
+		<!-- fields -->
+		<column name="symbol" type="String"></column>
+		<column name="description" type="String"></column>
+		<column name="geneorphanumber" type="long"></column>
+		<column name="genetype" type="long"></column>
+		<column name="genetypeorphanumber" type="long"></column>
+		<column name="genetypename" type="String"></column>
+		<column name="disordergeneassociationtype" type="long"></column>
+		<column name="disordergeneassociationtypename" type="String"></column>
+		<column name="disordergeneassociationstatus" type="long"></column>
+		<column name="disordergeneassociationstatusname" type="String"></column>
+	</entity>
+	<entity name="GeneSynonym" local-service="true" remote-service="true" table="ontologies.genesynonym">
+		<!-- PK fields -->
+		<column name="genesynonymId" primary="true" type="long"></column>
+		<!-- FK fields -->
+		<column name="geneId" type="long"></column>
+		<!-- fields -->
+		<column name="synonym" type="String"></column>
+	</entity>
+	<entity name="GeneLocus" local-service="true" remote-service="true" table="ontologies.genelocus">
+		<!-- PK fields -->
+		<column name="genelocusId" primary="true" type="long"></column>
+		<!-- FK fields -->
+		<column name="geneId" type="long"></column>
+		<!-- fields -->
+		<column name="genelocus" type="String"></column>
+		<column name="genelocuskey" type="String"></column>
+	</entity>
+	<entity name="GeneReference" local-service="true" remote-service="true" table="ontologies.genereference">
+		<!-- PK fields -->
+		<column name="genereferenceId" primary="true" type="long"></column>
+		<!-- FK fields -->
+		<column name="geneId" type="long"></column>
+		<!-- fields -->
+		<column name="source" type="String"></column>
+		<column name="reference" type="String"></column>
+	</entity>
 </service-builder>

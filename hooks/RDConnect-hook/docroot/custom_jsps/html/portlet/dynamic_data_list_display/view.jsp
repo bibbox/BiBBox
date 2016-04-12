@@ -19,11 +19,13 @@
 
 <%
 DDLRecordSet recordSet = null;
-			
+boolean portaleditorrole = false;
+boolean biobankregistryownerrole = false;
+boolean display = true;
+		
 try {
 	if (Validator.isNotNull(recordSetId)) {
 		recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(recordSetId);
-
 		if (recordSet.getGroupId() != scopeGroupId) {
 			recordSet = null;
 		}
@@ -39,8 +41,6 @@ if (currentGroup.isOrganization()) {
     // the group is an Organization
 	organizationId = currentGroup.getClassPK();
 
-	boolean portaleditorrole = false;
-	boolean biobankregistryownerrole = false;
 	for(Role role : themeDisplay.getUser().getRoles()) {
 		if(role.getName().equalsIgnoreCase("PORTAL-EDITOR"))
 			portaleditorrole = true;
@@ -114,6 +114,15 @@ if (currentGroup.isOrganization()) {
 		}
 	}
 }
+if(rdcstructure.equals("bb_contribution")) {
+	if(biobankregistryownerrole || portaleditorrole) {
+		display = true;
+	} else {
+		display = false;
+	}
+}
+
+if(display) {
 %>
 <!-- RDC Edit Link END -->
 
@@ -161,6 +170,7 @@ if (currentGroup.isOrganization()) {
 
 <%
 }
+}
 catch (NoSuchRecordSetException nsrse) {
 %>
 
@@ -179,6 +189,8 @@ boolean showAddListIcon = hasConfigurationPermission && DDLPermission.contains(p
 boolean showAddTemplateIcon = (recordSet != null) && DDMPermission.contains(permissionChecker, scopeGroupId, ddmDisplay.getResourceName(), ddmDisplay.getAddTemplateActionId());
 boolean showEditDisplayTemplateIcon = (displayDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, displayDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
 boolean showEditFormTemplateIcon = (formDDMTemplateId != 0) && DDMTemplatePermission.contains(permissionChecker, formDDMTemplateId, PortletKeys.DYNAMIC_DATA_LISTS, ActionKeys.UPDATE);
+
+if(display) {
 %>
 
 
@@ -295,3 +307,7 @@ boolean showEditFormTemplateIcon = (formDDMTemplateId != 0) && DDMTemplatePermis
 		</div>
 	</div>
 </c:if>
+
+<%
+}
+%>

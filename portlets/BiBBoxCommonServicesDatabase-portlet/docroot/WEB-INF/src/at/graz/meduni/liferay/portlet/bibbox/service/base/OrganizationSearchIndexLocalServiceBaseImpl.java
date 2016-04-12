@@ -17,9 +17,16 @@ package at.graz.meduni.liferay.portlet.bibbox.service.base;
 import at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex;
 import at.graz.meduni.liferay.portlet.bibbox.service.OrganizationSearchIndexLocalService;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.DDLConfigurationPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneLocusPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.GenePersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneReferencePersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.GeneSynonymPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.IconsPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrganizationSearchIndexPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetDisorderPersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetReferencePersistence;
+import at.graz.meduni.liferay.portlet.bibbox.service.persistence.OrphanetSynonymPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolConfigurationPersistence;
 import at.graz.meduni.liferay.portlet.bibbox.service.persistence.SymbolTypeConfigurationPersistence;
 
@@ -346,6 +353,233 @@ public abstract class OrganizationSearchIndexLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the gene local service.
+	 *
+	 * @return the gene local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.GeneLocalService getGeneLocalService() {
+		return geneLocalService;
+	}
+
+	/**
+	 * Sets the gene local service.
+	 *
+	 * @param geneLocalService the gene local service
+	 */
+	public void setGeneLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.GeneLocalService geneLocalService) {
+		this.geneLocalService = geneLocalService;
+	}
+
+	/**
+	 * Returns the gene remote service.
+	 *
+	 * @return the gene remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.GeneService getGeneService() {
+		return geneService;
+	}
+
+	/**
+	 * Sets the gene remote service.
+	 *
+	 * @param geneService the gene remote service
+	 */
+	public void setGeneService(
+		at.graz.meduni.liferay.portlet.bibbox.service.GeneService geneService) {
+		this.geneService = geneService;
+	}
+
+	/**
+	 * Returns the gene persistence.
+	 *
+	 * @return the gene persistence
+	 */
+	public GenePersistence getGenePersistence() {
+		return genePersistence;
+	}
+
+	/**
+	 * Sets the gene persistence.
+	 *
+	 * @param genePersistence the gene persistence
+	 */
+	public void setGenePersistence(GenePersistence genePersistence) {
+		this.genePersistence = genePersistence;
+	}
+
+	/**
+	 * Returns the gene locus local service.
+	 *
+	 * @return the gene locus local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusLocalService getGeneLocusLocalService() {
+		return geneLocusLocalService;
+	}
+
+	/**
+	 * Sets the gene locus local service.
+	 *
+	 * @param geneLocusLocalService the gene locus local service
+	 */
+	public void setGeneLocusLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusLocalService geneLocusLocalService) {
+		this.geneLocusLocalService = geneLocusLocalService;
+	}
+
+	/**
+	 * Returns the gene locus remote service.
+	 *
+	 * @return the gene locus remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusService getGeneLocusService() {
+		return geneLocusService;
+	}
+
+	/**
+	 * Sets the gene locus remote service.
+	 *
+	 * @param geneLocusService the gene locus remote service
+	 */
+	public void setGeneLocusService(
+		at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusService geneLocusService) {
+		this.geneLocusService = geneLocusService;
+	}
+
+	/**
+	 * Returns the gene locus persistence.
+	 *
+	 * @return the gene locus persistence
+	 */
+	public GeneLocusPersistence getGeneLocusPersistence() {
+		return geneLocusPersistence;
+	}
+
+	/**
+	 * Sets the gene locus persistence.
+	 *
+	 * @param geneLocusPersistence the gene locus persistence
+	 */
+	public void setGeneLocusPersistence(
+		GeneLocusPersistence geneLocusPersistence) {
+		this.geneLocusPersistence = geneLocusPersistence;
+	}
+
+	/**
+	 * Returns the gene reference local service.
+	 *
+	 * @return the gene reference local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceLocalService getGeneReferenceLocalService() {
+		return geneReferenceLocalService;
+	}
+
+	/**
+	 * Sets the gene reference local service.
+	 *
+	 * @param geneReferenceLocalService the gene reference local service
+	 */
+	public void setGeneReferenceLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceLocalService geneReferenceLocalService) {
+		this.geneReferenceLocalService = geneReferenceLocalService;
+	}
+
+	/**
+	 * Returns the gene reference remote service.
+	 *
+	 * @return the gene reference remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceService getGeneReferenceService() {
+		return geneReferenceService;
+	}
+
+	/**
+	 * Sets the gene reference remote service.
+	 *
+	 * @param geneReferenceService the gene reference remote service
+	 */
+	public void setGeneReferenceService(
+		at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceService geneReferenceService) {
+		this.geneReferenceService = geneReferenceService;
+	}
+
+	/**
+	 * Returns the gene reference persistence.
+	 *
+	 * @return the gene reference persistence
+	 */
+	public GeneReferencePersistence getGeneReferencePersistence() {
+		return geneReferencePersistence;
+	}
+
+	/**
+	 * Sets the gene reference persistence.
+	 *
+	 * @param geneReferencePersistence the gene reference persistence
+	 */
+	public void setGeneReferencePersistence(
+		GeneReferencePersistence geneReferencePersistence) {
+		this.geneReferencePersistence = geneReferencePersistence;
+	}
+
+	/**
+	 * Returns the gene synonym local service.
+	 *
+	 * @return the gene synonym local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymLocalService getGeneSynonymLocalService() {
+		return geneSynonymLocalService;
+	}
+
+	/**
+	 * Sets the gene synonym local service.
+	 *
+	 * @param geneSynonymLocalService the gene synonym local service
+	 */
+	public void setGeneSynonymLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymLocalService geneSynonymLocalService) {
+		this.geneSynonymLocalService = geneSynonymLocalService;
+	}
+
+	/**
+	 * Returns the gene synonym remote service.
+	 *
+	 * @return the gene synonym remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymService getGeneSynonymService() {
+		return geneSynonymService;
+	}
+
+	/**
+	 * Sets the gene synonym remote service.
+	 *
+	 * @param geneSynonymService the gene synonym remote service
+	 */
+	public void setGeneSynonymService(
+		at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymService geneSynonymService) {
+		this.geneSynonymService = geneSynonymService;
+	}
+
+	/**
+	 * Returns the gene synonym persistence.
+	 *
+	 * @return the gene synonym persistence
+	 */
+	public GeneSynonymPersistence getGeneSynonymPersistence() {
+		return geneSynonymPersistence;
+	}
+
+	/**
+	 * Sets the gene synonym persistence.
+	 *
+	 * @param geneSynonymPersistence the gene synonym persistence
+	 */
+	public void setGeneSynonymPersistence(
+		GeneSynonymPersistence geneSynonymPersistence) {
+		this.geneSynonymPersistence = geneSynonymPersistence;
+	}
+
+	/**
 	 * Returns the icon configuration local service.
 	 *
 	 * @return the icon configuration local service
@@ -494,6 +728,177 @@ public abstract class OrganizationSearchIndexLocalServiceBaseImpl
 	public void setOrganizationSearchIndexPersistence(
 		OrganizationSearchIndexPersistence organizationSearchIndexPersistence) {
 		this.organizationSearchIndexPersistence = organizationSearchIndexPersistence;
+	}
+
+	/**
+	 * Returns the orphanet disorder local service.
+	 *
+	 * @return the orphanet disorder local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderLocalService getOrphanetDisorderLocalService() {
+		return orphanetDisorderLocalService;
+	}
+
+	/**
+	 * Sets the orphanet disorder local service.
+	 *
+	 * @param orphanetDisorderLocalService the orphanet disorder local service
+	 */
+	public void setOrphanetDisorderLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderLocalService orphanetDisorderLocalService) {
+		this.orphanetDisorderLocalService = orphanetDisorderLocalService;
+	}
+
+	/**
+	 * Returns the orphanet disorder remote service.
+	 *
+	 * @return the orphanet disorder remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderService getOrphanetDisorderService() {
+		return orphanetDisorderService;
+	}
+
+	/**
+	 * Sets the orphanet disorder remote service.
+	 *
+	 * @param orphanetDisorderService the orphanet disorder remote service
+	 */
+	public void setOrphanetDisorderService(
+		at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderService orphanetDisorderService) {
+		this.orphanetDisorderService = orphanetDisorderService;
+	}
+
+	/**
+	 * Returns the orphanet disorder persistence.
+	 *
+	 * @return the orphanet disorder persistence
+	 */
+	public OrphanetDisorderPersistence getOrphanetDisorderPersistence() {
+		return orphanetDisorderPersistence;
+	}
+
+	/**
+	 * Sets the orphanet disorder persistence.
+	 *
+	 * @param orphanetDisorderPersistence the orphanet disorder persistence
+	 */
+	public void setOrphanetDisorderPersistence(
+		OrphanetDisorderPersistence orphanetDisorderPersistence) {
+		this.orphanetDisorderPersistence = orphanetDisorderPersistence;
+	}
+
+	/**
+	 * Returns the orphanet reference local service.
+	 *
+	 * @return the orphanet reference local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceLocalService getOrphanetReferenceLocalService() {
+		return orphanetReferenceLocalService;
+	}
+
+	/**
+	 * Sets the orphanet reference local service.
+	 *
+	 * @param orphanetReferenceLocalService the orphanet reference local service
+	 */
+	public void setOrphanetReferenceLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceLocalService orphanetReferenceLocalService) {
+		this.orphanetReferenceLocalService = orphanetReferenceLocalService;
+	}
+
+	/**
+	 * Returns the orphanet reference remote service.
+	 *
+	 * @return the orphanet reference remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceService getOrphanetReferenceService() {
+		return orphanetReferenceService;
+	}
+
+	/**
+	 * Sets the orphanet reference remote service.
+	 *
+	 * @param orphanetReferenceService the orphanet reference remote service
+	 */
+	public void setOrphanetReferenceService(
+		at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceService orphanetReferenceService) {
+		this.orphanetReferenceService = orphanetReferenceService;
+	}
+
+	/**
+	 * Returns the orphanet reference persistence.
+	 *
+	 * @return the orphanet reference persistence
+	 */
+	public OrphanetReferencePersistence getOrphanetReferencePersistence() {
+		return orphanetReferencePersistence;
+	}
+
+	/**
+	 * Sets the orphanet reference persistence.
+	 *
+	 * @param orphanetReferencePersistence the orphanet reference persistence
+	 */
+	public void setOrphanetReferencePersistence(
+		OrphanetReferencePersistence orphanetReferencePersistence) {
+		this.orphanetReferencePersistence = orphanetReferencePersistence;
+	}
+
+	/**
+	 * Returns the orphanet synonym local service.
+	 *
+	 * @return the orphanet synonym local service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymLocalService getOrphanetSynonymLocalService() {
+		return orphanetSynonymLocalService;
+	}
+
+	/**
+	 * Sets the orphanet synonym local service.
+	 *
+	 * @param orphanetSynonymLocalService the orphanet synonym local service
+	 */
+	public void setOrphanetSynonymLocalService(
+		at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymLocalService orphanetSynonymLocalService) {
+		this.orphanetSynonymLocalService = orphanetSynonymLocalService;
+	}
+
+	/**
+	 * Returns the orphanet synonym remote service.
+	 *
+	 * @return the orphanet synonym remote service
+	 */
+	public at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymService getOrphanetSynonymService() {
+		return orphanetSynonymService;
+	}
+
+	/**
+	 * Sets the orphanet synonym remote service.
+	 *
+	 * @param orphanetSynonymService the orphanet synonym remote service
+	 */
+	public void setOrphanetSynonymService(
+		at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymService orphanetSynonymService) {
+		this.orphanetSynonymService = orphanetSynonymService;
+	}
+
+	/**
+	 * Returns the orphanet synonym persistence.
+	 *
+	 * @return the orphanet synonym persistence
+	 */
+	public OrphanetSynonymPersistence getOrphanetSynonymPersistence() {
+		return orphanetSynonymPersistence;
+	}
+
+	/**
+	 * Sets the orphanet synonym persistence.
+	 *
+	 * @param orphanetSynonymPersistence the orphanet synonym persistence
+	 */
+	public void setOrphanetSynonymPersistence(
+		OrphanetSynonymPersistence orphanetSynonymPersistence) {
+		this.orphanetSynonymPersistence = orphanetSynonymPersistence;
 	}
 
 	/**
@@ -792,6 +1197,30 @@ public abstract class OrganizationSearchIndexLocalServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.DDLConfigurationService ddlConfigurationService;
 	@BeanReference(type = DDLConfigurationPersistence.class)
 	protected DDLConfigurationPersistence ddlConfigurationPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.GeneLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.GeneLocalService geneLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.GeneService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.GeneService geneService;
+	@BeanReference(type = GenePersistence.class)
+	protected GenePersistence genePersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusLocalService geneLocusLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.GeneLocusService geneLocusService;
+	@BeanReference(type = GeneLocusPersistence.class)
+	protected GeneLocusPersistence geneLocusPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceLocalService geneReferenceLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.GeneReferenceService geneReferenceService;
+	@BeanReference(type = GeneReferencePersistence.class)
+	protected GeneReferencePersistence geneReferencePersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymLocalService geneSynonymLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.GeneSynonymService geneSynonymService;
+	@BeanReference(type = GeneSynonymPersistence.class)
+	protected GeneSynonymPersistence geneSynonymPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationLocalService iconConfigurationLocalService;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.IconConfigurationService.class)
@@ -808,6 +1237,24 @@ public abstract class OrganizationSearchIndexLocalServiceBaseImpl
 	protected at.graz.meduni.liferay.portlet.bibbox.service.OrganizationSearchIndexLocalService organizationSearchIndexLocalService;
 	@BeanReference(type = OrganizationSearchIndexPersistence.class)
 	protected OrganizationSearchIndexPersistence organizationSearchIndexPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderLocalService orphanetDisorderLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.OrphanetDisorderService orphanetDisorderService;
+	@BeanReference(type = OrphanetDisorderPersistence.class)
+	protected OrphanetDisorderPersistence orphanetDisorderPersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceLocalService orphanetReferenceLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.OrphanetReferenceService orphanetReferenceService;
+	@BeanReference(type = OrphanetReferencePersistence.class)
+	protected OrphanetReferencePersistence orphanetReferencePersistence;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymLocalService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymLocalService orphanetSynonymLocalService;
+	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymService.class)
+	protected at.graz.meduni.liferay.portlet.bibbox.service.OrphanetSynonymService orphanetSynonymService;
+	@BeanReference(type = OrphanetSynonymPersistence.class)
+	protected OrphanetSynonymPersistence orphanetSynonymPersistence;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService.class)
 	protected at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationLocalService symbolConfigurationLocalService;
 	@BeanReference(type = at.graz.meduni.liferay.portlet.bibbox.service.SymbolConfigurationService.class)

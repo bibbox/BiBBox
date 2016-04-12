@@ -106,17 +106,17 @@ public class IconsLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.model.Icons"
 			};
 
-		_methodName62 = "getBeanIdentifier";
+		_methodName104 = "getBeanIdentifier";
 
-		_methodParameterTypes62 = new String[] {  };
+		_methodParameterTypes104 = new String[] {  };
 
-		_methodName63 = "setBeanIdentifier";
+		_methodName105 = "setBeanIdentifier";
 
-		_methodParameterTypes63 = new String[] { "java.lang.String" };
+		_methodParameterTypes105 = new String[] { "java.lang.String" };
 
-		_methodName68 = "iconsFromRequest";
+		_methodName110 = "iconsFromRequest";
 
-		_methodParameterTypes68 = new String[] { "javax.portlet.ActionRequest" };
+		_methodParameterTypes110 = new String[] { "javax.portlet.ActionRequest" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -208,20 +208,20 @@ public class IconsLocalServiceClpInvoker {
 			return IconsLocalServiceUtil.updateIcons((at.graz.meduni.liferay.portlet.bibbox.model.Icons)arguments[0]);
 		}
 
-		if (_methodName62.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+		if (_methodName104.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
 			return IconsLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName63.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+		if (_methodName105.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
 			IconsLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
 			return IconsLocalServiceUtil.iconsFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
@@ -260,10 +260,10 @@ public class IconsLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName62;
-	private String[] _methodParameterTypes62;
-	private String _methodName63;
-	private String[] _methodParameterTypes63;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
+	private String _methodName104;
+	private String[] _methodParameterTypes104;
+	private String _methodName105;
+	private String[] _methodParameterTypes105;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
 }

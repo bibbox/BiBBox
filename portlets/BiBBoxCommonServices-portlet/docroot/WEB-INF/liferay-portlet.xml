@@ -282,6 +282,19 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>scaleus-importer-portlet</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>orphanet-data-importer</portlet-name>
+		<icon>/icon.png</icon>
+		<control-panel-entry-category>configuration</control-panel-entry-category>
+		<control-panel-entry-weight>6.6</control-panel-entry-weight>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			orphanet-data-importer-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.pw.model.Inventory">
+		<field name="inventoryId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="inventarnummer" type="long" />
+		<field name="webcontentId" type="long" />
+		<field name="folderId" type="long" />
+		<field name="structureId" type="String" />
+		<field name="structuretemplateId" type="String" />
+	</model>
+</model-hints>

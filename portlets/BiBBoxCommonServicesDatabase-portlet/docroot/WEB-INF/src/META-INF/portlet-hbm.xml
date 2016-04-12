@@ -3,9 +3,16 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.DDLConfiguration" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.Gene" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.GeneLocus" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.GeneReference" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.GeneSynonym" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.IconConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.Icons" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.OrphanetDisorder" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.OrphanetReference" />
+	<import class="at.graz.meduni.liferay.portlet.bibbox.model.OrphanetSynonym" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.SymbolConfiguration" />
 	<import class="at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration" />
 	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.DDLConfigurationImpl" table="bibboxcs.ddlconfiguration">
@@ -24,6 +31,49 @@
 		<property name="columwidth" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="editscript" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="edittip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneImpl" table="ontologies.gene">
+		<cache usage="read-write" />
+		<id name="geneId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="orphanetdisorderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="symbol" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geneorphanumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="genetype" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="genetypeorphanumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="genetypename" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="disordergeneassociationtype" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="disordergeneassociationtypename" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="disordergeneassociationstatus" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="disordergeneassociationstatusname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneLocusImpl" table="ontologies.genelocus">
+		<cache usage="read-write" />
+		<id name="genelocusId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="geneId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="genelocus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="genelocuskey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneReferenceImpl" table="ontologies.genereference">
+		<cache usage="read-write" />
+		<id name="genereferenceId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="geneId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="reference" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.GeneSynonymImpl" table="ontologies.genesynonym">
+		<cache usage="read-write" />
+		<id name="genesynonymId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="geneId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="synonym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.IconConfigurationImpl" table="bibboxcs.iconconfiguration">
 		<cache usage="read-write" />
@@ -56,6 +106,41 @@
 		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetDisorderImpl" table="ontologies.orphanetdisorder">
+		<cache usage="read-write" />
+		<id name="orphanetdisorderId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="orphanumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="orpahnetlink" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseasename" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetReferenceImpl" table="ontologies.orphanetreference">
+		<cache usage="read-write" />
+		<id name="orphanetreferenceId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="orphanetdisorderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="reference" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="disordermappingrelation" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="disordermappingrelationorphanumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="disordermappingrelationname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="disordermappingicdrelation" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="disordermappingicdrelationorphanumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="disordermappingicdrelationname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="disordermappingvalidationstatus" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="disordermappingvalidationstatusorphanumber" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="disordermappingvalidationstatusname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetSynonymImpl" table="ontologies.orphanetsynonym">
+		<cache usage="read-write" />
+		<id name="orphanetsynonymId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="orphanetdisorderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="synonym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.SymbolConfigurationImpl" table="bibboxcs.symbolconfiguration">
 		<cache usage="read-write" />

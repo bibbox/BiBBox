@@ -139,6 +139,10 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 		_methodName83 = "createEmpltyDiseaseMatrix";
 
 		_methodParameterTypes83 = new String[] {  };
+
+		_methodName84 = "getDiseaseMatrixFromFederation";
+
+		_methodParameterTypes84 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -274,6 +278,11 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 			return DiseaseMatrixLocalServiceUtil.createEmpltyDiseaseMatrix();
 		}
 
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
+			return DiseaseMatrixLocalServiceUtil.getDiseaseMatrixFromFederation(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -325,4 +334,6 @@ public class DiseaseMatrixLocalServiceClpInvoker {
 	private String[] _methodParameterTypes82;
 	private String _methodName83;
 	private String[] _methodParameterTypes83;
+	private String _methodName84;
+	private String[] _methodParameterTypes84;
 }

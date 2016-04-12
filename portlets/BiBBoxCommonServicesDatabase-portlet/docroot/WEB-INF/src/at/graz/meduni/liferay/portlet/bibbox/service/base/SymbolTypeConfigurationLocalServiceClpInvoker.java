@@ -106,21 +106,21 @@ public class SymbolTypeConfigurationLocalServiceClpInvoker {
 				"at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration"
 			};
 
-		_methodName62 = "getBeanIdentifier";
+		_methodName104 = "getBeanIdentifier";
 
-		_methodParameterTypes62 = new String[] {  };
+		_methodParameterTypes104 = new String[] {  };
 
-		_methodName63 = "setBeanIdentifier";
+		_methodName105 = "setBeanIdentifier";
 
-		_methodParameterTypes63 = new String[] { "java.lang.String" };
+		_methodParameterTypes105 = new String[] { "java.lang.String" };
 
-		_methodName68 = "getSymbolTypeConfigurationBySymbolType";
+		_methodName110 = "getSymbolTypeConfigurationBySymbolType";
 
-		_methodParameterTypes68 = new String[] { "java.lang.String" };
+		_methodParameterTypes110 = new String[] { "java.lang.String" };
 
-		_methodName69 = "symbolTypeConfigurationFromRequest";
+		_methodName111 = "symbolTypeConfigurationFromRequest";
 
-		_methodParameterTypes69 = new String[] { "javax.portlet.ActionRequest" };
+		_methodParameterTypes111 = new String[] { "javax.portlet.ActionRequest" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -212,25 +212,25 @@ public class SymbolTypeConfigurationLocalServiceClpInvoker {
 			return SymbolTypeConfigurationLocalServiceUtil.updateSymbolTypeConfiguration((at.graz.meduni.liferay.portlet.bibbox.model.SymbolTypeConfiguration)arguments[0]);
 		}
 
-		if (_methodName62.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+		if (_methodName104.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
 			return SymbolTypeConfigurationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName63.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+		if (_methodName105.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
 			SymbolTypeConfigurationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
 			return SymbolTypeConfigurationLocalServiceUtil.getSymbolTypeConfigurationBySymbolType((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName69.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+		if (_methodName111.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
 			return SymbolTypeConfigurationLocalServiceUtil.symbolTypeConfigurationFromRequest((javax.portlet.ActionRequest)arguments[0]);
 		}
 
@@ -269,12 +269,12 @@ public class SymbolTypeConfigurationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName62;
-	private String[] _methodParameterTypes62;
-	private String _methodName63;
-	private String[] _methodParameterTypes63;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
-	private String _methodName69;
-	private String[] _methodParameterTypes69;
+	private String _methodName104;
+	private String[] _methodParameterTypes104;
+	private String _methodName105;
+	private String[] _methodParameterTypes105;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
+	private String _methodName111;
+	private String[] _methodParameterTypes111;
 }
