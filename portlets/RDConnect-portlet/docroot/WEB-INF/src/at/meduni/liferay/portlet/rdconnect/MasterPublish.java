@@ -117,22 +117,40 @@ import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 import com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicyFactoryUtil;
 
 /**
- * Portlet implementation class MasterPublish
+ * MasterPublish is a helper class for all publishing of organizations in the RD-Connect Context
+ * This class encapsulates the creation and assostioation of different liferay objects and objects
+ * definde for the RD-Connect purpose.
+ * This objects includes:
+ * <ul>
+ * <li>Organization</li>
+ * <li>Site</li>
+ * <li>User</li>
+ * <li>Address</li>
+ * <li>Phone</li>
+ * <li>DDL</li>
+ * <li>Folder</li>
+ * </ul>
+ * 
+ * @author	Robert Reihs
+ * @version	%I%, %G%
+ * @since	1.0
  */
 public class MasterPublish extends MVCPortlet {
 	
 	String counter = "15";
 	Locale default_locale_ = null;
 	final String alphabet_ = "abcdefghijklmopqrstuvwxyz";
-    final int N_ = alphabet_.length();
+    final int alphabeth_length_ = alphabet_.length();
     Random random_ = new Random();
+    // Company IDs
+    long company_id_ = 0;
     // Roles
-    long BIOBANK_REG_EDITOR = 13322;
-    long BIOBANK_REG_OWNER = 13321;
-    long BiobanK_REG_MAINCONTACT = 13320;
-    
-    long BIOBANK_ASSESSMENT_ORGANIZATION = 26616;
-    long CATALOGUE_ORGANIZATION = 10709;
+    long bb_reg_editor_role_id_ = 0; 
+    long bb_reg_owner_role_id_ = 13321;
+    long bb_reg_maincontact_role_id_ = 13320;
+    // Parent Organizations
+    long biobank_assessment_organization_id_ = 26616;
+    long catalog_organization_id_ = 10709;
     // Web page
     int PUBLICWEBSITETYPEID = 12020; // Public: 12020
     int INTRANETWEBSITETYPEID = 12019; // Public: 12020
@@ -143,15 +161,36 @@ public class MasterPublish extends MVCPortlet {
     int ADDRESS_OTHER = 12001;
     int ADDRESS_POBOX = 12002;
     int ADDRESS_SHIPPING = 12003;
+    
+    /**
+     * Setup variables for publishing the an organization
+     * 
+     * @param request the ActionRequest from the portlet call with information of the portal
+     */
+    public void setUpVaraibles(ActionRequest request) {
+    	try {
+    		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+    		company_id_ = themeDisplay.getCompanyId();
+    		default_locale_ = themeDisplay.getLocale();
+    		
+    		bb_reg_editor_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-EDITOR").getRoleId();
+    		bb_reg_owner_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-OWNER").getRoleId();
+    		bb_reg_maincontact_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-MAINCONTACT").getRoleId();
+    		
+    		biobank_assessment_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Biobank Assessment").getOrganizationId();
+    		catalog_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Catalog").getOrganizationId();
+    	} catch (Exception ex) {
+    		
+    	}
+    }
 	
 	public void publishToGate(ActionRequest request, ActionResponse response, MasterCandidate master) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		default_locale_ = themeDisplay.getLocale();
-		long companyId = themeDisplay.getCompanyId();
+		
 		Organization organization = null;
 		
 		try {
-			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
+			Company company = CompanyLocalServiceUtil.getCompanyById(company_id_);
 			// Create Organisation
 			organization = createOrganisation(company, master);
 			
@@ -397,9 +436,9 @@ public class MasterPublish extends MVCPortlet {
 			long userId = company.getDefaultUser().getUserId();
 	        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 	        if(master.getCandidatetype().equalsIgnoreCase("biobank")) {
-	        	parentOrganizationId = BIOBANK_ASSESSMENT_ORGANIZATION;
+	        	parentOrganizationId = biobank_assessment_organization_id_;
 	        } else {
-	        	parentOrganizationId = CATALOGUE_ORGANIZATION;
+	        	parentOrganizationId = catalog_organization_id_;
 	        }
 	        String name = master.getName();
 	        if(name.length() > 100) {
@@ -490,10 +529,10 @@ public class MasterPublish extends MVCPortlet {
 			OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization);
 		}
 		long[] userids = {user.getUserId()};
-		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), BIOBANK_REG_EDITOR);
-		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), BIOBANK_REG_OWNER);
+		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_editor_role_id_);
+		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_owner_role_id_);
 		if(first) {
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), BiobanK_REG_MAINCONTACT);
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_maincontact_role_id_);
 		}
 	}
 	
@@ -751,7 +790,7 @@ public class MasterPublish extends MVCPortlet {
 	private String randomIdGenerator() {
 		String id = "_INSTANCE_";
 	    for (int i = 0; i < 4; i++) {
-	    	id += alphabet_.charAt(random_.nextInt(N_));
+	    	id += alphabet_.charAt(random_.nextInt(alphabeth_length_));
 	    }
 	    return id;
 	}
