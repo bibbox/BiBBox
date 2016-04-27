@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.DictionaryLocalService" class="at.graz.meduni.liferay.portlet.saat.service.impl.DictionaryLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.DictionaryService" class="at.graz.meduni.liferay.portlet.saat.service.impl.DictionaryServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.persistence.DictionaryPersistence" class="at.graz.meduni.liferay.portlet.saat.service.persistence.DictionaryPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.DictionaryDictionaryLinkLocalService" class="at.graz.meduni.liferay.portlet.saat.service.impl.DictionaryDictionaryLinkLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.DictionaryDictionaryLinkService" class="at.graz.meduni.liferay.portlet.saat.service.impl.DictionaryDictionaryLinkServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.persistence.DictionaryDictionaryLinkPersistence" class="at.graz.meduni.liferay.portlet.saat.service.persistence.DictionaryDictionaryLinkPersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.ICD10LocalService" class="at.graz.meduni.liferay.portlet.saat.service.impl.ICD10LocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.ICD10Service" class="at.graz.meduni.liferay.portlet.saat.service.impl.ICD10ServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.persistence.ICD10Persistence" class="at.graz.meduni.liferay.portlet.saat.service.persistence.ICD10PersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.ICDO3LocalService" class="at.graz.meduni.liferay.portlet.saat.service.impl.ICDO3LocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.ICDO3Service" class="at.graz.meduni.liferay.portlet.saat.service.impl.ICDO3ServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.persistence.ICDO3Persistence" class="at.graz.meduni.liferay.portlet.saat.service.persistence.ICDO3PersistenceImpl" parent="basePersistence" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.SCGLocalService" class="at.graz.meduni.liferay.portlet.saat.service.impl.SCGLocalServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.SCGService" class="at.graz.meduni.liferay.portlet.saat.service.impl.SCGServiceImpl" />
+	<bean id="at.graz.meduni.liferay.portlet.saat.service.persistence.SCGPersistence" class="at.graz.meduni.liferay.portlet.saat.service.persistence.SCGPersistenceImpl" parent="basePersistence" />
+</beans>

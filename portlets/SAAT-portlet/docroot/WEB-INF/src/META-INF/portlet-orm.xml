@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="at.graz.meduni.liferay.model.impl.DictionaryModelImpl">
+		<attributes>
+			<id name="dictionary_id" />
+			<basic name="synonym" />
+			<basic name="before_synonym" />
+			<basic name="after_synonym" />
+			<basic name="foreword" />
+			<basic name="ending" />
+			<basic name="sentence" />
+			<basic name="iscode" />
+			<basic name="pattern" />
+			<basic name="code_typ" />
+			<basic name="code_value" />
+			<basic name="root" />
+			<basic name="negation" />
+			<basic name="occur" />
+			<basic name="disease_ids" />
+			<basic name="dirty" />
+			<basic name="priority" />
+			<basic name="disease_ids_count" />
+			<basic name="priority_mode" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.model.impl.DictionaryDictionaryLinkModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="dictionary_id" />
+			<basic name="addiction_id" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.model.impl.ICD10ModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="code">
+				<column name="CODE_" />
+			</basic>
+			<basic name="description" />
+			<basic name="INKLUSIVA" />
+			<basic name="EXKLUSIVA" />
+			<basic name="TYPE" />
+			<basic name="USED" />
+			<basic name="FROM_CODE" />
+			<basic name="TO_CODE" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.model.impl.ICDO3ModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="code">
+				<column name="CODE_" />
+			</basic>
+			<basic name="term" />
+			<basic name="sui" />
+			<basic name="typ" />
+			<basic name="use">
+				<column name="USE_" />
+			</basic>
+			<basic name="description" />
+			<basic name="localisation" />
+			<basic name="link" />
+			<basic name="exklusiva" />
+			<basic name="hint" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="at.graz.meduni.liferay.model.impl.SCGModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="code">
+				<column name="CODE_" />
+			</basic>
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="at.graz.meduni.liferay.model.impl.DictionaryImpl" name="Dictionary">
+		<table name="dictionary2" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.model.impl.DictionaryDictionaryLinkImpl" name="DictionaryDictionaryLink">
+		<table name="dictionary2_dictionary2_addiction_link" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.model.impl.ICD10Impl" name="ICD10">
+		<table name="code_icd10" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.model.impl.ICDO3Impl" name="ICDO3">
+		<table name="code_icdo3" />
+		<attributes />
+	</entity>
+	<entity class="at.graz.meduni.liferay.model.impl.SCGImpl" name="SCG">
+		<table name="code_scg" />
+		<attributes />
+	</entity>
+</entity-mappings>

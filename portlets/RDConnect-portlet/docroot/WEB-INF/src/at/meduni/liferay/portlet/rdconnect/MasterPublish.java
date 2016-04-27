@@ -126,10 +126,8 @@ public class MasterPublish extends MVCPortlet {
 	final String alphabet_ = "abcdefghijklmopqrstuvwxyz";
     final int N_ = alphabet_.length();
     Random random_ = new Random();
-    //long ORGANISATION_ADMIN_ROLL = 22956; // local 10166 Server 22956
-    //long ADMIN_ROLL = 22951;
+    // Roles
     long BIOBANK_REG_EDITOR = 13322;
-    //long BIOBANK_REG_MEMBER = 32821;
     long BIOBANK_REG_OWNER = 13321;
     long BiobanK_REG_MAINCONTACT = 13320;
     

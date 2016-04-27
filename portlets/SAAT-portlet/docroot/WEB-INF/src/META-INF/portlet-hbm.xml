@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.graz.meduni.liferay.model.Dictionary" />
+	<import class="at.graz.meduni.liferay.model.DictionaryDictionaryLink" />
+	<import class="at.graz.meduni.liferay.model.ICD10" />
+	<import class="at.graz.meduni.liferay.model.ICDO3" />
+	<import class="at.graz.meduni.liferay.model.SCG" />
+	<class name="at.graz.meduni.liferay.model.impl.DictionaryImpl" table="dictionary2">
+		<cache usage="read-write" />
+		<id name="dictionary_id" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="synonym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="before_synonym" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="after_synonym" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="foreword" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="ending" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="sentence" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="iscode" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="pattern" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="code_typ" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="code_value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="root" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="negation" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="occur" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="disease_ids" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dirty" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="disease_ids_count" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="priority_mode" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="at.graz.meduni.liferay.model.impl.DictionaryDictionaryLinkImpl" table="dictionary2_dictionary2_addiction_link">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="dictionary_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="addiction_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="at.graz.meduni.liferay.model.impl.ICD10Impl" table="code_icd10">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="code" type="com.liferay.portal.dao.orm.hibernate.StringType" column="code_" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="INKLUSIVA" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="EXKLUSIVA" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="TYPE" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="USED" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="FROM_CODE" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="TO_CODE" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.model.impl.ICDO3Impl" table="code_icdo3">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="code" type="com.liferay.portal.dao.orm.hibernate.StringType" column="code_" />
+		<property name="term" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="sui" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="typ" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="use" type="com.liferay.portal.dao.orm.hibernate.StringType" column="use_" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="localisation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="link" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="exklusiva" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hint" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="at.graz.meduni.liferay.model.impl.SCGImpl" table="code_scg">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="code" type="com.liferay.portal.dao.orm.hibernate.StringType" column="code_" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

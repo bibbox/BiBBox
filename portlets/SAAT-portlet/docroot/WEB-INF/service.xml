@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.graz.meduni.liferay">
+	<author>reihsr</author>
+	<namespace>saat_false</namespace>
+
+	<entity name="Dictionary" local-service="true" remote-service="true" table="dictionary2">
+		<!-- PK fields -->
+		<column name="dictionary_id" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="synonym" type="String" />
+		<column name="before_synonym" type="int" />
+		<column name="after_synonym" type="int" />
+		<column name="foreword" type="boolean" />
+		<column name="ending" type="boolean" />
+		<column name="sentence" type="boolean" />
+		<column name="iscode" type="boolean" />
+		<column name="pattern" type="String" />
+		<column name="code_typ" type="String" />
+		<column name="code_value" type="String" />
+		<column name="root" type="boolean" />
+		<column name="negation" type="boolean" />
+		<column name="occur" type="boolean" />
+		<column name="disease_ids" type="String" />
+		<column name="dirty" type="boolean" />
+		<column name="priority" type="int" />
+		<column name="disease_ids_count" type="int" />
+		<column name="priority_mode" type="boolean" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="dictionary_id" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="Synonym" return-type="Collection">
+			<finder-column name="synonym" />
+		</finder>
+		<finder name="RootNodes" return-type="Collection">
+			<finder-column name="root" />
+		</finder>
+	</entity>
+	
+	<entity name="DictionaryDictionaryLink" local-service="true" remote-service="true" table="dictionary2_dictionary2_addiction_link">
+		<!-- PK fields -->
+		<column name="id" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="dictionary_id" type="long" />
+		<column name="addiction_id" type="long" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="DictionaryId" return-type="Collection">
+			<finder-column name="dictionary_id" />
+		</finder>
+	</entity>
+	
+	<entity name="ICD10" local-service="true" remote-service="true" table="code_icd10">
+		<!-- PK fields -->
+		<column name="id" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="code" type="String" />
+		<column name="description" type="String" />
+		<column name="INKLUSIVA" type="String" />
+		<column name="EXKLUSIVA" type="String" />
+		<column name="TYPE" type="String" />
+		<column name="USED" type="double" />
+		<column name="FROM_CODE" type="String" />
+		<column name="TO_CODE" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
+		</finder>
+	</entity>
+	
+	<entity name="ICDO3" local-service="true" remote-service="true" table="code_icdo3">
+		<!-- PK fields -->
+		<column name="id" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="code" type="String" />
+		<column name="term" type="int" />
+		<column name="sui" type="int" />
+		<column name="typ" type="String" />
+		<column name="use" type="String" />
+		<column name="description" type="String" />
+		<column name="localisation" type="String" />
+		<column name="link" type="String" />
+		<column name="exklusiva" type="String" />
+		<column name="hint" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
+		</finder>
+	</entity>
+	
+	<entity name="SCG" local-service="true" remote-service="true" table="code_scg">
+		<!-- PK fields -->
+		<column name="id" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="code" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
+		</finder>
+	</entity>
+	
+</service-builder>

@@ -63,8 +63,6 @@ request.setAttribute("search.jsp-returnToFullPageURL", portletDisplay.getURLBack
 
 	<aui:fieldset id="searchContainer">
 	
-		<aui:input name="TestField" type="text" />
-	
 		<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" inlineField="<%= true %>" label="" name="keywords" size="30" value="123<%= HtmlUtil.escape(keywords) %>" />
 
 		<aui:input inlineField="<%= true %>" label="" name="search" src='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' title="search" type="image" />

@@ -30,11 +30,14 @@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants" 
 page import="com.liferay.portlet.dynamicdatamapping.service.permission.DDMPermission" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.util.DDMDisplay" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.util.DDMDisplayRegistryUtil" %>
-
+1234
 <%
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 long recordSetId = GetterUtil.getLong(portletPreferences.getValue("recordSetId", StringPool.BLANK));
+		 
+boolean bbmri_disableSelection = GetterUtil.getBoolean(portletPreferences.getValue("bbmri_disableSelection", Boolean.FALSE.toString()));
+long bbmri_siteId = GetterUtil.getLong(portletPreferences.getValue("bbmri_siteId", StringPool.BLANK));
 
 long displayDDMTemplateId = GetterUtil.getLong(portletPreferences.getValue("displayDDMTemplateId", StringPool.BLANK));
 long formDDMTemplateId = GetterUtil.getLong(portletPreferences.getValue("formDDMTemplateId", StringPool.BLANK));

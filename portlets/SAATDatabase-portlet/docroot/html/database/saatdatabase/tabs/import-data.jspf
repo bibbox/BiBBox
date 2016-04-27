@@ -1,0 +1,23 @@
+<h3>Import Data to SAAT Tables from JSON</h3>
+
+<portlet:actionURL name="importData" var="importDataURL" windowState="normal" />
+<aui:form action="<%=importDataURL%>" enctype="multipart/form-data" method="post" name="fm">
+	<div>
+		<aui:fieldset>
+			<aui:select name="table">
+				<aui:option value="ICD-10">ICD-10</aui:option>
+				<aui:option value="ICD-O3">ICD-O3</aui:option>
+				<aui:option value="SCG">SCG</aui:option>
+				<aui:option value="Dictionary">Dictionary</aui:option>
+				<aui:option value="Dictionary-Addiction-Link">Dictionary Addiction Link</aui:option>
+			</aui:select>
+ 			<input type="file" name="fileupload" id="fileupload" size="60" />
+			
+		</aui:fieldset>
+	</div>
+	<div>
+		<aui:button-row>
+			<aui:button name="saveButton" type="submit" value="save" />
+		</aui:button-row>
+	</div>
+</aui:form>

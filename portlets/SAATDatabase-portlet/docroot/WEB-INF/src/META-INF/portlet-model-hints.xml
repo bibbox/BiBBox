@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="at.graz.meduni.liferay.portlet.saat.model.Dictionary">
+		<field name="dictionaryId" type="long" />
+		<field name="synonym" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="before_synonym" type="int" />
+		<field name="after_synonym" type="int" />
+		<field name="foreword" type="boolean" />
+		<field name="ending" type="boolean" />
+		<field name="sentence" type="boolean" />
+		<field name="iscode" type="boolean" />
+		<field name="pattern" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="code_typ" type="String" />
+		<field name="code_value" type="String" />
+		<field name="root" type="boolean" />
+		<field name="negation" type="boolean" />
+		<field name="occur" type="boolean" />
+		<field name="disease_ids" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="dirty" type="boolean" />
+		<field name="priority" type="int" />
+		<field name="disease_ids_count" type="int" />
+		<field name="priority_mode" type="boolean" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.saat.model.DictionaryDictionaryLink">
+		<field name="dictionary_dictionary_addiction_linkId" type="long" />
+		<field name="dictionaryId" type="long" />
+		<field name="addictionId" type="long" />
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.saat.model.ICD10">
+		<field name="icd10Id" type="long" />
+		<field name="code" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="description" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="INKLUSIVA" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="EXKLUSIVA" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="TYPE" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="USED" type="double" />
+		<field name="FROM_CODE" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="TO_CODE" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.saat.model.ICDO3">
+		<field name="icdo3Id" type="long" />
+		<field name="code" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="term" type="int" />
+		<field name="sui" type="int" />
+		<field name="typ" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="use" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="description" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="localisation" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="link" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="exklusiva" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+		<field name="hint" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+	</model>
+	<model name="at.graz.meduni.liferay.portlet.saat.model.SCG">
+		<field name="scgId" type="long" />
+		<field name="code" type="String">
+			<hint name="max-length">255</hint>
+		</field>
+		<field name="description" type="String">
+			<hint name="max-length">10000</hint>
+		</field>
+	</model>
+</model-hints>

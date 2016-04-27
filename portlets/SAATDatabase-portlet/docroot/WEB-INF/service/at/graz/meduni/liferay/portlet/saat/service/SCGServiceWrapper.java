@@ -1,0 +1,84 @@
+/**
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package at.graz.meduni.liferay.portlet.saat.service;
+
+import com.liferay.portal.service.ServiceWrapper;
+
+/**
+ * Provides a wrapper for {@link SCGService}.
+ *
+ * @author reihsr
+ * @see SCGService
+ * @generated
+ */
+public class SCGServiceWrapper implements SCGService,
+	ServiceWrapper<SCGService> {
+	public SCGServiceWrapper(SCGService scgService) {
+		_scgService = scgService;
+	}
+
+	/**
+	* Returns the Spring bean ID for this bean.
+	*
+	* @return the Spring bean ID for this bean
+	*/
+	@Override
+	public java.lang.String getBeanIdentifier() {
+		return _scgService.getBeanIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	@Override
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_scgService.setBeanIdentifier(beanIdentifier);
+	}
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _scgService.invokeMethod(name, parameterTypes, arguments);
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	public SCGService getWrappedSCGService() {
+		return _scgService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	public void setWrappedSCGService(SCGService scgService) {
+		_scgService = scgService;
+	}
+
+	@Override
+	public SCGService getWrappedService() {
+		return _scgService;
+	}
+
+	@Override
+	public void setWrappedService(SCGService scgService) {
+		_scgService = scgService;
+	}
+
+	private SCGService _scgService;
+}

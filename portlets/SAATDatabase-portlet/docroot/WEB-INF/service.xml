@@ -2,87 +2,138 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 <service-builder package-path="at.graz.meduni.liferay.portlet.saat">
 	<author>reihsr</author>
-	<namespace>saat</namespace>
+	<namespace>saatdatabase</namespace>
 
-	<!-- SAAT -->
-	<entity name="SAATBackgroundTaske" uuid="true" local-service="true" remote-service="true" table="saat.saatbackgroundtaske">
+	<entity name="Dictionary" local-service="true" remote-service="true" table="saat_dictionary">
 		<!-- PK fields -->
-		<column name="saatbackgroundtaskeId" type="long" primary="true" />
-
-		<!-- Audit fields -->
-		<column name="companyId" type="long" />
-		<column name="groupId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+		<column name="dictionaryId" type="long" primary="true" />
 
 		<!-- Other fields -->
-		<column name="backgroundtaskId" type="long" />
-		<column name="started" type="boolean" />
-		<column name="startdate" type="Date" />
-		<column name="processes" type="long" />
-		<column name="processescompleted" type="long" />
-		<column name="processesavgtime" type="long" />
-		<column name="ended" type="boolean" />
-		<column name="enddate" type="Date" />
+		<column name="synonym" type="String" />
+		<column name="before_synonym" type="int" />
+		<column name="after_synonym" type="int" />
+		<column name="foreword" type="boolean" />
+		<column name="ending" type="boolean" />
+		<column name="sentence" type="boolean" />
+		<column name="iscode" type="boolean" />
+		<column name="pattern" type="String" />
+		<column name="code_typ" type="String" />
+		<column name="code_value" type="String" />
+		<column name="root" type="boolean" />
+		<column name="negation" type="boolean" />
+		<column name="occur" type="boolean" />
+		<column name="disease_ids" type="String" />
+		<column name="dirty" type="boolean" />
+		<column name="priority" type="int" />
+		<column name="disease_ids_count" type="int" />
+		<column name="priority_mode" type="boolean" />
 
 		<!-- Order -->
 		<order by="asc">
-			<order-column name="saatbackgroundtaskesId" />
+			<order-column name="dictionaryId" />
 		</order>
 
 		<!-- Finder methods -->
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="Synonym" return-type="Collection">
+			<finder-column name="synonym" />
 		</finder>
-		<finder name="CompanyId" return-type="Collection"> 
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="BackgroundTaskId" return-type="Collection"> 
-			<finder-column name="groupId" />
-			<finder-column name="backgroundtaskId" />
+		<finder name="RootNodes" return-type="Collection">
+			<finder-column name="root" />
 		</finder>
 	</entity>
-	<!-- Pathology -->
-	<entity name="Patient" uuid="true" local-service="true" remote-service="true" table="pathology.patient">
+	
+	<entity name="DictionaryDictionaryLink" local-service="true" remote-service="true" table="saat_dictionary_dictionary_addiction_link">
 		<!-- PK fields -->
-		<column name="patientId" type="long" primary="true" />
+		<column name="dictionary_dictionary_addiction_linkId" type="long" primary="true" />
 
-		<!-- Audit fields -->
-		<column name="companyId" type="long" />
-		<column name="groupId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-		
 		<!-- Other fields -->
-		<column name="firstname" type="String" />
-		<column name="lastname" type="String" />
-		<column name="gender" type="String" />
-		<column name="dateofbirth" type="Date" />
-		<column name="dateofdeath" type="Date" />
-		<column name="autopsy" type="String" />
-		<column name="icdn" type="String" />
-		<column name="icde" type="String" />
-		<column name="source" type="String" />
-		
+		<column name="dictionaryId" type="long" />
+		<column name="addictionId" type="long" />
+
 		<!-- Order -->
 		<order by="asc">
-			<order-column name="patientId" />
+			<order-column name="dictionary_dictionary_addiction_linkId" />
 		</order>
 
 		<!-- Finder methods -->
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="CompanyId" return-type="Collection"> 
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="PatientId" return-type="Collection"> 
-			<finder-column name="groupId" />
-			<finder-column name="patientId" />
+
+		<finder name="DictionaryId" return-type="Collection">
+			<finder-column name="dictionaryId" />
 		</finder>
 	</entity>
+	
+	<entity name="ICD10" local-service="true" remote-service="true" table="saat_code_icd10">
+		<!-- PK fields -->
+		<column name="icd10Id" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="code" type="String" />
+		<column name="description" type="String" />
+		<column name="INKLUSIVA" type="String" />
+		<column name="EXKLUSIVA" type="String" />
+		<column name="TYPE" type="String" />
+		<column name="USED" type="double" />
+		<column name="FROM_CODE" type="String" />
+		<column name="TO_CODE" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="icd10Id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
+		</finder>
+	</entity>
+	
+	<entity name="ICDO3" local-service="true" remote-service="true" table="saat_code_icdo3">
+		<!-- PK fields -->
+		<column name="icdo3Id" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="code" type="String" />
+		<column name="term" type="int" />
+		<column name="sui" type="int" />
+		<column name="typ" type="String" />
+		<column name="use" type="String" />
+		<column name="description" type="String" />
+		<column name="localisation" type="String" />
+		<column name="link" type="String" />
+		<column name="exklusiva" type="String" />
+		<column name="hint" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="icdo3Id" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
+		</finder>
+	</entity>
+	
+	<entity name="SCG" local-service="true" remote-service="true" table="saat_code_scg">
+		<!-- PK fields -->
+		<column name="scgId" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="code" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="scgId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
+		</finder>
+	</entity>
+	
 </service-builder>

@@ -6,4 +6,7 @@
 	<category name="SAAT Test">
 		<portlet id="test-background-tasks"></portlet>
 	</category>
+	<category name="SAAT">
+		<portlet id="saat-directory"></portlet>
+	</category>
 </display>
