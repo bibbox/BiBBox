@@ -1,18 +1,8 @@
 package at.meduni.liferay.portlet.rdconnect;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.Collator;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -28,78 +18,37 @@ import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnect
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.AddressLocalServiceUtil;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
-import com.liferay.portal.service.GroupLocalService;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
-import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.service.UserGroupRoleServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
-import com.liferay.portal.service.WebsiteServiceUtil;
-import com.liferay.portal.service.persistence.CountryUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.persistence.WebsiteUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Account;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.EmailAddress;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
-import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.ListTypeConstants;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Phone;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
-import com.liferay.portal.service.AccountLocalServiceUtil;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
@@ -107,7 +56,6 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecordSetConstants;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
-import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
@@ -136,22 +84,31 @@ import com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicy
  * @since	1.0
  */
 public class MasterPublish extends MVCPortlet {
+	/**
+	 * Declare Error Variables
+	 */
+	String error_date_format_apache_pattern_ = "EEE MMM dd HH:mm:ss yyyy";
+	SimpleDateFormat error_date_format_apache_ = new SimpleDateFormat(error_date_format_apache_pattern_);
+	String class_name_ = "RDConnect-portlet::at.meduni.liferay.portlet.rdconnect.MasterPublish";
 	
-	String counter = "15";
-	Locale default_locale_ = null;
+	/**
+	 * Declare Variables 
+	 */
 	final String alphabet_ = "abcdefghijklmopqrstuvwxyz";
     final int alphabeth_length_ = alphabet_.length();
     Random random_ = new Random();
     // Company IDs
     long company_id_ = 0;
+    Locale default_locale_ = null;
     // Roles
     long bb_reg_editor_role_id_ = 0; 
-    long bb_reg_owner_role_id_ = 13321;
-    long bb_reg_maincontact_role_id_ = 13320;
+    long bb_reg_owner_role_id_ = 0;
+    long bb_reg_maincontact_role_id_ = 0;
     // Parent Organizations
-    long biobank_assessment_organization_id_ = 26616;
-    long catalog_organization_id_ = 10709;
+    long biobank_assessment_organization_id_ = 0;
+    long catalog_organization_id_ = 0;
     // Web page
+    
     int PUBLICWEBSITETYPEID = 12020; // Public: 12020
     int INTRANETWEBSITETYPEID = 12019; // Public: 12020
     // E-mail
@@ -161,29 +118,19 @@ public class MasterPublish extends MVCPortlet {
     int ADDRESS_OTHER = 12001;
     int ADDRESS_POBOX = 12002;
     int ADDRESS_SHIPPING = 12003;
-    
+	
     /**
-     * Setup variables for publishing the an organization
+     * Publish an new organization for RD-Connect
+     * Registries are directly published to the catalogue, Biobanks are first published to the 
+     * assessment organization and moved after the assessment to the catalogue.
+     * For all organizations contact details are added to the liferay organization, users are
+     * added with the proper roles, or if they dose not exist new users are created.
      * 
      * @param request the ActionRequest from the portlet call with information of the portal
+     * @param response - delete
+     * @param master 
+     * @throws Exception
      */
-    public void setUpVaraibles(ActionRequest request) {
-    	try {
-    		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-    		company_id_ = themeDisplay.getCompanyId();
-    		default_locale_ = themeDisplay.getLocale();
-    		
-    		bb_reg_editor_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-EDITOR").getRoleId();
-    		bb_reg_owner_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-OWNER").getRoleId();
-    		bb_reg_maincontact_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-MAINCONTACT").getRoleId();
-    		
-    		biobank_assessment_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Biobank Assessment").getOrganizationId();
-    		catalog_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Catalog").getOrganizationId();
-    	} catch (Exception ex) {
-    		
-    	}
-    }
-	
 	public void publishToGate(ActionRequest request, ActionResponse response, MasterCandidate master) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		
@@ -244,6 +191,53 @@ public class MasterPublish extends MVCPortlet {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+     * Setup variables for publishing an organization
+     * 
+     * @param request the ActionRequest from the portlet call with information of the portal 
+     */
+    public void setUpVaraibles(ActionRequest request) {
+    	try {
+    		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+    		company_id_ = themeDisplay.getCompanyId();
+    		default_locale_ = themeDisplay.getLocale();
+    		
+    		setUpRoleVaraibles();
+    		setUpOrganizationVaraibles();
+    		
+    	} catch(Exception exception) {
+    		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::setUpVaraibles(ActionRequest request)] Error Setting up Varaibles for publishing: " + exception.getMessage());
+    		exception.printStackTrace();
+    	}
+    }
+    
+    /**
+     * Setup role variables for publishing an organization
+     */
+    public void setUpRoleVaraibles() {
+    	try {
+	    	bb_reg_editor_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-EDITOR").getRoleId();
+			bb_reg_owner_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-OWNER").getRoleId();
+			bb_reg_maincontact_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-MAINCONTACT").getRoleId();
+    	} catch(Exception exception) {
+    		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::setUpRoleVaraibles()] Error Setting up Role Varaibles for publishing: " + exception.getMessage());
+    		exception.printStackTrace();
+    	}
+    }
+    
+    /**
+     * Setup organization variables for publishing an organization
+     */
+    public void setUpOrganizationVaraibles() {
+    	try {
+    		biobank_assessment_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Biobank Assessment").getOrganizationId();
+    		catalog_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Catalog").getOrganizationId();
+    	} catch(Exception exception) {
+    		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::setUpOrganizationVaraibles()] Error Setting up Organization Varaibles for publishing: " + exception.getMessage());
+    		exception.printStackTrace();
+    	}
+    }
 	
 	/**
 	 * Add event entry

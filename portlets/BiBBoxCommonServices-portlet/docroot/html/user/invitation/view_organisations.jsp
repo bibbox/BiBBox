@@ -153,7 +153,7 @@ SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apa
 		//tablerow += "<td class=\"" + rowcss + "\">" + ((now.getTime() - modifieddate.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(modifieddate) + ")</td>";
 		if(maincontact != null) {
 			tablerow += "<td class=\"" + rowcss + "\">" + maincontact.getFullName() + "</td>";
-			java.util.Date lastlogin = maincontact.getLastLoginDate();
+			java.util.Date lastlogin = maincontact.getLoginDate();
 			if(lastlogin != null) {
 				tablerow += "<td class=\"" + rowcss + "\">" + ((now.getTime() - lastlogin.getTime())/(1000 *60*60*24)) + " (" + dateFormat.format(lastlogin) + ")</td>";
 			} else {
