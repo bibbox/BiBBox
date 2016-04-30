@@ -15,6 +15,8 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil;
+import at.meduni.liferay.portlet.rdconnect.exception.MasterPublishException;
+import at.meduni.liferay.portlet.rdconnect.helper.HelperUser;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
@@ -97,7 +99,10 @@ public class MasterPublish extends MVCPortlet {
 	final String alphabet_ = "abcdefghijklmopqrstuvwxyz";
     final int alphabeth_length_ = alphabet_.length();
     Random random_ = new Random();
-    // Company IDs
+    MasterCandidate master_ = null;
+    // Liferay data
+    ThemeDisplay theme_display_ = null;
+    Company company_ = null;
     long company_id_ = 0;
     Locale default_locale_ = null;
     // Roles
@@ -132,15 +137,26 @@ public class MasterPublish extends MVCPortlet {
      * @throws Exception
      */
 	public void publishToGate(ActionRequest request, ActionResponse response, MasterCandidate master) throws Exception {
+		try {
+			master_ = master;
+			setUpVaraibles(request);
+			Organization organization = createOrganisation();
+			updateMasterCandidate(organization.getOrganizationId());
+			HashSet<User> users = createUsersFromMaster();
+			addUsersToOrganization(organization, users);
+		} catch (MasterPublishException exception) {
+			
+		}
+		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		
 		Organization organization = null;
 		
 		try {
+			//setUpVaraibles(request);
 			Company company = CompanyLocalServiceUtil.getCompanyById(company_id_);
 			// Create Organisation
-			organization = createOrganisation(company, master);
-			
+			organization = createOrganisation(company);
 			
 			// Update Master
 			master.setOrganisationid(organization.getOrganizationId());
@@ -196,12 +212,14 @@ public class MasterPublish extends MVCPortlet {
      * Setup variables for publishing an organization
      * 
      * @param request the ActionRequest from the portlet call with information of the portal 
+	 * @throws MasterPublishException 
      */
-    public void setUpVaraibles(ActionRequest request) {
+    public void setUpVaraibles(ActionRequest request) throws MasterPublishException {
     	try {
-    		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-    		company_id_ = themeDisplay.getCompanyId();
-    		default_locale_ = themeDisplay.getLocale();
+    		theme_display_ = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+    		company_id_ = theme_display_.getCompanyId();
+    		default_locale_ = theme_display_.getLocale();
+    		company_ = theme_display_.getCompany();
     		
     		setUpRoleVaraibles();
     		setUpOrganizationVaraibles();
@@ -209,13 +227,15 @@ public class MasterPublish extends MVCPortlet {
     	} catch(Exception exception) {
     		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::setUpVaraibles(ActionRequest request)] Error Setting up Varaibles for publishing: " + exception.getMessage());
     		exception.printStackTrace();
+    		throw new MasterPublishException("Error Setting up Varaibles for publishing: " + exception.getMessage());
     	}
     }
     
     /**
      * Setup role variables for publishing an organization
+     * @throws MasterPublishException 
      */
-    public void setUpRoleVaraibles() {
+    public void setUpRoleVaraibles() throws MasterPublishException {
     	try {
 	    	bb_reg_editor_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-EDITOR").getRoleId();
 			bb_reg_owner_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-OWNER").getRoleId();
@@ -223,21 +243,235 @@ public class MasterPublish extends MVCPortlet {
     	} catch(Exception exception) {
     		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::setUpRoleVaraibles()] Error Setting up Role Varaibles for publishing: " + exception.getMessage());
     		exception.printStackTrace();
+    		throw new MasterPublishException("Error Setting up Role Varaibles for publishing: " + exception.getMessage());
     	}
     }
     
     /**
      * Setup organization variables for publishing an organization
+     * @throws MasterPublishException 
      */
-    public void setUpOrganizationVaraibles() {
+    public void setUpOrganizationVaraibles() throws MasterPublishException {
     	try {
     		biobank_assessment_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Biobank Assessment").getOrganizationId();
     		catalog_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Catalog").getOrganizationId();
     	} catch(Exception exception) {
     		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::setUpOrganizationVaraibles()] Error Setting up Organization Varaibles for publishing: " + exception.getMessage());
     		exception.printStackTrace();
+    		throw new MasterPublishException("Error Setting up Organization Varaibles for publishing: " + exception.getMessage());
     	}
     }
+    
+    /**
+     * 
+     * @param company
+     * @return
+     * @throws MasterPublishException
+     */
+    private Organization createOrganisation() throws MasterPublishException {
+		try {	
+			long userId = company_.getDefaultUser().getUserId();
+	        long parentOrganizationId = getParentOrganizationIdForMasterCandidate();
+	        String name = getOrganizationNameForMasterCandidate();
+	        String type = OrganizationConstants.TYPE_REGULAR_ORGANIZATION;
+	        long regionId = 0;
+	        long countryId = 0;
+	        int statusId = GetterUtil.getInteger(PropsUtil.get("sql.data.com.liferay.portal.model.ListType.organization.status"));
+	        String comments = null;
+	        boolean site = true;
+	
+	        ServiceContext service_context = getServiceContext();
+
+	        Organization organization =
+	                OrganizationLocalServiceUtil.addOrganization(userId, parentOrganizationId, name, type, regionId, countryId, 
+	                		statusId, comments, site, service_context);
+	        
+			return organization;
+		} catch (Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::createOrganisation()] Error creating Organization: " + exception.getMessage());
+    		exception.printStackTrace();
+    		throw new MasterPublishException("Error creating Organization: " + exception.getMessage());
+		}
+	}
+    
+    /**
+     * 
+     * @return
+     */
+    private long getParentOrganizationIdForMasterCandidate() {
+    	long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
+        if(master_.getCandidatetype().equalsIgnoreCase("biobank")) {
+        	parentOrganizationId = biobank_assessment_organization_id_;
+        } else {
+        	parentOrganizationId = catalog_organization_id_;
+        }
+        return parentOrganizationId;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    private String getOrganizationNameForMasterCandidate() {
+    	String name = master_.getName();
+        if(name.length() > 100) {
+        	name = name.substring(0, 100);
+        }
+        return name;
+    }
+    
+    /**
+     * 
+     * @param organization_id
+     */
+    private void updateMasterCandidate(long organization_id) {
+    	try {
+	    	master_.setOrganisationid(organization_id);
+	    	master_.setState("P");
+	    	master_ = MasterCandidateLocalServiceUtil.updateMasterCandidate(master_);
+    	} catch(Exception exception) {
+    		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::updateMasterCandidate(long organization_id)] Error updating MasterCandidate: [masterId:" + master_.getMasterCandidateId() + "; organizationId:" + organization_id + "]" + exception.getMessage());
+    		exception.printStackTrace();
+    		//TODO: Add Event for Admins for this
+    	}
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    private ServiceContext getServiceContext() {
+    	ServiceContext service_context = new ServiceContext();
+    	service_context.setAddGroupPermissions(true);
+    	service_context.setAddGuestPermissions(true);
+        return service_context;
+    }
+    
+    /**
+     * 
+     * @param organization
+     * @param company
+     */
+    private HashSet<User> createUsersFromMaster() {
+		HashSet<HelperUser> mails = getEmailAddressFromMaster(master_.getMail());
+		HashSet<User> users = new HashSet<User>();
+		
+		boolean fix_use_contact_person = false;
+		if(mails.size() == 1) {
+			fix_use_contact_person = true;
+		}
+		
+		for(HelperUser mail : mails) {
+			User user = createUsers(mail, fix_use_contact_person);
+			if(user != null) {
+				users.add(user);
+			}
+		}
+		return users;
+	}
+    
+    /**
+     * 
+     * @param email
+     * @return
+     */
+    private HashSet<HelperUser> getEmailAddressFromMaster(String email) {
+    	HashSet<HelperUser> mails = new HashSet<HelperUser>();
+    	email = email.replaceAll("mailto:", ";").replaceAll(" ", "");
+    	String pattern_string_mail_ = "\\b([a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4})*)\\b";
+		Pattern pattern_mail_ = Pattern.compile(pattern_string_mail_);
+		Matcher matcher = pattern_mail_.matcher(email);
+		while (matcher.find()) {
+			HelperUser helper_user = new HelperUser();
+			helper_user.setEmail(matcher.group().toLowerCase());
+			if(!mails.contains(helper_user)) {
+				mails.add(helper_user);
+			}
+		}
+		return mails;
+    }
+    
+    /**
+     * 
+     * @param mail
+     * @param fix_use_contact_person
+     */
+    private User createUsers(HelperUser mail, boolean fix_use_contact_person) {
+    	try {
+			mail.extractNameFromContactPerson(master_.getContactperson(), master_.getHead(), fix_use_contact_person);
+			return createLiferayUser(mail);
+		} catch(Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::createUsersFromMaster(Organization organization, Company company)] Error creating user: [email: " + mail.getEmail() + "]" + exception.getMessage());
+    		exception.printStackTrace();
+    		//TODO: Add Event for Admins for this
+		}
+    	return null;
+    }
+	
+    /**
+     * 
+     * @param mail
+     * @return
+     * @throws PortalException
+     * @throws SystemException
+     */
+	private User createLiferayUser(HelperUser mail) throws PortalException, SystemException {
+		boolean autoPassword = false;
+		String password1 = "rdc2015";
+		boolean autoScreenName = true;
+		String screenName = "";
+		long facebookId = 0;
+		String openId = "";
+		String firstName = mail.getFirstname();
+		String middleName = "";
+		String lastName = mail.getLastname();
+		int prefixId = 0;
+		int suffixId = 0;
+		int birthdayMonth = 1;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = "";
+		long[] groupIds = new long[0];
+		long[] organizationIds = {};
+		long[] roleIds = new long[0];
+		long[] userGroupIds = new long[0];
+		boolean male = false;
+		boolean sendEmail = false;
+		User user = UserLocalServiceUtil.addUser(company_.getDefaultUser().getUserId(), company_.getCompanyId(), autoPassword, password1, password1, 
+				autoScreenName, screenName, mail.getEmail(), facebookId, openId, default_locale_, firstName, middleName, lastName, 
+				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, getServiceContext());
+		user.setPasswordReset(false);
+		UserLocalServiceUtil.updateUser(user);
+		return user;
+	}
+	
+	private void addUsersToOrganization(Organization organization, HashSet<User> users) {
+		boolean maincontact = true;
+		for(User user : users) {
+			addUserToOrganization(organization, user, maincontact);
+			maincontact = false;
+		}
+	}
+	
+	private void addUserToOrganization(Organization organization, User user, boolean maincontact) {
+		try {
+			OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization);
+			long[] userids = {user.getUserId()};
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_editor_role_id_);
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_owner_role_id_);
+			if(maincontact) {
+				UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_maincontact_role_id_);
+			}
+		} catch (Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::addUserToOrganization(Organization organization, User user, boolean maincontact)] Error adding user to organization: [UserId: " + user.getUserId() + "; OrganizationId: " + organization.getOrganizationId() + "]" + exception.getMessage());
+    		exception.printStackTrace();
+    		//TODO: Add Event for Admins for this
+		}
+	}
+    
+    //----------------------------------------------------------------
+	
+	
 	
 	/**
 	 * Add event entry
@@ -422,143 +656,9 @@ public class MasterPublish extends MVCPortlet {
 		}
 	}
 	
-	private Organization createOrganisation(Company company, MasterCandidate master) throws PortalException, SystemException {
-		try {
-			// Create Organisation		
-			User defaultUser = company.getDefaultUser();
-			
-			long userId = company.getDefaultUser().getUserId();
-	        long parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
-	        if(master.getCandidatetype().equalsIgnoreCase("biobank")) {
-	        	parentOrganizationId = biobank_assessment_organization_id_;
-	        } else {
-	        	parentOrganizationId = catalog_organization_id_;
-	        }
-	        String name = master.getName();
-	        if(name.length() > 100) {
-	        	name = name.substring(0, 100);
-	        }
-	        String type = OrganizationConstants.TYPE_REGULAR_ORGANIZATION;
-	        boolean recursable = true;
-	        long regionId = 0;
-	        long countryId = 0;
-	        int statusId = GetterUtil.getInteger(PropsUtil.get(
-	                "sql.data.com.liferay.portal.model.ListType.organization.status"));
-	        String comments = null;
 	
-	        ServiceContext serviceContext = new ServiceContext();
 	
-	        serviceContext.setAddGroupPermissions(true);
-	        serviceContext.setAddGuestPermissions(true);
-	        
-	        boolean site = true;
 	
-	        Organization organization =
-	                OrganizationLocalServiceUtil.addOrganization(userId, parentOrganizationId, name, type, regionId, countryId, 
-	                		statusId, comments, site, serviceContext);
-	        
-	        Group group = organization.getGroup();
-	        serviceContext.setScopeGroupId(group.getGroupId());
-	        
-			return organization;
-		} catch (Exception e) {
-			System.out.println("RDC Exception in MasterPublish:createOrganisation");
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	private void createUsersFromMaster(Organization organization, Company company, String emails, String contactperson, String head) {
-		String pattern_string_mail_ = "\\b([a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4})*)\\b";
-		Pattern pattern_mail_ = Pattern.compile(pattern_string_mail_);
-		
-		ServiceContext serviceContext = new ServiceContext();
-        serviceContext.setAddGroupPermissions(true);
-        serviceContext.setAddGuestPermissions(true);
-		
-		HashSet<String> mails = new HashSet<String>();
-		Matcher matcher = pattern_mail_.matcher(emails.replaceAll("mailto:", ""));
-		while (matcher.find()) {
-			if(!mails.contains(matcher.group().toLowerCase()))
-				mails.add(matcher.group().toLowerCase());
-		}
-		matcher = pattern_mail_.matcher(contactperson.replaceAll("mailto:", ""));
-		while (matcher.find()) {
-			if(!mails.contains(matcher.group().toLowerCase()))
-				mails.add(matcher.group().toLowerCase());
-		}
-		matcher = pattern_mail_.matcher(head.replaceAll("mailto:", ""));
-		while (matcher.find()) {
-			if(!mails.contains(matcher.group().toLowerCase()))
-				mails.add(matcher.group().toLowerCase());
-		}
-		
-		boolean first = true;
-		for(String mail : mails) {
-			try {
-				addUsersToOrganisation(organization, company, mail, serviceContext, first);
-				first = false;
-			} catch (SystemException e) {
-				System.out.println("RDC Exception in MasterPublish:createUsersFromMaster");
-				System.out.println("Could not create USER");
-				e.printStackTrace();
-			} catch (PortalException e) {
-				System.out.println("RDC Exception in MasterPublish:createUsersFromMaster");
-				System.out.println("Could not create USER");
-				e.printStackTrace();
-			} catch (Exception e) {
-				System.out.println("RDC Exception in MasterPublish:createUsersFromMaster");
-				System.out.println("Could not create USER");
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	private void addUsersToOrganisation(Organization organization, Company company, String mail, ServiceContext serviceContext, boolean first) throws SystemException, PortalException {
-		// Create User
-		User user = UserLocalServiceUtil.fetchUserByEmailAddress(company.getCompanyId(), mail);
-		if (user == null) {
-			user = createUser(user, company, mail, organization, serviceContext);
-		} else {
-			OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization);
-		}
-		long[] userids = {user.getUserId()};
-		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_editor_role_id_);
-		UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_owner_role_id_);
-		if(first) {
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_maincontact_role_id_);
-		}
-	}
-	
-	private User createUser(User user, Company company, String mail, Organization organization, ServiceContext serviceContext) throws PortalException, SystemException {
-		boolean autoPassword = false;
-		String password1 = "rdc2015";
-		boolean autoScreenName = true;
-		String screenName = "";
-		long facebookId = 0;
-		String openId = "";
-		String firstName = getFirstnameFromMail(mail);
-		String middleName = "";
-		String lastName = getLastnameFromMail(mail);
-		int prefixId = 0;
-		int suffixId = 0;
-		int birthdayMonth = 1;
-		int birthdayDay = 1;
-		int birthdayYear = 1970;
-		String jobTitle = "";
-		long[] groupIds = new long[0];
-		long[] organizationIds = {organization.getOrganizationId()};
-		long[] roleIds = new long[0];
-		long[] userGroupIds = new long[0];
-		boolean male = false;
-		boolean sendEmail = false;
-		user = UserLocalServiceUtil.addUser(company.getDefaultUser().getUserId(), company.getCompanyId(), autoPassword, password1, password1, 
-				autoScreenName, screenName, mail, facebookId, openId, default_locale_, firstName, middleName, lastName, 
-				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
-		user.setPasswordReset(false);
-		UserLocalServiceUtil.updateUser(user);
-		return user;
-	}
 	
 	private String getFirstnameFromMail(String mail) {
 		String name = "";
