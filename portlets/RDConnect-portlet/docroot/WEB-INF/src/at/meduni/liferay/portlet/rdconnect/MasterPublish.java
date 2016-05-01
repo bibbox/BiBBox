@@ -40,6 +40,8 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -100,7 +102,10 @@ public class MasterPublish extends MVCPortlet {
     final int alphabeth_length_ = alphabet_.length();
     Random random_ = new Random();
     MasterCandidate master_ = null;
+    String password_ = "rdc2015";
+    Organization organization_ = null;
     // Liferay data
+    ActionRequest request_ = null;
     ThemeDisplay theme_display_ = null;
     Company company_ = null;
     long company_id_ = 0;
@@ -138,14 +143,24 @@ public class MasterPublish extends MVCPortlet {
      */
 	public void publishToGate(ActionRequest request, ActionResponse response, MasterCandidate master) throws Exception {
 		try {
+			//TODO: Use SessionMessages for display (msg):   error-assining-user-role, error-creating-user, master-cadidate-not-updated
+			//TODO: Use SessionMessages for display (error): organization-creation-error
 			master_ = master;
-			setUpVaraibles(request);
-			Organization organization = createOrganisation();
-			updateMasterCandidate(organization.getOrganizationId());
+			request_ = request;
+			setUpVaraibles();
+			organization_ = createOrganisation();
+			updateMasterCandidate();
+			//TODO: createPages(organization);
 			HashSet<User> users = createUsersFromMaster();
-			addUsersToOrganization(organization, users);
+			addUsersToOrganization(users);
+			createDDLs();
+			//TODO: addFoldersForSite
+			//TODO: addOrganisationDetails(organization, master, themeDisplay.getUserId());
+			//TODO: OrganizationLocalServiceUtil.rebuildTree(company.getCompanyId());
+			//TODO: organization.getExpandoBridge().setAttribute("Organization Type", master.getCandidatetype());
 		} catch (MasterPublishException exception) {
-			
+			SessionErrors.add(request_, "organization-creation-error", exception.getMessage());
+			response.setRenderParameter("success", "false");
 		}
 		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
@@ -214,9 +229,9 @@ public class MasterPublish extends MVCPortlet {
      * @param request the ActionRequest from the portlet call with information of the portal 
 	 * @throws MasterPublishException 
      */
-    public void setUpVaraibles(ActionRequest request) throws MasterPublishException {
+    public void setUpVaraibles() throws MasterPublishException {
     	try {
-    		theme_display_ = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+    		theme_display_ = (ThemeDisplay) request_.getAttribute(WebKeys.THEME_DISPLAY);
     		company_id_ = theme_display_.getCompanyId();
     		default_locale_ = theme_display_.getLocale();
     		company_ = theme_display_.getCompany();
@@ -324,14 +339,15 @@ public class MasterPublish extends MVCPortlet {
      * 
      * @param organization_id
      */
-    private void updateMasterCandidate(long organization_id) {
+    private void updateMasterCandidate() {
     	try {
-	    	master_.setOrganisationid(organization_id);
+	    	master_.setOrganisationid(organization_.getOrganizationId());
 	    	master_.setState("P");
 	    	master_ = MasterCandidateLocalServiceUtil.updateMasterCandidate(master_);
     	} catch(Exception exception) {
-    		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::updateMasterCandidate(long organization_id)] Error updating MasterCandidate: [masterId:" + master_.getMasterCandidateId() + "; organizationId:" + organization_id + "]" + exception.getMessage());
+    		System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::updateMasterCandidate(long organization_id)] Error updating MasterCandidate: [masterId:" + master_.getMasterCandidateId() + "; organizationId:" + organization_.getOrganizationId() + "]" + exception.getMessage());
     		exception.printStackTrace();
+    		SessionMessages.add(request_, "master-cadidate-not-updated", "There was an error updating the MasterCandidate Table.");
     		//TODO: Add Event for Admins for this
     	}
     }
@@ -361,10 +377,15 @@ public class MasterPublish extends MVCPortlet {
 			fix_use_contact_person = true;
 		}
 		
-		for(HelperUser mail : mails) {
-			User user = createUsers(mail, fix_use_contact_person);
-			if(user != null) {
+		for(HelperUser mail : mails) {	
+			try {
+				User user = createUsers(mail, fix_use_contact_person);
 				users.add(user);
+			} catch(Exception exception) {
+				System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::createUsersFromMaster()] Error creating user: [email: " + mail.getEmail() + "]" + exception.getMessage());
+	    		exception.printStackTrace();
+	    		SessionMessages.add(request_, "error-creating-user", "There was an error creating the user with email: " + mail.getEmail() + ".");
+	    		//TODO: Add Event for Admins for this
 			}
 		}
 		return users;
@@ -395,17 +416,12 @@ public class MasterPublish extends MVCPortlet {
      * 
      * @param mail
      * @param fix_use_contact_person
+     * @throws SystemException 
+     * @throws PortalException 
      */
-    private User createUsers(HelperUser mail, boolean fix_use_contact_person) {
-    	try {
-			mail.extractNameFromContactPerson(master_.getContactperson(), master_.getHead(), fix_use_contact_person);
-			return createLiferayUser(mail);
-		} catch(Exception exception) {
-			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::createUsersFromMaster(Organization organization, Company company)] Error creating user: [email: " + mail.getEmail() + "]" + exception.getMessage());
-    		exception.printStackTrace();
-    		//TODO: Add Event for Admins for this
-		}
-    	return null;
+    private User createUsers(HelperUser mail, boolean fix_use_contact_person) throws PortalException, SystemException {
+		mail.extractNameFromContactPerson(master_.getContactperson(), master_.getHead(), fix_use_contact_person);
+		return createLiferayUser(mail);
     }
 	
     /**
@@ -417,7 +433,6 @@ public class MasterPublish extends MVCPortlet {
      */
 	private User createLiferayUser(HelperUser mail) throws PortalException, SystemException {
 		boolean autoPassword = false;
-		String password1 = "rdc2015";
 		boolean autoScreenName = true;
 		String screenName = "";
 		long facebookId = 0;
@@ -437,7 +452,7 @@ public class MasterPublish extends MVCPortlet {
 		long[] userGroupIds = new long[0];
 		boolean male = false;
 		boolean sendEmail = false;
-		User user = UserLocalServiceUtil.addUser(company_.getDefaultUser().getUserId(), company_.getCompanyId(), autoPassword, password1, password1, 
+		User user = UserLocalServiceUtil.addUser(company_.getDefaultUser().getUserId(), company_.getCompanyId(), autoPassword, password_, password_, 
 				autoScreenName, screenName, mail.getEmail(), facebookId, openId, default_locale_, firstName, middleName, lastName, 
 				prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, getServiceContext());
 		user.setPasswordReset(false);
@@ -445,28 +460,133 @@ public class MasterPublish extends MVCPortlet {
 		return user;
 	}
 	
-	private void addUsersToOrganization(Organization organization, HashSet<User> users) {
+	/**
+	 * 
+	 * @param organization
+	 * @param users
+	 */
+	private void addUsersToOrganization(HashSet<User> users) {
 		boolean maincontact = true;
 		for(User user : users) {
-			addUserToOrganization(organization, user, maincontact);
+			addUserToOrganization(user, maincontact);
 			maincontact = false;
 		}
 	}
 	
-	private void addUserToOrganization(Organization organization, User user, boolean maincontact) {
+	/**
+	 * 
+	 * @param organization
+	 * @param user
+	 * @param maincontact
+	 */
+	private void addUserToOrganization(User user, boolean maincontact) {
 		try {
-			OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization);
+			OrganizationLocalServiceUtil.addUserOrganization(user.getUserId(), organization_);
 			long[] userids = {user.getUserId()};
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_editor_role_id_);
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_owner_role_id_);
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization_.getGroupId(), bb_reg_editor_role_id_);
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization_.getGroupId(), bb_reg_owner_role_id_);
 			if(maincontact) {
-				UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization.getGroupId(), bb_reg_maincontact_role_id_);
+				UserGroupRoleLocalServiceUtil.addUserGroupRoles(userids, organization_.getGroupId(), bb_reg_maincontact_role_id_);
 			}
+		} catch (Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::addUserToOrganization(Organization organization, User user, boolean maincontact)] Error adding user to organization: [UserId: " + user.getUserId() + "; OrganizationId: " + organization_.getOrganizationId() + "]" + exception.getMessage());
+    		exception.printStackTrace();
+    		SessionMessages.add(request_, "error-assining-user-role", "There was an error assigning the Roles for user with email: " + user.getEmailAddress() + ".");
+    		//TODO: Add Event for Admins for this
+		}
+	}
+	
+	/**
+	 * Creates DDL entrys for the RD-Connect ID-Cards with data from master
+	 */
+	private void createDDLs() {
+		createRecordSetWithDatafields("core", "core");
+		createRecordSetWithDatafields("bb_core", "bb_core");
+		createRecordSetWithDatafields("reg_quality", "reg_quality");
+		createRecordSetWithDatafields("bb_quality", "bb_quality");
+		createRecordSetWithDatafields("Disease Areas (ICD10)", "Disease Areas (ICD10)");
+		createRecordSetWithDatafields("reg_accessibility", "reg_accessibility");
+		createRecordSetWithDatafields("bb_accessibility", "bb_accessibility");
+		createRecordSetWithDatafields("Scientific publications", "Scientific publications");
+		createRecordSetWithDatafields("bb_contribution", "bb_contribution");
+	}
+	
+	private void createRecordSetWithDatafields(String ddl_name, String ddm_name) {
+		try {
+			long ddm_structure_id = getDDMStructureIdFromDDMName(ddm_name);
+			DDLRecordSet recordSet = createRecordSet(ddl_name, ddm_structure_id);
+			creatRecordCore(recordSet, groupId, serviceContextRecord, master);
 		} catch (Exception exception) {
 			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::addUserToOrganization(Organization organization, User user, boolean maincontact)] Error adding user to organization: [UserId: " + user.getUserId() + "; OrganizationId: " + organization.getOrganizationId() + "]" + exception.getMessage());
     		exception.printStackTrace();
+    		//TODO: SessionMessages.add(request_, "error-assining-user-role", "There was an error assigning the Roles for user with email: " + user.getEmailAddress() + ".");
     		//TODO: Add Event for Admins for this
 		}
+	}
+	
+	/**
+	 * Temporary class needs to be updated to get the information from liferay API
+	 * 
+	 * @param name
+	 * @return
+	 */
+	private long getDDMStructureIdFromDDMName(String name) {
+		if(name.equalsIgnoreCase("core")) {
+			return 16059;
+		}
+		if(name.equalsIgnoreCase("bb_core")) {
+			return 32327;
+		}
+		if(name.equalsIgnoreCase("reg_quality")) {
+			return 23725;
+		}
+		if(name.equalsIgnoreCase("bb_quality")) {
+			return 32325;
+		}
+		if(name.equalsIgnoreCase("Disease Areas (ICD10)")) {
+			return 32329;
+		}
+		if(name.equalsIgnoreCase("reg_accessibility")) {
+			return 22594;
+		}
+		if(name.equalsIgnoreCase("bb_accessibility")) {
+			return 32323;
+		}
+		if(name.equalsIgnoreCase("Scientific publications")) {
+			return 32331;
+		}
+		if(name.equalsIgnoreCase("bb_contribution")) {
+			return 32333;
+		}
+		return 0;
+	}
+	
+	/**
+	 * Creates DDL RecordSet from DDM Structure
+	 * 
+	 * @param name
+	 * @param ddmStructureId
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	private DDLRecordSet createRecordSet(String name, long ddmStructureId) throws PortalException, SystemException {
+		ServiceContext serviceContext = getServiceContext();
+        Group group = organization_.getGroup();
+        serviceContext.setScopeGroupId(group.getGroupId());
+        serviceContext.setUserId(organization_.getUserId());
+		long groupId = organization_.getGroupId();
+		String recordSetKey = null;
+		int scope = 0;
+		String[] languageid = {"0"};
+		String[] names = {name};
+		String[] description = {name};
+		Map<Locale,String> nameMap = LocalizationUtil.getLocalizationMap(languageid, names);
+		Map<Locale,String> descriptionMap = LocalizationUtil.getLocalizationMap(languageid, description);
+
+		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.addRecordSet(theme_display_.getUserId(), groupId, ddmStructureId, recordSetKey, nameMap, 
+				descriptionMap, DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope, serviceContext);
+		return recordSet;
 	}
     
     //----------------------------------------------------------------
@@ -735,151 +855,9 @@ public class MasterPublish extends MVCPortlet {
 		LayoutSetServiceUtil.updateLogo(organization.getGroupId(), privateLayout, true, logo);*/
 	}
 	
-	private void createDDLs(ActionRequest request, Organization organization, MasterCandidate master) throws PortalException, SystemException {
-		ServiceContext serviceContext = new ServiceContext();
-
-        serviceContext.setAddGroupPermissions(true);
-        serviceContext.setAddGuestPermissions(true);
-        Group group = organization.getGroup();
-        serviceContext.setScopeGroupId(group.getGroupId());
-        
-        serviceContext.setUserId(organization.getUserId());
-        
-		ServiceContext serviceContextRecord = serviceContext;
-		long groupId = organization.getGroupId();
-		// create Registry Core (name Core) core | ID 16059 
-		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "core", 16059, serviceContext);
-			creatRecordCore(recordSet, groupId, serviceContextRecord, master);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create core");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create core");
-			e.printStackTrace();
-		}
-		// create Biobank Core (name bb_core) core | ID 32327 
-				try {
-					DDLRecordSet recordSet = createRecordSet(request, organization, "bb_core", 32327, serviceContext);
-					creatRecordCore(recordSet, groupId, serviceContextRecord, master);
-				} catch (PortalException e) {
-					System.out.println("RDC Exception in MasterPublish:createDDLs");
-					System.out.println("Could not create core");
-					e.printStackTrace();
-				} catch (SystemException e) {
-					System.out.println("RDC Exception in MasterPublish:createDDLs");
-					System.out.println("Could not create core");
-					e.printStackTrace();
-				}
-		// create  	reg_quality | ID 23725
-		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "reg_quality", 23725, serviceContext);
-			creatRecordQualityIndicator(recordSet, groupId, serviceContextRecord, master);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Quality Indicators");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Quality Indicators");
-			e.printStackTrace();
-		}
-		// create bb_quality | ID 32325
-		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "bb_quality", 32325, serviceContext);
-			creatRecordQualityIndicator(recordSet, groupId, serviceContextRecord, master);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Quality Indicators");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Quality Indicators");
-			e.printStackTrace();
-		}
-		// create Disease Areas (ICD10) | ID 32329
-		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "Disease Areas (ICD10)", 32329, serviceContext);
-			creatRecordDiseaseAreas(recordSet, groupId, serviceContextRecord, master);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Disease Areas (ICD10)");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Disease Areas (ICD10)");
-			e.printStackTrace();
-		}
-		// create reg_accessibility | ID 22594
-		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "reg_accessibility", 22594, serviceContext);
-			creatRecordAccesability(recordSet, groupId, serviceContextRecord, master);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Accessibility");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Accessibility");
-			e.printStackTrace();
-		}
-		// create bb_accessibility | ID 32323
-		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "bb_accessibility", 32323, serviceContext);
-			creatRecordAccesability(recordSet, groupId, serviceContextRecord, master);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Accessibility");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Accessibility");
-			e.printStackTrace();
-		}
-		// create Scientific publications | ID 32331
-		try {
-			createRecordSet(request, organization, "Scientific publications", 32331, serviceContext);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Sample Matrix");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Sample Matrix");
-			e.printStackTrace();
-		}
-		// create bb_contribution | ID 32333
-		try {
-			DDLRecordSet recordSet = createRecordSet(request, organization, "bb_contribution", 32333, serviceContext);
-			creatRecord(recordSet, groupId, serviceContextRecord, master);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Sample Matrix");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception in MasterPublish:createDDLs");
-			System.out.println("Could not create Sample Matrix");
-			e.printStackTrace();
-		}
-	}
 	
-	private DDLRecordSet createRecordSet(ActionRequest request, Organization organization, String name, long ddmStructureId, ServiceContext serviceContext) throws PortalException, SystemException {
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		long groupId = organization.getGroupId();
-		String recordSetKey = null;
-		int scope = 0;
-		String[] languageid = {"0"};
-		String[] names = {name};
-		String[] description = {name};
-		Map<Locale,String> nameMap = LocalizationUtil.getLocalizationMap(languageid, names);
-		Map<Locale,String> descriptionMap = LocalizationUtil.getLocalizationMap(languageid, description);
-
-		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.addRecordSet(themeDisplay.getUserId(), groupId, ddmStructureId, recordSetKey, nameMap, 
-				descriptionMap, DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope, serviceContext);
-		return recordSet;
-	}
+	
+	
 	
 	private String randomIdGenerator() {
 		String id = "_INSTANCE_";
