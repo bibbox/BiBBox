@@ -32,6 +32,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -53,6 +54,7 @@ import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
@@ -128,6 +130,8 @@ public class MasterPublish extends MVCPortlet {
     int ADDRESS_OTHER = 12001;
     int ADDRESS_POBOX = 12002;
     int ADDRESS_SHIPPING = 12003;
+    // NamingConventions
+    String PUBLIC_LAYOUT_SET_PROTOTYPE_NAME = "ID-Card";
 	
     /**
      * Publish an new organization for RD-Connect
@@ -143,21 +147,21 @@ public class MasterPublish extends MVCPortlet {
      */
 	public void publishToGate(ActionRequest request, ActionResponse response, MasterCandidate master) throws Exception {
 		try {
-			//TODO: Use SessionMessages for display (msg):   error-assining-user-role, error-creating-user, master-cadidate-not-updated
+			//TODO: Use SessionMessages for display (msg):   error-assining-user-role, error-creating-user, master-cadidate-not-updated, error-creating-ddl, error-creating-folder
 			//TODO: Use SessionMessages for display (error): organization-creation-error
 			master_ = master;
 			request_ = request;
 			setUpVaraibles();
 			organization_ = createOrganisation();
 			updateMasterCandidate();
-			//TODO: createPages(organization);
+			createPublicPage();
 			HashSet<User> users = createUsersFromMaster();
 			addUsersToOrganization(users);
 			createDDLs();
-			//TODO: addFoldersForSite
+			addFoldersForOrganization();
 			//TODO: addOrganisationDetails(organization, master, themeDisplay.getUserId());
 			//TODO: OrganizationLocalServiceUtil.rebuildTree(company.getCompanyId());
-			//TODO: organization.getExpandoBridge().setAttribute("Organization Type", master.getCandidatetype());
+			organization_.getExpandoBridge().setAttribute("Organization Type", master_.getCandidatetype());
 		} catch (MasterPublishException exception) {
 			SessionErrors.add(request_, "organization-creation-error", exception.getMessage());
 			response.setRenderParameter("success", "false");
@@ -364,6 +368,51 @@ public class MasterPublish extends MVCPortlet {
     }
     
     /**
+     * Create public site for organization
+     * 
+     * @throws Exception
+     */
+    private void createPublicPage() throws Exception {
+		try {
+			long public_layout_set_prototype_id = getPublicLayoutSetPrototypeId();
+			boolean is_private_layout = false;
+			Group organization_group = organization_.getGroup();
+			long group_id = organization_group.getGroupId();
+			boolean layout_set_prototype_link_enabled = true;
+			
+		    LayoutSetPrototype prototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(public_layout_set_prototype_id);
+		    LayoutSetLocalServiceUtil.updateLayoutSetPrototypeLinkEnabled(group_id, is_private_layout,
+		            layout_set_prototype_link_enabled, prototype.getUuid());
+		    
+		    LayoutSet layout_set = LayoutSetLocalServiceUtil.getLayoutSet(group_id, is_private_layout);
+		    SitesUtil.mergeLayoutSetPrototypeLayouts(organization_group, layout_set);
+		    
+		} catch (Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::createOrganisation()] Error creating Organization: " + exception.getMessage());
+    		exception.printStackTrace();
+    		throw new MasterPublishException("Error creating Organization Site: " + exception.getMessage());
+		}
+	}
+    
+    /**
+     * Get the PublicLayoutSetPrototypeId for the name
+     * 
+     * @return
+     * @throws PortalException
+     * @throws SystemException
+     * @throws MasterPublishException
+     */
+    private long getPublicLayoutSetPrototypeId() throws PortalException, SystemException, MasterPublishException {
+    	List<LayoutSetPrototype> site_templates = LayoutSetPrototypeServiceUtil.search(company_.getCompanyId(), Boolean.TRUE, null);
+    	for(LayoutSetPrototype site_template : site_templates) {
+    		if(site_template.getName().equalsIgnoreCase(PUBLIC_LAYOUT_SET_PROTOTYPE_NAME)) {
+    			return site_template.getLayoutSetPrototypeId();
+    		}
+    	}
+    	throw new MasterPublishException("Error LayoutSetPrototype with name " + PUBLIC_LAYOUT_SET_PROTOTYPE_NAME + " dose not exist: ");
+    }
+    
+    /**
      * 
      * @param organization
      * @param company
@@ -511,15 +560,21 @@ public class MasterPublish extends MVCPortlet {
 		createRecordSetWithDatafields("bb_contribution", "bb_contribution");
 	}
 	
+	/**
+	 * Function to create DDLs from DDM Structure with data from the master record
+	 * 
+	 * @param ddl_name
+	 * @param ddm_name
+	 */
 	private void createRecordSetWithDatafields(String ddl_name, String ddm_name) {
 		try {
 			long ddm_structure_id = getDDMStructureIdFromDDMName(ddm_name);
 			DDLRecordSet recordSet = createRecordSet(ddl_name, ddm_structure_id);
-			creatRecordCore(recordSet, groupId, serviceContextRecord, master);
+			creatRecord(recordSet);
 		} catch (Exception exception) {
-			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::addUserToOrganization(Organization organization, User user, boolean maincontact)] Error adding user to organization: [UserId: " + user.getUserId() + "; OrganizationId: " + organization.getOrganizationId() + "]" + exception.getMessage());
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::createRecordSetWithDatafields(String ddl_name, String ddm_name)] Error adding DDL Structure: [DDLname: " + ddl_name + "; OrganizationId: " + organization_.getOrganizationId() + "]" + exception.getMessage());
     		exception.printStackTrace();
-    		//TODO: SessionMessages.add(request_, "error-assining-user-role", "There was an error assigning the Roles for user with email: " + user.getEmailAddress() + ".");
+    		SessionMessages.add(request_, "error-creating-ddl", "There was an error creating a DDL for the Organization.");
     		//TODO: Add Event for Admins for this
 		}
 	}
@@ -565,12 +620,12 @@ public class MasterPublish extends MVCPortlet {
 	 * Creates DDL RecordSet from DDM Structure
 	 * 
 	 * @param name
-	 * @param ddmStructureId
+	 * @param ddm_structure_id
 	 * @return
 	 * @throws PortalException
 	 * @throws SystemException
 	 */
-	private DDLRecordSet createRecordSet(String name, long ddmStructureId) throws PortalException, SystemException {
+	private DDLRecordSet createRecordSet(String name, long ddm_structure_id) throws PortalException, SystemException {
 		ServiceContext serviceContext = getServiceContext();
         Group group = organization_.getGroup();
         serviceContext.setScopeGroupId(group.getGroupId());
@@ -584,9 +639,63 @@ public class MasterPublish extends MVCPortlet {
 		Map<Locale,String> nameMap = LocalizationUtil.getLocalizationMap(languageid, names);
 		Map<Locale,String> descriptionMap = LocalizationUtil.getLocalizationMap(languageid, description);
 
-		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.addRecordSet(theme_display_.getUserId(), groupId, ddmStructureId, recordSetKey, nameMap, 
+		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.addRecordSet(theme_display_.getUserId(), groupId, ddm_structure_id, recordSetKey, nameMap, 
 				descriptionMap, DDLRecordSetConstants.MIN_DISPLAY_ROWS_DEFAULT, scope, serviceContext);
 		return recordSet;
+	}
+	
+	/**
+	 * Create Record for the DDL
+	 * 
+	 * @param record_set
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
+	private void creatRecord(DDLRecordSet record_set) throws PortalException, SystemException {
+		ServiceContext serviceContext = getServiceContext();
+        Group group = organization_.getGroup();
+        serviceContext.setScopeGroupId(group.getGroupId());
+        serviceContext.setUserId(organization_.getUserId());		
+		Fields fields = DDMUtil.getFields(record_set.getDDMStructureId(), serviceContext);
+		fields = master_.getFieldsForDDLRecord(fields, record_set.getName());
+		DDLRecordLocalServiceUtil.addRecord(
+				serviceContext.getUserId(),
+				serviceContext.getScopeGroupId(), record_set.getRecordSetId(),
+				DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
+				serviceContext);
+	}
+	
+	/**
+	 * Creating Folders for RD-Connect
+	 */
+	private void addFoldersForOrganization() {
+		addFolderForOrganization("Study protocol", "");
+		addFolderForOrganization("Datasets", "Case Report Form");
+		addFolderForOrganization("Standard Operating Procedures", "");
+		addFolderForOrganization("Informed consent templates", "");
+		addFolderForOrganization("REC approval", "");
+		addFolderForOrganization("Data transfer agreement", "");
+		addFolderForOrganization("Papers and publications", "");
+	}
+	
+	/**
+	 * Creating a folder in the organization site
+	 * 
+	 * @param foldername
+	 */
+	private void addFolderForOrganization(String foldername, String description) {
+		try {
+			ServiceContext serviceContext = getServiceContext();
+	        Group group = organization_.getGroup();
+	        serviceContext.setScopeGroupId(group.getGroupId());
+	        serviceContext.setUserId(organization_.getUserId());
+			DLFolderLocalServiceUtil.addFolder(organization_.getUserId(), organization_.getGroupId(), organization_.getGroupId(), false, 0, foldername, description, false, serviceContext);
+		} catch(Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::createRecordSetWithDatafields(String ddl_name, String ddm_name)] Error adding Folder: [Foldername: " + foldername + "; OrganizationId: " + organization_.getOrganizationId() + "]" + exception.getMessage());
+    		exception.printStackTrace();
+    		SessionMessages.add(request_, "error-creating-folder", "There was an error creating a Folder for the Organization.");
+    		//TODO: Add Event for Admins for this
+		}
 	}
     
     //----------------------------------------------------------------
@@ -814,46 +923,7 @@ public class MasterPublish extends MVCPortlet {
 		return name;
 	}
 	
-	private void createPages(Organization organization) throws Exception {
-		try {
-			// Create Public Pages
-			long publicLayoutSetPrototypeId = 10717; 
-			boolean publicLayoutSetPrototypeLinkEnabled = true;
-			boolean isPrivateLayout = false;
-			long privateLayoutSetPrototypeId = 0;
-			boolean privateLayoutSetPrototypeLinkEnabled = false;
-					
-			Group organizationGroup = organization.getGroup();
-			
-			long groupId = organizationGroup.getGroupId();
-		    LayoutSetPrototype prototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(publicLayoutSetPrototypeId);
-		    boolean layoutSetPrototypeLinkEnabled = true;
-		    LayoutSetLocalServiceUtil.updateLayoutSetPrototypeLinkEnabled(groupId, isPrivateLayout,
-		            layoutSetPrototypeLinkEnabled, prototype.getUuid());
-		    
-		    LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, isPrivateLayout);
-		    SitesUtil.mergeLayoutSetPrototypeLayouts(organizationGroup, layoutSet);
-			
-			/*SitesUtil.updateLayoutSetPrototypesLinks(organizationGroup, publicLayoutSetPrototypeId,
-							privateLayoutSetPrototypeId,
-							publicLayoutSetPrototypeLinkEnabled,
-							privateLayoutSetPrototypeLinkEnabled);
-			SitesUtil.mergeLayoutSetPrototypeLayouts(organizationGroup, LayoutSetLocalServiceUtil.getLayoutSet(organizationGroup.getGroupId(), false));*/
-		} catch (Exception e) {
-			System.out.println("RDC Exception - MasterPublish::createPages");
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-		
-		// Update Logo
-		//boolean privateLayout = true;
-		
-		//String url = "http://localhost:8080/documents/10194/0/Biobank/a7b1fd67-d959-4170-9ea4-2139ed7b6047?t=1390941119698";
-	    //File logo = new File(url);    
-		//LayoutSetServiceUtil.updateLogo(organization.getGroupId(), privateLayout, true, logo);//organizationGroup.getGroupId()
-		/*privateLayout = false;
-		LayoutSetServiceUtil.updateLogo(organization.getGroupId(), privateLayout, true, logo);*/
-	}
+	
 	
 	
 	
@@ -865,88 +935,6 @@ public class MasterPublish extends MVCPortlet {
 	    	id += alphabet_.charAt(random_.nextInt(alphabeth_length_));
 	    }
 	    return id;
-	}
-	
-	private void creatRecordCore(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		try {
-			DDMStructure ddmStructure = recordSet.getDDMStructure();		
-			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
-			// Define Fields
-			Field field_acronym = new Field("acronym", master.getCandidatesubtype());
-			fields.put(field_acronym);
-			Field field_description = new Field("Description", "");
-			fields.put(field_description);
-			Field field_countryCode = new Field("countryCode", master.getCountry());
-			fields.put(field_countryCode);
-			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
-				serviceContext.getUserId(),
-				serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
-				DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
-				serviceContext);
-		} catch(Exception e) {
-			System.out.println("RDC Exception Core");
-			e.printStackTrace();
-		}
-	}
-	
-	private void creatRecordQualityIndicator(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		try {
-			DDMStructure ddmStructure = recordSet.getDDMStructure();		
-			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
-			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
-					serviceContext.getUserId(),
-					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
-					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
-					serviceContext);
-		} catch(Exception e) {
-			System.out.println("RDC Exception QualityIndicator");
-			e.printStackTrace();
-		}
-	}
-	
-	private void creatRecord(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		try {
-			DDMStructure ddmStructure = recordSet.getDDMStructure();		
-			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
-			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
-					serviceContext.getUserId(),
-					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
-					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
-					serviceContext);
-		} catch(Exception e) {
-			System.out.println("RDC Exception creatRecord " + recordSet.getName());
-			e.printStackTrace();
-		}
-	}
-	
-	private void creatRecordDiseaseAreas(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		try {
-			DDMStructure ddmStructure = recordSet.getDDMStructure();		
-			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
-			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
-					serviceContext.getUserId(),
-					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
-					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
-					serviceContext);
-		} catch(Exception e) {
-			System.out.println("RDC Exception DiseaseAreas");
-			e.printStackTrace();
-		}
-	}
-	
-	private void creatRecordAccesability(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		try {
-			DDMStructure ddmStructure = recordSet.getDDMStructure();		
-			Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);	
-			DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
-					serviceContext.getUserId(),
-					serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
-					DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
-					serviceContext);
-		} catch(Exception e) {
-			System.out.println("RDC Exception Accesability");
-			e.printStackTrace();
-		}
 	}
 	
 	private void creatRecordDiseaseMatrix(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {

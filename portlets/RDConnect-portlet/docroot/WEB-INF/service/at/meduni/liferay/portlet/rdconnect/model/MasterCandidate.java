@@ -31,4 +31,7 @@ public interface MasterCandidate extends MasterCandidateModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.meduni.liferay.portlet.rdconnect.model.impl.MasterCandidateImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public com.liferay.portlet.dynamicdatamapping.storage.Fields getFieldsForDDLRecord(
+		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		java.lang.String record_set_name);
 }

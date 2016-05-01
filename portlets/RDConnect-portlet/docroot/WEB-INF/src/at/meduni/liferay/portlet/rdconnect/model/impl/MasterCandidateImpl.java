@@ -14,6 +14,9 @@
 
 package at.meduni.liferay.portlet.rdconnect.model.impl;
 
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+
 /**
  * The extended model implementation for the MasterCandidate service. Represents a row in the &quot;rdconnect.master_candidate&quot; database table, with each column mapped to a property of this class.
  *
@@ -30,5 +33,25 @@ public class MasterCandidateImpl extends MasterCandidateBaseImpl {
 	 * Never reference this class directly. All methods that expect a master candidate model instance should use the {@link at.meduni.liferay.portlet.rdconnect.model.MasterCandidate} interface instead.
 	 */
 	public MasterCandidateImpl() {
+	}
+	
+	public Fields getFieldsForDDLRecord(Fields fields, String record_set_name) {
+		if(record_set_name.equalsIgnoreCase("core")) {
+			getFieldsForCore(fields);
+		}
+		if(record_set_name.equalsIgnoreCase("bb_core")) {
+			getFieldsForCore(fields);
+		}
+		return fields;
+	}
+	
+	private Fields getFieldsForCore(Fields fields) {
+		Field field_acronym = new Field("acronym", this.getCandidatesubtype());
+		fields.put(field_acronym);
+		Field field_description = new Field("Description", "");
+		fields.put(field_description);
+		Field field_countryCode = new Field("countryCode", this.getCountry());
+		fields.put(field_countryCode);
+		return fields;
 	}
 }

@@ -750,6 +750,30 @@ public class MasterCandidateClp extends BaseModelImpl<MasterCandidate>
 		}
 	}
 
+	@Override
+	public com.liferay.portlet.dynamicdatamapping.storage.Fields getFieldsForDDLRecord(
+		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		java.lang.String record_set_name) {
+		try {
+			String methodName = "getFieldsForDDLRecord";
+
+			Class<?>[] parameterTypes = new Class<?>[] {
+					com.liferay.portlet.dynamicdatamapping.storage.Fields.class,
+					java.lang.String.class
+				};
+
+			Object[] parameterValues = new Object[] { fields, record_set_name };
+
+			com.liferay.portlet.dynamicdatamapping.storage.Fields returnObj = (com.liferay.portlet.dynamicdatamapping.storage.Fields)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getMasterCandidateRemoteModel() {
 		return _masterCandidateRemoteModel;
 	}

@@ -787,6 +787,13 @@ public class MasterCandidateWrapper implements MasterCandidate,
 	}
 
 	@Override
+	public com.liferay.portlet.dynamicdatamapping.storage.Fields getFieldsForDDLRecord(
+		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		java.lang.String record_set_name) {
+		return _masterCandidate.getFieldsForDDLRecord(fields, record_set_name);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
