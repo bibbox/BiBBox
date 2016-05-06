@@ -1,0 +1,17 @@
+at.meduni.liferay.portlet.kdssmp
+at.meduni.liferay.portlet.rdconnect
+at.meduni.liferay.portlet.rdconnect.admin
+at.meduni.liferay.portlet.rdconnect.dashboard
+at.meduni.liferay.portlet.rdconnect.dashboard.config
+at.meduni.liferay.portlet.rdconnect.heading
+at.meduni.liferay.portlet.rdconnect.maps
+at.meduni.liferay.portlet.rdconnect.model.impl
+at.meduni.liferay.portlet.rdconnect.questionnaire
+at.meduni.liferay.portlet.rdconnect.recommendation
+at.meduni.liferay.portlet.rdconnect.search
+at.meduni.liferay.portlet.rdconnect.service.base
+at.meduni.liferay.portlet.rdconnect.service.impl
+at.meduni.liferay.portlet.rdconnect.service.persistence
+at.meduni.liferay.portlet.rdconnect.staticddl
+at.meduni.liferay.portlet.rdconnect.statistik
+at.meduni.liferay.portlet.test
