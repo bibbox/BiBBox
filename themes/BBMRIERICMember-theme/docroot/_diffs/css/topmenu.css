@@ -59,7 +59,7 @@
    padding: 13px 0 0 15px;
 }
 .bbmri-eric-member-area-top-menue-container-menu-current-site {
-   width: 245px;
+   width: 248px;
    height: 36px;
    float: left;
    font-weight:bold;
@@ -107,7 +107,7 @@
 }
 /* ----------------------------------------------- */
 .bbmri-eric-member-area-top-menue-container-group1 {
-   width: 131px;
+   width: 163px;
    height: 36px;
    float: left;
    
@@ -180,7 +180,7 @@
 }
 /* ----------------------------------------------- */
 .bbmri-eric-member-area-top-menue-container-group2 {
-   width: 131px;
+   width: 163px;
    height: 36px;
    float: left;
    
@@ -216,7 +216,7 @@
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 448px;
+   left: 320px;
    z-index: 500;
    width: 300px;
    
@@ -253,7 +253,7 @@
 }
 /* ----------------------------------------------- */
 .bbmri-eric-member-area-top-menue-container-group3 {
-   width: 131px;
+   width: 163px;
    height: 36px;
    float: left;
    
@@ -289,7 +289,7 @@
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 580px;
+   left: 484px;
    z-index: 500;
    width: 300px;
    
@@ -302,7 +302,7 @@
    border-bottom: 1px solid #F4F6FB;
    position: relative;
    float: left;
-   width: 237px;
+   width: 250px;
    padding-left: 3px;
    align: left;
    text-align: left;
@@ -326,7 +326,7 @@
 }
 /* ----------------------------------------------- */
 .bbmri-eric-member-area-top-menue-container-group4 {
-   width: 131px;
+   width: 163px;
    height: 36px;
    float: left;
    
@@ -362,9 +362,9 @@
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 712px;
+   left: 648px;
    z-index: 500;
-   width: 150px;
+   width: 163px;
    
    -webkit-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
@@ -375,7 +375,7 @@
    border-bottom: 1px solid #F4F6FB;
    position: relative;
    float: left;
-   width: 137px;
+   width: 150px;
    padding-left: 3px;
    align: left;
    text-align: left;
@@ -399,7 +399,7 @@
 }
 /* ----------------------------------------------- */
 .bbmri-eric-member-area-top-menue-container-group5 {
-   width: 131px;
+   width: 163px;
    height: 36px;
    float: left;
    
@@ -437,9 +437,9 @@
    padding: 0;
    position: absolute; 
    top: 49px;
-   left: 845px;
+   left: 812px;
    z-index: 500;
-   width: 150px;
+   width: 163px;
    
    -webkit-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
    -moz-box-shadow: 2px 2px 2px 0px rgba(102,102,102,0.30);
@@ -450,7 +450,7 @@
    border-bottom: 1px solid #F4F6FB;
    position: relative;
    float: left;
-   width: 137px;
+   width: 150px;
    padding-left: 3px;
    align: left;
    text-align: left;

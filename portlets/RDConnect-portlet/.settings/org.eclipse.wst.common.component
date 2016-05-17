@@ -8,6 +8,9 @@
         <dependent-module archiveName="BiBBoxCommonServices-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/BiBBoxCommonServices-portlet/docroot/WEB-INF/lib/BiBBoxCommonServices-portlet-service.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="BiBBoxCommonServicesDatabase-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/BiBBoxCommonServicesDatabase-portlet/docroot/WEB-INF/lib/BiBBoxCommonServicesDatabase-portlet-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="RDConnect-portlet"/>
         <property name="java-output-path" value="/RDConnect-portlet/docroot/WEB-INF/classes"/>
     </wb-module>

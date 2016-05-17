@@ -228,12 +228,34 @@ public class MasterPublish extends MVCPortlet {
 	}
 	
 	/**
+	 * 
+	 * @param organisationid
+	 * @throws PortalException
+	 * @throws SystemException
+	 * @throws MasterPublishException 
+	 */
+	public void deleteOrganisation(long organisationid) throws MasterPublishException {
+		try {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(organisationid);
+			List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
+			for(User u : userlist) {
+				OrganizationLocalServiceUtil.deleteUserOrganization(u.getUserId(), organization);
+			}
+			OrganizationLocalServiceUtil.deleteOrganization(organization);
+		} catch(Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::deleteOrganisation(long organisationid)] Error deleting Organization: " + exception.getMessage());
+    		exception.printStackTrace();
+    		throw new MasterPublishException("Error deleting Organization: " + exception.getMessage());
+		}
+	}
+	
+	/**
      * Setup variables for publishing an organization
      * 
      * @param request the ActionRequest from the portlet call with information of the portal 
 	 * @throws MasterPublishException 
      */
-    public void setUpVaraibles() throws MasterPublishException {
+	private void setUpVaraibles() throws MasterPublishException {
     	try {
     		theme_display_ = (ThemeDisplay) request_.getAttribute(WebKeys.THEME_DISPLAY);
     		company_id_ = theme_display_.getCompanyId();
@@ -254,7 +276,7 @@ public class MasterPublish extends MVCPortlet {
      * Setup role variables for publishing an organization
      * @throws MasterPublishException 
      */
-    public void setUpRoleVaraibles() throws MasterPublishException {
+    private void setUpRoleVaraibles() throws MasterPublishException {
     	try {
 	    	bb_reg_editor_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-EDITOR").getRoleId();
 			bb_reg_owner_role_id_ = RoleLocalServiceUtil.getRole(company_id_, "BB-REG-OWNER").getRoleId();
@@ -270,7 +292,7 @@ public class MasterPublish extends MVCPortlet {
      * Setup organization variables for publishing an organization
      * @throws MasterPublishException 
      */
-    public void setUpOrganizationVaraibles() throws MasterPublishException {
+    private void setUpOrganizationVaraibles() throws MasterPublishException {
     	try {
     		biobank_assessment_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Biobank Assessment").getOrganizationId();
     		catalog_organization_id_ = OrganizationLocalServiceUtil.getOrganization(company_id_, "Catalog").getOrganizationId();
@@ -991,19 +1013,6 @@ public class MasterPublish extends MVCPortlet {
 	
 	
 	// --------------------------------------------------------------------
-	public void deleteOrganisation(long organisationid) throws PortalException, SystemException {
-		try {
-		Organization organization = OrganizationLocalServiceUtil.getOrganization(organisationid);
-		List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
-		for(User u : userlist) {
-			OrganizationLocalServiceUtil.deleteUserOrganization(u.getUserId(), organization);
-		}
-		OrganizationLocalServiceUtil.deleteOrganization(organization);
-		} catch(Exception e) {
-			System.out.println("RDC Exception in MasterPublish:deleteOrganisation");
-			System.out.println("Could not delete Organisation: " + organisationid);
-			e.printStackTrace();
-		}
-	}
+	
 
 }

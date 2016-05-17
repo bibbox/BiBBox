@@ -42,14 +42,12 @@ boolean project = false;
 List<String> groupsfornavigation = new ArrayList<String>();
 groupsfornavigation.add("PROJECTS");
 groupsfornavigation.add("GROUPS");
-groupsfornavigation.add("WP");
 groupsfornavigation.add("WG");
 groupsfornavigation.add("GOVERNANCE");
 
 HashMap<String, String> groupsfornavigationnaming = new HashMap<String, String>();
 groupsfornavigationnaming.put("GOVERNANCE", "committee");
 groupsfornavigationnaming.put("WG", "working group");
-groupsfornavigationnaming.put("WP", "working parties");
 groupsfornavigationnaming.put("GROUPS", "ad-hoc working group");
 groupsfornavigationnaming.put("PROJECTS", "projects");
 
@@ -65,9 +63,6 @@ for(Group group : groups) {
 	   if(tag.getName().equalsIgnoreCase("working group")) {
 		   wg = true;
 	   }
-	   if(tag.getName().equalsIgnoreCase("working parties")) {
-		   wp = true;
-	   }
 	   if(tag.getName().equalsIgnoreCase("projects")) {
 		   project = true;
 	   }
@@ -81,9 +76,6 @@ if(!committees) {
 }
 if(!wg) {
 	groupsfornavigation.remove(groupsfornavigation.indexOf("WG"));
-}
-if(!wp) {
-	groupsfornavigation.remove(groupsfornavigation.indexOf("WP"));
 }
 if(!project) {
 	groupsfornavigation.remove(groupsfornavigation.indexOf("PROJECTS"));
@@ -131,7 +123,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
    <aui:a href="<%= url_home %>"><ul><li><%= themeDisplay.getSiteGroupName() %></li></ul></aui:a>
 </div>
 <!-- Group Container -->
-<!-- Group 1 -->
+<!-- Group 1 
 <div class="bbmri-eric-member-area-top-menue-container-group1">
    <ul>
       <% if(!g1.equalsIgnoreCase("")) { %>
@@ -157,7 +149,7 @@ for(String groupsfornavigation_key : groupsfornavigation) {
 	      </li>
       <% } %>
    </ul>
-</div>
+</div>-->
 <!-- Group 2 -->
 <div class="bbmri-eric-member-area-top-menue-container-group2">
 	<ul>
