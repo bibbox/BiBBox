@@ -68,7 +68,7 @@ create table bbmrieric.d2biobank (
 	biobankURL VARCHAR(500) null,
 	biobankHeadFirstName VARCHAR(75) null,
 	biobankHeadLastName VARCHAR(75) null,
-	biobankHeadRole VARCHAR(75) null,
+	biobankHeadRole VARCHAR(500) null,
 	biobankClinical BOOLEAN,
 	biobankPopulation BOOLEAN,
 	biobankResearchStudy BOOLEAN,

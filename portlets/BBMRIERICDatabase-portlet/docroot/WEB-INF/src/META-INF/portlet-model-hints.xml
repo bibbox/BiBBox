@@ -91,7 +91,9 @@
 		</field>
 		<field name="biobankHeadFirstName" type="String" />
 		<field name="biobankHeadLastName" type="String" />
-		<field name="biobankHeadRole" type="String" />
+		<field name="biobankHeadRole" type="String">
+			<hint name="max-length">500</hint>
+		</field>
 		<field name="biobankClinical" type="boolean" />
 		<field name="biobankPopulation" type="boolean" />
 		<field name="biobankResearchStudy" type="boolean" />
