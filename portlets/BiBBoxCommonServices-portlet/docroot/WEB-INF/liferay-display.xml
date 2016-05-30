@@ -43,4 +43,10 @@
 		<portlet id="symbol-configuration"></portlet>
 		<portlet id="icons-image-config"></portlet>
 	</category>
+	<category name="RDConnect Statistiks">
+		<portlet id="disease-overview"></portlet>
+	</category>
+	<category name="RD-Connect Dashboard">
+		<portlet id="invitation-report"></portlet>
+	</category>
 </display>
