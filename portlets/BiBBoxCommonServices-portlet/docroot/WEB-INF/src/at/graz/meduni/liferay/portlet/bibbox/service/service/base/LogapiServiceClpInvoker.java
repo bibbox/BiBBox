@@ -64,43 +64,47 @@ public class LogapiServiceClpInvoker {
 
 		_methodParameterTypes69 = new String[] { "java.lang.String" };
 
-		_methodName70 = "testMethode";
+		_methodName70 = "getIdCard";
 
-		_methodParameterTypes70 = new String[] { "java.lang.String" };
+		_methodParameterTypes70 = new String[] { "long" };
 
-		_methodName71 = "resttest01";
+		_methodName71 = "testMethode";
 
-		_methodParameterTypes71 = new String[] { "long" };
+		_methodParameterTypes71 = new String[] { "java.lang.String" };
 
-		_methodName72 = "resttest02";
+		_methodName72 = "resttest01";
 
-		_methodParameterTypes72 = new String[] { "java.lang.String" };
+		_methodParameterTypes72 = new String[] { "long" };
 
-		_methodName73 = "resttest03";
+		_methodName73 = "resttest02";
 
-		_methodParameterTypes73 = new String[] { "long[][]" };
+		_methodParameterTypes73 = new String[] { "java.lang.String" };
 
-		_methodName74 = "resttest04";
+		_methodName74 = "resttest03";
 
-		_methodParameterTypes74 = new String[] { "java.lang.String[][]" };
+		_methodParameterTypes74 = new String[] { "long[][]" };
 
-		_methodName75 = "resttest05";
+		_methodName75 = "resttest04";
 
-		_methodParameterTypes75 = new String[] {
+		_methodParameterTypes75 = new String[] { "java.lang.String[][]" };
+
+		_methodName76 = "resttest05";
+
+		_methodParameterTypes76 = new String[] {
 				"java.lang.String", "com.liferay.portal.model.User"
 			};
 
-		_methodName76 = "resttest06";
+		_methodName77 = "resttest06";
 
-		_methodParameterTypes76 = new String[] {
+		_methodParameterTypes77 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName77 = "resttest07";
+		_methodName78 = "resttest07";
 
-		_methodParameterTypes77 = new String[] {
+		_methodParameterTypes78 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
@@ -164,49 +168,54 @@ public class LogapiServiceClpInvoker {
 
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
-			LogapiServiceUtil.testMethode((java.lang.String)arguments[0]);
-
-			return null;
+			return LogapiServiceUtil.getIdCard(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName71.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
-			LogapiServiceUtil.resttest01(((Long)arguments[0]).longValue());
+			LogapiServiceUtil.testMethode((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName72.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
-			LogapiServiceUtil.resttest02((java.lang.String)arguments[0]);
+			LogapiServiceUtil.resttest01(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			LogapiServiceUtil.resttest03((long[])arguments[0]);
+			LogapiServiceUtil.resttest02((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
-			LogapiServiceUtil.resttest04((java.lang.String[])arguments[0]);
+			LogapiServiceUtil.resttest03((long[])arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
-			LogapiServiceUtil.resttest05((java.lang.String)arguments[0],
-				(com.liferay.portal.model.User)arguments[1]);
+			LogapiServiceUtil.resttest04((java.lang.String[])arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName76.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+			LogapiServiceUtil.resttest05((java.lang.String)arguments[0],
+				(com.liferay.portal.model.User)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
 			LogapiServiceUtil.resttest06((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -216,8 +225,8 @@ public class LogapiServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName77.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			LogapiServiceUtil.resttest07((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -266,4 +275,6 @@ public class LogapiServiceClpInvoker {
 	private String[] _methodParameterTypes76;
 	private String _methodName77;
 	private String[] _methodParameterTypes77;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
 }

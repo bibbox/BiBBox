@@ -128,7 +128,7 @@ public class LDAPSyncService implements MessageListener {
 		Hashtable<String, String> environment = new Hashtable<String, String>();
 		environment.put(LdapContext.CONTROL_FACTORIES, "com.sun.jndi.ldap.ControlFactory");
 		environment.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-		environment.put(Context.PROVIDER_URL, "ldap://directory.bbmri-eric.eu:10389");
+		environment.put(Context.PROVIDER_URL, "ldap://directory-ldap.bbmri-eric.eu:10389");
 		environment.put(Context.SECURITY_AUTHENTICATION, "simple");
 		environment.put(Context.REFERRAL, "follow");
 		DirContext ctx = null;

@@ -32,33 +32,37 @@ public class idcardServiceClpInvoker {
 
 		_methodParameterTypes19 = new String[] { "java.lang.String" };
 
-		_methodName24 = "DiseaseMatrix";
+		_methodName24 = "TestVariables";
 
-		_methodParameterTypes24 = new String[] {
+		_methodParameterTypes24 = new String[] { "long" };
+
+		_methodName25 = "DiseaseMatrix";
+
+		_methodParameterTypes25 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName25 = "DiseaseMatrix";
+		_methodName26 = "DiseaseMatrix";
 
-		_methodParameterTypes25 = new String[] {
+		_methodParameterTypes26 = new String[] {
 				"java.lang.String", "long", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName26 = "DiseaseMatrix";
+		_methodName27 = "DiseaseMatrix";
 
-		_methodParameterTypes26 = new String[] {
+		_methodParameterTypes27 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName27 = "DiseaseMatrix";
+		_methodName28 = "DiseaseMatrix";
 
-		_methodParameterTypes27 = new String[] {
+		_methodParameterTypes28 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
@@ -81,17 +85,12 @@ public class idcardServiceClpInvoker {
 
 		if (_methodName24.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
-			return idcardServiceUtil.DiseaseMatrix(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
-				(java.lang.String)arguments[4], (java.lang.String)arguments[5],
-				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
-				(java.lang.String)arguments[8]);
+			return idcardServiceUtil.TestVariables(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName25.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
-			return idcardServiceUtil.DiseaseMatrix((java.lang.String)arguments[0],
+			return idcardServiceUtil.DiseaseMatrix(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
 				(java.lang.String)arguments[4], (java.lang.String)arguments[5],
@@ -101,6 +100,16 @@ public class idcardServiceClpInvoker {
 
 		if (_methodName26.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
+			return idcardServiceUtil.DiseaseMatrix((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				(java.lang.String)arguments[4], (java.lang.String)arguments[5],
+				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
+				(java.lang.String)arguments[8]);
+		}
+
+		if (_methodName27.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
 			return idcardServiceUtil.DiseaseMatrix(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -108,8 +117,8 @@ public class idcardServiceClpInvoker {
 				(java.lang.String)arguments[7]);
 		}
 
-		if (_methodName27.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
+		if (_methodName28.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
 			return idcardServiceUtil.DiseaseMatrix((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -132,4 +141,6 @@ public class idcardServiceClpInvoker {
 	private String[] _methodParameterTypes26;
 	private String _methodName27;
 	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
 }

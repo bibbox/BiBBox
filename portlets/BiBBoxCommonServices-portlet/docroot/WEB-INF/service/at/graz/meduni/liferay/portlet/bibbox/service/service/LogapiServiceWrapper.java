@@ -122,6 +122,11 @@ public class LogapiServiceWrapper implements LogapiService,
 	}
 
 	@Override
+	public java.lang.String getIdCard(long organizationId) {
+		return _logapiService.getIdCard(organizationId);
+	}
+
+	@Override
 	public void testMethode(java.lang.String jason) {
 		_logapiService.testMethode(jason);
 	}

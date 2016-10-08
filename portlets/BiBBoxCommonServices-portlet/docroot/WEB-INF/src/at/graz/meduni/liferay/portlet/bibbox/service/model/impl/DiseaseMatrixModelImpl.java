@@ -73,9 +73,10 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 			{ "icd10", Types.VARCHAR },
 			{ "omim", Types.VARCHAR },
 			{ "synonym", Types.VARCHAR },
-			{ "modifieddate", Types.TIMESTAMP }
+			{ "modifieddate", Types.TIMESTAMP },
+			{ "modifieduser", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.diseasematrix (diseasematrixId LONG not null primary key,organizationId LONG,diseasename TEXT null,patientcount TEXT null,gene TEXT null,orphanumber TEXT null,icd10 TEXT null,omim TEXT null,synonym TEXT null,modifieddate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.diseasematrix (diseasematrixId LONG not null primary key,organizationId LONG,diseasename TEXT null,patientcount TEXT null,gene TEXT null,orphanumber TEXT null,icd10 TEXT null,omim TEXT null,synonym TEXT null,modifieddate DATE null,modifieduser VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.diseasematrix";
 	public static final String ORDER_BY_JPQL = " ORDER BY diseaseMatrix.diseasematrixId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.diseasematrix.diseasematrixId ASC";
@@ -92,7 +93,8 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 				"value.object.column.bitmask.enabled.at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix"),
 			true);
 	public static long ORGANIZATIONID_COLUMN_BITMASK = 1L;
-	public static long DISEASEMATRIXID_COLUMN_BITMASK = 2L;
+	public static long ORPHANUMBER_COLUMN_BITMASK = 2L;
+	public static long DISEASEMATRIXID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -117,6 +119,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		model.setOmim(soapModel.getOmim());
 		model.setSynonym(soapModel.getSynonym());
 		model.setModifieddate(soapModel.getModifieddate());
+		model.setModifieduser(soapModel.getModifieduser());
 
 		return model;
 	}
@@ -191,6 +194,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		attributes.put("omim", getOmim());
 		attributes.put("synonym", getSynonym());
 		attributes.put("modifieddate", getModifieddate());
+		attributes.put("modifieduser", getModifieduser());
 
 		return attributes;
 	}
@@ -255,6 +259,12 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 
 		if (modifieddate != null) {
 			setModifieddate(modifieddate);
+		}
+
+		String modifieduser = (String)attributes.get("modifieduser");
+
+		if (modifieduser != null) {
+			setModifieduser(modifieduser);
 		}
 	}
 
@@ -353,7 +363,17 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 
 	@Override
 	public void setOrphanumber(String orphanumber) {
+		_columnBitmask |= ORPHANUMBER_COLUMN_BITMASK;
+
+		if (_originalOrphanumber == null) {
+			_originalOrphanumber = _orphanumber;
+		}
+
 		_orphanumber = orphanumber;
+	}
+
+	public String getOriginalOrphanumber() {
+		return GetterUtil.getString(_originalOrphanumber);
 	}
 
 	@JSON
@@ -415,6 +435,22 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		_modifieddate = modifieddate;
 	}
 
+	@JSON
+	@Override
+	public String getModifieduser() {
+		if (_modifieduser == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _modifieduser;
+		}
+	}
+
+	@Override
+	public void setModifieduser(String modifieduser) {
+		_modifieduser = modifieduser;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -456,6 +492,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		diseaseMatrixImpl.setOmim(getOmim());
 		diseaseMatrixImpl.setSynonym(getSynonym());
 		diseaseMatrixImpl.setModifieddate(getModifieddate());
+		diseaseMatrixImpl.setModifieduser(getModifieduser());
 
 		diseaseMatrixImpl.resetOriginalValues();
 
@@ -511,6 +548,8 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		diseaseMatrixModelImpl._originalOrganizationId = diseaseMatrixModelImpl._organizationId;
 
 		diseaseMatrixModelImpl._setOriginalOrganizationId = false;
+
+		diseaseMatrixModelImpl._originalOrphanumber = diseaseMatrixModelImpl._orphanumber;
 
 		diseaseMatrixModelImpl._columnBitmask = 0;
 	}
@@ -588,12 +627,20 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 			diseaseMatrixCacheModel.modifieddate = Long.MIN_VALUE;
 		}
 
+		diseaseMatrixCacheModel.modifieduser = getModifieduser();
+
+		String modifieduser = diseaseMatrixCacheModel.modifieduser;
+
+		if ((modifieduser != null) && (modifieduser.length() == 0)) {
+			diseaseMatrixCacheModel.modifieduser = null;
+		}
+
 		return diseaseMatrixCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{diseasematrixId=");
 		sb.append(getDiseasematrixId());
@@ -615,6 +662,8 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 		sb.append(getSynonym());
 		sb.append(", modifieddate=");
 		sb.append(getModifieddate());
+		sb.append(", modifieduser=");
+		sb.append(getModifieduser());
 		sb.append("}");
 
 		return sb.toString();
@@ -622,7 +671,7 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -669,6 +718,10 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 			"<column><column-name>modifieddate</column-name><column-value><![CDATA[");
 		sb.append(getModifieddate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifieduser</column-name><column-value><![CDATA[");
+		sb.append(getModifieduser());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -687,10 +740,12 @@ public class DiseaseMatrixModelImpl extends BaseModelImpl<DiseaseMatrix>
 	private String _patientcount;
 	private String _gene;
 	private String _orphanumber;
+	private String _originalOrphanumber;
 	private String _icd10;
 	private String _omim;
 	private String _synonym;
 	private Date _modifieddate;
+	private String _modifieduser;
 	private long _columnBitmask;
 	private DiseaseMatrix _escapedModel;
 }

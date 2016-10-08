@@ -51,25 +51,28 @@ if (currentGroup.isOrganization()) {
   	
  	// Core Functions
  	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
+ 	String core_ddl_name = "core";
  	if(organizationtype.equalsIgnoreCase("Biobank")) {
  		if(organization.getLogoId() == 0) {
  			imgPath = request.getContextPath() + "/images/Biobank.png";
  		}
  		orgPath = orgPath + "/bb_home";	
  		organisationtype = "Biobank";
+ 		core_ddl_name = "bb_core";
  	} else {
  		if(organization.getLogoId() == 0) {
  			imgPath = request.getContextPath() + "/images/Registry.png";
  		}
  		orgPath = orgPath + "/reg_home";
  		organisationtype = "Registry";
+ 		core_ddl_name = "core";
  	}
   	
   	List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
   	for(DDLRecordSet rdc_rs : rdc_recordlist) {
   		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
   		
-  		 if(rdc_rsname.equals("core")) {
+  		 if(rdc_rsname.equals(core_ddl_name)) {
   			List<DDLRecord> records = rdc_rs.getRecords();
   			for(DDLRecord record : records) { 
   				 recordId = record.getPrimaryKey();

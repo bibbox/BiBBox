@@ -41,6 +41,7 @@ public class DiseaseMatrixSoap implements Serializable {
 		soapModel.setOmim(model.getOmim());
 		soapModel.setSynonym(model.getSynonym());
 		soapModel.setModifieddate(model.getModifieddate());
+		soapModel.setModifieduser(model.getModifieduser());
 
 		return soapModel;
 	}
@@ -173,6 +174,14 @@ public class DiseaseMatrixSoap implements Serializable {
 		_modifieddate = modifieddate;
 	}
 
+	public String getModifieduser() {
+		return _modifieduser;
+	}
+
+	public void setModifieduser(String modifieduser) {
+		_modifieduser = modifieduser;
+	}
+
 	private long _diseasematrixId;
 	private long _organizationId;
 	private String _diseasename;
@@ -183,4 +192,5 @@ public class DiseaseMatrixSoap implements Serializable {
 	private String _omim;
 	private String _synonym;
 	private Date _modifieddate;
+	private String _modifieduser;
 }

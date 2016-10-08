@@ -84,6 +84,7 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 		attributes.put("omim", getOmim());
 		attributes.put("synonym", getSynonym());
 		attributes.put("modifieddate", getModifieddate());
+		attributes.put("modifieduser", getModifieduser());
 
 		return attributes;
 	}
@@ -148,6 +149,12 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 
 		if (modifieddate != null) {
 			setModifieddate(modifieddate);
+		}
+
+		String modifieduser = (String)attributes.get("modifieduser");
+
+		if (modifieduser != null) {
+			setModifieduser(modifieduser);
 		}
 	}
 
@@ -381,6 +388,29 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 		}
 	}
 
+	@Override
+	public String getModifieduser() {
+		return _modifieduser;
+	}
+
+	@Override
+	public void setModifieduser(String modifieduser) {
+		_modifieduser = modifieduser;
+
+		if (_diseaseMatrixRemoteModel != null) {
+			try {
+				Class<?> clazz = _diseaseMatrixRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModifieduser", String.class);
+
+				method.invoke(_diseaseMatrixRemoteModel, modifieduser);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getDiseaseMatrixRemoteModel() {
 		return _diseaseMatrixRemoteModel;
 	}
@@ -461,6 +491,7 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 		clone.setOmim(getOmim());
 		clone.setSynonym(getSynonym());
 		clone.setModifieddate(getModifieddate());
+		clone.setModifieduser(getModifieduser());
 
 		return clone;
 	}
@@ -509,7 +540,7 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{diseasematrixId=");
 		sb.append(getDiseasematrixId());
@@ -531,6 +562,8 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 		sb.append(getSynonym());
 		sb.append(", modifieddate=");
 		sb.append(getModifieddate());
+		sb.append(", modifieduser=");
+		sb.append(getModifieduser());
 		sb.append("}");
 
 		return sb.toString();
@@ -538,7 +571,7 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -585,6 +618,10 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 			"<column><column-name>modifieddate</column-name><column-value><![CDATA[");
 		sb.append(getModifieddate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifieduser</column-name><column-value><![CDATA[");
+		sb.append(getModifieduser());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -601,5 +638,6 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 	private String _omim;
 	private String _synonym;
 	private Date _modifieddate;
+	private String _modifieduser;
 	private BaseModel<?> _diseaseMatrixRemoteModel;
 }

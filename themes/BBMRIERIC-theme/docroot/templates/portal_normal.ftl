@@ -46,12 +46,12 @@ ${theme.include(body_top_include)}
 			<img  alt="${logo_description}" height="215px" src="/BBMRIERIC-theme/images/BBMRI-ERIC_new_header_image.png" width="1200px" >
 		</div>
 	</div>
-	<a href="/about"><div class="bbmri_eric_header-innercontainer">
+	<div class="bbmri_eric_header-innercontainer">
 		<div class="bbmri_eric_header-logo">
 			<div class="bbmri_eric_header-logo-floating">
 			</div>
 		</div>
-	</div></a>
+	</div>
 	<div class="bbmri_eric_header-menucontainer">
 		<div class="bbmri_eric_header-mainmenu">
 			<div class="bbmri_eric_header-mainmenu-position">

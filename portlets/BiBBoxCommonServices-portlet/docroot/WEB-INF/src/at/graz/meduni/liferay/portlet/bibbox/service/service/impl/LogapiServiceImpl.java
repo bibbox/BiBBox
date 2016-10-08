@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
@@ -49,6 +50,8 @@ import at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.DiseaseMatrixLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.LogapiLocalServiceUtil;
 import at.graz.meduni.liferay.portlet.bibbox.service.service.base.LogapiServiceBaseImpl;
+import at.meduni.liferay.portlet.rdconnect.model.SearchIndex;
+import at.meduni.liferay.portlet.rdconnect.service.SearchIndexLocalServiceUtil;
 
 /**
  * The implementation of the logapi remote service.
@@ -184,6 +187,69 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		} catch (SystemException e) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error creating list of Biobanks and Registries.");
 			LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error creating list of Biobanks and Registries.");
+			LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return jsonarray;
+	}
+	
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "findorganization", method = "GET")
+	public JSONArray findorganization(String organizationname) {
+		long userid = 0;
+		String userip = "";
+		try {
+			User user = this.getGuestOrUser();
+			userid = user.getUserId();
+			userip = user.getLoginIP();
+			LogapiLocalServiceUtil.addLogAPI(user.getUserId(), user.getLoginIP(), "API Request getAPIVersion().");
+		} catch (Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting user data for API Logging.");
+			LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting user data for API Logging.");
+			LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		JSONArray jsonarray = JSONFactoryUtil.createJSONArray();
+		try {
+			List<Long> organizationIds = SearchIndexLocalServiceUtil.getOrganizationIdByKeywordAndValue("OrganizationName", "organizationname");
+			for(Long organizationId : organizationIds) {
+				try {
+					Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+					
+					String type = "reg/bb";
+					try {
+						type = OrganizationSearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+					} catch (Exception ex) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+						ex.printStackTrace();
+					}
+					
+					JSONObject json = JSONFactoryUtil.createJSONObject();
+					json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
+					json.put("OrganizationID", organization.getOrganizationId());
+					json.put("name", organization.getName());
+					json.put("type", type);
+					JSONArray json_collection_array = JSONFactoryUtil.createJSONArray();
+					JSONObject json_default_collection = JSONFactoryUtil.createJSONObject();
+					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
+					json_default_collection.put("CollectionName", "default");
+					json_collection_array.put(json_default_collection);
+					json.put("Collections", json_collection_array);
+					jsonarray.put(json);
+					
+				} catch (PortalException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SystemException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (SystemException e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regs] Error creating list of Registries.");
+			LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regs] Error creating list of Registries.");
 			LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
 			e.printStackTrace();
 		}
@@ -579,6 +645,48 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "getidcard", method = "GET")
+	public String getIdCard(long organizationId) {
+		String idcard = "<!-- ID Card --><div class='rdc_idcard_idcardbody'><!-- top --><div class='rdc_idcard_idcardbodytop'><span class='rdc_idcard_idcardbodytop-id'>ID # §§ORGANIZATIONID§§</span><span class='rdc_idcard_idcardbodytop-dateofinclution'>Date of Inclusion: §§DATEOFINCLUSION§§ </span><span class='rdc_idcard_idcardbodytop-type'>Last Activities: §§LASTACTIVITIES§§ </span></div><!-- middle --><div class='rdc_idcard_idcardbodymiddle'><a href='§§IDCARDURL§§'><img alt='logo' class='rdc_idcard_idcardbodymiddle-logo' src='§§IMGPATH§§' /></a><div class='rdc_idcard_idcardbodymiddle-organisationname'>§§ORGANIZATIONNAME§§</div></div><!-- bottom --><div class='rdc_idcard_idcardbodybottom'><div class='rdc_idcard_idcardbodybottom-shortdescription'>§§SHORTDISCRIPTION§§</div><div class='rdc_idcard_idcardbodybottom-menue'><!-- menue --><ul></ul><!-- menue --></div></div></div>";
+		idcard = "<style>/* ---------- RDC ID Card ---------- */.rdc_idcard_idcaibody-edit-icon-coreddl {position: absolute;right: 70px;top: 160px;z-index: 100;}.rdc_idcard_idcaibody-edit-icon-coreddl img {width: 10px;height: 10px;}.rdc_idcard_idcardbody {background-color:#E2E3CE;position:relative;left:16px;top:-32px;}.rdc_idcard_idcardbodymiddle {background-color:#FFFFFF;}.rdc_idcard_idcardbody {border-radius:25px;box-shadow: 5px 7px 20px rgba(0,0,0,0.2);}.rdc_idcard_idcardbody {height:322px;width:544px;}.rdc_idcard_idcardbodytop {height:32px;width:100%;padding-top: 24px;font-size:12px;}.rdc_idcard_idcardbodymiddle {height:116px;width:100%;}.rdc_idcard_idcardbodybottom {height:150px;width:100%;}/* ------ RDC Formating ----------- *//* ------ RDC Formating top ----------- */.rdc_idcard_idcardbodytop-id {margin-left: 40px;float: left;width:106px;}.rdc_idcard_idcardbodytop-dateofinclution {float: left;width: 216px;}.rdc_idcard_idcardbodytop-type {float: left;width: 158px;}/* ------ RDC Formating middle ----------- */.rdc_idcard_idcardbodymiddle-logo{margin-left: 26px;margin-top: 20px;float: left;margin-right: 20px;}.rdc_idcard_idcardbodymiddle img {height:85px;}.rdc_idcard_idcardbodymiddle-organisationname {font-size: 18px;font-weight:bold;color: #8BBF39;width: 100%;height:116px;display: table-cell;vertical-align: middle;}/* ------ RDC Formating bottom ----------- */.rdc_idcard_idcardbodybottom-shortdescription {width: 436px;height:60px;padding-top: 30px;margin-left: 54px;margin-right: 54px;margin-bottom: 20px;overflow: hidden;  text-overflow: ellipsis;}.rdc_idcard_idcardbodybottom-menue {width: 494px;height:40px;margin-left: 25px;margin-right: 25px;}/* ---------- RDC Formating bottom Menu styles ---------- */.rdc_idcard_idcardbodybottom-menue ul {padding: 0;margin: 0;}.rdc_idcard_idcardbodybottom-menue ul li {padding-top: 4px;padding-left: 4px;list-style: none;float:left;background-color:#F4F4E1;margin: 0 3px;text-align: left;height:36px;font-size:14px;font-weight:bold;line-height: 15px;}.rdc_idcard_idcardbodybottom-menue-pageinformation {color:#8BBF39;font-weight: normal;}.rdc_idcard_idcardbodybottom-menue-pageinformation-gray {color:#7F7F7F;font-weight: normal;}.rdc_idcard_idcardbodybottom-menue-pageinformation-noncalculates {font-weight: normal;}/* ---------- -------------------------- ---------- *//* ---------- -------------------------- ---------- *//* ---------- RDC Additional Information ---------- */.rdc_idcard_idcaibody-edit-icon-websites {position: relative;right: 0px;top: -25px;float: right;}.rdc_idcard_idcaibody-edit-icon-phone {position: absolute;right: 30px;top: 65px;z-index: 100;}.rdc_idcard_idcaibody-edit-icon-address {position: absolute;right: 170px;top: 65px;z-index: 100;}.rdc_idcard_idcaibody-edit-icon-websites img, .rdc_idcard_idcaibody-edit-icon-phone img, .rdc_idcard_idcaibody-edit-icon-address img {width: 10px;height: 10px;}.rdc_idcard_idcaibody {width: 369px;}.rdc_idcard_idcaibody-top {width: 100%;height: 35px;margin: 48px 0 30px 0;}.rdc_idcard_idcaibody-flag img {height: 35px;}.rdc_idcard_idcaibody-flag {float: left;}.rdc_idcard_idcaibody-webpage {float: right;}.rdc_idcard_idcaibody-contactinformation hr {  border-top: 1px dotted #000000;  height: 1px;  width:100%;}.rdc_idcard_idcaibody-contactinformation-tdfirst {width: 259px;}.rdc_idcard_idcaibody-contactinformation-tdlast {width: 140px;text-align:right;}.rdc_idcard_idcaibody-headlines {font-weight:bold;float: left;}.rdc_idcard_idcaibody-contactname {float: left;}.rdc_idcard_idcaibody-contactemail {float: left;}.rdc_idcard_idcaibody-avatar {float:right;}.rdc_idcard_idcaibody-avatar img {float:right;height: 50px;}</style>" + idcard;
+		
+		try {
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
+			String type = "reg/bb";
+			try {
+				type = OrganizationSearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+			} catch (Exception ex) {
+				System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+				ex.printStackTrace();
+			}
+			String startpage = "reg_home";
+			if(type.equalsIgnoreCase("biobank")) {
+				startpage = "bb_home";
+			}
+			String idc_url = "http://catalogue.rd-connect.eu/web"+organization.getGroup().getFriendlyURL() + "/" + startpage;
+
+		
+			String date_format_pattern = "yyyy/MMM";
+			SimpleDateFormat date_format = new SimpleDateFormat(date_format_pattern);
+			
+			idcard = idcard.replaceAll("§§ORGANIZATIONID§§", organizationId+"");
+			idcard = idcard.replaceAll("§§ORGANIZATIONNAME§§", organization.getName());
+			idcard = idcard.replaceAll("§§DATEOFINCLUSION§§", date_format.format(organization.getCreateDate()));
+			idcard = idcard.replaceAll("§§LASTACTIVITIES§§", date_format.format(organization.getModifiedDate()));
+			idcard = idcard.replaceAll("§§SHORTDISCRIPTION§§", "");
+			idcard = idcard.replaceAll("§§IMGPATH§§", "http://catalogue.rd-connect.eu/image/layout_set_logo?img_id="+organization.getLogoId());
+			idcard = idcard.replaceAll("§§IDCARDURL§§", "http://catalogue.rd-connect.eu/web"+organization.getGroup().getFriendlyURL() + "/" + startpage);
+
+		
+		} catch (Exception ex) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+			ex.printStackTrace();
+		}
+		
+		return idcard;
 	}
 	
 	@AccessControlled(guestAccessEnabled=true)

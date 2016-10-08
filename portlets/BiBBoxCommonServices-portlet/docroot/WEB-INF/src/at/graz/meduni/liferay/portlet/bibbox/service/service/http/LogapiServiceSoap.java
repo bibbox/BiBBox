@@ -194,6 +194,20 @@ public class LogapiServiceSoap {
 		}
 	}
 
+	public static java.lang.String getIdCard(long organizationId)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = LogapiServiceUtil.getIdCard(organizationId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void testMethode(java.lang.String jason)
 		throws RemoteException {
 		try {

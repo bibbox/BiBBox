@@ -276,4 +276,8 @@ public interface DiseaseMatrixLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getDiseaseMatrixFromFederation(long organizationId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> getDiseaseMatirxByOrganizationAndOrphanumber(
+		long organizationId, java.lang.String orphanumber);
 }

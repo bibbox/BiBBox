@@ -44,7 +44,7 @@ ${theme.include(body_top_include)}
 <div class="bbmri-eric-member-area-top-menue">
    <div class="bbmri-eric-member-area-top-menue-container">
       <div class="bbmri-eric-member-area-top-menue-container-bbmri-member-logo">
-         <a href="/about"><img alt="BBMRI-ERIC-Logo" height="40px" width="140px" src="/BBMRIERICMember-theme/images/bbmriericintranetlogo.jpeg" /></a>
+         <a href="/about"><img alt="BBMRI-ERIC-Logo" height="40px" width="140px" src="/BBMRIERICMember-theme/images/bbmriericintranetlogo.jpg" /></a>
       </div>
       <div class="bbmri-eric-member-area-top-menue-container-menu">
          <#if is_signed_in>

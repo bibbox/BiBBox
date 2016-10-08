@@ -176,6 +176,157 @@ public interface DiseaseMatrixPersistence extends BasePersistence<DiseaseMatrix>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the disease matrixs where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @return the matching disease matrixs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> findByOrganizationAndOrphanumber(
+		long organizationId, java.lang.String orphanumber)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the disease matrixs where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @param start the lower bound of the range of disease matrixs
+	* @param end the upper bound of the range of disease matrixs (not inclusive)
+	* @return the range of matching disease matrixs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> findByOrganizationAndOrphanumber(
+		long organizationId, java.lang.String orphanumber, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the disease matrixs where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.DiseaseMatrixModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @param start the lower bound of the range of disease matrixs
+	* @param end the upper bound of the range of disease matrixs (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching disease matrixs
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> findByOrganizationAndOrphanumber(
+		long organizationId, java.lang.String orphanumber, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first disease matrix in the ordered set where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching disease matrix
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException if a matching disease matrix could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix findByOrganizationAndOrphanumber_First(
+		long organizationId, java.lang.String orphanumber,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first disease matrix in the ordered set where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching disease matrix, or <code>null</code> if a matching disease matrix could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix fetchByOrganizationAndOrphanumber_First(
+		long organizationId, java.lang.String orphanumber,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last disease matrix in the ordered set where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching disease matrix
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException if a matching disease matrix could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix findByOrganizationAndOrphanumber_Last(
+		long organizationId, java.lang.String orphanumber,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last disease matrix in the ordered set where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching disease matrix, or <code>null</code> if a matching disease matrix could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix fetchByOrganizationAndOrphanumber_Last(
+		long organizationId, java.lang.String orphanumber,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the disease matrixs before and after the current disease matrix in the ordered set where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* @param diseasematrixId the primary key of the current disease matrix
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next disease matrix
+	* @throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException if a disease matrix with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix[] findByOrganizationAndOrphanumber_PrevAndNext(
+		long diseasematrixId, long organizationId,
+		java.lang.String orphanumber,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws at.graz.meduni.liferay.portlet.bibbox.service.NoSuchDiseaseMatrixException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the disease matrixs where organizationId = &#63; and orphanumber = &#63; from the database.
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByOrganizationAndOrphanumber(long organizationId,
+		java.lang.String orphanumber)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of disease matrixs where organizationId = &#63; and orphanumber = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param orphanumber the orphanumber
+	* @return the number of matching disease matrixs
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByOrganizationAndOrphanumber(long organizationId,
+		java.lang.String orphanumber)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the disease matrix in the entity cache if it is enabled.
 	*
 	* @param diseaseMatrix the disease matrix

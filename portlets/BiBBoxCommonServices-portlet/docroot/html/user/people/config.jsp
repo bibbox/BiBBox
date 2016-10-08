@@ -9,6 +9,7 @@ String organisation_type = "organization";
 long optionsMainContactRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", ""));
 long optionsEditorRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsEditorRole", ""));
 long optionsOwnerRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsOwnerRole", ""));
+long optionsNetEditorRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsNetEditorRole", ""));
 boolean optionsDisplayMaincontact_cfg = GetterUtil.getBoolean(portletPreferences.getValue("optionsDisplayMaincontact", "false"));
 String optionsDisplayMaincontactTitle_cfg = GetterUtil.getString(portletPreferences.getValue("optionsDisplayMaincontactTitle", "Main contact"));
 String optionsDisplayPeopleTitle_cfg = GetterUtil.getString(portletPreferences.getValue("optionsDisplayPeopleTitle", "Personal"));
@@ -74,6 +75,19 @@ List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId(), ro
 						
 						%>
 						<aui:option value="<%= role.getRoleId() %>" selected='<%= optionsEditorRole_cfg == role.getRoleId() ? true : false %>' ><%= role.getName() %></aui:option>
+						<%
+					}
+					%>
+				</aui:select>
+			</aui:column>
+			<!-- Select Network Editor Role -->
+			<aui:column columnWidth="75" last="true">
+				<aui:select label="Select Network Editor Role for Organisation" name="preferences--optionsNetEditorRole--">
+					<%
+					for(Role role : roles) {
+						
+						%>
+						<aui:option value="<%= role.getRoleId() %>" selected='<%= optionsNetEditorRole_cfg == role.getRoleId() ? true : false %>' ><%= role.getName() %></aui:option>
 						<%
 					}
 					%>

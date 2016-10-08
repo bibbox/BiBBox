@@ -48,6 +48,7 @@
 		<property name="omim" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="synonym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="modifieddate" type="org.hibernate.type.TimestampType" />
+		<property name="modifieduser" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.service.model.impl.GeneralInformationImpl" table="rdconnect.generalgnformation">
 		<cache usage="read-write" />

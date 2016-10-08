@@ -1,0 +1,1 @@
+create index IX_1E21A47A on reactjsservice_ToolInformation (category);

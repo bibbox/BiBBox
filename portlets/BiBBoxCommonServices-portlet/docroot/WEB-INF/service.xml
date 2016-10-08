@@ -93,8 +93,13 @@
 		<column name="omim" type="String"></column>
 		<column name="synonym" type="String"></column>
 		<column name="modifieddate" type="Date"></column>
+		<column name="modifieduser" type="String"></column>
 		<finder return-type="Collection" name="OrganizationFinder">
 			<finder-column name="organizationId"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="OrganizationAndOrphanumber">
+			<finder-column name="organizationId"></finder-column>
+			<finder-column name="orphanumber"></finder-column>
 		</finder>
 	</entity>
 	<entity name="GeneralInformation" local-service="true" remote-service="false" table="rdconnect.generalgnformation">

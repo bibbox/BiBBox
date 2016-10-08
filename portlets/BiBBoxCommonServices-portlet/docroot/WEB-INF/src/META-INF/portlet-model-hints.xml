@@ -61,6 +61,7 @@
 			<hint name="max-length">5000</hint>
 		</field>
 		<field name="modifieddate" type="Date" />
+		<field name="modifieduser" type="String" />
 	</model>
 	<model name="at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation">
 		<field name="generalinformationId" type="long" />

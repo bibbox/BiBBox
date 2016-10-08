@@ -312,6 +312,13 @@ public class DiseaseMatrixLocalServiceUtil {
 		return getService().getDiseaseMatrixFromFederation(organizationId);
 	}
 
+	public static java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> getDiseaseMatirxByOrganizationAndOrphanumber(
+		long organizationId, java.lang.String orphanumber) {
+		return getService()
+				   .getDiseaseMatirxByOrganizationAndOrphanumber(organizationId,
+			orphanumber);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

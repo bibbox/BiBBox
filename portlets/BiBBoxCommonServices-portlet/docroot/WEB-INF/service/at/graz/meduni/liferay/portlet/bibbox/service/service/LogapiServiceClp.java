@@ -64,43 +64,47 @@ public class LogapiServiceClp implements LogapiService {
 
 		_methodParameterTypes10 = new String[] { "java.lang.String" };
 
-		_methodName11 = "testMethode";
+		_methodName11 = "getIdCard";
 
-		_methodParameterTypes11 = new String[] { "java.lang.String" };
+		_methodParameterTypes11 = new String[] { "long" };
 
-		_methodName12 = "resttest01";
+		_methodName12 = "testMethode";
 
-		_methodParameterTypes12 = new String[] { "long" };
+		_methodParameterTypes12 = new String[] { "java.lang.String" };
 
-		_methodName13 = "resttest02";
+		_methodName13 = "resttest01";
 
-		_methodParameterTypes13 = new String[] { "java.lang.String" };
+		_methodParameterTypes13 = new String[] { "long" };
 
-		_methodName14 = "resttest03";
+		_methodName14 = "resttest02";
 
-		_methodParameterTypes14 = new String[] { "long[][]" };
+		_methodParameterTypes14 = new String[] { "java.lang.String" };
 
-		_methodName15 = "resttest04";
+		_methodName15 = "resttest03";
 
-		_methodParameterTypes15 = new String[] { "java.lang.String[][]" };
+		_methodParameterTypes15 = new String[] { "long[][]" };
 
-		_methodName16 = "resttest05";
+		_methodName16 = "resttest04";
 
-		_methodParameterTypes16 = new String[] {
+		_methodParameterTypes16 = new String[] { "java.lang.String[][]" };
+
+		_methodName17 = "resttest05";
+
+		_methodParameterTypes17 = new String[] {
 				"java.lang.String", "com.liferay.portal.model.User"
 			};
 
-		_methodName17 = "resttest06";
+		_methodName18 = "resttest06";
 
-		_methodParameterTypes17 = new String[] {
+		_methodParameterTypes18 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName18 = "resttest07";
+		_methodName19 = "resttest07";
 
-		_methodParameterTypes18 = new String[] {
+		_methodParameterTypes19 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
@@ -347,10 +351,33 @@ public class LogapiServiceClp implements LogapiService {
 	}
 
 	@Override
+	public java.lang.String getIdCard(long organizationId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11, new Object[] { organizationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public void testMethode(java.lang.String jason) {
 		try {
-			_invokableService.invokeMethod(_methodName11,
-				_methodParameterTypes11,
+			_invokableService.invokeMethod(_methodName12,
+				_methodParameterTypes12,
 				new Object[] { ClpSerializer.translateInput(jason) });
 		}
 		catch (Throwable t) {
@@ -369,8 +396,8 @@ public class LogapiServiceClp implements LogapiService {
 	@Override
 	public void resttest01(long organizationId) {
 		try {
-			_invokableService.invokeMethod(_methodName12,
-				_methodParameterTypes12, new Object[] { organizationId });
+			_invokableService.invokeMethod(_methodName13,
+				_methodParameterTypes13, new Object[] { organizationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -388,8 +415,8 @@ public class LogapiServiceClp implements LogapiService {
 	@Override
 	public void resttest02(java.lang.String text) {
 		try {
-			_invokableService.invokeMethod(_methodName13,
-				_methodParameterTypes13,
+			_invokableService.invokeMethod(_methodName14,
+				_methodParameterTypes14,
 				new Object[] { ClpSerializer.translateInput(text) });
 		}
 		catch (Throwable t) {
@@ -407,26 +434,6 @@ public class LogapiServiceClp implements LogapiService {
 
 	@Override
 	public void resttest03(long[] array) {
-		try {
-			_invokableService.invokeMethod(_methodName14,
-				_methodParameterTypes14,
-				new Object[] { ClpSerializer.translateInput(array) });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-	}
-
-	@Override
-	public void resttest04(java.lang.String[] array) {
 		try {
 			_invokableService.invokeMethod(_methodName15,
 				_methodParameterTypes15,
@@ -446,11 +453,31 @@ public class LogapiServiceClp implements LogapiService {
 	}
 
 	@Override
-	public void resttest05(java.lang.String url,
-		com.liferay.portal.model.User user) {
+	public void resttest04(java.lang.String[] array) {
 		try {
 			_invokableService.invokeMethod(_methodName16,
 				_methodParameterTypes16,
+				new Object[] { ClpSerializer.translateInput(array) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void resttest05(java.lang.String url,
+		com.liferay.portal.model.User user) {
+		try {
+			_invokableService.invokeMethod(_methodName17,
+				_methodParameterTypes17,
 				new Object[] {
 					ClpSerializer.translateInput(url),
 					
@@ -476,8 +503,8 @@ public class LogapiServiceClp implements LogapiService {
 		java.lang.String orphanumber, java.lang.String icd10,
 		java.lang.String omim, java.lang.String synonym) {
 		try {
-			_invokableService.invokeMethod(_methodName17,
-				_methodParameterTypes17,
+			_invokableService.invokeMethod(_methodName18,
+				_methodParameterTypes18,
 				new Object[] {
 					ClpSerializer.translateInput(url),
 					
@@ -515,8 +542,8 @@ public class LogapiServiceClp implements LogapiService {
 		java.lang.String orphanumber, java.lang.String icd10,
 		java.lang.String omim, java.lang.String synonym) {
 		try {
-			_invokableService.invokeMethod(_methodName18,
-				_methodParameterTypes18,
+			_invokableService.invokeMethod(_methodName19,
+				_methodParameterTypes19,
 				new Object[] {
 					ClpSerializer.translateInput(url),
 					
@@ -585,4 +612,6 @@ public class LogapiServiceClp implements LogapiService {
 	private String[] _methodParameterTypes17;
 	private String _methodName18;
 	private String[] _methodParameterTypes18;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

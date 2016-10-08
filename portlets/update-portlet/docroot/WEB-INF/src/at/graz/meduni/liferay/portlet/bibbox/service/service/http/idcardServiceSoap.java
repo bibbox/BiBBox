@@ -62,6 +62,20 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class idcardServiceSoap {
+	public static java.lang.String TestVariables(long idcardid)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = idcardServiceUtil.TestVariables(idcardid);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String DiseaseMatrix(long idcardid, long diseaseid,
 		java.lang.String diseasname, java.lang.String patientcount,
 		java.lang.String gene, java.lang.String orphanumber,

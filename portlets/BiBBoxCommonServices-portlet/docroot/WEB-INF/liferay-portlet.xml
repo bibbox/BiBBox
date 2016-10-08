@@ -172,6 +172,7 @@
 	<portlet>
 		<portlet-name>disease-matrix</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrixConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -313,6 +314,18 @@
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>invitation-report-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>sample-catalogue-link</portlet-name>
+		<icon>/icon.png</icon>
+		<configuration-action-class>at.graz.meduni.liferay.portlet.bibbox.rdconnect.SampleCatalogueLinkConfig</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			sample-catalogue-link-portlet
+		</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

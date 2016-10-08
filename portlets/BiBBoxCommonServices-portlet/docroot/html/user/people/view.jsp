@@ -21,6 +21,7 @@ String actionId_edit_user = "EDIT_USER";
 <!-- Main Contact  -->
 <%
 long optionsMainContactRole_option = GetterUtil.getLong(portletPreferences.getValue("optionsMainContactRole", "0"));
+long optionsNetEditorRole_cfg = GetterUtil.getLong(portletPreferences.getValue("optionsNetEditorRole", "0"));
 boolean optionsDisplayMaincontact_option = GetterUtil.getBoolean(portletPreferences.getValue("optionsDisplayMaincontact", "false"));
 String optionsDisplayMaincontactTitle_option = GetterUtil.getString(portletPreferences.getValue("optionsDisplayMaincontactTitle", "Main contact"));
 String redirect = ParamUtil.getString(request, "redirect");
@@ -149,6 +150,18 @@ for(User user_om : users) {
 	if(maincontactid == user_om.getUserId()) {
 		continue;
 	}
+	// Check for Network Editor
+	boolean networkrole = false;
+	List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user_om.getUserId(), organization.getGroup().getGroupId());
+	for (UserGroupRole ugr : usergrouprolles) {
+		if(ugr.getRoleId() == optionsNetEditorRole_cfg) {
+			networkrole = true;
+		}
+	}	
+	if(networkrole) {
+		continue;
+	}
+	
 	String role = "";
 	String imgPath = user_om.getPortraitURL(themeDisplay);
 	if(user_om.getExpandoBridge() != null) {

@@ -60,6 +60,7 @@ public class DiseaseMatrixWrapper implements DiseaseMatrix,
 		attributes.put("omim", getOmim());
 		attributes.put("synonym", getSynonym());
 		attributes.put("modifieddate", getModifieddate());
+		attributes.put("modifieduser", getModifieduser());
 
 		return attributes;
 	}
@@ -124,6 +125,12 @@ public class DiseaseMatrixWrapper implements DiseaseMatrix,
 
 		if (modifieddate != null) {
 			setModifieddate(modifieddate);
+		}
+
+		String modifieduser = (String)attributes.get("modifieduser");
+
+		if (modifieduser != null) {
+			setModifieduser(modifieduser);
 		}
 	}
 
@@ -345,6 +352,26 @@ public class DiseaseMatrixWrapper implements DiseaseMatrix,
 	@Override
 	public void setModifieddate(java.util.Date modifieddate) {
 		_diseaseMatrix.setModifieddate(modifieddate);
+	}
+
+	/**
+	* Returns the modifieduser of this disease matrix.
+	*
+	* @return the modifieduser of this disease matrix
+	*/
+	@Override
+	public java.lang.String getModifieduser() {
+		return _diseaseMatrix.getModifieduser();
+	}
+
+	/**
+	* Sets the modifieduser of this disease matrix.
+	*
+	* @param modifieduser the modifieduser of this disease matrix
+	*/
+	@Override
+	public void setModifieduser(java.lang.String modifieduser) {
+		_diseaseMatrix.setModifieduser(modifieduser);
 	}
 
 	@Override

@@ -50,6 +50,7 @@
 			<basic name="modifieddate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="modifieduser" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

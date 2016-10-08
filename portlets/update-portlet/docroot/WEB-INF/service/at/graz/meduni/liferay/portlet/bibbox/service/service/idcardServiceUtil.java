@@ -63,6 +63,13 @@ public class idcardServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject TestVariables(
+		long idcardid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().TestVariables(idcardid);
+	}
+
 	public static com.liferay.portal.kernel.json.JSONObject DiseaseMatrix(
 		long idcardid, long diseaseid, java.lang.String diseasname,
 		java.lang.String patientcount, java.lang.String gene,

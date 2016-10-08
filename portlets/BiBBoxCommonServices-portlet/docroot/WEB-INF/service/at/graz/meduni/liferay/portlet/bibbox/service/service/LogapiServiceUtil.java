@@ -122,6 +122,10 @@ public class LogapiServiceUtil {
 		return getService().regbb(id);
 	}
 
+	public static java.lang.String getIdCard(long organizationId) {
+		return getService().getIdCard(organizationId);
+	}
+
 	public static void testMethode(java.lang.String jason) {
 		getService().testMethode(jason);
 	}

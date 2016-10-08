@@ -58,7 +58,8 @@ create table rdconnect.diseasematrix (
 	icd10 TEXT null,
 	omim TEXT null,
 	synonym TEXT null,
-	modifieddate DATE null
+	modifieddate DATE null,
+	modifieduser VARCHAR(75) null
 );
 
 create table rdconnect.generalgnformation (

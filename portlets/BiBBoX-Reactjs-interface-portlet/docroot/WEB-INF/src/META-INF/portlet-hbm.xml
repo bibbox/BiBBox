@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="at.bibbox.reactjsservice.model.ToolInformation" />
+	<class name="at.bibbox.reactjsservice.model.impl.ToolInformationImpl" table="reactjsservice_ToolInformation">
+		<cache usage="read-write" />
+		<id name="toolInformationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="gitUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="logourl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="category" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="company" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="demourl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="downloadurl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="toolId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="platform" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="license" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

@@ -65,6 +65,17 @@ public class idcardServiceImpl extends idcardServiceBaseImpl {
 	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
 	String calss_name = "at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl";
 	
+	@JSONWebService(value = "testvariables", method = "POST")
+	public JSONObject TestVariables(long idcardid) throws PortalException, SystemException {
+		JSONObject json = JSONFactoryUtil.createJSONObject();
+		json.put("TestVariables", "View all available Variabels");
+		json.put("this.counterLocalService", "possible counter");
+		json.put("this.getUser().getLastLoginDate()", this.getUser().getLastLoginDate().toString());
+		json.put("this.getUser().getLoginDate()", this.getUser().getLoginDate().toString());
+		json.put("this.getUser().getLogin()", this.getUser().getLogin());
+		return json; 
+	}
+	
 	@JSONWebService(value = "diseasematrix", method = "POST")
 	public JSONObject DiseaseMatrix(long idcardid, long diseaseid, String diseasname, String patientcount, String gene, String orphanumber, String icd10, String omim, String synonym) {
 		System.out.println("diseasematrix: v1");

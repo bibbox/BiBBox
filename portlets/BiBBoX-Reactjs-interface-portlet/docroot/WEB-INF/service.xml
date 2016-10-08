@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="at.bibbox.reactjsservice">
+	<author>reihsr</author>
+	<namespace>reactjsservice</namespace>
+
+	<entity name="ToolInformation" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+		<column name="toolInformationId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+		<column name="gitUUID" type="String" />
+
+		<!-- Other fields -->
+		<column name="logourl" type="String" />
+		<column name="name" type="String" />
+		<column name="category" type="String" />
+		<column name="company" type="String" />
+		<column name="demourl" type="String" />
+		<column name="downloadurl" type="String" />
+		<column name="toolId" type="String" />
+		<column name="platform" type="String" />
+		<column name="license" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Category" return-type="Collection">
+			<finder-column name="category" />
+		</finder>
+	</entity>
+</service-builder>

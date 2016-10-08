@@ -206,6 +206,21 @@ public interface DiseaseMatrixModel extends BaseModel<DiseaseMatrix> {
 	 */
 	public void setModifieddate(Date modifieddate);
 
+	/**
+	 * Returns the modifieduser of this disease matrix.
+	 *
+	 * @return the modifieduser of this disease matrix
+	 */
+	@AutoEscape
+	public String getModifieduser();
+
+	/**
+	 * Sets the modifieduser of this disease matrix.
+	 *
+	 * @param modifieduser the modifieduser of this disease matrix
+	 */
+	public void setModifieduser(String modifieduser);
+
 	@Override
 	public boolean isNew();
 

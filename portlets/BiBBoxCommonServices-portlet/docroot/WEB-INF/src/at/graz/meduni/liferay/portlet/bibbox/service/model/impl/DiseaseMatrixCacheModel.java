@@ -38,7 +38,7 @@ public class DiseaseMatrixCacheModel implements CacheModel<DiseaseMatrix>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{diseasematrixId=");
 		sb.append(diseasematrixId);
@@ -60,6 +60,8 @@ public class DiseaseMatrixCacheModel implements CacheModel<DiseaseMatrix>,
 		sb.append(synonym);
 		sb.append(", modifieddate=");
 		sb.append(modifieddate);
+		sb.append(", modifieduser=");
+		sb.append(modifieduser);
 		sb.append("}");
 
 		return sb.toString();
@@ -128,6 +130,13 @@ public class DiseaseMatrixCacheModel implements CacheModel<DiseaseMatrix>,
 			diseaseMatrixImpl.setModifieddate(new Date(modifieddate));
 		}
 
+		if (modifieduser == null) {
+			diseaseMatrixImpl.setModifieduser(StringPool.BLANK);
+		}
+		else {
+			diseaseMatrixImpl.setModifieduser(modifieduser);
+		}
+
 		diseaseMatrixImpl.resetOriginalValues();
 
 		return diseaseMatrixImpl;
@@ -145,6 +154,7 @@ public class DiseaseMatrixCacheModel implements CacheModel<DiseaseMatrix>,
 		omim = objectInput.readUTF();
 		synonym = objectInput.readUTF();
 		modifieddate = objectInput.readLong();
+		modifieduser = objectInput.readUTF();
 	}
 
 	@Override
@@ -203,6 +213,13 @@ public class DiseaseMatrixCacheModel implements CacheModel<DiseaseMatrix>,
 		}
 
 		objectOutput.writeLong(modifieddate);
+
+		if (modifieduser == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(modifieduser);
+		}
 	}
 
 	public long diseasematrixId;
@@ -215,4 +232,5 @@ public class DiseaseMatrixCacheModel implements CacheModel<DiseaseMatrix>,
 	public String omim;
 	public String synonym;
 	public long modifieddate;
+	public String modifieduser;
 }

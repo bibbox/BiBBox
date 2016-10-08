@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -16,7 +17,8 @@ import javax.portlet.ActionResponse;
 
 import at.graz.meduni.liferay.portlet.bibbox.rdconnect.service.service.RDConnectEventLocalServiceUtil;
 import at.meduni.liferay.portlet.rdconnect.exception.MasterPublishException;
-import at.meduni.liferay.portlet.rdconnect.helper.HelperUser;
+import at.meduni.liferay.portlet.rdconnect.helper.AddressHelper;
+import at.meduni.liferay.portlet.rdconnect.helper.UserHelper;
 import at.meduni.liferay.portlet.rdconnect.model.MasterCandidate;
 import at.meduni.liferay.portlet.rdconnect.service.MasterCandidateLocalServiceUtil;
 
@@ -119,8 +121,8 @@ public class MasterPublish extends MVCPortlet {
     // Parent Organizations
     long biobank_assessment_organization_id_ = 0;
     long catalog_organization_id_ = 0;
+    // TODO: Clean IDs
     // Web page
-    
     int PUBLICWEBSITETYPEID = 12020; // Public: 12020
     int INTRANETWEBSITETYPEID = 12019; // Public: 12020
     // E-mail
@@ -158,73 +160,15 @@ public class MasterPublish extends MVCPortlet {
 			HashSet<User> users = createUsersFromMaster();
 			addUsersToOrganization(users);
 			createDDLs();
-			addFoldersForOrganization();
-			//TODO: addOrganisationDetails(organization, master, themeDisplay.getUserId());
-			//TODO: OrganizationLocalServiceUtil.rebuildTree(company.getCompanyId());
-			organization_.getExpandoBridge().setAttribute("Organization Type", master_.getCandidatetype());
+			addFoldersToOrganization();
+			addOrganisationDetails();
+			OrganizationLocalServiceUtil.rebuildTree(company_.getCompanyId());
+			organization_.getExpandoBridge().setAttribute("Organization Type", getOrganizationTypeFromMaster());
+			addEventEntry();
 		} catch (MasterPublishException exception) {
 			SessionErrors.add(request_, "organization-creation-error", exception.getMessage());
 			response.setRenderParameter("success", "false");
-		}
-		
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		
-		Organization organization = null;
-		
-		try {
-			//setUpVaraibles(request);
-			Company company = CompanyLocalServiceUtil.getCompanyById(company_id_);
-			// Create Organisation
-			organization = createOrganisation(company);
-			
-			// Update Master
-			master.setOrganisationid(organization.getOrganizationId());
-			master.setState("P");
-			MasterCandidateLocalServiceUtil.updateMasterCandidate(master);
-			// Create Users
-			createUsersFromMaster(organization, company, master.getMail(), master.getContactperson(), master.getHead());
-			// Create DDL Elements
-			createDDLs(request, organization, master);
-			// Create Organisation Pages
-			createPages(organization);
-			// Add Organisation details
-			addOrganisationDetails(organization, master, themeDisplay.getUserId());
-			
-			OrganizationLocalServiceUtil.rebuildTree(company.getCompanyId());
-			
-			organization.getExpandoBridge().setAttribute("Organization Type", master.getCandidatetype());
-		} catch(Exception e) {
-			System.out.println("RDC Exception in MasterPublish:publishToGate");
-			e.printStackTrace();
 		}	
-		
-		try {
-			String shorttext = "";
-			String longtext = "";
-			String link = "";
-			String restricted = "";
-			String eventtitle = "";
-			
-			String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
-			
-			if(master.getCandidatetype().equalsIgnoreCase("Biobank")) {
-				eventtitle = "New Biobank Published: " + organization.getName();
-				restricted = "RD-Connect CURATOR";
-				link = link + "/bb_home";
-				shorttext = "Biobank "+ organization.getName() + " from " + master.getCountry() + " was published an is now in the list redy for the pannel assessment invitation.";
-				longtext = "";
-			} else {
-				eventtitle = "New Registry Published: " + organization.getName();
-				restricted = "";
-				link = link + "/reg_home";
-				shorttext = "Registry "+ organization.getName() + " from " + master.getCountry() + " was published an is now listed in the catalouge.";
-				longtext = "";
-			}
-			addEventEntry(new Date(), organization.getOrganizationId(), themeDisplay.getUserId(), shorttext, longtext, link, restricted, eventtitle);
-		} catch(Exception e) {
-			System.out.println("RDC Exception in MasterPublish:publishToGate -> Add Event");
-			e.printStackTrace();
-		}
 	}
 	
 	/**
@@ -427,7 +371,7 @@ public class MasterPublish extends MVCPortlet {
     private long getPublicLayoutSetPrototypeId() throws PortalException, SystemException, MasterPublishException {
     	List<LayoutSetPrototype> site_templates = LayoutSetPrototypeServiceUtil.search(company_.getCompanyId(), Boolean.TRUE, null);
     	for(LayoutSetPrototype site_template : site_templates) {
-    		if(site_template.getName().equalsIgnoreCase(PUBLIC_LAYOUT_SET_PROTOTYPE_NAME)) {
+    		if(site_template.toString().contains(PUBLIC_LAYOUT_SET_PROTOTYPE_NAME)) {
     			return site_template.getLayoutSetPrototypeId();
     		}
     	}
@@ -440,7 +384,7 @@ public class MasterPublish extends MVCPortlet {
      * @param company
      */
     private HashSet<User> createUsersFromMaster() {
-		HashSet<HelperUser> mails = getEmailAddressFromMaster(master_.getMail());
+		HashSet<UserHelper> mails = getEmailAddressFromMaster(master_.getMail());
 		HashSet<User> users = new HashSet<User>();
 		
 		boolean fix_use_contact_person = false;
@@ -448,7 +392,7 @@ public class MasterPublish extends MVCPortlet {
 			fix_use_contact_person = true;
 		}
 		
-		for(HelperUser mail : mails) {	
+		for(UserHelper mail : mails) {	
 			try {
 				User user = createUsers(mail, fix_use_contact_person);
 				users.add(user);
@@ -467,14 +411,14 @@ public class MasterPublish extends MVCPortlet {
      * @param email
      * @return
      */
-    private HashSet<HelperUser> getEmailAddressFromMaster(String email) {
-    	HashSet<HelperUser> mails = new HashSet<HelperUser>();
+    private HashSet<UserHelper> getEmailAddressFromMaster(String email) {
+    	HashSet<UserHelper> mails = new HashSet<UserHelper>();
     	email = email.replaceAll("mailto:", ";").replaceAll(" ", "");
     	String pattern_string_mail_ = "\\b([a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4})*)\\b";
 		Pattern pattern_mail_ = Pattern.compile(pattern_string_mail_);
 		Matcher matcher = pattern_mail_.matcher(email);
 		while (matcher.find()) {
-			HelperUser helper_user = new HelperUser();
+			UserHelper helper_user = new UserHelper();
 			helper_user.setEmail(matcher.group().toLowerCase());
 			if(!mails.contains(helper_user)) {
 				mails.add(helper_user);
@@ -490,7 +434,7 @@ public class MasterPublish extends MVCPortlet {
      * @throws SystemException 
      * @throws PortalException 
      */
-    private User createUsers(HelperUser mail, boolean fix_use_contact_person) throws PortalException, SystemException {
+    private User createUsers(UserHelper mail, boolean fix_use_contact_person) throws PortalException, SystemException {
 		mail.extractNameFromContactPerson(master_.getContactperson(), master_.getHead(), fix_use_contact_person);
 		return createLiferayUser(mail);
     }
@@ -502,7 +446,7 @@ public class MasterPublish extends MVCPortlet {
      * @throws PortalException
      * @throws SystemException
      */
-	private User createLiferayUser(HelperUser mail) throws PortalException, SystemException {
+	private User createLiferayUser(UserHelper mail) throws PortalException, SystemException {
 		boolean autoPassword = false;
 		boolean autoScreenName = true;
 		String screenName = "";
@@ -690,14 +634,14 @@ public class MasterPublish extends MVCPortlet {
 	/**
 	 * Creating Folders for RD-Connect
 	 */
-	private void addFoldersForOrganization() {
-		addFolderForOrganization("Study protocol", "");
-		addFolderForOrganization("Datasets", "Case Report Form");
-		addFolderForOrganization("Standard Operating Procedures", "");
-		addFolderForOrganization("Informed consent templates", "");
-		addFolderForOrganization("REC approval", "");
-		addFolderForOrganization("Data transfer agreement", "");
-		addFolderForOrganization("Papers and publications", "");
+	private void addFoldersToOrganization() {
+		addFolderToOrganization("Study protocol", "");
+		addFolderToOrganization("Datasets", "Case Report Form");
+		addFolderToOrganization("Standard Operating Procedures", "");
+		addFolderToOrganization("Informed consent templates", "");
+		addFolderToOrganization("REC approval", "");
+		addFolderToOrganization("Data transfer agreement", "");
+		addFolderToOrganization("Papers and publications", "");
 	}
 	
 	/**
@@ -705,7 +649,7 @@ public class MasterPublish extends MVCPortlet {
 	 * 
 	 * @param foldername
 	 */
-	private void addFolderForOrganization(String foldername, String description) {
+	private void addFolderToOrganization(String foldername, String description) {
 		try {
 			ServiceContext serviceContext = getServiceContext();
 	        Group group = organization_.getGroup();
@@ -713,16 +657,146 @@ public class MasterPublish extends MVCPortlet {
 	        serviceContext.setUserId(organization_.getUserId());
 			DLFolderLocalServiceUtil.addFolder(organization_.getUserId(), organization_.getGroupId(), organization_.getGroupId(), false, 0, foldername, description, false, serviceContext);
 		} catch(Exception exception) {
-			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::createRecordSetWithDatafields(String ddl_name, String ddm_name)] Error adding Folder: [Foldername: " + foldername + "; OrganizationId: " + organization_.getOrganizationId() + "]" + exception.getMessage());
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::addFolderToOrganization(String foldername, String description)] Error adding Folder: [Foldername: " + foldername + "; OrganizationId: " + organization_.getOrganizationId() + "]" + exception.getMessage());
     		exception.printStackTrace();
     		SessionMessages.add(request_, "error-creating-folder", "There was an error creating a Folder for the Organization.");
     		//TODO: Add Event for Admins for this
 		}
 	}
+	
+	/**
+	 * Add details to the Organization
+	 * <ul>
+	 * <li>Address</li>
+	 * <li>webpage</li>
+	 * </ul>
+	 */
+	private void addOrganisationDetails() {
+		addWebpageToOrganisation();
+		addAddressToOrganisation();
+	}
+	
+	/**
+	 * Creat Website Urls for Organization
+	 */
+	private void addWebpageToOrganisation() {
+		try {
+			List<Website> websites = new ArrayList<Website>();
+			String[] urls = getUrlsFromMaster();
+			boolean primary = true;
+			for(String url : urls) {
+				Website website = WebsiteLocalServiceUtil.createWebsite(0);
+				website.setUrl(url);
+				website.setTypeId(PUBLICWEBSITETYPEID);
+				website.setPrimary(primary);
+				primary = false;
+				websites.add(website);
+			}
+			UsersAdminUtil.updateWebsites(Organization.class.getName(), organization_.getOrganizationId(), websites);
+		} catch (Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::addWebpageToOrganisation()] Error creating Websites for Organization: " + exception.getMessage());
+    		exception.printStackTrace();
+    		SessionMessages.add(request_, "error-creating-websites", "There was an error creating the Websites for the Organization.");
+    		//TODO: Add Event for Admins for this
+		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private String[] getUrlsFromMaster() {
+		String[] urls = master_.getUrl().trim().split("[,; ]");
+		LinkedList<String> result = new LinkedList<String>();
+		for(String url : urls) {
+			if(!url.equals("")) {
+				result.add(getFormatedUrl(url));
+			}
+		}
+		return result.toArray(new String[result.size()]);
+	}
+	
+	/**
+	 * 
+	 * @param url
+	 * @return
+	 */
+	private String getFormatedUrl(String url) {
+		if(!url.startsWith("http")) {
+			url = "http://" + url;
+		}
+		return url;
+	}
+	
+	/**
+	 * 
+	 */
+	private void addAddressToOrganisation() {
+		try {
+			List<Address> addresses = new ArrayList<Address>();
+			
+			AddressHelper addresshelper = new AddressHelper(master_.getAddress());
+			
+			int typeId = ADDRESS_OTHER;
+			long regionId = 0;
+			long countryId = 0;
+			boolean mailing = false;
+			boolean primary = true;
+			addresses.add(AddressLocalServiceUtil.addAddress(theme_display_.getUserId(), Organization.class.getName(), organization_.getOrganizationId(), 
+					addresshelper.getStreet1(), addresshelper.getStreet2(), addresshelper.getStreet3(), addresshelper.getCity(), addresshelper.getZip(), 
+					regionId, countryId, typeId, mailing, primary, new ServiceContext()));
+			UsersAdminUtil.updateAddresses(Organization.class.getName(), organization_.getOrganizationId(), addresses);
+		} catch (Exception exception) {
+			System.err.println("[" + error_date_format_apache_.format(new Date()) + "] [error] [" + class_name_ + "::addAddressToOrganisation()] Error creating Address for Organization: " + exception.getMessage());
+    		exception.printStackTrace();
+    		SessionMessages.add(request_, "error-creating-websites", "There was an error creating the Address for the Organization.");
+    		//TODO: Add Event for Admins for this
+		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private String getOrganizationTypeFromMaster() {
+		String type = "Registry";
+		if(master_.getCandidatetype().equalsIgnoreCase("Biobank")) {
+			type = "Biobank";
+		}
+		return type;
+	}
     
     //----------------------------------------------------------------
 	
-	
+	private void addEventEntry() {
+		try {
+			String shorttext = "";
+			String longtext = "";
+			String link = "";
+			String restricted = "";
+			String eventtitle = "";
+			
+			String orgPath = theme_display_.getURLPortal()+"/web"+organization_.getGroup().getFriendlyURL();
+			
+			if(master_.getCandidatetype().equalsIgnoreCase("Biobank")) {
+				eventtitle = "New Biobank Published: " + organization_.getName();
+				restricted = "RD-Connect CURATOR";
+				link = link + "/bb_home";
+				shorttext = "Biobank "+ organization_.getName() + " from " + master_.getCountry() + " was published an is now in the list redy for the pannel assessment invitation.";
+				longtext = "";
+			} else {
+				eventtitle = "New Registry Published: " + organization_.getName();
+				restricted = "";
+				link = link + "/reg_home";
+				shorttext = "Registry "+ organization_.getName() + " from " + master_.getCountry() + " was published an is now listed in the catalouge.";
+				longtext = "";
+			}
+			addEventEntry(new Date(), organization_.getOrganizationId(), theme_display_.getUserId(), shorttext, longtext, link, restricted, eventtitle);
+		} catch(Exception e) {
+			System.out.println("RDC Exception in MasterPublish:publishToGate -> Add Event");
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Add event entry
@@ -738,281 +812,5 @@ public class MasterPublish extends MVCPortlet {
 	private void addEventEntry(Date eventdate, long organizationId, long userId, String shorttext, String longtext, String link, String restricted, String eventtitle) {
 		RDConnectEventLocalServiceUtil.createEvent(eventtitle, eventdate, organizationId, userId, shorttext, longtext, link, restricted);
 	}
-	
-	private void addOrganisationDetails(Organization organization, MasterCandidate master, long userid) {
-		addWebpageToOrganisation(organization, master);
-		addEmailAddressToOrganisation(organization, master);
-		addAddressToOrganisation(organization, master, userid);
-	}
-	
-	private void addEmailAddressToOrganisation(Organization organization, MasterCandidate master) {
-		try {
-			List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
-			String pattern_string_mail_ = "\\b([a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4})*)\\b";
-			Pattern pattern_mail_ = Pattern.compile(pattern_string_mail_);
-			
-			ServiceContext serviceContext = new ServiceContext();
-	        serviceContext.setAddGroupPermissions(true);
-	        serviceContext.setAddGuestPermissions(true);
-			
-			HashSet<String> mails = new HashSet<String>();
-			Matcher matcher = pattern_mail_.matcher(master.getMail().replaceAll("mailto:", ""));
-			while (matcher.find()) {
-				if(!mails.contains(matcher.group().toLowerCase()))
-					mails.add(matcher.group().toLowerCase());
-			}
-			matcher = pattern_mail_.matcher(master.getContactperson().replaceAll("mailto:", ""));
-			while (matcher.find()) {
-				if(!mails.contains(matcher.group().toLowerCase()))
-					mails.add(matcher.group().toLowerCase());
-			}
-			matcher = pattern_mail_.matcher(master.getHead().replaceAll("mailto:", ""));
-			while (matcher.find()) {
-				if(!mails.contains(matcher.group().toLowerCase()))
-					mails.add(matcher.group().toLowerCase());
-			}
-			
-			boolean primary = true;
-			for(String mail : mails) {
-				EmailAddress emailAddress = EmailAddressLocalServiceUtil.createEmailAddress(0);
-
-				emailAddress.setAddress(mail);
-				emailAddress.setTypeId(EMAILADDRESS_TYPEID);
-				emailAddress.setPrimary(primary);
-				primary = false;
-				emailAddresses.add(emailAddress);
-			}
-			UsersAdminUtil.updateEmailAddresses(Organization.class.getName(), organization.getOrganizationId(), emailAddresses);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception MasterPublish::addEmailAddressToOrganisation");
-			System.out.println("PortalException");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception MasterPublish::addEmailAddressToOrganisation");
-			System.out.println("SystemException");
-			e.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("RDC Exception MasterPublish::addEmailAddressToOrganisation");
-			e.printStackTrace();
-		}
-	}
-	
-	private void addPhoneToOrganisation(Organization organization, MasterCandidate master) {
-		try {
-			List<Phone> phones = new ArrayList<Phone>();
-			UsersAdminUtil.updatePhones(Organization.class.getName(), organization.getOrganizationId(), phones);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception MasterPublish::addPhoneToOrganisation");
-			System.out.println("PortalException");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception MasterPublish::addPhoneToOrganisation");
-			System.out.println("SystemException");
-			e.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("RDC Exception MasterPublish::addPhoneToOrganisation");
-			e.printStackTrace();
-		}
-	}
-	
-	private void addAddressToOrganisation(Organization organization, MasterCandidate master, long userid) {
-		try {
-			List<Address> addresses = new ArrayList<Address>();
-			String street1 = "-";
-			String street2 = "";
-			String street3 = "";
-			String city = "-";
-			String zip = "-";
-			
-			if(!master.getAddress().equalsIgnoreCase("")){ 
-				int end = 0;
-				int start = 0;
-				if(master.getAddress().length() <= 75) {
-					street1 = master.getAddress();
-				} else if (master.getAddress().length() > 75 && master.getAddress().length() <= 150) {
-					end = master.getAddress().substring(start, 75).lastIndexOf(" ");
-					street1 = master.getAddress().substring(start, end);
-				} else if (master.getAddress().length() > 150 && master.getAddress().length() <= 225) {
-					end = master.getAddress().substring(start, 75).lastIndexOf(" ");				
-					street1 = master.getAddress().substring(start, end);
-					start = end;
-					end = start + master.getAddress().substring(start, end+75).lastIndexOf(" ");
-					street2 = master.getAddress().substring(start, end);
-					if(end < master.getAddress().length())
-						street3 = master.getAddress().substring(end);
-				} else if (master.getAddress().length() > 225) {
-					end = master.getAddress().substring(start, 75).lastIndexOf(" ");
-					street1 = master.getAddress().substring(start, end);
-					start = end;
-					end = start + master.getAddress().substring(start, end+75).lastIndexOf(" ");
-					street2 = master.getAddress().substring(start, end);
-					start = end;
-					end = start + master.getAddress().substring(start, start+75).lastIndexOf(" ");
-					street3 = master.getAddress().substring(start, end);
-				}
-			}
-			
-			int typeId = ADDRESS_OTHER;
-			long regionId = 0;
-			long countryId = 0;
-			boolean mailing = false;
-			boolean primary = true;
-			addresses.add(AddressLocalServiceUtil.addAddress(userid, Organization.class.getName(), organization.getOrganizationId(), street1, street2, street3, city, zip, 
-					regionId, countryId, typeId, mailing, primary, new ServiceContext()));
-			UsersAdminUtil.updateAddresses(Organization.class.getName(), organization.getOrganizationId(), addresses);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception MasterPublish::addAddressToOrganisation");
-			System.out.println("PortalException");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception MasterPublish::addAddressToOrganisation");
-			System.out.println("SystemException");
-			e.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("RDC Exception MasterPublish::addAddressToOrganisation");
-			e.printStackTrace();
-		}
-	}
-	
-	private void addWebpageToOrganisation(Organization organization, MasterCandidate master) {
-		try {
-			List<Website> websites = new ArrayList<Website>();
-			String[] urls = master.getUrl().split("[,; ]");
-			boolean primary = true;
-			for(String url : urls) {
-				url = url.trim();
-				if(url.length() == 0)
-					continue;
-				if(!url.startsWith("http"))
-					url = "http://" + url;
-				Website website = WebsiteLocalServiceUtil.createWebsite(0);
-				website.setUrl(url);
-				website.setTypeId(PUBLICWEBSITETYPEID);
-				website.setPrimary(primary);
-				primary = false;
-				websites.add(website);
-			}
-			UsersAdminUtil.updateWebsites(Organization.class.getName(), organization.getOrganizationId(), websites);
-		} catch (PortalException e) {
-			System.out.println("RDC Exception MasterPublish::addWebpageToOrganisation");
-			System.out.println("PortalException");
-			e.printStackTrace();
-		} catch (SystemException e) {
-			System.out.println("RDC Exception MasterPublish::addWebpageToOrganisation");
-			System.out.println("SystemException");
-			e.printStackTrace();
-		} catch (Exception e) {
-			System.out.println("RDC Exception MasterPublish::addWebpageToOrganisation");
-			e.printStackTrace();
-		}
-	}
-	
-	
-	
-	
-	
-	private String getFirstnameFromMail(String mail) {
-		String name = "";
-		String[] split1 = mail.split("@");
-		if(split1.length > 0) {
-			String[] split2 = split1[0].split("[\\._]");
-			if(split2.length > 0) {
-				name = split2[0];
-			}
-		}
-		return getNameStringFormat(name);
-	}
-	
-	private String getLastnameFromMail(String mail) {
-		String name = "";
-		String[] split1 = mail.split("@");
-		if(split1.length > 0) {
-			String[] split2 = split1[0].split("[\\._]");
-			if(split2.length > 1) {
-				name = split2[1];
-			}
-		}
-		return getNameStringFormat(name);
-	}
-	
-	private String getNameStringFormat(String name) {
-		if(name.length() > 1) {
-			name = name.substring(0, 1).toUpperCase() + name.substring(1);
-		} else if(name.length() == 1) {
-			name = name.substring(0, 1).toUpperCase();
-		}
-		System.out.println("Name: " + name);
-		return name;
-	}
-	
-	
-	
-	
-	
-	
-	
-	private String randomIdGenerator() {
-		String id = "_INSTANCE_";
-	    for (int i = 0; i < 4; i++) {
-	    	id += alphabet_.charAt(random_.nextInt(alphabeth_length_));
-	    }
-	    return id;
-	}
-	
-	private void creatRecordDiseaseMatrix(DDLRecordSet recordSet, long groupId, ServiceContext serviceContext, MasterCandidate master) throws PortalException, SystemException {
-		String[] diseascodes = master.getDiseasescodes().split(";");
-		for(String s : diseascodes) {
-			try {
-				DDMStructure ddmStructure = recordSet.getDDMStructure();		
-				Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
-				
-				s = s.trim();
-				
-				String fieldtype = "Comment";
-				if(s.contains("orpha") || s.contains("ORPHA")) {
-					fieldtype = "Orphanet_Number";
-				}
-				if(s.matches("\\w\\d\\d\\.\\d") || s.matches("\\w\\d\\d") || s.matches("ICD10:\\w\\d\\d\\.\\d") || s.matches("ICD10:\\w\\d\\d")) {
-					fieldtype = "ICD10";
-				}
-				if(s.matches("\\d{6}") || s.matches("OMIM:\\d{6}") || s.matches("OMIM\\d{6}")) {
-					fieldtype = "OMIM";
-				}
-				
-				Field field_code = new Field(fieldtype, s);
-				fields.put(field_code);
-				DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
-						serviceContext.getUserId(),
-						serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
-						DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
-						serviceContext);
-			} catch(Exception e) {
-				System.out.println("RDC Exception DiseaseMatrix");
-				e.printStackTrace();
-			}
-		}
-		diseascodes = master.getDiseasesfreetext().split(";");
-		for(String s : diseascodes) {
-			try {
-				DDMStructure ddmStructure = recordSet.getDDMStructure();		
-				Fields fields = DDMUtil.getFields(recordSet.getDDMStructureId(), serviceContext);
-					
-				Field field_code = new Field("Name", s);
-				fields.put(field_code);
-				DDLRecord record = DDLRecordLocalServiceUtil.addRecord(
-						serviceContext.getUserId(),
-						serviceContext.getScopeGroupId(), recordSet.getRecordSetId(),
-						DDLRecordConstants.DISPLAY_INDEX_DEFAULT, fields,
-						serviceContext);
-			} catch(Exception e) {
-				System.out.println("RDC Exception DiseaseMatrix");
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	
-	// --------------------------------------------------------------------
-	
 
 }

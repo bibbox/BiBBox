@@ -136,10 +136,11 @@ public class Molgenis {
 							data += "{\"ORPHA Code\":\"ORPHA" + xlabel.get("Code").toString() + "\",";
 							data += "\"NumberofPatientsDonors\":\"" + numberofdoners + "\",";
 							data += "\"Disease Name\":\"" + disorder.getDiseasename() + "\",";
+							data += "\"Gene\":\"" + "" + "\",";
 							data += "\"ICD 10\":\"" + disorder.getICD10() + "\",";
 							data += "\"OMIM\":\"" + disorder.getOMIM() + "\",";
 							data += "\"Synonym\":\"" + disorder.getSynonym() + "\",";
-							data += "\"SampleCatalogue\":\"https://molgenis10.gcc.rug.nl\",";
+							data += "\"SampleCatalogue\":\"https://molgenis21.gcc.rug.nl/menu/main/dataexplorer?entity=rdconnect_Sample&hideselect=true\",";
 							data += "\"Registries\":\"" + registryorganizations + "\"}";
 							
 							// Disease Name, Number of Patients, Donors, Gene, ORPHA Code, ICD 10, OMIM, Synonym(s), Modified Date

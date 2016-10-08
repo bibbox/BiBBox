@@ -14,6 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -127,5 +128,15 @@ public class DiseaseMatrixLocalServiceImpl
 	public String getDiseaseMatrixFromFederation(long organizationId) {
 		Molgenis molgens = Molgenis.getInstance();
 		return molgens.getAgregatedJsonFromMolgenis(String.valueOf(organizationId));
+	}
+	
+	public List<DiseaseMatrix> getDiseaseMatirxByOrganizationAndOrphanumber(long organizationId, String orphanumber) {
+		try {
+			return diseaseMatrixPersistence.findByOrganizationAndOrphanumber(organizationId, orphanumber);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList<DiseaseMatrix>();
 	}
 }

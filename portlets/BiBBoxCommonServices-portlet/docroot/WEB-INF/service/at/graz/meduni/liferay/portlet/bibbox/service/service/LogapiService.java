@@ -107,6 +107,9 @@ public interface LogapiService extends BaseService, InvokableService {
 
 	public com.liferay.portal.kernel.json.JSONObject regbb(java.lang.String id);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getIdCard(long organizationId);
+
 	public void testMethode(java.lang.String jason);
 
 	public void resttest01(long organizationId);

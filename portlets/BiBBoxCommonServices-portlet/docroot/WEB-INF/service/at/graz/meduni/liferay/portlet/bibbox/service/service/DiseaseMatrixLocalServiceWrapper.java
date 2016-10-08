@@ -331,6 +331,13 @@ public class DiseaseMatrixLocalServiceWrapper
 		return _diseaseMatrixLocalService.getDiseaseMatrixFromFederation(organizationId);
 	}
 
+	@Override
+	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> getDiseaseMatirxByOrganizationAndOrphanumber(
+		long organizationId, java.lang.String orphanumber) {
+		return _diseaseMatrixLocalService.getDiseaseMatirxByOrganizationAndOrphanumber(organizationId,
+			orphanumber);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

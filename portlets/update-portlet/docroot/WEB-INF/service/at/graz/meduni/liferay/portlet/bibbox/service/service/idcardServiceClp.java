@@ -32,33 +32,37 @@ public class idcardServiceClp implements idcardService {
 
 		_methodParameterTypes1 = new String[] { "java.lang.String" };
 
-		_methodName3 = "DiseaseMatrix";
+		_methodName3 = "TestVariables";
 
-		_methodParameterTypes3 = new String[] {
+		_methodParameterTypes3 = new String[] { "long" };
+
+		_methodName4 = "DiseaseMatrix";
+
+		_methodParameterTypes4 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName4 = "DiseaseMatrix";
+		_methodName5 = "DiseaseMatrix";
 
-		_methodParameterTypes4 = new String[] {
+		_methodParameterTypes5 = new String[] {
 				"java.lang.String", "long", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName5 = "DiseaseMatrix";
+		_methodName6 = "DiseaseMatrix";
 
-		_methodParameterTypes5 = new String[] {
+		_methodParameterTypes6 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName6 = "DiseaseMatrix";
+		_methodName7 = "DiseaseMatrix";
 
-		_methodParameterTypes6 = new String[] {
+		_methodParameterTypes7 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String"
@@ -116,6 +120,40 @@ public class idcardServiceClp implements idcardService {
 	}
 
 	@Override
+	public com.liferay.portal.kernel.json.JSONObject TestVariables(
+		long idcardid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName3,
+					_methodParameterTypes3, new Object[] { idcardid });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.json.JSONObject DiseaseMatrix(
 		long idcardid, long diseaseid, java.lang.String diseasname,
 		java.lang.String patientcount, java.lang.String gene,
@@ -124,8 +162,8 @@ public class idcardServiceClp implements idcardService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName3,
-					_methodParameterTypes3,
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
 					new Object[] {
 						idcardid,
 						
@@ -170,8 +208,8 @@ public class idcardServiceClp implements idcardService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4,
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
 					new Object[] {
 						ClpSerializer.translateInput(url),
 						
@@ -216,8 +254,8 @@ public class idcardServiceClp implements idcardService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5,
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
 					new Object[] {
 						idcardid,
 						
@@ -260,8 +298,8 @@ public class idcardServiceClp implements idcardService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
 					new Object[] {
 						ClpSerializer.translateInput(url),
 						
@@ -308,4 +346,6 @@ public class idcardServiceClp implements idcardService {
 	private String[] _methodParameterTypes5;
 	private String _methodName6;
 	private String[] _methodParameterTypes6;
+	private String _methodName7;
+	private String[] _methodParameterTypes7;
 }

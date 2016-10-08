@@ -57,6 +57,14 @@ public class idcardServiceWrapper implements idcardService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.json.JSONObject TestVariables(
+		long idcardid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _idcardService.TestVariables(idcardid);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.json.JSONObject DiseaseMatrix(
 		long idcardid, long diseaseid, java.lang.String diseasname,
 		java.lang.String patientcount, java.lang.String gene,
