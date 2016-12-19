@@ -105,7 +105,7 @@
 		<property name="locationid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="key" type="com.liferay.portal.dao.orm.hibernate.StringType" column="key_" />
-		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="searchvalue" type="com.liferay.portal.dao.orm.hibernate.StringType" column="value" />
 	</class>
 	<class name="at.graz.meduni.liferay.portlet.bibbox.model.impl.OrphanetDisorderImpl" table="ontologies.orphanetdisorder">
 		<cache usage="read-write" />

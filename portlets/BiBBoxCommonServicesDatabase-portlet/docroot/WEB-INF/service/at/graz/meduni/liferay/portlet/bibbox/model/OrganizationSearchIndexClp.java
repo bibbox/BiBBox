@@ -78,7 +78,7 @@ public class OrganizationSearchIndexClp extends BaseModelImpl<OrganizationSearch
 		attributes.put("locationid", getLocationid());
 		attributes.put("location", getLocation());
 		attributes.put("key", getKey());
-		attributes.put("value", getValue());
+		attributes.put("searchvalue", getSearchvalue());
 
 		return attributes;
 	}
@@ -115,10 +115,10 @@ public class OrganizationSearchIndexClp extends BaseModelImpl<OrganizationSearch
 			setKey(key);
 		}
 
-		String value = (String)attributes.get("value");
+		String searchvalue = (String)attributes.get("searchvalue");
 
-		if (value != null) {
-			setValue(value);
+		if (searchvalue != null) {
+			setSearchvalue(searchvalue);
 		}
 	}
 
@@ -239,21 +239,21 @@ public class OrganizationSearchIndexClp extends BaseModelImpl<OrganizationSearch
 	}
 
 	@Override
-	public String getValue() {
-		return _value;
+	public String getSearchvalue() {
+		return _searchvalue;
 	}
 
 	@Override
-	public void setValue(String value) {
-		_value = value;
+	public void setSearchvalue(String searchvalue) {
+		_searchvalue = searchvalue;
 
 		if (_organizationSearchIndexRemoteModel != null) {
 			try {
 				Class<?> clazz = _organizationSearchIndexRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setValue", String.class);
+				Method method = clazz.getMethod("setSearchvalue", String.class);
 
-				method.invoke(_organizationSearchIndexRemoteModel, value);
+				method.invoke(_organizationSearchIndexRemoteModel, searchvalue);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -337,7 +337,7 @@ public class OrganizationSearchIndexClp extends BaseModelImpl<OrganizationSearch
 		clone.setLocationid(getLocationid());
 		clone.setLocation(getLocation());
 		clone.setKey(getKey());
-		clone.setValue(getValue());
+		clone.setSearchvalue(getSearchvalue());
 
 		return clone;
 	}
@@ -398,8 +398,8 @@ public class OrganizationSearchIndexClp extends BaseModelImpl<OrganizationSearch
 		sb.append(getLocation());
 		sb.append(", key=");
 		sb.append(getKey());
-		sb.append(", value=");
-		sb.append(getValue());
+		sb.append(", searchvalue=");
+		sb.append(getSearchvalue());
 		sb.append("}");
 
 		return sb.toString();
@@ -435,8 +435,8 @@ public class OrganizationSearchIndexClp extends BaseModelImpl<OrganizationSearch
 		sb.append(getKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>value</column-name><column-value><![CDATA[");
-		sb.append(getValue());
+			"<column><column-name>searchvalue</column-name><column-value><![CDATA[");
+		sb.append(getSearchvalue());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -449,6 +449,6 @@ public class OrganizationSearchIndexClp extends BaseModelImpl<OrganizationSearch
 	private long _locationid;
 	private String _location;
 	private String _key;
-	private String _value;
+	private String _searchvalue;
 	private BaseModel<?> _organizationSearchIndexRemoteModel;
 }

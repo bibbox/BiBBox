@@ -282,6 +282,15 @@ public class OrganizationSearchIndexLocalServiceUtil {
 		return getService().getSearchIndexValueByKey(keyword, organizationId);
 	}
 
+	public static void testSearchIndex() {
+		getService().testSearchIndex();
+	}
+
+	public static java.util.List<java.lang.Long> getOrganizationIdByKeywordAndValue(
+		java.lang.String key, java.lang.String value) {
+		return getService().getOrganizationIdByKeywordAndValue(key, value);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

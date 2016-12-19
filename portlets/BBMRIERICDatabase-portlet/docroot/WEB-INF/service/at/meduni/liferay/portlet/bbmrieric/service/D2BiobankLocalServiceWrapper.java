@@ -398,6 +398,16 @@ public class D2BiobankLocalServiceWrapper implements D2BiobankLocalService,
 	}
 
 	/**
+	* @param bbmribiobankID
+	* @return
+	*/
+	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankByBBMRIERICID(
+		java.lang.String bbmribiobankID) {
+		return _d2BiobankLocalService.getD2BiobankByBBMRIERICID(bbmribiobankID);
+	}
+
+	/**
 	* @param newbiobank
 	* @param serviceContext
 	* @return

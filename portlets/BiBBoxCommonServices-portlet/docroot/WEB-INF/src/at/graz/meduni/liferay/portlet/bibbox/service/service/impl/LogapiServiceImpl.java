@@ -194,8 +194,8 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	}
 	
 	@AccessControlled(guestAccessEnabled=true)
-	@JSONWebService(value = "findorganization", method = "GET")
-	public JSONArray findorganization(String organizationname) {
+	@JSONWebService(value = "findorganizationbyname", method = "GET")
+	public JSONArray findorganizationbyname(String organizationname) {
 		long userid = 0;
 		String userip = "";
 		try {
@@ -211,7 +211,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		}
 		JSONArray jsonarray = JSONFactoryUtil.createJSONArray();
 		try {
-			List<Long> organizationIds = SearchIndexLocalServiceUtil.getOrganizationIdByKeywordAndValue("OrganizationName", "organizationname");
+			List<Long> organizationIds = OrganizationSearchIndexLocalServiceUtil.getOrganizationIdByKeywordAndValue("OrganizationName", organizationname);
 			for(Long organizationId : organizationIds) {
 				try {
 					Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
@@ -247,7 +247,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 					e.printStackTrace();
 				}
 			}
-		} catch (SystemException e) {
+		} catch (Exception e) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regs] Error creating list of Registries.");
 			LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regs] Error creating list of Registries.");
 			LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
@@ -694,69 +694,6 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	public void testMethode(String jason) {
 		System.out.println(jason);
 	}
-	
-	//---------------------------
-	// Test
-	
-	@JSONWebService(value = "resttest01", method = "POST")
-	public void resttest01(long organizationId) {
-		System.out.println("resttest01: (organizationId = " + organizationId + ")");
-	}
-	
-	@JSONWebService(value = "resttest02", method = "POST")
-	public void resttest02(String text) {
-		System.out.println("resttest02: (text = " + text + ")");
-	}
-	
-	@JSONWebService(value = "resttest03", method = "POST")
-	public void resttest03(long[] array) {
-		System.out.println("resttest03: (array = " + array.length + ")");
-		for(long abc : array) {
-			System.out.println("            value: " + abc);
-		}
-	}
-	
-	@JSONWebService(value = "resttest04", method = "POST")
-	public void resttest04(String[] array) {
-		System.out.println("resttest04: (array = " + array.length + ")");
-		for(String abc : array) {
-			System.out.println("            value: " + abc);
-		}
-	}
-	
-	@JSONWebService(value = "resttest05", method = "POST")
-	public void resttest05(String url, User user) {
-		System.out.println("resttest05: (array = " + url + ")");
-		System.out.println("            firstname: " + user.getFirstName());
-		System.out.println("            lastname:  " + user.getLastName());
-	}
-	
-	@JSONWebService(value = "resttest06", method = "POST")
-	public void resttest06(String url, String diseasname, String patientcount, String gene, String orphanumber, String icd10, String omim, String synonym) {
-		System.out.println("resttest06: url: " + url);
-		System.out.println("            diseasname: " + diseasname);
-		System.out.println("            patientcount:  " + patientcount);
-		System.out.println("            gene:  " + gene);
-		System.out.println("            orphanumber:  " + orphanumber);
-		System.out.println("            icd10:  " + icd10);
-		System.out.println("            omim:  " + omim);
-		System.out.println("            synonym:  " + synonym);
-	}
-	
-	@JSONWebService(value = "/resttest07", method = "POST")
-	public void resttest07(String url, String diseasname, String patientcount, String gene, String orphanumber, String icd10, String omim, String synonym) {
-		System.out.println("resttest07: url: " + url);
-		System.out.println("            diseasname: " + diseasname);
-		System.out.println("            patientcount:  " + patientcount);
-		System.out.println("            gene:  " + gene);
-		System.out.println("            orphanumber:  " + orphanumber);
-		System.out.println("            icd10:  " + icd10);
-		System.out.println("            omim:  " + omim);
-		System.out.println("            synonym:  " + synonym);
-	}
-	
-	// Test
-	//---------------------------
 	
 	
 	String pattern = "http%3A%2F%2Fcatalogue.rd-connect.eu%2Fid%2Forganization-id%2F(\\d+)(%2Fcollection-id%2F)?(\\d+)?";

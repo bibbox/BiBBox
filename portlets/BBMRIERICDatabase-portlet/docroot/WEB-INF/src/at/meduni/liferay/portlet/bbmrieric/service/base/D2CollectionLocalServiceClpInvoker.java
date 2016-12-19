@@ -122,53 +122,22 @@ public class D2CollectionLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Collection"
 			};
 
-		_methodName64 = "getBeanIdentifier";
+		_methodName66 = "getBeanIdentifier";
 
-		_methodParameterTypes64 = new String[] {  };
+		_methodParameterTypes66 = new String[] {  };
 
-		_methodName65 = "setBeanIdentifier";
+		_methodName67 = "setBeanIdentifier";
 
-		_methodParameterTypes65 = new String[] { "java.lang.String" };
+		_methodParameterTypes67 = new String[] { "java.lang.String" };
 
-		_methodName70 = "addD2Collection";
-
-		_methodParameterTypes70 = new String[] {
-				"at.meduni.liferay.portlet.bbmrieric.model.D2Collection",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName71 = "addD2Collection";
-
-		_methodParameterTypes71 = new String[] {
-				"long", "long", "long", "long", "long", "long",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "boolean", "boolean",
-				"boolean", "boolean", "boolean", "boolean", "boolean", "boolean",
-				"boolean", "boolean", "boolean", "boolean", "java.lang.String",
-				"boolean", "boolean", "boolean", "boolean", "boolean", "boolean",
-				"boolean", "boolean", "boolean", "java.lang.String", "long",
-				"java.lang.String", "java.lang.String", "long",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"boolean", "boolean", "java.lang.String", "java.lang.String",
-				"boolean", "boolean", "boolean", "boolean", "long", "long",
-				"java.lang.String", "boolean", "boolean", "boolean", "boolean",
-				"boolean", "boolean", "boolean", "java.lang.String", "boolean",
-				"boolean", "boolean", "boolean", "boolean", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "boolean", "boolean", "java.lang.String",
-				"java.lang.String", "boolean", "boolean", "java.lang.String",
-				"java.lang.String", "long", "long",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName72 = "updateD2Collection";
+		_methodName72 = "addD2Collection";
 
 		_methodParameterTypes72 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Collection",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName73 = "updateD2Collection";
+		_methodName73 = "addD2Collection";
 
 		_methodParameterTypes73 = new String[] {
 				"long", "long", "long", "long", "long", "long",
@@ -192,39 +161,70 @@ public class D2CollectionLocalServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName74 = "getD2CollectionByBBMRIERICID";
+		_methodName74 = "updateD2Collection";
 
 		_methodParameterTypes74 = new String[] {
+				"at.meduni.liferay.portlet.bbmrieric.model.D2Collection",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName75 = "updateD2Collection";
+
+		_methodParameterTypes75 = new String[] {
+				"long", "long", "long", "long", "long", "long",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean", "boolean",
+				"boolean", "boolean", "boolean", "boolean", "boolean", "boolean",
+				"boolean", "boolean", "boolean", "boolean", "java.lang.String",
+				"boolean", "boolean", "boolean", "boolean", "boolean", "boolean",
+				"boolean", "boolean", "boolean", "java.lang.String", "long",
+				"java.lang.String", "java.lang.String", "long",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"boolean", "boolean", "java.lang.String", "java.lang.String",
+				"boolean", "boolean", "boolean", "boolean", "long", "long",
+				"java.lang.String", "boolean", "boolean", "boolean", "boolean",
+				"boolean", "boolean", "boolean", "java.lang.String", "boolean",
+				"boolean", "boolean", "boolean", "boolean", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "boolean", "boolean", "java.lang.String",
+				"java.lang.String", "boolean", "boolean", "java.lang.String",
+				"java.lang.String", "long", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName76 = "getD2CollectionByBBMRIERICID";
+
+		_methodParameterTypes76 = new String[] {
 				"long", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName75 = "getD2CollectionByBiobankId";
+		_methodName77 = "getD2CollectionByBiobankId";
 
-		_methodParameterTypes75 = new String[] { "long" };
+		_methodParameterTypes77 = new String[] { "long" };
 
-		_methodName76 = "getRootD2Collection";
-
-		_methodParameterTypes76 = new String[] { "long" };
-
-		_methodName77 = "getChildD2Collection";
-
-		_methodParameterTypes77 = new String[] { "long", "long" };
-
-		_methodName78 = "getD2CollectionByBiobankIdCount";
+		_methodName78 = "getRootD2Collection";
 
 		_methodParameterTypes78 = new String[] { "long" };
 
-		_methodName79 = "getD2CollectionFromLDAP";
+		_methodName79 = "getChildD2Collection";
 
-		_methodParameterTypes79 = new String[] {
+		_methodParameterTypes79 = new String[] { "long", "long" };
+
+		_methodName80 = "getD2CollectionByBiobankIdCount";
+
+		_methodParameterTypes80 = new String[] { "long" };
+
+		_methodName81 = "getD2CollectionFromLDAP";
+
+		_methodParameterTypes81 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Collection",
 				"javax.naming.directory.Attributes",
 				"javax.naming.directory.SearchResult", "boolean"
 			};
 
-		_methodName80 = "getLDAPNotUpdatedCollection";
+		_methodName82 = "getLDAPNotUpdatedCollection";
 
-		_methodParameterTypes80 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes82 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -340,116 +340,27 @@ public class D2CollectionLocalServiceClpInvoker {
 			return D2CollectionLocalServiceUtil.updateD2Collection((at.meduni.liferay.portlet.bbmrieric.model.D2Collection)arguments[0]);
 		}
 
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return D2CollectionLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName65.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			D2CollectionLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName70.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.addD2Collection((at.meduni.liferay.portlet.bbmrieric.model.D2Collection)arguments[0],
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
-		}
-
-		if (_methodName71.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.addD2Collection(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				((Long)arguments[2]).longValue(),
-				((Long)arguments[3]).longValue(),
-				((Long)arguments[4]).longValue(),
-				((Long)arguments[5]).longValue(),
-				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
-				(java.lang.String)arguments[8], (java.lang.String)arguments[9],
-				(java.lang.String)arguments[10],
-				((Boolean)arguments[11]).booleanValue(),
-				((Boolean)arguments[12]).booleanValue(),
-				((Boolean)arguments[13]).booleanValue(),
-				((Boolean)arguments[14]).booleanValue(),
-				((Boolean)arguments[15]).booleanValue(),
-				((Boolean)arguments[16]).booleanValue(),
-				((Boolean)arguments[17]).booleanValue(),
-				((Boolean)arguments[18]).booleanValue(),
-				((Boolean)arguments[19]).booleanValue(),
-				((Boolean)arguments[20]).booleanValue(),
-				((Boolean)arguments[21]).booleanValue(),
-				((Boolean)arguments[22]).booleanValue(),
-				(java.lang.String)arguments[23],
-				((Boolean)arguments[24]).booleanValue(),
-				((Boolean)arguments[25]).booleanValue(),
-				((Boolean)arguments[26]).booleanValue(),
-				((Boolean)arguments[27]).booleanValue(),
-				((Boolean)arguments[28]).booleanValue(),
-				((Boolean)arguments[29]).booleanValue(),
-				((Boolean)arguments[30]).booleanValue(),
-				((Boolean)arguments[31]).booleanValue(),
-				((Boolean)arguments[32]).booleanValue(),
-				(java.lang.String)arguments[33],
-				((Long)arguments[34]).longValue(),
-				(java.lang.String)arguments[35],
-				(java.lang.String)arguments[36],
-				((Long)arguments[37]).longValue(),
-				(java.lang.String)arguments[38],
-				(java.lang.String)arguments[39],
-				(java.lang.String)arguments[40],
-				((Boolean)arguments[41]).booleanValue(),
-				((Boolean)arguments[42]).booleanValue(),
-				(java.lang.String)arguments[43],
-				(java.lang.String)arguments[44],
-				((Boolean)arguments[45]).booleanValue(),
-				((Boolean)arguments[46]).booleanValue(),
-				((Boolean)arguments[47]).booleanValue(),
-				((Boolean)arguments[48]).booleanValue(),
-				((Long)arguments[49]).longValue(),
-				((Long)arguments[50]).longValue(),
-				(java.lang.String)arguments[51],
-				((Boolean)arguments[52]).booleanValue(),
-				((Boolean)arguments[53]).booleanValue(),
-				((Boolean)arguments[54]).booleanValue(),
-				((Boolean)arguments[55]).booleanValue(),
-				((Boolean)arguments[56]).booleanValue(),
-				((Boolean)arguments[57]).booleanValue(),
-				((Boolean)arguments[58]).booleanValue(),
-				(java.lang.String)arguments[59],
-				((Boolean)arguments[60]).booleanValue(),
-				((Boolean)arguments[61]).booleanValue(),
-				((Boolean)arguments[62]).booleanValue(),
-				((Boolean)arguments[63]).booleanValue(),
-				((Boolean)arguments[64]).booleanValue(),
-				(java.lang.String)arguments[65],
-				(java.lang.String)arguments[66],
-				(java.lang.String)arguments[67],
-				(java.lang.String)arguments[68],
-				(java.lang.String)arguments[69],
-				((Boolean)arguments[70]).booleanValue(),
-				((Boolean)arguments[71]).booleanValue(),
-				(java.lang.String)arguments[72],
-				(java.lang.String)arguments[73],
-				((Boolean)arguments[74]).booleanValue(),
-				((Boolean)arguments[75]).booleanValue(),
-				(java.lang.String)arguments[76],
-				(java.lang.String)arguments[77],
-				((Long)arguments[78]).longValue(),
-				((Long)arguments[79]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[80]);
-		}
-
 		if (_methodName72.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.updateD2Collection((at.meduni.liferay.portlet.bbmrieric.model.D2Collection)arguments[0],
+			return D2CollectionLocalServiceUtil.addD2Collection((at.meduni.liferay.portlet.bbmrieric.model.D2Collection)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.updateD2Collection(((Long)arguments[0]).longValue(),
+			return D2CollectionLocalServiceUtil.addD2Collection(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
 				((Long)arguments[3]).longValue(),
@@ -532,41 +443,130 @@ public class D2CollectionLocalServiceClpInvoker {
 
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+			return D2CollectionLocalServiceUtil.updateD2Collection((at.meduni.liferay.portlet.bbmrieric.model.D2Collection)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.getD2CollectionByBiobankId(((Long)arguments[0]).longValue());
+			return D2CollectionLocalServiceUtil.updateD2Collection(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				((Long)arguments[3]).longValue(),
+				((Long)arguments[4]).longValue(),
+				((Long)arguments[5]).longValue(),
+				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
+				(java.lang.String)arguments[8], (java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				((Boolean)arguments[11]).booleanValue(),
+				((Boolean)arguments[12]).booleanValue(),
+				((Boolean)arguments[13]).booleanValue(),
+				((Boolean)arguments[14]).booleanValue(),
+				((Boolean)arguments[15]).booleanValue(),
+				((Boolean)arguments[16]).booleanValue(),
+				((Boolean)arguments[17]).booleanValue(),
+				((Boolean)arguments[18]).booleanValue(),
+				((Boolean)arguments[19]).booleanValue(),
+				((Boolean)arguments[20]).booleanValue(),
+				((Boolean)arguments[21]).booleanValue(),
+				((Boolean)arguments[22]).booleanValue(),
+				(java.lang.String)arguments[23],
+				((Boolean)arguments[24]).booleanValue(),
+				((Boolean)arguments[25]).booleanValue(),
+				((Boolean)arguments[26]).booleanValue(),
+				((Boolean)arguments[27]).booleanValue(),
+				((Boolean)arguments[28]).booleanValue(),
+				((Boolean)arguments[29]).booleanValue(),
+				((Boolean)arguments[30]).booleanValue(),
+				((Boolean)arguments[31]).booleanValue(),
+				((Boolean)arguments[32]).booleanValue(),
+				(java.lang.String)arguments[33],
+				((Long)arguments[34]).longValue(),
+				(java.lang.String)arguments[35],
+				(java.lang.String)arguments[36],
+				((Long)arguments[37]).longValue(),
+				(java.lang.String)arguments[38],
+				(java.lang.String)arguments[39],
+				(java.lang.String)arguments[40],
+				((Boolean)arguments[41]).booleanValue(),
+				((Boolean)arguments[42]).booleanValue(),
+				(java.lang.String)arguments[43],
+				(java.lang.String)arguments[44],
+				((Boolean)arguments[45]).booleanValue(),
+				((Boolean)arguments[46]).booleanValue(),
+				((Boolean)arguments[47]).booleanValue(),
+				((Boolean)arguments[48]).booleanValue(),
+				((Long)arguments[49]).longValue(),
+				((Long)arguments[50]).longValue(),
+				(java.lang.String)arguments[51],
+				((Boolean)arguments[52]).booleanValue(),
+				((Boolean)arguments[53]).booleanValue(),
+				((Boolean)arguments[54]).booleanValue(),
+				((Boolean)arguments[55]).booleanValue(),
+				((Boolean)arguments[56]).booleanValue(),
+				((Boolean)arguments[57]).booleanValue(),
+				((Boolean)arguments[58]).booleanValue(),
+				(java.lang.String)arguments[59],
+				((Boolean)arguments[60]).booleanValue(),
+				((Boolean)arguments[61]).booleanValue(),
+				((Boolean)arguments[62]).booleanValue(),
+				((Boolean)arguments[63]).booleanValue(),
+				((Boolean)arguments[64]).booleanValue(),
+				(java.lang.String)arguments[65],
+				(java.lang.String)arguments[66],
+				(java.lang.String)arguments[67],
+				(java.lang.String)arguments[68],
+				(java.lang.String)arguments[69],
+				((Boolean)arguments[70]).booleanValue(),
+				((Boolean)arguments[71]).booleanValue(),
+				(java.lang.String)arguments[72],
+				(java.lang.String)arguments[73],
+				((Boolean)arguments[74]).booleanValue(),
+				((Boolean)arguments[75]).booleanValue(),
+				(java.lang.String)arguments[76],
+				(java.lang.String)arguments[77],
+				((Long)arguments[78]).longValue(),
+				((Long)arguments[79]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[80]);
 		}
 
 		if (_methodName76.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.getRootD2Collection(((Long)arguments[0]).longValue());
+			return D2CollectionLocalServiceUtil.getD2CollectionByBBMRIERICID(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 		}
 
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.getChildD2Collection(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+			return D2CollectionLocalServiceUtil.getD2CollectionByBiobankId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName78.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
-			return D2CollectionLocalServiceUtil.getD2CollectionByBiobankIdCount(((Long)arguments[0]).longValue());
+			return D2CollectionLocalServiceUtil.getRootD2Collection(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName79.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			return D2CollectionLocalServiceUtil.getChildD2Collection(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+			return D2CollectionLocalServiceUtil.getD2CollectionByBiobankIdCount(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			return D2CollectionLocalServiceUtil.getD2CollectionFromLDAP((at.meduni.liferay.portlet.bbmrieric.model.D2Collection)arguments[0],
 				(javax.naming.directory.Attributes)arguments[1],
 				(javax.naming.directory.SearchResult)arguments[2],
 				((Boolean)arguments[3]).booleanValue());
 		}
 
-		if (_methodName80.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+		if (_methodName82.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
 			return D2CollectionLocalServiceUtil.getLDAPNotUpdatedCollection(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
@@ -614,14 +614,10 @@ public class D2CollectionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
-	private String _methodName64;
-	private String[] _methodParameterTypes64;
-	private String _methodName65;
-	private String[] _methodParameterTypes65;
-	private String _methodName70;
-	private String[] _methodParameterTypes70;
-	private String _methodName71;
-	private String[] _methodParameterTypes71;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
 	private String _methodName72;
 	private String[] _methodParameterTypes72;
 	private String _methodName73;
@@ -640,4 +636,8 @@ public class D2CollectionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes79;
 	private String _methodName80;
 	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
+	private String _methodName82;
+	private String[] _methodParameterTypes82;
 }

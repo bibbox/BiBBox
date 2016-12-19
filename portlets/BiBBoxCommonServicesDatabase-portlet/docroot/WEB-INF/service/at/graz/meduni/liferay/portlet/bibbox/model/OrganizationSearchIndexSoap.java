@@ -35,7 +35,7 @@ public class OrganizationSearchIndexSoap implements Serializable {
 		soapModel.setLocationid(model.getLocationid());
 		soapModel.setLocation(model.getLocation());
 		soapModel.setKey(model.getKey());
-		soapModel.setValue(model.getValue());
+		soapModel.setSearchvalue(model.getSearchvalue());
 
 		return soapModel;
 	}
@@ -131,12 +131,12 @@ public class OrganizationSearchIndexSoap implements Serializable {
 		_key = key;
 	}
 
-	public String getValue() {
-		return _value;
+	public String getSearchvalue() {
+		return _searchvalue;
 	}
 
-	public void setValue(String value) {
-		_value = value;
+	public void setSearchvalue(String searchvalue) {
+		_searchvalue = searchvalue;
 	}
 
 	private long _searchid;
@@ -144,5 +144,5 @@ public class OrganizationSearchIndexSoap implements Serializable {
 	private long _locationid;
 	private String _location;
 	private String _key;
-	private String _value;
+	private String _searchvalue;
 }

@@ -1,5 +1,8 @@
 package at.meduni.liferay.portlet.bbmrieric.portlet;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,11 +10,30 @@ import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.Credentials;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -29,6 +51,77 @@ public class Biobank extends MVCPortlet {
 	 */
 	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
 	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
+	
+	String negotiator_url_ = "https://bbmri-demo.mitro.dkfz.de/api/directory/create_query";
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.liferay.util.bridges.mvc.MVCPortlet#serveResource(javax.portlet.ResourceRequest, javax.portlet.ResourceResponse)
+	 */
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) {
+		try {
+			JSONObject json = JSONFactoryUtil.createJSONObject();
+			String searchurl = ParamUtil.getString(resourceRequest, "searchurl");
+			String humanReadable = ParamUtil.getString(resourceRequest, "humanReadable");
+			String collections = ParamUtil.getString(resourceRequest, "collections");
+			System.out.println("searchurl: " + searchurl);
+			System.out.println("humanReadable: " + humanReadable);
+			System.out.println("collections: " + collections);
+			
+			String redirect_uri = "";
+			try {
+				redirect_uri = createNegotiation(searchurl, humanReadable, collections);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			json.put("redirect_uri", redirect_uri);
+			resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
+		} catch (IOException e) {
+			System.out.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BBMRIERICDatabase-portlet::at.meduni.liferay.portlet.bbmrieric.portlet.Biobank::serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)] Error creating Negotiation.");
+			e.printStackTrace();
+		}
+	}
+	
+	private String createNegotiation(String searchurl, String humanReadable, String collections) throws ClientProtocolException, IOException, JSONException {
+		
+
+
+		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+		credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("molgenis", "gogogo"));
+		CloseableHttpClient c = HttpClientBuilder.create().setDefaultCredentialsProvider(credentialsProvider).build();
+
+
+		
+		//HttpClient c = HttpClientBuilder.create().build();
+		HttpPost p = new HttpPost(negotiator_url_);
+
+		p.setEntity(new StringEntity("{\"searchurl\":\"" + searchurl
+				+ "\",\"humanReadable\":\"" + humanReadable
+				+ "\",\"collections\":" + collections + "}",
+				ContentType.create("application/json")));
+
+		System.out.println("{\"searchurl\":\"" + searchurl
+				+ "\",\"humanReadable\":\"" + humanReadable
+				+ "\",\"collections\":" + collections + "}");
+		
+		//p.setHeader("authorization", "Basic bW9sZ2VuaXM6Z29nb2dv");
+		
+		HttpResponse r = c.execute(p);
+
+		BufferedReader rd = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
+		String line = "";
+		String redirect_uri = "";
+		while ((line = rd.readLine()) != null) {
+			// Parse our JSON response
+			System.out.println(line);
+			JSONObject o = JSONFactoryUtil.createJSONObject(line);
+
+			redirect_uri = o.getString("redirect_uri");
+		}
+		return redirect_uri;
+	}
 	
 	/**
 	 * 

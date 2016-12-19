@@ -69,7 +69,7 @@ public class BioBankModelImpl extends BaseModelImpl<BioBank>
 			{ "biobankjuristicperson", Types.VARCHAR },
 			{ "UUID", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bbmrieric.biobank (biobankId LONG not null primary key,organisationid LONG,ldapbiobankID TEXT null,biobankcountry TEXT null,biobankname TEXT null,biobanktype TEXT null,biobanksize TEXT null,biobankdescription VARCHAR(75) null,biobankjuristicperson TEXT null,UUID VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table bbmrieric.biobank (biobankId LONG not null primary key,organisationid LONG,ldapbiobankID TEXT null,biobankcountry TEXT null,biobankname TEXT null,biobanktype TEXT null,biobanksize TEXT null,biobankdescription TEXT null,biobankjuristicperson TEXT null,UUID VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table bbmrieric.biobank";
 	public static final String ORDER_BY_JPQL = " ORDER BY bioBank.biobankId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bbmrieric.biobank.biobankId ASC";

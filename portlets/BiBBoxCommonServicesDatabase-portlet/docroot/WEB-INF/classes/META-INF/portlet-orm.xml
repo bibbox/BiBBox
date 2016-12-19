@@ -117,7 +117,9 @@
 			<basic name="key">
 				<column name="KEY_" />
 			</basic>
-			<basic name="value" />
+			<basic name="searchvalue">
+				<column name="VALUE" />
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

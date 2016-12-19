@@ -80,7 +80,7 @@ public class D2BiobankNetworkLinkModelImpl extends BaseModelImpl<D2BiobankNetwor
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "updateuuid", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bbmrieric.d2biobanknetworklink (uuid_ VARCHAR(75) null,d2biobanknetworklinkId LONG not null primary key,d2biobanknetworkId LONG,d2linkId LONG,d2linktype VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,updateuuid VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table bbmrieric.d2biobanknetworklink (uuid_ VARCHAR(75) null,d2biobanknetworklinkId LONG not null primary key,d2biobanknetworkId LONG,d2linkId LONG,d2linktype TEXT null,status INTEGER,statusByUserId LONG,statusByUserName TEXT null,statusDate DATE null,companyId LONG,groupId LONG,userId LONG,userName TEXT null,createDate DATE null,modifiedDate DATE null,updateuuid TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table bbmrieric.d2biobanknetworklink";
 	public static final String ORDER_BY_JPQL = " ORDER BY d2BiobankNetworkLink.d2biobanknetworklinkId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bbmrieric.d2biobanknetworklink.d2biobanknetworklinkId ASC";

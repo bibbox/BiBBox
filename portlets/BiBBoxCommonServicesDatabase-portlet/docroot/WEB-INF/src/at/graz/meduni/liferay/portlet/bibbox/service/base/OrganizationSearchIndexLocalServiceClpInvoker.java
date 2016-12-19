@@ -117,6 +117,16 @@ public class OrganizationSearchIndexLocalServiceClpInvoker {
 		_methodName110 = "getSearchIndexValueByKey";
 
 		_methodParameterTypes110 = new String[] { "java.lang.String", "long" };
+
+		_methodName111 = "testSearchIndex";
+
+		_methodParameterTypes111 = new String[] {  };
+
+		_methodName112 = "getOrganizationIdByKeywordAndValue";
+
+		_methodParameterTypes112 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -226,6 +236,19 @@ public class OrganizationSearchIndexLocalServiceClpInvoker {
 				((Long)arguments[1]).longValue());
 		}
 
+		if (_methodName111.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
+			OrganizationSearchIndexLocalServiceUtil.testSearchIndex();
+
+			return null;
+		}
+
+		if (_methodName112.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
+			return OrganizationSearchIndexLocalServiceUtil.getOrganizationIdByKeywordAndValue((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -267,4 +290,8 @@ public class OrganizationSearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes105;
 	private String _methodName110;
 	private String[] _methodParameterTypes110;
+	private String _methodName111;
+	private String[] _methodParameterTypes111;
+	private String _methodName112;
+	private String[] _methodParameterTypes112;
 }

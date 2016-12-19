@@ -374,7 +374,7 @@ public class ScaleusImporter extends MVCPortlet {
 								return new String[]{record.getField("acronym").getValue().toString()};
 							}
 			  			}
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -432,7 +432,7 @@ public class ScaleusImporter extends MVCPortlet {
 							}
 			  			}
 						return returnurls.toArray(new String[]{});
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -467,7 +467,7 @@ public class ScaleusImporter extends MVCPortlet {
 							}
 			  			}
 						return new String[]{returnvalue};
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -497,7 +497,7 @@ public class ScaleusImporter extends MVCPortlet {
 							}
 				  		}
 						return new String[]{returnvalue};
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -570,7 +570,7 @@ public class ScaleusImporter extends MVCPortlet {
 								return new String[]{record.getField("Description").getValue().toString().replaceAll("\"\\]|\\[\"", "")};
 							}
 				  		}
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -600,7 +600,7 @@ public class ScaleusImporter extends MVCPortlet {
 							}
 				  		}
 						return new String[]{returnvalue};
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -624,7 +624,7 @@ public class ScaleusImporter extends MVCPortlet {
 								return new String[]{record.getField("year_of_establishment").getValue().toString().replaceAll("\"\\]|\\[\"", "")};
 							}
 				  		}
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -654,7 +654,7 @@ public class ScaleusImporter extends MVCPortlet {
 							}
 				  		}
 						return new String[]{returnvalue};
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -695,7 +695,7 @@ public class ScaleusImporter extends MVCPortlet {
 							}
 			  			}
 						return returnurls.toArray(new String[]{});
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -736,7 +736,7 @@ public class ScaleusImporter extends MVCPortlet {
 							}
 			  			}
 						return returnurls.toArray(new String[]{});
-					} catch (SystemException | PortalException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

@@ -1445,6 +1445,64 @@ public interface D2BiobankPersistence extends BasePersistence<D2Biobank> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the d2 biobank where bbmribiobankID = &#63; or throws a {@link at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException} if it could not be found.
+	*
+	* @param bbmribiobankID the bbmribiobank i d
+	* @return the matching d2 biobank
+	* @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank findByBbmriEricId(
+		java.lang.String bbmribiobankID)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the d2 biobank where bbmribiobankID = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param bbmribiobankID the bbmribiobank i d
+	* @return the matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank fetchByBbmriEricId(
+		java.lang.String bbmribiobankID)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the d2 biobank where bbmribiobankID = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param bbmribiobankID the bbmribiobank i d
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank fetchByBbmriEricId(
+		java.lang.String bbmribiobankID, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the d2 biobank where bbmribiobankID = &#63; from the database.
+	*
+	* @param bbmribiobankID the bbmribiobank i d
+	* @return the d2 biobank that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank removeByBbmriEricId(
+		java.lang.String bbmribiobankID)
+		throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of d2 biobanks where bbmribiobankID = &#63;.
+	*
+	* @param bbmribiobankID the bbmribiobank i d
+	* @return the number of matching d2 biobanks
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByBbmriEricId(java.lang.String bbmribiobankID)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the d2 biobanks where groupId = &#63; and updateuuid &ne; &#63;.
 	*
 	* @param groupId the group ID

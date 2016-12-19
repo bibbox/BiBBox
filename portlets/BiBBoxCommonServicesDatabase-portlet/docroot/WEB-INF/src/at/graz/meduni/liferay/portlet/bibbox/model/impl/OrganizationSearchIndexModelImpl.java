@@ -83,7 +83,7 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 			true);
 	public static long KEY_COLUMN_BITMASK = 1L;
 	public static long ORGANISATIONID_COLUMN_BITMASK = 2L;
-	public static long VALUE_COLUMN_BITMASK = 4L;
+	public static long SEARCHVALUE_COLUMN_BITMASK = 4L;
 	public static long SEARCHID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex"));
@@ -130,7 +130,7 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 		attributes.put("locationid", getLocationid());
 		attributes.put("location", getLocation());
 		attributes.put("key", getKey());
-		attributes.put("value", getValue());
+		attributes.put("searchvalue", getSearchvalue());
 
 		return attributes;
 	}
@@ -167,10 +167,10 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 			setKey(key);
 		}
 
-		String value = (String)attributes.get("value");
+		String searchvalue = (String)attributes.get("searchvalue");
 
-		if (value != null) {
-			setValue(value);
+		if (searchvalue != null) {
+			setSearchvalue(searchvalue);
 		}
 	}
 
@@ -257,28 +257,28 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 	}
 
 	@Override
-	public String getValue() {
-		if (_value == null) {
+	public String getSearchvalue() {
+		if (_searchvalue == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _value;
+			return _searchvalue;
 		}
 	}
 
 	@Override
-	public void setValue(String value) {
-		_columnBitmask |= VALUE_COLUMN_BITMASK;
+	public void setSearchvalue(String searchvalue) {
+		_columnBitmask |= SEARCHVALUE_COLUMN_BITMASK;
 
-		if (_originalValue == null) {
-			_originalValue = _value;
+		if (_originalSearchvalue == null) {
+			_originalSearchvalue = _searchvalue;
 		}
 
-		_value = value;
+		_searchvalue = searchvalue;
 	}
 
-	public String getOriginalValue() {
-		return GetterUtil.getString(_originalValue);
+	public String getOriginalSearchvalue() {
+		return GetterUtil.getString(_originalSearchvalue);
 	}
 
 	public long getColumnBitmask() {
@@ -317,7 +317,7 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 		organizationSearchIndexImpl.setLocationid(getLocationid());
 		organizationSearchIndexImpl.setLocation(getLocation());
 		organizationSearchIndexImpl.setKey(getKey());
-		organizationSearchIndexImpl.setValue(getValue());
+		organizationSearchIndexImpl.setSearchvalue(getSearchvalue());
 
 		organizationSearchIndexImpl.resetOriginalValues();
 
@@ -376,7 +376,7 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 
 		organizationSearchIndexModelImpl._originalKey = organizationSearchIndexModelImpl._key;
 
-		organizationSearchIndexModelImpl._originalValue = organizationSearchIndexModelImpl._value;
+		organizationSearchIndexModelImpl._originalSearchvalue = organizationSearchIndexModelImpl._searchvalue;
 
 		organizationSearchIndexModelImpl._columnBitmask = 0;
 	}
@@ -407,12 +407,12 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 			organizationSearchIndexCacheModel.key = null;
 		}
 
-		organizationSearchIndexCacheModel.value = getValue();
+		organizationSearchIndexCacheModel.searchvalue = getSearchvalue();
 
-		String value = organizationSearchIndexCacheModel.value;
+		String searchvalue = organizationSearchIndexCacheModel.searchvalue;
 
-		if ((value != null) && (value.length() == 0)) {
-			organizationSearchIndexCacheModel.value = null;
+		if ((searchvalue != null) && (searchvalue.length() == 0)) {
+			organizationSearchIndexCacheModel.searchvalue = null;
 		}
 
 		return organizationSearchIndexCacheModel;
@@ -432,8 +432,8 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 		sb.append(getLocation());
 		sb.append(", key=");
 		sb.append(getKey());
-		sb.append(", value=");
-		sb.append(getValue());
+		sb.append(", searchvalue=");
+		sb.append(getSearchvalue());
 		sb.append("}");
 
 		return sb.toString();
@@ -469,8 +469,8 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 		sb.append(getKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>value</column-name><column-value><![CDATA[");
-		sb.append(getValue());
+			"<column><column-name>searchvalue</column-name><column-value><![CDATA[");
+		sb.append(getSearchvalue());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -490,8 +490,8 @@ public class OrganizationSearchIndexModelImpl extends BaseModelImpl<Organization
 	private String _location;
 	private String _key;
 	private String _originalKey;
-	private String _value;
-	private String _originalValue;
+	private String _searchvalue;
+	private String _originalSearchvalue;
 	private long _columnBitmask;
 	private OrganizationSearchIndex _escapedModel;
 }

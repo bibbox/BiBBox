@@ -232,6 +232,11 @@ biobank = D2BiobankLocalServiceUtil.getBiobankWithLdapUpdate(biobank.getBiobankI
 			    	}
 			    	%>
 			    	<h1 style="color: #8bbf39;"><%= collection.getCollectionName() %> <%= acronym %></h1>
+			    	<div>
+						<div class="fieldname">CollectionID:</div>
+						<div class="fieldvalue"><%= collection.getBbmricollectionID() %></div>
+						<div style='content: "";clear: both;display: table;'></div> 
+					</div>
 			    	<!-- Main Contact -->
 			    	<h1 class="bbmriericrecentnews">Main Contact</h1>
 			    	<%

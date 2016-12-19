@@ -340,6 +340,14 @@ public interface D2BiobankLocalService extends BaseLocalService,
 		long groupId, java.lang.String bbmribiobankID);
 
 	/**
+	* @param bbmribiobankID
+	* @return
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankByBBMRIERICID(
+		java.lang.String bbmribiobankID);
+
+	/**
 	* @param newbiobank
 	* @param serviceContext
 	* @return

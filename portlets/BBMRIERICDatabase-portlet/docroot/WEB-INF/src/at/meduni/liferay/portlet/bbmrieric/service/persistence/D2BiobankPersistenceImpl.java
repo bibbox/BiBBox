@@ -5544,6 +5544,256 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 		"d2Biobank.bbmribiobankID = ?";
 	private static final String _FINDER_COLUMN_BIOBANKBBMRIERICID_BBMRIBIOBANKID_3 =
 		"(d2Biobank.bbmribiobankID IS NULL OR d2Biobank.bbmribiobankID = '')";
+	public static final FinderPath FINDER_PATH_FETCH_BY_BBMRIERICID = new FinderPath(D2BiobankModelImpl.ENTITY_CACHE_ENABLED,
+			D2BiobankModelImpl.FINDER_CACHE_ENABLED, D2BiobankImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByBbmriEricId",
+			new String[] { String.class.getName() },
+			D2BiobankModelImpl.BBMRIBIOBANKID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_BBMRIERICID = new FinderPath(D2BiobankModelImpl.ENTITY_CACHE_ENABLED,
+			D2BiobankModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByBbmriEricId",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns the d2 biobank where bbmribiobankID = &#63; or throws a {@link at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException} if it could not be found.
+	 *
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @return the matching d2 biobank
+	 * @throws at.meduni.liferay.portlet.bbmrieric.NoSuchD2BiobankException if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank findByBbmriEricId(String bbmribiobankID)
+		throws NoSuchD2BiobankException, SystemException {
+		D2Biobank d2Biobank = fetchByBbmriEricId(bbmribiobankID);
+
+		if (d2Biobank == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("bbmribiobankID=");
+			msg.append(bbmribiobankID);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchD2BiobankException(msg.toString());
+		}
+
+		return d2Biobank;
+	}
+
+	/**
+	 * Returns the d2 biobank where bbmribiobankID = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @return the matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank fetchByBbmriEricId(String bbmribiobankID)
+		throws SystemException {
+		return fetchByBbmriEricId(bbmribiobankID, true);
+	}
+
+	/**
+	 * Returns the d2 biobank where bbmribiobankID = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching d2 biobank, or <code>null</code> if a matching d2 biobank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank fetchByBbmriEricId(String bbmribiobankID,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { bbmribiobankID };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_BBMRIERICID,
+					finderArgs, this);
+		}
+
+		if (result instanceof D2Biobank) {
+			D2Biobank d2Biobank = (D2Biobank)result;
+
+			if (!Validator.equals(bbmribiobankID, d2Biobank.getBbmribiobankID())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_D2BIOBANK_WHERE);
+
+			boolean bindBbmribiobankID = false;
+
+			if (bbmribiobankID == null) {
+				query.append(_FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_1);
+			}
+			else if (bbmribiobankID.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_3);
+			}
+			else {
+				bindBbmribiobankID = true;
+
+				query.append(_FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindBbmribiobankID) {
+					qPos.add(bbmribiobankID);
+				}
+
+				List<D2Biobank> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BBMRIERICID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"D2BiobankPersistenceImpl.fetchByBbmriEricId(String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					D2Biobank d2Biobank = list.get(0);
+
+					result = d2Biobank;
+
+					cacheResult(d2Biobank);
+
+					if ((d2Biobank.getBbmribiobankID() == null) ||
+							!d2Biobank.getBbmribiobankID().equals(bbmribiobankID)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BBMRIERICID,
+							finderArgs, d2Biobank);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BBMRIERICID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (D2Biobank)result;
+		}
+	}
+
+	/**
+	 * Removes the d2 biobank where bbmribiobankID = &#63; from the database.
+	 *
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @return the d2 biobank that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public D2Biobank removeByBbmriEricId(String bbmribiobankID)
+		throws NoSuchD2BiobankException, SystemException {
+		D2Biobank d2Biobank = findByBbmriEricId(bbmribiobankID);
+
+		return remove(d2Biobank);
+	}
+
+	/**
+	 * Returns the number of d2 biobanks where bbmribiobankID = &#63;.
+	 *
+	 * @param bbmribiobankID the bbmribiobank i d
+	 * @return the number of matching d2 biobanks
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByBbmriEricId(String bbmribiobankID)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_BBMRIERICID;
+
+		Object[] finderArgs = new Object[] { bbmribiobankID };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_D2BIOBANK_WHERE);
+
+			boolean bindBbmribiobankID = false;
+
+			if (bbmribiobankID == null) {
+				query.append(_FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_1);
+			}
+			else if (bbmribiobankID.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_3);
+			}
+			else {
+				bindBbmribiobankID = true;
+
+				query.append(_FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindBbmribiobankID) {
+					qPos.add(bbmribiobankID);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_1 = "d2Biobank.bbmribiobankID IS NULL";
+	private static final String _FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_2 = "d2Biobank.bbmribiobankID = ?";
+	private static final String _FINDER_COLUMN_BBMRIERICID_BBMRIBIOBANKID_3 = "(d2Biobank.bbmribiobankID IS NULL OR d2Biobank.bbmribiobankID = '')";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_NOTUUID = new FinderPath(D2BiobankModelImpl.ENTITY_CACHE_ENABLED,
 			D2BiobankModelImpl.FINDER_CACHE_ENABLED, D2BiobankImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByNotUUID",
@@ -6550,6 +6800,9 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 			new Object[] { d2Biobank.getGroupId(), d2Biobank.getBbmribiobankID() },
 			d2Biobank);
 
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BBMRIERICID,
+			new Object[] { d2Biobank.getBbmribiobankID() }, d2Biobank);
+
 		d2Biobank.resetOriginalValues();
 	}
 
@@ -6642,6 +6895,13 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 				args, Long.valueOf(1));
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
 				args, d2Biobank);
+
+			args = new Object[] { d2Biobank.getBbmribiobankID() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BBMRIERICID, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BBMRIERICID, args,
+				d2Biobank);
 		}
 		else {
 			D2BiobankModelImpl d2BiobankModelImpl = (D2BiobankModelImpl)d2Biobank;
@@ -6667,6 +6927,16 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BIOBANKBBMRIERICID,
 					args, Long.valueOf(1));
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
+					args, d2Biobank);
+			}
+
+			if ((d2BiobankModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_BBMRIERICID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { d2Biobank.getBbmribiobankID() };
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BBMRIERICID,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BBMRIERICID,
 					args, d2Biobank);
 			}
 		}
@@ -6711,6 +6981,19 @@ public class D2BiobankPersistenceImpl extends BasePersistenceImpl<D2Biobank>
 				args);
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BIOBANKBBMRIERICID,
 				args);
+		}
+
+		args = new Object[] { d2Biobank.getBbmribiobankID() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BBMRIERICID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BBMRIERICID, args);
+
+		if ((d2BiobankModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_BBMRIERICID.getColumnBitmask()) != 0) {
+			args = new Object[] { d2BiobankModelImpl.getOriginalBbmribiobankID() };
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BBMRIERICID, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BBMRIERICID, args);
 		}
 	}
 

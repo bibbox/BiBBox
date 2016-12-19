@@ -375,6 +375,15 @@ public class D2BiobankLocalServiceUtil {
 	}
 
 	/**
+	* @param bbmribiobankID
+	* @return
+	*/
+	public static at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankByBBMRIERICID(
+		java.lang.String bbmribiobankID) {
+		return getService().getD2BiobankByBBMRIERICID(bbmribiobankID);
+	}
+
+	/**
 	* @param newbiobank
 	* @param serviceContext
 	* @return

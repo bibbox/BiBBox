@@ -55,7 +55,7 @@ public class OrganizationSearchIndexWrapper implements OrganizationSearchIndex,
 		attributes.put("locationid", getLocationid());
 		attributes.put("location", getLocation());
 		attributes.put("key", getKey());
-		attributes.put("value", getValue());
+		attributes.put("searchvalue", getSearchvalue());
 
 		return attributes;
 	}
@@ -92,10 +92,10 @@ public class OrganizationSearchIndexWrapper implements OrganizationSearchIndex,
 			setKey(key);
 		}
 
-		String value = (String)attributes.get("value");
+		String searchvalue = (String)attributes.get("searchvalue");
 
-		if (value != null) {
-			setValue(value);
+		if (searchvalue != null) {
+			setSearchvalue(searchvalue);
 		}
 	}
 
@@ -220,23 +220,23 @@ public class OrganizationSearchIndexWrapper implements OrganizationSearchIndex,
 	}
 
 	/**
-	* Returns the value of this organization search index.
+	* Returns the searchvalue of this organization search index.
 	*
-	* @return the value of this organization search index
+	* @return the searchvalue of this organization search index
 	*/
 	@Override
-	public java.lang.String getValue() {
-		return _organizationSearchIndex.getValue();
+	public java.lang.String getSearchvalue() {
+		return _organizationSearchIndex.getSearchvalue();
 	}
 
 	/**
-	* Sets the value of this organization search index.
+	* Sets the searchvalue of this organization search index.
 	*
-	* @param value the value of this organization search index
+	* @param searchvalue the searchvalue of this organization search index
 	*/
 	@Override
-	public void setValue(java.lang.String value) {
-		_organizationSearchIndex.setValue(value);
+	public void setSearchvalue(java.lang.String searchvalue) {
+		_organizationSearchIndex.setSearchvalue(searchvalue);
 	}
 
 	@Override

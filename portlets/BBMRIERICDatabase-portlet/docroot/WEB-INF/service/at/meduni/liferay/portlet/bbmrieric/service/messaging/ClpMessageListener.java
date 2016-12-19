@@ -20,6 +20,7 @@ import at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalServic
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
@@ -48,6 +49,7 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			D2BiobankLocalServiceUtil.clearService();
 
+			D2BiobankServiceUtil.clearService();
 			D2BiobankNetworkLocalServiceUtil.clearService();
 
 			D2BiobankNetworkLinkLocalServiceUtil.clearService();

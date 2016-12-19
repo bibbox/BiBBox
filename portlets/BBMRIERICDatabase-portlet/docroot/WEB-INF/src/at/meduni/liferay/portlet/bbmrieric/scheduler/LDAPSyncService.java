@@ -212,6 +212,7 @@ public class LDAPSyncService implements MessageListener {
 			List<D2BiobankNetwork> networks = D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworks(-1, -1);
 			for(D2BiobankNetwork network : networks) {
 				if(network.getParentd2biobanknetworkId() == 0) {
+					System.out.println("Update ROOT Network:" + network.getBbmriBiobankNetworkID());
 					List<D2BiobankNetwork> assosiatednetworks = network.getAssosiatedNetworks();
 					for(D2BiobankNetwork assosiatednetwork : assosiatednetworks) {
 						updateD2BiobankNetworksContactInformationsRecursive(assosiatednetwork);
@@ -229,6 +230,7 @@ public class LDAPSyncService implements MessageListener {
 	 * @param network
 	 */
 	private void updateD2BiobankNetworksContactInformationsRecursive(D2BiobankNetwork network) {
+		System.out.println("Update Network:" + network.getBbmriBiobankNetworkID());
 		List<D2BiobankNetwork> assosiatednetworks = network.getAssosiatedNetworks();
 		for(D2BiobankNetwork assosiatednetwork : assosiatednetworks) {
 			if(network.getContactPriority() > assosiatednetwork.getContactPriority()) {

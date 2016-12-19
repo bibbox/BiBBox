@@ -130,19 +130,19 @@ public interface OrganizationSearchIndexModel extends BaseModel<OrganizationSear
 	public void setKey(String key);
 
 	/**
-	 * Returns the value of this organization search index.
+	 * Returns the searchvalue of this organization search index.
 	 *
-	 * @return the value of this organization search index
+	 * @return the searchvalue of this organization search index
 	 */
 	@AutoEscape
-	public String getValue();
+	public String getSearchvalue();
 
 	/**
-	 * Sets the value of this organization search index.
+	 * Sets the searchvalue of this organization search index.
 	 *
-	 * @param value the value of this organization search index
+	 * @param searchvalue the searchvalue of this organization search index
 	 */
-	public void setValue(String value);
+	public void setSearchvalue(String searchvalue);
 
 	@Override
 	public boolean isNew();

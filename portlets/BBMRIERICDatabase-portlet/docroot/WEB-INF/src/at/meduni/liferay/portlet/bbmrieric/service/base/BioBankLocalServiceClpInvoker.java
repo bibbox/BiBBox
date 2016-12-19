@@ -106,37 +106,37 @@ public class BioBankLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.bbmrieric.model.BioBank"
 			};
 
-		_methodName60 = "getBeanIdentifier";
+		_methodName62 = "getBeanIdentifier";
 
-		_methodParameterTypes60 = new String[] {  };
+		_methodParameterTypes62 = new String[] {  };
 
-		_methodName61 = "setBeanIdentifier";
+		_methodName63 = "setBeanIdentifier";
 
-		_methodParameterTypes61 = new String[] { "java.lang.String" };
+		_methodParameterTypes63 = new String[] { "java.lang.String" };
 
-		_methodName66 = "notUpdatedBioBank";
-
-		_methodParameterTypes66 = new String[] { "java.lang.String" };
-
-		_methodName67 = "createBioBank";
-
-		_methodParameterTypes67 = new String[] { "java.lang.String" };
-
-		_methodName68 = "getBioBank";
+		_methodName68 = "notUpdatedBioBank";
 
 		_methodParameterTypes68 = new String[] { "java.lang.String" };
 
-		_methodName69 = "getBioBankByCountry";
+		_methodName69 = "createBioBank";
 
 		_methodParameterTypes69 = new String[] { "java.lang.String" };
 
-		_methodName70 = "getBioBankByCountryInJavaScriptArray";
+		_methodName70 = "getBioBank";
 
 		_methodParameterTypes70 = new String[] { "java.lang.String" };
 
-		_methodName71 = "getBioBankFiltered";
+		_methodName71 = "getBioBankByCountry";
 
-		_methodParameterTypes71 = new String[] {
+		_methodParameterTypes71 = new String[] { "java.lang.String" };
+
+		_methodName72 = "getBioBankByCountryInJavaScriptArray";
+
+		_methodParameterTypes72 = new String[] { "java.lang.String" };
+
+		_methodName73 = "getBioBankFiltered";
+
+		_methodParameterTypes73 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
@@ -231,45 +231,45 @@ public class BioBankLocalServiceClpInvoker {
 			return BioBankLocalServiceUtil.updateBioBank((at.meduni.liferay.portlet.bbmrieric.model.BioBank)arguments[0]);
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
 			return BioBankLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName61.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			BioBankLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
-			return BioBankLocalServiceUtil.notUpdatedBioBank((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
-			return BioBankLocalServiceUtil.createBioBank((java.lang.String)arguments[0]);
-		}
-
 		if (_methodName68.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
-			return BioBankLocalServiceUtil.getBioBank((java.lang.String)arguments[0]);
+			return BioBankLocalServiceUtil.notUpdatedBioBank((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
-			return BioBankLocalServiceUtil.getBioBankByCountry((java.lang.String)arguments[0]);
+			return BioBankLocalServiceUtil.createBioBank((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
-			return BioBankLocalServiceUtil.getBioBankByCountryInJavaScriptArray((java.lang.String)arguments[0]);
+			return BioBankLocalServiceUtil.getBioBank((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName71.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+			return BioBankLocalServiceUtil.getBioBankByCountry((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+			return BioBankLocalServiceUtil.getBioBankByCountryInJavaScriptArray((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
 			return BioBankLocalServiceUtil.getBioBankFiltered((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -311,14 +311,10 @@ public class BioBankLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
-	private String _methodName61;
-	private String[] _methodParameterTypes61;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 	private String _methodName68;
 	private String[] _methodParameterTypes68;
 	private String _methodName69;
@@ -327,4 +323,8 @@ public class BioBankLocalServiceClpInvoker {
 	private String[] _methodParameterTypes70;
 	private String _methodName71;
 	private String[] _methodParameterTypes71;
+	private String _methodName72;
+	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
 }

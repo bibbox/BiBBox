@@ -109,7 +109,7 @@
 		<field name="key" type="String">
 			<hint name="max-length">10000</hint>
 		</field>
-		<field name="value" type="String">
+		<field name="searchvalue" type="String">
 			<hint name="max-length">10000</hint>
 		</field>
 	</model>

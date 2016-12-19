@@ -440,6 +440,25 @@ public abstract class D2CollectionLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the d2 biobank remote service.
+	 *
+	 * @return the d2 biobank remote service
+	 */
+	public at.meduni.liferay.portlet.bbmrieric.service.D2BiobankService getD2BiobankService() {
+		return d2BiobankService;
+	}
+
+	/**
+	 * Sets the d2 biobank remote service.
+	 *
+	 * @param d2BiobankService the d2 biobank remote service
+	 */
+	public void setD2BiobankService(
+		at.meduni.liferay.portlet.bbmrieric.service.D2BiobankService d2BiobankService) {
+		this.d2BiobankService = d2BiobankService;
+	}
+
+	/**
 	 * Returns the d2 biobank persistence.
 	 *
 	 * @return the d2 biobank persistence
@@ -834,6 +853,8 @@ public abstract class D2CollectionLocalServiceBaseImpl
 	protected ContactInformationPersistence contactInformationPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService.class)
 	protected at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService d2BiobankLocalService;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2BiobankService.class)
+	protected at.meduni.liferay.portlet.bbmrieric.service.D2BiobankService d2BiobankService;
 	@BeanReference(type = D2BiobankPersistence.class)
 	protected D2BiobankPersistence d2BiobankPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalService.class)

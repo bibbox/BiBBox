@@ -81,7 +81,7 @@ public class ContactInformationModelImpl extends BaseModelImpl<ContactInformatio
 			{ "contactZIP", Types.VARCHAR },
 			{ "contactCity", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bbmrieric.contactinformation (uuid_ VARCHAR(75) null,contactinformationId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,updateuuid VARCHAR(75) null,contactID VARCHAR(75) null,contactEmail VARCHAR(75) null,contactCountry VARCHAR(75) null,contactFirstName VARCHAR(75) null,contactLastName VARCHAR(75) null,contactPhone VARCHAR(75) null,contactAddress TEXT null,contactZIP VARCHAR(75) null,contactCity VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table bbmrieric.contactinformation (uuid_ VARCHAR(75) null,contactinformationId LONG not null primary key,companyId LONG,groupId LONG,userId LONG,userName TEXT null,createDate DATE null,modifiedDate DATE null,updateuuid TEXT null,contactID TEXT null,contactEmail TEXT null,contactCountry TEXT null,contactFirstName TEXT null,contactLastName TEXT null,contactPhone TEXT null,contactAddress TEXT null,contactZIP TEXT null,contactCity TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table bbmrieric.contactinformation";
 	public static final String ORDER_BY_JPQL = " ORDER BY contactInformation.contactinformationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bbmrieric.contactinformation.contactinformationId ASC";

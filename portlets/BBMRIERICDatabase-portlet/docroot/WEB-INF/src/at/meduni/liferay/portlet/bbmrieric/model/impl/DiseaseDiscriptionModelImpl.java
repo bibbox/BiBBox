@@ -64,7 +64,7 @@ public class DiseaseDiscriptionModelImpl extends BaseModelImpl<DiseaseDiscriptio
 			{ "diseasediscription", Types.VARCHAR },
 			{ "root", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bbmrieric.diseasediscription (diseasediscriptionId LONG not null primary key,diseasecode VARCHAR(75) null,diseasegroup VARCHAR(75) null,diseasediscription TEXT null,root BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table bbmrieric.diseasediscription (diseasediscriptionId LONG not null primary key,diseasecode TEXT null,diseasegroup TEXT null,diseasediscription TEXT null,root BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table bbmrieric.diseasediscription";
 	public static final String ORDER_BY_JPQL = " ORDER BY diseaseDiscription.diseasegroup ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bbmrieric.diseasediscription.diseasegroup ASC";

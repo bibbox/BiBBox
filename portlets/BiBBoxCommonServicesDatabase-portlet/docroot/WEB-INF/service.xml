@@ -98,9 +98,9 @@
 		<column name="locationid" type="long" />
 		<column name="location" type="String" />
 		<column name="key" type="String" />
-		<column name="value" type="String" />
+		<column name="searchvalue" db-name="value" type="String" />
 		<finder name="ExactSearch" return-type="Collection">
-			<finder-column name="value" />
+			<finder-column name="searchvalue" />
 		</finder>
 		<finder name="KeyAndOrganization" return-type="SearchIndex">
 			<finder-column name="organisationid" />

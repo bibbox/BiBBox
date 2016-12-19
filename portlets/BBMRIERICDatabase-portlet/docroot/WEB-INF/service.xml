@@ -76,7 +76,7 @@
 	<!-- ****************************************** -->
 	<!-- Directory 2.0 -->
 	<!-- ****************************************** -->
-	<entity name="D2Biobank" uuid="true" local-service="true" remote-service="false" table="bbmrieric.d2biobank">
+	<entity name="D2Biobank" uuid="true" local-service="true" remote-service="true" table="bbmrieric.d2biobank">
 		<!-- PK fields -->
 		<column name="biobankId" type="long" primary="true" />
 		<!-- provenance fields -->
@@ -143,6 +143,9 @@
 		</finder>
 		<finder name="BiobankBBMRIERICID" return-type="D2Biobank">
 			<finder-column name="groupId" />
+			<finder-column name="bbmribiobankID" />
+		</finder>
+		<finder name="BbmriEricId" return-type="D2Biobank">
 			<finder-column name="bbmribiobankID" />
 		</finder>
 		<finder name="NotUUID" return-type="Collection">

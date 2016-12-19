@@ -51,6 +51,12 @@ for(Organization organization : organisations) {
 			}
 			orgPath = orgPath + "/reg_home";
 		} 
+		if (organization.getName().equalsIgnoreCase("RD-Connect Curator Portal")){
+	  		if(organization.getLogoId() == 0) {
+	  			imgPath = request.getContextPath() + "/images/RegistryBiobank.png";
+	  		}
+	  		orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+	  	}
 	
 	%>
 	<li><aui:a href="<%= orgPath %>"><img class="rdc-portalmenu-div-container-logo" alt="logo" height="40px" width="40px" src="<%= imgPath %>" /><%= organization.getName() %></aui:a></li>

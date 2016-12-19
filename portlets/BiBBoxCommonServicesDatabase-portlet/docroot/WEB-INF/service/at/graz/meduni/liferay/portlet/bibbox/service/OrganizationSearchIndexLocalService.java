@@ -252,4 +252,10 @@ public interface OrganizationSearchIndexLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getSearchIndexValueByKey(java.lang.String keyword,
 		long organizationId);
+
+	public void testSearchIndex();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<java.lang.Long> getOrganizationIdByKeywordAndValue(
+		java.lang.String key, java.lang.String value);
 }

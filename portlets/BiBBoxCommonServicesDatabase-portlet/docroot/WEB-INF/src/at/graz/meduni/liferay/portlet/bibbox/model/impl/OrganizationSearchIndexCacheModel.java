@@ -48,8 +48,8 @@ public class OrganizationSearchIndexCacheModel implements CacheModel<Organizatio
 		sb.append(location);
 		sb.append(", key=");
 		sb.append(key);
-		sb.append(", value=");
-		sb.append(value);
+		sb.append(", searchvalue=");
+		sb.append(searchvalue);
 		sb.append("}");
 
 		return sb.toString();
@@ -77,11 +77,11 @@ public class OrganizationSearchIndexCacheModel implements CacheModel<Organizatio
 			organizationSearchIndexImpl.setKey(key);
 		}
 
-		if (value == null) {
-			organizationSearchIndexImpl.setValue(StringPool.BLANK);
+		if (searchvalue == null) {
+			organizationSearchIndexImpl.setSearchvalue(StringPool.BLANK);
 		}
 		else {
-			organizationSearchIndexImpl.setValue(value);
+			organizationSearchIndexImpl.setSearchvalue(searchvalue);
 		}
 
 		organizationSearchIndexImpl.resetOriginalValues();
@@ -96,7 +96,7 @@ public class OrganizationSearchIndexCacheModel implements CacheModel<Organizatio
 		locationid = objectInput.readLong();
 		location = objectInput.readUTF();
 		key = objectInput.readUTF();
-		value = objectInput.readUTF();
+		searchvalue = objectInput.readUTF();
 	}
 
 	@Override
@@ -120,11 +120,11 @@ public class OrganizationSearchIndexCacheModel implements CacheModel<Organizatio
 			objectOutput.writeUTF(key);
 		}
 
-		if (value == null) {
+		if (searchvalue == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(value);
+			objectOutput.writeUTF(searchvalue);
 		}
 	}
 
@@ -133,5 +133,5 @@ public class OrganizationSearchIndexCacheModel implements CacheModel<Organizatio
 	public long locationid;
 	public String location;
 	public String key;
-	public String value;
+	public String searchvalue;
 }

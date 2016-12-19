@@ -16,9 +16,11 @@ package at.meduni.liferay.portlet.bbmrieric.model.impl;
 
 import at.meduni.liferay.portlet.bbmrieric.model.D2Biobank;
 import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankModel;
+import at.meduni.liferay.portlet.bbmrieric.model.D2BiobankSoap;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -37,8 +39,10 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,6 +58,7 @@ import java.util.Map;
  * @see at.meduni.liferay.portlet.bbmrieric.model.D2BiobankModel
  * @generated
  */
+@JSON(strict = true)
 public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 	implements D2BiobankModel {
 	/*
@@ -106,7 +111,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 			{ "biobankCollection", Types.BOOLEAN },
 			{ "biobankType", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table bbmrieric.d2biobank (uuid_ VARCHAR(75) null,biobankId LONG not null primary key,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,companyId LONG,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,updateuuid VARCHAR(75) null,contactIDRef VARCHAR(75) null,contactPriority LONG,bbmribiobankID VARCHAR(75) null,biobankName TEXT null,biobankJurisdicalPerson TEXT null,biobankCountry VARCHAR(75) null,biobankPartnerCharterSigned BOOLEAN,bioresourceReference VARCHAR(75) null,biobankNetworkIDRef VARCHAR(75) null,geoLatitude VARCHAR(75) null,geoLongitude VARCHAR(75) null,collaborationPartnersCommercial BOOLEAN,collaborationPartnersNonforprofit BOOLEAN,biobankITSupportAvailable BOOLEAN,biobankITStaffSize LONG,biobankISAvailable BOOLEAN,biobankHISAvailable BOOLEAN,biobankAcronym VARCHAR(75) null,biobankDescription TEXT null,biobankURL VARCHAR(500) null,biobankHeadFirstName VARCHAR(75) null,biobankHeadLastName VARCHAR(75) null,biobankHeadRole VARCHAR(500) null,biobankClinical BOOLEAN,biobankPopulation BOOLEAN,biobankResearchStudy BOOLEAN,biobankNonHuman BOOLEAN,biobankCollection BOOLEAN,biobankType VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table bbmrieric.d2biobank (uuid_ VARCHAR(75) null,biobankId LONG not null primary key,status INTEGER,statusByUserId LONG,statusByUserName TEXT null,statusDate DATE null,companyId LONG,groupId LONG,userId LONG,userName TEXT null,createDate DATE null,modifiedDate DATE null,updateuuid TEXT null,contactIDRef TEXT null,contactPriority LONG,bbmribiobankID TEXT null,biobankName TEXT null,biobankJurisdicalPerson TEXT null,biobankCountry TEXT null,biobankPartnerCharterSigned BOOLEAN,bioresourceReference TEXT null,biobankNetworkIDRef TEXT null,geoLatitude TEXT null,geoLongitude TEXT null,collaborationPartnersCommercial BOOLEAN,collaborationPartnersNonforprofit BOOLEAN,biobankITSupportAvailable BOOLEAN,biobankITStaffSize LONG,biobankISAvailable BOOLEAN,biobankHISAvailable BOOLEAN,biobankAcronym TEXT null,biobankDescription TEXT null,biobankURL VARCHAR(500) null,biobankHeadFirstName TEXT null,biobankHeadLastName TEXT null,biobankHeadRole VARCHAR(500) null,biobankClinical BOOLEAN,biobankPopulation BOOLEAN,biobankResearchStudy BOOLEAN,biobankNonHuman BOOLEAN,biobankCollection BOOLEAN,biobankType TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table bbmrieric.d2biobank";
 	public static final String ORDER_BY_JPQL = " ORDER BY d2Biobank.biobankId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY bbmrieric.d2biobank.biobankId ASC";
@@ -130,6 +135,86 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 	public static long STATUS_COLUMN_BITMASK = 32L;
 	public static long UPDATEUUID_COLUMN_BITMASK = 64L;
 	public static long UUID_COLUMN_BITMASK = 128L;
+
+	/**
+	 * Converts the soap model instance into a normal model instance.
+	 *
+	 * @param soapModel the soap model instance to convert
+	 * @return the normal model instance
+	 */
+	public static D2Biobank toModel(D2BiobankSoap soapModel) {
+		if (soapModel == null) {
+			return null;
+		}
+
+		D2Biobank model = new D2BiobankImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setBiobankId(soapModel.getBiobankId());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setUpdateuuid(soapModel.getUpdateuuid());
+		model.setContactIDRef(soapModel.getContactIDRef());
+		model.setContactPriority(soapModel.getContactPriority());
+		model.setBbmribiobankID(soapModel.getBbmribiobankID());
+		model.setBiobankName(soapModel.getBiobankName());
+		model.setBiobankJurisdicalPerson(soapModel.getBiobankJurisdicalPerson());
+		model.setBiobankCountry(soapModel.getBiobankCountry());
+		model.setBiobankPartnerCharterSigned(soapModel.getBiobankPartnerCharterSigned());
+		model.setBioresourceReference(soapModel.getBioresourceReference());
+		model.setBiobankNetworkIDRef(soapModel.getBiobankNetworkIDRef());
+		model.setGeoLatitude(soapModel.getGeoLatitude());
+		model.setGeoLongitude(soapModel.getGeoLongitude());
+		model.setCollaborationPartnersCommercial(soapModel.getCollaborationPartnersCommercial());
+		model.setCollaborationPartnersNonforprofit(soapModel.getCollaborationPartnersNonforprofit());
+		model.setBiobankITSupportAvailable(soapModel.getBiobankITSupportAvailable());
+		model.setBiobankITStaffSize(soapModel.getBiobankITStaffSize());
+		model.setBiobankISAvailable(soapModel.getBiobankISAvailable());
+		model.setBiobankHISAvailable(soapModel.getBiobankHISAvailable());
+		model.setBiobankAcronym(soapModel.getBiobankAcronym());
+		model.setBiobankDescription(soapModel.getBiobankDescription());
+		model.setBiobankURL(soapModel.getBiobankURL());
+		model.setBiobankHeadFirstName(soapModel.getBiobankHeadFirstName());
+		model.setBiobankHeadLastName(soapModel.getBiobankHeadLastName());
+		model.setBiobankHeadRole(soapModel.getBiobankHeadRole());
+		model.setBiobankClinical(soapModel.getBiobankClinical());
+		model.setBiobankPopulation(soapModel.getBiobankPopulation());
+		model.setBiobankResearchStudy(soapModel.getBiobankResearchStudy());
+		model.setBiobankNonHuman(soapModel.getBiobankNonHuman());
+		model.setBiobankCollection(soapModel.getBiobankCollection());
+		model.setBiobankType(soapModel.getBiobankType());
+
+		return model;
+	}
+
+	/**
+	 * Converts the soap model instances into normal model instances.
+	 *
+	 * @param soapModels the soap model instances to convert
+	 * @return the normal model instances
+	 */
+	public static List<D2Biobank> toModels(D2BiobankSoap[] soapModels) {
+		if (soapModels == null) {
+			return null;
+		}
+
+		List<D2Biobank> models = new ArrayList<D2Biobank>(soapModels.length);
+
+		for (D2BiobankSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.meduni.liferay.portlet.bbmrieric.model.D2Biobank"));
 
@@ -487,6 +572,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		}
 	}
 
+	@JSON
 	@Override
 	public String getUuid() {
 		if (_uuid == null) {
@@ -510,6 +596,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	@Override
 	public long getBiobankId() {
 		return _biobankId;
@@ -532,6 +619,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		return _originalBiobankId;
 	}
 
+	@JSON
 	@Override
 	public int getStatus() {
 		return _status;
@@ -554,6 +642,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		return _originalStatus;
 	}
 
+	@JSON
 	@Override
 	public long getStatusByUserId() {
 		return _statusByUserId;
@@ -575,6 +664,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@JSON
 	@Override
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
@@ -590,6 +680,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_statusByUserName = statusByUserName;
 	}
 
+	@JSON
 	@Override
 	public Date getStatusDate() {
 		return _statusDate;
@@ -600,6 +691,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_statusDate = statusDate;
 	}
 
+	@JSON
 	@Override
 	public long getCompanyId() {
 		return _companyId;
@@ -622,6 +714,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		return _originalCompanyId;
 	}
 
+	@JSON
 	@Override
 	public long getGroupId() {
 		return _groupId;
@@ -644,6 +737,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		return _originalGroupId;
 	}
 
+	@JSON
 	@Override
 	public long getUserId() {
 		return _userId;
@@ -664,6 +758,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	@Override
 	public String getUserName() {
 		if (_userName == null) {
@@ -679,6 +774,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_userName = userName;
 	}
 
+	@JSON
 	@Override
 	public Date getCreateDate() {
 		return _createDate;
@@ -689,6 +785,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_createDate = createDate;
 	}
 
+	@JSON
 	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
@@ -699,6 +796,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	@Override
 	public String getUpdateuuid() {
 		if (_updateuuid == null) {
@@ -724,6 +822,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		return GetterUtil.getString(_originalUpdateuuid);
 	}
 
+	@JSON
 	@Override
 	public String getContactIDRef() {
 		if (_contactIDRef == null) {
@@ -739,6 +838,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_contactIDRef = contactIDRef;
 	}
 
+	@JSON
 	@Override
 	public long getContactPriority() {
 		return _contactPriority;
@@ -749,6 +849,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_contactPriority = contactPriority;
 	}
 
+	@JSON
 	@Override
 	public String getBbmribiobankID() {
 		if (_bbmribiobankID == null) {
@@ -774,6 +875,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		return GetterUtil.getString(_originalBbmribiobankID);
 	}
 
+	@JSON
 	@Override
 	public String getBiobankName() {
 		if (_biobankName == null) {
@@ -799,6 +901,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		return GetterUtil.getString(_originalBiobankName);
 	}
 
+	@JSON
 	@Override
 	public String getBiobankJurisdicalPerson() {
 		if (_biobankJurisdicalPerson == null) {
@@ -814,6 +917,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankJurisdicalPerson = biobankJurisdicalPerson;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankCountry() {
 		if (_biobankCountry == null) {
@@ -829,6 +933,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankCountry = biobankCountry;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankPartnerCharterSigned() {
 		return _biobankPartnerCharterSigned;
@@ -845,6 +950,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankPartnerCharterSigned = biobankPartnerCharterSigned;
 	}
 
+	@JSON
 	@Override
 	public String getBioresourceReference() {
 		if (_bioresourceReference == null) {
@@ -860,6 +966,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_bioresourceReference = bioresourceReference;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankNetworkIDRef() {
 		if (_biobankNetworkIDRef == null) {
@@ -875,6 +982,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankNetworkIDRef = biobankNetworkIDRef;
 	}
 
+	@JSON
 	@Override
 	public String getGeoLatitude() {
 		if (_geoLatitude == null) {
@@ -890,6 +998,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_geoLatitude = geoLatitude;
 	}
 
+	@JSON
 	@Override
 	public String getGeoLongitude() {
 		if (_geoLongitude == null) {
@@ -905,6 +1014,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_geoLongitude = geoLongitude;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollaborationPartnersCommercial() {
 		return _collaborationPartnersCommercial;
@@ -921,6 +1031,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_collaborationPartnersCommercial = collaborationPartnersCommercial;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollaborationPartnersNonforprofit() {
 		return _collaborationPartnersNonforprofit;
@@ -937,6 +1048,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_collaborationPartnersNonforprofit = collaborationPartnersNonforprofit;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankITSupportAvailable() {
 		return _biobankITSupportAvailable;
@@ -952,6 +1064,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankITSupportAvailable = biobankITSupportAvailable;
 	}
 
+	@JSON
 	@Override
 	public long getBiobankITStaffSize() {
 		return _biobankITStaffSize;
@@ -962,6 +1075,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankITStaffSize = biobankITStaffSize;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankISAvailable() {
 		return _biobankISAvailable;
@@ -977,6 +1091,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankISAvailable = biobankISAvailable;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankHISAvailable() {
 		return _biobankHISAvailable;
@@ -992,6 +1107,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankHISAvailable = biobankHISAvailable;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankAcronym() {
 		if (_biobankAcronym == null) {
@@ -1007,6 +1123,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankAcronym = biobankAcronym;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankDescription() {
 		if (_biobankDescription == null) {
@@ -1022,6 +1139,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankDescription = biobankDescription;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankURL() {
 		if (_biobankURL == null) {
@@ -1037,6 +1155,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankURL = biobankURL;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankHeadFirstName() {
 		if (_biobankHeadFirstName == null) {
@@ -1052,6 +1171,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankHeadFirstName = biobankHeadFirstName;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankHeadLastName() {
 		if (_biobankHeadLastName == null) {
@@ -1067,6 +1187,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankHeadLastName = biobankHeadLastName;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankHeadRole() {
 		if (_biobankHeadRole == null) {
@@ -1082,6 +1203,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankHeadRole = biobankHeadRole;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankClinical() {
 		return _biobankClinical;
@@ -1097,6 +1219,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankClinical = biobankClinical;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankPopulation() {
 		return _biobankPopulation;
@@ -1112,6 +1235,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankPopulation = biobankPopulation;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankResearchStudy() {
 		return _biobankResearchStudy;
@@ -1127,6 +1251,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankResearchStudy = biobankResearchStudy;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankNonHuman() {
 		return _biobankNonHuman;
@@ -1142,6 +1267,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankNonHuman = biobankNonHuman;
 	}
 
+	@JSON
 	@Override
 	public boolean getBiobankCollection() {
 		return _biobankCollection;
@@ -1157,6 +1283,7 @@ public class D2BiobankModelImpl extends BaseModelImpl<D2Biobank>
 		_biobankCollection = biobankCollection;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankType() {
 		if (_biobankType == null) {

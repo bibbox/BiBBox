@@ -38,41 +38,41 @@ public interface OrganizationSearchIndexPersistence extends BasePersistence<Orga
 	 */
 
 	/**
-	* Returns all the organization search indexs where value = &#63;.
+	* Returns all the organization search indexs where searchvalue = &#63;.
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @return the matching organization search indexs
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex> findByExactSearch(
-		java.lang.String value)
+		java.lang.String searchvalue)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the organization search indexs where value = &#63;.
+	* Returns a range of all the organization search indexs where searchvalue = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.model.impl.OrganizationSearchIndexModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @param start the lower bound of the range of organization search indexs
 	* @param end the upper bound of the range of organization search indexs (not inclusive)
 	* @return the range of matching organization search indexs
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex> findByExactSearch(
-		java.lang.String value, int start, int end)
+		java.lang.String searchvalue, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the organization search indexs where value = &#63;.
+	* Returns an ordered range of all the organization search indexs where searchvalue = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.model.impl.OrganizationSearchIndexModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @param start the lower bound of the range of organization search indexs
 	* @param end the upper bound of the range of organization search indexs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -80,99 +80,99 @@ public interface OrganizationSearchIndexPersistence extends BasePersistence<Orga
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex> findByExactSearch(
-		java.lang.String value, int start, int end,
+		java.lang.String searchvalue, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the first organization search index in the ordered set where value = &#63;.
+	* Returns the first organization search index in the ordered set where searchvalue = &#63;.
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching organization search index
 	* @throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException if a matching organization search index could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex findByExactSearch_First(
-		java.lang.String value,
+		java.lang.String searchvalue,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the first organization search index in the ordered set where value = &#63;.
+	* Returns the first organization search index in the ordered set where searchvalue = &#63;.
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching organization search index, or <code>null</code> if a matching organization search index could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex fetchByExactSearch_First(
-		java.lang.String value,
+		java.lang.String searchvalue,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the last organization search index in the ordered set where value = &#63;.
+	* Returns the last organization search index in the ordered set where searchvalue = &#63;.
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching organization search index
 	* @throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException if a matching organization search index could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex findByExactSearch_Last(
-		java.lang.String value,
+		java.lang.String searchvalue,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the last organization search index in the ordered set where value = &#63;.
+	* Returns the last organization search index in the ordered set where searchvalue = &#63;.
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching organization search index, or <code>null</code> if a matching organization search index could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex fetchByExactSearch_Last(
-		java.lang.String value,
+		java.lang.String searchvalue,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the organization search indexs before and after the current organization search index in the ordered set where value = &#63;.
+	* Returns the organization search indexs before and after the current organization search index in the ordered set where searchvalue = &#63;.
 	*
 	* @param searchid the primary key of the current organization search index
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization search index
 	* @throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException if a organization search index with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public at.graz.meduni.liferay.portlet.bibbox.model.OrganizationSearchIndex[] findByExactSearch_PrevAndNext(
-		long searchid, java.lang.String value,
+		long searchid, java.lang.String searchvalue,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the organization search indexs where value = &#63; from the database.
+	* Removes all the organization search indexs where searchvalue = &#63; from the database.
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByExactSearch(java.lang.String value)
+	public void removeByExactSearch(java.lang.String searchvalue)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of organization search indexs where value = &#63;.
+	* Returns the number of organization search indexs where searchvalue = &#63;.
 	*
-	* @param value the value
+	* @param searchvalue the searchvalue
 	* @return the number of matching organization search indexs
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByExactSearch(java.lang.String value)
+	public int countByExactSearch(java.lang.String searchvalue)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

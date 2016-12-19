@@ -81,6 +81,12 @@ public class LogapiServiceWrapper implements LogapiService,
 		return _logapiService.regbbs();
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONArray findorganizationbyname(
+		java.lang.String organizationname) {
+		return _logapiService.findorganizationbyname(organizationname);
+	}
+
 	/**
 	* @return
 	*/
@@ -129,50 +135,6 @@ public class LogapiServiceWrapper implements LogapiService,
 	@Override
 	public void testMethode(java.lang.String jason) {
 		_logapiService.testMethode(jason);
-	}
-
-	@Override
-	public void resttest01(long organizationId) {
-		_logapiService.resttest01(organizationId);
-	}
-
-	@Override
-	public void resttest02(java.lang.String text) {
-		_logapiService.resttest02(text);
-	}
-
-	@Override
-	public void resttest03(long[] array) {
-		_logapiService.resttest03(array);
-	}
-
-	@Override
-	public void resttest04(java.lang.String[] array) {
-		_logapiService.resttest04(array);
-	}
-
-	@Override
-	public void resttest05(java.lang.String url,
-		com.liferay.portal.model.User user) {
-		_logapiService.resttest05(url, user);
-	}
-
-	@Override
-	public void resttest06(java.lang.String url, java.lang.String diseasname,
-		java.lang.String patientcount, java.lang.String gene,
-		java.lang.String orphanumber, java.lang.String icd10,
-		java.lang.String omim, java.lang.String synonym) {
-		_logapiService.resttest06(url, diseasname, patientcount, gene,
-			orphanumber, icd10, omim, synonym);
-	}
-
-	@Override
-	public void resttest07(java.lang.String url, java.lang.String diseasname,
-		java.lang.String patientcount, java.lang.String gene,
-		java.lang.String orphanumber, java.lang.String icd10,
-		java.lang.String omim, java.lang.String synonym) {
-		_logapiService.resttest07(url, diseasname, patientcount, gene,
-			orphanumber, icd10, omim, synonym);
 	}
 
 	/**

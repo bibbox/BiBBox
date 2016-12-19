@@ -77,13 +77,24 @@ user/invitation
 	String standardsforsampleacquisition = "";
 	String ensuresampleintegrity = "";
 	String dedicatedsop = "";
+	String quality_control_external_audits = "";
+	String if_yes_frequency_of_audits = "";
+	String training_program_for_the_registering_activities = "";
 	// 6
+	String level_of_sample_description_catalogue = "";
+	String number_of_it_staff = "";
 	String biobankcataloguecollection = "";
 	String publishedonwebsite = "";
 	String biobankmaintainanupdateddatabase = "";
 	String samplemanagementsystemcontain = "";
 	String softwarebiobank = "";
 	String databaseexportable = "";
+	String personal_data_collected = "";
+	String available_data = "";
+	String procedure_to_access_de_identified_data = "";
+	String procedure_to_access_de_identified_data_other = "";
+	String patient_s_data_linked_to_other_resources = "";
+	String patient_s_data_linked_to_other_resources_other = "";
 	// 7
 	String restrictionaccesssamples = "";
 	String restrictionaccesssamplesspecify = "";
@@ -218,12 +229,29 @@ user/invitation
   				if(record.getFieldValue("Standardized_case-inclusion_and-exclusion_criteria") != null) {
   					standardsforsampleacquisition += record.getFieldValue("Standardized_case-inclusion_and-exclusion_criteria").toString().replaceAll("\"\\]|\\[\"", "");
   				}
-  				if(record.getFieldValue("Molecular_test_performed_to_ensure_sample_integrity") != null) {
-  					ensuresampleintegrity += record.getFieldValue("Molecular_test_performed_to_ensure_sample_integrity").toString().replaceAll("\"\\]|\\[\"", "");
-  				}
   				if(record.getFieldValue("Standardized_Operating_Procedures__SOPs__available_for_data_management") != null) {
   					dedicatedsop += record.getFieldValue("Standardized_Operating_Procedures__SOPs__available_for_data_management").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ",<br>");
   				}
+  				if(record.getFieldValue("Molecular_test_performed_to_ensure_sample_integrity") != null) {
+  					ensuresampleintegrity += record.getFieldValue("Molecular_test_performed_to_ensure_sample_integrity").toString().replaceAll("\"\\]|\\[\"", "");
+  				}
+  				
+  				if(record.getFieldValue("Quality_control_external_audits") != null) {
+  					quality_control_external_audits += record.getFieldValue("Quality_control_external_audits").toString().replaceAll("\"\\]|\\[\"", "");
+  				}
+  				if(record.getFieldValue("If_yes__frequency_of_audits") != null) {
+  					if_yes_frequency_of_audits += record.getFieldValue("If_yes__frequency_of_audits").toString();
+  				}
+  				if(record.getFieldValue("Training_program_for_the_registering_activities") != null) {
+  					training_program_for_the_registering_activities += record.getFieldValue("Training_program_for_the_registering_activities").toString().replaceAll("\"\\]|\\[\"", "");
+  				}
+  				if(record.getFieldValue("Level_of_Sample_Description__Catalogue_") != null) {
+  					level_of_sample_description_catalogue += record.getFieldValue("Level_of_Sample_Description__Catalogue_").toString().replaceAll("\"\\]|\\[\"", "");
+  				}
+  				if(record.getFieldValue("Number_of_IT_Staff") != null) {
+  					number_of_it_staff += record.getFieldValue("Number_of_IT_Staff").toString();
+  				}
+  				
   				if(record.getFieldValue("Catalogue_of_collections") != null) {
   					biobankcataloguecollection += record.getFieldValue("Catalogue_of_collections").toString().replaceAll("\"\\]|\\[\"", "");
   				}
@@ -288,6 +316,26 @@ user/invitation
   				}
   				if(record.getFieldValue("Please_specify_if_you_have_some_limitations_regarding_your_local_regulation") != null) {
   					somelimitationsregardingyourlocalregulation += record.getFieldValue("Please_specify_if_you_have_some_limitations_regarding_your_local_regulation").toString();
+  				}
+  				
+  				
+  				if(record.getFieldValue("Personal_Data_Collected") != null) {
+  					personal_data_collected += record.getFieldValue("Personal_Data_Collected").toString().replaceAll("\"\\]|\\[\"", "");
+  				}
+  				if(record.getFieldValue("Available_Data") != null) {
+  					available_data += record.getFieldValue("Available_Data").toString().replaceAll("\"\\]|\\[\"", "");
+  				}
+  				if(record.getFieldValue("Specific_procedure_for_access_to_raw_data") != null) {
+  					procedure_to_access_de_identified_data += record.getFieldValue("Specific_procedure_for_access_to_raw_data").toString().replaceAll("\"\\]|\\[\"", "");
+  				}
+  				if(record.getFieldValue("Other4838") != null) {
+  					procedure_to_access_de_identified_data_other += record.getFieldValue("Other4838").toString();
+  				}
+  				if(record.getFieldValue("Patient_s_data_linked_to_other_resources_") != null) {
+  					patient_s_data_linked_to_other_resources += record.getFieldValue("Patient_s_data_linked_to_other_resources_").toString().replaceAll("\"\\]|\\[\"", "");
+  				}
+  				if(record.getFieldValue("Other1") != null) {
+  					patient_s_data_linked_to_other_resources_other += record.getFieldValue("Other1").toString();
   				}
   			}
   		}
@@ -476,8 +524,11 @@ user/invitation
 		<tr><td style="width:50%">5.1 Does your biobank have a Quality Assurance system?</td><td style="width:50%"><%= qualityassurancesystem %></td></tr>
 		<tr><td>If yes, please specify which</td><td><%= qualityassurancesystemspecify %></td></tr>
 		<tr><td>5.2 Does your biobank adopt a dedicated standards for sample acquisition?</td><td><%= standardsforsampleacquisition %></td></tr>
-		<tr><td>5.3 Does your biobank perform molecular tests to ensure sample integrity?</td><td><%= ensuresampleintegrity %></td></tr>
-		<tr><td>5.4 Does your biobank adopt a dedicated SOP for sample processing/storage?</td><td><%= dedicatedsop %></td></tr>
+		<tr><td>5.3 Does your biobank adopt a dedicated SOP for sample processing/storage?</td><td><%= dedicatedsop %></td></tr>
+		<tr><td>5.4 Does your biobank perform molecular tests to ensure sample integrity?</td><td><%= ensuresampleintegrity %></td></tr>
+		<tr><td>5.5 Is your biobank Quality audited externaly?</td><td><%= quality_control_external_audits %></td></tr>
+		<tr><td>If yes, frequency of audits?</td><td><%= if_yes_frequency_of_audits %></td></tr>
+		<tr><td>5.6 Does your biobank offer trainings programms?</td><td><%= training_program_for_the_registering_activities %></td></tr>
 	</table>
 	<h5>6 DATA MANAGEMENT</h3>
 	<hr>
@@ -486,8 +537,16 @@ user/invitation
 		<tr><td>If yes, is it published on a website?</td><td><%= publishedonwebsite %></td></tr>
 		<tr><td>6.2 Does your biobank maintain an updated database?</td><td><%= biobankmaintainanupdateddatabase %></td></tr>
 		<tr><td>6.3 Does your sample management system contain a data identification system?</td><td><%= samplemanagementsystemcontain %></td></tr>
-		<tr><td>6.4 Which software does your biobank use?</td><td><%= softwarebiobank %></td></tr>
-		<tr><td>6.5 Is the collection database exportable?</td><td><%= databaseexportable %></td></tr>
+		
+		<tr><td>6.4 Does your biobank collect Personal Data?</td><td><%= personal_data_collected %></td></tr>
+		<tr><td>6.5 How are the data available?</td><td><%= available_data %></td></tr>
+		<tr><td>6.6 Are your patient data linked to other resources?</td><td><%= patient_s_data_linked_to_other_resources %></td></tr>
+		<tr><td>others:</td><td><%= patient_s_data_linked_to_other_resources_other %></td></tr>
+		
+		<tr><td>6.7 Which software does your biobank use?</td><td><%= softwarebiobank %></td></tr>
+		<tr><td>6.8 Is the collection database exportable?</td><td><%= databaseexportable %></td></tr>
+		<tr><td>6.9 What level of Dample Description does your Biobank provide?</td><td><%= level_of_sample_description_catalogue %></td></tr>
+		<tr><td>6.10 How big is your IT Staff?</td><td><%= number_of_it_staff %></td></tr>
 	</table>
 	<h5>7 ACCESS TO SAMPLE COLLECTIONS</h3>
 	<hr>
@@ -498,6 +557,8 @@ user/invitation
 		<tr><td>7.3 Does your biobank require the users to sign a Material Transfer Agreement?</td><td><%= materialtransferagreement %></td></tr>
 		<tr><td>7.4 Is there a cost recovery system in place?</td><td><%= costrecoverysystem %></td></tr>
 		<tr><td>7.5 Is there a dedicated policy for the return of the results from users?</td><td><%= returnoftheresults %></td></tr>
+		<tr><td>7.6 Is there a dedicated procedure to access de-identified data?</td><td><%= procedure_to_access_de_identified_data %></td></tr>
+		<tr><td>others:</td><td><%= procedure_to_access_de_identified_data_other %></td></tr>
 	</table>
 	<h5>8 ETHICAL, LEGAL AND SOCIAL IMPLICATIONS (ELSI)</h3>
 	<hr>

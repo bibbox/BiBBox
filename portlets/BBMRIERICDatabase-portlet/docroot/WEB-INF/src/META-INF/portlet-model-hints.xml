@@ -19,7 +19,9 @@
 		<field name="biobanksize" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
-		<field name="biobankdescription" type="String" />
+		<field name="biobankdescription" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biobankjuristicperson" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
@@ -31,66 +33,112 @@
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
-		<field name="userName" type="String" />
+		<field name="userName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="updateuuid" type="String" />
-		<field name="contactID" type="String" />
-		<field name="contactEmail" type="String" />
-		<field name="contactCountry" type="String" />
-		<field name="contactFirstName" type="String" />
-		<field name="contactLastName" type="String" />
-		<field name="contactPhone" type="String" />
+		<field name="updateuuid" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactID" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactEmail" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactCountry" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactFirstName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactLastName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactPhone" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="contactAddress" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
-		<field name="contactZIP" type="String" />
-		<field name="contactCity" type="String" />
+		<field name="contactZIP" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactCity" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2Biobank">
 		<field name="uuid" type="String" />
 		<field name="biobankId" type="long" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
-		<field name="statusByUserName" type="String" />
+		<field name="statusByUserName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="statusDate" type="Date" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
-		<field name="userName" type="String" />
+		<field name="userName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="updateuuid" type="String" />
-		<field name="contactIDRef" type="String" />
+		<field name="updateuuid" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactIDRef" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="contactPriority" type="long" />
-		<field name="bbmribiobankID" type="String" />
+		<field name="bbmribiobankID" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biobankName" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
 		<field name="biobankJurisdicalPerson" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
-		<field name="biobankCountry" type="String" />
+		<field name="biobankCountry" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biobankPartnerCharterSigned" type="boolean" />
-		<field name="bioresourceReference" type="String" />
-		<field name="biobankNetworkIDRef" type="String" />
-		<field name="geoLatitude" type="String" />
-		<field name="geoLongitude" type="String" />
+		<field name="bioresourceReference" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankNetworkIDRef" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="geoLatitude" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="geoLongitude" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collaborationPartnersCommercial" type="boolean" />
 		<field name="collaborationPartnersNonforprofit" type="boolean" />
 		<field name="biobankITSupportAvailable" type="boolean" />
 		<field name="biobankITStaffSize" type="long" />
 		<field name="biobankISAvailable" type="boolean" />
 		<field name="biobankHISAvailable" type="boolean" />
-		<field name="biobankAcronym" type="String" />
+		<field name="biobankAcronym" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biobankDescription" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
 		<field name="biobankURL" type="String">
 			<hint name="max-length">500</hint>
 		</field>
-		<field name="biobankHeadFirstName" type="String" />
-		<field name="biobankHeadLastName" type="String" />
+		<field name="biobankHeadFirstName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankHeadLastName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biobankHeadRole" type="String">
 			<hint name="max-length">500</hint>
 		</field>
@@ -99,7 +147,9 @@
 		<field name="biobankResearchStudy" type="boolean" />
 		<field name="biobankNonHuman" type="boolean" />
 		<field name="biobankCollection" type="boolean" />
-		<field name="biobankType" type="String" />
+		<field name="biobankType" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork">
 		<field name="uuid" type="String" />
@@ -107,18 +157,28 @@
 		<field name="parentd2biobanknetworkId" type="long" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
-		<field name="statusByUserName" type="String" />
+		<field name="statusByUserName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="statusDate" type="Date" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
-		<field name="userName" type="String" />
+		<field name="userName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="updateuuid" type="String" />
-		<field name="contactIDRef" type="String" />
+		<field name="updateuuid" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactIDRef" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="contactPriority" type="long" />
-		<field name="bbmriBiobankNetworkID" type="String" />
+		<field name="bbmriBiobankNetworkID" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biobankNetworkName" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
@@ -130,10 +190,18 @@
 		<field name="biobankNetworkCommonMTA" type="boolean" />
 		<field name="biobankNetworkCommonRepresentation" type="boolean" />
 		<field name="biobankNetworkCommonURL" type="boolean" />
-		<field name="biobankNetworkIDRef" type="String" />
-		<field name="geoLatitude" type="String" />
-		<field name="geoLongitude" type="String" />
-		<field name="biobankNetworkAcronym" type="String" />
+		<field name="biobankNetworkIDRef" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="geoLatitude" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="geoLongitude" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="biobankNetworkAcronym" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biobankNetworkDescription" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
@@ -149,18 +217,26 @@
 		<field name="d2biobanknetworklinkId" type="long" />
 		<field name="d2biobanknetworkId" type="long" />
 		<field name="d2linkId" type="long" />
-		<field name="d2linktype" type="String" />
+		<field name="d2linktype" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
-		<field name="statusByUserName" type="String" />
+		<field name="statusByUserName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="statusDate" type="Date" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
-		<field name="userName" type="String" />
+		<field name="userName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="updateuuid" type="String" />
+		<field name="updateuuid" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.D2Collection">
 		<field name="uuid" type="String" />
@@ -170,13 +246,23 @@
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
-		<field name="userName" type="String" />
+		<field name="userName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="updateuuid" type="String" />
-		<field name="bbmricollectionID" type="String" />
-		<field name="bbmriparentcollectionID" type="String" />
-		<field name="bbmribiobankID" type="String" />
+		<field name="updateuuid" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="bbmricollectionID" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="bbmriparentcollectionID" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="bbmribiobankID" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collectionName" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
@@ -192,7 +278,9 @@
 		<field name="materialStoredTissueFFPE" type="boolean" />
 		<field name="materialStoredImmortalizedCellLines" type="boolean" />
 		<field name="materialStoredIsolatedPathogen" type="boolean" />
-		<field name="materialStoredOther" type="String" />
+		<field name="materialStoredOther" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collectionTypeCaseControl" type="boolean" />
 		<field name="collectionTypeCohort" type="boolean" />
 		<field name="collectionTypeCrossSectional" type="boolean" />
@@ -202,17 +290,31 @@
 		<field name="collectionTypePopulationBased" type="boolean" />
 		<field name="collectionTypeDiseaseSpecific" type="boolean" />
 		<field name="collectionTypeBirthCohort" type="boolean" />
-		<field name="collectionTypeOther" type="String" />
+		<field name="collectionTypeOther" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collectionOrderOfMagnitude" type="long" />
-		<field name="bioresourceReference" type="String" />
-		<field name="contactIDRef" type="String" />
+		<field name="bioresourceReference" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contactIDRef" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="contactPriority" type="long" />
-		<field name="biobankNetworkIDRef" type="String" />
-		<field name="geoLatitude" type="String" />
-		<field name="geoLongitude" type="String" />
+		<field name="biobankNetworkIDRef" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="geoLatitude" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="geoLongitude" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collaborationPartnersCommercial" type="boolean" />
 		<field name="collaborationPartnersNonforprofit" type="boolean" />
-		<field name="collectionAcronym" type="String" />
+		<field name="collectionAcronym" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collectionDescription" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
@@ -222,7 +324,9 @@
 		<field name="collectionSexUndiferrentiated" type="boolean" />
 		<field name="collectionAgeLow" type="long" />
 		<field name="collectionAgeHigh" type="long" />
-		<field name="collectionAgeUnit" type="String" />
+		<field name="collectionAgeUnit" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collectionAvailableBiologicalSamples" type="boolean" />
 		<field name="collectionAvailableSurveyData" type="boolean" />
 		<field name="collectionAvailableImagingData" type="boolean" />
@@ -230,19 +334,29 @@
 		<field name="collectionAvailableNationalRegistries" type="boolean" />
 		<field name="collectionAvailableGenealogicalRecords" type="boolean" />
 		<field name="collectionAvailablePhysioBiochemMeasurements" type="boolean" />
-		<field name="collectionAvailableOther" type="String" />
+		<field name="collectionAvailableOther" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="temperatureRoom" type="boolean" />
 		<field name="temperature2to10" type="boolean" />
 		<field name="temperature18to35" type="boolean" />
 		<field name="temperature60to85" type="boolean" />
 		<field name="temperatureLN" type="boolean" />
-		<field name="temperatureOther" type="String" />
+		<field name="temperatureOther" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="diagnosisAvailable" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
-		<field name="collectionHeadFirstName" type="String" />
-		<field name="collectionHeadLastName" type="String" />
-		<field name="collectionHeadRole" type="String" />
+		<field name="collectionHeadFirstName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="collectionHeadLastName" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="collectionHeadRole" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="collectionSampleAccessFee" type="boolean" />
 		<field name="collectionSampleAccessJointProjects" type="boolean" />
 		<field name="collectionSampleAccessDescription" type="String">
@@ -264,8 +378,12 @@
 	</model>
 	<model name="at.meduni.liferay.portlet.bbmrieric.model.DiseaseDiscription">
 		<field name="diseasediscriptionId" type="long" />
-		<field name="diseasecode" type="String" />
-		<field name="diseasegroup" type="String" />
+		<field name="diseasecode" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="diseasegroup" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="diseasediscription" type="String">
 			<hint name="max-length">5000</hint>
 		</field>

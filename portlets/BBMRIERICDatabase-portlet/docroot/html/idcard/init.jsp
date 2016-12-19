@@ -30,6 +30,10 @@
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
 
+<%@ page import="com.liferay.portal.kernel.json.JSONArray" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONObject" %>
+
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchEntry" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>

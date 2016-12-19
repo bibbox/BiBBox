@@ -297,6 +297,18 @@ public class OrganizationSearchIndexLocalServiceWrapper
 			organizationId);
 	}
 
+	@Override
+	public void testSearchIndex() {
+		_organizationSearchIndexLocalService.testSearchIndex();
+	}
+
+	@Override
+	public java.util.List<java.lang.Long> getOrganizationIdByKeywordAndValue(
+		java.lang.String key, java.lang.String value) {
+		return _organizationSearchIndexLocalService.getOrganizationIdByKeywordAndValue(key,
+			value);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

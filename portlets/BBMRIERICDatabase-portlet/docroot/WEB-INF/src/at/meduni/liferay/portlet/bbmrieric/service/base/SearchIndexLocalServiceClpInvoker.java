@@ -106,52 +106,52 @@ public class SearchIndexLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.bbmrieric.model.SearchIndex"
 			};
 
-		_methodName60 = "getBeanIdentifier";
+		_methodName62 = "getBeanIdentifier";
 
-		_methodParameterTypes60 = new String[] {  };
+		_methodParameterTypes62 = new String[] {  };
 
-		_methodName61 = "setBeanIdentifier";
+		_methodName63 = "setBeanIdentifier";
 
-		_methodParameterTypes61 = new String[] { "java.lang.String" };
+		_methodParameterTypes63 = new String[] { "java.lang.String" };
 
-		_methodName66 = "createSearchIndex";
+		_methodName68 = "createSearchIndex";
 
-		_methodParameterTypes66 = new String[] {
+		_methodParameterTypes68 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName67 = "getSearchIndex";
+		_methodName69 = "getSearchIndex";
 
-		_methodParameterTypes67 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes69 = new String[] { "long", "java.lang.String" };
 
-		_methodName68 = "getSearchIndexForOrganization";
+		_methodName70 = "getSearchIndexForOrganization";
 
-		_methodParameterTypes68 = new String[] { "long" };
+		_methodParameterTypes70 = new String[] { "long" };
 
-		_methodName69 = "notUpdatedSearchIndex";
+		_methodName71 = "notUpdatedSearchIndex";
 
-		_methodParameterTypes69 = new String[] { "java.lang.String" };
+		_methodParameterTypes71 = new String[] { "java.lang.String" };
 
-		_methodName70 = "getMaterialTypes";
-
-		_methodParameterTypes70 = new String[] {  };
-
-		_methodName71 = "getDiagnosisAvailable";
-
-		_methodParameterTypes71 = new String[] {  };
-
-		_methodName72 = "getCountry";
+		_methodName72 = "getMaterialTypes";
 
 		_methodParameterTypes72 = new String[] {  };
 
-		_methodName73 = "getBiobankSize";
+		_methodName73 = "getDiagnosisAvailable";
 
 		_methodParameterTypes73 = new String[] {  };
 
-		_methodName74 = "getTypeOfBiobank";
+		_methodName74 = "getCountry";
 
 		_methodParameterTypes74 = new String[] {  };
+
+		_methodName75 = "getBiobankSize";
+
+		_methodParameterTypes75 = new String[] {  };
+
+		_methodName76 = "getTypeOfBiobank";
+
+		_methodParameterTypes76 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -243,63 +243,63 @@ public class SearchIndexLocalServiceClpInvoker {
 			return SearchIndexLocalServiceUtil.updateSearchIndex((at.meduni.liferay.portlet.bbmrieric.model.SearchIndex)arguments[0]);
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName61.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			SearchIndexLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.createSearchIndex(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3]);
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getSearchIndex(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
-			return SearchIndexLocalServiceUtil.getSearchIndexForOrganization(((Long)arguments[0]).longValue());
-		}
-
-		if (_methodName69.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
-			return SearchIndexLocalServiceUtil.notUpdatedSearchIndex((java.lang.String)arguments[0]);
-		}
-
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
-			return SearchIndexLocalServiceUtil.getMaterialTypes();
+			return SearchIndexLocalServiceUtil.getSearchIndexForOrganization(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName71.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
-			return SearchIndexLocalServiceUtil.getDiagnosisAvailable();
+			return SearchIndexLocalServiceUtil.notUpdatedSearchIndex((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName72.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
-			return SearchIndexLocalServiceUtil.getCountry();
+			return SearchIndexLocalServiceUtil.getMaterialTypes();
 		}
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			return SearchIndexLocalServiceUtil.getBiobankSize();
+			return SearchIndexLocalServiceUtil.getDiagnosisAvailable();
 		}
 
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getCountry();
+		}
+
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+			return SearchIndexLocalServiceUtil.getBiobankSize();
+		}
+
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getTypeOfBiobank();
 		}
 
@@ -338,14 +338,10 @@ public class SearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
-	private String _methodName61;
-	private String[] _methodParameterTypes61;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 	private String _methodName68;
 	private String[] _methodParameterTypes68;
 	private String _methodName69;
@@ -360,4 +356,8 @@ public class SearchIndexLocalServiceClpInvoker {
 	private String[] _methodParameterTypes73;
 	private String _methodName74;
 	private String[] _methodParameterTypes74;
+	private String _methodName75;
+	private String[] _methodParameterTypes75;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
 }

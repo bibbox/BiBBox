@@ -6,6 +6,7 @@
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.ContactInformationLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.ContactInformationLocalServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.ContactInformationPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.ContactInformationPersistenceImpl" parent="basePersistence" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.D2BiobankLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.D2BiobankLocalServiceImpl" />
+	<bean id="at.meduni.liferay.portlet.bbmrieric.service.D2BiobankService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.D2BiobankServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankPersistenceImpl" parent="basePersistence" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.D2BiobankNetworkLocalServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankNetworkPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankNetworkPersistenceImpl" parent="basePersistence" />

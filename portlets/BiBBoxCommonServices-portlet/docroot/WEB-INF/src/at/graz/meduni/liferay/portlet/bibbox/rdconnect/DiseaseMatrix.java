@@ -424,65 +424,47 @@ public class DiseaseMatrix extends MVCPortlet {
 				String column_missing = "";
 				while (cellIterator.hasNext()) {
 					Cell cell = cellIterator.next();
-					switch (cell.getStringCellValue().trim()) {
-						case "diseasematrixId":
-							diseasematrixid_column = cellcounter;
-			        		break;
-						case "Disease Name":
-			        		diseasename_column = cellcounter;
-			        		break;
-						case "diseasename":
-			        		diseasename_column = cellcounter;
-			        		break;	
-						case "Number of Patients, Donors":
-							numberofdoners_column = cellcounter;
-			        		break;	
-						case "Number of Patients":
-							numberofdoners_column = cellcounter;
-			        		break;
-						case "patientcount":
-							numberofdoners_column = cellcounter;
-			        		break;
-						case "Gene":
-							gene_column = cellcounter;
-			        		break;
-						case "gene":
-							gene_column = cellcounter;
-			        		break;
-						case "ORPHA Code":
-							orphacode_column = cellcounter;
-			        		break;
-						case "orpha":
-							orphacode_column = cellcounter;
-			        		break;
-						case "ORPHA":
-							orphacode_column = cellcounter;
-			        		break;
-						case "ICD10":
-							icd10_column = cellcounter;
-			        		break;
-						case "icd10":
-							icd10_column = cellcounter;
-			        		break;
-						case "OMIM":
-							omim_column = cellcounter;
-			        		break;
-						case "omim":
-							omim_column = cellcounter;
-			        		break;
-						case "Synonym(s)":
-							synonym_column = cellcounter;
-			        		break;
-						case "synonym":
-							synonym_column = cellcounter;
-			        		break;
-			        	default:
-			        		if(!column_missing.equalsIgnoreCase("")) {
-			        			column_missing += ";";
-			        		}
-			        		column_missing += cell.getStringCellValue().trim();
-			        		System.err.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrix::readXLSXFile] The field " + cell.getStringCellValue().trim() + " could not be mapped for header.");
-					}
+					if(cell.getStringCellValue().trim().equalsIgnoreCase("diseasematrixId")) {
+						diseasematrixid_column = cellcounter;
+					} else if(cell.getStringCellValue().trim().equalsIgnoreCase("Disease Name")) {
+			       		diseasename_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("diseasename")) {
+			       		diseasename_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("Number of Patients, Donors")) {
+						numberofdoners_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("Number of Patients")) {
+						numberofdoners_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("patientcount")) {
+						numberofdoners_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("Gene")) {
+						gene_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("gene")) {
+						gene_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("ORPHA Code")) {
+						orphacode_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("orpha")) {
+						orphacode_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("ORPHA")) {
+						orphacode_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("ICD10")) {
+						icd10_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("icd10")) {
+						icd10_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("OMIM")) {
+						omim_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("omim")) {
+						omim_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("Synonym(s)")) {
+						synonym_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("synonym")) {
+						synonym_column = cellcounter;
+			       	} else {
+			       		if(!column_missing.equalsIgnoreCase("")) {
+				        	column_missing += ";";
+				        }
+			       		column_missing += cell.getStringCellValue().trim();
+			       		System.err.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrix::readXLSXFile] The field " + cell.getStringCellValue().trim() + " could not be mapped for header.");
+			       	}
 					System.out.println("Header: " + cellcounter + ":" + cell.getStringCellValue());
 					cellcounter++;
 				}
@@ -664,65 +646,47 @@ public class DiseaseMatrix extends MVCPortlet {
 				String column_missing = "";
 				while (cellIterator.hasNext()) {
 					XSSFCell cell = (XSSFCell)cellIterator.next();
-					switch (cell.getStringCellValue().trim()) {
-						case "diseasematrixId":
-							diseasematrixid_column = cellcounter;
-			        		break;
-						case "Disease Name":
-			        		diseasename_column = cellcounter;
-			        		break;
-						case "diseasename":
-			        		diseasename_column = cellcounter;
-			        		break;	
-						case "Number of Patients, Donors":
-							numberofdoners_column = cellcounter;
-			        		break;	
-						case "Number of Patients":
-							numberofdoners_column = cellcounter;
-			        		break;
-						case "patientcount":
-							numberofdoners_column = cellcounter;
-			        		break;
-						case "Gene":
-							gene_column = cellcounter;
-			        		break;
-						case "gene":
-							gene_column = cellcounter;
-			        		break;
-						case "ORPHA Code":
-							orphacode_column = cellcounter;
-			        		break;
-						case "orpha":
-							orphacode_column = cellcounter;
-			        		break;
-						case "ORPHA":
-							orphacode_column = cellcounter;
-			        		break;
-						case "ICD10":
-							icd10_column = cellcounter;
-			        		break;
-						case "icd10":
-							icd10_column = cellcounter;
-			        		break;
-						case "OMIM":
-							omim_column = cellcounter;
-			        		break;
-						case "omim":
-							omim_column = cellcounter;
-			        		break;
-						case "Synonym(s)":
-							synonym_column = cellcounter;
-			        		break;
-						case "synonym":
-							synonym_column = cellcounter;
-			        		break;
-			        	default:
-			        		if(!column_missing.equalsIgnoreCase("")) {
-			        			column_missing += ";";
-			        		}
-			        		column_missing += cell.getStringCellValue().trim();
-			        		System.err.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrix::readXLSXFile] The field " + cell.getStringCellValue().trim() + " could not be mapped for header.");
-					}
+					if(cell.getStringCellValue().trim().equalsIgnoreCase("diseasematrixId")) {
+						diseasematrixid_column = cellcounter;
+					} else if(cell.getStringCellValue().trim().equalsIgnoreCase("Disease Name")) {
+			       		diseasename_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("diseasename")) {
+			       		diseasename_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("Number of Patients, Donors")) {
+						numberofdoners_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("Number of Patients")) {
+						numberofdoners_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("patientcount")) {
+						numberofdoners_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("Gene")) {
+						gene_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("gene")) {
+						gene_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("ORPHA Code")) {
+						orphacode_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("orpha")) {
+						orphacode_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("ORPHA")) {
+						orphacode_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("ICD10")) {
+						icd10_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("icd10")) {
+						icd10_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("OMIM")) {
+						omim_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("omim")) {
+						omim_column = cellcounter;
+			        } else if(cell.getStringCellValue().trim().equalsIgnoreCase("Synonym(s)")) {
+						synonym_column = cellcounter;
+			       	} else if(cell.getStringCellValue().trim().equalsIgnoreCase("synonym")) {
+						synonym_column = cellcounter;
+			       	} else {
+			       		if(!column_missing.equalsIgnoreCase("")) {
+				        	column_missing += ";";
+				        }
+			       		column_missing += cell.getStringCellValue().trim();
+			       		System.err.println("[" + date_format_apache_error.format(new Date()) + "] [info] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.rdconnect.DiseaseMatrix::readXLSXFile] The field " + cell.getStringCellValue().trim() + " could not be mapped for header.");
+			       	}
 					System.out.println("Header: " + cellcounter + ":" + cell.getStringCellValue());
 					cellcounter++;
 				}

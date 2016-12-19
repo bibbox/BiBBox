@@ -138,6 +138,20 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 	
 	/**
 	 * 
+	 * @param bbmribiobankID
+	 * @return
+	 */
+	public D2Biobank getD2BiobankByBBMRIERICID(String bbmribiobankID) {
+		try {
+			return d2BiobankPersistence.findByBbmriEricId(bbmribiobankID);
+		} catch (Exception ex) {
+			 
+		}
+		return null;
+	}
+	
+	/**
+	 * 
 	 * @param newbiobank
 	 * @param serviceContext
 	 * @return
@@ -889,6 +903,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 		serviceContext.setCompanyId(companyId);
 		serviceContext.setScopeGroupId(groupId);
 		
+		//-------------------------------------
 		// Reading data from the LDAP
 		Hashtable<String, String> environment = new Hashtable<String, String>();
 		environment.put(LdapContext.CONTROL_FACTORIES,
@@ -896,7 +911,7 @@ public class D2BiobankLocalServiceImpl extends D2BiobankLocalServiceBaseImpl {
 		environment.put(Context.INITIAL_CONTEXT_FACTORY,
 				"com.sun.jndi.ldap.LdapCtxFactory");
 		environment.put(Context.PROVIDER_URL,
-				"ldap://directory.bbmri-eric.eu:10389");
+				"ldap://directory-ldap.bbmri-eric.eu:10389");
 		environment.put(Context.SECURITY_AUTHENTICATION, "simple");
 		environment.put(Context.REFERRAL, "follow");
 		try {

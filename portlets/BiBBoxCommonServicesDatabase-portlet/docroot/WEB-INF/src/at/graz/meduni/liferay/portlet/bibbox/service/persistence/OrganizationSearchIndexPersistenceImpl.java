@@ -104,53 +104,53 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 			OrganizationSearchIndexImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByExactSearch",
 			new String[] { String.class.getName() },
-			OrganizationSearchIndexModelImpl.VALUE_COLUMN_BITMASK);
+			OrganizationSearchIndexModelImpl.SEARCHVALUE_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_EXACTSEARCH = new FinderPath(OrganizationSearchIndexModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationSearchIndexModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByExactSearch",
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns all the organization search indexs where value = &#63;.
+	 * Returns all the organization search indexs where searchvalue = &#63;.
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @return the matching organization search indexs
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<OrganizationSearchIndex> findByExactSearch(String value)
+	public List<OrganizationSearchIndex> findByExactSearch(String searchvalue)
 		throws SystemException {
-		return findByExactSearch(value, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByExactSearch(searchvalue, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the organization search indexs where value = &#63;.
+	 * Returns a range of all the organization search indexs where searchvalue = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.model.impl.OrganizationSearchIndexModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @param start the lower bound of the range of organization search indexs
 	 * @param end the upper bound of the range of organization search indexs (not inclusive)
 	 * @return the range of matching organization search indexs
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<OrganizationSearchIndex> findByExactSearch(String value,
+	public List<OrganizationSearchIndex> findByExactSearch(String searchvalue,
 		int start, int end) throws SystemException {
-		return findByExactSearch(value, start, end, null);
+		return findByExactSearch(searchvalue, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the organization search indexs where value = &#63;.
+	 * Returns an ordered range of all the organization search indexs where searchvalue = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link at.graz.meduni.liferay.portlet.bibbox.model.impl.OrganizationSearchIndexModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @param start the lower bound of the range of organization search indexs
 	 * @param end the upper bound of the range of organization search indexs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -158,7 +158,7 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<OrganizationSearchIndex> findByExactSearch(String value,
+	public List<OrganizationSearchIndex> findByExactSearch(String searchvalue,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		boolean pagination = true;
@@ -169,11 +169,11 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXACTSEARCH;
-			finderArgs = new Object[] { value };
+			finderArgs = new Object[] { searchvalue };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_EXACTSEARCH;
-			finderArgs = new Object[] { value, start, end, orderByComparator };
+			finderArgs = new Object[] { searchvalue, start, end, orderByComparator };
 		}
 
 		List<OrganizationSearchIndex> list = (List<OrganizationSearchIndex>)FinderCacheUtil.getResult(finderPath,
@@ -181,7 +181,8 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 		if ((list != null) && !list.isEmpty()) {
 			for (OrganizationSearchIndex organizationSearchIndex : list) {
-				if (!Validator.equals(value, organizationSearchIndex.getValue())) {
+				if (!Validator.equals(searchvalue,
+							organizationSearchIndex.getSearchvalue())) {
 					list = null;
 
 					break;
@@ -202,18 +203,18 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 			query.append(_SQL_SELECT_ORGANIZATIONSEARCHINDEX_WHERE);
 
-			boolean bindValue = false;
+			boolean bindSearchvalue = false;
 
-			if (value == null) {
-				query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_1);
+			if (searchvalue == null) {
+				query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_1);
 			}
-			else if (value.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_3);
+			else if (searchvalue.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_3);
 			}
 			else {
-				bindValue = true;
+				bindSearchvalue = true;
 
-				query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_2);
+				query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_2);
 			}
 
 			if (orderByComparator != null) {
@@ -236,8 +237,8 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindValue) {
-					qPos.add(value);
+				if (bindSearchvalue) {
+					qPos.add(searchvalue);
 				}
 
 				if (!pagination) {
@@ -271,19 +272,19 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first organization search index in the ordered set where value = &#63;.
+	 * Returns the first organization search index in the ordered set where searchvalue = &#63;.
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching organization search index
 	 * @throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException if a matching organization search index could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public OrganizationSearchIndex findByExactSearch_First(String value,
+	public OrganizationSearchIndex findByExactSearch_First(String searchvalue,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationSearchIndexException, SystemException {
-		OrganizationSearchIndex organizationSearchIndex = fetchByExactSearch_First(value,
+		OrganizationSearchIndex organizationSearchIndex = fetchByExactSearch_First(searchvalue,
 				orderByComparator);
 
 		if (organizationSearchIndex != null) {
@@ -294,8 +295,8 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("value=");
-		msg.append(value);
+		msg.append("searchvalue=");
+		msg.append(searchvalue);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -303,18 +304,19 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first organization search index in the ordered set where value = &#63;.
+	 * Returns the first organization search index in the ordered set where searchvalue = &#63;.
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching organization search index, or <code>null</code> if a matching organization search index could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public OrganizationSearchIndex fetchByExactSearch_First(String value,
-		OrderByComparator orderByComparator) throws SystemException {
-		List<OrganizationSearchIndex> list = findByExactSearch(value, 0, 1,
-				orderByComparator);
+	public OrganizationSearchIndex fetchByExactSearch_First(
+		String searchvalue, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<OrganizationSearchIndex> list = findByExactSearch(searchvalue, 0,
+				1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -324,19 +326,19 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last organization search index in the ordered set where value = &#63;.
+	 * Returns the last organization search index in the ordered set where searchvalue = &#63;.
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching organization search index
 	 * @throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException if a matching organization search index could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public OrganizationSearchIndex findByExactSearch_Last(String value,
+	public OrganizationSearchIndex findByExactSearch_Last(String searchvalue,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationSearchIndexException, SystemException {
-		OrganizationSearchIndex organizationSearchIndex = fetchByExactSearch_Last(value,
+		OrganizationSearchIndex organizationSearchIndex = fetchByExactSearch_Last(searchvalue,
 				orderByComparator);
 
 		if (organizationSearchIndex != null) {
@@ -347,8 +349,8 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("value=");
-		msg.append(value);
+		msg.append("searchvalue=");
+		msg.append(searchvalue);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -356,23 +358,23 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last organization search index in the ordered set where value = &#63;.
+	 * Returns the last organization search index in the ordered set where searchvalue = &#63;.
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching organization search index, or <code>null</code> if a matching organization search index could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public OrganizationSearchIndex fetchByExactSearch_Last(String value,
+	public OrganizationSearchIndex fetchByExactSearch_Last(String searchvalue,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByExactSearch(value);
+		int count = countByExactSearch(searchvalue);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<OrganizationSearchIndex> list = findByExactSearch(value,
+		List<OrganizationSearchIndex> list = findByExactSearch(searchvalue,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -383,10 +385,10 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the organization search indexs before and after the current organization search index in the ordered set where value = &#63;.
+	 * Returns the organization search indexs before and after the current organization search index in the ordered set where searchvalue = &#63;.
 	 *
 	 * @param searchid the primary key of the current organization search index
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next organization search index
 	 * @throws at.graz.meduni.liferay.portlet.bibbox.NoSuchOrganizationSearchIndexException if a organization search index with the primary key could not be found
@@ -394,7 +396,7 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 	 */
 	@Override
 	public OrganizationSearchIndex[] findByExactSearch_PrevAndNext(
-		long searchid, String value, OrderByComparator orderByComparator)
+		long searchid, String searchvalue, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationSearchIndexException, SystemException {
 		OrganizationSearchIndex organizationSearchIndex = findByPrimaryKey(searchid);
 
@@ -406,12 +408,14 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 			OrganizationSearchIndex[] array = new OrganizationSearchIndexImpl[3];
 
 			array[0] = getByExactSearch_PrevAndNext(session,
-					organizationSearchIndex, value, orderByComparator, true);
+					organizationSearchIndex, searchvalue, orderByComparator,
+					true);
 
 			array[1] = organizationSearchIndex;
 
 			array[2] = getByExactSearch_PrevAndNext(session,
-					organizationSearchIndex, value, orderByComparator, false);
+					organizationSearchIndex, searchvalue, orderByComparator,
+					false);
 
 			return array;
 		}
@@ -425,7 +429,8 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 	protected OrganizationSearchIndex getByExactSearch_PrevAndNext(
 		Session session, OrganizationSearchIndex organizationSearchIndex,
-		String value, OrderByComparator orderByComparator, boolean previous) {
+		String searchvalue, OrderByComparator orderByComparator,
+		boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -438,18 +443,18 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 		query.append(_SQL_SELECT_ORGANIZATIONSEARCHINDEX_WHERE);
 
-		boolean bindValue = false;
+		boolean bindSearchvalue = false;
 
-		if (value == null) {
-			query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_1);
+		if (searchvalue == null) {
+			query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_1);
 		}
-		else if (value.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_3);
+		else if (searchvalue.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_3);
 		}
 		else {
-			bindValue = true;
+			bindSearchvalue = true;
 
-			query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_2);
+			query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_2);
 		}
 
 		if (orderByComparator != null) {
@@ -520,8 +525,8 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindValue) {
-			qPos.add(value);
+		if (bindSearchvalue) {
+			qPos.add(searchvalue);
 		}
 
 		if (orderByComparator != null) {
@@ -543,31 +548,32 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the organization search indexs where value = &#63; from the database.
+	 * Removes all the organization search indexs where searchvalue = &#63; from the database.
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByExactSearch(String value) throws SystemException {
+	public void removeByExactSearch(String searchvalue)
+		throws SystemException {
 		for (OrganizationSearchIndex organizationSearchIndex : findByExactSearch(
-				value, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+				searchvalue, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(organizationSearchIndex);
 		}
 	}
 
 	/**
-	 * Returns the number of organization search indexs where value = &#63;.
+	 * Returns the number of organization search indexs where searchvalue = &#63;.
 	 *
-	 * @param value the value
+	 * @param searchvalue the searchvalue
 	 * @return the number of matching organization search indexs
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByExactSearch(String value) throws SystemException {
+	public int countByExactSearch(String searchvalue) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_EXACTSEARCH;
 
-		Object[] finderArgs = new Object[] { value };
+		Object[] finderArgs = new Object[] { searchvalue };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -577,18 +583,18 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 			query.append(_SQL_COUNT_ORGANIZATIONSEARCHINDEX_WHERE);
 
-			boolean bindValue = false;
+			boolean bindSearchvalue = false;
 
-			if (value == null) {
-				query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_1);
+			if (searchvalue == null) {
+				query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_1);
 			}
-			else if (value.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_3);
+			else if (searchvalue.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_3);
 			}
 			else {
-				bindValue = true;
+				bindSearchvalue = true;
 
-				query.append(_FINDER_COLUMN_EXACTSEARCH_VALUE_2);
+				query.append(_FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_2);
 			}
 
 			String sql = query.toString();
@@ -602,8 +608,8 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindValue) {
-					qPos.add(value);
+				if (bindSearchvalue) {
+					qPos.add(searchvalue);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -623,9 +629,9 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_EXACTSEARCH_VALUE_1 = "organizationSearchIndex.value IS NULL";
-	private static final String _FINDER_COLUMN_EXACTSEARCH_VALUE_2 = "organizationSearchIndex.value = ?";
-	private static final String _FINDER_COLUMN_EXACTSEARCH_VALUE_3 = "(organizationSearchIndex.value IS NULL OR organizationSearchIndex.value = '')";
+	private static final String _FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_1 = "organizationSearchIndex.searchvalue IS NULL";
+	private static final String _FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_2 = "organizationSearchIndex.searchvalue = ?";
+	private static final String _FINDER_COLUMN_EXACTSEARCH_SEARCHVALUE_3 = "(organizationSearchIndex.searchvalue IS NULL OR organizationSearchIndex.searchvalue = '')";
 	public static final FinderPath FINDER_PATH_FETCH_BY_KEYANDORGANIZATION = new FinderPath(OrganizationSearchIndexModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationSearchIndexModelImpl.FINDER_CACHE_ENABLED,
 			OrganizationSearchIndexImpl.class, FINDER_CLASS_NAME_ENTITY,
@@ -1209,7 +1215,7 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 			if ((organizationSearchIndexModelImpl.getColumnBitmask() &
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXACTSEARCH.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						organizationSearchIndexModelImpl.getOriginalValue()
+						organizationSearchIndexModelImpl.getOriginalSearchvalue()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_EXACTSEARCH,
@@ -1217,7 +1223,9 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_EXACTSEARCH,
 					args);
 
-				args = new Object[] { organizationSearchIndexModelImpl.getValue() };
+				args = new Object[] {
+						organizationSearchIndexModelImpl.getSearchvalue()
+					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_EXACTSEARCH,
 					args);
@@ -1252,7 +1260,7 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 		organizationSearchIndexImpl.setLocationid(organizationSearchIndex.getLocationid());
 		organizationSearchIndexImpl.setLocation(organizationSearchIndex.getLocation());
 		organizationSearchIndexImpl.setKey(organizationSearchIndex.getKey());
-		organizationSearchIndexImpl.setValue(organizationSearchIndex.getValue());
+		organizationSearchIndexImpl.setSearchvalue(organizationSearchIndex.getSearchvalue());
 
 		return organizationSearchIndexImpl;
 	}
@@ -1579,7 +1587,7 @@ public class OrganizationSearchIndexPersistenceImpl extends BasePersistenceImpl<
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(OrganizationSearchIndexPersistenceImpl.class);
 	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
-				"key"
+				"key", "searchvalue"
 			});
 	private static OrganizationSearchIndex _nullOrganizationSearchIndex = new OrganizationSearchIndexImpl() {
 			@Override

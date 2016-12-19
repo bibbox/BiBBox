@@ -1,4 +1,6 @@
 <%@ include file="/html/init.jsp" %> 
+<%@ page import="java.io.Serializable" %>
+
 
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
@@ -35,6 +37,13 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 		host_institute = ddlrecord.getFieldValue("Host_institution_is_a").toString();
   	}
 	String displayclass = "";
+	
+	String description = "";
+	Serializable description_ser = ddlrecord.getFieldValue("Description");
+	if(description_ser != null) {
+		description = description_ser.toString().replaceAll("\"\\]|\\[\"", "");
+	}
+	
 	%>
 	<portlet:actionURL name="updateCoreDDL" var="updateCoreDDLURL" windowState="normal" />
 	<aui:form action="<%= updateCoreDDLURL %>" method="POST" name="fm">
@@ -47,7 +56,7 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 			<aui:field-wrapper label="Description">
 			    <liferay-ui:input-editor name="Description" toolbarSet="liferay-article" initMethod="initEditor" width="200" />
 			    <script type="text/javascript">
-			        function <portlet:namespace />initEditor() { return "<%= UnicodeFormatter.toString(ddlrecord.getFieldValue("Description").toString().replaceAll("\"\\]|\\[\"", "")) %>"; }
+			        function <portlet:namespace />initEditor() { return "<%= UnicodeFormatter.toString(description) %>"; }
 			    </script>
 			</aui:field-wrapper>
 			<!-- Host Institute -->

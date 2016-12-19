@@ -146,16 +146,20 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 
 		_methodParameterTypes26 = new String[] { "long", "java.lang.String" };
 
-		_methodName27 = "addD2Biobank";
+		_methodName27 = "getD2BiobankByBBMRIERICID";
 
-		_methodParameterTypes27 = new String[] {
-				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
-				"com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes27 = new String[] { "java.lang.String" };
 
 		_methodName28 = "addD2Biobank";
 
 		_methodParameterTypes28 = new String[] {
+				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName29 = "addD2Biobank";
+
+		_methodParameterTypes29 = new String[] {
 				"long", "long", "long", "long", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"long", "java.lang.String", "java.lang.String", "boolean",
@@ -168,16 +172,16 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName29 = "updateD2Biobank";
+		_methodName30 = "updateD2Biobank";
 
-		_methodParameterTypes29 = new String[] {
+		_methodParameterTypes30 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName30 = "updateD2Biobank";
+		_methodName31 = "updateD2Biobank";
 
-		_methodParameterTypes30 = new String[] {
+		_methodParameterTypes31 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.lang.String", "boolean",
@@ -190,31 +194,31 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName31 = "deleteD2Biobank";
+		_methodName32 = "deleteD2Biobank";
 
-		_methodParameterTypes31 = new String[] {
+		_methodParameterTypes32 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName32 = "getD2Biobanks";
+		_methodName33 = "getD2Biobanks";
 
-		_methodParameterTypes32 = new String[] {
+		_methodParameterTypes33 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName33 = "getLDAPNotUpdatedBiobanks";
+		_methodName34 = "getLDAPNotUpdatedBiobanks";
 
-		_methodParameterTypes33 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes34 = new String[] { "long", "java.lang.String" };
 
-		_methodName34 = "getBiobankWithLdapUpdate";
+		_methodName35 = "getBiobankWithLdapUpdate";
 
-		_methodParameterTypes34 = new String[] { "long" };
+		_methodParameterTypes35 = new String[] { "long" };
 
-		_methodName35 = "getD2BiobankFromLDAP";
+		_methodName36 = "getD2BiobankFromLDAP";
 
-		_methodParameterTypes35 = new String[] {
+		_methodParameterTypes36 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2Biobank",
 				"javax.naming.directory.Attributes", "boolean"
 			};
@@ -1014,14 +1018,39 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 	}
 
 	@Override
+	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank getD2BiobankByBBMRIERICID(
+		java.lang.String bbmribiobankID) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName27,
+					_methodParameterTypes27,
+					new Object[] { ClpSerializer.translateInput(bbmribiobankID) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (at.meduni.liferay.portlet.bbmrieric.model.D2Biobank)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public at.meduni.liferay.portlet.bbmrieric.model.D2Biobank addD2Biobank(
 		at.meduni.liferay.portlet.bbmrieric.model.D2Biobank newbiobank,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName27,
-					_methodParameterTypes27,
+			returnObj = _invokableLocalService.invokeMethod(_methodName28,
+					_methodParameterTypes28,
 					new Object[] {
 						ClpSerializer.translateInput(newbiobank),
 						
@@ -1066,8 +1095,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName28,
-					_methodParameterTypes28,
+			returnObj = _invokableLocalService.invokeMethod(_methodName29,
+					_methodParameterTypes29,
 					new Object[] {
 						biobankId,
 						
@@ -1162,8 +1191,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName29,
-					_methodParameterTypes29,
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
 					new Object[] {
 						ClpSerializer.translateInput(d2biobank),
 						
@@ -1208,8 +1237,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName30,
-					_methodParameterTypes30,
+			returnObj = _invokableLocalService.invokeMethod(_methodName31,
+					_methodParameterTypes31,
 					new Object[] {
 						biobankId,
 						
@@ -1299,8 +1328,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName31,
-					_methodParameterTypes31,
+			returnObj = _invokableLocalService.invokeMethod(_methodName32,
+					_methodParameterTypes32,
 					new Object[] {
 						biobankId,
 						
@@ -1331,8 +1360,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName32,
-					_methodParameterTypes32,
+			returnObj = _invokableLocalService.invokeMethod(_methodName33,
+					_methodParameterTypes33,
 					new Object[] {
 						ClpSerializer.translateInput(keyword),
 						
@@ -1370,8 +1399,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName33,
-					_methodParameterTypes33,
+			returnObj = _invokableLocalService.invokeMethod(_methodName34,
+					_methodParameterTypes34,
 					new Object[] {
 						groupId,
 						
@@ -1399,8 +1428,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName34,
-					_methodParameterTypes34, new Object[] { biobankId });
+			returnObj = _invokableLocalService.invokeMethod(_methodName35,
+					_methodParameterTypes35, new Object[] { biobankId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1424,8 +1453,8 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName35,
-					_methodParameterTypes35,
+			returnObj = _invokableLocalService.invokeMethod(_methodName36,
+					_methodParameterTypes36,
 					new Object[] {
 						ClpSerializer.translateInput(d2biobank),
 						
@@ -1520,4 +1549,6 @@ public class D2BiobankLocalServiceClp implements D2BiobankLocalService {
 	private String[] _methodParameterTypes34;
 	private String _methodName35;
 	private String[] _methodParameterTypes35;
+	private String _methodName36;
+	private String[] _methodParameterTypes36;
 }

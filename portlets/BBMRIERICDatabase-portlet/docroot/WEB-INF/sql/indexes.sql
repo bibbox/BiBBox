@@ -10,6 +10,7 @@ create index IX_7B8303DF on bbmrieric.contactinformation (uuid_);
 create index IX_EAC62EE9 on bbmrieric.contactinformation (uuid_, companyId);
 create unique index IX_12AF5BAB on bbmrieric.contactinformation (uuid_, groupId);
 
+create index IX_5FC1A928 on bbmrieric.d2biobank (bbmribiobankID);
 create index IX_5F232146 on bbmrieric.d2biobank (biobankName);
 create index IX_90CB06CF on bbmrieric.d2biobank (companyId);
 create index IX_E3B4F511 on bbmrieric.d2biobank (groupId);
