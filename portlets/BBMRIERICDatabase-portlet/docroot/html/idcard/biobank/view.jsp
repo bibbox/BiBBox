@@ -100,12 +100,29 @@ a.tooltip_size span
 String mode = "";
 HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
 httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
-mode = httpRequest.getParameter("SEARCH");
+mode = httpRequest.getParameter("mode");
 if (mode == null) {
 	mode = "production";
 }
 
+String nTocken = httpRequest.getParameter("nToken");
+if (nTocken == null) {
+	nTocken = "false";
+}
+
+System.out.println("=>nTocken: " + nTocken);
+
 String keywords = ParamUtil.getString(request, "keywords");
+
+String nTockenLiferay = ParamUtil.getString(request, "nTockenLiferay");
+if (nTockenLiferay == null || nTockenLiferay.equalsIgnoreCase("")) {
+	if(nTocken.equalsIgnoreCase("false")) {
+		nTockenLiferay = "false";
+	} else {
+		nTockenLiferay = nTocken;
+	}
+}
+System.out.println("=>nTockenLiferay: " + nTockenLiferay);
 
 String country_filter = ParamUtil.getString(request, "country");
 if (country_filter == null) {
@@ -160,7 +177,9 @@ String[] typeofcollections = D2BiobankKeys.getTypeOfCollection();
 	
 	<aui:layout>
 		<aui:fieldset>
-		 
+		 	<input type="hidden" name="mode" value="<%= mode %>" />
+		 	<aui:input type="hidden" name="nTockenLiferay" value="<%= nTockenLiferay %>" />
+		 	
 			<aui:column columnWidth="100" first="true">
 				<input style="width: 458px;" type="text" placeholder="search by: BioBank Name ..." value="<%= keywords %>" name="<portlet:namespace />keywords" size="100" id="<portlet:namespace />keywords">
 			</aui:column>
@@ -235,8 +254,15 @@ String[] typeofcollections = D2BiobankKeys.getTypeOfCollection();
 			<aui:column columnWidth="15" last="true">
 				<aui:button-row cssClass="searchFiledFloat">
 					<aui:button type="submit" value="search" />
-					<% if(mode.equalsIgnoreCase("debug")) { %>
-						<aui:button value="Negotiation" onClick="startNegotiation()" />
+					<% 
+					String negotiationButtonName = "";
+					if(nTockenLiferay.equalsIgnoreCase("false") || nTockenLiferay.equalsIgnoreCase("")) {
+						negotiationButtonName = "Start Negotiation";
+					} else {
+						negotiationButtonName = "Edit Negotiation";
+					}
+					if(mode.equalsIgnoreCase("debug")) { %>
+						<aui:button style="margin-top: 10px;" value="<%= negotiationButtonName %>" onClick="startNegotiation()" />
 					<% } %>
  				</aui:button-row>
 			</aui:column>
@@ -329,7 +355,8 @@ String[] typeofcollections = D2BiobankKeys.getTypeOfCollection();
 				  	var response = this.get('responseData');
 				  	A.all('#negotiatorloader').setStyle('display', 'none');
 				  	var redirect_uri = response['redirect_uri'];
-				  	A.one('#negotiatordata').setHTML('Negotiation process started:<br><a href="' + redirect_uri + '">' + redirect_uri + '</a>');
+				  	window.location = redirect_uri;
+				  	A.one('#negotiatordata').setHTML('Negotiation process started:<br><a target="_blank" href="' + redirect_uri + '">' + redirect_uri + '</a>');
 				  }
 				}
 		});
@@ -366,6 +393,7 @@ if(networks != null) {
 		textresult_splitter = ",";
 	}
 }
+
 %>
 
 <div id="negotiator" style="display: none;width: 100%;">

@@ -149,9 +149,13 @@ if (currentGroup.isOrganization()) {
 			listedin = core_record.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks").toString().replaceAll("\"\\]|\\[\"", "").replaceAll("\",\"", ",<br>").replaceAll("\\]|\\[", "");
 			if(core_record.getFieldValue("Additional_networks_inventories") != null) {
 				if(!core_record.getFieldValue("Additional_networks_inventories").toString().equalsIgnoreCase("")) {
-					listedin.replaceAll("none", "").replaceAll("not specified", "");
+					listedin = listedin.replaceAll("none", "").replaceAll("not specified", "");
 				}
-				listedin += "<br>" + core_record.getFieldValue("Additional_networks_inventories");
+				if(listedin.equalsIgnoreCase("")) {
+					listedin += core_record.getFieldValue("Additional_networks_inventories");
+				} else {
+					listedin += "<br>" + core_record.getFieldValue("Additional_networks_inventories");
+				}
 			}
 		}
 		

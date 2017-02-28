@@ -13,6 +13,7 @@
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.D2BiobankNetworkLinkLocalServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankNetworkLinkPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2BiobankNetworkLinkPersistenceImpl" parent="basePersistence" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.D2CollectionLocalServiceImpl" />
+	<bean id="at.meduni.liferay.portlet.bbmrieric.service.D2CollectionService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.D2CollectionServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2CollectionPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.D2CollectionPersistenceImpl" parent="basePersistence" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService" class="at.meduni.liferay.portlet.bbmrieric.service.impl.DiseaseDiscriptionLocalServiceImpl" />
 	<bean id="at.meduni.liferay.portlet.bbmrieric.service.persistence.DiseaseDiscriptionPersistence" class="at.meduni.liferay.portlet.bbmrieric.service.persistence.DiseaseDiscriptionPersistenceImpl" parent="basePersistence" />

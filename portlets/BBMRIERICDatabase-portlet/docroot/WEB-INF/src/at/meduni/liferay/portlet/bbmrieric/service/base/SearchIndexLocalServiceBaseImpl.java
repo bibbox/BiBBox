@@ -515,6 +515,25 @@ public abstract class SearchIndexLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the d2 collection remote service.
+	 *
+	 * @return the d2 collection remote service
+	 */
+	public at.meduni.liferay.portlet.bbmrieric.service.D2CollectionService getD2CollectionService() {
+		return d2CollectionService;
+	}
+
+	/**
+	 * Sets the d2 collection remote service.
+	 *
+	 * @param d2CollectionService the d2 collection remote service
+	 */
+	public void setD2CollectionService(
+		at.meduni.liferay.portlet.bbmrieric.service.D2CollectionService d2CollectionService) {
+		this.d2CollectionService = d2CollectionService;
+	}
+
+	/**
 	 * Returns the d2 collection persistence.
 	 *
 	 * @return the d2 collection persistence
@@ -809,6 +828,8 @@ public abstract class SearchIndexLocalServiceBaseImpl
 	protected D2BiobankNetworkLinkPersistence d2BiobankNetworkLinkPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService.class)
 	protected at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalService d2CollectionLocalService;
+	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.D2CollectionService.class)
+	protected at.meduni.liferay.portlet.bbmrieric.service.D2CollectionService d2CollectionService;
 	@BeanReference(type = D2CollectionPersistence.class)
 	protected D2CollectionPersistence d2CollectionPersistence;
 	@BeanReference(type = at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalService.class)

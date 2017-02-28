@@ -122,39 +122,22 @@ public class ContactInformationLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.bbmrieric.model.ContactInformation"
 			};
 
-		_methodName66 = "getBeanIdentifier";
+		_methodName68 = "getBeanIdentifier";
 
-		_methodParameterTypes66 = new String[] {  };
+		_methodParameterTypes68 = new String[] {  };
 
-		_methodName67 = "setBeanIdentifier";
+		_methodName69 = "setBeanIdentifier";
 
-		_methodParameterTypes67 = new String[] { "java.lang.String" };
+		_methodParameterTypes69 = new String[] { "java.lang.String" };
 
-		_methodName72 = "addContactInformation";
-
-		_methodParameterTypes72 = new String[] {
-				"at.meduni.liferay.portlet.bbmrieric.model.ContactInformation",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName73 = "addContactInformation";
-
-		_methodParameterTypes73 = new String[] {
-				"long", "long", "long", "long", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName74 = "updateContactInformation";
+		_methodName74 = "addContactInformation";
 
 		_methodParameterTypes74 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.ContactInformation",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName75 = "updateContactInformation";
+		_methodName75 = "addContactInformation";
 
 		_methodParameterTypes75 = new String[] {
 				"long", "long", "long", "long", "java.lang.String",
@@ -164,28 +147,45 @@ public class ContactInformationLocalServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName76 = "contactInformationFromLdapAttribute";
+		_methodName76 = "updateContactInformation";
 
 		_methodParameterTypes76 = new String[] {
+				"at.meduni.liferay.portlet.bbmrieric.model.ContactInformation",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName77 = "updateContactInformation";
+
+		_methodParameterTypes77 = new String[] {
+				"long", "long", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName78 = "contactInformationFromLdapAttribute";
+
+		_methodParameterTypes78 = new String[] {
 				"javax.naming.directory.Attributes",
 				"at.meduni.liferay.portlet.bbmrieric.model.ContactInformation"
 			};
 
-		_methodName77 = "getContactInformationWithLdapUpdate";
+		_methodName79 = "getContactInformationWithLdapUpdate";
 
-		_methodParameterTypes77 = new String[] { "long" };
+		_methodParameterTypes79 = new String[] { "long" };
 
-		_methodName78 = "getContactInformationWithLdapUpdate";
+		_methodName81 = "getContactInformationWithLdapUpdate";
 
-		_methodParameterTypes78 = new String[] { "java.lang.String" };
+		_methodParameterTypes81 = new String[] { "java.lang.String" };
 
-		_methodName79 = "getContactInformationByBBMRIERICID";
+		_methodName82 = "getContactInformationByBBMRIERICID";
 
-		_methodParameterTypes79 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes82 = new String[] { "long", "java.lang.String" };
 
-		_methodName80 = "getLDAPNotUpdatedContactInformation";
+		_methodName83 = "getLDAPNotUpdatedContactInformation";
 
-		_methodParameterTypes80 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes83 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -301,49 +301,27 @@ public class ContactInformationLocalServiceClpInvoker {
 			return ContactInformationLocalServiceUtil.updateContactInformation((at.meduni.liferay.portlet.bbmrieric.model.ContactInformation)arguments[0]);
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return ContactInformationLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			ContactInformationLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName72.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
-			return ContactInformationLocalServiceUtil.addContactInformation((at.meduni.liferay.portlet.bbmrieric.model.ContactInformation)arguments[0],
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
-		}
-
-		if (_methodName73.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			return ContactInformationLocalServiceUtil.addContactInformation(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				((Long)arguments[2]).longValue(),
-				((Long)arguments[3]).longValue(),
-				(java.lang.String)arguments[4], (java.lang.String)arguments[5],
-				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
-				(java.lang.String)arguments[8], (java.lang.String)arguments[9],
-				(java.lang.String)arguments[10],
-				(java.lang.String)arguments[11],
-				(java.lang.String)arguments[12],
-				(java.lang.String)arguments[13],
-				(com.liferay.portal.service.ServiceContext)arguments[14]);
-		}
-
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
-			return ContactInformationLocalServiceUtil.updateContactInformation((at.meduni.liferay.portlet.bbmrieric.model.ContactInformation)arguments[0],
+			return ContactInformationLocalServiceUtil.addContactInformation((at.meduni.liferay.portlet.bbmrieric.model.ContactInformation)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
-			return ContactInformationLocalServiceUtil.updateContactInformation(((Long)arguments[0]).longValue(),
+			return ContactInformationLocalServiceUtil.addContactInformation(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
 				((Long)arguments[3]).longValue(),
@@ -359,28 +337,50 @@ public class ContactInformationLocalServiceClpInvoker {
 
 		if (_methodName76.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
-			return ContactInformationLocalServiceUtil.contactInformationFromLdapAttribute((javax.naming.directory.Attributes)arguments[0],
-				(at.meduni.liferay.portlet.bbmrieric.model.ContactInformation)arguments[1]);
+			return ContactInformationLocalServiceUtil.updateContactInformation((at.meduni.liferay.portlet.bbmrieric.model.ContactInformation)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
-			return ContactInformationLocalServiceUtil.getContactInformationWithLdapUpdate(((Long)arguments[0]).longValue());
+			return ContactInformationLocalServiceUtil.updateContactInformation(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				((Long)arguments[3]).longValue(),
+				(java.lang.String)arguments[4], (java.lang.String)arguments[5],
+				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
+				(java.lang.String)arguments[8], (java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				(java.lang.String)arguments[13],
+				(com.liferay.portal.service.ServiceContext)arguments[14]);
 		}
 
 		if (_methodName78.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
-			return ContactInformationLocalServiceUtil.getContactInformationWithLdapUpdate((java.lang.String)arguments[0]);
+			return ContactInformationLocalServiceUtil.contactInformationFromLdapAttribute((javax.naming.directory.Attributes)arguments[0],
+				(at.meduni.liferay.portlet.bbmrieric.model.ContactInformation)arguments[1]);
 		}
 
 		if (_methodName79.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			return ContactInformationLocalServiceUtil.getContactInformationWithLdapUpdate(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+			return ContactInformationLocalServiceUtil.getContactInformationWithLdapUpdate((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName82.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
 			return ContactInformationLocalServiceUtil.getContactInformationByBBMRIERICID(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName80.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+		if (_methodName83.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
 			return ContactInformationLocalServiceUtil.getLDAPNotUpdatedContactInformation(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
@@ -428,14 +428,10 @@ public class ContactInformationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
-	private String _methodName72;
-	private String[] _methodParameterTypes72;
-	private String _methodName73;
-	private String[] _methodParameterTypes73;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
 	private String _methodName74;
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
@@ -448,6 +444,10 @@ public class ContactInformationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes78;
 	private String _methodName79;
 	private String[] _methodParameterTypes79;
-	private String _methodName80;
-	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
+	private String _methodName82;
+	private String[] _methodParameterTypes82;
+	private String _methodName83;
+	private String[] _methodParameterTypes83;
 }

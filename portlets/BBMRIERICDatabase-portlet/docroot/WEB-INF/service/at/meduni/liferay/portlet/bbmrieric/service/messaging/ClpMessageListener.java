@@ -22,6 +22,7 @@ import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLinkLocalServ
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankNetworkLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2BiobankServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.D2CollectionLocalServiceUtil;
+import at.meduni.liferay.portlet.bbmrieric.service.D2CollectionServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.DiseaseDiscriptionLocalServiceUtil;
 import at.meduni.liferay.portlet.bbmrieric.service.SearchIndexLocalServiceUtil;
 
@@ -56,6 +57,7 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			D2CollectionLocalServiceUtil.clearService();
 
+			D2CollectionServiceUtil.clearService();
 			DiseaseDiscriptionLocalServiceUtil.clearService();
 
 			SearchIndexLocalServiceUtil.clearService();

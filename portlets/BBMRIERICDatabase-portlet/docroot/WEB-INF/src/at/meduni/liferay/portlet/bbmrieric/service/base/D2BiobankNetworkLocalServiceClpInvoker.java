@@ -122,24 +122,24 @@ public class D2BiobankNetworkLocalServiceClpInvoker {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork"
 			};
 
-		_methodName66 = "getBeanIdentifier";
+		_methodName68 = "getBeanIdentifier";
 
-		_methodParameterTypes66 = new String[] {  };
+		_methodParameterTypes68 = new String[] {  };
 
-		_methodName67 = "setBeanIdentifier";
+		_methodName69 = "setBeanIdentifier";
 
-		_methodParameterTypes67 = new String[] { "java.lang.String" };
+		_methodParameterTypes69 = new String[] { "java.lang.String" };
 
-		_methodName72 = "addD2BiobankNetwork";
+		_methodName74 = "addD2BiobankNetwork";
 
-		_methodParameterTypes72 = new String[] {
+		_methodParameterTypes74 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName73 = "addD2BiobankNetwork";
+		_methodName75 = "addD2BiobankNetwork";
 
-		_methodParameterTypes73 = new String[] {
+		_methodParameterTypes75 = new String[] {
 				"long", "long", "long", "long", "java.lang.String",
 				"java.lang.String", "long", "java.lang.String",
 				"java.lang.String", "boolean", "boolean", "boolean", "boolean",
@@ -149,31 +149,31 @@ public class D2BiobankNetworkLocalServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName74 = "getLDAPNotUpdatedNetworks";
+		_methodName76 = "getLDAPNotUpdatedNetworks";
 
-		_methodParameterTypes74 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes76 = new String[] { "long", "java.lang.String" };
 
-		_methodName75 = "getD2BiobankNetworkByBBMRIERICID";
+		_methodName77 = "getD2BiobankNetworkByBBMRIERICID";
 
-		_methodParameterTypes75 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes77 = new String[] { "long", "java.lang.String" };
 
-		_methodName76 = "getD2BiobankNetworkFromLDAP";
+		_methodName78 = "getD2BiobankNetworkFromLDAP";
 
-		_methodParameterTypes76 = new String[] {
+		_methodParameterTypes78 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork",
 				"javax.naming.directory.Attributes"
 			};
 
-		_methodName77 = "updateD2BiobankNetwork";
+		_methodName79 = "updateD2BiobankNetwork";
 
-		_methodParameterTypes77 = new String[] {
+		_methodParameterTypes79 = new String[] {
 				"at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName78 = "updateD2BiobankNetwork";
+		_methodName80 = "updateD2BiobankNetwork";
 
-		_methodParameterTypes78 = new String[] {
+		_methodParameterTypes80 = new String[] {
 				"long", "long", "long", "long", "java.lang.String",
 				"java.lang.String", "long", "java.lang.String",
 				"java.lang.String", "boolean", "boolean", "boolean", "boolean",
@@ -297,26 +297,26 @@ public class D2BiobankNetworkLocalServiceClpInvoker {
 			return D2BiobankNetworkLocalServiceUtil.updateD2BiobankNetwork((at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork)arguments[0]);
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return D2BiobankNetworkLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			D2BiobankNetworkLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName72.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
 			return D2BiobankNetworkLocalServiceUtil.addD2BiobankNetwork((at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName73.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
 			return D2BiobankNetworkLocalServiceUtil.addD2BiobankNetwork(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -342,32 +342,32 @@ public class D2BiobankNetworkLocalServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[24]);
 		}
 
-		if (_methodName74.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			return D2BiobankNetworkLocalServiceUtil.getLDAPNotUpdatedNetworks(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName75.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
 			return D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworkByBBMRIERICID(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName76.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			return D2BiobankNetworkLocalServiceUtil.getD2BiobankNetworkFromLDAP((at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork)arguments[0],
 				(javax.naming.directory.Attributes)arguments[1]);
 		}
 
-		if (_methodName77.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			return D2BiobankNetworkLocalServiceUtil.updateD2BiobankNetwork((at.meduni.liferay.portlet.bbmrieric.model.D2BiobankNetwork)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return D2BiobankNetworkLocalServiceUtil.updateD2BiobankNetwork(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -436,14 +436,10 @@ public class D2BiobankNetworkLocalServiceClpInvoker {
 	private String[] _methodParameterTypes18;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
-	private String _methodName72;
-	private String[] _methodParameterTypes72;
-	private String _methodName73;
-	private String[] _methodParameterTypes73;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
 	private String _methodName74;
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
@@ -454,4 +450,8 @@ public class D2BiobankNetworkLocalServiceClpInvoker {
 	private String[] _methodParameterTypes77;
 	private String _methodName78;
 	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
 }

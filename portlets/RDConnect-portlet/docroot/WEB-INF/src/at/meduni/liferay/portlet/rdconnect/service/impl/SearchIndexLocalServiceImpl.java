@@ -426,24 +426,11 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 						}
 						String lastupdated = "";
 						if(tmp_lastupdated != null) {
-							lastupdated = date_format_.format(tmp_lastupdated);
+							String date_format_pattern = "yyyy/MM";
+							SimpleDateFormat date_format = new SimpleDateFormat(date_format_pattern);
+							lastupdated = date_format.format(tmp_lastupdated);
 						}
-						// Data Access Committee
-						String dataaccess = "not specified";
-						List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
-					  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
-					  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
-					  		 if(rdc_rsname.equals("reg_accessibility")) {
-					  			List<DDLRecord> records = rdc_rs.getRecords();
-					  			for(DDLRecord record : records) { 
-					  				try {
-					  					dataaccess = record.getFieldValue("Has_the_registry_a_Data_Access_Committee_").toString().replaceAll("\"\\]|\\[\"", "");
-					  				} catch (Exception ex) {
-					  					
-					  				}
-					  			}
-					  		 }
-					  	}
+						
 					  	String organizationtype = organization.getExpandoBridge().getAttribute("Organization Type").toString();
 					  	String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
 					  	String imgPath = themeDisplay.getPathImage()+"/layout_set_logo?img_id="+organization.getLogoId();
@@ -459,6 +446,29 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 					 		}
 							orgPath = orgPath + "/reg_home";
 						} 
+						
+						// Data in DDL
+						String core_name = "core";
+						String countryCode_value = "countryCode";
+						if(organizationtype.equalsIgnoreCase("Biobank")) {
+							core_name = "bb_core";
+						}
+						String countryCode = "not specified";
+						List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
+					  	for(DDLRecordSet rdc_rs : rdc_recordlist) {
+					  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+					  		 if(rdc_rsname.equals(core_name)) {
+					  			List<DDLRecord> records = rdc_rs.getRecords();
+					  			for(DDLRecord record : records) { 
+					  				try {
+					  					countryCode = record.getFieldValue(countryCode_value).toString().replaceAll("\"\\]|\\[\"", "");
+					  				} catch (Exception ex) {
+					  					
+					  				}
+					  			}
+					  		 }
+					  	}
+						
 						String maincontactmail = "";
 						User maincontact = null;
 						List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organization.getOrganizationId());
@@ -478,7 +488,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 								+ "OrganizationImageLink: '" + imgPath + "',"
 								+ "Type: '" + organization.getExpandoBridge().getAttribute("Organization Type").toString() + "',"
 								+ "'NumberofCases': " + diseascount + ","
-								+ "'Data Access Committe': '" + dataaccess + "',"
+								+ "'CountryCode': '" + countryCode + "',"
 								+ "'Request data':  '" + maincontactmail + "', "
 								+ "'lastupdated':  '" + lastupdated + "', "
 								+ "'Number of access': " + numberofacces + "}";

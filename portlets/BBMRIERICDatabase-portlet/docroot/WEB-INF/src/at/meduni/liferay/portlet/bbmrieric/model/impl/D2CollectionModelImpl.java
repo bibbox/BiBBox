@@ -16,9 +16,11 @@ package at.meduni.liferay.portlet.bbmrieric.model.impl;
 
 import at.meduni.liferay.portlet.bbmrieric.model.D2Collection;
 import at.meduni.liferay.portlet.bbmrieric.model.D2CollectionModel;
+import at.meduni.liferay.portlet.bbmrieric.model.D2CollectionSoap;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -36,8 +38,10 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,6 +57,7 @@ import java.util.Map;
  * @see at.meduni.liferay.portlet.bbmrieric.model.D2CollectionModel
  * @generated
  */
+@JSON(strict = true)
 public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 	implements D2CollectionModel {
 	/*
@@ -172,6 +177,128 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 	public static long PARENTD2COLLECTIONID_COLUMN_BITMASK = 64L;
 	public static long UPDATEUUID_COLUMN_BITMASK = 128L;
 	public static long UUID_COLUMN_BITMASK = 256L;
+
+	/**
+	 * Converts the soap model instance into a normal model instance.
+	 *
+	 * @param soapModel the soap model instance to convert
+	 * @return the normal model instance
+	 */
+	public static D2Collection toModel(D2CollectionSoap soapModel) {
+		if (soapModel == null) {
+			return null;
+		}
+
+		D2Collection model = new D2CollectionImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setD2collectionId(soapModel.getD2collectionId());
+		model.setBiobankId(soapModel.getBiobankId());
+		model.setParentd2collectionId(soapModel.getParentd2collectionId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setUpdateuuid(soapModel.getUpdateuuid());
+		model.setBbmricollectionID(soapModel.getBbmricollectionID());
+		model.setBbmriparentcollectionID(soapModel.getBbmriparentcollectionID());
+		model.setBbmribiobankID(soapModel.getBbmribiobankID());
+		model.setCollectionName(soapModel.getCollectionName());
+		model.setMaterialStoredDNA(soapModel.getMaterialStoredDNA());
+		model.setMaterialStoredPlasma(soapModel.getMaterialStoredPlasma());
+		model.setMaterialStoredSerum(soapModel.getMaterialStoredSerum());
+		model.setMaterialStoredUrine(soapModel.getMaterialStoredUrine());
+		model.setMaterialStoredSaliva(soapModel.getMaterialStoredSaliva());
+		model.setMaterialStoredFaeces(soapModel.getMaterialStoredFaeces());
+		model.setMaterialStoredRNA(soapModel.getMaterialStoredRNA());
+		model.setMaterialStoredBlood(soapModel.getMaterialStoredBlood());
+		model.setMaterialStoredTissueFrozen(soapModel.getMaterialStoredTissueFrozen());
+		model.setMaterialStoredTissueFFPE(soapModel.getMaterialStoredTissueFFPE());
+		model.setMaterialStoredImmortalizedCellLines(soapModel.getMaterialStoredImmortalizedCellLines());
+		model.setMaterialStoredIsolatedPathogen(soapModel.getMaterialStoredIsolatedPathogen());
+		model.setMaterialStoredOther(soapModel.getMaterialStoredOther());
+		model.setCollectionTypeCaseControl(soapModel.getCollectionTypeCaseControl());
+		model.setCollectionTypeCohort(soapModel.getCollectionTypeCohort());
+		model.setCollectionTypeCrossSectional(soapModel.getCollectionTypeCrossSectional());
+		model.setCollectionTypeLongitudinal(soapModel.getCollectionTypeLongitudinal());
+		model.setCollectionTypeTwinStudy(soapModel.getCollectionTypeTwinStudy());
+		model.setCollectionTypeQualityControl(soapModel.getCollectionTypeQualityControl());
+		model.setCollectionTypePopulationBased(soapModel.getCollectionTypePopulationBased());
+		model.setCollectionTypeDiseaseSpecific(soapModel.getCollectionTypeDiseaseSpecific());
+		model.setCollectionTypeBirthCohort(soapModel.getCollectionTypeBirthCohort());
+		model.setCollectionTypeOther(soapModel.getCollectionTypeOther());
+		model.setCollectionOrderOfMagnitude(soapModel.getCollectionOrderOfMagnitude());
+		model.setBioresourceReference(soapModel.getBioresourceReference());
+		model.setContactIDRef(soapModel.getContactIDRef());
+		model.setContactPriority(soapModel.getContactPriority());
+		model.setBiobankNetworkIDRef(soapModel.getBiobankNetworkIDRef());
+		model.setGeoLatitude(soapModel.getGeoLatitude());
+		model.setGeoLongitude(soapModel.getGeoLongitude());
+		model.setCollaborationPartnersCommercial(soapModel.getCollaborationPartnersCommercial());
+		model.setCollaborationPartnersNonforprofit(soapModel.getCollaborationPartnersNonforprofit());
+		model.setCollectionAcronym(soapModel.getCollectionAcronym());
+		model.setCollectionDescription(soapModel.getCollectionDescription());
+		model.setCollectionSexMale(soapModel.getCollectionSexMale());
+		model.setCollectionSexFemale(soapModel.getCollectionSexFemale());
+		model.setCollectionSexUnknown(soapModel.getCollectionSexUnknown());
+		model.setCollectionSexUndiferrentiated(soapModel.getCollectionSexUndiferrentiated());
+		model.setCollectionAgeLow(soapModel.getCollectionAgeLow());
+		model.setCollectionAgeHigh(soapModel.getCollectionAgeHigh());
+		model.setCollectionAgeUnit(soapModel.getCollectionAgeUnit());
+		model.setCollectionAvailableBiologicalSamples(soapModel.getCollectionAvailableBiologicalSamples());
+		model.setCollectionAvailableSurveyData(soapModel.getCollectionAvailableSurveyData());
+		model.setCollectionAvailableImagingData(soapModel.getCollectionAvailableImagingData());
+		model.setCollectionAvailableMedicalRecords(soapModel.getCollectionAvailableMedicalRecords());
+		model.setCollectionAvailableNationalRegistries(soapModel.getCollectionAvailableNationalRegistries());
+		model.setCollectionAvailableGenealogicalRecords(soapModel.getCollectionAvailableGenealogicalRecords());
+		model.setCollectionAvailablePhysioBiochemMeasurements(soapModel.getCollectionAvailablePhysioBiochemMeasurements());
+		model.setCollectionAvailableOther(soapModel.getCollectionAvailableOther());
+		model.setTemperatureRoom(soapModel.getTemperatureRoom());
+		model.setTemperature2to10(soapModel.getTemperature2to10());
+		model.setTemperature18to35(soapModel.getTemperature18to35());
+		model.setTemperature60to85(soapModel.getTemperature60to85());
+		model.setTemperatureLN(soapModel.getTemperatureLN());
+		model.setTemperatureOther(soapModel.getTemperatureOther());
+		model.setDiagnosisAvailable(soapModel.getDiagnosisAvailable());
+		model.setCollectionHeadFirstName(soapModel.getCollectionHeadFirstName());
+		model.setCollectionHeadLastName(soapModel.getCollectionHeadLastName());
+		model.setCollectionHeadRole(soapModel.getCollectionHeadRole());
+		model.setCollectionSampleAccessFee(soapModel.getCollectionSampleAccessFee());
+		model.setCollectionSampleAccessJointProjects(soapModel.getCollectionSampleAccessJointProjects());
+		model.setCollectionSampleAccessDescription(soapModel.getCollectionSampleAccessDescription());
+		model.setCollectionSampleAccessURI(soapModel.getCollectionSampleAccessURI());
+		model.setCollectionDataAccessFee(soapModel.getCollectionDataAccessFee());
+		model.setCollectionDataAccessJointProjects(soapModel.getCollectionDataAccessJointProjects());
+		model.setCollectionDataAccessDescription(soapModel.getCollectionDataAccessDescription());
+		model.setCollectionDataAccessURI(soapModel.getCollectionDataAccessURI());
+		model.setCollectionSize(soapModel.getCollectionSize());
+		model.setCollectionSizeTimestamp(soapModel.getCollectionSizeTimestamp());
+
+		return model;
+	}
+
+	/**
+	 * Converts the soap model instances into normal model instances.
+	 *
+	 * @param soapModels the soap model instances to convert
+	 * @return the normal model instances
+	 */
+	public static List<D2Collection> toModels(D2CollectionSoap[] soapModels) {
+		if (soapModels == null) {
+			return null;
+		}
+
+		List<D2Collection> models = new ArrayList<D2Collection>(soapModels.length);
+
+		for (D2CollectionSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.at.meduni.liferay.portlet.bbmrieric.model.D2Collection"));
 
@@ -884,6 +1011,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		}
 	}
 
+	@JSON
 	@Override
 	public String getUuid() {
 		if (_uuid == null) {
@@ -907,6 +1035,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	@Override
 	public long getD2collectionId() {
 		return _d2collectionId;
@@ -929,6 +1058,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return _originalD2collectionId;
 	}
 
+	@JSON
 	@Override
 	public long getBiobankId() {
 		return _biobankId;
@@ -951,6 +1081,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return _originalBiobankId;
 	}
 
+	@JSON
 	@Override
 	public long getParentd2collectionId() {
 		return _parentd2collectionId;
@@ -973,6 +1104,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return _originalParentd2collectionId;
 	}
 
+	@JSON
 	@Override
 	public long getCompanyId() {
 		return _companyId;
@@ -995,6 +1127,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return _originalCompanyId;
 	}
 
+	@JSON
 	@Override
 	public long getGroupId() {
 		return _groupId;
@@ -1017,6 +1150,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return _originalGroupId;
 	}
 
+	@JSON
 	@Override
 	public long getUserId() {
 		return _userId;
@@ -1037,6 +1171,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	@Override
 	public String getUserName() {
 		if (_userName == null) {
@@ -1052,6 +1187,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_userName = userName;
 	}
 
+	@JSON
 	@Override
 	public Date getCreateDate() {
 		return _createDate;
@@ -1062,6 +1198,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_createDate = createDate;
 	}
 
+	@JSON
 	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
@@ -1072,6 +1209,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	@Override
 	public String getUpdateuuid() {
 		if (_updateuuid == null) {
@@ -1097,6 +1235,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return GetterUtil.getString(_originalUpdateuuid);
 	}
 
+	@JSON
 	@Override
 	public String getBbmricollectionID() {
 		if (_bbmricollectionID == null) {
@@ -1122,6 +1261,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return GetterUtil.getString(_originalBbmricollectionID);
 	}
 
+	@JSON
 	@Override
 	public String getBbmriparentcollectionID() {
 		if (_bbmriparentcollectionID == null) {
@@ -1137,6 +1277,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_bbmriparentcollectionID = bbmriparentcollectionID;
 	}
 
+	@JSON
 	@Override
 	public String getBbmribiobankID() {
 		if (_bbmribiobankID == null) {
@@ -1162,6 +1303,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		return GetterUtil.getString(_originalBbmribiobankID);
 	}
 
+	@JSON
 	@Override
 	public String getCollectionName() {
 		if (_collectionName == null) {
@@ -1177,6 +1319,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionName = collectionName;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredDNA() {
 		return _materialStoredDNA;
@@ -1192,6 +1335,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredDNA = materialStoredDNA;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredPlasma() {
 		return _materialStoredPlasma;
@@ -1207,6 +1351,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredPlasma = materialStoredPlasma;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredSerum() {
 		return _materialStoredSerum;
@@ -1222,6 +1367,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredSerum = materialStoredSerum;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredUrine() {
 		return _materialStoredUrine;
@@ -1237,6 +1383,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredUrine = materialStoredUrine;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredSaliva() {
 		return _materialStoredSaliva;
@@ -1252,6 +1399,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredSaliva = materialStoredSaliva;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredFaeces() {
 		return _materialStoredFaeces;
@@ -1267,6 +1415,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredFaeces = materialStoredFaeces;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredRNA() {
 		return _materialStoredRNA;
@@ -1282,6 +1431,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredRNA = materialStoredRNA;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredBlood() {
 		return _materialStoredBlood;
@@ -1297,6 +1447,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredBlood = materialStoredBlood;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredTissueFrozen() {
 		return _materialStoredTissueFrozen;
@@ -1313,6 +1464,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredTissueFrozen = materialStoredTissueFrozen;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredTissueFFPE() {
 		return _materialStoredTissueFFPE;
@@ -1328,6 +1480,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredTissueFFPE = materialStoredTissueFFPE;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredImmortalizedCellLines() {
 		return _materialStoredImmortalizedCellLines;
@@ -1344,6 +1497,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredImmortalizedCellLines = materialStoredImmortalizedCellLines;
 	}
 
+	@JSON
 	@Override
 	public boolean getMaterialStoredIsolatedPathogen() {
 		return _materialStoredIsolatedPathogen;
@@ -1360,6 +1514,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredIsolatedPathogen = materialStoredIsolatedPathogen;
 	}
 
+	@JSON
 	@Override
 	public String getMaterialStoredOther() {
 		if (_materialStoredOther == null) {
@@ -1375,6 +1530,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_materialStoredOther = materialStoredOther;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypeCaseControl() {
 		return _collectionTypeCaseControl;
@@ -1390,6 +1546,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeCaseControl = collectionTypeCaseControl;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypeCohort() {
 		return _collectionTypeCohort;
@@ -1405,6 +1562,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeCohort = collectionTypeCohort;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypeCrossSectional() {
 		return _collectionTypeCrossSectional;
@@ -1421,6 +1579,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeCrossSectional = collectionTypeCrossSectional;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypeLongitudinal() {
 		return _collectionTypeLongitudinal;
@@ -1437,6 +1596,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeLongitudinal = collectionTypeLongitudinal;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypeTwinStudy() {
 		return _collectionTypeTwinStudy;
@@ -1452,6 +1612,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeTwinStudy = collectionTypeTwinStudy;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypeQualityControl() {
 		return _collectionTypeQualityControl;
@@ -1468,6 +1629,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeQualityControl = collectionTypeQualityControl;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypePopulationBased() {
 		return _collectionTypePopulationBased;
@@ -1484,6 +1646,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypePopulationBased = collectionTypePopulationBased;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypeDiseaseSpecific() {
 		return _collectionTypeDiseaseSpecific;
@@ -1500,6 +1663,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeDiseaseSpecific = collectionTypeDiseaseSpecific;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionTypeBirthCohort() {
 		return _collectionTypeBirthCohort;
@@ -1515,6 +1679,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeBirthCohort = collectionTypeBirthCohort;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionTypeOther() {
 		if (_collectionTypeOther == null) {
@@ -1530,6 +1695,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionTypeOther = collectionTypeOther;
 	}
 
+	@JSON
 	@Override
 	public long getCollectionOrderOfMagnitude() {
 		return _collectionOrderOfMagnitude;
@@ -1540,6 +1706,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionOrderOfMagnitude = collectionOrderOfMagnitude;
 	}
 
+	@JSON
 	@Override
 	public String getBioresourceReference() {
 		if (_bioresourceReference == null) {
@@ -1555,6 +1722,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_bioresourceReference = bioresourceReference;
 	}
 
+	@JSON
 	@Override
 	public String getContactIDRef() {
 		if (_contactIDRef == null) {
@@ -1570,6 +1738,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_contactIDRef = contactIDRef;
 	}
 
+	@JSON
 	@Override
 	public long getContactPriority() {
 		return _contactPriority;
@@ -1580,6 +1749,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_contactPriority = contactPriority;
 	}
 
+	@JSON
 	@Override
 	public String getBiobankNetworkIDRef() {
 		if (_biobankNetworkIDRef == null) {
@@ -1595,6 +1765,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_biobankNetworkIDRef = biobankNetworkIDRef;
 	}
 
+	@JSON
 	@Override
 	public String getGeoLatitude() {
 		if (_geoLatitude == null) {
@@ -1610,6 +1781,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_geoLatitude = geoLatitude;
 	}
 
+	@JSON
 	@Override
 	public String getGeoLongitude() {
 		if (_geoLongitude == null) {
@@ -1625,6 +1797,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_geoLongitude = geoLongitude;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollaborationPartnersCommercial() {
 		return _collaborationPartnersCommercial;
@@ -1641,6 +1814,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collaborationPartnersCommercial = collaborationPartnersCommercial;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollaborationPartnersNonforprofit() {
 		return _collaborationPartnersNonforprofit;
@@ -1657,6 +1831,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collaborationPartnersNonforprofit = collaborationPartnersNonforprofit;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionAcronym() {
 		if (_collectionAcronym == null) {
@@ -1672,6 +1847,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAcronym = collectionAcronym;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionDescription() {
 		if (_collectionDescription == null) {
@@ -1687,6 +1863,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionDescription = collectionDescription;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionSexMale() {
 		return _collectionSexMale;
@@ -1702,6 +1879,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSexMale = collectionSexMale;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionSexFemale() {
 		return _collectionSexFemale;
@@ -1717,6 +1895,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSexFemale = collectionSexFemale;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionSexUnknown() {
 		return _collectionSexUnknown;
@@ -1732,6 +1911,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSexUnknown = collectionSexUnknown;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionSexUndiferrentiated() {
 		return _collectionSexUndiferrentiated;
@@ -1748,6 +1928,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSexUndiferrentiated = collectionSexUndiferrentiated;
 	}
 
+	@JSON
 	@Override
 	public long getCollectionAgeLow() {
 		return _collectionAgeLow;
@@ -1758,6 +1939,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAgeLow = collectionAgeLow;
 	}
 
+	@JSON
 	@Override
 	public long getCollectionAgeHigh() {
 		return _collectionAgeHigh;
@@ -1768,6 +1950,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAgeHigh = collectionAgeHigh;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionAgeUnit() {
 		if (_collectionAgeUnit == null) {
@@ -1783,6 +1966,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAgeUnit = collectionAgeUnit;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionAvailableBiologicalSamples() {
 		return _collectionAvailableBiologicalSamples;
@@ -1799,6 +1983,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAvailableBiologicalSamples = collectionAvailableBiologicalSamples;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionAvailableSurveyData() {
 		return _collectionAvailableSurveyData;
@@ -1815,6 +2000,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAvailableSurveyData = collectionAvailableSurveyData;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionAvailableImagingData() {
 		return _collectionAvailableImagingData;
@@ -1831,6 +2017,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAvailableImagingData = collectionAvailableImagingData;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionAvailableMedicalRecords() {
 		return _collectionAvailableMedicalRecords;
@@ -1847,6 +2034,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAvailableMedicalRecords = collectionAvailableMedicalRecords;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionAvailableNationalRegistries() {
 		return _collectionAvailableNationalRegistries;
@@ -1863,6 +2051,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAvailableNationalRegistries = collectionAvailableNationalRegistries;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionAvailableGenealogicalRecords() {
 		return _collectionAvailableGenealogicalRecords;
@@ -1879,6 +2068,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAvailableGenealogicalRecords = collectionAvailableGenealogicalRecords;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionAvailablePhysioBiochemMeasurements() {
 		return _collectionAvailablePhysioBiochemMeasurements;
@@ -1895,6 +2085,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAvailablePhysioBiochemMeasurements = collectionAvailablePhysioBiochemMeasurements;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionAvailableOther() {
 		if (_collectionAvailableOther == null) {
@@ -1910,6 +2101,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionAvailableOther = collectionAvailableOther;
 	}
 
+	@JSON
 	@Override
 	public boolean getTemperatureRoom() {
 		return _temperatureRoom;
@@ -1925,6 +2117,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_temperatureRoom = temperatureRoom;
 	}
 
+	@JSON
 	@Override
 	public boolean getTemperature2to10() {
 		return _temperature2to10;
@@ -1940,6 +2133,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_temperature2to10 = temperature2to10;
 	}
 
+	@JSON
 	@Override
 	public boolean getTemperature18to35() {
 		return _temperature18to35;
@@ -1955,6 +2149,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_temperature18to35 = temperature18to35;
 	}
 
+	@JSON
 	@Override
 	public boolean getTemperature60to85() {
 		return _temperature60to85;
@@ -1970,6 +2165,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_temperature60to85 = temperature60to85;
 	}
 
+	@JSON
 	@Override
 	public boolean getTemperatureLN() {
 		return _temperatureLN;
@@ -1985,6 +2181,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_temperatureLN = temperatureLN;
 	}
 
+	@JSON
 	@Override
 	public String getTemperatureOther() {
 		if (_temperatureOther == null) {
@@ -2000,6 +2197,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_temperatureOther = temperatureOther;
 	}
 
+	@JSON
 	@Override
 	public String getDiagnosisAvailable() {
 		if (_diagnosisAvailable == null) {
@@ -2015,6 +2213,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_diagnosisAvailable = diagnosisAvailable;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionHeadFirstName() {
 		if (_collectionHeadFirstName == null) {
@@ -2030,6 +2229,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionHeadFirstName = collectionHeadFirstName;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionHeadLastName() {
 		if (_collectionHeadLastName == null) {
@@ -2045,6 +2245,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionHeadLastName = collectionHeadLastName;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionHeadRole() {
 		if (_collectionHeadRole == null) {
@@ -2060,6 +2261,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionHeadRole = collectionHeadRole;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionSampleAccessFee() {
 		return _collectionSampleAccessFee;
@@ -2075,6 +2277,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSampleAccessFee = collectionSampleAccessFee;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionSampleAccessJointProjects() {
 		return _collectionSampleAccessJointProjects;
@@ -2091,6 +2294,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSampleAccessJointProjects = collectionSampleAccessJointProjects;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionSampleAccessDescription() {
 		if (_collectionSampleAccessDescription == null) {
@@ -2107,6 +2311,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSampleAccessDescription = collectionSampleAccessDescription;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionSampleAccessURI() {
 		if (_collectionSampleAccessURI == null) {
@@ -2122,6 +2327,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSampleAccessURI = collectionSampleAccessURI;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionDataAccessFee() {
 		return _collectionDataAccessFee;
@@ -2137,6 +2343,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionDataAccessFee = collectionDataAccessFee;
 	}
 
+	@JSON
 	@Override
 	public boolean getCollectionDataAccessJointProjects() {
 		return _collectionDataAccessJointProjects;
@@ -2153,6 +2360,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionDataAccessJointProjects = collectionDataAccessJointProjects;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionDataAccessDescription() {
 		if (_collectionDataAccessDescription == null) {
@@ -2169,6 +2377,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionDataAccessDescription = collectionDataAccessDescription;
 	}
 
+	@JSON
 	@Override
 	public String getCollectionDataAccessURI() {
 		if (_collectionDataAccessURI == null) {
@@ -2184,6 +2393,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionDataAccessURI = collectionDataAccessURI;
 	}
 
+	@JSON
 	@Override
 	public long getCollectionSize() {
 		return _collectionSize;
@@ -2194,6 +2404,7 @@ public class D2CollectionModelImpl extends BaseModelImpl<D2Collection>
 		_collectionSize = collectionSize;
 	}
 
+	@JSON
 	@Override
 	public long getCollectionSizeTimestamp() {
 		return _collectionSizeTimestamp;

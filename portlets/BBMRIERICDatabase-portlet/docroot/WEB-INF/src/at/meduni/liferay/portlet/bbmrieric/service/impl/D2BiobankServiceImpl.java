@@ -93,37 +93,47 @@ public class D2BiobankServiceImpl extends D2BiobankServiceBaseImpl {
 	@JSONWebService(value = "eu_bbmri_eric_biobanks_123")
 	public JSONObject getBiobanks1234(String start) {
 		int s = Integer.valueOf(start);
-		JSONObject jsonobject = getMetaData(s);
-		jsonobject.put("items", getBiobanksArray(s));
-		return jsonobject;
+		/*JSONObject jsonobject = getMetaData(s);
+		jsonobject.put("items", getBiobanksArray(s));*/
+		return null;
 	}
 	
 	private JSONObject getMetaData(int start) {
 		JSONObject jsonobject = JSONFactoryUtil.createJSONObject();
+		int count = 0;
 		jsonobject.put("start", start);
 		jsonobject.put("num", 100);
 		jsonobject.put("href", "/api/v2/eu_bbmri_eric_biobanks");
-		jsonobject.put("nextHref", "http://old.bbrmi-eric.eu/api/v2/eu_bbmri_eric_biobanks?start=" + (start + 100));
+		
 		try {
+			count = D2BiobankLocalServiceUtil.getD2BiobanksCount();
 			jsonobject.put("total", D2BiobankLocalServiceUtil.getD2BiobanksCount());
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if(start+100 <= count) {
+			jsonobject.put("nextHref", "http://old.bbmri-eric.eu/api/v2/eu_bbmri_eric_biobanks?start=" + (start + 100));
 		}
 		return jsonobject;
 	}
 	
 	private JSONObject getMetaDataCollection(int start) {
 		JSONObject jsonobject = JSONFactoryUtil.createJSONObject();
+		int count = 0;
 		jsonobject.put("start", start);
 		jsonobject.put("num", 100);
 		jsonobject.put("href", "/api/v2/eu_bbmri_eric_collections");
-		jsonobject.put("nextHref", "http://old.bbrmi-eric.eu/api/v2/eu_bbmri_eric_collections?start=" + (start + 100));
+		
 		try {
+			count = D2BiobankLocalServiceUtil.getD2BiobanksCount();
 			jsonobject.put("total", D2BiobankLocalServiceUtil.getD2BiobanksCount());
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if(start+100 <= count) {
+			jsonobject.put("nextHref", "http://old.bbmri-eric.eu/api/v2/eu_bbmri_eric_collections?start=" + (start + 100));
 		}
 		return jsonobject;
 	}
@@ -132,9 +142,10 @@ public class D2BiobankServiceImpl extends D2BiobankServiceBaseImpl {
 		JSONArray jsonarray = JSONFactoryUtil.createJSONArray();
 		try {
 			List<D2Biobank> d2biobanks = D2BiobankLocalServiceUtil.getD2Biobanks(start, start+100);
+			System.out.println("Count in:" + d2biobanks.size());
 			for(D2Biobank d2biobank : d2biobanks) {
 				JSONObject biobankobject = JSONFactoryUtil.createJSONObject();
-				biobankobject.put("_href", "http://old.bbrmi-eric.eu/api/v2/eu_bbmri_eric_biobanks/" + d2biobank.getBbmribiobankID());
+				biobankobject.put("_href", "http://old.bbmri-eric.eu/api/v2/eu_bbmri_eric_biobanks/" + d2biobank.getBbmribiobankID());
 				biobankobject.put("id", d2biobank.getBbmribiobankID());
 				biobankobject.put("name", d2biobank.getBiobankName());
 				biobankobject.put("acronym", d2biobank.getBiobankAcronym());
@@ -155,7 +166,12 @@ public class D2BiobankServiceImpl extends D2BiobankServiceBaseImpl {
 				biobankobject.put("head_firstname", d2biobank.getBiobankHeadFirstName());
 				biobankobject.put("head_lastname", d2biobank.getBiobankHeadLastName());
 				biobankobject.put("head_role", d2biobank.getBiobankHeadRole());
-				biobankobject.put("contact", getContact(d2biobank.getContactInformation()));
+				try {
+					biobankobject.put("contact", getContact(d2biobank.getContactInformation()));
+				} catch (Exception e) {
+					System.err.println("ERROR getting contact!");
+					e.printStackTrace();
+				}
 				biobankobject.put("contact_priority", d2biobank.getContactPriority());
 				biobankobject.put("latitude", d2biobank.getGeoLatitude());
 				biobankobject.put("longitude", d2biobank.getGeoLongitude());
@@ -225,7 +241,12 @@ public class D2BiobankServiceImpl extends D2BiobankServiceBaseImpl {
 				order_of_magnitude.put("id", d2collection.getCollectionOrderOfMagnitude());
 				collectionobject.put("order_of_magnitude", order_of_magnitude);
 				collectionobject.put("size", d2collection.getCollectionSize());
-				collectionobject.put("contact", getContact(d2collection.getContactInformation()));
+				try {
+					collectionobject.put("contact", getContact(d2collection.getContactInformation()));
+				} catch (Exception e) {
+					System.err.println("ERROR getting contact!");
+					e.printStackTrace();
+				}
 				collectionobject.put("contact_priority", d2collection.getContactPriority());
 				collectionobject.put("sex", getSexArray(d2collection));
 				collectionobject.put("diagnosis_available", getDiagnosisAvailableArray(d2collection));
@@ -258,7 +279,7 @@ public class D2BiobankServiceImpl extends D2BiobankServiceBaseImpl {
 	private JSONObject getBiobankObject(String bbmribiobankID) {
 		D2Biobank d2biobank = D2BiobankLocalServiceUtil.getD2BiobankByBBMRIERICID(bbmribiobankID);
 		JSONObject biobankobject = JSONFactoryUtil.createJSONObject();
-		biobankobject.put("_href", "http://old.bbrmi-eric.eu/api/v2/eu_bbmri_eric_biobanks/" + d2biobank.getBbmribiobankID());
+		biobankobject.put("_href", "http://old.bbmri-eric.eu/api/v2/eu_bbmri_eric_biobanks/" + d2biobank.getBbmribiobankID());
 		biobankobject.put("id", d2biobank.getBbmribiobankID());
 		biobankobject.put("name", d2biobank.getBiobankName());
 		return biobankobject;

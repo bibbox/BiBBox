@@ -96,7 +96,7 @@ AUI().use(
     		sortable: true
     	},
     	{
-    		label: 'Number of enrolled cases (last report)',
+    		label: 'Number of enrolled cases',
     		key: 'NumberofCases',
     		sortable: true,
     		allowHTML: true,
@@ -105,17 +105,20 @@ AUI().use(
     			if(o.data.NumberofCases == 0) {
     				returnvalue = 'Not reported';
     			} else {
-    				returnvalue = o.data.NumberofCases + ' (' + o.data.lastupdated + ')';
+    				returnvalue = o.data.NumberofCases;
     			}
     			return returnvalue;
     		}
     	},
     	{
-    		label: 'Main contact',
-    		key: 'Request data',
-    		sortable: true,
-    		allowHTML: true,
-    		formatter: '<a href="mailto:{value}">{value}</a>'
+    		label: 'Last report',
+    		key: 'lastupdated',
+    		sortable: true
+    	},
+    	{
+    		label: 'Country',
+    		key: 'CountryCode',
+    		sortable: true
     	}
     ];
 	var dataTable = new Y.DataTable(

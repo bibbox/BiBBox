@@ -21,9 +21,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services.
+ * This class is used by SOAP remote services, specifically {@link at.meduni.liferay.portlet.bbmrieric.service.http.D2CollectionServiceSoap}.
  *
  * @author reihsr
+ * @see at.meduni.liferay.portlet.bbmrieric.service.http.D2CollectionServiceSoap
  * @generated
  */
 public class D2CollectionSoap implements Serializable {

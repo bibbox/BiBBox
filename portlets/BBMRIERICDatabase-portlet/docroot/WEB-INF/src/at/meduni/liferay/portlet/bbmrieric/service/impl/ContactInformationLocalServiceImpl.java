@@ -306,7 +306,17 @@ public class ContactInformationLocalServiceImpl
 		return null;
 	}
 	
+	private String removeOtherIds(String contactID) {
+		String[] split = contactID.split(", ");
+		for(String contactID_s : split) {
+			contactID = contactID_s;
+			break;
+		}
+		return contactID;
+	}
+	
 	public ContactInformation getContactInformationWithLdapUpdate(String contactID) {
+		contactID = removeOtherIds(contactID);
 		try {
 			long companyId = Long.parseLong(PropsUtil.get("D2BiobankCompany"));
 			long groupId = Long.parseLong(PropsUtil.get("D2BiobankGroup"));

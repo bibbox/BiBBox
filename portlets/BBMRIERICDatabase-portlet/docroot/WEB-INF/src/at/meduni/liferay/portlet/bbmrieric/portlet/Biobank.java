@@ -64,18 +64,18 @@ public class Biobank extends MVCPortlet {
 			String searchurl = ParamUtil.getString(resourceRequest, "searchurl");
 			String humanReadable = ParamUtil.getString(resourceRequest, "humanReadable");
 			String collections = ParamUtil.getString(resourceRequest, "collections");
-			System.out.println("searchurl: " + searchurl);
-			System.out.println("humanReadable: " + humanReadable);
-			System.out.println("collections: " + collections);
+			String nTockenLiferay = ParamUtil.getString(resourceRequest, "nTockenLiferay");
 			
 			String redirect_uri = "";
 			try {
-				redirect_uri = createNegotiation(searchurl, humanReadable, collections);
+				redirect_uri = createNegotiation(searchurl, humanReadable, collections, nTockenLiferay);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			if(redirect_uri.equalsIgnoreCase("")) {
+				redirect_uri = "An Error occurred, please try later again.";
+			}
 			json.put("redirect_uri", redirect_uri);
 			resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
 		} catch (IOException e) {
@@ -84,29 +84,31 @@ public class Biobank extends MVCPortlet {
 		}
 	}
 	
-	private String createNegotiation(String searchurl, String humanReadable, String collections) throws ClientProtocolException, IOException, JSONException {
+	private String createNegotiation(String searchurl, String humanReadable, String collections, String nTockenLiferay) throws ClientProtocolException, IOException, JSONException {
 		
 
 
-		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+		/*CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 		credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("molgenis", "gogogo"));
-		CloseableHttpClient c = HttpClientBuilder.create().setDefaultCredentialsProvider(credentialsProvider).build();
+		CloseableHttpClient c = HttpClientBuilder.create().setDefaultCredentialsProvider(credentialsProvider).build();*/
 
 
 		
-		//HttpClient c = HttpClientBuilder.create().build();
+		HttpClient c = HttpClientBuilder.create().build();
 		HttpPost p = new HttpPost(negotiator_url_);
-
-		p.setEntity(new StringEntity("{\"searchurl\":\"" + searchurl
-				+ "\",\"humanReadable\":\"" + humanReadable
-				+ "\",\"collections\":" + collections + "}",
-				ContentType.create("application/json")));
-
-		System.out.println("{\"searchurl\":\"" + searchurl
-				+ "\",\"humanReadable\":\"" + humanReadable
-				+ "\",\"collections\":" + collections + "}");
 		
-		//p.setHeader("authorization", "Basic bW9sZ2VuaXM6Z29nb2dv");
+		if(nTockenLiferay.equalsIgnoreCase("false")) {
+			nTockenLiferay = "";
+		} else {
+			nTockenLiferay = ", \"nToken\":\"" + nTockenLiferay + "\"";
+		}
+
+		p.setEntity(new StringEntity("{\"URL\":\"" + searchurl
+				+ "\",\"humanReadable\":\"" + humanReadable
+				+ "\",\"collections\":" + collections + nTockenLiferay + "}",
+				ContentType.create("application/json")));
+		
+		p.setHeader("Authorization", "Basic bW9sZ2VuaXM6Z29nb2dv");
 		
 		HttpResponse r = c.execute(p);
 

@@ -144,7 +144,6 @@ if (currentGroup.isOrganization()) {
 			  	on: {
 	              failure: function() { 
 	              	Y.all('#ajaxloader').setStyle('display', 'none');
-	              	alert('Unable to Load Data'); 
 	              },
 	              success: function() {
 	                Y.all('#ajaxloader').setStyle('display', 'none'); 

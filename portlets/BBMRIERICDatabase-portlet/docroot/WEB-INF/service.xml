@@ -197,7 +197,7 @@
             <finder-column comparator="!=" name="updateuuid"></finder-column>
         </finder>
 	</entity>
-	<entity name="D2Collection" uuid="true" local-service="true" remote-service="false" table="bbmrieric.d2collection">
+	<entity name="D2Collection" uuid="true" local-service="true" remote-service="true" table="bbmrieric.d2collection">
 		<!-- PK fields -->
 		<column name="d2collectionId" type="long" primary="true" />
 		<!-- FK fields -->
