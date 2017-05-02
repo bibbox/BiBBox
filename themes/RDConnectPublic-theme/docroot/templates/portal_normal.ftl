@@ -7,8 +7,6 @@
 <head>
 	<title>${the_title} - ${company_name}</title>
 
-	<meta name="GOOGLEBOT" content="NOINDEX, NOFOLLOW">
-	<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 	
 	<#if is_signed_in>

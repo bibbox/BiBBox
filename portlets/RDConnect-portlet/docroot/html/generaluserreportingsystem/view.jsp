@@ -125,6 +125,7 @@ AUI().use(
       {
         columns: nestedCols,
         data: remoteData,
+        sortBy: { 'Name': "asc" },
       }
     ).render('#myDataTable');
 

@@ -377,7 +377,7 @@ if (currentGroup.isOrganization()) {
 					%><br /><%
 				}
 				//if(website.isPrimary()) {
-				%><aui:a href='<%= website.getUrl() %>' target="blank"><%= website.getUrl() %></aui:a><%
+				%><aui:a href='<%= website.getUrl() %>' target="blank">Website Link</aui:a><%
 				//}
 				first = false;
 			}

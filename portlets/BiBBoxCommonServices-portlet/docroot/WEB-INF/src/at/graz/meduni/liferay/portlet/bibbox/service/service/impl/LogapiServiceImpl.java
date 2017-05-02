@@ -14,11 +14,27 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import nl.dtl.fairmetadata4j.io.MetadataException;
+import nl.dtl.fairmetadata4j.model.Agent;
+import nl.dtl.fairmetadata4j.model.FDPMetadata;
+import nl.dtl.fairmetadata4j.model.Metadata;
+import nl.dtl.fairmetadata4j.utils.MetadataParserUtils;
+import nl.dtl.fairmetadata4j.utils.MetadataUtils;
+
+import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.eclipse.rdf4j.model.vocabulary.FOAF;
+import org.eclipse.rdf4j.rio.RDFFormat;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -381,6 +397,40 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 					e.printStackTrace();
 				}
 			}
+			organizations = OrganizationLocalServiceUtil.getOrganizations(CompanyThreadLocal.getCompanyId(), 26616);
+			for(Organization organization : organizations) {
+				try {
+					String type = "biobank";
+					try {
+						type = OrganizationSearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+					} catch (Exception ex) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+						ex.printStackTrace();
+					}
+					//if(!type.equalsIgnoreCase("biobank")) {
+						//continue;
+					//}
+					JSONObject json = JSONFactoryUtil.createJSONObject();
+					json.put("ID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
+					json.put("OrganizationID", organization.getOrganizationId());
+					json.put("name", organization.getName());
+					json.put("type", type);
+					JSONArray json_collection_array = JSONFactoryUtil.createJSONArray();
+					JSONObject json_default_collection = JSONFactoryUtil.createJSONObject();
+					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
+					json_default_collection.put("CollectionName", "default");
+					json_collection_array.put(json_default_collection);
+					json.put("Collections", json_collection_array);
+					jsonarray.put(json);
+				} catch (Exception e) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::bbs] Error adding element to list of Biobanks.");
+					LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::bbs] Error adding element to list of Biobanks.");
+					LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+					e.printStackTrace();
+				}
+			}
 		} catch (SystemException e) {
 			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::bbs] Error creating list of Biobanks.");
 			LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::bbs] Error creating list of Biobanks.");
@@ -696,6 +746,56 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	}
 	
 	
+	/* --------------------------------------------------------
+	 * FAIR API
+	 */
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "fdp", method = "POST")
+	public String fdp() {
+		FDPMetadata metadata = new FDPMetadata();
+		metadata.setTitle(valueFactory.createLiteral("FDP of RD-Connect ID-Card"));
+		metadata.setDescription(valueFactory.createLiteral("FDP of RD-Connect ID-Card"));
+		String myDate = "2014/10/29";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = new Date(System.nanoTime());
+		try {
+			date = sdf.parse(myDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		metadata.setIssued(valueFactory.createLiteral(date));
+		metadata.setModified(valueFactory.createLiteral(date));
+		
+		metadata.setLicense(valueFactory.createIRI("http://rdflicense.appspot.com/rdflicense/cc-by-nc-nd3.0"));
+		metadata.setUri(valueFactory.createIRI("http://catalogue.rd-connect.eu/fdp"));
+		
+		Agent agent = new Agent();
+		agent.setName(valueFactory.createLiteral("RD-Connect"));
+		agent.setUri(valueFactory.createIRI("http://rd-connect.eu"));
+		agent.setType(FOAF.ORGANIZATION);
+		
+		metadata.setPublisher(agent);
+		
+		metadata.setLanguage(valueFactory.createIRI("http://id.loc.gov/vocabulary/iso639-1/en"));
+		List<IRI> catalogs = new ArrayList<IRI>();
+		catalogs.add(valueFactory.createIRI("http://catalogue.rd-connect.eu/fdp/catalog/biobank"));
+		catalogs.add(valueFactory.createIRI("http://catalogue.rd-connect.eu/fdp/catalog/registry"));
+		metadata.setCatalogs(catalogs);
+		
+		String return_value = "";
+		try {
+			return_value = MetadataUtils.getString(metadata, RDFFormat.JSONLD);
+		} catch (MetadataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return return_value;
+	}
+	
+	
+	private final ValueFactory valueFactory = SimpleValueFactory.getInstance();
 	String pattern = "http%3A%2F%2Fcatalogue.rd-connect.eu%2Fid%2Forganization-id%2F(\\d+)(%2Fcollection-id%2F)?(\\d+)?";
 	Pattern r = Pattern.compile(pattern);
 }

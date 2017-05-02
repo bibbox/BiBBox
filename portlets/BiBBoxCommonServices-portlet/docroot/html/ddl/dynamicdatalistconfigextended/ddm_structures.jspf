@@ -1,0 +1,38 @@
+<!-- Toggler header -->
+<h4 class="header toggler-header-collapsed"><span><%= ddm_structure.getStructureId() %></span> - <%= ddm_structure.getNameCurrentValue() %></h4>
+
+<!-- Form for one DDL Structure -->
+<portlet:actionURL name="updateDDLConfig" var="updateDDLConfigURL" windowState="normal" />
+<aui:form action="<%= updateDDLConfigURL %>" method="POST" name="fm" cssClass="content toggler-content-collapsed">
+	<!-- Hidden elements of the form -->
+	<aui:fieldset>
+		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
+		<aui:input type="hidden" name="ddmstructureid" value="<%= ddm_structure.getStructureId() %>" />
+		<aui:input type="hidden" name="ddmstructurename" value="<%= ddm_structure.getNameCurrentValue() %>" />
+	</aui:fieldset>
+	
+	<!-- Elements for configuration of the field -->
+	<%
+	for(String field : fieldsmap.keySet()) {
+		if(field.equalsIgnoreCase("_fieldsDisplay")) {
+			continue;
+		}
+		// read stored config data
+		DDLConfiguration fieldconfiguration = DDLConfigurationLocalServiceUtil.getDDLConfigurationForField(ddm_structure.getStructureId(), field);
+		%>
+		<aui:fieldset>
+			<aui:layout>
+				<aui:column columnWidth="100" first="true">
+					<div class="fieldnameclass"><%= fieldsmap.get(field).get("label") %></div>
+				</aui:column>
+							
+				<aui:column columnWidth="75" last="true">
+					...
+				</aui:column>
+			</aui:layout>
+		</aui:fieldset>
+		<%
+	}
+	%>
+	
+</aui:form>

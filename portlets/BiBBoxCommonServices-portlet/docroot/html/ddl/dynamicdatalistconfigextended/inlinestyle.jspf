@@ -1,0 +1,15 @@
+<style>
+	.fieldnameclass {
+		font-weight: bold;
+		background-color: yellow;
+		padding: 5px;
+		width: 90%;
+	}
+	.proposelayout {
+	    margin-left: 0;
+	    margin-right: 0;
+	}
+	.aui textarea .fieldtextarea {
+		width: 90%;
+	}
+</style>

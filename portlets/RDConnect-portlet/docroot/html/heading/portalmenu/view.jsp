@@ -21,7 +21,7 @@
 
 <div class="rdc-portalmenu-div-container">
 <div class="rdc-portalmenu-div-container-homologocontainer">
-<aui:a href='<%= themeDisplay.getURLPortal() + "/home" %>'><img class="rdc-portalmenu-div-container-homelogo" alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="16px" width="19px" /></aui:a>
+<aui:a href='<%= themeDisplay.getURLPortal() + "/catalogue" %>'><img class="rdc-portalmenu-div-container-homelogo" alt="homelogo" src="<%= request.getContextPath() %>/images/home.png" height="16px" width="19px" /></aui:a>
 </div>
 <div class="rdc-portalmenu-div-container-myorganisations">
 <%

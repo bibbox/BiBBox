@@ -254,7 +254,7 @@ public class CandidateLocalServiceImpl extends CandidateLocalServiceBaseImpl {
 	public String[] getSource() {
 		String[] array = new String[] { "all", "orpha.net", "bbmri.eu", "rd-neuromics.eu", "ee", "eurobiobank.org", 
 				"CORDIS", "ECSF website", "EPIRARE", "EUROCAT website", "EURORDIS", "HQIP", "MM", "ONLINE PROPOSED", "Severe Chronic Neutropenia Registry - SCNIR",
-				"SPANISH NETWORK", "SPANISH REGISTRIES", "Telethon", "TREAT NMD"};
+				"SPANISH NETWORK", "SPANISH REGISTRIES", "Telethon", "TREAT NMD", "EURenOmics"};
 		return array;
 	}
 	

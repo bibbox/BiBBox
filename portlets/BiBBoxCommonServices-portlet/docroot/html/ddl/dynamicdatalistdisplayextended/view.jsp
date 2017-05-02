@@ -217,7 +217,7 @@ for (DDLRecordSet recordset : recordsets) {
 					
 					// Configuration Display Styles
 					if(fieldconfiguration.getColumwidth() != 0) {
-						//cssclasselementwidth = "width: " + fieldconfiguration.getColumwidth() + "%;";
+						cssclasselementwidth = "width: " + fieldconfiguration.getColumwidth() + "%;";
 					}
 					titlecss = fieldconfiguration.getViewtitlecss();
 					valuecss = fieldconfiguration.getViewvaluecss();

@@ -1,0 +1,220 @@
+/* ---------- New Header ----------- */
+.bbmri_eric_header-maincontainer {
+	height: 165px;
+	margin-bottom: 0;
+}
+.bbmri_eric_header-maincontainer-verlauf {
+	margin: auto;
+}
+.bbmri_eric_header-maincontainer-verlauf-inner {
+	margin: auto;
+	width: 1200px;
+	position: relative;
+}
+.bbmri_eric_header-innercontainer {
+	margin: auto;
+	position: absolute;
+   top: 0px;
+   width: 100%;
+   height: 48px;
+}
+.bbmri_eric_header-logo {
+	width: 1000px;
+	height: 48px;
+	margin: auto;
+}
+.bbmri_eric_header-logo-floating {
+	margin-top: 42px;
+	float: right;
+}
+/* menu */
+.bbmri_eric_header-menucontainer {
+	width: 100%;
+	height: 40px;
+	margin: auto;
+	position: absolute;
+	left: 0px;
+	top: 86px;
+}
+.bbmri_eric_header-mainmenu-position {
+	width: 1000px;
+	margin-left: 100px;
+	margin-right: 100px;
+}
+.bbmri_eric_header-mainmenu-floating {
+	float: left;
+	margin-left: 320px;
+}
+.bbmri_eric_header-mainmenu {
+	width: 1200px;
+	height: 40px;
+	margin: auto;
+}
+.bbmri_eric_header-mainmenu ui {
+	float: right;
+	text-align: right;
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+.bbmri_eric_header-mainmenu li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 0;
+	line-height: 20px;
+}
+/* submenu */
+.bbmri_eric_header-submenucontainer {
+	width: 100%;
+	height: 40px;
+	margin: auto;
+	position: absolute;
+	left: 0px;
+	top: 125px;
+}
+.bbmri_eric_header-submainmenu {
+	width: 1200px;
+	margin: auto;
+	text-align: left;
+	height: 40px;
+	background: url(@theme_image_path@/02_content_background.png) repeat-y;
+	-webkit-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
+   -moz-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
+   box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
+}
+.bbmri_eric_header-submainmenu-position {
+	width: 1000px;
+	margin-left: 100px;
+	margin-right: 100px;
+}
+.bbmri_eric_header-submainmenu-floating-runing-text {
+   float: left;
+   width: 275px;
+   margin-top: 12px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+   text-align: center;
+   font-weight: bold;
+   font-style: italic;
+}
+.bbmri_eric_header-submainmenu-floating {
+	float: left;
+	width: 1000px;
+}
+.bbmri_eric_header-submainmenu-floating ul {
+   float: left;
+   margin: 10px 0 10px 0;
+}
+.bbmri_eric_header-submainmenu-floating ul ul {
+   float: left;
+   margin: 0 0 10px 25px;
+}
+.bbmri_eric_header-submainmenu ui {
+	float: right;
+	text-align: right;
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+.bbmri_eric_header-submainmenu li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 15px;
+	padding-right: 0;
+	line-height: 20px;
+	height: 40px;
+}
+/* subsubmenu */
+.bbmri_eric_header-subsubmenucontainer {
+	width: 100%;
+	height: 30px;
+	margin: auto;
+	position: absolute;
+	left: 0px;
+	top: 290px;
+}
+.bbmri_eric_header-subsubmainmenu {
+	width: 1200px;
+	height: 30px;
+	margin: auto;
+	text-align: right;
+	color: #FFFFFF;
+	background-color: rgba(21,74,191,0.8);
+}
+.bbmri_eric_header-subsubmainmenu-position {
+	width: 1000px;
+	height: 30px;
+	margin: auto;
+}
+.bbmri_eric_header-subsubmainmenu-floating {
+	float: right;
+}
+.bbmri_eric_header-subsubmainmenu ul {
+	float: right;
+	text-align: right;
+	padding:0px;
+	margin-top: 6px;
+	list-style-type: none;
+}
+.bbmri_eric_header-subsubmainmenu li {
+	float: left;
+	list-style-type: none;
+	margin: auto;
+	padding-left: 15px;
+	padding-right: 5px;
+	line-height: 15px;
+}
+/* ---------- New Header ende ----------- */
+.bbmri_eric_header-login-top-right {
+	position: absolute;
+   	top: 20px;
+   	left: 20px;
+   	width: 45px;
+   	height: 45px;
+   	z-index: 1000;
+}
+.bbmri_eric_header-logo {
+	position: absolute;
+   	top: 10px;
+   	right: 70px;
+   	width: 99px;
+   	height: 145px;
+   	z-index: 1000;
+}
+.bbmri_eric_header-login-top-right:hover > .bbmri_eric_header-login-top-right-name {
+	display: inline;
+}
+.bbmri_eric_header-login-top-right .bbmri_eric_header-login-top-right-name {
+	position: absolute;
+	display: none;
+	top: 0px;
+	left: 30px;
+	width: 150px;
+	height: 70px;
+	padding-left: 30px;
+	background: rgba(18,135,218,1);
+	z-index: 5;
+	color: #FFFFFF;
+	border-radius: 0px 5px 5px 5px;
+}
+.bbmri_eric_header-login-top-right .bbmri_eric_header-login-top-right-name .bbmri_eric_header-login-top-right-name-title {
+	width: 175px;
+	text-align: center;
+	border-radius: 0px 5px 0px 0px;
+	margin-left: -25px;
+	margin-bottom: 5px;
+    text-align: center;
+    background: #2aaae6;
+}
+.bbmri_eric_header-login-image-position {
+	position: absolute;
+   	top: 0px;
+   	left: 0px;
+   	width: 45px;
+   	height: 45px;
+   	z-index: 1000;
+}

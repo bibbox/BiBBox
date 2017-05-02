@@ -1,0 +1,21 @@
+<!-- Toggle function for the DDM Structures
+		<div id="ddmStructureToggler"> -->
+<script>
+YUI().use(
+	'aui-toggler',
+	function(Y) {
+		new Y.TogglerDelegate({
+			animated: true,
+			closeAllOnExpand: true,
+			container: '#ddmStructureToggler',
+			content: '.content',
+			expanded: false,
+			header: '.header',
+			transition: {
+				duration: 0.2,
+				easing: 'cubic-bezier(0, 0.1, 0, 1)'
+			}
+		});
+	}
+);
+</script>
