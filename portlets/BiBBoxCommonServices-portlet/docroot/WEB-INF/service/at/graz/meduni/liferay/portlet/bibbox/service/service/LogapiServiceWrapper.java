@@ -137,6 +137,11 @@ public class LogapiServiceWrapper implements LogapiService,
 		_logapiService.testMethode(jason);
 	}
 
+	@Override
+	public java.lang.String fdp() {
+		return _logapiService.fdp();
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

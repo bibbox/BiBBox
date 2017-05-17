@@ -75,6 +75,10 @@ public class LogapiServiceClp implements LogapiService {
 		_methodName13 = "testMethode";
 
 		_methodParameterTypes13 = new String[] { "java.lang.String" };
+
+		_methodName14 = "fdp";
+
+		_methodParameterTypes14 = new String[] {  };
 	}
 
 	@Override
@@ -385,6 +389,29 @@ public class LogapiServiceClp implements LogapiService {
 		}
 	}
 
+	@Override
+	public java.lang.String fdp() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName14,
+					_methodParameterTypes14, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -412,4 +439,6 @@ public class LogapiServiceClp implements LogapiService {
 	private String[] _methodParameterTypes12;
 	private String _methodName13;
 	private String[] _methodParameterTypes13;
+	private String _methodName14;
+	private String[] _methodParameterTypes14;
 }

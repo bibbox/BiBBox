@@ -114,4 +114,6 @@ public interface LogapiService extends BaseService, InvokableService {
 	public java.lang.String getIdCard(long organizationId);
 
 	public void testMethode(java.lang.String jason);
+
+	public java.lang.String fdp();
 }

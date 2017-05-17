@@ -14,6 +14,7 @@
 
 package at.graz.meduni.liferay.portlet.bibbox.service.service.impl;
 
+import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,18 +24,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import nl.dtl.fairmetadata4j.io.MetadataException;
-import nl.dtl.fairmetadata4j.model.Agent;
-import nl.dtl.fairmetadata4j.model.FDPMetadata;
-import nl.dtl.fairmetadata4j.model.Metadata;
-import nl.dtl.fairmetadata4j.utils.MetadataParserUtils;
-import nl.dtl.fairmetadata4j.utils.MetadataUtils;
-
 import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.vocabulary.FOAF;
+import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.RDFWriter;
+import org.eclipse.rdf4j.rio.Rio;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -95,8 +93,8 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	 */
 	String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
 	SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
-	
 	/**
+	
 	 * 
 	 * @return
 	 */
@@ -783,7 +781,7 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		catalogs.add(valueFactory.createIRI("http://catalogue.rd-connect.eu/fdp/catalog/registry"));
 		metadata.setCatalogs(catalogs);
 		
-		String return_value = "";
+		String return_value = metadata.toString();;
 		try {
 			return_value = MetadataUtils.getString(metadata, RDFFormat.JSONLD);
 		} catch (MetadataException e) {
@@ -793,6 +791,8 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 		
 		return return_value;
 	}
+	
+	
 	
 	
 	private final ValueFactory valueFactory = SimpleValueFactory.getInstance();

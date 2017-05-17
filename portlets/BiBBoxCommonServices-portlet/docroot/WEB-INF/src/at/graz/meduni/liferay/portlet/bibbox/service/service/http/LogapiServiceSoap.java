@@ -234,5 +234,18 @@ public class LogapiServiceSoap {
 		}
 	}
 
+	public static java.lang.String fdp() throws RemoteException {
+		try {
+			java.lang.String returnValue = LogapiServiceUtil.fdp();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(LogapiServiceSoap.class);
 }

@@ -75,6 +75,10 @@ public class LogapiServiceClpInvoker {
 		_methodName72 = "testMethode";
 
 		_methodParameterTypes72 = new String[] { "java.lang.String" };
+
+		_methodName73 = "fdp";
+
+		_methodParameterTypes73 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -149,6 +153,11 @@ public class LogapiServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+			return LogapiServiceUtil.fdp();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -178,4 +187,6 @@ public class LogapiServiceClpInvoker {
 	private String[] _methodParameterTypes71;
 	private String _methodName72;
 	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
 }

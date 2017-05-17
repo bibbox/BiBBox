@@ -135,6 +135,10 @@ public class LogapiServiceUtil {
 		getService().testMethode(jason);
 	}
 
+	public static java.lang.String fdp() {
+		return getService().fdp();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
