@@ -131,7 +131,7 @@ ${theme.include(body_top_include)}
 <div class="bbmrieric-footer-container bbmrieric-footer">
 	<div class="bbmri-footer-inner">
         <div class="bbmri-footer-item">
-            <img src="/BBMRIERICRITrainNew-theme/images/footer_logos/bbmri_eric.png">
+            <img src="/BBMRIERICRITrainNew-theme/images/footer_logos/bbmri-eric.png">
         </div>
 		<div class="bbmri-footer-item">
 			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/Ebi_official_logo.png">
@@ -140,10 +140,10 @@ ${theme.include(body_top_include)}
 			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/ELIXIR_logo.png">
 		</div>
 		<div class="bbmri-footer-item">
-			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/MedUni_Hauptlogo_EN_RGB_72dpi.jpg">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/MedUni-Wien.png">
 		</div>
 		<div class="bbmri-footer-item">
-			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/logo-ecrin.png">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/ecrin.png">
 		</div>
 		<div class="bbmri-footer-item">
 			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/emtrain.png">
@@ -170,7 +170,7 @@ ${theme.include(body_top_include)}
 			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/IMG.png">
 		</div>
 		<div class="bbmri-footer-item">
-			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/logo_unimib_2.png">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/unimib.png">
 		</div>
 		<div class="bbmri-footer-item">
 			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/oncourse.png">

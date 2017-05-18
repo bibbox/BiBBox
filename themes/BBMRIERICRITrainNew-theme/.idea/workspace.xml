@@ -20,13 +20,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="oncourse.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/_diffs/images/footer_logos/oncourse.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ISBE.png" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docroot/_diffs/images/footer_logos/ISBE.png">
           <provider selected="true" editor-type-id="images">
@@ -48,20 +41,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="logo_unimib_2.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/_diffs/images/footer_logos/logo_unimib_2.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MedUni_Hauptlogo_EN_RGB_72dpi.jpg" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/_diffs/images/footer_logos/MedUni_Hauptlogo_EN_RGB_72dpi.jpg">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="minho.png" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docroot/_diffs/images/footer_logos/minho.png">
           <provider selected="true" editor-type-id="images">
@@ -72,8 +51,8 @@
       <file leaf-file-name="portal_normal.ftl" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docroot/_diffs/templates/portal_normal.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1559">
-              <caret line="176" column="14" lean-forward="false" selection-start-line="176" selection-start-column="14" selection-end-line="176" selection-end-column="14" />
+            <state relative-caret-position="504">
+              <caret line="142" column="85" lean-forward="true" selection-start-line="142" selection-start-column="85" selection-end-line="142" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -82,8 +61,8 @@
       <file leaf-file-name="custom_footer.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom_footer.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+            <state relative-caret-position="601">
+              <caret line="65" column="23" lean-forward="false" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -147,8 +126,8 @@
         <option value="$PROJECT_DIR$/docroot/_diffs/css/custom.css" />
         <option value="$PROJECT_DIR$/docroot/_diffs/css/custom_additional.css" />
         <option value="$PROJECT_DIR$/docroot/_diffs/css/custom_header.css" />
-        <option value="$PROJECT_DIR$/docroot/_diffs/templates/portal_normal.ftl" />
         <option value="$PROJECT_DIR$/docroot/_diffs/css/custom_footer.css" />
+        <option value="$PROJECT_DIR$/docroot/_diffs/templates/portal_normal.ftl" />
       </list>
     </option>
   </component>
@@ -799,12 +778,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495091949436</updated>
-      <workItem from="1495091952739" duration="13091000" />
+      <workItem from="1495091952739" duration="14483000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13091000" />
+    <option name="totallyTimeSpent" value="14483000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="938" y="103" width="1835" height="1168" extended-state="0" />
@@ -1092,16 +1071,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom_footer.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+        <state relative-caret-position="601">
+          <caret line="65" column="23" lean-forward="false" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docroot/_diffs/templates/portal_normal.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1559">
-          <caret line="176" column="14" lean-forward="false" selection-start-line="176" selection-start-column="14" selection-end-line="176" selection-end-column="14" />
+        <state relative-caret-position="504">
+          <caret line="142" column="85" lean-forward="true" selection-start-line="142" selection-start-column="85" selection-end-line="142" selection-end-column="85" />
           <folding />
         </state>
       </provider>
