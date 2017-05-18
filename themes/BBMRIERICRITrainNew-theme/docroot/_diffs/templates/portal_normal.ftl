@@ -129,7 +129,53 @@ ${theme.include(body_top_include)}
 	</div>
 </div>
 <div class="bbmrieric-footer-container bbmrieric-footer">
-		&nbsp;
+	<div class="bbmri-footer-inner">
+        <div class="bbmri-footer-item">
+            <img src="/BBMRIERICRITrainNew-theme/images/footer_logos/bbmri_eric.png">
+        </div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/Ebi_official_logo.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/ELIXIR_logo.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/MedUni_Hauptlogo_EN_RGB_72dpi.jpg">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/logo-ecrin.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/emtrain.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/cnrs-new.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/minho.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/EATRIS-logo.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/logo_share.gif">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/logo-infrafrontier.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/ISBE.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/IMG.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/logo_unimib_2.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/oncourse.png">
+		</div>
+	</div>
 </div>
 
 

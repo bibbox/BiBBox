@@ -234,15 +234,15 @@
 .bbmri_eric_header-login-top-right .bbmri_eric_header-login-top-right-name {
 	position: absolute;
 	display: none;
-	top: 0px;
-	left: 30px;
+	top: 0;
+	left: 75px;
 	width: 150px;
 	height: 70px;
 	padding-left: 30px;
-	background: rgba(18,135,218,1);
+	background: #555;
 	z-index: 5;
-	color: #FFFFFF;
-	border-radius: 0px 5px 5px 5px;
+	color: #fff;
+	border-radius: 0 5px 5px 5px;
 }
 .bbmri_eric_header-login-top-right .bbmri_eric_header-login-top-right-name .bbmri_eric_header-login-top-right-name-title {
 	width: 175px;
@@ -251,7 +251,7 @@
 	margin-left: -25px;
 	margin-bottom: 5px;
     text-align: center;
-    background: #2aaae6;
+    background: #ed660a;
 }
 .bbmri_eric_header-login-image-position {
 	position: absolute;
