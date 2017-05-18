@@ -269,7 +269,7 @@
 .bbmri_eric_header-submainmenu a:hover {
 	color: #184B8A;
 	text-decoration:none;
-	font-size: 9.5pt;
+	font-size: 10pt;
 	text-transform:uppercase;
 }
 .bbmri_eric_header-subsubmainmenu a {
@@ -323,7 +323,7 @@
 
 .bbmri_eric_header-submainmenu a {
     color: #000000;
-    font-size: 9.5pt;
+    font-size: 10pt;
 }
 
 .aui div[id^=portlet_56_] img, .aui div[id^=portlet_101_] img {

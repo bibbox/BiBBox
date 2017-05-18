@@ -46,8 +46,8 @@
       <file leaf-file-name="custom_header.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom_header.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="582">
-              <caret line="160" column="43" lean-forward="false" selection-start-line="160" selection-start-column="43" selection-end-line="160" selection-end-column="43" />
+            <state relative-caret-position="484">
+              <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -56,8 +56,8 @@
       <file leaf-file-name="custom_additional.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom_additional.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="260" column="25" lean-forward="false" selection-start-line="260" selection-start-column="25" selection-end-line="260" selection-end-column="25" />
+            <state relative-caret-position="21">
+              <caret line="245" column="19" lean-forward="true" selection-start-line="245" selection-start-column="19" selection-end-line="245" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -67,25 +67,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>submenu-flot</find>
-      <find>submenu-flo</find>
-      <find>submenu-floa</find>
-      <find>submenu-float</find>
-      <find>submenu-floati</find>
-      <find>submenu-floatin</find>
-      <find>submenu-floating</find>
-      <find>submenu-floating i</find>
-      <find>submenu-floating</find>
-      <find>submenu-floating ul</find>
-      <find>.bbmri_eric_header-submainmenu-floating ul</find>
-      <find>. ul</find>
-      <find>ul</find>
-      <find>h</find>
-      <find>hea</find>
       <find>header_s</find>
       <find>header_</find>
-      <find>header</find>
-      <find>header-</find>
       <find>header-sub</find>
       <find>header-subma</find>
       <find>header-submain</find>
@@ -97,6 +80,23 @@
       <find>login-imag</find>
       <find>header-submainmenu a</find>
       <find>.bbmri_eric_header-submainmenu li</find>
+      <find>hea</find>
+      <find>hede</find>
+      <find>hed</find>
+      <find>he</find>
+      <find>heade</find>
+      <find>header</find>
+      <find>header-</find>
+      <find>header-lgo</find>
+      <find>header-lg</find>
+      <find>header-lio</find>
+      <find>header-li</find>
+      <find>header-l</find>
+      <find>header-lo</find>
+      <find>header-log</find>
+      <find>bbmri_eric_header-logo</find>
+      <find>header-logo</find>
+      <find>.bbmri_eric_header-submainmenu a</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -678,12 +678,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495091949436</updated>
-      <workItem from="1495091952739" duration="8341000" />
+      <workItem from="1495091952739" duration="9290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8341000" />
+    <option name="totallyTimeSpent" value="9290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="938" y="103" width="1835" height="1244" extended-state="0" />
@@ -834,16 +834,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom_additional.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="260" column="25" lean-forward="false" selection-start-line="260" selection-start-column="25" selection-end-line="260" selection-end-column="25" />
+        <state relative-caret-position="21">
+          <caret line="245" column="19" lean-forward="true" selection-start-line="245" selection-start-column="19" selection-end-line="245" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom_header.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="160" column="43" lean-forward="false" selection-start-line="160" selection-start-column="43" selection-end-line="160" selection-end-column="43" />
+        <state relative-caret-position="484">
+          <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
           <folding />
         </state>
       </provider>
