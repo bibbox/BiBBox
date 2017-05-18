@@ -26,12 +26,10 @@ html {
 }
 
 .container-fluid-background {
-	width: 1200px;
+	width: 100%;
+	max-width: 1400px;
 	margin: auto;
-	background: url(/BBMRIERICRITrain-theme/images/02_content_background.png) repeat-y;
-	-webkit-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
-   -moz-box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
-   box-shadow: inset 0px 3px 2px 0px rgba(102,102,102,0.30);
+	-moz-box-shadow: inset 0 3px 2px 0 rgba(102,102,102,0.3);
 }
 
 
@@ -59,7 +57,7 @@ html {
 	height: 130px;
 	background: -webkit-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Safari */
 	background: -o-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
+	background: -moz-linear-gradient(right, #ffffff, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(to right, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #87AAB5); /* Standard syntax (must be last) */
 }
 .bbmri-eric-header-container-bottom {
@@ -170,6 +168,7 @@ html {
 	}
 
 	#wrapper {
+		padding: 50px 40px;
 		position: relative;
 	}
 
