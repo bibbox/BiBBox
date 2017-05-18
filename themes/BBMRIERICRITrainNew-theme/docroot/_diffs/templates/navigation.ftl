@@ -14,14 +14,15 @@
 			<li ${nav_item_attr_selected} class="${nav_item_css_class} " id="layout_${nav_item.getLayoutId()}" role="presentation">
 				<#assign itemhrefurl = nav_item.getURL()?replace("(.+)web(.+)guest", "", 'r') />
 				<a aria-labelledby="layout_${nav_item.getLayoutId()}" ${nav_item_attr_has_popup} href="${itemhrefurl}" ${nav_item.getTarget()} role="menuitem">
-				<div style="float: left;">
-				<#if nav_item.isSelected()>
-					<div class="bbmri-eric-square-orange"></div>
-				<#else>
-					<div class="bbmri-eric-square-blue"></div>
-				</#if>
-				<div style="float: left;color: #184B8A;text-transform: uppercase;">${nav_item.icon()} ${nav_item.getName()}</div>
-				</div></a>
+					<!--
+					<#if nav_item.isSelected()>
+						<div class="bbmri-eric-square-orange"></div>
+					<#else>
+						<div class="bbmri-eric-square-blue"></div>
+					</#if>
+					-->
+					<div style="float: left;text-transform: uppercase;">${nav_item.icon()} ${nav_item.getName()}</div>
+				</a>
 			</li>
 		</#list>
 	</ul>

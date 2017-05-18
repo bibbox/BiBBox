@@ -43,7 +43,7 @@ ${theme.include(body_top_include)}
 
 	<div class="bbmri_eric_header-innercontainer">
 
-        <img class="bbmri_eric_header-image" src="/BBMRIERICRITrain-theme/images/header.png" alt="RItrain Header Image">
+        <img class="bbmri_eric_header-image" src="/BBMRIERICRITrainNew-theme/images/header.png" alt="RItrain Header Image">
 
         <!-- Login area -->
         <div class="bbmri_eric_header-login-top-right">
@@ -57,14 +57,14 @@ ${theme.include(body_top_include)}
 				</div>
 			<#else>
 				<a href="/login">
-					<img  alt="Login" height="45px" src="/BBMRIERICRITrain-theme/images/Login_button.png" width="45px" >
+					<img  alt="Login" height="45px" src="/BBMRIERICRITrainNew-theme/images/Login_button.png" width="45px" >
 				</a>
 			</#if>
         </div>
 
 		<!-- Logo -->
         <div class="bbmri_eric_header-logo">
-            <img style="border-style: ridge;border-width: 0px;border-color: #F0F8FF;" class="bbmri_eric_header-logo-position" src="/BBMRIERICRITrain-theme/images/logo_ritrain.png" alt="RItrain" width="75">
+            <img style="border-style: ridge;border-width: 0px;border-color: #F0F8FF;" class="bbmri_eric_header-logo-position" src="/BBMRIERICRITrainNew-theme/images/logo_ritrain.png" alt="RItrain" width="75">
         </div>
 
 	</div>

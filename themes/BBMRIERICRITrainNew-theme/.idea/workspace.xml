@@ -13,88 +13,23 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="portal_normal.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/templates/portal_normal.ftl">
+      <file leaf-file-name="custom.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="52" column="68" lean-forward="true" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
+            <state relative-caret-position="376">
+              <caret line="155" column="24" lean-forward="false" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="custom_header.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/css/custom_header.css">
+        <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom_header.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-621">
-              <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
+            <state relative-caret-position="165">
+              <caret line="11" column="48" lean-forward="true" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/css/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="custom.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/docroot/css/custom.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="163" column="16" lean-forward="true" selection-start-line="163" selection-start-column="16" selection-end-line="163" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="navigation.ftl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/templates/navigation.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="02_content_background.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/images/02_content_background.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="03_footer_background.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/images/03_footer_background.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="at.gif" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/images/at.gif">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RITRain_new_header_image7_old.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/images/RITRain_new_header_image7_old.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RITRain_new_header_image8.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docroot/images/RITRain_new_header_image8.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -102,10 +37,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.</find>
-      <find>.con</find>
-      <find>.cont</find>
-      <find>.contain</find>
       <find>.containe</find>
       <find>.container</find>
       <find>.container</find>
@@ -123,11 +54,23 @@
       <find>.container-fluid-backgro</find>
       <find>.container-fluid-backgrou</find>
       <find>.container-fluid-backgroun</find>
-      <find>.container-fluid-background</find>
       <find>#wrapper</find>
+      <find>.bbmri-eric-body</find>
+      <find>wrapp</find>
+      <find>.container-fluid-background</find>
+      <find>.</find>
+      <find>.sel</find>
+      <find>.sele</find>
+      <find>.selec</find>
+      <find>.select</find>
+      <find>.selecte</find>
+      <find>.selected</find>
+      <find>.selected</find>
+      <find>.selected a</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/docroot/css</dir>
+      <dir>$PROJECT_DIR$/docroot/_diffs/css</dir>
     </dirStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -138,10 +81,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/docroot/templates/portal_normal.ftl" />
         <option value="$PROJECT_DIR$/docroot/templates/navigation.ftl" />
         <option value="$PROJECT_DIR$/docroot/css/custom_header.css" />
         <option value="$PROJECT_DIR$/docroot/css/custom.css" />
+        <option value="$PROJECT_DIR$/docroot/templates/portal_normal.ftl" />
+        <option value="$PROJECT_DIR$/docroot/_diffs/css/custom_header.css" />
+        <option value="$PROJECT_DIR$/docroot/_diffs/css/custom.css" />
       </list>
     </option>
   </component>
@@ -214,7 +159,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="_diffs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -229,6 +174,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="docroot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_diffs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -248,6 +197,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docroot/_diffs/templates" />
+      <recent name="$PROJECT_DIR$/docroot/_diffs/css" />
+      <recent name="$PROJECT_DIR$/docroot/_diffs/images" />
       <recent name="$PROJECT_DIR$/docroot/images" />
     </key>
   </component>
@@ -674,12 +626,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495091949436</updated>
-      <workItem from="1495091952739" duration="2552000" />
+      <workItem from="1495091952739" duration="4546000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2552000" />
+    <option name="totallyTimeSpent" value="4546000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="938" y="103" width="1835" height="1244" extended-state="0" />
@@ -756,14 +708,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docroot/templates/portal_normal.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="52" column="68" lean-forward="true" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docroot/templates/navigation.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -775,7 +719,7 @@
     <entry file="file://$PROJECT_DIR$/docroot/css/custom_header.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-621">
-          <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
+          <caret line="87" column="22" lean-forward="false" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -790,8 +734,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docroot/css/custom.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="163" column="16" lean-forward="true" selection-start-line="163" selection-start-column="16" selection-end-line="163" selection-end-column="16" />
+        <state relative-caret-position="154">
+          <caret line="154" column="1" lean-forward="false" selection-start-line="154" selection-start-column="1" selection-end-line="154" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docroot/templates/portal_normal.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="45" column="70" lean-forward="false" selection-start-line="45" selection-start-column="70" selection-end-line="45" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/navigation.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docroot/_diffs/templates/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom_header.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="48" lean-forward="true" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docroot/_diffs/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="155" column="24" lean-forward="false" selection-start-line="155" selection-start-column="24" selection-end-line="155" selection-end-column="24" />
           <folding />
         </state>
       </provider>

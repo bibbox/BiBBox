@@ -1,0 +1,89 @@
+.bbmrieric-footer-twitter {
+	position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px; 
+    border: 0px solid black;
+    right: -1050px;
+    top: -96px;
+}
+
+#bbmrieric-footer-twitter-slide {
+    position: absolute;
+    bottom: -25px;
+    width: 50px;
+    height: 50px;
+    background: blue;
+    transition: 1s;
+}
+
+.bbmrieric-footer-twitter:hover #bbmrieric-footer-twitter-slide {
+    transition: 1s;
+    bottom: 0;
+}
+.bbmrieric-footer-linkedin {
+	position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px; 
+    border: 0px solid black;
+    right: -990px;
+    top: -146px;
+}
+
+#bbmrieric-footer-linkedin-slide {
+    position: absolute;
+    bottom: -25px;
+    width: 50px;
+    height: 50px;
+    background: blue;
+    transition: 1s;
+}
+
+.bbmrieric-footer-linkedin:hover #bbmrieric-footer-linkedin-slide {
+    transition: 1s;
+    bottom: 0;
+}
+
+/* ---------- Footer ----------- */
+.bbmrieric-footer-container {
+	margin: auto;
+	width: 1200px;
+	height: 179px;
+}
+.bbmrieric-footer {
+	margin: auto;
+	width: 1200px;
+	height: 179px;
+	background: url(/BBMRIERICRITrainNew-theme/images/03_footer_background.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+#footer {
+	width: 1000px;
+	margin: auto;
+}
+.bbmrieric-footer-menue {
+	width: 1000px;
+	height: 20px;
+	margin: auto;
+	text-align: center;
+	align: center;
+	margin-top: -75px;
+	margin-bottom: 30px;
+}
+.bbmrieric-footer-menue ul {
+	text-align: center;
+	padding: 0px;
+	margin: auto;
+	list-style-type: none;
+	height: 70px;
+}
+.bbmrieric-footer-menue li {
+	list-style-type: none;
+	margin-left: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	line-height: 20px;
+}
+/* ---------- Footer ende ----------- */

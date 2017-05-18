@@ -4,7 +4,6 @@
 	position: relative;
 	padding-bottom: 80px;
 	background: #333;
-	padding-top: 6px;
 }
 .bbmri_eric_header-maincontainer-verlauf {
 	margin: auto;
@@ -16,8 +15,10 @@
 }
 .bbmri_eric_header-innercontainer {
 	margin: auto;
-	width: 100%;
-	max-width: 1400px;
+	position: absolute;
+   top: 0px;
+   width: 100%;
+   height: 48px;
 }
 .bbmri_eric_header-logo {
 	width: 1000px;
@@ -43,7 +44,7 @@
 	display: inline-block;
 }
 .bbmri_eric_header-mainmenu-floating {
-	float: right;
+	float: left;
 }
 .bbmri_eric_header-mainmenu {
 	width: 100%;
@@ -53,7 +54,7 @@
 	padding: 0 40px;
 	box-sizing: border-box;
 }
-.bbmri_eric_header-mainmenu ul {
+.bbmri_eric_header-mainmenu ui {
 	float: right;
 	text-align: right;
 	padding:0px;
