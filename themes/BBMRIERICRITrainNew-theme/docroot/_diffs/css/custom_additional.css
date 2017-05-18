@@ -258,8 +258,13 @@
 }
 .bbmri_eric_header-submainmenu a {
 	color: #184B8A;
-	font-size: 9.5pt;
 	text-transform:uppercase;
+	font-size: 10pt;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	padding: 0 15px;
 }
 .bbmri_eric_header-submainmenu a:hover {
 	color: #184B8A;
