@@ -38,6 +38,7 @@ html {
 	min-width: 1200px;
 	padding-left: 0;
     padding-right: 0;
+	background: url(/BBMRIERICRITrain-theme/images/02_content_background.png) 100%/100% repeat-y;
 }
 .dialog-iframe-root-node {
 	background-color: #FFFFFF;
