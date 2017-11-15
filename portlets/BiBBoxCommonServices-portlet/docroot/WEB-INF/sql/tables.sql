@@ -77,6 +77,7 @@ create table rdconnect.generalgnformation (
 	percentageofrarediseasesinyourregistrybiobank TEXT null,
 	ontologies TEXT null,
 	biomaterialcollected TEXT null,
+	biomaterialcollectedinbiobank TEXT null,
 	biomaterialprepared TEXT null,
 	origionofcollection TEXT null,
 	useofcollection TEXT null,

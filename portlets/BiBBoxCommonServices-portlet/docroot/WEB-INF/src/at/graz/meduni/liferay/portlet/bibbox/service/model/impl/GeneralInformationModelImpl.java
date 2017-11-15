@@ -73,6 +73,7 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 			{ "percentageofrarediseasesinyourregistrybiobank", Types.VARCHAR },
 			{ "ontologies", Types.VARCHAR },
 			{ "biomaterialcollected", Types.VARCHAR },
+			{ "biomaterialcollectedinbiobank", Types.VARCHAR },
 			{ "biomaterialprepared", Types.VARCHAR },
 			{ "origionofcollection", Types.VARCHAR },
 			{ "useofcollection", Types.VARCHAR },
@@ -84,7 +85,7 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 			},
 			{ "modifieddate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table rdconnect.generalgnformation (generalinformationId LONG not null primary key,organizationId LONG,acronym TEXT null,description TEXT null,hosteinstitue TEXT null,typeofhosteinstitue TEXT null,sourceoffunding TEXT null,country TEXT null,targetpopulation TEXT null,yearofestablishment TEXT null,howmanyrdsareintheregistrybiobank TEXT null,percentageofrarediseasesinyourregistrybiobank TEXT null,ontologies TEXT null,biomaterialcollected TEXT null,biomaterialprepared TEXT null,origionofcollection TEXT null,useofcollection TEXT null,associateddataavailable TEXT null,imagingavailable TEXT null,theregistrybiobanksislistedinotherinventoriesnetworks TEXT null,modifieddate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table rdconnect.generalgnformation (generalinformationId LONG not null primary key,organizationId LONG,acronym TEXT null,description TEXT null,hosteinstitue TEXT null,typeofhosteinstitue TEXT null,sourceoffunding TEXT null,country TEXT null,targetpopulation TEXT null,yearofestablishment TEXT null,howmanyrdsareintheregistrybiobank TEXT null,percentageofrarediseasesinyourregistrybiobank TEXT null,ontologies TEXT null,biomaterialcollected TEXT null,biomaterialcollectedinbiobank TEXT null,biomaterialprepared TEXT null,origionofcollection TEXT null,useofcollection TEXT null,associateddataavailable TEXT null,imagingavailable TEXT null,theregistrybiobanksislistedinotherinventoriesnetworks TEXT null,modifieddate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table rdconnect.generalgnformation";
 	public static final String ORDER_BY_JPQL = " ORDER BY generalInformation.generalinformationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY rdconnect.generalgnformation.generalinformationId ASC";
@@ -158,6 +159,8 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 			getPercentageofrarediseasesinyourregistrybiobank());
 		attributes.put("ontologies", getOntologies());
 		attributes.put("biomaterialcollected", getBiomaterialcollected());
+		attributes.put("biomaterialcollectedinbiobank",
+			getBiomaterialcollectedinbiobank());
 		attributes.put("biomaterialprepared", getBiomaterialprepared());
 		attributes.put("origionofcollection", getOrigionofcollection());
 		attributes.put("useofcollection", getUseofcollection());
@@ -259,6 +262,13 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 
 		if (biomaterialcollected != null) {
 			setBiomaterialcollected(biomaterialcollected);
+		}
+
+		String biomaterialcollectedinbiobank = (String)attributes.get(
+				"biomaterialcollectedinbiobank");
+
+		if (biomaterialcollectedinbiobank != null) {
+			setBiomaterialcollectedinbiobank(biomaterialcollectedinbiobank);
 		}
 
 		String biomaterialprepared = (String)attributes.get(
@@ -523,6 +533,22 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 	}
 
 	@Override
+	public String getBiomaterialcollectedinbiobank() {
+		if (_biomaterialcollectedinbiobank == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _biomaterialcollectedinbiobank;
+		}
+	}
+
+	@Override
+	public void setBiomaterialcollectedinbiobank(
+		String biomaterialcollectedinbiobank) {
+		_biomaterialcollectedinbiobank = biomaterialcollectedinbiobank;
+	}
+
+	@Override
 	public String getBiomaterialprepared() {
 		if (_biomaterialprepared == null) {
 			return StringPool.BLANK;
@@ -668,6 +694,7 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 		generalInformationImpl.setPercentageofrarediseasesinyourregistrybiobank(getPercentageofrarediseasesinyourregistrybiobank());
 		generalInformationImpl.setOntologies(getOntologies());
 		generalInformationImpl.setBiomaterialcollected(getBiomaterialcollected());
+		generalInformationImpl.setBiomaterialcollectedinbiobank(getBiomaterialcollectedinbiobank());
 		generalInformationImpl.setBiomaterialprepared(getBiomaterialprepared());
 		generalInformationImpl.setOrigionofcollection(getOrigionofcollection());
 		generalInformationImpl.setUseofcollection(getUseofcollection());
@@ -843,6 +870,15 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 			generalInformationCacheModel.biomaterialcollected = null;
 		}
 
+		generalInformationCacheModel.biomaterialcollectedinbiobank = getBiomaterialcollectedinbiobank();
+
+		String biomaterialcollectedinbiobank = generalInformationCacheModel.biomaterialcollectedinbiobank;
+
+		if ((biomaterialcollectedinbiobank != null) &&
+				(biomaterialcollectedinbiobank.length() == 0)) {
+			generalInformationCacheModel.biomaterialcollectedinbiobank = null;
+		}
+
 		generalInformationCacheModel.biomaterialprepared = getBiomaterialprepared();
 
 		String biomaterialprepared = generalInformationCacheModel.biomaterialprepared;
@@ -909,7 +945,7 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{generalinformationId=");
 		sb.append(getGeneralinformationId());
@@ -939,6 +975,8 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 		sb.append(getOntologies());
 		sb.append(", biomaterialcollected=");
 		sb.append(getBiomaterialcollected());
+		sb.append(", biomaterialcollectedinbiobank=");
+		sb.append(getBiomaterialcollectedinbiobank());
 		sb.append(", biomaterialprepared=");
 		sb.append(getBiomaterialprepared());
 		sb.append(", origionofcollection=");
@@ -960,7 +998,7 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -1024,6 +1062,10 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 		sb.append(getBiomaterialcollected());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>biomaterialcollectedinbiobank</column-name><column-value><![CDATA[");
+		sb.append(getBiomaterialcollectedinbiobank());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>biomaterialprepared</column-name><column-value><![CDATA[");
 		sb.append(getBiomaterialprepared());
 		sb.append("]]></column-value></column>");
@@ -1077,6 +1119,7 @@ public class GeneralInformationModelImpl extends BaseModelImpl<GeneralInformatio
 	private String _percentageofrarediseasesinyourregistrybiobank;
 	private String _ontologies;
 	private String _biomaterialcollected;
+	private String _biomaterialcollectedinbiobank;
 	private String _biomaterialprepared;
 	private String _origionofcollection;
 	private String _useofcollection;

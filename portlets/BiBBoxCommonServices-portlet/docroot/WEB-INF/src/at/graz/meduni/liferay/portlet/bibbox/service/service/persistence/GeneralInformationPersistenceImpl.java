@@ -623,6 +623,7 @@ public class GeneralInformationPersistenceImpl extends BasePersistenceImpl<Gener
 		generalInformationImpl.setPercentageofrarediseasesinyourregistrybiobank(generalInformation.getPercentageofrarediseasesinyourregistrybiobank());
 		generalInformationImpl.setOntologies(generalInformation.getOntologies());
 		generalInformationImpl.setBiomaterialcollected(generalInformation.getBiomaterialcollected());
+		generalInformationImpl.setBiomaterialcollectedinbiobank(generalInformation.getBiomaterialcollectedinbiobank());
 		generalInformationImpl.setBiomaterialprepared(generalInformation.getBiomaterialprepared());
 		generalInformationImpl.setOrigionofcollection(generalInformation.getOrigionofcollection());
 		generalInformationImpl.setUseofcollection(generalInformation.getUseofcollection());

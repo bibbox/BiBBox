@@ -68,6 +68,7 @@
 		<property name="percentageofrarediseasesinyourregistrybiobank" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ontologies" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biomaterialcollected" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biomaterialcollectedinbiobank" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biomaterialprepared" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="origionofcollection" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="useofcollection" type="com.liferay.portal.dao.orm.hibernate.StringType" />

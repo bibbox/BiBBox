@@ -102,6 +102,9 @@
 		<field name="biomaterialcollected" type="String">
 			<hint name="max-length">5000</hint>
 		</field>
+		<field name="biomaterialcollectedinbiobank" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
 		<field name="biomaterialprepared" type="String">
 			<hint name="max-length">5000</hint>
 		</field>

@@ -44,6 +44,7 @@ public class GeneralInformationSoap implements Serializable {
 		soapModel.setPercentageofrarediseasesinyourregistrybiobank(model.getPercentageofrarediseasesinyourregistrybiobank());
 		soapModel.setOntologies(model.getOntologies());
 		soapModel.setBiomaterialcollected(model.getBiomaterialcollected());
+		soapModel.setBiomaterialcollectedinbiobank(model.getBiomaterialcollectedinbiobank());
 		soapModel.setBiomaterialprepared(model.getBiomaterialprepared());
 		soapModel.setOrigionofcollection(model.getOrigionofcollection());
 		soapModel.setUseofcollection(model.getUseofcollection());
@@ -220,6 +221,15 @@ public class GeneralInformationSoap implements Serializable {
 		_biomaterialcollected = biomaterialcollected;
 	}
 
+	public String getBiomaterialcollectedinbiobank() {
+		return _biomaterialcollectedinbiobank;
+	}
+
+	public void setBiomaterialcollectedinbiobank(
+		String biomaterialcollectedinbiobank) {
+		_biomaterialcollectedinbiobank = biomaterialcollectedinbiobank;
+	}
+
 	public String getBiomaterialprepared() {
 		return _biomaterialprepared;
 	}
@@ -291,6 +301,7 @@ public class GeneralInformationSoap implements Serializable {
 	private String _percentageofrarediseasesinyourregistrybiobank;
 	private String _ontologies;
 	private String _biomaterialcollected;
+	private String _biomaterialcollectedinbiobank;
 	private String _biomaterialprepared;
 	private String _origionofcollection;
 	private String _useofcollection;

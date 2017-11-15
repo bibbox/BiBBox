@@ -124,6 +124,9 @@ String tmpTitle = "General Information " + organization.getName();
 				</aui:select>
 			</aui:column>
 			<aui:column columnWidth="100" first="true">
+				<aui:input name="biomaterialcollectedinbiobank" />
+			</aui:column>
+			<aui:column columnWidth="100" first="true">
 				<aui:input name="biomaterialprepared" />
 			</aui:column>
 			<aui:column columnWidth="100" first="true">

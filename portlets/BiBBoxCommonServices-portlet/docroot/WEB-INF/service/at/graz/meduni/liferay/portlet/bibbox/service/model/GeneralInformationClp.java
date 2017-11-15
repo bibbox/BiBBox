@@ -90,6 +90,8 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 			getPercentageofrarediseasesinyourregistrybiobank());
 		attributes.put("ontologies", getOntologies());
 		attributes.put("biomaterialcollected", getBiomaterialcollected());
+		attributes.put("biomaterialcollectedinbiobank",
+			getBiomaterialcollectedinbiobank());
 		attributes.put("biomaterialprepared", getBiomaterialprepared());
 		attributes.put("origionofcollection", getOrigionofcollection());
 		attributes.put("useofcollection", getUseofcollection());
@@ -191,6 +193,13 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 
 		if (biomaterialcollected != null) {
 			setBiomaterialcollected(biomaterialcollected);
+		}
+
+		String biomaterialcollectedinbiobank = (String)attributes.get(
+				"biomaterialcollectedinbiobank");
+
+		if (biomaterialcollectedinbiobank != null) {
+			setBiomaterialcollectedinbiobank(biomaterialcollectedinbiobank);
 		}
 
 		String biomaterialprepared = (String)attributes.get(
@@ -579,6 +588,32 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 	}
 
 	@Override
+	public String getBiomaterialcollectedinbiobank() {
+		return _biomaterialcollectedinbiobank;
+	}
+
+	@Override
+	public void setBiomaterialcollectedinbiobank(
+		String biomaterialcollectedinbiobank) {
+		_biomaterialcollectedinbiobank = biomaterialcollectedinbiobank;
+
+		if (_generalInformationRemoteModel != null) {
+			try {
+				Class<?> clazz = _generalInformationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBiomaterialcollectedinbiobank",
+						String.class);
+
+				method.invoke(_generalInformationRemoteModel,
+					biomaterialcollectedinbiobank);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getBiomaterialprepared() {
 		return _biomaterialprepared;
 	}
@@ -750,6 +785,25 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 		}
 	}
 
+	@Override
+	public java.lang.String getBiomaterialcollectedinbiobankFormated() {
+		try {
+			String methodName = "getBiomaterialcollectedinbiobankFormated";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getGeneralInformationRemoteModel() {
 		return _generalInformationRemoteModel;
 	}
@@ -835,6 +889,7 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 		clone.setPercentageofrarediseasesinyourregistrybiobank(getPercentageofrarediseasesinyourregistrybiobank());
 		clone.setOntologies(getOntologies());
 		clone.setBiomaterialcollected(getBiomaterialcollected());
+		clone.setBiomaterialcollectedinbiobank(getBiomaterialcollectedinbiobank());
 		clone.setBiomaterialprepared(getBiomaterialprepared());
 		clone.setOrigionofcollection(getOrigionofcollection());
 		clone.setUseofcollection(getUseofcollection());
@@ -890,7 +945,7 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{generalinformationId=");
 		sb.append(getGeneralinformationId());
@@ -920,6 +975,8 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 		sb.append(getOntologies());
 		sb.append(", biomaterialcollected=");
 		sb.append(getBiomaterialcollected());
+		sb.append(", biomaterialcollectedinbiobank=");
+		sb.append(getBiomaterialcollectedinbiobank());
 		sb.append(", biomaterialprepared=");
 		sb.append(getBiomaterialprepared());
 		sb.append(", origionofcollection=");
@@ -941,7 +998,7 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append(
@@ -1005,6 +1062,10 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 		sb.append(getBiomaterialcollected());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>biomaterialcollectedinbiobank</column-name><column-value><![CDATA[");
+		sb.append(getBiomaterialcollectedinbiobank());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>biomaterialprepared</column-name><column-value><![CDATA[");
 		sb.append(getBiomaterialprepared());
 		sb.append("]]></column-value></column>");
@@ -1052,6 +1113,7 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 	private String _percentageofrarediseasesinyourregistrybiobank;
 	private String _ontologies;
 	private String _biomaterialcollected;
+	private String _biomaterialcollectedinbiobank;
 	private String _biomaterialprepared;
 	private String _origionofcollection;
 	private String _useofcollection;

@@ -270,6 +270,22 @@ public interface GeneralInformationModel extends BaseModel<GeneralInformation> {
 	public void setBiomaterialcollected(String biomaterialcollected);
 
 	/**
+	 * Returns the biomaterialcollectedinbiobank of this general information.
+	 *
+	 * @return the biomaterialcollectedinbiobank of this general information
+	 */
+	@AutoEscape
+	public String getBiomaterialcollectedinbiobank();
+
+	/**
+	 * Sets the biomaterialcollectedinbiobank of this general information.
+	 *
+	 * @param biomaterialcollectedinbiobank the biomaterialcollectedinbiobank of this general information
+	 */
+	public void setBiomaterialcollectedinbiobank(
+		String biomaterialcollectedinbiobank);
+
+	/**
 	 * Returns the biomaterialprepared of this general information.
 	 *
 	 * @return the biomaterialprepared of this general information

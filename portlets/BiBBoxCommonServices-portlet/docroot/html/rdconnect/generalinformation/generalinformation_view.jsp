@@ -51,6 +51,7 @@ if (currentGroup.isOrganization()) {
 		RD coverage: <%= generalinformation.getHowmanyrdsareintheregistrybiobank() %><br />
 		Ontologies used: <%= generalinformation.getOntologies() %><br />
 		Biomaterial available: <%= generalinformation.getBiomaterialcollected() %><br />
+		<%= generalinformation.getBiomaterialcollectedinbiobankFormated() %>
 		Imaging available: <%= generalinformation.getImagingavailable() %><br />
 		Also listed in: <%= generalinformation.getTheregistrybiobanksislistedinotherinventoriesnetworks() %><br />
 		<%= generalinformation.getDescription() %><br />

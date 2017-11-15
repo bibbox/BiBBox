@@ -38,7 +38,7 @@ public class GeneralInformationCacheModel implements CacheModel<GeneralInformati
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{generalinformationId=");
 		sb.append(generalinformationId);
@@ -68,6 +68,8 @@ public class GeneralInformationCacheModel implements CacheModel<GeneralInformati
 		sb.append(ontologies);
 		sb.append(", biomaterialcollected=");
 		sb.append(biomaterialcollected);
+		sb.append(", biomaterialcollectedinbiobank=");
+		sb.append(biomaterialcollectedinbiobank);
 		sb.append(", biomaterialprepared=");
 		sb.append(biomaterialprepared);
 		sb.append(", origionofcollection=");
@@ -178,6 +180,13 @@ public class GeneralInformationCacheModel implements CacheModel<GeneralInformati
 			generalInformationImpl.setBiomaterialcollected(biomaterialcollected);
 		}
 
+		if (biomaterialcollectedinbiobank == null) {
+			generalInformationImpl.setBiomaterialcollectedinbiobank(StringPool.BLANK);
+		}
+		else {
+			generalInformationImpl.setBiomaterialcollectedinbiobank(biomaterialcollectedinbiobank);
+		}
+
 		if (biomaterialprepared == null) {
 			generalInformationImpl.setBiomaterialprepared(StringPool.BLANK);
 		}
@@ -248,6 +257,7 @@ public class GeneralInformationCacheModel implements CacheModel<GeneralInformati
 		percentageofrarediseasesinyourregistrybiobank = objectInput.readUTF();
 		ontologies = objectInput.readUTF();
 		biomaterialcollected = objectInput.readUTF();
+		biomaterialcollectedinbiobank = objectInput.readUTF();
 		biomaterialprepared = objectInput.readUTF();
 		origionofcollection = objectInput.readUTF();
 		useofcollection = objectInput.readUTF();
@@ -347,6 +357,13 @@ public class GeneralInformationCacheModel implements CacheModel<GeneralInformati
 			objectOutput.writeUTF(biomaterialcollected);
 		}
 
+		if (biomaterialcollectedinbiobank == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(biomaterialcollectedinbiobank);
+		}
+
 		if (biomaterialprepared == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -406,6 +423,7 @@ public class GeneralInformationCacheModel implements CacheModel<GeneralInformati
 	public String percentageofrarediseasesinyourregistrybiobank;
 	public String ontologies;
 	public String biomaterialcollected;
+	public String biomaterialcollectedinbiobank;
 	public String biomaterialprepared;
 	public String origionofcollection;
 	public String useofcollection;

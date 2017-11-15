@@ -4,6 +4,7 @@
 	position: relative;
 	padding-bottom: 80px;
 	background: #333;
+	padding-top: 6px;
 }
 .bbmri_eric_header-maincontainer-verlauf {
 	margin: auto;
@@ -15,15 +16,21 @@
 }
 .bbmri_eric_header-innercontainer {
 	margin: auto;
-	position: absolute;
-   top: 0px;
-   width: 100%;
-   height: 48px;
+	width: 100%;
+	max-width: 1400px;
+	position: relative;
+	padding: 0 100px;
+	box-sizing: border-box;
 }
 .bbmri_eric_header-logo {
-	width: 1000px;
-	height: 48px;
-	margin: auto;
+	position: absolute;
+	top: 10px;
+	right: 0;
+	width: 80px;
+	height: 115px;
+	z-index: 1000;
+	padding: 5px;
+	box-sizing: border-box;
 }
 .bbmri_eric_header-logo-floating {
 	margin-top: 42px;
@@ -44,7 +51,7 @@
 	display: inline-block;
 }
 .bbmri_eric_header-mainmenu-floating {
-	float: left;
+	float: right;
 }
 .bbmri_eric_header-mainmenu {
 	width: 100%;
@@ -54,7 +61,7 @@
 	padding: 0 40px;
 	box-sizing: border-box;
 }
-.bbmri_eric_header-mainmenu ui {
+.bbmri_eric_header-mainmenu ul {
 	float: right;
 	text-align: right;
 	padding:0px;
@@ -76,6 +83,12 @@
 	line-height: 40px;
 	text-align: center;
 	display: inherit;
+}
+.bbmri_eric_header-mainmenu li:hover {
+	background: #ed660a;
+}
+.bbmri_eric_header-mainmenu li:hover a {
+	color: white !important;
 }
 /* submenu */
 .bbmri_eric_header-submenucontainer {
@@ -120,7 +133,7 @@
 }
 .bbmri_eric_header-submainmenu-floating ul {
    float: left;
-   margin: 10px 0 10px 0;
+   margin: 0;
 }
 .bbmri_eric_header-submainmenu-floating ul ul {
    float: left;
@@ -137,13 +150,22 @@
 	float: left;
 	list-style-type: none;
 	margin: auto;
-	padding-left: 15px;
+	padding-left: 0;
 	padding-right: 0;
 	line-height: 20px;
 	height: 40px;
 }
+.bbmri_eric_header-submainmenu li.selected {
+	background: #184b8a;
+}
 .bbmri_eric_header-submainmenu li:hover {
 	background: #184b8a;
+}
+.bbmri_eric_header-submainmenu li:hover a {
+	font-size: 10pt;
+}
+.bbmri_eric_header-submainmenu li.selected a,
+.bbmri_eric_header-submainmenu li:hover a {
 	color: white;
 }
 /* subsubmenu */
@@ -189,19 +211,22 @@
 /* ---------- New Header ende ----------- */
 .bbmri_eric_header-login-top-right {
 	position: absolute;
-   	top: 20px;
-   	left: 20px;
-   	width: 45px;
-   	height: 45px;
-   	z-index: 1000;
+	top: 25px;
+	left: 0;
+	width: 80px;
+	height: 80px;
+	z-index: 1000;
 }
 .bbmri_eric_header-logo {
 	position: absolute;
-   	top: 10px;
-   	right: 70px;
-   	width: 99px;
-   	height: 145px;
-   	z-index: 1000;
+	top: 10px;
+	right: 0;
+	width: 80px;
+	height: 115px;
+	z-index: 1000;
+	background: white;
+	padding: 5px;
+	box-sizing: border-box;
 }
 .bbmri_eric_header-login-top-right:hover > .bbmri_eric_header-login-top-right-name {
 	display: inline;
@@ -209,15 +234,15 @@
 .bbmri_eric_header-login-top-right .bbmri_eric_header-login-top-right-name {
 	position: absolute;
 	display: none;
-	top: 0px;
-	left: 30px;
+	top: 0;
+	left: 75px;
 	width: 150px;
 	height: 70px;
 	padding-left: 30px;
-	background: rgba(18,135,218,1);
+	background: #555;
 	z-index: 5;
-	color: #FFFFFF;
-	border-radius: 0px 5px 5px 5px;
+	color: #fff;
+	border-radius: 0 5px 5px 5px;
 }
 .bbmri_eric_header-login-top-right .bbmri_eric_header-login-top-right-name .bbmri_eric_header-login-top-right-name-title {
 	width: 175px;
@@ -226,13 +251,13 @@
 	margin-left: -25px;
 	margin-bottom: 5px;
     text-align: center;
-    background: #2aaae6;
+    background: #ed660a;
 }
 .bbmri_eric_header-login-image-position {
 	position: absolute;
    	top: 0px;
    	left: 0px;
-   	width: 45px;
-   	height: 45px;
    	z-index: 1000;
+	width: 100%;
+	box-sizing: border-box;
 }

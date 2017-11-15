@@ -129,7 +129,53 @@ ${theme.include(body_top_include)}
 	</div>
 </div>
 <div class="bbmrieric-footer-container bbmrieric-footer">
-		&nbsp;
+	<div class="bbmri-footer-inner">
+        <div class="bbmri-footer-item">
+            <img src="/BBMRIERICRITrainNew-theme/images/footer_logos/bbmri-eric.png">
+        </div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/Ebi_official_logo.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/ELIXIR_logo.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/MedUni-Wien.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/ecrin.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/emtrain.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/cnrs-new.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/minho.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/EATRIS-logo.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/logo_share.gif">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/logo-infrafrontier.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/ISBE.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/IMG.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/unimib.png">
+		</div>
+		<div class="bbmri-footer-item">
+			<img src="/BBMRIERICRITrainNew-theme/images/footer_logos/oncourse.png">
+		</div>
+	</div>
 </div>
 
 

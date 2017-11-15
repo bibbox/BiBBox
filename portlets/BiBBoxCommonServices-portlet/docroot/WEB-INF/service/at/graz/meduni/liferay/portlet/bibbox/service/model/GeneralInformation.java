@@ -32,4 +32,5 @@ public interface GeneralInformation extends GeneralInformationModel,
 	 *
 	 * Never modify this interface directly. Add methods to {@link at.graz.meduni.liferay.portlet.bibbox.service.model.impl.GeneralInformationImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getBiomaterialcollectedinbiobankFormated();
 }

@@ -66,6 +66,8 @@ public class GeneralInformationWrapper implements GeneralInformation,
 			getPercentageofrarediseasesinyourregistrybiobank());
 		attributes.put("ontologies", getOntologies());
 		attributes.put("biomaterialcollected", getBiomaterialcollected());
+		attributes.put("biomaterialcollectedinbiobank",
+			getBiomaterialcollectedinbiobank());
 		attributes.put("biomaterialprepared", getBiomaterialprepared());
 		attributes.put("origionofcollection", getOrigionofcollection());
 		attributes.put("useofcollection", getUseofcollection());
@@ -167,6 +169,13 @@ public class GeneralInformationWrapper implements GeneralInformation,
 
 		if (biomaterialcollected != null) {
 			setBiomaterialcollected(biomaterialcollected);
+		}
+
+		String biomaterialcollectedinbiobank = (String)attributes.get(
+				"biomaterialcollectedinbiobank");
+
+		if (biomaterialcollectedinbiobank != null) {
+			setBiomaterialcollectedinbiobank(biomaterialcollectedinbiobank);
 		}
 
 		String biomaterialprepared = (String)attributes.get(
@@ -519,6 +528,27 @@ public class GeneralInformationWrapper implements GeneralInformation,
 	}
 
 	/**
+	* Returns the biomaterialcollectedinbiobank of this general information.
+	*
+	* @return the biomaterialcollectedinbiobank of this general information
+	*/
+	@Override
+	public java.lang.String getBiomaterialcollectedinbiobank() {
+		return _generalInformation.getBiomaterialcollectedinbiobank();
+	}
+
+	/**
+	* Sets the biomaterialcollectedinbiobank of this general information.
+	*
+	* @param biomaterialcollectedinbiobank the biomaterialcollectedinbiobank of this general information
+	*/
+	@Override
+	public void setBiomaterialcollectedinbiobank(
+		java.lang.String biomaterialcollectedinbiobank) {
+		_generalInformation.setBiomaterialcollectedinbiobank(biomaterialcollectedinbiobank);
+	}
+
+	/**
 	* Returns the biomaterialprepared of this general information.
 	*
 	* @return the biomaterialprepared of this general information
@@ -763,6 +793,11 @@ public class GeneralInformationWrapper implements GeneralInformation,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_generalInformation.persist();
+	}
+
+	@Override
+	public java.lang.String getBiomaterialcollectedinbiobankFormated() {
+		return _generalInformation.getBiomaterialcollectedinbiobankFormated();
 	}
 
 	@Override

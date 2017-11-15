@@ -117,6 +117,7 @@
 		<column name="percentageofrarediseasesinyourregistrybiobank" type="String"></column>
 		<column name="ontologies" type="String"></column>
 		<column name="biomaterialcollected" type="String"></column>
+		<column name="biomaterialcollectedinbiobank" type="String"></column>
 		<column name="biomaterialprepared" type="String"></column>
 		<column name="origionofcollection" type="String"></column>
 		<column name="useofcollection" type="String"></column>

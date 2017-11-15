@@ -221,7 +221,8 @@ public class OrganizationlinkWrapper implements Organizationlink,
 	}
 
 	@Override
-	public int compareTo(Organizationlink organizationlink) {
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bbmriat.service.model.Organizationlink organizationlink) {
 		return _organizationlink.compareTo(organizationlink);
 	}
 
@@ -231,17 +232,17 @@ public class OrganizationlinkWrapper implements Organizationlink,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<Organizationlink> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<at.graz.meduni.liferay.portlet.bbmriat.service.model.Organizationlink> toCacheModel() {
 		return _organizationlink.toCacheModel();
 	}
 
 	@Override
-	public Organizationlink toEscapedModel() {
+	public at.graz.meduni.liferay.portlet.bbmriat.service.model.Organizationlink toEscapedModel() {
 		return new OrganizationlinkWrapper(_organizationlink.toEscapedModel());
 	}
 
 	@Override
-	public Organizationlink toUnescapedModel() {
+	public at.graz.meduni.liferay.portlet.bbmriat.service.model.Organizationlink toUnescapedModel() {
 		return new OrganizationlinkWrapper(_organizationlink.toUnescapedModel());
 	}
 

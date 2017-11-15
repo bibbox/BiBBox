@@ -51,10 +51,10 @@ ${theme.include(body_top_include)}
 			<div class="bbmri_eric_header-logo-flaot">
 				<div class="bbmri_eric_header-logo-white">
 					<span style="font-size: 40px;font-weight: bold;line-height: 45px;">HandsOn: Biobanks</span><br />
-					<span style="font-size: 20px;line-height: 25px;">is now <b>Europe Biobank Week</b></span>
+					<span style="font-size: 20px;line-height: 25px;">is now <b>Global Biobank Week</b></span>
 				</div>
 				<div class="bbmri_eric_header-logo-orange">
-					<span style="font-size: 20px;color: #FFFFFF;line-height: 25px;">visit http://europebiobankweek.eu</span>
+					<span style="font-size: 20px;color: #FFFFFF;line-height: 25px;">visit http://www.globalbiobankweek.org/#</span>
 				</div>
 			</div>
 		</div>
@@ -125,7 +125,7 @@ ${theme.include(body_top_include)}
 			<a href="https://twitter.com/BBMRIERIC" target="_blank"><img id="bbmrieric-footer-twitter-slide"  src="/HandsOnBiobanking-theme/images/twitter.png" /></a>
 		</div>
 		<div class="bbmrieric-footer-linkedin" >
-			<a href="https://www.facebook.com/HandsOnBiobanks" target="_blank"><img id="bbmrieric-footer-linkedin-slide"  src="/HandsOnBiobanking-theme/images/fb_icon.png" /></a>
+			<a href="https://www.facebook.com/gbwstockholm" target="_blank"><img id="bbmrieric-footer-linkedin-slide"  src="/HandsOnBiobanking-theme/images/fb_icon.png" /></a>
 		</div>
 		
 		<div class="bbmrieric-footer-menue">

@@ -29,16 +29,16 @@ html {
 	width: 100%;
 	max-width: 1400px;
 	margin: auto;
-	-moz-box-shadow: inset 0 3px 2px 0 rgba(102,102,102,0.3);
 }
 
 
 /* ---------- My Styling ----------- */
 .aui .bbmri-eric-body {
-	background-color: #0C2848;
+	background-color: white;
 	min-width: 1200px;
 	padding-left: 0;
     padding-right: 0;
+	background: url(/BBMRIERICRITrain-theme/images/02_content_background.png) 100%/100% repeat-y;
 }
 .dialog-iframe-root-node {
 	background-color: #FFFFFF;
@@ -153,6 +153,9 @@ html {
 .bbmri-eric-submenue {
 	color: #4A4A49;
 }
+.selected {
+	background: #ed660a;
+}
 .selected a {
 	font-weight:bold;
 }
@@ -170,6 +173,9 @@ html {
 	#wrapper {
 		padding: 50px 40px;
 		position: relative;
+		width: 100%;
+		max-width: 1400px;
+		box-sizing: border-box;
 	}
 
 	.site-title {

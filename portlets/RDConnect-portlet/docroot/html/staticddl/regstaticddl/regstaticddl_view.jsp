@@ -1,4 +1,5 @@
 <%@ include file="/html/init.jsp" %> 
+<%@ page import="at.meduni.liferay.portlet.helper.OrganizationHelper"%>
 
 <portlet:defineObjects />
 <liferay-theme:defineObjects />
@@ -163,17 +164,31 @@ if (currentGroup.isOrganization()) {
 		if(core_record.getFieldValue("Description") != null) {
 			discription = core_record.getFieldValue("Description").toString().replaceAll("\"\\]|\\[\"", "");
 		}
+		
+		String biobankids = "";
+		String biomaterial_available_in = "";
+		if(core_record.getFieldValue("Biomaterial_Available_in_biobanks") != null) {
+			biobankids = core_record.getFieldValue("Biomaterial_Available_in_biobanks").toString();
+			biomaterial_available_in = OrganizationHelper.getBiomaterialcollectedinbiobankFormated(biobankids);
+		} 
+		
 		%>
 		
 		<h4><%= organization.getName() %><%= acronym %></h4>
-		
 		<table>
-		<tr><td style="vertical-align: top;">Type of Host Institution: </td><td><strong><%= host_institution_is_a %> </strong></td></tr>
+		<tr><td style="vertical-align: top;width: 150px;">Type of Host Institution: </td><td><strong><%= host_institution_is_a %> </strong></td></tr>
 		<tr><td style="vertical-align: top;">Source of funding: </td><td><strong><%= source_of_funding %></strong></td></tr>
 		<tr><td style="vertical-align: top;">Target population: </td><td><strong><%= target_population %> </strong></td></tr>
 		<tr><td style="vertical-align: top;">Year of establishment: </td><td><strong><%= year_of_establishment %> </strong></td></tr>
 		<tr><td style="vertical-align: top;">Ontologies used: </td><td><strong><%= ontologies %> </strong></td></tr>
 		<tr><td style="vertical-align: top;">Imaging available: </td><td><strong><%= images_available %> </strong></td></tr>
+		<%
+		if(!biomaterial_available_in.equals("")) {
+			%>
+			<tr><td style="vertical-align: top;">BioMaterial available in: </td><td><strong><%= biomaterial_available_in %> </strong></td></tr>
+			<%
+		}
+		%>
 		<tr><td style="vertical-align: top;">Also listed in: </td><td><strong><%= listedin %> </strong></td></tr>
 		</table>
 		<%= discription %> <br />
