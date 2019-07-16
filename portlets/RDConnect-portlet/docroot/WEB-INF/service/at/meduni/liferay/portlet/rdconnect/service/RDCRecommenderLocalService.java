@@ -16,6 +16,7 @@ package at.meduni.liferay.portlet.rdconnect.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface RDCRecommenderLocalService extends BaseLocalService,
 	* @return the r d c recommender that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender addRDCRecommender(
 		at.meduni.liferay.portlet.rdconnect.model.RDCRecommender rdcRecommender)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface RDCRecommenderLocalService extends BaseLocalService,
 	* @throws PortalException if a r d c recommender with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender deleteRDCRecommender(
 		long rdcrecommenderid)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface RDCRecommenderLocalService extends BaseLocalService,
 	* @return the r d c recommender that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender deleteRDCRecommender(
 		at.meduni.liferay.portlet.rdconnect.model.RDCRecommender rdcRecommender)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -226,6 +230,7 @@ public interface RDCRecommenderLocalService extends BaseLocalService,
 	* @return the r d c recommender that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender updateRDCRecommender(
 		at.meduni.liferay.portlet.rdconnect.model.RDCRecommender rdcRecommender)
 		throws com.liferay.portal.kernel.exception.SystemException;

@@ -850,6 +850,10 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1014,4 +1018,5 @@ public class BiobankPanelAssessmentClp extends BaseModelImpl<BiobankPanelAssessm
 	private String _needadditionalinformation3_3;
 	private String _finalrecommendation_4;
 	private BaseModel<?> _biobankPanelAssessmentRemoteModel;
+	private Class<?> _clpSerializerClass = at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer.class;
 }

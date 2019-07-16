@@ -226,19 +226,20 @@ public interface InvitationModel extends BaseModel<Invitation> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Invitation invitation);
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Invitation> toCacheModel();
+	public CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation> toCacheModel();
 
 	@Override
-	public Invitation toEscapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation toEscapedModel();
 
 	@Override
-	public Invitation toUnescapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation toUnescapedModel();
 
 	@Override
 	public String toString();

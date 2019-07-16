@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface LogapiLocalService extends BaseLocalService,
 	* @return the logapi that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi addLogapi(
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi logapi)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface LogapiLocalService extends BaseLocalService,
 	* @throws PortalException if a logapi with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi deleteLogapi(
 		long logapiId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface LogapiLocalService extends BaseLocalService,
 	* @return the logapi that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi deleteLogapi(
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi logapi)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -226,6 +230,7 @@ public interface LogapiLocalService extends BaseLocalService,
 	* @return the logapi that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi updateLogapi(
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi logapi)
 		throws com.liferay.portal.kernel.exception.SystemException;

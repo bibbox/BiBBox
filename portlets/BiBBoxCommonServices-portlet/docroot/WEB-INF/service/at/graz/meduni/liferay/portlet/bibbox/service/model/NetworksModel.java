@@ -181,19 +181,20 @@ public interface NetworksModel extends BaseModel<Networks> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Networks networks);
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.Networks networks);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Networks> toCacheModel();
+	public CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.Networks> toCacheModel();
 
 	@Override
-	public Networks toEscapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.Networks toEscapedModel();
 
 	@Override
-	public Networks toUnescapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.Networks toUnescapedModel();
 
 	@Override
 	public String toString();

@@ -380,6 +380,10 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -452,4 +456,5 @@ public class NetworksClp extends BaseModelImpl<Networks> implements Networks {
 	private String _externalnetworkId;
 	private String _yearofestablishment;
 	private BaseModel<?> _networksRemoteModel;
+	private Class<?> _clpSerializerClass = at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer.class;
 }

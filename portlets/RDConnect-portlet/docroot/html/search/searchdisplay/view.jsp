@@ -21,21 +21,47 @@
 	if (keywords == null) {
 		keywords = "";
 	}
+	String nToken = "";
+	nToken = httpRequest.getParameter("nToken");
+	String selectedElements = httpRequest.getParameter("selectedbiobanks");
+	if (selectedElements == null) {
+		selectedElements = "";
+	}
 %>
 
 <%
 	String searchurl1 = themeDisplay.getURLPortal() + "/web/guest/search";
 %>
-<aui:form action="<%= searchurl1 %>" method="POST" name="fm">
-	<aui:fieldset>
+<aui:form action="<%= searchurl1 %>" method="POST" name="fm" style="width: 700px;">
+	<aui:fieldset style="width: 600px;">
 		<input style="width: 420px;" type="text" placeholder="search by: Disease Name, Gene, ORPHACODE,  ICD10, OMIM ..." value="<%= keywords %>" name="SEARCH" size="60">
 	</aui:fieldset>
-	<aui:button-row cssClass="searchFiledFloat">
+	<aui:button-row cssClass="searchFiledFloat"  style="width: 90px;float: right;">
 		<aui:button type="submit" value="Search" />
 	</aui:button-row>
 </aui:form>
 
 Search for: <%= keywords %>
+
+<portlet:actionURL name='negotiationStartUpdate' var="negotiationStartUpdateURL" windowState="normal" />
+<aui:form action="<%= negotiationStartUpdateURL %>" method="POST" name="fm">
+
+<aui:button-row>
+	<%
+	if(nToken == null) {
+		%>
+		<aui:button type="submit" value='Start Negotiation' />
+		<%
+	} else {
+		%>
+		<aui:button type="submit" value='Edit Negotiation' />
+		<%
+	} 
+	%>
+	
+</aui:button-row>
+	<aui:input type="hidden" name="ntoken" value="<%= nToken %>" />
+	<aui:input type="hidden" name="humanReadable" value="<%= keywords %>" />
 <%
 	if(keywords.equalsIgnoreCase("")) {
 		%>
@@ -43,11 +69,12 @@ Search for: <%= keywords %>
 		<br />
 		<%
 	} else {
-		String textresult = SearchIndexLocalServiceUtil.getSearchIndexByKeyword(keywords, themeDisplay, request.getContextPath());
+		String textresult = SearchIndexLocalServiceUtil.getSearchIndexByKeyword(keywords, themeDisplay, request.getContextPath(), selectedElements);
 		%>
 		<%= textresult %>
 		<br />
 		<%
 	}
 %>
+</aui:form>
 

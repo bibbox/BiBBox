@@ -28,10 +28,9 @@
 	
 %>
 
-
-
 <liferay-ui:success key="candidate-saved-successfully" message="candidate-saved-successfully" />
 <liferay-ui:error key="fields-required" message="fields-required" />
+
 
 <aui:model-context bean="<%= candidate %>" model="<%= Candidate.class %>" />
 <portlet:actionURL name='<%= "addCandidate" %>' var="addCandidateURL" windowState="normal" />
@@ -133,4 +132,7 @@
 		<aui:button type="cancel"  onClick="<%= redirect %>" last="true" />
 	</aui:button-row>
 </aui:form>
+
+
+
 </div>

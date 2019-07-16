@@ -65,13 +65,16 @@ public interface DiseaseMatrixService extends BaseService, InvokableService {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "testupdatediseasematrix", method = "POST")
 	public com.liferay.portal.kernel.json.JSONObject testupdatediseasematrix(
 		long organizationId);
 
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "updatediseasematrix", method = "POST")
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix updatediseasematrix(
 		long organizationId,
 		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix matrix);
 
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "updatediseasematrixs", method = "POST")
 	public void updatediseasematrixs(long organizationId,
 		java.util.List<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> matrixs);
 

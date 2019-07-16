@@ -100,6 +100,9 @@ ${theme.include(body_top_include)}
 		<p class="powered-by">
 			Linking up rare disease resarch across the world<br/> <a href="http://www.rd-connect.eu" rel="external">RD-Connect</a>
 		</p>
+		<p class="powered-by">
+			<a href="http://catalogue.rd-connect.eu/web/guest/data-protection-statement" rel="external">Data Protection statement</a>
+		</p>
 </footer>
 ${theme.include(body_bottom_include)}
 

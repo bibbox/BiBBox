@@ -612,6 +612,10 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -734,4 +738,5 @@ public class InvitationOrganisationClp extends BaseModelImpl<InvitationOrganisat
 	private long _status;
 	private Date _statusdate;
 	private BaseModel<?> _invitationOrganisationRemoteModel;
+	private Class<?> _clpSerializerClass = at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer.class;
 }

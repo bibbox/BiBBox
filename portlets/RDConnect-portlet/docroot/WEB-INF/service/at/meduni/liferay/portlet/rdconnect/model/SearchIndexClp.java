@@ -376,6 +376,10 @@ public class SearchIndexClp extends BaseModelImpl<SearchIndex>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -447,4 +451,5 @@ public class SearchIndexClp extends BaseModelImpl<SearchIndex>
 	private String _key;
 	private String _value;
 	private BaseModel<?> _searchIndexRemoteModel;
+	private Class<?> _clpSerializerClass = at.meduni.liferay.portlet.rdconnect.service.ClpSerializer.class;
 }

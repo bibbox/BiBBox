@@ -98,6 +98,74 @@ public class LogapiServiceSoap {
 	/**
 	* @return
 	*/
+	public static java.lang.String getRDConnectBiobanks()
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = LogapiServiceUtil.getRDConnectBiobanks();
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @return
+	*/
+	public static java.lang.String getRDConnectBiobanks(java.lang.Integer start)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = LogapiServiceUtil.getRDConnectBiobanks(start);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @return
+	*/
+	public static java.lang.String getRDConnectCollections()
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = LogapiServiceUtil.getRDConnectCollections();
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @return
+	*/
+	public static java.lang.String getRDConnectCollections(
+		java.lang.Integer start) throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = LogapiServiceUtil.getRDConnectCollections(start);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @return
+	*/
 	public static java.lang.String regbbs() throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArray returnValue = LogapiServiceUtil.regbbs();

@@ -317,6 +317,10 @@ public class ImporterConfigClp extends BaseModelImpl<ImporterConfig>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -375,4 +379,5 @@ public class ImporterConfigClp extends BaseModelImpl<ImporterConfig>
 	private String _elementId;
 	private String _elementvalue;
 	private BaseModel<?> _importerConfigRemoteModel;
+	private Class<?> _clpSerializerClass = at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer.class;
 }

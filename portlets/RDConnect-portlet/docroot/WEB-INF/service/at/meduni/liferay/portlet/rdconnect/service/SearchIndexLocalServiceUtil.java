@@ -304,9 +304,10 @@ public class SearchIndexLocalServiceUtil {
 	public static java.lang.String getSearchIndexByKeyword(
 		java.lang.String keyword,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay,
-		java.lang.String contextpath) {
+		java.lang.String contextpath, java.lang.String selected) {
 		return getService()
-				   .getSearchIndexByKeyword(keyword, themeDisplay, contextpath);
+				   .getSearchIndexByKeyword(keyword, themeDisplay, contextpath,
+			selected);
 	}
 
 	/**

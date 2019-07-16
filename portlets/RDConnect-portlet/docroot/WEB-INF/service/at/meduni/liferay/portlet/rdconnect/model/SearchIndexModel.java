@@ -181,19 +181,20 @@ public interface SearchIndexModel extends BaseModel<SearchIndex> {
 	public Object clone();
 
 	@Override
-	public int compareTo(SearchIndex searchIndex);
+	public int compareTo(
+		at.meduni.liferay.portlet.rdconnect.model.SearchIndex searchIndex);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<SearchIndex> toCacheModel();
+	public CacheModel<at.meduni.liferay.portlet.rdconnect.model.SearchIndex> toCacheModel();
 
 	@Override
-	public SearchIndex toEscapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.SearchIndex toEscapedModel();
 
 	@Override
-	public SearchIndex toUnescapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.SearchIndex toUnescapedModel();
 
 	@Override
 	public String toString();

@@ -133,6 +133,212 @@ public class LogapiServiceImpl extends LogapiServiceBaseImpl {
 	 * @return
 	 */
 	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "rdconnectbiobanksregistries", method = "POST")
+	public JSONObject getRDConnectBiobanks() {
+		return getgetRDConnectBiobanksCall(0);
+	}
+
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "rdconnectbiobanksregistries", method = "POST")
+	public JSONObject getRDConnectBiobanks(Integer start) {
+		return getgetRDConnectBiobanksCall(start);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "rdconnectcollections", method = "POST")
+	public JSONObject getRDConnectCollections() {
+		return getgetRDConnectCollectionsCall(0);
+	}
+
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@AccessControlled(guestAccessEnabled=true)
+	@JSONWebService(value = "rdconnectcollections", method = "POST")
+	public JSONObject getRDConnectCollections(Integer start) {
+		return getgetRDConnectCollectionsCall(start);
+	}
+	
+	private JSONObject getgetRDConnectCollectionsCall(Integer start) {
+		int number = 100;
+		int total = 0;
+		
+		JSONObject json = JSONFactoryUtil.createJSONObject();
+		
+		json.put("href", "/api/v2/rdconnectcollections");
+		json.put("meta", getRDConnectBiobanksMeta());
+		json.put("start", start);
+		json.put("num", number);
+		try {
+			String parentid_string = PropsUtil.get("rdconnectcatalougeid");
+			long parentid = Long.parseLong(parentid_string);
+			total = OrganizationLocalServiceUtil.getOrganizationsCount(CompanyThreadLocal.getCompanyId(), parentid);
+			json.put("total", total);
+		} catch(Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::getgetRDConnectBiobanksCall] Error creating list of Biobanks and Registries.");
+			e.printStackTrace();
+		}
+		if(start != 0) {
+			json.put("prevHref", "http://catalogue.rd-connect.eu/api/v2/rdconnectcollections/start/" + (start - number));
+		}
+		if(start + number < total) {
+			json.put("nextHref", "http://catalogue.rd-connect.eu/api/v2/rdconnectcollections/start/" + (start + number));
+		}
+		json.put("items", getRDConnectCollectionsItems(start, start + number - 1));
+
+		return json;
+	}
+	
+	private JSONArray getRDConnectCollectionsItems(Integer start, Integer end) {
+		JSONArray jsonarray = JSONFactoryUtil.createJSONArray();
+		try {
+			String parentid_string = PropsUtil.get("rdconnectcatalougeid");
+			long parentid = Long.parseLong(parentid_string);
+			List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(CompanyThreadLocal.getCompanyId(), parentid, start, end);
+			for(Organization organization : organizations) {
+				try {
+					String type = "reg/bb";
+					try {
+						type = OrganizationSearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+					} catch (Exception ex) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::getRDConnectBiobanksItems] Error getting Expando Brige for Organization.");
+						//LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						//LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+						ex.printStackTrace();
+					}
+					
+					JSONObject json = JSONFactoryUtil.createJSONObject();
+					json.put("_href", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
+					json.put("id", organization.getOrganizationId());
+					json.put("name", "Collections " + organization.getName());
+					json.put("description", "");
+
+					JSONObject json_biobank = JSONFactoryUtil.createJSONObject();
+					json_biobank.put("id", organization.getOrganizationId());
+					json_biobank.put("name", organization.getName());
+					json.put("biobank", json_biobank);
+					
+					
+					jsonarray.put(json);
+				} catch (Exception e) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::reggetRDConnectBiobanksItemsbbs] Error adding element to list of Biobanks and Registries.");
+					//LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error adding element to list of Biobanks and Registries.");
+					//LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+					e.printStackTrace();
+				}
+			}
+		} catch(Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::getRDConnectBiobanksItems] Error creating list of Biobanks and Registries.");
+			//LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error creating list of Biobanks and Registries.");
+			//LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return jsonarray;
+	}
+	
+	private JSONObject getgetRDConnectBiobanksCall(Integer start) {
+		int number = 100;
+		int total = 0;
+		
+		JSONObject json = JSONFactoryUtil.createJSONObject();
+		
+		json.put("href", "/api/v2/rdconnectbiobanksregistries");
+		json.put("meta", getRDConnectBiobanksMeta());
+		json.put("start", start);
+		json.put("num", number);
+		try {
+			String parentid_string = PropsUtil.get("rdconnectcatalougeid");
+			long parentid = Long.parseLong(parentid_string);
+			total = OrganizationLocalServiceUtil.getOrganizationsCount(CompanyThreadLocal.getCompanyId(), parentid);
+			json.put("total", total);
+		} catch(Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::getgetRDConnectBiobanksCall] Error creating list of Biobanks and Registries.");
+			e.printStackTrace();
+		}
+		if(start != 0) {
+			json.put("prevHref", "http://catalogue.rd-connect.eu/api/v2/rdconnectbiobanksregistries/start/" + (start - number));
+		}
+		if(start + number < total) {
+			json.put("nextHref", "http://catalogue.rd-connect.eu/api/v2/rdconnectbiobanksregistries/start/" + (start + number));
+		}
+		json.put("items", getRDConnectBiobanksItems(start, start + number - 1));
+
+		return json;
+	}
+	
+	private JSONObject getRDConnectBiobanksMeta() {
+		JSONObject json = JSONFactoryUtil.createJSONObject();
+		json.put("error", "Not Implemented");
+		return json;
+	}
+	
+	private JSONArray getRDConnectBiobanksItems(Integer start, Integer end) {
+		JSONArray jsonarray = JSONFactoryUtil.createJSONArray();
+		try {
+			String parentid_string = PropsUtil.get("rdconnectcatalougeid");
+			long parentid = Long.parseLong(parentid_string);
+			List<Organization> organizations = OrganizationLocalServiceUtil.getOrganizations(CompanyThreadLocal.getCompanyId(), parentid, start, end);
+			for(Organization organization : organizations) {
+				try {
+					String type = "reg/bb";
+					try {
+						type = OrganizationSearchIndexLocalServiceUtil.getSearchIndexValueByKey("Type", organization.getOrganizationId()).toLowerCase();
+					} catch (Exception ex) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::getRDConnectBiobanksItems] Error getting Expando Brige for Organization.");
+						//LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error getting Expando Brige for Organization.");
+						//LogapiLocalServiceUtil.addLogAPI(userid, userip, ex.getLocalizedMessage());
+						ex.printStackTrace();
+					}
+					
+					JSONObject json = JSONFactoryUtil.createJSONObject();
+					json.put("_href", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId());
+					json.put("id", organization.getOrganizationId());
+					json.put("name", organization.getName());
+					json.put("acronym", "");
+					json.put("description", "");
+					json.put("url", "");
+					json.put("juridical_person", "");
+					json.put("country", "");
+					json.put("type", type);
+					JSONArray json_collection_array = JSONFactoryUtil.createJSONArray();
+					JSONObject json_default_collection = JSONFactoryUtil.createJSONObject();
+					json_default_collection.put("CollectionID", "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organization.getOrganizationId() + "/collection-id/" + 1);
+					json_default_collection.put("CollectionName", "default");
+					json_collection_array.put(json_default_collection);
+					json.put("Collections", json_collection_array);
+					jsonarray.put(json);
+				} catch (Exception e) {
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::reggetRDConnectBiobanksItemsbbs] Error adding element to list of Biobanks and Registries.");
+					//LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error adding element to list of Biobanks and Registries.");
+					//LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+					e.printStackTrace();
+				}
+			}
+		} catch(Exception e) {
+			System.err.println("[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::getRDConnectBiobanksItems] Error creating list of Biobanks and Registries.");
+			//LogapiLocalServiceUtil.addLogAPI(userid, userip, "[" + date_format_apache_error.format(new Date()) + "] [error] [BiBBoxCommonServices-portlet::at.graz.meduni.liferay.portlet.bibbox.service.service.impl.LogapiServiceImpl::regbbs] Error creating list of Biobanks and Registries.");
+			//LogapiLocalServiceUtil.addLogAPI(userid, userip, e.getLocalizedMessage());
+			e.printStackTrace();
+		}
+		return jsonarray;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@AccessControlled(guestAccessEnabled=true)
 	@JSONWebService(value = "regbbs", method = "GET")
 	public JSONArray regbbs() {
 		long userid = 0;

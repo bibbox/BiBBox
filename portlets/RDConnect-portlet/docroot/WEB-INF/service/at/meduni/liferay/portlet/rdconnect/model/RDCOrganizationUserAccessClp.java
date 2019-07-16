@@ -364,6 +364,10 @@ public class RDCOrganizationUserAccessClp extends BaseModelImpl<RDCOrganizationU
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -430,4 +434,5 @@ public class RDCOrganizationUserAccessClp extends BaseModelImpl<RDCOrganizationU
 	private long _ipaddress;
 	private Date _lastaccess;
 	private BaseModel<?> _rdcOrganizationUserAccessRemoteModel;
+	private Class<?> _clpSerializerClass = at.meduni.liferay.portlet.rdconnect.service.ClpSerializer.class;
 }

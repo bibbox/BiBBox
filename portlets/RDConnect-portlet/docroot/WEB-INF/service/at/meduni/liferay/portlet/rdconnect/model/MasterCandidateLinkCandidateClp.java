@@ -289,6 +289,10 @@ public class MasterCandidateLinkCandidateClp extends BaseModelImpl<MasterCandida
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -340,4 +344,5 @@ public class MasterCandidateLinkCandidateClp extends BaseModelImpl<MasterCandida
 	private long _candidateId;
 	private long _masterCandidateId;
 	private BaseModel<?> _masterCandidateLinkCandidateRemoteModel;
+	private Class<?> _clpSerializerClass = at.meduni.liferay.portlet.rdconnect.service.ClpSerializer.class;
 }

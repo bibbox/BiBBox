@@ -184,19 +184,20 @@ public interface LogapiModel extends BaseModel<Logapi> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Logapi logapi);
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi logapi);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Logapi> toCacheModel();
+	public CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi> toCacheModel();
 
 	@Override
-	public Logapi toEscapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi toEscapedModel();
 
 	@Override
-	public Logapi toUnescapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.Logapi toUnescapedModel();
 
 	@Override
 	public String toString();

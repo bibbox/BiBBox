@@ -533,6 +533,10 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -640,4 +644,5 @@ public class DiseaseMatrixClp extends BaseModelImpl<DiseaseMatrix>
 	private Date _modifieddate;
 	private String _modifieduser;
 	private BaseModel<?> _diseaseMatrixRemoteModel;
+	private Class<?> _clpSerializerClass = at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer.class;
 }

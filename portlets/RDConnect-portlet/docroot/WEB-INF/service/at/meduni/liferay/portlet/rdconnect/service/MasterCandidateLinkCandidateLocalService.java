@@ -16,6 +16,7 @@ package at.meduni.liferay.portlet.rdconnect.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface MasterCandidateLinkCandidateLocalService
 	* @return the master candidate link candidate that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate addMasterCandidateLinkCandidate(
 		at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate masterCandidateLinkCandidate)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface MasterCandidateLinkCandidateLocalService
 	* @throws PortalException if a master candidate link candidate with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate deleteMasterCandidateLinkCandidate(
 		long linkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface MasterCandidateLinkCandidateLocalService
 	* @return the master candidate link candidate that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate deleteMasterCandidateLinkCandidate(
 		at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate masterCandidateLinkCandidate)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -225,6 +229,7 @@ public interface MasterCandidateLinkCandidateLocalService
 	* @return the master candidate link candidate that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate updateMasterCandidateLinkCandidate(
 		at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate masterCandidateLinkCandidate)
 		throws com.liferay.portal.kernel.exception.SystemException;

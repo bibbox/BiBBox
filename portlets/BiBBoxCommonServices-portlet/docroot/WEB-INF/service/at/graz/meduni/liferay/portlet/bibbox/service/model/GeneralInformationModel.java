@@ -427,19 +427,20 @@ public interface GeneralInformationModel extends BaseModel<GeneralInformation> {
 	public Object clone();
 
 	@Override
-	public int compareTo(GeneralInformation generalInformation);
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation generalInformation);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<GeneralInformation> toCacheModel();
+	public CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation> toCacheModel();
 
 	@Override
-	public GeneralInformation toEscapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation toEscapedModel();
 
 	@Override
-	public GeneralInformation toUnescapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.GeneralInformation toUnescapedModel();
 
 	@Override
 	public String toString();

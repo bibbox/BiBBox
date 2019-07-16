@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -159,9 +160,10 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 	/**
 	 * Search index for normal Search
 	 */
-	public String getSearchIndexByKeyword(String keyword, ThemeDisplay themeDisplay, String contextpath) {
+	public String getSearchIndexByKeyword(String keyword, ThemeDisplay themeDisplay, String contextpath, String selected) {
 		keyword = keyword.trim();
 		String searchresultstring = "";
+		HashSet<String> selectedarray = new HashSet<String>(Arrays.asList(selected.split(";")));
 		try {
 			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SearchIndex.class);
 			Criterion criterion = RestrictionsFactoryUtil.ilike("value", StringPool.PERCENT + keyword + StringPool.PERCENT);
@@ -183,6 +185,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			String maincontactline = "";
 			String organizationurl = "";
 			HashMap<String, String> hits = null;
+			String orgids = "";
 			for(SearchIndex serachresult : serachresults) {
 				try {
 				if(oldorganizationid == 0 || oldorganizationid != serachresult.getOrganisationid()) {
@@ -205,6 +208,7 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 					
 					// New Hit
 					oldorganizationid = serachresult.getOrganisationid();
+					orgids += oldorganizationid + ";";
 					// Get Organization Data
 					organization = OrganizationLocalServiceUtil.getOrganization(serachresult.getOrganisationid());
 					long organizationId = organization.getOrganizationId();
@@ -231,7 +235,13 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 				 		organisationtype = "Registry";
 					}
 					// Organization Line
-					organizationline = "<tr><td rowspan=\"3\" width=\"80px\"><a href=\"" + orgPath + "\"><img alt=\"logo\" src=\"" + imgPath + "\" width=\"60px\" /></a></td>";
+					String checked = "";
+					if(selectedarray.contains(String.valueOf(organizationId))) {
+						checked = " checked ";
+					}
+					organizationline = "<tr><td rowspan=\"3\" width=\"80px\">"
+							+ "<input type=\"checkbox\" " + checked + " name=\"_searchdisplay_WAR_RDConnectportlet_negotiation_" + organizationId + "\" >"
+							+ "<a href=\"" + orgPath + "\"><img alt=\"logo\" src=\"" + imgPath + "\" width=\"60px\" /></a></td>";
 					organizationline += "<td><a href=\"" + orgPath + "\">" + highlightResult(organization.getName(), keyword) + "</a></td></tr>";
 					// Organization Main Contact
 					long maincontactrole = 13320;
@@ -308,6 +318,9 @@ public class SearchIndexLocalServiceImpl extends SearchIndexLocalServiceBaseImpl
 			searchresultstring += "</table>";
 			// Add the number of Results
 			searchresultstring = "<h4>Search returned " + serachresults.size() + " hits (Registries:" + regcount + " /Biobanks:" + bbcount + ")</h4><br /><br />" + searchresultstring;
+		
+			searchresultstring += "<input type=\"hidden\" name=\"_searchdisplay_WAR_RDConnectportlet_negotiation_organistionidlist\" value=\"" + orgids + "\" >";
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

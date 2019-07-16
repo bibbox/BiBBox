@@ -16,6 +16,7 @@ package at.graz.meduni.liferay.portlet.bibbox.service.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface InvitationLocalService extends BaseLocalService,
 	* @return the invitation that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation addInvitation(
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface InvitationLocalService extends BaseLocalService,
 	* @throws PortalException if a invitation with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation deleteInvitation(
 		long invitationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface InvitationLocalService extends BaseLocalService,
 	* @return the invitation that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation deleteInvitation(
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -226,6 +230,7 @@ public interface InvitationLocalService extends BaseLocalService,
 	* @return the invitation that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation updateInvitation(
 		at.graz.meduni.liferay.portlet.bibbox.service.model.Invitation invitation)
 		throws com.liferay.portal.kernel.exception.SystemException;

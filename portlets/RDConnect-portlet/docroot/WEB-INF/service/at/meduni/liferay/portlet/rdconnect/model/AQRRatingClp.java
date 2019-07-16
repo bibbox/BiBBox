@@ -407,6 +407,10 @@ public class AQRRatingClp extends BaseModelImpl<AQRRating> implements AQRRating 
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -485,4 +489,5 @@ public class AQRRatingClp extends BaseModelImpl<AQRRating> implements AQRRating 
 	private String _aqrrater;
 	private String _ratingtype;
 	private BaseModel<?> _aqrRatingRemoteModel;
+	private Class<?> _clpSerializerClass = at.meduni.liferay.portlet.rdconnect.service.ClpSerializer.class;
 }

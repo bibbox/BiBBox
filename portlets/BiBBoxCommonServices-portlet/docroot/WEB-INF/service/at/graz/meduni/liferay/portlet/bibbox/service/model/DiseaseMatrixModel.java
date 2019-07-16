@@ -258,19 +258,20 @@ public interface DiseaseMatrixModel extends BaseModel<DiseaseMatrix> {
 	public Object clone();
 
 	@Override
-	public int compareTo(DiseaseMatrix diseaseMatrix);
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix diseaseMatrix);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<DiseaseMatrix> toCacheModel();
+	public CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix> toCacheModel();
 
 	@Override
-	public DiseaseMatrix toEscapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix toEscapedModel();
 
 	@Override
-	public DiseaseMatrix toUnescapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.DiseaseMatrix toUnescapedModel();
 
 	@Override
 	public String toString();

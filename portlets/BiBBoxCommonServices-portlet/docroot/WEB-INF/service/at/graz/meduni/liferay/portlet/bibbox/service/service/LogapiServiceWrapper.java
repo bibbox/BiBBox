@@ -77,6 +77,40 @@ public class LogapiServiceWrapper implements LogapiService,
 	* @return
 	*/
 	@Override
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectBiobanks() {
+		return _logapiService.getRDConnectBiobanks();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectBiobanks(
+		java.lang.Integer start) {
+		return _logapiService.getRDConnectBiobanks(start);
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectCollections() {
+		return _logapiService.getRDConnectCollections();
+	}
+
+	/**
+	* @return
+	*/
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectCollections(
+		java.lang.Integer start) {
+		return _logapiService.getRDConnectCollections(start);
+	}
+
+	/**
+	* @return
+	*/
+	@Override
 	public com.liferay.portal.kernel.json.JSONArray regbbs() {
 		return _logapiService.regbbs();
 	}

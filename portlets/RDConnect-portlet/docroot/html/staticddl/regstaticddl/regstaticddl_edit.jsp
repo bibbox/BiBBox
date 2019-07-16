@@ -7,14 +7,16 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");	
+String portletResource = ParamUtil.getString(request, "portletResource");
 // Parameters for permission Checking
 long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 String actionId_add_diseasematrix = "EDIT_CORE";
+long recordId = 0;
 
 if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasematrix)) {
-	long recordId = ParamUtil.getLong(request, "recordId");
+	recordId = ParamUtil.getLong(request, "recordId");
 	long recordSetId = ParamUtil.getLong(request, "recordSetId");
 	long organizationId = ParamUtil.getLong(request, "organizationId");
 	DDLRecord ddlrecord = DDLRecordLocalServiceUtil.getRecord(recordId);
@@ -188,12 +190,29 @@ if(permissionChecker.hasPermission(groupId, name, primKey, actionId_add_diseasem
 				%>
 			</aui:select>
 			<aui:input type="text" name="Additional_Imaging_available" label="Additional Imaging available" value='<%= ddlrecord.getFieldValue("Additional_Imaging_available") %>' />
+			
+			<!-- Biomaterial_Available_in_biobanks -->
+			<%
+			String biobankids = "";
+			//String biomaterial_available_in = "";
+			if(ddlrecord.getFieldValue("Biomaterial_Available_in_biobanks") != null) {
+				biobankids = ddlrecord.getFieldValue("Biomaterial_Available_in_biobanks").toString();
+				//biomaterial_available_in = OrganizationHelper.getBiomaterialcollectedinbiobankFormated(biobankids);
+			}
+			%>
+			<aui:input type="text" name="Biomaterial_Available_in_biobanks" label="Biomaterial Available in biobanks" value='<%= biobankids %>' />
+			
+			<img id="addorganisations" style="height:31px;width:31px;" src='<%= request.getContextPath() + "/images/ListEdit.png" %>'>
+			
+			<!-- Biomaterial_Available_in_biobanks ENDE -->
+			
 			<%
 			String the_registry_biobanks_is_listed_in_other_inventories_networks = "";
 			if(ddlrecord.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks") != null) {
 				the_registry_biobanks_is_listed_in_other_inventories_networks = ddlrecord.getFieldValue("The_registry_biobanks_is_listed_in_other_inventories_networks").toString();
 			}
 			%>
+			
 			<aui:select name="The_registry_biobanks_is_listed_in_other_inventories_networks" label="The registry is listed in other inventories/networks" multiple="true"  >
 				<% 
 				for(String option : field_options.get("The_registry_biobanks_is_listed_in_other_inventories_networks").keySet()) {
@@ -244,4 +263,31 @@ AUI().use('aui-base', function(A){
 		}
 	});
 });
+</aui:script>
+<!-- Organization Selectors -->
+
+<%
+String addOrganizationURL = themeDisplay.getURLCurrent().split("[?]")[0] + "/-/regstaticddl/organisations/" + recordId;
+%>
+
+<!-- Popup for adding Organiaztions to the list -->
+<aui:script use="aui-base">
+            A.all('#addorganisations').on(
+               'click',
+               function(event) {
+            	   Liferay.Util.selectEntity(
+                           {
+                              dialog: {
+                                 cache: false,
+                                 constrain: true,
+                                 modal: true,
+                                 width: 1000,
+                              },
+                              id: '_<%=HtmlUtil.escapeJS(portletResource)%>_addorganisation' + Math.floor((Math.random() * 10000) + 1),
+                              title: 'Edit Organisations List',
+                              uri: '<%= addOrganizationURL %>',
+                           }
+                        );
+               }
+            );
 </aui:script>

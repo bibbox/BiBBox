@@ -181,19 +181,20 @@ public interface RDCOrganizationUserAccessModel extends BaseModel<RDCOrganizatio
 	public Object clone();
 
 	@Override
-	public int compareTo(RDCOrganizationUserAccess rdcOrganizationUserAccess);
+	public int compareTo(
+		at.meduni.liferay.portlet.rdconnect.model.RDCOrganizationUserAccess rdcOrganizationUserAccess);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<RDCOrganizationUserAccess> toCacheModel();
+	public CacheModel<at.meduni.liferay.portlet.rdconnect.model.RDCOrganizationUserAccess> toCacheModel();
 
 	@Override
-	public RDCOrganizationUserAccess toEscapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.RDCOrganizationUserAccess toEscapedModel();
 
 	@Override
-	public RDCOrganizationUserAccess toUnescapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.RDCOrganizationUserAccess toUnescapedModel();
 
 	@Override
 	public String toString();

@@ -68,50 +68,106 @@ public interface LogapiService extends BaseService, InvokableService {
 	/**
 	* @return
 	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "getapiversion", method = "GET")
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONObject getAPIVersion();
 
 	/**
 	* @return
 	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "regbbs", method = "POST")
 	public com.liferay.portal.kernel.json.JSONArray regbbs(
 		java.lang.String data);
 
 	/**
 	* @return
 	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "rdconnectbiobanksregistries", method = "POST")
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectBiobanks();
+
+	/**
+	* @return
+	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "rdconnectbiobanksregistries", method = "POST")
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectBiobanks(
+		java.lang.Integer start);
+
+	/**
+	* @return
+	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "rdconnectcollections", method = "POST")
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectCollections();
+
+	/**
+	* @return
+	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "rdconnectcollections", method = "POST")
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectCollections(
+		java.lang.Integer start);
+
+	/**
+	* @return
+	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "regbbs", method = "GET")
 	public com.liferay.portal.kernel.json.JSONArray regbbs();
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "findorganizationbyname", method = "GET")
 	public com.liferay.portal.kernel.json.JSONArray findorganizationbyname(
 		java.lang.String organizationname);
 
 	/**
 	* @return
 	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "regs", method = "GET")
 	public com.liferay.portal.kernel.json.JSONArray regs();
 
 	/**
 	* @return
 	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "bbs", method = "GET")
 	public com.liferay.portal.kernel.json.JSONArray bbs();
 
 	/**
 	* @param organizationId
 	* @return
 	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "regbb", method = "GET")
 	public com.liferay.portal.kernel.json.JSONObject regbb(long organizationId);
 
 	/**
 	* @param organizationId
 	* @return
 	*/
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "regbb", method = "GET")
 	public com.liferay.portal.kernel.json.JSONObject regbb(
 		long organizationId, long collectionId);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "regbb", method = "GET")
 	public com.liferay.portal.kernel.json.JSONObject regbb(java.lang.String id);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "getidcard", method = "GET")
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getIdCard(long organizationId);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@com.liferay.portal.kernel.jsonwebservice.JSONWebService(value = "testmethode", method = "POST")
 	public void testMethode(java.lang.String jason);
 }

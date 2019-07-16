@@ -194,19 +194,20 @@ public interface AQRRatingModel extends BaseModel<AQRRating> {
 	public Object clone();
 
 	@Override
-	public int compareTo(AQRRating aqrRating);
+	public int compareTo(
+		at.meduni.liferay.portlet.rdconnect.model.AQRRating aqrRating);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<AQRRating> toCacheModel();
+	public CacheModel<at.meduni.liferay.portlet.rdconnect.model.AQRRating> toCacheModel();
 
 	@Override
-	public AQRRating toEscapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.AQRRating toEscapedModel();
 
 	@Override
-	public AQRRating toUnescapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.AQRRating toUnescapedModel();
 
 	@Override
 	public String toString();

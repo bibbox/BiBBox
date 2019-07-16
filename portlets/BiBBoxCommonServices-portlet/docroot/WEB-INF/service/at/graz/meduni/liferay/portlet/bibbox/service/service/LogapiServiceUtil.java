@@ -81,6 +81,36 @@ public class LogapiServiceUtil {
 	/**
 	* @return
 	*/
+	public static com.liferay.portal.kernel.json.JSONObject getRDConnectBiobanks() {
+		return getService().getRDConnectBiobanks();
+	}
+
+	/**
+	* @return
+	*/
+	public static com.liferay.portal.kernel.json.JSONObject getRDConnectBiobanks(
+		java.lang.Integer start) {
+		return getService().getRDConnectBiobanks(start);
+	}
+
+	/**
+	* @return
+	*/
+	public static com.liferay.portal.kernel.json.JSONObject getRDConnectCollections() {
+		return getService().getRDConnectCollections();
+	}
+
+	/**
+	* @return
+	*/
+	public static com.liferay.portal.kernel.json.JSONObject getRDConnectCollections(
+		java.lang.Integer start) {
+		return getService().getRDConnectCollections(start);
+	}
+
+	/**
+	* @return
+	*/
 	public static com.liferay.portal.kernel.json.JSONArray regbbs() {
 		return getService().regbbs();
 	}

@@ -938,6 +938,10 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1122,4 +1126,5 @@ public class GeneralInformationClp extends BaseModelImpl<GeneralInformation>
 	private String _theregistrybiobanksislistedinotherinventoriesnetworks;
 	private Date _modifieddate;
 	private BaseModel<?> _generalInformationRemoteModel;
+	private Class<?> _clpSerializerClass = at.graz.meduni.liferay.portlet.bibbox.service.service.ClpSerializer.class;
 }

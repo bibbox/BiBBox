@@ -153,19 +153,20 @@ public interface ImporterConfigModel extends BaseModel<ImporterConfig> {
 	public Object clone();
 
 	@Override
-	public int compareTo(ImporterConfig importerConfig);
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig importerConfig);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<ImporterConfig> toCacheModel();
+	public CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig> toCacheModel();
 
 	@Override
-	public ImporterConfig toEscapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig toEscapedModel();
 
 	@Override
-	public ImporterConfig toUnescapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.ImporterConfig toUnescapedModel();
 
 	@Override
 	public String toString();

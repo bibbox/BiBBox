@@ -136,19 +136,19 @@ public interface MasterCandidateLinkCandidateModel extends BaseModel<MasterCandi
 
 	@Override
 	public int compareTo(
-		MasterCandidateLinkCandidate masterCandidateLinkCandidate);
+		at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate masterCandidateLinkCandidate);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<MasterCandidateLinkCandidate> toCacheModel();
+	public CacheModel<at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate> toCacheModel();
 
 	@Override
-	public MasterCandidateLinkCandidate toEscapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate toEscapedModel();
 
 	@Override
-	public MasterCandidateLinkCandidate toUnescapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidateLinkCandidate toUnescapedModel();
 
 	@Override
 	public String toString();

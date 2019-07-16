@@ -322,6 +322,10 @@ public class RDCRecommenderClp extends BaseModelImpl<RDCRecommender>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -379,4 +383,5 @@ public class RDCRecommenderClp extends BaseModelImpl<RDCRecommender>
 	private long _recommendedorganisationId;
 	private double _recommendervalue;
 	private BaseModel<?> _rdcRecommenderRemoteModel;
+	private Class<?> _clpSerializerClass = at.meduni.liferay.portlet.rdconnect.service.ClpSerializer.class;
 }

@@ -149,19 +149,20 @@ public interface RDCRecommenderModel extends BaseModel<RDCRecommender> {
 	public Object clone();
 
 	@Override
-	public int compareTo(RDCRecommender rdcRecommender);
+	public int compareTo(
+		at.meduni.liferay.portlet.rdconnect.model.RDCRecommender rdcRecommender);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<RDCRecommender> toCacheModel();
+	public CacheModel<at.meduni.liferay.portlet.rdconnect.model.RDCRecommender> toCacheModel();
 
 	@Override
-	public RDCRecommender toEscapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender toEscapedModel();
 
 	@Override
-	public RDCRecommender toUnescapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.RDCRecommender toUnescapedModel();
 
 	@Override
 	public String toString();

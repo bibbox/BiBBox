@@ -120,7 +120,6 @@ public class ScaleusImporter extends MVCPortlet {
 			if(true)
 				break;
 			organizationId = organization.getOrganizationId();
-			/*organizationId = organization.getOrganizationId();
 			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/identifier", String.valueOf(organization.getOrganizationId()));
 			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/name", organization.getName());
 			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/type", organization.getExpandoBridge().getAttribute("Organization Type").toString());
@@ -128,7 +127,7 @@ public class ScaleusImporter extends MVCPortlet {
 			List<Website> websites = WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
 			for(Website website : websites) {
 				addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/url", website.getUrl());
-			}*/
+			}
 			
 			String biobankidentifier = "http://catalogue.rd-connect.eu/" + identifier_string + "/" + organization.getOrganizationId();
 			
@@ -192,9 +191,9 @@ public class ScaleusImporter extends MVCPortlet {
 		int count = 0; 
 		for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(companyid, parentid)) {
 			count ++;
-			if(count > 0) {
+			/*if(count > 0) {
 				break;
-			}
+			}*/
 			organizationId = organization.getOrganizationId();
 			/*organizationId = organization.getOrganizationId();
 			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/identifier", String.valueOf(organization.getOrganizationId()));

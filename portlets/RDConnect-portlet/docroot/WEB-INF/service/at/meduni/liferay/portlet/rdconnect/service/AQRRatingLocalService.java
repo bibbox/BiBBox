@@ -16,6 +16,7 @@ package at.meduni.liferay.portlet.rdconnect.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface AQRRatingLocalService extends BaseLocalService,
 	* @return the a q r rating that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.meduni.liferay.portlet.rdconnect.model.AQRRating addAQRRating(
 		at.meduni.liferay.portlet.rdconnect.model.AQRRating aqrRating)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface AQRRatingLocalService extends BaseLocalService,
 	* @throws PortalException if a a q r rating with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.meduni.liferay.portlet.rdconnect.model.AQRRating deleteAQRRating(
 		long aqrId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface AQRRatingLocalService extends BaseLocalService,
 	* @return the a q r rating that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public at.meduni.liferay.portlet.rdconnect.model.AQRRating deleteAQRRating(
 		at.meduni.liferay.portlet.rdconnect.model.AQRRating aqrRating)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -225,6 +229,7 @@ public interface AQRRatingLocalService extends BaseLocalService,
 	* @return the a q r rating that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public at.meduni.liferay.portlet.rdconnect.model.AQRRating updateAQRRating(
 		at.meduni.liferay.portlet.rdconnect.model.AQRRating aqrRating)
 		throws com.liferay.portal.kernel.exception.SystemException;

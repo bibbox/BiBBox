@@ -134,7 +134,7 @@ public class SearchIndexLocalServiceClpInvoker {
 
 		_methodParameterTypes65 = new String[] {
 				"java.lang.String", "com.liferay.portal.theme.ThemeDisplay",
-				"java.lang.String"
+				"java.lang.String", "java.lang.String"
 			};
 
 		_methodName67 = "getSearchIndexByKeyword";
@@ -273,7 +273,7 @@ public class SearchIndexLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
 			return SearchIndexLocalServiceUtil.getSearchIndexByKeyword((java.lang.String)arguments[0],
 				(com.liferay.portal.theme.ThemeDisplay)arguments[1],
-				(java.lang.String)arguments[2]);
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3]);
 		}
 
 		if (_methodName67.equals(name) &&

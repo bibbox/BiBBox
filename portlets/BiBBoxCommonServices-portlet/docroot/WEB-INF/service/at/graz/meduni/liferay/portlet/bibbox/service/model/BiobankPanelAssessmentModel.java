@@ -394,19 +394,20 @@ public interface BiobankPanelAssessmentModel extends BaseModel<BiobankPanelAsses
 	public Object clone();
 
 	@Override
-	public int compareTo(BiobankPanelAssessment biobankPanelAssessment);
+	public int compareTo(
+		at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment biobankPanelAssessment);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<BiobankPanelAssessment> toCacheModel();
+	public CacheModel<at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment> toCacheModel();
 
 	@Override
-	public BiobankPanelAssessment toEscapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment toEscapedModel();
 
 	@Override
-	public BiobankPanelAssessment toUnescapedModel();
+	public at.graz.meduni.liferay.portlet.bibbox.service.model.BiobankPanelAssessment toUnescapedModel();
 
 	@Override
 	public String toString();

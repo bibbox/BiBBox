@@ -40,41 +40,57 @@ public class LogapiServiceClpInvoker {
 
 		_methodParameterTypes63 = new String[] { "java.lang.String" };
 
-		_methodName64 = "regbbs";
+		_methodName64 = "getRDConnectBiobanks";
 
 		_methodParameterTypes64 = new String[] {  };
 
-		_methodName65 = "findorganizationbyname";
+		_methodName65 = "getRDConnectBiobanks";
 
-		_methodParameterTypes65 = new String[] { "java.lang.String" };
+		_methodParameterTypes65 = new String[] { "java.lang.Integer" };
 
-		_methodName66 = "regs";
+		_methodName66 = "getRDConnectCollections";
 
 		_methodParameterTypes66 = new String[] {  };
 
-		_methodName67 = "bbs";
+		_methodName67 = "getRDConnectCollections";
 
-		_methodParameterTypes67 = new String[] {  };
+		_methodParameterTypes67 = new String[] { "java.lang.Integer" };
 
-		_methodName68 = "regbb";
+		_methodName73 = "regbbs";
 
-		_methodParameterTypes68 = new String[] { "long" };
+		_methodParameterTypes73 = new String[] {  };
 
-		_methodName69 = "regbb";
+		_methodName74 = "findorganizationbyname";
 
-		_methodParameterTypes69 = new String[] { "long", "long" };
+		_methodParameterTypes74 = new String[] { "java.lang.String" };
 
-		_methodName70 = "regbb";
+		_methodName75 = "regs";
 
-		_methodParameterTypes70 = new String[] { "java.lang.String" };
+		_methodParameterTypes75 = new String[] {  };
 
-		_methodName71 = "getIdCard";
+		_methodName76 = "bbs";
 
-		_methodParameterTypes71 = new String[] { "long" };
+		_methodParameterTypes76 = new String[] {  };
 
-		_methodName72 = "testMethode";
+		_methodName77 = "regbb";
 
-		_methodParameterTypes72 = new String[] { "java.lang.String" };
+		_methodParameterTypes77 = new String[] { "long" };
+
+		_methodName78 = "regbb";
+
+		_methodParameterTypes78 = new String[] { "long", "long" };
+
+		_methodName79 = "regbb";
+
+		_methodParameterTypes79 = new String[] { "java.lang.String" };
+
+		_methodName80 = "getIdCard";
+
+		_methodParameterTypes80 = new String[] { "long" };
+
+		_methodName81 = "testMethode";
+
+		_methodParameterTypes81 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -103,47 +119,67 @@ public class LogapiServiceClpInvoker {
 
 		if (_methodName64.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
-			return LogapiServiceUtil.regbbs();
+			return LogapiServiceUtil.getRDConnectBiobanks();
 		}
 
 		if (_methodName65.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
-			return LogapiServiceUtil.findorganizationbyname((java.lang.String)arguments[0]);
+			return LogapiServiceUtil.getRDConnectBiobanks((java.lang.Integer)arguments[0]);
 		}
 
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
-			return LogapiServiceUtil.regs();
+			return LogapiServiceUtil.getRDConnectCollections();
 		}
 
 		if (_methodName67.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+			return LogapiServiceUtil.getRDConnectCollections((java.lang.Integer)arguments[0]);
+		}
+
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+			return LogapiServiceUtil.regbbs();
+		}
+
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+			return LogapiServiceUtil.findorganizationbyname((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+			return LogapiServiceUtil.regs();
+		}
+
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			return LogapiServiceUtil.bbs();
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
 			return LogapiServiceUtil.regbb(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName69.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			return LogapiServiceUtil.regbb(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName70.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			return LogapiServiceUtil.regbb((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName71.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return LogapiServiceUtil.getIdCard(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName72.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			LogapiServiceUtil.testMethode((java.lang.String)arguments[0]);
 
 			return null;
@@ -168,14 +204,22 @@ public class LogapiServiceClpInvoker {
 	private String[] _methodParameterTypes66;
 	private String _methodName67;
 	private String[] _methodParameterTypes67;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
-	private String _methodName69;
-	private String[] _methodParameterTypes69;
-	private String _methodName70;
-	private String[] _methodParameterTypes70;
-	private String _methodName71;
-	private String[] _methodParameterTypes71;
-	private String _methodName72;
-	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
+	private String _methodName74;
+	private String[] _methodParameterTypes74;
+	private String _methodName75;
+	private String[] _methodParameterTypes75;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
+	private String _methodName77;
+	private String[] _methodParameterTypes77;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
 }

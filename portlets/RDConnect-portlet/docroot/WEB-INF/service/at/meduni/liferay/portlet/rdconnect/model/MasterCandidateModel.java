@@ -426,19 +426,20 @@ public interface MasterCandidateModel extends BaseModel<MasterCandidate> {
 	public Object clone();
 
 	@Override
-	public int compareTo(MasterCandidate masterCandidate);
+	public int compareTo(
+		at.meduni.liferay.portlet.rdconnect.model.MasterCandidate masterCandidate);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<MasterCandidate> toCacheModel();
+	public CacheModel<at.meduni.liferay.portlet.rdconnect.model.MasterCandidate> toCacheModel();
 
 	@Override
-	public MasterCandidate toEscapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidate toEscapedModel();
 
 	@Override
-	public MasterCandidate toUnescapedModel();
+	public at.meduni.liferay.portlet.rdconnect.model.MasterCandidate toUnescapedModel();
 
 	@Override
 	public String toString();

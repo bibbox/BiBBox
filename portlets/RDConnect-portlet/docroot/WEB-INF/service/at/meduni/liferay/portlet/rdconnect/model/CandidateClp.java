@@ -1015,6 +1015,10 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1226,4 +1230,5 @@ public class CandidateClp extends BaseModelImpl<Candidate> implements Candidate 
 	private long _masterId;
 	private String _state;
 	private BaseModel<?> _candidateRemoteModel;
+	private Class<?> _clpSerializerClass = at.meduni.liferay.portlet.rdconnect.service.ClpSerializer.class;
 }

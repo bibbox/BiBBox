@@ -40,41 +40,57 @@ public class LogapiServiceClp implements LogapiService {
 
 		_methodParameterTypes4 = new String[] { "java.lang.String" };
 
-		_methodName5 = "regbbs";
+		_methodName5 = "getRDConnectBiobanks";
 
 		_methodParameterTypes5 = new String[] {  };
 
-		_methodName6 = "findorganizationbyname";
+		_methodName6 = "getRDConnectBiobanks";
 
-		_methodParameterTypes6 = new String[] { "java.lang.String" };
+		_methodParameterTypes6 = new String[] { "java.lang.Integer" };
 
-		_methodName7 = "regs";
+		_methodName7 = "getRDConnectCollections";
 
 		_methodParameterTypes7 = new String[] {  };
 
-		_methodName8 = "bbs";
+		_methodName8 = "getRDConnectCollections";
 
-		_methodParameterTypes8 = new String[] {  };
+		_methodParameterTypes8 = new String[] { "java.lang.Integer" };
 
-		_methodName9 = "regbb";
+		_methodName9 = "regbbs";
 
-		_methodParameterTypes9 = new String[] { "long" };
+		_methodParameterTypes9 = new String[] {  };
 
-		_methodName10 = "regbb";
+		_methodName10 = "findorganizationbyname";
 
-		_methodParameterTypes10 = new String[] { "long", "long" };
+		_methodParameterTypes10 = new String[] { "java.lang.String" };
 
-		_methodName11 = "regbb";
+		_methodName11 = "regs";
 
-		_methodParameterTypes11 = new String[] { "java.lang.String" };
+		_methodParameterTypes11 = new String[] {  };
 
-		_methodName12 = "getIdCard";
+		_methodName12 = "bbs";
 
-		_methodParameterTypes12 = new String[] { "long" };
+		_methodParameterTypes12 = new String[] {  };
 
-		_methodName13 = "testMethode";
+		_methodName13 = "regbb";
 
-		_methodParameterTypes13 = new String[] { "java.lang.String" };
+		_methodParameterTypes13 = new String[] { "long" };
+
+		_methodName14 = "regbb";
+
+		_methodParameterTypes14 = new String[] { "long", "long" };
+
+		_methodName15 = "regbb";
+
+		_methodParameterTypes15 = new String[] { "java.lang.String" };
+
+		_methodName16 = "getIdCard";
+
+		_methodParameterTypes16 = new String[] { "long" };
+
+		_methodName17 = "testMethode";
+
+		_methodParameterTypes17 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -176,12 +192,108 @@ public class LogapiServiceClp implements LogapiService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray regbbs() {
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectBiobanks() {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName5,
 					_methodParameterTypes5, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectBiobanks(
+		java.lang.Integer start) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
+					new Object[] { ClpSerializer.translateInput(start) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectCollections() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getRDConnectCollections(
+		java.lang.Integer start) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
+					new Object[] { ClpSerializer.translateInput(start) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONArray regbbs() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -204,8 +316,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
 					new Object[] { ClpSerializer.translateInput(
 							organizationname) });
 		}
@@ -229,8 +341,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] {  });
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -252,8 +364,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8, new Object[] {  });
+			returnObj = _invokableService.invokeMethod(_methodName12,
+					_methodParameterTypes12, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -275,8 +387,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName9,
-					_methodParameterTypes9, new Object[] { organizationId });
+			returnObj = _invokableService.invokeMethod(_methodName13,
+					_methodParameterTypes13, new Object[] { organizationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -299,8 +411,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName10,
-					_methodParameterTypes10,
+			returnObj = _invokableService.invokeMethod(_methodName14,
+					_methodParameterTypes14,
 					new Object[] { organizationId, collectionId });
 		}
 		catch (Throwable t) {
@@ -323,8 +435,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName11,
-					_methodParameterTypes11,
+			returnObj = _invokableService.invokeMethod(_methodName15,
+					_methodParameterTypes15,
 					new Object[] { ClpSerializer.translateInput(id) });
 		}
 		catch (Throwable t) {
@@ -347,8 +459,8 @@ public class LogapiServiceClp implements LogapiService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName12,
-					_methodParameterTypes12, new Object[] { organizationId });
+			returnObj = _invokableService.invokeMethod(_methodName16,
+					_methodParameterTypes16, new Object[] { organizationId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -368,8 +480,8 @@ public class LogapiServiceClp implements LogapiService {
 	@Override
 	public void testMethode(java.lang.String jason) {
 		try {
-			_invokableService.invokeMethod(_methodName13,
-				_methodParameterTypes13,
+			_invokableService.invokeMethod(_methodName17,
+				_methodParameterTypes17,
 				new Object[] { ClpSerializer.translateInput(jason) });
 		}
 		catch (Throwable t) {
@@ -412,4 +524,12 @@ public class LogapiServiceClp implements LogapiService {
 	private String[] _methodParameterTypes12;
 	private String _methodName13;
 	private String[] _methodParameterTypes13;
+	private String _methodName14;
+	private String[] _methodParameterTypes14;
+	private String _methodName15;
+	private String[] _methodParameterTypes15;
+	private String _methodName16;
+	private String[] _methodParameterTypes16;
+	private String _methodName17;
+	private String[] _methodParameterTypes17;
 }
