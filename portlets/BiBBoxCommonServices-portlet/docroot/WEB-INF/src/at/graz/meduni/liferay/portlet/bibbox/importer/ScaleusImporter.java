@@ -4,9 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -54,9 +60,14 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class ScaleusImporter extends MVCPortlet {
 	String date_format_pattern_ = "dd.mm.yyyy";
 	SimpleDateFormat date_format_ = new SimpleDateFormat(date_format_pattern_);
+	List<String> trutelLines = new ArrayList<String>();
 	
 	public void testImport(ActionRequest request, ActionResponse response) throws Exception {
-		//clearScaleusDatabase();
+		System.out.println("Starting Scaleus Import...");
+		try {
+			
+			
+		clearScaleusDatabase();
 		
 		HashMap<String, String> biobank = readBiobankData(request);
 		HashMap<String, String> collection = readCollectionData(request);
@@ -115,10 +126,13 @@ public class ScaleusImporter extends MVCPortlet {
 		String DiseasMatrixIDPredicate = ParamUtil.getString(request, "DiseasMatrixIDPredicate");
 		ImporterConfigLocalServiceUtil.setPredicate("scaleus", "DiseasMatrixIDPredicate", DiseasMatrixIDPredicate);
 		
+		
+		
 		// Regular input
 		for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(companyid, parentid)) {
-			if(true)
-				break;
+			System.out.println("Creating entry for Organization: " + organization.getName());
+			if(organization.getExpandoBridge().getAttribute("Organization Type").toString().equalsIgnoreCase("biobank"))
+				continue;
 			organizationId = organization.getOrganizationId();
 			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/identifier", String.valueOf(organization.getOrganizationId()));
 			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/name", organization.getName());
@@ -179,81 +193,15 @@ public class ScaleusImporter extends MVCPortlet {
 			}
 		}
 		
-		/**
-		 ****************************************************************************
-		 * Test input
-		 ****************************************************************************
-		 */
+			
+			Path file = Paths.get("/opt/liferay/turtel.txt");
+			Files.write(file, trutelLines, StandardCharsets.UTF_8);
 		
-		url = "http://localhost:8085/scaleus/api/v1/store/test";
-		p = new HttpPost(url);
-		
-		int count = 0; 
-		for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(companyid, parentid)) {
-			count ++;
-			/*if(count > 0) {
-				break;
-			}*/
-			organizationId = organization.getOrganizationId();
-			/*organizationId = organization.getOrganizationId();
-			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/identifier", String.valueOf(organization.getOrganizationId()));
-			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/name", organization.getName());
-			addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/type", organization.getExpandoBridge().getAttribute("Organization Type").toString());
-			
-			List<Website> websites = WebsiteLocalServiceUtil.getWebsites(organization.getCompanyId(), Organization.class.getName(), organization.getOrganizationId());
-			for(Website website : websites) {
-				addScaleusEntry(p, c, "http://catalogue.rd-connect.eu/apiv1/regbb/organization-id/" + organizationId, "http://purl.org/dc/terms/url", website.getUrl());
-			}*/
-			
-			String biobankidentifier = "http://catalogue.rd-connect.eu/" + identifier_string + "/" + organization.getOrganizationId();
-			
-			List<DDLRecordSet> rdc_recordlist = DDLRecordSetLocalServiceUtil.getRecordSets(organization.getGroupId());
-			
-			for(String biobank_key : biobank.keySet()) {
-				for(String value : getBiobankDataValue(biobank_key, organization, request, rdc_recordlist)) {
-					addScaleusEntry(p, c, biobankidentifier, biobank.get(biobank_key), value);
-				}
-			}
-			// Add Collection
-			String collectionidentifier = biobankidentifier + "/" + identifier_collection_string + "/1";
-			if(!CollectionIDPredicate.equals("")) {
-				addScaleusEntry(p, c, biobankidentifier, CollectionIDPredicate, collectionidentifier);
-			}
-			addScaleusEntry(p, c, collectionidentifier, collection.get("CollectionNamePredicate"), "default");
-			
-			// Add DiseaseMatrix
-			List<DiseaseMatrix> diseasematrixes = DiseaseMatrixLocalServiceUtil.getDiseaseMatrixs(organization.getOrganizationId(), -1, -1);
-			for(DiseaseMatrix diseasematrix : diseasematrixes) {
-				String diseasematrixidentifier = collectionidentifier + "/" + identifier_diseasmatrix_string + "/" + diseasematrix.getDiseasematrixId();
-				if(!DiseasMatrixIDPredicate.equals("")) {
-					addScaleusEntry(p, c, collectionidentifier, DiseasMatrixIDPredicate, diseasematrixidentifier);
-				}
-				for(String diseasematrix_key : diseasematrix_list.keySet()) {
-					for(String value : getDiseaseMatrixDataValue(diseasematrix_key, organization, diseasematrix)) {
-						addScaleusEntry(p, c, diseasematrixidentifier, diseasematrix_list.get(diseasematrix_key), value);
-					}
-				}
-			}
-			// Add User
-			
-			List<User> userlist = UserLocalServiceUtil.getOrganizationUsers(organizationId);
-			for(User user_mc : userlist) {
-				List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user_mc.getUserId(), organization.getGroup().getGroupId());
-				for (UserGroupRole ugr : usergrouprolles) {
-					if(ugr.getRoleId() == maincontactrole) {
-						String useridentifier = "http://catalogue.rd-connect.eu/" + identifier_user_string + "/" + user_mc.getUserId();
-						if(!MaincontactIDPredicate.equals("")) {
-							addScaleusEntry(p, c, biobankidentifier, MaincontactIDPredicate, useridentifier);
-						}
-						for(String user_key : user_list.keySet()) {
-							for(String value : getUserDataValue(user_key, organization, user_mc)) { 
-								addScaleusEntry(p, c, useridentifier, user_list.get(user_key), value);
-							}
-						}				
-					}
-				}
-			}
+		} catch (Exception e) {
+			System.err.println("Not handelt exception in scaleus importer.");
+			e.printStackTrace();
 		}
+		System.out.println("Scaleus Import done ...");
 	}
 	
 	private String[] getUserDataValue(String datafield, Organization organization, User user) {
@@ -488,12 +436,40 @@ public class ScaleusImporter extends MVCPortlet {
 						String returnvalue = "";
 						for(DDLRecord record : records) {
 							
-							if(record.getField("countryCode") != null) {
+							/*if(record.getField("countryCode") != null) {
 								returnvalue += record.getField("countryCode").getValue().toString().replaceAll("\"\\]|\\[\"", "");
-							}
+							}*/
 							if(record.getField("Target_population_of_the_registry") != null) {
 								returnvalue += record.getField("Target_population_of_the_registry").getValue().toString().replaceAll("\"\\]|\\[\"", "");
 							}
+				  		}
+						return new String[]{returnvalue};
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			}
+		}
+		if(datafield.equals("TargetContryPredicate")) {
+			String ddlname = "default";
+			if(organization.getExpandoBridge().getAttribute("Organization Type").toString().equalsIgnoreCase("biobank")) {
+				ddlname = "bb_core";
+			} else {
+				ddlname = "core";
+			}
+			for(DDLRecordSet rdc_rs : rdc_recordlist) {
+		  		String rdc_rsname = String.valueOf(rdc_rs.getNameCurrentValue());
+		  		if(rdc_rsname.equalsIgnoreCase(ddlname)) {
+					try {
+						List<DDLRecord> records = rdc_rs.getRecords();
+						String returnvalue = "";
+						for(DDLRecord record : records) {
+							
+							if(record.getField("countryCode") != null) {
+								returnvalue += record.getField("countryCode").getValue().toString().replaceAll("\"\\]|\\[\"", "");
+							}
+							
 				  		}
 						return new String[]{returnvalue};
 					} catch (Exception e) {
@@ -919,6 +895,7 @@ public class ScaleusImporter extends MVCPortlet {
 			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TypeOfHostInstitutionPredicate", "");
 		}
 		String TargetPopulationPredicate = ParamUtil.getString(request, "TargetPopulationPredicate");
+		System.out.println("TargetPopulationPredicate: " + TargetPopulationPredicate);
 		if(!TargetPopulationPredicate.equals("")) {
 			biobank.put("TargetPopulationPredicate", TargetPopulationPredicate);
 			ImporterConfigLocalServiceUtil.setPredicate("scaleus", "TargetPopulationPredicate", TargetPopulationPredicate);
@@ -1026,7 +1003,7 @@ public class ScaleusImporter extends MVCPortlet {
 		return biobank;
 	}
 	
-	/*
+	
 	private void clearScaleusDatabase() {
 		String url = "http://localhost:8085/scaleus/api/v1/dataset/default";
 		HttpClient c = HttpClientBuilder.create().build();
@@ -1073,7 +1050,7 @@ public class ScaleusImporter extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 	private void addScaleusEntry(HttpPost p, HttpClient c, String subject, String predicate, String object) throws UnsupportedEncodingException {
 		
@@ -1085,7 +1062,36 @@ public class ScaleusImporter extends MVCPortlet {
 				+ "\"o\":\"" + object + "\""
 				+ "}"; 
 		
-		System.out.println(json);
+		System.out.println("Creating enty in Scaleus: " + json);
+		StringBuilder triple = new StringBuilder();
+		//Build subject url
+		triple.append("<");
+		triple.append(subject);
+		triple.append("> ");
+		
+		// Build predicate utl
+		triple.append("<");
+		triple.append(predicate);
+		triple.append("> ");
+		
+		// Build object
+		
+		if(!object.contains("http")) {
+			triple.append('"');
+			triple.append(object);
+			triple.append('"');
+			
+		}
+		else {
+			triple.append("<");
+			triple.append(object);
+			triple.append(">");
+		}
+		triple.append(" .");
+		
+		trutelLines.add(triple.toString());
+		
+		System.out.println("Statement" + triple.toString());
 		
 		StringEntity stringentitiy = new StringEntity(json, ContentType.APPLICATION_JSON );
 		
