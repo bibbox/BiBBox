@@ -67,7 +67,7 @@ public class ScaleusImporter extends MVCPortlet {
 		try {
 			
 			
-		clearScaleusDatabase();
+		//clearScaleusDatabase();
 		
 		HashMap<String, String> biobank = readBiobankData(request);
 		HashMap<String, String> collection = readCollectionData(request);
